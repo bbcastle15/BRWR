@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b17tkam11o1uj"]
+
+[ext_resource type="Script" uid="uid://dlc5qfu1n5umm" path="res://game.gd" id="1_80nbo"]
+
+[node name="Game" type="Node2D" unique_id=2036644011]
+script = ExtResource("1_80nbo")
+player_count = 3

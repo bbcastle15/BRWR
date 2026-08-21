@@ -1,0 +1,141 @@
+[
+  {
+    "id": "black_rose",
+    "name": "Black Rose Room",
+    "color": "black",
+    "core": true,
+    "fixed": true
+  },
+
+  {
+    "id": "crypt",
+    "name": "Crypt",
+    "color": "grey",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "sacrificial_altar",
+    "name": "Sacrificial Altar",
+    "color": "grey",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "cemetery",
+    "name": "Cemetery",
+    "color": "grey",
+    "core": true,
+    "fixed": false
+  },
+
+  {
+    "id": "summoner_room",
+    "name": "Summoner Room",
+    "color": "red",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "alchemical_laboratory",
+    "name": "Alchemical Laboratory",
+    "color": "red",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "arena",
+    "name": "Arena",
+    "color": "red",
+    "core": true,
+    "fixed": false
+  },
+
+  {
+    "id": "observatory",
+    "name": "Observatory",
+    "color": "yellow",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "bibliotheca",
+    "name": "Bibliotheca",
+    "color": "yellow",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "sanctuary",
+    "name": "Sanctuary",
+    "color": "yellow",
+    "core": true,
+    "fixed": false
+  },
+
+  {
+    "id": "garden",
+    "name": "Garden",
+    "color": "green",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "forge",
+    "name": "Forge",
+    "color": "green",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "treasure_room",
+    "name": "Treasure Room",
+    "color": "green",
+    "core": true,
+    "fixed": false
+  },
+
+  {
+    "id": "the_abyss",
+    "name": "The Abyss",
+    "color": "blue",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "oracle_room",
+    "name": "Oracle Room",
+    "color": "blue",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "mirrors_room",
+    "name": "Mirrors Room",
+    "color": "blue",
+    "core": true,
+    "fixed": false
+  },
+
+  {
+    "id": "throne",
+    "name": "Throne Room",
+    "color": "purple",
+    "core": true,
+    "fixed": true
+  },
+  {
+    "id": "armory",
+    "name": "Armory",
+    "color": "purple",
+    "core": true,
+    "fixed": false
+  },
+  {
+    "id": "pleasures_room",
+    "name": "Pleasures Room",
+    "color": "purple",
+    "core": true,
+    "fixed": false
+  }
+]

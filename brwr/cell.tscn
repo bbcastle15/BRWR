@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bkwtt4v6k31mp"]
+
+[ext_resource type="Script" uid="uid://dkunewaacy01k" path="res://cell.gd" id="1_yh0nt"]
+
+[node name="Cell" type="Node2D" unique_id=1934898915]
+position = Vector2(300, 300)
+script = ExtResource("1_yh0nt")
+
+[node name="Background" type="Polygon2D" parent="." unique_id=838376847]
+
+[node name="CellName" type="Label" parent="." unique_id=334777748]
+offset_right = 40.0
+offset_bottom = 23.0

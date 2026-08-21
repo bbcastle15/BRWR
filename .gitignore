@@ -1,0 +1,14 @@
+# Godot generated files
+brwr/.godot/
+
+# Temporary files
+*.tmp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://biurgj5s8m0k4"]
+
+[ext_resource type="Script" uid="uid://df62k2r6vfg1q" path="res://room.gd" id="1_88gup"]
+
+[node name="Room" type="Node2D" unique_id=1347722645]
+position = Vector2(-60, -10)
+script = ExtResource("1_88gup")
+
+[node name="Background" type="Polygon2D" parent="." unique_id=2087409923]
+
+[node name="RoomName" type="Label" parent="." unique_id=1310577108]
+offset_left = -60.0
+offset_top = -10.0
+offset_right = -20.0
+offset_bottom = 13.0
