@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cs6xj7tm5b2w"]
+
+[ext_resource type="Script" uid="uid://bqfke1degxdg1" path="res://event_board.gd" id="1_jyqrl"]
+
+[node name="EventBoard" type="Control" unique_id=1182762388]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 700.0
+script = ExtResource("1_jyqrl")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1084934302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1881639985]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 50.0
+text = "EVENT BOARD"
+horizontal_alignment = 1
+
+[node name="EventDeckSlot" type="Panel" parent="." unique_id=617030295]
+layout_mode = 0
+
+[node name="ActiveEvent1" type="Panel" parent="." unique_id=536969203]
+layout_mode = 0
+
+[node name="ActiveEvent2" type="Panel" parent="." unique_id=413563706]
+layout_mode = 0
+
+[node name="ActiveEvent3" type="Panel" parent="." unique_id=1314790598]
+layout_mode = 0
+
+[node name="EventDiscardSlot" type="Panel" parent="." unique_id=10652241]
+layout_mode = 0
+
+[node name="QuestDiscardSlot" type="Panel" parent="." unique_id=1511753298]
+layout_mode = 0
+
+[node name="BlackRoseCubePool" type="Panel" parent="." unique_id=155141306]
+layout_mode = 0
+
+[node name="BlackRoseTrophySlot" type="Panel" parent="." unique_id=163151868]
+layout_mode = 0

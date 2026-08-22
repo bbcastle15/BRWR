@@ -1,9 +1,9 @@
 extends Node2D
 
+@export var cell_id: String = ""
 @export var cell_name: String = "Cell"
 @export var cell_color: Color = Color.DIM_GRAY
 @export var radius: float = 70.0
-
 
 func _ready():
 	var background = $Background

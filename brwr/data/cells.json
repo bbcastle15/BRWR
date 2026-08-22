@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cell_a",
+    "name": "Cell A",
+    "color": "#d84a4a"
+  },
+  {
+    "id": "cell_b",
+    "name": "Cell B",
+    "color": "#4a74d8"
+  },
+  {
+    "id": "cell_c",
+    "name": "Cell C",
+    "color": "#8c55c9"
+  },
+  {
+    "id": "cell_d",
+    "name": "Cell D",
+    "color": "#dedede"
+  },
+  {
+    "id": "cell_e",
+    "name": "Cell E",
+    "color": "#4fa85b"
+  },
+  {
+    "id": "cell_f",
+    "name": "Cell F",
+    "color": "#d7b83f"
+  }
+]

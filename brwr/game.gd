@@ -1,13 +1,33 @@
 extends Node2D
+@export var game_seed: int = 0
 @export_range(2, 6) var player_count: int = 4
+
+var rng = RandomNumberGenerator.new()
+
 var room_scene = preload("res://room.tscn")
 var cell_scene = preload("res://cell.tscn")
 var layout_database = {}
 const HEX_RADIUS = 70.0
 var board_center: Vector2
-const BOARD_CENTER = Vector2(576, 324)
 var room_database = []
+var cell_database = []
+const BOARD_CENTER = Vector2(576, 324)
 
+func load_cells():
+	var file = FileAccess.open("res://data/cells.json", FileAccess.READ)
+
+	if file == null:
+		print("ERRORE: impossibile aprire cells.json")
+		return []
+
+	var text = file.get_as_text()
+	var data = JSON.parse_string(text)
+
+	if data == null:
+		print("ERRORE: cells.json non è valido")
+		return []
+
+	return data
 func load_layouts():
 	var file = FileAccess.open("res://data/layouts.json", FileAccess.READ)
 
@@ -24,25 +44,37 @@ func load_layouts():
 
 	return data
 	
-func create_cell(cell_number: int, hex_position: Vector2i):
+func create_cell(cell_data, hex_position: Vector2i):
 	var cell = cell_scene.instantiate()
 
-	cell.cell_name = "Cell " + str(cell_number)
+	cell.cell_id = cell_data["id"]
+	cell.cell_name = cell_data["name"]
+	cell.cell_color = Color(cell_data["color"])
 	cell.radius = HEX_RADIUS
 	cell.position = hex_to_pixel(hex_position)
 
 	add_child(cell)
 	
 func _ready():
+	if game_seed == 0:
+		rng.randomize()
+	else:
+		rng.seed = game_seed
+
 	board_center = get_viewport_rect().size / 2.0
 
 	room_database = load_rooms()
 	layout_database = load_layouts()
+	cell_database = load_cells()
 
 	print("PLAYER COUNT: ", player_count)
+	print("GAME SEED: ", game_seed)
 
 	create_lodge()
+	$PowerBoard.initialize(player_count)
+	await $PowerBoard.initialize(player_count)
 
+	
 
 func load_rooms():
 	var file = FileAccess.open("res://data/rooms.json", FileAccess.READ)
@@ -94,7 +126,7 @@ func create_lodge():
 			room_pool.append(room_data)
 
 	# Mischia le 17 stanze
-	room_pool.shuffle()
+	shuffle_with_rng(room_pool)
 
 	# Tutte le posizioni della Lodge tranne:
 	# (0,0) = Black Rose
@@ -174,10 +206,17 @@ func get_lodge_positions() -> Array[Vector2i]:
 
 func create_cells():
 	var layout = layout_database[str(player_count)]
-	var cells = layout["cells"]
+	var cell_slots = layout["cells"]
 
-	for cell_data in cells:
-		var position_array = cell_data["position"]
+	var available_cells = cell_database.duplicate(true)
+
+	shuffle_with_rng(available_cells)
+
+	var selected_cells = available_cells.slice(0, player_count)
+
+	for i in range(cell_slots.size()):
+		var slot_data = cell_slots[i]
+		var position_array = slot_data["position"]
 
 		var hex_position = Vector2i(
 			int(position_array[0]),
@@ -185,6 +224,16 @@ func create_cells():
 		)
 
 		create_cell(
-			int(cell_data["slot"]),
+			selected_cells[i],
 			hex_position
 		)
+
+	print("Cells created: ", cell_slots.size())
+	
+func shuffle_with_rng(array: Array):
+	for i in range(array.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+
+		var temp = array[i]
+		array[i] = array[j]
+		array[j] = temp

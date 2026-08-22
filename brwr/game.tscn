@@ -1,7 +1,21 @@
 [gd_scene format=3 uid="uid://b17tkam11o1uj"]
 
 [ext_resource type="Script" uid="uid://dlc5qfu1n5umm" path="res://game.gd" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://r6u0araoi5wt" path="res://power_board.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cs6xj7tm5b2w" path="res://event_board.tscn" id="3_fc0e3"]
 
 [node name="Game" type="Node2D" unique_id=2036644011]
 script = ExtResource("1_80nbo")
-player_count = 3
+game_seed = 1232
+
+[node name="PowerBoard" parent="." unique_id=2134685225 instance=ExtResource("2_feb5d")]
+offset_left = 1270.0
+offset_top = 100.0
+offset_right = 1570.0
+offset_bottom = 800.0
+
+[node name="EventBoard" parent="." unique_id=1182762388 instance=ExtResource("3_fc0e3")]
+offset_left = 30.0
+offset_top = 100.0
+offset_right = 330.0
+offset_bottom = 800.0

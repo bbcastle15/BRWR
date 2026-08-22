@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bign5cx0ipqnm"]
+
+[ext_resource type="Script" uid="uid://d35l54qtyx1dk" path="res://power_marker.gd" id="1_1nm1r"]
+
+[node name="PowerMarker" type="Control" unique_id=2047691104]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1nm1r")
+
+[node name="Body" type="ColorRect" parent="." unique_id=316489061]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=1431001761]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
