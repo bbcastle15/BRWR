@@ -73,6 +73,15 @@ func _ready():
 	create_lodge()
 	$PowerBoard.initialize(player_count)
 	await $PowerBoard.initialize(player_count)
+	var test_room = find_room("crypt")
+
+	if test_room != null:
+		place_black_rose_instability("crypt", 5)
+		remove_black_rose_instability("crypt", 10)
+
+		print("Crypt instability: ", test_room.get_instability_count())
+		print("Black Rose cubes: ", test_room.get_instability_by_owner(-1))
+		print("Player 1 cubes: ", test_room.get_instability_by_owner(0))
 
 	
 
@@ -144,7 +153,7 @@ func create_lodge():
 
 func create_room(room_data, hex_position: Vector2i):
 	var room = room_scene.instantiate()
-
+	room.set_meta("room_id", room_data["id"])
 	room.room_name = room_data["name"]
 	room.room_color = get_room_color(room_data["color"])
 	room.radius = HEX_RADIUS
@@ -237,3 +246,54 @@ func shuffle_with_rng(array: Array):
 		var temp = array[i]
 		array[i] = array[j]
 		array[j] = temp
+
+func find_room(room_id: String):
+	for child in get_children():
+		if child.has_meta("room_id"):
+			if child.get_meta("room_id") == room_id:
+				return child
+
+	return null
+	
+func place_black_rose_instability(room_id: String, amount: int = 1):
+	var room = find_room(room_id)
+
+	if room == null:
+		print("ERRORE: stanza non trovata: ", room_id)
+		return
+
+	var taken = $EventBoard.take_black_rose_cubes(amount)
+
+	for i in range(taken):
+		room.add_instability_cube(-1)
+
+	print(
+		"Black Rose placed ",
+		taken,
+		" instability in ",
+		room.room_name
+	)
+
+func remove_black_rose_instability(room_id: String, amount: int = 1):
+	var room = find_room(room_id)
+
+	if room == null:
+		print("ERRORE: stanza non trovata: ", room_id)
+		return
+
+	var removed = 0
+
+	for i in range(amount):
+		if room.remove_instability_cube(-1):
+			removed += 1
+		else:
+			break
+
+	$EventBoard.return_black_rose_cubes(removed)
+
+	print(
+		"Removed ",
+		removed,
+		" Black Rose instability from ",
+		room.room_name
+	)

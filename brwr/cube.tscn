@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bu5drjf80kukm"]
+
+[ext_resource type="Script" uid="uid://c2p0gqevfcsxj" path="res://cube.gd" id="1_jbd7x"]
+
+[node name="Cube" type="Control" unique_id=910034874]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1584.0
+offset_bottom = -884.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jbd7x")
+
+[node name="Body" type="ColorRect" parent="." unique_id=407023589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.029944023, 0.108802445, 0.12919992, 1)
