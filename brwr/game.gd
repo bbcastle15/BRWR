@@ -1,7 +1,7 @@
 extends Node2D
 @export var game_seed: int = 0
 @export_range(2, 6) var player_count: int = 4
-
+var players: Array[PlayerState] = []
 var rng = RandomNumberGenerator.new()
 
 var room_scene = preload("res://room.tscn")
@@ -71,19 +71,24 @@ func _ready():
 	print("GAME SEED: ", game_seed)
 
 	create_lodge()
-	$PowerBoard.initialize(player_count)
+	create_players()
+	deal_damage(0, 1, 3)
+	deal_damage(-1, 1, 2)
+
+	print("Before healing")
+	print("P1 cubes: ", players[0].available_cubes)
+	print("BR cubes: ", $EventBoard.black_rose_cube_count)
+	print("P2 damage: ", players[1].mage.damage_cubes)
+
+	heal_damage(1, 0, 2)
+	heal_damage(1, -1, 10)
+	print("After healing")
+	print("P1 cubes: ", players[0].available_cubes)
+	print("BR cubes: ", $EventBoard.black_rose_cube_count)
+	print("P2 damage: ", players[1].mage.damage_cubes)
 	await $PowerBoard.initialize(player_count)
-	var test_room = find_room("crypt")
-
-	if test_room != null:
-		place_black_rose_instability("crypt", 5)
-		remove_black_rose_instability("crypt", 10)
-
-		print("Crypt instability: ", test_room.get_instability_count())
-		print("Black Rose cubes: ", test_room.get_instability_by_owner(-1))
-		print("Player 1 cubes: ", test_room.get_instability_by_owner(0))
-
 	
+
 
 func load_rooms():
 	var file = FileAccess.open("res://data/rooms.json", FileAccess.READ)
@@ -297,3 +302,188 @@ func remove_black_rose_instability(room_id: String, amount: int = 1):
 		" Black Rose instability from ",
 		room.room_name
 	)
+func create_players():
+	players.clear()
+
+	var colors = [
+		Color.RED,
+		Color.BLUE,
+		Color.GREEN,
+		Color.PURPLE,
+		Color.YELLOW,
+		Color.WHITE
+	]
+
+	for i in range(player_count):
+		var player = PlayerState.new(
+			i,
+			"Player " + str(i + 1),
+			colors[i]
+		)
+
+		players.append(player)
+
+	print("Players created: ", players.size())
+
+func place_player_instability(player_index: int, room_id: String, amount: int = 1):
+	if player_index < 0 or player_index >= players.size():
+		print("ERRORE: player_index non valido: ", player_index)
+		return
+
+	var room = find_room(room_id)
+
+	if room == null:
+		print("ERRORE: stanza non trovata: ", room_id)
+		return
+
+	var player = players[player_index]
+	var taken = player.take_cubes(amount)
+
+	for i in range(taken):
+		room.add_instability_cube(player_index)
+
+	print(
+		player.player_name,
+		" placed ",
+		taken,
+		" instability in ",
+		room.room_name,
+		" | Cubes left: ",
+		player.available_cubes
+	)
+func remove_player_instability(player_index: int, room_id: String, amount: int = 1):
+	if player_index < 0 or player_index >= players.size():
+		print("ERRORE: player_index non valido: ", player_index)
+		return
+
+	var room = find_room(room_id)
+
+	if room == null:
+		print("ERRORE: stanza non trovata: ", room_id)
+		return
+
+	var player = players[player_index]
+	var removed = 0
+
+	for i in range(amount):
+		if room.remove_instability_cube(player_index):
+			removed += 1
+		else:
+			break
+
+	player.return_cubes(removed)
+
+	print(
+		"Removed ",
+		removed,
+		" instability of ",
+		player.player_name,
+		" from ",
+		room.room_name,
+		" | Cubes available: ",
+		player.available_cubes
+	)
+	
+func take_owner_cubes(owner_id: int, amount: int) -> int:
+	if owner_id == -1:
+		return $EventBoard.take_black_rose_cubes(amount)
+
+	if owner_id < 0 or owner_id >= players.size():
+		print("ERRORE: owner_id non valido: ", owner_id)
+		return 0
+
+	return players[owner_id].take_cubes(amount)
+	
+func return_owner_cubes(owner_id: int, amount: int):
+	if owner_id == -1:
+		$EventBoard.return_black_rose_cubes(amount)
+		return
+
+	if owner_id < 0 or owner_id >= players.size():
+		print("ERRORE: owner_id non valido: ", owner_id)
+		return
+
+	players[owner_id].return_cubes(amount)
+	
+func deal_damage(
+	attacker_id: int,
+	target_player_index: int,
+	amount: int
+) -> int:
+
+	if target_player_index < 0 or target_player_index >= players.size():
+		print("ERRORE: target_player_index non valido")
+		return 0
+
+	if amount <= 0:
+		return 0
+
+	var target_mage = players[target_player_index].mage
+
+	# Il regolamento non piazza Damage oltre la Health.
+	var damage_capacity = target_mage.get_remaining_health()
+	var requested_damage = min(amount, damage_capacity)
+
+	# L'attaccante deve avere fisicamente i cubi.
+	var cubes_available = take_owner_cubes(
+		attacker_id,
+		requested_damage
+	)
+
+	var damage_dealt = target_mage.add_damage(
+		attacker_id,
+		cubes_available
+	)
+
+	print(
+		"Damage: attacker ", attacker_id,
+		" -> Player ", target_player_index + 1,
+		" | ", damage_dealt,
+		" damage",
+		" | Target HP: ",
+		target_mage.get_remaining_health(),
+		"/",
+		target_mage.health
+	)
+
+	return damage_dealt
+
+func heal_damage(
+	target_player_index: int,
+	owner_id: int,
+	amount: int
+) -> int:
+
+	if target_player_index < 0 or target_player_index >= players.size():
+		print("ERRORE: target_player_index non valido")
+		return 0
+
+	if amount <= 0:
+		return 0
+
+	var target_mage = players[target_player_index].mage
+
+	var removed = target_mage.remove_damage(
+		owner_id,
+		amount
+	)
+
+	return_owner_cubes(
+		owner_id,
+		removed
+	)
+
+	print(
+		"Healed ",
+		removed,
+		" damage from owner ",
+		owner_id,
+		" on Player ",
+		target_player_index + 1,
+		" | Target HP: ",
+		target_mage.get_remaining_health(),
+		"/",
+		target_mage.health
+	)
+
+	return removed
