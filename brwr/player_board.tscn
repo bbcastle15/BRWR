@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://dofr4heb45ccf"]
+
+[ext_resource type="Script" uid="uid://c0u6cn600nl30" path="res://player_board.gd" id="1_gfcrp"]
+
+[node name="PlayerBoard" type="Control" unique_id=1863808276]
+custom_minimum_size = Vector2(700, 220)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 700.0
+offset_bottom = 220.0
+script = ExtResource("1_gfcrp")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1996729064]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="PlayerName" type="Label" parent="." unique_id=470704213]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 180.0
+offset_bottom = 35.0
+text = "Player"
+
+[node name="MageName" type="Label" parent="." unique_id=287140575]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 180.0
+offset_bottom = 65.0
+text = "Mage"
+
+[node name="HealthLabel" type="Label" parent="." unique_id=59264174]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 75.0
+offset_right = 180.0
+offset_bottom = 100.0
+text = "HP: 10/10"
+
+[node name="PowerLabel" type="Label" parent="." unique_id=934426090]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 105.0
+offset_right = 180.0
+offset_bottom = 130.0
+text = "Power: 0"
+
+[node name="CubeLabel" type="Label" parent="." unique_id=1785520983]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 180.0
+offset_bottom = 160.0
+text = "Cubes: 25"
+
+[node name="SpellSlots" type="HBoxContainer" parent="." unique_id=536329808]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 25.0
+offset_right = 680.0
+offset_bottom = 150.0
+theme_override_constants/separation = 10
+
+[node name="SpellSlotI" type="Panel" parent="SpellSlots" unique_id=146178104]
+custom_minimum_size = Vector2(100, 120)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SpellSlots/SpellSlotI" unique_id=873793502]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellSlotII" type="Panel" parent="SpellSlots" unique_id=1013560179]
+custom_minimum_size = Vector2(100, 120)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SpellSlots/SpellSlotII" unique_id=251244585]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "II"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellSlotIII" type="Panel" parent="SpellSlots" unique_id=665290442]
+custom_minimum_size = Vector2(100, 120)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SpellSlots/SpellSlotIII" unique_id=189948641]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "III"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuickSpellSlot" type="Panel" parent="SpellSlots" unique_id=1397107605]
+custom_minimum_size = Vector2(100, 120)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SpellSlots/QuickSpellSlot" unique_id=2068508491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUICK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrimoireSlot" type="Panel" parent="." unique_id=2021878485]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 165.0
+offset_right = 320.0
+offset_bottom = 210.0
+
+[node name="Label" type="Label" parent="GrimoireSlot" unique_id=596988763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GRIMOIRE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MemoriesSlot" type="Panel" parent="." unique_id=492171430]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 165.0
+offset_right = 440.0
+offset_bottom = 210.0
+
+[node name="Label" type="Label" parent="MemoriesSlot" unique_id=1091965562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MEMORIES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HandInfo" type="Label" parent="." unique_id=1094652284]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 175.0
+offset_right = 660.0
+offset_bottom = 200.0
+text = "Hand: 0"

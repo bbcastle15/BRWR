@@ -6,11 +6,14 @@ var rng = RandomNumberGenerator.new()
 
 var room_scene = preload("res://room.tscn")
 var cell_scene = preload("res://cell.tscn")
+var player_board_scene = preload("res://player_board.tscn")
+
 var layout_database = {}
 const HEX_RADIUS = 70.0
 var board_center: Vector2
 var room_database = []
 var cell_database = []
+var player_boards: Array = []
 const BOARD_CENTER = Vector2(576, 324)
 
 func load_cells():
@@ -72,22 +75,12 @@ func _ready():
 
 	create_lodge()
 	create_players()
+	create_player_boards()
 	deal_damage(0, 1, 3)
-	deal_damage(-1, 1, 2)
-
-	print("Before healing")
-	print("P1 cubes: ", players[0].available_cubes)
-	print("BR cubes: ", $EventBoard.black_rose_cube_count)
-	print("P2 damage: ", players[1].mage.damage_cubes)
-
-	heal_damage(1, 0, 2)
-	heal_damage(1, -1, 10)
-	print("After healing")
-	print("P1 cubes: ", players[0].available_cubes)
-	print("BR cubes: ", $EventBoard.black_rose_cube_count)
-	print("P2 damage: ", players[1].mage.damage_cubes)
+	player_boards[0].refresh()
+	player_boards[1].refresh()
 	await $PowerBoard.initialize(player_count)
-	
+	update_table_layout()
 
 
 func load_rooms():
@@ -487,3 +480,70 @@ func heal_damage(
 	)
 
 	return removed
+
+func create_player_boards():
+	for board in player_boards:
+		if board != null:
+			board.queue_free()
+
+	player_boards.clear()
+
+	for i in range(players.size()):
+		var board = player_board_scene.instantiate()
+
+		board.setup(players[i])
+
+		add_child(board)
+		player_boards.append(board)
+
+	update_player_board_positions()
+	
+func update_player_board_positions():
+	var board_scale = 0.38
+
+	var left_x = 10.0
+	var right_x = 1325.0
+
+	var y_positions = [
+		40.0,
+		340.0,
+		640.0
+	]
+
+	for i in range(player_boards.size()):
+		var board = player_boards[i]
+		board.scale = Vector2(board_scale, board_scale)
+
+		if i % 2 == 0:
+			var row = int(i / 2)
+
+			board.position = Vector2(
+				left_x,
+				y_positions[row]
+			)
+		else:
+			var row = int(i / 2)
+
+			board.position = Vector2(
+				right_x,
+				y_positions[row]
+			)
+			
+func update_table_layout():
+	var last_column_center_room = hex_to_pixel(Vector2i(2, -1))
+
+	# Vertice destro della Room centrale dell'ultima colonna
+	var lodge_connection_point = (
+		last_column_center_room
+		+ Vector2(HEX_RADIUS, 0)
+	)
+
+	# Punto della PowerBoard che deve coincidere con quel vertice
+	var power_board_notch = Vector2(70, 325)
+
+	$PowerBoard.position = (
+		lodge_connection_point
+		- power_board_notch
+	)
+
+	update_player_board_positions()

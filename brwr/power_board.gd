@@ -1,18 +1,33 @@
 extends Control
+const SMALL_CARD_SIZE = Vector2(80, 52)
+
+const RECT_X = 145.0
+const RECT_WIDTH = 161.0
+const CARD_GAP = 5.0
+const CARD_X = 35.0
+const UPPER_HEX_Y = 185.0
+const LOWER_HEX_Y = 355.0
+
 var marker_scene = preload("res://power_marker.tscn")
 var threshold_markers: Array = []
 var black_rose_marker
 var player_markers: Array = []
 @export var second_moon_threshold: int = 6
 @export var third_moon_threshold: int = 18
-@export var end_game_threshold: int = 30
+@export var end_game_threshold: int = 35
 
 var black_rose_power: int = 0
 var player_power: Array[int] = []
 
 
 func _ready():
+	create_board_shape()
 	create_power_track()
+
+	await get_tree().process_frame
+
+	setup_card_slots()
+	center_power_track()
 
 
 func initialize(player_count: int):
@@ -91,7 +106,7 @@ func create_power_track():
 		var label = Label.new()
 
 		label.text = str(value)
-		label.custom_minimum_size = Vector2(38, 30)
+		label.custom_minimum_size = Vector2(48, 34)
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
@@ -182,3 +197,166 @@ func update_threshold_markers():
 		get_power_position(end_game_threshold)
 		+ Vector2(-12, -12)
 	)
+	
+func create_board_shape():
+	var shape = $BoardShape
+
+	# Geometria dell'incastro: NON TOCCARE
+	var r = 70.0
+	var half_r = r / 2.0
+	var hex_h = sqrt(3.0) * r
+
+	# Connessione più corta del 30%
+	var rect_x = 145.0
+
+	# Manteniamo fisso il centro
+	var center_y = 325.0
+
+	var upper_center_y = center_y - hex_h / 2.0
+	var lower_center_y = center_y + hex_h / 2.0
+
+	# Rettangolo più stretto del 30%
+	var rect_width = 161.0
+
+	# Altezza del rettangolo invariata
+	var rect_top = 60.0
+	var rect_bottom = 590.0
+
+	var rect_right = rect_x + rect_width
+
+	var points = PackedVector2Array([
+		Vector2(rect_x, rect_top),
+		Vector2(rect_right, rect_top),
+
+		Vector2(rect_right, rect_bottom),
+		Vector2(rect_x, rect_bottom),
+
+		Vector2(rect_x, lower_center_y + hex_h / 2.0),
+
+		Vector2(half_r, lower_center_y + hex_h / 2.0),
+
+		Vector2(0, lower_center_y),
+
+		Vector2(half_r, center_y),
+
+		Vector2(0, upper_center_y),
+
+		Vector2(half_r, upper_center_y - hex_h / 2.0),
+
+		Vector2(rect_x, upper_center_y - hex_h / 2.0)
+	])
+
+	shape.polygon = points
+	shape.color = Color(0.07, 0.12, 0.13)
+
+func center_power_track():
+	var power_track = $PowerTrack
+
+	var rect_center_x = (
+		RECT_X
+		+ RECT_WIDTH / 2.0
+	)
+
+	power_track.position.x = (
+		rect_center_x
+		- power_track.size.x / 2.0
+	)
+	
+func setup_card_slots():
+	var r = 70.0
+	var hex_h = sqrt(3.0) * r
+
+	var center_y = 325.0
+	var upper_center_y = center_y - hex_h / 2.0
+	var lower_center_y = center_y + hex_h / 2.0
+
+	# Altezza totale della coppia di carte
+	var pair_height = (
+		SMALL_CARD_SIZE.y * 2.0
+		+ CARD_GAP
+	)
+
+	# Centro orizzontale della zona esagonale.
+	# Questo è il valore da calibrare se serve spostare
+	# tutto leggermente a destra/sinistra.
+	var card_center_x = 105.0
+
+	var card_x = (
+		card_center_x
+		- SMALL_CARD_SIZE.x / 2.0
+	)
+
+	var upper_start_y = (
+		upper_center_y
+		- pair_height / 2.0
+	)
+
+	var lower_start_y = (
+		lower_center_y
+		- pair_height / 2.0
+	)
+
+	# Primo esagono
+	setup_card_slot(
+		$QuestSlot,
+		Vector2(
+			card_x,
+			upper_start_y
+		),
+		"QUEST"
+	)
+
+	setup_card_slot(
+		$JinxSlot,
+		Vector2(
+			card_x,
+			upper_start_y
+			+ SMALL_CARD_SIZE.y
+			+ CARD_GAP
+		),
+		"JINX"
+	)
+
+	# Secondo esagono
+	setup_card_slot(
+		$EvocationSlot,
+		Vector2(
+			card_x,
+			lower_start_y
+		),
+		"EVOC"
+	)
+
+	setup_card_slot(
+		$UpgradeSlot,
+		Vector2(
+			card_x,
+			lower_start_y
+			+ SMALL_CARD_SIZE.y
+			+ CARD_GAP
+		),
+		"UPGRADE"
+	)
+	
+func setup_card_slot(
+	slot: Control,
+	slot_position: Vector2,
+	label_text: String
+):
+	slot.position = slot_position
+	slot.size = SMALL_CARD_SIZE
+	slot.custom_minimum_size = SMALL_CARD_SIZE
+
+	var label = slot.get_node_or_null("Label")
+
+	if label == null:
+		label = Label.new()
+		label.name = "Label"
+		slot.add_child(label)
+
+	label.position = Vector2.ZERO
+	label.size = SMALL_CARD_SIZE
+
+	label.text = label_text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
