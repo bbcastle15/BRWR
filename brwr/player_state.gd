@@ -8,10 +8,10 @@ const MAX_CUBES: int = 25
 var player_index: int
 var player_name: String
 var color: Color
-
+var evocations: Array[EvocationState] = []
 var power: int = 0
 var available_cubes: int = MAX_CUBES
-
+var active_spells: Array[ActiveSpellState] = []
 var mage_id: String = ""
 var school_id: String = ""
 
@@ -45,3 +45,27 @@ func return_cubes(amount: int):
 		available_cubes + max(amount, 0),
 		MAX_CUBES
 	)
+func has_free_evocation_slot() -> bool:
+	return evocations.size() < 3
+	
+func add_evocation(evocation: EvocationState) -> bool:
+	if not has_free_evocation_slot():
+		return false
+
+	evocations.append(evocation)
+	return true
+	
+func add_active_spell(
+	active_spell: ActiveSpellState
+):
+	active_spells.append(active_spell)
+
+func remove_active_spell(
+	active_spell: ActiveSpellState
+):
+	var index = active_spells.find(
+		active_spell
+	)
+
+	if index != -1:
+		active_spells.remove_at(index)

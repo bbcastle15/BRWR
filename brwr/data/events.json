@@ -1,0 +1,32 @@
+[
+	{
+		"id": "event_test_01",
+		"name": "Test Event 1",
+		"moon": 1,
+		"slot": 1
+	},
+	{
+		"id": "event_test_02",
+		"name": "Test Event 2",
+		"moon": 1,
+		"slot": 2
+	},
+	{
+		"id": "event_test_03",
+		"name": "Test Event 3",
+		"moon": 1,
+		"slot": 3
+	},
+	{
+		"id": "event_test_04",
+		"name": "Test Event 4",
+		"moon": 1,
+		"slot": 1
+	},
+	{
+		"id": "event_test_05",
+		"name": "Test Event 5",
+		"moon": 1,
+		"slot": 2
+	}
+]

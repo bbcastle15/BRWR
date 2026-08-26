@@ -1,0 +1,182 @@
+[
+  {
+    "id": "grim_torment",
+    "name": "Grim Torment",
+    "school": "agony",
+    "copies": 3,
+    "instability": true,
+
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 1,
+
+      "effects": [
+        {
+          "type": "damage_per_black_rose_damage",
+          "step": 2,
+          "damage_per_step": 1,
+          "max": 3
+        },
+        {
+          "type": "pain",
+          "amount": 1
+        }
+      ]
+    },
+
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 2,
+
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "pain",
+          "amount": 1
+        }
+      ]
+    }
+  }
+  ,
+
+{
+  "id": "shared_torture",
+  "name": "Shared Torture",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "element": "profane",
+    "target": "model",
+    "range": 1,
+
+    "effects": [
+      {
+        "type": "damage_per_black_rose_damage",
+        "step": 2,
+        "damage_per_step": 1,
+        "max": 999
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "element": "profane",
+    "target": "model",
+    "range": 1,
+
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 4
+      },
+      {
+        "type": "convert_damage",
+        "amount": 1
+      },
+      {
+        "type": "pain",
+        "amount": 3
+      }
+    ]
+  }
+},
+
+{
+  "id": "cross_and_delight",
+  "name": "Cross and Delight",
+  "school": "agony",
+  "copies": 3,
+  "instability": true,
+
+  "light": {
+    "type": "combat",
+    "element": "water",
+    "target": "special",
+    "effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "succubus"
+      },
+      {
+        "type": "pain",
+        "amount": 1
+      },
+      {
+        "type": "activate_summoned_evocation"
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "element": "water",
+    "target": "own_demon",
+    "target_archetype": "demon",
+    "effects": [
+      {
+        "type": "damage_from_evocation",
+        "base_amount": 2,
+        "bonus_per_evocation_damage": 1
+      },
+      {
+        "type": "remove_target_evocation"
+      }
+    ]
+  }
+}, 
+
+{
+  "id": "torment",
+  "name": "Torment",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "another_model_inflicts_damage"
+    },
+
+    "effects": [
+      {
+        "type": "damage_triggering_model",
+        "amount": 2
+      },
+      {
+        "type": "summon_evocation_at_triggering_model",
+        "evocation_id": "succubus",
+        "range": 0
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "another_model_inflicts_damage_to_caster"
+    },
+
+    "effects": [
+      {
+        "type": "damage_triggering_model_from_trigger_damage",
+        "bonus": 1
+      }
+    ]
+  }
+}
+]
+

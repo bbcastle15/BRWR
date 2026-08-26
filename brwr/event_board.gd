@@ -1,5 +1,22 @@
 extends Control
 
+var card_view_scene = preload("res://card_view.tscn")
+
+var event_decks: Dictionary = {
+	1: [],
+	2: [],
+	3: []
+}
+
+var current_moon: int = 1
+
+var active_event_cards: Array = [
+	null,
+	null,
+	null
+]
+
+var discarded_event_cards: Array[CardState] = []
 var cube_scene = preload("res://cube.tscn")
 
 const SMALL_CARD_SIZE = Vector2(80, 52)
@@ -29,6 +46,76 @@ var active_events: Array = [
 var event_discard: Array = []
 var quest_discard: Array = []
 
+func initialize_events(rng: RandomNumberGenerator):
+	load_event_database()
+	shuffle_event_decks(rng)
+
+	current_moon = 1
+
+	refresh_event_slots()
+	
+func shuffle_event_decks(rng: RandomNumberGenerator):
+	for moon in [1, 2, 3]:
+		var deck: Array = event_decks[moon]
+
+		for i in range(deck.size() - 1, 0, -1):
+			var j = rng.randi_range(0, i)
+
+			var temp = deck[i]
+			deck[i] = deck[j]
+			deck[j] = temp
+func refresh_event_slots():
+	show_card_in_slot(
+		$ActiveEvent1,
+		active_event_cards[0]
+	)
+
+	show_card_in_slot(
+		$ActiveEvent2,
+		active_event_cards[1]
+	)
+
+	show_card_in_slot(
+		$ActiveEvent3,
+		active_event_cards[2]
+	)
+	update_event_deck_label()
+	update_event_discard_label()
+
+func update_event_deck_label():
+	var label = $EventDeckSlot.get_node_or_null("Label")
+
+	if label != null:
+		label.text = (
+			"EVENT DECK\n"
+			+ "Moon " + str(current_moon)
+			+ "\n"
+			+ str(event_decks[current_moon].size())
+		)
+func update_event_discard_label():
+	var label = $EventDiscardSlot.get_node_or_null("Label")
+
+	if label != null:
+		label.text = (
+			"DISCARD\n"
+			+ str(discarded_event_cards.size())
+		)
+func show_card_in_slot(slot: Control, card: CardState):
+	var old_view = slot.get_node_or_null("CardView")
+
+	if old_view != null:
+		old_view.queue_free()
+
+	if card == null:
+		return
+
+	var view = card_view_scene.instantiate()
+	view.name = "CardView"
+
+	slot.add_child(view)
+
+	view.position = Vector2.ZERO
+	view.setup(card)
 
 func _ready():
 	create_board_shape()
@@ -256,9 +343,7 @@ func setup_lower_slots():
 	var upper_center_y = CENTER_Y - hex_h / 2.0
 	var lower_center_y = CENTER_Y + hex_h / 2.0
 
-	# La zona sagomata è sul lato destro.
 	var board_width = RECT_X + RECT_WIDTH
-
 	var irregular_center_x = board_width - 105.0
 
 	# Trophy nella parte superiore
@@ -271,17 +356,7 @@ func setup_lower_slots():
 		"TROPHIES"
 	)
 
-	# Quest discard nella parte inferiore
-	setup_card_slot(
-		$QuestDiscardSlot,
-		Vector2(
-			irregular_center_x - SMALL_CARD_SIZE.x / 2.0,
-			lower_center_y - SMALL_CARD_SIZE.y / 2.0
-		),
-		"QUEST\nDISCARD"
-	)
-
-	# Cubi della Black Rose nel centro
+	# Black Rose cubes nella parte inferiore
 	var cube_pool_size = Vector2(80, 45)
 
 	$BlackRoseCubePool.size = cube_pool_size
@@ -289,5 +364,158 @@ func setup_lower_slots():
 
 	$BlackRoseCubePool.position = Vector2(
 		irregular_center_x - cube_pool_size.x / 2.0,
-		CENTER_Y - cube_pool_size.y / 2.0
+		lower_center_y - cube_pool_size.y / 2.0
 	)
+
+	# Quest discard al centro
+	setup_card_slot(
+		$QuestDiscardSlot,
+		Vector2(
+			irregular_center_x - SMALL_CARD_SIZE.x / 2.0,
+			CENTER_Y - SMALL_CARD_SIZE.y / 2.0
+		),
+		"QUEST\nDISCARD"
+	)
+	
+func load_event_database():
+	event_decks[1].clear()
+	event_decks[2].clear()
+	event_decks[3].clear()
+
+	var file = FileAccess.open(
+		"res://data/events.json",
+		FileAccess.READ
+	)
+
+	if file == null:
+		print("ERRORE: impossibile aprire events.json")
+		return
+
+	var json_data = JSON.parse_string(file.get_as_text())
+
+	if json_data == null:
+		print("ERRORE: events.json non valido")
+		return
+
+	for event_data in json_data:
+		var card = CardState.new(
+			event_data["id"],
+			event_data["name"],
+			CardState.CardType.EVENT,
+			event_data
+		)
+
+		var moon = int(event_data.get("moon", 1))
+
+		if moon >= 1 and moon <= 3:
+			event_decks[moon].append(card)
+
+	print(
+		"Events loaded | Moon 1: ",
+		event_decks[1].size(),
+		" | Moon 2: ",
+		event_decks[2].size(),
+		" | Moon 3: ",
+		event_decks[3].size()
+	)
+
+func shift_events():
+	if active_event_cards[2] != null:
+		discarded_event_cards.append(
+			active_event_cards[2]
+		)
+
+		print(
+			"Event shifted to discard: ",
+			active_event_cards[2].card_name
+		)
+
+	active_event_cards[2] = active_event_cards[1]
+	active_event_cards[1] = active_event_cards[0]
+	active_event_cards[0] = null
+
+	refresh_event_slots()
+
+func draw_and_place_event():
+	var card = draw_event()
+
+	if card == null:
+		return
+
+	var slot_number = int(card.data.get("slot", 1))
+
+	place_event(card, slot_number)
+	
+func place_event(card: CardState, slot_number: int):
+	# Gli slot validi sono 1, 2, 3
+	slot_number = clamp(slot_number, 1, 3)
+
+	# Convertiamo:
+	# slot 1 -> indice 0
+	# slot 2 -> indice 1
+	# slot 3 -> indice 2
+	var index = slot_number - 1
+
+	var card_to_place = card
+
+	while card_to_place != null:
+		# Se siamo usciti dallo slot 3,
+		# la carta finisce nel discard.
+		if index >= active_event_cards.size():
+			discarded_event_cards.append(card_to_place)
+
+			print(
+				"Event discarded: ",
+				card_to_place.card_name
+			)
+
+			break
+
+		# Salviamo l'eventuale carta già presente.
+		var displaced_card = active_event_cards[index]
+
+		# Inseriamo la nuova carta.
+		active_event_cards[index] = card_to_place
+
+		print(
+			card_to_place.card_name,
+			" placed in Event Slot ",
+			index + 1
+		)
+
+		# La carta che c'era prima viene spinta
+		# nello slot successivo.
+		card_to_place = displaced_card
+		index += 1
+
+	refresh_event_slots()
+	
+func draw_event() -> CardState:
+	var deck: Array = event_decks[current_moon]
+
+	if deck.is_empty():
+		print("Event deck empty for Moon ", current_moon)
+		return null
+
+	var card = deck.pop_back()
+
+	print(
+		"Event drawn: ",
+		card.card_name,
+		" | Moon ",
+		current_moon
+	)
+
+	return card
+	
+func set_moon(moon: int):
+	moon = clamp(moon, 1, 3)
+
+	if moon == current_moon:
+		return
+
+	current_moon = moon
+
+	print("Event Board changed to Moon ", current_moon)
+
+	update_event_deck_label()

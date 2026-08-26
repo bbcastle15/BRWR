@@ -4,7 +4,8 @@ extends RefCounted
 
 var mage_id: String = ""
 var health: int = 10
-
+var room_id: String = ""
+var room_coord: Vector2i = Vector2i.ZERO
 # Ogni elemento rappresenta un Damage Cube presente sulla Mage Sheet.
 #
 # Convenzione owner_id:

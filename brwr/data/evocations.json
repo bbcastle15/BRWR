@@ -1,0 +1,10 @@
+[
+  {
+    "id": "succubus",
+    "name": "Succubus",
+    "archetype": "demon",
+    "health": 3,
+    "strength": 1,
+    "speed": 2
+  }
+]

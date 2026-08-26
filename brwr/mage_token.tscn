@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://e3kwayrri8a7"]
+
+[ext_resource type="Script" uid="uid://cghxn82isy33f" path="res://mage_token.gd" id="1_0sstl"]
+
+[node name="MageToken" type="Node2D" unique_id=477014151]
+script = ExtResource("1_0sstl")
+
+[node name="Body" type="Polygon2D" parent="." unique_id=880840670]
+
+[node name="Label" type="Label" parent="." unique_id=91606482]
+offset_right = 40.0
+offset_bottom = 23.0

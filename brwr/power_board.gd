@@ -17,7 +17,6 @@ var player_markers: Array = []
 @export var end_game_threshold: int = 35
 
 var black_rose_power: int = 0
-var player_power: Array[int] = []
 
 
 func _ready():
@@ -31,13 +30,6 @@ func _ready():
 
 
 func initialize(player_count: int):
-	player_power.clear()
-
-	for i in range(player_count):
-		player_power.append(0)
-
-	black_rose_power = 0
-
 	create_power_markers(player_count)
 	create_threshold_markers()
 
@@ -52,8 +44,8 @@ func update_all_markers():
 	update_black_rose_marker()
 
 	for i in range(player_markers.size()):
-		update_player_marker(i)
-		
+		update_player_marker(i, 0)
+
 func get_power_position(value: int) -> Vector2:
 	var power_track = $PowerTrack
 
@@ -113,14 +105,13 @@ func create_power_track():
 		power_track.add_child(label)
 
 func set_player_power(player_index: int, value: int):
-	if player_index < 0 or player_index >= player_power.size():
+	if player_index < 0 or player_index >= player_markers.size():
 		print("ERRORE: player_index non valido: ", player_index)
 		return
 
 	value = clamp(value, 0, end_game_threshold)
 
-	player_power[player_index] = value
-	update_player_marker(player_index)
+	update_player_marker(player_index, value)
 
 
 func set_black_rose_power(value: int):
@@ -129,14 +120,12 @@ func set_black_rose_power(value: int):
 	black_rose_power = value
 	update_black_rose_marker()
 	
-func update_player_marker(player_index: int):
-	var value = player_power[player_index]
+func update_player_marker(player_index: int, value: int):
 	var marker = player_markers[player_index]
-
 	var slot_position = get_power_position(value)
 
 	marker.position = slot_position + get_marker_offset(player_index)
-
+	
 func get_marker_offset(player_index: int) -> Vector2:
 	var offsets = [
 		Vector2(-4, -12),
@@ -360,3 +349,4 @@ func setup_card_slot(
 	label.text = label_text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	
