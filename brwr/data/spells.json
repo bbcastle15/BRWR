@@ -177,6 +177,332 @@
       }
     ]
   }
+},
+{
+  "id": "visceral_fire",
+  "name": "Visceral Fire",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "last_damage_defeated_target",
+        "effects": [
+          {
+            "type": "damage_all_target_owner_evocations",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "type": "pain",
+        "amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage_per_black_rose_damage",
+        "step": 1,
+        "damage_per_step": 1,
+        "max": 5
+      }
+    ]
+  }
+},
+{
+  "id": "peak_of_agony",
+  "name": "Peak of Agony",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2
+      },
+      {
+        "type": "convert_damage_on_caster",
+        "converter_owner_id": -1,
+        "amount": 2
+      },
+      {
+        "type": "pain",
+        "amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 3
+      },
+      {
+        "type": "damage_secondary_mage_per_self_damage",
+        "step": 2,
+        "damage_per_step": 1,
+        "max": 3
+      }
+    ]
+  }
+},
+{
+  "id": "pain_mark",
+  "name": "Pain Mark",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "permanent",
+    "range": 1,
+
+    "trigger": {
+      "type": "marked_mage_inflicts_damage",
+      "action_types": [
+        "spell",
+        "physical_action"
+      ]
+    },
+
+    "effects": [
+      {
+        "type": "damage_marked_mage",
+        "amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "permanent",
+
+    "trigger": {
+      "type": "caster_about_to_suffer_damage"
+    },
+
+    "effects": [
+      {
+        "type": "redirect_damage_to_evocation"
+      }
+    ]
+  }
+},
+{
+  "id": "master_of_pleasure",
+  "name": "Master of Pleasure",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "another_mage_solves_quest"
+    },
+
+    "effects": [
+      {
+        "type": "damage_triggering_model",
+        "amount": 2
+      },
+      {
+        "type": "summon_evocation_at_triggering_model",
+        "evocation_id": "succubus"
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "another_mage_suffers_damage"
+    },
+
+    "effects": [
+      {
+        "type": "pain_from_trigger_damage"
+      },
+      {
+        "type": "gain_power_per_black_rose_damage",
+        "step": 2,
+        "power_per_step": 1,
+        "max": 4
+      }
+    ]
+  }
+},
+{
+  "id": "liquefy_the_pain",
+  "name": "Liquefy the Pain",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "caster_is_defeated"
+    },
+
+    "effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "succubus"
+      },
+      {
+        "type": "gain_power_from_defeating_model",
+        "mage_amount": 1,
+        "black_rose_amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "trap",
+
+    "trigger": {
+      "type": "another_mage_is_defeated"
+    },
+
+    "effects": [
+      {
+        "type": "place_instability_at_defeated_mage_room_per_self_damage",
+        "step": 2,
+        "instability_per_step": 1,
+        "max": 4
+      }
+    ]
+  }
+},
+{
+  "id": "submission",
+  "name": "Submission",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 1
+      },
+      {
+        "type": "convert_damage",
+        "amount": 1
+      },
+      {
+        "type": "pain",
+        "amount": 1
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "range": 1,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2
+      },
+      {
+        "type": "place_instability_per_black_rose_damage_on_effect_damaged_models",
+        "instability_per_damage": 1,
+        "max": 4
+      }
+    ]
+  }
+},
+{
+  "id": "ineluctable_pain",
+  "name": "Ineluctable Pain",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "permanent",
+    "trigger": {
+      "type": "marked_mage_gains_or_loses_power"
+    },
+    "effects": [
+      {
+        "type": "damage_marked_mage",
+        "amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "permanent",
+    "trigger": {
+      "type": "caster_suffers_black_rose_damage"
+    },
+    "effects": [
+      {
+        "type": "gain_power",
+        "amount": 1
+      }
+    ]
+  }
+},
+{
+  "id": "heart_of_ice",
+  "name": "Heart of Ice",
+  "school": "agony",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 3
+      },
+      {
+        "type": "convert_damage",
+        "amount": 2
+      },
+      {
+        "type": "pain",
+        "amount": 2
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "effects": [
+      {
+        "type": "place_instability_per_self_black_rose_damage",
+        "instability_per_damage": 1,
+        "max": 4
+      }
+    ]
+  }
 }
 ]
 

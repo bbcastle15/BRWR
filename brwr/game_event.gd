@@ -3,7 +3,7 @@ extends RefCounted
 
 
 var event_type: String = ""
-
+var action_type: String = ""
 var source_model_type: String = ""
 var source_player_index: int = -1
 var source_evocation: EvocationState = null
@@ -11,7 +11,8 @@ var source_evocation: EvocationState = null
 var target_model_type: String = ""
 var target_player_index: int = -1
 var target_evocation: EvocationState = null
-
+var cancelled: bool = false
+var redirected_evocation: EvocationState = null	
 var source_room_id: String = ""
 var target_room_id: String = ""
 

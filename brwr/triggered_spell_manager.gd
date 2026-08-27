@@ -65,7 +65,101 @@ func trigger_matches(
 					active_spell.owner_id
 				)
 			)
+		"marked_mage_inflicts_damage":
+			if event.event_type != "damage_inflicted":
+				return false
 
+			if event.source_model_type != "mage":
+				return false
+
+			if event.source_player_index != active_spell.target_player_index:
+				return false
+
+			var allowed_action_types = trigger.get(
+				"action_types",
+				[]
+			)
+
+			return event.action_type in allowed_action_types
+		
+		"caster_about_to_suffer_damage":
+			return (
+				event.event_type == "damage_about_to_be_inflicted"
+				and event.target_model_type == "mage"
+				and event.target_player_index == active_spell.owner_id
+			)
+		"another_mage_suffers_damage":
+			if event.event_type != "damage_inflicted":
+				return false
+
+			if event.target_model_type != "mage":
+				return false
+
+			# "Another Mage":
+			# il caster della Trap non può essere il Mage
+			# che ha appena subito Damage.
+			if event.target_player_index == active_spell.owner_id:
+				return false
+			return true
+		
+		"another_mage_solves_quest":
+			return (
+				event.event_type == "quest_solved"
+				and event.source_model_type == "mage"
+				and event.source_player_index
+					!= active_spell.owner_id
+			)
+		"caster_is_defeated":
+			return (
+				event.event_type == "mage_defeated"
+				and event.target_model_type == "mage"
+				and event.target_player_index
+					== active_spell.owner_id
+			)
+
+		"another_mage_is_defeated":
+			return (
+				event.event_type == "mage_defeated"
+				and event.target_model_type == "mage"
+				and event.target_player_index
+					!= active_spell.owner_id
+			)
+		"another_mage_gains_power":
+			return (
+				event.event_type == "power_gained"
+				and event.source_model_type == "mage"
+				and event.source_player_index
+					!= active_spell.owner_id
+			)
+
+		"another_mage_loses_power":
+			return (
+				event.event_type == "power_lost"
+				and event.source_model_type == "mage"
+				and event.source_player_index
+					!= active_spell.owner_id
+			)
+		"marked_mage_gains_or_loses_power":
+			if event.event_type != "power_gained" \
+			and event.event_type != "power_lost":
+				return false
+
+			if event.source_model_type != "mage":
+				return false
+
+			return (
+				event.source_player_index
+				== active_spell.target_player_index
+			)
+
+		"caster_suffers_black_rose_damage":
+			return (
+				event.event_type == "damage_inflicted"
+				and event.source_model_type == "black_rose"
+				and event.target_model_type == "mage"
+				and event.target_player_index
+					== active_spell.owner_id
+			)
 		_:
 			print(
 				"UNKNOWN TRIGGER TYPE: ",

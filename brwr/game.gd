@@ -23,6 +23,7 @@ var effect_resolver = EffectResolver.new()
 const BOARD_CENTER = Vector2(576, 324)
 var room_id_by_coord: Dictionary = {}
 
+
 func load_cells():
 	var file = FileAccess.open("res://data/cells.json", FileAccess.READ)
 
@@ -92,70 +93,8 @@ func _ready():
 	await $PowerBoard.initialize(player_count)
 	$EventBoard.initialize_events(rng)
 	update_table_layout()
-	print("---- TORMENT DARK FROM EVOCATION TEST ----")
-
-	# Room valide
-	players[0].mage.room_coord = Vector2i(0, 0)
-	players[0].mage.room_id = coord_to_room_id(Vector2i(0, 0))
-
-	players[1].mage.room_coord = Vector2i(1, 0)
-	players[1].mage.room_id = coord_to_room_id(Vector2i(1, 0))
-
-
-	# Torment DARK su P1
-	var torment = spell_database.get_spell("torment")
-
-	var active_torment = ActiveSpellState.new(
-		torment,
-		0,     # P1
-		true   # Dark side
-	)
-
-	players[0].add_active_spell(active_torment)
-
-
-	# P2 evoca una Succubus
-	var enemy_succubus = summon_evocation(
-		1,
-		"succubus",
-		players[1].mage.room_id
-	)
-
-	if enemy_succubus == null:
-		print("ERROR: failed to summon enemy Succubus")
-		return
-
-
-	# La Succubus di P2 infligge 1 Damage a P1
-	deal_damage_from_evocation(
-		enemy_succubus,
-		0,
-		1
-	)
-
-
-	print(
-		"P1 damage cubes: ",
-		players[0].mage.damage_cubes
-	)
-
-	print(
-		"Enemy Succubus damage: ",
-		enemy_succubus.damage_cubes
-	)
-
-	print(
-		"Enemy Succubus HP: ",
-		enemy_succubus.get_remaining_health(),
-		"/",
-		enemy_succubus.health
-	)
-
-	print(
-		"Torment active: ",
-		active_torment.active
-	)
 	
+
 func load_rooms():
 	var file = FileAccess.open("res://data/rooms.json", FileAccess.READ)
 
@@ -509,14 +448,16 @@ func return_owner_cubes(owner_id: int, amount: int):
 func deal_damage(
 	attacker_id: int,
 	target_player_index: int,
-	amount: int
+	amount: int,
+	action_type: String = ""
 ) -> int:
 
-	# -----------------------------------------------------
-	# VALIDAZIONE TARGET
-	# -----------------------------------------------------
+	# =====================================================
+	# VALIDAZIONE
+	# =====================================================
 
-	if target_player_index < 0 or target_player_index >= players.size():
+	if target_player_index < 0 \
+	or target_player_index >= players.size():
 		print(
 			"ERRORE: target_player_index non valido: ",
 			target_player_index
@@ -531,11 +472,13 @@ func deal_damage(
 	var target_mage = target_player.mage
 
 
-	# -----------------------------------------------------
-	# QUANTO DAMAGE PUÒ ANCORA RICEVERE IL TARGET
-	# -----------------------------------------------------
+	# =====================================================
+	# QUANTO DAMAGE PUÒ RICEVERE IL MAGE
+	# =====================================================
 
-	var damage_capacity = target_mage.get_remaining_health()
+	var damage_capacity = (
+		target_mage.get_remaining_health()
+	)
 
 	if damage_capacity <= 0:
 		return 0
@@ -546,21 +489,198 @@ func deal_damage(
 	)
 
 
+	# =====================================================
+	# PRE-DAMAGE EVENT
+	#
+	# Qui possono intervenire:
+	# - Protection
+	# - Permanent
+	# - effetti di redirect / replacement
+	#
+	# Il Damage NON è ancora stato applicato.
+	# =====================================================
+
+	var pre_event = GameEvent.new(
+		"damage_about_to_be_inflicted"
+	)
+
+
 	# -----------------------------------------------------
-	# PRENDI I CUBI DALLA RISERVA DEL PROPRIETARIO
+	# SOURCE
+	# -----------------------------------------------------
+
+	if attacker_id == -1:
+		pre_event.source_model_type = "black_rose"
+		pre_event.source_player_index = -1
+		pre_event.source_room_id = ""
+
+	else:
+		pre_event.source_model_type = "mage"
+		pre_event.source_player_index = attacker_id
+
+		pre_event.source_room_id = (
+			players[attacker_id]
+			.mage
+			.room_id
+		)
+
+
+	# -----------------------------------------------------
+	# TARGET
+	# -----------------------------------------------------
+
+	pre_event.target_model_type = "mage"
+	pre_event.target_player_index = target_player_index
+	pre_event.target_room_id = target_mage.room_id
+
+
+	# -----------------------------------------------------
+	# DAMAGE / CAUSA
+	# -----------------------------------------------------
+
+	pre_event.amount = requested_damage
+	pre_event.action_type = action_type
+
+
+	# -----------------------------------------------------
+	# TRIGGER PRE-DAMAGE
+	# -----------------------------------------------------
+
+	process_game_event(
+		pre_event
+	)
+
+
+	# =====================================================
+	# EVENTO CANCELLATO
+	# =====================================================
+
+	if pre_event.cancelled:
+		print(
+			"Damage cancelled on Player ",
+			target_player_index + 1
+		)
+
+		return 0
+
+
+	# =====================================================
+	# REDIRECT VERSO EVOCATION
+	#
+	# Esempio:
+	# Pain Mark Dark
+	# =====================================================
+
+	if pre_event.redirected_evocation != null:
+		var redirected_evocation = (
+			pre_event.redirected_evocation
+		)
+
+		var redirected_amount = min(
+			pre_event.amount,
+			redirected_evocation.get_remaining_health()
+		)
+
+		if redirected_amount <= 0:
+			return 0
+
+
+		# -------------------------------------------------
+		# PRENDI I CUBI DALL'ATTACCANTE
+		# -------------------------------------------------
+
+		var redirected_cubes = take_owner_cubes(
+			attacker_id,
+			redirected_amount
+		)
+
+		if redirected_cubes <= 0:
+			return 0
+
+
+		# -------------------------------------------------
+		# APPLICA DAMAGE ALL'EVOCATION
+		# -------------------------------------------------
+
+		var redirected_damage = (
+			redirected_evocation.add_damage(
+				attacker_id,
+				redirected_cubes
+			)
+		)
+
+
+		print(
+			"Damage redirected: attacker ",
+			attacker_id,
+			" -> Evocation ",
+			redirected_evocation.evocation_name,
+			" | ",
+			redirected_damage,
+			" damage",
+			" | HP: ",
+			redirected_evocation.get_remaining_health(),
+			"/",
+			redirected_evocation.health
+		)
+
+
+		# -------------------------------------------------
+		# NOTA
+		#
+		# Per ora il redirect sostituisce completamente
+		# il Damage al Mage.
+		#
+		# Se l'Evocation ha meno Health del Damage totale,
+		# l'eccesso NON torna sul Mage.
+		#
+		# Inoltre, essendo stato rediretto, questo Damage
+		# NON può sconfiggere il Mage originale.
+		# -------------------------------------------------
+
+		return redirected_damage
+
+
+	# =====================================================
+	# DAMAGE NORMALE AL MAGE
+	# =====================================================
+
+	var final_damage_amount = min(
+		pre_event.amount,
+		target_mage.get_remaining_health()
+	)
+
+	if final_damage_amount <= 0:
+		return 0
+
+
+	# -----------------------------------------------------
+	# PRENDI I CUBI DALLA RISERVA DELL'ATTACCANTE
 	# -----------------------------------------------------
 
 	var cubes_available = take_owner_cubes(
 		attacker_id,
-		requested_damage
+		final_damage_amount
 	)
 
 	if cubes_available <= 0:
 		return 0
 
 
+	# =====================================================
+	# STATO DEL MAGE PRIMA DEL DAMAGE
+	#
+	# Serve per generare mage_defeated UNA SOLA VOLTA:
+	#
+	# false -> true = nuova sconfitta
+	# true  -> true = nessun nuovo evento
+	# =====================================================
+
+	var was_defeated = target_mage.is_defeated()
+
+
 	# -----------------------------------------------------
-	# APPLICA IL DAMAGE ALLA MAGE SHEET
+	# APPLICA DAMAGE
 	# -----------------------------------------------------
 
 	var damage_dealt = target_mage.add_damage(
@@ -569,22 +689,27 @@ func deal_damage(
 	)
 
 
-	# -----------------------------------------------------
-	# AGGIORNA UI
-	# -----------------------------------------------------
+	# =====================================================
+	# REFRESH UI
+	# =====================================================
 
 	if target_player_index < player_boards.size():
-		player_boards[target_player_index].refresh()
-
-	# Se l'attaccante è un Player, aggiorna anche la sua
-	# riserva di cubi visualizzata.
-	if attacker_id >= 0 and attacker_id < player_boards.size():
-		player_boards[attacker_id].refresh()
+		player_boards[
+			target_player_index
+		].refresh()
 
 
-	# -----------------------------------------------------
+	if attacker_id >= 0 \
+	and attacker_id < player_boards.size():
+
+		player_boards[
+			attacker_id
+		].refresh()
+
+
+	# =====================================================
 	# DEBUG
-	# -----------------------------------------------------
+	# =====================================================
 
 	print(
 		"Damage: attacker ",
@@ -601,54 +726,192 @@ func deal_damage(
 	)
 
 
-	# -----------------------------------------------------
-	# GENERA IL GAME EVENT
-	# -----------------------------------------------------
+	# =====================================================
+	# POST-DAMAGE EVENT
+	#
+	# Qui reagiscono effetti del tipo:
+	# - Torment
+	# - Pain Mark Light
+	# - Master of Pleasure Dark
+	# - "after a Mage inflicts Damage..."
+	# - "another Mage suffers Damage..."
+	# =====================================================
 
 	if damage_dealt > 0:
-		var event = GameEvent.new(
+		var post_event = GameEvent.new(
 			"damage_inflicted"
 		)
 
-		# -------------------------
+
+		# -------------------------------------------------
 		# SOURCE
-		# -------------------------
+		# -------------------------------------------------
 
 		if attacker_id == -1:
-			event.source_model_type = "black_rose"
-			event.source_player_index = -1
-			event.source_room_id = ""
+			post_event.source_model_type = (
+				"black_rose"
+			)
+
+			post_event.source_player_index = -1
+			post_event.source_room_id = ""
 
 		else:
-			event.source_model_type = "mage"
-			event.source_player_index = attacker_id
-			event.source_room_id = (
-				players[attacker_id].mage.room_id
+			post_event.source_model_type = "mage"
+			post_event.source_player_index = attacker_id
+
+			post_event.source_room_id = (
+				players[attacker_id]
+				.mage
+				.room_id
 			)
 
 
-		# -------------------------
+		# -------------------------------------------------
 		# TARGET
-		# -------------------------
+		# -------------------------------------------------
 
-		event.target_model_type = "mage"
-		event.target_player_index = target_player_index
-		event.target_room_id = target_mage.room_id
+		post_event.target_model_type = "mage"
+
+		post_event.target_player_index = (
+			target_player_index
+		)
+
+		post_event.target_room_id = (
+			target_mage.room_id
+		)
 
 
-		# Damage EFFETTIVAMENTE inflitto.
-		event.amount = damage_dealt
+		# -------------------------------------------------
+		# DAMAGE EFFETTIVAMENTE INFLITTO
+		# -------------------------------------------------
+
+		post_event.amount = damage_dealt
+		post_event.action_type = action_type
 
 
-		# -------------------------
-		# SISTEMA TRIGGER
-		# -------------------------
+		# -------------------------------------------------
+		# TRIGGER POST-DAMAGE
+		# -------------------------------------------------
 
-		process_game_event(event)
+		process_game_event(
+			post_event
+		)
+
+
+	# =====================================================
+	# MAGE DEFEATED EVENT
+	#
+	# IMPORTANTE:
+	#
+	# Viene generato solamente quando il Mage passa
+	# effettivamente da:
+	#
+	#     non sconfitto -> sconfitto
+	#
+	# Questo evento servirà a:
+	# - Liquefy the Pain Light
+	# - Liquefy the Pain Dark
+	# - future carte "when X is defeated"
+	# =====================================================
+
+	var is_defeated_now = (
+		target_mage.is_defeated()
+	)
+
+	if not was_defeated \
+	and is_defeated_now:
+
+		var defeat_event = GameEvent.new(
+			"mage_defeated"
+		)
+
+
+		# -------------------------------------------------
+		# SOURCE = chi ha inflitto il Damage decisivo
+		# -------------------------------------------------
+
+		if attacker_id == -1:
+			defeat_event.source_model_type = (
+				"black_rose"
+			)
+
+			defeat_event.source_player_index = -1
+			defeat_event.source_room_id = ""
+
+		else:
+			defeat_event.source_model_type = "mage"
+
+			defeat_event.source_player_index = (
+				attacker_id
+			)
+
+			defeat_event.source_room_id = (
+				players[attacker_id]
+				.mage
+				.room_id
+			)
+
+
+		# -------------------------------------------------
+		# TARGET = Mage sconfitto
+		# -------------------------------------------------
+
+		defeat_event.target_model_type = "mage"
+
+		defeat_event.target_player_index = (
+			target_player_index
+		)
+
+		# Questa è particolarmente importante per
+		# Liquefy the Pain Dark.
+		defeat_event.target_room_id = (
+			target_mage.room_id
+		)
+
+
+		# -------------------------------------------------
+		# DAMAGE DECISIVO / CAUSA
+		# -------------------------------------------------
+
+		defeat_event.amount = damage_dealt
+		defeat_event.action_type = action_type
+
+
+		# -------------------------------------------------
+		# DEBUG
+		# -------------------------------------------------
+
+		if attacker_id == -1:
+			print(
+				"MAGE DEFEATED: Player ",
+				target_player_index + 1,
+				" | defeated by Black Rose",
+				" | Room: ",
+				target_mage.room_id
+			)
+
+		else:
+			print(
+				"MAGE DEFEATED: Player ",
+				target_player_index + 1,
+				" | defeated by Player ",
+				attacker_id + 1,
+				" | Room: ",
+				target_mage.room_id
+			)
+
+
+		# -------------------------------------------------
+		# TRIGGER DELLE SPELL LEGATE ALLA SCONFITTA
+		# -------------------------------------------------
+
+		process_game_event(
+			defeat_event
+		)
 
 
 	return damage_dealt
-
+		
 func heal_damage(
 	target_player_index: int,
 	owner_id: int,
@@ -811,14 +1074,110 @@ func set_player_power(player_index: int, value: int):
 		player_boards[player_index].refresh()
 
 	check_moon_phase()
-func add_player_power(player_index: int, amount: int):
-	if player_index < 0 or player_index >= players.size():
-		print("ERRORE: player_index non valido: ", player_index)
+func add_player_power(
+	player_index: int,
+	amount: int
+):
+	if player_index < 0 \
+	or player_index >= players.size():
+		print(
+			"ERRORE: player_index non valido: ",
+			player_index
+		)
 		return
 
+	if amount == 0:
+		return
+
+	# Power prima della modifica
+	var old_power = players[player_index].power
+
+	# set_player_power continua a occuparsi di:
+	# - aggiornamento del valore
+	# - eventuali limiti
+	# - Power Board / UI
 	set_player_power(
 		player_index,
-		players[player_index].power + amount
+		old_power + amount
+	)
+
+	# Power realmente ottenuto dopo set_player_power()
+	var new_power = players[player_index].power
+
+	var actual_change = (
+		new_power - old_power
+	)
+
+	# Nessuna variazione reale:
+	# non deve esistere alcun trigger.
+	if actual_change == 0:
+		return
+
+
+	# =====================================================
+	# POWER GAINED
+	# =====================================================
+
+	if actual_change > 0:
+		print(
+			"Player ",
+			player_index + 1,
+			" gained ",
+			actual_change,
+			" Power"
+		)
+
+		var event = GameEvent.new(
+			"power_gained"
+		)
+
+		event.source_model_type = "mage"
+		event.source_player_index = player_index
+
+		event.source_room_id = (
+			players[player_index]
+			.mage
+			.room_id
+		)
+
+		event.amount = actual_change
+
+		process_game_event(
+			event
+		)
+
+		return
+
+
+	# =====================================================
+	# POWER LOST
+	# =====================================================
+
+	print(
+		"Player ",
+		player_index + 1,
+		" lost ",
+		abs(actual_change),
+		" Power"
+	)
+
+	var event = GameEvent.new(
+		"power_lost"
+	)
+
+	event.source_model_type = "mage"
+	event.source_player_index = player_index
+
+	event.source_room_id = (
+		players[player_index]
+		.mage
+		.room_id
+	)
+
+	event.amount = abs(actual_change)
+
+	process_game_event(
+		event
 	)
 	
 func set_black_rose_power(value: int):
@@ -1097,8 +1456,15 @@ func handle_triggered_permanent(
 	event: GameEvent
 ):
 	print(
-		"PERMANENT TRIGGERED but not implemented: ",
-		active_spell.spell.card_name
+		"PERMANENT TRIGGERED: ",
+		active_spell.spell.card_name,
+		" | Player ",
+		active_spell.owner_id + 1
+	)
+
+	resolve_triggered_spell(
+		active_spell,
+		event
 	)
 	
 func resolve_triggered_spell(
@@ -1106,24 +1472,30 @@ func resolve_triggered_spell(
 	event: GameEvent
 ):
 	var context = {
-		"game": self,
-		"caster_id": active_spell.owner_id,
+	"game": self,
+	"caster_id": active_spell.owner_id,
+	"caster_room_id":
+		players[active_spell.owner_id].mage.room_id,
+	"trigger_event": event,
 
-		"triggering_model_type":
-			event.source_model_type,
+	"marked_player_index":
+		active_spell.target_player_index,
 
-		"triggering_player_index":
-			event.source_player_index,
+	"triggering_model_type":
+		event.source_model_type,
 
-		"triggering_evocation":
-			event.source_evocation,
+	"triggering_player_index":
+		event.source_player_index,
 
-		"triggering_room_id":
-			event.source_room_id,
+	"triggering_evocation":
+		event.source_evocation,
 
-		"trigger_damage_amount":
-			event.amount
-	}
+	"triggering_room_id":
+		event.source_room_id,
+
+	"trigger_damage_amount":
+		event.amount
+}
 
 	var success = effect_resolver.resolve_effects(
 		active_spell.get_effects(),
