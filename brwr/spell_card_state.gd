@@ -66,3 +66,28 @@ func get_effects(use_dark_side: bool) -> Array:
 
 func has_instability() -> bool:
 	return instability
+	
+func get_element(
+	use_dark_side: bool
+) -> String:
+
+	var side = get_side(
+		use_dark_side
+	)
+
+	return str(
+		side.get("element", "")
+	)
+	
+func get_enhancement(
+	use_dark_side: bool
+) -> Dictionary:
+
+	var side = get_side(
+		use_dark_side
+	)
+
+	return side.get(
+		"enhancement",
+		{}
+	)

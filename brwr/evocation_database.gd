@@ -54,3 +54,43 @@ func get_evocation(
 		evocation_id,
 		{}
 	)
+	
+func get_all_evocations() -> Array:
+
+	var result: Array = []
+
+	for evocation_data in evocations.values():
+		result.append(evocation_data)
+
+	return result
+
+
+func get_evocations_with_max_health(
+	max_health: int
+) -> Array:
+
+	var result: Array = []
+
+	for evocation_data in evocations.values():
+
+		if int(
+			evocation_data.get(
+				"health",
+				999
+			)
+		) > max_health:
+			continue
+
+		if int(
+			evocation_data.get(
+				"copies",
+				0
+			)
+		) <= 0:
+			continue
+
+		result.append(
+			evocation_data
+		)
+
+	return result

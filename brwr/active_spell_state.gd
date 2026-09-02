@@ -8,7 +8,7 @@ var owner_id: int = -1
 var use_dark_side: bool = false
 var target_player_index: int = -1
 var active: bool = true
-
+var context: Dictionary = {}
 
 func _init(
 	spell_state: SpellCardState,

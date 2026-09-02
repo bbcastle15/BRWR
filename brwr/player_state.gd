@@ -16,7 +16,7 @@ var mage_id: String = ""
 var school_id: String = ""
 
 var mage: MageState
-
+var revealed_spells: Array[RevealedSpellState] = []
 
 func _init(index: int, name: String, player_color: Color):
 	player_index = index
@@ -69,3 +69,10 @@ func remove_active_spell(
 
 	if index != -1:
 		active_spells.remove_at(index)
+
+func add_revealed_spell(
+	revealed_spell: RevealedSpellState
+):
+	revealed_spells.append(
+		revealed_spell
+	)

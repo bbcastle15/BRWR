@@ -13,6 +13,7 @@ var target_player_index: int = -1
 var target_evocation: EvocationState = null
 var cancelled: bool = false
 var redirected_evocation: EvocationState = null	
+var suppressed_trigger_types: Array[String] = []
 var source_room_id: String = ""
 var target_room_id: String = ""
 

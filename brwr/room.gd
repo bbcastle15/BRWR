@@ -5,6 +5,8 @@ var cube_scene = preload("res://cube.tscn")
 @export var radius: float = 150.0
 var instability_cubes: Array = []
 var instability_cube_nodes: Array = []
+var flipped: bool = false
+var activated_this_turn: bool = false
 func _ready():
 	var background = $Background
 	
@@ -102,3 +104,21 @@ func update_instability_cube_positions():
 			column * spacing,
 			row * spacing
 		)
+
+func can_activate_room(
+	room,
+	allow_reactivate_flipped: bool = false
+) -> bool:
+
+	if not room.flipped:
+		return true
+
+	if not room.activated_this_turn:
+		return true
+
+	return allow_reactivate_flipped
+	
+func reset_room_activations():
+	for child in get_children():
+		if child.has_meta("room_id"):
+			child.activated_this_turn = false

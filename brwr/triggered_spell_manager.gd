@@ -15,7 +15,11 @@ func get_triggered_spells(
 		for active_spell in player.active_spells:
 			if not active_spell.active:
 				continue
+				
+			var spell_type = active_spell.get_spell_type()
 
+			if spell_type in event.suppressed_trigger_types:
+				continue
 			var trigger = active_spell.get_trigger()
 
 			if trigger.is_empty():
@@ -160,6 +164,36 @@ func trigger_matches(
 				and event.target_player_index
 					== active_spell.owner_id
 			)
+		"your_evocation_defeated_or_removed":
+
+			if event.event_type != "evocation_defeated_or_removed":
+				return false
+
+			if event.target_evocation == null:
+				return false
+
+			return (
+				event.target_player_index
+				== active_spell.owner_id
+			)
+		"you_suffer_damage":
+
+			if event.event_type != "damage_about_to_be_inflicted":
+				return false
+
+			if event.target_model_type != "mage":
+				return false
+
+			if event.target_player_index != active_spell.owner_id:
+				return false
+
+			return event.amount > 0
+		"evocation_defeated_or_removed":
+
+			if event.event_type != "evocation_defeated_or_removed":
+				return false
+
+			return event.target_evocation != null
 		_:
 			print(
 				"UNKNOWN TRIGGER TYPE: ",

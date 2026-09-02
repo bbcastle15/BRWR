@@ -22,7 +22,7 @@ var player_boards: Array = []
 var effect_resolver = EffectResolver.new()
 const BOARD_CENTER = Vector2(576, 324)
 var room_id_by_coord: Dictionary = {}
-
+var suppressed_trigger_types: Array[String] = []
 
 func load_cells():
 	var file = FileAccess.open("res://data/cells.json", FileAccess.READ)
@@ -93,6 +93,7 @@ func _ready():
 	await $PowerBoard.initialize(player_count)
 	$EventBoard.initialize_events(rng)
 	update_table_layout()
+	
 	
 
 func load_rooms():
@@ -228,6 +229,7 @@ func get_lodge_positions() -> Array[Vector2i]:
 	return positions
 
 func create_cells():
+
 	var layout = layout_database[str(player_count)]
 	var cell_slots = layout["cells"]
 
@@ -241,9 +243,13 @@ func create_cells():
 	)
 
 	for i in range(cell_slots.size()):
+
 		var slot_data = cell_slots[i]
 
-		# Posizione della Cell
+		# =================================================
+		# POSIZIONE DELLA CELL
+		# =================================================
+
 		var position_array = slot_data["position"]
 
 		var hex_position = Vector2i(
@@ -251,7 +257,11 @@ func create_cells():
 			int(position_array[1])
 		)
 
-		# Quale Cell random usare
+
+		# =================================================
+		# CELL RANDOM
+		# =================================================
+
 		var cell_data = selected_cells[i]
 
 		create_cell(
@@ -259,25 +269,49 @@ func create_cells():
 			hex_position
 		)
 
-		# Posizione iniziale del Mage
-		var entrance_array = slot_data["entrance_room"]
+
+		# =================================================
+		# ENTRANCE ROOM
+		#
+		# Questa NON è la posizione attuale del Mage.
+		# È la Room attraverso cui entra nella Lodge.
+		# =================================================
+
+		var entrance_array = slot_data[
+			"entrance_room"
+		]
 
 		var entrance_room = Vector2i(
 			int(entrance_array[0]),
 			int(entrance_array[1])
 		)
 
+
 		if i < players.size():
-			players[i].mage.room_coord = entrance_room
-			players[i].mage.room_id = coord_to_room_id(
+
+			players[i].mage.room_coord = (
 				entrance_room
 			)
+
+			players[i].mage.room_id = (
+				coord_to_room_id(
+					entrance_room
+				)
+			)
+
+			# Il Mage comincia fisicamente nella Cell.
+			players[i].mage.in_cell = true
+
+
 			print(
 				"Player ",
 				i + 1,
 				" entrance room: ",
-				entrance_room
+				entrance_room,
+				" | starts in Cell: ",
+				players[i].mage.in_cell
 			)
+
 
 	print(
 		"Cells created: ",
@@ -449,7 +483,8 @@ func deal_damage(
 	attacker_id: int,
 	target_player_index: int,
 	amount: int,
-	action_type: String = ""
+	action_type: String = "",
+	suppressed_trigger_types: Array[String] = []
 ) -> int:
 
 	# =====================================================
@@ -540,7 +575,9 @@ func deal_damage(
 
 	pre_event.amount = requested_damage
 	pre_event.action_type = action_type
-
+	pre_event.suppressed_trigger_types = (
+	suppressed_trigger_types.duplicate()
+	)
 
 	# -----------------------------------------------------
 	# TRIGGER PRE-DAMAGE
@@ -787,7 +824,9 @@ func deal_damage(
 
 		post_event.amount = damage_dealt
 		post_event.action_type = action_type
-
+		post_event.suppressed_trigger_types = (
+			suppressed_trigger_types.duplicate()
+		)
 
 		# -------------------------------------------------
 		# TRIGGER POST-DAMAGE
@@ -1342,7 +1381,8 @@ func deal_damage_to_model(
 func deal_damage_to_evocation(
 	attacker_id: int,
 	evocation: EvocationState,
-	amount: int
+	amount: int,
+	suppressed_trigger_types: Array[String] = []
 ) -> int:
 
 	if evocation == null:
@@ -1351,10 +1391,31 @@ func deal_damage_to_evocation(
 	if amount <= 0:
 		return 0
 
+
+	# =====================================================
+	# STATE BEFORE DAMAGE
+	#
+	# Serve per evitare di emettere più volte l'evento
+	# "defeated" se, per qualche motivo, viene applicato
+	# altro Damage a una Evocation già sconfitta.
+	# =====================================================
+
+	var was_defeated = evocation.is_defeated()
+
+
+	# =====================================================
+	# APPLY DAMAGE
+	# =====================================================
+
 	var damage_dealt = evocation.add_damage(
 		attacker_id,
 		amount
 	)
+
+
+	# =====================================================
+	# DEBUG
+	# =====================================================
 
 	print(
 		"Damage: attacker ",
@@ -1369,6 +1430,32 @@ func deal_damage_to_evocation(
 		"/",
 		evocation.health
 	)
+
+
+	# =====================================================
+	# EVOCATION DEFEATED
+	#
+	# L'evento viene emesso soltanto nel momento esatto
+	# in cui passa da viva -> defeated.
+	#
+	# IMPORTANTE:
+	# lo facciamo mentre l'oggetto Evocation esiste ancora,
+	# così Stone Phoenix può leggere:
+	#
+	# - owner_id
+	# - room_id
+	# - evocation_id
+	# - evocation_name
+	# =====================================================
+
+	if not was_defeated \
+	and evocation.is_defeated():
+
+		emit_evocation_defeated_or_removed(
+			evocation,
+			"defeated"
+		)
+
 
 	return damage_dealt
 
@@ -1447,9 +1534,19 @@ func handle_triggered_protection(
 	event: GameEvent
 ):
 	print(
-		"PROTECTION TRIGGERED but not implemented: ",
-		active_spell.spell.card_name
+		"PROTECTION TRIGGERED: ",
+		active_spell.spell.card_name,
+		" | Player ",
+		active_spell.owner_id + 1
 	)
+
+	resolve_triggered_spell(
+		active_spell,
+		event
+	)
+
+	# Una Protection rivelata non è più Active.
+	active_spell.active = false
 	
 func handle_triggered_permanent(
 	active_spell: ActiveSpellState,
@@ -1471,49 +1568,155 @@ func resolve_triggered_spell(
 	active_spell: ActiveSpellState,
 	event: GameEvent
 ):
+
+	# =====================================================
+	# BASE RESOLUTION CONTEXT
+	# =====================================================
+
 	var context = {
-	"game": self,
-	"caster_id": active_spell.owner_id,
-	"caster_room_id":
-		players[active_spell.owner_id].mage.room_id,
-	"trigger_event": event,
+		"game": self,
 
-	"marked_player_index":
-		active_spell.target_player_index,
+		"caster_id":
+			active_spell.owner_id,
 
-	"triggering_model_type":
-		event.source_model_type,
+		"caster_room_id":
+			players[
+				active_spell.owner_id
+			].mage.room_id,
 
-	"triggering_player_index":
-		event.source_player_index,
+		# Original event.
+		# Effects such as Silver of the Sages can modify
+		# event.amount before Damage is actually applied.
+		"trigger_event":
+			event,
 
-	"triggering_evocation":
-		event.source_evocation,
 
-	"triggering_room_id":
-		event.source_room_id,
+		# =================================================
+		# STORED TARGET
+		# =================================================
 
-	"trigger_damage_amount":
-		event.amount
-}
+		"marked_player_index":
+			active_spell.target_player_index,
+
+
+		# =================================================
+		# TRIGGER SOURCE
+		# =================================================
+
+		"triggering_model_type":
+			event.source_model_type,
+
+		"triggering_player_index":
+			event.source_player_index,
+
+		"triggering_evocation":
+			event.source_evocation,
+
+		"triggering_room_id":
+			event.source_room_id,
+
+		"trigger_damage_amount":
+			event.amount,
+
+
+		# =================================================
+		# TRIGGER TARGET
+		# =================================================
+
+		"trigger_evocation":
+			event.target_evocation,
+
+		"trigger_evocation_owner":
+			event.target_player_index,
+
+		"trigger_evocation_room_id":
+			event.target_room_id,
+
+		"trigger_evocation_reason":
+			event.action_type
+	}
+
+
+	# =====================================================
+	# RESTORE ACTIVE SPELL CONTEXT
+	#
+	# Active spells may need to remember choices/targets
+	# selected before the trigger occurs.
+	#
+	# Examples:
+	# - Silver choice
+	# - selected Evocation
+	# - future Trap/Protection choices
+	# =====================================================
+
+	for key in active_spell.context:
+
+		context[key] = (
+			active_spell.context[key]
+		)
+
+
+	# =====================================================
+	# RESOLVE EFFECTS
+	# =====================================================
 
 	var success = effect_resolver.resolve_effects(
 		active_spell.get_effects(),
 		context
 	)
 
+
 	if not success:
+
 		print(
 			"Failed to resolve triggered spell: ",
 			active_spell.spell.card_name
 		)
+
 		return
 
-	# Per ora questo comportamento vale per le Trap.
-	# Permanent/Protection avranno il loro lifecycle quando
-	# le implementeremo.
+
+	# =====================================================
+	# SAVE RESOLUTION CONTEXT
+	#
+	# Keep results produced by the EffectResolver available
+	# on the ActiveSpellState.
+	#
+	# We intentionally do not store references to Game
+	# or the triggering GameEvent.
+	# =====================================================
+
+	for key in context:
+
+		if key == "game":
+			continue
+
+		if key == "trigger_event":
+			continue
+
+		active_spell.context[key] = (
+			context[key]
+		)
+
+
+	# =====================================================
+	# TRAP LIFECYCLE
+	#
+	# Existing behaviour:
+	# a triggered Trap is no longer Active.
+	#
+	# Protection lifecycle is handled by
+	# handle_triggered_protection().
+	# =====================================================
+
 	if active_spell.get_spell_type() == "trap":
+
 		active_spell.active = false
+
+
+	# =====================================================
+	# LOG
+	# =====================================================
 
 	print(
 		"Triggered spell resolved: ",
@@ -1634,3 +1837,658 @@ func deal_damage_from_evocation(
 		process_game_event(event)
 
 	return damage_dealt
+
+func get_revealed_element_counts(
+	player_index: int
+) -> Dictionary:
+
+	var counts: Dictionary = {}
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return counts
+
+	for revealed in players[player_index].revealed_spells:
+		var element = revealed.get_element()
+
+		if element == "":
+			continue
+
+		if element == "all":
+			counts["all"] = (
+				int(counts.get("all", 0))
+				+ 1
+			)
+		else:
+			counts[element] = (
+				int(counts.get(element, 0))
+				+ 1
+			)
+
+	return counts
+	
+func can_apply_enhancement(
+	player_index: int,
+	required_elements: Array
+) -> bool:
+
+	var counts = get_revealed_element_counts(
+		player_index
+	)
+
+	var wildcards = int(
+		counts.get("all", 0)
+	)
+
+	for required_element in required_elements:
+		var element = str(
+			required_element
+		)
+
+		var available = int(
+			counts.get(element, 0)
+		)
+
+		if available > 0:
+			counts[element] = available - 1
+			continue
+
+		if wildcards > 0:
+			wildcards -= 1
+			continue
+
+		return false
+
+	return true
+
+func resolve_spell(
+	spell: SpellCardState,
+	use_dark_side: bool,
+	context: Dictionary
+) -> bool:
+
+	var caster_id = int(
+		context.get("caster_id", -1)
+	)
+
+	if caster_id < 0 \
+	or caster_id >= players.size():
+		return false
+
+
+	var side = spell.get_side(
+		use_dark_side
+	)
+	context["spell_target_type"] = str(
+		side.get("target", "")
+	)
+
+	context["spell_range"] = side.get(
+		"range",
+		null
+	)
+
+	# Ogni risoluzione di Spell parte con una nuova lista.
+	context["models_damaged_by_effect"] = []
+	var enhancement = side.get(
+		"enhancement",
+		{}
+	)
+
+	var enhancement_active = false
+
+
+	# =====================================================
+	# VERIFICA ENHANCEMENT
+	# =====================================================
+
+	if not enhancement.is_empty():
+		var required_elements: Array = (
+			enhancement.get(
+				"requires",
+				[]
+			)
+		)
+
+		enhancement_active = can_apply_enhancement(
+			caster_id,
+			required_elements
+		)
+
+
+	context["enhancement_active"] = (
+		enhancement_active
+	)
+
+
+	# =====================================================
+	# ORDINE DI RISOLUZIONE
+	# =====================================================
+
+	var resolution_order: Array = side.get(
+		"resolution_order",
+		[
+			"base",
+			"enhancement"
+		]
+	)
+
+
+	for step in resolution_order:
+
+		match str(step):
+
+			"base":
+				if not effect_resolver.resolve_effects(
+					spell.get_effects(
+						use_dark_side
+					),
+					context
+				):
+					return false
+
+
+			"enhancement":
+				if not enhancement_active:
+					continue
+
+				var enhancement_effects: Array = (
+					enhancement.get(
+						"effects",
+						[]
+					)
+				)
+
+				if not effect_resolver.resolve_effects(
+					enhancement_effects,
+					context
+				):
+					return false
+
+
+			_:
+				print(
+					"Unknown resolution step: ",
+					step
+				)
+
+				return false
+
+
+	# =====================================================
+	# SPELL REVEALED
+	# =====================================================
+
+	var revealed = RevealedSpellState.new(
+		spell,
+		use_dark_side
+	)
+
+	players[caster_id].add_revealed_spell(
+		revealed
+	)
+
+
+	return true
+func room_id_to_coord(
+	room_id: String
+) -> Vector2i:
+
+	for coord in room_id_by_coord.keys():
+
+		if str(
+			room_id_by_coord[coord]
+		) == room_id:
+			return coord
+
+	print(
+		"room_id_to_coord: Room not found: ",
+		room_id
+	)
+
+	return Vector2i(
+		9999,
+		9999
+	)
+func get_hex_distance(
+	a: Vector2i,
+	b: Vector2i
+) -> int:
+
+	var dq = a.x - b.x
+	var dr = a.y - b.y
+
+	return int(
+		(
+			abs(dq)
+			+ abs(dr)
+			+ abs(dq + dr)
+		) / 2
+	)
+func move_mage_to_room_id(
+	player_index: int,
+	destination_room_id: String,
+	max_distance: int
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return false
+
+
+	var mage = players[player_index].mage
+
+
+	var destination_coord = room_id_to_coord(
+		destination_room_id
+	)
+
+	if destination_coord == null:
+		print(
+			"move_mage_to_room_id: invalid destination Room: ",
+			destination_room_id
+		)
+		return false
+
+
+	# =====================================================
+	# DISTANCE
+	#
+	# Se il Mage è già nella Lodge, controlliamo la
+	# normale distanza.
+	#
+	# Il movimento Cell -> Lodge verrà gestito
+	# separatamente dalla normale Action di movimento.
+	# =====================================================
+
+	if not mage.in_cell:
+
+		var distance = get_hex_distance(
+			mage.room_coord,
+			destination_coord
+		)
+
+		if distance > max_distance:
+			print(
+				"move_mage_to_room_id: destination too far | ",
+				distance,
+				" > ",
+				max_distance
+			)
+			return false
+
+
+	mage.room_id = destination_room_id
+	mage.room_coord = destination_coord
+	mage.in_cell = false
+
+
+	print(
+		"Player ",
+		player_index + 1,
+		" moved to ",
+		destination_room_id
+	)
+
+
+	return true
+	
+func move_evocation_to_room_id(
+	evocation: EvocationState,
+	destination_room_id: String,
+	max_distance: int
+) -> bool:
+
+	if evocation == null:
+		return false
+
+	var from_coord = room_id_to_coord(
+		evocation.room_id
+	)
+
+	var to_coord = room_id_to_coord(
+		destination_room_id
+	)
+
+	if from_coord == Vector2i(9999, 9999) \
+	or to_coord == Vector2i(9999, 9999):
+		return false
+
+	if get_hex_distance(
+		from_coord,
+		to_coord
+	) > max_distance:
+
+		print(
+			"Movement exceeds range"
+		)
+
+		return false
+
+	evocation.room_id = destination_room_id
+
+	print(
+		evocation.evocation_name,
+		" moved to ",
+		destination_room_id
+	)
+
+	return true
+
+func is_lodge_room_id(room_id: String) -> bool:
+
+	if room_id == "":
+		return false
+
+	return room_id in room_id_by_coord.values()
+
+func is_mage_in_cell(
+	player_index: int
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return false
+
+	return players[player_index].mage.in_cell
+
+func emit_evocation_defeated_or_removed(
+	evocation: EvocationState,
+	event_reason: String = "defeated"
+):
+
+	if evocation == null:
+		return
+
+
+	# =====================================================
+	# CREATE EVENT
+	# =====================================================
+
+	var event = GameEvent.new(
+		"evocation_defeated_or_removed"
+	)
+
+
+	# =====================================================
+	# SOURCE / TARGET DATA
+	#
+	# L'Evocation persa è il target dell'evento.
+	# Conserviamo owner e Room perché Stone Phoenix
+	# deve poterli leggere durante la risoluzione.
+	# =====================================================
+
+	event.target_model_type = "evocation"
+
+	event.target_player_index = (
+		evocation.owner_id
+	)
+
+	event.target_evocation = (
+		evocation
+	)
+
+	event.target_room_id = (
+		evocation.room_id
+	)
+
+
+	# =====================================================
+	# REASON
+	#
+	# "defeated"
+	# "removed"
+	# =====================================================
+
+	event.action_type = event_reason
+
+
+	# =====================================================
+	# DEBUG
+	# =====================================================
+
+	print(
+		"Evocation defeated/removed event: ",
+		evocation.evocation_name,
+		" | owner P",
+		evocation.owner_id + 1,
+		" | room ",
+		evocation.room_id,
+		" | reason ",
+		event_reason
+	)
+
+
+	# =====================================================
+	# PROCESS TRIGGERS
+	# =====================================================
+
+	process_game_event(
+		event
+	)
+
+func activate_room(
+	player_index: int,
+	room_id: String,
+	allow_reactivate_flipped: bool = false
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+
+		print(
+			"activate_room: invalid player_index: ",
+			player_index
+		)
+
+		return false
+
+
+	var room = find_room(
+		room_id
+	)
+
+
+	if room == null:
+
+		print(
+			"activate_room: Room not found: ",
+			room_id
+		)
+
+		return false
+
+
+	# =====================================================
+	# ACTIVATION LIMIT
+	#
+	# Room normale:
+	# -> attivabile infinite volte.
+	#
+	# Room flipped:
+	# -> una volta per turno.
+	#
+	# Soul Transfer:
+	# -> può ignorare il limite della Room flipped.
+	# =====================================================
+
+	if room.flipped \
+	and room.activated_this_turn \
+	and not allow_reactivate_flipped:
+
+		print(
+			"activate_room: flipped Room ",
+			room.room_name,
+			" has already been activated this turn"
+		)
+
+		return false
+
+
+	print(
+		"Player ",
+		player_index + 1,
+		" activates Room ",
+		room.room_name,
+		" | flipped: ",
+		room.flipped,
+		" | already activated: ",
+		room.activated_this_turn,
+		" | override: ",
+		allow_reactivate_flipped
+	)
+
+
+	# =====================================================
+	# ROOM EFFECT
+	# =====================================================
+
+	if not resolve_room_activation(
+		player_index,
+		room_id
+	):
+
+		return false
+
+
+	# =====================================================
+	# MARK ACTIVATED
+	#
+	# Ci interessa solamente per le Room flipped.
+	# Le Room normali possono continuare ad essere usate.
+	# =====================================================
+
+	if room.flipped:
+		room.activated_this_turn = true
+
+
+	return true
+	
+func resolve_room_activation(
+	player_index: int,
+	room_id: String
+) -> bool:
+
+	var room_data = get_room(
+		room_id
+	)
+
+	if room_data == null:
+		print(
+			"resolve_room_activation: Room data not found: ",
+			room_id
+		)
+		return false
+
+
+	print(
+		"Room effect pending implementation: ",
+		str(room_data.get("name", room_id)),
+		" | activated by Player ",
+		player_index + 1
+	)
+
+
+	return true
+
+func reset_room_activations():
+
+	for child in get_children():
+
+		if not child.has_meta("room_id"):
+			continue
+
+
+		child.activated_this_turn = false
+
+
+	print(
+		"Room activation limits reset"
+	)
+	
+func get_evocation_copies_in_play(
+	evocation_id: String
+) -> int:
+
+	var count = 0
+
+	for player in players:
+
+		for evocation in player.evocations:
+
+			if evocation == null:
+				continue
+
+			if evocation.evocation_id == evocation_id:
+				count += 1
+
+	return count
+	
+func get_available_evocation_copies(
+	evocation_id: String
+) -> int:
+
+	var data = evocation_database.get_evocation(
+		evocation_id
+	)
+
+	if data.is_empty():
+		return 0
+
+
+	var total_copies = int(
+		data.get(
+			"copies",
+			0
+		)
+	)
+
+	var copies_in_play = (
+		get_evocation_copies_in_play(
+			evocation_id
+		)
+	)
+
+
+	return max(
+		0,
+		total_copies - copies_in_play
+	)
+	
+func get_available_evocations_with_max_health(
+	max_health: int
+) -> Array:
+
+	var result: Array = []
+
+
+	for data in (
+		evocation_database
+		.get_evocations_with_max_health(
+			max_health
+		)
+	):
+
+		var evocation_id = str(
+			data.get(
+				"id",
+				""
+			)
+		)
+
+		if evocation_id == "":
+			continue
+
+
+		if get_available_evocation_copies(
+			evocation_id
+		) <= 0:
+			continue
+
+
+		result.append(
+			data
+		)
+
+
+	return result

@@ -1,508 +1,1216 @@
 [
   {
-    "id": "grim_torment",
-    "name": "Grim Torment",
+    "id": "shared_torture",
+    "name": "Shared Torture",
     "school": "agony",
     "copies": 3,
-    "instability": true,
-
+    "instability": false,
     "light": {
       "type": "combat",
       "element": "profane",
       "target": "model",
       "range": 1,
-
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 4
+        },
+        {
+          "type": "convert_damage",
+          "amount": 1
+        },
+        {
+          "type": "pain",
+          "amount": 3
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 1,
       "effects": [
         {
           "type": "damage_per_black_rose_damage",
           "step": 2,
           "damage_per_step": 1,
+          "max": 999
+        }
+      ]
+    }
+  },
+  {
+    "id": "grim_torment",
+    "name": "Grim Torment",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+    "type": "contingency",
+    "element": "all",
+    "target": "room",
+    "range": "*",
+    "effects": [
+      {
+        "type": "activate_room_from_owned_evocation",
+        "evocation_archetype": "construct",
+        "distance": 0,
+        "excluded_rooms": [
+          "throne",
+          "black_rose"
+        ]
+      }
+    ]
+  },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "pain",
+          "amount": 1
+        },
+        {
+          "type": "damage_per_black_rose_damage",
+          "step": 2,
+          "damage_per_step": 1,
           "max": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "cross_and_delight",
+    "name": "Cross and Delight",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "succubus"
         },
         {
           "type": "pain",
           "amount": 1
+        },
+        {
+          "type": "activate_summoned_evocation"
         }
       ]
     },
-
     "dark": {
       "type": "combat",
-      "element": "profane",
+      "element": "water",
+      "target": "evocation",
+      "range": "*",
+      "target_archetype": "demon",
+      "effects": [
+        {
+          "type": "damage_from_evocation",
+          "base_amount": 2,
+          "bonus_per_evocation_damage": 1
+        },
+        {
+          "type": "remove_target_evocation"
+        }
+      ]
+    }
+  },
+  {
+    "id": "torment",
+    "name": "Torment",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "air",
       "target": "model",
+      "range": "*",
+      "trigger": {
+        "type": "another_model_inflicts_damage"
+      },
+      "effects": [
+        {
+          "type": "damage_triggering_model",
+          "amount": 2
+        },
+        {
+          "type": "summon_evocation_at_triggering_model",
+          "evocation_id": "succubus",
+          "range": 0
+        }
+      ]
+    },
+    "dark": {
+      "type": "trap",
+      "element": "air",
+      "target": "model",
+      "range": "*",
+      "trigger": {
+        "type": "another_model_inflicts_damage_to_caster"
+      },
+      "effects": [
+        {
+          "type": "damage_triggering_model_from_trigger_damage",
+          "bonus": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "visceral_fire",
+    "name": "Visceral Fire",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "mage",
       "range": 2,
-
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "conditional",
+          "condition": "last_damage_defeated_target",
+          "effects": [
+            {
+              "type": "damage_all_target_owner_evocations",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "type": "pain",
+          "amount": 2
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage_per_black_rose_damage",
+          "step": 1,
+          "damage_per_step": 1,
+          "max": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "peak_of_agony",
+    "name": "Peak of Agony",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "air",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "convert_damage_on_caster",
+          "converter_owner_id": -1,
+          "amount": 2
+        },
+        {
+          "type": "pain",
+          "amount": 2
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "model",
+      "range": 1,
       "effects": [
         {
           "type": "damage",
           "amount": 3
         },
         {
+          "type": "damage_secondary_mage_per_self_damage",
+          "step": 2,
+          "damage_per_step": 1,
+          "max": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "pain_mark",
+    "name": "Pain Mark",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 1,
+      "trigger": {
+        "type": "marked_mage_inflicts_damage",
+        "action_types": [
+          "spell",
+          "physical_action"
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage_marked_mage",
+          "amount": 2
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "caster_about_to_suffer_damage"
+      },
+      "effects": [
+        {
+          "type": "redirect_damage_to_evocation"
+        }
+      ]
+    }
+  },
+  {
+    "id": "master_of_pleasure",
+    "name": "Master of Pleasure",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "fire",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "another_mage_solves_quest"
+      },
+      "effects": [
+        {
+          "type": "damage_triggering_model",
+          "amount": 2
+        },
+        {
+          "type": "summon_evocation_at_triggering_model",
+          "evocation_id": "succubus",
+          "range": 0
+        }
+      ]
+    },
+    "dark": {
+      "type": "trap",
+      "element": "fire",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "another_mage_suffers_damage"
+      },
+      "effects": [
+        {
+          "type": "pain_from_trigger_damage"
+        },
+        {
+          "type": "gain_power_per_black_rose_damage",
+          "step": 2,
+          "power_per_step": 1,
+          "max": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "liquefy_the_pain",
+    "name": "Liquefy the Pain",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "water",
+      "target": "room",
+      "range": "*",
+      "trigger": {
+        "type": "caster_is_defeated"
+      },
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "succubus"
+        },
+        {
+          "type": "gain_power_from_defeating_model",
+          "mage_amount": 1,
+          "black_rose_amount": 2
+        }
+      ]
+    },
+    "dark": {
+      "type": "trap",
+      "element": "water",
+      "target": "room",
+      "range": "*",
+      "trigger": {
+        "type": "another_mage_is_defeated"
+      },
+      "effects": [
+        {
+          "type": "place_instability_at_defeated_mage_room_per_self_damage",
+          "step": 2,
+          "instability_per_step": 1,
+          "max": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "submission",
+    "name": "Submission",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": "*",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "convert_damage",
+          "amount": 1
+        },
+        {
           "type": "pain",
           "amount": 1
         }
       ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "place_instability_per_black_rose_damage_on_effect_damaged_models",
+          "instability_per_damage": 1,
+          "max": 4
+        }
+      ]
     }
-  }
-  ,
-
-{
-  "id": "shared_torture",
-  "name": "Shared Torture",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "element": "profane",
-    "target": "model",
-    "range": 1,
-
-    "effects": [
-      {
-        "type": "damage_per_black_rose_damage",
-        "step": 2,
-        "damage_per_step": 1,
-        "max": 999
-      }
-    ]
   },
-
-  "dark": {
-    "type": "combat",
-    "element": "profane",
-    "target": "model",
-    "range": 1,
-
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 4
+  {
+    "id": "ineluctable_pain",
+    "name": "Ineluctable Pain",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "model",
+      "range": 2,
+      "trigger": {
+        "type": "marked_mage_gains_or_loses_power"
       },
-      {
-        "type": "convert_damage",
-        "amount": 1
-      },
-      {
-        "type": "pain",
-        "amount": 3
-      }
-    ]
-  }
-},
-
-{
-  "id": "cross_and_delight",
-  "name": "Cross and Delight",
-  "school": "agony",
-  "copies": 3,
-  "instability": true,
-
-  "light": {
-    "type": "combat",
-    "element": "water",
-    "target": "special",
-    "effects": [
-      {
-        "type": "summon_evocation",
-        "evocation_id": "succubus"
-      },
-      {
-        "type": "pain",
-        "amount": 1
-      },
-      {
-        "type": "activate_summoned_evocation"
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "combat",
-    "element": "water",
-    "target": "own_demon",
-    "target_archetype": "demon",
-    "effects": [
-      {
-        "type": "damage_from_evocation",
-        "base_amount": 2,
-        "bonus_per_evocation_damage": 1
-      },
-      {
-        "type": "remove_target_evocation"
-      }
-    ]
-  }
-}, 
-
-{
-  "id": "torment",
-  "name": "Torment",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "trap",
-
-    "trigger": {
-      "type": "another_model_inflicts_damage"
+      "effects": [
+        {
+          "type": "damage_marked_mage",
+          "amount": 2
+        }
+      ]
     },
-
-    "effects": [
-      {
-        "type": "damage_triggering_model",
-        "amount": 2
+    "dark": {
+      "type": "contingency",
+      "element": "all",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "caster_suffers_black_rose_damage"
       },
-      {
-        "type": "summon_evocation_at_triggering_model",
-        "evocation_id": "succubus",
-        "range": 0
-      }
-    ]
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1
+        }
+      ]
+    }
   },
-
-  "dark": {
-    "type": "trap",
-
-    "trigger": {
-      "type": "another_model_inflicts_damage_to_caster"
+  {
+    "id": "heart_of_ice",
+    "name": "Heart of Ice",
+    "school": "agony",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "water",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "convert_damage",
+          "amount": 2
+        },
+        {
+          "type": "pain",
+          "amount": 2
+        }
+      ]
     },
-
-    "effects": [
-      {
-        "type": "damage_triggering_model_from_trigger_damage",
-        "bonus": 1
-      }
-    ]
-  }
-},
-{
-  "id": "visceral_fire",
-  "name": "Visceral Fire",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 2
-      },
-      {
-        "type": "conditional",
-        "condition": "last_damage_defeated_target",
+    "dark": {
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "place_instability_per_self_black_rose_damage",
+          "instability_per_damage": 1,
+          "max": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "azoth_bomb",
+    "name": "Azoth Bomb",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "air",
+      "target": "room",
+      "range": 3,
+      "enhancement": {
+        "requires": [
+          "water",
+          "water"
+        ],
         "effects": [
           {
-            "type": "damage_all_target_owner_evocations",
+            "type": "damage",
             "amount": 2
           }
         ]
       },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "room",
+      "range": 1,
+      "enhancement": {
+        "requires": [
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "damage_per_revealed_active_element",
+            "element": "earth",
+            "amount_per_element": 1
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "viatorium_spagyricum",
+    "name": "Viatorium Spagyricum",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "water",
+      "target": "model",
+      "range": 0,
+      "enhancement": {
+        "requires": [
+          "magic",
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "model",
+      "range": 2,
+      "enhancement": {
+        "requires": [
+          "water"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "deflagrate",
+    "name": "Deflagrate",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "water",
+      "target": "model",
+      "range": 2,
+      "enhancement": {
+        "requires": [
+          "water",
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "modify_spell_target",
+            "target": "room",
+            "range": 2
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "move_one_model_damaged_by_effect",
+          "distance": 1
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 1,
+      "enhancement": {
+        "requires": [
+          "fire"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "place_instability",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "athanor_eruption",
+    "name": "Athanor Eruption",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "model",
+      "range": 1,
+      "enhancement": {
+        "requires": [
+          "air",
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "suppress_triggers": [
+              "protection",
+              "trap"
+            ]
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "model",
+      "range": 2,
+      "enhancement": {
+        "requires": [
+          "air"
+        ],
+        "effects": [
+          {
+            "type": "place_instability_per_revealed_active_element",
+            "element": "air",
+            "amount_per_element": 1,
+            "room_range_from_target": 0
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "marbling",
+    "name": "Marbling",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "earth",
+      "target": "room",
+      "range": "*",
+      "enhancement": {
+        "requires": [
+          "fire",
+          "fire"
+        ],
+        "effects": [
+          {
+            "type": "damage_all_models_of_type",
+            "model_type": "mage",
+            "amount": 1
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage_all_models_of_type",
+          "model_type": "evocation",
+          "amount": 1
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "room",
+      "range": 2,
+      "enhancement": {
+        "requires": [
+          "water"
+        ],
+        "effects": [
+          {
+            "type": "place_instability",
+            "amount": 2
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        }
+      ],
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "stone_phoenix",
+    "name": "Stone Phoenix",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "earth",
+      "trigger": {
+        "type": "your_evocation_defeated_or_removed"
+      },
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "nigredo",
+          "room": "trigger_evocation_room"
+        }
+      ],
+      "target": "room",
+      "range": "*"
+    },
+    "dark": {
+      "type": "trap",
+      "element": "fire",
+      "trigger": {
+        "type": "evocation_defeated_or_removed"
+      },
+      "effects": [
+        {
+          "type": "summon_same_evocation_as_trigger",
+          "room": "trigger_evocation_room"
+        },
+        {
+          "type": "activate_summoned_evocation"
+        }
+      ],
+      "target": "room",
+      "range": "*"
+    }
+  },
+  {
+  "id": "soul_transfer",
+  "name": "Soul Transfer",
+  "school": "alchemy",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "contingency",
+    "element": "all",
+    "target": "room",
+    "range": "*",
+
+    "effects": [
       {
-        "type": "pain",
-        "amount": 2
+        "type": "activate_room_from_owned_evocation",
+        "evocation_archetype": "construct",
+        "distance": 0,
+        "allow_used_room": true,
+        "excluded_rooms": [
+          "throne",
+          "black_rose"
+        ]
       }
     ]
   },
 
   "dark": {
-    "type": "combat",
-    "effects": [
-      {
-        "type": "damage_per_black_rose_damage",
-        "step": 1,
-        "damage_per_step": 1,
-        "max": 5
-      }
-    ]
-  }
+  "type": "contingency",
+  "element": "all",
+  "target": "room",
+  "range": 1,
+  "effects": [
+    {
+      "type": "remove_owned_evocation",
+      "evocation_archetype": "construct"
+    },
+    {
+      "type": "summon_evocation_from_deck",
+      "max_health": 3
+    }
+  ]
+}
 },
 {
-  "id": "peak_of_agony",
-  "name": "Peak of Agony",
-  "school": "agony",
+  "id": "liquid_fire",
+  "name": "Liquid Fire",
+  "school": "alchemy",
   "copies": 3,
   "instability": false,
 
   "light": {
     "type": "combat",
+    "element": "fire",
+    "target": "evocation",
+    "range": "*",
+
     "effects": [
       {
-        "type": "damage",
-        "amount": 2
-      },
-      {
-        "type": "convert_damage_on_caster",
-        "converter_owner_id": -1,
-        "amount": 2
-      },
-      {
-        "type": "pain",
-        "amount": 2
+        "type": "remove_owned_evocation_and_damage_around",
+        "damage": 2,
+        "distance": 1
       }
-    ]
+    ],
+
+    "enhancement": {
+      "element": "water",
+      "effects": [
+        {
+          "type": "damage_models_damaged_by_effect",
+          "amount": 1
+        }
+      ]
+    }
   },
 
   "dark": {
     "type": "combat",
+    "element": "fire",
+    "target": "room",
+    "range": 0,
+
     "effects": [
       {
         "type": "damage",
-        "amount": 3
+        "amount": 1
       },
       {
-        "type": "damage_secondary_mage_per_self_damage",
-        "step": 2,
-        "damage_per_step": 1,
-        "max": 3
+        "type": "summon_evocation",
+        "evocation_id": "nigredo",
+        "room": "target_room"
+      }
+    ],
+
+    "enhancement": {
+      "element": "air",
+      "effects": [
+        {
+          "type": "activate_owned_evocation",
+          "evocation_archetype": "construct",
+          "strength_bonus": 1
+        }
+      ]
+    }
+  }
+},
+{
+  "id": "fountain_of_the_three",
+  "name": "Fountain of the Three",
+  "school": "alchemy",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+  "type": "contingency",
+  "element": "earth",
+  "target": "evocation",
+  "range": 1,
+  "effects": [
+    {
+      "type": "remove_evocation_with_max_health",
+      "max_health": 3
+    },
+    {
+      "type": "summon_evocation_at_removed_evocation",
+      "evocation_id": "nigredo"
+    }
+  ],
+  "enhancement": {
+    "elements": [
+      "water",
+      "water"
+    ],
+    "effects": [
+      {
+        "type": "activate_owned_evocation",
+        "evocation_archetype": "construct",
+        "strength_bonus": 1
+      }
+    ]
+  }
+},
+
+  "dark": {
+  "type": "contingency",
+  "element": "earth",
+  "target": "room",
+  "range": "*",
+  "effects": [
+    {
+      "type": "fountain_construct_or_nigredo"
+    }
+  ],
+  "enhancement": {
+    "element": "water",
+    "effects": [
+      {
+        "type": "place_instability",
+        "amount": 1
+      }
+    ]
+  }
+}
+},
+{
+  "id": "purifying_aludel",
+  "name": "Purifying Aludel",
+  "school": "alchemy",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "contingency",
+    "element": "air",
+    "target": "evocation",
+    "range": "*",
+    "effects": [
+      {
+        "type": "heal_target_evocation",
+        "amount": 3,
+        "owner": "caster"
+      },
+      {
+        "type": "activate_target_evocation"
+      }
+    ],
+    "enhancement": {
+      "elements": [
+        "air",
+        "earth"
+      ],
+      "effects": [
+        {
+          "type": "next_activation_strength_bonus",
+          "amount": 2
+        }
+      ]
+    },
+    "resolution_order": [
+      "enhancement",
+      "base"
+    ]
+  },
+
+  "dark": {
+    "type": "contingency",
+    "element": "air",
+    "target": "evocation",
+    "range": "*",
+    "effects": [
+      {
+        "type": "activate_target_evocation_under_control"
       }
     ]
   }
 },
 {
-  "id": "pain_mark",
-  "name": "Pain Mark",
-  "school": "agony",
+  "id": "albify",
+  "name": "Albify",
+  "school": "alchemy",
   "copies": 3,
   "instability": false,
 
   "light": {
-    "type": "permanent",
+    "type": "combat",
+    "element": "water",
+    "target": "mage",
     "range": 1,
 
-    "trigger": {
-      "type": "marked_mage_inflicts_damage",
-      "action_types": [
-        "spell",
-        "physical_action"
+    "effects": [
+      {
+        "type": "convert_damage",
+        "amount": 4
+      }
+    ],
+
+    "enhancement": {
+      "requires": [
+        "air",
+        "air"
+      ],
+      "effects": [
+        {
+          "type": "lose_power",
+          "amount": 2
+        }
       ]
     },
 
-    "effects": [
-      {
-        "type": "damage_marked_mage",
-        "amount": 2
-      }
+    "resolution_order": [
+      "enhancement",
+      "base"
     ]
   },
 
   "dark": {
-    "type": "permanent",
+    "type": "combat",
+    "element": "water",
+    "target": "room",
+    "range": 2,
 
+    "effects": [
+      {
+        "type": "convert_damage",
+        "amount": 3
+      }
+    ],
+
+    "enhancement": {
+      "requires": [
+        "fire"
+      ],
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        }
+      ]
+    },
+
+    "resolution_order": [
+      "enhancement",
+      "base"
+    ]
+  }
+},
+{
+  "id": "silver_of_the_sages",
+  "name": "Silver of the Sages",
+  "school": "alchemy",
+  "copies": 3,
+  "instability": false,
+
+  "light": {
+    "type": "protection",
+    "element": "all",
+    "target": "mage",
+    "range": "*",
     "trigger": {
       "type": "caster_about_to_suffer_damage"
     },
-
     "effects": [
       {
-        "type": "redirect_damage_to_evocation"
-      }
-    ]
-  }
-},
-{
-  "id": "master_of_pleasure",
-  "name": "Master of Pleasure",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "trap",
-
-    "trigger": {
-      "type": "another_mage_solves_quest"
-    },
-
-    "effects": [
-      {
-        "type": "damage_triggering_model",
+        "type": "ignore_trigger_damage",
         "amount": 2
       },
       {
-        "type": "summon_evocation_at_triggering_model",
-        "evocation_id": "succubus"
+        "type": "activate_owned_evocation_then_black_rose_damage",
+        "amount": 1
       }
     ]
   },
 
   "dark": {
-    "type": "trap",
-
-    "trigger": {
-      "type": "another_mage_suffers_damage"
-    },
-
-    "effects": [
-      {
-        "type": "pain_from_trigger_damage"
-      },
-      {
-        "type": "gain_power_per_black_rose_damage",
-        "step": 2,
-        "power_per_step": 1,
-        "max": 4
-      }
-    ]
-  }
-},
-{
-  "id": "liquefy_the_pain",
-  "name": "Liquefy the Pain",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "trap",
-
+    "type": "protection",
+    "element": "all",
+    "target": "mage",
+    "range": "*",
     "trigger": {
       "type": "caster_is_defeated"
-    },
-
-    "effects": [
-      {
-        "type": "summon_evocation",
-        "evocation_id": "succubus"
-      },
-      {
-        "type": "gain_power_from_defeating_model",
-        "mage_amount": 1,
-        "black_rose_amount": 2
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "trap",
-
-    "trigger": {
-      "type": "another_mage_is_defeated"
-    },
-
-    "effects": [
-      {
-        "type": "place_instability_at_defeated_mage_room_per_self_damage",
-        "step": 2,
-        "instability_per_step": 1,
-        "max": 4
-      }
-    ]
-  }
-},
-{
-  "id": "submission",
-  "name": "Submission",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 1
-      },
-      {
-        "type": "convert_damage",
-        "amount": 1
-      },
-      {
-        "type": "pain",
-        "amount": 1
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "combat",
-    "range": 1,
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 2
-      },
-      {
-        "type": "place_instability_per_black_rose_damage_on_effect_damaged_models",
-        "instability_per_damage": 1,
-        "max": 4
-      }
-    ]
-  }
-},
-{
-  "id": "ineluctable_pain",
-  "name": "Ineluctable Pain",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "permanent",
-    "trigger": {
-      "type": "marked_mage_gains_or_loses_power"
-    },
-    "effects": [
-      {
-        "type": "damage_marked_mage",
-        "amount": 2
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "permanent",
-    "trigger": {
-      "type": "caster_suffers_black_rose_damage"
     },
     "effects": [
       {
         "type": "gain_power",
         "amount": 1
-      }
-    ]
-  }
-},
-{
-  "id": "heart_of_ice",
-  "name": "Heart of Ice",
-  "school": "agony",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 3
       },
       {
-        "type": "convert_damage",
-        "amount": 2
-      },
-      {
-        "type": "pain",
-        "amount": 2
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "combat",
-    "effects": [
-      {
-        "type": "place_instability_per_self_black_rose_damage",
-        "instability_per_damage": 1,
-        "max": 4
+        "type": "silver_defeat_choice"
       }
     ]
   }
 }
 ]
-

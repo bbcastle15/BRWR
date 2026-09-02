@@ -5,6 +5,46 @@
     "archetype": "demon",
     "health": 3,
     "strength": 1,
-    "speed": 2
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "strength_per_damage",
+        "amount_per_damage": 1
+      },
+      {
+        "type": "redirect_owner_damage",
+        "trigger": "owner_suffers_damage",
+        "amount": 1,
+        "optional": true
+      }
+    ]
+  },
+  {
+    "id": "nigredo",
+    "name": "Nigredo",
+    "archetype": "construct",
+    "health": 4,
+    "strength": 2,
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "on_inflict_damage",
+        "optional": true,
+        "choices": [
+          {
+            "type": "place_instability",
+            "amount": 1,
+            "range": 0
+          },
+          {
+            "type": "convert_instability",
+            "amount": 1,
+            "range": 0
+          }
+        ]
+      }
+    ]
   }
 ]
