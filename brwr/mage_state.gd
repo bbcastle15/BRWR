@@ -3,10 +3,16 @@ extends RefCounted
 
 
 var mage_id: String = ""
+
 var health: int = 10
+var strength: int = 0
+var speed: int = 0
+
 var room_id: String = ""
 var room_coord: Vector2i = Vector2i.ZERO
 var in_cell: bool = true
+
+
 # Ogni elemento rappresenta un Damage Cube presente sulla Mage Sheet.
 #
 # Convenzione owner_id:
@@ -18,9 +24,16 @@ var in_cell: bool = true
 var damage_cubes: Array[int] = []
 
 
-func _init(id: String = "", mage_health: int = 10):
+func _init(
+	id: String = "",
+	mage_health: int = 10,
+	mage_strength: int = 0,
+	mage_speed: int = 0
+):
 	mage_id = id
 	health = mage_health
+	strength = mage_strength
+	speed = mage_speed
 
 
 func get_damage() -> int:
@@ -35,32 +48,62 @@ func is_defeated() -> bool:
 	return get_damage() >= health
 
 
-func get_damage_from(owner_id: int) -> int:
-	return damage_cubes.count(owner_id)
+func get_damage_from(
+	owner_id: int
+) -> int:
+
+	return damage_cubes.count(
+		owner_id
+	)
 
 
-func add_damage(owner_id: int, amount: int) -> int:
-	var amount_to_place = min(
-		max(amount, 0),
+func add_damage(
+	owner_id: int,
+	amount: int
+) -> int:
+
+	var amount_to_place: int = min(
+		max(
+			amount,
+			0
+		),
 		get_remaining_health()
 	)
 
-	for i in range(amount_to_place):
-		damage_cubes.append(owner_id)
+	for i in range(
+		amount_to_place
+	):
+
+		damage_cubes.append(
+			owner_id
+		)
 
 	return amount_to_place
 
 
-func remove_damage(owner_id: int, amount: int) -> int:
-	var removed = 0
+func remove_damage(
+	owner_id: int,
+	amount: int
+) -> int:
 
-	for i in range(amount):
-		var index = damage_cubes.find(owner_id)
+	var removed: int = 0
+
+	for i in range(
+		amount
+	):
+
+		var index: int = damage_cubes.find(
+			owner_id
+		)
 
 		if index == -1:
 			break
 
-		damage_cubes.remove_at(index)
+		damage_cubes.remove_at(
+			index
+		)
+
 		removed += 1
+
 
 	return removed

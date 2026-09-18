@@ -20,6 +20,7 @@
       }
     ]
   },
+
   {
     "id": "nigredo",
     "name": "Nigredo",
@@ -46,5 +47,37 @@
         ]
       }
     ]
-  }
+  },
+
+  {
+    "id": "cadaver",
+    "name": "Cadaver",
+    "archetype": "undead",
+    "health": 2,
+    "strength": 2,
+    "speed": 2,
+    "copies": 8,
+    "abilities": [
+      {
+        "type": "health_bonus_if_upgraded",
+        "amount": 1
+      }
+    ]
+  },
+  {
+  "id": "colossus",
+  "name": "Colossus",
+  "archetype": "undead",
+  "health": 4,
+  "strength": 3,
+  "speed": 2,
+  "copies": 3,
+  "abilities": [
+    {
+      "type": "damage_mage_entering_room",
+      "trigger": "mage_enters_room",
+      "amount": 3
+    }
+  ]
+}
 ]

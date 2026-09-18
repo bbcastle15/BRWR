@@ -1,32 +1,254 @@
 [
-	{
-		"id": "event_test_01",
-		"name": "Test Event 1",
-		"moon": 1,
-		"slot": 1
-	},
-	{
-		"id": "event_test_02",
-		"name": "Test Event 2",
-		"moon": 1,
-		"slot": 2
-	},
-	{
-		"id": "event_test_03",
-		"name": "Test Event 3",
-		"moon": 1,
-		"slot": 3
-	},
-	{
-		"id": "event_test_04",
-		"name": "Test Event 4",
-		"moon": 1,
-		"slot": 1
-	},
-	{
-		"id": "event_test_05",
-		"name": "Test Event 5",
-		"moon": 1,
-		"slot": 2
-	}
+  {
+    "id": "hidden_resources",
+    "name": "Hidden Resources",
+    "moon": 1,
+    "crown": true,
+    "phase": "always",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "When a Mage is placed in their Cell, that Mage gains 1 Power.",
+    "effects": [
+      {
+        "type": "mage_enters_cell_gain_power",
+        "amount": 1
+      }
+    ]
+  },
+
+  {
+    "id": "black_thorns",
+    "name": "Black Thorns",
+    "moon": 1,
+    "crown": true,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "The Black Rose inflicts 2 Damage to each Evocation.",
+    "effects": [
+      {
+        "type": "black_rose_damage_all_evocations",
+        "amount": 2
+      }
+    ]
+  },
+
+  {
+    "id": "rebirth_at_sunset",
+    "name": "Rebirth at Sunset",
+    "moon": 1,
+    "crown": true,
+    "phase": "black_rose",
+    "slot": 2,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "The Black Rose places 1 Instability in each green and grey Room.",
+    "effects": [
+      {
+        "type": "black_rose_instability_room_colors",
+        "amount": 1,
+        "colors": [
+          "green",
+          "grey"
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "gift_to_fools",
+    "name": "Gift to Fools",
+    "moon": 1,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 2,
+    "text": "Each Mage, in play order, may draw 1 Spell from the Library.",
+    "effects": [
+      {
+        "type": "each_mage_may_draw_library",
+        "amount": 1
+      }
+    ]
+  },
+
+  {
+    "id": "dislocation",
+    "name": "Dislocation",
+    "moon": 1,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, may place their Model in a Room within 1.",
+    "effects": [
+      {
+        "type": "each_mage_may_place_model",
+        "range": 1
+      }
+    ]
+  },
+
+  {
+    "id": "rebirth_at_noon",
+    "name": "Rebirth at Noon",
+    "moon": 1,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 2,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "The Black Rose places 1 Instability in each blue and purple Room.",
+    "effects": [
+      {
+        "type": "black_rose_instability_room_colors",
+        "amount": 1,
+        "colors": [
+          "blue",
+          "purple"
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "awakening",
+    "name": "Awakening",
+    "moon": 1,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 1,
+    "discard_power": 0,
+    "text": "The Black Rose places 5 Instability in the Black Rose Room.",
+    "effects": [
+      {
+        "type": "black_rose_instability",
+        "room_id": "black_rose",
+        "amount": 5
+      }
+    ]
+  },
+
+  {
+    "id": "puppeteer",
+    "name": "Puppeteer",
+    "moon": 1,
+    "crown": true,
+    "phase": "action",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "When an Evocation is defeated or removed, the Black Rose places 1 Instability in the Room that Model was in.",
+    "effects": [
+      {
+        "type": "on_evocation_removed_black_rose_instability",
+        "amount": 1
+      }
+    ]
+  },
+
+  {
+    "id": "rebirth_at_dawn",
+    "name": "Rebirth at Dawn",
+    "moon": 1,
+    "crown": true,
+    "phase": "black_rose",
+    "slot": 2,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "The Black Rose places 1 Instability in each red and yellow Room.",
+    "effects": [
+      {
+        "type": "black_rose_instability_room_colors",
+        "amount": 1,
+        "colors": [
+          "red",
+          "yellow"
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "a_hard_lesson",
+    "name": "A Hard Lesson",
+    "moon": 1,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 1,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, loses 1 Power, then places themselves in a Room within 1 from their own Cell.",
+    "effects": [
+      {
+        "type": "each_mage_lose_power",
+        "amount": 1
+      },
+      {
+        "type": "each_mage_place_from_cell",
+        "range": 1
+      }
+    ]
+  },
+
+  {
+    "id": "undead_army",
+    "name": "Undead Army",
+    "moon": 1,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, may summon a Cadaver in a Room within 0 from themselves.",
+    "effects": [
+      {
+        "type": "each_mage_may_summon_evocation",
+        "evocation_id": "cadaver",
+        "range": 0
+      }
+    ]
+  },
+
+  {
+    "id": "black_overload",
+    "name": "Black Overload",
+    "moon": 1,
+    "crown": true,
+    "phase": "always",
+    "slot": 2,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "When a Mage places at least 1 Instability, the Black Rose places 1 Instability in the same Room, if possible.",
+    "effects": [
+      {
+        "type": "on_mage_places_instability_black_rose_instability",
+        "amount": 1
+      }
+    ]
+  },
+
+  {
+    "id": "midnight_rebirth",
+    "name": "Midnight Rebirth",
+    "moon": 1,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "The Black Rose places 2 Instability in the Black Rose Room.",
+    "effects": [
+      {
+        "type": "black_rose_instability",
+        "room_id": "black_rose",
+        "amount": 2
+      }
+    ]
+  }
 ]

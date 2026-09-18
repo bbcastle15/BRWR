@@ -4,51 +4,199 @@
     "name": "Black Rose Room",
     "color": "black",
     "core": true,
-    "fixed": true
+    "fixed": true,
+    "instability_resistance": 10,
+    "completion_rewards": [6, 3, 1],
+    "destroyed_effects": [
+      {
+        "type": "discard_spells",
+        "amount": 3,
+        "from": "hand"
+      },
+      {
+        "type": "draw_forgotten",
+        "amount": 1
+      },
+      {
+        "type": "place_black_rose_instability",
+        "amount": 1,
+        "target": "choose_room"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "discard_spells",
+        "amount": 3,
+        "from": "hand"
+      },
+      {
+        "type": "draw_forgotten_choose",
+        "draw": 2,
+        "keep": 1
+      }
+    ]
   },
 
   {
-    "id": "crypt",
-    "name": "Crypt",
-    "color": "grey",
-    "core": true,
-    "fixed": false
-  },
-  {
-    "id": "sacrificial_altar",
-    "name": "Sacrificial Altar",
-    "color": "grey",
-    "core": true,
-    "fixed": false
-  },
-  {
-    "id": "cemetery",
-    "name": "Cemetery",
-    "color": "grey",
-    "core": true,
-    "fixed": false
-  },
+  "id": "crypt",
+  "name": "Crypt",
+  "color": "grey",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "cadaver",
+      "range": 0
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "cadaver",
+      "range": 1
+    },
+    {
+      "type": "summon_evocation",
+      "evocation_id": "cadaver",
+      "range": 1
+    }
+  ]
+},
 
   {
-    "id": "summoner_room",
-    "name": "Summoner Room",
-    "color": "red",
-    "core": true,
-    "fixed": false
-  },
+  "id": "sacrificial_altar",
+  "name": "Sacrificial Altar",
+  "color": "grey",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "cadaver"
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "damage",
+      "amount": 2,
+      "target": "choose_model"
+    }
+  ]
+},
+
+ {
+  "id": "cemetery",
+  "name": "Cemetery",
+  "color": "grey",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "cadaver",
+      "range": 0
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "colossus",
+      "range": "*"
+    }
+  ]
+},
+
+  {
+  "id": "summoner_room",
+  "name": "Summoner Room",
+  "color": "red",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "damage",
+      "amount": 1,
+      "target": "choose_model",
+      "range": 1
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "summon_evocation",
+      "evocation_id": "nigredo",
+      "range": 0
+    },
+    {
+      "type": "activate_last_summoned_evocation"
+    }
+  ]
+},
+
   {
     "id": "alchemical_laboratory",
     "name": "Alchemical Laboratory",
     "color": "red",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [4, 2, 1],
+    "destroyed_effects": [
+      {
+        "type": "damage",
+        "amount": 1,
+        "target": "choose_model"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 3
+      },
+      {
+        "type": "discard_spell",
+        "amount": 1,
+        "destination": "memories"
+      }
+    ]
   },
+
   {
     "id": "arena",
     "name": "Arena",
     "color": "red",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [4, 2, 1],
+    "destroyed_effects": [
+      {
+        "type": "damage",
+        "amount": 1,
+        "target": "choose_model"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "cast_next_ready_spell"
+      }
+    ]
   },
 
   {
@@ -56,86 +204,342 @@
     "name": "Observatory",
     "color": "yellow",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 5,
+    "completion_rewards": [3, 1, 1],
+    "destroyed_effects": [
+      {
+        "type": "draw_quest",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "lose_power_other_mages",
+        "amount": 1
+      }
+    ]
   },
-  {
-    "id": "bibliotheca",
-    "name": "Bibliotheca",
-    "color": "yellow",
-    "core": true,
-    "fixed": false
-  },
+
+ {
+  "id": "bibliotheca",
+  "name": "Bibliotheca",
+  "color": "yellow",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 5,
+  "completion_rewards": [
+    3,
+    1,
+    1
+  ],
+  "destroyed_effects": [
+    {
+      "type": "draw_quest",
+      "amount": 1
+    }
+  ],
+  "rebuilt_effects": [
+    {
+      "type": "draw_library",
+      "amount": 2
+    }
+  ]
+},
+
   {
     "id": "sanctuary",
     "name": "Sanctuary",
     "color": "yellow",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 5,
+    "completion_rewards": [3, 1, 1],
+    "destroyed_effects": [
+      {
+        "type": "draw_quest",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "heal",
+        "amount": 3,
+        "target": "activating_mage"
+      }
+    ]
   },
 
+ {
+  "id": "garden",
+  "name": "Garden",
+  "color": "green",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 4,
+  "completion_rewards": [2, 1, 0],
+
+  "destroyed_effects": [
+    {
+      "type": "place_instability",
+      "amount": 1,
+      "target": "choose_room",
+      "range": 1
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "place_instability",
+      "amount": 1,
+      "target": "choose_room",
+      "range": "*"
+    },
+    {
+      "type": "place_instability",
+      "amount": 1,
+      "target": "choose_room",
+      "range": "*"
+    }
+  ]
+},
+
+ {
+  "id": "forge",
+  "name": "Forge",
+  "color": "green",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 4,
+  "completion_rewards": [2, 1, 0],
+
+  "destroyed_effects": [
+    {
+      "type": "place_instability",
+      "amount": 1,
+      "target": "choose_room"
+    }
+  ],
+
+  "rebuilt_effects": [
   {
-    "id": "garden",
-    "name": "Garden",
-    "color": "green",
-    "core": true,
-    "fixed": false
+    "type": "move",
+    "amount": 1,
+    "target": "self"
   },
   {
-    "id": "forge",
-    "name": "Forge",
-    "color": "green",
-    "core": true,
-    "fixed": false
+    "type": "move",
+    "amount": 1,
+    "target": "self"
   },
+  {
+    "type": "attack",
+    "target": "self"
+  },
+  {
+    "type": "move",
+    "amount": 1,
+    "target": "self"
+  },
+  {
+    "type": "move",
+    "amount": 1,
+    "target": "self"
+  },
+  {
+    "type": "attack",
+    "target": "self"
+  }
+]
+},
+
   {
     "id": "treasure_room",
     "name": "Treasure Room",
     "color": "green",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 4,
+    "completion_rewards": [2, 1, 0],
+    "destroyed_effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "choose_room"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "gain_power",
+        "amount": 2
+      },
+      {
+        "type": "draw_event",
+        "amount": 1
+      }
+    ]
   },
 
-  {
-    "id": "the_abyss",
-    "name": "The Abyss",
-    "color": "blue",
-    "core": true,
-    "fixed": false
-  },
+ {
+  "id": "the_abyss",
+  "name": "The Abyss",
+  "color": "blue",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "draw_random_memories",
+      "amount": 1
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "return_all_mages_to_cells"
+    }
+  ]
+},
+
   {
     "id": "oracle_room",
     "name": "Oracle Room",
     "color": "blue",
     "core": true,
-    "fixed": false
-  },
-  {
-    "id": "mirrors_room",
-    "name": "Mirrors Room",
-    "color": "blue",
-    "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [4, 2, 1],
+    "destroyed_effects": [
+      {
+        "type": "draw_random_memories",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "search_grimoire_or_memories",
+        "amount": 1
+      }
+    ]
   },
 
-  {
-    "id": "throne",
-    "name": "Throne Room",
-    "color": "purple",
-    "core": true,
-    "fixed": true
-  },
+ {
+  "id": "mirrors_room",
+  "name": "Mirrors Room",
+  "color": "blue",
+  "core": true,
+  "fixed": false,
+  "instability_resistance": 6,
+  "completion_rewards": [4, 2, 1],
+
+  "destroyed_effects": [
+    {
+      "type": "draw_random_memories",
+      "amount": 1
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "copy_room_effect",
+      "side": "rebuilt",
+      "exclude": [
+        "black_rose",
+        "throne"
+      ]
+    }
+  ]
+},
+
+{
+  "id": "throne",
+  "name": "Throne Room",
+  "color": "purple",
+  "core": true,
+  "fixed": true,
+  "instability_resistance": 10,
+  "completion_rewards": [
+    6,
+    3,
+    1
+  ],
+
+  "destroyed_effects": [
+    {
+      "type": "conditional_payment",
+      "cost": {
+        "type": "lose_power",
+        "amount": 1
+      },
+      "effects": [
+        {
+          "type": "take_crown"
+        }
+      ]
+    }
+  ],
+
+  "rebuilt_effects": [
+    {
+      "type": "take_crown"
+    },
+    {
+      "type": "gain_power",
+      "amount": 1
+    }
+  ]
+},
+
   {
     "id": "armory",
     "name": "Armory",
     "color": "purple",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [4, 2, 1],
+    "destroyed_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "replace_revealed_spell_from_hand"
+      },
+      {
+        "type": "black_rose_gain_power",
+        "amount": 1
+      }
+    ]
   },
+
   {
     "id": "pleasures_room",
     "name": "Pleasures Room",
     "color": "purple",
     "core": true,
-    "fixed": false
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [4, 2, 1],
+    "destroyed_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_quest",
+        "amount": 3
+      },
+      {
+        "type": "discard_quest",
+        "amount": 2
+      }
+    ]
   }
 ]

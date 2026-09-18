@@ -91,3 +91,57 @@ func get_enhancement(
 		"enhancement",
 		{}
 	)
+func has_summon_effect() -> bool:
+
+	if _dictionary_has_summon_effect(
+		light_side
+	):
+		return true
+
+	if _dictionary_has_summon_effect(
+		dark_side
+	):
+		return true
+
+	return false
+
+
+func _dictionary_has_summon_effect(
+	data: Dictionary
+) -> bool:
+
+	if data.has("type"):
+
+		var effect_type: String = str(
+			data["type"]
+		)
+
+		if effect_type.begins_with(
+			"summon_"
+		):
+			return true
+
+
+	for value in data.values():
+
+		if value is Dictionary:
+
+			if _dictionary_has_summon_effect(
+				value
+			):
+				return true
+
+
+		elif value is Array:
+
+			for element in value:
+
+				if element is Dictionary:
+
+					if _dictionary_has_summon_effect(
+						element
+					):
+						return true
+
+
+	return false
