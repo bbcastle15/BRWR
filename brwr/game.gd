@@ -1,6 +1,9 @@
 extends Node2D
 
 const Tests = preload("res://tests.gd")
+
+@export var run_tests_on_ready: bool = false
+@export var auto_start_game_flow: bool = true
 # =========================================================
 # INTERACTIVE PHASE STATE
 # =========================================================
@@ -26,12 +29,15 @@ var trigger_window_event: GameEvent = null
 var trigger_window_queue: Array = []
 
 var trigger_window_cursor: int = 0
+var trigger_window_stack: Array[Dictionary] = []
 # =========================================================
 # RESOLUTION STACK
 # =========================================================
 
 var resolution_stack: Array[Dictionary] = []
 var processing_resolution_stack: bool = false
+var next_resolution_id: int = 1
+var active_effect_context: Dictionary = {}
 
 # =========================================================
 # ACTION PHASE STATE
@@ -45,6 +51,11 @@ var action_phase_activation_round: int = 0
 
 var preparation_phase_cursor: int = 0
 # =========================================================
+# EVOCATION / CLEAN-UP PHASE STATE
+# =========================================================
+var evocation_phase_cursor: int = 0
+var cleanup_phase_cursor: int = 0
+# =========================================================
 # STUDY PHASE STATE
 # =========================================================
 
@@ -53,6 +64,17 @@ var study_phase_cursor: int = 0
 # Le 4 carte temporaneamente pescate dalla Library
 # dal giocatore che sta risolvendo lo Study.
 var study_drawn_cards: Array[SpellCardState] = []
+
+# =========================================================
+# GAME FLOW / BOARD STATE
+# =========================================================
+signal phase_completed(phase: String)
+signal game_over(winner_data: Dictionary)
+var game_flow_active: bool = false
+var game_has_ended: bool = false
+var player_entrance_room_ids: Dictionary = {}
+var player_entrance_room_coords: Dictionary = {}
+var cancelled_physical_action_players: Dictionary = {}
 @export var game_seed: int = 0
 @export_range(2, 6) var player_count: int = 4
 var players: Array[PlayerState] = []
@@ -64,9 +86,11 @@ var cell_scene = preload("res://cell.tscn")
 var mage_token_scene = preload("res://mage_token.tscn")
 var mage_tokens: Array = []
 var player_board_scene = preload("res://player_board.tscn")
+
 var spell_database = SpellDatabase.new()
 var evocation_database = EvocationDatabase.new()
 var triggered_spell_manager = TriggeredSpellManager.new()
+var mage_database = MageDatabase.new()
 var layout_database = {}
 const HEX_RADIUS = 70.0
 var board_center: Vector2
@@ -88,7 +112,17 @@ var forgotten_discard: Array[SpellCardState] = []
 var crown_owner_id: int = -1
 var event_database := EventDatabase.new()
 var current_round: int = 1
+var quest_database := QuestDatabase.new()
+var quest_manager := QuestManager.new()
+var black_rose_quest_step: int = 0
+var black_rose_quest_cursor: int = 0
+var quest_decks: Dictionary = {
+	1: [],
+	2: [],
+	3: []
+}
 
+var quest_discard: Array[QuestCardState] = []
 
 # Fase corrente della partita.
 var current_phase: String = ""
@@ -172,25 +206,41 @@ func _ready():
 
 	print("PLAYER COUNT: ", player_count)
 	print("GAME SEED: ", game_seed)
+
 	spell_database.load_database()
 	select_active_schools()
 	create_school_libraries()
 	create_forgotten_deck()
+	mage_database.load_database()
+	quest_database.load_from_file(
+	"res://data/quests.json"
+	)
+
+	create_quest_decks()
 	event_database.load_database()
 	create_event_decks()
+
 	evocation_database.load_database()
+	
 	create_players()
 	assign_initial_crown()
 	create_lodge()
 	create_player_boards()
-	player_boards[0].refresh()
-	player_boards[1].refresh()
+
+	for board in player_boards:
+		if board != null:
+			board.refresh()
+
 	await $PowerBoard.initialize(player_count)
-	$EventBoard.refresh_event_slots()	
+	$EventBoard.refresh_event_slots()
 	update_table_layout()
 	await get_tree().process_frame
-	Tests.run(self)
-	
+
+	if run_tests_on_ready:
+		Tests.run(self)
+
+	if auto_start_game_flow:
+		start_game_flow()
 
 func load_rooms():
 	var file = FileAccess.open("res://data/rooms.json", FileAccess.READ)
@@ -347,10 +397,8 @@ func get_lodge_positions() -> Array[Vector2i]:
 	return positions
 
 func create_cells():
-
 	var layout = layout_database[str(player_count)]
 	var cell_slots = layout["cells"]
-
 	var available_cells = cell_database.duplicate(true)
 
 	shuffle_with_rng(available_cells)
@@ -360,82 +408,44 @@ func create_cells():
 		player_count
 	)
 
+	player_entrance_room_ids.clear()
+	player_entrance_room_coords.clear()
+
 	for i in range(cell_slots.size()):
-
 		var slot_data = cell_slots[i]
-
-		# =================================================
-		# POSIZIONE DELLA CELL
-		# =================================================
-
 		var position_array = slot_data["position"]
-
 		var hex_position = Vector2i(
 			int(position_array[0]),
 			int(position_array[1])
 		)
 
-
-		# =================================================
-		# CELL RANDOM
-		# =================================================
-
 		var cell_data = selected_cells[i]
+		create_cell(cell_data, hex_position)
 
-		create_cell(
-			cell_data,
-			hex_position
-		)
-
-
-		# =================================================
-		# ENTRANCE ROOM
-		#
-		# Questa NON è la posizione attuale del Mage.
-		# È la Room attraverso cui entra nella Lodge.
-		# =================================================
-
-		var entrance_array = slot_data[
-			"entrance_room"
-		]
-
+		var entrance_array = slot_data["entrance_room"]
 		var entrance_room = Vector2i(
 			int(entrance_array[0]),
 			int(entrance_array[1])
 		)
-
+		var entrance_room_id: String = coord_to_room_id(entrance_room)
 
 		if i < players.size():
+			player_entrance_room_coords[i] = entrance_room
+			player_entrance_room_ids[i] = entrance_room_id
 
-			players[i].mage.room_coord = (
-				entrance_room
-			)
-
-			players[i].mage.room_id = (
-				coord_to_room_id(
-					entrance_room
-				)
-			)
-
-			# Il Mage comincia fisicamente nella Cell.
+			players[i].mage.room_coord = entrance_room
+			players[i].mage.room_id = entrance_room_id
 			players[i].mage.in_cell = true
 
-
 			print(
-				"Player ",
-				i + 1,
-				" entrance room: ",
-				entrance_room,
-				" | starts in Cell: ",
-				players[i].mage.in_cell
+				"Player ", i + 1,
+				" entrance room: ", entrance_room,
+				" (", entrance_room_id, ")",
+				" | starts in Cell: true"
 			)
 
+	print("Cells created: ", cell_slots.size())
 
-	print(
-		"Cells created: ",
-		cell_slots.size()
-	)
-	
 func shuffle_with_rng(array: Array):
 	for i in range(array.size() - 1, 0, -1):
 		var j = rng.randi_range(0, i)
@@ -495,6 +505,7 @@ func remove_black_rose_instability(room_id: String, amount: int = 1):
 		room.room_name
 	)
 func create_players():
+
 	players.clear()
 
 	var colors = [
@@ -506,7 +517,13 @@ func create_players():
 		Color.WHITE
 	]
 
+	var test_mages: Array[String] = [
+		"rikkart",
+		"angela"
+	]
+
 	for i in range(player_count):
+
 		var player = PlayerState.new(
 			i,
 			"Player " + str(i + 1),
@@ -515,7 +532,21 @@ func create_players():
 
 		players.append(player)
 
-	print("Players created: ", players.size())
+		if i < test_mages.size():
+
+			var mage_id: String = test_mages[i]
+
+			if assign_mage_to_player(
+				i,
+				mage_id
+			):
+
+				give_initial_personal_spell(i)
+
+	print(
+		"Players created: ",
+		players.size()
+	)
 
 func place_player_instability(
 	player_index: int,
@@ -610,54 +641,49 @@ func deal_damage(
 	amount: int,
 	action_type: String = "",
 	suppressed_trigger_types: Array = []
-) -> bool:
-
+) -> int:
 	if target_player_index < 0 \
 	or target_player_index >= players.size():
-
-		print(
-			"deal_damage: invalid target player"
-		)
-
-		return false
-
+		print("deal_damage: invalid target player")
+		return 0
 
 	if amount <= 0:
-		return true
+		return 0
 
+	var capacity: int = players[target_player_index].mage.get_remaining_health()
+	if capacity <= 0:
+		return 0
 
-	var resolution: Dictionary = {
+	var requested: int = min(amount, capacity)
+	var result_context: Dictionary = {}
 
-		"type":
-			"damage",
+	# When called by an EffectResolver, keep a reference to the currently
+	# resolving context so the asynchronous Damage frame can overwrite the
+	# optimistic result with the real post-Protection result before the next
+	# Effect is resolved.
+	if not active_effect_context.is_empty():
+		result_context = active_effect_context
 
-		"step":
-			"pre_event",
+	queue_resolution({
+		"type": "damage",
+		"step": "pre_event",
+		"attacker_id": attacker_id,
+		"target_player_index": target_player_index,
+		"amount": requested,
+		"action_type": action_type,
+		"suppressed_trigger_types": suppressed_trigger_types.duplicate(),
+		"source_model_type": "black_rose" if attacker_id == -1 else "mage",
+		"source_evocation": null,
+		"event": null,
+		"actual_damage": 0,
+		"result_context": result_context
+	})
 
-		"attacker_id":
-			attacker_id,
+	# Compatibility with EffectResolver handlers that use the return value to
+	# register the damaged target. The authoritative value is written back to
+	# result_context when the Damage frame completes.
+	return requested
 
-		"target_player_index":
-			target_player_index,
-
-		"amount":
-			amount,
-
-		"action_type":
-			action_type,
-
-		"suppressed_trigger_types":
-			suppressed_trigger_types.duplicate(),
-
-		"event":
-			null
-	}
-
-
-	return queue_resolution(
-		resolution
-	)
-		
 func heal_damage(
 	target_player_index: int,
 	owner_id: int,
@@ -944,7 +970,7 @@ func add_black_rose_power(amount: int):
 		black_rose_power + amount
 	)
 func check_moon_phase():
-	var highest_power = black_rose_power
+	var highest_power: int = black_rose_power
 
 	for player in players:
 		highest_power = max(
@@ -952,7 +978,7 @@ func check_moon_phase():
 			player.power
 		)
 
-	var new_moon = current_moon
+	var new_moon: int = current_moon
 
 	if highest_power >= $PowerBoard.third_moon_threshold:
 		new_moon = 3
@@ -964,15 +990,31 @@ func check_moon_phase():
 		new_moon = 1
 
 	# La Moon non può regredire.
-	if new_moon > current_moon:
-		current_moon = new_moon
+	if new_moon <= current_moon:
+		return
+
+	var old_moon: int = current_moon
+
+	# Gestiamo anche l'eventuale salto diretto
+	# Moon I -> Moon III.
+	for moon in range(
+		old_moon + 1,
+		new_moon + 1
+	):
+		current_moon = moon
 
 		print(
 			"GAME: Moon changed to ",
 			current_moon
 		)
 
-		$EventBoard.set_moon(current_moon)
+		$EventBoard.set_moon(
+			current_moon
+		)
+
+		distribute_personal_spells_for_moon(
+			current_moon
+		)
 	
 func summon_evocation(
 	owner_id: int,
@@ -1091,473 +1133,108 @@ func deal_damage_to_evocation(
 	amount: int,
 	suppressed_trigger_types: Array[String] = []
 ) -> int:
-
-	if evocation == null:
+	if evocation == null or amount <= 0:
 		return 0
 
-	if amount <= 0:
+	if evocation.is_defeated():
 		return 0
 
+	var requested: int = min(amount, evocation.get_remaining_health())
+	if requested <= 0:
+		return 0
 
-	# =====================================================
-	# STATE BEFORE DAMAGE
-	#
-	# Serve per evitare di emettere più volte l'evento
-	# "defeated" se, per qualche motivo, viene applicato
-	# altro Damage a una Evocation già sconfitta.
-	# =====================================================
+	var result_context: Dictionary = {}
+	if not active_effect_context.is_empty():
+		result_context = active_effect_context
 
-	var was_defeated = evocation.is_defeated()
+	queue_resolution({
+		"type": "evocation_damage",
+		"step": "apply",
+		"attacker_id": attacker_id,
+		"evocation": evocation,
+		"amount": requested,
+		"suppressed_trigger_types": suppressed_trigger_types.duplicate(),
+		"actual_damage": 0,
+		"result_context": result_context
+	})
 
-
-	# =====================================================
-	# APPLY DAMAGE
-	# =====================================================
-
-	var damage_dealt = evocation.add_damage(
-		attacker_id,
-		amount
-	)
-
-
-	# =====================================================
-	# DEBUG
-	# =====================================================
-
-	print(
-		"Damage: attacker ",
-		attacker_id,
-		" -> Evocation ",
-		evocation.evocation_name,
-		" | ",
-		damage_dealt,
-		" damage",
-		" | HP: ",
-		evocation.get_remaining_health(),
-		"/",
-		evocation.health
-	)
-
-
-	# =====================================================
-	# EVOCATION DEFEATED
-	#
-	# L'evento viene emesso soltanto nel momento esatto
-	# in cui passa da viva -> defeated.
-	#
-	# IMPORTANTE:
-	# lo facciamo mentre l'oggetto Evocation esiste ancora,
-	# così Stone Phoenix può leggere:
-	#
-	# - owner_id
-	# - room_id
-	# - evocation_id
-	# - evocation_name
-	# =====================================================
-
-	if not was_defeated \
-	and evocation.is_defeated():
-
-		emit_evocation_defeated_or_removed(
-			evocation,
-			"defeated"
-		)
-
-
-	return damage_dealt
+	return requested
 
 func process_game_event(
 	event: GameEvent
 ) -> bool:
-
 	if event == null:
 		return true
 
-
-	var triggered = (
-		triggered_spell_manager
-		.get_triggered_spells(
-			event,
-			players
-		)
+	var triggered = triggered_spell_manager.get_triggered_spells(
+		event,
+		players
 	)
-
 
 	if triggered.is_empty():
 		return true
 
-
-	# =====================================================
-	# SEPARATE AUTOMATIC / OPTIONAL TRIGGERS
-	# =====================================================
-
-	var automatic_triggers: Array = []
-	var optional_triggers: Array = []
-
-
-	for trigger_data in triggered:
-
-		var active_spell: ActiveSpellState = (
-			trigger_data.get(
-				"active_spell",
-				null
-			)
-		)
-
-
-		if active_spell == null:
-			continue
-
-
-		var spell_type: String = (
-			active_spell.get_spell_type()
-		)
-
-
-		match spell_type:
-
-			"permanent":
-
-				automatic_triggers.append(
-					trigger_data
-				)
-
-
-			"trap", "protection":
-
-				optional_triggers.append(
-					trigger_data
-				)
-
-
-			_:
-
-				print(
-					"Unsupported triggered spell type: ",
-					spell_type
-				)
-
-
-	# =====================================================
-	# AUTOMATIC TRIGGERS
-	#
-	# Permanents don't require a player decision.
-	# =====================================================
-
-	for trigger_data in automatic_triggers:
-
-		handle_triggered_spell(
-			trigger_data
-		)
-
-
-	# =====================================================
-	# NO OPTIONAL TRIGGERS
-	# =====================================================
-
-	if optional_triggers.is_empty():
+	var ordered: Array = order_optional_triggers(triggered)
+	if ordered.is_empty():
 		return true
 
+	_push_trigger_window(event, ordered)
+	request_next_trigger_decision()
 
-	# =====================================================
-	# OPEN OPTIONAL TRIGGER WINDOW
-	# =====================================================
-
-	if trigger_window_active:
-
-		print(
-			"process_game_event: nested optional trigger window"
-		)
-
-		return false
-
-
-	trigger_window_active = true
-
-	trigger_window_event = event
-
-	trigger_window_queue = (
-		order_optional_triggers(
-			optional_triggers
-		)
+	return (
+		not trigger_window_active
+		and not waiting_for_player_input
 	)
 
-	trigger_window_cursor = 0
-
-
-	# IMPORTANT:
-	#
-	# false means:
-	# resolution CANNOT continue yet.
-	#
-	# A player decision is required.
-	return false
-		
 func handle_triggered_spell(
 	trigger_data: Dictionary
-):
-	var active_spell = (
-		trigger_data["active_spell"]
-	)
+) -> bool:
+	var active_spell: ActiveSpellState = trigger_data.get("active_spell", null)
+	var event: GameEvent = trigger_data.get("event", null)
 
-	var event = trigger_data["event"]
+	if active_spell == null or event == null:
+		return false
 
-	var spell_type = (
-		active_spell.get_spell_type()
-	)
+	return queue_resolution({
+		"type": "trigger_spell",
+		"step": "start",
+		"active_spell": active_spell,
+		"event": event,
+		"context": {}
+	})
 
-	match spell_type:
-		"trap":
-			handle_triggered_trap(
-				active_spell,
-				event
-			)
-
-		"protection":
-			handle_triggered_protection(
-				active_spell,
-				event
-			)
-
-		"permanent":
-			handle_triggered_permanent(
-				active_spell,
-				event
-			)
-
-		_:
-			print(
-				"Unsupported triggered spell type: ",
-				spell_type
-			)
-			
 func handle_triggered_trap(
 	active_spell: ActiveSpellState,
 	event: GameEvent
 ):
-	print(
-		"TRAP TRIGGERED: ",
-		active_spell.spell.card_name,
-		" | Player ",
-		active_spell.owner_id + 1
-	)
+	resolve_triggered_spell(active_spell, event)
 
-	resolve_triggered_spell(
-		active_spell,
-		event
-	)
-	
 func handle_triggered_protection(
 	active_spell: ActiveSpellState,
 	event: GameEvent
 ):
-	print(
-		"PROTECTION TRIGGERED: ",
-		active_spell.spell.card_name,
-		" | Player ",
-		active_spell.owner_id + 1
-	)
+	resolve_triggered_spell(active_spell, event)
 
-	resolve_triggered_spell(
-		active_spell,
-		event
-	)
-
-	# Una Protection rivelata non è più Active.
-	active_spell.active = false
-	
 func handle_triggered_permanent(
 	active_spell: ActiveSpellState,
 	event: GameEvent
 ):
-	print(
-		"PERMANENT TRIGGERED: ",
-		active_spell.spell.card_name,
-		" | Player ",
-		active_spell.owner_id + 1
-	)
+	resolve_triggered_spell(active_spell, event)
 
-	resolve_triggered_spell(
-		active_spell,
-		event
-	)
-	
 func resolve_triggered_spell(
 	active_spell: ActiveSpellState,
 	event: GameEvent
-):
+) -> bool:
+	if active_spell == null or event == null:
+		return false
 
-	# =====================================================
-	# BASE RESOLUTION CONTEXT
-	# =====================================================
-
-	var context = {
-		"game": self,
-
-		"caster_id":
-			active_spell.owner_id,
-
-		"caster_room_id":
-			players[
-				active_spell.owner_id
-			].mage.room_id,
-
-		# Original event.
-		# Effects such as Silver of the Sages can modify
-		# event.amount before Damage is actually applied.
-		"trigger_event":
-			event,
-
-
-		# =================================================
-		# STORED TARGET
-		# =================================================
-
-		"marked_player_index":
-			active_spell.target_player_index,
-
-
-		# =================================================
-		# TRIGGER SOURCE
-		# =================================================
-
-		"triggering_model_type":
-			event.source_model_type,
-
-		"triggering_player_index":
-			event.source_player_index,
-
-		"triggering_evocation":
-			event.source_evocation,
-
-		"triggering_room_id":
-			event.source_room_id,
-
-		"trigger_damage_amount":
-			event.amount,
-
-
-		# =================================================
-		# TRIGGER TARGET
-		# =================================================
-
-		"trigger_evocation":
-			event.target_evocation,
-
-		"trigger_evocation_owner":
-			event.target_player_index,
-
-		"trigger_evocation_room_id":
-			event.target_room_id,
-
-		"trigger_evocation_reason":
-			event.action_type
-	}
-
-
-	# =====================================================
-	# RESTORE ACTIVE SPELL CONTEXT
-	#
-	# Active spells may need to remember choices/targets
-	# selected before the trigger occurs.
-	#
-	# Examples:
-	# - Silver choice
-	# - selected Evocation
-	# - future Trap/Protection choices
-	# =====================================================
-
-	for key in active_spell.context:
-
-		context[key] = (
-			active_spell.context[key]
-		)
-
-
-	# =====================================================
-	# RESOLVE EFFECTS
-	# =====================================================
-		# =====================================================
-	# REVEAL INSTABILITY
-	#
-	# Trap / Protection were not revealed when cast.
-	# They are revealed NOW.
-	# =====================================================
-
-	if not resolve_spell_reveal_instability(
-		active_spell.owner_id,
-		active_spell.spell
-	):
-
-		print(
-			"Failed to resolve reveal Instability for ",
-			active_spell.spell.card_name
-		)
-
-		return
-		
-	var success = effect_resolver.resolve_effects(
-		active_spell.get_effects(),
-		context
-	)
-
-
-	if not success:
-
-		print(
-			"Failed to resolve triggered spell: ",
-			active_spell.spell.card_name
-		)
-
-		return
-
-
-	# =====================================================
-	# SAVE RESOLUTION CONTEXT
-	#
-	# Keep results produced by the EffectResolver available
-	# on the ActiveSpellState.
-	#
-	# We intentionally do not store references to Game
-	# or the triggering GameEvent.
-	# =====================================================
-
-	for key in context:
-
-		if key == "game":
-			continue
-
-		if key == "trigger_event":
-			continue
-
-		active_spell.context[key] = (
-			context[key]
-		)
-
-
-	# =====================================================
-	# TRAP LIFECYCLE
-	#
-	# Existing behaviour:
-	# a triggered Trap is no longer Active.
-	#
-	# Protection lifecycle is handled by
-	# handle_triggered_protection().
-	# =====================================================
-
-	if active_spell.get_spell_type() == "trap":
-
-		active_spell.active = false
-
-
-	# =====================================================
-	# LOG
-	# =====================================================
-
-	print(
-		"Triggered spell resolved: ",
-		active_spell.spell.card_name
-	)
+	return queue_resolution({
+		"type": "trigger_spell",
+		"step": "start",
+		"active_spell": active_spell,
+		"event": event,
+		"context": {}
+	})
 
 func set_mage_starting_position(
 	player_index: int,
@@ -1596,83 +1273,41 @@ func deal_damage_from_evocation(
 	target_player_index: int,
 	amount: int
 ) -> int:
-
 	if evocation == null:
 		return 0
 
-	if target_player_index < 0 or target_player_index >= players.size():
+	if target_player_index < 0 \
+	or target_player_index >= players.size():
 		return 0
 
 	if amount <= 0:
 		return 0
 
-	var target_mage = players[target_player_index].mage
-
-	var damage_capacity = target_mage.get_remaining_health()
-
-	if damage_capacity <= 0:
+	var capacity: int = players[target_player_index].mage.get_remaining_health()
+	if capacity <= 0:
 		return 0
 
-	var requested_damage = min(
-		amount,
-		damage_capacity
-	)
+	var requested: int = min(amount, capacity)
+	var result_context: Dictionary = {}
+	if not active_effect_context.is_empty():
+		result_context = active_effect_context
 
-	# I cubi appartengono al controller dell'Evocation
-	var attacker_id = evocation.controller_id
+	queue_resolution({
+		"type": "damage",
+		"step": "pre_event",
+		"attacker_id": evocation.controller_id,
+		"target_player_index": target_player_index,
+		"amount": requested,
+		"action_type": "evocation_attack",
+		"suppressed_trigger_types": [],
+		"source_model_type": "evocation",
+		"source_evocation": evocation,
+		"event": null,
+		"actual_damage": 0,
+		"result_context": result_context
+	})
 
-	var cubes_available = take_owner_cubes(
-		attacker_id,
-		requested_damage
-	)
-
-	if cubes_available <= 0:
-		return 0
-
-	var damage_dealt = target_mage.add_damage(
-		attacker_id,
-		cubes_available
-	)
-
-	# Refresh UI
-	if target_player_index < player_boards.size():
-		player_boards[target_player_index].refresh()
-
-	if attacker_id >= 0 and attacker_id < player_boards.size():
-		player_boards[attacker_id].refresh()
-
-	print(
-		"Damage: Evocation ",
-		evocation.evocation_name,
-		" (P",
-		attacker_id + 1,
-		") -> Player ",
-		target_player_index + 1,
-		" | ",
-		damage_dealt,
-		" damage"
-	)
-
-	# GameEvent generato dalla Evocation
-	if damage_dealt > 0:
-		var event = GameEvent.new(
-			"damage_inflicted"
-		)
-
-		event.source_model_type = "evocation"
-		event.source_player_index = attacker_id
-		event.source_evocation = evocation
-		event.source_room_id = evocation.room_id
-
-		event.target_model_type = "mage"
-		event.target_player_index = target_player_index
-		event.target_room_id = target_mage.room_id
-
-		event.amount = damage_dealt
-
-		process_game_event(event)
-
-	return damage_dealt
+	return requested
 
 func get_revealed_element_counts(
 	player_index: int
@@ -1742,130 +1377,22 @@ func resolve_spell(
 	use_dark_side: bool,
 	context: Dictionary
 ) -> bool:
-
-	var caster_id = int(
-		context.get("caster_id", -1)
-	)
-
-	if caster_id < 0 \
-	or caster_id >= players.size():
+	if spell == null:
 		return false
 
+	var caster_id: int = int(context.get("caster_id", -1))
+	if caster_id < 0 or caster_id >= players.size():
+		return false
 
-	var side = spell.get_side(
-		use_dark_side
-	)
-	context["spell_target_type"] = str(
-		side.get("target", "")
-	)
+	return queue_resolution({
+		"type": "spell_resolution",
+		"step": "prepare",
+		"spell": spell,
+		"use_dark_side": use_dark_side,
+		"context": context,
+		"sequence_index": 0
+	})
 
-	context["spell_range"] = side.get(
-		"range",
-		null
-	)
-
-	# Ogni risoluzione di Spell parte con una nuova lista.
-	context["models_damaged_by_effect"] = []
-	var enhancement = side.get(
-		"enhancement",
-		{}
-	)
-
-	var enhancement_active = false
-
-
-	# =====================================================
-	# VERIFICA ENHANCEMENT
-	# =====================================================
-
-	if not enhancement.is_empty():
-		var required_elements: Array = (
-			enhancement.get(
-				"requires",
-				[]
-			)
-		)
-
-		enhancement_active = can_apply_enhancement(
-			caster_id,
-			required_elements
-		)
-
-
-	context["enhancement_active"] = (
-		enhancement_active
-	)
-
-
-	# =====================================================
-	# ORDINE DI RISOLUZIONE
-	# =====================================================
-
-	var resolution_order: Array = side.get(
-		"resolution_order",
-		[
-			"base",
-			"enhancement"
-		]
-	)
-
-
-	for step in resolution_order:
-
-		match str(step):
-
-			"base":
-				if not effect_resolver.resolve_effects(
-					spell.get_effects(
-						use_dark_side
-					),
-					context
-				):
-					return false
-
-
-			"enhancement":
-				if not enhancement_active:
-					continue
-
-				var enhancement_effects: Array = (
-					enhancement.get(
-						"effects",
-						[]
-					)
-				)
-
-				if not effect_resolver.resolve_effects(
-					enhancement_effects,
-					context
-				):
-					return false
-
-
-			_:
-				print(
-					"Unknown resolution step: ",
-					step
-				)
-
-				return false
-
-
-	# =====================================================
-	# SPELL REVEALED
-	# =====================================================
-
-	var revealed = RevealedSpellState.new(
-		spell,
-		use_dark_side
-	)
-
-	players[caster_id].add_revealed_spell(
-		revealed
-	)
-
-
-	return true
 func room_id_to_coord(
 	room_id: String
 ) -> Vector2i:
@@ -1904,135 +1431,48 @@ func get_hex_distance(
 func move_mage_to_room_id(
 	player_index: int,
 	destination_room_id: String,
-	max_distance: int
+	max_distance: int = 1
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if player_index < 0 or player_index >= players.size() or max_distance < 0:
 		return false
 
-
-	if max_distance < 0:
-		return false
-
-
-	var mage = players[
-		player_index
-	].mage
-
-
+	var mage = players[player_index].mage
 	if mage == null:
 		return false
 
-
-	var destination_coord: Vector2i = (
-		room_id_to_coord(
-			destination_room_id
-		)
-	)
-
-
-	if destination_coord == Vector2i(
-		9999,
-		9999
-	):
-
-		print(
-			"move_mage_to_room_id: invalid destination Room: ",
-			destination_room_id
-		)
-
+	var destination_coord: Vector2i = room_id_to_coord(destination_room_id)
+	if destination_coord == Vector2i(9999, 9999):
 		return false
-
-
-	# =====================================================
-	# CELL -> LODGE
-	#
-	# Quando il Mage è nella Cell:
-	#
-	# mage.room_id
-	# mage.room_coord
-	#
-	# rappresentano la sua Entrance Room.
-	#
-	# Il primo Move può quindi portarlo SOLAMENTE
-	# nella propria Entrance Room.
-	# =====================================================
 
 	if mage.in_cell:
-
-		var entrance_room_id: String = (
-			mage.room_id
+		var entrance_room_id: String = str(
+			player_entrance_room_ids.get(player_index, mage.room_id)
 		)
-
-
 		if destination_room_id != entrance_room_id:
-
 			print(
-				"move_mage_to_room_id: Player ",
-				player_index + 1,
-				" must enter through ",
-				entrance_room_id,
-				", not ",
-				destination_room_id
+				"Player ", player_index + 1,
+				" must enter through ", entrance_room_id
 			)
-
 			return false
 
-
+		mage.room_id = destination_room_id
 		mage.room_coord = destination_coord
 		mage.in_cell = false
-
-
 		print(
-			"Player ",
-			player_index + 1,
-			" entered the Lodge through ",
-			destination_room_id
+			"Player ", player_index + 1,
+			" entered the Lodge through ", destination_room_id
 		)
-
-
 		return true
 
-
-	# =====================================================
-	# NORMAL LODGE MOVEMENT
-	# =====================================================
-
-	var distance: int = get_hex_distance(
-		mage.room_coord,
-		destination_coord
-	)
-
-
-	if distance > max_distance:
-
-		print(
-			"move_mage_to_room_id: destination too far | ",
-			distance,
-			" > ",
-			max_distance
-		)
-
+	if get_hex_distance(mage.room_coord, destination_coord) > max_distance:
 		return false
-
 
 	mage.room_id = destination_room_id
 	mage.room_coord = destination_coord
 	mage.in_cell = false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" moved to ",
-		destination_room_id
-	)
-
-
+	print("Player ", player_index + 1, " moved to ", destination_room_id)
 	return true
-	
+
 func move_evocation_to_room_id(
 	evocation: EvocationState,
 	destination_room_id: String,
@@ -2096,92 +1536,18 @@ func emit_evocation_defeated_or_removed(
 	evocation: EvocationState,
 	event_reason: String = "defeated"
 ):
-
 	if evocation == null:
 		return
 
+	var event := _make_evocation_lost_event(evocation, event_reason)
+	process_game_event(event)
 
-	# =====================================================
-	# SAVE LOCATION
-	#
-	# Puppeteer deve usare la Room in cui si trovava
-	# l'Evocation al momento della sconfitta/rimozione.
-	# =====================================================
-
-	var evocation_room_id: String = (
-		evocation.room_id
-	)
-
-
-	# =====================================================
-	# CREATE EVENT
-	# =====================================================
-
-	var event = GameEvent.new(
-		"evocation_defeated_or_removed"
-	)
-
-
-	event.target_model_type = "evocation"
-
-	event.target_player_index = (
-		evocation.owner_id
-	)
-
-	event.target_evocation = (
-		evocation
-	)
-
-	event.target_room_id = (
-		evocation_room_id
-	)
-
-
-	# =====================================================
-	# REASON
-	# =====================================================
-
-	event.action_type = event_reason
-
-
-	print(
-		"Evocation defeated/removed event: ",
-		evocation.evocation_name,
-		" | owner P",
-		evocation.owner_id + 1,
-		" | room ",
-		evocation_room_id,
-		" | reason ",
-		event_reason
-	)
-
-
-	# =====================================================
-	# SPELL TRIGGERS
-	# =====================================================
-
-	process_game_event(
-		event
-	)
-
-
-	# =====================================================
-	# PUPPETEER
-	#
-	# Whenever an Evocation is defeated or removed,
-	# Black Rose places 1 Instability in the Room
-	# that Model was in.
-	# =====================================================
-
-	if is_event_active(
-		"puppeteer"
-	):
-
-		place_instability(
-			-1,
-			evocation_room_id,
-			1
-		)
+	# Direct removal handlers do not have an evocation-damage frame to resume.
+	# Puppeteer is therefore applied here exactly once, regardless of whether
+	# the loss event opened an optional trigger window. Stack-driven defeat
+	# paths use _apply_puppeteer_after_evocation_loss() in their own frame and
+	# do not call this helper.
+	_apply_puppeteer_after_evocation_loss(evocation.room_id)
 
 func activate_room(
 	player_index: int,
@@ -2189,71 +1555,30 @@ func activate_room(
 	allow_reactivate_flipped: bool = false,
 	context: Dictionary = {}
 ) -> bool:
-
-	var room = get_room_by_id(
-		room_id
-	)
-
-	if room == null:
-
-		print(
-			"activate_room: Room not found: ",
-			room_id
-		)
-
+	if player_index < 0 or player_index >= players.size():
 		return false
 
+	var room = get_room_by_id(room_id)
+	if room == null:
+		print("activate_room: Room not found: ", room_id)
+		return false
 
-	if not room.can_activate(
-		allow_reactivate_flipped
-	):
-
+	if not room.can_activate(allow_reactivate_flipped):
 		print(
 			"activate_room: ",
 			room.room_name,
 			" already activated this turn"
 		)
-
 		return false
 
-
-	var success = (
-		room_effect_resolver.resolve_room(
-			self,
-			player_index,
-			room,
-			context
-		)
-	)
-
-
-	if not success:
-
-		print(
-			"activate_room: effect resolution failed for ",
-			room.room_name
-		)
-
-		return false
-
-
-	room.mark_activated()
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" activated ",
-		room.room_name,
-		" [",
-		room.get_current_side_name(),
-		"]"
-	)
-
-
-	return true
-	
-
+	return queue_resolution({
+		"type": "room_activation",
+		"step": "prepare",
+		"player_index": player_index,
+		"room_id": room_id,
+		"allow_reactivate_flipped": allow_reactivate_flipped,
+		"context": context
+	})
 
 func reset_room_activations():
 
@@ -3724,58 +3049,23 @@ func cast_next_ready_spell(
 	player_index: int,
 	context: Dictionary = {}
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if player_index < 0 or player_index >= players.size():
 		return false
 
-
-	var player = players[
-		player_index
-	]
-
-
-	var ready_spell: ReadySpellState = (
-		player.get_next_ready_spell()
-	)
-
-
+	var player = players[player_index]
+	var ready_spell: ReadySpellState = player.get_next_ready_spell()
 	if ready_spell == null:
-
-		print(
-			"cast_next_ready_spell: Player ",
-			player_index + 1,
-			" has no Ready Spell"
-		)
-
+		print("cast_next_ready_spell: no Ready Spell")
 		return false
 
-
-	# =====================================================
-	# CAST FIRST
-	#
-	# Do not remove the card until the casting operation
-	# has succeeded.
-	# =====================================================
-
-	if not cast_ready_spell_state(
-		player_index,
-		ready_spell,
-		context
-	):
-
-		return false
-
-
-	# =====================================================
-	# REMOVE FROM READY SLOT
-	# =====================================================
-
-	player.remove_next_ready_spell()
-
-
-	return true
+	return queue_resolution({
+		"type": "spell_cast",
+		"step": "start",
+		"player_index": player_index,
+		"ready_spell": ready_spell,
+		"source": "ready",
+		"context": context
+	})
 
 func heal_evocation_damage(
 	evocation: EvocationState,
@@ -3897,277 +3187,32 @@ func take_crown(
 
 func activate_evocation(
 	evocation: EvocationState,
-	controller_id: int,
+	controller_id: int = -1,
 	context: Dictionary = {},
 	strength_bonus: int = 0
 ) -> bool:
-
 	if evocation == null:
 		return false
 
+	if controller_id < 0:
+		controller_id = evocation.owner_id
+
+	if controller_id < 0 or controller_id >= players.size():
+		return false
+
 	if evocation.is_defeated():
-
-		print(
-			"activate_evocation: Evocation is defeated"
-		)
-
 		return false
 
-	if controller_id < 0 \
-	or controller_id >= players.size():
+	return queue_resolution({
+		"type": "evocation_activation",
+		"step": "start",
+		"evocation": evocation,
+		"controller_id": controller_id,
+		"context": context,
+		"strength_bonus": strength_bonus,
+		"move_index": 0
+	})
 
-		print(
-			"activate_evocation: invalid controller ",
-			controller_id
-		)
-
-		return false
-
-
-	# =====================================================
-	# ACTIVATION VALUES
-	# =====================================================
-
-	var activation_strength: int = (
-		evocation.strength
-		+ strength_bonus
-	)
-
-	var speed: int = evocation.speed
-
-
-	# =====================================================
-	# CONTEXT
-	#
-	# evocation_attack_timing:
-	#   "before"
-	#   "after"
-	#   "none"
-	#
-	# evocation_move_room_ids:
-	#   percorso dell'Evocation.
-	#   Ogni elemento = UN Move 1.
-	#
-	# evocation_target_player_index:
-	#   Mage bersaglio dell'Attack.
-	# =====================================================
-
-	var attack_timing: String = str(
-		context.get(
-			"evocation_attack_timing",
-			"none"
-		)
-	)
-
-
-	var move_room_ids: Array = (
-		context.get(
-			"evocation_move_room_ids",
-			[]
-		)
-	)
-
-
-	var target_player_index: int = int(
-		context.get(
-			"evocation_target_player_index",
-			-1
-		)
-	)
-
-
-	# =====================================================
-	# VALIDATE ATTACK TIMING
-	# =====================================================
-
-	if attack_timing != "before" \
-	and attack_timing != "after" \
-	and attack_timing != "none":
-
-		print(
-			"activate_evocation: invalid attack timing: ",
-			attack_timing
-		)
-
-		return false
-
-
-	# =====================================================
-	# VALIDATE MOVEMENT COUNT
-	#
-	# Speed N = maximum N consecutive Move 1 effects.
-	# =====================================================
-
-	if move_room_ids.size() > speed:
-
-		print(
-			"activate_evocation: too many Move effects | ",
-			move_room_ids.size(),
-			" > Speed ",
-			speed
-		)
-
-		return false
-
-
-	# =====================================================
-	# ATTACK BEFORE MOVEMENT
-	# =====================================================
-
-	if attack_timing == "before":
-
-		if target_player_index < 0 \
-		or target_player_index >= players.size():
-
-			print(
-				"activate_evocation: attack target missing"
-			)
-
-			return false
-
-
-		var target_mage = players[
-			target_player_index
-		].mage
-
-
-		if target_mage.in_cell:
-
-			print(
-				"activate_evocation: target Mage is in Cell"
-			)
-
-			return false
-
-
-		if target_mage.room_id != evocation.room_id:
-
-			print(
-				"activate_evocation: target Mage is not in Evocation Room"
-			)
-
-			return false
-
-
-		deal_damage_from_evocation(
-			evocation,
-			target_player_index,
-			activation_strength
-		)
-
-
-	# =====================================================
-	# MOVEMENT
-	#
-	# Ogni elemento dell'Array è UN Move 1.
-	# Devono essere consecutivi.
-	# =====================================================
-
-	for room_id_value in move_room_ids:
-
-		var room_id: String = str(
-			room_id_value
-		)
-
-
-		if not move_evocation_to_room_id(
-			evocation,
-			room_id,
-			1
-		):
-
-			print(
-				"activate_evocation: movement failed"
-			)
-
-			return false
-
-
-	# =====================================================
-	# ATTACK AFTER MOVEMENT
-	# =====================================================
-
-	if attack_timing == "after":
-
-		if target_player_index < 0 \
-		or target_player_index >= players.size():
-
-			print(
-				"activate_evocation: attack target missing"
-			)
-
-			return false
-
-
-		var target_mage = players[
-			target_player_index
-		].mage
-
-
-		if target_mage.in_cell:
-
-			print(
-				"activate_evocation: target Mage is in Cell"
-			)
-
-			return false
-
-
-		if target_mage.room_id != evocation.room_id:
-
-			print(
-				"activate_evocation: target Mage is not in Evocation Room"
-			)
-
-			return false
-
-
-		deal_damage_from_evocation(
-			evocation,
-			target_player_index,
-			activation_strength
-		)
-
-
-	# =====================================================
-	# STORE RESULT
-	# =====================================================
-
-	context[
-		"last_activated_evocation"
-	] = evocation
-
-	context[
-		"last_evocation_activation_controller"
-	] = controller_id
-
-	context[
-		"last_evocation_activation_strength"
-	] = activation_strength
-
-	context[
-		"last_evocation_activation_strength_bonus"
-	] = strength_bonus
-
-
-	print(
-		"Evocation activated: ",
-		evocation.evocation_name,
-		" | controller P",
-		controller_id + 1,
-		" | Moves ",
-		move_room_ids.size(),
-		"/",
-		speed,
-		" | attack ",
-		attack_timing,
-		" | Strength ",
-		activation_strength
-	)
-
-
-	return true
-	
 func create_event_decks():
 
 	event_discard.clear()
@@ -4675,66 +3720,41 @@ func is_event_active(
 func place_mage_in_cell(
 	player_index: int
 ) -> bool:
-
 	if player_index < 0 \
 	or player_index >= players.size():
-
 		return false
 
-
-	var mage = players[
-		player_index
-	].mage
-
-
+	var mage = players[player_index].mage
 	if mage == null:
 		return false
 
+	# A defeated Mage returns to THEIR Cell. room_id/room_coord while in
+	# Cell therefore point to the entrance associated with that Cell.
+	if player_entrance_room_ids.has(player_index):
+		mage.room_id = str(player_entrance_room_ids[player_index])
 
-	# =====================================================
-	# PLACE IN CELL
-	#
-	# room_id e room_coord NON vengono cancellati.
-	# Nel nostro modello rappresentano l'Entrance Room
-	# associata alla Cell e servono per il successivo
-	# ingresso nella Lodge.
-	# =====================================================
+	if player_entrance_room_coords.has(player_index):
+		mage.room_coord = player_entrance_room_coords[player_index]
 
 	mage.in_cell = true
-
 
 	print(
 		"Player ",
 		player_index + 1,
-		" Mage placed in Cell"
+		" Mage placed in Cell | entrance ",
+		mage.room_id
 	)
 
-
-	# =====================================================
-	# HIDDEN RESOURCES
-	#
-	# Quando un Mage viene placed nella propria Cell,
-	# quel Mage guadagna 1 Power.
-	# =====================================================
-
-	if is_event_active(
-		"hidden_resources"
-	):
-
-		add_player_power(
-			player_index,
-			1
-		)
-
-
+	if is_event_active("hidden_resources"):
+		add_player_power(player_index, 1)
 		print(
 			"Hidden Resources: Player ",
 			player_index + 1,
 			" gains 1 Power"
 		)
 
-
 	return true
+
 func place_instability(
 	owner_id: int,
 	room_id: String,
@@ -4868,82 +3888,25 @@ func resolve_black_rose_phase(
 	context: Dictionary = {}
 ) -> bool:
 
-	if players.is_empty():
+	if players.is_empty() or waiting_for_player_input:
 		return false
 
-
-	if crown_owner_id < 0 \
-	or crown_owner_id >= players.size():
-
-		print(
-			"Black Rose Phase: no valid Crown owner"
-		)
-
+	if not start_phase(PHASE_BLACK_ROSE):
 		return false
-
-
-	# =====================================================
-	# START PHASE
-	# =====================================================
-
-	if not start_phase(
-		PHASE_BLACK_ROSE
-	):
-		return false
-
 
 	print("")
 	print("==============================================")
 	print("             BLACK ROSE PHASE")
 	print("==============================================")
 
+	current_phase_play_order = get_play_order()
 
-	# =====================================================
-	# SNAPSHOT PLAY ORDER
-	#
-	# IMPORTANT:
-	# questo Array rimane invariato per TUTTA la Phase.
-	#
-	# Se un Event cambia il possessore della Crown,
-	# il nuovo First Mage avrà effetto solamente
-	# dalla Phase successiva.
-	# =====================================================
-
-	var play_order: Array[int] = (
-		get_play_order()
-	)
-
-
-	if play_order.is_empty():
-
-		print(
-			"Black Rose Phase: invalid play order"
-		)
-
+	if current_phase_play_order.is_empty():
 		return false
 
-
 	var first_mage_index: int = (
-		play_order[0]
+		current_phase_play_order[0]
 	)
-
-
-	print(
-		"Round ",
-		current_round,
-		" | First Mage: Player ",
-		first_mage_index + 1
-	)
-
-
-	# =====================================================
-	# EVENT DRAWER
-	#
-	# Il Mage alla DESTRA del First Mage pesca l'Event.
-	#
-	# Usiamo first_mage_index dello snapshot,
-	# NON crown_owner_id dopo l'inizio della Phase.
-	# =====================================================
 
 	var drawing_player_index: int = (
 		first_mage_index
@@ -4951,116 +3914,49 @@ func resolve_black_rose_phase(
 		+ players.size()
 	) % players.size()
 
-
-	print(
-		"Player ",
-		drawing_player_index + 1,
-		" draws the Event"
-	)
-
-
-	# =====================================================
-	# EVENT CONTEXT
-	# =====================================================
-
 	var event_context: Dictionary = (
-		context.duplicate()
+		context.duplicate(true)
 	)
-
 
 	event_context["game"] = self
-
-	event_context[
-		"drawing_player_index"
-	] = drawing_player_index
-
-	event_context[
-		"play_order"
-	] = play_order
-
+	event_context["drawing_player_index"] = (
+		drawing_player_index
+	)
+	event_context["play_order"] = (
+		current_phase_play_order.duplicate()
+	)
 
 	# =====================================================
-	# 1. SHIFT ACTIVE EVENTS
+	# STEPS 1-3: EVENTS
 	# =====================================================
-
-	print("")
-	print("--- SHIFT EVENTS ---")
-
 
 	shift_active_events()
 
-
-	# =====================================================
-	# 2. DRAW CURRENT MOON EVENT
-	#
-	# ATTENZIONE:
-	# draw_event() può cambiare crown_owner_id.
-	#
-	# Non importa per questa Phase:
-	# play_order è già stato salvato sopra.
-	# =====================================================
-
-	print("")
-	print("--- DRAW EVENT ---")
-
-
-	var drawn_event: EventCardState = (
-		draw_event(
-			drawing_player_index,
-			event_context
-		)
+	var drawn_event: EventCardState = draw_event(
+		drawing_player_index,
+		event_context
 	)
 
-
 	if drawn_event == null:
-
 		print(
 			"Black Rose Phase: Event draw failed"
 		)
-
 		return false
-
-
-	# =====================================================
-	# 3. RESOLVE BLACK ROSE PHASE EVENTS
-	#
-	# active_events:
-	#
-	# [0] = Slot 1
-	# [1] = Slot 2
-	# [2] = Slot 3
-	#
-	# Gli Instant sono già stati risolti
-	# direttamente da draw_event().
-	#
-	# event_context contiene il play_order originale
-	# della Phase.
-	# =====================================================
-
-	print("")
-	print("--- RESOLVE BLACK ROSE EVENTS ---")
-
 
 	if not resolve_events_for_phase(
 		PHASE_BLACK_ROSE,
 		event_context
 	):
-
-		print(
-			"Black Rose Phase: Event resolution failed"
-		)
-
 		return false
 
+	# =====================================================
+	# STEPS 4-6: QUESTS
+	# =====================================================
 
-	print("")
-	print("==============================================")
-	print("          BLACK ROSE PHASE COMPLETE")
-	print("==============================================")
-	print("")
+	black_rose_quest_step = 4
+	black_rose_quest_cursor = 0
 
-
-	return true
+	return advance_black_rose_quest_steps()
 
 func start_phase(
 	phase: String
@@ -5151,19 +4047,11 @@ func get_player_right_of_first_mage() -> int:
 
 
 func finish_round():
-
 	print("")
-	print(
-		"ROUND ",
-		current_round,
-		" COMPLETE"
-	)
-
-
+	print("ROUND ", current_round, " COMPLETE")
 	current_round += 1
 	current_phase = ""
-
-
+	cancelled_physical_action_players.clear()
 	print(
 		"Starting Round ",
 		current_round,
@@ -6072,12 +4960,20 @@ func resolve_preparation_phase(
 func player_has_available_action(
 	player_index: int
 ) -> bool:
-
 	if player_index < 0 \
 	or player_index >= players.size():
 		return false
 
 	var player = players[player_index]
+
+	# A Mage in a Cell cannot cast Ready/Quick Spells or perform Fight/
+	# Command. During the Action Phase the meaningful available Action is
+	# a Physical Action that can move them out of the Cell (Explore).
+	if player.mage != null and player.mage.in_cell:
+		return (
+			player.has_physical_action()
+			and player.mage.speed > 0
+		)
 
 	if not player.ready_spells.is_empty():
 		return true
@@ -6089,7 +4985,7 @@ func player_has_available_action(
 		return true
 
 	return false
-	
+
 func perform_explore_action(
 	player_index: int,
 	destination_room_ids: Array,
@@ -6097,145 +4993,17 @@ func perform_explore_action(
 	activate_room_after_movement: bool = false,
 	context: Dictionary = {}
 ) -> bool:
+	return queue_resolution({
+		"type": "explore",
+		"step": "start",
+		"player_index": player_index,
+		"destination_room_ids": destination_room_ids.duplicate(),
+		"activate_before": activate_room_before_movement,
+		"activate_after": activate_room_after_movement,
+		"move_index": 0,
+		"context": context
+	})
 
-	if player_index < 0 \
-	or player_index >= players.size():
-
-		return false
-
-
-	var player = players[
-		player_index
-	]
-
-
-	if not player.has_physical_action():
-
-		print(
-			"Explore: Player ",
-			player_index + 1,
-			" has no Physical Action Tokens"
-		)
-
-		return false
-
-
-	if activate_room_before_movement \
-	and activate_room_after_movement:
-
-		print(
-			"Explore: Room can only be activated once"
-		)
-
-		return false
-
-
-	var speed: int = (
-		player.mage.speed
-	)
-
-
-	if destination_room_ids.size() > speed:
-
-		print(
-			"Explore: Player ",
-			player_index + 1,
-			" cannot perform more than ",
-			speed,
-			" Move(s)"
-		)
-
-		return false
-
-
-	# =====================================================
-	# CONSUME PHYSICAL ACTION
-	# =====================================================
-
-	if not player.exhaust_physical_action():
-		return false
-
-
-	# =====================================================
-	# ROOM BEFORE MOVEMENT
-	# =====================================================
-
-	if activate_room_before_movement:
-
-		if player.mage.in_cell:
-
-			print(
-				"Explore: cannot activate a Room while in Cell"
-			)
-
-			return false
-
-
-		if not activate_room(
-			player_index,
-			player.mage.room_id,
-			false,
-			context
-		):
-
-			return false
-
-
-	# =====================================================
-	# MOVEMENT
-	#
-	# Ogni elemento = un Move di distanza 1.
-	# =====================================================
-
-	for room_id_value in destination_room_ids:
-
-		var room_id: String = str(
-			room_id_value
-		)
-
-
-		if not move_mage_to_room_id(
-			player_index,
-			room_id,
-			1
-		):
-
-			print(
-				"Explore: movement failed"
-			)
-
-			return false
-
-
-	# =====================================================
-	# ROOM AFTER MOVEMENT
-	# =====================================================
-
-	if activate_room_after_movement:
-
-		if player.mage.in_cell:
-			return false
-
-
-		if not activate_room(
-			player_index,
-			player.mage.room_id,
-			false,
-			context
-		):
-
-			return false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" performed Explore"
-	)
-
-
-	return true
-	
 func perform_fight_action(
 	player_index: int,
 	target_player_index: int = -1,
@@ -6244,571 +5012,109 @@ func perform_fight_action(
 	perform_room_activation: bool = true,
 	context: Dictionary = {}
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
-		return false
-
-
-	var player = players[
-		player_index
-	]
-
-
-	if not player.has_physical_action():
-		return false
-
-
-	# =====================================================
-	# ROOM FIRST
-	# =====================================================
-
-	if perform_room_activation \
-	and activate_room_first:
-
-		if player.mage.in_cell:
-			return false
-
-
-		if not activate_room(
-			player_index,
-			player.mage.room_id,
-			false,
-			context
-		):
-
-			return false
-
-
-	# =====================================================
-	# PHYSICAL ATTACK
-	# =====================================================
-
-	if perform_attack:
-
-		if target_player_index < 0 \
-		or target_player_index >= players.size():
-
-			return false
-
-
-		if target_player_index == player_index:
-			return false
-
-
-		var target = players[
-			target_player_index
-		]
-
-
-		if player.mage.in_cell \
-		or target.mage.in_cell:
-
-			return false
-
-
-		if player.mage.room_id \
-		!= target.mage.room_id:
-
-			print(
-				"Fight: target is not in the same Room"
-			)
-
-			return false
-
-
-		deal_damage(
-			player_index,
-			target_player_index,
-			player.mage.strength,
-			"physical_attack"
-		)
-
-
-	# =====================================================
-	# ROOM AFTER ATTACK
-	# =====================================================
-
-	if perform_room_activation \
-	and not activate_room_first:
-
-		if player.mage.in_cell:
-			return false
-
-
-		if not activate_room(
-			player_index,
-			player.mage.room_id,
-			false,
-			context
-		):
-
-			return false
-
-
-	if not player.exhaust_physical_action():
-		return false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" performed Fight"
-	)
-
-
-	return true
+	return queue_resolution({
+		"type": "fight",
+		"step": "start",
+		"player_index": player_index,
+		"target_player_index": target_player_index,
+		"activate_room_first": activate_room_first,
+		"perform_attack": perform_attack,
+		"perform_room_activation": perform_room_activation,
+		"context": context
+	})
 
 func perform_command_action(
 	player_index: int,
 	evocation_index: int,
 	context: Dictionary = {}
 ) -> bool:
+	return queue_resolution({
+		"type": "command",
+		"step": "start",
+		"player_index": player_index,
+		"evocation_index": evocation_index,
+		"context": context
+	})
 
-	if player_index < 0 \
-	or player_index >= players.size():
-
-		return false
-
-
-	var player = players[
-		player_index
-	]
-
-
-	if not player.has_physical_action():
-
-		print(
-			"Command: Player ",
-			player_index + 1,
-			" has no Physical Action Tokens"
-		)
-
-		return false
-
-
-	if evocation_index < 0 \
-	or evocation_index >= player.evocations.size():
-
-		print(
-			"Command: invalid Evocation index ",
-			evocation_index
-		)
-
-		return false
-
-
-	var evocation: EvocationState = (
-		player.evocations[
-			evocation_index
-		]
-	)
-
-
-	if evocation == null:
-		return false
-
-
-	if not activate_evocation(
-		evocation,
-		player_index,
-		context
-	):
-
-		print(
-			"Command: Evocation activation failed"
-		)
-
-		return false
-
-
-	if not player.exhaust_physical_action():
-		return false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" performed Command with ",
-		evocation.evocation_name
-	)
-
-
-	return true
 func cast_quick_spell(
 	player_index: int,
 	context: Dictionary = {}
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if player_index < 0 or player_index >= players.size():
 		return false
 
-
-	var player = players[
-		player_index
-	]
-
-
-	var quick_spell: ReadySpellState = (
-		player.quick_spell
-	)
-
-
-	if quick_spell == null:
-
-		print(
-			"cast_quick_spell: Player ",
-			player_index + 1,
-			" has no Quick Spell"
-		)
-
+	var player = players[player_index]
+	if player.quick_spell == null:
+		print("cast_quick_spell: no Quick Spell")
 		return false
 
+	return queue_resolution({
+		"type": "spell_cast",
+		"step": "start",
+		"player_index": player_index,
+		"ready_spell": player.quick_spell,
+		"source": "quick",
+		"context": context
+	})
 
-	if not cast_ready_spell_state(
-		player_index,
-		quick_spell,
-		context
-	):
-
-		return false
-
-
-	player.quick_spell = null
-
-
-	return true
-	
 func perform_player_action(
 	player_index: int,
 	action: Dictionary
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if player_index < 0 or player_index >= players.size():
 		return false
-
-
 	if action.is_empty():
-
-		print(
-			"perform_player_action: empty action"
-		)
-
 		return false
 
-
-	var action_type: String = str(
-		action.get(
-			"type",
-			""
-		)
-	)
-
-
-	var action_context: Dictionary = (
-		action.get(
-			"context",
-			{}
-		)
-	)
-
+	var action_type: String = str(action.get("type", ""))
+	var action_context: Dictionary = action.get("context", {})
 
 	match action_type:
-
-		# =================================================
-		# NORMAL READY SPELL
-		# =================================================
-
 		"spell":
-
-			return cast_next_ready_spell(
-				player_index,
-				action_context
-			)
-
-
-		# =================================================
-		# QUICK SPELL
-		# =================================================
-
+			return cast_next_ready_spell(player_index, action_context)
 		"quick":
-
-			return cast_quick_spell(
-				player_index,
-				action_context
-			)
-
-
-		# =================================================
-		# EXPLORE
-		# =================================================
-
+			return cast_quick_spell(player_index, action_context)
 		"explore":
-
-			var destination_room_ids: Array = (
-				action.get(
-					"destination_room_ids",
-					[]
-				)
-			)
-
-
-			var activate_before: bool = bool(
-				action.get(
-					"activate_room_before_movement",
-					false
-				)
-			)
-
-
-			var activate_after: bool = bool(
-				action.get(
-					"activate_room_after_movement",
-					false
-				)
-			)
-
-
 			return perform_explore_action(
 				player_index,
-				destination_room_ids,
-				activate_before,
-				activate_after,
+				action.get("destination_room_ids", []),
+				bool(action.get("activate_room_before_movement", false)),
+				bool(action.get("activate_room_after_movement", false)),
 				action_context
 			)
-
-
-		# =================================================
-		# FIGHT
-		# =================================================
-
 		"fight":
-
-			var target_player_index: int = int(
-				action.get(
-					"target_player_index",
-					-1
-				)
-			)
-
-
-			var activate_room_first: bool = bool(
-				action.get(
-					"activate_room_first",
-					false
-				)
-			)
-
-
-			var perform_attack: bool = bool(
-				action.get(
-					"perform_attack",
-					true
-				)
-			)
-
-
-			var perform_room_activation: bool = bool(
-				action.get(
-					"perform_room_activation",
-					true
-				)
-			)
-
-
 			return perform_fight_action(
 				player_index,
-				target_player_index,
-				activate_room_first,
-				perform_attack,
-				perform_room_activation,
+				int(action.get("target_player_index", -1)),
+				bool(action.get("activate_room_first", false)),
+				bool(action.get("perform_attack", true)),
+				bool(action.get("perform_room_activation", true)),
 				action_context
 			)
-
-
-		# =================================================
-		# COMMAND
-		# =================================================
-
 		"command":
-
-			var evocation_index: int = int(
-				action.get(
-					"evocation_index",
-					-1
-				)
-			)
-
-
 			return perform_command_action(
 				player_index,
-				evocation_index,
+				int(action.get("evocation_index", -1)),
 				action_context
 			)
-
-
 		_:
-
-			print(
-				"perform_player_action: unknown action type ",
-				action_type
-			)
-
+			print("perform_player_action: unknown action type ", action_type)
 			return false
 
 func resolve_player_activation(
 	player_index: int,
 	actions: Array
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if not _validate_player_activation(player_index, actions):
 		return false
 
-
-	# =====================================================
-	# NUMBER OF ACTIONS
-	#
-	# Ogni Activation contiene 1 o 2 Actions.
-	# Il Quick Spell CONTA come una Action.
-	# =====================================================
-
-	if actions.is_empty():
-
-		print(
-			"Activation: Player ",
-			player_index + 1,
-			" selected no Actions"
-		)
-
-		return false
-
-
-	if actions.size() > 2:
-
-		print(
-			"Activation: Player ",
-			player_index + 1,
-			" cannot perform more than 2 Actions"
-		)
-
-		return false
-
-
-	# =====================================================
-	# CAST SPELL VALIDATION
-	#
-	# Nella stessa Activation:
-	#
-	# OK:
-	#   Spell + Quick
-	#   Quick + Spell
-	#
-	# NOT OK:
-	#   Spell + Spell
-	#
-	# Quick resta comunque una delle due Actions.
-	# =====================================================
-
-	var normal_spell_count: int = 0
-	var quick_spell_count: int = 0
-
-
-	for action_value in actions:
-
-		var action: Dictionary = action_value
-
-		var action_type: String = str(
-			action.get(
-				"type",
-				""
-			)
-		)
-
-
-		if action_type == "spell":
-
-			normal_spell_count += 1
-
-
-		elif action_type == "quick":
-
-			quick_spell_count += 1
-
-
-	# Non può esistere più di un Quick preparato.
-	if quick_spell_count > 1:
-
-		print(
-			"Activation: Quick Spell selected more than once"
-		)
-
-		return false
-
-
-	# Due Ready Spell numerati nella stessa Activation
-	# non possono essere lanciati.
-	if normal_spell_count > 1:
-
-		print(
-			"Activation: cannot cast two numbered Ready Spells ",
-			"in the same Activation"
-		)
-
-		return false
-
-
-	# =====================================================
-	# RESOLVE ACTIONS
-	# =====================================================
-
-	print("")
-	print(
-		"--- PLAYER ",
-		player_index + 1,
-		" ACTIVATION ---"
-	)
-
-
-	for action_value in actions:
-
-		var action: Dictionary = action_value
-
-
-		if not perform_player_action(
-			player_index,
-			action
-		):
-
-			print(
-				"Activation: Action failed for Player ",
-				player_index + 1,
-				" | type ",
-				str(
-					action.get(
-						"type",
-						""
-					)
-				)
-			)
-
-			return false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" Activation complete"
-	)
-
-
-	return true
+	return queue_resolution({
+		"type": "activation",
+		"step": "actions",
+		"player_index": player_index,
+		"actions": actions.duplicate(true),
+		"action_index": 0
+	})
 
 func resolve_action_phase(
 	context: Dictionary = {}
@@ -6898,261 +5204,33 @@ func resolve_action_phase(
 func resolve_evocation_phase(
 	context: Dictionary = {}
 ) -> bool:
-
-	if not start_phase(
-		PHASE_EVOCATION
-	):
+	if waiting_for_player_input:
 		return false
 
+	if not start_phase(PHASE_EVOCATION):
+		return false
 
 	print("")
 	print("==============================================")
 	print("              EVOCATION PHASE")
 	print("==============================================")
 
-
-	# =====================================================
-	# SNAPSHOT PLAY ORDER
-	# =====================================================
-
-	var play_order: Array[int] = (
-		get_play_order()
-	)
-
-
-	if play_order.is_empty():
-
-		print(
-			"Evocation Phase: invalid play order"
-		)
-
+	current_phase_play_order = get_play_order()
+	if current_phase_play_order.is_empty():
 		return false
 
-
-	var phase_context: Dictionary = (
-		context.duplicate()
-	)
-
-
+	var phase_context: Dictionary = context.duplicate(true)
 	phase_context["game"] = self
-	phase_context["play_order"] = play_order
+	phase_context["play_order"] = current_phase_play_order.duplicate()
 
+	# Black Rose Evocations are not represented in the current game state.
+	# Player Evocations are therefore the first represented activations.
+	if not resolve_events_for_phase(PHASE_EVOCATION, phase_context):
+		return false
 
-	# =====================================================
-	# PLAYER EVOCATION CHOICES
-	#
-	# Example:
-	#
-	# "evocation_activations": {
-	#
-	#     0: [
-	#         {
-	#             "evocation_index": 1,
-	#             "context": {...}
-	#         },
-	#         {
-	#             "evocation_index": 0,
-	#             "context": {...}
-	#         }
-	#     ]
-	# }
-	#
-	# Array order = activation order chosen by owner.
-	# =====================================================
+	evocation_phase_cursor = 0
+	return advance_evocation_phase()
 
-	var activation_choices: Dictionary = (
-		context.get(
-			"evocation_activations",
-			{}
-		)
-	)
-
-
-	# =====================================================
-	# BLACK ROSE EVOCATIONS
-	#
-	# According to the rules these activate first.
-	#
-	# Our current game state has no Black Rose Evocation
-	# collection, therefore there is nothing to resolve
-	# here yet.
-	# =====================================================
-
-
-	# =====================================================
-	# PLAYER EVOCATIONS
-	# =====================================================
-
-	for player_index in play_order:
-
-		var player = players[
-			player_index
-		]
-
-
-		# No Evocations = nothing to do.
-		if player.evocations.is_empty():
-			continue
-
-
-		if not activation_choices.has(
-			player_index
-		):
-
-			print(
-				"Evocation Phase: choices missing for Player ",
-				player_index + 1
-			)
-
-			return false
-
-
-		var player_choices: Array = (
-			activation_choices[
-				player_index
-			]
-		)
-
-
-		# Every Evocation must activate exactly once.
-		if player_choices.size() \
-		!= player.evocations.size():
-
-			print(
-				"Evocation Phase: Player ",
-				player_index + 1,
-				" must activate ",
-				player.evocations.size(),
-				" Evocation(s)"
-			)
-
-			return false
-
-
-		var used_indices: Array[int] = []
-
-
-		# =================================================
-		# VALIDATE ORDER FIRST
-		# =================================================
-
-		for choice_value in player_choices:
-
-			var choice: Dictionary = (
-				choice_value
-			)
-
-
-			var evocation_index: int = int(
-				choice.get(
-					"evocation_index",
-					-1
-				)
-			)
-
-
-			if evocation_index < 0 \
-			or evocation_index >= player.evocations.size():
-
-				print(
-					"Evocation Phase: invalid Evocation index ",
-					evocation_index
-				)
-
-				return false
-
-
-			if used_indices.has(
-				evocation_index
-			):
-
-				print(
-					"Evocation Phase: Evocation ",
-					evocation_index,
-					" selected more than once"
-				)
-
-				return false
-
-
-			used_indices.append(
-				evocation_index
-			)
-
-
-		# =================================================
-		# ACTIVATE IN OWNER'S CHOSEN ORDER
-		# =================================================
-
-		for choice_value in player_choices:
-
-			var choice: Dictionary = (
-				choice_value
-			)
-
-
-			var evocation_index: int = int(
-				choice.get(
-					"evocation_index",
-					-1
-				)
-			)
-
-
-			var evocation: EvocationState = (
-				player.evocations[
-					evocation_index
-				]
-			)
-
-
-			var activation_context: Dictionary = (
-				choice.get(
-					"context",
-					{}
-				)
-			)
-
-
-			activation_context = (
-				activation_context.duplicate()
-			)
-
-
-			activation_context["game"] = self
-			activation_context["play_order"] = play_order
-
-
-			print(
-				"Player ",
-				player_index + 1,
-				" activates ",
-				evocation.evocation_name
-			)
-
-
-			if not activate_evocation(
-				evocation,
-				player_index,
-				activation_context
-			):
-
-				print(
-					"Evocation Phase: activation failed for ",
-					evocation.evocation_name
-				)
-
-				return false
-
-
-	print("")
-	print("==============================================")
-	print("           EVOCATION PHASE COMPLETE")
-	print("==============================================")
-	print("")
-
-
-	return true
 func request_player_input(
 	request: Dictionary
 ) -> bool:
@@ -7372,119 +5450,38 @@ func submit_action_activation(
 	player_index: int,
 	actions: Array
 ) -> bool:
-
-	# =====================================================
-	# MUST BE WAITING
-	# =====================================================
-
 	if not waiting_for_player_input:
-
-		print(
-			"submit_action_activation: no input requested"
-		)
-
+		print("submit_action_activation: no input requested")
 		return false
 
-
-	# =====================================================
-	# CORRECT INPUT TYPE
-	# =====================================================
-
-	if str(
-		pending_input.get(
-			"type",
-			""
-		)
-	) != "action_activation":
-
-		print(
-			"submit_action_activation: wrong pending input type"
-		)
-
+	if str(pending_input.get("type", "")) != "action_activation":
+		print("submit_action_activation: wrong pending input type")
 		return false
-
-
-	# =====================================================
-	# CORRECT PLAYER
-	# =====================================================
 
 	var expected_player_index: int = int(
-		pending_input.get(
-			"player_index",
-			-1
-		)
+		pending_input.get("player_index", -1)
 	)
-
-
 	if player_index != expected_player_index:
-
-		print(
-			"submit_action_activation: expected Player ",
-			expected_player_index + 1,
-			", received Player ",
-			player_index + 1
-		)
-
+		print("submit_action_activation: wrong player")
 		return false
 
-
-	# =====================================================
-	# RESOLVE ACTIVATION
-	#
-	# resolve_player_activation() already validates:
-	#
-	# - 1 or 2 Actions
-	# - Quick counts as an Action
-	# - no Spell + Spell
-	# - Spell + Quick is legal
-	# - Quick + Spell is legal
-	# =====================================================
-
-	if not resolve_player_activation(
-		player_index,
-		actions
-	):
-
-		print(
-			"submit_action_activation: invalid Activation"
-		)
-
-		# IMPORTANT:
-		#
-		# We remain waiting for the SAME player.
-		#
-		# The UI can therefore let them correct
-		# their choice.
+	if not _validate_player_activation(player_index, actions):
 		return false
-
-
-	# =====================================================
-	# INPUT SUCCESSFULLY RESOLVED
-	# =====================================================
 
 	clear_player_input()
 
+	return queue_resolution({
+		"type": "activation",
+		"step": "actions",
+		"player_index": player_index,
+		"actions": actions.duplicate(true),
+		"action_index": 0,
+		"on_complete": "advance_action_phase"
+	})
 
-	# =====================================================
-	# CONTINUE AUTOMATICALLY
-	# =====================================================
-
-	return advance_action_phase()
 func finish_action_phase() -> bool:
-
-	if current_phase != PHASE_ACTION:
-
+	if current_phase != PHASE_ACTION or waiting_for_player_input:
 		return false
-
-
-	if waiting_for_player_input:
-
-		print(
-			"finish_action_phase: still waiting for input"
-		)
-
-		return false
-
 
 	print("")
 	print("==============================================")
@@ -7492,14 +5489,11 @@ func finish_action_phase() -> bool:
 	print("==============================================")
 	print("")
 
-
 	action_phase_cursor = 0
 	action_phase_activation_round = 0
-
 	current_phase_play_order.clear()
+	return _complete_phase(PHASE_ACTION)
 
-
-	return true
 func advance_preparation_phase() -> bool:
 
 	if current_phase != PHASE_PREPARATION:
@@ -7713,20 +5707,8 @@ func submit_preparation(
 	return advance_preparation_phase()
 
 func finish_preparation_phase() -> bool:
-
-	if current_phase != PHASE_PREPARATION:
-
+	if current_phase != PHASE_PREPARATION or waiting_for_player_input:
 		return false
-
-
-	if waiting_for_player_input:
-
-		print(
-			"finish_preparation_phase: still waiting for input"
-		)
-
-		return false
-
 
 	print("")
 	print("==============================================")
@@ -7734,13 +5716,10 @@ func finish_preparation_phase() -> bool:
 	print("==============================================")
 	print("")
 
-
 	preparation_phase_cursor = 0
-
 	current_phase_play_order.clear()
+	return _complete_phase(PHASE_PREPARATION)
 
-
-	return true
 func advance_study_phase() -> bool:
 
 	if current_phase != PHASE_STUDY:
@@ -8586,25 +6565,12 @@ func complete_player_study(
 
 	return advance_study_phase()
 func finish_study_phase() -> bool:
-
-	if current_phase != PHASE_STUDY:
+	if current_phase != PHASE_STUDY or waiting_for_player_input:
 		return false
-
-
-	if waiting_for_player_input:
-
-		print(
-			"finish_study_phase: still waiting for input"
-		)
-
-		return false
-
 
 	study_phase_cursor = 0
 	study_drawn_cards.clear()
-
 	current_phase_play_order.clear()
-
 
 	print("")
 	print("==============================================")
@@ -8612,9 +6578,8 @@ func finish_study_phase() -> bool:
 	print("==============================================")
 	print("")
 
+	return _complete_phase(PHASE_STUDY)
 
-	return true
-	
 func resolve_spell_reveal_instability(
 	player_index: int,
 	spell: SpellCardState
@@ -8682,382 +6647,2392 @@ func cast_ready_spell_state(
 	ready_spell: ReadySpellState,
 	context: Dictionary = {}
 ) -> bool:
-
-	if player_index < 0 \
-	or player_index >= players.size():
-
+	if player_index < 0 or player_index >= players.size():
+		return false
+	if ready_spell == null or ready_spell.spell == null:
 		return false
 
+	return queue_resolution({
+		"type": "spell_cast",
+		"step": "start",
+		"player_index": player_index,
+		"ready_spell": ready_spell,
+		"source": "external",
+		"context": context
+	})
 
-	if ready_spell == null:
-		return false
-
-
-	if ready_spell.spell == null:
-		return false
-
-
-	var player = players[
-		player_index
-	]
-
-
-	var spell: SpellCardState = (
-		ready_spell.spell
-	)
-
-
-	var use_dark_side: bool = (
-		ready_spell.use_dark_side
-	)
-
-
-	var side: Dictionary = (
-		spell.get_side(
-			use_dark_side
-		)
-	)
-
-
-	var spell_type: String = str(
-		side.get(
-			"type",
-			""
-		)
-	)
-
-
-	var spell_context: Dictionary = (
-		context.duplicate(true)
-	)
-
-
-	spell_context["game"] = self
-	spell_context["caster_id"] = player_index
-
-	spell_context[
-		"caster_room_id"
-	] = player.mage.room_id
-
-
-	# =====================================================
-	# TRAP / PROTECTION
-	#
-	# They are cast FACE DOWN.
-	# Their effects are NOT resolved now.
-	# =====================================================
-
-	if spell_type == "trap" \
-	or spell_type == "protection":
-
-		var target_player_index: int = int(
-			spell_context.get(
-				"target_player_index",
-				-1
-			)
-		)
-
-
-		var active_spell := ActiveSpellState.new(
-			spell,
-			player_index,
-			use_dark_side,
-			target_player_index
-		)
-
-
-		# Store all choices that may be required later
-		# when the Trigger Condition occurs.
-		for key in spell_context:
-
-			if key == "game":
-				continue
-
-			active_spell.context[
-				key
-			] = spell_context[key]
-
-
-		player.add_active_spell(
-			active_spell
-		)
-
-
-		print(
-			"Player ",
-			player_index + 1,
-			" activates ",
-			spell.card_name,
-			" [",
-			spell_type,
-			"]"
-		)
-
-
-		return true
-
-
-	# =====================================================
-	# NORMAL SPELL
-	#
-	# Combat / Contingency are revealed immediately.
-	# =====================================================
-
-	if spell_type != "combat" \
-	and spell_type != "contingency":
-
-		print(
-			"cast_ready_spell_state: unsupported Spell type: ",
-			spell_type
-		)
-
-		return false
-
-
-	# =====================================================
-	# REVEAL INSTABILITY
-	#
-	# This happens BEFORE resolving the Spell.
-	# =====================================================
-
-	if not resolve_spell_reveal_instability(
-		player_index,
-		spell
-	):
-
-		return false
-
-
-	# =====================================================
-	# RESOLVE SPELL
-	# =====================================================
-
-	if not resolve_spell(
-		spell,
-		use_dark_side,
-		spell_context
-	):
-
-		print(
-			"Failed to resolve Spell: ",
-			spell.card_name
-		)
-
-		return false
-
-
-	print(
-		"Player ",
-		player_index + 1,
-		" cast ",
-		spell.card_name,
-		" | side: ",
-		"Dark" if use_dark_side else "Light"
-	)
-
-
-	return true
 func order_optional_triggers(
 	triggers: Array
 ) -> Array:
-
 	var result: Array = []
-
-
-	var play_order: Array[int] = (
-		current_phase_play_order.duplicate()
-	)
-
+	var play_order: Array[int] = current_phase_play_order.duplicate()
 
 	if play_order.is_empty():
-
 		play_order = get_play_order()
 
-
-	# =====================================================
-	# GROUP BY PLAYER IN PLAY ORDER
-	# =====================================================
-
 	for player_index in play_order:
-
 		for trigger_data in triggers:
-
-			var active_spell: ActiveSpellState = (
-				trigger_data.get(
-					"active_spell",
-					null
-				)
-			)
-
-
-			if active_spell == null:
-				continue
-
-
-			if active_spell.owner_id \
-			!= player_index:
-
-				continue
-
-
-			result.append(
-				trigger_data
-			)
-
-
-	return result
-	
-func request_next_trigger_decision() -> bool:
-
-	if not trigger_window_active:
-		return true
-
-
-	if waiting_for_player_input:
-		return true
-
-
-	if trigger_window_cursor \
-	>= trigger_window_queue.size():
-
-		return finish_trigger_window()
-
-
-	var current_data: Dictionary = (
-		trigger_window_queue[
-			trigger_window_cursor
-		]
-	)
-
-
-	var current_spell: ActiveSpellState = (
-		current_data.get(
-			"active_spell",
-			null
-		)
-	)
-
-
-	if current_spell == null:
-
-		trigger_window_cursor += 1
-
-		return request_next_trigger_decision()
-
-
-	var player_index: int = (
-		current_spell.owner_id
-	)
-
-
-	# =====================================================
-	# ALL CURRENT OPTIONS FOR THIS PLAYER
-	# =====================================================
-
-	var options: Array = []
-
-
-	for i in range(
-		trigger_window_cursor,
-		trigger_window_queue.size()
-	):
-
-		var trigger_data: Dictionary = (
-			trigger_window_queue[i]
-		)
-
-
-		var active_spell: ActiveSpellState = (
-			trigger_data.get(
+			var active_spell: ActiveSpellState = trigger_data.get(
 				"active_spell",
 				null
 			)
-		)
+			if active_spell == null:
+				continue
+			if active_spell.owner_id != player_index:
+				continue
+			result.append(trigger_data)
 
+	return result
 
-		if active_spell == null:
+func request_next_trigger_decision() -> bool:
+	while trigger_window_active and not waiting_for_player_input:
+		if trigger_window_cursor >= trigger_window_queue.size():
+			finish_trigger_window()
 			continue
 
+		var current_data: Dictionary = trigger_window_queue[trigger_window_cursor]
+		var current_spell: ActiveSpellState = current_data.get("active_spell", null)
 
-		# Next player's block reached.
-		if active_spell.owner_id != player_index:
-			break
+		if current_spell == null or not current_spell.active:
+			trigger_window_queue.remove_at(trigger_window_cursor)
+			continue
 
+		var spell_type: String = current_spell.get_spell_type()
+		var optional: bool = spell_type == "trap" or spell_type == "protection"
 
-		options.append(
-			{
+		# Permanents are mandatory. Remove them from this trigger queue before
+		# pushing their resolution so they cannot be selected twice.
+		if not optional:
+			trigger_window_queue.remove_at(trigger_window_cursor)
+			handle_triggered_spell(current_data)
+			return true
+
+		var player_index: int = current_spell.owner_id
+		var options: Array = []
+
+		for i in range(trigger_window_cursor, trigger_window_queue.size()):
+			var trigger_data: Dictionary = trigger_window_queue[i]
+			var active_spell: ActiveSpellState = trigger_data.get("active_spell", null)
+			if active_spell == null:
+				continue
+			if active_spell.owner_id != player_index:
+				break
+			var candidate_type: String = active_spell.get_spell_type()
+			if candidate_type != "trap" and candidate_type != "protection":
+				break
+			if not active_spell.active:
+				continue
+
+			options.append({
 				"queue_index": i,
+				"spell_id": active_spell.spell.id,
+				"spell_name": active_spell.spell.card_name,
+				"spell_type": candidate_type
+			})
 
-				"spell_id":
-					active_spell.spell.id,
+		if options.is_empty():
+			trigger_window_queue.remove_at(trigger_window_cursor)
+			continue
 
-				"spell_name":
-					active_spell.spell.card_name,
+		return request_player_input({
+			"type": "trigger_decision",
+			"phase": current_phase,
+			"player_index": player_index,
+			"optional": true,
+			"options": options
+		})
 
-				"spell_type":
-					active_spell.get_spell_type()
-			}
-		)
+	return true
 
-
-	var request: Dictionary = {
-
-		"type":
-			"trigger_decision",
-
-		"phase":
-			current_phase,
-
-		"player_index":
-			player_index,
-
-		"optional":
-			true,
-
-		"options":
-			options
-	}
-
-
-	return request_player_input(
-		request
-	)
 func submit_trigger_decision(
 	player_index: int,
 	queue_index: int = -1
 ) -> bool:
-
-	if not trigger_window_active:
-
-		print(
-			"submit_trigger_decision: no active trigger window"
-		)
-
+	if not trigger_window_active or not waiting_for_player_input:
 		return false
 
+	if str(pending_input.get("type", "")) != "trigger_decision":
+		return false
+
+	if player_index != int(pending_input.get("player_index", -1)):
+		return false
+
+	var options: Array = pending_input.get("options", [])
+
+	if queue_index == -1:
+		# Pass declines all currently offered optional triggers for this owner,
+		# but leaves later trigger opportunities / other players untouched.
+		var indices_to_remove: Array[int] = []
+		for option_value in options:
+			indices_to_remove.append(int(option_value.get("queue_index", -1)))
+		indices_to_remove.sort()
+		indices_to_remove.reverse()
+		for idx in indices_to_remove:
+			if idx >= 0 and idx < trigger_window_queue.size():
+				trigger_window_queue.remove_at(idx)
+
+		clear_player_input()
+		request_next_trigger_decision()
+		if waiting_for_player_input:
+			return true
+		return process_resolution_stack()
+
+	var valid_option: bool = false
+	for option_value in options:
+		if int(option_value.get("queue_index", -1)) == queue_index:
+			valid_option = true
+			break
+
+	if not valid_option:
+		return false
+
+	if queue_index < 0 or queue_index >= trigger_window_queue.size():
+		return false
+
+	var trigger_data: Dictionary = trigger_window_queue[queue_index]
+	trigger_window_queue.remove_at(queue_index)
+	clear_player_input()
+
+	handle_triggered_spell(trigger_data)
+	return process_resolution_stack()
+
+func finish_trigger_window() -> bool:
+	if not trigger_window_active:
+		return true
+
+	if waiting_for_player_input:
+		return false
+
+	print("Trigger window complete")
+
+	if not trigger_window_stack.is_empty():
+		var previous: Dictionary = trigger_window_stack.pop_back()
+		trigger_window_event = previous.get("event", null)
+		trigger_window_queue = previous.get("queue", [])
+		trigger_window_cursor = int(previous.get("cursor", 0))
+		trigger_window_active = true
+		return true
+
+	trigger_window_active = false
+	trigger_window_event = null
+	trigger_window_queue.clear()
+	trigger_window_cursor = 0
+	return true
+
+func queue_resolution(
+	resolution: Dictionary
+) -> bool:
+	if resolution.is_empty() or not resolution.has("type"):
+		return false
+
+	var frame: Dictionary = resolution.duplicate(false)
+	frame["_rid"] = next_resolution_id
+	next_resolution_id += 1
+	resolution_stack.push_front(frame)
+
+	if processing_resolution_stack:
+		return true
+
+	return process_resolution_stack()
+
+func process_resolution_stack() -> bool:
+	if processing_resolution_stack:
+		return true
+
+	processing_resolution_stack = true
+
+	while true:
+		if waiting_for_player_input:
+			processing_resolution_stack = false
+			return true
+
+		if trigger_window_active:
+			request_next_trigger_decision()
+			if waiting_for_player_input:
+				processing_resolution_stack = false
+				return true
+
+		# request_next_trigger_decision may have queued a mandatory trigger.
+		if resolution_stack.is_empty():
+			if trigger_window_active:
+				continue
+			processing_resolution_stack = false
+			return true
+
+		var frame: Dictionary = resolution_stack[0]
+		var frame_id: int = int(frame.get("_rid", -1))
+		var resolution_type: String = str(frame.get("type", ""))
+		var completed: bool = false
+
+		match resolution_type:
+			"damage":
+				completed = process_damage_resolution(frame)
+			"evocation_damage":
+				completed = process_evocation_damage_resolution(frame)
+			"effect_sequence":
+				completed = process_effect_sequence_resolution(frame)
+			"spell_resolution":
+				completed = process_spell_resolution_frame(frame)
+			"spell_cast":
+				completed = process_spell_cast_resolution(frame)
+			"trigger_spell":
+				completed = process_trigger_spell_resolution(frame)
+			"room_activation":
+				completed = process_room_activation_resolution(frame)
+			"activation":
+				completed = process_activation_resolution(frame)
+			"explore":
+				completed = process_explore_resolution(frame)
+			"fight":
+				completed = process_fight_resolution(frame)
+			"command":
+				completed = process_command_resolution(frame)
+			"evocation_activation":
+				completed = process_evocation_activation_resolution(frame)
+			"evocation_phase_player":
+				completed = process_evocation_phase_player_resolution(frame)
+			_:
+				print("Unsupported resolution type: ", resolution_type)
+				resolution_stack.pop_front()
+				processing_resolution_stack = false
+				return false
+
+		if waiting_for_player_input:
+			processing_resolution_stack = false
+			return true
+
+		if resolution_stack.is_empty():
+			continue
+
+		# A nested resolution was pushed in front of this frame.
+		if int(resolution_stack[0].get("_rid", -2)) != frame_id:
+			continue
+
+		if completed:
+			var finished_frame: Dictionary = resolution_stack.pop_front()
+			_handle_resolution_completion(finished_frame)
+			continue
+
+		# The frame advanced one internal step. If it did not create a nested
+		# resolution or input request, simply run its next step now.
+		continue
+	return true
+
+func process_damage_resolution(
+	resolution: Dictionary
+) -> bool:
+	var step: String = str(resolution.get("step", "pre_event"))
+
+	match step:
+		"pre_event":
+			var target_player_index: int = int(resolution.get("target_player_index", -1))
+			if target_player_index < 0 or target_player_index >= players.size():
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			var target_mage = players[target_player_index].mage
+			var requested: int = min(
+				int(resolution.get("amount", 0)),
+				target_mage.get_remaining_health()
+			)
+			if requested <= 0:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			resolution["amount"] = requested
+			var event := GameEvent.new("damage_about_to_be_inflicted")
+			_fill_damage_event_source(event, resolution)
+			event.target_model_type = "mage"
+			event.target_player_index = target_player_index
+			event.target_room_id = target_mage.room_id
+			event.amount = requested
+			event.action_type = str(resolution.get("action_type", ""))
+			event.suppressed_trigger_types = _to_string_array(
+				resolution.get("suppressed_trigger_types", [])
+			)
+
+			resolution["event"] = event
+			resolution["step"] = "after_pre_event"
+
+			if not process_game_event(event):
+				return false
+			return false
+
+		"after_pre_event":
+			var event: GameEvent = resolution.get("event", null)
+			if event == null or event.cancelled:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			resolution["amount"] = max(0, int(event.amount))
+			resolution["target_player_index"] = event.target_player_index
+
+			if int(resolution["amount"]) <= 0:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			if event.redirected_evocation != null:
+				resolution["redirected_evocation"] = event.redirected_evocation
+				resolution["step"] = "apply_redirect"
+				return false
+
+			resolution["step"] = "apply_damage"
+			return false
+
+		"apply_redirect":
+			var redirected_evocation = resolution.get("redirected_evocation", null)
+			if redirected_evocation == null or redirected_evocation.is_defeated():
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			var amount: int = min(
+				int(resolution.get("amount", 0)),
+				redirected_evocation.get_remaining_health()
+			)
+			var attacker_id: int = int(resolution.get("attacker_id", -1))
+			var cubes: int = take_owner_cubes(attacker_id, amount)
+			if cubes <= 0:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			var was_defeated: bool = redirected_evocation.is_defeated()
+			var dealt: int = redirected_evocation.add_damage(attacker_id, cubes)
+			resolution["actual_damage"] = dealt
+			_sync_damage_result_context(resolution, dealt)
+
+			print(
+				"Damage redirected: attacker ", attacker_id,
+				" -> Evocation ", redirected_evocation.evocation_name,
+				" | ", dealt, " damage"
+			)
+
+			if not was_defeated and redirected_evocation.is_defeated():
+				var defeat_event := _make_evocation_lost_event(
+					redirected_evocation,
+					"defeated"
+				)
+				resolution["step"] = "after_redirect_defeat"
+				if not process_game_event(defeat_event):
+					return false
+				_apply_puppeteer_after_evocation_loss(redirected_evocation.room_id)
+				return true
+
+			return true
+
+		"after_redirect_defeat":
+			var redirected_evocation = resolution.get("redirected_evocation", null)
+			if redirected_evocation != null:
+				_apply_puppeteer_after_evocation_loss(redirected_evocation.room_id)
+			return true
+
+		"apply_damage":
+			var target_player_index: int = int(resolution.get("target_player_index", -1))
+			if target_player_index < 0 or target_player_index >= players.size():
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			var target_mage = players[target_player_index].mage
+			var amount: int = min(
+				int(resolution.get("amount", 0)),
+				target_mage.get_remaining_health()
+			)
+			if amount <= 0:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			var attacker_id: int = int(resolution.get("attacker_id", -1))
+			var cubes_available: int = take_owner_cubes(attacker_id, amount)
+			if cubes_available <= 0:
+				_sync_damage_result_context(resolution, 0)
+				return true
+
+			resolution["was_defeated"] = target_mage.is_defeated()
+			var damage_dealt: int = target_mage.add_damage(attacker_id, cubes_available)
+			resolution["actual_damage"] = damage_dealt
+			_sync_damage_result_context(resolution, damage_dealt)
+			_refresh_damage_boards(target_player_index, attacker_id)
+
+			print(
+				"Damage: attacker ", attacker_id,
+				" -> Player ", target_player_index + 1,
+				" | ", damage_dealt,
+				" damage | Target HP: ",
+				target_mage.get_remaining_health(), "/", target_mage.health
+			)
+
+			if damage_dealt <= 0:
+				return true
+
+			resolution["step"] = "post_event"
+			return false
+
+		"post_event":
+			var post_event := GameEvent.new("damage_inflicted")
+			_fill_damage_event_source(post_event, resolution)
+			var target_player_index: int = int(resolution.get("target_player_index", -1))
+			post_event.target_model_type = "mage"
+			post_event.target_player_index = target_player_index
+			post_event.target_room_id = players[target_player_index].mage.room_id
+			post_event.amount = int(resolution.get("actual_damage", 0))
+			post_event.action_type = str(resolution.get("action_type", ""))
+			post_event.suppressed_trigger_types = _to_string_array(
+				resolution.get("suppressed_trigger_types", [])
+			)
+			resolution["step"] = "after_post_event"
+			if not process_game_event(post_event):
+				return false
+			return false
+
+		"after_post_event":
+			var target_player_index: int = int(resolution.get("target_player_index", -1))
+			var target_mage = players[target_player_index].mage
+			var was_defeated: bool = bool(resolution.get("was_defeated", false))
+
+			if not was_defeated and target_mage.is_defeated():
+				var defeat_event := GameEvent.new("mage_defeated")
+				_fill_damage_event_source(defeat_event, resolution)
+				defeat_event.target_model_type = "mage"
+				defeat_event.target_player_index = target_player_index
+				defeat_event.target_room_id = target_mage.room_id
+				defeat_event.amount = int(resolution.get("actual_damage", 0))
+				defeat_event.action_type = str(resolution.get("action_type", ""))
+				resolution["step"] = "after_defeat_event"
+				if not process_game_event(defeat_event):
+					return false
+				return false
+
+			return true
+
+		"after_defeat_event":
+			var target_player_index: int = int(resolution.get("target_player_index", -1))
+			# A defeated Mage is sent to their Cell after defeat-triggered Effects
+			# have had their window. Physical Actions are not resumed afterwards.
+			cancelled_physical_action_players[target_player_index] = true
+			place_mage_in_cell(target_player_index)
+			return true
+
+		_:
+			print("Unknown Damage resolution step: ", step)
+			return true
+
+# =============================================================================
+# INTEGRATED RESOLUTION / PHASE ENGINE
+# =============================================================================
+
+func _to_string_array(values: Array) -> Array[String]:
+	var result: Array[String] = []
+	for value in values:
+		result.append(str(value))
+	return result
+
+
+func _push_trigger_window(event: GameEvent, queue: Array):
+	if trigger_window_active:
+		trigger_window_stack.append({
+			"event": trigger_window_event,
+			"queue": trigger_window_queue,
+			"cursor": trigger_window_cursor
+		})
+
+	trigger_window_active = true
+	trigger_window_event = event
+	trigger_window_queue = queue.duplicate(false)
+	trigger_window_cursor = 0
+
+
+func _make_evocation_lost_event(
+	evocation: EvocationState,
+	reason: String
+) -> GameEvent:
+	var event := GameEvent.new("evocation_defeated_or_removed")
+	event.target_model_type = "evocation"
+	event.target_player_index = evocation.owner_id
+	event.target_evocation = evocation
+	event.target_room_id = evocation.room_id
+	event.action_type = reason
+	return event
+
+
+func _apply_puppeteer_after_evocation_loss(room_id: String):
+	if is_event_active("puppeteer"):
+		place_instability(-1, room_id, 1)
+
+
+func _fill_damage_event_source(
+	event: GameEvent,
+	resolution: Dictionary
+):
+	var attacker_id: int = int(resolution.get("attacker_id", -1))
+	var source_model_type: String = str(
+		resolution.get(
+			"source_model_type",
+			"black_rose" if attacker_id == -1 else "mage"
+		)
+	)
+
+	event.source_model_type = source_model_type
+	event.source_player_index = attacker_id
+
+	if source_model_type == "evocation":
+		var evocation = resolution.get("source_evocation", null)
+		event.source_evocation = evocation
+		if evocation != null:
+			event.source_room_id = evocation.room_id
+		return
+
+	if source_model_type == "mage" \
+	and attacker_id >= 0 \
+	and attacker_id < players.size():
+		event.source_room_id = players[attacker_id].mage.room_id
+	else:
+		event.source_room_id = ""
+
+
+func _refresh_damage_boards(
+	target_player_index: int,
+	attacker_id: int
+):
+	if target_player_index >= 0 \
+	and target_player_index < player_boards.size():
+		player_boards[target_player_index].refresh()
+
+	if attacker_id >= 0 and attacker_id < player_boards.size():
+		player_boards[attacker_id].refresh()
+
+
+func _sync_damage_result_context(
+	resolution: Dictionary,
+	actual_damage: int
+):
+	var context: Dictionary = resolution.get(
+		"result_context",
+		{}
+	)
+
+	if context.is_empty():
+		return
+
+	var target_player_index: int = int(
+		resolution.get(
+			"target_player_index",
+			-1
+		)
+	)
+
+	var attacker_id: int = int(
+		resolution.get(
+			"attacker_id",
+			-999
+		)
+	)
+
+	context["last_damage_dealt"] = actual_damage
+	context["last_damage_attacker_id"] = attacker_id
+
+	context["last_damage_source_model_type"] = str(
+		resolution.get(
+			"source_model_type",
+			""
+		)
+	)
+
+	context["last_damage_target_player_index"] = (
+		target_player_index
+	)
+
+	# IMPORTANT:
+	# true soltanto se il target è sconfitto DOPO
+	# la risoluzione effettiva del Damage.
+	if target_player_index >= 0 \
+	and target_player_index < players.size():
+
+		context["last_damage_defeated_target"] = (
+			actual_damage > 0
+			and players[
+				target_player_index
+			].mage.is_defeated()
+		)
+
+	else:
+		context["last_damage_defeated_target"] = false
+
+	# Corregge la registrazione ottimistica fatta
+	# dall'EffectResolver nel caso in cui una Protection
+	# abbia ridotto/annullato il Damage.
+	var damaged_models: Array = context.get(
+		"models_damaged_by_effect",
+		[]
+	)
+
+	if actual_damage <= 0:
+
+		for i in range(
+			damaged_models.size() - 1,
+			-1,
+			-1
+		):
+
+			var model: Dictionary = (
+				damaged_models[i]
+			)
+
+			if str(
+				model.get("type", "")
+			) == "mage" \
+			and int(
+				model.get(
+					"player_index",
+					-1
+				)
+			) == target_player_index:
+
+				damaged_models.remove_at(i)
+
+		context["models_damaged_by_effect"] = (
+			damaged_models
+		)
+
+		return
+
+	context["last_damaged_model_type"] = "mage"
+
+	context["last_damaged_player_index"] = (
+		target_player_index
+	)
+
+func process_evocation_damage_resolution(
+	resolution: Dictionary
+) -> bool:
+	var step: String = str(resolution.get("step", "apply"))
+	var evocation: EvocationState = resolution.get("evocation", null)
+
+	if evocation == null:
+		return true
+
+	match step:
+		"apply":
+			if evocation.is_defeated():
+				_sync_evocation_damage_result_context(resolution, 0)
+				return true
+
+			var attacker_id: int = int(resolution.get("attacker_id", -1))
+			var amount: int = min(
+				int(resolution.get("amount", 0)),
+				evocation.get_remaining_health()
+			)
+			if amount <= 0:
+				_sync_evocation_damage_result_context(resolution, 0)
+				return true
+
+			var was_defeated: bool = evocation.is_defeated()
+			var damage_dealt: int = evocation.add_damage(attacker_id, amount)
+			resolution["actual_damage"] = damage_dealt
+			_sync_evocation_damage_result_context(resolution, damage_dealt)
+
+			print(
+				"Damage: attacker ", attacker_id,
+				" -> Evocation ", evocation.evocation_name,
+				" | ", damage_dealt, " damage | HP: ",
+				evocation.get_remaining_health(), "/", evocation.health
+			)
+
+			if not was_defeated and evocation.is_defeated():
+				resolution["step"] = "after_defeat_event"
+				var event := _make_evocation_lost_event(evocation, "defeated")
+				if not process_game_event(event):
+					return false
+				return false
+
+			return true
+
+		"after_defeat_event":
+			_apply_puppeteer_after_evocation_loss(evocation.room_id)
+			return true
+
+		_:
+			return true
+
+
+func _sync_evocation_damage_result_context(
+	resolution: Dictionary,
+	actual_damage: int
+):
+	var context: Dictionary = resolution.get("result_context", {})
+	if context.is_empty():
+		return
+
+	var evocation = resolution.get("evocation", null)
+	context["last_damage_dealt"] = actual_damage
+
+	if actual_damage <= 0 or evocation == null:
+		return
+
+	context["last_damaged_model_type"] = "evocation"
+	context["last_damaged_evocation"] = evocation
+
+
+func process_effect_sequence_resolution(
+	resolution: Dictionary
+) -> bool:
+
+	var effects: Array = resolution.get(
+		"effects",
+		[]
+	)
+
+	var index: int = int(
+		resolution.get(
+			"index",
+			0
+		)
+	)
+
+	if index >= effects.size():
+		return true
+
+
+	var effect: Dictionary = effects[index]
+
+	resolution["index"] = index + 1
+
+
+	var context: Dictionary = resolution.get(
+		"context",
+		{}
+	)
+
+	var resolver_kind: String = str(
+		resolution.get(
+			"resolver_kind",
+			"spell"
+		)
+	)
+
+
+	active_effect_context = context
+
+	var success: bool = false
+
+
+	match resolver_kind:
+
+		"spell":
+			success = effect_resolver.resolve_effect(
+				effect,
+				context
+			)
+
+		"room":
+			success = room_effect_resolver.resolve_effect(
+				effect,
+				context
+			)
+
+		_:
+			print(
+				"Unknown resolver_kind: ",
+				resolver_kind
+			)
+
+			success = false
+
+
+	active_effect_context = {}
+
+
+	if not success:
+
+		print(
+			"Effect resolution failed | kind ",
+			resolver_kind,
+			" | effect ",
+			str(effect.get("type", ""))
+		)
+
+		resolution["failed"] = true
+
+		return true
+
+
+	# =====================================================
+	# QUEST EVENT
+	#
+	# Only successfully resolved Spell Effects generate
+	# this Quest event.
+	#
+	# Room Effects are intentionally excluded.
+	# =====================================================
+
+	if resolver_kind == "spell":
+
+		var caster_id: int = int(
+			context.get(
+				"caster_id",
+				-1
+			)
+		)
+
+		if (
+			caster_id >= 0
+			and caster_id < players.size()
+		):
+
+			var quest_event: Dictionary = {
+				"type": "effect_resolved",
+				"player_index": caster_id,
+				"effect_type": str(
+					effect.get(
+						"type",
+						""
+					)
+				),
+				"element": str(
+					context.get(
+						"spell_element",
+						""
+					)
+				),
+				"effect": effect
+			}
+
+			quest_manager.process_event(
+				self,
+				quest_event
+			)
+
+
+	return (
+		int(
+			resolution.get(
+				"index",
+				0
+			)
+		)
+		>= effects.size()
+	)
+
+func process_spell_resolution_frame(
+	resolution: Dictionary
+) -> bool:
+
+	var spell: SpellCardState = resolution.get(
+		"spell",
+		null
+	)
+
+	if spell == null:
+		return true
+
+
+	var use_dark_side: bool = bool(
+		resolution.get(
+			"use_dark_side",
+			false
+		)
+	)
+
+	var context: Dictionary = resolution.get(
+		"context",
+		{}
+	)
+
+	var caster_id: int = int(
+		context.get(
+			"caster_id",
+			-1
+		)
+	)
+
+	if caster_id < 0 \
+	or caster_id >= players.size():
+		return true
+
+
+	match str(
+		resolution.get(
+			"step",
+			"prepare"
+		)
+	):
+
+		# =================================================
+		# PREPARE
+		# =================================================
+
+		"prepare":
+
+			var side: Dictionary = spell.get_side(
+				use_dark_side
+			)
+
+
+			context["spell_target_type"] = str(
+				side.get(
+					"target",
+					""
+				)
+			)
+
+			context["spell_range"] = side.get(
+				"range",
+				null
+			)
+
+			# Used by Quest tasks and other systems that
+			# need to know which element is currently
+			# being resolved.
+			context["spell_element"] = str(
+				side.get(
+					"element",
+					""
+				)
+			)
+
+			context["spell_id"] = spell.id
+
+			context["models_damaged_by_effect"] = []
+
+
+			# ---------------------------------------------
+			# ENHANCEMENT
+			# ---------------------------------------------
+
+			var enhancement: Dictionary = side.get(
+				"enhancement",
+				{}
+			)
+
+			var enhancement_active: bool = false
+
+
+			if not enhancement.is_empty():
+
+				enhancement_active = (
+					can_apply_enhancement(
+						caster_id,
+						enhancement.get(
+							"requires",
+							[]
+						)
+					)
+				)
+
+
+			context["enhancement_active"] = (
+				enhancement_active
+			)
+
+
+			# ---------------------------------------------
+			# RESOLUTION ORDER
+			# ---------------------------------------------
+
+			var sequences: Array = []
+
+			var resolution_order: Array = side.get(
+				"resolution_order",
+				[
+					"base",
+					"enhancement"
+				]
+			)
+
+
+			for order_step in resolution_order:
+
+				match str(order_step):
+
+					"base":
+
+						sequences.append(
+							spell.get_effects(
+								use_dark_side
+							)
+						)
+
+
+					"enhancement":
+
+						if enhancement_active:
+
+							sequences.append(
+								enhancement.get(
+									"effects",
+									[]
+								)
+							)
+
+
+					_:
+
+						print(
+							"Unknown spell resolution step: ",
+							order_step
+						)
+
+
+			resolution["sequences"] = sequences
+			resolution["sequence_index"] = 0
+			resolution["step"] = "next_sequence"
+
+			return false
+
+
+		# =================================================
+		# NEXT EFFECT SEQUENCE
+		# =================================================
+
+		"next_sequence":
+
+			var sequences: Array = resolution.get(
+				"sequences",
+				[]
+			)
+
+			var sequence_index: int = int(
+				resolution.get(
+					"sequence_index",
+					0
+				)
+			)
+
+
+			if sequence_index >= sequences.size():
+
+				resolution["step"] = "reveal"
+
+				return false
+
+
+			resolution["sequence_index"] = (
+				sequence_index + 1
+			)
+
+
+			queue_resolution(
+				{
+					"type": "effect_sequence",
+					"resolver_kind": "spell",
+					"effects": sequences[
+						sequence_index
+					],
+					"index": 0,
+					"context": context
+				}
+			)
+
+
+			return false
+
+
+		# =================================================
+		# REVEAL
+		# =================================================
+
+		"reveal":
+
+			var revealed = RevealedSpellState.new(
+				spell,
+				use_dark_side
+			)
+
+			players[
+				caster_id
+			].add_revealed_spell(
+				revealed
+			)
+
+			# A newly Revealed Spell may satisfy a
+			# state-based Quest.
+			quest_manager.check_state_quests(
+				self,
+				caster_id
+			)
+
+			return true
+
+
+		_:
+			return true
+
+
+func process_spell_cast_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	var player = players[player_index]
+	var ready_spell: ReadySpellState = resolution.get("ready_spell", null)
+	if ready_spell == null or ready_spell.spell == null:
+		return true
+
+	var spell: SpellCardState = ready_spell.spell
+	var use_dark_side: bool = ready_spell.use_dark_side
+	var source: String = str(resolution.get("source", "external"))
+	var context: Dictionary = resolution.get("context", {}).duplicate(true)
+
+	match str(resolution.get("step", "start")):
+		"start":
+			if player.mage.in_cell:
+				print("A Mage in Cell cannot cast a Ready/Quick Spell")
+				return true
+
+			context["game"] = self
+			context["caster_id"] = player_index
+			context["caster_room_id"] = player.mage.room_id
+			resolution["context"] = context
+
+			var side: Dictionary = spell.get_side(use_dark_side)
+			var spell_type: String = str(side.get("type", ""))
+
+			if spell_type != "combat" \
+			and spell_type != "contingency" \
+			and spell_type != "trap" \
+			and spell_type != "protection":
+				print("Unsupported Spell type: ", spell_type)
+				return true
+
+			# The card leaves its prepared slot only after the Cast Action itself
+			# has been validated. This avoids consuming a prepared card on an
+			# invalid/unsupported cast request.
+			if source == "ready":
+				if player.get_next_ready_spell() != ready_spell:
+					return true
+				player.remove_next_ready_spell()
+			elif source == "quick":
+				if player.quick_spell != ready_spell:
+					return true
+				player.quick_spell = null
+
+			if spell_type == "trap" or spell_type == "protection":
+				var target_player_index: int = int(
+					context.get("target_player_index", -1)
+				)
+				var active_spell := ActiveSpellState.new(
+					spell,
+					player_index,
+					use_dark_side,
+					target_player_index
+				)
+				for key in context:
+					if key != "game":
+						active_spell.context[key] = context[key]
+				player.add_active_spell(active_spell)
+				print(
+					"Player ", player_index + 1,
+					" activates ", spell.card_name,
+					" [", spell_type, "]"
+				)
+				return true
+
+			if not resolve_spell_reveal_instability(player_index, spell):
+				return true
+
+			resolution["step"] = "after_spell"
+			queue_resolution({
+				"type": "spell_resolution",
+				"step": "prepare",
+				"spell": spell,
+				"use_dark_side": use_dark_side,
+				"context": context,
+				"sequence_index": 0
+			})
+			return false
+
+		"after_spell":
+			print(
+				"Player ", player_index + 1,
+				" cast ", spell.card_name,
+				" | side: ", "Dark" if use_dark_side else "Light"
+			)
+			return true
+
+		_:
+			return true
+
+
+func process_trigger_spell_resolution(
+	resolution: Dictionary
+) -> bool:
+	var active_spell: ActiveSpellState = resolution.get("active_spell", null)
+	var event: GameEvent = resolution.get("event", null)
+	if active_spell == null or event == null:
+		return true
+
+	var owner_id: int = active_spell.owner_id
+	if owner_id < 0 or owner_id >= players.size():
+		return true
+
+	match str(resolution.get("step", "start")):
+		"start":
+			var spell_type: String = active_spell.get_spell_type()
+			print(
+				spell_type.to_upper(), " TRIGGERED: ",
+				active_spell.spell.card_name,
+				" | Player ", owner_id + 1
+			)
+
+			# Trap/Protection stop being Active as soon as they are revealed. This
+			# prevents a nested event from triggering the same card again.
+			if spell_type == "trap" or spell_type == "protection":
+				active_spell.active = false
+				players[owner_id].active_spells.erase(active_spell)
+
+			var context: Dictionary = {
+				"game": self,
+				"caster_id": owner_id,
+				"caster_room_id": players[owner_id].mage.room_id,
+				"trigger_event": event,
+				"marked_player_index": active_spell.target_player_index,
+				"triggering_model_type": event.source_model_type,
+				"triggering_player_index": event.source_player_index,
+				"triggering_evocation": event.source_evocation,
+				"triggering_room_id": event.source_room_id,
+				"trigger_damage_amount": event.amount,
+				"trigger_evocation": event.target_evocation,
+				"trigger_evocation_owner": event.target_player_index,
+				"trigger_evocation_room_id": event.target_room_id,
+				"trigger_evocation_reason": event.action_type
+			}
+			for key in active_spell.context:
+				context[key] = active_spell.context[key]
+
+			resolution["context"] = context
+
+			if spell_type == "trap" or spell_type == "protection":
+				resolve_spell_reveal_instability(owner_id, active_spell.spell)
+
+			resolution["step"] = "after_effects"
+			queue_resolution({
+				"type": "effect_sequence",
+				"resolver_kind": "spell",
+				"effects": active_spell.get_effects(),
+				"index": 0,
+				"context": context
+			})
+			return false
+
+		"after_effects":
+			var context: Dictionary = resolution.get("context", {})
+			for key in context:
+				if key != "game" and key != "trigger_event":
+					active_spell.context[key] = context[key]
+
+			var spell_type: String = active_spell.get_spell_type()
+			if spell_type == "trap" or spell_type == "protection":
+				var revealed := RevealedSpellState.new(
+					active_spell.spell,
+					active_spell.use_dark_side
+				)
+				players[owner_id].add_revealed_spell(revealed)
+
+			print("Triggered spell resolved: ", active_spell.spell.card_name)
+			return true
+
+		_:
+			return true
+
+
+func process_room_activation_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	var room_id: String = str(resolution.get("room_id", ""))
+	var room = get_room_by_id(room_id)
+	if room == null or player_index < 0 or player_index >= players.size():
+		return true
+
+	match str(resolution.get("step", "prepare")):
+		"prepare":
+			if not room.can_activate(
+				bool(resolution.get("allow_reactivate_flipped", false))
+			):
+				return true
+
+			var room_context: Dictionary = resolution.get("context", {}).duplicate(true)
+			room_context["game"] = self
+			room_context["player_index"] = player_index
+			room_context["caster_id"] = player_index
+			room_context["room"] = room
+			room_context["room_id"] = room.get_room_id()
+			if not room_context.has("target_room_id"):
+				room_context["target_room_id"] = room.get_room_id()
+
+			resolution["context"] = room_context
+			resolution["step"] = "after_effects"
+			queue_resolution({
+				"type": "effect_sequence",
+				"resolver_kind": "room",
+				"effects": room.get_effects(),
+				"index": 0,
+				"context": room_context
+			})
+			return false
+
+		"after_effects":
+			room.mark_activated()
+			print(
+				"Player ", player_index + 1,
+				" activated ", room.room_name,
+				" [", room.get_current_side_name(), "]"
+			)
+			return true
+
+		_:
+			return true
+
+
+func _validate_player_activation(
+	player_index: int,
+	actions: Array
+) -> bool:
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	if actions.is_empty() or actions.size() > 2:
+		return false
+
+	var normal_spell_count: int = 0
+	var quick_spell_count: int = 0
+
+	for action_value in actions:
+		if not action_value is Dictionary:
+			return false
+		var action_type: String = str(action_value.get("type", ""))
+		if action_type == "spell":
+			normal_spell_count += 1
+		elif action_type == "quick":
+			quick_spell_count += 1
+
+	if normal_spell_count > 1 or quick_spell_count > 1:
+		return false
+
+	# Quick + numbered Ready is legal, but Quick still consumes the second
+	# Action slot. Two numbered Ready Spells are not legal in one Activation.
+	return true
+
+
+func process_activation_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	var actions: Array = resolution.get("actions", [])
+	var action_index: int = int(resolution.get("action_index", 0))
+
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	if action_index >= actions.size():
+		print("Player ", player_index + 1, " Activation complete")
+		return true
+
+	var action: Dictionary = actions[action_index]
+	resolution["action_index"] = action_index + 1
+	if not perform_player_action(player_index, action):
+		print("Activation Action failed: ", action.get("type", ""))
+		return true
+
+	return false
+
+
+func _physical_action_cancelled(player_index: int) -> bool:
+	if not bool(cancelled_physical_action_players.get(player_index, false)):
+		return false
+	cancelled_physical_action_players.erase(player_index)
+	return true
+
+
+func process_explore_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	if _physical_action_cancelled(player_index):
+		print("Explore interrupted by Mage defeat")
+		return true
+
+	var player = players[player_index]
+	var context: Dictionary = resolution.get("context", {})
+
+	match str(resolution.get("step", "start")):
+		"start":
+			if not player.has_physical_action():
+				return true
+
+			var path: Array = resolution.get("destination_room_ids", [])
+			if path.size() > player.mage.speed:
+				return true
+
+			if bool(resolution.get("activate_before", false)) \
+			and bool(resolution.get("activate_after", false)):
+				return true
+
+			if not player.exhaust_physical_action():
+				return true
+
+			if bool(resolution.get("activate_before", false)):
+				if player.mage.in_cell:
+					return true
+				resolution["step"] = "move"
+				activate_room(player_index, player.mage.room_id, false, context)
+				return false
+
+			resolution["step"] = "move"
+			return false
+
+		"move":
+			var path: Array = resolution.get("destination_room_ids", [])
+			var move_index: int = int(resolution.get("move_index", 0))
+			if move_index < path.size():
+				if not move_mage_to_room_id(player_index, str(path[move_index]), 1):
+					return true
+				resolution["move_index"] = move_index + 1
+				return false
+
+			if bool(resolution.get("activate_after", false)):
+				if player.mage.in_cell:
+					return true
+				resolution["step"] = "done"
+				activate_room(player_index, player.mage.room_id, false, context)
+				return false
+
+			resolution["step"] = "done"
+			return false
+
+		"done":
+			print("Player ", player_index + 1, " performed Explore")
+			return true
+
+		_:
+			return true
+
+
+func process_fight_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	if _physical_action_cancelled(player_index):
+		print("Fight interrupted by Mage defeat")
+		return true
+
+	var player = players[player_index]
+	var context: Dictionary = resolution.get("context", {})
+
+	match str(resolution.get("step", "start")):
+		"start":
+			if player.mage.in_cell or not player.has_physical_action():
+				return true
+			if not player.exhaust_physical_action():
+				return true
+
+			if bool(resolution.get("perform_room_activation", true)) \
+			and bool(resolution.get("activate_room_first", false)):
+				resolution["step"] = "attack"
+				activate_room(player_index, player.mage.room_id, false, context)
+				return false
+
+			resolution["step"] = "attack"
+			return false
+
+		"attack":
+			if bool(resolution.get("perform_attack", true)):
+				var target_player_index: int = int(
+					resolution.get("target_player_index", -1)
+				)
+				if target_player_index < 0 or target_player_index >= players.size():
+					return true
+				if target_player_index == player_index:
+					return true
+
+				var target = players[target_player_index]
+				if target.mage.in_cell or target.mage.room_id != player.mage.room_id:
+					return true
+
+				resolution["step"] = "room_after"
+				deal_damage(
+					player_index,
+					target_player_index,
+					player.mage.strength,
+					"physical_attack"
+				)
+				return false
+
+			resolution["step"] = "room_after"
+			return false
+
+		"room_after":
+			if bool(resolution.get("perform_room_activation", true)) \
+			and not bool(resolution.get("activate_room_first", false)):
+				resolution["step"] = "done"
+				activate_room(player_index, player.mage.room_id, false, context)
+				return false
+
+			resolution["step"] = "done"
+			return false
+
+		"done":
+			print("Player ", player_index + 1, " performed Fight")
+			return true
+
+		_:
+			return true
+
+
+func process_command_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	if _physical_action_cancelled(player_index):
+		print("Command interrupted by Mage defeat")
+		return true
+
+	var player = players[player_index]
+	match str(resolution.get("step", "start")):
+		"start":
+			if player.mage.in_cell or not player.has_physical_action():
+				return true
+			var evocation_index: int = int(resolution.get("evocation_index", -1))
+			if evocation_index < 0 or evocation_index >= player.evocations.size():
+				return true
+			if not player.exhaust_physical_action():
+				return true
+
+			var evocation: EvocationState = player.evocations[evocation_index]
+			resolution["step"] = "done"
+			activate_evocation(
+				evocation,
+				player_index,
+				resolution.get("context", {})
+			)
+			return false
+
+		"done":
+			print("Player ", player_index + 1, " performed Command")
+			return true
+
+		_:
+			return true
+
+
+func process_evocation_activation_resolution(
+	resolution: Dictionary
+) -> bool:
+	var evocation: EvocationState = resolution.get("evocation", null)
+	if evocation == null or evocation.is_defeated():
+		return true
+
+	var controller_id: int = int(resolution.get("controller_id", evocation.owner_id))
+	var context: Dictionary = resolution.get("context", {})
+	var strength_bonus: int = int(resolution.get("strength_bonus", 0))
+	var activation_strength: int = evocation.strength + strength_bonus
+	var attack_timing: String = str(context.get("evocation_attack_timing", "none"))
+	var move_room_ids: Array = context.get("evocation_move_room_ids", [])
+	var target_player_index: int = int(context.get("evocation_target_player_index", -1))
+
+	match str(resolution.get("step", "start")):
+		"start":
+			if attack_timing != "before" and attack_timing != "after" and attack_timing != "none":
+				return true
+			if move_room_ids.size() > evocation.speed:
+				return true
+			resolution["step"] = "attack_before"
+			return false
+
+		"attack_before":
+			resolution["step"] = "move"
+			if attack_timing == "before":
+				if not _valid_evocation_attack_target(evocation, target_player_index):
+					return true
+				deal_damage_from_evocation(
+					evocation,
+					target_player_index,
+					activation_strength
+				)
+				return false
+			return false
+
+		"move":
+			var move_index: int = int(resolution.get("move_index", 0))
+			if move_index < move_room_ids.size():
+				if not move_evocation_to_room_id(
+					evocation,
+					str(move_room_ids[move_index]),
+					1
+				):
+					return true
+				resolution["move_index"] = move_index + 1
+				return false
+			resolution["step"] = "attack_after"
+			return false
+
+		"attack_after":
+			resolution["step"] = "done"
+			if attack_timing == "after":
+				if not _valid_evocation_attack_target(evocation, target_player_index):
+					return true
+				deal_damage_from_evocation(
+					evocation,
+					target_player_index,
+					activation_strength
+				)
+				return false
+			return false
+
+		"done":
+			context["last_activated_evocation"] = evocation
+			context["last_evocation_activation_controller"] = controller_id
+			context["last_evocation_activation_strength"] = activation_strength
+			context["last_evocation_activation_strength_bonus"] = strength_bonus
+			print(
+				"Evocation activated: ", evocation.evocation_name,
+				" | controller P", controller_id + 1,
+				" | Strength ", activation_strength
+			)
+			return true
+
+		_:
+			return true
+
+
+func _valid_evocation_attack_target(
+	evocation: EvocationState,
+	target_player_index: int
+) -> bool:
+	if target_player_index < 0 or target_player_index >= players.size():
+		return false
+	var target_mage = players[target_player_index].mage
+	return (
+		not target_mage.in_cell
+		and target_mage.room_id == evocation.room_id
+	)
+
+
+func _handle_resolution_completion(frame: Dictionary):
+	match str(frame.get("on_complete", "")):
+		"advance_action_phase":
+			advance_action_phase()
+		"advance_evocation_phase":
+			evocation_phase_cursor += 1
+			advance_evocation_phase()
+		_:
+			pass
+
+
+# =============================================================================
+# EVOCATION PHASE - INTERACTIVE
+# =============================================================================
+
+func advance_evocation_phase() -> bool:
+	if current_phase != PHASE_EVOCATION:
+		return false
+	if waiting_for_player_input:
+		return true
+
+	while evocation_phase_cursor < current_phase_play_order.size():
+		var player_index: int = current_phase_play_order[evocation_phase_cursor]
+		var player = players[player_index]
+
+		if player.evocations.is_empty():
+			evocation_phase_cursor += 1
+			continue
+
+		var evocation_data: Array = []
+		for i in range(player.evocations.size()):
+			var evocation: EvocationState = player.evocations[i]
+			if evocation == null:
+				continue
+			evocation_data.append({
+				"evocation_index": i,
+				"id": evocation.evocation_id,
+				"name": evocation.evocation_name,
+				"room_id": evocation.room_id,
+				"speed": evocation.speed,
+				"strength": evocation.strength
+			})
+
+		return request_player_input({
+			"type": "evocation_phase_activations",
+			"phase": PHASE_EVOCATION,
+			"player_index": player_index,
+			"evocations": evocation_data,
+			"required_count": player.evocations.size()
+		})
+
+	return finish_evocation_phase()
+
+
+func submit_evocation_phase_activations(
+	player_index: int,
+	choices: Array
+) -> bool:
+	if not waiting_for_player_input:
+		return false
+	if str(pending_input.get("type", "")) != "evocation_phase_activations":
+		return false
+	if player_index != int(pending_input.get("player_index", -1)):
+		return false
+
+	var player = players[player_index]
+	if choices.size() != player.evocations.size():
+		return false
+
+	var used_indices: Array[int] = []
+	for choice_value in choices:
+		if not choice_value is Dictionary:
+			return false
+		var index: int = int(choice_value.get("evocation_index", -1))
+		if index < 0 or index >= player.evocations.size() or used_indices.has(index):
+			return false
+		used_indices.append(index)
+
+	clear_player_input()
+	return queue_resolution({
+		"type": "evocation_phase_player",
+		"player_index": player_index,
+		"choices": choices.duplicate(true),
+		"choice_index": 0,
+		"on_complete": "advance_evocation_phase"
+	})
+
+
+func process_evocation_phase_player_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(resolution.get("player_index", -1))
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	var choices: Array = resolution.get("choices", [])
+	var choice_index: int = int(resolution.get("choice_index", 0))
+	if choice_index >= choices.size():
+		return true
+
+	var choice: Dictionary = choices[choice_index]
+	resolution["choice_index"] = choice_index + 1
+	var evocation_index: int = int(choice.get("evocation_index", -1))
+	if evocation_index < 0 or evocation_index >= players[player_index].evocations.size():
+		return true
+
+	var evocation: EvocationState = players[player_index].evocations[evocation_index]
+	var activation_context: Dictionary = choice.get("context", {}).duplicate(true)
+	activation_context["game"] = self
+	activation_context["play_order"] = current_phase_play_order.duplicate()
+	activate_evocation(evocation, player_index, activation_context)
+	return false
+
+
+func finish_evocation_phase() -> bool:
+	if current_phase != PHASE_EVOCATION or waiting_for_player_input:
+		return false
+
+	evocation_phase_cursor = 0
+	current_phase_play_order.clear()
+	print("")
+	print("==============================================")
+	print("           EVOCATION PHASE COMPLETE")
+	print("==============================================")
+	print("")
+	return _complete_phase(PHASE_EVOCATION)
+
+
+# =============================================================================
+# CLEAN-UP PHASE
+# =============================================================================
+
+func resolve_cleanup_phase(
+	context: Dictionary = {}
+) -> bool:
+	if waiting_for_player_input:
+		return false
+	if not start_phase(PHASE_CLEANUP):
+		return false
+
+	current_phase_play_order = get_play_order()
+	if current_phase_play_order.is_empty():
+		return false
+
+	print("")
+	print("==============================================")
+	print("              CLEAN-UP PHASE")
+	print("==============================================")
+
+	cleanup_phase_cursor = 0
+	return advance_cleanup_phase(context)
+
+
+func advance_cleanup_phase(
+	context: Dictionary = {}
+) -> bool:
+	if current_phase != PHASE_CLEANUP:
+		return false
+	if waiting_for_player_input:
+		return true
+
+	while cleanup_phase_cursor < current_phase_play_order.size():
+		var player_index: int = current_phase_play_order[cleanup_phase_cursor]
+		var player = players[player_index]
+		var active_options: Array = []
+
+		for i in range(player.active_spells.size()):
+			var active_spell: ActiveSpellState = player.active_spells[i]
+			if active_spell == null or not active_spell.active:
+				continue
+			var spell_type: String = active_spell.get_spell_type()
+			if spell_type != "trap" and spell_type != "protection":
+				continue
+			active_options.append({
+				"active_index": i,
+				"spell_id": active_spell.spell.id,
+				"spell_name": active_spell.spell.card_name,
+				"spell_type": spell_type
+			})
+
+		if not active_options.is_empty():
+			return request_player_input({
+				"type": "cleanup_active_spells",
+				"phase": PHASE_CLEANUP,
+				"player_index": player_index,
+				"active_spells": active_options,
+				"return_to_hand_indices": []
+			})
+
+		_cleanup_player_mage_sheet(player_index, [])
+		cleanup_phase_cursor += 1
+
+	return _finish_cleanup_after_players(context)
+
+
+func submit_cleanup_active_spells(
+	player_index: int,
+	return_to_hand_indices: Array
+) -> bool:
+	if not waiting_for_player_input:
+		return false
+	if str(pending_input.get("type", "")) != "cleanup_active_spells":
+		return false
+	if player_index != int(pending_input.get("player_index", -1)):
+		return false
+
+	var offered: Array = pending_input.get("active_spells", [])
+	var allowed_indices: Array[int] = []
+	for option_value in offered:
+		allowed_indices.append(int(option_value.get("active_index", -1)))
+
+	var validated: Array[int] = []
+	for index_value in return_to_hand_indices:
+		var index: int = int(index_value)
+		if not allowed_indices.has(index) or validated.has(index):
+			return false
+		validated.append(index)
+
+	clear_player_input()
+	_cleanup_player_mage_sheet(player_index, validated)
+	cleanup_phase_cursor += 1
+	return advance_cleanup_phase()
+
+
+func _cleanup_player_mage_sheet(
+	player_index: int,
+	return_active_indices: Array[int]
+):
+	var player = players[player_index]
+
+	# Active Trap/Protection: chosen cards return to Hand, all other Active
+	# cards go to Memories.
+	for i in range(player.active_spells.size()):
+		var active_spell: ActiveSpellState = player.active_spells[i]
+		if active_spell == null:
+			continue
+		if not active_spell.active:
+			continue
+
+		if return_active_indices.has(i):
+			player.add_spell_to_hand(active_spell.spell)
+		else:
+			player.add_spell_to_memories(active_spell.spell)
+
+	player.active_spells.clear()
+
+	# All remaining prepared cards on the Mage Sheet go to Memories.
+	for ready in player.ready_spells:
+		if ready != null and ready.spell != null:
+			player.add_spell_to_memories(ready.spell)
+	player.ready_spells.clear()
+
+	if player.quick_spell != null and player.quick_spell.spell != null:
+		player.add_spell_to_memories(player.quick_spell.spell)
+	player.quick_spell = null
+
+	# Revealed Spells also leave the Mage Sheet for Memories.
+	for revealed in player.revealed_spells:
+		if revealed != null and revealed.spell != null:
+			player.add_spell_to_memories(revealed.spell)
+	player.revealed_spells.clear()
+
+	player.refresh_physical_actions()
+
+	if player_index < player_boards.size():
+		player_boards[player_index].refresh()
+
+
+func _finish_cleanup_after_players(
+	context: Dictionary = {}
+) -> bool:
+	var phase_context: Dictionary = context.duplicate(true)
+	phase_context["game"] = self
+	phase_context["play_order"] = current_phase_play_order.duplicate()
+
+	if not resolve_events_for_phase(PHASE_CLEANUP, phase_context):
+		return false
+
+	resolve_completed_rooms()
+	reset_room_activations()
+
+	if check_end_game():
+		return true
+
+	return finish_cleanup_phase()
+
+
+func finish_cleanup_phase() -> bool:
+	if current_phase != PHASE_CLEANUP or waiting_for_player_input:
+		return false
+
+	cleanup_phase_cursor = 0
+	current_phase_play_order.clear()
+
+	print("")
+	print("==============================================")
+	print("           CLEAN-UP PHASE COMPLETE")
+	print("==============================================")
+	print("")
+
+	finish_round()
+	return _complete_phase(PHASE_CLEANUP)
+
+
+func check_end_game() -> bool:
+	var threshold: int = int($PowerBoard.end_game_threshold)
+	var reached: Array = []
+
+	if black_rose_power >= threshold:
+		reached.append({"type": "black_rose", "power": black_rose_power})
+
+	for player in players:
+		if player.power >= threshold:
+			reached.append({
+				"type": "player",
+				"player_index": player.player_index,
+				"power": player.power
+			})
+
+	if reached.is_empty():
+		return false
+
+	game_has_ended = true
+	game_flow_active = false
+	var result := {
+		"round": current_round,
+		"reached_threshold": reached,
+		"threshold": threshold
+	}
+	game_over.emit(result)
+	print("GAME OVER: end-game threshold reached")
+	return true
+
+
+# =============================================================================
+# WHOLE TURN FLOW
+# =============================================================================
+
+func start_game_flow() -> bool:
+	if game_has_ended:
+		return false
+	if waiting_for_player_input or not resolution_stack.is_empty():
+		return false
+
+	game_flow_active = true
+	return resolve_black_rose_phase()
+
+
+func stop_game_flow():
+	game_flow_active = false
+
+
+func _complete_phase(phase: String) -> bool:
+	phase_completed.emit(phase)
+	if not game_flow_active or game_has_ended:
+		return true
+	return advance_game_flow(phase)
+
+
+func advance_game_flow(completed_phase: String = "") -> bool:
+	if not game_flow_active or game_has_ended:
+		return false
+	if waiting_for_player_input:
+		return true
+
+	match completed_phase:
+		PHASE_BLACK_ROSE:
+			return resolve_study_phase()
+		PHASE_STUDY:
+			return resolve_preparation_phase()
+		PHASE_PREPARATION:
+			return resolve_action_phase()
+		PHASE_ACTION:
+			return resolve_evocation_phase()
+		PHASE_EVOCATION:
+			return resolve_cleanup_phase()
+		PHASE_CLEANUP:
+			return resolve_black_rose_phase()
+		_:
+			return resolve_black_rose_phase()
+func assign_mage_to_player(
+	player_index: int,
+	mage_id: String
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		print(
+			"assign_mage_to_player: invalid player ",
+			player_index
+		)
+		return false
+
+	var data: Dictionary = (
+		mage_database.get_mage_data(mage_id)
+	)
+
+	if data.is_empty():
+		return false
+
+	var player: PlayerState = players[player_index]
+
+	player.mage_id = str(data["id"])
+
+	player.mage = MageState.new(
+		str(data["id"]),
+		int(data.get("health", 10)),
+		int(data.get("strength", 0)),
+		int(data.get("speed", 0))
+	)
+
+	player.hand_limit = int(
+		data.get("hand_limit", 6)
+	)
+
+	player.max_active_quests = int(
+		data.get("max_active_quests", 2)
+	)
+
+	player.personal_spell_id = str(
+		data.get("personal_spell_id", "")
+	)
+
+	player.personal_spell_copies_received = 0
+
+	print(
+		"Player ",
+		player_index + 1,
+		" assigned Mage: ",
+		data.get("name", mage_id),
+		" | HP ",
+		player.mage.health,
+		" | Hand ",
+		player.hand_limit,
+		" | STR ",
+		player.mage.strength,
+		" | SPD ",
+		player.mage.speed
+	)
+
+	return true
+	
+func create_personal_spell_copy(
+	spell_id: String
+) -> SpellCardState:
+
+	if spell_id.is_empty():
+		return null
+
+	if not spell_database.spells.has(spell_id):
+		print(
+			"Personal Spell not found: ",
+			spell_id
+		)
+		return null
+
+	var spell: SpellCardState = (
+		spell_database.spells[spell_id]
+	)
+
+	var copy := SpellCardState.new(
+		spell.id,
+		spell.card_name,
+		spell.school_id,
+		spell.light_side.duplicate(true),
+		spell.dark_side.duplicate(true),
+		spell.copies,
+		spell.personal
+	)
+
+	copy.forgotten = spell.forgotten
+	copy.instability = spell.instability
+
+	return copy
+func give_initial_personal_spell(
+	player_index: int
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return false
+
+	var player: PlayerState = players[player_index]
+
+	if player.personal_spell_id.is_empty():
+		return false
+
+	if player.personal_spell_copies_received >= 1:
+		return true
+
+	var spell := create_personal_spell_copy(
+		player.personal_spell_id
+	)
+
+	if spell == null:
+		return false
+
+	player.grimoire.append(spell)
+	player.personal_spell_copies_received = 1
+
+	print(
+		"Player ",
+		player_index + 1,
+		" received ",
+		spell.card_name,
+		" copy 1 in Grimoire"
+	)
+
+	return true
+
+
+func give_personal_spell_for_moon(
+	player_index: int,
+	moon: int
+) -> bool:
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return false
+
+	if moon < 2 or moon > 3:
+		return false
+
+	var player: PlayerState = players[player_index]
+
+	if player.personal_spell_id.is_empty():
+		return false
+
+	if player.personal_spell_copies_received >= moon:
+		return true
+
+	# Sicurezza: non distribuiamo Moon III se per qualche
+	# motivo non è stata ancora distribuita Moon II.
+	if player.personal_spell_copies_received != moon - 1:
+		print(
+			"Personal Spell distribution out of sequence for Player ",
+			player_index + 1
+		)
+		return false
+
+	var spell := create_personal_spell_copy(
+		player.personal_spell_id
+	)
+
+	if spell == null:
+		return false
+
+	player.hand.append(spell)
+	player.personal_spell_copies_received = moon
+
+	print(
+		"Player ",
+		player_index + 1,
+		" received ",
+		spell.card_name,
+		" copy ",
+		moon,
+		" directly in Hand"
+	)
+
+	return true
+
+
+func distribute_personal_spells_for_moon(
+	moon: int
+):
+	for player_index in range(players.size()):
+		give_personal_spell_for_moon(
+			player_index,
+			moon
+		)
+
+	for board in player_boards:
+		if board != null:
+			board.refresh()
+func create_quest_decks() -> void:
+
+	for moon in range(1, 4):
+
+		var deck: Array[QuestCardState] = (
+			quest_database.create_deck_for_moon(
+				moon
+			)
+		)
+
+		shuffle_with_rng(deck)
+
+		quest_decks[moon] = deck
+
+		print(
+			"Quest Deck Moon ",
+			moon,
+			": ",
+			deck.size()
+		)
+func advance_black_rose_quest_steps() -> bool:
+
+	if current_phase != PHASE_BLACK_ROSE:
+		return false
+
+	if waiting_for_player_input:
+		return true
+
+	if current_phase_play_order.is_empty():
+		return false
+
+	match black_rose_quest_step:
+
+		4:
+			return advance_black_rose_quest_discard()
+
+		5:
+			return advance_black_rose_quest_draw()
+
+		6:
+			return advance_black_rose_quest_limits()
+
+		7:
+			return finish_black_rose_phase()
+
+		_:
+			print(
+				"Invalid Black Rose Quest step: ",
+				black_rose_quest_step
+			)
+			return false
+func advance_black_rose_quest_discard() -> bool:
+
+	while black_rose_quest_cursor \
+	< current_phase_play_order.size():
+
+		var player_index: int = (
+			current_phase_play_order[
+				black_rose_quest_cursor
+			]
+		)
+
+		var player = players[player_index]
+
+		# Nessuna Active Quest:
+		# non c'è niente da scegliere.
+		if player.active_quests.is_empty():
+			black_rose_quest_cursor += 1
+			continue
+
+		var quest_data: Array = []
+
+		for i in range(
+			player.active_quests.size()
+		):
+			var quest: QuestState = (
+				player.active_quests[i]
+			)
+
+			quest_data.append(
+				{
+					"quest_index": i,
+					"id": quest.get_id(),
+					"name": quest.get_name(),
+					"moon": quest.get_moon(),
+					"revealed": quest.revealed,
+					"progress": quest.progress,
+					"cube_slots":
+						quest.get_cube_slots()
+				}
+			)
+
+		return request_player_input(
+			{
+				"type":
+					"black_rose_optional_quest_discard",
+
+				"phase":
+					PHASE_BLACK_ROSE,
+
+				"player_index":
+					player_index,
+
+				"optional":
+					true,
+
+				"quests":
+					quest_data
+			}
+		)
+
+	# Tutti hanno effettuato/ignorato lo step 4.
+	black_rose_quest_step = 5
+	black_rose_quest_cursor = 0
+
+	return advance_black_rose_quest_steps()
+	
+func submit_black_rose_optional_quest_discard(
+	player_index: int,
+	quest_index: int = -1
+) -> bool:
 
 	if not waiting_for_player_input:
-
 		print(
-			"submit_trigger_decision: no input requested"
+			"submit_black_rose_optional_quest_discard: "
+			+ "no input requested"
 		)
-
 		return false
-
 
 	if str(
 		pending_input.get(
 			"type",
 			""
 		)
-	) != "trigger_decision":
+	) != "black_rose_optional_quest_discard":
 
 		print(
-			"submit_trigger_decision: wrong pending input type"
+			"submit_black_rose_optional_quest_discard: "
+			+ "wrong pending input type"
 		)
-
 		return false
-
 
 	var expected_player_index: int = int(
 		pending_input.get(
@@ -9066,674 +9041,405 @@ func submit_trigger_decision(
 		)
 	)
 
-
 	if player_index != expected_player_index:
-
-		print(
-			"submit_trigger_decision: wrong player"
-		)
-
 		return false
 
+	var player = players[player_index]
 
-	# =====================================================
-	# PASS
-	# =====================================================
+	# -1 = il giocatore sceglie di non scartare.
+	if quest_index != -1:
 
-	if queue_index == -1:
+		if quest_index < 0 \
+		or quest_index >= player.active_quests.size():
 
-		clear_player_input()
-
-
-		while trigger_window_cursor \
-		< trigger_window_queue.size():
-
-			var trigger_data: Dictionary = (
-				trigger_window_queue[
-					trigger_window_cursor
-				]
+			print(
+				"Black Rose Quest discard: "
+				+ "invalid Quest index"
 			)
+			return false
 
-
-			var active_spell: ActiveSpellState = (
-				trigger_data.get(
-					"active_spell",
-					null
-				)
-			)
-
-
-			if active_spell == null:
-
-				trigger_window_cursor += 1
-				continue
-
-
-			if active_spell.owner_id != player_index:
-				break
-
-
-			trigger_window_cursor += 1
-
-
-		# Continue with the next player, if any.
-		request_next_trigger_decision()
-
-
-		# If another decision was requested, stop here.
-		if waiting_for_player_input:
-			return true
-
-
-		# Otherwise the Trigger Window has finished.
-		return process_resolution_stack()
-
-
-	# =====================================================
-	# VALIDATE CHOSEN TRIGGER
-	# =====================================================
-
-	var valid_option: bool = false
-
-
-	var options: Array = (
-		pending_input.get(
-			"options",
-			[]
-		)
-	)
-
-
-	for option_value in options:
-
-		var option: Dictionary = (
-			option_value
+		var quest: QuestState = (
+			player.active_quests[quest_index]
 		)
 
+		# IMPORTANT:
+		# la BR guadagna Power in base alla Moon
+		# DELLA QUEST, non necessariamente current_moon.
+		var black_rose_reward: int = (
+			quest.get_moon()
+		)
 
-		if int(
-			option.get(
-				"queue_index",
-				-1
-			)
-		) == queue_index:
+		if not quest_manager.discard_active_quest(
+			self,
+			player_index,
+			quest
+		):
+			return false
 
-			valid_option = true
-			break
-
-
-	if not valid_option:
+		add_black_rose_power(
+			black_rose_reward
+		)
 
 		print(
-			"submit_trigger_decision: invalid trigger option"
+			"Black Rose gains ",
+			black_rose_reward,
+			" Power from discarded Quest ",
+			quest.get_name()
 		)
-
-		return false
-
-
-	# =====================================================
-	# REMOVE CHOSEN TRIGGER FROM QUEUE
-	# =====================================================
-
-	var trigger_data: Dictionary = (
-		trigger_window_queue[
-			queue_index
-		]
-	)
-
-
-	trigger_window_queue.remove_at(
-		queue_index
-	)
-
 
 	clear_player_input()
 
+	black_rose_quest_cursor += 1
 
-	# =====================================================
-	# REVEAL + RESOLVE TRIGGERED SPELL
-	# =====================================================
+	return advance_black_rose_quest_steps()
+func advance_black_rose_quest_draw() -> bool:
 
-	handle_triggered_spell(
-		trigger_data
-	)
+	while black_rose_quest_cursor \
+	< current_phase_play_order.size():
 
-
-	# =====================================================
-	# SAME PLAYER MAY HAVE ANOTHER TRIGGER
-	# =====================================================
-
-	request_next_trigger_decision()
-
-
-	if waiting_for_player_input:
-		return true
-
-
-	# =====================================================
-	# WINDOW COMPLETE → RESUME INTERRUPTED RESOLUTION
-	# =====================================================
-
-	return process_resolution_stack()
-	
-func finish_trigger_window() -> bool:
-
-	if not trigger_window_active:
-		return true
-
-
-	if waiting_for_player_input:
-		return false
-
-
-	trigger_window_active = false
-
-	trigger_window_event = null
-
-	trigger_window_queue.clear()
-
-	trigger_window_cursor = 0
-
-
-	print(
-		"Trigger window complete"
-	)
-
-
-	return true
-func queue_resolution(
-	resolution: Dictionary
-) -> bool:
-
-	if resolution.is_empty():
-
-		print(
-			"queue_resolution: empty resolution"
-		)
-
-		return false
-
-
-	if not resolution.has("type"):
-
-		print(
-			"queue_resolution: missing type"
-		)
-
-		return false
-
-
-	# Insert at the front.
-	#
-	# This means a nested resolution is handled before
-	# returning to the operation that generated it.
-
-	resolution_stack.push_front(
-		resolution.duplicate(true)
-	)
-
-
-	return process_resolution_stack()
-func process_resolution_stack() -> bool:
-
-	if processing_resolution_stack:
-		return true
-
-
-	processing_resolution_stack = true
-
-
-	while not resolution_stack.is_empty():
-
-		# =================================================
-		# PLAYER DECISION REQUIRED
-		# =================================================
-
-		if waiting_for_player_input:
-
-			processing_resolution_stack = false
-			return true
-
-
-		# =================================================
-		# OPTIONAL TRIGGER WINDOW CURRENTLY OPEN
-		# =================================================
-
-		if trigger_window_active:
-
-			if not request_next_trigger_decision():
-
-				processing_resolution_stack = false
-				return false
-
-
-			if waiting_for_player_input:
-
-				processing_resolution_stack = false
-				return true
-
-
-			if trigger_window_active:
-
-				processing_resolution_stack = false
-				return true
-
-
-		# =================================================
-		# CURRENT RESOLUTION
-		# =================================================
-
-		var resolution: Dictionary = (
-			resolution_stack[0]
-		)
-
-
-		var resolution_type: String = str(
-			resolution.get(
-				"type",
-				""
-			)
-		)
-
-
-		var completed: bool = false
-
-
-		match resolution_type:
-
-			"damage":
-
-				completed = (
-					process_damage_resolution(
-						resolution
-					)
-				)
-
-
-			_:
-
-				print(
-					"process_resolution_stack: unsupported resolution type: ",
-					resolution_type
-				)
-
-				resolution_stack.pop_front()
-
-				processing_resolution_stack = false
-				return false
-
-
-		# =================================================
-		# RESOLUTION PAUSED
-		# =================================================
-
-		if not completed:
-
-			processing_resolution_stack = false
-			return true
-
-
-		# =================================================
-		# RESOLUTION COMPLETE
-		# =================================================
-
-		resolution_stack.pop_front()
-
-
-	processing_resolution_stack = false
-
-	return true
-func process_damage_resolution(
-	resolution: Dictionary
-) -> bool:
-
-	var step: String = str(
-		resolution.get(
-			"step",
-			"pre_event"
-		)
-	)
-
-
-	match step:
-
-		# =================================================
-		# STEP 1 — CREATE PRE-DAMAGE EVENT
-		# =================================================
-
-		"pre_event":
-
-			var attacker_id: int = int(
-				resolution.get(
-					"attacker_id",
-					-1
-				)
-			)
-
-
-			var target_player_index: int = int(
-				resolution.get(
-					"target_player_index",
-					-1
-				)
-			)
-
-
-			var amount: int = int(
-				resolution.get(
-					"amount",
-					0
-				)
-			)
-
-
-			var action_type: String = str(
-				resolution.get(
-					"action_type",
-					""
-				)
-			)
-
-
-			var event := GameEvent.new(
-				"damage_about_to_be_inflicted"
-			)
-
-
-			event.source_player_index = attacker_id
-			event.target_player_index = target_player_index
-			event.amount = amount
-
-			event.context[
-				"action_type"
-			] = action_type
-
-			event.context[
-				"suppressed_trigger_types"
-			] = resolution.get(
-				"suppressed_trigger_types",
-				[]
-			)
-
-
-			resolution["event"] = event
-
-			# IMPORTANT:
-			# Set the next step BEFORE processing triggers.
-			#
-			# If trigger resolution pauses the Game, when
-			# we resume we continue from after_pre_event.
-
-			resolution["step"] = "after_pre_event"
-
-
-			var event_complete: bool = (
-				process_game_event(
-					event
-				)
-			)
-
-
-			if not event_complete:
-
-				# Optional trigger window exists.
-				#
-				# The Damage resolution remains at the
-				# top of the stack.
-
-				request_next_trigger_decision()
-
-				return false
-
-
-			# No pause required.
-			return process_damage_resolution(
-				resolution
-			)
-
-
-		# =================================================
-		# STEP 2 — READ MODIFIED PRE-DAMAGE EVENT
-		# =================================================
-
-		"after_pre_event":
-
-			var event: GameEvent = (
-				resolution.get(
-					"event",
-					null
-				)
-			)
-
-
-			if event == null:
-
-				print(
-					"Damage resolution: pre-event missing"
-				)
-
-				resolution["step"] = "complete"
-				return true
-
-
-			# Protection may have cancelled the Damage.
-			if event.cancelled:
-
-				print(
-					"Damage cancelled"
-				)
-
-				resolution["step"] = "complete"
-
-				return true
-
-
-			# Protection may have modified amount or target.
-			resolution[
-				"amount"
-			] = max(
-				0,
-				int(event.amount)
-			)
-
-
-			resolution[
-				"target_player_index"
-			] = event.target_player_index
-
-
-			if int(
-				resolution["amount"]
-			) <= 0:
-
-				print(
-					"Damage reduced to 0"
-				)
-
-				resolution["step"] = "complete"
-
-				return true
-
-
-			resolution["step"] = "apply_damage"
-
-
-			return process_damage_resolution(
-				resolution
-			)
-
-
-		# =================================================
-		# STEP 3 — APPLY ACTUAL DAMAGE
-		# =================================================
-
-		"apply_damage":
-
-			var target_player_index: int = int(
-				resolution[
-					"target_player_index"
-				]
-			)
-
-
-			if target_player_index < 0 \
-			or target_player_index >= players.size():
-
-				print(
-					"Damage resolution: invalid final target"
-				)
-
-				resolution["step"] = "complete"
-
-				return true
-
-
-			var amount: int = int(
-				resolution[
-					"amount"
-				]
-			)
-
-
-			var attacker_id: int = int(
-				resolution[
-					"attacker_id"
-				]
-			)
-
-
-			var target_player = players[
-				target_player_index
+		var player_index: int = (
+			current_phase_play_order[
+				black_rose_quest_cursor
 			]
+		)
 
+		var player = players[player_index]
 
-			# =================================================
-			# USE THE EXISTING MAGE DAMAGE METHOD
-			# =================================================
+		if player.active_quests.is_empty():
 
-			target_player.mage.take_damage(
-				attacker_id,
-				amount
-			)
-
-
-			print(
-				"Player ",
-				target_player_index + 1,
-				" takes ",
-				amount,
-				" Damage from ",
-				attacker_id
-			)
-
-
-			resolution["step"] = "post_event"
-
-
-			return process_damage_resolution(
-				resolution
-			)
-
-
-		# =================================================
-		# STEP 4 — POST-DAMAGE EVENT
-		# =================================================
-
-		"post_event":
-
-			var post_event := GameEvent.new(
-				"damage_inflicted"
-			)
-
-
-			post_event.source_player_index = int(
-				resolution[
-					"attacker_id"
-				]
-			)
-
-
-			post_event.target_player_index = int(
-				resolution[
-					"target_player_index"
-				]
-			)
-
-
-			post_event.amount = int(
-				resolution[
-					"amount"
-				]
-			)
-
-
-			post_event.context[
-				"action_type"
-			] = str(
-				resolution.get(
-					"action_type",
-					""
+			var quest: QuestState = (
+				quest_manager.draw_quest(
+					self,
+					player_index
 				)
 			)
 
-
-			post_event.context[
-				"suppressed_trigger_types"
-			] = resolution.get(
-				"suppressed_trigger_types",
-				[]
-			)
-
-
-			resolution["event"] = post_event
-
-			resolution["step"] = "after_post_event"
-
-
-			var event_complete: bool = (
-				process_game_event(
-					post_event
+			if quest == null:
+				print(
+					"Black Rose Phase: "
+					+ "Player ",
+					player_index + 1,
+					" could not draw a Quest"
 				)
+
+		black_rose_quest_cursor += 1
+
+	black_rose_quest_step = 6
+	black_rose_quest_cursor = 0
+
+	return advance_black_rose_quest_steps()
+func advance_black_rose_quest_limits() -> bool:
+
+	while black_rose_quest_cursor \
+	< current_phase_play_order.size():
+
+		var player_index: int = (
+			current_phase_play_order[
+				black_rose_quest_cursor
+			]
+		)
+
+		var active_excess: int = (
+			quest_manager.get_active_excess(
+				self,
+				player_index
+			)
+		)
+
+		if active_excess > 0:
+			return request_black_rose_active_quest_limit(
+				player_index,
+				active_excess
 			)
 
+		var completed_excess: int = (
+			quest_manager.get_completed_excess(
+				self,
+				player_index
+			)
+		)
 
-			if not event_complete:
-
-				request_next_trigger_decision()
-
-				return false
-
-
-			return process_damage_resolution(
-				resolution
+		if completed_excess > 0:
+			return request_black_rose_completed_quest_limit(
+				player_index,
+				completed_excess
 			)
 
+		black_rose_quest_cursor += 1
 
-		# =================================================
-		# STEP 5 — POST EVENT FINISHED
-		# =================================================
+	black_rose_quest_step = 7
+	black_rose_quest_cursor = 0
 
-		"after_post_event":
+	return advance_black_rose_quest_steps()
+	
+func request_black_rose_active_quest_limit(
+	player_index: int,
+	discard_count: int
+) -> bool:
 
-			resolution["step"] = "complete"
+	var player = players[player_index]
 
-			return true
+	var quest_data: Array = []
 
+	for i in range(
+		player.active_quests.size()
+	):
+		var quest: QuestState = (
+			player.active_quests[i]
+		)
 
-		# =================================================
-		# COMPLETE
-		# =================================================
+		quest_data.append(
+			{
+				"quest_index": i,
+				"id": quest.get_id(),
+				"name": quest.get_name(),
+				"moon": quest.get_moon(),
+				"revealed": quest.revealed,
+				"progress": quest.progress,
+				"cube_slots":
+					quest.get_cube_slots()
+			}
+		)
 
-		"complete":
+	return request_player_input(
+		{
+			"type":
+				"black_rose_active_quest_limit",
 
-			return true
+			"phase":
+				PHASE_BLACK_ROSE,
 
+			"player_index":
+				player_index,
 
-		_:
+			"discard_count":
+				discard_count,
 
-			print(
-				"Unknown Damage resolution step: ",
-				step
-			)
+			"quests":
+				quest_data
+		}
+	)
+func submit_black_rose_active_quest_limit(
+	player_index: int,
+	quest_indices: Array
+) -> bool:
 
-			return true
+	if not waiting_for_player_input:
+		return false
+
+	if str(
+		pending_input.get(
+			"type",
+			""
+		)
+	) != "black_rose_active_quest_limit":
+		return false
+
+	if player_index != int(
+		pending_input.get(
+			"player_index",
+			-1
+		)
+	):
+		return false
+
+	var required_count: int = int(
+		pending_input.get(
+			"discard_count",
+			0
+		)
+	)
+
+	if quest_indices.size() != required_count:
+		print(
+			"Black Rose: must discard exactly ",
+			required_count,
+			" Active Quests"
+		)
+		return false
+
+	var player = players[player_index]
+
+	var selected: Array[QuestState] = []
+
+	var seen_indices: Dictionary = {}
+
+	for value in quest_indices:
+
+		var index: int = int(value)
+
+		if index < 0 \
+		or index >= player.active_quests.size():
+			return false
+
+		if seen_indices.has(index):
+			return false
+
+		seen_indices[index] = true
+
+		selected.append(
+			player.active_quests[index]
+		)
+
+	# IMPORTANT:
+	# nessun Power alla Black Rose per questi scarti.
+	for quest in selected:
+
+		if not quest_manager.discard_active_quest(
+			self,
+			player_index,
+			quest
+		):
+			return false
+
+	clear_player_input()
+
+	# Non avanziamo ancora il player.
+	# Potrebbe avere Completed Quest in eccesso.
+	return advance_black_rose_quest_steps()
+	
+func request_black_rose_completed_quest_limit(
+	player_index: int,
+	discard_count: int
+) -> bool:
+
+	var player = players[player_index]
+
+	var quest_data: Array = []
+
+	for i in range(
+		player.completed_quests.size()
+	):
+		var quest: QuestState = (
+			player.completed_quests[i]
+		)
+
+		quest_data.append(
+			{
+				"quest_index": i,
+				"id": quest.get_id(),
+				"name": quest.get_name(),
+				"moon": quest.get_moon(),
+				"solved": quest.solved
+			}
+		)
+
+	return request_player_input(
+		{
+			"type":
+				"black_rose_completed_quest_limit",
+
+			"phase":
+				PHASE_BLACK_ROSE,
+
+			"player_index":
+				player_index,
+
+			"discard_count":
+				discard_count,
+
+			"quests":
+				quest_data
+		}
+	)
+func submit_black_rose_completed_quest_limit(
+	player_index: int,
+	quest_indices: Array
+) -> bool:
+
+	if not waiting_for_player_input:
+		return false
+
+	if str(
+		pending_input.get(
+			"type",
+			""
+		)
+	) != "black_rose_completed_quest_limit":
+		return false
+
+	if player_index != int(
+		pending_input.get(
+			"player_index",
+			-1
+		)
+	):
+		return false
+
+	var required_count: int = int(
+		pending_input.get(
+			"discard_count",
+			0
+		)
+	)
+
+	if quest_indices.size() != required_count:
+		print(
+			"Black Rose: must discard exactly ",
+			required_count,
+			" Completed Quests"
+		)
+		return false
+
+	var player = players[player_index]
+
+	var selected: Array[QuestState] = []
+
+	var seen_indices: Dictionary = {}
+
+	for value in quest_indices:
+
+		var index: int = int(value)
+
+		if index < 0 \
+		or index >= player.completed_quests.size():
+			return false
+
+		if seen_indices.has(index):
+			return false
+
+		seen_indices[index] = true
+
+		selected.append(
+			player.completed_quests[index]
+		)
+
+	for quest in selected:
+
+		if not quest_manager.discard_completed_quest(
+			self,
+			player_index,
+			quest
+		):
+			return false
+
+	clear_player_input()
+
+	# Ora questo stesso player verrà ricontrollato.
+	# Siccome non ha più eccessi, advance incrementerà
+	# automaticamente il cursor.
+	return advance_black_rose_quest_steps()
+	
+func finish_black_rose_phase() -> bool:
+
+	if current_phase != PHASE_BLACK_ROSE:
+		return false
+
+	if waiting_for_player_input:
+		return false
+
+	print("")
+	print("==============================================")
+	print("          BLACK ROSE PHASE COMPLETE")
+	print("==============================================")
+	print("")
+
+	black_rose_quest_step = 0
+	black_rose_quest_cursor = 0
+
+	current_phase_play_order.clear()
+
+	return _complete_phase(
+		PHASE_BLACK_ROSE
+	)
+	

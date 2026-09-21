@@ -7,7 +7,7 @@
 [node name="Game" type="Node2D" unique_id=2036644011]
 script = ExtResource("1_80nbo")
 game_seed = 1232
-player_count = 6
+player_count = 2
 
 [node name="PowerBoard" parent="." unique_id=2134685225 instance=ExtResource("2_feb5d")]
 offset_left = 1270.0

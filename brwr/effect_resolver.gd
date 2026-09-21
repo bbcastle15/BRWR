@@ -93,6 +93,11 @@ func resolve_effect(
 		# Targeting / movement / Room interaction.
 		"modify_spell_target":
 			return _resolve_modify_spell_target(effect, context)
+		"set_target_room_from_target_evocation":
+			return resolve_set_target_room_from_target_evocation(
+				effect,
+				context
+			)
 		"move_one_model_damaged_by_effect":
 			return _resolve_move_damaged_model(effect, context)
 		"activate_room_from_owned_evocation":
@@ -698,7 +703,22 @@ func _resolve_damage(
 		context["models_damaged_by_effect"] = []
 
 	var suppressed = _suppressed_triggers(effect)
-	var target_type = _target_type(context)
+
+	# Normally the target type comes from the Spell context.
+	# A specific effect can override it.
+	#
+	# Example:
+	# {
+	#     "type": "damage",
+	#     "amount": 2,
+	#     "target": "room"
+	# }
+	var target_type = str(
+		effect.get(
+			"target",
+			_target_type(context)
+		)
+	)
 
 	if target_type == "room":
 		var room_id = _target_room(context)
@@ -706,7 +726,7 @@ func _resolve_damage(
 			print("resolve_damage: target Room missing")
 			return false
 
-		# Preserve current behaviour: Room Damage resolves by room_id.
+		# Damage every Mage in the target Room.
 		for player_index in range(game.players.size()):
 			var mage = game.players[player_index].mage
 			if mage.room_id != room_id:
@@ -731,10 +751,15 @@ func _resolve_damage(
 					}
 				)
 
+		# Damage every Evocation in the target Room.
 		for player in game.players:
 			var snapshot = player.evocations.duplicate()
+
 			for evocation in snapshot:
-				if evocation == null or evocation.room_id != room_id:
+				if evocation == null:
+					continue
+
+				if evocation.room_id != room_id:
 					continue
 
 				var dealt = _damage_evocation(
@@ -770,19 +795,38 @@ func _resolve_damage(
 			amount,
 			suppressed
 		)
-		_record_evocation_damage(context, evocation, dealt)
+
+		_record_evocation_damage(
+			context,
+			evocation,
+			dealt
+		)
+
 		return true
 
 	if target_type == "model":
-		var model_type = str(context.get("target_model_type", ""))
+		var model_type = str(
+			context.get(
+				"target_model_type",
+				""
+			)
+		)
+
 		if model_type == "" and context.has("target_player_index"):
 			model_type = "mage"
 
 		if model_type == "mage":
 			var player_index = int(
-				context.get("target_player_index", -1)
+				context.get(
+					"target_player_index",
+					-1
+				)
 			)
-			if not _valid_player(game, player_index):
+
+			if not _valid_player(
+				game,
+				player_index
+			):
 				return false
 
 			var dealt = _damage_mage(
@@ -793,13 +837,25 @@ func _resolve_damage(
 				"spell",
 				suppressed
 			)
-			_record_mage_damage(context, game, player_index, dealt)
+
+			_record_mage_damage(
+				context,
+				game,
+				player_index,
+				dealt
+			)
+
 			return true
 
 		if model_type == "evocation":
-			var evocation = context.get("target_evocation")
+			var evocation = context.get(
+				"target_evocation"
+			)
+
 			if evocation == null:
-				print("resolve_damage: target Model Evocation missing")
+				print(
+					"resolve_damage: target Model Evocation missing"
+				)
 				return false
 
 			var dealt = _damage_evocation(
@@ -809,17 +865,34 @@ func _resolve_damage(
 				amount,
 				suppressed
 			)
-			_record_evocation_damage(context, evocation, dealt)
+
+			_record_evocation_damage(
+				context,
+				evocation,
+				dealt
+			)
+
 			return true
 
-		print("resolve_damage: unknown Model type: ", model_type)
+		print(
+			"resolve_damage: unknown Model type: ",
+			model_type
+		)
+
 		return false
 
 	if target_type == "mage":
 		var player_index = int(
-			context.get("target_player_index", -1)
+			context.get(
+				"target_player_index",
+				-1
+			)
 		)
-		if not _valid_player(game, player_index):
+
+		if not _valid_player(
+			game,
+			player_index
+		):
 			return false
 
 		var dealt = _damage_mage(
@@ -830,10 +903,21 @@ func _resolve_damage(
 			"spell",
 			suppressed
 		)
-		_record_mage_damage(context, game, player_index, dealt)
+
+		_record_mage_damage(
+			context,
+			game,
+			player_index,
+			dealt
+		)
+
 		return true
 
-	print("resolve_damage: unsupported target type: ", target_type)
+	print(
+		"resolve_damage: unsupported target type: ",
+		target_type
+	)
+
 	return false
 
 
@@ -1701,15 +1785,95 @@ func _resolve_conditional(
 	context: Dictionary
 ) -> bool:
 
-	var condition = str(effect.get("condition", ""))
+	var condition: String = str(
+		effect.get("condition", "")
+	)
 
-	if condition == "last_damage_defeated_target":
-		if not bool(context.get("last_damage_defeated_target", false)):
-			return true
-		return resolve_effects(effect.get("effects", []), context)
+	var condition_met: bool = false
 
-	print("UNKNOWN CONDITION: ", condition)
-	return false
+	match condition:
+
+		"last_damage_defeated_target":
+
+			condition_met = bool(
+				context.get(
+					"last_damage_defeated_target",
+					false
+				)
+			)
+
+
+		"caster_defeated_by_last_black_rose_damage":
+
+			var caster_id: int = _caster(
+				context
+			)
+
+			var last_target: int = int(
+				context.get(
+					"last_damage_target_player_index",
+					-1
+				)
+			)
+
+			var last_source: String = str(
+				context.get(
+					"last_damage_source_model_type",
+					""
+				)
+			)
+
+			var last_damage: int = int(
+				context.get(
+					"last_damage_dealt",
+					0
+				)
+			)
+
+			var defeated: bool = bool(
+				context.get(
+					"last_damage_defeated_target",
+					false
+				)
+			)
+
+			condition_met = (
+				caster_id >= 0
+				and last_target == caster_id
+				and last_source == "black_rose"
+				and last_damage > 0
+				and defeated
+			)
+
+
+		_:
+
+			print(
+				"UNKNOWN CONDITION: ",
+				condition
+			)
+
+			return false
+
+
+	if condition_met:
+
+		return resolve_effects(
+			effect.get(
+				"effects",
+				[]
+			),
+			context
+		)
+
+
+	return resolve_effects(
+		effect.get(
+			"else_effects",
+			[]
+		),
+		context
+	)
 
 
 func _resolve_redirect_damage(
@@ -2108,4 +2272,49 @@ func _resolve_activate_then_black_rose_damage(
 		amount,
 		" Damage to ", evocation.evocation_name
 	)
+	return true
+	
+func resolve_set_target_room_from_target_evocation(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+
+	var target_evocation = context.get(
+		"target_evocation"
+	)
+
+	if target_evocation == null:
+		print(
+			"set_target_room_from_target_evocation: "
+			+ "target_evocation missing"
+		)
+		return false
+
+
+	var room_id: String = str(
+		target_evocation.room_id
+	)
+
+
+	if room_id == "":
+		print(
+			"set_target_room_from_target_evocation: "
+			+ "target Evocation has no Room"
+		)
+		return false
+
+
+	# Da questo momento gli effetti che lavorano
+	# sulla Room useranno la Room della Evocation scelta.
+	context["target_room_id"] = room_id
+
+
+	print(
+		"Target Room set from Evocation ",
+		target_evocation.evocation_name,
+		": ",
+		room_id
+	)
+
+
 	return true

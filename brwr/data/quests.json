@@ -1,0 +1,384 @@
+{
+  "holy_corruption": {
+    "name": "Holy Corruption",
+    "moon": 1,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "sacred",
+        "profane"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "return_revealed_spell_to_hand",
+        "required_elements": [
+          "sacred",
+          "profane"
+        ]
+      },
+      {
+        "type": "convert_damage",
+        "amount": 2,
+        "target": "room",
+        "range": 2
+      }
+    ],
+    "power_reward": 2
+  },
+  "contingent_mage": {
+    "name": "Contingent Mage",
+    "moon": 1,
+    "task": {
+      "trigger": "spell_resolved",
+      "spell_type": "contingency",
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "search_grimoire_to_hand",
+        "amount": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "shattered_illusion": {
+    "name": "Shattered Illusion",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "blue",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 1
+  },
+  "warrior_wizard": {
+    "name": "Warrior Wizard",
+    "moon": 1,
+    "task": {
+      "trigger": "spell_resolved",
+      "spell_type": "combat",
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "remove_evocation_with_max_health",
+        "max_health": 3,
+        "target": "evocation",
+        "range": "*"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "magic_stem": {
+    "name": "Magic Stem",
+    "moon": 1,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "fire",
+        "water"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "return_revealed_spell_to_hand",
+        "required_elements": [
+          "fire",
+          "water"
+        ]
+      },
+      {
+        "type": "convert_damage",
+        "amount": 1,
+        "target": "room",
+        "range": "*"
+      }
+    ],
+    "power_reward": 2
+  },
+  "guarding_wisdom": {
+    "name": "Guarding Wisdom",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "yellow",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "draw_grimoire_or_heal",
+        "draw": 2,
+        "heal": 3
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "dominate_fear": {
+    "name": "Dominate Fear",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "grey",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "activate_target_evocation_under_control",
+        "target": "evocation",
+        "target_archetype": "undead",
+        "range": "*"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 2
+  },
+  "earth_tempest": {
+    "name": "Earth Tempest",
+    "moon": 1,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "air",
+        "earth"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "return_revealed_spell_to_hand",
+        "required_elements": [
+          "air",
+          "earth"
+        ]
+      },
+      {
+        "type": "damage",
+        "amount": 2,
+        "target": "room",
+        "range": 2
+      }
+    ],
+    "power_reward": 2
+  },
+  "channeling_instability": {
+    "name": "Channeling Instability",
+    "moon": 1,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_instability",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 4,
+    "effects": [
+      {
+        "type": "convert_instability",
+        "amount": 2,
+        "target": "room",
+        "range": 2
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "summoner_wizard": {
+    "name": "Summoner Wizard",
+    "moon": 1,
+    "task": {
+      "trigger": "effect_resolved",
+      "keyword": "summon",
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "activate_owned_evocation",
+        "target": "evocation",
+        "target_owner": "self",
+        "range": "*"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 2
+  },
+  "guardian_mage": {
+    "name": "Guardian Mage",
+    "moon": 1,
+    "task": {
+      "trigger": "spell_resolved",
+      "spell_type": "protection"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_library",
+        "amount": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "conspirator_mage": {
+    "name": "Conspirator Mage",
+    "moon": 1,
+    "task": {
+      "trigger": "spell_resolved",
+      "spell_type": "trap"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2,
+        "target": "mage",
+        "range": "*"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "rest_the_limbs": {
+    "name": "Rest the Limbs",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "purple",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "take_crown"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "field_test": {
+    "name": "Field Test",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "red",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2,
+        "target": "mage",
+        "range": 2
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 1
+  },
+  "acquire_wealth": {
+    "name": "Acquire Wealth",
+    "moon": 1,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_color": "green",
+      "progress": 1
+    },
+    "cube_slots": 2,
+    "effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 2
+  }
+}

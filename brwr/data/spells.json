@@ -1212,5 +1212,127 @@
       }
     ]
   }
+},
+{
+  "id": "cube_of_lamentations",
+  "name": "Cube of Lamentations",
+  "school": "",
+  "copies": 3,
+  "personal": true,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "element": "profane",
+    "target": "model",
+    "range": 2,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2
+      },
+      {
+        "type": "summon_evocation",
+        "evocation_id": "succubus"
+      },
+      {
+        "type": "pain",
+        "amount": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "caster_defeated_by_last_black_rose_damage",
+        "effects": [
+          {
+            "type": "activate_summoned_evocation",
+            "strength_bonus": 2
+          }
+        ]
+      }
+    ]
+  },
+
+  "dark": {
+    "type": "combat",
+    "element": "profane",
+    "target": "model",
+    "range": 2,
+    "effects": [
+      {
+        "type": "pain",
+        "amount": 2
+      },
+      {
+        "type": "conditional",
+        "condition": "caster_defeated_by_last_black_rose_damage",
+        "effects": [
+          {
+            "type": "gain_power",
+            "amount": 2
+          }
+        ],
+        "else_effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          }
+        ]
+      }
+    ]
+  }
+},
+{
+  "id": "emet_met",
+  "name": "Emet-Met",
+  "school": "",
+  "copies": 3,
+  "personal": true,
+  "instability": false,
+
+  "light": {
+    "type": "combat",
+    "element": "earth",
+    "target": "room",
+    "range": 0,
+    "effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "nigredo"
+      },
+      {
+        "type": "activate_owned_evocation",
+        "evocation_archetype": "construct",
+        "strength_bonus": 1,
+        "speed_bonus": 1
+      }
+    ]
+  },
+
+  "dark": {
+  "type": "combat",
+  "element": "earth",
+  "target": "evocation",
+  "range": "*",
+  "target_owner": "self",
+  "target_archetype": "construct",
+
+  "effects": [
+    {
+      "type": "set_target_room_from_target_evocation"
+    },
+    {
+      "type": "damage",
+      "amount": 2,
+      "target": "room"
+    },
+    {
+      "type": "place_instability",
+      "amount": 3
+    },
+    {
+      "type": "remove_target_evocation"
+    }
+  ]
+}
 }
 ]

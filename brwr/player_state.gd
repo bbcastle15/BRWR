@@ -16,9 +16,12 @@ var evocations: Array[EvocationState] = []
 var power: int = 0
 var hand_limit: int = 6
 var available_cubes: int = MAX_CUBES
-
+var max_active_quests: int = 2
+var active_quests: Array[QuestState] = []
+var completed_quests: Array[QuestState] = []
+var personal_spell_id: String = ""
 var active_spells: Array[ActiveSpellState] = []
-
+var personal_spell_copies_received: int = 0
 var mage_id: String = ""
 var school_id: String = ""
 
