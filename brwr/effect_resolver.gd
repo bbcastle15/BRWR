@@ -20,6 +20,7 @@ func resolve_effect(
 	context: Dictionary
 ) -> bool:
 
+	context.erase("effect_resolution_error")
 	var effect_type = str(effect.get("type", ""))
 
 	match effect_type:
@@ -36,6 +37,20 @@ func resolve_effect(
 			return _resolve_pain(effect, context)
 		"convert_damage", "convert_damage_on_caster":
 			return _resolve_convert_damage(effect, context, effect_type)
+		"convert_instability":
+			return _resolve_convert_instability(effect, context)
+
+		# Quest / card-zone effects.
+		"return_revealed_spell_to_hand":
+			return _resolve_return_revealed_spell_to_hand(effect, context)
+		"search_grimoire_to_hand":
+			return _resolve_search_grimoire_to_hand(effect, context)
+		"draw_library":
+			return _resolve_draw_library(effect, context)
+		"take_crown":
+			return _resolve_take_crown(effect, context)
+		"draw_grimoire_or_heal":
+			return _resolve_draw_grimoire_or_heal(effect, context)
 
 		# Effects whose amount is derived from another game value.
 		"damage_per_black_rose_damage", \
@@ -116,6 +131,7 @@ func resolve_effect(
 			return _resolve_activate_then_black_rose_damage(effect, context)
 
 		_:
+			context["effect_resolution_error"] = "unknown_effect_type"
 			print("UNKNOWN EFFECT TYPE: ", effect_type)
 			return false
 
@@ -983,7 +999,17 @@ func _resolve_place_instability(
 	if game == null:
 		return false
 
-	var room_id = _target_room(context)
+	var room_id := ""
+
+	# A Quest/Spell Effect printed as Room range 0 always means the caster's
+	# current Room, even if another Effect in the same card uses a different
+	# selected target Room.
+	if str(effect.get("target", "")) == "room" \
+	and str(effect.get("range", "")) == "0":
+		room_id = str(context.get("caster_room_id", ""))
+	else:
+		room_id = _target_room(context)
+
 	if room_id == "":
 		print("place_instability: target Room missing")
 		return false
@@ -1144,6 +1170,396 @@ func _resolve_convert_damage(
 
 	print("resolve_convert_damage: unsupported target type: ", target_type)
 	return false
+
+
+# =============================================================================
+# QUEST / CARD-ZONE EFFECT HANDLERS
+# =============================================================================
+
+func _side_element_symbols(side: Dictionary) -> Array[String]:
+	var result: Array[String] = []
+
+	var main_element := str(side.get("element", ""))
+	if main_element != "":
+		result.append(main_element)
+
+	var enhancement = side.get("enhancement", {})
+	if enhancement is Dictionary and not enhancement.is_empty():
+		if enhancement.has("requires"):
+			for value in enhancement.get("requires", []):
+				result.append(str(value))
+		elif enhancement.has("elements"):
+			for value in enhancement.get("elements", []):
+				result.append(str(value))
+		elif enhancement.has("element"):
+			result.append(str(enhancement.get("element", "")))
+
+	return result
+
+
+func _side_has_any_element(
+	side: Dictionary,
+	required_elements: Array[String]
+) -> bool:
+	if required_elements.is_empty():
+		return true
+
+	for element in _side_element_symbols(side):
+		# The rulebook defines the All-Elements symbol as a chosen Element
+		# whenever an Element is required.
+		if element == "all" or element in required_elements:
+			return true
+
+	return false
+
+
+func _resolve_return_revealed_spell_to_hand(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var required_elements: Array[String] = []
+	for value in effect.get("required_elements", []):
+		required_elements.append(str(value))
+
+	# Backward compatibility with the first Quest JSON prototype.
+	var legacy_symbol := str(effect.get("required_symbol", ""))
+	if required_elements.is_empty() and legacy_symbol != "":
+		required_elements.append(legacy_symbol)
+
+	var player = game.players[caster_id]
+	var eligible: Array = []
+
+	for revealed in player.revealed_spells:
+		if revealed == null or revealed.spell == null:
+			continue
+		if _side_has_any_element(revealed.get_active_side(), required_elements):
+			eligible.append(revealed)
+
+	# If there is no legal card, the sentence cannot be applied and is skipped.
+	if eligible.is_empty():
+		return true
+
+	var selected = context.get("selected_revealed_spell", null)
+
+	if selected == null and context.has("selected_revealed_spell_index"):
+		var selected_index := int(context.get("selected_revealed_spell_index", -1))
+		if selected_index >= 0 and selected_index < player.revealed_spells.size():
+			selected = player.revealed_spells[selected_index]
+
+	if selected == null and context.has("selected_revealed_spell_id"):
+		var selected_id := str(context.get("selected_revealed_spell_id", ""))
+		for revealed in eligible:
+			if revealed.spell.id == selected_id:
+				selected = revealed
+				break
+
+	# Quest resolution must never silently choose for the player.
+	if selected == null:
+		if str(context.get("resolver_kind", "")) == "quest":
+			print("return_revealed_spell_to_hand: player choice missing")
+			return false
+		selected = eligible[0]
+
+	if not selected in eligible:
+		print("return_revealed_spell_to_hand: illegal selected Spell")
+		return false
+
+	player.revealed_spells.erase(selected)
+	player.add_spell_to_hand(selected.spell)
+
+	print(
+		"Player ", caster_id + 1,
+		" returned revealed ", selected.spell.card_name,
+		" to Hand"
+	)
+	return true
+
+
+func _resolve_search_grimoire_to_hand(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var player = game.players[caster_id]
+	var amount: int = maxi(0, int(effect.get("amount", 1)))
+
+	for i in range(amount):
+		if player.grimoire.is_empty():
+			break
+
+		var selected_spell = context.get("selected_grimoire_spell", null)
+		var selected_id := str(context.get("selected_grimoire_spell_id", ""))
+		var selected_index := -1
+
+		if selected_spell != null:
+			selected_index = player.grimoire.find(selected_spell)
+		elif selected_id != "":
+			for index in range(player.grimoire.size()):
+				if player.grimoire[index].id == selected_id:
+					selected_index = index
+					break
+		else:
+			if str(context.get("resolver_kind", "")) == "quest":
+				print("search_grimoire_to_hand: player choice missing")
+				return false
+			selected_index = 0
+
+		if selected_index < 0 or selected_index >= player.grimoire.size():
+			print("search_grimoire_to_hand: selected Spell not in Grimoire")
+			return false
+
+		var spell: SpellCardState = player.grimoire[selected_index]
+		player.grimoire.remove_at(selected_index)
+		player.add_spell_to_hand(spell)
+
+		print(
+			"Player ", caster_id + 1,
+			" searched ", spell.card_name,
+			" from Grimoire"
+		)
+
+	# The card explicitly instructs the Mage to shuffle the Grimoire afterwards.
+	game.shuffle_player_grimoire(caster_id)
+	return true
+
+
+func _resolve_draw_library(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 1)))
+	var requested_school := str(context.get("selected_school_id", ""))
+
+	for i in range(amount):
+		var spell: SpellCardState = null
+
+		if requested_school != "":
+			if not game.is_school_active(requested_school):
+				print("draw_library: selected School is not active: ", requested_school)
+				return false
+			spell = game.draw_from_school_library(requested_school)
+		else:
+			if str(context.get("resolver_kind", "")) == "quest":
+				print("draw_library: player School choice missing")
+				return false
+
+			for school_id in game.active_school_ids:
+				spell = game.draw_from_school_library(str(school_id))
+				if spell != null:
+					break
+
+		# If the Library cannot supply a card, that part of the Effect is skipped.
+		if spell == null:
+			continue
+
+		game.players[caster_id].add_spell_to_hand(spell)
+		print(
+			"Player ", caster_id + 1,
+			" drew ", spell.card_name,
+			" from the Library"
+		)
+
+	return true
+
+
+func _resolve_take_crown(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	return game.take_crown(caster_id)
+
+
+func _choice_as_array(value) -> Array:
+	if value == null:
+		return []
+
+	if value is Array:
+		var values: Array = value
+		return values.duplicate()
+
+	return [value]
+
+
+func _heal_any_mage_damage(
+	game,
+	player_index: int,
+	amount: int,
+	preferred_owners: Array = [],
+	allow_fallback: bool = true
+) -> int:
+	if not _valid_player(game, player_index) or amount <= 0:
+		return 0
+
+	var mage = game.players[player_index].mage
+	var healed: int = 0
+	var owner_queue: Array = preferred_owners.duplicate()
+
+	while healed < amount and not mage.damage_cubes.is_empty():
+		var owner_id: int
+
+		if not owner_queue.is_empty():
+			owner_id = int(owner_queue.pop_front())
+			if not owner_id in mage.damage_cubes:
+				continue
+		else:
+			if not allow_fallback:
+				break
+			owner_id = int(mage.damage_cubes[-1])
+
+		if mage.remove_damage(owner_id, 1) <= 0:
+			continue
+
+		game.return_owner_cubes(owner_id, 1)
+		healed += 1
+
+	if player_index < game.player_boards.size():
+		game.player_boards[player_index].refresh()
+
+	return healed
+
+
+func _resolve_draw_grimoire_or_heal(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var player = game.players[caster_id]
+
+	# Guarding Wisdom: if there is no Damage at all on the Mage Sheet,
+	# draw from the Grimoire; otherwise heal Damage.
+	if player.mage.get_damage() == 0:
+		var draw_amount: int = maxi(0, int(effect.get("draw", 0)))
+		for i in range(draw_amount):
+			game.draw_player_spell(caster_id)
+		return true
+
+	var heal_amount: int = maxi(0, int(effect.get("heal", 0)))
+	var has_explicit_selection: bool = context.has(
+		"selected_damage_owner_ids"
+	)
+	var preferred_owners: Array = _choice_as_array(
+		context.get(
+			"selected_damage_owner_ids",
+			null
+		)
+	)
+	var healed: int = _heal_any_mage_damage(
+		game,
+		caster_id,
+		heal_amount,
+		preferred_owners,
+		not has_explicit_selection
+	)
+
+	print(
+		"Guarding Wisdom: Player ", caster_id + 1,
+		" healed ", healed, " Damage"
+	)
+	return true
+
+
+func _resolve_convert_instability(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id := _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var room_id := _target_room(context)
+	if room_id == "":
+		print("convert_instability: target Room missing")
+		return false
+
+	var room = game.get_room_by_id(room_id)
+	if room == null:
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 0)))
+	if amount <= 0:
+		return true
+
+	var explicit_selection: bool = context.has(
+		"selected_instability_owner_ids"
+	)
+	var requested_owners: Array = _choice_as_array(
+		context.get(
+			"selected_instability_owner_ids",
+			null
+		)
+	)
+	var converted: int = 0
+
+	while converted < amount:
+		var old_owner: int = 999999
+
+		if not requested_owners.is_empty():
+			old_owner = int(requested_owners.pop_front())
+			if old_owner == caster_id or not old_owner in room.instability_cubes:
+				continue
+		else:
+			if explicit_selection:
+				break
+
+			for owner_value in room.instability_cubes:
+				var candidate: int = int(owner_value)
+				if candidate != caster_id:
+					old_owner = candidate
+					break
+
+		# No opponent Instability remains: the rest of the Effect cannot apply.
+		if old_owner == 999999:
+			break
+
+		# A conversion replaces the old Cube with one of the caster's Cubes.
+		if game.take_owner_cubes(caster_id, 1) <= 0:
+			break
+
+		if not room.remove_instability_cube(old_owner):
+			game.return_owner_cubes(caster_id, 1)
+			continue
+
+		game.return_owner_cubes(old_owner, 1)
+
+		if not room.add_instability_cube(caster_id):
+			# Roll back both the board and Cube pools if placement unexpectedly fails.
+			game.take_owner_cubes(old_owner, 1)
+			room.add_instability_cube(old_owner)
+			game.return_owner_cubes(caster_id, 1)
+			continue
+
+		converted += 1
+
+	print(
+		"Player ", caster_id + 1,
+		" converted ", converted,
+		" Instability in ", room_id
+	)
+	return true
 
 
 # =============================================================================
@@ -1554,6 +1970,9 @@ func _resolve_activation_effect(
 				return false
 
 			var preferred = context.get("selected_evocation_to_activate")
+			var allow_auto_select: bool = (
+				str(context.get("resolver_kind", "")) != "quest"
+			)
 			evocation = _select_evocation(
 				game,
 				preferred,
@@ -1563,7 +1982,7 @@ func _resolve_activation_effect(
 					"alive": true,
 					"in_play": true
 				},
-				true
+				allow_auto_select
 			)
 
 			if evocation == null:

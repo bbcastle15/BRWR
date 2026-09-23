@@ -2,8 +2,8 @@ extends Node2D
 
 const Tests = preload("res://tests.gd")
 
-@export var run_tests_on_ready: bool = false
-@export var auto_start_game_flow: bool = true
+@export var run_tests_on_ready: bool = true
+@export var auto_start_game_flow: bool = false
 # =========================================================
 # INTERACTIVE PHASE STATE
 # =========================================================
@@ -38,6 +38,12 @@ var resolution_stack: Array[Dictionary] = []
 var processing_resolution_stack: bool = false
 var next_resolution_id: int = 1
 var active_effect_context: Dictionary = {}
+
+# Interactive choices requested while resolving an Effect.  The public
+# request only exposes serializable option data; runtime values such as
+# RevealedSpellState / EvocationState stay here until the player answers.
+var pending_effect_choice_context: Dictionary = {}
+var pending_effect_choice_values: Dictionary = {}
 
 # =========================================================
 # ACTION PHASE STATE
@@ -1428,6 +1434,191 @@ func get_hex_distance(
 			+ abs(dq + dr)
 		) / 2
 	)
+# =============================================================================
+# TARGETING: RANGE + LINE OF SIGHT
+# =============================================================================
+# BRWR numeric Range requires Line of Sight. On the axial hex grid used by the
+# Lodge, two Room centres lie on the same straight row iff q, r, or q+r is
+# equal. Range "*" ignores Line of Sight.
+# =============================================================================
+
+func has_line_of_sight_between_coords(
+	a: Vector2i,
+	b: Vector2i
+) -> bool:
+	if a == b:
+		return true
+
+	return (
+		a.x == b.x
+		or a.y == b.y
+		or (a.x + a.y) == (b.x + b.y)
+	)
+
+
+func has_line_of_sight_between_rooms(
+	from_room_id: String,
+	to_room_id: String
+) -> bool:
+	if not is_lodge_room_id(from_room_id) \
+	or not is_lodge_room_id(to_room_id):
+		return false
+
+	var from_coord: Vector2i = room_id_to_coord(from_room_id)
+	var to_coord: Vector2i = room_id_to_coord(to_room_id)
+
+	if from_coord == Vector2i(9999, 9999) \
+	or to_coord == Vector2i(9999, 9999):
+		return false
+
+	return has_line_of_sight_between_coords(
+		from_coord,
+		to_coord
+	)
+
+
+func is_room_within_effect_range(
+	caster_room_id: String,
+	target_room_id: String,
+	range_value
+) -> bool:
+	if not is_lodge_room_id(caster_room_id) \
+	or not is_lodge_room_id(target_room_id):
+		return false
+
+	# Unlimited Range can target anywhere in the Lodge and explicitly does
+	# not require Line of Sight.
+	if str(range_value) == "*":
+		return true
+
+	if range_value == null:
+		return true
+
+	var max_range: int = int(range_value)
+	if max_range < 0:
+		return false
+
+	var caster_coord: Vector2i = room_id_to_coord(caster_room_id)
+	var target_coord: Vector2i = room_id_to_coord(target_room_id)
+
+	if caster_coord == Vector2i(9999, 9999) \
+	or target_coord == Vector2i(9999, 9999):
+		return false
+
+	if get_hex_distance(caster_coord, target_coord) > max_range:
+		return false
+
+	return has_line_of_sight_between_coords(
+		caster_coord,
+		target_coord
+	)
+
+
+func validate_target_range_from_context(
+	caster_id: int,
+	target_type: String,
+	range_value,
+	context: Dictionary
+) -> bool:
+	if caster_id < 0 or caster_id >= players.size():
+		return false
+
+	var caster_mage = players[caster_id].mage
+	if caster_mage == null:
+		return false
+
+	var normalized_target: String = target_type.strip_edges().to_lower()
+
+	# Self and Special targets do not select another Room/Model whose Range
+	# needs to be checked here.
+	if normalized_target == "" \
+	or normalized_target == "self" \
+	or normalized_target == "activating_mage" \
+	or normalized_target == "special":
+		return true
+
+	var target_room_id: String = ""
+
+	match normalized_target:
+		"room", "area", "choose_room":
+			target_room_id = str(
+				context.get("target_room_id", "")
+			)
+
+			# Some Effects determine their target later in their own resolver.
+			if target_room_id == "":
+				return true
+
+		"mage":
+			if not context.has("target_player_index"):
+				return true
+
+			var target_player_index: int = int(
+				context.get("target_player_index", -1)
+			)
+
+			if target_player_index < 0 \
+			or target_player_index >= players.size():
+				return false
+
+			var target_mage = players[target_player_index].mage
+			if target_mage == null or target_mage.in_cell:
+				return false
+
+			target_room_id = target_mage.room_id
+
+		"evocation":
+			if not context.has("target_evocation"):
+				return true
+
+			var target_evocation = context.get("target_evocation")
+			if target_evocation == null:
+				return false
+
+			target_room_id = str(target_evocation.room_id)
+
+		"model", "choose_model":
+			# A Model target may be a Mage or an Evocation.
+			if context.has("target_player_index") \
+			and int(context.get("target_player_index", -1)) >= 0:
+				var model_player_index: int = int(
+					context.get("target_player_index", -1)
+				)
+
+				if model_player_index >= players.size():
+					return false
+
+				var model_mage = players[model_player_index].mage
+				if model_mage == null or model_mage.in_cell:
+					return false
+
+				target_room_id = model_mage.room_id
+
+			elif context.has("target_evocation"):
+				var model_evocation = context.get("target_evocation")
+				if model_evocation == null:
+					return false
+
+				target_room_id = str(model_evocation.room_id)
+
+			else:
+				return true
+
+		_:
+			# Unknown/custom target types are resolved by their dedicated
+			# Effect logic rather than rejected here.
+			return true
+
+	if target_room_id == "":
+		return true
+
+	return is_room_within_effect_range(
+		caster_mage.room_id,
+		target_room_id,
+		range_value
+	)
+
+
 func move_mage_to_room_id(
 	player_index: int,
 	destination_room_id: String,
@@ -3837,6 +4028,16 @@ func place_instability(
 		room.room_name
 	)
 
+	# Effect-resolution metadata used by Quest tasks.  Because
+	# active_effect_context points to the same Dictionary used by the current
+	# effect_sequence frame, the value remains available after the resolver
+	# returns.
+	if placed > 0 	and not active_effect_context.is_empty():
+		active_effect_context["effect_instability_placed"] = (
+			int(active_effect_context.get("effect_instability_placed", 0))
+			+ placed
+		)
+
 
 	# =====================================================
 	# BLACK OVERLOAD
@@ -5310,6 +5511,775 @@ func clear_player_input():
 	player_input_resolved.emit(
 		resolved_request
 	)
+
+
+# =========================================================
+# EFFECT CHOICES
+# =========================================================
+
+func _set_interactive_effect_choice(
+	context: Dictionary,
+	context_key: String,
+	value
+) -> void:
+	context[context_key] = value
+
+	var keys: Array = context.get(
+		"_interactive_choice_keys",
+		[]
+	)
+
+	if not context_key in keys:
+		keys.append(context_key)
+
+	context["_interactive_choice_keys"] = keys
+
+
+func _clear_interactive_effect_choices(
+	context: Dictionary
+) -> void:
+	var keys: Array = context.get(
+		"_interactive_choice_keys",
+		[]
+	)
+
+	for key_value in keys:
+		context.erase(str(key_value))
+
+	context.erase("_interactive_choice_keys")
+
+
+func request_effect_choice(
+	player_index: int,
+	choice_kind: String,
+	context: Dictionary,
+	context_key: String,
+	options: Array,
+	min_select: int = 1,
+	max_select: int = 1,
+	prompt: String = ""
+) -> bool:
+	if waiting_for_player_input:
+		return false
+
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	if context_key == "" or options.is_empty():
+		return false
+
+	if min_select < 0 or max_select < min_select:
+		return false
+
+	var public_options: Array = []
+	var runtime_values: Dictionary = {}
+
+	for option_value in options:
+		if not option_value is Dictionary:
+			continue
+
+		var option: Dictionary = option_value
+		var token: String = str(option.get("token", ""))
+
+		if token == "" or runtime_values.has(token):
+			continue
+
+		runtime_values[token] = option.get("value")
+
+		var public_option: Dictionary = option.duplicate(true)
+		public_option.erase("value")
+		public_options.append(public_option)
+
+	if public_options.is_empty():
+		return false
+
+	pending_effect_choice_context = context
+	pending_effect_choice_values = runtime_values
+
+	return request_player_input({
+		"type": "effect_choice",
+		"phase": current_phase,
+		"player_index": player_index,
+		"choice_kind": choice_kind,
+		"context_key": context_key,
+		"prompt": prompt,
+		"min_select": min_select,
+		"max_select": max_select,
+		"options": public_options
+	})
+
+
+func submit_effect_choice(
+	player_index: int,
+	selection
+) -> bool:
+	if not waiting_for_player_input:
+		print("submit_effect_choice: no input requested")
+		return false
+
+	if str(pending_input.get("type", "")) != "effect_choice":
+		print("submit_effect_choice: wrong pending input type")
+		return false
+
+	if player_index != int(pending_input.get("player_index", -1)):
+		print("submit_effect_choice: wrong player")
+		return false
+
+	if pending_effect_choice_context.is_empty():
+		print("submit_effect_choice: missing live Effect context")
+		return false
+
+	var min_select: int = int(pending_input.get("min_select", 1))
+	var max_select: int = int(pending_input.get("max_select", 1))
+	var tokens: Array = []
+
+	if max_select <= 1:
+		if selection is Array:
+			var selection_array: Array = selection
+			if selection_array.size() > 1:
+				return false
+			if not selection_array.is_empty():
+				tokens.append(str(selection_array[0]))
+		elif str(selection) != "":
+			tokens.append(str(selection))
+	else:
+		if not selection is Array:
+			return false
+
+		for token_value in selection:
+			tokens.append(str(token_value))
+
+	if tokens.size() < min_select or tokens.size() > max_select:
+		return false
+
+	var seen_tokens: Dictionary = {}
+	var runtime_selection: Array = []
+
+	for token in tokens:
+		if token == "" or seen_tokens.has(token):
+			return false
+
+		if not pending_effect_choice_values.has(token):
+			return false
+
+		seen_tokens[token] = true
+		runtime_selection.append(
+			pending_effect_choice_values[token]
+		)
+
+	var context_key: String = str(
+		pending_input.get("context_key", "")
+	)
+
+	if context_key == "":
+		return false
+
+	if max_select <= 1:
+		var selected_value = null
+		if not runtime_selection.is_empty():
+			selected_value = runtime_selection[0]
+
+		_set_interactive_effect_choice(
+			pending_effect_choice_context,
+			context_key,
+			selected_value
+		)
+	else:
+		_set_interactive_effect_choice(
+			pending_effect_choice_context,
+			context_key,
+			runtime_selection
+		)
+
+	pending_effect_choice_context = {}
+	pending_effect_choice_values = {}
+
+	clear_player_input()
+
+	return process_resolution_stack()
+
+
+func _quest_effect_room_in_range(
+	caster_id: int,
+	room_id: String,
+	range_value
+) -> bool:
+	if caster_id < 0 or caster_id >= players.size():
+		return false
+
+	var mage = players[caster_id].mage
+	if mage == null or mage.in_cell:
+		return false
+
+	return is_room_within_effect_range(
+		mage.room_id,
+		room_id,
+		range_value
+	)
+
+
+func _quest_room_choice_options(
+	caster_id: int,
+	effect: Dictionary
+) -> Array:
+	var options: Array = []
+	var range_value = effect.get("range", "*")
+
+	for room_value in room_id_by_coord.values():
+		var room_id: String = str(room_value)
+
+		if not _quest_effect_room_in_range(
+			caster_id,
+			room_id,
+			range_value
+		):
+			continue
+
+		var room = get_room_by_id(room_id)
+		var room_name: String = room_id
+
+		if room != null:
+			room_name = str(room.room_name)
+
+		options.append({
+			"token": "room:" + room_id,
+			"value": room_id,
+			"room_id": room_id,
+			"name": room_name
+		})
+
+	return options
+
+
+func _quest_mage_choice_options(
+	caster_id: int,
+	effect: Dictionary
+) -> Array:
+	var options: Array = []
+	var range_value = effect.get("range", "*")
+
+	for player_index in range(players.size()):
+		if player_index == caster_id:
+			continue
+
+		var mage = players[player_index].mage
+		if mage == null or mage.in_cell:
+			continue
+
+		if not _quest_effect_room_in_range(
+			caster_id,
+			mage.room_id,
+			range_value
+		):
+			continue
+
+		options.append({
+			"token": "mage:" + str(player_index),
+			"value": player_index,
+			"player_index": player_index,
+			"name": players[player_index].player_name,
+			"room_id": mage.room_id
+		})
+
+	return options
+
+
+func _quest_evocation_choice_options(
+	caster_id: int,
+	effect: Dictionary
+) -> Array:
+	var options: Array = []
+	var range_value = effect.get("range", "*")
+	var effect_type: String = str(effect.get("type", ""))
+	var owner_filter: int = -999999
+
+	if str(effect.get("target_owner", "")) == "self" \
+	or effect_type == "activate_owned_evocation":
+		owner_filter = caster_id
+
+	var archetype_filter: String = str(
+		effect.get(
+			"target_archetype",
+			effect.get("evocation_archetype", "")
+		)
+	)
+
+	var max_health: int = int(effect.get("max_health", -1))
+
+	for owner_index in range(players.size()):
+		if owner_filter != -999999 and owner_index != owner_filter:
+			continue
+
+		var evocations: Array[EvocationState] = players[owner_index].evocations
+
+		for evocation_index in range(evocations.size()):
+			var evocation: EvocationState = evocations[evocation_index]
+
+			if evocation == null or evocation.is_defeated():
+				continue
+
+			if archetype_filter != "" \
+			and evocation.archetype != archetype_filter:
+				continue
+
+			if max_health >= 0 and evocation.health > max_health:
+				continue
+
+			if not _quest_effect_room_in_range(
+				caster_id,
+				evocation.room_id,
+				range_value
+			):
+				continue
+
+			options.append({
+				"token":
+					"evocation:"
+					+ str(owner_index)
+					+ ":"
+					+ str(evocation_index),
+				"value": evocation,
+				"owner_id": owner_index,
+				"evocation_index": evocation_index,
+				"id": evocation.evocation_id,
+				"name": evocation.evocation_name,
+				"archetype": evocation.archetype,
+				"room_id": evocation.room_id,
+				"health": evocation.health
+			})
+
+	return options
+
+
+func _quest_side_has_any_element(
+	side: Dictionary,
+	required_elements: Array[String]
+) -> bool:
+	var symbols: Array[String] = []
+
+	var main_element: String = str(side.get("element", ""))
+	if main_element != "":
+		symbols.append(main_element)
+
+	var enhancement = side.get("enhancement", {})
+	if enhancement is Dictionary:
+		var enhancement_data: Dictionary = enhancement
+
+		if enhancement_data.has("requires"):
+			for value in enhancement_data.get("requires", []):
+				symbols.append(str(value))
+		elif enhancement_data.has("elements"):
+			for value in enhancement_data.get("elements", []):
+				symbols.append(str(value))
+		elif enhancement_data.has("element"):
+			symbols.append(
+				str(enhancement_data.get("element", ""))
+			)
+
+	for symbol in symbols:
+		if symbol == "all" or symbol in required_elements:
+			return true
+
+	return false
+
+
+func _quest_request_single_choice(
+	caster_id: int,
+	choice_kind: String,
+	context: Dictionary,
+	context_key: String,
+	options: Array,
+	prompt: String
+) -> bool:
+	if options.is_empty():
+		# No legal target/choice exists.  Let the Effect resolver attempt the
+		# sentence; the Quest rules will then skip the unapplicable part.
+		return true
+
+	if options.size() == 1:
+		var only_option: Dictionary = options[0]
+		_set_interactive_effect_choice(
+			context,
+			context_key,
+			only_option.get("value")
+		)
+		return true
+
+	request_effect_choice(
+		caster_id,
+		choice_kind,
+		context,
+		context_key,
+		options,
+		1,
+		1,
+		prompt
+	)
+
+	return false
+
+
+func _prepare_quest_target_choice(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var caster_id: int = int(context.get("caster_id", -1))
+	if caster_id < 0 or caster_id >= players.size():
+		return true
+
+	var target_type: String = str(effect.get("target", ""))
+	if target_type == "":
+		return true
+
+	if target_type == "room":
+		# Range 0 explicitly means the caster's current Room.
+		if str(effect.get("range", "")) == "0":
+			return true
+
+		if str(context.get("target_room_id", "")) != "":
+			return true
+
+		return _quest_request_single_choice(
+			caster_id,
+			"target_room",
+			context,
+			"target_room_id",
+			_quest_room_choice_options(caster_id, effect),
+			"Choose a target Room."
+		)
+
+	if target_type == "mage":
+		if int(context.get("target_player_index", -1)) >= 0:
+			return true
+
+		return _quest_request_single_choice(
+			caster_id,
+			"target_mage",
+			context,
+			"target_player_index",
+			_quest_mage_choice_options(caster_id, effect),
+			"Choose a target Mage."
+		)
+
+	if target_type == "evocation":
+		var context_key: String = "target_evocation"
+
+		if str(effect.get("type", "")) == "activate_owned_evocation":
+			context_key = "selected_evocation_to_activate"
+
+		if context.get(context_key, null) != null:
+			return true
+
+		return _quest_request_single_choice(
+			caster_id,
+			"target_evocation",
+			context,
+			context_key,
+			_quest_evocation_choice_options(caster_id, effect),
+			"Choose a target Evocation."
+		)
+
+	return true
+
+
+func _prepare_quest_special_choice(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var caster_id: int = int(context.get("caster_id", -1))
+	if caster_id < 0 or caster_id >= players.size():
+		return true
+
+	var player = players[caster_id]
+	var effect_type: String = str(effect.get("type", ""))
+
+	match effect_type:
+		"return_revealed_spell_to_hand":
+			if context.get("selected_revealed_spell", null) != null \
+			or context.has("selected_revealed_spell_index") \
+			or str(context.get("selected_revealed_spell_id", "")) != "":
+				return true
+
+			var required_elements: Array[String] = []
+			for value in effect.get("required_elements", []):
+				required_elements.append(str(value))
+
+			var legacy_symbol: String = str(
+				effect.get("required_symbol", "")
+			)
+			if required_elements.is_empty() and legacy_symbol != "":
+				required_elements.append(legacy_symbol)
+
+			var options: Array = []
+
+			for revealed_index in range(player.revealed_spells.size()):
+				var revealed: RevealedSpellState = (
+					player.revealed_spells[revealed_index]
+				)
+
+				if revealed == null or revealed.spell == null:
+					continue
+
+				if not _quest_side_has_any_element(
+					revealed.get_active_side(),
+					required_elements
+				):
+					continue
+
+				options.append({
+					"token": "revealed:" + str(revealed_index),
+					"value": revealed,
+					"revealed_index": revealed_index,
+					"id": revealed.spell.id,
+					"name": revealed.spell.card_name,
+					"side": (
+						"dark"
+						if revealed.use_dark_side
+						else "light"
+					)
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"revealed_spell",
+				context,
+				"selected_revealed_spell",
+				options,
+				"Choose one eligible Revealed Spell to return to your Hand."
+			)
+
+		"search_grimoire_to_hand":
+			if context.get("selected_grimoire_spell", null) != null \
+			or str(context.get("selected_grimoire_spell_id", "")) != "":
+				return true
+
+			var options: Array = []
+
+			for spell_index in range(player.grimoire.size()):
+				var spell: SpellCardState = player.grimoire[spell_index]
+				if spell == null:
+					continue
+
+				options.append({
+					"token": "grimoire:" + str(spell_index),
+					"value": spell,
+					"grimoire_index": spell_index,
+					"id": spell.id,
+					"name": spell.card_name,
+					"school_id": spell.school_id
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"grimoire_spell",
+				context,
+				"selected_grimoire_spell",
+				options,
+				"Choose a Spell from your Grimoire."
+			)
+
+		"draw_library":
+			if str(context.get("selected_school_id", "")) != "":
+				return true
+
+			var options: Array = []
+
+			for school_value in active_school_ids:
+				var school_id: String = str(school_value)
+				var library: Array = school_libraries.get(
+					school_id,
+					[]
+				)
+				var discard: Array = school_discards.get(
+					school_id,
+					[]
+				)
+
+				if library.is_empty() and discard.is_empty():
+					continue
+
+				options.append({
+					"token": "school:" + school_id,
+					"value": school_id,
+					"school_id": school_id,
+					"name": school_id
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"library_school",
+				context,
+				"selected_school_id",
+				options,
+				"Choose a School of Magic to draw from."
+			)
+
+		"draw_grimoire_or_heal":
+			if player.mage.get_damage() <= 0:
+				return true
+
+			if context.has("selected_damage_owner_ids"):
+				return true
+
+			var heal_amount: int = maxi(
+				0,
+				int(effect.get("heal", 0))
+			)
+			var max_select: int = mini(
+				heal_amount,
+				player.mage.damage_cubes.size()
+			)
+
+			if max_select <= 0:
+				return true
+
+			var options: Array = []
+			var owner_occurrences: Dictionary = {}
+
+			for owner_value in player.mage.damage_cubes:
+				var owner_id: int = int(owner_value)
+				var ordinal: int = int(
+					owner_occurrences.get(owner_id, 0)
+				)
+				owner_occurrences[owner_id] = ordinal + 1
+
+				var owner_name: String = "Black Rose"
+				if owner_id >= 0 and owner_id < players.size():
+					owner_name = players[owner_id].player_name
+
+				options.append({
+					"token":
+						"damage:"
+						+ str(owner_id)
+						+ ":"
+						+ str(ordinal),
+					"value": owner_id,
+					"owner_id": owner_id,
+					"owner_name": owner_name
+				})
+
+			request_effect_choice(
+				caster_id,
+				"heal_damage",
+				context,
+				"selected_damage_owner_ids",
+				options,
+				0,
+				max_select,
+				"Choose up to "
+				+ str(max_select)
+				+ " Damage cubes to heal."
+			)
+			return false
+
+		"convert_instability":
+			if context.has("selected_instability_owner_ids"):
+				return true
+
+			var room_id: String = str(
+				context.get("target_room_id", "")
+			)
+			if room_id == "":
+				return true
+
+			var room = get_room_by_id(room_id)
+			if room == null:
+				return true
+
+			var amount: int = maxi(
+				0,
+				int(effect.get("amount", 0))
+			)
+			var convertible_count: int = 0
+
+			for owner_value in room.instability_cubes:
+				if int(owner_value) != caster_id:
+					convertible_count += 1
+
+			var max_convert: int = mini(
+				amount,
+				convertible_count
+			)
+			max_convert = mini(
+				max_convert,
+				player.available_cubes
+			)
+
+			if max_convert <= 0:
+				return true
+
+			var options: Array = []
+			var owner_occurrences: Dictionary = {}
+
+			for owner_value in room.instability_cubes:
+				var owner_id: int = int(owner_value)
+				if owner_id == caster_id:
+					continue
+
+				var ordinal: int = int(
+					owner_occurrences.get(owner_id, 0)
+				)
+				owner_occurrences[owner_id] = ordinal + 1
+
+				var owner_name: String = "Black Rose"
+				if owner_id >= 0 and owner_id < players.size():
+					owner_name = players[owner_id].player_name
+
+				options.append({
+					"token":
+						"instability:"
+						+ str(owner_id)
+						+ ":"
+						+ str(ordinal),
+					"value": owner_id,
+					"owner_id": owner_id,
+					"owner_name": owner_name
+				})
+
+			if options.size() <= max_convert:
+				var selected_owners: Array = []
+				for option_value in options:
+					var option: Dictionary = option_value
+					selected_owners.append(
+						int(option.get("value", -999999))
+					)
+
+				_set_interactive_effect_choice(
+					context,
+					"selected_instability_owner_ids",
+					selected_owners
+				)
+				return true
+
+			request_effect_choice(
+				caster_id,
+				"instability_cubes",
+				context,
+				"selected_instability_owner_ids",
+				options,
+				max_convert,
+				max_convert,
+				"Choose "
+				+ str(max_convert)
+				+ " Instability cubes to convert."
+			)
+			return false
+
+		_:
+			return true
+
+
+func _prepare_quest_effect_choice(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if not _prepare_quest_target_choice(effect, context):
+		return false
+
+	return _prepare_quest_special_choice(
+		effect,
+		context
+	)
 func advance_action_phase() -> bool:
 
 	if current_phase != PHASE_ACTION:
@@ -5429,7 +6399,12 @@ func advance_action_phase() -> bool:
 			"physical_actions":
 				players[
 					player_index
-				].available_physical_actions
+				].available_physical_actions,
+
+			"completed_quests":
+				_get_solvable_quest_activation_data(
+					player_index
+				)
 		}
 
 
@@ -5446,6 +6421,34 @@ func advance_action_phase() -> bool:
 
 	return advance_action_phase()
 	
+func _get_solvable_quest_activation_data(
+	player_index: int
+) -> Array:
+
+	var result: Array = []
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+
+	for i in range(player.completed_quests.size()):
+		var quest: QuestState = player.completed_quests[i]
+
+		if quest == null or not quest.is_completed():
+			continue
+
+		result.append({
+			"quest_index": i,
+			"id": quest.get_id(),
+			"name": quest.get_name(),
+			"power_reward": quest.get_power_reward()
+		})
+
+	return result
+
+
 func submit_action_activation(
 	player_index: int,
 	actions: Array
@@ -6582,7 +7585,8 @@ func finish_study_phase() -> bool:
 
 func resolve_spell_reveal_instability(
 	player_index: int,
-	spell: SpellCardState
+	spell: SpellCardState,
+	use_dark_side: bool = false
 ) -> bool:
 
 	if player_index < 0 \
@@ -6624,11 +7628,31 @@ func resolve_spell_reveal_instability(
 	#
 	# Se la Room è piena, semplicemente non viene
 	# piazzato il cubo.
-	place_instability(
+	var placed: int = place_instability(
 		player_index,
 		mage.room_id,
 		1
 	)
+
+	# The central Instability icon is itself a Spell Effect (rulebook p.16).
+	# It can therefore progress Quests such as Channeling Instability and the
+	# element-symbol Quests if at least one cube was actually placed.
+	if placed > 0:
+		var side: Dictionary = spell.get_side(use_dark_side)
+		quest_manager.process_event(
+			self,
+			{
+				"type": "effect_resolved",
+				"player_index": player_index,
+				"source_kind": "spell",
+				"effect_type": "place_instability",
+				"spell_type": str(side.get("type", "")),
+				"spell_element": str(side.get("element", "")),
+				"spell_side": side,
+				"instability_placed": placed,
+				"keywords": []
+			}
+		)
 
 
 	print(
@@ -6871,6 +7895,8 @@ func process_resolution_stack() -> bool:
 				completed = process_evocation_damage_resolution(frame)
 			"effect_sequence":
 				completed = process_effect_sequence_resolution(frame)
+			"quest_resolution":
+				completed = process_quest_resolution_frame(frame)
 			"spell_resolution":
 				completed = process_spell_resolution_frame(frame)
 			"spell_cast":
@@ -7371,6 +8397,70 @@ func _sync_evocation_damage_result_context(
 	context["last_damaged_evocation"] = evocation
 
 
+func process_quest_resolution_frame(
+	resolution: Dictionary
+) -> bool:
+	var step: String = str(resolution.get("step", "start"))
+	var player_index: int = int(resolution.get("player_index", -1))
+	var quest: QuestState = resolution.get("quest", null)
+	var context: Dictionary = resolution.get("context", {})
+
+	if player_index < 0 or player_index >= players.size() or quest == null:
+		return true
+
+	match step:
+		"start":
+			if not quest.is_completed() or quest.is_solved():
+				return true
+
+			resolution["step"] = "finish"
+			var effects: Array = quest.get_effects()
+
+			if not effects.is_empty():
+				queue_resolution({
+					"type": "effect_sequence",
+					"resolver_kind": "quest",
+					"effects": effects,
+					"index": 0,
+					"context": context
+				})
+
+			return false
+
+		"finish":
+			if bool(context.get("quest_resolution_hard_failed", false)):
+				print("Quest resolution failed due to an unsupported Effect")
+				return true
+
+			# Set the next step before awarding Power, because Power gain can open
+			# a Trap/Protection window and temporarily pause the resolution stack.
+			resolution["step"] = "emit_solved"
+			resolution["finalized"] = quest_manager.finalize_quest_solve(
+				self,
+				player_index,
+				quest
+			)
+			return false
+
+		"emit_solved":
+			# Same protection against re-entry: the event itself can open a trigger
+			# window (e.g. Master of Pleasure).
+			resolution["step"] = "done"
+			if bool(resolution.get("finalized", false)):
+				quest_manager.emit_quest_solved_event(
+					self,
+					player_index,
+					quest
+				)
+			return false
+
+		"done":
+			return true
+
+		_:
+			return true
+
+
 func process_effect_sequence_resolution(
 	resolution: Dictionary
 ) -> bool:
@@ -7408,6 +8498,27 @@ func process_effect_sequence_resolution(
 		)
 	)
 
+	context["resolver_kind"] = resolver_kind
+	context.erase("effect_resolution_error")
+
+
+	# Quest Effects may require a player decision.  Do this before applying
+	# the Effect so no game state is changed until all required choices for
+	# this sentence are known.
+	if resolver_kind == "quest":
+		if not _prepare_quest_effect_choice(
+			effect,
+			context
+		):
+			# The frame must retry the same Effect after submit_effect_choice()
+			# stores the selected runtime value in the live context.
+			resolution["index"] = index
+			return false
+
+
+	# Per-effect runtime metadata. Individual low-level operations may update
+	# these fields while this effect is being resolved.
+	context["effect_instability_placed"] = 0
 
 	active_effect_context = context
 
@@ -7416,7 +8527,7 @@ func process_effect_sequence_resolution(
 
 	match resolver_kind:
 
-		"spell":
+		"spell", "quest":
 			success = effect_resolver.resolve_effect(
 				effect,
 				context
@@ -7440,7 +8551,40 @@ func process_effect_sequence_resolution(
 	active_effect_context = {}
 
 
+	# Safety net: an Effect handler may itself request input in the future.
+	# If that happens, retry the same Effect when the answer arrives.
+	if waiting_for_player_input \
+	and str(pending_input.get("type", "")) == "effect_choice":
+		resolution["index"] = index
+		return false
+
+
 	if not success:
+
+		# A Quest Effect is still considered resolved after attempting every
+		# sentence, even when a part cannot be applied. Therefore a failed
+		# low-level Quest handler is skipped and the sequence continues.
+		if resolver_kind == "quest":
+			if str(context.get("effect_resolution_error", "")) == "unknown_effect_type":
+				context["quest_resolution_hard_failed"] = true
+				_clear_interactive_effect_choices(context)
+				print(
+					"Quest resolution aborted: unknown Effect type ",
+					str(effect.get("type", ""))
+				)
+				return true
+
+			print(
+				"Quest Effect could not be applied; skipped | effect ",
+				str(effect.get("type", ""))
+			)
+
+			_clear_interactive_effect_choices(context)
+
+			return (
+				int(resolution.get("index", 0))
+				>= effects.size()
+			)
 
 		print(
 			"Effect resolution failed | kind ",
@@ -7455,50 +8599,56 @@ func process_effect_sequence_resolution(
 
 
 	# =====================================================
-	# QUEST EVENT
+	# QUEST EVENT: EFFECT RESOLVED
 	#
-	# Only successfully resolved Spell Effects generate
-	# this Quest event.
-	#
-	# Room Effects are intentionally excluded.
+	# Any successfully resolved player-controlled Effect can be relevant to a
+	# Quest. The event carries source metadata so each Quest can discriminate
+	# Spell Effects, Room Effects, keywords and actual Instability placement.
 	# =====================================================
 
-	if resolver_kind == "spell":
+	var caster_id: int = int(context.get("caster_id", -1))
 
-		var caster_id: int = int(
-			context.get(
-				"caster_id",
-				-1
-			)
+	if caster_id >= 0 and caster_id < players.size():
+
+		var effect_type: String = str(effect.get("type", ""))
+		var keywords: Array[String] = []
+
+		# Current data model represents the Summon keyword through summon_*
+		# Effect types. Explicit keywords are also supported for future cards.
+		if effect_type.begins_with("summon_"):
+			keywords.append("summon")
+
+		for keyword in effect.get("keywords", []):
+			var keyword_string: String = str(keyword)
+			if not keyword_string in keywords:
+				keywords.append(keyword_string)
+
+		var quest_event: Dictionary = {
+			"type": "effect_resolved",
+			"player_index": caster_id,
+			"source_kind": resolver_kind,
+			"effect_type": effect_type,
+			"spell_type": str(context.get("spell_type", "")),
+			"spell_element": str(context.get("spell_element", "")),
+			"spell_side": context.get("spell_side", {}),
+			"instability_placed": int(
+				context.get("effect_instability_placed", 0)
+			),
+			"keywords": keywords,
+			"effect": effect
+		}
+
+		quest_manager.process_event(
+			self,
+			quest_event
 		)
 
-		if (
-			caster_id >= 0
-			and caster_id < players.size()
-		):
 
-			var quest_event: Dictionary = {
-				"type": "effect_resolved",
-				"player_index": caster_id,
-				"effect_type": str(
-					effect.get(
-						"type",
-						""
-					)
-				),
-				"element": str(
-					context.get(
-						"spell_element",
-						""
-					)
-				),
-				"effect": effect
-			}
-
-			quest_manager.process_event(
-				self,
-				quest_event
-			)
+	if resolver_kind == "quest":
+		# Choices belong to one sentence/Effect only. This is important for
+		# cards such as Shattered Illusion, whose two separate "Place 1"
+		# Effects may target two different Rooms.
+		_clear_interactive_effect_choices(context)
 
 
 	return (
@@ -7588,6 +8738,8 @@ func process_spell_resolution_frame(
 				)
 			)
 
+			context["spell_type"] = str(side.get("type", ""))
+			context["spell_side"] = side
 			context["spell_id"] = spell.id
 
 			context["models_damaged_by_effect"] = []
@@ -7742,11 +8894,19 @@ func process_spell_resolution_frame(
 				revealed
 			)
 
-			# A newly Revealed Spell may satisfy a
-			# state-based Quest.
-			quest_manager.check_state_quests(
+			# The entire Spell has now resolved.  This is distinct from the
+			# effect_resolved events emitted for its individual Effect entries.
+			quest_manager.process_event(
 				self,
-				caster_id
+				{
+					"type": "spell_resolved",
+					"player_index": caster_id,
+					"source_kind": "spell",
+					"spell_id": spell.id,
+					"spell_type": str(context.get("spell_type", "")),
+					"spell_element": str(context.get("spell_element", "")),
+					"spell_side": context.get("spell_side", {})
+				}
 			)
 
 			return true
@@ -7794,6 +8954,22 @@ func process_spell_cast_resolution(
 				print("Unsupported Spell type: ", spell_type)
 				return true
 
+			# If the caller already supplied a target, enforce the common
+			# Range + Line of Sight rules before consuming the prepared card.
+			# Missing targets are allowed here because some Trap/Protection and
+			# special Effects determine their target only when they resolve.
+			if not validate_target_range_from_context(
+				player_index,
+				str(side.get("target", "")),
+				side.get("range", null),
+				context
+			):
+				print(
+					"Illegal Spell target: outside Range or Line of Sight | ",
+					spell.card_name
+				)
+				return true
+
 			# The card leaves its prepared slot only after the Cast Action itself
 			# has been validated. This avoids consuming a prepared card on an
 			# invalid/unsupported cast request.
@@ -7827,7 +9003,7 @@ func process_spell_cast_resolution(
 				)
 				return true
 
-			if not resolve_spell_reveal_instability(player_index, spell):
+			if not resolve_spell_reveal_instability(player_index, spell, use_dark_side):
 				return true
 
 			resolution["step"] = "after_spell"
@@ -7880,10 +9056,16 @@ func process_trigger_spell_resolution(
 				active_spell.active = false
 				players[owner_id].active_spells.erase(active_spell)
 
+			var active_side: Dictionary = active_spell.get_side()
+
 			var context: Dictionary = {
 				"game": self,
 				"caster_id": owner_id,
 				"caster_room_id": players[owner_id].mage.room_id,
+				"spell_id": active_spell.spell.id,
+				"spell_type": spell_type,
+				"spell_element": str(active_side.get("element", "")),
+				"spell_side": active_side,
 				"trigger_event": event,
 				"marked_player_index": active_spell.target_player_index,
 				"triggering_model_type": event.source_model_type,
@@ -7902,7 +9084,7 @@ func process_trigger_spell_resolution(
 			resolution["context"] = context
 
 			if spell_type == "trap" or spell_type == "protection":
-				resolve_spell_reveal_instability(owner_id, active_spell.spell)
+				resolve_spell_reveal_instability(owner_id, active_spell.spell, active_spell.use_dark_side)
 
 			resolution["step"] = "after_effects"
 			queue_resolution({
@@ -7927,6 +9109,19 @@ func process_trigger_spell_resolution(
 					active_spell.use_dark_side
 				)
 				players[owner_id].add_revealed_spell(revealed)
+
+			quest_manager.process_event(
+				self,
+				{
+					"type": "spell_resolved",
+					"player_index": owner_id,
+					"source_kind": "spell",
+					"spell_id": active_spell.spell.id,
+					"spell_type": spell_type,
+					"spell_element": str(context.get("spell_element", "")),
+					"spell_side": context.get("spell_side", {})
+				}
+			)
 
 			print("Triggered spell resolved: ", active_spell.spell.card_name)
 			return true
@@ -7973,6 +9168,20 @@ func process_room_activation_resolution(
 
 		"after_effects":
 			room.mark_activated()
+
+			quest_manager.process_event(
+				self,
+				{
+					"type": "room_effect_resolved",
+					"player_index": player_index,
+					"source_kind": "room",
+					"room_id": room.get_room_id(),
+					"room_color": str(
+						room.get_room_data().get("color", "")
+					)
+				}
+			)
+
 			print(
 				"Player ", player_index + 1,
 				" activated ", room.room_name,
@@ -7991,20 +9200,50 @@ func _validate_player_activation(
 	if player_index < 0 or player_index >= players.size():
 		return false
 
-	if actions.is_empty() or actions.size() > 2:
+	if actions.is_empty():
 		return false
 
+	var player = players[player_index]
+	var actual_action_count: int = 0
 	var normal_spell_count: int = 0
 	var quick_spell_count: int = 0
+	var seen_quest_indices: Dictionary = {}
 
 	for action_value in actions:
 		if not action_value is Dictionary:
 			return false
-		var action_type: String = str(action_value.get("type", ""))
+
+		var action: Dictionary = action_value
+		var action_type: String = str(action.get("type", ""))
+
+		# Completed Quests are resolved during an Activation, but they are
+		# not Actions and therefore do not count toward the 1-2 Action limit.
+		if action_type == "quest":
+			var quest_index: int = int(action.get("quest_index", -1))
+
+			if quest_index < 0 \
+			or quest_index >= player.completed_quests.size():
+				return false
+
+			if seen_quest_indices.has(quest_index):
+				return false
+
+			var quest: QuestState = player.completed_quests[quest_index]
+			if quest == null or not quest.is_completed():
+				return false
+
+			seen_quest_indices[quest_index] = true
+			continue
+
+		actual_action_count += 1
+
 		if action_type == "spell":
 			normal_spell_count += 1
 		elif action_type == "quick":
 			quick_spell_count += 1
+
+	if actual_action_count < 1 or actual_action_count > 2:
+		return false
 
 	if normal_spell_count > 1 or quick_spell_count > 1:
 		return false
@@ -8030,6 +9269,47 @@ func process_activation_resolution(
 
 	var action: Dictionary = actions[action_index]
 	resolution["action_index"] = action_index + 1
+
+	# Quest resolution is an Activation timing window, not an Action.
+	# It may therefore appear before, between or after the Mage's 1-2 Actions.
+	if str(action.get("type", "")) == "quest":
+		var player = players[player_index]
+
+		# A Mage in their Cell may only perform the specific operations listed
+		# by the Cell rules; resolving a Completed Quest is not one of them.
+		if player.mage.in_cell:
+			print(
+				"Quest resolution skipped: Player ",
+				player_index + 1,
+				" is in their Cell"
+			)
+			return false
+
+		var quest_index: int = int(action.get("quest_index", -1))
+		if quest_index < 0 \
+		or quest_index >= player.completed_quests.size():
+			print("Quest resolution skipped: invalid Quest index")
+			return false
+
+		var quest: QuestState = player.completed_quests[quest_index]
+		if quest == null or not quest.is_completed():
+			print("Quest resolution skipped: Quest is no longer Completed")
+			return false
+
+		var quest_context: Dictionary = action.get("context", {}).duplicate(true)
+		quest_context["activation_player_index"] = player_index
+
+		if not quest_manager.solve_quest(
+			self,
+			player_index,
+			quest,
+			quest_context
+		):
+			print("Activation Quest resolution failed: ", quest.get_name())
+			return true
+
+		return false
+
 	if not perform_player_action(player_index, action):
 		print("Activation Action failed: ", action.get("type", ""))
 		return true
