@@ -380,5 +380,837 @@
       }
     ],
     "power_reward": 2
+  },
+  "cinder_and_gold": {
+    "name": "Cinder and Gold",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_colors": [
+        "yellow",
+        "grey"
+      ],
+      "progress": 1
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "convert_damage",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "convert_instability",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Effect of a yellow or grey Room, place 1 cube on this card. The first time you do it, reveal this card.",
+    "raw_effect": "Convert 2 Damage. Convert 2 Instability."
+  },
+  "enigmatic_sun": {
+    "name": "Enigmatic Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "purple",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "convert_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "convert_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "convert_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a purple Room, place 1 cube on this card.",
+    "raw_effect": "Convert 1 Instability. Convert 1 Instability. Convert 1 Instability."
+  },
+  "cinder_star": {
+    "name": "Cinder Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "crypt",
+      "elements": [
+        "fire",
+        "profane"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "colossus",
+        "target": "room",
+        "range": 0
+      },
+      {
+        "type": "activate_summoned_evocation"
+      }
+    ],
+    "power_reward": 1,
+    "raw_task": "After you resolve a Fire or Profane Spell while you are in the Crypt.",
+    "raw_effect": "Summon a Colossus. It activates."
+  },
+  "illusory_moon": {
+    "name": "Illusory Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "mirrors_room"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "swap_with_target_mage_optional",
+        "target": "mage",
+        "range": "*"
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Mirrors Room Effect.",
+    "raw_effect": "You may place your Mage in target Mage's Room. If you do, place the target in a Room of your choice."
+  },
+  "purple_star": {
+    "name": "Purple Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "pleasures_room",
+      "elements": [
+        "profane",
+        "magic"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_event_optional_gain_power",
+        "amount": 1,
+        "power": 2
+      }
+    ],
+    "power_reward": 1,
+    "raw_task": "After you resolve a Profane or Magic Spell while you are in the Pleasures Room.",
+    "raw_effect": "You may draw 1 Event. If you do, gain 2 Power."
+  },
+  "mortal_moon": {
+    "name": "Mortal Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "cemetery"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "gain_power_if_no_damage",
+        "amount": 1
+      },
+      {
+        "type": "heal_all_damage",
+        "target": "self"
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Cemetery Effect.",
+    "raw_effect": "If you do not have any Damage on your Mage Sheet, gain 1 Power. Heal all the Damage on your Mage Sheet."
+  },
+  "generous_moon": {
+    "name": "Generous Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "garden"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "convert_damage",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "convert_instability",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Garden Effect.",
+    "raw_effect": "Convert 1 Damage. Convert 2 Instability."
+  },
+  "wise_moon": {
+    "name": "Wise Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "bibliotheca"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_library",
+        "amount": 2
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Bibliotheca Effect.",
+    "raw_effect": "Draw 2 Spells from the Library."
+  },
+  "crimson_star": {
+    "name": "Crimson Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "alchemical_laboratory",
+      "elements": [
+        "fire",
+        "water"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_event_then_damage",
+        "amount": 1,
+        "damage": 3,
+        "range": 3
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve a Fire or Water Spell while you are in the Alchemical Laboratory.",
+    "raw_effect": "You can draw 1 Event. If you do, inflict 3 Damage to a Mage within 1."
+  },
+  "persuasive_moon": {
+    "name": "Persuasive Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "armory"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "damage_all_models_lodge",
+        "amount": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Armory Effect.",
+    "raw_effect": "Inflict 1 Damage to each Model in the Lodge."
+  },
+  "emerald_star": {
+    "name": "Emerald Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "forge",
+      "elements": [
+        "earth",
+        "fire"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_quest",
+        "amount": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Earth or Fire Spell while you are in the Forge.",
+    "raw_effect": "Draw 1 Quest."
+  },
+  "powerful_moon": {
+    "name": "Powerful Moon",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "arena"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "place_target_mage_then_damage",
+        "room_id": "arena",
+        "damage": 2,
+        "target": "mage",
+        "range": "*"
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Arena Effect.",
+    "raw_effect": "Place the target in the Arena Room. Inflict 2 Damage."
+  },
+  "citrine_star": {
+    "name": "Citrine Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "observatory",
+      "elements": [
+        "air",
+        "earth"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 2
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Air or Earth Spell while you are in the Observatory.",
+    "raw_effect": "Draw 2 Spells from your Grimoire."
+  },
+  "indigo_star": {
+    "name": "Indigo Star",
+    "moon": 2,
+    "task": {
+      "trigger": "spell_resolved",
+      "in_room_id": "oracle_room",
+      "elements": [
+        "air",
+        "water"
+      ]
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "shuffle_memories_into_grimoire_then_draw",
+        "amount": 3
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Air or Water Spell while you are in the Oracle Room.",
+    "raw_effect": "Shuffle your Memories into your Grimoire, then draw 3 Spells from your Grimoire."
+  },
+  "emerald_amethyst": {
+    "name": "Emerald Amethyst",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_colors": [
+        "green",
+        "purple"
+      ],
+      "progress": 1
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "summon_non_forgotten_evocation_choice",
+        "target": "room",
+        "range": 0
+      },
+      {
+        "type": "activate_summoned_evocation"
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Effect of a green or purple Room, place 1 cube on this card. The first time you do it, reveal this card.",
+    "raw_effect": "Summon a non-Forgotten Evocation of your choice. It activates."
+  },
+  "bloody_sun": {
+    "name": "Bloody Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "red",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "convert_damage",
+        "amount": 3,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a red Room, place 1 cube on this card.",
+    "raw_effect": "Convert 3 Damage."
+  },
+  "vial_sun": {
+    "name": "Vial Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "green",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "convert_instability",
+        "amount": 2,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a green Room, place 1 cube on this card.",
+    "raw_effect": "Inflict 2 Damage. Place 2 Instability. Convert 2 Instability."
+  },
+  "electric_ruby": {
+    "name": "Electric Ruby",
+    "moon": 2,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_colors": [
+        "red",
+        "blue"
+      ],
+      "progress": 1
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "damage_or_place_instability",
+        "damage": 2,
+        "instability": 2,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve the Effect of a red or blue Room, place 1 cube on this card. The first time you do it, reveal this card.",
+    "raw_effect": "Choose one: inflict 2 Damage; or place 2 Instability."
+  },
+  "golden_sun": {
+    "name": "Golden Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "yellow",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "complete_owned_quest_choice"
+      }
+    ],
+    "power_reward": 1,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a yellow Room, place 1 cube on this card.",
+    "raw_effect": "Complete one of your Quests."
+  },
+  "extinct_sun": {
+    "name": "Extinct Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "grey",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "target": "room",
+        "range": 0
+      },
+      {
+        "type": "activate_summoned_evocation"
+      },
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "target": "room",
+        "range": 0
+      },
+      {
+        "type": "activate_summoned_evocation"
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a grey Room, place 1 cube on this card.",
+    "raw_effect": "Summon a Cadaver. It activates. Summon a Cadaver. It activates."
+  },
+  "invisible_sun": {
+    "name": "Invisible Sun",
+    "moon": 2,
+    "task": {
+      "trigger": "effect_resolved",
+      "condition": "places_or_converts_instability_in_room_color",
+      "room_color": "blue",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "draw_library",
+        "amount": 2
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a blue Room, place 1 cube on this card.",
+    "raw_effect": "Draw 2 Spells from the Library."
+  },
+  "collective_sacrifice": {
+    "name": "Collective Sacrifice",
+    "moon": 3,
+    "task": {
+      "trigger": "damage_or_heal_evocation",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "black_rose_lose_power_or_target_mage_lose_power",
+        "black_rose": 3,
+        "mage": 2
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you inflict or heal at least 1 Damage to an Evocation, place 1 cube on this card.",
+    "raw_effect": "Choose an Effect: the Black Rose loses 3 Power; or a Mage loses 2 Power."
+  },
+  "aeromancer": {
+    "name": "Aeromancer",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "air"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "refresh_physical_action_token",
+        "amount": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Air and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "One of your exhausted Physical Action tokens becomes available."
+  },
+  "hydromancer": {
+    "name": "Hydromancer",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "water"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "power_reward": 4,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Water and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "Heal 1 Damage."
+  },
+  "geomancer": {
+    "name": "Geomancer",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "earth"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Earth and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "Place 1 Instability. Place 1 Instability. Place 1 Instability."
+  },
+  "pyromancer": {
+    "name": "Pyromancer",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "fire"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_forgotten",
+        "amount": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Fire and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "Draw 1 Spell from the Forgotten Spell Deck."
+  },
+  "elementalist": {
+    "name": "Elementalist",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "elements": [
+        "sacred",
+        "profane",
+        "magic"
+      ],
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "place_instability",
+        "amount": 4,
+        "target": "room",
+        "range": 0
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "Reveal this card. After you resolve a Sacred, Profane, or Magic Spell Effect, place 1 cube on this card.",
+    "raw_effect": "Place 4 Instability."
+  },
+  "surrender_of_power": {
+    "name": "Surrender of Power",
+    "moon": 3,
+    "task": {
+      "trigger": "room_effect_resolved",
+      "room_id": "black_rose"
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "give_forgotten_to_target",
+        "target": "mage",
+        "range": "*"
+      }
+    ],
+    "power_reward": 4,
+    "raw_task": "After you resolve the Black Rose Room Effect.",
+    "raw_effect": "Give a Forgotten Spell in your Hand to the target; the target adds that card to their Hand. If you do, solve this Quest."
+  },
+  "deep_knowledge": {
+    "name": "Deep Knowledge",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "in_room_id": "black_rose",
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "draw_three_forgotten_keep_one",
+        "draw": 3,
+        "keep": 1
+      }
+    ],
+    "power_reward": 4,
+    "raw_task": "Reveal this card. After you resolve a Spell Effect while you are in the Black Rose Room, place 1 cube on this card.",
+    "raw_effect": "Draw 3 Forgotten Spells; keep 1 of those, then discard the others."
+  },
+  "magus": {
+    "name": "Magus",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "magic"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 3
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Magic and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "Draw 3 Spells from your Grimoire."
+  },
+  "power_catalyst": {
+    "name": "Power Catalyst",
+    "moon": 3,
+    "task": {
+      "trigger": "damage_inflicted",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "damage",
+        "amount": 4,
+        "target": "mage",
+        "range": "*"
+      }
+    ],
+    "power_reward": 4,
+    "raw_task": "Reveal this card. After you inflict at least 1 Damage, place 1 cube on this card.",
+    "raw_effect": "Inflict 4 Damage."
+  },
+  "summoner": {
+    "name": "Summoner",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "profane"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "activate_evocation_or_summon_nigredo",
+        "range": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Summon and/or matching symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "The target activates under your control. If there are no Evocations in the Lodge, summon a Nigredo in a Room within 1. It activates."
+  },
+  "master_of_death": {
+    "name": "Master of Death",
+    "moon": 3,
+    "task": {
+      "trigger": "mage_defeated",
+      "condition": "defeated_mage_has_your_damage",
+      "minimum": 1,
+      "progress": 1,
+      "reveal_immediately": true
+    },
+    "cube_slots": 3,
+    "effects": [
+      {
+        "type": "steal_power_from_up_to_mages",
+        "max_targets": 3,
+        "amount_each": 1
+      }
+    ],
+    "power_reward": 2,
+    "raw_task": "Reveal this card. After a Mage who has at least one of your Damage cubes on their Mage Sheet is defeated, place 1 cube on this card.",
+    "raw_effect": "Choose up to 3 Mages and gain 1 Power from each of them."
+  },
+  "theurge": {
+    "name": "Theurge",
+    "moon": 3,
+    "task": {
+      "trigger": "effect_resolved",
+      "source_kind": "spell",
+      "condition": "revealed_spell_elements",
+      "elements": [
+        "sacred",
+        "profane"
+      ],
+      "required": 3
+    },
+    "cube_slots": 0,
+    "effects": [
+      {
+        "type": "heal",
+        "amount": 5,
+        "target": "model",
+        "range": "*"
+      }
+    ],
+    "power_reward": 3,
+    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Sacred and/or Profane symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "Heal 5 Damage."
   }
 }

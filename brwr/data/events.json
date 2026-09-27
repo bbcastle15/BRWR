@@ -16,7 +16,6 @@
       }
     ]
   },
-
   {
     "id": "black_thorns",
     "name": "Black Thorns",
@@ -34,7 +33,6 @@
       }
     ]
   },
-
   {
     "id": "rebirth_at_sunset",
     "name": "Rebirth at Sunset",
@@ -56,7 +54,6 @@
       }
     ]
   },
-
   {
     "id": "gift_to_fools",
     "name": "Gift to Fools",
@@ -74,7 +71,6 @@
       }
     ]
   },
-
   {
     "id": "dislocation",
     "name": "Dislocation",
@@ -92,7 +88,6 @@
       }
     ]
   },
-
   {
     "id": "rebirth_at_noon",
     "name": "Rebirth at Noon",
@@ -114,7 +109,6 @@
       }
     ]
   },
-
   {
     "id": "awakening",
     "name": "Awakening",
@@ -133,7 +127,6 @@
       }
     ]
   },
-
   {
     "id": "puppeteer",
     "name": "Puppeteer",
@@ -151,7 +144,6 @@
       }
     ]
   },
-
   {
     "id": "rebirth_at_dawn",
     "name": "Rebirth at Dawn",
@@ -173,7 +165,6 @@
       }
     ]
   },
-
   {
     "id": "a_hard_lesson",
     "name": "A Hard Lesson",
@@ -195,7 +186,6 @@
       }
     ]
   },
-
   {
     "id": "undead_army",
     "name": "Undead Army",
@@ -214,7 +204,6 @@
       }
     ]
   },
-
   {
     "id": "black_overload",
     "name": "Black Overload",
@@ -232,7 +221,6 @@
       }
     ]
   },
-
   {
     "id": "midnight_rebirth",
     "name": "Midnight Rebirth",
@@ -248,6 +236,478 @@
         "type": "black_rose_instability",
         "room_id": "black_rose",
         "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "abandonment",
+    "name": "Abandonment",
+    "moon": 2,
+    "crown": false,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a grey Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "grey",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "battle",
+    "name": "Battle",
+    "moon": 2,
+    "crown": false,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a red Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "red",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "knowledge",
+    "name": "Knowledge",
+    "moon": 2,
+    "crown": true,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a yellow Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "yellow",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "illness",
+    "name": "Illness",
+    "moon": 2,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 3,
+    "reveal_power": 1,
+    "discard_power": 2,
+    "text": "The Black Rose places 2 Instability in each Room in which there is at least one Mage, then each Mage is placed in their own Cell.",
+    "effects": [
+      {
+        "type": "black_rose_instability_each_room_with_mage",
+        "amount": 2
+      },
+      {
+        "type": "return_all_mages_to_cells"
+      }
+    ]
+  },
+  {
+    "id": "clairvoyance",
+    "name": "Clairvoyance",
+    "moon": 2,
+    "crown": false,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a blue Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "blue",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "vision",
+    "name": "Vision",
+    "moon": 2,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, draws 1 Quest from the Third Moon Deck.",
+    "effects": [
+      {
+        "type": "each_mage_draw_quest_from_moon",
+        "moon": 3,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "wave_of_fatigue",
+    "name": "Wave of Fatigue",
+    "moon": 2,
+    "crown": true,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, discards 1 Spell from their Hand. If a Mage cannot discard any Spell, they lose 1 Power.",
+    "effects": [
+      {
+        "type": "each_mage_discard_hand_or_lose_power",
+        "discard_amount": 1,
+        "power_loss": 1
+      }
+    ]
+  },
+  {
+    "id": "growth",
+    "name": "Growth",
+    "moon": 2,
+    "crown": false,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a green Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "green",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "revolt_of_the_servants",
+    "name": "Revolt of the Servants",
+    "moon": 2,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 1,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, suffers Damage from the Black Rose equal to the sum of the Strength values of their own Evocations. If a Mage does not own any Evocations, they lose 1 Power.",
+    "effects": [
+      {
+        "type": "each_mage_black_rose_damage_by_owned_evocation_strength_or_lose_power",
+        "power_loss": 1
+      }
+    ]
+  },
+  {
+    "id": "tribute_of_the_command",
+    "name": "Tribute of the Command",
+    "moon": 2,
+    "crown": false,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 1,
+    "discard_power": 3,
+    "text": "At the start of the Action Phase, in play order, each Mage may suffer 1 Damage from the Black Rose. If they do, they choose an Evocation; that Evocation activates under their control.",
+    "effects": [
+      {
+        "type": "each_mage_optional_black_rose_damage_then_activate_evocation",
+        "damage": 1
+      }
+    ]
+  },
+  {
+    "id": "renovation",
+    "name": "Renovation",
+    "moon": 2,
+    "crown": true,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 3,
+    "discard_power": 0,
+    "text": "Each Mage, in play order, may give one of their Trophies to the Black Rose. If they do, that Mage places 2 Instability in a Room within 0.",
+    "effects": [
+      {
+        "type": "each_mage_optional_give_trophy_then_place_instability",
+        "amount": 2,
+        "range": 0
+      }
+    ]
+  },
+  {
+    "id": "reward_the_slothful",
+    "name": "Reward the Slothful",
+    "moon": 2,
+    "crown": true,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage who has no Completed Quests gains 1 Power.",
+    "effects": [
+      {
+        "type": "each_mage_without_completed_quests_gain_power",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "instinct",
+    "name": "Instinct",
+    "moon": 2,
+    "crown": true,
+    "phase": "action",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "When a Mage activates a purple Room, the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_activate_room_color_black_rose_gain_power",
+        "color": "purple",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "only_war",
+    "name": "Only War",
+    "moon": 3,
+    "crown": false,
+    "phase": "action",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 3,
+    "text": "After a Mage resolves a Contingency or Protection Spell Effect, that Mage suffers 2 Damage from the Black Rose.",
+    "effects": [
+      {
+        "type": "on_spell_types_resolved_black_rose_damage",
+        "spell_types": [
+          "contingency",
+          "protection"
+        ],
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "remembrance",
+    "name": "Remembrance",
+    "moon": 3,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Draw 1 Event from the First Moon Deck. Draw 1 Event from the Second Moon Deck.",
+    "effects": [
+      {
+        "type": "draw_event_from_moon",
+        "moon": 1,
+        "amount": 1
+      },
+      {
+        "type": "draw_event_from_moon",
+        "moon": 2,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "assault",
+    "name": "Assault",
+    "moon": 3,
+    "crown": false,
+    "phase": "action",
+    "slot": 2,
+    "reveal_power": 2,
+    "discard_power": 3,
+    "text": "When a Mage inflicts Damage with a Combat Spell, they inflict +1 Damage.",
+    "effects": [
+      {
+        "type": "combat_spell_damage_bonus",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "manipulating_the_past",
+    "name": "Manipulating the Past",
+    "moon": 3,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "text": "Each Mage discards 1 Solved Quest. If a Mage does not have any Solved Quests, that Mage loses 3 Power.",
+    "effects": [
+      {
+        "type": "each_mage_discard_solved_quest_or_lose_power",
+        "power_loss": 3
+      }
+    ]
+  },
+  {
+    "id": "pledge",
+    "name": "Pledge",
+    "moon": 3,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 1,
+    "reveal_power": 2,
+    "discard_power": 2,
+    "text": "The Black Rose inflicts 3 Damage to each Mage.",
+    "effects": [
+      {
+        "type": "black_rose_damage_all_mages",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "only_peace",
+    "name": "Only Peace",
+    "moon": 3,
+    "crown": true,
+    "phase": "action",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 3,
+    "text": "After a Mage resolves a Combat or Trap Spell Effect, that Mage suffers 1 Damage from the Black Rose.",
+    "effects": [
+      {
+        "type": "on_spell_types_resolved_black_rose_damage",
+        "spell_types": [
+          "combat",
+          "trap"
+        ],
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "gold_to_the_king",
+    "name": "Gold to the King",
+    "moon": 3,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 4,
+    "discard_power": 0,
+    "text": "The Mage who owns the Crown gains 2 Power.",
+    "effects": [
+      {
+        "type": "crown_owner_gain_power",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "woe",
+    "name": "Woe",
+    "moon": 3,
+    "crown": false,
+    "phase": "black_rose",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 1,
+    "text": "The Black Rose converts up to 4 Damage to each Mage. The Black Rose inflicts 2 Damage to each Mage that did not convert any Damage due to this Effect.",
+    "effects": [
+      {
+        "type": "black_rose_convert_damage_all_mages_then_damage_if_none",
+        "convert_max": 4,
+        "damage": 2
+      }
+    ]
+  },
+  {
+    "id": "infinite_knowledge",
+    "name": "Infinite Knowledge",
+    "moon": 3,
+    "crown": true,
+    "phase": "always",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 2,
+    "text": "When a Mage resolves a Quest, that Mage gains 2 Power and the Black Rose gains 1 Power.",
+    "effects": [
+      {
+        "type": "on_quest_resolved_mage_and_black_rose_gain_power",
+        "mage_amount": 2,
+        "black_rose_amount": 1
+      }
+    ]
+  },
+  {
+    "id": "immortals",
+    "name": "Immortals",
+    "moon": 3,
+    "crown": false,
+    "phase": "always",
+    "slot": 3,
+    "reveal_power": 3,
+    "discard_power": 3,
+    "text": "Heal all the Damage on each Evocation in the Lodge. Evocations cannot suffer Damage.",
+    "effects": [
+      {
+        "type": "heal_all_evocations"
+      },
+      {
+        "type": "evocations_damage_immunity"
+      }
+    ]
+  },
+  {
+    "id": "false_mercy",
+    "name": "False Mercy",
+    "moon": 3,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 4,
+    "discard_power": 0,
+    "text": "Heal all the Damage to each Mage, except Damage from the Black Rose. The Black Rose inflicts 2 Damage to each Mage without any Black Rose Damage on their Mage Sheet.",
+    "effects": [
+      {
+        "type": "heal_non_black_rose_damage_then_damage_mages_without_black_rose_damage",
+        "damage": 2
+      }
+    ]
+  },
+  {
+    "id": "dominion",
+    "name": "Dominion",
+    "moon": 3,
+    "crown": true,
+    "phase": "always",
+    "slot": 3,
+    "reveal_power": 2,
+    "discard_power": 2,
+    "text": "When a Mage is defeated, their Trophy is obtained by the Black Rose instead of whoever defeated that Mage.",
+    "effects": [
+      {
+        "type": "black_rose_claims_defeated_mage_trophies"
+      }
+    ]
+  },
+  {
+    "id": "power_infusion",
+    "name": "Power Infusion",
+    "moon": 3,
+    "crown": false,
+    "phase": "instant",
+    "slot": 0,
+    "reveal_power": 0,
+    "discard_power": 3,
+    "text": "At the start of the Action Phase, in play order, each Mage may lose 2 Power. If they do, that Mage draws 1 Spell from the Forgotten Spell Deck.",
+    "effects": [
+      {
+        "type": "each_mage_optional_lose_power_draw_forgotten",
+        "power_loss": 2,
+        "amount": 1
       }
     ]
   }

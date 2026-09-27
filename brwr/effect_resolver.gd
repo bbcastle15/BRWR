@@ -39,6 +39,12 @@ func resolve_effect(
 			return _resolve_convert_damage(effect, context, effect_type)
 		"convert_instability":
 			return _resolve_convert_instability(effect, context)
+		"convert_damage_each_other_mage":
+			return _resolve_convert_damage_each_other_mage(effect, context)
+		"damage_within_distance":
+			return _resolve_damage_within_distance_effect(effect, context)
+		"place_instability_per_damaged_model":
+			return _resolve_place_instability_per_damaged_model(effect, context)
 
 		# Quest / card-zone effects.
 		"return_revealed_spell_to_hand":
@@ -51,9 +57,50 @@ func resolve_effect(
 			return _resolve_take_crown(effect, context)
 		"draw_grimoire_or_heal":
 			return _resolve_draw_grimoire_or_heal(effect, context)
+		"draw_grimoire":
+			return _resolve_draw_grimoire(effect, context)
+		"draw_quest":
+			return _resolve_draw_quest(effect, context)
+		"draw_forgotten":
+			return _resolve_draw_forgotten(effect, context)
+		"swap_with_target_mage_optional":
+			return _resolve_swap_with_target_mage_optional(effect, context)
+		"draw_event_optional_gain_power":
+			return _resolve_draw_event_optional_gain_power(effect, context)
+		"gain_power_if_no_damage":
+			return _resolve_gain_power_if_no_damage(effect, context)
+		"heal_all_damage":
+			return _resolve_heal_all_damage(effect, context)
+		"draw_event_then_damage":
+			return _resolve_draw_event_then_damage(effect, context)
+		"damage_all_models_lodge":
+			return _resolve_damage_all_models_lodge(effect, context)
+		"place_target_mage_then_damage":
+			return _resolve_place_target_mage_then_damage(effect, context)
+		"shuffle_memories_into_grimoire_then_draw":
+			return _resolve_shuffle_memories_into_grimoire_then_draw(effect, context)
+		"summon_non_forgotten_evocation_choice":
+			return _resolve_summon_non_forgotten_evocation_choice(effect, context)
+		"damage_or_place_instability":
+			return _resolve_damage_or_place_instability(effect, context)
+		"complete_owned_quest_choice":
+			return _resolve_complete_owned_quest_choice(effect, context)
+		"black_rose_lose_power_or_target_mage_lose_power":
+			return _resolve_black_rose_or_mage_power_loss(effect, context)
+		"refresh_physical_action_token":
+			return _resolve_refresh_physical_action_token(effect, context)
+		"give_forgotten_to_target":
+			return _resolve_give_forgotten_to_target(effect, context)
+		"draw_three_forgotten_keep_one":
+			return _resolve_draw_three_forgotten_keep_one(effect, context)
+		"activate_evocation_or_summon_nigredo":
+			return _resolve_activate_evocation_or_summon_nigredo(effect, context)
+		"steal_power_from_up_to_mages":
+			return _resolve_steal_power_from_up_to_mages(effect, context)
 
 		# Effects whose amount is derived from another game value.
 		"damage_per_black_rose_damage", \
+		"damage_per_self_damage", \
 		"damage_secondary_mage_per_self_damage", \
 		"gain_power_per_black_rose_damage", \
 		"place_instability_at_defeated_mage_room_per_self_damage", \
@@ -179,6 +226,13 @@ func _target_type(context: Dictionary) -> String:
 	return result
 
 
+func _is_dummy_target(context: Dictionary) -> bool:
+	return (
+		bool(context.get("target_is_dummy", false))
+		or str(context.get("target_model_type", "")) == "dummy"
+	)
+
+
 func _target_room(context: Dictionary) -> String:
 	return str(
 		context.get(
@@ -255,6 +309,9 @@ func _damage_mage(
 	if not _valid_player(game, player_index):
 		return 0
 
+	if attacker_id >= 0 and attacker_id == player_index:
+		return 0
+
 	return game.deal_damage(
 		attacker_id,
 		player_index,
@@ -273,6 +330,13 @@ func _damage_evocation(
 ) -> int:
 
 	if game == null or evocation == null:
+		return 0
+
+	var controller_id: int = int(evocation.controller_id)
+	if controller_id < 0:
+		controller_id = int(evocation.owner_id)
+
+	if attacker_id >= 0 and controller_id == attacker_id:
 		return 0
 
 	return game.deal_damage_to_evocation(
@@ -648,7 +712,8 @@ func _remove_evocation(
 		"removed"
 	)
 
-	owner.evocations.remove_at(index)
+	if not game.finalize_evocation_removal(evocation):
+		return false
 
 	if store_result:
 		context["removed_evocation"] = evocation
@@ -735,6 +800,10 @@ func _resolve_damage(
 			_target_type(context)
 		)
 	)
+
+	if _is_dummy_target(context) \
+	and target_type in ["model", "mage", "evocation"]:
+		return true
 
 	if target_type == "room":
 		var room_id = _target_room(context)
@@ -942,25 +1011,144 @@ func _resolve_heal(
 	context: Dictionary
 ) -> bool:
 
-	var game = _game(context)
-	var target = int(context.get("target_player_index", -1))
+	if _is_dummy_target(context):
+		return true
 
-	if game == null or target < 0:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null:
 		return false
 
-	game.heal_damage(
-		target,
-		int(
-			effect.get(
-				"owner_id",
-				context.get("damage_owner_id", -999)
-			)
-		),
-		int(effect.get("amount", 0))
+	var amount: int = int(
+		effect.get(
+			"amount",
+			0
+		)
 	)
 
-	return true
+	if amount <= 0:
+		return true
 
+	var selected_owners: Array = _choice_as_array(
+		context.get(
+			"selected_damage_owner_ids",
+			null
+		)
+	)
+
+	var target_model_type: String = str(
+		context.get(
+			"target_model_type",
+			""
+		)
+	)
+
+	if target_model_type == "" \
+	and int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	) >= 0:
+		target_model_type = "mage"
+
+	var healed: int = 0
+
+	if target_model_type == "evocation":
+		var evocation = context.get(
+			"target_evocation"
+		)
+
+		if evocation == null:
+			return false
+
+		var requested_owners: Array = selected_owners.duplicate()
+
+		while healed < amount \
+		and not evocation.damage_cubes.is_empty():
+			var cube_owner: int = int(
+				evocation.damage_cubes[0]
+			)
+
+			if not requested_owners.is_empty():
+				cube_owner = int(
+					requested_owners.pop_front()
+				)
+
+			var cube_index: int = evocation.damage_cubes.find(
+				cube_owner
+			)
+
+			if cube_index == -1:
+				if selected_owners.is_empty():
+					cube_index = 0
+					cube_owner = int(
+						evocation.damage_cubes[0]
+					)
+				else:
+					continue
+
+			evocation.damage_cubes.remove_at(
+				cube_index
+			)
+			game.return_owner_cubes(
+				cube_owner,
+				1
+			)
+			healed += 1
+
+		context["effect_target_model_type"] = "evocation"
+
+	else:
+		var target: int = int(
+			context.get(
+				"target_player_index",
+				caster_id
+			)
+		)
+
+		if not _valid_player(
+			game,
+			target
+		):
+			return false
+
+		var requested_owners: Array = selected_owners.duplicate()
+
+		while healed < amount \
+		and not game.players[
+			target
+		].mage.damage_cubes.is_empty():
+			var cube_owner: int = int(
+				game.players[
+					target
+				].mage.damage_cubes[0]
+			)
+
+			if not requested_owners.is_empty():
+				cube_owner = int(
+					requested_owners.pop_front()
+				)
+
+			var removed: int = game.heal_damage(
+				target,
+				cube_owner,
+				1
+			)
+
+			if removed <= 0:
+				if selected_owners.is_empty():
+					break
+				continue
+
+			healed += removed
+
+		context["effect_target_model_type"] = "mage"
+
+	context["effect_damage_healed"] = healed
+
+	return true
 
 func _resolve_power(
 	effect: Dictionary,
@@ -980,6 +1168,9 @@ func _resolve_power(
 			game.add_black_rose_power(amount)
 		else:
 			game.add_player_power(caster_id, amount)
+		return true
+
+	if _is_dummy_target(context):
 		return true
 
 	var target = int(context.get("target_player_index", -1))
@@ -1017,10 +1208,29 @@ func _resolve_place_instability(
 	var caster_id = _caster(context)
 	var amount = int(effect.get("amount", 1))
 
+	var before_count: int = 0
+	var target_room = game.get_room_by_id(
+		room_id
+	)
+
+	if target_room != null:
+		before_count = target_room.get_instability_count()
+
 	if caster_id == -1:
 		game.place_black_rose_instability(room_id, amount)
 	else:
 		game.place_player_instability(caster_id, room_id, amount)
+
+	var after_count: int = before_count
+
+	if target_room != null:
+		after_count = target_room.get_instability_count()
+
+	context["effect_target_room_id"] = room_id
+	context["effect_instability_placed"] = max(
+		0,
+		after_count - before_count
+	)
 
 	return true
 
@@ -1066,6 +1276,10 @@ func _resolve_convert_damage(
 	if amount <= 0:
 		return true
 
+	if mode != "convert_damage_on_caster" \
+	and _is_dummy_target(context):
+		return true
+
 	if mode == "convert_damage_on_caster":
 		var new_owner = int(effect.get("converter_owner_id", -1))
 		var converted = convert_damage_cubes(
@@ -1076,6 +1290,9 @@ func _resolve_convert_damage(
 
 		if caster_id < game.player_boards.size():
 			game.player_boards[caster_id].refresh()
+
+		context["effect_damage_converted"] = converted
+		context["effect_target_model_type"] = "mage"
 
 		print(
 			"Converted ", converted,
@@ -1091,6 +1308,9 @@ func _resolve_convert_damage(
 		if not _valid_player(game, player_index):
 			return false
 
+		if player_index == caster_id:
+			return true
+
 		var converted = convert_damage_cubes(
 			game.players[player_index].mage.damage_cubes,
 			caster_id,
@@ -1099,6 +1319,9 @@ func _resolve_convert_damage(
 
 		if player_index < game.player_boards.size():
 			game.player_boards[player_index].refresh()
+
+		context["effect_damage_converted"] = converted
+		context["effect_target_model_type"] = "mage"
 
 		print(
 			"Convert damage: P", caster_id + 1,
@@ -1112,11 +1335,21 @@ func _resolve_convert_damage(
 		if evocation == null:
 			return false
 
+		var controller_id: int = int(evocation.controller_id)
+		if controller_id < 0:
+			controller_id = int(evocation.owner_id)
+
+		if controller_id == caster_id:
+			return true
+
 		var converted = convert_damage_cubes(
 			evocation.damage_cubes,
 			caster_id,
 			amount
 		)
+		context["effect_damage_converted"] = converted
+		context["effect_target_model_type"] = "evocation"
+
 		print(
 			"Convert damage: P", caster_id + 1,
 			" converted ", converted,
@@ -1129,10 +1362,15 @@ func _resolve_convert_damage(
 		if room_id == "":
 			return false
 
+		var total_converted: int = 0
+
 		for player_index in range(game.players.size()):
 			var mage = game.players[player_index].mage
 			if mage.room_id != room_id \
 			or game.is_mage_in_cell(player_index):
+				continue
+
+			if player_index == caster_id:
 				continue
 
 			var converted = convert_damage_cubes(
@@ -1140,6 +1378,7 @@ func _resolve_convert_damage(
 				caster_id,
 				amount
 			)
+			total_converted += converted
 
 			if player_index < game.player_boards.size():
 				game.player_boards[player_index].refresh()
@@ -1156,21 +1395,192 @@ func _resolve_convert_damage(
 				or evocation.room_id != room_id:
 					continue
 
+				var controller_id: int = int(evocation.controller_id)
+				if controller_id < 0:
+					controller_id = int(evocation.owner_id)
+
+				if controller_id == caster_id:
+					continue
+
 				var converted = convert_damage_cubes(
 					evocation.damage_cubes,
 					caster_id,
 					amount
 				)
+				total_converted += converted
 				print(
 					"Albify Room: converted ", converted,
 					" Damage on ", evocation.evocation_name
 				)
 
+		context["effect_target_room_id"] = room_id
+		context["effect_damage_converted"] = total_converted
 		return true
 
 	print("resolve_convert_damage: unsupported target type: ", target_type)
 	return false
 
+
+
+func _resolve_convert_damage_each_other_mage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var primary_target: int = int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	)
+
+	var amount: int = int(
+		effect.get(
+			"amount",
+			0
+		)
+	)
+
+	if amount <= 0:
+		return true
+
+	for player_index in range(
+		game.players.size()
+	):
+		# "each other Mage" excludes the primary target. The caster also
+		# ignores conversion caused by their own Effect.
+		if player_index == primary_target \
+		or player_index == caster_id \
+		or game.is_mage_in_cell(player_index):
+			continue
+
+		var converted: int = convert_damage_cubes(
+			game.players[
+				player_index
+			].mage.damage_cubes,
+			caster_id,
+			amount
+		)
+
+		if player_index < game.player_boards.size():
+			game.player_boards[
+				player_index
+			].refresh()
+
+		print(
+			"Killer Fog: converted ",
+			converted,
+			" Damage on Player ",
+			player_index + 1
+		)
+
+	return true
+
+
+func _resolve_damage_within_distance_effect(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null:
+		return false
+
+	var room_id: String = _target_room(
+		context
+	)
+
+	if room_id == "":
+		return false
+
+	var amount: int = int(
+		effect.get(
+			"amount",
+			0
+		)
+	)
+	var distance: int = int(
+		effect.get(
+			"distance",
+			0
+		)
+	)
+
+	if amount <= 0:
+		return true
+
+	# Reuse the existing Lodge-distance damage primitive. The helper also
+	# records every damaged Model in the current Effect context.
+	return _damage_within_distance(
+		game,
+		caster_id,
+		room_id,
+		distance,
+		amount,
+		context
+	)
+
+
+func _resolve_place_instability_per_damaged_model(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(
+		game,
+		caster_id
+	):
+		return false
+
+	var room_id: String = _target_room(
+		context
+	)
+
+	if room_id == "":
+		return false
+
+	var damaged_models: Array = context.get(
+		"models_damaged_by_effect",
+		[]
+	)
+
+	var amount_per_model: int = int(
+		effect.get(
+			"amount_per_model",
+			1
+		)
+	)
+	var cap: int = int(
+		effect.get(
+			"max",
+			999
+		)
+	)
+
+	var amount: int = min(
+		damaged_models.size()
+		* amount_per_model,
+		cap
+	)
+
+	if amount <= 0:
+		return true
+
+	game.place_player_instability(
+		caster_id,
+		room_id,
+		amount
+	)
+
+	return true
 
 # =============================================================================
 # QUEST / CARD-ZONE EFFECT HANDLERS
@@ -1554,12 +1964,869 @@ func _resolve_convert_instability(
 
 		converted += 1
 
+	context["effect_target_room_id"] = room_id
+	context["effect_instability_converted"] = converted
+
 	print(
 		"Player ", caster_id + 1,
 		" converted ", converted,
 		" Instability in ", room_id
 	)
 	return true
+
+
+
+func _resolve_draw_grimoire(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = max(
+		0,
+		int(
+			effect.get(
+				"amount",
+				1
+			)
+		)
+	)
+
+	for i in range(amount):
+		game.draw_player_spell(
+			caster_id
+		)
+
+	return true
+
+
+func _resolve_draw_quest(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = max(
+		0,
+		int(
+			effect.get(
+				"amount",
+				1
+			)
+		)
+	)
+
+	for i in range(amount):
+		game.quest_manager.draw_quest(
+			game,
+			caster_id
+		)
+
+	return true
+
+
+func _resolve_draw_forgotten(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = max(
+		0,
+		int(
+			effect.get(
+				"amount",
+				1
+			)
+		)
+	)
+
+	for i in range(amount):
+		game.draw_forgotten_spell(
+			caster_id
+		)
+
+	return true
+
+
+func _place_mage_direct(
+	game,
+	player_index: int,
+	room_id: String
+) -> bool:
+	if not _valid_player(
+		game,
+		player_index
+	):
+		return false
+
+	var coord: Vector2i = game.room_id_to_coord(
+		room_id
+	)
+
+	if coord == Vector2i(9999, 9999):
+		return false
+
+	game.players[player_index].mage.room_id = room_id
+	game.players[player_index].mage.room_coord = coord
+	game.players[player_index].mage.in_cell = false
+
+	return true
+
+
+func _resolve_swap_with_target_mage_optional(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if not bool(
+		context.get(
+			"quest_optional_yes",
+			false
+		)
+	):
+		return true
+
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	)
+
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id):
+		return false
+
+	var target_room_id: String = game.players[
+		target_id
+	].mage.room_id
+	var destination_room_id: String = str(
+		context.get(
+			"secondary_room_id",
+			""
+		)
+	)
+
+	if target_room_id == "" \
+	or destination_room_id == "":
+		return false
+
+	if not _place_mage_direct(
+		game,
+		caster_id,
+		target_room_id
+	):
+		return false
+
+	return _place_mage_direct(
+		game,
+		target_id,
+		destination_room_id
+	)
+
+
+func _resolve_draw_event_optional_gain_power(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if not bool(
+		context.get(
+			"quest_optional_yes",
+			false
+		)
+	):
+		return true
+
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var drawn = game.draw_event(
+		caster_id,
+		{
+			"game": game,
+			"drawing_player_index": caster_id
+		}
+	)
+
+	if drawn == null:
+		return false
+
+	game.add_player_power(
+		caster_id,
+		int(
+			effect.get(
+				"power",
+				0
+			)
+		)
+	)
+
+	return true
+
+
+func _resolve_gain_power_if_no_damage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	if game.players[
+		caster_id
+	].mage.get_damage() <= 0:
+		game.add_player_power(
+			caster_id,
+			int(
+				effect.get(
+					"amount",
+					0
+				)
+			)
+		)
+
+	return true
+
+
+func _resolve_heal_all_damage(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var mage = game.players[
+		caster_id
+	].mage
+	var healed: int = 0
+
+	while not mage.damage_cubes.is_empty():
+		var owner_id: int = int(
+			mage.damage_cubes[0]
+		)
+		var removed: int = game.heal_damage(
+			caster_id,
+			owner_id,
+			1
+		)
+
+		if removed <= 0:
+			break
+
+		healed += removed
+
+	context["effect_target_model_type"] = "mage"
+	context["effect_damage_healed"] = healed
+
+	return true
+
+
+func _resolve_draw_event_then_damage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if not bool(
+		context.get(
+			"quest_optional_yes",
+			false
+		)
+	):
+		return true
+
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	)
+
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id):
+		return false
+
+	var drawn = game.draw_event(
+		caster_id,
+		{
+			"game": game,
+			"drawing_player_index": caster_id
+		}
+	)
+
+	if drawn == null:
+		return false
+
+	game.deal_damage(
+		caster_id,
+		target_id,
+		int(
+			effect.get(
+				"damage",
+				0
+			)
+		),
+		"quest"
+	)
+
+	return true
+
+
+func _resolve_damage_all_models_lodge(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var amount: int = int(
+		effect.get(
+			"amount",
+			0
+		)
+	)
+
+	if game == null:
+		return false
+
+	for player_index in range(
+		game.players.size()
+	):
+		if game.is_mage_in_cell(
+			player_index
+		):
+			continue
+
+		_damage_mage(
+			game,
+			caster_id,
+			player_index,
+			amount
+		)
+
+	for player in game.players:
+		var snapshot: Array = player.evocations.duplicate()
+
+		for evocation in snapshot:
+			if evocation == null \
+			or evocation.is_defeated():
+				continue
+
+			_damage_evocation(
+				game,
+				caster_id,
+				evocation,
+				amount
+			)
+
+	return true
+
+
+func _resolve_place_target_mage_then_damage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	)
+	var room_id: String = str(
+		effect.get(
+			"room_id",
+			""
+		)
+	)
+
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id) \
+	or room_id == "":
+		return false
+
+	if not _place_mage_direct(
+		game,
+		target_id,
+		room_id
+	):
+		return false
+
+	game.deal_damage(
+		caster_id,
+		target_id,
+		int(
+			effect.get(
+				"damage",
+				0
+			)
+		),
+		"quest"
+	)
+
+	return true
+
+
+func _resolve_shuffle_memories_into_grimoire_then_draw(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	game.shuffle_memories_into_grimoire(
+		caster_id
+	)
+
+	var amount: int = int(
+		effect.get(
+			"amount",
+			0
+		)
+	)
+
+	for i in range(amount):
+		game.draw_player_spell(
+			caster_id
+		)
+
+	return true
+
+
+func _resolve_summon_non_forgotten_evocation_choice(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var evocation_id: String = str(
+		context.get(
+			"chosen_evocation_id",
+			""
+		)
+	)
+
+	if not _valid_player(game, caster_id) \
+	or evocation_id == "":
+		return false
+
+	var room_id: String = game.players[
+		caster_id
+	].mage.room_id
+
+	var summoned = _summon(
+		game,
+		caster_id,
+		evocation_id,
+		room_id,
+		context
+	)
+
+	return summoned != null
+
+
+func _resolve_damage_or_place_instability(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var branch: String = str(
+		context.get(
+			"quest_branch",
+			""
+		)
+	)
+
+	if branch == "damage":
+		return _resolve_damage(
+			{
+				"type": "damage",
+				"amount": int(
+					effect.get(
+						"damage",
+						0
+					)
+				),
+				"target": "room"
+			},
+			context
+		)
+
+	if branch == "instability":
+		return _resolve_place_instability(
+			{
+				"type": "place_instability",
+				"amount": int(
+					effect.get(
+						"instability",
+						0
+					)
+				),
+				"target": "room"
+			},
+			context
+		)
+
+	return false
+
+
+func _resolve_complete_owned_quest_choice(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var quest: QuestState = context.get(
+		"selected_active_quest",
+		null
+	)
+
+	if not _valid_player(game, caster_id) \
+	or quest == null:
+		return false
+
+	return game.quest_manager.complete_active_quest(
+		game,
+		caster_id,
+		quest
+	)
+
+
+func _resolve_black_rose_or_mage_power_loss(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var branch: String = str(
+		context.get(
+			"quest_branch",
+			""
+		)
+	)
+
+	if game == null:
+		return false
+
+	if branch == "black_rose":
+		game.add_black_rose_power(
+			-int(
+				effect.get(
+					"black_rose",
+					0
+				)
+			)
+		)
+		return true
+
+	if branch == "mage":
+		var target_id: int = int(
+			context.get(
+				"target_player_index",
+				-1
+			)
+		)
+
+		if not _valid_player(
+			game,
+			target_id
+		):
+			return false
+
+		game.add_player_power(
+			target_id,
+			-int(
+				effect.get(
+					"mage",
+					0
+				)
+			)
+		)
+
+		return true
+
+	return false
+
+
+func _resolve_refresh_physical_action_token(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var player = game.players[
+		caster_id
+	]
+
+	player.available_physical_actions = min(
+		player.MAX_PHYSICAL_ACTIONS,
+		player.available_physical_actions
+		+ int(
+			effect.get(
+				"amount",
+				1
+			)
+		)
+	)
+
+	if caster_id < game.player_boards.size():
+		game.player_boards[
+			caster_id
+		].refresh()
+
+	return true
+
+
+func _resolve_give_forgotten_to_target(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(
+		context.get(
+			"target_player_index",
+			-1
+		)
+	)
+	var spell: SpellCardState = context.get(
+		"selected_forgotten_spell",
+		null
+	)
+
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id) \
+	or spell == null \
+	or not spell.forgotten:
+		return false
+
+	var hand_index: int = game.players[
+		caster_id
+	].hand.find(
+		spell
+	)
+
+	if hand_index == -1:
+		return false
+
+	game.players[
+		caster_id
+	].hand.remove_at(
+		hand_index
+	)
+
+	game.players[
+		target_id
+	].hand.append(
+		spell
+	)
+
+	return true
+
+
+func _resolve_draw_three_forgotten_keep_one(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var selected: SpellCardState = context.get(
+		"selected_forgotten_spell",
+		null
+	)
+
+	if not _valid_player(game, caster_id) \
+	or selected == null:
+		return false
+
+	var draw_amount: int = mini(
+		int(
+			effect.get(
+				"draw",
+				3
+			)
+		),
+		game.forgotten_deck.size()
+	)
+
+	var candidates: Array[SpellCardState] = []
+
+	for offset in range(draw_amount):
+		var index: int = (
+			game.forgotten_deck.size()
+			- 1
+			- offset
+		)
+
+		if index < 0:
+			break
+
+		candidates.append(
+			game.forgotten_deck[
+				index
+			]
+		)
+
+	if not candidates.has(
+		selected
+	):
+		return false
+
+	for candidate in candidates:
+		game.forgotten_deck.erase(
+			candidate
+		)
+
+		if candidate == selected:
+			game.players[
+				caster_id
+			].hand.append(
+				candidate
+			)
+		else:
+			game.remove_forgotten_from_game(
+				candidate
+			)
+
+	return true
+
+
+func _resolve_activate_evocation_or_summon_nigredo(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var evocation = context.get(
+		"selected_evocation_to_activate"
+	)
+
+	if evocation != null:
+		return _activate_evocation(
+			evocation,
+			caster_id,
+			context
+		)
+
+	var room_id: String = str(
+		context.get(
+			"target_room_id",
+			""
+		)
+	)
+
+	if room_id == "":
+		return false
+
+	var summoned = _summon(
+		game,
+		caster_id,
+		"nigredo",
+		room_id,
+		context
+	)
+
+	if summoned == null:
+		return false
+
+	return _activate_evocation(
+		summoned,
+		caster_id,
+		context
+	)
+
+
+func _resolve_steal_power_from_up_to_mages(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if not _valid_player(game, caster_id):
+		return false
+
+	var selected: Array = _choice_as_array(
+		context.get(
+			"selected_mage_indices",
+			[]
+		)
+	)
+	var amount_each: int = int(
+		effect.get(
+			"amount_each",
+			1
+		)
+	)
+
+	var total_gained: int = 0
+
+	for target_value in selected:
+		var target_id: int = int(
+			target_value
+		)
+
+		if not _valid_player(game, target_id) \
+		or target_id == caster_id:
+			continue
+
+		var before: int = game.players[
+			target_id
+		].power
+
+		game.add_player_power(
+			target_id,
+			-amount_each
+		)
+
+		var actual_loss: int = max(
+			0,
+			before - game.players[
+				target_id
+			].power
+		)
+
+		total_gained += actual_loss
+
+	if total_gained > 0:
+		game.add_player_power(
+			caster_id,
+			total_gained
+		)
+
+	return true
+
 
 
 # =============================================================================
@@ -1578,10 +2845,47 @@ func _resolve_scaled_effect(
 		return false
 
 	match mode:
+		"damage_per_self_damage":
+			if _is_dummy_target(context):
+				return true
+
+			if not _valid_player(game, caster_id):
+				return false
+
+			var source = game.players[caster_id].mage.get_damage()
+			var amount = _scaled_amount(
+				source,
+				effect,
+				"damage_per_step"
+			)
+
+			if amount < 0:
+				return false
+
+			if amount <= 0:
+				return true
+
+			var damage_effect: Dictionary = {
+				"type": "damage",
+				"amount": amount,
+				"target": str(
+					effect.get(
+						"target",
+						_target_type(context)
+					)
+				)
+			}
+
+			return _resolve_damage(
+				damage_effect,
+				context
+			)
+
 		"damage_per_black_rose_damage":
-			var target = int(context.get("target_player_index", -1))
-			if not _valid_player(game, caster_id) \
-			or not _valid_player(game, target):
+			if _is_dummy_target(context):
+				return true
+
+			if not _valid_player(game, caster_id):
 				return false
 
 			var source = game.players[caster_id].mage.get_damage_from(-1)
@@ -1590,11 +2894,21 @@ func _resolve_scaled_effect(
 				effect,
 				"damage_per_step"
 			)
+
 			if amount < 0:
 				return false
-			if amount > 0:
-				game.deal_damage(caster_id, target, amount)
-			return true
+
+			if amount <= 0:
+				return true
+
+			return _resolve_damage(
+				{
+					"type": "damage",
+					"amount": amount,
+					"target": _target_type(context)
+				},
+				context
+			)
 
 		"damage_secondary_mage_per_self_damage":
 			var primary = int(context.get("target_player_index", -1))
@@ -1622,7 +2936,12 @@ func _resolve_scaled_effect(
 			if amount < 0:
 				return false
 			if amount > 0:
-				game.deal_damage(caster_id, target, amount)
+				_damage_mage(
+					game,
+					caster_id,
+					target,
+					amount
+				)
 
 			print(
 				"Peak of Agony secondary damage: ", source,
@@ -1682,36 +3001,58 @@ func _resolve_scaled_effect(
 			if not _valid_player(game, caster_id):
 				return false
 
-			if str(context.get("last_damaged_model_type", "")) != "mage":
-				return true
+			var models: Array = context.get(
+				"models_damaged_by_effect",
+				[]
+			)
 
-			var target = int(context.get("last_damaged_player_index", -1))
-			if not _valid_player(game, target):
-				return false
+			var source: int = 0
 
-			var mage = game.players[target].mage
-			var source = mage.get_damage_from(-1)
-			var amount = min(
+			for model_value in models:
+				if not model_value is Dictionary:
+					continue
+
+				var model: Dictionary = model_value
+				var model_type: String = str(model.get("type", ""))
+
+				if model_type == "mage":
+					var target: int = int(
+						model.get("player_index", -1)
+					)
+					if _valid_player(game, target):
+						source += game.players[target].mage.get_damage_from(-1)
+
+				elif model_type == "evocation":
+					var evocation = model.get("evocation", null)
+					if evocation != null:
+						source += evocation.get_damage_from(-1)
+
+			var amount: int = min(
 				source * int(effect.get("instability_per_damage", 1)),
 				int(effect.get("max", 4))
 			)
 
-			if amount > 0:
-				if mage.room_id == "":
-					print("Submission: damaged Mage has no Room")
-					return false
-				game.place_player_instability(
-					caster_id,
-					mage.room_id,
-					amount
-				)
+			if amount <= 0:
+				return true
+
+			var room_id: String = _target_room(context)
+			if room_id == "":
+				print("Submission: target Room missing")
+				return false
+
+			game.place_player_instability(
+				caster_id,
+				room_id,
+				amount
+			)
+
 			return true
 
 		"place_instability_per_self_black_rose_damage":
 			if not _valid_player(game, caster_id):
 				return false
 
-			var room_id = str(context.get("room_id", ""))
+			var room_id: String = _target_room(context)
 			if room_id == "":
 				print("Heart of Ice: target Room missing")
 				return false
@@ -1727,9 +3068,10 @@ func _resolve_scaled_effect(
 			return true
 
 		"damage_per_revealed_active_element":
-			var target = int(context.get("target_player_index", -1))
-			if not _valid_player(game, caster_id) \
-			or not _valid_player(game, target):
+			if _is_dummy_target(context):
+				return true
+
+			if not _valid_player(game, caster_id):
 				return false
 
 			var element = str(effect.get("element", ""))
@@ -1738,11 +3080,22 @@ func _resolve_scaled_effect(
 				return false
 
 			var amount = count * int(effect.get("amount_per_element", 1))
-			if amount > 0:
-				game.deal_damage(caster_id, target, amount, "spell")
-			return true
+			if amount <= 0:
+				return true
+
+			return _resolve_damage(
+				{
+					"type": "damage",
+					"amount": amount,
+					"target": _target_type(context)
+				},
+				context
+			)
 
 		"place_instability_per_revealed_active_element":
+			if _is_dummy_target(context):
+				return true
+
 			if not _valid_player(game, caster_id):
 				return false
 
@@ -1902,7 +3255,17 @@ func _resolve_remove_evocation_effect(
 
 	var game = _game(context)
 	var caster_id = _caster(context)
+
+	if _is_dummy_target(context):
+		return true
+
 	var evocation = context.get("target_evocation")
+
+	if mode == "remove_owned_evocation":
+		evocation = context.get(
+			"selected_evocation_to_remove",
+			evocation
+		)
 
 	if game == null or evocation == null:
 		return false
@@ -1954,6 +3317,14 @@ func _resolve_activation_effect(
 
 	var game = _game(context)
 	var caster_id = _caster(context)
+
+	if _is_dummy_target(context) \
+	and mode in [
+		"activate_target_evocation",
+		"activate_target_evocation_under_control"
+	]:
+		return true
+
 	var evocation = null
 	var controller_id = caster_id
 	var bonus = 0
@@ -2065,9 +3436,15 @@ func _resolve_damage_variant(
 			return success
 
 		"damage_from_evocation":
-			var target = int(context.get("target_player_index", -1))
+			if _is_dummy_target(context):
+				return true
+
 			var evocation = context.get("target_evocation")
-			if evocation == null or target < 0:
+			if evocation == null:
+				return false
+
+			var room_id: String = str(evocation.room_id)
+			if room_id == "":
 				return false
 
 			var amount = (
@@ -2075,8 +3452,24 @@ func _resolve_damage_variant(
 				+ evocation.get_damage()
 				* int(effect.get("bonus_per_evocation_damage", 0))
 			)
-			game.deal_damage(caster_id, target, amount)
-			return true
+
+			if amount <= 0:
+				return true
+
+			var room_context: Dictionary = context.duplicate(false)
+			room_context["spell_target_type"] = "room"
+			room_context["target_room_id"] = room_id
+			room_context.erase("target_player_index")
+			room_context.erase("target_model_type")
+
+			return _resolve_damage(
+				{
+					"type": "damage",
+					"amount": amount,
+					"target": "room"
+				},
+				room_context
+			)
 
 		"damage_all_target_owner_evocations":
 			var target = int(
@@ -2094,7 +3487,9 @@ func _resolve_damage_variant(
 			var target = int(context.get("marked_player_index", -1))
 			if not _valid_player(game, target):
 				return false
-			game.deal_damage(
+
+			_damage_mage(
+				game,
 				caster_id,
 				target,
 				int(effect.get("amount", 0)),
@@ -2119,11 +3514,19 @@ func _resolve_damage_variant(
 			if model_type != "mage" and model_type != "evocation":
 				return false
 
+			var room_id: String = _target_room(context)
+			if room_id == "":
+				print("damage_all_models_of_type: target Room missing")
+				return false
+
 			var active_count = min(game.player_count, game.players.size())
 
 			if model_type == "mage":
 				for player_index in range(active_count):
 					if game.is_mage_in_cell(player_index):
+						continue
+
+					if game.players[player_index].mage.room_id != room_id:
 						continue
 
 					var dealt = _damage_mage(
@@ -2132,34 +3535,43 @@ func _resolve_damage_variant(
 						player_index,
 						amount
 					)
+
 					if dealt > 0:
 						register_damaged_model(
 							context,
 							{
 								"type": "mage",
 								"player_index": player_index,
-								"room_id": game.players[player_index].mage.room_id
+								"room_id": room_id
 							}
 						)
+
 				return true
 
 			for player_index in range(active_count):
 				for evocation in game.players[player_index].evocations.duplicate():
+					if evocation == null \
+					or evocation.is_defeated() \
+					or evocation.room_id != room_id:
+						continue
+
 					var dealt = _damage_evocation(
 						game,
 						caster_id,
 						evocation,
 						amount
 					)
+
 					if dealt > 0:
 						register_damaged_model(
 							context,
 							{
 								"type": "evocation",
 								"evocation": evocation,
-								"room_id": evocation.room_id
+								"room_id": room_id
 							}
 						)
+
 			return true
 
 		"damage_models_damaged_by_effect":
@@ -2312,8 +3724,25 @@ func _resolve_redirect_damage(
 		print("Pain Mark: no Evocation available to redirect Damage")
 		return true
 
-	# Preserve current automatic behaviour: first owned Evocation.
-	var evocation = player.evocations[0]
+	var evocation = context.get(
+		"selected_evocation_to_redirect",
+		null
+	)
+
+	if evocation == null:
+		# A single legal option may have been auto-selected by the Game
+		# preflight. If no legal Evocation exists, the Effect simply has
+		# nothing to redirect to.
+		if player.evocations.size() == 1:
+			evocation = player.evocations[0]
+		else:
+			print("Pain Mark: Evocation selection required")
+			return false
+
+	if not evocation in player.evocations:
+		print("Pain Mark: selected Evocation is not owned by caster")
+		return false
+
 	event.redirected_evocation = evocation
 
 	print(
@@ -2613,6 +4042,9 @@ func _resolve_heal_target_evocation(
 	context: Dictionary
 ) -> bool:
 
+	if _is_dummy_target(context):
+		return true
+
 	var game = _game(context)
 	var caster_id = _caster(context)
 	var evocation = context.get("target_evocation")
@@ -2647,6 +4079,9 @@ func _resolve_next_activation_strength_bonus(
 	context: Dictionary
 ) -> bool:
 
+	if _is_dummy_target(context):
+		return true
+
 	if context.get("target_evocation") == null:
 		return false
 
@@ -2680,11 +4115,15 @@ func _resolve_activate_then_black_rose_damage(
 	if evocation == null:
 		return false
 
+	var amount = int(effect.get("amount", 1))
+
+	# queue_resolution() is LIFO. Queue the post-activation Damage first, then
+	# the activation, so the Evocation completes its activation before the
+	# Black Rose Damage is resolved.
+	game.deal_damage_to_evocation(-1, evocation, amount)
+
 	if not _activate_evocation(evocation, caster_id, context):
 		return false
-
-	var amount = int(effect.get("amount", 1))
-	game.deal_damage_to_evocation(-1, evocation, amount)
 
 	print(
 		"Silver of the Sages: Black Rose inflicts ",
@@ -2697,6 +4136,9 @@ func resolve_set_target_room_from_target_evocation(
 	effect: Dictionary,
 	context: Dictionary
 ) -> bool:
+
+	if _is_dummy_target(context):
+		return true
 
 	var target_evocation = context.get(
 		"target_evocation"

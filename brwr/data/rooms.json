@@ -6,7 +6,11 @@
     "core": true,
     "fixed": true,
     "instability_resistance": 10,
-    "completion_rewards": [6, 3, 1],
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "discard_spells",
@@ -20,7 +24,8 @@
       {
         "type": "place_black_rose_instability",
         "amount": 1,
-        "target": "choose_room"
+        "target": "choose_room",
+        "range": 0
       }
     ],
     "rebuilt_effects": [
@@ -36,119 +41,122 @@
       }
     ]
   },
-
   {
-  "id": "crypt",
-  "name": "Crypt",
-  "color": "grey",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "cadaver",
-      "range": 0
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "cadaver",
-      "range": 1
-    },
-    {
-      "type": "summon_evocation",
-      "evocation_id": "cadaver",
-      "range": 1
-    }
-  ]
-},
-
+    "id": "crypt",
+    "name": "Crypt",
+    "color": "grey",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "range": 0
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "range": 1
+      },
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "range": 1
+      }
+    ]
+  },
   {
-  "id": "sacrificial_altar",
-  "name": "Sacrificial Altar",
-  "color": "grey",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "cadaver"
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "damage",
-      "amount": 2,
-      "target": "choose_model"
-    }
-  ]
-},
-
- {
-  "id": "cemetery",
-  "name": "Cemetery",
-  "color": "grey",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "cadaver",
-      "range": 0
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "colossus",
-      "range": "*"
-    }
-  ]
-},
-
+    "id": "sacrificial_altar",
+    "name": "Sacrificial Altar",
+    "color": "grey",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "damage",
+        "amount": 2,
+        "target": "choose_model"
+      }
+    ]
+  },
   {
-  "id": "summoner_room",
-  "name": "Summoner Room",
-  "color": "red",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "damage",
-      "amount": 1,
-      "target": "choose_model",
-      "range": 1
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "summon_evocation",
-      "evocation_id": "nigredo",
-      "range": 0
-    },
-    {
-      "type": "activate_last_summoned_evocation"
-    }
-  ]
-},
-
+    "id": "cemetery",
+    "name": "Cemetery",
+    "color": "grey",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "cadaver",
+        "range": 0
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "colossus",
+        "range": "*"
+      }
+    ]
+  },
+  {
+    "id": "summoner_room",
+    "name": "Summoner Room",
+    "color": "red",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "damage",
+        "amount": 1,
+        "target": "room",
+        "range": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "summon_evocation",
+        "evocation_id": "nigredo",
+        "range": 0
+      },
+      {
+        "type": "activate_last_summoned_evocation"
+      }
+    ]
+  },
   {
     "id": "alchemical_laboratory",
     "name": "Alchemical Laboratory",
@@ -156,12 +164,17 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 6,
-    "completion_rewards": [4, 2, 1],
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "damage",
         "amount": 1,
-        "target": "choose_model"
+        "target": "room",
+        "range": 1
       }
     ],
     "rebuilt_effects": [
@@ -176,7 +189,6 @@
       }
     ]
   },
-
   {
     "id": "arena",
     "name": "Arena",
@@ -184,12 +196,17 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 6,
-    "completion_rewards": [4, 2, 1],
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "damage",
         "amount": 1,
-        "target": "choose_model"
+        "target": "room",
+        "range": 1
       }
     ],
     "rebuilt_effects": [
@@ -198,7 +215,6 @@
       }
     ]
   },
-
   {
     "id": "observatory",
     "name": "Observatory",
@@ -206,7 +222,11 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 5,
-    "completion_rewards": [3, 1, 1],
+    "completion_rewards": [
+      3,
+      1,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "draw_quest",
@@ -220,33 +240,31 @@
       }
     ]
   },
-
- {
-  "id": "bibliotheca",
-  "name": "Bibliotheca",
-  "color": "yellow",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 5,
-  "completion_rewards": [
-    3,
-    1,
-    1
-  ],
-  "destroyed_effects": [
-    {
-      "type": "draw_quest",
-      "amount": 1
-    }
-  ],
-  "rebuilt_effects": [
-    {
-      "type": "draw_library",
-      "amount": 2
-    }
-  ]
-},
-
+  {
+    "id": "bibliotheca",
+    "name": "Bibliotheca",
+    "color": "yellow",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 5,
+    "completion_rewards": [
+      3,
+      1,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "draw_quest",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_library",
+        "amount": 2
+      }
+    ]
+  },
   {
     "id": "sanctuary",
     "name": "Sanctuary",
@@ -254,7 +272,11 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 5,
-    "completion_rewards": [3, 1, 1],
+    "completion_rewards": [
+      3,
+      1,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "draw_quest",
@@ -269,90 +291,92 @@
       }
     ]
   },
-
- {
-  "id": "garden",
-  "name": "Garden",
-  "color": "green",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 4,
-  "completion_rewards": [2, 1, 0],
-
-  "destroyed_effects": [
-    {
-      "type": "place_instability",
-      "amount": 1,
-      "target": "choose_room",
-      "range": 1
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "place_instability",
-      "amount": 1,
-      "target": "choose_room",
-      "range": "*"
-    },
-    {
-      "type": "place_instability",
-      "amount": 1,
-      "target": "choose_room",
-      "range": "*"
-    }
-  ]
-},
-
- {
-  "id": "forge",
-  "name": "Forge",
-  "color": "green",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 4,
-  "completion_rewards": [2, 1, 0],
-
-  "destroyed_effects": [
-    {
-      "type": "place_instability",
-      "amount": 1,
-      "target": "choose_room"
-    }
-  ],
-
-  "rebuilt_effects": [
   {
-    "type": "move",
-    "amount": 1,
-    "target": "self"
+    "id": "garden",
+    "name": "Garden",
+    "color": "green",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "choose_room",
+        "range": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "choose_room",
+        "range": "*"
+      },
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "choose_room",
+        "range": "*"
+      }
+    ]
   },
   {
-    "type": "move",
-    "amount": 1,
-    "target": "self"
+    "id": "forge",
+    "name": "Forge",
+    "color": "green",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_effects": [
+      {
+        "type": "place_instability",
+        "amount": 1,
+        "target": "choose_room",
+        "range": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "move",
+        "amount": 1,
+        "target": "self"
+      },
+      {
+        "type": "move",
+        "amount": 1,
+        "target": "self"
+      },
+      {
+        "type": "attack",
+        "target": "self"
+      },
+      {
+        "type": "move",
+        "amount": 1,
+        "target": "self"
+      },
+      {
+        "type": "move",
+        "amount": 1,
+        "target": "self"
+      },
+      {
+        "type": "attack",
+        "target": "self"
+      }
+    ]
   },
-  {
-    "type": "attack",
-    "target": "self"
-  },
-  {
-    "type": "move",
-    "amount": 1,
-    "target": "self"
-  },
-  {
-    "type": "move",
-    "amount": 1,
-    "target": "self"
-  },
-  {
-    "type": "attack",
-    "target": "self"
-  }
-]
-},
-
   {
     "id": "treasure_room",
     "name": "Treasure Room",
@@ -360,12 +384,17 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 4,
-    "completion_rewards": [2, 1, 0],
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
     "destroyed_effects": [
       {
         "type": "place_instability",
         "amount": 1,
-        "target": "choose_room"
+        "target": "choose_room",
+        "range": 1
       }
     ],
     "rebuilt_effects": [
@@ -379,30 +408,30 @@
       }
     ]
   },
-
- {
-  "id": "the_abyss",
-  "name": "The Abyss",
-  "color": "blue",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "draw_random_memories",
-      "amount": 1
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "return_all_mages_to_cells"
-    }
-  ]
-},
-
+  {
+    "id": "the_abyss",
+    "name": "The Abyss",
+    "color": "blue",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "draw_random_memories",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "return_all_mages_to_cells"
+      }
+    ]
+  },
   {
     "id": "oracle_room",
     "name": "Oracle Room",
@@ -410,7 +439,11 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 6,
-    "completion_rewards": [4, 2, 1],
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "draw_random_memories",
@@ -424,74 +457,71 @@
       }
     ]
   },
-
- {
-  "id": "mirrors_room",
-  "name": "Mirrors Room",
-  "color": "blue",
-  "core": true,
-  "fixed": false,
-  "instability_resistance": 6,
-  "completion_rewards": [4, 2, 1],
-
-  "destroyed_effects": [
-    {
-      "type": "draw_random_memories",
-      "amount": 1
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "copy_room_effect",
-      "side": "rebuilt",
-      "exclude": [
-        "black_rose",
-        "throne"
-      ]
-    }
-  ]
-},
-
-{
-  "id": "throne",
-  "name": "Throne Room",
-  "color": "purple",
-  "core": true,
-  "fixed": true,
-  "instability_resistance": 10,
-  "completion_rewards": [
-    6,
-    3,
-    1
-  ],
-
-  "destroyed_effects": [
-    {
-      "type": "conditional_payment",
-      "cost": {
-        "type": "lose_power",
+  {
+    "id": "mirrors_room",
+    "name": "Mirrors Room",
+    "color": "blue",
+    "core": true,
+    "fixed": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "draw_random_memories",
         "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "copy_room_effect",
+        "side": "rebuilt",
+        "exclude": [
+          "black_rose",
+          "throne"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "throne",
+    "name": "Throne Room",
+    "color": "purple",
+    "core": true,
+    "fixed": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_effects": [
+      {
+        "type": "conditional_payment",
+        "cost": {
+          "type": "lose_power",
+          "amount": 1
+        },
+        "effects": [
+          {
+            "type": "take_crown"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "take_crown"
       },
-      "effects": [
-        {
-          "type": "take_crown"
-        }
-      ]
-    }
-  ],
-
-  "rebuilt_effects": [
-    {
-      "type": "take_crown"
-    },
-    {
-      "type": "gain_power",
-      "amount": 1
-    }
-  ]
-},
-
+      {
+        "type": "gain_power",
+        "amount": 1
+      }
+    ]
+  },
   {
     "id": "armory",
     "name": "Armory",
@@ -499,7 +529,11 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 6,
-    "completion_rewards": [4, 2, 1],
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "draw_grimoire",
@@ -516,7 +550,6 @@
       }
     ]
   },
-
   {
     "id": "pleasures_room",
     "name": "Pleasures Room",
@@ -524,7 +557,11 @@
     "core": true,
     "fixed": false,
     "instability_resistance": 6,
-    "completion_rewards": [4, 2, 1],
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
     "destroyed_effects": [
       {
         "type": "draw_grimoire",

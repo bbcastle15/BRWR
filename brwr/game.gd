@@ -1,9 +1,13 @@
 extends Node2D
 
 const Tests = preload("res://tests.gd")
+const BetaHUDScript = preload("res://beta_hud.gd")
 
-@export var run_tests_on_ready: bool = true
-@export var auto_start_game_flow: bool = false
+@export var run_tests_on_ready: bool = false
+@export var auto_start_game_flow: bool = true
+@export var enable_beta_hud: bool = true
+
+var beta_hud = null
 # =========================================================
 # INTERACTIVE PHASE STATE
 # =========================================================
@@ -51,6 +55,15 @@ var pending_effect_choice_values: Dictionary = {}
 
 var action_phase_cursor: int = 0
 var action_phase_activation_round: int = 0
+
+# During the beta UI flow an Activation is resolved one decision at a time.
+# This is necessary because Action 1 may change the legal options for Action 2
+# (for example Explore into a Room and then Fight a Model there).
+var action_activation_active: bool = false
+var action_activation_player_index: int = -1
+var action_activation_actions_used: int = 0
+var action_activation_numbered_spells_cast: int = 0
+var action_activation_quick_spells_cast: int = 0
 # =========================================================
 # PREPARATION PHASE STATE
 # =========================================================
@@ -80,6 +93,13 @@ var game_flow_active: bool = false
 var game_has_ended: bool = false
 var player_entrance_room_ids: Dictionary = {}
 var player_entrance_room_coords: Dictionary = {}
+
+# A Cell touches two Lodge Rooms in the standard layouts. Keep the historic
+# single entrance as a deterministic primary exit for backwards compatibility,
+# but expose every legal exit to movement/UI.
+var player_cell_exit_room_ids: Dictionary = {}
+var player_cell_exit_room_coords: Dictionary = {}
+
 var cancelled_physical_action_players: Dictionary = {}
 @export var game_seed: int = 0
 @export_range(2, 6) var player_count: int = 4
@@ -91,6 +111,9 @@ var room_scene = preload("res://room.tscn")
 var cell_scene = preload("res://cell.tscn")
 var mage_token_scene = preload("res://mage_token.tscn")
 var mage_tokens: Array = []
+var evocation_token_scene = preload("res://evocation_token.tscn")
+var evocation_tokens: Dictionary = {}
+var player_cell_coords: Dictionary = {}
 var player_board_scene = preload("res://player_board.tscn")
 
 var spell_database = SpellDatabase.new()
@@ -98,11 +121,13 @@ var evocation_database = EvocationDatabase.new()
 var triggered_spell_manager = TriggeredSpellManager.new()
 var mage_database = MageDatabase.new()
 var layout_database = {}
-const HEX_RADIUS = 70.0
+const HEX_RADIUS = 78.0
 var board_center: Vector2
 var room_database = []
 var cell_database = []
 var player_boards: Array = []
+var player_board_spell_slots: Dictionary = {}
+var spell_preview_script = preload("res://spell_card_preview.gd")
 var effect_resolver = EffectResolver.new()
 var room_effect_resolver = RoomEffectResolver.new()
 var event_effect_resolver := EventEffectResolver.new()
@@ -113,8 +138,23 @@ var school_libraries: Dictionary = {}
 var school_discards: Dictionary = {}
 const ACTIVE_SCHOOL_COUNT: int = 6
 var active_school_ids: Array[String] = []
+
+# Setup step: unique School choice + one of its two Starting Grimoires.
+var school_specialization_database: Dictionary = {}
+var starting_setup_complete: bool = false
+var starting_setup_order: Array[int] = []
+var starting_setup_cursor: int = 0
+var starting_setup_stage: String = "mage"
+
+# The beta HUD owns a permanent right sidebar. The tabletop uses the
+# remaining viewport directly at native scale.
+@export var beta_sidebar_width: float = 340.0
+@export var beta_force_fullscreen: bool = true
+const TABLE_LOGICAL_SIZE := Vector2(1600.0, 900.0)
+var beta_background_layer: CanvasLayer = null
 var forgotten_deck: Array[SpellCardState] = []
 var forgotten_discard: Array[SpellCardState] = []
+var forgotten_removed_from_game: Array[SpellCardState] = []
 var crown_owner_id: int = -1
 var event_database := EventDatabase.new()
 var current_round: int = 1
@@ -133,6 +173,7 @@ var quest_discard: Array[QuestCardState] = []
 # Fase corrente della partita.
 var current_phase: String = ""
 
+const PHASE_SETUP: String = "setup"
 const PHASE_BLACK_ROSE: String = "black_rose"
 const PHASE_STUDY: String = "study"
 const PHASE_PREPARATION: String = "preparation"
@@ -184,6 +225,173 @@ func load_layouts():
 
 	return data
 	
+
+func _builtin_school_specializations() -> Dictionary:
+	return {
+		"agony": {
+			"name": "Agony",
+			"starting_grimoires": [
+				{
+					"id": "sadistic_fury",
+					"name": "Sadistic Fury",
+					"spell_ids": [
+						"shared_torture",
+						"grim_torment",
+						"cross_and_delight",
+						"torment",
+						"visceral_fire",
+						"peak_of_agony"
+					]
+				},
+				{
+					"id": "algolagnia",
+					"name": "Algolagnia",
+					"spell_ids": [
+						"pain_mark",
+						"master_of_pleasure",
+						"liquefy_the_pain",
+						"submission",
+						"ineluctable_pain",
+						"heart_of_ice"
+					]
+				}
+			]
+		},
+		"alchemy": {
+			"name": "Alchemy",
+			"starting_grimoires": [
+				{
+					"id": "scourge",
+					"name": "Scourge",
+					"spell_ids": [
+						"azoth_bomb",
+						"viatorium_spagyricum",
+						"deflagrate",
+						"athanor_eruption",
+						"marbling",
+						"stone_phoenix"
+					]
+				},
+				{
+					"id": "auromancer",
+					"name": "Auromancer",
+					"spell_ids": [
+						"soul_transfer",
+						"liquid_fire",
+						"fountain_of_the_three",
+						"purifying_aludel",
+						"albify",
+						"silver_of_the_sages"
+					]
+				}
+			]
+		}
+	}
+
+
+func load_school_specializations() -> Dictionary:
+	var candidate_paths: Array[String] = [
+		"res://data/school_specializations.json",
+		"res://school_specializations.json"
+	]
+
+	for path in candidate_paths:
+		if not FileAccess.file_exists(path):
+			continue
+
+		var file := FileAccess.open(
+			path,
+			FileAccess.READ
+		)
+
+		if file == null:
+			continue
+
+		var data = JSON.parse_string(
+			file.get_as_text()
+		)
+
+		if data is Dictionary:
+			print(
+				"Loaded Starting Grimoires from ",
+				path
+			)
+			return data
+
+		print(
+			"WARNING: invalid Starting Grimoire JSON at ",
+			path
+		)
+
+	print(
+		"WARNING: school_specializations.json not found; "
+		+ "using built-in Agony/Alchemy Starting Grimoires"
+	)
+
+	return _builtin_school_specializations()
+
+
+func get_school_display_name(
+	school_id: String
+) -> String:
+	if school_specialization_database.has(school_id):
+		return str(
+			school_specialization_database[school_id].get(
+				"name",
+				school_id.capitalize()
+			)
+		)
+
+	return school_id.capitalize()
+
+
+func get_starting_grimoire_options(
+	school_id: String
+) -> Array:
+	var result: Array = []
+
+	if not school_specialization_database.has(school_id):
+		return result
+
+	var school_data: Dictionary = school_specialization_database[
+		school_id
+	]
+
+	for grimoire_value in school_data.get(
+		"starting_grimoires",
+		[]
+	):
+		if not grimoire_value is Dictionary:
+			continue
+
+		var grimoire: Dictionary = grimoire_value
+		var public_spells: Array = []
+
+		for spell_id_value in grimoire.get("spell_ids", []):
+			var spell_id: String = str(spell_id_value)
+			var spell_name: String = spell_id
+
+			if spell_database.spells.has(spell_id):
+				var spell: SpellCardState = spell_database.spells[
+					spell_id
+				]
+
+				if spell != null:
+					spell_name = spell.card_name
+
+			public_spells.append({
+				"id": spell_id,
+				"name": spell_name
+			})
+
+		result.append({
+			"id": str(grimoire.get("id", "")),
+			"name": str(grimoire.get("name", "")),
+			"spells": public_spells
+		})
+
+	return result
+
 func create_cell(
 	cell_data,
 	hex_position: Vector2i
@@ -194,6 +402,7 @@ func create_cell(
 	cell.cell_name = cell_data["name"]
 	cell.cell_color = Color(cell_data["color"])
 	cell.radius = HEX_RADIUS
+	cell.set_meta("hex_coord", hex_position)
 	cell.position = hex_to_pixel(hex_position)
 
 	add_child(cell)
@@ -204,7 +413,21 @@ func _ready():
 	else:
 		rng.seed = game_seed
 
-	board_center = get_viewport_rect().size / 2.0
+	# Use the actual viewport immediately. The HUD owns only a right sidebar;
+	# the tabletop is no longer globally shrunk from a 1600x900 virtual canvas.
+	var initial_viewport_size: Vector2 = get_viewport_rect().size
+	var initial_play_width: float = initial_viewport_size.x
+
+	if enable_beta_hud and not run_tests_on_ready:
+		initial_play_width = max(
+			640.0,
+			initial_viewport_size.x - beta_sidebar_width
+		)
+
+	board_center = Vector2(
+		initial_play_width * 0.5,
+		initial_viewport_size.y * 0.54
+	)
 
 	room_database = load_rooms()
 	layout_database = load_layouts()
@@ -214,6 +437,7 @@ func _ready():
 	print("GAME SEED: ", game_seed)
 
 	spell_database.load_database()
+	school_specialization_database = load_school_specializations()
 	select_active_schools()
 	create_school_libraries()
 	create_forgotten_deck()
@@ -231,6 +455,7 @@ func _ready():
 	create_players()
 	assign_initial_crown()
 	create_lodge()
+	create_model_tokens()
 	create_player_boards()
 
 	for board in player_boards:
@@ -242,10 +467,47 @@ func _ready():
 	update_table_layout()
 	await get_tree().process_frame
 
+	# The first beta UI is created entirely from code, so no scene-tree changes
+	# are required. Tests keep it disabled to avoid user-interface side effects.
+	if enable_beta_hud and not run_tests_on_ready:
+		var usable_screen_rect: Rect2i = (
+			DisplayServer.screen_get_usable_rect()
+		)
+
+		if usable_screen_rect.size.x > 0 \
+		and usable_screen_rect.size.y > 0:
+			get_window().size = usable_screen_rect.size
+			get_window().position = usable_screen_rect.position
+
+		if beta_force_fullscreen:
+			get_window().mode = Window.MODE_FULLSCREEN
+
+		beta_hud = BetaHUDScript.new()
+		add_child(beta_hud)
+		beta_hud.setup(
+			self,
+			beta_sidebar_width
+		)
+
+		var viewport := get_viewport()
+		if not viewport.size_changed.is_connected(
+			_on_beta_viewport_resized
+		):
+			viewport.size_changed.connect(
+				_on_beta_viewport_resized
+			)
+
+		_apply_beta_table_layout()
+
 	if run_tests_on_ready:
 		Tests.run(self)
 
-	if auto_start_game_flow:
+	if not run_tests_on_ready \
+	and enable_beta_hud:
+		call_deferred(
+			"_ensure_interactive_beta_started"
+		)
+	elif auto_start_game_flow:
 		start_game_flow()
 
 func load_rooms():
@@ -289,7 +551,7 @@ func create_lodge():
 		throne,
 		Vector2i(1, 0)
 	)
-	create_cells()
+
 	# Tutte le altre stanze Core
 	var room_pool = []
 
@@ -310,6 +572,14 @@ func create_lodge():
 			room_pool[i],
 			available_positions[i]
 		)
+
+	# Cell entrance IDs depend on coord_to_room_id(). Therefore the complete
+	# Lodge coordinate map must exist before Cells are assigned to players.
+	# Previously create_cells() ran before the 17 random Rooms were registered,
+	# leaving entrance Room IDs empty for Cells whose entrance was not Black Rose
+	# or Throne.
+	create_cells()
+
 	print("Rooms in database: ", room_database.size())
 	print("Random rooms: ", room_pool.size())
 	print("Available positions: ", available_positions.size())
@@ -336,6 +606,7 @@ func create_room(
 	# POSITION
 	# -----------------------------------------------------
 
+	room.set_meta("hex_coord", hex_position)
 	room.position = hex_to_pixel(
 		hex_position
 	)
@@ -402,6 +673,75 @@ func get_lodge_positions() -> Array[Vector2i]:
 
 	return positions
 
+func _cell_adjacent_lodge_rooms(
+	cell_coord: Vector2i
+) -> Dictionary:
+	var ids: Array[String] = []
+	var coords: Array[Vector2i] = []
+
+	var directions: Array[Vector2i] = [
+		Vector2i(1, 0),
+		Vector2i(1, -1),
+		Vector2i(0, -1),
+		Vector2i(-1, 0),
+		Vector2i(-1, 1),
+		Vector2i(0, 1)
+	]
+
+	for direction in directions:
+		var candidate_coord: Vector2i = (
+			cell_coord + direction
+		)
+
+		if not room_id_by_coord.has(
+			candidate_coord
+		):
+			continue
+
+		var room_id: String = str(
+			room_id_by_coord[
+				candidate_coord
+			]
+		)
+
+		if room_id == "":
+			continue
+
+		if not is_lodge_room_id(room_id):
+			continue
+
+		if ids.has(room_id):
+			continue
+
+		ids.append(room_id)
+		coords.append(candidate_coord)
+
+	return {
+		"ids": ids,
+		"coords": coords
+	}
+
+
+func get_player_cell_exit_room_ids(
+	player_index: int
+) -> Array[String]:
+	var result: Array[String] = []
+
+	if not player_cell_exit_room_ids.has(
+		player_index
+	):
+		return result
+
+	for room_id_value in player_cell_exit_room_ids[
+		player_index
+	]:
+		result.append(
+			str(room_id_value)
+		)
+
+	return result
+
+
 func create_cells():
 	var layout = layout_database[str(player_count)]
 	var cell_slots = layout["cells"]
@@ -416,6 +756,9 @@ func create_cells():
 
 	player_entrance_room_ids.clear()
 	player_entrance_room_coords.clear()
+	player_cell_exit_room_ids.clear()
+	player_cell_exit_room_coords.clear()
+	player_cell_coords.clear()
 
 	for i in range(cell_slots.size()):
 		var slot_data = cell_slots[i]
@@ -428,25 +771,62 @@ func create_cells():
 		var cell_data = selected_cells[i]
 		create_cell(cell_data, hex_position)
 
+		var exit_data: Dictionary = (
+			_cell_adjacent_lodge_rooms(
+				hex_position
+			)
+		)
+		var exit_ids: Array[String] = []
+		var exit_coords: Array[Vector2i] = []
+
+		for room_id_value in exit_data.get(
+			"ids",
+			[]
+		):
+			exit_ids.append(
+				str(room_id_value)
+			)
+
+		for coord_value in exit_data.get(
+			"coords",
+			[]
+		):
+			exit_coords.append(
+				Vector2i(coord_value)
+			)
+
+		# Preserve the layout's historical entrance as the primary exit when
+		# possible, purely for deterministic old code/tests.
 		var entrance_array = slot_data["entrance_room"]
-		var entrance_room = Vector2i(
+		var primary_coord = Vector2i(
 			int(entrance_array[0]),
 			int(entrance_array[1])
 		)
-		var entrance_room_id: String = coord_to_room_id(entrance_room)
+		var primary_id: String = coord_to_room_id(
+			primary_coord
+		)
+
+		if primary_id == "" \
+		or not exit_ids.has(primary_id):
+			if not exit_ids.is_empty():
+				primary_id = exit_ids[0]
+				primary_coord = exit_coords[0]
 
 		if i < players.size():
-			player_entrance_room_coords[i] = entrance_room
-			player_entrance_room_ids[i] = entrance_room_id
+			player_cell_coords[i] = hex_position
+			player_entrance_room_coords[i] = primary_coord
+			player_entrance_room_ids[i] = primary_id
+			player_cell_exit_room_ids[i] = exit_ids
+			player_cell_exit_room_coords[i] = exit_coords
 
-			players[i].mage.room_coord = entrance_room
-			players[i].mage.room_id = entrance_room_id
+			players[i].mage.room_coord = primary_coord
+			players[i].mage.room_id = primary_id
 			players[i].mage.in_cell = true
 
 			print(
 				"Player ", i + 1,
-				" entrance room: ", entrance_room,
-				" (", entrance_room_id, ")",
+				" Cell exits: ", exit_ids,
+				" | primary: ", primary_id,
 				" | starts in Cell: true"
 			)
 
@@ -536,23 +916,324 @@ func create_players():
 			colors[i]
 		)
 
+		# Lodge/Cell setup and PlayerBoard rendering require a MageState object
+		# even before the real Mage has been selected.
+		player.mage = MageState.new()
+
 		players.append(player)
 
-		if i < test_mages.size():
+		# Automated tests keep deterministic Mages so all older rule tests
+		# continue to operate on their known baseline.
+		if run_tests_on_ready \
+		and i < test_mages.size():
 
-			var mage_id: String = test_mages[i]
-
-			if assign_mage_to_player(
+			assign_mage_to_player(
 				i,
-				mage_id
-			):
-
-				give_initial_personal_spell(i)
+				test_mages[i]
+			)
 
 	print(
 		"Players created: ",
 		players.size()
 	)
+
+
+func create_model_tokens() -> void:
+	for token in mage_tokens:
+		if is_instance_valid(token):
+			token.queue_free()
+
+	mage_tokens.clear()
+
+	for token_value in evocation_tokens.values():
+		if is_instance_valid(token_value):
+			token_value.queue_free()
+
+	evocation_tokens.clear()
+
+	for player_index in range(players.size()):
+		var token = mage_token_scene.instantiate()
+		token.name = "MageToken_P" + str(player_index + 1)
+		token.setup(
+			player_index,
+			players[player_index].color
+		)
+		add_child(token)
+		mage_tokens.append(token)
+
+	refresh_model_tokens()
+
+
+func _sync_evocation_tokens() -> void:
+	var live_ids: Dictionary = {}
+
+	for owner_index in range(players.size()):
+		var owner = players[owner_index]
+
+		for evocation in owner.evocations:
+			if evocation == null:
+				continue
+
+			var instance_id: int = int(
+				evocation.get_instance_id()
+			)
+			live_ids[instance_id] = true
+
+			if evocation_tokens.has(instance_id):
+				continue
+
+			var token = evocation_token_scene.instantiate()
+			token.name = (
+				"EvocationToken_"
+				+ evocation.evocation_id
+				+ "_P"
+				+ str(owner_index + 1)
+			)
+			token.setup(
+				evocation.evocation_id,
+				evocation.evocation_name,
+				owner_index,
+				players[owner_index].color
+			)
+			add_child(token)
+			evocation_tokens[instance_id] = token
+
+	var stale_ids: Array = []
+
+	for instance_id_value in evocation_tokens.keys():
+		var instance_id: int = int(instance_id_value)
+
+		if live_ids.has(instance_id):
+			continue
+
+		var old_token = evocation_tokens[
+			instance_id
+		]
+
+		if is_instance_valid(old_token):
+			old_token.queue_free()
+
+		stale_ids.append(instance_id)
+
+	for instance_id in stale_ids:
+		evocation_tokens.erase(instance_id)
+
+
+func refresh_model_tokens() -> void:
+	if players.is_empty():
+		return
+
+	_sync_evocation_tokens()
+
+	var groups: Dictionary = {}
+	var group_centers: Dictionary = {}
+
+	for player_index in range(players.size()):
+		if player_index >= mage_tokens.size():
+			continue
+
+		var mage = players[player_index].mage
+		var token = mage_tokens[player_index]
+
+		if mage == null or not is_instance_valid(token):
+			continue
+
+		var location_key: String = ""
+		var center: Vector2 = Vector2.ZERO
+
+		if mage.in_cell:
+			var cell_coord: Vector2i = mage.room_coord
+
+			if player_cell_coords.has(player_index):
+				cell_coord = player_cell_coords[
+					player_index
+				]
+
+			location_key = "cell:" + str(player_index)
+			center = hex_to_pixel(cell_coord)
+		else:
+			if mage.room_id == "":
+				token.visible = false
+				continue
+
+			var room_coord: Vector2i = room_id_to_coord(
+				mage.room_id
+			)
+
+			if room_coord == Vector2i(9999, 9999):
+				token.visible = false
+				continue
+
+			location_key = "room:" + mage.room_id
+			center = hex_to_pixel(room_coord)
+
+		token.visible = true
+
+		if not groups.has(location_key):
+			groups[location_key] = []
+			group_centers[location_key] = center
+
+		groups[location_key].append({
+			"node": token,
+			"sort": player_index * 100
+		})
+
+	for owner_index in range(players.size()):
+		for evocation_index in range(
+			players[owner_index].evocations.size()
+		):
+			var evocation = players[
+				owner_index
+			].evocations[
+				evocation_index
+			]
+
+			if evocation == null:
+				continue
+
+			if evocation.room_id == "":
+				continue
+
+			var instance_id: int = int(
+				evocation.get_instance_id()
+			)
+
+			if not evocation_tokens.has(instance_id):
+				continue
+
+			var token = evocation_tokens[
+				instance_id
+			]
+
+			if not is_instance_valid(token):
+				continue
+
+			var room_coord: Vector2i = room_id_to_coord(
+				evocation.room_id
+			)
+
+			if room_coord == Vector2i(9999, 9999):
+				token.visible = false
+				continue
+
+			token.visible = true
+
+			var location_key: String = (
+				"room:"
+				+ evocation.room_id
+			)
+
+			if not groups.has(location_key):
+				groups[location_key] = []
+				group_centers[location_key] = hex_to_pixel(
+					room_coord
+				)
+
+			groups[location_key].append({
+				"node": token,
+				"sort":
+					10000
+					+ owner_index * 100
+					+ evocation_index
+			})
+
+	for location_key_value in groups.keys():
+		var location_key: String = str(
+			location_key_value
+		)
+		var entries: Array = groups[
+			location_key
+		]
+
+		entries.sort_custom(
+			func(a, b):
+				return int(a["sort"]) < int(b["sort"])
+		)
+
+		var offsets: Array[Vector2] = (
+			_model_token_offsets(
+				entries.size()
+			)
+		)
+		var center: Vector2 = group_centers[
+			location_key
+		]
+
+		for i in range(entries.size()):
+			var node = entries[i]["node"]
+
+			if not is_instance_valid(node):
+				continue
+
+			node.position = center + offsets[i]
+
+
+func _model_token_offsets(
+	count: int
+) -> Array[Vector2]:
+	var result: Array[Vector2] = []
+
+	if count <= 0:
+		return result
+
+	if count == 1:
+		return [Vector2(0, -38)]
+
+	if count == 2:
+		return [
+			Vector2(-22, -38),
+			Vector2(22, -38)
+		]
+
+	if count == 3:
+		return [
+			Vector2(-34, -38),
+			Vector2(0, -38),
+			Vector2(34, -38)
+		]
+
+	var columns: int = mini(3, count)
+	var spacing_x: float = 35.0
+	var spacing_y: float = 34.0
+	var rows: int = int(
+		ceil(
+			float(count)
+			/ float(columns)
+		)
+	)
+	var start_y: float = (
+		-42.0
+		- float(rows - 1) * spacing_y * 0.5
+	)
+
+	for i in range(count):
+		var row: int = int(i / columns)
+		var column: int = i % columns
+
+		var items_in_row: int = mini(
+			columns,
+			count - row * columns
+		)
+
+		var start_x: float = (
+			-float(items_in_row - 1)
+			* spacing_x
+			* 0.5
+		)
+
+		result.append(
+			Vector2(
+				start_x
+				+ float(column)
+				* spacing_x,
+				start_y
+				+ float(row)
+				* spacing_y
+			)
+		)
+
+	return result
+
 
 func place_player_instability(
 	player_index: int,
@@ -730,6 +1411,314 @@ func heal_damage(
 
 	return removed
 
+
+func refresh_player_board(
+	player_index: int
+) -> void:
+	if player_index < 0 	or player_index >= player_boards.size():
+		return
+
+	if player_boards[player_index] == null:
+		return
+
+	player_boards[player_index].refresh()
+
+
+func refresh_all_player_boards() -> void:
+	for board in player_boards:
+		if board != null:
+			board.refresh()
+
+
+func get_ui_viewer_player_index() -> int:
+	if waiting_for_player_input:
+		return int(
+			pending_input.get(
+				"player_index",
+				-1
+			)
+		)
+
+	return -1
+
+
+func can_view_private_player_board_spells(
+	owner_player_index: int
+) -> bool:
+	return (
+		get_ui_viewer_player_index()
+		== owner_player_index
+	)
+
+
+func _ensure_player_board_spell_slots(
+	player_index: int
+) -> Dictionary:
+	if not player_board_spell_slots.has(player_index):
+		player_board_spell_slots[player_index] = {
+			"Q": {},
+			"I": {},
+			"II": {},
+			"III": {}
+		}
+
+	return player_board_spell_slots[player_index]
+
+
+func _set_player_board_spell_slot(
+	player_index: int,
+	slot_id: String,
+	spell: SpellCardState,
+	use_dark_side: bool,
+	state: String
+) -> void:
+	if spell == null:
+		return
+
+	var slots: Dictionary = _ensure_player_board_spell_slots(
+		player_index
+	)
+
+	slots[slot_id] = {
+		"spell": spell,
+		"use_dark_side": use_dark_side,
+		"state": state
+	}
+
+
+func _clear_player_board_spell_slots(
+	player_index: int
+) -> void:
+	player_board_spell_slots[player_index] = {
+		"Q": {},
+		"I": {},
+		"II": {},
+		"III": {}
+	}
+
+	refresh_player_board(player_index)
+
+
+func _sync_player_board_prepared_spells(
+	player_index: int
+) -> void:
+	if player_index < 0 	or player_index >= players.size():
+		return
+
+	var player = players[player_index]
+	var slots: Dictionary = {
+		"Q": {},
+		"I": {},
+		"II": {},
+		"III": {}
+	}
+
+	var numbered_ids: Array[String] = [
+		"I",
+		"II",
+		"III"
+	]
+
+	for i in range(
+		min(
+			3,
+			player.ready_spells.size()
+		)
+	):
+		var ready = player.ready_spells[i]
+
+		if ready == null 		or ready.spell == null:
+			continue
+
+		slots[numbered_ids[i]] = {
+			"spell": ready.spell,
+			"use_dark_side": ready.use_dark_side,
+			"state": "prepared"
+		}
+
+	if player.quick_spell != null 	and player.quick_spell.spell != null:
+		slots["Q"] = {
+			"spell": player.quick_spell.spell,
+			"use_dark_side": player.quick_spell.use_dark_side,
+			"state": "prepared"
+		}
+
+	player_board_spell_slots[player_index] = slots
+	refresh_player_board(player_index)
+
+
+func _find_player_board_slot_for_spell(
+	player_index: int,
+	spell: SpellCardState
+) -> String:
+	if spell == null:
+		return ""
+
+	var slots: Dictionary = _ensure_player_board_spell_slots(
+		player_index
+	)
+
+	for slot_id_value in [
+		"Q",
+		"I",
+		"II",
+		"III"
+	]:
+		var slot_id: String = str(slot_id_value)
+		var entry: Dictionary = slots.get(
+			slot_id,
+			{}
+		)
+
+		if entry.get(
+			"spell",
+			null
+		) == spell:
+			return slot_id
+
+	return ""
+
+
+func _set_player_board_spell_state(
+	player_index: int,
+	spell: SpellCardState,
+	state: String
+) -> void:
+	var slot_id: String = _find_player_board_slot_for_spell(
+		player_index,
+		spell
+	)
+
+	if slot_id == "":
+		return
+
+	var slots: Dictionary = _ensure_player_board_spell_slots(
+		player_index
+	)
+	var entry: Dictionary = slots.get(
+		slot_id,
+		{}
+	)
+
+	if entry.is_empty():
+		return
+
+	entry["state"] = state
+	slots[slot_id] = entry
+	refresh_player_board(player_index)
+
+
+func _clear_player_board_spell_by_spell(
+	player_index: int,
+	spell: SpellCardState
+) -> void:
+	var slot_id: String = _find_player_board_slot_for_spell(
+		player_index,
+		spell
+	)
+
+	if slot_id == "":
+		return
+
+	var slots: Dictionary = _ensure_player_board_spell_slots(
+		player_index
+	)
+	slots[slot_id] = {}
+	refresh_player_board(player_index)
+
+
+func get_player_board_spell_slot_data(
+	player_index: int,
+	slot_id: String
+) -> Dictionary:
+	if player_index < 0 	or player_index >= players.size():
+		return {}
+
+	var slots: Dictionary = _ensure_player_board_spell_slots(
+		player_index
+	)
+	var entry: Dictionary = slots.get(
+		slot_id,
+		{}
+	)
+
+	if entry.is_empty():
+		return {}
+
+	var spell: SpellCardState = entry.get(
+		"spell",
+		null
+	)
+
+	if spell == null:
+		return {}
+
+	var state: String = str(
+		entry.get(
+			"state",
+			"prepared"
+		)
+	)
+
+	return {
+		"occupied": true,
+		"state": state,
+		"public": state == "revealed",
+		"id": spell.id,
+		"name": spell.card_name,
+		"school_id": spell.school_id,
+		"use_dark_side": bool(
+			entry.get(
+				"use_dark_side",
+				false
+			)
+		),
+		"slot_id": slot_id
+	}
+
+
+func open_player_board_spell(
+	player_index: int,
+	slot_id: String
+) -> void:
+	var data: Dictionary = get_player_board_spell_slot_data(
+		player_index,
+		slot_id
+	)
+
+	if data.is_empty():
+		return
+
+	var public_card: bool = bool(
+		data.get(
+			"public",
+			false
+		)
+	)
+
+	if not public_card 	and not can_view_private_player_board_spells(
+		player_index
+	):
+		return
+
+	var preview = get_node_or_null(
+		"SpellCardPreview"
+	)
+
+	if preview == null:
+		preview = spell_preview_script.new()
+		preview.name = "SpellCardPreview"
+		add_child(preview)
+
+	preview.show_spell(
+		str(data.get("id", "")),
+		str(data.get("name", "Spell")),
+		str(data.get("school_id", "")),
+		bool(data.get("use_dark_side", false)),
+		public_card
+	)
+
+
 func create_player_boards():
 	for board in player_boards:
 		if board != null:
@@ -740,7 +1729,7 @@ func create_player_boards():
 	for i in range(players.size()):
 		var board = player_board_scene.instantiate()
 
-		board.setup(players[i])
+		board.setup(players[i], self, i)
 
 		add_child(board)
 		player_boards.append(board)
@@ -748,40 +1737,122 @@ func create_player_boards():
 	update_player_board_positions()
 	
 func update_player_board_positions():
-	var board_scale = 0.34
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var usable_width: float = viewport_size.x
 
-	var left_x = 0.0
-	var right_x = 1390.0
+	if enable_beta_hud and not run_tests_on_ready:
+		usable_width = max(
+			640.0,
+			viewport_size.x - beta_sidebar_width
+		)
 
-	var y_positions = [
-		20.0,
-		325.0,
-		630.0
-	]
+	var board_scale: float = clamp(
+		min(
+			usable_width / 2050.0,
+			viewport_size.y / 1400.0
+		),
+		0.54,
+		0.72
+	)
+
+	var board_width: float = 700.0 * board_scale
+	var board_height: float = 220.0 * board_scale
+
+	var left_x: float = 10.0
+	var right_x: float = max(
+		10.0,
+		usable_width - board_width - 10.0
+	)
+
+	var row_spacing: float = board_height + 12.0
+	var first_y: float = 8.0
 
 	for i in range(player_boards.size()):
 		var board = player_boards[i]
 
-		board.scale = Vector2(board_scale, board_scale)
+		board.scale = Vector2(
+			board_scale,
+			board_scale
+		)
 
-		# P1, P3, P5 a sinistra
+		var row: int = int(i / 2)
+		var y: float = first_y + row_spacing * row
+
 		if i % 2 == 0:
-			var row = int(i / 2)
-
 			board.position = Vector2(
 				left_x,
-				y_positions[row]
+				y
 			)
-
-		# P2, P4, P6 a destra
 		else:
-			var row = int(i / 2)
-
 			board.position = Vector2(
 				right_x,
-				y_positions[row]
+				y
 			)
-			
+
+
+func _ensure_beta_background() -> void:
+	if beta_background_layer != null:
+		return
+
+	beta_background_layer = CanvasLayer.new()
+	beta_background_layer.layer = -100
+	beta_background_layer.name = "BetaBackgroundLayer"
+	add_child(beta_background_layer)
+
+	var background := ColorRect.new()
+	background.name = "BetaBackground"
+	background.color = Color(0.29, 0.29, 0.29, 1.0)
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+	beta_background_layer.add_child(background)
+
+
+func _reposition_hex_nodes() -> void:
+	for child in get_children():
+		if not child.has_meta("hex_coord"):
+			continue
+
+		var coord_value = child.get_meta(
+			"hex_coord"
+		)
+
+		if not coord_value is Vector2i:
+			continue
+
+		child.position = hex_to_pixel(
+			coord_value
+		)
+
+
+func _apply_beta_table_layout() -> void:
+	scale = Vector2.ONE
+	position = Vector2.ZERO
+
+	if not enable_beta_hud or run_tests_on_ready:
+		return
+
+	_ensure_beta_background()
+
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var usable_width: float = max(
+		640.0,
+		viewport_size.x - beta_sidebar_width
+	)
+
+	board_center = Vector2(
+		usable_width * 0.5,
+		viewport_size.y * 0.54
+	)
+
+	_reposition_hex_nodes()
+	update_table_layout()
+
+
+func _on_beta_viewport_resized() -> void:
+	_apply_beta_table_layout()
+
 func update_table_layout():
 	# -------------------------
 	# POWER BOARD
@@ -828,6 +1899,7 @@ func update_table_layout():
 
 
 	update_player_board_positions()
+	refresh_model_tokens()
 
 
 func set_player_power(player_index: int, value: int):
@@ -1077,6 +2149,7 @@ func summon_evocation(
 		room_id
 	)
 
+	refresh_model_tokens()
 	return evocation
 
 func deal_damage_to_model(
@@ -1137,7 +2210,10 @@ func deal_damage_to_evocation(
 	attacker_id: int,
 	evocation: EvocationState,
 	amount: int,
-	suppressed_trigger_types: Array[String] = []
+	suppressed_trigger_types: Array[String] = [],
+	action_type: String = "",
+	source_model_type: String = "",
+	source_evocation: EvocationState = null
 ) -> int:
 	if evocation == null or amount <= 0:
 		return 0
@@ -1153,12 +2229,22 @@ func deal_damage_to_evocation(
 	if not active_effect_context.is_empty():
 		result_context = active_effect_context
 
+	if source_model_type == "":
+		source_model_type = (
+			"black_rose"
+			if attacker_id == -1
+			else "mage"
+		)
+
 	queue_resolution({
 		"type": "evocation_damage",
-		"step": "apply",
+		"step": "pre_event",
 		"attacker_id": attacker_id,
 		"evocation": evocation,
 		"amount": requested,
+		"action_type": action_type,
+		"source_model_type": source_model_type,
+		"source_evocation": source_evocation,
 		"suppressed_trigger_types": suppressed_trigger_types.duplicate(),
 		"actual_damage": 0,
 		"result_context": result_context
@@ -1171,6 +2257,12 @@ func process_game_event(
 ) -> bool:
 	if event == null:
 		return true
+
+	if quest_manager != null:
+		quest_manager.process_game_event(
+			self,
+			event
+		)
 
 	var triggered = triggered_spell_manager.get_triggered_spells(
 		event,
@@ -1255,6 +2347,8 @@ func set_mage_starting_position(
 	mage.room_id = room_id
 	mage.room_coord = room_coord
 
+	refresh_model_tokens()
+
 	print(
 		"Player ",
 		player_index + 1,
@@ -1301,7 +2395,7 @@ func deal_damage_from_evocation(
 	queue_resolution({
 		"type": "damage",
 		"step": "pre_event",
-		"attacker_id": evocation.controller_id,
+		"attacker_id": get_evocation_controller_id(evocation),
 		"target_player_index": target_player_index,
 		"amount": requested,
 		"action_type": "evocation_attack",
@@ -1377,6 +2471,32 @@ func can_apply_enhancement(
 		return false
 
 	return true
+
+
+func _enhancement_required_elements(
+	enhancement: Dictionary
+) -> Array:
+	if enhancement.has("requires"):
+		var required = enhancement.get("requires", [])
+		if required is Array:
+			return required.duplicate()
+		return [required]
+
+	if enhancement.has("elements"):
+		var elements = enhancement.get("elements", [])
+		if elements is Array:
+			return elements.duplicate()
+		return [elements]
+
+	var single_element: String = str(
+		enhancement.get("element", "")
+	)
+
+	if single_element != "":
+		return [single_element]
+
+	return []
+
 
 func resolve_spell(
 	spell: SpellCardState,
@@ -1523,6 +2643,10 @@ func validate_target_range_from_context(
 	if caster_id < 0 or caster_id >= players.size():
 		return false
 
+	if bool(context.get("target_is_dummy", false)) \
+	or str(context.get("target_model_type", "")) == "dummy":
+		return true
+
 	var caster_mage = players[caster_id].mage
 	if caster_mage == null:
 		return false
@@ -1636,13 +2760,17 @@ func move_mage_to_room_id(
 		return false
 
 	if mage.in_cell:
-		var entrance_room_id: String = str(
-			player_entrance_room_ids.get(player_index, mage.room_id)
+		var legal_exits: Array[String] = (
+			get_player_cell_exit_room_ids(
+				player_index
+			)
 		)
-		if destination_room_id != entrance_room_id:
+
+		if not legal_exits.has(destination_room_id):
 			print(
 				"Player ", player_index + 1,
-				" must enter through ", entrance_room_id
+				" must exit Cell through one of ",
+				legal_exits
 			)
 			return false
 
@@ -1653,6 +2781,7 @@ func move_mage_to_room_id(
 			"Player ", player_index + 1,
 			" entered the Lodge through ", destination_room_id
 		)
+		refresh_model_tokens()
 		return true
 
 	if get_hex_distance(mage.room_coord, destination_coord) > max_distance:
@@ -1662,6 +2791,7 @@ func move_mage_to_room_id(
 	mage.room_coord = destination_coord
 	mage.in_cell = false
 	print("Player ", player_index + 1, " moved to ", destination_room_id)
+	refresh_model_tokens()
 	return true
 
 func move_evocation_to_room_id(
@@ -1704,6 +2834,7 @@ func move_evocation_to_room_id(
 		destination_room_id
 	)
 
+	refresh_model_tokens()
 	return true
 
 func is_lodge_room_id(room_id: String) -> bool:
@@ -1722,6 +2853,104 @@ func is_mage_in_cell(
 		return false
 
 	return players[player_index].mage.in_cell
+
+
+func get_evocation_by_owner_index(
+	owner_id: int,
+	evocation_index: int
+) -> EvocationState:
+	if owner_id < 0 or owner_id >= players.size():
+		return null
+
+	if evocation_index < 0 \
+	or evocation_index >= players[owner_id].evocations.size():
+		return null
+
+	return players[owner_id].evocations[evocation_index]
+
+
+func is_evocation_in_play(
+	evocation: EvocationState
+) -> bool:
+	if evocation == null:
+		return false
+
+	var owner_id: int = int(evocation.owner_id)
+	if owner_id < 0 or owner_id >= players.size():
+		return false
+
+	return players[owner_id].evocations.has(evocation)
+
+
+func get_evocation_controller_id(
+	evocation: EvocationState
+) -> int:
+	if evocation == null:
+		return -999
+
+	var controller_id: int = int(evocation.controller_id)
+
+	if controller_id < 0:
+		controller_id = int(evocation.owner_id)
+
+	return controller_id
+
+
+func finalize_evocation_removal(
+	evocation: EvocationState
+) -> bool:
+	if evocation == null:
+		return false
+
+	var owner_id: int = int(evocation.owner_id)
+	if owner_id < 0 or owner_id >= players.size():
+		return false
+
+	var owner = players[owner_id]
+	var index: int = owner.evocations.find(evocation)
+
+	if index == -1:
+		return false
+
+	# Damage Cubes leave the card when the Evocation leaves play.
+	var damage_snapshot: Array[int] = evocation.damage_cubes.duplicate()
+
+	for cube_owner_id in damage_snapshot:
+		return_owner_cubes(
+			int(cube_owner_id),
+			1
+		)
+
+	evocation.damage_cubes.clear()
+	owner.evocations.remove_at(index)
+
+	refresh_model_tokens()
+	return true
+
+
+func _valid_mage_physical_attack_evocation(
+	attacker_id: int,
+	evocation: EvocationState
+) -> bool:
+	if attacker_id < 0 or attacker_id >= players.size():
+		return false
+
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
+		return false
+
+	var attacker_mage = players[attacker_id].mage
+
+	if attacker_mage == null or attacker_mage.in_cell:
+		return false
+
+	if evocation.room_id != attacker_mage.room_id:
+		return false
+
+	# A Mage and the Evocations they control ignore Damage resolved by that
+	# Mage. Do not expose such a Model as a useful Physical Attack target.
+	return get_evocation_controller_id(evocation) != attacker_id
 
 func emit_evocation_defeated_or_removed(
 	evocation: EvocationState,
@@ -2233,6 +3462,30 @@ func calculate_room_completion_rewards(
 
 
 	return result
+func clone_spell_card(
+	spell: SpellCardState
+) -> SpellCardState:
+
+	if spell == null:
+		return null
+
+	var copy := SpellCardState.new(
+		spell.id,
+		spell.card_name,
+		spell.school_id,
+		spell.light_side.duplicate(true),
+		spell.dark_side.duplicate(true),
+		spell.copies,
+		spell.instability
+	)
+
+	copy.personal = spell.personal
+	copy.forgotten = spell.forgotten
+	copy.instability = spell.instability
+
+	return copy
+
+
 func create_school_libraries():
 	school_libraries.clear()
 	school_discards.clear()
@@ -2260,9 +3513,10 @@ func create_school_libraries():
 
 			for i in range(spell.copies):
 
-				library.append(
-					spell
-				)
+				var spell_copy: SpellCardState = clone_spell_card(spell)
+
+				if spell_copy != null:
+					library.append(spell_copy)
 
 
 		shuffle_with_rng(
@@ -2286,7 +3540,7 @@ func create_school_libraries():
 			school_libraries[school_id].size(),
 			" cards"
 		)
-		
+
 func select_active_schools():
 	active_school_ids.clear()
 
@@ -2305,6 +3559,11 @@ func select_active_schools():
 		)
 
 		if school_id.is_empty():
+			continue
+
+		# Forgotten Spells belong to their own deck. They are NOT a School of
+		# Magic and must never appear among the active Study Libraries.
+		if spell.forgotten 		or school_id == "forgotten":
 			continue
 
 		if school_id in available_school_ids:
@@ -2616,27 +3875,40 @@ func discard_player_spell(
 		return false
 
 
-	var success = (
-		players[player_index]
-		.discard_spell_from_hand(
-			spell
+	var player = players[
+		player_index
+	]
+
+	var hand_index: int = player.hand.find(
+		spell
+	)
+
+	if hand_index == -1:
+		return false
+
+	player.hand.remove_at(
+		hand_index
+	)
+
+	move_spell_to_memories_or_remove(
+		player_index,
+		spell
+	)
+
+	print(
+		"Player ",
+		player_index + 1,
+		" discarded ",
+		spell.card_name,
+		(
+			" out of the game"
+			if spell.forgotten
+			else " to Memories"
 		)
 	)
 
+	return true
 
-	if success:
-
-		print(
-			"Player ",
-			player_index + 1,
-			" discarded ",
-			spell.card_name,
-			" to Memories"
-		)
-
-
-	return success
-	
 func discard_player_spell_by_id(
 	player_index: int,
 	spell_id: String
@@ -2825,6 +4097,7 @@ func discard_player_spells_by_id(
 func create_forgotten_deck():
 	forgotten_deck.clear()
 	forgotten_discard.clear()
+	forgotten_removed_from_game.clear()
 
 	for spell in spell_database.spells.values():
 
@@ -2832,9 +4105,10 @@ func create_forgotten_deck():
 			continue
 
 		for i in range(spell.copies):
-			forgotten_deck.append(
-				spell
-			)
+			var spell_copy: SpellCardState = clone_spell_card(spell)
+
+			if spell_copy != null:
+				forgotten_deck.append(spell_copy)
 
 	shuffle_with_rng(
 		forgotten_deck
@@ -2845,6 +4119,92 @@ func create_forgotten_deck():
 		forgotten_deck.size(),
 		" cards"
 	)
+
+func draw_forgotten_spell(
+	player_index: int
+) -> SpellCardState:
+	if player_index < 0 \
+	or player_index >= players.size():
+		return null
+
+	if forgotten_deck.is_empty():
+		print("Forgotten Spell Deck is empty")
+		return null
+
+	var spell: SpellCardState = (
+		forgotten_deck.pop_back()
+	)
+
+	players[player_index].hand.append(
+		spell
+	)
+
+	print(
+		"Player ",
+		player_index + 1,
+		" drew Forgotten Spell: ",
+		spell.card_name
+	)
+
+	return spell
+
+
+func remove_forgotten_from_game(
+	spell: SpellCardState
+) -> bool:
+	if spell == null or not spell.forgotten:
+		return false
+
+	if not forgotten_removed_from_game.has(
+		spell
+	):
+		forgotten_removed_from_game.append(
+			spell
+		)
+
+	print(
+		"Forgotten Spell removed from game: ",
+		spell.card_name
+	)
+
+	return true
+
+
+func move_spell_to_memories_or_remove(
+	player_index: int,
+	spell: SpellCardState
+) -> bool:
+	if player_index < 0 \
+	or player_index >= players.size() \
+	or spell == null:
+		return false
+
+	if spell.forgotten:
+		return remove_forgotten_from_game(
+			spell
+		)
+
+	players[player_index].add_spell_to_memories(
+		spell
+	)
+
+	return true
+
+
+func get_forgotten_hand_spells(
+	player_index: int
+) -> Array[SpellCardState]:
+	var result: Array[SpellCardState] = []
+
+	if player_index < 0 \
+	or player_index >= players.size():
+		return result
+
+	for spell in players[player_index].hand:
+		if spell != null and spell.forgotten:
+			result.append(spell)
+
+	return result
 func get_summon_spells_from_grimoire(
 	player_index: int
 ) -> Array[SpellCardState]:
@@ -3928,6 +5288,7 @@ func place_mage_in_cell(
 		mage.room_coord = player_entrance_room_coords[player_index]
 
 	mage.in_cell = true
+	refresh_model_tokens()
 
 	print(
 		"Player ",
@@ -4775,7 +6136,8 @@ func resolve_hand_limit(
 		)
 
 
-		player.memories.append(
+		move_spell_to_memories_or_remove(
+			player_index,
 			spell
 		)
 
@@ -4785,16 +6147,21 @@ func resolve_hand_limit(
 			player_index + 1,
 			" discards ",
 			spell.id,
-			" to Memories due to Hand Limit"
+			(
+				" out of the game"
+				if spell.forgotten
+				else " to Memories"
+			),
+			" due to Hand Limit"
 		)
 
 
 	return true
 func prepare_player_spells(
 	player_index: int,
-	ready_spell_ids: Array,
+	ready_hand_indices: Array,
 	ready_dark_sides: Array,
-	quick_spell_id: String = "",
+	quick_hand_index: int = -1,
 	quick_dark_side: bool = false
 ) -> bool:
 
@@ -4818,12 +6185,9 @@ func prepare_player_spells(
 	# - 1 Quick Spell
 	# =====================================================
 
-	var total_spells: int = (
-		ready_spell_ids.size()
-	)
+	var total_spells: int = ready_hand_indices.size()
 
-
-	if not quick_spell_id.is_empty():
+	if quick_hand_index != -1:
 		total_spells += 1
 
 
@@ -4839,7 +6203,7 @@ func prepare_player_spells(
 		return false
 
 
-	if ready_spell_ids.size() > 3:
+	if ready_hand_indices.size() > 3:
 
 		print(
 			"Preparation: Player ",
@@ -4850,8 +6214,7 @@ func prepare_player_spells(
 		return false
 
 
-	if ready_dark_sides.size() \
-	!= ready_spell_ids.size():
+	if ready_dark_sides.size() != ready_hand_indices.size():
 
 		print(
 			"Preparation: side choices do not match Ready Spells"
@@ -4878,131 +6241,92 @@ func prepare_player_spells(
 
 	# =====================================================
 	# VALIDATE ALL CARDS BEFORE MODIFYING HAND
+	#
+	# Hand indices identify physical copies, so two cards
+	# with the same Spell id can be prepared independently.
+	# Store the object references now, before removals shift
+	# the Hand indices.
 	# =====================================================
 
-	var used_ids: Array[String] = []
+	var used_hand_indices: Array[int] = []
+	var ready_spells_to_prepare: Array[SpellCardState] = []
 
+	for hand_index_value in ready_hand_indices:
 
-	for spell_id_value in ready_spell_ids:
+		var hand_index: int = int(hand_index_value)
 
-		var spell_id: String = str(
-			spell_id_value
-		)
-
-
-		if used_ids.has(
-			spell_id
-		):
-
+		if hand_index < 0 or hand_index >= player.hand.size():
 			print(
-				"Preparation: duplicate Spell ",
-				spell_id
+				"Preparation: Hand index ",
+				hand_index,
+				" is invalid for Player ",
+				player_index + 1
 			)
-
 			return false
 
-
-		var spell: SpellCardState = (
-			player.get_spell_from_hand(
-				spell_id
+		if used_hand_indices.has(hand_index):
+			print(
+				"Preparation: Hand card ",
+				hand_index,
+				" selected more than once"
 			)
-		)
+			return false
 
+		var spell: SpellCardState = player.hand[hand_index]
 
 		if spell == null:
-
 			print(
-				"Preparation: Spell ",
-				spell_id,
-				" not found in Player ",
-				player_index + 1,
-				" Hand"
+				"Preparation: null Spell at Hand index ",
+				hand_index
 			)
-
 			return false
 
-
-		used_ids.append(
-			spell_id
-		)
+		used_hand_indices.append(hand_index)
+		ready_spells_to_prepare.append(spell)
 
 
-	if not quick_spell_id.is_empty():
+	var quick_spell_to_prepare: SpellCardState = null
 
-		if used_ids.has(
-			quick_spell_id
-		):
+	if quick_hand_index != -1:
 
+		if quick_hand_index < 0 or quick_hand_index >= player.hand.size():
+			print(
+				"Preparation: Quick Spell Hand index ",
+				quick_hand_index,
+				" is invalid"
+			)
+			return false
+
+		if used_hand_indices.has(quick_hand_index):
 			print(
 				"Preparation: Quick Spell already used in numbered slots"
 			)
-
 			return false
 
+		quick_spell_to_prepare = player.hand[quick_hand_index]
 
-		var quick_spell: SpellCardState = (
-			player.get_spell_from_hand(
-				quick_spell_id
-			)
-		)
-
-
-		if quick_spell == null:
-
+		if quick_spell_to_prepare == null:
 			print(
-				"Preparation: Quick Spell ",
-				quick_spell_id,
-				" not found in Hand"
+				"Preparation: null Quick Spell at Hand index ",
+				quick_hand_index
 			)
-
 			return false
 
 
 	# =====================================================
 	# PREPARE I / II / III
-	#
-	# Array order IS slot order:
-	#
-	# index 0 = I
-	# index 1 = II
-	# index 2 = III
 	# =====================================================
 
-	for i in range(
-		ready_spell_ids.size()
-	):
+	for i in range(ready_spells_to_prepare.size()):
 
-		var spell_id: String = str(
-			ready_spell_ids[
-				i
-			]
-		)
+		var spell: SpellCardState = ready_spells_to_prepare[i]
+		var use_dark_side: bool = bool(ready_dark_sides[i])
 
-
-		var spell: SpellCardState = (
-			player.get_spell_from_hand(
-				spell_id
-			)
-		)
-
-
-		var use_dark_side: bool = bool(
-			ready_dark_sides[
-				i
-			]
-		)
-
-
-		if not player.add_ready_spell(
-			spell,
-			use_dark_side
-		):
-
+		if not player.add_ready_spell(spell, use_dark_side):
 			print(
 				"Preparation: failed to prepare ",
-				spell_id
+				spell.id
 			)
-
 			return false
 
 
@@ -5010,25 +6334,16 @@ func prepare_player_spells(
 	# PREPARE QUICK
 	# =====================================================
 
-	if not quick_spell_id.is_empty():
-
-		var quick_spell: SpellCardState = (
-			player.get_spell_from_hand(
-				quick_spell_id
-			)
-		)
-
+	if quick_spell_to_prepare != null:
 
 		if not player.set_quick_spell(
-			quick_spell,
+			quick_spell_to_prepare,
 			quick_dark_side
 		):
-
 			print(
 				"Preparation: failed to prepare Quick Spell ",
-				quick_spell_id
+				quick_spell_to_prepare.id
 			)
-
 			return false
 
 
@@ -5044,17 +6359,9 @@ func prepare_player_spells(
 		" Spells"
 	)
 
+	for i in range(player.ready_spells.size()):
 
-	for i in range(
-		player.ready_spells.size()
-	):
-
-		var ready: ReadySpellState = (
-			player.ready_spells[
-				i
-			]
-		)
-
+		var ready: ReadySpellState = player.ready_spells[i]
 
 		print(
 			"  Slot ",
@@ -5065,9 +6372,7 @@ func prepare_player_spells(
 			"Dark" if ready.use_dark_side else "Light"
 		)
 
-
 	if player.quick_spell != null:
-
 		print(
 			"  Quick: ",
 			player.quick_spell.spell.card_name,
@@ -5075,8 +6380,9 @@ func prepare_player_spells(
 			"Dark" if player.quick_spell.use_dark_side else "Light"
 		)
 
-
+	_sync_player_board_prepared_spells(player_index)
 	return true
+
 func resolve_preparation_phase(
 	context: Dictionary = {}
 ) -> bool:
@@ -5168,12 +6474,16 @@ func player_has_available_action(
 	var player = players[player_index]
 
 	# A Mage in a Cell cannot cast Ready/Quick Spells or perform Fight/
-	# Command. During the Action Phase the meaningful available Action is
-	# a Physical Action that can move them out of the Cell (Explore).
+	# Command, but they may leave the Cell either through a Physical Action
+	# that moves them or through Momentum by discarding a Ready Spell.
 	if player.mage != null and player.mage.in_cell:
 		return (
-			player.has_physical_action()
-			and player.mage.speed > 0
+			(
+				player.has_physical_action()
+				and player.mage.speed > 0
+			)
+			or not player.ready_spells.is_empty()
+			or player.quick_spell != null
 		)
 
 	if not player.ready_spells.is_empty():
@@ -5211,13 +6521,20 @@ func perform_fight_action(
 	activate_room_first: bool = false,
 	perform_attack: bool = true,
 	perform_room_activation: bool = true,
-	context: Dictionary = {}
+	context: Dictionary = {},
+	target_model_type: String = "",
+	target_evocation: EvocationState = null
 ) -> bool:
+	if target_model_type == "" 	and target_player_index >= 0:
+		target_model_type = "mage"
+
 	return queue_resolution({
 		"type": "fight",
 		"step": "start",
 		"player_index": player_index,
+		"target_model_type": target_model_type,
 		"target_player_index": target_player_index,
+		"target_evocation": target_evocation,
 		"activate_room_first": activate_room_first,
 		"perform_attack": perform_attack,
 		"perform_room_activation": perform_room_activation,
@@ -5258,6 +6575,82 @@ func cast_quick_spell(
 		"context": context
 	})
 
+
+func _is_valid_momentum_destination(
+	player_index: int,
+	destination_room_id: String
+) -> bool:
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	var mage = players[player_index].mage
+	if mage == null:
+		return false
+
+	# "You may Move 1": outside the Cell the movement is optional.
+	if destination_room_id == "":
+		return not mage.in_cell
+
+	if not is_lodge_room_id(destination_room_id):
+		return false
+
+	if mage.in_cell:
+		return get_player_cell_exit_room_ids(
+			player_index
+		).has(
+			destination_room_id
+		)
+
+	var destination_coord: Vector2i = room_id_to_coord(
+		destination_room_id
+	)
+
+	if destination_coord == Vector2i(9999, 9999):
+		return false
+
+	return get_hex_distance(
+		mage.room_coord,
+		destination_coord
+	) <= 1
+
+func perform_momentum_action(
+	player_index: int,
+	ready_index: int = -1,
+	use_quick: bool = false,
+	destination_room_id: String = "",
+	context: Dictionary = {}
+) -> bool:
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	var player = players[player_index]
+
+	if use_quick:
+		if player.quick_spell == null:
+			print("Momentum: no Quick Spell to discard")
+			return false
+	else:
+		if ready_index < 0 or ready_index >= player.ready_spells.size():
+			print("Momentum: invalid Ready Spell index")
+			return false
+
+	if not _is_valid_momentum_destination(
+		player_index,
+		destination_room_id
+	):
+		print("Momentum: invalid optional Move 1 destination")
+		return false
+
+	return queue_resolution({
+		"type": "momentum",
+		"step": "discard",
+		"player_index": player_index,
+		"ready_index": ready_index,
+		"use_quick": use_quick,
+		"destination_room_id": destination_room_id,
+		"context": context
+	})
+
 func perform_player_action(
 	player_index: int,
 	action: Dictionary
@@ -5284,18 +6677,51 @@ func perform_player_action(
 				action_context
 			)
 		"fight":
+			var target_evocation: EvocationState = null
+
+			if str(
+				action.get(
+					"target_model_type",
+					""
+				)
+			) == "evocation":
+				target_evocation = get_evocation_by_owner_index(
+					int(
+						action.get(
+							"target_evocation_owner_id",
+							-1
+						)
+					),
+					int(
+						action.get(
+							"target_evocation_index",
+							-1
+						)
+					)
+				)
+
 			return perform_fight_action(
 				player_index,
 				int(action.get("target_player_index", -1)),
 				bool(action.get("activate_room_first", false)),
 				bool(action.get("perform_attack", true)),
 				bool(action.get("perform_room_activation", true)),
-				action_context
+				action_context,
+				str(action.get("target_model_type", "")),
+				target_evocation
 			)
 		"command":
 			return perform_command_action(
 				player_index,
 				int(action.get("evocation_index", -1)),
+				action_context
+			)
+		"momentum":
+			return perform_momentum_action(
+				player_index,
+				int(action.get("ready_index", -1)),
+				bool(action.get("use_quick", false)),
+				str(action.get("destination_room_id", "")),
 				action_context
 			)
 		_:
@@ -5398,6 +6824,7 @@ func resolve_action_phase(
 
 	action_phase_cursor = 0
 	action_phase_activation_round = 1
+	_reset_stepwise_action_activation()
 
 
 	return advance_action_phase()
@@ -5474,6 +6901,7 @@ func request_player_input(
 	)
 
 	waiting_for_player_input = true
+	refresh_all_player_boards()
 
 
 	print(
@@ -5506,6 +6934,7 @@ func clear_player_input():
 
 	pending_input.clear()
 	waiting_for_player_input = false
+	refresh_all_player_boards()
 
 
 	player_input_resolved.emit(
@@ -5851,6 +7280,131 @@ func _quest_evocation_choice_options(
 	return options
 
 
+
+func _quest_model_choice_options(
+	caster_id: int,
+	effect: Dictionary
+) -> Array:
+	var options: Array = []
+
+	for mage_option_value in _quest_mage_choice_options(
+		caster_id,
+		effect
+	):
+		var mage_option: Dictionary = mage_option_value
+		var player_index: int = int(
+			mage_option.get(
+				"value",
+				-1
+			)
+		)
+
+		options.append({
+			"token": "model:mage:" + str(player_index),
+			"value": {
+				"type": "mage",
+				"player_index": player_index
+			},
+			"name": str(
+				mage_option.get(
+					"name",
+					"Mage"
+				)
+			),
+			"model_type": "mage",
+			"player_index": player_index,
+			"room_id": str(
+				mage_option.get(
+					"room_id",
+					""
+				)
+			)
+		})
+
+	for evocation_option_value in _quest_evocation_choice_options(
+		caster_id,
+		effect
+	):
+		var evocation_option: Dictionary = evocation_option_value
+		var evocation = evocation_option.get(
+			"value"
+		)
+
+		options.append({
+			"token": str(
+				evocation_option.get(
+					"token",
+					""
+				)
+			).replace(
+				"evocation:",
+				"model:evocation:"
+			),
+			"value": {
+				"type": "evocation",
+				"evocation": evocation
+			},
+			"name": str(
+				evocation_option.get(
+					"name",
+					"Evocation"
+				)
+			),
+			"model_type": "evocation",
+			"room_id": str(
+				evocation_option.get(
+					"room_id",
+					""
+				)
+			)
+		})
+
+	return options
+
+
+func _apply_quest_model_choice_to_context(
+	context: Dictionary
+) -> bool:
+	if not context.has("quest_target_model"):
+		return false
+
+	var model_data = context.get(
+		"quest_target_model"
+	)
+
+	if not model_data is Dictionary:
+		return false
+
+	var model: Dictionary = model_data
+	var model_type: String = str(
+		model.get(
+			"type",
+			""
+		)
+	)
+
+	context["target_model_type"] = model_type
+
+	if model_type == "mage":
+		context["target_player_index"] = int(
+			model.get(
+				"player_index",
+				-1
+			)
+		)
+		return true
+
+	if model_type == "evocation":
+		context["target_evocation"] = model.get(
+			"evocation"
+		)
+		return context.get(
+			"target_evocation",
+			null
+		) != null
+
+	return false
+
 func _quest_side_has_any_element(
 	side: Dictionary,
 	required_elements: Array[String]
@@ -5961,6 +7515,24 @@ func _prepare_quest_target_choice(
 			"Choose a target Mage."
 		)
 
+	if target_type == "model":
+		if _apply_quest_model_choice_to_context(
+			context
+		):
+			return true
+
+		return _quest_request_single_choice(
+			caster_id,
+			"target_model",
+			context,
+			"quest_target_model",
+			_quest_model_choice_options(
+				caster_id,
+				effect
+			),
+			"Choose a target Model."
+		)
+
 	if target_type == "evocation":
 		var context_key: String = "target_evocation"
 
@@ -5981,6 +7553,82 @@ func _prepare_quest_target_choice(
 
 	return true
 
+
+
+func _quest_yes_no_options(
+	yes_label: String = "Yes",
+	no_label: String = "No"
+) -> Array:
+	return [
+		{
+			"token": "choice:yes",
+			"value": true,
+			"name": yes_label
+		},
+		{
+			"token": "choice:no",
+			"value": false,
+			"name": no_label
+		}
+	]
+
+
+func _quest_non_forgotten_evocation_id_options() -> Array:
+	var options: Array = []
+
+	for evocation_id in evocation_database.evocations.keys():
+		var data: Dictionary = evocation_database.get_evocation(
+			str(evocation_id)
+		)
+
+		if data.is_empty():
+			continue
+
+		options.append({
+			"token": "evocation_type:" + str(evocation_id),
+			"value": str(evocation_id),
+			"id": str(evocation_id),
+			"name": str(
+				data.get(
+					"name",
+					evocation_id
+				)
+			)
+		})
+
+	return options
+
+
+func _quest_all_live_evocation_options() -> Array:
+	var options: Array = []
+
+	for owner_index in range(players.size()):
+		for evocation_index in range(
+			players[owner_index].evocations.size()
+		):
+			var evocation = players[
+				owner_index
+			].evocations[
+				evocation_index
+			]
+
+			if evocation == null \
+			or evocation.is_defeated():
+				continue
+
+			options.append({
+				"token":
+					"live_evocation:"
+					+ str(owner_index)
+					+ ":"
+					+ str(evocation_index),
+				"value": evocation,
+				"name": evocation.evocation_name,
+				"owner_id": owner_index,
+				"room_id": evocation.room_id
+			})
+
+	return options
 
 func _prepare_quest_special_choice(
 	effect: Dictionary,
@@ -6265,6 +7913,556 @@ func _prepare_quest_special_choice(
 			)
 			return false
 
+
+		"swap_with_target_mage_optional":
+			if not context.has("quest_optional_yes"):
+				if not _quest_request_single_choice(
+					caster_id,
+					"quest_optional",
+					context,
+					"quest_optional_yes",
+					_quest_yes_no_options(
+						"Swap positions",
+						"Do not swap"
+					),
+					"Do you want to move into the target Mage's Room?"
+				):
+					return false
+
+			if not bool(
+				context.get(
+					"quest_optional_yes",
+					false
+				)
+			):
+				return true
+
+			if str(
+				context.get(
+					"secondary_room_id",
+					""
+				)
+			) != "":
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"secondary_room",
+				context,
+				"secondary_room_id",
+				_quest_room_choice_options(
+					caster_id,
+					{
+						"range": "*"
+					}
+				),
+				"Choose the Room where the target Mage will be placed."
+			)
+
+		"draw_event_optional_gain_power":
+			if context.has("quest_optional_yes"):
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"quest_optional",
+				context,
+				"quest_optional_yes",
+				_quest_yes_no_options(
+					"Draw 1 Event",
+					"Do not draw"
+				),
+				"Do you want to draw an Event?"
+			)
+
+		"draw_event_then_damage":
+			if not context.has("quest_optional_yes"):
+				if not _quest_request_single_choice(
+					caster_id,
+					"quest_optional",
+					context,
+					"quest_optional_yes",
+					_quest_yes_no_options(
+						"Draw 1 Event",
+						"Do not draw"
+					),
+					"Do you want to draw an Event?"
+				):
+					return false
+
+			if not bool(
+				context.get(
+					"quest_optional_yes",
+					false
+				)
+			):
+				return true
+
+			if int(
+				context.get(
+					"target_player_index",
+					-1
+				)
+			) >= 0:
+				return true
+
+			var target_effect: Dictionary = {
+				"range": effect.get(
+					"range",
+					3
+				)
+			}
+
+			return _quest_request_single_choice(
+				caster_id,
+				"target_mage",
+				context,
+				"target_player_index",
+				_quest_mage_choice_options(
+					caster_id,
+					target_effect
+				),
+				"Choose the Mage who will suffer the Damage."
+			)
+
+		"damage_or_place_instability":
+			if str(
+				context.get(
+					"quest_branch",
+					""
+				)
+			) != "":
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"quest_branch",
+				context,
+				"quest_branch",
+				[
+					{
+						"token": "branch:damage",
+						"value": "damage",
+						"name": "Inflict "
+							+ str(
+								effect.get(
+									"damage",
+									0
+								)
+							)
+							+ " Damage"
+					},
+					{
+						"token": "branch:instability",
+						"value": "instability",
+						"name": "Place "
+							+ str(
+								effect.get(
+									"instability",
+									0
+								)
+							)
+							+ " Instability"
+					}
+				],
+				"Choose one Effect."
+			)
+
+		"complete_owned_quest_choice":
+			if context.get(
+				"selected_active_quest",
+				null
+			) != null:
+				return true
+
+			var quest_options: Array = []
+
+			for quest_index in range(
+				player.active_quests.size()
+			):
+				var quest_state: QuestState = (
+					player.active_quests[
+						quest_index
+					]
+				)
+
+				if quest_state == null:
+					continue
+
+				quest_options.append({
+					"token": "active_quest:" + str(quest_index),
+					"value": quest_state,
+					"name": quest_state.get_name(),
+					"quest_index": quest_index
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"active_quest",
+				context,
+				"selected_active_quest",
+				quest_options,
+				"Choose one of your Active Quests to complete."
+			)
+
+		"black_rose_lose_power_or_target_mage_lose_power":
+			if str(
+				context.get(
+					"quest_branch",
+					""
+				)
+			) == "":
+				if not _quest_request_single_choice(
+					caster_id,
+					"quest_branch",
+					context,
+					"quest_branch",
+					[
+						{
+							"token": "branch:black_rose",
+							"value": "black_rose",
+							"name": "Black Rose loses "
+								+ str(
+									effect.get(
+										"black_rose",
+										0
+									)
+								)
+								+ " Power"
+						},
+						{
+							"token": "branch:mage",
+							"value": "mage",
+							"name": "A Mage loses "
+								+ str(
+									effect.get(
+										"mage",
+										0
+									)
+								)
+								+ " Power"
+						}
+					],
+					"Choose one Effect."
+				):
+					return false
+
+			if str(
+				context.get(
+					"quest_branch",
+					""
+				)
+			) != "mage":
+				return true
+
+			if int(
+				context.get(
+					"target_player_index",
+					-1
+				)
+			) >= 0:
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"target_mage",
+				context,
+				"target_player_index",
+				_quest_mage_choice_options(
+					caster_id,
+					{
+						"range": "*"
+					}
+				),
+				"Choose the Mage who loses Power."
+			)
+
+		"give_forgotten_to_target":
+			if context.get(
+				"selected_forgotten_spell",
+				null
+			) != null:
+				return true
+
+			var forgotten_options: Array = []
+
+			for spell_index in range(
+				player.hand.size()
+			):
+				var spell: SpellCardState = player.hand[
+					spell_index
+				]
+
+				if spell == null \
+				or not spell.forgotten:
+					continue
+
+				forgotten_options.append({
+					"token": "forgotten_hand:" + str(spell_index),
+					"value": spell,
+					"name": spell.card_name,
+					"id": spell.id
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"forgotten_hand",
+				context,
+				"selected_forgotten_spell",
+				forgotten_options,
+				"Choose a Forgotten Spell from your Hand."
+			)
+
+		"draw_three_forgotten_keep_one":
+			if context.get(
+				"selected_forgotten_spell",
+				null
+			) != null:
+				return true
+
+			var draw_amount: int = mini(
+				int(
+					effect.get(
+						"draw",
+						3
+					)
+				),
+				forgotten_deck.size()
+			)
+
+			var forgotten_options: Array = []
+
+			for offset in range(draw_amount):
+				var deck_index: int = (
+					forgotten_deck.size()
+					- 1
+					- offset
+				)
+
+				var spell: SpellCardState = (
+					forgotten_deck[
+						deck_index
+					]
+				)
+
+				forgotten_options.append({
+					"token": "forgotten_draw:" + str(deck_index),
+					"value": spell,
+					"name": spell.card_name,
+					"id": spell.id
+				})
+
+			return _quest_request_single_choice(
+				caster_id,
+				"forgotten_keep",
+				context,
+				"selected_forgotten_spell",
+				forgotten_options,
+				"Draw 3 Forgotten Spells: choose the one to keep."
+			)
+
+		"activate_evocation_or_summon_nigredo":
+			var live_options: Array = (
+				_quest_all_live_evocation_options()
+			)
+
+			if not live_options.is_empty():
+				if context.get(
+					"selected_evocation_to_activate",
+					null
+				) != null:
+					return true
+
+				return _quest_request_single_choice(
+					caster_id,
+					"target_evocation",
+					context,
+					"selected_evocation_to_activate",
+					live_options,
+					"Choose an Evocation to activate under your control."
+				)
+
+			if str(
+				context.get(
+					"target_room_id",
+					""
+				)
+			) != "":
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"target_room",
+				context,
+				"target_room_id",
+				_quest_room_choice_options(
+					caster_id,
+					{
+						"range": int(
+							effect.get(
+								"range",
+								1
+							)
+						)
+					}
+				),
+				"Choose where to summon the Nigredo."
+			)
+
+		"steal_power_from_up_to_mages":
+			if context.has(
+				"selected_mage_indices"
+			):
+				return true
+
+			var mage_options: Array = (
+				_quest_mage_choice_options(
+					caster_id,
+					{
+						"range": "*"
+					}
+				)
+			)
+
+			request_effect_choice(
+				caster_id,
+				"multiple_mages",
+				context,
+				"selected_mage_indices",
+				mage_options,
+				0,
+				mini(
+					int(
+						effect.get(
+							"max_targets",
+							3
+						)
+					),
+					mage_options.size()
+				),
+				"Choose up to "
+				+ str(
+					effect.get(
+						"max_targets",
+						3
+					)
+				)
+				+ " Mages."
+			)
+
+			return false
+
+		"summon_non_forgotten_evocation_choice":
+			if str(
+				context.get(
+					"chosen_evocation_id",
+					""
+				)
+			) != "":
+				return true
+
+			return _quest_request_single_choice(
+				caster_id,
+				"evocation_type",
+				context,
+				"chosen_evocation_id",
+				_quest_non_forgotten_evocation_id_options(),
+				"Choose a non-Forgotten Evocation to summon."
+			)
+
+		"heal":
+			if not context.has(
+				"selected_damage_owner_ids"
+			):
+				var damage_cubes: Array = []
+
+				if str(
+					context.get(
+						"target_model_type",
+						""
+					)
+				) == "mage":
+					var target_player_index: int = int(
+						context.get(
+							"target_player_index",
+							-1
+						)
+					)
+
+					if target_player_index >= 0 \
+					and target_player_index < players.size():
+						damage_cubes = players[
+							target_player_index
+						].mage.damage_cubes
+
+				elif str(
+					context.get(
+						"target_model_type",
+						""
+					)
+				) == "evocation":
+					var target_evocation = context.get(
+						"target_evocation"
+					)
+
+					if target_evocation != null:
+						damage_cubes = target_evocation.damage_cubes
+
+				if damage_cubes.is_empty():
+					return true
+
+				var max_select: int = mini(
+					int(
+						effect.get(
+							"amount",
+							0
+						)
+					),
+					damage_cubes.size()
+				)
+
+				var options: Array = []
+				var owner_occurrences: Dictionary = {}
+
+				for owner_value in damage_cubes:
+					var owner_id: int = int(
+						owner_value
+					)
+					var ordinal: int = int(
+						owner_occurrences.get(
+							owner_id,
+							0
+						)
+					)
+					owner_occurrences[owner_id] = ordinal + 1
+
+					options.append({
+						"token":
+							"damage:"
+							+ str(owner_id)
+							+ ":"
+							+ str(ordinal),
+						"value": owner_id,
+						"owner_id": owner_id
+					})
+
+				request_effect_choice(
+					caster_id,
+					"heal_damage",
+					context,
+					"selected_damage_owner_ids",
+					options,
+					0,
+					max_select,
+					"Choose up to "
+					+ str(max_select)
+					+ " Damage cubes to heal."
+				)
+
+				return false
+
+			return true
+
 		_:
 			return true
 
@@ -6280,6 +8478,1469 @@ func _prepare_quest_effect_choice(
 		effect,
 		context
 	)
+
+# =========================================================
+# SPELL PRIMARY TARGET CHOICES
+# =========================================================
+
+
+func _spell_effective_target_side(
+	caster_id: int,
+	side: Dictionary
+) -> Dictionary:
+	var effective: Dictionary = side.duplicate(true)
+
+	# Some printed Effects constrain the legal primary target even though the
+	# constraint lives inside the Effect rather than in the target header.
+	for effect_value in side.get("effects", []):
+		if not effect_value is Dictionary:
+			continue
+
+		var effect: Dictionary = effect_value
+		var effect_type: String = str(effect.get("type", ""))
+
+		if effect_type == "remove_evocation_with_max_health":
+			effective["max_health"] = int(
+				effect.get("max_health", -1)
+			)
+
+		if effect_type == "remove_owned_evocation_and_damage_around":
+			effective["target_owner"] = "self"
+
+	var enhancement: Dictionary = side.get(
+		"enhancement",
+		{}
+	)
+
+	if enhancement.is_empty():
+		return effective
+
+	var enhancement_active: bool = can_apply_enhancement(
+		caster_id,
+		_enhancement_required_elements(enhancement)
+	)
+
+	if not enhancement_active:
+		return effective
+
+	# A target-changing Enhancement changes what the player chooses when
+	# casting the Spell, not after an obsolete target has already been chosen.
+	for effect_value in enhancement.get("effects", []):
+		if not effect_value is Dictionary:
+			continue
+
+		var effect: Dictionary = effect_value
+		if str(effect.get("type", "")) != "modify_spell_target":
+			continue
+
+		if effect.has("target"):
+			effective["target"] = effect.get("target")
+
+		if effect.has("range"):
+			effective["range"] = effect.get("range")
+
+	return effective
+
+
+func _is_ongoing_revealed_spell(
+	side: Dictionary
+) -> bool:
+	var spell_type: String = str(side.get("type", ""))
+
+	if spell_type == "trap" or spell_type == "protection":
+		return false
+
+	var trigger = side.get("trigger", {})
+	return trigger is Dictionary and not trigger.is_empty()
+
+
+func _register_ongoing_revealed_spell(
+	player_index: int,
+	spell: SpellCardState,
+	use_dark_side: bool,
+	context: Dictionary
+) -> void:
+	if player_index < 0 or player_index >= players.size():
+		return
+
+	if spell == null:
+		return
+
+	var side: Dictionary = spell.get_side(use_dark_side)
+	if not _is_ongoing_revealed_spell(side):
+		return
+
+	# Prevent accidental duplicate registration of the same revealed card.
+	for existing in players[player_index].active_spells:
+		if existing == null:
+			continue
+		if existing.spell == spell \
+		and existing.use_dark_side == use_dark_side \
+		and existing.active:
+			return
+
+	var target_player_index: int = int(
+		context.get("target_player_index", -1)
+	)
+
+	var ongoing := ActiveSpellState.new(
+		spell,
+		player_index,
+		use_dark_side,
+		target_player_index
+	)
+
+	for key in context:
+		if key == "game":
+			continue
+		ongoing.context[key] = context[key]
+
+	players[player_index].add_active_spell(ongoing)
+
+	print(
+		"Player ", player_index + 1,
+		" keeps ongoing Effect active: ",
+		spell.card_name
+	)
+
+func _spell_has_primary_target(
+	target_type: String,
+	context: Dictionary
+) -> bool:
+	if bool(context.get("target_is_dummy", false)):
+		return true
+
+	match target_type:
+		"room", "area":
+			return str(context.get("target_room_id", "")) != ""
+
+		"mage":
+			return int(context.get("target_player_index", -1)) >= 0
+
+		"evocation":
+			return context.get("target_evocation", null) != null
+
+		"model":
+			var model_type: String = str(
+				context.get("target_model_type", "")
+			)
+
+			if model_type == "mage":
+				return int(context.get("target_player_index", -1)) >= 0
+
+			if model_type == "evocation":
+				return context.get("target_evocation", null) != null
+
+			return model_type == "dummy"
+
+		"self", "special", "":
+			return true
+
+		_:
+			return true
+
+
+func _spell_materialize_primary_target(
+	context: Dictionary
+) -> bool:
+	var selected = context.get("spell_primary_target", null)
+	if not selected is Dictionary:
+		return false
+
+	var target_data: Dictionary = selected
+	var target_type: String = str(
+		target_data.get("target_type", "")
+	)
+
+	context.erase("target_is_dummy")
+	context.erase("target_room_id")
+	context.erase("target_player_index")
+	context.erase("target_evocation")
+	context.erase("target_model_type")
+
+	match target_type:
+		"dummy":
+			context["target_is_dummy"] = true
+			context["target_model_type"] = "dummy"
+			return true
+
+		"room":
+			var room_id: String = str(
+				target_data.get("room_id", "")
+			)
+			if room_id == "":
+				return false
+
+			context["target_room_id"] = room_id
+			return true
+
+		"mage":
+			var player_index: int = int(
+				target_data.get("player_index", -1)
+			)
+			if player_index < 0 or player_index >= players.size():
+				return false
+
+			context["target_player_index"] = player_index
+			context["target_model_type"] = "mage"
+			return true
+
+		"evocation":
+			var evocation = target_data.get("evocation", null)
+			if evocation == null:
+				return false
+
+			context["target_evocation"] = evocation
+			context["target_model_type"] = "evocation"
+			return true
+
+		_:
+			return false
+
+
+func _spell_room_target_options(
+	caster_id: int,
+	side: Dictionary
+) -> Array:
+	var result: Array = []
+
+	for option_value in _quest_room_choice_options(
+		caster_id,
+		side
+	):
+		var option: Dictionary = option_value
+
+		result.append({
+			"token": str(option.get("token", "")),
+			"value": {
+				"target_type": "room",
+				"room_id": str(option.get("room_id", ""))
+			},
+			"target_type": "room",
+			"room_id": str(option.get("room_id", "")),
+			"name": str(option.get("name", ""))
+		})
+
+	return result
+
+
+func _spell_mage_target_options(
+	caster_id: int,
+	side: Dictionary,
+	allow_dummy: bool = true
+) -> Array:
+	var result: Array = []
+
+	for option_value in _quest_mage_choice_options(
+		caster_id,
+		side
+	):
+		var option: Dictionary = option_value
+		var player_index: int = int(
+			option.get("player_index", -1)
+		)
+
+		result.append({
+			"token": "spell_mage:" + str(player_index),
+			"value": {
+				"target_type": "mage",
+				"player_index": player_index
+			},
+			"target_type": "mage",
+			"player_index": player_index,
+			"name": str(option.get("name", "")),
+			"room_id": str(option.get("room_id", ""))
+		})
+
+	if allow_dummy:
+		result.append({
+			"token": "spell_dummy",
+			"value": {
+				"target_type": "dummy"
+			},
+			"target_type": "dummy",
+			"name": "Dummy Target"
+		})
+
+	return result
+
+
+func _spell_evocation_target_options(
+	caster_id: int,
+	side: Dictionary,
+	allow_dummy: bool = true
+) -> Array:
+	var result: Array = []
+
+	for option_value in _quest_evocation_choice_options(
+		caster_id,
+		side
+	):
+		var option: Dictionary = option_value
+		var evocation = option.get("value", null)
+		if evocation == null:
+			continue
+
+		result.append({
+			"token": str(option.get("token", "")),
+			"value": {
+				"target_type": "evocation",
+				"evocation": evocation
+			},
+			"target_type": "evocation",
+			"owner_id": int(option.get("owner_id", -1)),
+			"evocation_index": int(
+				option.get("evocation_index", -1)
+			),
+			"id": str(option.get("id", "")),
+			"name": str(option.get("name", "")),
+			"archetype": str(option.get("archetype", "")),
+			"room_id": str(option.get("room_id", ""))
+		})
+
+	if allow_dummy:
+		result.append({
+			"token": "spell_dummy",
+			"value": {
+				"target_type": "dummy"
+			},
+			"target_type": "dummy",
+			"name": "Dummy Target"
+		})
+
+	return result
+
+
+func _spell_model_target_options(
+	caster_id: int,
+	side: Dictionary
+) -> Array:
+	var result: Array = []
+	var archetype_filter: String = str(
+		side.get("target_archetype", "")
+	)
+
+	# A Dummy has no Archetype, so it cannot be selected when the Effect
+	# requires one.
+	if archetype_filter == "":
+		result.append_array(
+			_spell_mage_target_options(
+				caster_id,
+				side,
+				false
+			)
+		)
+
+	result.append_array(
+		_spell_evocation_target_options(
+			caster_id,
+			side,
+			false
+		)
+	)
+
+	if archetype_filter == "":
+		result.append({
+			"token": "spell_dummy",
+			"value": {
+				"target_type": "dummy"
+			},
+			"target_type": "dummy",
+			"name": "Dummy Target"
+		})
+
+	return result
+
+
+func _spell_primary_target_options(
+	caster_id: int,
+	side: Dictionary
+) -> Array:
+	var target_type: String = str(
+		side.get("target", "")
+	)
+
+	match target_type:
+		"room", "area":
+			return _spell_room_target_options(
+				caster_id,
+				side
+			)
+
+		"mage":
+			return _spell_mage_target_options(
+				caster_id,
+				side,
+				true
+			)
+
+		"evocation":
+			return _spell_evocation_target_options(
+				caster_id,
+				side,
+				str(side.get("target_archetype", "")) == ""
+				and str(side.get("target_owner", "")) != "self"
+			)
+
+		"model":
+			return _spell_model_target_options(
+				caster_id,
+				side
+			)
+
+		_:
+			return []
+
+
+func _prepare_spell_primary_target_choice(
+	caster_id: int,
+	side: Dictionary,
+	context: Dictionary
+) -> bool:
+	if caster_id < 0 or caster_id >= players.size():
+		return true
+
+	var target_type: String = str(
+		side.get("target", "")
+	)
+
+	if target_type == "" \
+	or target_type == "self" \
+	or target_type == "special":
+		return true
+
+	# A Room at Range 0 is unambiguously the caster's Room.
+	if (target_type == "room" or target_type == "area") \
+	and str(side.get("range", "")) == "0":
+		context["target_room_id"] = players[caster_id].mage.room_id
+		return true
+
+	if _spell_has_primary_target(
+		target_type,
+		context
+	):
+		return true
+
+	# A previous input request stores a structured target here. Materialize it
+	# into the legacy context keys used by EffectResolver.
+	if context.get("spell_primary_target", null) is Dictionary:
+		if _spell_materialize_primary_target(context):
+			return true
+
+	var options: Array = _spell_primary_target_options(
+		caster_id,
+		side
+	)
+
+	if options.is_empty():
+		# No legal target exists. Effects that target Models normally still have
+		# a Dummy Target option, unless an Archetype restriction forbids it.
+		return true
+
+	# Primary Spell targets are always an explicit player decision, even when
+	# there is only one legal option. This is especially important for the
+	# Dummy Target: choosing it is a meaningful casting decision and must not
+	# happen automatically.
+	request_effect_choice(
+		caster_id,
+		"spell_target",
+		context,
+		"spell_primary_target",
+		options,
+		1,
+		1,
+		"Choose the Spell target."
+	)
+
+	return false
+
+
+# =========================================================
+# SPELL SECONDARY EFFECT CHOICES
+# =========================================================
+
+func _forget_interactive_effect_choice_key(
+	context: Dictionary,
+	context_key: String
+) -> void:
+	context.erase(context_key)
+
+	var keys: Array = context.get(
+		"_interactive_choice_keys",
+		[]
+	)
+
+	keys.erase(context_key)
+
+	if keys.is_empty():
+		context.erase("_interactive_choice_keys")
+	else:
+		context["_interactive_choice_keys"] = keys
+
+
+func _spell_secondary_evocation_options(
+	caster_id: int,
+	owner_id: int = -999999,
+	archetype: String = "",
+	room_id: String = "",
+	max_health: int = -1
+) -> Array:
+	var options: Array = []
+
+	for owner_index in range(players.size()):
+		if owner_id != -999999 and owner_index != owner_id:
+			continue
+
+		var evocations: Array[EvocationState] = players[owner_index].evocations
+
+		for evocation_index in range(evocations.size()):
+			var evocation: EvocationState = evocations[evocation_index]
+
+			if evocation == null or evocation.is_defeated():
+				continue
+
+			if archetype != "" and evocation.archetype != archetype:
+				continue
+
+			if room_id != "" and evocation.room_id != room_id:
+				continue
+
+			if max_health >= 0 and evocation.health > max_health:
+				continue
+
+			options.append({
+				"token":
+					"secondary_evocation:"
+					+ str(owner_index)
+					+ ":"
+					+ str(evocation_index),
+				"value": evocation,
+				"owner_id": owner_index,
+				"evocation_index": evocation_index,
+				"id": evocation.evocation_id,
+				"name": evocation.evocation_name,
+				"archetype": evocation.archetype,
+				"room_id": evocation.room_id
+			})
+
+	return options
+
+
+func _spell_secondary_mage_options(
+	excluded_players: Array
+) -> Array:
+	var options: Array = []
+
+	for player_index in range(players.size()):
+		if player_index in excluded_players:
+			continue
+
+		var mage = players[player_index].mage
+		if mage == null or mage.in_cell:
+			continue
+
+		options.append({
+			"token": "secondary_mage:" + str(player_index),
+			"value": player_index,
+			"player_index": player_index,
+			"name": players[player_index].player_name,
+			"room_id": mage.room_id
+		})
+
+	return options
+
+
+func _damaged_model_choice_options(
+	context: Dictionary
+) -> Array:
+	var options: Array = []
+	var models: Array = context.get(
+		"models_damaged_by_effect",
+		[]
+	)
+
+	for model_index in range(models.size()):
+		var model_value = models[model_index]
+
+		if not model_value is Dictionary:
+			continue
+
+		var model: Dictionary = model_value
+		var model_type: String = str(model.get("type", ""))
+		var name: String = "Model"
+
+		if model_type == "mage":
+			var player_index: int = int(
+				model.get("player_index", -1)
+			)
+
+			if player_index < 0 or player_index >= players.size():
+				continue
+
+			var mage = players[player_index].mage
+			if mage == null or mage.in_cell:
+				continue
+
+			name = players[player_index].player_name
+
+		elif model_type == "evocation":
+			var evocation = model.get("evocation", null)
+			if evocation == null or evocation.is_defeated():
+				continue
+
+			name = str(evocation.evocation_name)
+
+		else:
+			continue
+
+		options.append({
+			"token": "damaged_model:" + str(model_index),
+			"value": model_index,
+			"model_index": model_index,
+			"model_type": model_type,
+			"name": name
+		})
+
+	return options
+
+
+func _damaged_model_room_id(
+	context: Dictionary,
+	model_index: int
+) -> String:
+	var models: Array = context.get(
+		"models_damaged_by_effect",
+		[]
+	)
+
+	if model_index < 0 or model_index >= models.size():
+		return ""
+
+	var model_value = models[model_index]
+	if not model_value is Dictionary:
+		return ""
+
+	var model: Dictionary = model_value
+	var model_type: String = str(model.get("type", ""))
+
+	if model_type == "mage":
+		var player_index: int = int(
+			model.get("player_index", -1)
+		)
+
+		if player_index < 0 or player_index >= players.size():
+			return ""
+
+		var mage = players[player_index].mage
+		if mage == null or mage.in_cell:
+			return ""
+
+		return mage.room_id
+
+	if model_type == "evocation":
+		var evocation = model.get("evocation", null)
+		if evocation == null or evocation.is_defeated():
+			return ""
+
+		return str(evocation.room_id)
+
+	return ""
+
+
+func _movement_destination_choice_options(
+	origin_room_id: String,
+	distance: int
+) -> Array:
+	var options: Array = []
+
+	if not is_lodge_room_id(origin_room_id):
+		return options
+
+	var origin_coord: Vector2i = room_id_to_coord(origin_room_id)
+	if origin_coord == Vector2i(9999, 9999):
+		return options
+
+	for room_value in room_id_by_coord.values():
+		var room_id: String = str(room_value)
+
+		if room_id == origin_room_id:
+			continue
+
+		var room_coord: Vector2i = room_id_to_coord(room_id)
+		if room_coord == Vector2i(9999, 9999):
+			continue
+
+		var room_distance: int = get_hex_distance(
+			origin_coord,
+			room_coord
+		)
+
+		if room_distance <= 0 or room_distance > distance:
+			continue
+
+		var room = get_room_by_id(room_id)
+		var room_name: String = room_id
+
+		if room != null:
+			room_name = str(room.room_name)
+
+		options.append({
+			"token": "movement_room:" + room_id,
+			"value": room_id,
+			"room_id": room_id,
+			"name": room_name
+		})
+
+	return options
+
+
+func _evocation_deck_choice_options(
+	max_health: int
+) -> Array:
+	var options: Array = []
+
+	for evocation_data_value in evocation_database.get_evocations_with_max_health(
+		max_health
+	):
+		if not evocation_data_value is Dictionary:
+			continue
+
+		var evocation_data: Dictionary = evocation_data_value
+		var evocation_id: String = str(
+			evocation_data.get("id", "")
+		)
+
+		if evocation_id == "":
+			continue
+
+		if get_available_evocation_copies(evocation_id) <= 0:
+			continue
+
+		options.append({
+			"token": "evocation_deck:" + evocation_id,
+			"value": evocation_id,
+			"id": evocation_id,
+			"name": str(
+				evocation_data.get(
+					"name",
+					evocation_id
+				)
+			),
+			"health": int(evocation_data.get("health", 0)),
+			"archetype": str(
+				evocation_data.get("archetype", "")
+			)
+		})
+
+	return options
+
+
+func _apply_or_request_secondary_choice(
+	caster_id: int,
+	choice_kind: String,
+	context: Dictionary,
+	context_key: String,
+	options: Array,
+	prompt: String
+) -> bool:
+	if options.is_empty():
+		# No legal choice exists. Let the resolver attempt the sentence;
+		# normal Effect rules decide whether it is skipped or fails.
+		return true
+
+	if options.size() == 1:
+		var only_option: Dictionary = options[0]
+
+		_set_interactive_effect_choice(
+			context,
+			context_key,
+			only_option.get("value")
+		)
+
+		return true
+
+	request_effect_choice(
+		caster_id,
+		choice_kind,
+		context,
+		context_key,
+		options,
+		1,
+		1,
+		prompt
+	)
+
+	return false
+
+
+func _prepare_spell_secondary_effect_choice(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var caster_id: int = int(
+		context.get("caster_id", -1)
+	)
+
+	if caster_id < 0 or caster_id >= players.size():
+		return true
+
+	var effect_type: String = str(
+		effect.get("type", "")
+	)
+
+	match effect_type:
+		"damage_secondary_mage_per_self_damage":
+			if context.has("secondary_target_player_index"):
+				return true
+
+			var primary_player: int = int(
+				context.get("target_player_index", -1)
+			)
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"secondary_mage",
+				context,
+				"secondary_target_player_index",
+				_spell_secondary_mage_options(
+					[primary_player]
+				),
+				"Choose the secondary Mage."
+			)
+
+		"move_one_model_damaged_by_effect":
+			var models: Array = context.get(
+				"models_damaged_by_effect",
+				[]
+			)
+
+			if models.is_empty():
+				return true
+
+			if not context.has("damaged_model_to_move_index"):
+				if not _apply_or_request_secondary_choice(
+					caster_id,
+					"damaged_model",
+					context,
+					"damaged_model_to_move_index",
+					_damaged_model_choice_options(context),
+					"Choose one Model damaged by this Effect."
+				):
+					return false
+
+			if context.has("movement_destination_room_id"):
+				return true
+
+			var model_index: int = int(
+				context.get(
+					"damaged_model_to_move_index",
+					-1
+				)
+			)
+
+			var origin_room_id: String = _damaged_model_room_id(
+				context,
+				model_index
+			)
+
+			if origin_room_id == "":
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"movement_destination",
+				context,
+				"movement_destination_room_id",
+				_movement_destination_choice_options(
+					origin_room_id,
+					int(effect.get("distance", 1))
+				),
+				"Choose where to move the selected Model."
+			)
+
+		"activate_owned_evocation", \
+		"activate_owned_evocation_then_black_rose_damage":
+			if context.get(
+				"selected_evocation_to_activate",
+				null
+			) != null:
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"owned_evocation",
+				context,
+				"selected_evocation_to_activate",
+				_spell_secondary_evocation_options(
+					caster_id,
+					caster_id,
+					str(
+						effect.get(
+							"evocation_archetype",
+							""
+						)
+					)
+				),
+				"Choose one of your Evocations."
+			)
+
+		"remove_owned_evocation":
+			if context.get(
+				"selected_evocation_to_remove",
+				null
+			) != null:
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"owned_evocation_to_remove",
+				context,
+				"selected_evocation_to_remove",
+				_spell_secondary_evocation_options(
+					caster_id,
+					caster_id,
+					str(
+						effect.get(
+							"evocation_archetype",
+							""
+						)
+					)
+				),
+				"Choose one of your Evocations to remove."
+			)
+
+		"summon_evocation_from_deck":
+			if str(
+				context.get(
+					"chosen_evocation_id",
+					""
+				)
+			) != "":
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"evocation_from_deck",
+				context,
+				"chosen_evocation_id",
+				_evocation_deck_choice_options(
+					int(effect.get("max_health", 3))
+				),
+				"Choose an Evocation from the Evocation Deck."
+			)
+
+		"redirect_damage_to_evocation":
+			if context.get(
+				"selected_evocation_to_redirect",
+				null
+			) != null:
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"damage_redirect_evocation",
+				context,
+				"selected_evocation_to_redirect",
+				_spell_secondary_evocation_options(
+					caster_id,
+					caster_id
+				),
+				"Choose one of your Evocations to suffer the Damage."
+			)
+
+		"fountain_construct_or_nigredo":
+			var target_room_id: String = str(
+				context.get("target_room_id", "")
+			)
+
+			var construct_options: Array = (
+				_spell_secondary_evocation_options(
+					caster_id,
+					-999999,
+					"construct",
+					target_room_id
+				)
+			)
+
+			if str(
+				context.get(
+					"fountain_choice",
+					""
+				)
+			) == "":
+				var branch_options: Array = [
+					{
+						"token": "fountain:summon_nigredo",
+						"value": "summon_nigredo",
+						"name": "Summon a Nigredo"
+					}
+				]
+
+				if not construct_options.is_empty():
+					branch_options.append({
+						"token": "fountain:activate_construct",
+						"value": "activate_construct",
+						"name": "Activate a Construct"
+					})
+
+				if not _apply_or_request_secondary_choice(
+					caster_id,
+					"fountain_choice",
+					context,
+					"fountain_choice",
+					branch_options,
+					"Choose the Fountain of the Three Effect."
+				):
+					return false
+
+			if str(context.get("fountain_choice", "")) \
+			!= "activate_construct":
+				return true
+
+			if context.get(
+				"selected_evocation_to_activate",
+				null
+			) != null:
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"construct_to_activate",
+				context,
+				"selected_evocation_to_activate",
+				construct_options,
+				"Choose the Construct to activate."
+			)
+
+		"silver_defeat_choice":
+			var silver_constructs: Array = (
+				_spell_secondary_evocation_options(
+					caster_id,
+					caster_id,
+					"construct"
+				)
+			)
+
+			if str(
+				context.get(
+					"silver_choice",
+					""
+				)
+			) == "":
+				var silver_options: Array = [
+					{
+						"token": "silver:summon_nigredo",
+						"value": "summon_nigredo",
+						"name": "Summon a Nigredo"
+					}
+				]
+
+				if not silver_constructs.is_empty():
+					silver_options.append({
+						"token": "silver:activate_construct",
+						"value": "activate_construct",
+						"name": "Activate one of your Constructs"
+					})
+
+				if not _apply_or_request_secondary_choice(
+					caster_id,
+					"silver_choice",
+					context,
+					"silver_choice",
+					silver_options,
+					"Choose the Silver of the Sages Effect."
+				):
+					return false
+
+			if str(context.get("silver_choice", "")) \
+			!= "activate_construct":
+				return true
+
+			if context.get(
+				"selected_evocation_to_activate",
+				null
+			) != null:
+				return true
+
+			return _apply_or_request_secondary_choice(
+				caster_id,
+				"construct_to_activate",
+				context,
+				"selected_evocation_to_activate",
+				silver_constructs,
+				"Choose one of your Constructs."
+			)
+
+		_:
+			return true
+
+
+func _clear_spell_secondary_effect_choices(
+	effect: Dictionary,
+	context: Dictionary
+) -> void:
+	var effect_type: String = str(
+		effect.get("type", "")
+	)
+
+	var keys_to_clear: Array[String] = []
+
+	match effect_type:
+		"damage_secondary_mage_per_self_damage":
+			keys_to_clear = [
+				"secondary_target_player_index"
+			]
+
+		"move_one_model_damaged_by_effect":
+			keys_to_clear = [
+				"damaged_model_to_move_index",
+				"movement_destination_room_id"
+			]
+
+		"activate_owned_evocation", \
+		"activate_owned_evocation_then_black_rose_damage":
+			keys_to_clear = [
+				"selected_evocation_to_activate"
+			]
+
+		"remove_owned_evocation":
+			keys_to_clear = [
+				"selected_evocation_to_remove"
+			]
+
+		"summon_evocation_from_deck":
+			keys_to_clear = [
+				"chosen_evocation_id"
+			]
+
+		"redirect_damage_to_evocation":
+			keys_to_clear = [
+				"selected_evocation_to_redirect"
+			]
+
+		"fountain_construct_or_nigredo":
+			keys_to_clear = [
+				"fountain_choice",
+				"selected_evocation_to_activate"
+			]
+
+		"silver_defeat_choice":
+			keys_to_clear = [
+				"silver_choice",
+				"selected_evocation_to_activate"
+			]
+
+	for context_key in keys_to_clear:
+		_forget_interactive_effect_choice_key(
+			context,
+			context_key
+		)
+
+
+func _reset_stepwise_action_activation() -> void:
+	action_activation_active = false
+	action_activation_player_index = -1
+	action_activation_actions_used = 0
+	action_activation_numbered_spells_cast = 0
+	action_activation_quick_spells_cast = 0
+
+
+func _start_stepwise_action_activation(
+	player_index: int
+) -> bool:
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	_reset_stepwise_action_activation()
+
+	action_activation_active = true
+	action_activation_player_index = player_index
+
+	return _request_stepwise_action_activation()
+
+
+func _stepwise_action_is_allowed(
+	action: Dictionary
+) -> bool:
+	if action_activation_actions_used >= 2:
+		return false
+
+	var action_type: String = str(
+		action.get("type", "")
+	)
+
+	if action_type == "spell" \
+	and action_activation_numbered_spells_cast >= 1:
+		return false
+
+	if action_type == "quick" \
+	and action_activation_quick_spells_cast >= 1:
+		return false
+
+	return true
+
+
+func _request_stepwise_action_activation() -> bool:
+	if not action_activation_active:
+		return false
+
+	var player_index: int = action_activation_player_index
+
+	if player_index < 0 or player_index >= players.size():
+		_reset_stepwise_action_activation()
+		return false
+
+	if waiting_for_player_input:
+		return true
+
+	var legal: Dictionary = get_beta_legal_actions(
+		player_index
+	)
+
+	var options: Array = []
+	var option_counter: int = 0
+
+	# Recompute every Action from the CURRENT board state. This is the central
+	# difference from the old batch Activation request.
+	for action_value in legal.get("actions", []):
+		if not action_value is Dictionary:
+			continue
+
+		var descriptor: Dictionary = action_value
+		var action: Dictionary = descriptor.get(
+			"action",
+			{}
+		)
+
+		if action.is_empty() \
+		or not _stepwise_action_is_allowed(action):
+			continue
+
+		options.append({
+			"token": "action:" + str(option_counter),
+			"kind": "action",
+			"label": str(
+				descriptor.get(
+					"label",
+					str(action.get("type", "Action"))
+				)
+			),
+			"action": action.duplicate(true),
+			"descriptor": descriptor.duplicate(true)
+		})
+
+		option_counter += 1
+
+	# Completed Quests are timing windows, not Actions. They remain available
+	# before Action 1, between the Actions, and after Action 2.
+	for quest_value in legal.get("quests", []):
+		if not quest_value is Dictionary:
+			continue
+
+		var quest_descriptor: Dictionary = quest_value
+		var quest_action: Dictionary = quest_descriptor.get(
+			"action",
+			{}
+		)
+
+		if quest_action.is_empty():
+			continue
+
+		options.append({
+			"token": "quest:" + str(
+				quest_descriptor.get(
+					"quest_index",
+					-1
+				)
+			),
+			"kind": "quest",
+			"label": str(
+				quest_descriptor.get(
+					"label",
+					"Resolve Quest"
+				)
+			),
+			"action": quest_action.duplicate(true),
+			"descriptor": quest_descriptor.duplicate(true)
+		})
+
+	# After at least one real Action the player may end the Activation.
+	if action_activation_actions_used >= 1:
+		options.append({
+			"token": "finish",
+			"kind": "finish",
+			"label": "End Activation"
+		})
+
+	# If the second Action has been used and no Quest timing window remains,
+	# ending the Activation requires no further user click.
+	if action_activation_actions_used >= 2:
+		var has_quest_option: bool = false
+
+		for option_value in options:
+			if str(option_value.get("kind", "")) == "quest":
+				has_quest_option = true
+				break
+
+		if not has_quest_option:
+			return _finish_stepwise_action_activation()
+
+	# If one Action was used and nothing else can be done, finish immediately.
+	if action_activation_actions_used >= 1 \
+	and options.size() == 1 \
+	and str(options[0].get("kind", "")) == "finish":
+		return _finish_stepwise_action_activation()
+
+	if options.is_empty():
+		print(
+			"Stepwise Activation has no legal option for Player ",
+			player_index + 1
+		)
+
+		_reset_stepwise_action_activation()
+		return advance_action_phase()
+
+	return request_player_input({
+		"type": "action_activation_step",
+		"phase": PHASE_ACTION,
+		"player_index": player_index,
+		"activation_round": action_phase_activation_round,
+		"actions_used": action_activation_actions_used,
+		"actions_remaining": max(
+			0,
+			2 - action_activation_actions_used
+		),
+		"numbered_spells_cast":
+			action_activation_numbered_spells_cast,
+		"quick_spells_cast":
+			action_activation_quick_spells_cast,
+		"can_finish": action_activation_actions_used >= 1,
+		"options": options,
+		"legal_actions": legal
+	})
+
+
+func submit_action_activation_step(
+	player_index: int,
+	token: String
+) -> bool:
+	if not action_activation_active \
+	or not waiting_for_player_input:
+		return false
+
+	if str(
+		pending_input.get(
+			"type",
+			""
+		)
+	) != "action_activation_step":
+		return false
+
+	if player_index != action_activation_player_index \
+	or player_index != int(
+		pending_input.get(
+			"player_index",
+			-1
+		)
+	):
+		return false
+
+	var selected: Dictionary = {}
+
+	for option_value in pending_input.get("options", []):
+		if not option_value is Dictionary:
+			continue
+
+		var option: Dictionary = option_value
+
+		if str(option.get("token", "")) == token:
+			selected = option
+			break
+
+	if selected.is_empty():
+		return false
+
+	var kind: String = str(
+		selected.get(
+			"kind",
+			""
+		)
+	)
+
+	if kind == "finish":
+		if action_activation_actions_used < 1:
+			return false
+
+		clear_player_input()
+		return _finish_stepwise_action_activation()
+
+	var action: Dictionary = selected.get(
+		"action",
+		{}
+	).duplicate(true)
+
+	if action.is_empty():
+		return false
+
+	clear_player_input()
+
+	if kind == "quest":
+		# Quest timing does not consume either Action slot.
+		return queue_resolution({
+			"type": "activation",
+			"step": "actions",
+			"player_index": player_index,
+			"actions": [action],
+			"action_index": 0,
+			"on_complete": "continue_action_activation"
+		})
+
+	if kind != "action" \
+	or not _stepwise_action_is_allowed(action):
+		return false
+
+	action_activation_actions_used += 1
+
+	var action_type: String = str(
+		action.get(
+			"type",
+			""
+		)
+	)
+
+	if action_type == "spell":
+		action_activation_numbered_spells_cast += 1
+	elif action_type == "quick":
+		action_activation_quick_spells_cast += 1
+
+	return queue_resolution({
+		"type": "activation",
+		"step": "actions",
+		"player_index": player_index,
+		"actions": [action],
+		"action_index": 0,
+		"on_complete": "continue_action_activation"
+	})
+
+
+func _finish_stepwise_action_activation() -> bool:
+	if not action_activation_active:
+		return false
+
+	var player_index: int = action_activation_player_index
+	var actions_used: int = action_activation_actions_used
+
+	print(
+		"Player ",
+		player_index + 1,
+		" Activation complete | Actions: ",
+		actions_used
+	)
+
+	_reset_stepwise_action_activation()
+
+	return advance_action_phase()
+
 func advance_action_phase() -> bool:
 
 	if current_phase != PHASE_ACTION:
@@ -6366,50 +10027,37 @@ func advance_action_phase() -> bool:
 		# THIS PLAYER MUST PERFORM AN ACTIVATION
 		# =================================================
 
-		var request: Dictionary = {
+		var momentum_options: Array = []
 
-			"type":
-				"action_activation",
+		for ready_index in range(
+			players[player_index].ready_spells.size()
+		):
+			var ready: ReadySpellState = (
+				players[player_index].ready_spells[
+					ready_index
+				]
+			)
 
-			"phase":
-				PHASE_ACTION,
+			if ready == null or ready.spell == null:
+				continue
 
-			"player_index":
-				player_index,
+			momentum_options.append({
+				"ready_index": ready_index,
+				"use_quick": false,
+				"spell_id": ready.spell.id,
+				"spell_name": ready.spell.card_name
+			})
 
-			"activation_round":
-				action_phase_activation_round,
+		if players[player_index].quick_spell != null 		and players[player_index].quick_spell.spell != null:
+			momentum_options.append({
+				"ready_index": -1,
+				"use_quick": true,
+				"spell_id": players[player_index].quick_spell.spell.id,
+				"spell_name": players[player_index].quick_spell.spell.card_name
+			})
 
-			"min_actions":
-				1,
-
-			"max_actions":
-				2,
-
-			"ready_spell_count":
-				players[
-					player_index
-				].ready_spells.size(),
-
-			"has_quick_spell":
-				players[
-					player_index
-				].quick_spell != null,
-
-			"physical_actions":
-				players[
-					player_index
-				].available_physical_actions,
-
-			"completed_quests":
-				_get_solvable_quest_activation_data(
-					player_index
-				)
-		}
-
-
-		return request_player_input(
-			request
+		return _start_stepwise_action_activation(
+			player_index
 		)
 
 
@@ -6494,6 +10142,7 @@ func finish_action_phase() -> bool:
 
 	action_phase_cursor = 0
 	action_phase_activation_round = 0
+	_reset_stepwise_action_activation()
 	current_phase_play_order.clear()
 	return _complete_phase(PHASE_ACTION)
 
@@ -6560,7 +10209,9 @@ func advance_preparation_phase() -> bool:
 	var hand_data: Array = []
 
 
-	for spell in player.hand:
+	for hand_index in range(player.hand.size()):
+
+		var spell: SpellCardState = player.hand[hand_index]
 
 		if spell == null:
 			continue
@@ -6568,6 +10219,7 @@ func advance_preparation_phase() -> bool:
 
 		hand_data.append(
 			{
+				"hand_index": hand_index,
 				"id": spell.id,
 				"name": spell.card_name,
 				"school_id": spell.school_id
@@ -6608,9 +10260,9 @@ func advance_preparation_phase() -> bool:
 	)
 func submit_preparation(
 	player_index: int,
-	ready_spell_ids: Array,
+	ready_hand_indices: Array,
 	ready_dark_sides: Array,
-	quick_spell_id: String = "",
+	quick_hand_index: int = -1,
 	quick_dark_side: bool = false
 ) -> bool:
 
@@ -6671,16 +10323,13 @@ func submit_preparation(
 
 	# =====================================================
 	# RESOLVE CHOICE
-	#
-	# Existing function performs the authoritative
-	# validation and moves cards Hand -> Ready/Quick.
 	# =====================================================
 
 	if not prepare_player_spells(
 		player_index,
-		ready_spell_ids,
+		ready_hand_indices,
 		ready_dark_sides,
-		quick_spell_id,
+		quick_hand_index,
 		quick_dark_side
 	):
 
@@ -6689,7 +10338,6 @@ func submit_preparation(
 			player_index + 1
 		)
 
-		# Keep waiting for the same player.
 		return false
 
 
@@ -6699,13 +10347,7 @@ func submit_preparation(
 
 	clear_player_input()
 
-
 	preparation_phase_cursor += 1
-
-
-	# =====================================================
-	# NEXT PLAYER
-	# =====================================================
 
 	return advance_preparation_phase()
 
@@ -7516,7 +11158,8 @@ func submit_study_hand_limit(
 		)
 
 
-		player.add_spell_to_memories(
+		move_spell_to_memories_or_remove(
+			player_index,
 			spell
 		)
 
@@ -7913,6 +11556,8 @@ func process_resolution_stack() -> bool:
 				completed = process_fight_resolution(frame)
 			"command":
 				completed = process_command_resolution(frame)
+			"momentum":
+				completed = process_momentum_resolution(frame)
 			"evocation_activation":
 				completed = process_evocation_activation_resolution(frame)
 			"evocation_phase_player":
@@ -8038,17 +11683,31 @@ func process_damage_resolution(
 					"defeated"
 				)
 				resolution["step"] = "after_redirect_defeat"
+
 				if not process_game_event(defeat_event):
 					return false
-				_apply_puppeteer_after_evocation_loss(redirected_evocation.room_id)
-				return true
+
+				return false
 
 			return true
 
 		"after_redirect_defeat":
-			var redirected_evocation = resolution.get("redirected_evocation", null)
+			var redirected_evocation = resolution.get(
+				"redirected_evocation",
+				null
+			)
+
 			if redirected_evocation != null:
-				_apply_puppeteer_after_evocation_loss(redirected_evocation.room_id)
+				var room_id: String = redirected_evocation.room_id
+
+				finalize_evocation_removal(
+					redirected_evocation
+				)
+
+				_apply_puppeteer_after_evocation_loss(
+					room_id
+				)
+
 			return true
 
 		"apply_damage":
@@ -8329,50 +11988,240 @@ func _sync_damage_result_context(
 func process_evocation_damage_resolution(
 	resolution: Dictionary
 ) -> bool:
-	var step: String = str(resolution.get("step", "apply"))
-	var evocation: EvocationState = resolution.get("evocation", null)
+	var step: String = str(
+		resolution.get("step", "pre_event")
+	)
+
+	var evocation: EvocationState = resolution.get(
+		"evocation",
+		null
+	)
 
 	if evocation == null:
 		return true
 
 	match step:
-		"apply":
-			if evocation.is_defeated():
-				_sync_evocation_damage_result_context(resolution, 0)
+		"pre_event":
+			if evocation.is_defeated() \
+			or not is_evocation_in_play(evocation):
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
 				return true
 
-			var attacker_id: int = int(resolution.get("attacker_id", -1))
+			var requested: int = min(
+				int(resolution.get("amount", 0)),
+				evocation.get_remaining_health()
+			)
+
+			if requested <= 0:
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
+				return true
+
+			resolution["amount"] = requested
+			resolution["was_defeated"] = evocation.is_defeated()
+
+			var event := GameEvent.new(
+				"damage_about_to_be_inflicted"
+			)
+
+			_fill_damage_event_source(
+				event,
+				resolution
+			)
+
+			event.target_model_type = "evocation"
+			event.target_player_index = evocation.owner_id
+			event.target_evocation = evocation
+			event.target_room_id = evocation.room_id
+			event.amount = requested
+			event.action_type = str(
+				resolution.get("action_type", "")
+			)
+			event.suppressed_trigger_types = _to_string_array(
+				resolution.get(
+					"suppressed_trigger_types",
+					[]
+				)
+			)
+
+			resolution["event"] = event
+			resolution["step"] = "after_pre_event"
+
+			if not process_game_event(event):
+				return false
+
+			return false
+
+		"after_pre_event":
+			var event: GameEvent = resolution.get(
+				"event",
+				null
+			)
+
+			if event == null or event.cancelled:
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
+				return true
+
+			resolution["amount"] = max(
+				0,
+				int(event.amount)
+			)
+
+			if int(resolution["amount"]) <= 0:
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
+				return true
+
+			resolution["step"] = "apply"
+			return false
+
+		"apply":
+			if evocation.is_defeated() \
+			or not is_evocation_in_play(evocation):
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
+				return true
+
+			var attacker_id: int = int(
+				resolution.get("attacker_id", -1)
+			)
+
 			var amount: int = min(
 				int(resolution.get("amount", 0)),
 				evocation.get_remaining_health()
 			)
+
 			if amount <= 0:
-				_sync_evocation_damage_result_context(resolution, 0)
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
 				return true
 
-			var was_defeated: bool = evocation.is_defeated()
-			var damage_dealt: int = evocation.add_damage(attacker_id, amount)
-			resolution["actual_damage"] = damage_dealt
-			_sync_evocation_damage_result_context(resolution, damage_dealt)
-
-			print(
-				"Damage: attacker ", attacker_id,
-				" -> Evocation ", evocation.evocation_name,
-				" | ", damage_dealt, " damage | HP: ",
-				evocation.get_remaining_health(), "/", evocation.health
+			var cubes_available: int = take_owner_cubes(
+				attacker_id,
+				amount
 			)
 
-			if not was_defeated and evocation.is_defeated():
+			if cubes_available <= 0:
+				_sync_evocation_damage_result_context(
+					resolution,
+					0
+				)
+				return true
+
+			var damage_dealt: int = evocation.add_damage(
+				attacker_id,
+				cubes_available
+			)
+
+			resolution["actual_damage"] = damage_dealt
+
+			_sync_evocation_damage_result_context(
+				resolution,
+				damage_dealt
+			)
+
+			_refresh_damage_boards(
+				evocation.owner_id,
+				attacker_id
+			)
+
+			print(
+				"Damage: attacker ",
+				attacker_id,
+				" -> Evocation ",
+				evocation.evocation_name,
+				" | ",
+				damage_dealt,
+				" damage | HP: ",
+				evocation.get_remaining_health(),
+				"/",
+				evocation.health
+			)
+
+			if damage_dealt <= 0:
+				return true
+
+			resolution["step"] = "post_event"
+			return false
+
+		"post_event":
+			var post_event := GameEvent.new(
+				"damage_inflicted"
+			)
+
+			_fill_damage_event_source(
+				post_event,
+				resolution
+			)
+
+			post_event.target_model_type = "evocation"
+			post_event.target_player_index = evocation.owner_id
+			post_event.target_evocation = evocation
+			post_event.target_room_id = evocation.room_id
+			post_event.amount = int(
+				resolution.get("actual_damage", 0)
+			)
+			post_event.action_type = str(
+				resolution.get("action_type", "")
+			)
+			post_event.suppressed_trigger_types = _to_string_array(
+				resolution.get(
+					"suppressed_trigger_types",
+					[]
+				)
+			)
+
+			resolution["step"] = "after_post_event"
+
+			if not process_game_event(post_event):
+				return false
+
+			return false
+
+		"after_post_event":
+			var was_defeated: bool = bool(
+				resolution.get(
+					"was_defeated",
+					false
+				)
+			)
+
+			if not was_defeated \
+			and evocation.is_defeated():
+				var defeat_event := _make_evocation_lost_event(
+					evocation,
+					"defeated"
+				)
+
 				resolution["step"] = "after_defeat_event"
-				var event := _make_evocation_lost_event(evocation, "defeated")
-				if not process_game_event(event):
+
+				if not process_game_event(defeat_event):
 					return false
+
 				return false
 
 			return true
 
 		"after_defeat_event":
-			_apply_puppeteer_after_evocation_loss(evocation.room_id)
+			var room_id: String = evocation.room_id
+
+			finalize_evocation_removal(evocation)
+			_apply_puppeteer_after_evocation_loss(room_id)
+
 			return true
 
 		_:
@@ -8461,6 +12310,68 @@ func process_quest_resolution_frame(
 			return true
 
 
+
+func _prepare_room_effect_choice(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var caster_id: int = int(
+		context.get(
+			"caster_id",
+			-1
+		)
+	)
+
+	if caster_id < 0 or caster_id >= players.size():
+		return true
+
+	var target_type: String = str(
+		effect.get(
+			"target",
+			""
+		)
+	)
+
+	if target_type != "room" \
+	and target_type != "choose_room":
+		return true
+
+	if str(
+		context.get(
+			"target_room_id",
+			""
+		)
+	) != "":
+		return true
+
+	var options: Array = _quest_room_choice_options(
+		caster_id,
+		effect
+	)
+
+	if options.is_empty():
+		context["room_effect_no_target"] = true
+		return true
+
+	# request_effect_choice() returns true when the input request was created.
+	# _prepare_* helpers use the opposite convention: false means "pause the
+	# current resolution frame and wait for player input".
+	if request_effect_choice(
+		caster_id,
+		"room_effect_room_target",
+		context,
+		"target_room_id",
+		options,
+		1,
+		1,
+		"Choose the target Room"
+	):
+		return false
+
+	# If the request could not be created, do not deadlock the resolution
+	# frame. Let the Room Effect resolver handle the sentence normally.
+	return true
+
 func process_effect_sequence_resolution(
 	resolution: Dictionary
 ) -> bool:
@@ -8515,10 +12426,34 @@ func process_effect_sequence_resolution(
 			resolution["index"] = index
 			return false
 
+	if resolver_kind == "spell":
+		if not _prepare_spell_secondary_effect_choice(
+			effect,
+			context
+		):
+			# Secondary Spell decisions use the same live-context / resolution
+			# stack mechanism as Quest choices.
+			resolution["index"] = index
+			return false
+
+	if resolver_kind == "room":
+		if not _prepare_room_effect_choice(
+			effect,
+			context
+		):
+			# Retry the same Room sentence after the player selects a target.
+			resolution["index"] = index
+			return false
+
 
 	# Per-effect runtime metadata. Individual low-level operations may update
 	# these fields while this effect is being resolved.
 	context["effect_instability_placed"] = 0
+	context["effect_instability_converted"] = 0
+	context["effect_damage_converted"] = 0
+	context["effect_damage_healed"] = 0
+	context["effect_target_room_id"] = ""
+	context["effect_target_model_type"] = ""
 
 	active_effect_context = context
 
@@ -8559,31 +12494,46 @@ func process_effect_sequence_resolution(
 		return false
 
 
+
 	if not success:
 
-		# A Quest Effect is still considered resolved after attempting every
-		# sentence, even when a part cannot be applied. Therefore a failed
-		# low-level Quest handler is skipped and the sequence continues.
-		if resolver_kind == "quest":
-			if str(context.get("effect_resolution_error", "")) == "unknown_effect_type":
+		# Unknown Effect types are implementation errors and must never be
+		# silently treated as an in-game impossible phrase.
+		if str(context.get("effect_resolution_error", "")) == "unknown_effect_type":
+			if resolver_kind == "quest":
 				context["quest_resolution_hard_failed"] = true
 				_clear_interactive_effect_choices(context)
-				print(
-					"Quest resolution aborted: unknown Effect type ",
-					str(effect.get("type", ""))
-				)
-				return true
 
 			print(
-				"Quest Effect could not be applied; skipped | effect ",
+				"Resolution aborted: unknown Effect type ",
+				str(effect.get("type", "")),
+				" | kind ",
+				resolver_kind
+			)
+
+			resolution["failed"] = true
+			return true
+
+		# If a phrase cannot be applied, skip that phrase and continue. This
+		# applies to both Quest and Spell Effects.
+		if resolver_kind == "quest" or resolver_kind == "spell":
+			print(
+				resolver_kind.capitalize(),
+				" Effect could not be applied; skipped | effect ",
 				str(effect.get("type", ""))
 			)
 
-			_clear_interactive_effect_choices(context)
+			if resolver_kind == "quest":
+				_clear_interactive_effect_choices(context)
+			else:
+				_clear_spell_secondary_effect_choices(
+					effect,
+					context
+				)
 
 			return (
 				int(resolution.get("index", 0))
-				>= effects.size()
+					>= effects.size()
 			)
 
 		print(
@@ -8594,7 +12544,6 @@ func process_effect_sequence_resolution(
 		)
 
 		resolution["failed"] = true
-
 		return true
 
 
@@ -8623,6 +12572,34 @@ func process_effect_sequence_resolution(
 			if not keyword_string in keywords:
 				keywords.append(keyword_string)
 
+		var effect_room_id: String = str(
+			context.get(
+				"effect_target_room_id",
+				context.get(
+					"target_room_id",
+					context.get(
+						"caster_room_id",
+						""
+					)
+				)
+			)
+		)
+
+		var effect_room_color: String = ""
+
+		if effect_room_id != "":
+			var effect_room = get_room_by_id(
+				effect_room_id
+			)
+
+			if effect_room != null:
+				effect_room_color = str(
+					effect_room.get_room_data().get(
+						"color",
+						""
+					)
+				)
+
 		var quest_event: Dictionary = {
 			"type": "effect_resolved",
 			"player_index": caster_id,
@@ -8631,8 +12608,43 @@ func process_effect_sequence_resolution(
 			"spell_type": str(context.get("spell_type", "")),
 			"spell_element": str(context.get("spell_element", "")),
 			"spell_side": context.get("spell_side", {}),
+			"caster_room_id": str(
+				context.get(
+					"caster_room_id",
+					""
+				)
+			),
+			"effect_target_room_id": effect_room_id,
+			"effect_room_color": effect_room_color,
+			"effect_target_model_type": str(
+				context.get(
+					"effect_target_model_type",
+					context.get(
+						"target_model_type",
+						""
+					)
+				)
+			),
 			"instability_placed": int(
 				context.get("effect_instability_placed", 0)
+			),
+			"instability_converted": int(
+				context.get(
+					"effect_instability_converted",
+					0
+				)
+			),
+			"damage_converted": int(
+				context.get(
+					"effect_damage_converted",
+					0
+				)
+			),
+			"damage_healed": int(
+				context.get(
+					"effect_damage_healed",
+					0
+				)
 			),
 			"keywords": keywords,
 			"effect": effect
@@ -8649,6 +12661,18 @@ func process_effect_sequence_resolution(
 		# cards such as Shattered Illusion, whose two separate "Place 1"
 		# Effects may target two different Rooms.
 		_clear_interactive_effect_choices(context)
+
+	if resolver_kind == "room":
+		_clear_interactive_effect_choices(context)
+		context.erase("room_effect_no_target")
+
+	if resolver_kind == "spell":
+		# Primary target data belongs to the whole Spell, but secondary choices
+		# belong only to the sentence that requested them.
+		_clear_spell_secondary_effect_choices(
+			effect,
+			context
+		)
 
 
 	return (
@@ -8762,9 +12786,8 @@ func process_spell_resolution_frame(
 				enhancement_active = (
 					can_apply_enhancement(
 						caster_id,
-						enhancement.get(
-							"requires",
-							[]
+						_enhancement_required_elements(
+							enhancement
 						)
 					)
 				)
@@ -8894,6 +12917,19 @@ func process_spell_resolution_frame(
 				revealed
 			)
 
+			_set_player_board_spell_state(
+				caster_id,
+				spell,
+				"revealed"
+			)
+
+			_register_ongoing_revealed_spell(
+				caster_id,
+				spell,
+				use_dark_side,
+				context
+			)
+
 			# The entire Spell has now resolved.  This is distinct from the
 			# effect_resolved events emitted for its individual Effect entries.
 			quest_manager.process_event(
@@ -8905,7 +12941,10 @@ func process_spell_resolution_frame(
 					"spell_id": spell.id,
 					"spell_type": str(context.get("spell_type", "")),
 					"spell_element": str(context.get("spell_element", "")),
-					"spell_side": context.get("spell_side", {})
+					"spell_side": context.get("spell_side", {}),
+					"caster_room_id": players[
+						caster_id
+					].mage.room_id
 				}
 			)
 
@@ -8946,6 +12985,10 @@ func process_spell_cast_resolution(
 
 			var side: Dictionary = spell.get_side(use_dark_side)
 			var spell_type: String = str(side.get("type", ""))
+			var targeting_side: Dictionary = _spell_effective_target_side(
+				player_index,
+				side
+			)
 
 			if spell_type != "combat" \
 			and spell_type != "contingency" \
@@ -8954,14 +12997,26 @@ func process_spell_cast_resolution(
 				print("Unsupported Spell type: ", spell_type)
 				return true
 
+			# Combat and Contingency Spells choose their primary target when
+			# cast. Trap/Protection targets are determined by their trigger
+			# semantics and remain handled by the Active Spell system.
+			if spell_type == "combat" or spell_type == "contingency":
+				if not _prepare_spell_primary_target_choice(
+					player_index,
+					targeting_side,
+					context
+				):
+					resolution["context"] = context
+					return false
+
 			# If the caller already supplied a target, enforce the common
 			# Range + Line of Sight rules before consuming the prepared card.
 			# Missing targets are allowed here because some Trap/Protection and
 			# special Effects determine their target only when they resolve.
 			if not validate_target_range_from_context(
 				player_index,
-				str(side.get("target", "")),
-				side.get("range", null),
+				str(targeting_side.get("target", "")),
+				targeting_side.get("range", null),
 				context
 			):
 				print(
@@ -8996,6 +13051,11 @@ func process_spell_cast_resolution(
 					if key != "game":
 						active_spell.context[key] = context[key]
 				player.add_active_spell(active_spell)
+				_set_player_board_spell_state(
+					player_index,
+					spell,
+					"active_hidden"
+				)
 				print(
 					"Player ", player_index + 1,
 					" activates ", spell.card_name,
@@ -9109,19 +13169,25 @@ func process_trigger_spell_resolution(
 					active_spell.use_dark_side
 				)
 				players[owner_id].add_revealed_spell(revealed)
+				_set_player_board_spell_state(
+					owner_id,
+					active_spell.spell,
+					"revealed"
+				)
 
-			quest_manager.process_event(
-				self,
-				{
-					"type": "spell_resolved",
-					"player_index": owner_id,
-					"source_kind": "spell",
-					"spell_id": active_spell.spell.id,
-					"spell_type": spell_type,
-					"spell_element": str(context.get("spell_element", "")),
-					"spell_side": context.get("spell_side", {})
-				}
-			)
+			if spell_type == "trap" or spell_type == "protection":
+				quest_manager.process_event(
+					self,
+					{
+						"type": "spell_resolved",
+						"player_index": owner_id,
+						"source_kind": "spell",
+						"spell_id": active_spell.spell.id,
+						"spell_type": spell_type,
+						"spell_element": str(context.get("spell_element", "")),
+						"spell_side": context.get("spell_side", {})
+					}
+				)
 
 			print("Triggered spell resolved: ", active_spell.spell.card_name)
 			return true
@@ -9152,9 +13218,9 @@ func process_room_activation_resolution(
 			room_context["caster_id"] = player_index
 			room_context["room"] = room
 			room_context["room_id"] = room.get_room_id()
-			if not room_context.has("target_room_id"):
-				room_context["target_room_id"] = room.get_room_id()
 
+			# Explicit Area targets are selected interactively per Effect.
+			# RoomEffectResolver still defaults untargeted Effects to room_id.
 			resolution["context"] = room_context
 			resolution["step"] = "after_effects"
 			queue_resolution({
@@ -9324,6 +13390,108 @@ func _physical_action_cancelled(player_index: int) -> bool:
 	return true
 
 
+
+func process_momentum_resolution(
+	resolution: Dictionary
+) -> bool:
+	var player_index: int = int(
+		resolution.get("player_index", -1)
+	)
+
+	if player_index < 0 or player_index >= players.size():
+		return true
+
+	var player = players[player_index]
+	var context: Dictionary = resolution.get("context", {})
+
+	match str(resolution.get("step", "discard")):
+		"discard":
+			var use_quick: bool = bool(
+				resolution.get("use_quick", false)
+			)
+
+			var spell: SpellCardState = null
+
+			if use_quick:
+				if player.quick_spell == null:
+					return true
+
+				spell = player.quick_spell.spell
+				player.quick_spell = null
+			else:
+				var ready_index: int = int(
+					resolution.get("ready_index", -1)
+				)
+
+				if ready_index < 0 \
+				or ready_index >= player.ready_spells.size():
+					return true
+
+				var ready: ReadySpellState = (
+					player.ready_spells[ready_index]
+				)
+
+				if ready == null or ready.spell == null:
+					return true
+
+				spell = ready.spell
+				player.ready_spells.remove_at(ready_index)
+
+			if spell == null:
+				return true
+
+			move_spell_to_memories_or_remove(
+				player_index,
+				spell
+			)
+
+			_clear_player_board_spell_by_spell(
+				player_index,
+				spell
+			)
+			resolution["discarded_spell_id"] = spell.id
+			resolution["step"] = "move"
+			return false
+
+		"move":
+			var destination_room_id: String = str(
+				resolution.get(
+					"destination_room_id",
+					""
+				)
+			)
+
+			if destination_room_id != "":
+				if not move_mage_to_room_id(
+					player_index,
+					destination_room_id,
+					1
+				):
+					return true
+
+			resolution["step"] = "done"
+			return false
+
+		"done":
+			context["last_action_type"] = "momentum"
+
+			print(
+				"Player ",
+				player_index + 1,
+				" performed Momentum | discarded ",
+				str(
+					resolution.get(
+						"discarded_spell_id",
+						""
+					)
+				)
+			)
+
+			return true
+
+		_:
+			return true
+
 func process_explore_resolution(
 	resolution: Dictionary
 ) -> bool:
@@ -9422,29 +13590,81 @@ func process_fight_resolution(
 			return false
 
 		"attack":
-			if bool(resolution.get("perform_attack", true)):
-				var target_player_index: int = int(
-					resolution.get("target_player_index", -1)
+			resolution["step"] = "room_after"
+
+			if not bool(
+				resolution.get(
+					"perform_attack",
+					true
 				)
-				if target_player_index < 0 or target_player_index >= players.size():
-					return true
-				if target_player_index == player_index:
-					return true
+			):
+				return false
+
+			var target_model_type: String = str(
+				resolution.get(
+					"target_model_type",
+					""
+				)
+			)
+
+			if target_model_type == "":
+				if int(
+					resolution.get(
+						"target_player_index",
+						-1
+					)
+				) >= 0:
+					target_model_type = "mage"
+
+			if target_model_type == "mage":
+				var target_player_index: int = int(
+					resolution.get(
+						"target_player_index",
+						-1
+					)
+				)
+
+				if target_player_index < 0 				or target_player_index >= players.size() 				or target_player_index == player_index:
+					return false
 
 				var target = players[target_player_index]
-				if target.mage.in_cell or target.mage.room_id != player.mage.room_id:
-					return true
 
-				resolution["step"] = "room_after"
+				if target.mage.in_cell 				or target.mage.room_id != player.mage.room_id:
+					return false
+
 				deal_damage(
 					player_index,
 					target_player_index,
 					player.mage.strength,
 					"physical_attack"
 				)
+
 				return false
 
-			resolution["step"] = "room_after"
+			if target_model_type == "evocation":
+				var target_evocation: EvocationState = resolution.get(
+					"target_evocation",
+					null
+				)
+
+				if not _valid_mage_physical_attack_evocation(
+					player_index,
+					target_evocation
+				):
+					return false
+
+				deal_damage_to_evocation(
+					player_index,
+					target_evocation,
+					player.mage.strength,
+					[],
+					"physical_attack",
+					"mage",
+					null
+				)
+
+				return false
+
 			return false
 
 		"room_after":
@@ -9488,11 +13708,26 @@ func process_command_resolution(
 				return true
 
 			var evocation: EvocationState = player.evocations[evocation_index]
+			var controller_id: int = get_evocation_controller_id(
+				evocation
+			)
+			var activation_context: Dictionary = resolution.get(
+				"context",
+				{}
+			)
+
+			if not _validate_evocation_activation_context(
+				evocation,
+				controller_id,
+				activation_context
+			):
+				return true
+
 			resolution["step"] = "done"
 			activate_evocation(
 				evocation,
-				player_index,
-				resolution.get("context", {})
+				controller_id,
+				activation_context
 			)
 			return false
 
@@ -9507,42 +13742,89 @@ func process_command_resolution(
 func process_evocation_activation_resolution(
 	resolution: Dictionary
 ) -> bool:
-	var evocation: EvocationState = resolution.get("evocation", null)
-	if evocation == null or evocation.is_defeated():
+	var evocation: EvocationState = resolution.get(
+		"evocation",
+		null
+	)
+
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
 		return true
 
-	var controller_id: int = int(resolution.get("controller_id", evocation.owner_id))
-	var context: Dictionary = resolution.get("context", {})
-	var strength_bonus: int = int(resolution.get("strength_bonus", 0))
-	var activation_strength: int = evocation.strength + strength_bonus
-	var attack_timing: String = str(context.get("evocation_attack_timing", "none"))
-	var move_room_ids: Array = context.get("evocation_move_room_ids", [])
-	var target_player_index: int = int(context.get("evocation_target_player_index", -1))
+	var controller_id: int = int(
+		resolution.get(
+			"controller_id",
+			get_evocation_controller_id(evocation)
+		)
+	)
+
+	var context: Dictionary = resolution.get(
+		"context",
+		{}
+	)
+
+	var strength_bonus: int = int(
+		resolution.get(
+			"strength_bonus",
+			0
+		)
+	)
+
+	var activation_strength: int = (
+		evocation.strength
+		+ strength_bonus
+	)
+
+	var attack_timing: String = str(
+		context.get(
+			"evocation_attack_timing",
+			"none"
+		)
+	)
+
+	var move_room_ids: Array = context.get(
+		"evocation_move_room_ids",
+		[]
+	)
 
 	match str(resolution.get("step", "start")):
 		"start":
-			if attack_timing != "before" and attack_timing != "after" and attack_timing != "none":
+			if not _validate_evocation_activation_context(
+				evocation,
+				controller_id,
+				context
+			):
 				return true
-			if move_room_ids.size() > evocation.speed:
-				return true
+
 			resolution["step"] = "attack_before"
 			return false
 
 		"attack_before":
 			resolution["step"] = "move"
+
 			if attack_timing == "before":
-				if not _valid_evocation_attack_target(evocation, target_player_index):
-					return true
-				deal_damage_from_evocation(
+				# The target could have disappeared because another pending
+				# trigger resolved first. In that case only the attack is lost;
+				# the rest of the Evocation activation still continues.
+				if _perform_evocation_physical_attack(
 					evocation,
-					target_player_index,
-					activation_strength
-				)
-				return false
+					controller_id,
+					activation_strength,
+					context
+				):
+					return false
+
 			return false
 
 		"move":
-			var move_index: int = int(resolution.get("move_index", 0))
+			var move_index: int = int(
+				resolution.get(
+					"move_index",
+					0
+				)
+			)
+
 			if move_index < move_room_ids.size():
 				if not move_evocation_to_room_id(
 					evocation,
@@ -9550,22 +13832,25 @@ func process_evocation_activation_resolution(
 					1
 				):
 					return true
+
 				resolution["move_index"] = move_index + 1
 				return false
+
 			resolution["step"] = "attack_after"
 			return false
 
 		"attack_after":
 			resolution["step"] = "done"
+
 			if attack_timing == "after":
-				if not _valid_evocation_attack_target(evocation, target_player_index):
-					return true
-				deal_damage_from_evocation(
+				if _perform_evocation_physical_attack(
 					evocation,
-					target_player_index,
-					activation_strength
-				)
-				return false
+					controller_id,
+					activation_strength,
+					context
+				):
+					return false
+
 			return false
 
 		"done":
@@ -9573,34 +13858,28 @@ func process_evocation_activation_resolution(
 			context["last_evocation_activation_controller"] = controller_id
 			context["last_evocation_activation_strength"] = activation_strength
 			context["last_evocation_activation_strength_bonus"] = strength_bonus
+
 			print(
-				"Evocation activated: ", evocation.evocation_name,
-				" | controller P", controller_id + 1,
-				" | Strength ", activation_strength
+				"Evocation activated: ",
+				evocation.evocation_name,
+				" | controller P",
+				controller_id + 1,
+				" | Strength ",
+				activation_strength
 			)
+
 			return true
 
 		_:
 			return true
 
 
-func _valid_evocation_attack_target(
-	evocation: EvocationState,
-	target_player_index: int
-) -> bool:
-	if target_player_index < 0 or target_player_index >= players.size():
-		return false
-	var target_mage = players[target_player_index].mage
-	return (
-		not target_mage.in_cell
-		and target_mage.room_id == evocation.room_id
-	)
-
-
 func _handle_resolution_completion(frame: Dictionary):
 	match str(frame.get("on_complete", "")):
 		"advance_action_phase":
 			advance_action_phase()
+		"continue_action_activation":
+			_request_stepwise_action_activation()
 		"advance_evocation_phase":
 			evocation_phase_cursor += 1
 			advance_evocation_phase()
@@ -9631,13 +13910,23 @@ func advance_evocation_phase() -> bool:
 			var evocation: EvocationState = player.evocations[i]
 			if evocation == null:
 				continue
+			var controller_id: int = get_evocation_controller_id(
+				evocation
+			)
+
 			evocation_data.append({
 				"evocation_index": i,
 				"id": evocation.evocation_id,
 				"name": evocation.evocation_name,
 				"room_id": evocation.room_id,
 				"speed": evocation.speed,
-				"strength": evocation.strength
+				"strength": evocation.strength,
+				"controller_id": controller_id,
+				"activation_plans":
+					_beta_evocation_activation_plans(
+						evocation,
+						controller_id
+					)
 			})
 
 		return request_player_input({
@@ -9671,8 +13960,26 @@ func submit_evocation_phase_activations(
 		if not choice_value is Dictionary:
 			return false
 		var index: int = int(choice_value.get("evocation_index", -1))
-		if index < 0 or index >= player.evocations.size() or used_indices.has(index):
+
+		if index < 0 		or index >= player.evocations.size() 		or used_indices.has(index):
 			return false
+
+		var evocation: EvocationState = player.evocations[index]
+		var controller_id: int = get_evocation_controller_id(
+			evocation
+		)
+		var activation_context: Dictionary = choice_value.get(
+			"context",
+			{}
+		)
+
+		if not _validate_evocation_activation_context(
+			evocation,
+			controller_id,
+			activation_context
+		):
+			return false
+
 		used_indices.append(index)
 
 	clear_player_input()
@@ -9705,9 +14012,19 @@ func process_evocation_phase_player_resolution(
 
 	var evocation: EvocationState = players[player_index].evocations[evocation_index]
 	var activation_context: Dictionary = choice.get("context", {}).duplicate(true)
+	var controller_id: int = get_evocation_controller_id(
+		evocation
+	)
+
 	activation_context["game"] = self
 	activation_context["play_order"] = current_phase_play_order.duplicate()
-	activate_evocation(evocation, player_index, activation_context)
+
+	activate_evocation(
+		evocation,
+		controller_id,
+		activation_context
+	)
+
 	return false
 
 
@@ -9828,7 +14145,10 @@ func _cleanup_player_mage_sheet(
 	var player = players[player_index]
 
 	# Active Trap/Protection: chosen cards return to Hand, all other Active
-	# cards go to Memories.
+	# cards go to Memories. Ongoing revealed Effects are also tracked in
+	# active_spells so TriggeredSpellManager can see them.
+	var active_cards: Array[SpellCardState] = []
+
 	for i in range(player.active_spells.size()):
 		var active_spell: ActiveSpellState = player.active_spells[i]
 		if active_spell == null:
@@ -9836,28 +14156,57 @@ func _cleanup_player_mage_sheet(
 		if not active_spell.active:
 			continue
 
-		if return_active_indices.has(i):
+		if active_spell.spell != null 		and not active_cards.has(active_spell.spell):
+			active_cards.append(active_spell.spell)
+
+		var spell_type: String = active_spell.get_spell_type()
+		var can_return_to_hand: bool = (
+			spell_type == "trap"
+			or spell_type == "protection"
+		)
+
+		if can_return_to_hand 		and return_active_indices.has(i):
 			player.add_spell_to_hand(active_spell.spell)
 		else:
-			player.add_spell_to_memories(active_spell.spell)
+			move_spell_to_memories_or_remove(
+				player_index,
+				active_spell.spell
+			)
 
 	player.active_spells.clear()
 
 	# All remaining prepared cards on the Mage Sheet go to Memories.
 	for ready in player.ready_spells:
 		if ready != null and ready.spell != null:
-			player.add_spell_to_memories(ready.spell)
+			move_spell_to_memories_or_remove(
+				player_index,
+				ready.spell
+			)
 	player.ready_spells.clear()
 
 	if player.quick_spell != null and player.quick_spell.spell != null:
-		player.add_spell_to_memories(player.quick_spell.spell)
+		move_spell_to_memories_or_remove(
+			player_index,
+			player.quick_spell.spell
+		)
 	player.quick_spell = null
 
-	# Revealed Spells also leave the Mage Sheet for Memories.
+	# Revealed Spells also leave the Mage Sheet for Memories. Ongoing cards
+	# already moved above must not be added twice.
 	for revealed in player.revealed_spells:
-		if revealed != null and revealed.spell != null:
-			player.add_spell_to_memories(revealed.spell)
+		if revealed == null or revealed.spell == null:
+			continue
+
+		if active_cards.has(revealed.spell):
+			continue
+
+		move_spell_to_memories_or_remove(
+			player_index,
+			revealed.spell
+		)
+
 	player.revealed_spells.clear()
+	_clear_player_board_spell_slots(player_index)
 
 	player.refresh_physical_actions()
 
@@ -9931,9 +14280,2397 @@ func check_end_game() -> bool:
 	return true
 
 
+
+# =============================================================================
+# BETA INTERACTION BRIDGE
+# =============================================================================
+#
+# The UI should not call a different submit_* method for every Phase.
+# These helpers expose a serializable view of the current game and route the
+# current pending decision through one stable entry point.
+
+
+func _beta_spell_public_data(
+	spell: SpellCardState
+) -> Dictionary:
+	if spell == null:
+		return {}
+
+	return {
+		"id": spell.id,
+		"name": spell.card_name,
+		"school_id": spell.school_id
+	}
+
+
+func _beta_ready_spell_data(
+	ready: ReadySpellState
+) -> Dictionary:
+	if ready == null or ready.spell == null:
+		return {}
+
+	var result: Dictionary = _beta_spell_public_data(
+		ready.spell
+	)
+	result["use_dark_side"] = ready.use_dark_side
+	return result
+
+
+func _beta_revealed_spell_data(
+	revealed: RevealedSpellState
+) -> Dictionary:
+	if revealed == null or revealed.spell == null:
+		return {}
+
+	var result: Dictionary = _beta_spell_public_data(
+		revealed.spell
+	)
+	result["use_dark_side"] = revealed.use_dark_side
+	return result
+
+
+func _beta_quest_data(
+	quest: QuestState,
+	reveal_private_data: bool
+) -> Dictionary:
+	if quest == null:
+		return {}
+
+	var visible: bool = (
+		reveal_private_data
+		or quest.revealed
+		or quest.completed
+		or quest.solved
+	)
+
+	var result: Dictionary = {
+		"revealed": quest.revealed,
+		"completed": quest.completed,
+		"solved": quest.solved
+	}
+
+	if not visible:
+		return result
+
+	result["id"] = quest.get_id()
+	result["name"] = quest.get_name()
+	result["moon"] = quest.get_moon()
+	result["progress"] = quest.progress
+	result["cube_slots"] = quest.get_cube_slots()
+	result["power_reward"] = quest.get_power_reward()
+
+	return result
+
+
+func _beta_evocation_data(
+	evocation: EvocationState
+) -> Dictionary:
+	if evocation == null:
+		return {}
+
+	return {
+		"id": evocation.evocation_id,
+		"name": evocation.evocation_name,
+		"archetype": evocation.archetype,
+		"owner_id": evocation.owner_id,
+		"controller_id": evocation.controller_id,
+		"health": evocation.health,
+		"damage": evocation.get_damage(),
+		"strength": evocation.strength,
+		"speed": evocation.speed,
+		"room_id": evocation.room_id,
+		"defeated": evocation.is_defeated()
+	}
+
+
+func _beta_player_state(
+	player_index: int,
+	viewer_player_index: int
+) -> Dictionary:
+	if player_index < 0 or player_index >= players.size():
+		return {}
+
+	var player: PlayerState = players[player_index]
+	var is_owner_view: bool = viewer_player_index == player_index
+	var mage = player.mage
+
+	var result: Dictionary = {
+		"player_index": player_index,
+		"name": player.player_name,
+		"color": player.color.to_html(),
+		"power": player.power,
+		"school_id": player.school_id,
+		"starting_grimoire_id": player.starting_grimoire_id,
+		"starting_grimoire_name": player.starting_grimoire_name,
+		"mage_id": player.mage_id,
+		"available_cubes": player.available_cubes,
+		"available_physical_actions": player.available_physical_actions,
+		"hand_count": player.hand.size(),
+		"grimoire_count": player.grimoire.size(),
+		"memories_count": player.memories.size(),
+		"ready_spell_count": player.ready_spells.size(),
+		"has_quick_spell": player.quick_spell != null,
+		"active_spell_count": player.active_spells.size(),
+		"revealed_spell_count": player.revealed_spells.size(),
+		"active_quest_count": player.active_quests.size(),
+		"completed_quest_count": player.completed_quests.size()
+	}
+
+	if mage != null:
+		result["mage"] = {
+			"health": mage.health,
+			"damage": mage.get_damage(),
+			"remaining_health": mage.get_remaining_health(),
+			"strength": mage.strength,
+			"speed": mage.speed,
+			"in_cell": mage.in_cell,
+			"room_id": mage.room_id,
+			"room_coord": {
+				"q": mage.room_coord.x,
+				"r": mage.room_coord.y
+			},
+			"damage_cubes": mage.damage_cubes.duplicate()
+		}
+
+	var evocations: Array = []
+	for evocation in player.evocations:
+		evocations.append(
+			_beta_evocation_data(evocation)
+		)
+	result["evocations"] = evocations
+
+	var public_revealed: Array = []
+	for revealed in player.revealed_spells:
+		var revealed_data: Dictionary = _beta_revealed_spell_data(
+			revealed
+		)
+		if not revealed_data.is_empty():
+			public_revealed.append(revealed_data)
+	result["revealed_spells"] = public_revealed
+
+	var active_quests: Array = []
+	for quest in player.active_quests:
+		active_quests.append(
+			_beta_quest_data(
+				quest,
+				is_owner_view
+			)
+		)
+	result["active_quests"] = active_quests
+
+	var completed_quests: Array = []
+	for quest in player.completed_quests:
+		completed_quests.append(
+			_beta_quest_data(
+				quest,
+				true
+			)
+		)
+	result["completed_quests"] = completed_quests
+
+	# Hidden information is exposed only to the player who owns it.
+	if is_owner_view:
+		var hand_data: Array = []
+		for spell in player.hand:
+			hand_data.append(
+				_beta_spell_public_data(spell)
+			)
+		result["hand"] = hand_data
+
+		var ready_data: Array = []
+		for ready in player.ready_spells:
+			ready_data.append(
+				_beta_ready_spell_data(ready)
+			)
+		result["ready_spells"] = ready_data
+
+		result["quick_spell"] = (
+			_beta_ready_spell_data(player.quick_spell)
+			if player.quick_spell != null
+			else {}
+		)
+
+		var active_data: Array = []
+		for active_spell in player.active_spells:
+			if active_spell == null \
+			or active_spell.spell == null \
+			or not active_spell.active:
+				continue
+
+			var spell_data: Dictionary = _beta_spell_public_data(
+				active_spell.spell
+			)
+			spell_data["spell_type"] = active_spell.get_spell_type()
+			spell_data["use_dark_side"] = active_spell.use_dark_side
+			active_data.append(spell_data)
+
+		result["active_spells"] = active_data
+
+	return result
+
+
+func get_beta_pending_input(
+	viewer_player_index: int = -1
+) -> Dictionary:
+	if not waiting_for_player_input:
+		return {}
+
+	var owner_id: int = int(
+		pending_input.get("player_index", -1)
+	)
+
+	# The player who must answer receives the complete request.
+	if viewer_player_index == owner_id:
+		return pending_input.duplicate(true)
+
+	# Everyone else sees only public turn/phase information. In particular,
+	# Preparation and Study Hand information never leaks to another player.
+	return {
+		"type": str(pending_input.get("type", "")),
+		"phase": str(pending_input.get("phase", current_phase)),
+		"player_index": owner_id,
+		"private": true
+	}
+
+
+func get_beta_game_state(
+	viewer_player_index: int = -1
+) -> Dictionary:
+	var player_states: Array = []
+
+	for player_index in range(players.size()):
+		player_states.append(
+			_beta_player_state(
+				player_index,
+				viewer_player_index
+			)
+		)
+
+	return {
+		"round": current_round,
+		"moon": current_moon,
+		"phase": current_phase,
+		"setup_stage": starting_setup_stage,
+		"game_flow_active": game_flow_active,
+		"game_has_ended": game_has_ended,
+		"black_rose_power": black_rose_power,
+		"crown_owner_id": crown_owner_id,
+		"player_count": player_count,
+		"players": player_states,
+		"waiting_for_player_input": waiting_for_player_input,
+		"pending_input": get_beta_pending_input(
+			viewer_player_index
+		)
+	}
+
+
+
+func _beta_room_public_data(
+	room_id: String
+) -> Dictionary:
+	var room = get_room_by_id(room_id)
+	if room == null:
+		return {}
+
+	return {
+		"id": room_id,
+		"name": str(room.room_name),
+		"coord": {
+			"q": room_id_to_coord(room_id).x,
+			"r": room_id_to_coord(room_id).y
+		},
+		"can_activate": bool(room.can_activate(false))
+	}
+
+
+func _beta_adjacent_room_ids(
+	room_id: String
+) -> Array[String]:
+	var result: Array[String] = []
+
+	if not is_lodge_room_id(room_id):
+		return result
+
+	var origin: Vector2i = room_id_to_coord(room_id)
+	if origin == Vector2i(9999, 9999):
+		return result
+
+	for room_value in room_id_by_coord.values():
+		var candidate_id: String = str(room_value)
+
+		if candidate_id == room_id:
+			continue
+
+		var candidate_coord: Vector2i = room_id_to_coord(
+			candidate_id
+		)
+
+		if candidate_coord == Vector2i(9999, 9999):
+			continue
+
+		if get_hex_distance(
+			origin,
+			candidate_coord
+		) == 1:
+			result.append(candidate_id)
+
+	result.sort()
+	return result
+
+
+func _beta_explore_paths(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+	var mage = player.mage
+
+	if mage == null or mage.speed <= 0:
+		return result
+
+	var frontier: Array = []
+
+	if mage.in_cell:
+		var exit_room_ids: Array[String] = (
+			get_player_cell_exit_room_ids(
+				player_index
+			)
+		)
+
+		if exit_room_ids.is_empty():
+			return result
+
+		for exit_room_id in exit_room_ids:
+			var first_path: Array = [
+				exit_room_id
+			]
+
+			result.append(
+				first_path.duplicate()
+			)
+
+			frontier.append({
+				"room_id": exit_room_id,
+				"path": first_path,
+				"moves_used": 1
+			})
+	else:
+		# Physical Actions may ignore some or all of their Effects, so an
+		# Explore with no movement is legal.
+		result.append([])
+
+		frontier.append({
+			"room_id": mage.room_id,
+			"path": [],
+			"moves_used": 0
+		})
+
+	while not frontier.is_empty():
+		var node: Dictionary = frontier.pop_front()
+
+		var moves_used: int = int(
+			node.get("moves_used", 0)
+		)
+
+		if moves_used >= mage.speed:
+			continue
+
+		var current_room_id: String = str(
+			node.get("room_id", "")
+		)
+
+		for next_room_id in _beta_adjacent_room_ids(
+			current_room_id
+		):
+			var next_path: Array = (
+				node.get("path", []).duplicate()
+			)
+
+			next_path.append(next_room_id)
+			result.append(next_path)
+
+			frontier.append({
+				"room_id": next_room_id,
+				"path": next_path,
+				"moves_used": moves_used + 1
+			})
+
+	return result
+
+func _beta_explore_action_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+	if not player.has_physical_action():
+		return result
+
+	var mage = player.mage
+	if mage == null:
+		return result
+
+	for path_value in _beta_explore_paths(player_index):
+		var path: Array = path_value
+
+		var final_room_id: String = (
+			str(path[path.size() - 1])
+			if not path.is_empty()
+			else mage.room_id
+		)
+
+		# Base Explore: movement only, or intentionally ignore all Effects.
+		result.append({
+			"kind": "explore",
+			"label": "Explore",
+			"action": {
+				"type": "explore",
+				"destination_room_ids": path.duplicate(),
+				"activate_room_before_movement": false,
+				"activate_room_after_movement": false
+			},
+			"path": path.duplicate(),
+			"final_room_id": final_room_id,
+			"room_activation_timing": "none"
+		})
+
+		# A Mage in their Cell cannot activate the Room before moving.
+		if not mage.in_cell:
+			var start_room = get_room_by_id(mage.room_id)
+
+			if start_room != null \
+			and start_room.can_activate(false):
+				result.append({
+					"kind": "explore",
+					"label": "Explore + activate Room before movement",
+					"action": {
+						"type": "explore",
+						"destination_room_ids": path.duplicate(),
+						"activate_room_before_movement": true,
+						"activate_room_after_movement": false
+					},
+					"path": path.duplicate(),
+					"final_room_id": final_room_id,
+					"room_activation_timing": "before"
+				})
+
+		var final_room = get_room_by_id(final_room_id)
+
+		if final_room != null \
+		and final_room.can_activate(false):
+			# For a zero-move Explore this is the same physical Room as the
+			# "before" option. Keep only one activation variant.
+			if mage.in_cell or not path.is_empty():
+				result.append({
+					"kind": "explore",
+					"label": "Explore + activate Room after movement",
+					"action": {
+						"type": "explore",
+						"destination_room_ids": path.duplicate(),
+						"activate_room_before_movement": false,
+						"activate_room_after_movement": true
+					},
+					"path": path.duplicate(),
+					"final_room_id": final_room_id,
+					"room_activation_timing": "after"
+				})
+
+	return result
+
+
+func _beta_fight_action_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+	var mage = player.mage
+
+	if mage == null \
+	or mage.in_cell \
+	or not player.has_physical_action():
+		return result
+
+	var room = get_room_by_id(mage.room_id)
+	var can_activate_room: bool = (
+		room != null
+		and room.can_activate(false)
+	)
+
+	var targets: Array = []
+
+	for target_index in range(players.size()):
+		if target_index == player_index:
+			continue
+
+		var target_mage = players[target_index].mage
+
+		if target_mage == null \
+		or target_mage.in_cell \
+		or target_mage.room_id != mage.room_id:
+			continue
+
+		targets.append({
+			"target_model_type": "mage",
+			"target_player_index": target_index,
+			"target_evocation_owner_id": -1,
+			"target_evocation_index": -1,
+			"name": players[target_index].player_name
+		})
+
+	for owner_id in range(players.size()):
+		for evocation_index in range(
+			players[owner_id].evocations.size()
+		):
+			var evocation: EvocationState = (
+				players[owner_id].evocations[
+					evocation_index
+				]
+			)
+
+			if not _valid_mage_physical_attack_evocation(
+				player_index,
+				evocation
+			):
+				continue
+
+			targets.append({
+				"target_model_type": "evocation",
+				"target_player_index": -1,
+				"target_evocation_owner_id": owner_id,
+				"target_evocation_index": evocation_index,
+				"name": evocation.evocation_name,
+				"controller_id": get_evocation_controller_id(
+					evocation
+				),
+				"evocation": _beta_evocation_data(evocation)
+			})
+
+	# A Physical Action may ignore some or all of its Effects.
+	result.append({
+		"kind": "fight",
+		"label": "Fight",
+		"action": {
+			"type": "fight",
+			"target_model_type": "",
+			"target_player_index": -1,
+			"target_evocation_owner_id": -1,
+			"target_evocation_index": -1,
+			"activate_room_first": false,
+			"perform_attack": false,
+			"perform_room_activation": false
+		},
+		"target_model_type": "",
+		"room_activation_timing": "none"
+	})
+
+	if can_activate_room:
+		result.append({
+			"kind": "fight",
+			"label": "Fight: activate Room",
+			"action": {
+				"type": "fight",
+				"target_model_type": "",
+				"target_player_index": -1,
+				"target_evocation_owner_id": -1,
+				"target_evocation_index": -1,
+				"activate_room_first": false,
+				"perform_attack": false,
+				"perform_room_activation": true
+			},
+			"target_model_type": "",
+			"room_activation_timing": "after"
+		})
+
+	for target_value in targets:
+		var target: Dictionary = target_value
+		var target_name: String = str(
+			target.get("name", "Model")
+		)
+
+		var target_fields: Dictionary = {
+			"target_model_type": str(
+				target.get(
+					"target_model_type",
+					""
+				)
+			),
+			"target_player_index": int(
+				target.get(
+					"target_player_index",
+					-1
+				)
+			),
+			"target_evocation_owner_id": int(
+				target.get(
+					"target_evocation_owner_id",
+					-1
+				)
+			),
+			"target_evocation_index": int(
+				target.get(
+					"target_evocation_index",
+					-1
+				)
+			)
+		}
+
+		var attack_action: Dictionary = {
+			"type": "fight",
+			"activate_room_first": false,
+			"perform_attack": true,
+			"perform_room_activation": false
+		}
+
+		for key in target_fields:
+			attack_action[key] = target_fields[key]
+
+		result.append({
+			"kind": "fight",
+			"label": "Fight: attack " + target_name,
+			"action": attack_action,
+			"target": target.duplicate(true),
+			"room_activation_timing": "none"
+		})
+
+		if can_activate_room:
+			var before_action: Dictionary = attack_action.duplicate(true)
+			before_action["activate_room_first"] = true
+			before_action["perform_room_activation"] = true
+
+			result.append({
+				"kind": "fight",
+				"label":
+					"Fight: activate Room, then attack "
+					+ target_name,
+				"action": before_action,
+				"target": target.duplicate(true),
+				"room_activation_timing": "before"
+			})
+
+			var after_action: Dictionary = attack_action.duplicate(true)
+			after_action["activate_room_first"] = false
+			after_action["perform_room_activation"] = true
+
+			result.append({
+				"kind": "fight",
+				"label":
+					"Fight: attack "
+					+ target_name
+					+ ", then activate Room",
+				"action": after_action,
+				"target": target.duplicate(true),
+				"room_activation_timing": "after"
+			})
+
+	return result
+
+
+
+func _beta_evocation_movement_paths(
+	evocation: EvocationState
+) -> Array:
+	var result: Array = []
+
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
+		return result
+
+	# Using none of the Move 1 Effects is legal.
+	result.append([])
+
+	var frontier: Array = [{
+		"room_id": evocation.room_id,
+		"path": [],
+		"moves_used": 0
+	}]
+
+	while not frontier.is_empty():
+		var node: Dictionary = frontier.pop_front()
+		var moves_used: int = int(
+			node.get("moves_used", 0)
+		)
+
+		if moves_used >= evocation.speed:
+			continue
+
+		var current_room_id: String = str(
+			node.get("room_id", "")
+		)
+
+		for next_room_id in _beta_adjacent_room_ids(
+			current_room_id
+		):
+			var next_path: Array = (
+				node.get("path", []).duplicate()
+			)
+
+			next_path.append(next_room_id)
+			result.append(next_path)
+
+			frontier.append({
+				"room_id": next_room_id,
+				"path": next_path,
+				"moves_used": moves_used + 1
+			})
+
+	return result
+
+
+func _valid_evocation_attack_mage(
+	evocation: EvocationState,
+	controller_id: int,
+	target_player_index: int,
+	expected_room_id: String = ""
+) -> bool:
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
+		return false
+
+	if target_player_index < 0 \
+	or target_player_index >= players.size():
+		return false
+
+	if target_player_index == controller_id:
+		return false
+
+	var target_mage = players[target_player_index].mage
+
+	if target_mage == null or target_mage.in_cell:
+		return false
+
+	var room_id: String = (
+		expected_room_id
+		if expected_room_id != ""
+		else evocation.room_id
+	)
+
+	return target_mage.room_id == room_id
+
+
+func _valid_evocation_attack_evocation(
+	evocation: EvocationState,
+	controller_id: int,
+	target_evocation: EvocationState,
+	expected_room_id: String = ""
+) -> bool:
+	if evocation == null \
+	or target_evocation == null \
+	or evocation == target_evocation:
+		return false
+
+	if evocation.is_defeated() \
+	or target_evocation.is_defeated():
+		return false
+
+	if not is_evocation_in_play(evocation) \
+	or not is_evocation_in_play(target_evocation):
+		return false
+
+	# An Evocation never inflicts Damage on another Evocation controlled by
+	# the Mage that controls the attacker.
+	if get_evocation_controller_id(
+		target_evocation
+	) == controller_id:
+		return false
+
+	var room_id: String = (
+		expected_room_id
+		if expected_room_id != ""
+		else evocation.room_id
+	)
+
+	return target_evocation.room_id == room_id
+
+
+func _beta_evocation_attack_targets(
+	evocation: EvocationState,
+	controller_id: int,
+	room_id: String
+) -> Array:
+	var result: Array = []
+
+	for target_player_index in range(players.size()):
+		if not _valid_evocation_attack_mage(
+			evocation,
+			controller_id,
+			target_player_index,
+			room_id
+		):
+			continue
+
+		result.append({
+			"target_model_type": "mage",
+			"target_player_index": target_player_index,
+			"target_evocation_owner_id": -1,
+			"target_evocation_index": -1,
+			"name": players[target_player_index].player_name,
+			"room_id": room_id
+		})
+
+	for owner_id in range(players.size()):
+		for evocation_index in range(
+			players[owner_id].evocations.size()
+		):
+			var target_evocation: EvocationState = (
+				players[owner_id].evocations[
+					evocation_index
+				]
+			)
+
+			if not _valid_evocation_attack_evocation(
+				evocation,
+				controller_id,
+				target_evocation,
+				room_id
+			):
+				continue
+
+			result.append({
+				"target_model_type": "evocation",
+				"target_player_index": -1,
+				"target_evocation_owner_id": owner_id,
+				"target_evocation_index": evocation_index,
+				"name": target_evocation.evocation_name,
+				"room_id": room_id,
+				"controller_id": get_evocation_controller_id(
+					target_evocation
+				),
+				"evocation": _beta_evocation_data(
+					target_evocation
+				)
+			})
+
+	return result
+
+
+func _evocation_target_context(
+	target: Dictionary
+) -> Dictionary:
+	return {
+		"evocation_target_model_type": str(
+			target.get("target_model_type", "")
+		),
+		"evocation_target_player_index": int(
+			target.get("target_player_index", -1)
+		),
+		"evocation_target_evocation_owner_id": int(
+			target.get(
+				"target_evocation_owner_id",
+				-1
+			)
+		),
+		"evocation_target_evocation_index": int(
+			target.get(
+				"target_evocation_index",
+				-1
+			)
+		)
+	}
+
+
+func _beta_evocation_activation_plans(
+	evocation: EvocationState,
+	controller_id: int
+) -> Array:
+	var result: Array = []
+
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
+		return result
+
+	var origin_room_id: String = evocation.room_id
+
+	for path_value in _beta_evocation_movement_paths(
+		evocation
+	):
+		var path: Array = path_value
+
+		var final_room_id: String = (
+			str(path[path.size() - 1])
+			if not path.is_empty()
+			else origin_room_id
+		)
+
+		# Move only / do nothing.
+		result.append({
+			"label": (
+				"Activate " + evocation.evocation_name
+				if path.is_empty()
+				else "Move " + evocation.evocation_name
+			),
+			"context": {
+				"evocation_attack_timing": "none",
+				"evocation_move_room_ids": path.duplicate()
+			},
+			"path": path.duplicate(),
+			"attack_timing": "none",
+			"target": {}
+		})
+
+		# Physical Attack before all Move 1 Effects.
+		for target_value in _beta_evocation_attack_targets(
+			evocation,
+			controller_id,
+			origin_room_id
+		):
+			var target: Dictionary = target_value
+			var before_context: Dictionary = {
+				"evocation_attack_timing": "before",
+				"evocation_move_room_ids": path.duplicate()
+			}
+
+			var target_context: Dictionary = _evocation_target_context(
+				target
+			)
+
+			for key in target_context:
+				before_context[key] = target_context[key]
+
+			result.append({
+				"label":
+					"Attack "
+					+ str(target.get("name", "Model"))
+					+ (
+						" then move"
+						if not path.is_empty()
+						else ""
+					),
+				"context": before_context,
+				"path": path.duplicate(),
+				"attack_timing": "before",
+				"target": target.duplicate(true)
+			})
+
+		# With no movement, "before" and "after" are mechanically identical.
+		if path.is_empty():
+			continue
+
+		# Physical Attack after all Move 1 Effects.
+		for target_value in _beta_evocation_attack_targets(
+			evocation,
+			controller_id,
+			final_room_id
+		):
+			var target: Dictionary = target_value
+			var after_context: Dictionary = {
+				"evocation_attack_timing": "after",
+				"evocation_move_room_ids": path.duplicate()
+			}
+
+			var target_context: Dictionary = _evocation_target_context(
+				target
+			)
+
+			for key in target_context:
+				after_context[key] = target_context[key]
+
+			result.append({
+				"label":
+					"Move then attack "
+					+ str(target.get("name", "Model")),
+				"context": after_context,
+				"path": path.duplicate(),
+				"attack_timing": "after",
+				"target": target.duplicate(true)
+			})
+
+	return result
+
+
+func _resolve_evocation_target_from_context(
+	context: Dictionary
+) -> EvocationState:
+	if str(
+		context.get(
+			"evocation_target_model_type",
+			""
+		)
+	) != "evocation":
+		return null
+
+	return get_evocation_by_owner_index(
+		int(
+			context.get(
+				"evocation_target_evocation_owner_id",
+				-1
+			)
+		),
+		int(
+			context.get(
+				"evocation_target_evocation_index",
+				-1
+			)
+		)
+	)
+
+
+func _validate_evocation_activation_context(
+	evocation: EvocationState,
+	controller_id: int,
+	context: Dictionary
+) -> bool:
+	if evocation == null \
+	or evocation.is_defeated() \
+	or not is_evocation_in_play(evocation):
+		return false
+
+	var attack_timing: String = str(
+		context.get(
+			"evocation_attack_timing",
+			"none"
+		)
+	)
+
+	if attack_timing != "none" \
+	and attack_timing != "before" \
+	and attack_timing != "after":
+		return false
+
+	var move_room_ids: Array = context.get(
+		"evocation_move_room_ids",
+		[]
+	)
+
+	if move_room_ids.size() > evocation.speed:
+		return false
+
+	var previous_room_id: String = evocation.room_id
+
+	for room_value in move_room_ids:
+		var room_id: String = str(room_value)
+
+		if not _beta_adjacent_room_ids(
+			previous_room_id
+		).has(room_id):
+			return false
+
+		previous_room_id = room_id
+
+	if attack_timing == "none":
+		return true
+
+	var attack_room_id: String = (
+		evocation.room_id
+		if attack_timing == "before"
+		else previous_room_id
+	)
+
+	var target_model_type: String = str(
+		context.get(
+			"evocation_target_model_type",
+			""
+		)
+	)
+
+	if target_model_type == "mage":
+		return _valid_evocation_attack_mage(
+			evocation,
+			controller_id,
+			int(
+				context.get(
+					"evocation_target_player_index",
+					-1
+				)
+			),
+			attack_room_id
+		)
+
+	if target_model_type == "evocation":
+		return _valid_evocation_attack_evocation(
+			evocation,
+			controller_id,
+			_resolve_evocation_target_from_context(
+				context
+			),
+			attack_room_id
+		)
+
+	return false
+
+
+func _perform_evocation_physical_attack(
+	evocation: EvocationState,
+	controller_id: int,
+	activation_strength: int,
+	context: Dictionary
+) -> bool:
+	var target_model_type: String = str(
+		context.get(
+			"evocation_target_model_type",
+			""
+		)
+	)
+
+	if target_model_type == "mage":
+		var target_player_index: int = int(
+			context.get(
+				"evocation_target_player_index",
+				-1
+			)
+		)
+
+		if not _valid_evocation_attack_mage(
+			evocation,
+			controller_id,
+			target_player_index
+		):
+			return false
+
+		deal_damage_from_evocation(
+			evocation,
+			target_player_index,
+			activation_strength
+		)
+
+		return true
+
+	if target_model_type == "evocation":
+		var target_evocation: EvocationState = (
+			_resolve_evocation_target_from_context(
+				context
+			)
+		)
+
+		if not _valid_evocation_attack_evocation(
+			evocation,
+			controller_id,
+			target_evocation
+		):
+			return false
+
+		deal_damage_to_evocation(
+			controller_id,
+			target_evocation,
+			activation_strength,
+			[],
+			"evocation_attack",
+			"evocation",
+			evocation
+		)
+
+		return true
+
+	return false
+
+func _beta_command_action_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+
+	if player.mage == null \
+	or player.mage.in_cell \
+	or not player.has_physical_action():
+		return result
+
+	for evocation_index in range(player.evocations.size()):
+		var evocation: EvocationState = player.evocations[
+			evocation_index
+		]
+
+		if evocation == null \
+		or evocation.is_defeated() \
+		or not is_evocation_in_play(evocation):
+			continue
+
+		var controller_id: int = get_evocation_controller_id(
+			evocation
+		)
+
+		for plan_value in _beta_evocation_activation_plans(
+			evocation,
+			controller_id
+		):
+			var plan: Dictionary = plan_value
+
+			result.append({
+				"kind": "command",
+				"label":
+					"Command "
+					+ evocation.evocation_name
+					+ ": "
+					+ str(plan.get("label", "Activate")),
+				"action": {
+					"type": "command",
+					"evocation_index": evocation_index,
+					"context": plan.get(
+						"context",
+						{}
+					).duplicate(true)
+				},
+				"evocation_index": evocation_index,
+				"controller_id": controller_id,
+				"evocation": _beta_evocation_data(evocation),
+				"activation_plan": plan.duplicate(true)
+			})
+
+	return result
+
+
+func _beta_public_target_options(
+	options: Array
+) -> Array:
+	var result: Array = []
+
+	for option_value in options:
+		if not option_value is Dictionary:
+			continue
+
+		var option: Dictionary = option_value
+		var public_option: Dictionary = {}
+
+		for key in option:
+			if str(key) == "value":
+				continue
+			public_option[key] = option[key]
+
+		result.append(public_option)
+
+	return result
+
+
+func _beta_spell_cast_descriptor(
+	player_index: int,
+	ready: ReadySpellState,
+	source: String
+) -> Dictionary:
+	if ready == null or ready.spell == null:
+		return {}
+
+	var side: Dictionary = ready.spell.get_side(
+		ready.use_dark_side
+	)
+
+	var targeting_side: Dictionary = _spell_effective_target_side(
+		player_index,
+		side
+	)
+
+	var spell_type: String = str(
+		side.get("type", "")
+	)
+
+	var target_type: String = str(
+		targeting_side.get("target", "")
+	)
+
+	var target_options: Array = []
+
+	if spell_type == "combat" \
+	or spell_type == "contingency":
+		if target_type != "" \
+		and target_type != "self" \
+		and target_type != "special":
+			# Range 0 Room target is automatically the caster's current Room.
+			if not (
+				(target_type == "room" or target_type == "area")
+				and str(targeting_side.get("range", "")) == "0"
+			):
+				target_options = _beta_public_target_options(
+					_spell_primary_target_options(
+						player_index,
+						targeting_side
+					)
+				)
+
+				# A primary target is mandatory for this cast. Do not expose
+				# a Cast action the engine cannot legally target.
+				if target_options.is_empty():
+					return {}
+
+	var action_type: String = (
+		"quick"
+		if source == "quick"
+		else "spell"
+	)
+
+	return {
+		"kind": "cast",
+		"label": "Cast " + ready.spell.card_name,
+		"action": {
+			"type": action_type
+		},
+		"source": source,
+		"spell": _beta_ready_spell_data(ready),
+		"spell_type": spell_type,
+		"element": str(side.get("element", "")),
+		"target_type": target_type,
+		"range": targeting_side.get("range", null),
+		"target_options": target_options,
+		"target_selection_follows": not target_options.is_empty()
+	}
+
+
+func _beta_cast_action_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+
+	if player.mage == null or player.mage.in_cell:
+		return result
+
+	# Only the lowest numbered prepared Slot may currently be cast.
+	if not player.ready_spells.is_empty():
+		var ready_descriptor: Dictionary = _beta_spell_cast_descriptor(
+			player_index,
+			player.ready_spells[0],
+			"ready"
+		)
+
+		if not ready_descriptor.is_empty():
+			result.append(ready_descriptor)
+
+	if player.quick_spell != null:
+		var quick_descriptor: Dictionary = _beta_spell_cast_descriptor(
+			player_index,
+			player.quick_spell,
+			"quick"
+		)
+
+		if not quick_descriptor.is_empty():
+			result.append(quick_descriptor)
+
+	return result
+
+
+func _beta_momentum_destinations(
+	player_index: int
+) -> Array[String]:
+	var result: Array[String] = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var mage = players[player_index].mage
+	if mage == null:
+		return result
+
+	if mage.in_cell:
+		for exit_room_id in get_player_cell_exit_room_ids(
+			player_index
+		):
+			if _is_valid_momentum_destination(
+				player_index,
+				exit_room_id
+			):
+				result.append(exit_room_id)
+
+		return result
+
+	# Move 1 is optional outside the Cell.
+	result.append("")
+
+	for room_id in _beta_adjacent_room_ids(mage.room_id):
+		if _is_valid_momentum_destination(
+			player_index,
+			room_id
+		):
+			result.append(room_id)
+
+	return result
+
+func _beta_momentum_action_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+	var destinations: Array[String] = _beta_momentum_destinations(
+		player_index
+	)
+
+	if destinations.is_empty():
+		return result
+
+	for ready_index in range(player.ready_spells.size()):
+		var ready: ReadySpellState = player.ready_spells[
+			ready_index
+		]
+
+		if ready == null or ready.spell == null:
+			continue
+
+		for destination_room_id in destinations:
+			result.append({
+				"kind": "momentum",
+				"label": "Momentum: discard " + ready.spell.card_name,
+				"action": {
+					"type": "momentum",
+					"ready_index": ready_index,
+					"use_quick": false,
+					"destination_room_id": destination_room_id
+				},
+				"spell": _beta_ready_spell_data(ready),
+				"destination_room_id": destination_room_id
+			})
+
+	if player.quick_spell != null \
+	and player.quick_spell.spell != null:
+		for destination_room_id in destinations:
+			result.append({
+				"kind": "momentum",
+				"label":
+					"Momentum: discard "
+					+ player.quick_spell.spell.card_name,
+				"action": {
+					"type": "momentum",
+					"ready_index": -1,
+					"use_quick": true,
+					"destination_room_id": destination_room_id
+				},
+				"spell": _beta_ready_spell_data(
+					player.quick_spell
+				),
+				"destination_room_id": destination_room_id
+			})
+
+	return result
+
+
+func _beta_quest_activation_variants(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	if player_index < 0 or player_index >= players.size():
+		return result
+
+	var player = players[player_index]
+
+	if player.mage == null or player.mage.in_cell:
+		return result
+
+	for quest_data_value in _get_solvable_quest_activation_data(
+		player_index
+	):
+		if not quest_data_value is Dictionary:
+			continue
+
+		var quest_data: Dictionary = quest_data_value
+		var quest_index: int = int(
+			quest_data.get("quest_index", -1)
+		)
+
+		result.append({
+			"kind": "quest",
+			"label": "Resolve Quest " + str(
+				quest_data.get("name", "")
+			),
+			"action": {
+				"type": "quest",
+				"quest_index": quest_index
+			},
+			"quest_index": quest_index,
+			"id": str(quest_data.get("id", "")),
+			"name": str(quest_data.get("name", "")),
+			"power_reward": int(
+				quest_data.get("power_reward", 0)
+			),
+			"consumes_action": false
+		})
+
+	return result
+
+
+func get_beta_legal_actions(
+	player_index: int
+) -> Dictionary:
+	if player_index < 0 or player_index >= players.size():
+		return {}
+
+	var player = players[player_index]
+	var actions: Array = []
+
+	var explore_actions: Array = _beta_explore_action_variants(
+		player_index
+	)
+	var fight_actions: Array = _beta_fight_action_variants(
+		player_index
+	)
+	var command_actions: Array = _beta_command_action_variants(
+		player_index
+	)
+	var cast_actions: Array = _beta_cast_action_variants(
+		player_index
+	)
+	var momentum_actions: Array = _beta_momentum_action_variants(
+		player_index
+	)
+
+	actions.append_array(explore_actions)
+	actions.append_array(fight_actions)
+	actions.append_array(command_actions)
+	actions.append_array(cast_actions)
+	actions.append_array(momentum_actions)
+
+	return {
+		"player_index": player_index,
+		"phase": current_phase,
+		"in_cell": (
+			player.mage != null
+			and player.mage.in_cell
+		),
+		"can_act": not actions.is_empty(),
+		"min_actions_per_activation": 1,
+		"max_actions_per_activation": 2,
+		"actions": actions,
+		"explore": explore_actions,
+		"fight": fight_actions,
+		"command": command_actions,
+		"cast": cast_actions,
+		"momentum": momentum_actions,
+		"quests": _beta_quest_activation_variants(
+			player_index
+		),
+		"activation_constraints": {
+			"max_numbered_spell_casts": 1,
+			"max_quick_spell_casts": 1,
+			"completed_quests_consume_actions": false
+		}
+	}
+
+func get_beta_supported_input_types() -> Array[String]:
+	return [
+		"starting_mage_choice",
+		"starting_school_choice",
+		"starting_grimoire_choice",
+		"effect_choice",
+		"action_activation",
+		"action_activation_step",
+		"preparation",
+		"study_choose_schools",
+		"study_keep_cards",
+		"study_optional_discard",
+		"study_hand_limit",
+		"trigger_decision",
+		"evocation_phase_activations",
+		"cleanup_active_spells",
+		"black_rose_optional_quest_discard",
+		"black_rose_active_quest_limit",
+		"black_rose_completed_quest_limit"
+	]
+
+
+func submit_beta_input(
+	player_index: int,
+	payload: Dictionary
+) -> bool:
+	if not waiting_for_player_input:
+		print("submit_beta_input: no pending input")
+		return false
+
+	if player_index != int(
+		pending_input.get("player_index", -1)
+	):
+		print("submit_beta_input: wrong player")
+		return false
+
+	var input_type: String = str(
+		pending_input.get("type", "")
+	)
+
+	match input_type:
+		"starting_mage_choice":
+			return submit_starting_mage_choice(
+				player_index,
+				str(payload.get("mage_id", ""))
+			)
+
+		"starting_school_choice":
+			return submit_starting_school_choice(
+				player_index,
+				str(payload.get("school_id", ""))
+			)
+
+		"starting_grimoire_choice":
+			return submit_starting_grimoire_choice(
+				player_index,
+				str(payload.get("grimoire_id", ""))
+			)
+
+		"effect_choice":
+			return submit_effect_choice(
+				player_index,
+				payload.get("selection", null)
+			)
+
+		"action_activation":
+			return submit_action_activation(
+				player_index,
+				payload.get("actions", [])
+			)
+
+		"action_activation_step":
+			return submit_action_activation_step(
+				player_index,
+				str(payload.get("token", ""))
+			)
+
+		"preparation":
+			return submit_preparation(
+				player_index,
+				payload.get("ready_hand_indices", []),
+				payload.get("ready_dark_sides", []),
+				int(payload.get("quick_hand_index", -1)),
+				bool(payload.get("quick_dark_side", false))
+			)
+
+		"study_choose_schools":
+			return submit_study_school_choices(
+				player_index,
+				payload.get("school_ids", [])
+			)
+
+		"study_keep_cards":
+			return submit_study_keep_cards(
+				player_index,
+				payload.get("keep_indices", [])
+			)
+
+		"study_optional_discard":
+			return submit_study_optional_discard(
+				player_index,
+				int(payload.get("hand_index", -1))
+			)
+
+		"study_hand_limit":
+			return submit_study_hand_limit(
+				player_index,
+				payload.get("hand_indices", [])
+			)
+
+		"trigger_decision":
+			return submit_trigger_decision(
+				player_index,
+				int(payload.get("queue_index", -1))
+			)
+
+		"evocation_phase_activations":
+			return submit_evocation_phase_activations(
+				player_index,
+				payload.get("choices", [])
+			)
+
+		"cleanup_active_spells":
+			return submit_cleanup_active_spells(
+				player_index,
+				payload.get("return_to_hand_indices", [])
+			)
+
+		"black_rose_optional_quest_discard":
+			return submit_black_rose_optional_quest_discard(
+				player_index,
+				int(payload.get("quest_index", -1))
+			)
+
+		"black_rose_active_quest_limit":
+			return submit_black_rose_active_quest_limit(
+				player_index,
+				payload.get("quest_indices", [])
+			)
+
+		"black_rose_completed_quest_limit":
+			return submit_black_rose_completed_quest_limit(
+				player_index,
+				payload.get("quest_indices", [])
+			)
+
+		_:
+			print(
+				"submit_beta_input: unsupported input type ",
+				input_type
+			)
+			return false
+
+
+# =============================================================================
+# STARTING SCHOOL / GRIMOIRE SETUP
+# =============================================================================
+
+
+func _mage_taken_by_other_player(
+	mage_id: String,
+	player_index: int
+) -> bool:
+	for other_index in range(players.size()):
+		if other_index == player_index:
+			continue
+
+		if players[other_index].mage_id == mage_id:
+			return true
+
+	return false
+
+
+func _available_starting_mages(
+	player_index: int
+) -> Array:
+	var result: Array = []
+	var mage_ids: Array[String] = mage_database.get_mage_ids()
+
+	mage_ids.sort()
+
+	for mage_id in mage_ids:
+		if _mage_taken_by_other_player(
+			mage_id,
+			player_index
+		):
+			continue
+
+		var data: Dictionary = (
+			mage_database.get_mage_data(
+				mage_id
+			)
+		)
+
+		if data.is_empty():
+			continue
+
+		var personal_spell_id: String = str(
+			data.get(
+				"personal_spell_id",
+				""
+			)
+		)
+		var personal_spell_name: String = personal_spell_id
+
+		if spell_database.spells.has(
+			personal_spell_id
+		):
+			var personal_spell: SpellCardState = (
+				spell_database.spells[
+					personal_spell_id
+				]
+			)
+
+			if personal_spell != null:
+				personal_spell_name = personal_spell.card_name
+
+		result.append({
+			"id": mage_id,
+			"name": str(
+				data.get(
+					"name",
+					mage_id.capitalize()
+				)
+			),
+			"health": int(
+				data.get(
+					"health",
+					10
+				)
+			),
+			"hand_limit": int(
+				data.get(
+					"hand_limit",
+					6
+				)
+			),
+			"strength": int(
+				data.get(
+					"strength",
+					0
+				)
+			),
+			"speed": int(
+				data.get(
+					"speed",
+					0
+				)
+			),
+			"personal_spell_id": personal_spell_id,
+			"personal_spell_name": personal_spell_name
+		})
+
+	return result
+
+func _school_taken_by_other_player(
+	school_id: String,
+	player_index: int
+) -> bool:
+	for other_index in range(players.size()):
+		if other_index == player_index:
+			continue
+
+		if players[other_index].school_id == school_id:
+			return true
+
+	return false
+
+
+func _available_starting_schools(
+	player_index: int
+) -> Array:
+	var result: Array = []
+
+	for school_id in active_school_ids:
+		if not school_specialization_database.has(school_id):
+			continue
+
+		if _school_taken_by_other_player(
+			school_id,
+			player_index
+		):
+			continue
+
+		result.append({
+			"id": school_id,
+			"name": get_school_display_name(school_id)
+		})
+
+	return result
+
+
+func _find_starting_grimoire_data(
+	school_id: String,
+	grimoire_id: String
+) -> Dictionary:
+	if not school_specialization_database.has(school_id):
+		return {}
+
+	var school_data: Dictionary = (
+		school_specialization_database[school_id]
+	)
+
+	for grimoire_value in school_data.get(
+		"starting_grimoires",
+		[]
+	):
+		if not grimoire_value is Dictionary:
+			continue
+
+		var grimoire: Dictionary = grimoire_value
+
+		if str(grimoire.get("id", "")) == grimoire_id:
+			return grimoire
+
+	return {}
+
+
+func _take_school_spell_for_starting_grimoire(
+	school_id: String,
+	spell_id: String
+) -> SpellCardState:
+	if not school_libraries.has(school_id):
+		return null
+
+	var library: Array = school_libraries[school_id]
+
+	for i in range(library.size()):
+		var spell: SpellCardState = library[i]
+
+		if spell == null or spell.id != spell_id:
+			continue
+
+		library.remove_at(i)
+		return spell
+
+	return null
+
+
+func build_starting_grimoire(
+	player_index: int,
+	school_id: String,
+	grimoire_id: String
+) -> bool:
+	if player_index < 0 or player_index >= players.size():
+		return false
+
+	var player: PlayerState = players[player_index]
+
+	if player.school_id != school_id:
+		return false
+
+	var grimoire_data: Dictionary = (
+		_find_starting_grimoire_data(
+			school_id,
+			grimoire_id
+		)
+	)
+
+	if grimoire_data.is_empty():
+		return false
+
+	var spell_ids: Array = grimoire_data.get(
+		"spell_ids",
+		[]
+	)
+
+	if spell_ids.size() != 6:
+		print(
+			"Starting Grimoire ",
+			grimoire_id,
+			" must contain exactly 6 School Spells"
+		)
+		return false
+
+	# Validate all six cards before mutating the Library.
+	var required_counts: Dictionary = {}
+
+	for spell_id_value in spell_ids:
+		var spell_id: String = str(spell_id_value)
+		required_counts[spell_id] = int(
+			required_counts.get(spell_id, 0)
+		) + 1
+
+	var available_counts: Dictionary = {}
+
+	for spell_value in school_libraries.get(school_id, []):
+		var spell: SpellCardState = spell_value
+
+		if spell == null:
+			continue
+
+		available_counts[spell.id] = int(
+			available_counts.get(spell.id, 0)
+		) + 1
+
+	for spell_id in required_counts:
+		if int(
+			available_counts.get(spell_id, 0)
+		) < int(required_counts[spell_id]):
+			print(
+				"Starting Grimoire missing Library card: ",
+				spell_id
+			)
+			return false
+
+	player.hand.clear()
+	player.grimoire.clear()
+	player.memories.clear()
+	player.ready_spells.clear()
+	player.quick_spell = null
+	player.active_spells.clear()
+	player.revealed_spells.clear()
+
+	for spell_id_value in spell_ids:
+		var spell_id: String = str(spell_id_value)
+		var school_spell: SpellCardState = (
+			_take_school_spell_for_starting_grimoire(
+				school_id,
+				spell_id
+			)
+		)
+
+		if school_spell == null:
+			return false
+
+		player.grimoire.append(school_spell)
+
+	var personal_spell: SpellCardState = (
+		create_personal_spell_copy(
+			player.personal_spell_id
+		)
+	)
+
+	if personal_spell == null:
+		return false
+
+	player.grimoire.append(personal_spell)
+	player.personal_spell_copies_received = 1
+
+	shuffle_with_rng(player.grimoire)
+
+	# draw_from_grimoire() uses pop_back(), so this is the top/first card.
+	var first_card: SpellCardState = player.grimoire.pop_back()
+	player.memories.append(first_card)
+
+	player.starting_grimoire_id = grimoire_id
+	player.starting_grimoire_name = str(
+		grimoire_data.get(
+			"name",
+			grimoire_id
+		)
+	)
+
+	if player_index < player_boards.size() \
+	and player_boards[player_index] != null:
+		player_boards[player_index].refresh()
+
+	print(
+		"Player ",
+		player_index + 1,
+		" chose ",
+		get_school_display_name(school_id),
+		" / ",
+		player.starting_grimoire_name,
+		" | Grimoire ",
+		player.grimoire.size(),
+		" | Memories ",
+		player.memories.size()
+	)
+
+	return true
+
+
+func begin_starting_school_setup() -> bool:
+	if starting_setup_complete:
+		return true
+
+	if players.size() > mage_database.get_mage_ids().size():
+		print(
+			"Starting setup requires ",
+			players.size(),
+			" Mages; only ",
+			mage_database.get_mage_ids().size(),
+			" are implemented."
+		)
+		return false
+
+	if players.size() > active_school_ids.size():
+		print(
+			"Starting setup requires ",
+			players.size(),
+			" implemented Schools; only ",
+			active_school_ids.size(),
+			" are active."
+		)
+		return false
+
+	starting_setup_order = get_play_order()
+
+	if starting_setup_order.is_empty():
+		return false
+
+	starting_setup_stage = "mage"
+	starting_setup_cursor = 0
+	current_phase = PHASE_SETUP
+
+	return advance_starting_school_setup()
+
+
+func advance_starting_school_setup() -> bool:
+	if starting_setup_complete:
+		return true
+
+	if waiting_for_player_input:
+		return true
+
+	while true:
+		if starting_setup_cursor >= starting_setup_order.size():
+			match starting_setup_stage:
+				"mage":
+					starting_setup_stage = "school"
+					starting_setup_cursor = 0
+					continue
+
+				"school":
+					starting_setup_stage = "grimoire"
+					starting_setup_cursor = 0
+					continue
+
+				"grimoire":
+					starting_setup_complete = true
+					current_phase = ""
+
+					print("")
+					print("==============================================")
+					print("            STARTING SETUP COMPLETE")
+					print("==============================================")
+					print("")
+
+					if game_flow_active:
+						return resolve_black_rose_phase()
+
+					return true
+
+				_:
+					return false
+
+		var player_index: int = starting_setup_order[
+			starting_setup_cursor
+		]
+		var player: PlayerState = players[
+			player_index
+		]
+
+		match starting_setup_stage:
+			"mage":
+				if player.mage_id != "":
+					starting_setup_cursor += 1
+					continue
+
+				var available_mages: Array = (
+					_available_starting_mages(
+						player_index
+					)
+				)
+
+				if available_mages.is_empty():
+					print(
+						"No legal Mage remains for Player ",
+						player_index + 1
+					)
+					return false
+
+				return request_player_input({
+					"type": "starting_mage_choice",
+					"phase": PHASE_SETUP,
+					"setup_stage": "mage",
+					"player_index": player_index,
+					"available_mages": available_mages
+				})
+
+			"school":
+				if player.school_id != "":
+					starting_setup_cursor += 1
+					continue
+
+				var available_schools: Array = (
+					_available_starting_schools(
+						player_index
+					)
+				)
+
+				if available_schools.is_empty():
+					print(
+						"No legal School remains for Player ",
+						player_index + 1
+					)
+					return false
+
+				return request_player_input({
+					"type": "starting_school_choice",
+					"phase": PHASE_SETUP,
+					"setup_stage": "school",
+					"player_index": player_index,
+					"mage_id": player.mage_id,
+					"available_schools": available_schools
+				})
+
+			"grimoire":
+				if player.starting_grimoire_id != "":
+					starting_setup_cursor += 1
+					continue
+
+				var options: Array = (
+					get_starting_grimoire_options(
+						player.school_id
+					)
+				)
+
+				if options.is_empty():
+					print(
+						"No Starting Grimoire data for ",
+						player.school_id
+					)
+					return false
+
+				return request_player_input({
+					"type": "starting_grimoire_choice",
+					"phase": PHASE_SETUP,
+					"setup_stage": "grimoire",
+					"player_index": player_index,
+					"mage_id": player.mage_id,
+					"school_id": player.school_id,
+					"school_name": get_school_display_name(
+						player.school_id
+					),
+					"options": options
+				})
+
+			_:
+				return false
+
+	# GDScript does not consider `while true` exhaustive for a typed return
+	# function, even though every branch above returns or continues.
+	return false
+
+
+func submit_starting_mage_choice(
+	player_index: int,
+	mage_id: String
+) -> bool:
+	if not waiting_for_player_input \
+	or str(
+		pending_input.get(
+			"type",
+			""
+		)
+	) != "starting_mage_choice":
+		return false
+
+	if starting_setup_stage != "mage":
+		return false
+
+	if player_index != int(
+		pending_input.get(
+			"player_index",
+			-1
+		)
+	):
+		return false
+
+	var legal_ids: Array[String] = []
+
+	for mage_value in pending_input.get(
+		"available_mages",
+		[]
+	):
+		if not mage_value is Dictionary:
+			continue
+
+		legal_ids.append(
+			str(
+				mage_value.get(
+					"id",
+					""
+				)
+			)
+		)
+
+	if not legal_ids.has(mage_id):
+		return false
+
+	if not assign_mage_to_player(
+		player_index,
+		mage_id
+	):
+		return false
+
+	clear_player_input()
+	starting_setup_cursor += 1
+
+	return advance_starting_school_setup()
+
+func submit_starting_school_choice(
+	player_index: int,
+	school_id: String
+) -> bool:
+	if not waiting_for_player_input \
+	or str(pending_input.get("type", "")) != "starting_school_choice":
+		return false
+
+	if player_index != int(
+		pending_input.get("player_index", -1)
+	):
+		return false
+
+	var legal_ids: Array[String] = []
+
+	for school_value in pending_input.get(
+		"available_schools",
+		[]
+	):
+		if not school_value is Dictionary:
+			continue
+
+		legal_ids.append(
+			str(school_value.get("id", ""))
+		)
+
+	if not legal_ids.has(school_id):
+		return false
+
+	players[player_index].school_id = school_id
+
+	clear_player_input()
+	starting_setup_cursor += 1
+
+	return advance_starting_school_setup()
+
+
+func submit_starting_grimoire_choice(
+	player_index: int,
+	grimoire_id: String
+) -> bool:
+	if not waiting_for_player_input \
+	or str(pending_input.get("type", "")) != "starting_grimoire_choice":
+		return false
+
+	if player_index != int(
+		pending_input.get("player_index", -1)
+	):
+		return false
+
+	var player: PlayerState = players[player_index]
+	var legal_ids: Array[String] = []
+
+	for option_value in pending_input.get("options", []):
+		if not option_value is Dictionary:
+			continue
+
+		legal_ids.append(
+			str(option_value.get("id", ""))
+		)
+
+	if not legal_ids.has(grimoire_id):
+		return false
+
+	if not build_starting_grimoire(
+		player_index,
+		player.school_id,
+		grimoire_id
+	):
+		return false
+
+	clear_player_input()
+	starting_setup_cursor += 1
+	return advance_starting_school_setup()
+
 # =============================================================================
 # WHOLE TURN FLOW
 # =============================================================================
+
+
+func _ensure_interactive_beta_started() -> void:
+	if waiting_for_player_input:
+		if beta_hud != null \
+		and not pending_input.is_empty():
+			beta_hud.present_pending_request(
+				pending_input
+			)
+		return
+
+	if game_has_ended:
+		return
+
+	if game_flow_active:
+		if current_phase == "" \
+		and resolution_stack.is_empty():
+			game_flow_active = false
+		else:
+			return
+
+	var started: bool = start_game_flow()
+
+	if not started \
+	and not waiting_for_player_input:
+		game_flow_active = false
+
+		print(
+			"ERROR: beta game flow could not start. ",
+			"Starting Grimoire DB schools: ",
+			school_specialization_database.keys(),
+			" | active schools: ",
+			active_school_ids
+		)
 
 func start_game_flow() -> bool:
 	if game_has_ended:
@@ -9942,7 +16679,23 @@ func start_game_flow() -> bool:
 		return false
 
 	game_flow_active = true
-	return resolve_black_rose_phase()
+
+	if not starting_setup_complete:
+		var setup_started: bool = begin_starting_school_setup()
+
+		if not setup_started \
+		and not waiting_for_player_input:
+			game_flow_active = false
+
+		return setup_started
+
+	var phase_started: bool = resolve_black_rose_phase()
+
+	if not phase_started \
+	and not waiting_for_player_input:
+		game_flow_active = false
+
+	return phase_started
 
 
 func stop_game_flow():
@@ -9999,6 +16752,15 @@ func assign_mage_to_player(
 
 	var player: PlayerState = players[player_index]
 
+	var previous_room_id: String = ""
+	var previous_room_coord: Vector2i = Vector2i.ZERO
+	var previous_in_cell: bool = true
+
+	if player.mage != null:
+		previous_room_id = player.mage.room_id
+		previous_room_coord = player.mage.room_coord
+		previous_in_cell = player.mage.in_cell
+
 	player.mage_id = str(data["id"])
 
 	player.mage = MageState.new(
@@ -10007,6 +16769,10 @@ func assign_mage_to_player(
 		int(data.get("strength", 0)),
 		int(data.get("speed", 0))
 	)
+
+	player.mage.room_id = previous_room_id
+	player.mage.room_coord = previous_room_coord
+	player.mage.in_cell = previous_in_cell
 
 	player.hand_limit = int(
 		data.get("hand_limit", 6)
@@ -10021,6 +16787,12 @@ func assign_mage_to_player(
 	)
 
 	player.personal_spell_copies_received = 0
+	player.school_id = ""
+	player.starting_grimoire_id = ""
+	player.starting_grimoire_name = ""
+
+	if player_index < player_boards.size() 	and player_boards[player_index] != null:
+		player_boards[player_index].refresh()
 
 	print(
 		"Player ",
@@ -10053,24 +16825,9 @@ func create_personal_spell_copy(
 		)
 		return null
 
-	var spell: SpellCardState = (
-		spell_database.spells[spell_id]
-	)
+	var spell: SpellCardState = spell_database.spells[spell_id]
+	return clone_spell_card(spell)
 
-	var copy := SpellCardState.new(
-		spell.id,
-		spell.card_name,
-		spell.school_id,
-		spell.light_side.duplicate(true),
-		spell.dark_side.duplicate(true),
-		spell.copies,
-		spell.personal
-	)
-
-	copy.forgotten = spell.forgotten
-	copy.instability = spell.instability
-
-	return copy
 func give_initial_personal_spell(
 	player_index: int
 ) -> bool:

@@ -1,0 +1,306 @@
+diff --git a/beta_hud.gd b/beta_hud.gd
+--- a/beta_hud.gd
++++ b/beta_hud.gd
+@@
+ class_name BetaHUD
+ extends CanvasLayer
+
++const HandOverlayScript = preload("res://hand_overlay.gd")
+
+ var game = null
+ var current_request: Dictionary = {}
+ var current_player_index: int = -1
+@@
+ var feedback_label: Label
+ var reserved_width: float = 340.0
++var hand_button: Button
++var hand_overlay = null
+
+ var generic_selection: Array = []
+ var school_draft: Array[String] = []
+@@
+ 	state_label = Label.new()
+ 	state_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+ 	root_box.add_child(state_label)
+
++	hand_button = Button.new()
++	hand_button.text = "HAND"
++	hand_button.custom_minimum_size = Vector2(0, 42)
++	hand_button.pressed.connect(
++		_open_hand_overlay
++	)
++	root_box.add_child(hand_button)
++
+ 	root_box.add_child(HSeparator.new())
+@@
+ 	var footer := Label.new()
+-	footer.text = "F10: show/hide beta panel"
++	footer.text = "H: hand   •   F10: show/hide beta panel"
+ 	footer.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+ 	footer.modulate = Color(0.75, 0.75, 0.75)
+ 	root_box.add_child(footer)
++
++	hand_overlay = HandOverlayScript.new()
++	overlay.add_child(hand_overlay)
++	hand_overlay.setup(game)
++	hand_overlay.preparation_confirmed.connect(
++		_on_hand_overlay_preparation_confirmed
++	)
+
+
+ func _unhandled_key_input(event: InputEvent) -> void:
+-	if event is InputEventKey \
+-	and event.pressed \
+-	and not event.echo \
+-	and event.keycode == KEY_F10:
++	if not event is InputEventKey:
++		return
++
++	if not event.pressed \
++	or event.echo:
++		return
++
++	if event.keycode == KEY_F10:
+ 		_toggle_panel()
++	elif event.keycode == KEY_H:
++		if hand_overlay != null \
++		and hand_overlay.visible:
++			hand_overlay.close_overlay(false)
++		else:
++			_open_hand_overlay()
+
+
+ func _toggle_panel() -> void:
+ 	if panel != null:
+ 		panel.visible = not panel.visible
++
++
++func _open_hand_overlay() -> void:
++	if hand_overlay == null \
++	or game == null:
++		return
++
++	if str(
++		current_request.get(
++			"type",
++			""
++		)
++	) == "preparation":
++		hand_overlay.open_preparation(
++			current_request
++		)
++		return
++
++	if current_player_index < 0 \
++	or current_player_index >= game.players.size():
++		feedback_label.text = (
++			"No player Hand is currently available."
++		)
++		return
++
++	hand_overlay.open_browse(
++		current_player_index
++	)
++
++
++func _on_hand_overlay_preparation_confirmed(
++	payload: Dictionary
++) -> void:
++	if str(
++		current_request.get(
++			"type",
++			""
++		)
++	) != "preparation":
++		return
++
++	_submit(payload)
+
+
+ func _on_phase_completed(_phase: String) -> void:
+ 	_refresh_header()
+@@
+ func _on_player_input_resolved(
+ 	_request: Dictionary
+ ) -> void:
++	if hand_overlay != null:
++		hand_overlay.close_overlay(true)
++
+ 	_refresh_header()
+@@
+ func _on_player_input_requested(
+ 	request: Dictionary
+ ) -> void:
++	if hand_overlay != null:
++		hand_overlay.close_overlay(true)
++
+ 	current_request = request.duplicate(true)
+ 	current_player_index = int(
+ 		current_request.get(
+@@
+ 	state_label.text = "  |  ".join(summary)
++
++	if hand_button != null:
++		var hand_count: int = 0
++
++		if viewer >= 0:
++			var player_states_for_hand: Array = state.get(
++				"players",
++				[]
++			)
++
++			if viewer < player_states_for_hand.size():
++				var hand_player_data: Dictionary = (
++					player_states_for_hand[
++						viewer
++					]
++				)
++
++				hand_count = int(
++					hand_player_data.get(
++						"hand_count",
++						0
++					)
++				)
++
++		hand_button.text = (
++			"HAND ("
++			+ str(hand_count)
++			+ ")"
++		)
++
++		hand_button.disabled = (
++			viewer < 0
++			or hand_count <= 0
++		)
+@@
+ func _render_preparation() -> void:
+-	_add_info(
+-		"Numbered Slots: "
+-		+ str(prep_ready_hand_indices.size())
+-		+ "/3\n"
+-		+ "Quick: "
+-		+ (
+-			_prep_hand_card_label(prep_quick_hand_index)
+-			if prep_quick_hand_index != -1
+-			else "-"
+-		)
+-	)
+-
+-	if not prep_ready_hand_indices.is_empty():
+-		for i in range(prep_ready_hand_indices.size()):
+-			_add_info(
+-				"Slot "
+-				+ str(i + 1)
+-				+ ": "
+-				+ _prep_hand_card_label(prep_ready_hand_indices[i])
+-				+ (
+-					" — Dark"
+-					if prep_ready_dark[i]
+-					else " — Light"
+-				)
+-			)
+-
+-	for card_value in current_request.get("hand", []):
+-		var card: Dictionary = card_value
+-		var hand_index: int = int(card.get("hand_index", -1))
+-		var card_id: String = str(card.get("id", ""))
+-		var card_name: String = str(card.get("name", card_id))
+-
+-		_add_section(
+-			card_name
+-			+ "  [Hand "
+-			+ str(hand_index + 1)
+-			+ "]"
+-		)
+-
+-		var row := HBoxContainer.new()
+-		content.add_child(row)
+-
+-		_add_small_button(
+-			row,
+-			"Ready L",
+-			Callable(self, "_prep_assign").bind(
+-				hand_index,
+-				false,
+-				false
+-			)
+-		)
+-
+-		_add_small_button(
+-			row,
+-			"Ready D",
+-			Callable(self, "_prep_assign").bind(
+-				hand_index,
+-				true,
+-				false
+-			)
+-		)
+-
+-		_add_small_button(
+-			row,
+-			"Quick L",
+-			Callable(self, "_prep_assign").bind(
+-				hand_index,
+-				false,
+-				true
+-			)
+-		)
+-
+-		_add_small_button(
+-			row,
+-			"Quick D",
+-			Callable(self, "_prep_assign").bind(
+-				hand_index,
+-				true,
+-				true
+-			)
+-		)
+-
+-		_add_small_button(
+-			row,
+-			"Remove",
+-			Callable(self, "_prep_remove").bind(hand_index)
+-		)
+-
+-	var controls := HBoxContainer.new()
+-	content.add_child(controls)
+-
+-	_add_small_button(
+-		controls,
+-		"Clear",
+-		Callable(self, "_prep_clear")
+-	)
+-
+-	var total_prepared: int = (
+-		prep_ready_hand_indices.size()
+-		+ (1 if prep_quick_hand_index != -1 else 0)
+-	)
+-
+-	_add_small_button(
+-		controls,
+-		"Confirm",
+-		Callable(self, "_submit_preparation"),
+-		total_prepared < int(current_request.get("min_spells", 2)) \
+-		or total_prepared > int(current_request.get("max_spells", 4))
+-	)
++	_add_info(
++		"Your Hand is open over the Lodge. "
++		+ "Choose Light/Dark and assign 2–4 Spells. "
++		+ "The overlay closes automatically after Confirm."
++	)
++
++	if hand_overlay != null:
++		hand_overlay.open_preparation(
++			current_request
++		)
+diff --git a/player_board.gd b/player_board.gd
+--- a/player_board.gd
++++ b/player_board.gd
+@@
+-	# Temporaneo finché non implementiamo la mano.
+-	$HandInfo.text = "Hand: 0"
++	$HandInfo.text = (
++		"Hand: "
++		+ str(player_state.hand.size())
++	)

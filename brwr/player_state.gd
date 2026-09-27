@@ -24,6 +24,8 @@ var active_spells: Array[ActiveSpellState] = []
 var personal_spell_copies_received: int = 0
 var mage_id: String = ""
 var school_id: String = ""
+var starting_grimoire_id: String = ""
+var starting_grimoire_name: String = ""
 
 var mage: MageState
 

@@ -47,22 +47,21 @@
     "copies": 3,
     "instability": false,
     "light": {
-    "type": "contingency",
-    "element": "all",
-    "target": "room",
-    "range": "*",
-    "effects": [
-      {
-        "type": "activate_room_from_owned_evocation",
-        "evocation_archetype": "construct",
-        "distance": 0,
-        "excluded_rooms": [
-          "throne",
-          "black_rose"
-        ]
-      }
-    ]
-  },
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "pain",
+          "amount": 1
+        }
+      ]
+    },
     "dark": {
       "type": "combat",
       "element": "profane",
@@ -74,7 +73,7 @@
           "amount": 1
         },
         {
-          "type": "damage_per_black_rose_damage",
+          "type": "damage_per_self_damage",
           "step": 2,
           "damage_per_step": 1,
           "max": 3
@@ -122,7 +121,8 @@
         {
           "type": "remove_target_evocation"
         }
-      ]
+      ],
+      "target_owner": "self"
     }
   },
   {
@@ -882,457 +882,557 @@
     }
   },
   {
-  "id": "soul_transfer",
-  "name": "Soul Transfer",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "contingency",
-    "element": "all",
-    "target": "room",
-    "range": "*",
-
-    "effects": [
-      {
-        "type": "activate_room_from_owned_evocation",
-        "evocation_archetype": "construct",
-        "distance": 0,
-        "allow_used_room": true,
-        "excluded_rooms": [
-          "throne",
-          "black_rose"
-        ]
-      }
-    ]
-  },
-
-  "dark": {
-  "type": "contingency",
-  "element": "all",
-  "target": "room",
-  "range": 1,
-  "effects": [
-    {
-      "type": "remove_owned_evocation",
-      "evocation_archetype": "construct"
-    },
-    {
-      "type": "summon_evocation_from_deck",
-      "max_health": 3
-    }
-  ]
-}
-},
-{
-  "id": "liquid_fire",
-  "name": "Liquid Fire",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "element": "fire",
-    "target": "evocation",
-    "range": "*",
-
-    "effects": [
-      {
-        "type": "remove_owned_evocation_and_damage_around",
-        "damage": 2,
-        "distance": 1
-      }
-    ],
-
-    "enhancement": {
-      "element": "water",
+    "id": "soul_transfer",
+    "name": "Soul Transfer",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "room",
+      "range": "*",
       "effects": [
         {
-          "type": "damage_models_damaged_by_effect",
-          "amount": 1
-        }
-      ]
-    }
-  },
-
-  "dark": {
-    "type": "combat",
-    "element": "fire",
-    "target": "room",
-    "range": 0,
-
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 1
-      },
-      {
-        "type": "summon_evocation",
-        "evocation_id": "nigredo",
-        "room": "target_room"
-      }
-    ],
-
-    "enhancement": {
-      "element": "air",
-      "effects": [
-        {
-          "type": "activate_owned_evocation",
+          "type": "activate_room_from_owned_evocation",
           "evocation_archetype": "construct",
-          "strength_bonus": 1
+          "distance": 0,
+          "allow_used_room": true,
+          "excluded_rooms": [
+            "throne",
+            "black_rose"
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "all",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "remove_owned_evocation",
+          "evocation_archetype": "construct"
+        },
+        {
+          "type": "summon_evocation_from_deck",
+          "max_health": 3
         }
       ]
     }
-  }
-},
-{
-  "id": "fountain_of_the_three",
-  "name": "Fountain of the Three",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-  "type": "contingency",
-  "element": "earth",
-  "target": "evocation",
-  "range": 1,
-  "effects": [
-    {
-      "type": "remove_evocation_with_max_health",
-      "max_health": 3
-    },
-    {
-      "type": "summon_evocation_at_removed_evocation",
-      "evocation_id": "nigredo"
-    }
-  ],
-  "enhancement": {
-    "elements": [
-      "water",
-      "water"
-    ],
-    "effects": [
-      {
-        "type": "activate_owned_evocation",
-        "evocation_archetype": "construct",
-        "strength_bonus": 1
-      }
-    ]
-  }
-},
-
-  "dark": {
-  "type": "contingency",
-  "element": "earth",
-  "target": "room",
-  "range": "*",
-  "effects": [
-    {
-      "type": "fountain_construct_or_nigredo"
-    }
-  ],
-  "enhancement": {
-    "element": "water",
-    "effects": [
-      {
-        "type": "place_instability",
-        "amount": 1
-      }
-    ]
-  }
-}
-},
-{
-  "id": "purifying_aludel",
-  "name": "Purifying Aludel",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "contingency",
-    "element": "air",
-    "target": "evocation",
-    "range": "*",
-    "effects": [
-      {
-        "type": "heal_target_evocation",
-        "amount": 3,
-        "owner": "caster"
+  },
+  {
+    "id": "liquid_fire",
+    "name": "Liquid Fire",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "remove_owned_evocation_and_damage_around",
+          "damage": 2,
+          "distance": 1
+        }
+      ],
+      "enhancement": {
+        "element": "water",
+        "effects": [
+          {
+            "type": "damage_models_damaged_by_effect",
+            "amount": 1
+          }
+        ]
       },
-      {
-        "type": "activate_target_evocation"
-      }
-    ],
-    "enhancement": {
-      "elements": [
-        "air",
-        "earth"
-      ],
-      "effects": [
-        {
-          "type": "next_activation_strength_bonus",
-          "amount": 2
-        }
-      ]
+      "target_owner": "self"
     },
-    "resolution_order": [
-      "enhancement",
-      "base"
-    ]
-  },
-
-  "dark": {
-    "type": "contingency",
-    "element": "air",
-    "target": "evocation",
-    "range": "*",
-    "effects": [
-      {
-        "type": "activate_target_evocation_under_control"
-      }
-    ]
-  }
-},
-{
-  "id": "albify",
-  "name": "Albify",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "element": "water",
-    "target": "mage",
-    "range": 1,
-
-    "effects": [
-      {
-        "type": "convert_damage",
-        "amount": 4
-      }
-    ],
-
-    "enhancement": {
-      "requires": [
-        "air",
-        "air"
-      ],
-      "effects": [
-        {
-          "type": "lose_power",
-          "amount": 2
-        }
-      ]
-    },
-
-    "resolution_order": [
-      "enhancement",
-      "base"
-    ]
-  },
-
-  "dark": {
-    "type": "combat",
-    "element": "water",
-    "target": "room",
-    "range": 2,
-
-    "effects": [
-      {
-        "type": "convert_damage",
-        "amount": 3
-      }
-    ],
-
-    "enhancement": {
-      "requires": [
-        "fire"
-      ],
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 0,
       "effects": [
         {
           "type": "damage",
           "amount": 1
+        },
+        {
+          "type": "summon_evocation",
+          "evocation_id": "nigredo",
+          "room": "target_room"
+        }
+      ],
+      "enhancement": {
+        "element": "air",
+        "effects": [
+          {
+            "type": "activate_owned_evocation",
+            "evocation_archetype": "construct",
+            "strength_bonus": 1
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "fountain_of_the_three",
+    "name": "Fountain of the Three",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "evocation",
+      "range": 1,
+      "effects": [
+        {
+          "type": "remove_evocation_with_max_health",
+          "max_health": 3
+        },
+        {
+          "type": "summon_evocation_at_removed_evocation",
+          "evocation_id": "nigredo"
+        }
+      ],
+      "enhancement": {
+        "elements": [
+          "water",
+          "water"
+        ],
+        "effects": [
+          {
+            "type": "activate_owned_evocation",
+            "evocation_archetype": "construct",
+            "strength_bonus": 1
+          }
+        ]
+      }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "fountain_construct_or_nigredo"
+        }
+      ],
+      "enhancement": {
+        "element": "water",
+        "effects": [
+          {
+            "type": "place_instability",
+            "amount": 1
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "purifying_aludel",
+    "name": "Purifying Aludel",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "air",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "heal_target_evocation",
+          "amount": 3,
+          "owner": "caster"
+        },
+        {
+          "type": "activate_target_evocation"
+        }
+      ],
+      "enhancement": {
+        "elements": [
+          "water",
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "next_activation_strength_bonus",
+            "amount": 2
+          }
+        ]
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ],
+      "target_owner": "self"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "air",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "activate_target_evocation_under_control"
+        }
+      ]
+    }
+  },
+  {
+    "id": "albify",
+    "name": "Albify",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "water",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "convert_damage",
+          "amount": 4
+        }
+      ],
+      "enhancement": {
+        "requires": [
+          "air",
+          "air"
+        ],
+        "effects": [
+          {
+            "type": "lose_power",
+            "amount": 2
+          }
+        ]
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "convert_damage",
+          "amount": 3
+        }
+      ],
+      "enhancement": {
+        "requires": [
+          "fire"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1
+          }
+        ]
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    }
+  },
+  {
+    "id": "silver_of_the_sages",
+    "name": "Silver of the Sages",
+    "school": "alchemy",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "protection",
+      "element": "all",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "caster_about_to_suffer_damage"
+      },
+      "effects": [
+        {
+          "type": "ignore_trigger_damage",
+          "amount": 2
+        },
+        {
+          "type": "activate_owned_evocation_then_black_rose_damage",
+          "amount": 1
         }
       ]
     },
-
-    "resolution_order": [
-      "enhancement",
-      "base"
-    ]
-  }
-},
-{
-  "id": "silver_of_the_sages",
-  "name": "Silver of the Sages",
-  "school": "alchemy",
-  "copies": 3,
-  "instability": false,
-
-  "light": {
-    "type": "protection",
-    "element": "all",
-    "target": "mage",
-    "range": "*",
-    "trigger": {
-      "type": "caster_about_to_suffer_damage"
-    },
-    "effects": [
-      {
-        "type": "ignore_trigger_damage",
-        "amount": 2
+    "dark": {
+      "type": "protection",
+      "element": "all",
+      "target": "mage",
+      "range": "*",
+      "trigger": {
+        "type": "caster_is_defeated"
       },
-      {
-        "type": "activate_owned_evocation_then_black_rose_damage",
-        "amount": 1
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "protection",
-    "element": "all",
-    "target": "mage",
-    "range": "*",
-    "trigger": {
-      "type": "caster_is_defeated"
-    },
-    "effects": [
-      {
-        "type": "gain_power",
-        "amount": 1
-      },
-      {
-        "type": "silver_defeat_choice"
-      }
-    ]
-  }
-},
-{
-  "id": "cube_of_lamentations",
-  "name": "Cube of Lamentations",
-  "school": "",
-  "copies": 3,
-  "personal": true,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "element": "profane",
-    "target": "model",
-    "range": 2,
-    "effects": [
-      {
-        "type": "damage",
-        "amount": 2
-      },
-      {
-        "type": "summon_evocation",
-        "evocation_id": "succubus"
-      },
-      {
-        "type": "pain",
-        "amount": 2
-      },
-      {
-        "type": "conditional",
-        "condition": "caster_defeated_by_last_black_rose_damage",
-        "effects": [
-          {
-            "type": "activate_summoned_evocation",
-            "strength_bonus": 2
-          }
-        ]
-      }
-    ]
-  },
-
-  "dark": {
-    "type": "combat",
-    "element": "profane",
-    "target": "model",
-    "range": 2,
-    "effects": [
-      {
-        "type": "pain",
-        "amount": 2
-      },
-      {
-        "type": "conditional",
-        "condition": "caster_defeated_by_last_black_rose_damage",
-        "effects": [
-          {
-            "type": "gain_power",
-            "amount": 2
-          }
-        ],
-        "else_effects": [
-          {
-            "type": "damage",
-            "amount": 3
-          }
-        ]
-      }
-    ]
-  }
-},
-{
-  "id": "emet_met",
-  "name": "Emet-Met",
-  "school": "",
-  "copies": 3,
-  "personal": true,
-  "instability": false,
-
-  "light": {
-    "type": "combat",
-    "element": "earth",
-    "target": "room",
-    "range": 0,
-    "effects": [
-      {
-        "type": "summon_evocation",
-        "evocation_id": "nigredo"
-      },
-      {
-        "type": "activate_owned_evocation",
-        "evocation_archetype": "construct",
-        "strength_bonus": 1,
-        "speed_bonus": 1
-      }
-    ]
-  },
-
-  "dark": {
-  "type": "combat",
-  "element": "earth",
-  "target": "evocation",
-  "range": "*",
-  "target_owner": "self",
-  "target_archetype": "construct",
-
-  "effects": [
-    {
-      "type": "set_target_room_from_target_evocation"
-    },
-    {
-      "type": "damage",
-      "amount": 2,
-      "target": "room"
-    },
-    {
-      "type": "place_instability",
-      "amount": 3
-    },
-    {
-      "type": "remove_target_evocation"
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1
+        },
+        {
+          "type": "silver_defeat_choice"
+        }
+      ]
     }
-  ]
-}
-}
+  },
+  {
+    "id": "cube_of_lamentations",
+    "name": "Cube of Lamentations",
+    "school": "",
+    "copies": 3,
+    "personal": true,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "summon_evocation",
+          "evocation_id": "succubus"
+        },
+        {
+          "type": "pain",
+          "amount": 2
+        },
+        {
+          "type": "conditional",
+          "condition": "caster_defeated_by_last_black_rose_damage",
+          "effects": [
+            {
+              "type": "activate_summoned_evocation",
+              "strength_bonus": 2
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "pain",
+          "amount": 2
+        },
+        {
+          "type": "conditional",
+          "condition": "caster_defeated_by_last_black_rose_damage",
+          "effects": [
+            {
+              "type": "gain_power",
+              "amount": 2
+            }
+          ],
+          "else_effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "emet_met",
+    "name": "Emet-Met",
+    "school": "",
+    "copies": 3,
+    "personal": true,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "earth",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "nigredo"
+        },
+        {
+          "type": "activate_owned_evocation",
+          "evocation_archetype": "construct",
+          "strength_bonus": 1,
+          "speed_bonus": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "evocation",
+      "range": "*",
+      "target_owner": "self",
+      "target_archetype": "construct",
+      "effects": [
+        {
+          "type": "set_target_room_from_target_evocation"
+        },
+        {
+          "type": "damage",
+          "amount": 2,
+          "target": "room"
+        },
+        {
+          "type": "place_instability",
+          "amount": 3
+        },
+        {
+          "type": "remove_target_evocation"
+        }
+      ]
+    }
+  },
+  {
+    "id": "arcane_barrage",
+    "name": "Arcane Barrage",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "earth",
+      "target": "model",
+      "range": "*",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 6
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "place_instability",
+          "amount": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "killer_fog",
+    "name": "Killer Fog",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "air",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 4
+        },
+        {
+          "type": "convert_damage_each_other_mage",
+          "amount": 2
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "convert_damage_each_other_mage",
+          "amount": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "supreme_fireball",
+    "name": "Supreme Fireball",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3,
+          "suppress_triggers": [
+            "combat",
+            "contingency",
+            "trap",
+            "protection"
+          ]
+        },
+        {
+          "type": "damage_within_distance",
+          "amount": 2,
+          "distance": 1,
+          "suppress_triggers": [
+            "combat",
+            "contingency",
+            "trap",
+            "protection"
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 5
+        },
+        {
+          "type": "place_instability_per_damaged_model",
+          "amount_per_model": 2,
+          "max": 8
+        }
+      ]
+    }
+  }
 ]

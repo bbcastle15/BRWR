@@ -681,6 +681,73 @@ func _resolve_damage(
 
 
 	# =====================================================
+	# AREA / ROOM TARGET
+	# =====================================================
+
+	if target_type == "room" or target_type == "choose_room":
+
+		var target_room_id: String = _target_room_id(
+			context
+		)
+
+		if target_room_id == "":
+			print("Room damage: target Room missing")
+			return false
+
+		# The Mage activating the Room resolves this Effect. Damage every Model
+		# in the target Room, while normal own-Effect immunity still applies.
+		for target_player_index in range(
+			game.players.size()
+		):
+			var target_mage = game.players[
+				target_player_index
+			].mage
+
+			if target_mage == null \
+			or target_mage.in_cell \
+			or target_mage.room_id != target_room_id:
+				continue
+
+			if target_player_index == player_index:
+				continue
+
+			game.deal_damage(
+				player_index,
+				target_player_index,
+				amount,
+				"room"
+			)
+
+		for owner_id in range(game.players.size()):
+			var snapshot = game.players[
+				owner_id
+			].evocations.duplicate()
+
+			for evocation in snapshot:
+				if evocation == null \
+				or evocation.is_defeated() \
+				or evocation.room_id != target_room_id:
+					continue
+
+				if game.get_evocation_controller_id(
+					evocation
+				) == player_index:
+					continue
+
+				game.deal_damage_to_evocation(
+					player_index,
+					evocation,
+					amount,
+					[],
+					"room",
+					"mage",
+					null
+				)
+
+		return true
+
+
+	# =====================================================
 	# GENERIC MODEL TARGET
 	#
 	# Usato ad esempio da Sacrificial Altar:

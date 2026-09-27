@@ -166,6 +166,52 @@ func process_event(
 	)
 
 
+
+func process_game_event(
+	game,
+	event: GameEvent
+) -> void:
+	if game == null or event == null:
+		return
+
+	var base_event: Dictionary = {
+		"type": event.event_type,
+		"source_kind": "game_event",
+		"source_model_type": event.source_model_type,
+		"source_player_index": event.source_player_index,
+		"target_model_type": event.target_model_type,
+		"target_player_index": event.target_player_index,
+		"target_evocation": event.target_evocation,
+		"source_room_id": event.source_room_id,
+		"target_room_id": event.target_room_id,
+		"amount": event.amount,
+		"action_type": event.action_type
+	}
+
+	if event.event_type == "damage_inflicted":
+		if event.source_player_index < 0:
+			return
+
+		base_event["player_index"] = event.source_player_index
+		process_event(
+			game,
+			base_event
+		)
+		return
+
+	if event.event_type == "mage_defeated":
+		# Master of Death can complete for a Mage who did not inflict the final
+		# point of Damage, so every player gets to evaluate the defeated Mage.
+		for player_index in range(game.players.size()):
+			var candidate: Dictionary = base_event.duplicate(true)
+			candidate["player_index"] = player_index
+			process_event(
+				game,
+				candidate
+			)
+
+
+
 # =========================================================
 # TASK MATCHING
 # =========================================================
@@ -187,7 +233,38 @@ func _task_matches(
 		event.get("type", "")
 	)
 
-	if required_trigger == "" \
+	if required_trigger == "damage_or_heal_evocation":
+		var is_damage: bool = (
+			event_type == "damage_inflicted"
+			and str(
+				event.get(
+					"target_model_type",
+					""
+				)
+			) == "evocation"
+			and int(event.get("amount", 0)) > 0
+		)
+
+		var is_heal: bool = (
+			event_type == "effect_resolved"
+			and str(
+				event.get(
+					"effect_target_model_type",
+					""
+				)
+			) == "evocation"
+			and int(
+				event.get(
+					"damage_healed",
+					0
+				)
+			) > 0
+		)
+
+		if not is_damage and not is_heal:
+			return false
+
+	elif required_trigger == "" \
 	or event_type != required_trigger:
 		return false
 
@@ -204,7 +281,6 @@ func _task_matches(
 
 	# -----------------------------------------------------
 	# SPELL TYPE
-	# Combat / Contingency / Trap / Protection.
 	# -----------------------------------------------------
 
 	if task.has("spell_type"):
@@ -214,20 +290,21 @@ func _task_matches(
 
 
 	# -----------------------------------------------------
-	# ROOM COLOR
+	# SPELL ELEMENT(S)
+	# All-Elements can satisfy any requested Element.
 	# -----------------------------------------------------
 
-	if task.has("room_color"):
-		if str(event.get("room_color", "")) \
-		!= str(task.get("room_color", "")):
-			return false
+	if task.has("element") or task.has("elements"):
+		var required_elements: Array[String] = []
 
+		if task.has("elements"):
+			for value in task.get("elements", []):
+				required_elements.append(str(value))
+		else:
+			required_elements.append(
+				str(task.get("element", ""))
+			)
 
-	# -----------------------------------------------------
-	# LEGACY SINGLE ELEMENT MATCH
-	# -----------------------------------------------------
-
-	if task.has("element"):
 		var actual_element: String = str(
 			event.get(
 				"spell_element",
@@ -235,13 +312,58 @@ func _task_matches(
 			)
 		)
 
-		if actual_element != str(task.get("element", "")):
+		if actual_element != "all" \
+		and not actual_element in required_elements:
+			return false
+
+
+	# -----------------------------------------------------
+	# ROOM COLOR / ROOM ID
+	# -----------------------------------------------------
+
+	if task.has("room_color"):
+		if str(event.get("room_color", "")) \
+		!= str(task.get("room_color", "")):
+			return false
+
+	if task.has("room_colors"):
+		var allowed_colors: Array[String] = []
+
+		for value in task.get("room_colors", []):
+			allowed_colors.append(str(value))
+
+		if not str(
+			event.get(
+				"room_color",
+				""
+			)
+		) in allowed_colors:
+			return false
+
+	if task.has("room_id"):
+		if str(event.get("room_id", "")) \
+		!= str(task.get("room_id", "")):
+			return false
+
+	if task.has("in_room_id"):
+		var caster_room_id: String = str(
+			event.get(
+				"caster_room_id",
+				event.get("source_room_id", "")
+			)
+		)
+
+		if caster_room_id != str(
+			task.get(
+				"in_room_id",
+				""
+			)
+		):
 			return false
 
 
 	# -----------------------------------------------------
 	# KEYWORD
-	# Example: Summoner Wizard -> Summon keyword.
 	# -----------------------------------------------------
 
 	if task.has("keyword"):
@@ -261,16 +383,84 @@ func _task_matches(
 
 
 	# -----------------------------------------------------
-	# EXTRA CONDITION
+	# GENERIC MINIMUM
+	# -----------------------------------------------------
+
+	if task.has("minimum") \
+	and event_type == "damage_inflicted":
+		if int(event.get("amount", 0)) < int(
+			task.get(
+				"minimum",
+				1
+			)
+		):
+			return false
+
+
+	# -----------------------------------------------------
+	# EXTRA CONDITIONS
 	# -----------------------------------------------------
 
 	if task.has("condition"):
-		var condition: String = str(task.get("condition", ""))
+		var condition: String = str(
+			task.get(
+				"condition",
+				""
+			)
+		)
 
 		match condition:
 			"places_instability":
-				var minimum: int = int(task.get("minimum", 1))
-				if int(event.get("instability_placed", 0)) < minimum:
+				var minimum: int = int(
+					task.get(
+						"minimum",
+						1
+					)
+				)
+
+				if int(
+					event.get(
+						"instability_placed",
+						0
+					)
+				) < minimum:
+					return false
+
+			"places_or_converts_instability_in_room_color":
+				var total_changed: int = (
+					int(
+						event.get(
+							"instability_placed",
+							0
+						)
+					)
+					+ int(
+						event.get(
+							"instability_converted",
+							0
+						)
+					)
+				)
+
+				if total_changed < int(
+					task.get(
+						"minimum",
+						1
+					)
+				):
+					return false
+
+				if str(
+					event.get(
+						"effect_room_color",
+						""
+					)
+				) != str(
+					task.get(
+						"room_color",
+						""
+					)
+				):
 					return false
 
 			"revealed_spell_elements":
@@ -283,13 +473,33 @@ func _task_matches(
 					return false
 
 			"revealed_spell_symbols":
-				# Backward compatibility with the old test JSON.
 				if not _check_revealed_spell_symbols_legacy(
 					game,
 					player_index,
 					task
 				):
 					return false
+
+			"defeated_mage_has_your_damage":
+				var target_index: int = int(
+					event.get(
+						"target_player_index",
+						-1
+					)
+				)
+
+				if target_index < 0 \
+				or target_index >= game.players.size():
+					return false
+
+				if not player_index in game.players[
+					target_index
+				].mage.damage_cubes:
+					return false
+
+			"damage_or_heal_evocation":
+				# Kept for compatibility with alternate JSON encodings.
+				pass
 
 			_:
 				print(
@@ -300,6 +510,7 @@ func _task_matches(
 
 
 	return true
+
 
 
 # =========================================================
@@ -393,6 +604,31 @@ func _complete_quest(
 		" completed Quest: ",
 		quest.get_name()
 	)
+
+
+
+func complete_active_quest(
+	game,
+	player_index: int,
+	quest: QuestState
+) -> bool:
+	if not _valid_player(game, player_index):
+		return false
+
+	if quest == null \
+	or not quest in game.players[
+		player_index
+	].active_quests:
+		return false
+
+	_complete_quest(
+		game,
+		player_index,
+		quest
+	)
+
+	return true
+
 
 
 # =========================================================

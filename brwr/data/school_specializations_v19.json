@@ -1,0 +1,60 @@
+{
+  "agony": {
+    "name": "Agony",
+    "starting_grimoires": [
+      {
+        "id": "sadistic_fury",
+        "name": "Sadistic Fury",
+        "spell_ids": [
+          "shared_torture",
+          "grim_torment",
+          "cross_and_delight",
+          "torment",
+          "visceral_fire",
+          "peak_of_agony"
+        ]
+      },
+      {
+        "id": "algolagnia",
+        "name": "Algolagnia",
+        "spell_ids": [
+          "pain_mark",
+          "master_of_pleasure",
+          "liquefy_the_pain",
+          "submission",
+          "ineluctable_pain",
+          "heart_of_ice"
+        ]
+      }
+    ]
+  },
+  "alchemy": {
+    "name": "Alchemy",
+    "starting_grimoires": [
+      {
+        "id": "scourge",
+        "name": "Scourge",
+        "spell_ids": [
+          "azoth_bomb",
+          "viatorium_spagyricum",
+          "deflagrate",
+          "athanor_eruption",
+          "marbling",
+          "stone_phoenix"
+        ]
+      },
+      {
+        "id": "auromancer",
+        "name": "Auromancer",
+        "spell_ids": [
+          "soul_transfer",
+          "liquid_fire",
+          "fountain_of_the_three",
+          "purifying_aludel",
+          "albify",
+          "silver_of_the_sages"
+        ]
+      }
+    ]
+  }
+}
