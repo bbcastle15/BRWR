@@ -114,6 +114,7 @@ func refresh_event_slots():
 
 	update_event_deck_label()
 	update_event_discard_label()
+	show_event_in_slot($EventDiscardSlot, game.event_discard.back() if not game.event_discard.is_empty() else null)
 
 
 # =========================================================
@@ -121,9 +122,7 @@ func refresh_event_slots():
 #
 # EventCardState non è CardState.
 #
-# Per ora mostriamo il nome dell'Event.
-# La futura grafica delle Event Card potrà essere
-# implementata senza modificare lo stato della partita.
+# Card art and enlarged inspection project the existing EventCardState.
 # =========================================================
 
 func show_event_in_slot(
@@ -137,38 +136,18 @@ func show_event_in_slot(
 
 
 	if old_view != null:
-		old_view.queue_free()
+		old_view.free()
 
 
 	if event == null:
 		return
 
 
-	var label = Label.new()
-
-	label.name = "EventView"
-
-	label.position = Vector2.ZERO
-	label.size = SMALL_CARD_SIZE
-
-	label.text = event.event_name
-
-	label.horizontal_alignment = (
-		HORIZONTAL_ALIGNMENT_CENTER
-	)
-
-	label.vertical_alignment = (
-		VERTICAL_ALIGNMENT_CENTER
-	)
-
-	label.autowrap_mode = (
-		TextServer.AUTOWRAP_WORD_SMART
-	)
-
-
-	slot.add_child(
-		label
-	)
+	var game = get_parent()
+	var view = game.ReferenceCardPreview.make_card("events", event.id, event.event_name,
+		SMALL_CARD_SIZE, game.open_event_card.bind(event), true)
+	view.name = "EventView"
+	slot.add_child(view)
 
 
 # =========================================================

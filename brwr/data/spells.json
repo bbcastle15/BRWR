@@ -45,7 +45,7 @@
     "name": "Grim Torment",
     "school": "agony",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "profane",
@@ -86,7 +86,7 @@
     "name": "Cross and Delight",
     "school": "agony",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "water",
@@ -172,7 +172,7 @@
     "name": "Visceral Fire",
     "school": "agony",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "fire",
@@ -265,7 +265,7 @@
     "name": "Pain Mark",
     "school": "agony",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "profane",
@@ -288,8 +288,7 @@
     "dark": {
       "type": "combat",
       "element": "profane",
-      "target": "mage",
-      "range": "*",
+      "target": "self",
       "trigger": {
         "type": "caster_about_to_suffer_damage"
       },
@@ -440,7 +439,7 @@
     "name": "Ineluctable Pain",
     "school": "agony",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "contingency",
       "element": "all",
@@ -459,7 +458,7 @@
     "dark": {
       "type": "contingency",
       "element": "all",
-      "target": "mage",
+      "target": "self",
       "range": "*",
       "trigger": {
         "type": "caster_suffers_black_rose_damage"
@@ -580,7 +579,7 @@
     "name": "Viatorium Spagyricum",
     "school": "alchemy",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "water",
@@ -611,7 +610,7 @@
     },
     "dark": {
       "type": "combat",
-      "element": "air",
+      "element": "water",
       "target": "model",
       "range": 2,
       "enhancement": {
@@ -890,8 +889,7 @@
     "light": {
       "type": "contingency",
       "element": "all",
-      "target": "room",
-      "range": "*",
+      "target": "special",
       "effects": [
         {
           "type": "activate_room_from_owned_evocation",
@@ -901,7 +899,8 @@
           "excluded_rooms": [
             "throne",
             "black_rose"
-          ]
+          ],
+          "target_owner": "any"
         }
       ]
     },
@@ -927,7 +926,7 @@
     "name": "Liquid Fire",
     "school": "alchemy",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "fire",
@@ -968,12 +967,12 @@
         }
       ],
       "enhancement": {
-        "element": "air",
+        "element": "earth",
         "effects": [
           {
             "type": "activate_owned_evocation",
             "evocation_archetype": "construct",
-            "strength_bonus": 1
+            "speed_bonus": 1
           }
         ]
       }
@@ -1040,7 +1039,7 @@
     "name": "Purifying Aludel",
     "school": "alchemy",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "contingency",
       "element": "air",
@@ -1091,7 +1090,7 @@
     "name": "Albify",
     "school": "alchemy",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "combat",
       "element": "water",
@@ -1153,7 +1152,7 @@
     "name": "Silver of the Sages",
     "school": "alchemy",
     "copies": 3,
-    "instability": false,
+    "instability": true,
     "light": {
       "type": "protection",
       "element": "all",
@@ -1202,7 +1201,7 @@
     "light": {
       "type": "combat",
       "element": "profane",
-      "target": "model",
+      "target": "room",
       "range": 2,
       "effects": [
         {
@@ -1232,7 +1231,7 @@
     "dark": {
       "type": "combat",
       "element": "profane",
-      "target": "model",
+      "target": "room",
       "range": 2,
       "effects": [
         {

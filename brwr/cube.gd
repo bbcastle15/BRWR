@@ -13,9 +13,11 @@ const CUBE_SIZE = Vector2(14, 14)
 
 
 func _ready():
+	set_anchors_preset(Control.PRESET_TOP_LEFT)
 	custom_minimum_size = CUBE_SIZE
 	size = CUBE_SIZE
 	
+	$Body.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	$Body.position = Vector2.ZERO
 	$Body.size = CUBE_SIZE
 	$Body.color = cube_color

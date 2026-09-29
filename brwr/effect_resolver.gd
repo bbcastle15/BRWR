@@ -1681,6 +1681,7 @@ func _resolve_return_revealed_spell_to_hand(
 
 	player.revealed_spells.erase(selected)
 	player.add_spell_to_hand(selected.spell)
+	game._clear_player_board_spell_by_spell(caster_id, selected.spell)
 
 	print(
 		"Player ", caster_id + 1,
@@ -3377,10 +3378,15 @@ func _resolve_activation_effect(
 	if evocation == null:
 		return false
 
+	var activation_context: Dictionary = context
+	if effect.has("speed_bonus"):
+		activation_context = context.duplicate(true)
+		activation_context["evocation_activation_speed_bonus"] = int(effect["speed_bonus"])
+
 	var success = _activate_evocation(
 		evocation,
 		controller_id,
-		context,
+		activation_context,
 		bonus
 	)
 
@@ -3892,23 +3898,11 @@ func _resolve_activate_room_from_evocation(
 	if archetype == "":
 		return false
 
-	var evocation = _select_evocation(
-		game,
-		null,
-		{
-			"owner_id": caster_id,
-			"archetype": archetype,
-			"room_id": room_id,
-			"alive": true,
-			"in_play": true
-		},
-		true
-	)
-
-	if evocation == null:
+	if not game._spell_room_target_allowed(caster_id, {"effects": [effect]}, room_id):
 		return false
 
-	return game.activate_room(caster_id, room_id, true)
+	return game.activate_room(caster_id, room_id, bool(effect.get("allow_used_room", false)),
+		{"effect_origin_room_id": room_id})
 
 
 # =============================================================================

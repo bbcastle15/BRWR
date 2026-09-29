@@ -9,7 +9,12 @@ static func spell_texture_path(spell_id: String) -> String:
 	if spell_id.is_empty():
 		return ""
 
-	return SPELL_DIR + spell_id + ".png"
+	var path := SPELL_DIR + spell_id + ".png"
+	if not ResourceLoader.exists(path):
+		var hyphenated := SPELL_DIR + spell_id.replace("_", "-") + ".png"
+		if ResourceLoader.exists(hyphenated):
+			return hyphenated
+	return path
 
 
 static func load_spell_texture(spell_id: String) -> Texture2D:

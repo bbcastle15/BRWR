@@ -8,6 +8,7 @@ var archetype: String = ""
 
 var owner_id: int = -1
 var controller_id: int = -1
+var board_number: int = 0
 
 var health: int = 0
 var strength: int = 0
@@ -41,6 +42,10 @@ func _init(
 
 func get_damage() -> int:
 	return damage_cubes.size()
+
+
+func get_display_name() -> String:
+	return evocation_name + (" #" + str(board_number) if board_number > 0 else "")
 
 
 func get_remaining_health() -> int:

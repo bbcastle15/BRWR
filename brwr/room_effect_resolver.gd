@@ -169,16 +169,10 @@ func resolve_effect(
 				context
 			)
 		"draw_forgotten":
-			return _placeholder(
-				effect_type,
-				context
-			)
+			return _resolve_draw_forgotten(effect, context)
 
 		"draw_forgotten_choose":
-			return _placeholder(
-				effect_type,
-				context
-			)
+			return _resolve_draw_forgotten_choose(effect, context)
 
 		"draw_grimoire":
 
@@ -341,16 +335,10 @@ func resolve_effect(
 				context
 			)	
 		"draw_quest":
-			return _placeholder(
-				effect_type,
-				context
-			)
+			return _resolve_draw_quest(effect, context)
 
 		"discard_quest":
-			return _placeholder(
-				effect_type,
-				context
-			)
+			return _resolve_discard_quest(effect, context)
 
 		"draw_event":
 			return _resolve_draw_event(
@@ -1158,7 +1146,7 @@ func _resolve_place_instability(
 		].mage
 
 
-		if mage.in_cell:
+		if mage.in_cell and str(context.get("effect_origin_room_id", "")) == "":
 
 			print(
 				"Room Instability: Mage is in Cell"
@@ -1174,8 +1162,9 @@ func _resolve_place_instability(
 		)
 
 
+		var origin_room: String = str(context.get("effect_origin_room_id", mage.room_id))
 		var distance: int = game.get_hex_distance(
-			mage.room_coord,
+			game.room_id_to_coord(origin_room),
 			target_coord
 		)
 
@@ -1639,6 +1628,8 @@ func _resolve_discard_spells(
 		"discard_spell_ids",
 		[]
 	)
+	if selected_spell_ids is String:
+		selected_spell_ids = [selected_spell_ids]
 
 
 	if not selected_spell_ids is Array:
@@ -1692,24 +1683,63 @@ func _resolve_discard_spells(
 
 
 # =========================================================
-# PLACEHOLDERS
+# QUEST / FORGOTTEN DECK EFFECTS
 # =========================================================
 
-func _placeholder(
-	effect_type: String,
-	context: Dictionary
-) -> bool:
-
-	print(
-		"[ROOM PLACEHOLDER] ",
-		effect_type,
-		" | Room: ",
-		_room_id(context),
-		" | Player ",
-		_player_index(context) + 1
-	)
-
+func _resolve_draw_quest(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	var player_index := _player_index(context)
+	if game == null or player_index < 0 or player_index >= game.players.size():
+		return false
+	for i in range(maxi(0, int(effect.get("amount", 1)))):
+		if game.quest_manager.draw_quest(game, player_index) == null:
+			break
 	return true
+
+
+func _resolve_discard_quest(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	var player_index := _player_index(context)
+	if game == null or player_index < 0 or player_index >= game.players.size():
+		return false
+	var selected_value = context.get("room_discard_quests", [])
+	var selected: Array = selected_value if selected_value is Array else [selected_value]
+	var amount := mini(maxi(0, int(effect.get("amount", 1))), game.players[player_index].active_quests.size())
+	if selected.size() != amount:
+		return false
+	var seen: Array = []
+	for quest in selected:
+		if not game.players[player_index].active_quests.has(quest) or seen.has(quest):
+			return false
+		seen.append(quest)
+	for quest in selected:
+		game.quest_manager.discard_active_quest(game, player_index, quest)
+	return true
+
+
+func _resolve_draw_forgotten(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	var player_index := _player_index(context)
+	if game == null or player_index < 0 or player_index >= game.players.size():
+		return false
+	for i in range(maxi(0, int(effect.get("amount", 1)))):
+		if game.draw_forgotten_spell(player_index) == null:
+			break
+	return true
+
+
+func _resolve_draw_forgotten_choose(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+	if game.forgotten_deck.is_empty():
+		return true
+	# Reuse the existing draw-N/keep-one primitive and Forgotten removal rules.
+	if int(effect.get("keep", 1)) != 1:
+		return false
+	return game.effect_resolver._resolve_draw_three_forgotten_keep_one(effect, context)
+
+
 func _resolve_library_draw_choice(
 	effect: Dictionary,
 	context: Dictionary

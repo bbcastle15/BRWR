@@ -25,6 +25,7 @@ static func get_texture(spell_id: String, school_id: String = "") -> Texture2D:
 		return _texture_cache[spell_id]
 
 	var candidates: Array[String] = []
+	candidates.append(VisualAssets.spell_texture_path(spell_id))
 
 	for root in CARD_ART_ROOTS:
 		if school_id != "":

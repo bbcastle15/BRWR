@@ -9,6 +9,12 @@ static func run(game) -> void:
 	print("BETA QUEST / FORGOTTEN AUDIT V24.1 TEST")
 	print("========================================")
 
+	if not _test_ineluctable_pain_dark_target(game):
+		return
+
+	if not _test_player_board_spell_privacy(game):
+		return
+
 	var player_index := 0
 	var player = game.players[player_index]
 
@@ -2947,6 +2953,8 @@ static func _beta_smoke_payload(
 					).duplicate(true)
 				})
 
+				break
+
 			return {
 				"choices": choices
 			}
@@ -5333,3 +5341,137 @@ static func _test_forgotten_beta_v24(
 
 	print("PASS: beta Forgotten deck uses three implemented cards and Forgotten cards leave the game instead of Memories")
 	return true
+
+
+static func _test_ineluctable_pain_dark_target(game) -> bool:
+	var spell: SpellCardState = game.spell_database.spells.get("ineluctable_pain")
+	if spell == null or spell.dark_side.get("target") != "self":
+		print("FAIL: Ineluctable Pain Dark must target self")
+		return false
+	var side: Dictionary = game._spell_effective_target_side(0, spell.get_side(true))
+	var context: Dictionary = {}
+	if not game._prepare_spell_primary_target_choice(0, side, context) or game.waiting_for_player_input:
+		print("FAIL: Ineluctable Pain Dark must not request an opponent/dummy target")
+		return false
+	print("PASS: Ineluctable Pain Dark targets self without a target prompt")
+	return true
+
+
+static func _test_player_board_spell_privacy(game) -> bool:
+	# Exercise the real board, preview and transition APIs with distinct copies.
+	var player = game.players[0]
+	var saved: Dictionary = {}
+	for key in ["hand", "ready_spells", "active_spells", "revealed_spells", "memories"]:
+		saved[key] = player.get(key).duplicate()
+		player.get(key).clear()
+	var saved_quick = player.quick_spell
+	var saved_cell: bool = player.mage.in_cell
+	var saved_actions: int = player.available_physical_actions
+	var saved_resolution_id: int = game.next_resolution_id
+	var saved_slots: Dictionary = game.player_board_spell_slots.duplicate(true)
+	var saved_input: Dictionary = game.pending_input.duplicate(true)
+	var saved_waiting: bool = game.waiting_for_player_input
+	var saved_stack: Array = game.resolution_stack.duplicate()
+	var saved_processing: bool = game.processing_resolution_stack
+	var hud = BetaHUDScript.new()
+	game.add_child(hud)
+	hud.setup(game)
+	player.quick_spell = null
+	player.mage.in_cell = false
+	game.clear_player_input()
+	game.resolution_stack.clear()
+	# Stop after commit, before queued effects finish, to verify reveal timing.
+	game.processing_resolution_stack = true
+
+	var side: Dictionary = {"type": "contingency", "target": "self", "effects": []}
+	var first := SpellCardState.new("board_copy", "Board Copy", "agony", side, side)
+	var second := SpellCardState.new("board_copy", "Board Copy", "agony", side, side)
+	var trap_side: Dictionary = {"type": "trap", "target": "self", "effects": []}
+	var trap := SpellCardState.new("board_trap", "Board Trap", "agony", trap_side, trap_side)
+	var replacement := SpellCardState.new("board_replacement", "Replacement", "agony", side, side)
+	player.hand.append_array([first, second, trap])
+	var passed: bool = game.prepare_player_spells(0, [0, 1], [false, true], 2, false)
+	game.request_player_input({"player_index": 1, "type": "board_test"})
+	var hidden: Dictionary = game.get_player_board_spell_slot_data(0, "I")
+	passed = passed and hidden == {"occupied": true, "public": false, "can_inspect": false, "slot_id": "I"}
+	var board = game.player_boards[0]
+	var slot = board.get_node("SpellSlots/SpellSlotI")
+	passed = passed and slot.get_node_or_null("PreparedCard") == null
+	passed = passed and slot.get_node("CardBack").visible and not slot.get_node("CardArt").visible
+	passed = passed and slot.get_node("CardClickButton").disabled
+	game.clear_player_input()
+	game.request_player_input({"player_index": 0, "type": "board_test"})
+	passed = passed and bool(game.get_player_board_spell_slot_data(0, "I").get("can_inspect", false))
+	game.open_player_board_spell(0, "I")
+	var preview = game.get_node("SpellCardPreview")
+	passed = passed and preview.root.visible
+	passed = passed and hud.current_player_index == game.get_ui_viewer_player_index()
+	game.clear_player_input()
+	passed = passed and not preview.root.visible
+	passed = passed and hud.current_player_index == -1 and hud.current_request.is_empty()
+	hud._open_hand_overlay()
+	passed = passed and not hud.hand_overlay.visible
+	game.request_player_input({"player_index": 1, "type": "board_test"})
+	game.open_player_board_spell(0, "I")
+	passed = passed and not preview.root.visible
+
+	var cast: Dictionary = {"player_index": 0, "ready_spell": player.ready_spells[0], "source": "ready"}
+	player.mage.in_cell = true
+	game.process_spell_cast_resolution(cast)
+	passed = passed and not bool(game.get_player_board_spell_slot_data(0, "I").get("public", false))
+	passed = passed and player.ready_spells.size() == 2
+	player.mage.in_cell = false
+	game.process_spell_cast_resolution(cast)
+	passed = passed and bool(game.get_player_board_spell_slot_data(0, "I").get("public", false))
+	passed = passed and player.revealed_spells.is_empty() and player.ready_spells.size() == 1
+	passed = passed and game._find_player_board_slot_for_spell(0, second) == "II"
+	game.open_player_board_spell(0, "I")
+	passed = passed and preview.root.visible
+
+	# Replacement must update only the original physical copy's slot.
+	player.revealed_spells.append(RevealedSpellState.new(first, false))
+	player.hand.append(replacement)
+	passed = passed and game.replace_revealed_spell_from_hand(0, first.id, replacement.id)
+	passed = passed and game._find_player_board_slot_for_spell(0, replacement) == "I"
+	passed = passed and game._find_player_board_slot_for_spell(0, first) == ""
+	passed = passed and game._find_player_board_slot_for_spell(0, second) == "II"
+	passed = passed and player.revealed_spells[0].spell == replacement
+
+	game.process_spell_cast_resolution({"player_index": 0, "ready_spell": player.quick_spell, "source": "quick"})
+	passed = passed and not bool(game.get_player_board_spell_slot_data(0, "Q").get("public", false))
+	passed = passed and not game.get_player_board_spell_slot_data(0, "Q").has("id")
+	game.process_trigger_spell_resolution({"active_spell": player.active_spells[0], "event": GameEvent.new("board_test")})
+	passed = passed and bool(game.get_player_board_spell_slot_data(0, "Q").get("public", false))
+	passed = passed and player.active_spells.is_empty()
+	# Complete the fixture's revealed gameplay collection for cleanup.
+	player.revealed_spells.append(RevealedSpellState.new(trap, false))
+
+	game.process_momentum_resolution({"player_index": 0, "ready_index": 0})
+	passed = passed and game.get_player_board_spell_slot_data(0, "II").is_empty()
+	passed = passed and game._find_player_board_slot_for_spell(0, replacement) == "I"
+	passed = passed and player.memories.has(second)
+	var returned: bool = game.effect_resolver._resolve_return_revealed_spell_to_hand(
+		{}, {"game": game, "caster_id": 0, "selected_revealed_spell": player.revealed_spells[0]}
+	)
+	passed = passed and returned and game.get_player_board_spell_slot_data(0, "I").is_empty()
+	var return_indices: Array[int] = []
+	game._cleanup_player_mage_sheet(0, return_indices)
+	for slot_id in ["Q", "I", "II", "III"]:
+		passed = passed and game.get_player_board_spell_slot_data(0, slot_id).is_empty()
+
+	hud.free()
+	for key in saved:
+		player.get(key).clear()
+		player.get(key).append_array(saved[key])
+	player.quick_spell = saved_quick
+	player.mage.in_cell = saved_cell
+	player.available_physical_actions = saved_actions
+	game.next_resolution_id = saved_resolution_id
+	game.player_board_spell_slots = saved_slots
+	game.pending_input = saved_input
+	game.waiting_for_player_input = saved_waiting
+	game.resolution_stack.assign(saved_stack)
+	game.processing_resolution_stack = saved_processing
+	game.refresh_all_player_boards()
+	print("PASS: PlayerBoard privacy, duplicate slots, reveal timing, replacement and cleanup" if passed else "FAIL: PlayerBoard spell regression")
+	return passed

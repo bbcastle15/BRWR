@@ -123,6 +123,15 @@ func add_evocation(
 	if not has_free_evocation_slot():
 		return false
 
+	# Keep a physical number for this instance; removing another does not renumber it.
+	var used_numbers: Array[int] = []
+	for existing in evocations:
+		used_numbers.append(existing.board_number)
+	for number in range(1, 4):
+		if not used_numbers.has(number):
+			evocation.board_number = number
+			break
+
 	evocations.append(
 		evocation
 	)

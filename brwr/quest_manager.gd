@@ -6,6 +6,19 @@ extends RefCounted
 # QUEST DRAW / DISCARD
 # =========================================================
 
+func draw_phase_quest(game, player_index: int) -> QuestState:
+	if not _valid_player(game, player_index):
+		return null
+	# Visibility does not affect whether a Quest occupies the active slot.
+	if not game.players[player_index].active_quests.is_empty():
+		return null
+	return draw_quest(game, player_index)
+
+func _refresh_quest_boards(game) -> void:
+	for board in game.player_boards:
+		if is_instance_valid(board):
+			board.refresh_quests()
+
 func draw_quest(
 	game,
 	player_index: int
@@ -51,6 +64,7 @@ func draw_quest(
 		quest.revealed
 	)
 
+	_refresh_quest_boards(game)
 	return quest
 
 
@@ -556,6 +570,7 @@ func _progress_quest(
 
 	var amount: int = int(task.get("progress", 1))
 	var completed_now: bool = quest.add_progress(amount)
+	_refresh_quest_boards(game)
 
 	print(
 		"Quest progress: ",
@@ -597,6 +612,7 @@ func _complete_quest(
 
 	if not quest in player.completed_quests:
 		player.completed_quests.append(quest)
+	_refresh_quest_boards(game)
 
 	print(
 		"Player ",

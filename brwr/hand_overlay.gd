@@ -3,11 +3,15 @@ extends Control
 
 
 signal preparation_confirmed(payload: Dictionary)
+signal study_confirmed(indices: Array)
 signal overlay_closed
 
 
 const MODE_BROWSE := "browse"
 const MODE_PREPARATION := "preparation"
+const MODE_STUDY := "study"
+var study_selection: Array[int] = []
+var study_confirm_button: Button
 
 const CARD_ASPECT := 630.0 / 880.0
 const CARD_MIN_WIDTH := 280.0
@@ -59,6 +63,9 @@ var close_button: Button
 
 var card_scroll: ScrollContainer
 var card_row: HBoxContainer
+var private_quest_row: HBoxContainer
+var private_quest_label: Label
+var private_quest_scroll: ScrollContainer
 
 var prep_controls: VBoxContainer
 var selection_label: Label
@@ -131,9 +138,22 @@ func _build_ui() -> void:
 	panel_margin.add_theme_constant_override("margin_bottom", 16)
 	main_panel.add_child(panel_margin)
 
+	# The Hand content can be taller than the available viewport, especially
+	# during Preparation. Keep the panel itself inside the screen and make the
+	# whole body vertically scrollable. The card strip keeps its own horizontal
+	# scrolling.
+	var body_scroll := ScrollContainer.new()
+	body_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	body_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	body_scroll.follow_focus = true
+	panel_margin.add_child(body_scroll)
+
 	var root := VBoxContainer.new()
+	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.add_theme_constant_override("separation", 10)
-	panel_margin.add_child(root)
+	body_scroll.add_child(root)
 
 	# -----------------------------------------------------
 	# HEADER
@@ -205,6 +225,15 @@ func _build_ui() -> void:
 	# PREPARATION CONTROLS
 	# -----------------------------------------------------
 
+	private_quest_label = Label.new()
+	private_quest_label.text = "PRIVATE QUESTS — click to inspect"
+	root.add_child(private_quest_label)
+	private_quest_scroll = ScrollContainer.new()
+	private_quest_scroll.custom_minimum_size = Vector2(0, 100)
+	root.add_child(private_quest_scroll)
+	private_quest_row = HBoxContainer.new()
+	private_quest_row.add_theme_constant_override("separation", 8)
+	private_quest_scroll.add_child(private_quest_row)
 	prep_controls = VBoxContainer.new()
 	prep_controls.add_theme_constant_override("separation", 8)
 	root.add_child(prep_controls)
@@ -299,12 +328,44 @@ func _build_ui() -> void:
 		_confirm_preparation
 	)
 	action_row.add_child(confirm_button)
+	study_confirm_button = Button.new()
+	study_confirm_button.text = "Keep selected cards"
+	study_confirm_button.pressed.connect(func():
+		if study_selection.size() == 2:
+			study_confirmed.emit(study_selection.duplicate()))
+	study_confirm_button.hide()
+	header.add_child(study_confirm_button)
+	header.move_child(study_confirm_button, header.get_child_count() - 2)
+
+
+func open_study(request: Dictionary) -> void:
+	mode = MODE_STUDY
+	current_request = request.duplicate(true)
+	owner_player_index = int(request.get("player_index", -1))
+	cards = request.get("cards", []).duplicate(true)
+	for card in cards:
+		card["hand_index"] = card.get("draw_index", -1)
+	study_selection.clear()
+	ready_hand_indices.clear()
+	quick_hand_index = -1
+	selected_hand_index = -1
+	title_label.text = "PLAYER %d — STUDY" % (owner_player_index + 1)
+	instruction_label.text = "Choose two cards to keep. Click a selected card to deselect it."
+	close_button.disabled = false
+	close_button.text = "Hide"
+	prep_controls.hide()
+	study_confirm_button.show()
+	visible = true
+	move_to_front()
+	_render_cards()
+	_update_controls()
 
 
 func open_preparation(
 	request: Dictionary
 ) -> void:
 	mode = MODE_PREPARATION
+	study_confirm_button.hide()
 	current_request = request.duplicate(true)
 	owner_player_index = int(
 		current_request.get(
@@ -363,6 +424,7 @@ func open_browse(
 		return
 
 	mode = MODE_BROWSE
+	study_confirm_button.hide()
 	current_request.clear()
 	owner_player_index = player_index
 
@@ -471,6 +533,13 @@ func _unhandled_key_input(
 
 
 func _render_cards() -> void:
+	for child in private_quest_row.get_children():
+		child.free()
+	for data in game.get_player_quest_cards(owner_player_index, "private"):
+		private_quest_row.add_child(game.ReferenceCardPreview.make_card("quests", data.id,
+			data.name, Vector2(72, 96), game.open_quest_card.bind(data.quest)))
+	private_quest_label.visible = private_quest_row.get_child_count() > 0
+	private_quest_scroll.visible = private_quest_label.visible
 	for child in card_row.get_children():
 		child.free()
 
@@ -566,7 +635,7 @@ func _create_card_widget(
 	)
 
 	var selected: bool = (
-		hand_index == selected_hand_index
+		study_selection.has(hand_index) if mode == MODE_STUDY else hand_index == selected_hand_index
 	)
 
 	var style := StyleBoxFlat.new()
@@ -730,6 +799,14 @@ func _assignment_badge(
 func _select_card(
 	hand_index: int
 ) -> void:
+	if mode == MODE_STUDY:
+		if study_selection.has(hand_index):
+			study_selection.erase(hand_index)
+		elif study_selection.size() < 2:
+			study_selection.append(hand_index)
+		_render_cards()
+		_update_controls()
+		return
 	selected_hand_index = hand_index
 	selected_dark = _assigned_dark_side(
 		hand_index
@@ -971,6 +1048,10 @@ func _confirm_preparation() -> void:
 
 
 func _update_controls() -> void:
+	if mode == MODE_STUDY:
+		study_confirm_button.disabled = study_selection.size() != 2
+		study_confirm_button.text = "Keep selected cards (%d/2)" % study_selection.size()
+		return
 	if mode != MODE_PREPARATION:
 		return
 
@@ -1249,6 +1330,7 @@ func _resolve_card_texture(
 	)
 
 	var candidates: Array[String] = []
+	candidates.append(VisualAssets.spell_texture_path(spell_id))
 
 	for root in CARD_ART_ROOTS:
 		if school_id != "":

@@ -6,7 +6,6 @@ var game = null
 var player_index: int = -1
 
 var cube_scene = preload("res://cube.tscn")
-var card_view_scene = preload("res://card_view.tscn")
 
 
 # =========================================================
@@ -96,9 +95,10 @@ func refresh():
 		+ str(player_state.get_hand_size())
 	)
 
-	refresh_prepared_spells()
 	refresh_spell_slots()
 	refresh_damage_track()
+	refresh_quests()
+	refresh_action_tokens()
 
 
 # =========================================================
@@ -294,77 +294,6 @@ func setup_deck_slots():
 	)
 
 
-# =========================================================
-# PREPARED SPELL ART
-# =========================================================
-
-func refresh_prepared_spells() -> void:
-	if player_state == null:
-		return
-
-	_clear_spell_slot($SpellSlots/QuickSpellSlot)
-	_clear_spell_slot($SpellSlots/SpellSlotI)
-	_clear_spell_slot($SpellSlots/SpellSlotII)
-	_clear_spell_slot($SpellSlots/SpellSlotIII)
-
-	if player_state.quick_spell != null:
-		_set_spell_slot(
-			$SpellSlots/QuickSpellSlot,
-			player_state.quick_spell
-		)
-
-	var numbered_slots: Array = [
-		$SpellSlots/SpellSlotI,
-		$SpellSlots/SpellSlotII,
-		$SpellSlots/SpellSlotIII
-	]
-
-	for i in range(min(
-		player_state.ready_spells.size(),
-		numbered_slots.size()
-	)):
-		_set_spell_slot(
-			numbered_slots[i],
-			player_state.ready_spells[i]
-		)
-
-
-func _clear_spell_slot(slot: Control) -> void:
-	var label = slot.get_node_or_null("Label")
-	if label != null:
-		label.visible = true
-
-	var old_card = slot.get_node_or_null("PreparedCard")
-	if old_card != null:
-		old_card.free()
-
-
-func _set_spell_slot(
-	slot: Control,
-	ready_spell
-) -> void:
-	if ready_spell == null or ready_spell.spell == null:
-		return
-
-	var label = slot.get_node_or_null("Label")
-	if label != null:
-		label.visible = false
-
-	var card = card_view_scene.instantiate()
-	card.name = "PreparedCard"
-	card.setup(ready_spell.spell)
-	card.set_side(ready_spell.use_dark_side)
-	card.set_display_size(SPELL_SIZE)
-	card.disabled = true
-	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	slot.add_child(card)
-	card.position = Vector2.ZERO
-
-
-# =========================================================
-# DAMAGE TRACK
-# =========================================================
-
 func _configure_spell_slot(slot: Control, slot_id: String) -> void:
 	if slot.get_node_or_null("CardBack") == null:
 		var back := ColorRect.new()
@@ -427,6 +356,25 @@ func _render_spell_slot(
 	var data: Dictionary = {}
 	if game != null:
 		data = game.get_player_board_spell_slot_data(player_index, slot_id)
+	var marker = slot.get_node_or_null("SpellMarker")
+	if marker == null:
+		marker = Label.new()
+		marker.name = "SpellMarker"
+		marker.position = Vector2(2, 3)
+		marker.z_index = 2
+		marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		marker.add_theme_font_size_override("font_size", 11)
+		marker.add_theme_color_override("font_outline_color", Color.BLACK)
+		marker.add_theme_constant_override("outline_size", 6)
+		var badge := StyleBoxFlat.new()
+		badge.bg_color = Color(0.25, 0.13, 0.38, 0.95)
+		badge.set_corner_radius_all(5)
+		badge.content_margin_left = 4
+		badge.content_margin_right = 4
+		marker.add_theme_stylebox_override("normal", badge)
+		slot.add_child(marker)
+	marker.text = str(data.get("marker", ""))
+	marker.visible = not marker.text.is_empty()
 
 	if data.is_empty():
 		back.visible = false
@@ -470,15 +418,11 @@ func _render_spell_slot(
 	label.visible = true
 	label.text = empty_label + "\nSET"
 
-	var owner_can_view: bool = (
-		game != null
-		and game.can_view_private_player_board_spells(player_index)
-	)
-
-	button.disabled = not owner_can_view
+	var can_inspect: bool = bool(data.get("can_inspect", false))
+	button.disabled = not can_inspect
 	button.tooltip_text = (
 		"Click to inspect your prepared Spell"
-		if owner_can_view
+		if can_inspect
 		else "Prepared Spell — hidden"
 	)
 
@@ -486,7 +430,112 @@ func _render_spell_slot(
 func _on_spell_slot_pressed(slot_id: String) -> void:
 	if game == null:
 		return
-	game.open_player_board_spell(player_index, slot_id)
+	game.activate_player_board_spell(player_index, slot_id, Input.is_key_pressed(KEY_SHIFT))
+
+
+func refresh_action_tokens() -> void:
+	if game == null or player_state == null:
+		return
+	for i in range(PlayerState.MAX_PHYSICAL_ACTIONS):
+		var token = get_node_or_null("PhysicalAction" + str(i))
+		if token == null:
+			token = Button.new()
+			token.name = "PhysicalAction" + str(i)
+			token.position = Vector2(520, 15 + i * 60)
+			token.size = Vector2(54, 54)
+			token.add_theme_font_size_override("font_size", 36)
+			token.pressed.connect(game.open_player_board_action.bind(player_index, "physical"))
+			add_child(token)
+		var available: bool = i < player_state.available_physical_actions
+		token.text = "+" if available else "×"
+		token.tooltip_text = "Physical action: Explore / Fight / Command" if available else "Physical action exhausted"
+		token.disabled = not available or game.get_player_board_action_options(player_index, "physical").is_empty()
+		for state in ["normal", "hover", "pressed", "disabled"]:
+			var style := StyleBoxFlat.new()
+			style.bg_color = Color(0.04, 0.05, 0.07)
+			style.border_color = get_damage_cube_color(player_index)
+			style.set_border_width_all(5)
+			style.set_corner_radius_all(10)
+			if state == "hover":
+				style.bg_color = Color(0.18, 0.2, 0.25)
+			token.add_theme_stylebox_override(state, style)
+		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_disabled_color"]:
+			token.add_theme_color_override(state, Color.WHITE if available else Color(1, 0.12, 0.12))
+	for i in range(3):
+		var category: String = ["momentum", "quests", "finish"][i]
+		var button = get_node_or_null("BoardAction_" + category)
+		if button == null:
+			button = Button.new()
+			button.name = "BoardAction_" + category
+			button.text = ["Momentum", "Resolve Quest", "End activation"][i]
+			button.position = Vector2(175 + i * 137, 349)
+			button.size = Vector2(130, 30)
+			button.add_theme_font_size_override("font_size", 13)
+			button.pressed.connect(game.open_player_board_action.bind(player_index, category))
+			add_child(button)
+		button.visible = not game.get_player_board_action_request(player_index).is_empty()
+		button.disabled = game.get_player_board_action_options(player_index, category).is_empty()
+	for slot_id in ["Q", "I", "II", "III"]:
+		var slot_path: String = "QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id
+		var button = get_node_or_null("SpellSlots/" + slot_path + "/CardClickButton")
+		if button != null and game.get_player_board_cast_token(player_index, slot_id) != "":
+			button.tooltip_text = "Click to cast · Shift-click to inspect"
+
+
+func refresh_quests() -> void:
+	if game == null:
+		return
+	for section in ["revealed", "completed"]:
+		var heading = get_node_or_null("QuestHeading_" + section)
+		if heading == null:
+			heading = Label.new()
+			heading.name = "QuestHeading_" + section
+			heading.text = "QUESTS" if section == "revealed" else "COMPLETED"
+			heading.position = Vector2(12, 168) if section == "revealed" else Vector2(505, 138)
+			heading.add_theme_font_size_override("font_size", 12)
+			heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			add_child(heading)
+		var strip = get_node_or_null("Quest_" + section)
+		if strip == null:
+			strip = ScrollContainer.new()
+			strip.name = "Quest_" + section
+			strip.position = Vector2(12, 190) if section == "revealed" else Vector2(505, 159)
+			strip.size = Vector2(145, 155) if section == "revealed" else Vector2(88, 155)
+			add_child(strip)
+		for child in strip.get_children():
+			child.free()
+		var row := HBoxContainer.new()
+		strip.add_child(row)
+		for data in game.get_player_quest_cards(player_index, section):
+			var card = game.ReferenceCardPreview.make_card("quests", data.id, data.name,
+				Vector2(80, 112), game.open_quest_card.bind(data.quest))
+			row.add_child(card)
+			var quest: QuestState = data.quest
+			if quest.get_cube_slots() > 0:
+				var track := HBoxContainer.new()
+				track.name = "QuestProgress"
+				track.position = Vector2(5, 48)
+				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				track.add_theme_constant_override("separation", 3)
+				card.add_child(track)
+				for i in range(quest.get_cube_slots()):
+					var cube := ColorRect.new()
+					cube.custom_minimum_size = Vector2(12, 12)
+					cube.color = get_damage_cube_color(player_index) if i < quest.progress else Color(0.12, 0.12, 0.12, 0.85)
+					cube.mouse_filter = Control.MOUSE_FILTER_IGNORE
+					track.add_child(cube)
+	var counter = get_node_or_null("SolvedQuestCount")
+	if counter == null:
+		counter = Label.new()
+		counter.name = "SolvedQuestCount"
+		counter.position = Vector2(15, 360)
+		counter.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(counter)
+	var solved: int = 0
+	for quest in player_state.completed_quests:
+		if quest.solved:
+			solved += 1
+	counter.text = "Solved Quests: " + str(solved)
 
 
 func create_damage_track():

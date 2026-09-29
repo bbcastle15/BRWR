@@ -1,22 +1,26 @@
 extends Node2D
 
+signal inspect_requested
 
 var evocation_id: String = ""
 var evocation_name: String = ""
 var owner_id: int = -1
 var owner_color: Color = Color.WHITE
+var board_number: int = 0
 
 
 func setup(
 	id_value: String,
 	name_value: String,
 	owner_index: int,
-	color: Color
+	color: Color,
+	number: int = 0
 ) -> void:
 	evocation_id = id_value
 	evocation_name = name_value
 	owner_id = owner_index
 	owner_color = color
+	board_number = number
 	z_index = 79
 
 	_build_visual()
@@ -42,7 +46,7 @@ func _build_visual() -> void:
 
 	var type_label := Label.new()
 	type_label.name = "TypeLabel"
-	type_label.text = _abbreviation(evocation_name)
+	type_label.text = _abbreviation(evocation_name) + (str(board_number) if board_number > 0 else "")
 	type_label.position = Vector2(-21, -14)
 	type_label.size = Vector2(42, 23)
 	type_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -67,6 +71,15 @@ func _build_visual() -> void:
 	owner_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	owner_label.add_theme_constant_override("outline_size", 4)
 	add_child(owner_label)
+
+	var inspect_button := Button.new()
+	inspect_button.name = "InspectButton"
+	inspect_button.position = Vector2(-21, -20)
+	inspect_button.size = Vector2(42, 45)
+	inspect_button.flat = true
+	inspect_button.tooltip_text = evocation_name + " #" + str(board_number) + " · P" + str(owner_id + 1) + " — Inspect"
+	inspect_button.pressed.connect(func(): inspect_requested.emit())
+	add_child(inspect_button)
 
 
 func _abbreviation(value: String) -> String:

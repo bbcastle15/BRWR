@@ -24,7 +24,11 @@ var room_data: Dictionary = {}
 var instability_cubes: Array = []
 var instability_cube_nodes: Array = []
 
-var flipped: bool = false
+var flipped: bool = false:
+	set(value):
+		flipped = value
+		if is_node_ready():
+			refresh_art()
 var activated_this_turn: bool = false
 
 
@@ -53,6 +57,24 @@ func _ready():
 	background.color = room_color
 
 	$RoomName.text = room_name
+	refresh_art()
+
+
+func refresh_art() -> void:
+	$Background.color = room_color
+	var has_art := preload("res://room_art.gd").apply($Background, room_id, radius)
+	$RoomName.visible = not has_art or flipped
+	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if has_art and flipped:
+		# Only the destroyed-side artwork has been supplied. Cover its obsolete rule.
+		$RoomName.position = Vector2(-radius * 0.58, -radius * 0.77)
+		$RoomName.size = Vector2(radius * 1.16, radius * 0.40)
+		$RoomName.text = room_name + "\nREBUILT"
+		$RoomName.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		$RoomName.add_theme_font_size_override("font_size", 8)
+		var panel := StyleBoxFlat.new()
+		panel.bg_color = Color(0.12, 0.10, 0.08, 1.0)
+		$RoomName.add_theme_stylebox_override("normal", panel)
 
 
 func setup_room(
@@ -82,6 +104,7 @@ func setup_room(
 
 	if is_node_ready():
 		$RoomName.text = room_name
+		refresh_art()
 
 
 # =========================================================
@@ -268,6 +291,13 @@ func get_instability_by_owner(
 
 
 func update_instability_cube_positions():
+	if $Background.texture != null:
+		var slots := get_art_instability_slots()
+		for i in range(instability_cube_nodes.size()):
+			var cube = instability_cube_nodes[i]
+			cube.scale = Vector2.ONE * radius / 130.0
+			cube.position = slots[i] - cube.size * cube.scale * 0.5
+		return
 
 	var start_position = Vector2(
 		-25,
@@ -299,6 +329,20 @@ func update_instability_cube_positions():
 # =========================================================
 # PLAYER COLORS
 # =========================================================
+
+func get_art_instability_slots() -> PackedVector2Array:
+	var count := get_instability_resistance()
+	var slots := PackedVector2Array()
+	var bottom_count := mini(count, 4) if count != 5 else 5
+	var size := Vector2(radius * 2.0, radius * sqrt(3.0))
+	for i in range(bottom_count):
+		slots.append((Vector2(0.5 + (i - (bottom_count - 1) * 0.5) * 0.10, 0.91) - Vector2.ONE * 0.5) * size)
+	var side_count := int((count - bottom_count) / 2)
+	for i in range(side_count):
+		var offset := Vector2(0.25 - i * 0.05, 0.81 - i * 0.10)
+		slots.append((offset - Vector2.ONE * 0.5) * size)
+		slots.append((Vector2(1.0 - offset.x, offset.y) - Vector2.ONE * 0.5) * size)
+	return slots
 
 func get_player_color(
 	player_index: int
