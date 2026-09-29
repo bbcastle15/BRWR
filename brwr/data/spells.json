@@ -784,7 +784,7 @@
     "light": {
       "type": "combat",
       "element": "earth",
-      "target": "room",
+      "target": "special",
       "range": "*",
       "enhancement": {
         "requires": [
@@ -794,6 +794,7 @@
         "effects": [
           {
             "type": "damage_all_models_of_type",
+            "scope": "lodge",
             "model_type": "mage",
             "amount": 1
           }
@@ -802,6 +803,7 @@
       "effects": [
         {
           "type": "damage_all_models_of_type",
+          "scope": "lodge",
           "model_type": "evocation",
           "amount": 1
         }

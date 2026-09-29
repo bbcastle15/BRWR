@@ -109,20 +109,21 @@ func set_player_power(player_index: int, value: int):
 		print("ERRORE: player_index non valido: ", player_index)
 		return
 
-	value = clamp(value, 0, end_game_threshold)
+	value = maxi(0, value)
 
 	update_player_marker(player_index, value)
 
 
 func set_black_rose_power(value: int):
-	value = clamp(value, 0, end_game_threshold)
+	value = maxi(0, value)
 
 	black_rose_power = value
 	update_black_rose_marker()
 	
 func update_player_marker(player_index: int, value: int):
 	var marker = player_markers[player_index]
-	var slot_position = get_power_position(value)
+	var slot_position = get_power_position(value % end_game_threshold if value > end_game_threshold else value)
+	marker.get_node("Label").text = "+" + str(int(value / end_game_threshold) * end_game_threshold) if value > end_game_threshold else marker.marker_name
 
 	marker.position = slot_position + get_marker_offset(player_index)
 	
@@ -139,7 +140,8 @@ func get_marker_offset(player_index: int) -> Vector2:
 	return offsets[player_index]
 	
 func update_black_rose_marker():
-	var slot_position = get_power_position(black_rose_power)
+	var slot_position = get_power_position(black_rose_power % end_game_threshold if black_rose_power > end_game_threshold else black_rose_power)
+	black_rose_marker.get_node("Label").text = "+" + str(int(black_rose_power / end_game_threshold) * end_game_threshold) if black_rose_power > end_game_threshold else "BR"
 
 	black_rose_marker.position = slot_position + Vector2(-12, -12)
 

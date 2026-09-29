@@ -3521,7 +3521,8 @@ func _resolve_damage_variant(
 				return false
 
 			var room_id: String = _target_room(context)
-			if room_id == "":
+			var global_scope: bool = effect.get("scope", "room") == "lodge"
+			if not global_scope and room_id == "":
 				print("damage_all_models_of_type: target Room missing")
 				return false
 
@@ -3532,7 +3533,7 @@ func _resolve_damage_variant(
 					if game.is_mage_in_cell(player_index):
 						continue
 
-					if game.players[player_index].mage.room_id != room_id:
+					if not global_scope and game.players[player_index].mage.room_id != room_id:
 						continue
 
 					var dealt = _damage_mage(
@@ -3548,7 +3549,7 @@ func _resolve_damage_variant(
 							{
 								"type": "mage",
 								"player_index": player_index,
-								"room_id": room_id
+								"room_id": game.players[player_index].mage.room_id
 							}
 						)
 
@@ -3558,7 +3559,7 @@ func _resolve_damage_variant(
 				for evocation in game.players[player_index].evocations.duplicate():
 					if evocation == null \
 					or evocation.is_defeated() \
-					or evocation.room_id != room_id:
+					or (not global_scope and evocation.room_id != room_id):
 						continue
 
 					var dealt = _damage_evocation(
@@ -3574,7 +3575,7 @@ func _resolve_damage_variant(
 							{
 								"type": "evocation",
 								"evocation": evocation,
-								"room_id": room_id
+								"room_id": evocation.room_id
 							}
 						)
 

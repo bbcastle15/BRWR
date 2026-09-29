@@ -99,6 +99,8 @@ signal phase_completed(phase: String)
 signal game_over(winner_data: Dictionary)
 var game_flow_active: bool = false
 var game_has_ended: bool = false
+var final_result: Dictionary = {}
+var black_rose_trophies: Array[int] = []
 var player_entrance_room_ids: Dictionary = {}
 var player_entrance_room_coords: Dictionary = {}
 
@@ -1072,6 +1074,8 @@ func _process(_delta: float) -> void:
 		var decision := int(pending_input.get("player_index", -1))
 		var turn := "Risoluzione" if decision < 0 else "Turno: Player %d" % (decision + 1)
 		turn_banner.text = "Round %d · %s · %s" % [current_round, current_phase.capitalize(), turn]
+		if game_has_ended:
+			turn_banner.text = "Fine partita" + (" · " + turn if waiting_for_player_input else "")
 	if evocation_inspection != null and evocation_inspection.visible:
 		_update_evocation_inspection()
 	if inspected_quest != null and not can_inspect_quest(inspected_quest):
@@ -2143,11 +2147,7 @@ func set_player_power(player_index: int, value: int):
 		print("ERRORE: player_index non valido: ", player_index)
 		return
 
-	value = clamp(
-		value,
-		0,
-		$PowerBoard.end_game_threshold
-	)
+	value = maxi(0, value)
 
 	players[player_index].power = value
 
@@ -2267,11 +2267,7 @@ func add_player_power(
 	)
 	
 func set_black_rose_power(value: int):
-	value = clamp(
-		value,
-		0,
-		$PowerBoard.end_game_threshold
-	)
+	value = maxi(0, value)
 
 	black_rose_power = value
 
@@ -2649,7 +2645,8 @@ func deal_damage_from_evocation(
 	return requested
 
 func get_revealed_element_counts(
-	player_index: int
+	player_index: int,
+	excluded_spell: SpellCardState = null
 ) -> Dictionary:
 
 	var counts: Dictionary = {}
@@ -2659,6 +2656,8 @@ func get_revealed_element_counts(
 		return counts
 
 	for revealed in players[player_index].revealed_spells:
+		if revealed.spell == excluded_spell:
+			continue
 		var element = revealed.get_element()
 
 		if element == "":
@@ -2679,11 +2678,12 @@ func get_revealed_element_counts(
 	
 func can_apply_enhancement(
 	player_index: int,
-	required_elements: Array
+	required_elements: Array,
+	excluded_spell: SpellCardState = null
 ) -> bool:
 
 	var counts = get_revealed_element_counts(
-		player_index
+		player_index, excluded_spell
 	)
 
 	var wildcards = int(
@@ -8758,7 +8758,8 @@ func _prepare_quest_effect_choice(
 
 func _spell_effective_target_side(
 	caster_id: int,
-	side: Dictionary
+	side: Dictionary,
+	spell: SpellCardState = null
 ) -> Dictionary:
 	var effective: Dictionary = side.duplicate(true)
 
@@ -8789,7 +8790,7 @@ func _spell_effective_target_side(
 
 	var enhancement_active: bool = can_apply_enhancement(
 		caster_id,
-		_enhancement_required_elements(enhancement)
+		_enhancement_required_elements(enhancement), spell
 	)
 
 	if not enhancement_active:
@@ -12141,18 +12142,42 @@ func process_damage_resolution(
 			return true
 
 		"after_defeat_event":
-			var target_player_index: int = int(resolution.get("target_player_index", -1))
-			# A defeated Mage is sent to their Cell after defeat-triggered Effects
-			# have had their window. Physical Actions are not resumed afterwards.
-			cancelled_physical_action_players[target_player_index] = true
-			var target_mage = players[target_player_index].mage
-			# Keep damage available to defeat triggers, then restore health and
-			# return each physical cube to its owner (including the Black Rose).
-			var damage_snapshot: Array[int] = target_mage.damage_cubes.duplicate()
-			target_mage.damage_cubes.clear()
-			for owner_id in damage_snapshot:
-				return_owner_cubes(owner_id, 1)
-			place_mage_in_cell(target_player_index)
+			var victim: int = int(resolution.get("target_player_index", -1))
+			if not players[victim].mage.is_defeated():
+				return true
+			cancelled_physical_action_players[victim] = true
+			var killer: int = int(resolution.get("attacker_id", -1))
+			if is_event_active("dominion"):
+				killer = -1
+			if killer == -1:
+				black_rose_trophies.append(victim)
+			elif killer >= 0 and killer < players.size():
+				players[killer].trophies.append(victim)
+			var counts: Dictionary = {}
+			for owner in players[victim].mage.damage_cubes:
+				counts[owner] = int(counts.get(owner, 0)) + 1
+			resolution["defeat_rewards"] = ranked_power_rewards(counts, true)
+			resolution["reward_owners"] = resolution.defeat_rewards.keys()
+			resolution["step"] = "defeat_rewards"
+			place_mage_in_cell(victim)
+			return false
+
+		"defeat_rewards":
+			var owners: Array = resolution.get("reward_owners", [])
+			if not owners.is_empty():
+				var owner: int = int(owners.pop_front())
+				var points: int = int(resolution.defeat_rewards[owner])
+				if owner == -1:
+					add_black_rose_power(points)
+				else:
+					add_player_power(owner, points)
+				return false
+			var victim: int = int(resolution.get("target_player_index", -1))
+			var mage = players[victim].mage
+			var cubes: Array[int] = mage.damage_cubes.duplicate()
+			mage.damage_cubes.clear()
+			for owner in cubes:
+				return_owner_cubes(owner, 1)
 			refresh_all_player_boards()
 			return true
 
@@ -13182,7 +13207,7 @@ func process_spell_resolution_frame(
 						caster_id,
 						_enhancement_required_elements(
 							enhancement
-						)
+						), spell
 					)
 				)
 
@@ -13381,7 +13406,7 @@ func process_spell_cast_resolution(
 			var spell_type: String = str(side.get("type", ""))
 			var targeting_side: Dictionary = _spell_effective_target_side(
 				player_index,
-				side
+				side, spell
 			)
 
 			if spell_type != "combat" \
@@ -13636,6 +13661,13 @@ func process_room_activation_resolution(
 
 		"after_effects":
 			room.mark_activated()
+			# Passive Events are consumed at activation, never at phase start.
+			for event in active_events:
+				if event == null:
+					continue
+				for effect in event.effects:
+					if effect.get("type", "") == "on_activate_room_color_black_rose_gain_power" and effect.get("color", "") == room.room_data.get("color", ""):
+						add_black_rose_power(int(effect.get("amount", 1)))
 
 			quest_manager.process_event(
 				self,
@@ -14641,35 +14673,91 @@ func finish_cleanup_phase() -> bool:
 	return _complete_phase(PHASE_CLEANUP)
 
 
+# Rulebook pp. 28/32: tied contribution levels share a reduced reward.
+func ranked_power_rewards(counts: Dictionary, sole_contributor_bonus: bool = false) -> Dictionary:
+	var groups: Dictionary = {}
+	for owner in counts:
+		var count: int = int(counts[owner])
+		if count <= 0:
+			continue
+		if not groups.has(count):
+			groups[count] = []
+		groups[count].append(owner)
+	var levels: Array = groups.keys()
+	levels.sort()
+	levels.reverse()
+	var rewards: Dictionary = {}
+	var rank: int = 0
+	for count in levels:
+		var owners: Array = groups[count]
+		var points: int = [4, 2, 1][mini(rank, 2)]
+		if sole_contributor_bonus and levels.size() == 1 and owners.size() == 1:
+			points = 5
+		elif owners.size() > 1 and points > 1:
+			points -= 1
+		for owner in owners:
+			rewards[owner] = points
+		rank += 1
+	return rewards
+
+
 func check_end_game() -> bool:
+	if game_has_ended:
+		return true
 	var threshold: int = int($PowerBoard.end_game_threshold)
-	var reached: Array = []
-
-	if black_rose_power >= threshold:
-		reached.append({"type": "black_rose", "power": black_rose_power})
-
+	var reached: bool = black_rose_power >= threshold
 	for player in players:
-		if player.power >= threshold:
-			reached.append({
-				"type": "player",
-				"player_index": player.player_index,
-				"power": player.power
-			})
-
-	if reached.is_empty():
+		reached = reached or player.power >= threshold
+	if not reached:
 		return false
-
 	game_has_ended = true
 	game_flow_active = false
-	var result := {
-		"round": current_round,
-		"reached_threshold": reached,
-		"threshold": threshold
-	}
-	game_over.emit(result)
-	print("GAME OVER: end-game threshold reached")
+	var quest_counts: Dictionary = {}
+	var trophy_counts: Dictionary = {-1: black_rose_trophies.size()}
+	for player in players:
+		quest_counts[player.player_index] = player.completed_quests.filter(func(quest): return quest.is_solved()).size()
+		trophy_counts[player.player_index] = player.trophies.size()
+	var quest_rewards: Dictionary = ranked_power_rewards(quest_counts)
+	var trophy_rewards: Dictionary = ranked_power_rewards(trophy_counts)
+	var scores: Array = []
+	for owner in range(-1, players.size()):
+		var base: int = black_rose_power if owner == -1 else players[owner].power
+		var quest_bonus: int = int(quest_rewards.get(owner, 0))
+		var trophy_bonus: int = int(trophy_rewards.get(owner, 0))
+		var crown_bonus: int = 1 if owner >= 0 and owner == crown_owner_id else 0
+		var total: int = base + quest_bonus + trophy_bonus + crown_bonus
+		scores.append({"player_index": owner, "name": "Black Rose" if owner == -1 else "Player " + str(owner + 1), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
+		# Final bonuses do not open gameplay trigger windows.
+		if owner == -1:
+			set_black_rose_power(total)
+		else:
+			set_player_power(owner, total)
+	scores.sort_custom(func(a, b): return a.total > b.total)
+	var contenders: Array = scores.filter(func(row): return row.total == scores[0].total)
+	for counts in [quest_counts, trophy_counts]:
+		var best: int = 0
+		for row in contenders:
+			best = maxi(best, int(counts.get(row.player_index, 0)))
+		contenders = contenders.filter(func(row): return int(counts.get(row.player_index, 0)) == best)
+	final_result = {"round": current_round, "scores": scores, "winner": -999}
+	if contenders.size() > 1:
+		request_player_input({"type": "final_winner_choice", "phase": current_phase, "player_index": crown_owner_id if crown_owner_id >= 0 else get_play_order()[0], "contenders": contenders})
+	else:
+		final_result["winner"] = contenders[0].player_index
+		game_over.emit(final_result)
 	return true
 
+
+func submit_final_winner_choice(player_index: int, winner: int) -> bool:
+	if pending_input.get("type", "") != "final_winner_choice" or int(pending_input.get("player_index", -1)) != player_index:
+		return false
+	for row in pending_input.get("contenders", []):
+		if int(row.player_index) == winner:
+			clear_player_input()
+			final_result["winner"] = winner
+			game_over.emit(final_result)
+			return true
+	return false
 
 
 # =============================================================================
@@ -14944,6 +15032,7 @@ func get_beta_game_state(
 		"setup_stage": starting_setup_stage,
 		"game_flow_active": game_flow_active,
 		"game_has_ended": game_has_ended,
+		"final_result": final_result,
 		"black_rose_power": black_rose_power,
 		"crown_owner_id": crown_owner_id,
 		"player_count": player_count,
@@ -15954,7 +16043,7 @@ func _beta_spell_cast_descriptor(
 
 	var targeting_side: Dictionary = _spell_effective_target_side(
 		player_index,
-		side
+		side, ready.spell
 	)
 
 	var spell_type: String = str(
@@ -16250,6 +16339,7 @@ func get_beta_legal_actions(
 
 func get_beta_supported_input_types() -> Array[String]:
 	return [
+		"final_winner_choice",
 		"starting_mage_choice",
 		"starting_school_choice",
 		"starting_grimoire_choice",
@@ -16294,6 +16384,8 @@ func _submit_beta_input_authoritative(player_index: int, payload: Dictionary) ->
 	)
 
 	match input_type:
+		"final_winner_choice":
+			return submit_final_winner_choice(player_index, int(payload.get("winner", -999)))
 		"starting_mage_choice":
 			return submit_starting_mage_choice(
 				player_index,
@@ -17751,6 +17843,8 @@ func request_black_rose_completed_quest_limit(
 			player.completed_quests[i]
 		)
 
+		if quest.is_solved():
+			continue
 		quest_data.append(
 			{
 				"quest_index": i,
@@ -17830,6 +17924,9 @@ func submit_black_rose_completed_quest_limit(
 
 		if index < 0 \
 		or index >= player.completed_quests.size():
+			return false
+
+		if player.completed_quests[index].is_solved():
 			return false
 
 		if seen_indices.has(index):

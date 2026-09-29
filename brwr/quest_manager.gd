@@ -775,7 +775,7 @@ func get_completed_excess(
 	var player = game.players[player_index]
 	return max(
 		0,
-		player.completed_quests.size() - player.max_active_quests
+		player.completed_quests.filter(func(quest): return quest.is_completed()).size() - player.max_active_quests
 	)
 
 

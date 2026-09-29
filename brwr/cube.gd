@@ -24,3 +24,9 @@ func _ready():
 	
 	# Deve stare davanti alla grafica della Room
 	z_index = 10
+
+
+func _draw() -> void:
+	# Black Rose cubes must remain visible over the black printed slots.
+	if owner_type == OwnerType.BLACK_ROSE:
+		draw_rect(Rect2(Vector2.ZERO, CUBE_SIZE), Color(0.85, 0.85, 0.85), false, 1.5)

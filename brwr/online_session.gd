@@ -16,7 +16,7 @@ var version := ""
 
 func _ready() -> void:
 	multiplayer.connected_to_server.connect(_connected)
-	multiplayer.connection_failed.connect(func(): status_changed.emit("Connessione fallita: verifica IP Tailscale, codice e firewall."))
+	multiplayer.connection_failed.connect(func(): status_changed.emit("Connessione fallita: verifica IP host, porta UDP 27847, codice e firewall."))
 	multiplayer.server_disconnected.connect(_disconnected)
 	multiplayer.peer_disconnected.connect(func(id):
 		if id == remote_peer: _disconnected())

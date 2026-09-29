@@ -17,17 +17,18 @@ un nuovo pacchetto. I vecchi ZIP senza questo launcher non si aggiornano.
 Godot è incluso, non serve installarlo. La modalità solo-test mantiene il
 controllo locale di tutti i giocatori (da 2 a 6).
 
-Per il PvP, entrambi devono essere collegati alla stessa rete Tailscale, oppure
-il PC host deve essere condiviso con l'amico attraverso Tailscale.
+Per il PvP non servono Tailscale, VPN o server intermedi.
 
-1. L'host sceglie **Crea partita PvP**.
-2. Comunica il suo IP Tailscale (100.x.x.x) e il codice di sei cifre mostrato.
-3. L'amico inserisce IP e codice e sceglie **Entra nella partita PvP**.
-4. L'host gioca P1, l'amico P2. L'ordine di turno viene deciso dal gioco.
+1. In LAN l'amico usa l'IP locale dell'host. Su Internet usa il suo IP pubblico.
+2. Per Internet, sul router dell'host inoltra **UDP 27847** all'IP locale del PC
+   host e consenti Godot nel firewall Windows. La porta e UDP, non TCP.
+3. L'host sceglie **Crea partita PvP** e comunica IP e codice di sei cifre.
+4. L'amico inserisce IP e codice e sceglie **Entra nella partita PvP**.
+5. L'host gioca P1, l'amico P2. L'ordine di turno viene deciso dal gioco.
 
-Se Windows Firewall lo chiede, consentite il traffico del programma sulla rete
-usata per Tailscale. Il gioco usa UDP 27847; non occorre aprire porte sul router
-con Tailscale. Non esporre questa porta direttamente a Internet per questo test.
+Con CGNAT la connessione entrante IPv4 non arriva al router: richiedi un IP
+pubblico al provider. Il gioco non apre automaticamente porte o regole firewall.
+La connessione diretta tra reti diverse richiede una prova sui vostri due PC.
 
 Ogni PC consulta la propria mano e le proprie carte nascoste anche fuori turno.
 Le carte pubbliche rimangono consultabili da entrambi. Solo il giocatore che
@@ -70,6 +71,4 @@ La directory deve contenere il Godot Windows originale. Il pacchetto include i
 file del progetto, compresi gli asset nuovi non ancora tracciati; esclude cache,
 output, backup e log. Non include la cartella Git o credenziali.
 
-Documentazione: [Tailscale su Windows](https://tailscale.com/kb/1022/install-windows),
-[condivisione dispositivi](https://tailscale.com/kb/1084/sharing),
-[multiplayer Godot](https://docs.godotengine.org/en/4.7/tutorials/networking/high_level_multiplayer.html).
+Documentazione: [multiplayer Godot e port forwarding UDP](https://docs.godotengine.org/en/4.7/tutorials/networking/high_level_multiplayer.html).

@@ -41,6 +41,8 @@ static func build(game, viewer: int) -> Dictionary:
 
 static func apply(game, state: Dictionary) -> void:
 	var previous_revision: int = game.input_revision
+	var previous_result: Dictionary = game.final_result.duplicate(true)
+	game.final_result = state.get("final_result", {}).duplicate(true)
 	for field in ["black_rose_power", "crown_owner_id", "game_flow_active", "game_has_ended", "waiting_for_player_input"]:
 		game.set(field, state[field])
 	game.current_round = state.round
@@ -147,3 +149,5 @@ static func apply(game, state: Dictionary) -> void:
 		game.player_input_resolved.emit({})
 		if game.waiting_for_player_input:
 			game.player_input_requested.emit(game.pending_input)
+	if not game.final_result.is_empty() and int(game.final_result.get("winner", -999)) != -999 and (previous_result != game.final_result or not game.waiting_for_player_input):
+		game.game_over.emit(game.final_result)

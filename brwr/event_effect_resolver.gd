@@ -41,6 +41,9 @@ func resolve_effect(
 
 
 	match effect_type:
+		"on_activate_room_color_black_rose_gain_power":
+			# Consumed by Game when a matching Room activation finishes.
+			return true
 
 		"black_rose_instability":
 			return _resolve_black_rose_instability(

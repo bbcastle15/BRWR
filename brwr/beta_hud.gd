@@ -102,6 +102,7 @@ func get_reserved_width() -> float:
 
 func get_supported_input_types() -> Array[String]:
 	return [
+		"final_winner_choice",
 		"starting_mage_choice",
 		"starting_school_choice",
 		"starting_grimoire_choice",
@@ -305,10 +306,13 @@ func _on_phase_completed(_phase: String) -> void:
 
 func _on_game_over(winner_data: Dictionary) -> void:
 	_refresh_header()
-	feedback_label.text = (
-		"GAME OVER\n"
-		+ JSON.stringify(winner_data)
-	)
+	_clear_content()
+	panel.show()
+	prompt_label.text = "Fine partita"
+	var winner: int = int(winner_data.get("winner", -999))
+	_add_info("Vincitore: " + ("Rosa Nera" if winner == -1 else "Player " + str(winner + 1)))
+	for row in winner_data.get("scores", []):
+		_add_info("%s: %d PP = %d base + %d quest + %d trofei + %d corona" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
 
 
 func _on_player_input_resolved(
@@ -544,6 +548,10 @@ func _render_current_request() -> void:
 	prompt_label.text = _request_title(input_type)
 
 	match input_type:
+		"final_winner_choice":
+			_add_info("Parità dopo quest e trofei: il Primo Mago sceglie il vincitore.")
+			for row in current_request.get("contenders", []):
+				_add_button(str(row.name), _submit.bind({"winner": row.player_index}))
 		"starting_mage_choice":
 			_render_starting_mage_choice()
 

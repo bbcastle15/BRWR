@@ -14,6 +14,7 @@ var color: Color
 var evocations: Array[EvocationState] = []
 
 var power: int = 0
+var trophies: Array[int] = []
 var hand_limit: int = 6
 var available_cubes: int = MAX_CUBES
 var max_active_quests: int = 2

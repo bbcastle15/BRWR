@@ -44,11 +44,11 @@ func _ready() -> void:
 	_button(box, "Modalità solo-test", _solo)
 	box.add_child(HSeparator.new())
 	var label := Label.new()
-	label.text = "PvP online · 2 giocatori · Tailscale / rete locale"
+	label.text = "PvP diretto · 2 giocatori · Internet / rete locale · UDP 27847"
 	box.add_child(label)
 	host_button = _button(box, "Crea partita PvP", _host)
 	address = LineEdit.new()
-	address.placeholder_text = "IP Tailscale dell'host (100.x.x.x)"
+	address.placeholder_text = "IP pubblico dell'host (oppure IP locale in LAN)"
 	box.add_child(address)
 	code = LineEdit.new()
 	code.placeholder_text = "Codice partita comunicato dall'host"
