@@ -80,11 +80,11 @@
     "slot": 0,
     "reveal_power": 2,
     "discard_power": 0,
-    "text": "Each Mage, in play order, may place their Model in a Room within 1.",
+    "text": "Each Mage, in play order, may place their Model in any Room.",
     "effects": [
       {
         "type": "each_mage_may_place_model",
-        "range": 1
+        "range": "any"
       }
     ]
   },
@@ -177,11 +177,8 @@
     "text": "Each Mage, in play order, loses 1 Power, then places themselves in a Room within 1 from their own Cell.",
     "effects": [
       {
-        "type": "each_mage_lose_power",
-        "amount": 1
-      },
-      {
-        "type": "each_mage_place_from_cell",
+        "type": "each_mage_lose_power_then_place_from_cell",
+        "power_loss": 1,
         "range": 1
       }
     ]
@@ -702,7 +699,7 @@
     "slot": 0,
     "reveal_power": 0,
     "discard_power": 3,
-    "text": "At the start of the Action Phase, in play order, each Mage may lose 2 Power. If they do, that Mage draws 1 Spell from the Forgotten Spell Deck.",
+    "text": "In play order, each Mage may lose 2 Power. If they do, that Mage draws 1 Spell from the Forgotten Spell Deck.",
     "effects": [
       {
         "type": "each_mage_optional_lose_power_draw_forgotten",

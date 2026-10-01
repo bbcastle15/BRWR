@@ -110,7 +110,6 @@ var player_entrance_room_coords: Dictionary = {}
 var player_cell_exit_room_ids: Dictionary = {}
 var player_cell_exit_room_coords: Dictionary = {}
 
-var cancelled_physical_action_players: Dictionary = {}
 @export var game_seed: int = 0
 @export_range(2, 6) var player_count: int = 4
 var players: Array[PlayerState] = []
@@ -1055,9 +1054,24 @@ func open_evocation_inspection(evocation: EvocationState) -> void:
 		evocation_inspection.name = "EvocationInspection"
 		evocation_inspection.ok_button_text = "Close"
 		add_child(evocation_inspection)
+		var content := VBoxContainer.new()
+		content.name = "Content"
+		content.add_theme_constant_override("separation", 12)
+		evocation_inspection.add_child(content)
+		var stats := Label.new()
+		stats.name = "Stats"
+		content.add_child(stats)
+		var art := TextureRect.new()
+		art.name = "CardArt"
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.custom_minimum_size = Vector2(650, 430)
+		art.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		content.add_child(art)
 	inspected_evocation = evocation
 	_update_evocation_inspection()
-	evocation_inspection.popup_centered(Vector2i(400, 260))
+	evocation_inspection.popup_centered(Vector2i(760, 680))
 
 
 func _process(_delta: float) -> void:
@@ -1091,12 +1105,15 @@ func _update_evocation_inspection() -> void:
 		inspected_evocation = null
 		return
 	var evocation := inspected_evocation
+	evocation_inspection.get_node("Content/CardArt").texture = ReferenceCardPreview.card_texture("evocations", evocation.evocation_id)
 	evocation_inspection.title = evocation.get_display_name() + " · P" + str(evocation.owner_id + 1)
 	evocation_inspection.dialog_text = (
 		"Health: %d / %d\nDamage: %d\nMovement speed: %d\nAttack: %d\nRoom: %s\nController: P%d"
 		% [evocation.get_remaining_health(), evocation.health, evocation.get_damage(),
 			evocation.speed, evocation.strength, evocation.room_id, get_evocation_controller_id(evocation) + 1]
 	)
+	evocation_inspection.get_label().hide()
+	evocation_inspection.get_node("Content/Stats").text = evocation_inspection.dialog_text
 
 
 func refresh_model_tokens() -> void:
@@ -1104,6 +1121,9 @@ func refresh_model_tokens() -> void:
 		return
 
 	_sync_evocation_tokens()
+	for board in player_boards:
+		if is_instance_valid(board):
+			board.refresh_evocations()
 
 	var groups: Dictionary = {}
 	var group_centers: Dictionary = {}
@@ -1416,6 +1436,7 @@ func deal_damage(
 	if amount <= 0:
 		return 0
 
+	amount = _event_spell_damage_amount(attacker_id, amount, action_type)
 	var capacity: int = players[target_player_index].mage.get_remaining_health()
 	if capacity <= 0:
 		return 0
@@ -1903,6 +1924,21 @@ func get_player_quest_cards(player_index: int, section: String) -> Array:
 	return result
 
 
+func get_player_board_quest_cards(player_index: int, section: String) -> Array:
+	var result: Array = []
+	if player_index < 0 or player_index >= players.size():
+		return result
+	var player = players[player_index]
+	for quest in player.active_quests + player.completed_quests:
+		if (section == "revealed" and quest.completed) or (section == "completed" and not quest.completed):
+			continue
+		if not can_inspect_quest(quest):
+			result.append({"can_inspect": false})
+		else:
+			result.append({"can_inspect": true, "id": quest.get_id(), "name": quest.get_name(), "quest": quest})
+	return result
+
+
 func open_quest_card(quest: QuestState) -> void:
 	if not can_inspect_quest(quest):
 		return
@@ -2002,7 +2038,7 @@ func get_tabletop_bounds() -> Rect2:
 
 func update_player_board_positions():
 	# Keep the tuned Lodge/side-board geometry. Place PlayerBoards outside
-	# its real bounds, using their actual 600 x 390 size for every player count.
+	# its real bounds, using their full footprint including external cards for every player count.
 	var bounds := get_lodge_table_bounds()
 	var board_scale := 0.65
 	var gap := 24.0
@@ -2439,8 +2475,9 @@ func deal_damage_to_evocation(
 	source_model_type: String = "",
 	source_evocation: EvocationState = null
 ) -> int:
-	if evocation == null or amount <= 0:
+	if evocation == null or amount <= 0 or is_event_active("immortals"):
 		return 0
+	amount = _event_spell_damage_amount(attacker_id, amount, action_type)
 	# Rebirth, Immunity: controlled Evocations ignore their Mage's damage.
 	if attacker_id >= 0 and get_evocation_controller_id(evocation) == attacker_id:
 		return 0
@@ -5245,7 +5282,8 @@ func place_event_on_board(
 	
 func draw_event(
 	drawing_player_index: int,
-	context: Dictionary = {}
+	context: Dictionary = {},
+	from_moon: int = 0
 ) -> EventCardState:
 
 	if drawing_player_index < 0 \
@@ -5254,9 +5292,7 @@ func draw_event(
 		return null
 
 
-	var moon: int = (
-		current_moon
-	)
+	var moon: int = from_moon if from_moon > 0 else current_moon
 
 
 	if not event_decks.has(
@@ -5359,55 +5395,15 @@ func draw_event(
 		] = drawing_player_index
 
 
-		# Mandatory event destinations are interactive; suspend the phase until
-		# every Mage has placed, without replaying already resolved effects.
-		for effect in event.effects:
-			if str(effect.get("type", "")) == "each_mage_place_from_cell" and not event_context.has("event_mage_destinations"):
-				black_rose_instant_event_queued = true
-				queue_resolution({
-					"type": "instant_event",
-					"event": event,
-					"context": event_context,
-					"index": 0,
-					"on_complete": "continue_black_rose_event" if current_phase == PHASE_BLACK_ROSE else ""
-				})
-				return event
-
-		if not resolve_event(
-			event,
-			event_context
-		):
-
-			print(
-				"Instant Event failed: ",
-				event.event_name
-			)
-
-			return null
-
-
-		if event.discard_power > 0:
-
-			print(
-				"Black Rose gains ",
-				event.discard_power,
-				" additional Power from Instant Event"
-			)
-
-
-			add_black_rose_power(
-				event.discard_power
-			)
-
-
-		# Non usare gain_discard_power=true:
-		# lo abbiamo appena assegnato esplicitamente.
-
-		discard_event(
-			event,
-			false
-		)
-
+		var resume_phase: bool = bool(event_context.get("resume_black_rose", false))
+		event_context.erase("resume_black_rose")
+		if resume_phase:
+			black_rose_instant_event_queued = true
+		queue_resolution({
+			"type": "event_sequence", "event": event, "context": event_context,
+			"discard_after": true,
+			"on_complete": "continue_black_rose_event" if resume_phase else ""
+		})
 
 		return event
 
@@ -5423,6 +5419,16 @@ func draw_event(
 		return null
 
 
+	if event.phase == "always":
+		var entry_context: Dictionary = context.duplicate()
+		entry_context["game"] = self
+		entry_context["event"] = event
+		var resume_phase: bool = bool(entry_context.get("resume_black_rose", false))
+		entry_context.erase("resume_black_rose")
+		if resume_phase:
+			black_rose_instant_event_queued = true
+		queue_resolution({"type": "event_sequence", "event": event, "context": entry_context,
+			"on_complete": "continue_black_rose_event" if resume_phase else ""})
 	return event
 	
 func resolve_events_for_phase(
@@ -5430,52 +5436,10 @@ func resolve_events_for_phase(
 	context: Dictionary = {}
 ) -> bool:
 
-	for event in active_events:
-
-		if event == null:
-			continue
-
-
-		# -------------------------------------------------
-		# Solo gli Event appartenenti esplicitamente
-		# alla fase richiesta vengono risolti.
-		#
-		# "always" e trigger come Puppeteer NON passano qui.
-		# -------------------------------------------------
-
-		if event.phase != phase:
-			continue
-
-
-		print(
-			"Resolving Event from board: ",
-			event.event_name
-		)
-
-
-		var event_context: Dictionary = (
-			context.duplicate()
-		)
-
-
-		event_context["event"] = event
-		event_context["game"] = self
-
-
-		if not resolve_event(
-			event,
-			event_context
-		):
-
-			print(
-				"Failed to resolve Event: ",
-				event.event_name
-			)
-
-			return false
-
-
-	return true
+	var phase_events: Array = active_events.filter(func(event): return event != null and event.phase == phase)
+	if phase_events.is_empty():
+		return true
+	return queue_resolution({"type": "action_events", "events": phase_events, "context": context})
 	
 func resolve_event(
 	event: EventCardState,
@@ -5499,6 +5463,28 @@ func resolve_event(
 		event,
 		event_context
 	)
+
+func get_active_event_effects(effect_type: String) -> Array:
+	var effects: Array = []
+	for event in active_events:
+		if event == null or (event.phase != "always" and event.phase != current_phase):
+			continue
+		for effect in event.effects:
+			if effect.get("type", "") == effect_type:
+				effects.append(effect)
+	return effects
+
+func _event_spell_damage_amount(attacker_id: int, amount: int, action_type: String) -> int:
+	if attacker_id < 0 or action_type != "spell" or active_effect_context.get("resolver_kind", "") != "spell" or active_effect_context.get("spell_type", "") != "combat":
+		return amount
+	for effect in get_active_event_effects("combat_spell_damage_bonus"):
+		amount += int(effect.get("amount", 1))
+	return amount
+
+func _apply_event_after_spell(player_index: int, spell_type: String) -> void:
+	for effect in get_active_event_effects("on_spell_types_resolved_black_rose_damage"):
+		if spell_type in effect.get("spell_types", []):
+			deal_damage(-1, player_index, int(effect.get("amount", 1)), "event")
 
 func get_active_event_by_id(
 	event_id: String
@@ -5750,6 +5736,7 @@ func resolve_black_rose_phase(
 	shift_active_events()
 
 	black_rose_instant_event_queued = false
+	event_context["resume_black_rose"] = true
 	var drawn_event: EventCardState = draw_event(
 		drawing_player_index,
 		event_context
@@ -5767,20 +5754,12 @@ func resolve_black_rose_phase(
 
 
 func _continue_black_rose_after_event(event_context: Dictionary) -> bool:
-	if not resolve_events_for_phase(
-		PHASE_BLACK_ROSE,
-		event_context
-	):
-		return false
+	return queue_resolution({
+		"type": "action_events", "context": event_context,
+		"events": active_events.filter(func(event): return event != null and event.phase == PHASE_BLACK_ROSE),
+		"on_complete": "continue_black_rose_quests"
+	})
 
-	# =====================================================
-	# STEPS 4-6: QUESTS
-	# =====================================================
-
-	black_rose_quest_step = 4
-	black_rose_quest_cursor = 0
-
-	return advance_black_rose_quest_steps()
 
 func start_phase(
 	phase: String
@@ -5875,7 +5854,6 @@ func finish_round():
 	print("ROUND ", current_round, " COMPLETE")
 	current_round += 1
 	current_phase = ""
-	cancelled_physical_action_players.clear()
 	print(
 		"Starting Round ",
 		current_round,
@@ -7068,29 +7046,17 @@ func resolve_action_phase(
 	] = current_phase_play_order.duplicate()
 
 
-	if not resolve_events_for_phase(
-		PHASE_ACTION,
-		phase_context
-	):
-
-		print(
-			"Action Phase: Event resolution failed"
-		)
-
-		return false
-
-
-	# =====================================================
-	# INITIALIZE INTERACTIVE LOOP
-	# =====================================================
-
 	action_phase_cursor = 0
 	action_phase_activation_round = 1
 	_reset_stepwise_action_activation()
-
-
-	return advance_action_phase()
+	# Events can suspend for choices, damage triggers and Evocation activation.
+	return queue_resolution({
+		"type": "action_events", "context": phase_context,
+		"events": active_events.filter(func(event): return event != null and event.phase == PHASE_ACTION),
+		"index": 0, "on_complete": "advance_action_phase"
+	})
 	
+
 func resolve_evocation_phase(
 	context: Dictionary = {}
 ) -> bool:
@@ -7191,6 +7157,7 @@ func request_player_input(
 
 func clear_player_input():
 	clear_lodge_room_choices()
+	clear_board_target_choices()
 
 	var resolved_request: Dictionary = (
 		pending_input.duplicate(true)
@@ -7282,6 +7249,28 @@ func request_effect_choice(
 
 		var public_option: Dictionary = option.duplicate(true)
 		public_option.erase("value")
+		# Public board addresses travel with choices, including remote clients.
+		var value = option.get("value")
+		var evocation = value if value is EvocationState else (value.get("evocation") if value is Dictionary else null)
+		if evocation is EvocationState:
+			public_option["owner_id"] = evocation.owner_id
+			public_option["evocation_index"] = players[evocation.owner_id].evocations.find(evocation)
+		if value is Dictionary and value.has("evocation_target_model_type"):
+			var target: Dictionary = {}
+			if str(value.evocation_target_model_type) == "mage":
+				target["player_index"] = int(value.get("evocation_target_player_index", -1))
+			elif str(value.evocation_target_model_type) == "evocation":
+				target = {"owner_id": int(value.get("evocation_target_evocation_owner_id", -1)), "evocation_index": int(value.get("evocation_target_evocation_index", -1))}
+			public_option["board_target"] = target
+		if value is Dictionary and value.has("player_index"):
+			public_option["player_index"] = value.player_index
+		if token.begins_with("damage:") or token.begins_with("instability:"):
+			public_option["cube_room_id"] = str(context.get("target_room_id", ""))
+			public_option["cube_player_index"] = int(option.get("cube_player_index", context.get("target_player_index", player_index)))
+			var target_evocation = context.get("target_evocation")
+			if target_evocation is EvocationState:
+				public_option["cube_evocation_owner"] = target_evocation.owner_id
+				public_option["cube_evocation_index"] = players[target_evocation.owner_id].evocations.find(target_evocation)
 		public_options.append(public_option)
 
 	if public_options.is_empty():
@@ -7289,6 +7278,9 @@ func request_effect_choice(
 
 	pending_effect_choice_context = context
 	pending_effect_choice_values = runtime_values
+	var movement_origin: String = str(context.get("movement_origin_room_id", ""))
+	if choice_kind == "evocation_activation_plan" and context.get("evocation") is EvocationState:
+		movement_origin = str(context.evocation.room_id)
 
 	return request_player_input({
 		"type": "effect_choice",
@@ -7296,6 +7288,7 @@ func request_effect_choice(
 		"player_index": player_index,
 		"choice_kind": choice_kind,
 		"context_key": context_key,
+		"movement_origin_room_id": movement_origin,
 		"prompt": prompt,
 		"min_select": min_select,
 		"max_select": max_select,
@@ -7707,14 +7700,15 @@ func _quest_request_single_choice(
 	context: Dictionary,
 	context_key: String,
 	options: Array,
-	prompt: String
+	prompt: String,
+	confirm_single: bool = false
 ) -> bool:
 	if options.is_empty():
 		# No legal target/choice exists.  Let the Effect resolver attempt the
 		# sentence; the Quest rules will then skip the unapplicable part.
 		return true
 
-	if options.size() == 1:
+	if options.size() == 1 and not confirm_single:
 		var only_option: Dictionary = options[0]
 		_set_interactive_effect_choice(
 			context,
@@ -7750,10 +7744,6 @@ func _prepare_quest_target_choice(
 		return true
 
 	if target_type == "room":
-		# Range 0 explicitly means the caster's current Room.
-		if str(effect.get("range", "")) == "0":
-			return true
-
 		if str(context.get("target_room_id", "")) != "":
 			return true
 
@@ -7763,7 +7753,8 @@ func _prepare_quest_target_choice(
 			context,
 			"target_room_id",
 			_quest_room_choice_options(caster_id, effect),
-			"Choose a target Room."
+			"Choose a target Room for " + str(effect.get("type", "Effect")).replace("_", " ") + ".",
+			true
 		)
 
 	if target_type == "mage":
@@ -8643,13 +8634,13 @@ func _prepare_quest_special_choice(
 				if str(
 					context.get(
 						"target_model_type",
-						""
+						"mage"
 					)
 				) == "mage":
 					var target_player_index: int = int(
 						context.get(
 							"target_player_index",
-							-1
+							caster_id
 						)
 					)
 
@@ -8662,7 +8653,7 @@ func _prepare_quest_special_choice(
 				elif str(
 					context.get(
 						"target_model_type",
-						""
+						"mage"
 					)
 				) == "evocation":
 					var target_evocation = context.get(
@@ -9391,6 +9382,9 @@ func _damaged_model_choice_options(
 			"token": "damaged_model:" + str(model_index),
 			"value": model_index,
 			"model_index": model_index,
+			"player_index": int(model.get("player_index", -1)),
+			"owner_id": int(model.evocation.owner_id) if model_type == "evocation" else -1,
+			"evocation_index": players[model.evocation.owner_id].evocations.find(model.evocation) if model_type == "evocation" else -1,
 			"model_type": model_type,
 			"name": name
 		})
@@ -9457,9 +9451,6 @@ func _movement_destination_choice_options(
 	for room_value in room_id_by_coord.values():
 		var room_id: String = str(room_value)
 
-		if room_id == origin_room_id:
-			continue
-
 		var room_coord: Vector2i = room_id_to_coord(room_id)
 		if room_coord == Vector2i(9999, 9999):
 			continue
@@ -9469,7 +9460,7 @@ func _movement_destination_choice_options(
 			room_coord
 		)
 
-		if room_distance <= 0 or room_distance > distance:
+		if room_distance < 0 or room_distance > distance:
 			continue
 
 		var room = get_room_by_id(room_id)
@@ -9482,7 +9473,8 @@ func _movement_destination_choice_options(
 			"token": "movement_room:" + room_id,
 			"value": room_id,
 			"room_id": room_id,
-			"name": room_name
+			"path": [] if room_id == origin_room_id else [room_id],
+			"name": "Stay here" if room_id == origin_room_id else room_name
 		})
 
 	return options
@@ -9567,6 +9559,62 @@ func _apply_or_request_secondary_choice(
 	return false
 
 
+func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary) -> bool:
+	var mode: String = str(effect.get("type", ""))
+	if mode not in ["convert_damage", "convert_damage_on_caster", "convert_damage_each_other_mage"]:
+		return true
+	var caster: int = int(context.get("caster_id", -1))
+	if caster < 0 or effect_resolver._is_dummy_target(context):
+		return true
+	var target_type: String = effect_resolver._target_type(context)
+	var models: Array = []
+	for i in range(players.size()):
+		var mage = players[i].mage
+		var include := false
+		if mode == "convert_damage_on_caster":
+			include = i == caster
+		elif i != caster:
+			if mode == "convert_damage_each_other_mage":
+				include = i != int(context.get("target_player_index", -1)) and not mage.in_cell
+			elif target_type == "room":
+				include = not mage.in_cell and mage.room_id == str(context.get("target_room_id", ""))
+			elif target_type == "mage":
+				include = i == int(context.get("target_player_index", -1))
+		if include:
+			models.append({"key": "mage:%d" % i, "cubes": mage.damage_cubes, "cube_player_index": i})
+		if mode != "convert_damage":
+			continue
+		for j in range(players[i].evocations.size()):
+			var evocation: EvocationState = players[i].evocations[j]
+			if evocation.is_defeated() or get_evocation_controller_id(evocation) == caster:
+				continue
+			if (target_type == "evocation" and context.get("target_evocation") == evocation) or (target_type == "room" and evocation.room_id == str(context.get("target_room_id", ""))):
+				models.append({"key": "evocation:%d" % evocation.get_instance_id(), "cubes": evocation.damage_cubes, "cube_evocation_owner": i, "cube_evocation_index": j})
+	var new_owner: int = int(effect.get("converter_owner_id", -1)) if mode == "convert_damage_on_caster" else caster
+	for model in models:
+		var key: String = "convert_" + str(model.key)
+		if context.has(key):
+			continue
+		var options: Array = []
+		var occurrences: Dictionary = {}
+		for owner in model.cubes:
+			var ordinal: int = int(occurrences.get(owner, 0))
+			occurrences[owner] = ordinal + 1
+			if int(owner) == new_owner:
+				continue
+			var option: Dictionary = model.duplicate()
+			option.erase("cubes")
+			option.erase("key")
+			option.merge({"token": "damage:%d:%d" % [owner, ordinal], "value": owner})
+			options.append(option)
+		var amount := mini(int(effect.get("amount", 0)), options.size())
+		if amount <= 0 or amount == options.size():
+			continue
+		request_effect_choice(caster, "convert_damage_cubes", context, key, options, amount, amount, "Choose Damage cubes to convert.")
+		return false
+	return true
+
+
 func _prepare_spell_secondary_effect_choice(
 	effect: Dictionary,
 	context: Dictionary
@@ -9583,6 +9631,8 @@ func _prepare_spell_secondary_effect_choice(
 	)
 
 	match effect_type:
+		"heal", "convert_instability":
+			return _prepare_quest_special_choice(effect, context)
 		"activate_room_from_owned_evocation":
 			if context.has("target_room_id"):
 				return true
@@ -9648,6 +9698,7 @@ func _prepare_spell_secondary_effect_choice(
 			if origin_room_id == "":
 				return true
 
+			context["movement_origin_room_id"] = origin_room_id
 			return _apply_or_request_secondary_choice(
 				caster_id,
 				"movement_destination",
@@ -9892,6 +9943,10 @@ func _clear_spell_secondary_effect_choices(
 	var keys_to_clear: Array[String] = []
 
 	match effect_type:
+		"heal":
+			keys_to_clear = ["selected_damage_owner_ids"]
+		"convert_instability":
+			keys_to_clear = ["selected_instability_owner_ids"]
 		"damage_secondary_mage_per_self_damage":
 			keys_to_clear = [
 				"secondary_target_player_index"
@@ -11838,12 +11893,20 @@ func process_resolution_stack() -> bool:
 		var completed: bool = false
 
 		match resolution_type:
-			"instant_event":
-				completed = process_instant_event_resolution(frame)
+			"action_events":
+				completed = process_action_events_resolution(frame)
+			"event_tribute":
+				completed = process_tribute_resolution(frame)
+			"event_sequence":
+				completed = event_effect_resolver.process_sequence(frame, self)
+			"event_effect":
+				completed = event_effect_resolver.process_effect(frame, self)
 			"damage":
 				completed = process_damage_resolution(frame)
 			"evocation_damage":
 				completed = process_evocation_damage_resolution(frame)
+			"evocation_damage_ability":
+				completed = process_evocation_damage_ability(frame)
 			"effect_sequence":
 				completed = process_effect_sequence_resolution(frame)
 			"quest_resolution":
@@ -11897,41 +11960,63 @@ func process_resolution_stack() -> bool:
 		continue
 	return true
 
-func process_instant_event_resolution(frame: Dictionary) -> bool:
-	var event: EventCardState = frame.get("event")
-	var context: Dictionary = frame.get("context", {})
+func process_action_events_resolution(frame: Dictionary) -> bool:
+	var events: Array = frame.get("events", [])
 	var index: int = int(frame.get("index", 0))
-	if index >= event.effects.size():
-		if event.discard_power > 0:
-			add_black_rose_power(event.discard_power)
-		discard_event(event, false)
+	if index >= events.size():
 		return true
-	var effect: Dictionary = event.effects[index]
-	if str(effect.get("type", "")) == "each_mage_place_from_cell":
-		var order: Array = context.get("play_order", get_play_order())
-		var cursor: int = int(frame.get("placement_cursor", 0))
-		if cursor >= order.size():
-			frame["index"] = index + 1
-			frame.erase("placement_cursor")
-			return false
-		var player_index: int = int(order[cursor])
-		if not frame.has("destination"):
-			var options: Array = []
-			for room_id in get_player_cell_exit_room_ids(player_index):
-				options.append({"token": "room:" + room_id, "name": room_id, "room_id": room_id, "value": room_id})
-			if not _apply_or_request_secondary_choice(
-				player_index, "event_cell_destination", frame, "destination", options,
-				event.event_name + ": choose a Room adjacent to your Cell."
-			):
-				return false
-		var placement_context: Dictionary = context.duplicate(true)
-		placement_context["play_order"] = [player_index]
-		placement_context["event_mage_destinations"] = {player_index: str(frame.get("destination", ""))}
-		frame.erase("destination")
-		frame["placement_cursor"] = cursor + 1
-		return not event_effect_resolver.resolve_effect(effect, placement_context)
 	frame["index"] = index + 1
-	return not event_effect_resolver.resolve_effect(effect, context)
+	if not resolve_event(events[index], frame.get("context", {})):
+		push_error("Action Event could not resolve: " + events[index].event_name)
+		frame["on_complete"] = ""
+		return true
+	return false
+
+
+func process_tribute_resolution(frame: Dictionary) -> bool:
+	var order: Array = frame.get("order", [])
+	var cursor: int = int(frame.get("cursor", 0))
+	if cursor >= order.size():
+		return true
+	var player_index: int = int(order[cursor])
+	if not frame.has("accepted"):
+		request_effect_choice(player_index, "event_tribute", frame, "accepted", [
+			{"token": "accept", "value": true, "label": "Suffer 1 Damage and activate an Evocation"},
+			{"token": "decline", "value": false, "label": "Decline"}
+		], 1, 1, "Tribute of the Command")
+		return false
+	if bool(frame.accepted):
+		if not bool(frame.get("damage_queued", false)):
+			frame["damage_queued"] = true
+			frame["damage_result"] = {"last_damage_dealt": 0}
+			queue_resolution({"type": "damage", "attacker_id": -1,
+				"target_player_index": player_index, "amount": int(frame.get("damage", 1)),
+				"action_type": "event", "result_context": frame.damage_result})
+			return false
+		if int(frame.damage_result.get("last_damage_dealt", 0)) < int(frame.get("damage", 1)) or frame.damage_result.get("last_damage_redirected_evocation") != null or int(frame.damage_result.get("last_damage_target_player_index", -1)) != player_index:
+			frame["accepted"] = false
+			return false
+		if not frame.has("evocation"):
+			var options: Array = []
+			for owner_index in range(players.size()):
+				for i in range(players[owner_index].evocations.size()):
+					var evocation: EvocationState = players[owner_index].evocations[i]
+					if evocation != null and not evocation.is_defeated():
+						options.append({"token": "evocation:%d:%d" % [owner_index, i], "value": evocation,
+							"owner_id": owner_index, "evocation_index": i, "name": evocation.get_display_name()})
+			if not options.is_empty():
+				request_effect_choice(player_index, "target_evocation", frame, "evocation", options, 1, 1, "Choose an Evocation to activate under your control.")
+				return false
+			frame["evocation"] = null
+		var chosen: EvocationState = frame.get("evocation")
+		if chosen != null:
+			activate_evocation(chosen, player_index)
+	frame["cursor"] = cursor + 1
+	frame.erase("accepted")
+	frame.erase("damage_queued")
+	frame.erase("damage_result")
+	frame.erase("evocation")
+	return false
 
 
 func process_damage_resolution(
@@ -11997,7 +12082,7 @@ func process_damage_resolution(
 
 		"apply_redirect":
 			var redirected_evocation = resolution.get("redirected_evocation", null)
-			if redirected_evocation == null or redirected_evocation.is_defeated():
+			if redirected_evocation == null or redirected_evocation.is_defeated() or is_event_active("immortals"):
 				_sync_damage_result_context(resolution, 0)
 				return true
 
@@ -12137,7 +12222,11 @@ func process_damage_resolution(
 			var victim: int = int(resolution.get("target_player_index", -1))
 			if not players[victim].mage.is_defeated():
 				return true
-			cancelled_physical_action_players[victim] = true
+			# Defeat interrupts only physical resolutions already in progress.
+			# A player-level flag would incorrectly cancel the next Cell exit.
+			for frame in resolution_stack:
+				if str(frame.get("type", "")) in ["explore", "fight", "command"] and int(frame.get("player_index", -1)) == victim:
+					frame["cancelled_by_defeat"] = true
 			var killer: int = int(resolution.get("attacker_id", -1))
 			if is_event_active("dominion"):
 				killer = -1
@@ -12216,7 +12305,7 @@ func _make_evocation_lost_event(
 
 
 func _apply_puppeteer_after_evocation_loss(room_id: String):
-	if is_event_active("puppeteer"):
+	if current_phase == PHASE_ACTION and is_event_active("puppeteer"):
 		place_instability(-1, room_id, 1)
 
 
@@ -12266,6 +12355,7 @@ func _sync_damage_result_context(
 	resolution: Dictionary,
 	actual_damage: int
 ):
+	_queue_evocation_damage_abilities(resolution, actual_damage)
 	var context: Dictionary = resolution.get(
 		"result_context",
 		{}
@@ -12290,6 +12380,7 @@ func _sync_damage_result_context(
 
 	context["last_damage_dealt"] = actual_damage
 	context["last_damage_attacker_id"] = attacker_id
+	context["last_damage_redirected_evocation"] = resolution.get("redirected_evocation")
 
 	context["last_damage_source_model_type"] = str(
 		resolution.get(
@@ -12375,6 +12466,10 @@ func process_evocation_damage_resolution(
 	)
 
 	if evocation == null:
+		return true
+	# A trigger may have drawn Immortals after this Damage was queued.
+	if step in ["pre_event", "after_pre_event", "apply"] and is_event_active("immortals"):
+		_sync_evocation_damage_result_context(resolution, 0)
 		return true
 
 	match step:
@@ -12609,6 +12704,7 @@ func _sync_evocation_damage_result_context(
 	resolution: Dictionary,
 	actual_damage: int
 ):
+	_queue_evocation_damage_abilities(resolution, actual_damage)
 	var context: Dictionary = resolution.get("result_context", {})
 	if context.is_empty():
 		return
@@ -12621,6 +12717,51 @@ func _sync_evocation_damage_result_context(
 
 	context["last_damaged_model_type"] = "evocation"
 	context["last_damaged_evocation"] = evocation
+
+
+func _queue_evocation_damage_abilities(resolution: Dictionary, actual_damage: int) -> void:
+	if actual_damage <= 0 or bool(resolution.get("damage_abilities_queued", false)):
+		return
+	var source: EvocationState = resolution.get("source_evocation")
+	if str(resolution.get("source_model_type", "")) != "evocation" or source == null:
+		return
+	resolution["damage_abilities_queued"] = true
+	var abilities: Array = evocation_database.get_evocation(source.evocation_id).get("abilities", [])
+	# Stack frames retain the controller and location at the moment damage occurs.
+	for index in range(abilities.size() - 1, -1, -1):
+		var ability: Dictionary = abilities[index]
+		if str(ability.get("type", "")) != "on_inflict_damage":
+			continue
+		queue_resolution({
+			"type": "evocation_damage_ability", "ability": ability,
+			"name": source.get_display_name(),
+			"context": {"game": self, "caster_id": int(resolution.get("attacker_id", -1)),
+				"caster_room_id": source.room_id, "target_room_id": source.room_id}
+		})
+
+
+func process_evocation_damage_ability(resolution: Dictionary) -> bool:
+	var context: Dictionary = resolution.context
+	var controller: int = int(context.caster_id)
+	if controller < 0 or controller >= players.size():
+		return true
+	var ability: Dictionary = resolution.ability
+	if not context.has("ability_choice"):
+		var options: Array = []
+		for effect in ability.get("choices", []):
+			options.append({"token": "ability:" + str(options.size()), "value": effect,
+				"name": str(effect.get("type", "")).replace("_", " ").capitalize() + " " + str(effect.get("amount", 1))})
+		if options.is_empty():
+			return true
+		request_effect_choice(controller, "evocation_damage_ability", context, "ability_choice", options,
+			0 if bool(ability.get("optional", false)) else 1, 1,
+			str(resolution.name) + ": choose an Instability effect in its Room, or skip.")
+		return false
+	var selected = context.get("ability_choice")
+	if selected is Dictionary:
+		queue_resolution({"type": "effect_sequence", "resolver_kind": "evocation",
+			"effects": [selected], "index": 0, "context": context})
+	return true
 
 
 func process_quest_resolution_frame(
@@ -12828,6 +12969,13 @@ func process_effect_sequence_resolution(
 	# the Effect so no game state is changed until all required choices for
 	# this sentence are known.
 	if resolver_kind == "quest":
+		# A target supplied to solve the Quest is not a target for every sentence.
+		# Initialize once per Effect, retaining its choices while input is pending.
+		if int(resolution.get("target_effect_index", -1)) != index:
+			resolution["target_effect_index"] = index
+			if not str(effect.get("target", "")).is_empty():
+				for key in ["target_room_id", "target_player_index", "target_evocation", "target_model_type", "quest_target_model", "selected_evocation_to_activate"]:
+					context.erase(key)
 		if not _prepare_quest_effect_choice(
 			effect,
 			context
@@ -12837,7 +12985,7 @@ func process_effect_sequence_resolution(
 			resolution["index"] = index
 			return false
 
-	if resolver_kind == "spell":
+	if resolver_kind in ["spell", "evocation"]:
 		if not _prepare_spell_secondary_effect_choice(
 			effect,
 			context
@@ -12857,6 +13005,10 @@ func process_effect_sequence_resolution(
 			return false
 
 
+	if not _prepare_damage_conversion_choices(effect, context):
+		resolution["index"] = index
+		return false
+
 	# Per-effect runtime metadata. Individual low-level operations may update
 	# these fields while this effect is being resolved.
 	context["effect_instability_placed"] = 0
@@ -12873,7 +13025,7 @@ func process_effect_sequence_resolution(
 
 	match resolver_kind:
 
-		"spell", "quest":
+		"spell", "quest", "evocation":
 			success = effect_resolver.resolve_effect(
 				effect,
 				context
@@ -12927,7 +13079,7 @@ func process_effect_sequence_resolution(
 
 		# If a phrase cannot be applied, skip that phrase and continue. This
 		# applies to both Quest and Spell Effects.
-		if resolver_kind == "quest" or resolver_kind == "spell":
+		if resolver_kind in ["quest", "spell", "evocation"]:
 			print(
 				resolver_kind.capitalize(),
 				" Effect could not be applied; skipped | effect ",
@@ -13066,6 +13218,10 @@ func process_effect_sequence_resolution(
 			quest_event
 		)
 
+
+	for key in context.keys():
+		if str(key).begins_with("convert_mage:") or str(key).begins_with("convert_evocation:"):
+			_forget_interactive_effect_choice_key(context, key)
 
 	if resolver_kind == "quest":
 		# Choices belong to one sentence/Effect only. This is important for
@@ -13317,6 +13473,7 @@ func process_spell_resolution_frame(
 
 		"reveal":
 
+			resolution["step"] = "done"
 			var revealed = RevealedSpellState.new(
 				spell,
 				use_dark_side
@@ -13340,6 +13497,8 @@ func process_spell_resolution_frame(
 				use_dark_side,
 				context
 			)
+
+			_apply_event_after_spell(caster_id, str(context.get("spell_type", "")))
 
 			# The entire Spell has now resolved.  This is distinct from the
 			# effect_resolved events emitted for its individual Effect entries.
@@ -13608,6 +13767,8 @@ func process_trigger_spell_resolution(
 					}
 				)
 
+			resolution["step"] = "done"
+			_apply_event_after_spell(owner_id, active_spell.get_spell_type())
 			print("Triggered spell resolved: ", active_spell.spell.card_name)
 			return true
 
@@ -13655,7 +13816,7 @@ func process_room_activation_resolution(
 			room.mark_activated()
 			# Passive Events are consumed at activation, never at phase start.
 			for event in active_events:
-				if event == null:
+				if event == null or event.phase != current_phase:
 					continue
 				for effect in event.effects:
 					if effect.get("type", "") == "on_activate_room_color_black_rose_gain_power" and effect.get("color", "") == room.room_data.get("color", ""):
@@ -13809,13 +13970,6 @@ func process_activation_resolution(
 	return false
 
 
-func _physical_action_cancelled(player_index: int) -> bool:
-	if not bool(cancelled_physical_action_players.get(player_index, false)):
-		return false
-	cancelled_physical_action_players.erase(player_index)
-	return true
-
-
 
 func process_momentum_resolution(
 	resolution: Dictionary
@@ -13925,7 +14079,7 @@ func process_explore_resolution(
 	if player_index < 0 or player_index >= players.size():
 		return true
 
-	if _physical_action_cancelled(player_index):
+	if bool(resolution.get("cancelled_by_defeat", false)):
 		print("Explore interrupted by Mage defeat")
 		return true
 
@@ -13993,7 +14147,7 @@ func process_fight_resolution(
 	if player_index < 0 or player_index >= players.size():
 		return true
 
-	if _physical_action_cancelled(player_index):
+	if bool(resolution.get("cancelled_by_defeat", false)):
 		print("Fight interrupted by Mage defeat")
 		return true
 
@@ -14120,7 +14274,7 @@ func process_command_resolution(
 	if player_index < 0 or player_index >= players.size():
 		return true
 
-	if _physical_action_cancelled(player_index):
+	if bool(resolution.get("cancelled_by_defeat", false)):
 		print("Command interrupted by Mage defeat")
 		return true
 
@@ -14335,6 +14489,10 @@ func _handle_resolution_completion(frame: Dictionary):
 			advance_evocation_phase()
 		"continue_black_rose_event":
 			_continue_black_rose_after_event(frame.get("context", {}))
+		"continue_black_rose_quests":
+			black_rose_quest_step = 4
+			black_rose_quest_cursor = 0
+			advance_black_rose_quest_steps()
 		_:
 			pass
 
@@ -17969,6 +18127,93 @@ func finish_black_rose_phase() -> bool:
 		PHASE_BLACK_ROSE
 	)
 	
+
+func clear_board_target_choices() -> void:
+	for node in get_tree().get_nodes_in_group("board_target_choices"):
+		node.hide()
+		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		node.get_parent().remove_child(node)
+		node.queue_free()
+
+
+func show_board_target_choice(option: Dictionary, callback: Callable, selected: bool = false) -> bool:
+	var token: String = str(option.get("token", ""))
+	var target: Node = null
+	var position_in_target := Vector2(-24, -24)
+	var hit_size := Vector2(48, 48)
+	if token.begins_with("damage:") or token.begins_with("instability:"):
+		var parts := token.split(":")
+		if parts.size() != 3:
+			return false
+		var owners: Array = []
+		var nodes: Array = []
+		if token.begins_with("instability:"):
+			var room = get_room_by_id(str(option.get("cube_room_id", "")))
+			if room == null:
+				return false
+			owners = room.instability_cubes
+			nodes = room.instability_cube_nodes
+		else:
+			var player_index: int = int(option.get("cube_player_index", -1))
+			if option.has("cube_evocation_owner"):
+				var evocation = get_evocation_by_owner_index(int(option.cube_evocation_owner), int(option.cube_evocation_index))
+				if evocation == null or not evocation_tokens.has(evocation.get_instance_id()):
+					return false
+				owners = evocation.damage_cubes
+				var model_token: Node = evocation_tokens[evocation.get_instance_id()]
+				# Damage cubes are projected next to the Evocation while choosing.
+				for i in range(owners.size()):
+					var name_value := "ChoiceDamage%d" % i
+					var cube = model_token.get_node_or_null(name_value)
+					if cube == null or cube.is_queued_for_deletion():
+						cube = preload("res://cube.tscn").instantiate()
+						cube.name = name_value
+						cube.cube_color = Color.BLACK if int(owners[i]) < 0 else players[int(owners[i])].color
+						cube.position = Vector2(i * 18 - owners.size() * 9, 30)
+						cube.add_to_group("board_target_choices")
+						model_token.add_child(cube)
+					nodes.append(cube)
+			elif player_index >= 0 and player_index < player_boards.size():
+				owners = players[player_index].mage.damage_cubes
+				for slot in player_boards[player_index].get_node("DamageTrack").get_children():
+					var cube = slot.get_node_or_null("DamageCube")
+					if cube != null:
+						nodes.append(cube)
+		var ordinal := 0
+		for i in range(mini(owners.size(), nodes.size())):
+			if int(owners[i]) == int(parts[1]):
+				if ordinal == int(parts[2]):
+					target = nodes[i]
+					break
+				ordinal += 1
+		position_in_target = Vector2(-3, -3)
+		hit_size = Vector2(20, 20)
+	elif int(option.get("evocation_index", -1)) >= 0:
+		var evocation = get_evocation_by_owner_index(int(option.get("owner_id", -1)), int(option.evocation_index))
+		if evocation != null:
+			target = evocation_tokens.get(evocation.get_instance_id())
+	elif option.has("player_index"):
+		var index: int = int(option.player_index)
+		if index >= 0 and index < mage_tokens.size():
+			target = mage_tokens[index]
+	if target == null:
+		return false
+	var button := Button.new()
+	button.position = position_in_target
+	button.size = hit_size
+	button.z_index = 100
+	button.tooltip_text = str(option.get("name", token))
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(1, 0.8, 0.15, 0.3 if selected else 0.04)
+	style.border_color = Color(1, 0.8, 0.15)
+	style.set_border_width_all(2)
+	button.add_theme_stylebox_override("normal", style)
+	button.add_to_group("board_target_choices")
+	button.set_meta("choice_token", token)
+	button.pressed.connect(callback, CONNECT_DEFERRED)
+	target.add_child(button)
+	return true
+
 
 func clear_lodge_room_choices() -> void:
 	for node in get_tree().get_nodes_in_group("lodge_room_choices"):

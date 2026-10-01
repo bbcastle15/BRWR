@@ -37,6 +37,11 @@ func run() -> void:
 	var first = game.summon_evocation(0, "succubus", room_id)
 	var second = game.summon_evocation(0, "succubus", room_id)
 	check(first.board_number == 1 and second.board_number == 2, "Duplicate types need distinct physical numbers")
+	var cards = game.player_boards[0].get_node("EvocationCards")
+	check(cards.get_node("EvocationSlot2").get_meta("evocation") == second, "Board card must reference the particular evocation instance")
+	var second_position: Vector2 = cards.get_node("EvocationSlot2").position
+	for id in game.evocation_database.evocations:
+		check(game.ReferenceCardPreview.card_texture("evocations", id) != null, "Every playable evocation must have card art: " + id)
 	var token = game.evocation_tokens[second.get_instance_id()]
 	token.position = Vector2(120, 120)
 	for board in game.player_boards:
@@ -56,8 +61,10 @@ func run() -> void:
 		check(game.evocation_inspection.dialog_text.contains("Attack: " + str(second.strength)), "Inspector must show attack")
 	game.effect_resolver._remove_evocation(game, first, {})
 	check(second.board_number == 2, "Removal must not renumber the remaining instance")
+	check(not cards.has_node("EvocationSlot1") and cards.get_node("EvocationSlot2").position == second_position, "Removing a card must leave its physical board slot empty")
 	var replacement = game.summon_evocation(0, "nigredo", room_id)
 	check(replacement.board_number == 1 and second.board_number == 2, "New summon must reuse only the freed number")
+	check(cards.get_node("EvocationSlot1").get_meta("evocation") == replacement, "Replacement must update the card in the reused slot")
 	game.effect_resolver._remove_evocation(game, second, {})
 	await process_frame
 	await process_frame

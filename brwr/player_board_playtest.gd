@@ -32,6 +32,17 @@ func run() -> void:
 	for i in range(10):
 		await process_frame
 	var board = game.player_boards[0]
+	check(board.get_node("SheetArt").size == Vector2(600, 500), "Board art must fit the physical sheet instead of its source pixel dimensions")
+	check(board.get_node("SheetArt").texture != null, "Physical board artwork must load")
+	var saved_color: Color = game.players[0].color
+	for color in board.SHEET_VARIANTS:
+		game.players[0].color = color
+		board.refresh_sheet_art()
+		var art: TextureRect = board.get_node("SheetArt")
+		check(art.texture != null and art.texture.resource_path.ends_with(board.SHEET_VARIANTS[color]), "Player colour must select its own board texture")
+		check(art.size == Vector2(600, 500), "Colour variants must preserve slot geometry")
+	game.players[0].color = saved_color
+	board.refresh_sheet_art()
 	board.position = Vector2(40, 40)
 	board.scale = Vector2.ONE
 	for other in game.player_boards:

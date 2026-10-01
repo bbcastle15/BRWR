@@ -309,8 +309,11 @@ func update_instability_cube_positions():
 		var slots := get_art_instability_slots()
 		for i in range(instability_cube_nodes.size()):
 			var cube = instability_cube_nodes[i]
+			# Rotate and scale about the cube's centre, keeping it on the socket.
+			cube.pivot_offset = cube.size * 0.5
 			cube.scale = Vector2.ONE * radius / 130.0
-			cube.position = slots[i] - cube.size * cube.scale * 0.5
+			cube.rotation = get_art_instability_slot_rotation(slots[i])
+			cube.position = slots[i] - cube.pivot_offset
 		return
 
 	var start_position = Vector2(
@@ -330,6 +333,9 @@ func update_instability_cube_positions():
 
 		var column = i % 4
 		var row = int(i / 4)
+		cube.rotation = 0.0
+		cube.pivot_offset = Vector2.ZERO
+		cube.scale = Vector2.ONE
 
 		cube.position = (
 			start_position
@@ -344,6 +350,13 @@ func update_instability_cube_positions():
 # PLAYER COLORS
 # =========================================================
 
+func get_art_instability_slot_rotation(slot_center: Vector2) -> float:
+	# Bottom sockets are horizontal; side sockets follow the two sloping edges.
+	if slot_center.y >= radius * sqrt(3.0) * 0.40:
+		return 0.0
+	return deg_to_rad(-30.0 if slot_center.x < 0.0 else 30.0)
+
+
 func get_art_instability_slots() -> PackedVector2Array:
 	var count := get_instability_resistance()
 	var slots := PackedVector2Array()
@@ -356,7 +369,13 @@ func get_art_instability_slots() -> PackedVector2Array:
 		var offset := Vector2(0.25 - i * 0.05, 0.81 - i * 0.10)
 		slots.append((offset - Vector2.ONE * 0.5) * size)
 		slots.append((Vector2(1.0 - offset.x, offset.y) - Vector2.ONE * 0.5) * size)
-	return slots
+	# The slanted left edge precedes the bottom row; the right edge follows it.
+	# Keep coordinates aligned with the art, changing only placement order.
+	var ordered: Array[Vector2] = []
+	for point in slots:
+		ordered.append(point)
+	ordered.sort_custom(func(a: Vector2, b: Vector2): return a.x < b.x)
+	return PackedVector2Array(ordered)
 
 func get_player_color(
 	player_index: int

@@ -343,7 +343,8 @@ func _damage_evocation(
 		attacker_id,
 		evocation,
 		amount,
-		suppressed
+		suppressed,
+		"spell" if game.active_effect_context.get("resolver_kind", "") == "spell" else ""
 	)
 
 
@@ -744,10 +745,12 @@ func _heal_evocation(
 func convert_damage_cubes(
 	damage_cubes: Array,
 	new_owner_id: int,
-	amount: int
+	amount: int,
+	selected_owners: Array = []
 ) -> int:
 
 	var converted = 0
+	var remaining := selected_owners.duplicate()
 
 	for i in range(damage_cubes.size()):
 		if converted >= amount:
@@ -756,6 +759,10 @@ func convert_damage_cubes(
 		if int(damage_cubes[i]) == new_owner_id:
 			continue
 
+		if not selected_owners.is_empty():
+			if not int(damage_cubes[i]) in remaining:
+				continue
+			remaining.erase(int(damage_cubes[i]))
 		damage_cubes[i] = new_owner_id
 		converted += 1
 
@@ -1037,6 +1044,9 @@ func _resolve_heal(
 		)
 	)
 
+	if context.has("selected_damage_owner_ids") and selected_owners.is_empty():
+		return true
+
 	var target_model_type: String = str(
 		context.get(
 			"target_model_type",
@@ -1067,6 +1077,8 @@ func _resolve_heal(
 
 		while healed < amount \
 		and not evocation.damage_cubes.is_empty():
+			if context.has("selected_damage_owner_ids") and requested_owners.is_empty():
+				break
 			var cube_owner: int = int(
 				evocation.damage_cubes[0]
 			)
@@ -1120,6 +1132,8 @@ func _resolve_heal(
 		and not game.players[
 			target
 		].mage.damage_cubes.is_empty():
+			if context.has("selected_damage_owner_ids") and requested_owners.is_empty():
+				break
 			var cube_owner: int = int(
 				game.players[
 					target
@@ -1285,7 +1299,7 @@ func _resolve_convert_damage(
 		var converted = convert_damage_cubes(
 			game.players[caster_id].mage.damage_cubes,
 			new_owner,
-			amount
+			amount, _choice_as_array(context.get("convert_mage:%d" % caster_id, null))
 		)
 
 		if caster_id < game.player_boards.size():
@@ -1314,7 +1328,7 @@ func _resolve_convert_damage(
 		var converted = convert_damage_cubes(
 			game.players[player_index].mage.damage_cubes,
 			caster_id,
-			amount
+			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
 		)
 
 		if player_index < game.player_boards.size():
@@ -1345,7 +1359,7 @@ func _resolve_convert_damage(
 		var converted = convert_damage_cubes(
 			evocation.damage_cubes,
 			caster_id,
-			amount
+			amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null))
 		)
 		context["effect_damage_converted"] = converted
 		context["effect_target_model_type"] = "evocation"
@@ -1376,7 +1390,7 @@ func _resolve_convert_damage(
 			var converted = convert_damage_cubes(
 				mage.damage_cubes,
 				caster_id,
-				amount
+				amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
 			)
 			total_converted += converted
 
@@ -1405,7 +1419,7 @@ func _resolve_convert_damage(
 				var converted = convert_damage_cubes(
 					evocation.damage_cubes,
 					caster_id,
-					amount
+					amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null))
 				)
 				total_converted += converted
 				print(
@@ -1464,7 +1478,7 @@ func _resolve_convert_damage_each_other_mage(
 				player_index
 			].mage.damage_cubes,
 			caster_id,
-			amount
+			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
 		)
 
 		if player_index < game.player_boards.size():
@@ -3856,6 +3870,9 @@ func _resolve_move_damaged_model(
 
 	var model = models[index]
 	var distance = int(effect.get("distance", 1))
+	# Choosing the current Room ends movement without emitting a room-entry event.
+	if destination == game._damaged_model_room_id(context, index):
+		return true
 
 	if str(model.get("type", "")) == "mage":
 		return game.move_mage_to_room_id(

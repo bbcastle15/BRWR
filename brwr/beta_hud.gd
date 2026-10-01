@@ -209,6 +209,20 @@ func _build_ui() -> void:
 		if camera != null:
 			camera.reset_view())
 	toolbar.add_child(view_button)
+	var window_toolbar := HBoxContainer.new()
+	window_toolbar.position = Vector2(12, 56)
+	overlay.add_child(window_toolbar)
+	var window_button := Button.new()
+	window_button.name = "WindowModeButton"
+	window_button.text = "Finestra / fullscreen"
+	window_button.tooltip_text = "Passa tra finestra e schermo intero"
+	window_button.pressed.connect(_toggle_window_mode)
+	window_toolbar.add_child(window_button)
+	var quit_button := Button.new()
+	quit_button.name = "QuitGameButton"
+	quit_button.text = "Chiudi gioco"
+	quit_button.pressed.connect(func(): get_tree().quit())
+	window_toolbar.add_child(quit_button)
 
 	root_box.add_child(HSeparator.new())
 
@@ -276,7 +290,9 @@ func _open_hand_overlay() -> void:
 		return
 
 	if str(current_request.get("type", "")) == "preparation":
-		hand_overlay.open_preparation(current_request)
+		# Hiding the overlay must retain the current Preparation draft.
+		hand_overlay.show()
+		hand_overlay.move_to_front()
 		return
 
 	if current_player_index < 0 or current_player_index >= game.players.size():
@@ -290,6 +306,14 @@ func _on_hand_overlay_preparation_confirmed(payload: Dictionary) -> void:
 	if str(current_request.get("type", "")) != "preparation":
 		return
 	_submit(payload)
+
+
+func _toggle_window_mode() -> void:
+	var window := get_window()
+	if window.mode in [Window.MODE_FULLSCREEN, Window.MODE_EXCLUSIVE_FULLSCREEN]:
+		window.mode = Window.MODE_WINDOWED
+	else:
+		window.mode = Window.MODE_FULLSCREEN
 
 
 func _toggle_panel() -> void:
@@ -485,6 +509,7 @@ func _refresh_header() -> void:
 
 func _clear_content() -> void:
 	game.clear_lodge_room_choices()
+	game.clear_board_target_choices()
 	for child in content.get_children():
 		child.queue_free()
 
@@ -1306,6 +1331,12 @@ func _render_action_root(category: String = "") -> void:
 				)
 			}
 
+		if mode == "command_plans":
+			var target := {"token": "command", "owner_id": current_player_index, "evocation_index": int(filter_data.evocation_index)}
+			if game.show_board_target_choice(target, _set_action_menu.bind(mode, filter_data)):
+				_add_info("Command: click a highlighted Evocation.")
+				continue
+
 		_add_button(
 			str(
 				entry.get(
@@ -1439,43 +1470,57 @@ func _render_momentum_destinations() -> void:
 	_render_lodge_paths(choices)
 
 
-func _render_action_variant_list(
-	action_type: String
-) -> void:
-	_add_section(action_type.capitalize())
+func _attack_target_option(action: Dictionary, prefix: String = "") -> Dictionary:
+	var kind: String = str(action.get(prefix + "target_model_type", ""))
+	if kind == "mage":
+		return {"player_index": int(action.get(prefix + "target_player_index", -1))}
+	if kind == "evocation":
+		return {"owner_id": int(action.get(prefix + "target_evocation_owner_id", -1)), "evocation_index": int(action.get(prefix + "target_evocation_index", -1))}
+	return {}
 
-	for option_value in _action_options_of_type(
-		action_type
-	):
-		var option: Dictionary = option_value
 
-		_add_button(
-			str(
-				option.get(
-					"label",
-					action_type.capitalize()
-				)
-			),
-			Callable(
-				self,
-				"_submit_action_token"
-			).bind(
-				str(
-					option.get(
-						"token",
-						""
-					)
-				)
-			)
-		)
+func _render_board_variants(choices: Array) -> void:
+	_clear_content()
+	panel.anchor_top = 1.0
+	panel.anchor_bottom = 1.0
+	panel.offset_top = -240.0
+	panel.offset_bottom = -12.0
+	panel.show()
+	_add_info("Click a highlighted target; then choose how to act.")
+	var groups: Dictionary = {}
+	for choice in choices:
+		var target: Dictionary = choice.get("board_target", {})
+		if target.is_empty():
+			_add_button(str(choice.get("label", "Continue")), choice.callback)
+			continue
+		var key: String = JSON.stringify(target)
+		if not groups.has(key):
+			groups[key] = []
+		groups[key].append(choice)
+	for key in groups:
+		var variants: Array = groups[key]
+		var target: Dictionary = variants[0].board_target.duplicate()
+		target["token"] = key
+		var callback: Callable = variants[0].callback if variants.size() == 1 else _render_target_variants.bind(variants)
+		if not game.show_board_target_choice(target, callback):
+			_add_button(str(variants[0].get("label", "Target")), callback)
+	_add_button("← Back", _render_current_request)
 
-	_add_button(
-		"← Back",
-		Callable(
-			self,
-			"_back_to_action_root"
-		)
-	)
+
+func _render_target_variants(choices: Array) -> void:
+	_clear_content()
+	for choice in choices:
+		_add_button(str(choice.get("label", "Continue")), choice.callback)
+	_add_button("← Back", _render_current_request)
+
+
+func _render_action_variant_list(action_type: String) -> void:
+	var choices: Array = []
+	for option in _action_options_of_type(action_type):
+		choices.append({"label": str(option.get("label", action_type.capitalize())),
+			"board_target": _attack_target_option(option.get("action", {})),
+			"callback": _submit_action_token.bind(str(option.get("token", "")))})
+	_render_board_variants(choices)
 
 
 func _command_option_path(
@@ -1504,7 +1549,8 @@ func _render_command_paths() -> void:
 			continue
 		var path: Array = _command_option_path(option)
 		choices.append({"path": path, "callback": _set_action_menu.bind("command_variants", {"evocation_index": evocation_index, "path_key": _action_path_key(path)})})
-	_render_lodge_paths(choices)
+	var evocation = game.get_evocation_by_owner_index(current_player_index, evocation_index)
+	_render_lodge_paths(choices, [], "" if evocation == null else str(evocation.room_id))
 
 
 func _command_variant_label(
@@ -1572,6 +1618,7 @@ func _render_command_variants() -> void:
 	)
 
 	var seen_variants: Dictionary = {}
+	var choices: Array = []
 
 	for option_value in _action_options_of_type(
 		"command"
@@ -1606,20 +1653,9 @@ func _render_command_variants() -> void:
 
 		seen_variants[label_text] = true
 
-		_add_button(
-			label_text,
-			Callable(
-				self,
-				"_submit_action_token"
-			).bind(
-				str(
-					option.get(
-						"token",
-						""
-					)
-				)
-			)
-		)
+		choices.append({"label": label_text, "board_target": _attack_target_option(action.get("context", {}), "evocation_"),
+			"callback": _submit_action_token.bind(str(option.get("token", "")))})
+	_render_board_variants(choices)
 
 	_add_button(
 		"← Change movement",
@@ -1682,9 +1718,22 @@ func _render_effect_choice() -> void:
 			choices.append({"path": [], "label": "Skip", "callback": _submit_effect_single.bind("")})
 		for option in options:
 			var path: Array = option.get("path", option.get("value", {}).get("evocation_move_room_ids", []) if option.get("value") is Dictionary else [option.get("room_id", "")])
-			choices.append({"path": path, "label": _option_label(option), "callback": _submit_effect_single.bind(str(option.get("token", "")))})
-		_render_lodge_paths(choices)
+			choices.append({"path": path, "label": _option_label(option), "board_target": option.get("board_target", {}), "callback": _submit_effect_single.bind(str(option.get("token", "")))})
+		_render_lodge_paths(choices, [], str(current_request.get("movement_origin_room_id", "")))
 		return
+
+	var board_tokens: Array[String] = []
+	for option in options:
+		var token: String = str(option.get("token", ""))
+		var callback: Callable = _submit_effect_single.bind(token) if max_select <= 1 else _toggle_generic_value.bind(token)
+		if game.show_board_target_choice(option, callback, generic_selection.has(token)):
+			board_tokens.append(token)
+	if not board_tokens.is_empty():
+		panel.anchor_top = 1.0
+		panel.anchor_bottom = 1.0
+		panel.offset_top = -240.0
+		panel.offset_bottom = -12.0
+		_add_info("Click the highlighted target or cubes on the board.")
 
 	var room_options: Array = options.filter(func(option):
 		return str(option.get("target_type", "")) in ["room", "area"] or str(option.get("token", "")).begins_with("room:"))
@@ -1704,7 +1753,7 @@ func _render_effect_choice() -> void:
 				selected_rooms.append(room_id)
 		game.show_lodge_room_choices(callbacks, selected_rooms)
 		for option in options:
-			if not room_options.has(option):
+			if not room_options.has(option) and not board_tokens.has(str(option.get("token", ""))):
 				_add_button(_option_label(option), _submit_effect_single.bind(str(option.get("token", ""))) if max_select <= 1 else _toggle_generic_value.bind(str(option.get("token", ""))))
 		if max_select > 1:
 			_add_button("Confirm selection (%d)" % generic_selection.size(), _submit_effect_multi,
@@ -1725,6 +1774,8 @@ func _render_effect_choice() -> void:
 
 		for option_value in options:
 			var option: Dictionary = option_value
+			if board_tokens.has(str(option.get("token", ""))):
+				continue
 			var token: String = str(
 				option.get(
 					"token",
@@ -1744,6 +1795,8 @@ func _render_effect_choice() -> void:
 
 	for option_value in options:
 		var option: Dictionary = option_value
+		if board_tokens.has(str(option.get("token", ""))):
+			continue
 		var token: String = str(
 			option.get(
 				"token",
@@ -2229,13 +2282,16 @@ func _evocation_phase_plan_label(
 func _render_evocation_phase() -> void:
 	_add_info("Choose an Evocation, then click its movement path on the Lodge. Each activation resolves immediately.")
 	for evocation in current_request.get("evocations", []):
-		_add_button(str(evocation.get("name", "Evocation")), _render_evocation_movement.bind(evocation))
+		var option := {"token": "evocation", "owner_id": current_player_index, "evocation_index": int(evocation.get("evocation_index", -1))}
+		if not game.show_board_target_choice(option, _render_evocation_movement.bind(evocation)):
+			_add_button(str(evocation.get("name", "Evocation")), _render_evocation_movement.bind(evocation))
 
 func _render_evocation_movement(evocation: Dictionary) -> void:
 	var choices: Array = []
 	for plan in evocation.get("activation_plans", []):
-		choices.append({"path": plan.get("path", []), "label": _evocation_phase_plan_label(plan), "callback": _choose_evocation_plan.bind(int(evocation.get("evocation_index", -1)), plan.get("context", {}).duplicate(true))})
-	_render_lodge_paths(choices)
+		choices.append({"path": plan.get("path", []), "label": _evocation_phase_plan_label(plan), "board_target": _attack_target_option(plan.get("context", {}), "evocation_"), "callback": _choose_evocation_plan.bind(int(evocation.get("evocation_index", -1)), plan.get("context", {}).duplicate(true))})
+	var model = game.get_evocation_by_owner_index(current_player_index, int(evocation.get("evocation_index", -1)))
+	_render_lodge_paths(choices, [], "" if model == null else str(model.room_id))
 
 
 func _choose_evocation_plan(
@@ -2374,7 +2430,9 @@ func _center_choice_panel() -> void:
 	panel.offset_bottom = 240.0
 
 
-func _render_lodge_paths(choices: Array, prefix: Array = []) -> void:
+func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: String = "") -> void:
+	if origin_room_id.is_empty() and current_player_index >= 0 and current_player_index < game.players.size():
+		origin_room_id = str(game.players[current_player_index].mage.room_id)
 	# Leave the middle of the Lodge visible while selecting rooms.
 	panel.anchor_top = 1.0
 	panel.anchor_bottom = 1.0
@@ -2382,7 +2440,7 @@ func _render_lodge_paths(choices: Array, prefix: Array = []) -> void:
 	panel.offset_bottom = -12.0
 	_clear_content()
 	_add_section("Movement — click the highlighted rooms")
-	_add_info(" → ".join(prefix) if not prefix.is_empty() else "Choose the first room on the Lodge.")
+	_add_info("Click the current Room to stay or stop. " + " → ".join(prefix))
 	var next_rooms: Dictionary = {}
 	var complete: Array = []
 	for choice in choices:
@@ -2394,15 +2452,17 @@ func _render_lodge_paths(choices: Array, prefix: Array = []) -> void:
 		else:
 			var next: Array = prefix.duplicate()
 			next.append(path[prefix.size()])
-			next_rooms[str(path[prefix.size()])] = _render_lodge_paths.bind(choices, next)
+			next_rooms[str(path[prefix.size()])] = _render_lodge_paths.bind(choices, next, origin_room_id)
 	if next_rooms.is_empty() and not complete.is_empty() and not prefix.is_empty():
 		_finish_lodge_path(complete)
 		return
-	game.show_lodge_room_choices(next_rooms)
 	if not complete.is_empty():
-		_add_button("No movement" if prefix.is_empty() else "Stop here", _finish_lodge_path.bind(complete))
+		var stop_room: String = origin_room_id if prefix.is_empty() else str(prefix.back())
+		if game.is_lodge_room_id(stop_room):
+			next_rooms[stop_room] = _finish_lodge_path.bind(complete)
+	game.show_lodge_room_choices(next_rooms)
 	if not prefix.is_empty():
-		_add_button("Reset path", _render_lodge_paths.bind(choices))
+		_add_button("Reset path", _render_lodge_paths.bind(choices, [], origin_room_id))
 	_add_button("← Back", _back_to_action_root if str(current_request.get("type", "")) == "action_activation_step" else _render_current_request)
 
 func _finish_lodge_path(choices: Array) -> void:
@@ -2412,6 +2472,9 @@ func _finish_lodge_path(choices: Array) -> void:
 	# Explore/Command duplicate paths share one follow-up menu.
 	if not choices[0].has("label") or choices.size() == 1:
 		choices[0].callback.call()
+		return
+	if choices.any(func(choice): return not choice.get("board_target", {}).is_empty()):
+		_render_board_variants(choices)
 		return
 	_add_section("Choose attack / activation")
 	var seen: Dictionary = {}

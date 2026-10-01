@@ -14,7 +14,7 @@ var study_selection: Array[int] = []
 var study_confirm_button: Button
 
 const CARD_ASPECT := 630.0 / 880.0
-const CARD_MAX_WIDTH := 340.0
+const CARD_MAX_WIDTH := 630.0
 const CARD_GAP := 18
 
 # First try the common deterministic paths. If none exists, the script performs
@@ -62,10 +62,6 @@ var close_button: Button
 
 var card_scroll: ScrollContainer
 var card_row: GridContainer
-var private_quest_row: VBoxContainer
-var quest_sidebar: VBoxContainer
-var private_quest_label: Label
-var private_quest_scroll: ScrollContainer
 
 var prep_controls: VBoxContainer
 var selection_label: Label
@@ -193,8 +189,8 @@ func _build_ui() -> void:
 	card_scroll = ScrollContainer.new()
 	card_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	card_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	card_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	card_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	card_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	card_scroll.resized.connect(func(): call_deferred("_layout_cards"))
 	hand_body.add_child(card_scroll)
 
@@ -220,21 +216,6 @@ func _build_ui() -> void:
 	# PREPARATION CONTROLS
 	# -----------------------------------------------------
 
-	quest_sidebar = VBoxContainer.new()
-	quest_sidebar.custom_minimum_size.x = 160
-	quest_sidebar.add_theme_constant_override("separation", 10)
-	hand_body.add_child(quest_sidebar)
-	private_quest_label = Label.new()
-	private_quest_label.text = "PRIVATE QUESTS"
-	private_quest_label.modulate = Color(0.90, 0.82, 0.55)
-	quest_sidebar.add_child(private_quest_label)
-	private_quest_scroll = ScrollContainer.new()
-	private_quest_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	private_quest_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	quest_sidebar.add_child(private_quest_scroll)
-	private_quest_row = VBoxContainer.new()
-	private_quest_row.add_theme_constant_override("separation", 8)
-	private_quest_scroll.add_child(private_quest_row)
 	prep_controls = VBoxContainer.new()
 	prep_controls.add_theme_constant_override("separation", 8)
 	root.add_child(prep_controls)
@@ -401,8 +382,8 @@ func open_preparation(
 	)
 
 	close_button.visible = true
-	close_button.disabled = true
-	close_button.text = "Preparation required"
+	close_button.disabled = false
+	close_button.text = "Hide"
 
 	prep_controls.visible = true
 	feedback_label.text = ""
@@ -497,10 +478,6 @@ func close_overlay(
 	if not visible:
 		return
 
-	if mode == MODE_PREPARATION \
-	and not force:
-		return
-
 	visible = false
 	overlay_closed.emit()
 
@@ -534,16 +511,9 @@ func _unhandled_key_input(
 
 
 func _render_cards() -> void:
-	for child in private_quest_row.get_children():
-		child.free()
-	for data in game.get_player_quest_cards(owner_player_index, "private"):
-		private_quest_row.add_child(game.ReferenceCardPreview.make_card("quests", data.id,
-			data.name, Vector2(128, 176), game.open_quest_card.bind(data.quest)))
-	private_quest_label.visible = private_quest_row.get_child_count() > 0
-	private_quest_scroll.visible = private_quest_label.visible
-	quest_sidebar.visible = private_quest_label.visible
 	for child in card_row.get_children():
-		child.free()
+		child.get_parent().remove_child(child)
+		child.queue_free()
 
 	count_label.text = (
 		str(cards.size())
@@ -590,14 +560,12 @@ func _render_cards() -> void:
 func _card_display_size(
 	card_count: int
 ) -> Vector2:
-	var columns: int = clampi(card_count, 1, 4)
-	var rows: int = 2 if card_count > 4 else 1
-	# Include frame borders, labels and margins in both dimensions. Only the
-	# card area scrolls for hands above eight; preparation stays anchored below.
+	var columns: int = clampi(card_count, 1, 6)
+	# Keep a single row, sized for at most six cards; extra cards scroll sideways.
 	var available_width: float = maxf(1.0, card_scroll.size.x - 36.0)
-	var available_height: float = maxf(1.0, card_scroll.size.y - 16.0)
+	var available_height: float = maxf(1.0, card_scroll.size.y - 32.0)
 	var width_limit: float = (available_width - (columns - 1) * CARD_GAP) / columns - 20.0
-	var height_limit: float = (available_height - (rows - 1) * 12.0) / rows - 80.0
+	var height_limit: float = available_height - 80.0
 	var width: float = maxf(1.0, minf(CARD_MAX_WIDTH, minf(width_limit, height_limit * CARD_ASPECT)))
 	return Vector2(width, width / CARD_ASPECT)
 
@@ -605,6 +573,7 @@ func _card_display_size(
 func _layout_cards() -> void:
 	if cards.is_empty():
 		return
+	card_row.columns = maxi(cards.size(), 1)
 	var display_size := _card_display_size(cards.size())
 	for frame in card_row.get_children():
 		frame.custom_minimum_size = Vector2(display_size.x + 20.0, display_size.y + 80.0)

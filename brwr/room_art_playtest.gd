@@ -22,11 +22,27 @@ func run() -> void:
 		check(not room.get_node("RoomName").visible, "Duplicate name over artwork")
 		var capacity: int = room.get_instability_resistance()
 		check(room.get_art_instability_slots().size() == capacity, "Wrong slot projection")
+		var slots: PackedVector2Array = room.get_art_instability_slots()
+		for i in range(1, slots.size()):
+			check(slots[i - 1].x < slots[i].x, "Slots must fill left to right, including slanted edges: " + room.room_id)
 		for i in range(capacity):
 			check(room.add_instability_cube(i % 2), "Cannot fill room")
+		for i in range(capacity):
+			var cube: Control = room.instability_cube_nodes[i]
+			check((cube.get_transform() * (cube.size * 0.5)).is_equal_approx(slots[i]), "Cube centre must stay on its socket after scaling/rotation: " + room.room_id)
+			var expected_angle := 0.0
+			if capacity > 5 and i < (capacity - 4) / 2:
+				expected_angle = -30.0
+			elif capacity > 5 and i >= (capacity + 4) / 2:
+				expected_angle = 30.0
+			check(is_equal_approx(cube.rotation_degrees, expected_angle), "Cube must follow socket orientation: " + room.room_id)
 		check(not room.flipped, "Filling instability must not flip the room before cleanup")
 		check(not room.add_instability_cube(0), "Room exceeded capacity")
 		check(room.remove_instability_cube(0), "Cannot remove cube")
+		for i in range(room.instability_cube_nodes.size()):
+			var cube: Control = room.instability_cube_nodes[i]
+			check((cube.get_transform() * (cube.size * 0.5)).is_equal_approx(slots[i]), "Removed cube must leave remaining cubes centred in their new slots")
+			check(is_equal_approx(cube.rotation, room.get_art_instability_slot_rotation(slots[i])), "Repacking must also update the cube's angle")
 		room.clear_instability()
 		var destroyed_texture = room.get_node("Background").texture
 		check(not room.get_node("ActivationToken").visible, "Destroyed rooms must not show activation tokens")

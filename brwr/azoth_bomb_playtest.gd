@@ -20,7 +20,7 @@ func run() -> void:
 	durable.room_id = target
 	game.players[1].add_evocation(durable)
 	player.revealed_spells.append(RevealedSpellState.new(game.spell_database.spells["deflagrate"], true))
-	player.revealed_spells.append(RevealedSpellState.new(game.spell_database.spells["viatorium_spagyricum"], true))
+	player.revealed_spells.append(RevealedSpellState.new(game.spell_database.spells["viatorium_spagyricum"], false))
 	var enhanced: bool = game.can_apply_enhancement(0, ["water", "water"])
 	player.quick_spell = ReadySpellState.new(game.spell_database.spells["azoth_bomb"], false)
 	game.cast_quick_spell(0)

@@ -30,12 +30,21 @@ func run() -> void:
 	player.revealed_spells.append(RevealedSpellState.new(duplicate, false))
 	check(game.can_apply_enhancement(0, ["earth"], spell), "Another physical copy must count")
 	player.revealed_spells.clear()
+	# Codex Arcanum p. 7: only the previously resolved side of OTHER cards.
+	var two_sides := SpellCardState.new("sides", "Sides", "alchemy", {"element": "fire"}, {"element": "water"})
+	player.revealed_spells.assign([RevealedSpellState.new(two_sides, false)])
+	check(game.can_apply_enhancement(0, ["fire"]), "Active Light element must count")
+	check(not game.can_apply_enhancement(0, ["water"]), "Inactive Dark element must not count")
+	player.revealed_spells[0].use_dark_side = true
+	check(game.can_apply_enhancement(0, ["water"]) and not game.can_apply_enhancement(0, ["fire"]), "Only active Dark element must count")
+	player.revealed_spells.clear()
 	var current := SpellCardState.new("test", "Test", "alchemy", {"type": "combat", "target": "special", "element": "earth", "effects": [], "enhancement": {"requires": ["earth"], "effects": [{"type": "gain_power", "amount": 2}]}}, {})
 	player.quick_spell = ReadySpellState.new(current, false)
 	var before: int = player.power
 	game.cast_quick_spell(0)
 	check(player.power == before, "Casting must not count its own element")
 	# Growth survives phase dispatch and pays only when its Room color activates.
+	game.current_phase = game.PHASE_ACTION
 	var growth = game.event_database.get_event("growth")
 	game.active_events.assign([growth, null, null])
 	before = game.black_rose_power

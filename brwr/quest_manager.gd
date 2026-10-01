@@ -21,21 +21,23 @@ func _refresh_quest_boards(game) -> void:
 
 func draw_quest(
 	game,
-	player_index: int
+	player_index: int,
+	from_moon: int = 0
 ) -> QuestState:
 
 	if not _valid_player(game, player_index):
 		return null
 
+	var moon: int = from_moon if from_moon > 0 else game.current_moon
 	var deck: Array = game.quest_decks.get(
-		game.current_moon,
+		moon,
 		[]
 	)
 
 	if deck.is_empty():
 		print(
 			"QuestManager: Moon ",
-			game.current_moon,
+			moon,
 			" Quest deck is empty"
 		)
 		return null
@@ -704,6 +706,10 @@ func finalize_quest_solve(
 		return false
 
 	quest.solve()
+
+	for effect in game.get_active_event_effects("on_quest_resolved_mage_and_black_rose_gain_power"):
+		game.add_player_power(player_index, int(effect.get("mage_amount", 2)))
+		game.add_black_rose_power(int(effect.get("black_rose_amount", 1)))
 
 	var reward: int = quest.get_power_reward()
 	if reward > 0:

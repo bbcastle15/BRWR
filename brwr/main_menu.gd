@@ -60,6 +60,7 @@ func _ready() -> void:
 	message.custom_minimum_size = Vector2(520, 64)
 	box.add_child(message)
 	_button(box, "Torna al menu / Annulla connessione", _reset)
+	_button(box, "Chiudi gioco", func(): get_tree().quit())
 
 func _button(box: Control, title: String, callback: Callable) -> Button:
 	var button := Button.new()

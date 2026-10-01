@@ -12,13 +12,21 @@ var cube_scene = preload("res://cube.tscn")
 # DIMENSIONI PLAYER BOARD
 # =========================================================
 
-const BOARD_SIZE = Vector2(600, 390)
+const BOARD_SIZE = Vector2(900, 730)
+const SHEET_VARIANTS = {
+	Color.RED: "mage_sheet_red.png",
+	Color.BLUE: "mage_sheet_blue.png",
+	Color.GREEN: "mage_sheet_green.png",
+	Color.PURPLE: "mage_sheet_purple.png",
+	Color.YELLOW: "mage_sheet_yellow.png",
+	Color.WHITE: "mage_sheet.png",
+}
 
 # Spell Card
-const SPELL_SIZE = Vector2(95, 132)
+const SPELL_SIZE = Vector2(150, 200)
 
 # Mage Card
-const MAGE_CARD_SIZE = Vector2(215, 131)
+const MAGE_CARD_SIZE = Vector2(330, 190)
 
 const CARD_GAP = 12.0
 
@@ -27,14 +35,14 @@ const CARD_GAP = 12.0
 # DAMAGE TRACK
 # =========================================================
 
-const DAMAGE_SLOT_SIZE = 18.0
-const DAMAGE_SLOT_GAP = 4.0
+const DAMAGE_SLOT_SIZE = 24.0
+const DAMAGE_SLOT_GAP = 18.0
 
-const DAMAGE_TRACK_POSITION = Vector2(15, 145)
+const DAMAGE_TRACK_POSITION = Vector2(204, 61)
 
 # Adatta solo questo valore se visivamente il cube.tscn
 # risulta troppo grande/piccolo.
-const DAMAGE_CUBE_SCALE = 0.45
+const DAMAGE_CUBE_SCALE = DAMAGE_SLOT_SIZE / 14.0
 
 
 # =========================================================
@@ -65,6 +73,7 @@ func setup(
 func refresh():
 	if player_state == null:
 		return
+	refresh_sheet_art()
 
 	$PlayerName.text = player_state.player_name
 
@@ -99,6 +108,10 @@ func refresh():
 	refresh_damage_track()
 	refresh_quests()
 	refresh_action_tokens()
+	refresh_evocations()
+	refresh_mage_card()
+	$GrimoireSlot/Label.text = "GRIMOIRE\n%d" % player_state.grimoire.size()
+	$MemoriesSlot/Label.text = "MEMORIES\n%d" % player_state.memories.size()
 
 
 # =========================================================
@@ -116,123 +129,59 @@ func setup_layout():
 
 
 func setup_background():
-	$Background.position = Vector2.ZERO
-	$Background.size = BOARD_SIZE
+	$Background.hide()
+	if get_node_or_null("SheetArt") == null:
+		var art := TextureRect.new()
+		art.name = "SheetArt"
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.texture = preload("res://assets/player_boards/mage_sheet.png")
+		art.position = Vector2(150, 40)
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.size = Vector2(600, 500)
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(art)
+		move_child(art, 0)
+	refresh_sheet_art()
 
 
-# =========================================================
-# INFO GIOCATORE
-# =========================================================
+func refresh_sheet_art() -> void:
+	var art := get_node_or_null("SheetArt") as TextureRect
+	if art == null or player_state == null:
+		return
+	var filename: String = SHEET_VARIANTS.get(player_state.color, "mage_sheet.png")
+	art.texture = load("res://assets/player_boards/" + filename)
+
 
 func setup_info():
-	$PlayerName.position = Vector2(15, 10)
-	$PlayerName.size = Vector2(150, 24)
+	var positions := [Vector2(150, 8), Vector2(380, 104), Vector2(290, 8), Vector2(420, 8), Vector2(550, 8)]
+	var nodes := [$PlayerName, $MageName, $HealthLabel, $PowerLabel, $CubeLabel]
+	for i in range(nodes.size()):
+		nodes[i].position = positions[i]
+		nodes[i].size = Vector2(150, 24)
+		nodes[i].mouse_filter = Control.MOUSE_FILTER_IGNORE
+		nodes[i].z_index = 3
+	$MageName.visible = false
 
-	$MageName.position = Vector2(15, 36)
-	$MageName.size = Vector2(150, 24)
-
-	$HealthLabel.position = Vector2(15, 62)
-	$HealthLabel.size = Vector2(150, 24)
-
-	$PowerLabel.position = Vector2(15, 88)
-	$PowerLabel.size = Vector2(150, 24)
-
-	$CubeLabel.position = Vector2(15, 114)
-	$CubeLabel.size = Vector2(150, 24)
-
-
-# =========================================================
-# MAGE CARD + SPELL
-# =========================================================
 
 func setup_main_cards():
-	var cards_x = 175.0
-
-	# -----------------------------------------------------
-	# RIGA SUPERIORE
-	#
-	# QUICK + MAGE CARD
-	# -----------------------------------------------------
-
-	var top_y = 15.0
-
-	setup_slot(
-		$SpellSlots/QuickSpellSlot,
-		Vector2(
-			cards_x,
-			top_y
-		),
-		SPELL_SIZE
-	)
-
-	setup_slot(
-		$MageCardSlot,
-		Vector2(
-			cards_x
-			+ SPELL_SIZE.x
-			+ CARD_GAP,
-			top_y
-		),
-		MAGE_CARD_SIZE
-	)
-
-
-	# -----------------------------------------------------
-	# RIGA INFERIORE
-	#
-	# I + II + III
-	# -----------------------------------------------------
-
-	var bottom_y = (
-		top_y
-		+ SPELL_SIZE.y
-		+ CARD_GAP
-	)
-
-	setup_slot(
-		$SpellSlots/SpellSlotI,
-		Vector2(
-			cards_x,
-			bottom_y
-		),
-		SPELL_SIZE
-	)
-
-	setup_slot(
-		$SpellSlots/SpellSlotII,
-		Vector2(
-			cards_x
-			+ SPELL_SIZE.x
-			+ CARD_GAP,
-			bottom_y
-		),
-		SPELL_SIZE
-	)
-
-	setup_slot(
-		$SpellSlots/SpellSlotIII,
-		Vector2(
-			cards_x
-			+ (
-				SPELL_SIZE.x
-				+ CARD_GAP
-			) * 2.0,
-			bottom_y
-		),
-		SPELL_SIZE
-	)
-
-
+	setup_slot($SpellSlots/QuickSpellSlot, Vector2(203, 94), SPELL_SIZE)
+	setup_slot($MageCardSlot, Vector2(368, 94), MAGE_CARD_SIZE)
+	setup_slot($SpellSlots/SpellSlotI, Vector2(203, 304), SPELL_SIZE)
+	setup_slot($SpellSlots/SpellSlotII, Vector2(372, 304), SPELL_SIZE)
+	setup_slot($SpellSlots/SpellSlotIII, Vector2(540, 304), SPELL_SIZE)
 	_configure_spell_slot($SpellSlots/QuickSpellSlot, "Q")
 	_configure_spell_slot($SpellSlots/SpellSlotI, "I")
 	_configure_spell_slot($SpellSlots/SpellSlotII, "II")
 	_configure_spell_slot($SpellSlots/SpellSlotIII, "III")
+
 
 func setup_slot(
 	slot: Control,
 	slot_position: Vector2,
 	slot_size: Vector2
 ):
+	slot.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	slot.position = slot_position
 	slot.size = slot_size
 	slot.custom_minimum_size = slot_size
@@ -257,41 +206,17 @@ func setup_slot(
 # =========================================================
 
 func setup_deck_slots():
-	var deck_size = Vector2(135, 52)
-
-	$GrimoireSlot.position = Vector2(
-		15,
-		190
-	)
-
-	$GrimoireSlot.size = deck_size
-	$GrimoireSlot.custom_minimum_size = deck_size
-
-	$GrimoireSlot/Label.position = Vector2.ZERO
-	$GrimoireSlot/Label.size = deck_size
-
-
-	$MemoriesSlot.position = Vector2(
-		15,
-		255
-	)
-
-	$MemoriesSlot.size = deck_size
-	$MemoriesSlot.custom_minimum_size = deck_size
-
-	$MemoriesSlot/Label.position = Vector2.ZERO
-	$MemoriesSlot/Label.size = deck_size
-
-
-	$HandInfo.position = Vector2(
-		15,
-		320
-	)
-
-	$HandInfo.size = Vector2(
-		135,
-		25
-	)
+	setup_slot($GrimoireSlot, Vector2(12, 320), Vector2(126, 180))
+	setup_slot($MemoriesSlot, Vector2(762, 320), Vector2(126, 180))
+	for deck in [$GrimoireSlot, $MemoriesSlot]:
+		var frame := StyleBoxFlat.new()
+		frame.bg_color = Color(0.035, 0.035, 0.045)
+		frame.border_color = Color(0.5, 0.48, 0.45)
+		frame.set_border_width_all(1)
+		frame.set_corner_radius_all(6)
+		deck.add_theme_stylebox_override("panel", frame)
+	$HandInfo.position = Vector2(690, 8)
+	$HandInfo.size = Vector2(110, 25)
 
 
 func _configure_spell_slot(slot: Control, slot_id: String) -> void:
@@ -380,7 +305,7 @@ func _render_spell_slot(
 		back.visible = false
 		art.visible = false
 		art.texture = null
-		label.visible = true
+		label.visible = false
 		label.text = empty_label
 		button.disabled = true
 		button.tooltip_text = ""
@@ -441,8 +366,8 @@ func refresh_action_tokens() -> void:
 		if token == null:
 			token = Button.new()
 			token.name = "PhysicalAction" + str(i)
-			token.position = Vector2(520, 15 + i * 60)
-			token.size = Vector2(54, 54)
+			token.position = Vector2(382 + i * 55, 229)
+			token.size = Vector2(46, 46)
 			token.add_theme_font_size_override("font_size", 36)
 			token.pressed.connect(game.open_player_board_action.bind(player_index, "physical"))
 			add_child(token)
@@ -468,8 +393,8 @@ func refresh_action_tokens() -> void:
 			button = Button.new()
 			button.name = "BoardAction_" + category
 			button.text = ["Momentum", "Resolve Quest", "End activation"][i]
-			button.position = Vector2(175 + i * 137, 349)
-			button.size = Vector2(130, 30)
+			button.position = Vector2(203 + i * 169, 695)
+			button.size = Vector2(150, 30)
 			button.add_theme_font_size_override("font_size", 13)
 			button.pressed.connect(game.open_player_board_action.bind(player_index, category))
 			add_child(button)
@@ -491,7 +416,7 @@ func refresh_quests() -> void:
 			heading = Label.new()
 			heading.name = "QuestHeading_" + section
 			heading.text = "QUESTS" if section == "revealed" else "COMPLETED"
-			heading.position = Vector2(12, 168) if section == "revealed" else Vector2(505, 138)
+			heading.position = Vector2(12, 40) if section == "revealed" else Vector2(762, 40)
 			heading.add_theme_font_size_override("font_size", 12)
 			heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			add_child(heading)
@@ -499,22 +424,31 @@ func refresh_quests() -> void:
 		if strip == null:
 			strip = ScrollContainer.new()
 			strip.name = "Quest_" + section
-			strip.position = Vector2(12, 190) if section == "revealed" else Vector2(505, 159)
-			strip.size = Vector2(145, 155) if section == "revealed" else Vector2(88, 155)
+			strip.position = Vector2(12, 65) if section == "revealed" else Vector2(762, 65)
+			strip.size = Vector2(126, 235)
 			add_child(strip)
 		for child in strip.get_children():
-			child.free()
-		var row := HBoxContainer.new()
+			strip.remove_child(child)
+			child.queue_free()
+		var row := VBoxContainer.new()
+		strip.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 		strip.add_child(row)
-		for data in game.get_player_quest_cards(player_index, section):
-			var card = game.ReferenceCardPreview.make_card("quests", data.id, data.name,
-				Vector2(80, 112), game.open_quest_card.bind(data.quest))
+		for data in game.get_player_board_quest_cards(player_index, section):
+			var card: Button
+			if not data.get("can_inspect", false):
+				card = Button.new()
+				card.custom_minimum_size = Vector2(112, 154)
+				card.text = "QUEST\nSET"
+				card.disabled = true
+			else:
+				card = game.ReferenceCardPreview.make_card("quests", data.id, data.name,
+					Vector2(112, 154), game.open_quest_card.bind(data.quest))
 			row.add_child(card)
-			var quest: QuestState = data.quest
-			if quest.get_cube_slots() > 0:
+			var quest: QuestState = data.get("quest")
+			if quest != null and quest.get_cube_slots() > 0:
 				var track := HBoxContainer.new()
 				track.name = "QuestProgress"
-				track.position = Vector2(5, 48)
+				track.position = Vector2(12, 70)
 				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
 				track.add_theme_constant_override("separation", 3)
 				card.add_child(track)
@@ -528,7 +462,8 @@ func refresh_quests() -> void:
 	if counter == null:
 		counter = Label.new()
 		counter.name = "SolvedQuestCount"
-		counter.position = Vector2(15, 360)
+		counter.position = Vector2(762, 302)
+		counter.add_theme_font_size_override("font_size", 13)
 		counter.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(counter)
 	var solved: int = 0
@@ -586,7 +521,7 @@ func create_damage_track():
 			0.20,
 			0.20,
 			0.20,
-			1.0
+			0.0
 		)
 
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -649,12 +584,8 @@ func refresh_damage_track():
 		slot.add_child(cube)
 
 
-		# Il cube.tscn è un Node2D:
-		# lo centriamo nello slot.
-		cube.position = Vector2(
-			DAMAGE_SLOT_SIZE / 2.0,
-			DAMAGE_SLOT_SIZE / 2.0
-		)
+		# Cube is a Control drawn from its top-left corner.
+		cube.position = Vector2.ZERO
 
 		cube.scale = Vector2(
 			DAMAGE_CUBE_SCALE,
@@ -673,6 +604,8 @@ func get_damage_cube_color(
 	# Black Rose
 	if owner_id == -1:
 		return Color.BLACK
+	if game != null and owner_id >= 0 and owner_id < game.players.size():
+		return game.players[owner_id].color
 
 
 	var colors = [
@@ -690,3 +623,70 @@ func get_damage_cube_color(
 
 
 	return Color.GRAY
+
+func refresh_mage_card() -> void:
+	var art = $MageCardSlot.get_node_or_null("MageArt")
+	if art == null:
+		art = TextureRect.new()
+		art.name = "MageArt"
+		art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$MageCardSlot.add_child(art)
+	art.texture = game.ReferenceCardPreview.card_texture("mages", player_state.mage.mage_id) if game != null else null
+	# Existing user-supplied contact sheet: use its original pixels without modifying it.
+	if art.texture == null and player_state.mage.mage_id == "rikkart":
+		var atlas := AtlasTexture.new()
+		atlas.atlas = preload("res://assets/mages/screen_3.png")
+		atlas.region = Rect2(1100, 14, 396, 249)
+		art.texture = atlas
+	$MageCardSlot/Label.visible = art.texture == null
+	$MageCardSlot/Label.text = player_state.mage.mage_id.capitalize() + "\nStrength %d · Movement %d" % [player_state.mage.strength, player_state.mage.speed]
+	var trophies = get_node_or_null("Trophies")
+	if trophies == null:
+		trophies = Label.new()
+		trophies.name = "Trophies"
+		trophies.position = Vector2(610, 248)
+		trophies.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(trophies)
+	trophies.text = "Trophies: %d" % player_state.trophies.size()
+
+
+func refresh_evocations() -> void:
+	if game == null or player_state == null:
+		return
+	var row = get_node_or_null("EvocationCards")
+	if row == null:
+		row = Control.new()
+		row.name = "EvocationCards"
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(row)
+	for child in row.get_children():
+		row.remove_child(child)
+		child.queue_free()
+	for evocation in player_state.evocations:
+		if not game.is_evocation_in_play(evocation):
+			continue
+		var card = game.ReferenceCardPreview.make_card("evocations", evocation.evocation_id,
+			evocation.get_display_name(), Vector2(164, 110), game.open_evocation_inspection.bind(evocation))
+		card.name = "EvocationSlot" + str(evocation.board_number)
+		card.position = Vector2(196 + (evocation.board_number - 1) * 169, 552)
+		card.set_meta("evocation", evocation)
+		row.add_child(card)
+		var damage := HBoxContainer.new()
+		damage.name = "EvocationDamage"
+		damage.position = Vector2(4, 4)
+		damage.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		damage.add_theme_constant_override("separation", 1)
+		card.add_child(damage)
+		for owner_id in evocation.damage_cubes:
+			var cube = cube_scene.instantiate()
+			cube.cube_color = get_damage_cube_color(owner_id)
+			damage.add_child(cube)
+		var label := Label.new()
+		label.position = Vector2(4, 111)
+		label.text = "#%d · HP %d/%d · P%d" % [evocation.board_number, evocation.get_remaining_health(), evocation.health, game.get_evocation_controller_id(evocation) + 1]
+		label.add_theme_font_size_override("font_size", 12)
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(label)

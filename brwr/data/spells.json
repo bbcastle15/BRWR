@@ -610,7 +610,7 @@
     },
     "dark": {
       "type": "combat",
-      "element": "water",
+      "element": "air",
       "target": "model",
       "range": 2,
       "enhancement": {
@@ -1267,26 +1267,34 @@
     "personal": true,
     "instability": false,
     "light": {
-      "type": "combat",
-      "element": "earth",
+      "type": "contingency",
+      "element": "all",
       "target": "room",
       "range": 0,
       "effects": [
         {
           "type": "summon_evocation",
           "evocation_id": "nigredo"
-        },
-        {
-          "type": "activate_owned_evocation",
-          "evocation_archetype": "construct",
-          "strength_bonus": 1,
-          "speed_bonus": 1
         }
-      ]
+      ],
+      "enhancement": {
+        "requires": [
+          "fire",
+          "earth"
+        ],
+        "effects": [
+          {
+            "type": "activate_owned_evocation",
+            "evocation_archetype": "construct",
+            "strength_bonus": 1,
+            "speed_bonus": 1
+          }
+        ]
+      }
     },
     "dark": {
-      "type": "combat",
-      "element": "earth",
+      "type": "contingency",
+      "element": "all",
       "target": "evocation",
       "range": "*",
       "target_owner": "self",

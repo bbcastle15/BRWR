@@ -21,12 +21,20 @@ func _ready():
 	$Body.position = Vector2.ZERO
 	$Body.size = CUBE_SIZE
 	$Body.color = cube_color
+	$Body.hide()
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	# Deve stare davanti alla grafica della Room
 	z_index = 10
 
 
 func _draw() -> void:
-	# Black Rose cubes must remain visible over the black printed slots.
-	if owner_type == OwnerType.BLACK_ROSE:
-		draw_rect(Rect2(Vector2.ZERO, CUBE_SIZE), Color(0.85, 0.85, 0.85), false, 1.5)
+	# Three shaded faces fit the existing footprint, including damage tracks.
+	var base := cube_color
+	if cube_color == Color.BLACK:
+		base = Color(0.13, 0.14, 0.16)
+	draw_colored_polygon(PackedVector2Array([Vector2(0, 3), Vector2(11, 3), Vector2(11, 14), Vector2(0, 14)]), base)
+	draw_colored_polygon(PackedVector2Array([Vector2(0, 3), Vector2(3, 0), Vector2(14, 0), Vector2(11, 3)]), base.lightened(0.38))
+	draw_colored_polygon(PackedVector2Array([Vector2(11, 3), Vector2(14, 0), Vector2(14, 11), Vector2(11, 14)]), base.darkened(0.4))
+	var outline := base.lightened(0.55) if cube_color == Color.BLACK else base.darkened(0.65)
+	draw_polyline(PackedVector2Array([Vector2(0, 3), Vector2(3, 0), Vector2(14, 0), Vector2(14, 11), Vector2(11, 14), Vector2(0, 14), Vector2(0, 3)]), outline, 0.7, true)

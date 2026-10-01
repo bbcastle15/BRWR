@@ -29,7 +29,7 @@ func run() -> void:
 	for viewport_size in [Vector2i(1600, 900), Vector2i(1280, 720)]:
 		root.size = viewport_size
 		root.content_scale_size = viewport_size
-		for count in [1, 4, 5, 8, 9]:
+		for count in [1, 4, 6, 7, 8, 9, 12]:
 			var hand: Array = []
 			for i in range(count):
 				hand.append({"hand_index": i, "id": "cube_of_lamentations", "name": "Cube of Lamentations"})
@@ -41,14 +41,16 @@ func run() -> void:
 			check(overlay.card_row.get_child_count() == count, "Every card must remain accessible")
 			check(overlay.confirm_button.get_global_rect().end.y <= root.size.y, "Confirm must stay on screen")
 			check(overlay.light_button.get_global_rect().end.y <= root.size.y, "Side controls must stay on screen")
-			check(overlay.quest_sidebar.get_global_rect().position.x >= overlay.card_scroll.get_global_rect().end.x, "Quests must sit beside spells")
-			if count <= 8:
-				check(last.get_global_rect().end.y <= overlay.card_scroll.get_global_rect().end.y + 1, "Up to eight cards must fit without vertical scrolling: %s / %d" % [viewport_size, count])
+			check(overlay.card_scroll.size.x > viewport_size.x * 0.85, "Spell hand must use the width freed by moving Quests to the board")
+			if count <= 6:
+				check(last.get_global_rect().end.y <= overlay.card_scroll.get_global_rect().end.y + 1, "Up to six cards must fit without vertical scrolling: %s / %d" % [viewport_size, count])
 				check(last.get_global_rect().end.x <= overlay.card_scroll.get_global_rect().end.x + 1, "Cards must fit horizontally")
-			if count <= 4:
-				check(is_equal_approx(first.position.y, last.position.y), "Up to four cards stay in one row")
-			elif count <= 8:
-				check(last.position.y > first.position.y, "Five to eight cards use a second row")
+			check(is_equal_approx(first.position.y, last.position.y), "All cards stay in one row")
+			if count > 6:
+				check(overlay.card_scroll.get_h_scroll_bar().visible, "Extra cards must scroll horizontally")
+				overlay.card_scroll.ensure_control_visible(last)
+				await process_frame
+				check(overlay.card_scroll.scroll_horizontal > 0, "The final card must be reachable by scrolling")
 			overlay._select_card(count - 1)
 			overlay._set_selected_side(true)
 			overlay._assign_selected_quick()

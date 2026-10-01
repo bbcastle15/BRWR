@@ -48,7 +48,8 @@ func run() -> void:
 	game.add_child(hand)
 	hand.setup(game)
 	hand.open_browse(0)
-	check(hand.private_quest_row.get_child_count() == 1, "Private Quests must be available in Hand")
+	game.player_boards[0].refresh()
+	check(game.player_boards[0].get_node("Quest_revealed").get_child(0).get_child_count() == 1, "Private Quests must be available beside the board")
 	hand.close_overlay()
 	game.open_quest_card(quest)
 	var preview = game.get_node("ReferenceCardPreview")
@@ -56,6 +57,8 @@ func run() -> void:
 	game.clear_player_input()
 	game.request_player_input({"player_index": 1, "type": "board_test"})
 	check(not preview.root.visible and game.get_player_quest_cards(0, "private").is_empty(), "Handoff must hide private Quest and close preview")
+	check(game.get_player_board_quest_cards(0, "revealed") == [{"can_inspect": false}], "Non-owner projection must contain no private Quest identity")
+	check(game.player_boards[0].get_node("Quest_revealed").get_child(0).get_child(0).disabled, "Hidden Quest back must not be inspectable")
 	game.open_quest_card(quest)
 	check(not preview.root.visible, "Unauthorized direct inspect must fail")
 	quest.revealed = true
