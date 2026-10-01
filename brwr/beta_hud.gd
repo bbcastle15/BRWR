@@ -479,7 +479,8 @@ func _refresh_header() -> void:
 			if viewer < ps.size():
 				hand_count = int(ps[viewer].get("hand_count", 0))
 		hand_button.text = "HAND (" + str(hand_count) + ")"
-		hand_button.disabled = viewer < 0 or hand_count <= 0
+		# The overlay also contains private Quests, even with no Spells in hand.
+		hand_button.disabled = viewer < 0
 
 
 func _clear_content() -> void:

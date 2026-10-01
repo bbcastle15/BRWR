@@ -1,6 +1,8 @@
 extends Camera2D
 
 var dragging := false
+var fitted_zoom := 0.0
+var fitted_center := Vector2.ZERO
 
 func minimum_zoom() -> float:
 	if get_parent().has_method("get_tabletop_bounds"):
@@ -9,13 +11,30 @@ func minimum_zoom() -> float:
 		return minf(view.x / maxf(bounds.size.x, 1.0), view.y / maxf(bounds.size.y, 1.0))
 	return 1.0
 
-func _process(_delta: float) -> void:
-	zoom = Vector2.ONE * maxf(zoom.x, minimum_zoom())
-
 func _ready() -> void:
 	position = get_viewport_rect().size * 0.5
 	zoom = Vector2.ONE * 1.2
 	call_deferred("reset_view")
+	get_viewport().size_changed.connect(_on_viewport_resized)
+
+func _on_viewport_resized() -> void:
+	# Wait until the game has repositioned the table for the new viewport.
+	call_deferred("adapt_to_viewport")
+
+func adapt_to_viewport() -> void:
+	if not get_parent().has_method("get_tabletop_bounds"):
+		return
+	var bounds: Rect2 = get_parent().get_tabletop_bounds()
+	var next_fit := minimum_zoom()
+	if fitted_zoom <= 0.0:
+		reset_view()
+		return
+	var relative_zoom := zoom.x / fitted_zoom
+	position = bounds.get_center() + position - fitted_center
+	zoom = Vector2.ONE * maxf(next_fit, next_fit * relative_zoom)
+	fitted_zoom = next_fit
+	fitted_center = bounds.get_center()
+	force_update_scroll()
 
 func reset_view() -> void:
 	position = get_viewport_rect().size * 0.5
@@ -25,6 +44,9 @@ func reset_view() -> void:
 		var viewport_size := get_viewport_rect().size
 		position = bounds.get_center()
 		zoom = Vector2.ONE * minf(viewport_size.x / bounds.size.x, viewport_size.y / bounds.size.y)
+		fitted_zoom = zoom.x
+		fitted_center = position
+	force_update_scroll()
 
 func zoom_at(screen_point: Vector2, factor: float) -> void:
 	var before := get_canvas_transform().affine_inverse() * screen_point

@@ -1,0 +1,35 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "rebuilt_reference_files": [
+    "codex-clipboard-ab232920-34fa-4ca4-a8ee-990e4f4bf3c4.png",
+    "codex-clipboard-a8c68100-8b81-4102-8ee6-b1df155c9c3a.png",
+    "codex-clipboard-e88b99fe-4504-446d-b496-e21d0fe494a0.png"
+  ],
+  "rebuilt_prompt_template": "Create ONE production rebuilt room tile '{title}'. Reference image 1: faithfully reconstruct ONLY the {location} hexagon ({title}), {description}. Reference image 2: approved newly generated Arena, match this painterly high-detail tabletop style, thin dark perimeter and exact flat-top hex shape width:height 2:sqrt(3). Orthographic top-down, no perspective distortion. Preserve source arrangement and door positions. Small title '{title}' near top. No parchment rules, reward badges, instability slots, tokens or other rooms. Single isolated tile nearly fills canvas edge to edge, transparent outside hexagon. Approximately 1348x1168 pixels or higher. Crisp high quality detailed textures, not a blurry enlargement.",
+  "token_prompt_template": "Create ONE high-resolution horizontal board-game activation token for '{title}', {state} face. The supplied screenshot is a reference sheet: reproduce only the token labeled '{title}', preserving its exact iconography and wording from the reference, no other tokens. {color} rolled parchment ends, dark narrow outline, worn fantasy tabletop painted texture. Flat front-on rectangular token with slightly curved corners, width:height approximately 3:1, token fills canvas almost edge to edge. {face_instruction} Transparent outside token. High-quality clean reconstruction approximately 1200x400 pixels, preserve the reference design and icons.",
+  "available_face_instruction": "Warm ivory parchment center, sharp readable black typography, title '{title}' with its room-color hex icon above the rules. Use the EXACT icons and text shown in the corresponding reference token; semantic guide only: {rule}",
+  "used_face_instruction": "Dark charcoal center, pale readable title '{title}' and color hex icon at top, large red painted X beneath, exactly like reference. No rules text.",
+  "black_rose": "Rebuilt tile generated from the subsequently supplied codex-clipboard-009b42b3-0c22-4473-8883-5e03763ae3e6.png reference. Both token faces generated.",
+  "asset_ids": [
+    "black_rose",
+    "crypt",
+    "sacrificial_altar",
+    "cemetery",
+    "summoner_room",
+    "alchemical_laboratory",
+    "arena",
+    "observatory",
+    "bibliotheca",
+    "sanctuary",
+    "garden",
+    "forge",
+    "treasure_room",
+    "the_abyss",
+    "oracle_room",
+    "mirrors_room",
+    "throne",
+    "armory",
+    "pleasures_room"
+  ],
+  "resumed_token_prompt": "Create ONE high-resolution horizontal board-game room activation token, '{title}', {state} face. Reference is a sheet: reproduce ONLY the token titled '{title}', no others. Preserve EXACT title, ALL rules wording and ALL icons from that corresponding reference, no invented rules or extra words. {color} rolled parchment ends, narrow dark outline, aged detailed fantasy tabletop painted texture. Flat front-on, rounded rectangular token, width:height approximately 3:1, fills canvas. Available: Ivory parchment center, crisp readable black rules with original icons and room color icon. Used: Dark charcoal center, pale title with room color icon, large red brushstroke X below, NO rules text. Transparent outside token, high quality clean reconstruction approximately 2048x680 pixels."
+}

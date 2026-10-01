@@ -29,7 +29,11 @@ var flipped: bool = false:
 		flipped = value
 		if is_node_ready():
 			refresh_art()
-var activated_this_turn: bool = false
+var activated_this_turn: bool = false:
+	set(value):
+		activated_this_turn = value
+		if is_node_ready():
+			_refresh_activation_token()
 
 
 # =========================================================
@@ -62,19 +66,29 @@ func _ready():
 
 func refresh_art() -> void:
 	$Background.color = room_color
-	var has_art := preload("res://room_art.gd").apply($Background, room_id, radius)
-	$RoomName.visible = not has_art or flipped
+	var has_art := preload("res://room_art.gd").apply($Background, room_id, radius, flipped)
+	$RoomName.visible = not has_art
 	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if has_art and flipped:
-		# Only the destroyed-side artwork has been supplied. Cover its obsolete rule.
-		$RoomName.position = Vector2(-radius * 0.58, -radius * 0.77)
-		$RoomName.size = Vector2(radius * 1.16, radius * 0.40)
-		$RoomName.text = room_name + "\nREBUILT"
-		$RoomName.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		$RoomName.add_theme_font_size_override("font_size", 8)
-		var panel := StyleBoxFlat.new()
-		panel.bg_color = Color(0.12, 0.10, 0.08, 1.0)
-		$RoomName.add_theme_stylebox_override("normal", panel)
+	_refresh_activation_token()
+
+
+func _refresh_activation_token() -> void:
+	var token := get_node_or_null("ActivationToken") as TextureRect
+	if token == null:
+		token = TextureRect.new()
+		token.name = "ActivationToken"
+		token.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		token.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		token.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		token.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		token.z_index = 20
+		add_child(token)
+	token.visible = flipped
+	if not flipped:
+		return
+	token.position = Vector2(-radius * 0.60, -radius * 0.77)
+	token.size = Vector2(radius * 1.20, radius * 0.40)
+	token.texture = preload("res://room_art.gd").activation_token(room_id, activated_this_turn)
 
 
 func setup_room(

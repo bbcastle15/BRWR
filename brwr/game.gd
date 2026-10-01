@@ -489,15 +489,6 @@ func _ready():
 	# The first beta UI is created entirely from code, so no scene-tree changes
 	# are required. Tests keep it disabled to avoid user-interface side effects.
 	if enable_beta_hud and not run_tests_on_ready:
-		var usable_screen_rect: Rect2i = (
-			DisplayServer.screen_get_usable_rect()
-		)
-
-		if usable_screen_rect.size.x > 0 \
-		and usable_screen_rect.size.y > 0:
-			get_window().size = usable_screen_rect.size
-			get_window().position = usable_screen_rect.position
-
 		if beta_force_fullscreen:
 			get_window().mode = Window.MODE_FULLSCREEN
 
@@ -2088,6 +2079,7 @@ func _apply_beta_table_layout() -> void:
 
 	_reposition_hex_nodes()
 	update_table_layout()
+	get_node("TableCamera").call_deferred("adapt_to_viewport")
 
 
 func _on_beta_viewport_resized() -> void:

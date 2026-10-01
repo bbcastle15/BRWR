@@ -14,7 +14,6 @@ var study_selection: Array[int] = []
 var study_confirm_button: Button
 
 const CARD_ASPECT := 630.0 / 880.0
-const CARD_MIN_WIDTH := 280.0
 const CARD_MAX_WIDTH := 340.0
 const CARD_GAP := 18
 
@@ -62,8 +61,9 @@ var count_label: Label
 var close_button: Button
 
 var card_scroll: ScrollContainer
-var card_row: HBoxContainer
-var private_quest_row: HBoxContainer
+var card_row: GridContainer
+var private_quest_row: VBoxContainer
+var quest_sidebar: VBoxContainer
 var private_quest_label: Label
 var private_quest_scroll: ScrollContainer
 
@@ -109,10 +109,10 @@ func _build_ui() -> void:
 	outer_margin.set_anchors_and_offsets_preset(
 		Control.PRESET_FULL_RECT
 	)
-	outer_margin.add_theme_constant_override("margin_left", 32)
-	outer_margin.add_theme_constant_override("margin_right", 32)
-	outer_margin.add_theme_constant_override("margin_top", 24)
-	outer_margin.add_theme_constant_override("margin_bottom", 24)
+	outer_margin.add_theme_constant_override("margin_left", 12)
+	outer_margin.add_theme_constant_override("margin_right", 12)
+	outer_margin.add_theme_constant_override("margin_top", 12)
+	outer_margin.add_theme_constant_override("margin_bottom", 12)
 	add_child(outer_margin)
 
 	main_panel = PanelContainer.new()
@@ -138,22 +138,11 @@ func _build_ui() -> void:
 	panel_margin.add_theme_constant_override("margin_bottom", 16)
 	main_panel.add_child(panel_margin)
 
-	# The Hand content can be taller than the available viewport, especially
-	# during Preparation. Keep the panel itself inside the screen and make the
-	# whole body vertically scrollable. The card strip keeps its own horizontal
-	# scrolling.
-	var body_scroll := ScrollContainer.new()
-	body_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	body_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	body_scroll.follow_focus = true
-	panel_margin.add_child(body_scroll)
-
 	var root := VBoxContainer.new()
 	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_theme_constant_override("separation", 10)
-	body_scroll.add_child(root)
+	panel_margin.add_child(root)
 
 	# -----------------------------------------------------
 	# HEADER
@@ -197,27 +186,33 @@ func _build_ui() -> void:
 	# LARGE CARD STRIP
 	# -----------------------------------------------------
 
+	var hand_body := HBoxContainer.new()
+	hand_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	hand_body.add_theme_constant_override("separation", 18)
+	root.add_child(hand_body)
 	card_scroll = ScrollContainer.new()
 	card_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	card_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	card_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	card_scroll.custom_minimum_size = Vector2(0, 500)
-	root.add_child(card_scroll)
+	card_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	card_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	card_scroll.resized.connect(func(): call_deferred("_layout_cards"))
+	hand_body.add_child(card_scroll)
 
 	var card_margin := MarginContainer.new()
+	card_margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card_margin.add_theme_constant_override("margin_left", 8)
 	card_margin.add_theme_constant_override("margin_right", 8)
 	card_margin.add_theme_constant_override("margin_top", 6)
 	card_margin.add_theme_constant_override("margin_bottom", 6)
 	card_scroll.add_child(card_margin)
 
-	card_row = HBoxContainer.new()
-	card_row.add_theme_constant_override(
-		"separation",
-		CARD_GAP
-	)
-	card_margin.add_child(card_row)
+	var card_center := CenterContainer.new()
+	card_margin.add_child(card_center)
+	card_row = GridContainer.new()
+	card_row.columns = 4
+	card_row.add_theme_constant_override("h_separation", CARD_GAP)
+	card_row.add_theme_constant_override("v_separation", 12)
+	card_center.add_child(card_row)
 
 	root.add_child(HSeparator.new())
 
@@ -225,13 +220,19 @@ func _build_ui() -> void:
 	# PREPARATION CONTROLS
 	# -----------------------------------------------------
 
+	quest_sidebar = VBoxContainer.new()
+	quest_sidebar.custom_minimum_size.x = 160
+	quest_sidebar.add_theme_constant_override("separation", 10)
+	hand_body.add_child(quest_sidebar)
 	private_quest_label = Label.new()
-	private_quest_label.text = "PRIVATE QUESTS — click to inspect"
-	root.add_child(private_quest_label)
+	private_quest_label.text = "PRIVATE QUESTS"
+	private_quest_label.modulate = Color(0.90, 0.82, 0.55)
+	quest_sidebar.add_child(private_quest_label)
 	private_quest_scroll = ScrollContainer.new()
-	private_quest_scroll.custom_minimum_size = Vector2(0, 100)
-	root.add_child(private_quest_scroll)
-	private_quest_row = HBoxContainer.new()
+	private_quest_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	private_quest_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	quest_sidebar.add_child(private_quest_scroll)
+	private_quest_row = VBoxContainer.new()
 	private_quest_row.add_theme_constant_override("separation", 8)
 	private_quest_scroll.add_child(private_quest_row)
 	prep_controls = VBoxContainer.new()
@@ -537,9 +538,10 @@ func _render_cards() -> void:
 		child.free()
 	for data in game.get_player_quest_cards(owner_player_index, "private"):
 		private_quest_row.add_child(game.ReferenceCardPreview.make_card("quests", data.id,
-			data.name, Vector2(72, 96), game.open_quest_card.bind(data.quest)))
+			data.name, Vector2(128, 176), game.open_quest_card.bind(data.quest)))
 	private_quest_label.visible = private_quest_row.get_child_count() > 0
 	private_quest_scroll.visible = private_quest_label.visible
+	quest_sidebar.visible = private_quest_label.visible
 	for child in card_row.get_children():
 		child.free()
 
@@ -582,45 +584,32 @@ func _render_cards() -> void:
 				display_size
 			)
 		)
+	call_deferred("_layout_cards")
 
 
 func _card_display_size(
 	card_count: int
 ) -> Vector2:
-	var viewport_width: float = max(
-		900.0,
-		get_viewport_rect().size.x
-	)
+	var columns: int = clampi(card_count, 1, 4)
+	var rows: int = 2 if card_count > 4 else 1
+	# Include frame borders, labels and margins in both dimensions. Only the
+	# card area scrolls for hands above eight; preparation stays anchored below.
+	var available_width: float = maxf(1.0, card_scroll.size.x - 36.0)
+	var available_height: float = maxf(1.0, card_scroll.size.y - 16.0)
+	var width_limit: float = (available_width - (columns - 1) * CARD_GAP) / columns - 20.0
+	var height_limit: float = (available_height - (rows - 1) * 12.0) / rows - 80.0
+	var width: float = maxf(1.0, minf(CARD_MAX_WIDTH, minf(width_limit, height_limit * CARD_ASPECT)))
+	return Vector2(width, width / CARD_ASPECT)
 
-	var visible_cards: int = clampi(
-		card_count,
-		1,
-		4
-	)
 
-	var available_width: float = max(
-		600.0,
-		viewport_width
-		- 140.0
-		- float(
-			max(
-				0,
-				visible_cards - 1
-			)
-		) * CARD_GAP
-	)
-
-	var width: float = clampf(
-		available_width
-		/ float(visible_cards),
-		CARD_MIN_WIDTH,
-		CARD_MAX_WIDTH
-	)
-
-	return Vector2(
-		width,
-		width / CARD_ASPECT
-	)
+func _layout_cards() -> void:
+	if cards.is_empty():
+		return
+	var display_size := _card_display_size(cards.size())
+	for frame in card_row.get_children():
+		frame.custom_minimum_size = Vector2(display_size.x + 20.0, display_size.y + 80.0)
+		var button: TextureButton = frame.get_meta("card_button")
+		button.custom_minimum_size = display_size
 
 
 func _create_card_widget(
@@ -687,6 +676,7 @@ func _create_card_widget(
 		)
 	)
 	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	name_label.add_theme_font_size_override(
 		"font_size",
 		16
@@ -710,6 +700,7 @@ func _create_card_widget(
 	header.add_child(assignment_label)
 
 	var card_button := TextureButton.new()
+	frame.set_meta("card_button", card_button)
 	card_button.custom_minimum_size = display_size
 	card_button.ignore_texture_size = true
 	card_button.stretch_mode = (

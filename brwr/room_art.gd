@@ -1,8 +1,11 @@
 extends RefCounted
 
 # Texture coordinates follow the existing hexagon; Lodge geometry stays unchanged.
-static func apply(background: Polygon2D, asset_id: String, radius: float) -> bool:
+static func apply(background: Polygon2D, asset_id: String, radius: float, rebuilt: bool = false) -> bool:
 	var path := "res://assets/rooms/%s.png" % asset_id
+	var rebuilt_path := "res://assets/rooms/rebuilt/%s.png" % asset_id
+	if rebuilt and ResourceLoader.exists(rebuilt_path):
+		path = rebuilt_path
 	if not ResourceLoader.exists(path):
 		background.texture = null
 		return false
@@ -20,3 +23,10 @@ static func apply(background: Polygon2D, asset_id: String, radius: float) -> boo
 	background.color = Color.WHITE
 	background.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	return true
+
+
+static func activation_token(asset_id: String, used: bool) -> Texture2D:
+	var path := "res://assets/rooms/tokens/%s_%s.png" % [asset_id, "used" if used else "available"]
+	if ResourceLoader.exists(path):
+		return load(path) as Texture2D
+	return null
