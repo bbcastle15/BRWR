@@ -695,9 +695,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "oracle_room",
-      "elements": [
-        "air",
-        "water"
+      "spell_types": [
+        "combat",
+        "contingency"
       ]
     },
     "cube_slots": 0,
@@ -708,7 +708,7 @@
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve an Air or Water Spell while you are in the Oracle Room.",
+    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Oracle Room.",
     "raw_effect": "Shuffle your Memories into your Grimoire, then draw 3 Spells from your Grimoire."
   },
   "emerald_amethyst": {

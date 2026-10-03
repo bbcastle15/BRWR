@@ -34,6 +34,16 @@ func run() -> void:
 	var board = game.player_boards[0]
 	check(board.get_node("SheetArt").size == Vector2(600, 500), "Board art must fit the physical sheet instead of its source pixel dimensions")
 	check(board.get_node("SheetArt").texture != null, "Physical board artwork must load")
+	var saved_mage_id: String = game.players[0].mage.mage_id
+	for mage_id in ["rikkart", "angela"]:
+		game.players[0].mage.mage_id = mage_id
+		board.refresh_mage_card()
+		var mage_art: TextureRect = board.get_node("MageCardSlot/MageArt")
+		check(mage_art.texture != null and mage_art.texture.resource_path.ends_with(mage_id + ".png"), "Each playable Mage loads its own card")
+		check(absf(mage_art.texture.get_size().aspect() - board.MAGE_CARD_SIZE.aspect()) < 0.01, "Mage art must fit slot without cropping or letterboxing")
+	game.players[0].mage.mage_id = saved_mage_id
+	board.refresh_mage_card()
+	check(game.ReferenceCardPreview.card_texture("quests", "conspirator_mage") != null, "Conspirator Mage image must load")
 	var saved_color: Color = game.players[0].color
 	for color in board.SHEET_VARIANTS:
 		game.players[0].color = color

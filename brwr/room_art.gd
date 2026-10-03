@@ -1,5 +1,9 @@
 extends RefCounted
 
+# Source tile PNGs include a narrow transparent gutter. Bleed the artwork
+# under the exact tessellating hex so neighbouring tiles meet at their edges.
+const ART_BLEED := 1.035
+
 # Texture coordinates follow the existing hexagon; Lodge geometry stays unchanged.
 static func apply(background: Polygon2D, asset_id: String, radius: float, rebuilt: bool = false) -> bool:
 	var path := "res://assets/rooms/%s.png" % asset_id
@@ -14,7 +18,7 @@ static func apply(background: Polygon2D, asset_id: String, radius: float, rebuil
 		return false
 	var bounds := Vector2(radius * 2.0, radius * sqrt(3.0))
 	var texture_size := texture.get_size()
-	var scale_factor := maxf(bounds.x / texture_size.x, bounds.y / texture_size.y)
+	var scale_factor := maxf(bounds.x / texture_size.x, bounds.y / texture_size.y) * ART_BLEED
 	var uv := PackedVector2Array()
 	for point in background.polygon:
 		uv.append(point / scale_factor + texture_size * 0.5)

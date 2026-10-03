@@ -366,8 +366,8 @@ func refresh_action_tokens() -> void:
 		if token == null:
 			token = Button.new()
 			token.name = "PhysicalAction" + str(i)
-			token.position = Vector2(382 + i * 55, 229)
-			token.size = Vector2(46, 46)
+			token.position = Vector2(385 + i * 70, 215)
+			token.size = Vector2(60, 60)
 			token.add_theme_font_size_override("font_size", 36)
 			token.pressed.connect(game.open_player_board_action.bind(player_index, "physical"))
 			add_child(token)
@@ -445,10 +445,21 @@ func refresh_quests() -> void:
 					Vector2(112, 154), game.open_quest_card.bind(data.quest))
 			row.add_child(card)
 			var quest: QuestState = data.get("quest")
+			card.set_meta("choice_quest", quest)
 			if quest != null and quest.get_cube_slots() > 0:
 				var track := HBoxContainer.new()
 				track.name = "QuestProgress"
-				track.position = Vector2(12, 70)
+				# Anchor the complete row to the card, rather than leaving short
+				# tracks aligned to a fixed left margin. Keep it centred on resize.
+				var track_width: float = quest.get_cube_slots() * 12.0 + (quest.get_cube_slots() - 1) * 3.0
+				track.anchor_left = 0.5
+				track.anchor_right = 0.5
+				track.anchor_top = 0.5
+				track.anchor_bottom = 0.5
+				track.offset_left = -track_width * 0.5
+				track.offset_right = track_width * 0.5
+				track.offset_top = -6.0
+				track.offset_bottom = 6.0
 				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
 				track.add_theme_constant_override("separation", 3)
 				card.add_child(track)
@@ -539,51 +550,25 @@ func refresh_damage_track():
 		return
 
 
-	# -----------------------------------------------------
-	# Rimuove i cubi grafici precedenti
-	# -----------------------------------------------------
-
-	for slot in track.get_children():
-		var old_cube = slot.get_node_or_null(
-			"DamageCube"
-		)
-
-		if old_cube != null:
-			old_cube.free()
-
-
-	# -----------------------------------------------------
-	# Legge lo stato vero dal MageState
-	# -----------------------------------------------------
-
 	var damage_cubes = (
 		player_state.mage.damage_cubes
 	)
-
-
-	# -----------------------------------------------------
-	# Disegna i cubi
-	# -----------------------------------------------------
-
-	for i in range(damage_cubes.size()):
-		if i >= track.get_child_count():
-			break
-
-		var owner_id = damage_cubes[i]
-
+	# Keep occupied slots' nodes: pending conversion/healing choices are attached
+	# to those cubes and must survive unrelated Quest/board refreshes.
+	for i in range(track.get_child_count()):
 		var slot = track.get_child(i)
-
-		var cube = cube_scene.instantiate()
-
-		cube.name = "DamageCube"
-
-		cube.cube_color = (
-			get_damage_cube_color(owner_id)
-		)
-
-		slot.add_child(cube)
-
-
+		var cube = slot.get_node_or_null("DamageCube")
+		if i >= damage_cubes.size():
+			if cube != null:
+				slot.remove_child(cube)
+				cube.queue_free()
+			continue
+		if cube == null:
+			cube = cube_scene.instantiate()
+			cube.name = "DamageCube"
+			slot.add_child(cube)
+		cube.cube_color = get_damage_cube_color(damage_cubes[i])
+		cube.queue_redraw()
 		# Cube is a Control drawn from its top-left corner.
 		cube.position = Vector2.ZERO
 

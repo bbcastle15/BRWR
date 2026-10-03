@@ -5,6 +5,7 @@ extends Control
 signal preparation_confirmed(payload: Dictionary)
 signal study_confirmed(indices: Array)
 signal overlay_closed
+signal confirmation_changed(button: Button)
 
 
 const MODE_BROWSE := "browse"
@@ -16,6 +17,7 @@ var study_confirm_button: Button
 const CARD_ASPECT := 630.0 / 880.0
 const CARD_MAX_WIDTH := 630.0
 const CARD_GAP := 18
+const VISIBLE_CARD_LIMIT := 6
 
 # First try the common deterministic paths. If none exists, the script performs
 # one cached recursive search for <spell_id>.png under res://.
@@ -107,7 +109,7 @@ func _build_ui() -> void:
 	)
 	outer_margin.add_theme_constant_override("margin_left", 12)
 	outer_margin.add_theme_constant_override("margin_right", 12)
-	outer_margin.add_theme_constant_override("margin_top", 12)
+	outer_margin.add_theme_constant_override("margin_top", 132)
 	outer_margin.add_theme_constant_override("margin_bottom", 12)
 	add_child(outer_margin)
 
@@ -560,7 +562,7 @@ func _render_cards() -> void:
 func _card_display_size(
 	card_count: int
 ) -> Vector2:
-	var columns: int = clampi(card_count, 1, 6)
+	var columns: int = clampi(card_count, 1, VISIBLE_CARD_LIMIT)
 	# Keep a single row, sized for at most six cards; extra cards scroll sideways.
 	var available_width: float = maxf(1.0, card_scroll.size.x - 36.0)
 	var available_height: float = maxf(1.0, card_scroll.size.y - 32.0)
@@ -575,8 +577,11 @@ func _layout_cards() -> void:
 		return
 	card_row.columns = maxi(cards.size(), 1)
 	var display_size := _card_display_size(cards.size())
+	var frame_width: float = display_size.x + 20.0
+	if cards.size() > VISIBLE_CARD_LIMIT:
+		frame_width = maxf(frame_width, (card_scroll.size.x - 36.0 - (VISIBLE_CARD_LIMIT - 1) * CARD_GAP) / VISIBLE_CARD_LIMIT)
 	for frame in card_row.get_children():
-		frame.custom_minimum_size = Vector2(display_size.x + 20.0, display_size.y + 80.0)
+		frame.custom_minimum_size = Vector2(frame_width, display_size.y + 80.0)
 		var button: TextureButton = frame.get_meta("card_button")
 		button.custom_minimum_size = display_size
 
@@ -1011,6 +1016,7 @@ func _update_controls() -> void:
 	if mode == MODE_STUDY:
 		study_confirm_button.disabled = study_selection.size() != 2
 		study_confirm_button.text = "Keep selected cards (%d/2)" % study_selection.size()
+		confirmation_changed.emit(study_confirm_button)
 		return
 	if mode != MODE_PREPARATION:
 		return
@@ -1147,6 +1153,7 @@ func _update_controls() -> void:
 		total_prepared < min_spells
 		or total_prepared > max_spells
 	)
+	confirmation_changed.emit(confirm_button)
 
 
 func _slots_summary() -> String:

@@ -1,45 +1,116 @@
-# Laptop Windows e playtest online
+# Laptop Windows e partita dal browser
 
-## Giocare con un amico
+## Avvio dell'host
 
-Usate `BRWR-Windows-auto-update.zip`. Installate Git per Windows, estraete tutto
-e avviate `Gioca.cmd`: prima di ogni avvio scarica il branch `master` da GitHub,
-poi Godot importa le immagini e apre il menu. Se il repository e privato,
-entrambi gli account GitHub devono avere accesso al repository.
-Il clone del playtest sta in `%LOCALAPPDATA%\BRWR\playtest`, separato dallo sviluppo.
-Il log sta in `%LOCALAPPDATA%\BRWR\playtest.log`.
-Gli aggiornamenti comprendono soltanto modifiche committate e pubblicate con push.
-Non avvengono durante una partita. Se il download fallisce, il gioco non parte
-con una vecchia versione senza avvisare. Modifiche e commit locali nel clone
-del playtest bloccano l'aggiornamento e non vengono sovrascritti.
-Il motore Godot resta quello incluso nello ZIP: un cambio di motore richiede
-un nuovo pacchetto. I vecchi ZIP senza questo launcher non si aggiornano.
-Godot è incluso, non serve installarlo. La modalità solo-test mantiene il
-controllo locale di tutti i giocatori (da 2 a 6).
+Sul PC di sviluppo apri **Ospita-Online.cmd** nella cartella `brwr`.
+Il comando esporta le modifiche attuali, verifica il pacchetto e apre il gioco.
+Servono Godot **4.7.2** e i suoi template Web ufficiali, già presenti su questo PC.
+Gli amici hanno bisogno solamente di un browser desktop con WebGL 2, come Chrome.
+Non devono installare Godot, Git, Tailscale o altre applicazioni.
 
-Per il PvP non servono Tailscale, VPN o server intermedi.
+1. Scegli **Crea sala PvP**.
+2. Per amici su Internet inserisci il tuo **IPv4 pubblico** nel campo dedicato.
+   Per una prova sulla stessa rete domestica lascia il campo vuoto: viene
+   proposto l'IP locale del PC. Con più schede di rete controlla che sia quello
+   della connessione al router, oppure inseriscilo manualmente.
+3. Premi **Copia link d'invito** e invialo ai partecipanti.
+4. Aspetta che compaiano in sala, poi premi **Avvia partita**.
+5. Lascia aperto il gioco sul PC host per tutta la partita.
 
-1. In LAN l'amico usa l'IP locale dell'host. Su Internet usa il suo IP pubblico.
-2. Per Internet, sul router dell'host inoltra **UDP 27847** all'IP locale del PC
-   host e consenti Godot nel firewall Windows. La porta e UDP, non TCP.
-3. L'host sceglie **Crea partita PvP** e comunica IP e codice di sei cifre.
-4. L'amico inserisce IP e codice e sceglie **Entra nella partita PvP**.
-5. L'host gioca P1, l'amico P2. L'ordine di turno viene deciso dal gioco.
+Il link ha la forma `http://IP:8080/#code=CODICE_SALA&port=27847`.
+Il codice cambia a ogni nuova sala. Il frammento dopo `#` viene letto dal gioco
+e non viene incluso nella richiesta HTTP dei file.
 
-Con CGNAT la connessione entrante IPv4 non arriva al router: richiedi un IP
-pubblico al provider. Il gioco non apre automaticamente porte o regole firewall.
-La connessione diretta tra reti diverse richiede una prova sui vostri due PC.
+Il menu limita attualmente il PvP a **2 giocatori** perché il database contiene
+solo due maghi e due scuole implementati. Il trasporto e la sala gestiscono da
+2 a 6 posti; le partite con più di due giocatori richiedono ulteriori contenuti.
+La modalità solo-test mantiene il flusso locale precedente.
 
-Ogni PC consulta la propria mano e le proprie carte nascoste anche fuori turno.
-Le carte pubbliche rimangono consultabili da entrambi. Solo il giocatore che
-deve rispondere riceve le opzioni private e può inviare la scelta. Le regole
-girano sull'host; il client riceve una proiezione filtrata, senza il mazzo o la
-mano dell'avversario. L'host è fidato e mantiene lo stato completo.
+Se il launcher non trova il motore:
 
-La prima versione supporta **due giocatori**, senza riconnessione/salvataggio:
-se uno si disconnette la partita si ferma. Tornate al menu per una nuova partita.
-Il banner superiore mostra fase e giocatore chiamato a decidere.
-Tasto destro: trascina la visuale; rotella: zoom; Home: tavolo completo.
+```powershell
+./tools/host_web.ps1 -Godot 'C:/percorso/Godot_v4.7.2-stable_win64_console.exe'
+```
+
+Sul laptop installa i template da **Editor > Gestisci modelli di esportazione**.
+Per esportare senza avviare una sala aggiungi `-BuildOnly`.
+File generati: `output/web`; log: `output/web-export.log` e
+`output/web-export-check.log`. Il vecchio ZIP Windows non contiene questa build
+browser: per ospitare usa il nuovo launcher dal repository aggiornato.
+
+## Cosa fanno gli amici
+
+1. Aprono il link completo in Chrome sul PC e aspettano il caricamento.
+2. Premono **Entra nella partita**: indirizzo e codice sono già compilati.
+3. Aspettano che l'host avvii e scelgono il proprio mago/scuola quando richiesto.
+
+La build attuale comprende circa **460 MB** di download compresso, soprattutto
+immagini: il primo caricamento dipende dalla velocità di upload dell'host.
+Il browser usa le stesse scene, carte e risolutori del gioco. L'host conserva
+lo stato autorevole; ogni ospite riceve solo la propria mano e le proprie carte
+nascoste, più le informazioni pubbliche. L'host è fidato e conosce lo stato completo.
+Le scelte fuori turno o appartenenti a una richiesta superata vengono rifiutate.
+
+Tasto destro: trascina la visuale. Rotella: zoom. Home: tavolo completo.
+Il banner superiore indica il giocatore che deve rispondere. In browser
+**Torna al menu** abbandona la partita; la scheda si chiude con i comandi di Chrome.
+Mantieni la scheda attiva: la sospensione delle schede in background può
+interrompere la connessione. Non sono ancora disponibili riconnessione o
+salvataggio: una disconnessione sospende la partita per tutti.
+
+## Fastweb: rendere il link raggiungibile su Internet
+
+Chrome è il browser; il modello del router non è ancora stato identificato.
+Il server integrato ascolta su queste due porte del PC host:
+
+| Servizio | Protocollo | Porta esterna e interna |
+| --- | --- | --- |
+| Download del gioco | TCP | 8080 |
+| Connessione alla partita | TCP | 27847 |
+
+1. Trova l'IPv4 **locale** del PC con `ipconfig` (scheda Ethernet/Wi-Fi in uso).
+   Prenota quell'indirizzo nel DHCP del router, per evitare che cambi.
+2. Nel port mapping inoltra entrambe le porte TCP a quell'IPv4 locale.
+   Le vecchie istruzioni UDP 27847 appartenevano al trasporto ENet precedente.
+3. Consenti il programma Godot nel firewall Windows per queste connessioni.
+   Non serve disabilitare il firewall né mettere il PC in DMZ.
+4. Verifica con Fastweb che la linea abbia un IPv4 pubblico raggiungibile,
+   senza CGNAT. Se è condiviso, richiedi un IPv4 pubblico all'operatore.
+   Il solo inoltro delle porte non supera il CGNAT.
+5. Inserisci l'IPv4 pubblico nel menu e prova il link da un'altra rete,
+   per esempio dal PC dell'amico. Una prova dalla stessa LAN non verifica
+   l'accessibilità da Internet; alcuni router non supportano il ritorno verso
+   il proprio IP pubblico dall'interno della rete.
+
+Percorsi ufficiali, secondo il modem:
+
+- **NeXXt:** da MyFastweb nel browser, Gestisci NeXXt → La mia rete / Impostazioni
+  → Altre impostazioni → Internet → Port Mapping.
+  [Guida Fastweb NeXXt](https://www.fastweb.it/myfastweb/assistenza/guide/configurazione-fastweb-nexxt/).
+- **FASTGate:** da casa apri `http://myfastgate`, poi Avanzate → Configurazione
+  manuale porte → Associa nuovo port mapping.
+  [Guida Fastweb FASTGate](https://fastweb.it/myfastweb/assistenza/guide/FASTGate).
+
+Questa configurazione serve solo all'host. Agli amici basta il link.
+Se l'IP pubblico cambia, aggiorna il campo e invia il nuovo link.
+Non sono state modificate automaticamente impostazioni del router o del firewall.
+La raggiungibilità esterna deve ancora essere provata sulla tua linea Fastweb.
+
+Il server integrato usa **HTTP e WebSocket senza TLS**: il traffico non è cifrato.
+HTTPS/WSS richiederebbe una configurazione aggiuntiva con un certificato;
+non basta sostituire `http` con `https` nel link.
+
+## Aggiornamenti
+
+Chiudi la partita e riapri **Ospita-Online.cmd** dopo le modifiche. Il launcher
+esporta il working tree attuale, compresi gli asset nuovi non ancora committati.
+Host e browser caricano lo stesso pacchetto; una versione diversa viene rifiutata.
+Gli amici ricaricano il nuovo link e ricevono i file aggiornati. Non avvengono
+aggiornamenti durante una partita e il launcher non esegue commit, push o pull.
+
+Per usare modifiche fatte sull'altro PC, sincronizza prima il repository come
+descritto sotto. I vecchi ZIP rimangono fermi alla versione con cui sono stati
+prodotti; il vecchio `Gioca.cmd` con auto-update vede solo i commit pubblicati.
 
 ## Continuare lo sviluppo sul laptop
 
@@ -71,4 +142,5 @@ La directory deve contenere il Godot Windows originale. Il pacchetto include i
 file del progetto, compresi gli asset nuovi non ancora tracciati; esclude cache,
 output, backup e log. Non include la cartella Git o credenziali.
 
-Documentazione: [multiplayer Godot e port forwarding UDP](https://docs.godotengine.org/en/4.7/tutorials/networking/high_level_multiplayer.html).
+Documentazione: [esportazione Web di Godot](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html),
+[WebSocketMultiplayerPeer](https://docs.godotengine.org/en/stable/classes/class_websocketmultiplayerpeer.html).

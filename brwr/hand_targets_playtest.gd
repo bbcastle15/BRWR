@@ -34,7 +34,7 @@ func run() -> void:
 	var first = hand.card_row.get_child(0)
 	var last = hand.card_row.get_child(7)
 	check(absf(first.global_position.y - last.global_position.y) < 1, "All cards must share a row")
-	check(last.global_position.x + last.size.x <= root.size.x, "Hand must fit screen width")
+	check(hand.card_scroll.get_h_scroll_bar().visible, "Cards beyond six must be accessible by horizontal scrolling")
 	first.get_meta("card_button").pressed.emit()
 	check(hand.selected_hand_index == 0, "Click must safely rebuild cards during signal emission")
 	hand.ready_hand_indices.assign([0])

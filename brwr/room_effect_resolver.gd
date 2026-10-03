@@ -1290,15 +1290,16 @@ func _resolve_summon_evocation(
 		return false
 
 
-	var summoned = game.summon_evocation(
+	var summoned = game.summon_evocation_for_effect(
 		player_index,
 		evocation_id,
-		room_id
+		room_id,
+		context
 	)
 
 
 	if summoned == null:
-		return false
+		return bool(context.get("summon_declined", false))
 
 
 	context[

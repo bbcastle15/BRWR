@@ -259,6 +259,20 @@ func add_instability_cube(
 	return true
 
 
+func convert_instability_cube(owner_id: int, new_owner_id: int, index: int = -1) -> bool:
+	if index < 0:
+		index = instability_cubes.find(owner_id)
+	if index < 0 or index >= instability_cubes.size() or instability_cubes[index] != owner_id:
+		return false
+	instability_cubes[index] = new_owner_id
+	var cube = instability_cube_nodes[index]
+	cube.owner_type = cube.OwnerType.BLACK_ROSE if new_owner_id == -1 else cube.OwnerType.PLAYER
+	cube.player_index = new_owner_id
+	cube.cube_color = Color.BLACK if new_owner_id == -1 else get_player_color(new_owner_id)
+	cube.queue_redraw()
+	return true
+
+
 func remove_instability_cube(
 	owner_id: int
 ) -> bool:
@@ -361,7 +375,7 @@ func get_art_instability_slots() -> PackedVector2Array:
 	var count := get_instability_resistance()
 	var slots := PackedVector2Array()
 	var bottom_count := mini(count, 4) if count != 5 else 5
-	var size := Vector2(radius * 2.0, radius * sqrt(3.0))
+	var size := Vector2(radius * 2.0, radius * sqrt(3.0)) * preload("res://room_art.gd").ART_BLEED
 	for i in range(bottom_count):
 		slots.append((Vector2(0.5 + (i - (bottom_count - 1) * 0.5) * 0.10, 0.91) - Vector2.ONE * 0.5) * size)
 	var side_count := int((count - bottom_count) / 2)

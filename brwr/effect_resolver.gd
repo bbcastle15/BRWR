@@ -674,14 +674,16 @@ func _summon(
 	or room_id == "":
 		return null
 
-	var summoned = game.summon_evocation(
+	var summoned = game.summon_evocation_for_effect(
 		caster_id,
 		evocation_id,
-		room_id
+		room_id,
+		context
 	)
 
 	if summoned != null:
 		context["last_summoned_evocation"] = summoned
+		context["effect_summoned_evocation"] = true
 
 	return summoned
 
@@ -760,9 +762,19 @@ func convert_damage_cubes(
 			continue
 
 		if not selected_owners.is_empty():
-			if not int(damage_cubes[i]) in remaining:
+			var selected_index: int = -1
+			for j in range(remaining.size()):
+				var selected = remaining[j]
+				if selected is Dictionary:
+					if int(selected.get("cube_index", -1)) == i and int(selected.get("owner_id", -999)) == int(damage_cubes[i]):
+						selected_index = j
+						break
+				elif int(selected) == int(damage_cubes[i]):
+					selected_index = j
+					break
+			if selected_index < 0:
 				continue
-			remaining.erase(int(damage_cubes[i]))
+			remaining.remove_at(selected_index)
 		damage_cubes[i] = new_owner_id
 		converted += 1
 
@@ -1600,27 +1612,6 @@ func _resolve_place_instability_per_damaged_model(
 # QUEST / CARD-ZONE EFFECT HANDLERS
 # =============================================================================
 
-func _side_element_symbols(side: Dictionary) -> Array[String]:
-	var result: Array[String] = []
-
-	var main_element := str(side.get("element", ""))
-	if main_element != "":
-		result.append(main_element)
-
-	var enhancement = side.get("enhancement", {})
-	if enhancement is Dictionary and not enhancement.is_empty():
-		if enhancement.has("requires"):
-			for value in enhancement.get("requires", []):
-				result.append(str(value))
-		elif enhancement.has("elements"):
-			for value in enhancement.get("elements", []):
-				result.append(str(value))
-		elif enhancement.has("element"):
-			result.append(str(enhancement.get("element", "")))
-
-	return result
-
-
 func _side_has_any_element(
 	side: Dictionary,
 	required_elements: Array[String]
@@ -1628,13 +1619,9 @@ func _side_has_any_element(
 	if required_elements.is_empty():
 		return true
 
-	for element in _side_element_symbols(side):
-		# The rulebook defines the All-Elements symbol as a chosen Element
-		# whenever an Element is required.
-		if element == "all" or element in required_elements:
-			return true
-
-	return false
+	# Enhancement requirements describe a condition, not this Spell's Element.
+	var element: String = str(side.get("element", ""))
+	return element == "all" or element in required_elements
 
 
 func _resolve_return_revealed_spell_to_hand(
@@ -1941,9 +1928,15 @@ func _resolve_convert_instability(
 
 	while converted < amount:
 		var old_owner: int = 999999
+		var cube_index: int = -1
 
 		if not requested_owners.is_empty():
-			old_owner = int(requested_owners.pop_front())
+			var selected = requested_owners.pop_front()
+			if selected is Dictionary:
+				old_owner = int(selected.get("owner_id", 999999))
+				cube_index = int(selected.get("cube_index", -1))
+			else:
+				old_owner = int(selected)
 			if old_owner == caster_id or not old_owner in room.instability_cubes:
 				continue
 		else:
@@ -1964,18 +1957,11 @@ func _resolve_convert_instability(
 		if game.take_owner_cubes(caster_id, 1) <= 0:
 			break
 
-		if not room.remove_instability_cube(old_owner):
+		if not room.convert_instability_cube(old_owner, caster_id, cube_index):
 			game.return_owner_cubes(caster_id, 1)
 			continue
 
 		game.return_owner_cubes(old_owner, 1)
-
-		if not room.add_instability_cube(caster_id):
-			# Roll back both the board and Cube pools if placement unexpectedly fails.
-			game.take_owner_cubes(old_owner, 1)
-			room.add_instability_cube(old_owner)
-			game.return_owner_cubes(caster_id, 1)
-			continue
 
 		converted += 1
 
@@ -2097,6 +2083,7 @@ func _place_mage_direct(
 	game.players[player_index].mage.room_id = room_id
 	game.players[player_index].mage.room_coord = coord
 	game.players[player_index].mage.in_cell = false
+	game.refresh_model_tokens()
 
 	return true
 

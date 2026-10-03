@@ -14,6 +14,7 @@ func run() -> void:
 	var game = load("res://game.tscn").instantiate()
 	game.enable_beta_hud = false
 	game.auto_start_game_flow = false
+	game.game_seed = 1232
 	root.add_child(game)
 	for i in range(10):
 		await process_frame
@@ -49,7 +50,9 @@ func run() -> void:
 	player.evocations.erase(construct)
 	check(game._spell_room_target_options(0, soul).is_empty(), "Removed Construct must not remain a target source")
 	game.players[1].evocations.append(construct)
-	check(game._spell_room_target_options(0, soul).is_empty(), "Enemy Construct must not authorize a room")
+	construct.owner_id = 1
+	construct.controller_id = 1
+	check(game._spell_room_target_options(0, soul).size() == 1, "Soul Transfer Light permits any Construct, as printed")
 	game.players[1].evocations.clear()
 	# Force the exact Clean-up -> instant event path from the reported stack.
 	game.game_flow_active = true

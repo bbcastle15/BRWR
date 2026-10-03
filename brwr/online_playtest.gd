@@ -18,26 +18,34 @@ func run() -> void:
 	session.name = "OnlineSession"
 	root.add_child(session)
 	if host_mode:
-		assert(session.host() == OK)
+		var count := 2
+		for arg in OS.get_cmdline_user_args():
+			if arg.begins_with("players="): count = int(arg.trim_prefix("players="))
+		assert(session.host(count, "127.0.0.1") == OK)
 		session.room_code = "123456"
 	else:
 		assert(session.join("127.0.0.1", "123456") == OK)
 
 func _process(delta: float) -> bool:
 	elapsed += delta
-	if elapsed > 40:
+	if elapsed > 70:
 		push_error("ONLINE PLAYTEST TIMEOUT choices=" + str(choices))
 		quit(1)
 		return false
-	if session == null or session.game == null: return false
+	if session == null: return false
+	if host_mode and session.can_start():
+		assert(session.start_match())
+	if session.game == null: return false
 	var game = session.game
 	if game.beta_hud == null: return false
 	if not host_mode:
-		assert(game.get_ui_viewer_player_index() == 1)
-		assert(game.players[0].hand.all(func(card): return card == null))
-		for slot in ["Q", "I", "II", "III"]:
-			var card: Dictionary = game.get_player_board_spell_slot_data(0, slot)
-			if not card.get("public", false): assert(not card.has("id"))
+		assert(game.get_ui_viewer_player_index() == session.local_player)
+		for other in game.players.size():
+			if other == session.local_player: continue
+			assert(game.players[other].hand.all(func(card): return card == null))
+			for slot in ["Q", "I", "II", "III"]:
+				var card: Dictionary = game.get_player_board_spell_slot_data(other, slot)
+				if not card.get("public", false): assert(not card.has("id"))
 	var request: Dictionary = game.pending_input
 	if game.current_phase == "action" and game.players.all(func(player): return not player.mage.in_cell):
 		if action_seen_at < 0:
@@ -49,7 +57,7 @@ func _process(delta: float) -> bool:
 	if not game.waiting_for_player_input: return false
 	var actor: int = int(request.get("player_index", -1))
 	if actor != game.local_viewer_index or game.input_revision == last_revision: return false
-	assert(not session.submit_local(1 - actor, {}), "Cannot submit on behalf of opponent")
+	assert(not session.submit_local((actor + 1) % game.players.size(), {}), "Cannot submit on behalf of opponent")
 	if not host_mode:
 		if stale_sent_at < 0:
 			stale_revision = game.input_revision

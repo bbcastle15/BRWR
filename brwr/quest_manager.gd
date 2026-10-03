@@ -303,6 +303,8 @@ func _task_matches(
 		if str(event.get("spell_type", "")) \
 		!= str(task.get("spell_type", "")):
 			return false
+	if task.has("spell_types") and not str(event.get("spell_type", "")) in task["spell_types"]:
+		return false
 
 
 	# -----------------------------------------------------
@@ -905,37 +907,10 @@ func _count_matching_element_symbols(
 	side: Dictionary,
 	required_elements: Array[String]
 ) -> int:
-
-	var total := 0
-
-	# Main Element symbol printed in the Spell header.
+	# Count the active header's Element once, matching Enhancement checks.
+	# Symbols in an Enhancement condition do not give the card those Elements.
 	var main_element: String = str(side.get("element", ""))
-	if _element_matches(main_element, required_elements):
-		total += 1
-
-	# Alchemy-style Enhancement requirements are also printed Element symbols
-	# on the Active Side. Current JSONs use requires/elements/element depending
-	# on the card, so support all three representations.
-	var enhancement = side.get("enhancement", {})
-	if enhancement is Dictionary \
-	and not enhancement.is_empty():
-
-		var requirements: Array[String] = []
-
-		if enhancement.has("requires"):
-			for value in enhancement.get("requires", []):
-				requirements.append(str(value))
-		elif enhancement.has("elements"):
-			for value in enhancement.get("elements", []):
-				requirements.append(str(value))
-		elif enhancement.has("element"):
-			requirements.append(str(enhancement.get("element", "")))
-
-		for element in requirements:
-			if _element_matches(element, required_elements):
-				total += 1
-
-	return total
+	return 1 if _element_matches(main_element, required_elements) else 0
 
 
 func _element_matches(

@@ -19,6 +19,9 @@ var state_label: Label
 var prompt_label: Label
 var content: VBoxContainer
 var feedback_label: Label
+var decision_bar: PanelContainer
+var decision_info: Label
+var decision_actions: HBoxContainer
 var reserved_width: float = 340.0
 var hand_button: Button
 var hand_overlay = null
@@ -220,8 +223,13 @@ func _build_ui() -> void:
 	window_toolbar.add_child(window_button)
 	var quit_button := Button.new()
 	quit_button.name = "QuitGameButton"
-	quit_button.text = "Chiudi gioco"
-	quit_button.pressed.connect(func(): get_tree().quit())
+	quit_button.text = "Torna al menu" if OS.has_feature("web") else "Chiudi gioco"
+	quit_button.pressed.connect(func():
+		if OS.has_feature("web"):
+			multiplayer.multiplayer_peer = null
+			get_tree().reload_current_scene()
+		else:
+			get_tree().quit())
 	window_toolbar.add_child(quit_button)
 
 	root_box.add_child(HSeparator.new())
@@ -260,7 +268,62 @@ func _build_ui() -> void:
 	hand_overlay.setup(game)
 	hand_overlay.preparation_confirmed.connect(_on_hand_overlay_preparation_confirmed)
 	hand_overlay.study_confirmed.connect(func(indices): _submit({"keep_indices": indices}))
+	_build_decision_bar()
+	hand_overlay.confirmation_changed.connect(_sync_hand_confirmation)
 	panel.hide()
+
+
+func _sync_hand_confirmation(source: Button) -> void:
+	if str(current_request.get("type", "")) not in ["preparation", "study_keep_cards"]:
+		return
+	source.hide()
+	for child in decision_actions.get_children():
+		decision_actions.remove_child(child)
+		child.queue_free()
+	_add_confirmation(source.text, source.pressed.emit, source.disabled)
+
+
+func _build_decision_bar() -> void:
+	var top_layer := CanvasLayer.new()
+	top_layer.layer = 91
+	add_child(top_layer)
+	decision_bar = PanelContainer.new()
+	decision_bar.name = "DecisionBar"
+	decision_bar.anchor_left = 0.30
+	decision_bar.anchor_right = 1.0
+	decision_bar.offset_left = 12
+	decision_bar.offset_right = -12
+	decision_bar.offset_top = 44
+	top_layer.add_child(decision_bar)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	decision_bar.add_child(row)
+	var messages := VBoxContainer.new()
+	messages.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(messages)
+	prompt_label.reparent(messages)
+	decision_info = Label.new()
+	decision_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	decision_info.max_lines_visible = 3
+	messages.add_child(decision_info)
+	feedback_label.reparent(messages)
+	decision_actions = HBoxContainer.new()
+	decision_actions.alignment = BoxContainer.ALIGNMENT_END
+	row.add_child(decision_actions)
+	phase_label.hide()
+	player_label.hide()
+	decision_bar.hide()
+
+
+func _add_confirmation(text_value: String, callback: Callable, disabled: bool = false) -> Button:
+	var button := Button.new()
+	button.text = text_value
+	button.disabled = disabled
+	button.custom_minimum_size = Vector2(135, 42)
+	button.pressed.connect(callback, CONNECT_DEFERRED)
+	decision_actions.add_child(button)
+	decision_bar.show()
+	return button
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -321,7 +384,7 @@ func _toggle_panel() -> void:
 		hand_overlay.visible = not hand_overlay.visible
 		return
 	if panel != null:
-		panel.visible = not panel.visible
+		panel.visible = not panel.visible and content.get_child_count() > 0
 
 
 func _on_phase_completed(_phase: String) -> void:
@@ -336,7 +399,7 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	var winner: int = int(winner_data.get("winner", -999))
 	_add_info("Vincitore: " + ("Rosa Nera" if winner == -1 else "Player " + str(winner + 1)))
 	for row in winner_data.get("scores", []):
-		_add_info("%s: %d PP = %d base + %d quest + %d trofei + %d corona" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
+		_add_section("%s: %d PP = %d base + %d quest + %d trofei + %d corona" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
 
 
 func _on_player_input_resolved(
@@ -508,10 +571,112 @@ func _refresh_header() -> void:
 
 
 func _clear_content() -> void:
+	if decision_actions != null:
+		for child in decision_actions.get_children():
+			decision_actions.remove_child(child)
+			child.queue_free()
+		decision_info.text = ""
+		feedback_label.text = ""
+		decision_bar.hide()
 	game.clear_lodge_room_choices()
 	game.clear_board_target_choices()
 	for child in content.get_children():
+		content.remove_child(child)
 		child.queue_free()
+
+
+func _add_object_choice(option: Dictionary, callback: Callable, selected: bool = false, kind: String = "") -> void:
+	var address := option.duplicate()
+	if kind == "quests" and address.has("quest_index"):
+		address["board_player_index"] = current_player_index
+		if not address.has("quest_section"):
+			address["quest_section"] = "completed" if str(current_request.get("type", "")).contains("completed") else "revealed"
+	if game.show_board_target_choice(address, callback, selected):
+		panel.anchor_top = 1.0
+		panel.anchor_bottom = 1.0
+		panel.offset_top = -200.0
+		panel.offset_bottom = -12.0
+		if not decision_info.text.contains("highlighted objects"):
+			_add_info("Click the highlighted objects on the table.")
+		if content.get_child_count() == 0:
+			panel.hide()
+		return
+	if kind == "":
+		kind = str(option.get("card_kind", ""))
+	if kind == "" and option.has("spell_id"):
+		kind = "spells"
+	if kind == "" and option.has("evocation_id"):
+		kind = "evocations"
+	if kind == "":
+		_add_button(("✓ " if selected else "") + _option_label(option), callback)
+		return
+	var half_width: float = minf(740.0, get_viewport().get_visible_rect().size.x * 0.46)
+	var half_height: float = minf(420.0, get_viewport().get_visible_rect().size.y * 0.40)
+	panel.anchor_top = 0.5
+	panel.anchor_bottom = 0.5
+	panel.offset_top = -half_height
+	panel.offset_bottom = half_height
+	panel.offset_left = -half_width
+	panel.offset_right = half_width
+	var gallery = content.get_node_or_null("ObjectChoices")
+	if gallery == null:
+		var scroll := ScrollContainer.new()
+		scroll.name = "ObjectChoices"
+		scroll.custom_minimum_size.y = 350
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		content.add_child(scroll)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		scroll.add_child(row)
+		gallery = scroll
+	var id: String = str(option.get("id", option.get("spell_id", option.get("evocation_id", ""))))
+	var texture: Texture2D = hand_overlay._resolve_card_texture({"id": id}) if kind == "spells" else game.ReferenceCardPreview.card_texture(kind, id)
+	var button := Button.new()
+	button.custom_minimum_size = Vector2(235, 335) if kind != "mages" else Vector2(450, 260)
+	if kind == "schools":
+		button.custom_minimum_size = Vector2(300, 450)
+	button.tooltip_text = _option_label(option)
+	if kind == "mages":
+		button.tooltip_text += "\nHP %s · Hand %s · STR %s · SPD %s\n%s" % [option.get("health", ""), option.get("hand_limit", ""), option.get("strength", ""), option.get("speed", ""), option.get("personal_spell_name", "")]
+	button.set_meta("choice_option", option)
+	button.pressed.connect(callback, CONNECT_DEFERRED)
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.08, 0.08, 0.08)
+	style.border_color = Color.GOLD if selected else Color(0.4, 0.4, 0.4)
+	style.set_border_width_all(4 if selected else 1)
+	button.add_theme_stylebox_override("normal", style)
+	if texture == null:
+		button.text = _option_label(option)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	else:
+		var art := TextureRect.new()
+		art.texture = texture
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(art)
+		art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		art.offset_left = 6
+		art.offset_right = -6
+		art.offset_top = 6
+		art.offset_bottom = -6
+	if kind == "schools":
+		var school_card := VBoxContainer.new()
+		school_card.add_child(button)
+		var inspect := Button.new()
+		inspect.name = "InspectSchool"
+		inspect.text = "Inspect " + str(option.get("name", id.capitalize()))
+		inspect.custom_minimum_size.y = 36
+		inspect.pressed.connect(_inspect_school.bind(id, str(option.get("name", id.capitalize()))), CONNECT_DEFERRED)
+		school_card.add_child(inspect)
+		gallery.get_child(0).add_child(school_card)
+	else:
+		gallery.get_child(0).add_child(button)
+
+
+func _inspect_school(id: String, title: String) -> void:
+	game._close_reference_card_preview()
+	game._reference_card_preview().show_card("schools", id, title, "")
 
 
 func _add_section(title_text: String) -> void:
@@ -525,10 +690,8 @@ func _add_section(title_text: String) -> void:
 
 
 func _add_info(text_value: String) -> void:
-	var label := Label.new()
-	label.text = text_value
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(label)
+	decision_info.text += ("\n" if decision_info.text != "" else "") + text_value
+	decision_bar.show()
 
 
 func _add_button(
@@ -536,6 +699,8 @@ func _add_button(
 	callback: Callable,
 	disabled: bool = false
 ) -> Button:
+	if text_value.begins_with("Confirm"):
+		return _add_confirmation(text_value, callback, disabled)
 	var button := Button.new()
 	button.text = text_value
 	button.disabled = disabled
@@ -551,6 +716,8 @@ func _add_small_button(
 	callback: Callable,
 	disabled: bool = false
 ) -> Button:
+	if text_value.begins_with("Confirm"):
+		return _add_confirmation(text_value, callback, disabled)
 	var button := Button.new()
 	button.text = text_value
 	button.disabled = disabled
@@ -571,13 +738,14 @@ func _render_current_request() -> void:
 		)
 	)
 
-	prompt_label.text = _request_title(input_type)
+	prompt_label.text = str(current_request.get("prompt", _request_title(input_type)))
+	decision_bar.show()
 
 	match input_type:
 		"final_winner_choice":
 			_add_info("Parità dopo quest e trofei: il Primo Mago sceglie il vincitore.")
 			for row in current_request.get("contenders", []):
-				_add_button(str(row.name), _submit.bind({"winner": row.player_index}))
+				_add_object_choice(row, _submit.bind({"winner": row.player_index}))
 		"starting_mage_choice":
 			_render_starting_mage_choice()
 
@@ -690,6 +858,10 @@ func _render_current_request() -> void:
 					"  "
 				)
 			)
+	# Board-only decisions keep their instructions in the top bar. Do not
+	# leave an empty modal over clickable Evocations, Rooms or damage cubes.
+	if content.get_child_count() == 0:
+		panel.hide()
 
 
 func _request_title(input_type: String) -> String:
@@ -759,62 +931,9 @@ func _submit(payload: Dictionary) -> void:
 
 
 func _render_starting_mage_choice() -> void:
-	_add_info(
-		"All Mages are chosen first, in play order. "
-		+ "A Mage already chosen by another player is unavailable."
-	)
-
-	for mage_value in current_request.get(
-		"available_mages",
-		[]
-	):
-		if not mage_value is Dictionary:
-			continue
-
-		var mage: Dictionary = mage_value
-		var mage_id: String = str(
-			mage.get(
-				"id",
-				""
-			)
-		)
-
-		var button_text: String = (
-			str(
-				mage.get(
-					"name",
-					mage_id.capitalize()
-				)
-			)
-			+ "\nHP "
-			+ str(mage.get("health", 0))
-			+ "  •  Hand "
-			+ str(mage.get("hand_limit", 0))
-			+ "  •  STR "
-			+ str(mage.get("strength", 0))
-			+ "  •  SPD "
-			+ str(mage.get("speed", 0))
-			+ "\nPersonal Spell: "
-			+ str(
-				mage.get(
-					"personal_spell_name",
-					mage.get(
-						"personal_spell_id",
-						""
-					)
-				)
-			)
-		)
-
-		var button := _add_button(
-			button_text,
-			Callable(
-				self,
-				"_submit_starting_mage"
-			).bind(mage_id)
-		)
-
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_add_info("Choose your Mage card. Mages already chosen are unavailable.")
+	for mage in current_request.get("available_mages", []):
+		_add_object_choice(mage, _submit_starting_mage.bind(str(mage.get("id", ""))), false, "mages")
 
 
 func _submit_starting_mage(
@@ -825,35 +944,9 @@ func _submit_starting_mage(
 	})
 
 func _render_starting_school_choice() -> void:
-	_add_info(
-		"Choose one School. A School already chosen by another Mage "
-		+ "is no longer available."
-	)
-
-	for school_value in current_request.get(
-		"available_schools",
-		[]
-	):
-		if not school_value is Dictionary:
-			continue
-
-		var school: Dictionary = school_value
-		var school_id: String = str(
-			school.get("id", "")
-		)
-
-		_add_button(
-			str(
-				school.get(
-					"name",
-					school_id.capitalize()
-				)
-			),
-			Callable(
-				self,
-				"_submit_starting_school"
-			).bind(school_id)
-		)
+	_add_info("Click a School to choose it. Inspect opens its rules.")
+	for school in current_request.get("available_schools", []):
+		_add_object_choice(school, _submit_starting_school.bind(str(school.get("id", ""))), false, "schools")
 
 
 func _submit_starting_school(
@@ -865,80 +958,14 @@ func _submit_starting_school(
 
 
 func _render_starting_grimoire_choice() -> void:
-	_add_info(
-		"School: "
-		+ str(
-			current_request.get(
-				"school_name",
-				current_request.get(
-					"school_id",
-					""
-				)
-			)
-		)
-		+ "\nChoose one specialization. Its six School Spells become "
-		+ "your starting Grimoire together with one Personal Spell."
-	)
-
-	for option_value in current_request.get(
-		"options",
-		[]
-	):
-		if not option_value is Dictionary:
-			continue
-
-		var option: Dictionary = option_value
-		var spell_names: Array[String] = []
-
-		for spell_value in option.get(
-			"spells",
-			[]
-		):
-			if not spell_value is Dictionary:
-				continue
-
-			spell_names.append(
-				str(
-					spell_value.get(
-						"name",
-						spell_value.get(
-							"id",
-							"Spell"
-						)
-					)
-				)
-			)
-
-		var option_name: String = str(
-			option.get(
-				"name",
-				option.get(
-					"id",
-					"Starting Grimoire"
-				)
-			)
-		)
-
-		_add_section(option_name)
-		_add_info(
-			"• " + "\n• ".join(spell_names)
-		)
-
-		_add_button(
-			"Choose " + option_name,
-			Callable(
-				self,
-				"_submit_starting_grimoire"
-			).bind(
-				str(
-					option.get(
-						"id",
-						""
-					)
-				)
-			)
-		)
-
+	_add_info("Choose a specialization by clicking one of its six cards.")
+	for option in current_request.get("options", []):
+		_add_section(str(option.get("name", option.get("id", ""))))
+		for spell in option.get("spells", []):
+			_add_object_choice(spell, _submit_starting_grimoire.bind(str(option.get("id", ""))), false, "spells")
+		var gallery = content.get_node_or_null("ObjectChoices")
+		if gallery != null:
+			gallery.name = "Grimoire_" + str(option.get("id", ""))
 
 
 func _submit_starting_grimoire(
@@ -1264,6 +1291,9 @@ func _render_action_root(category: String = "") -> void:
 			continue
 
 		if mode == "direct":
+			if str(option.get("kind", "")) == "quest":
+				_add_object_choice(option, _submit_action_token.bind(str(option.get("token", ""))), false, "quests")
+				continue
 			var prefix: String = ""
 
 			match str(option.get("kind", "")):
@@ -1331,6 +1361,9 @@ func _render_action_root(category: String = "") -> void:
 				)
 			}
 
+		if mode == "momentum_destinations":
+			_add_object_choice(option, _set_action_menu.bind(mode, filter_data), false, "spells")
+			continue
 		if mode == "command_plans":
 			var target := {"token": "command", "owner_id": current_player_index, "evocation_index": int(filter_data.evocation_index)}
 			if game.show_board_target_choice(target, _set_action_menu.bind(mode, filter_data)):
@@ -1736,7 +1769,7 @@ func _render_effect_choice() -> void:
 		_add_info("Click the highlighted target or cubes on the board.")
 
 	var room_options: Array = options.filter(func(option):
-		return str(option.get("target_type", "")) in ["room", "area"] or str(option.get("token", "")).begins_with("room:"))
+		return not board_tokens.has(str(option.get("token", ""))) and (str(option.get("target_type", "")) in ["room", "area"] or str(option.get("room_id", "")) != "" or str(option.get("token", "")).begins_with("room:")))
 	if not room_options.is_empty():
 		panel.anchor_top = 1.0
 		panel.anchor_bottom = 1.0
@@ -1754,7 +1787,7 @@ func _render_effect_choice() -> void:
 		game.show_lodge_room_choices(callbacks, selected_rooms)
 		for option in options:
 			if not room_options.has(option) and not board_tokens.has(str(option.get("token", ""))):
-				_add_button(_option_label(option), _submit_effect_single.bind(str(option.get("token", ""))) if max_select <= 1 else _toggle_generic_value.bind(str(option.get("token", ""))))
+				_add_object_choice(option, _submit_effect_single.bind(str(option.get("token", ""))) if max_select <= 1 else _toggle_generic_value.bind(str(option.get("token", ""))), generic_selection.has(str(option.get("token", ""))))
 		if max_select > 1:
 			_add_button("Confirm selection (%d)" % generic_selection.size(), _submit_effect_multi,
 				generic_selection.size() < min_select or generic_selection.size() > max_select)
@@ -1783,8 +1816,8 @@ func _render_effect_choice() -> void:
 				)
 			)
 
-			_add_button(
-				_option_label(option),
+			_add_object_choice(
+				option,
 				Callable(
 					self,
 					"_submit_effect_single"
@@ -1808,13 +1841,12 @@ func _render_effect_choice() -> void:
 			token
 		)
 
-		_add_button(
-			("✓ " if selected else "")
-			+ _option_label(option),
+		_add_object_choice(
+			option,
 			Callable(
 				self,
 				"_toggle_generic_value"
-			).bind(token)
+			).bind(token), selected
 		)
 
 	_add_button(
@@ -1874,6 +1906,7 @@ func _toggle_generic_value(value) -> void:
 # =============================================================================
 
 func _render_study_schools() -> void:
+	_add_info("Click a School for each draw. Inspect opens its rules without choosing a draw.")
 	_add_info(
 		"Library draws: "
 		+ str(school_draft.size())
@@ -1893,15 +1926,7 @@ func _render_study_schools() -> void:
 			school_value
 		)
 
-		_add_button(
-			"Draw from "
-			+ school_id.capitalize(),
-			Callable(
-				self,
-				"_add_study_school"
-			).bind(school_id),
-			school_draft.size() >= 4
-		)
+		_add_object_choice({"id": school_id, "name": school_id.capitalize()}, _add_study_school.bind(school_id), school_draft.has(school_id), "schools")
 
 	var controls := HBoxContainer.new()
 	content.add_child(controls)
@@ -1979,40 +2004,9 @@ func _show_study_cards() -> void:
 
 
 func _render_optional_hand_discard() -> void:
-	_add_button(
-		"Keep current Hand",
-		Callable(
-			self,
-			"_submit_optional_hand_discard"
-		).bind(-1)
-	)
-
-	for card_value in current_request.get(
-		"hand",
-		[]
-	):
-		var card: Dictionary = card_value
-
-		_add_button(
-			"Discard "
-			+ str(
-				card.get(
-					"name",
-					card.get("id", "Card")
-				)
-			),
-			Callable(
-				self,
-				"_submit_optional_hand_discard"
-			).bind(
-				int(
-					card.get(
-						"hand_index",
-						-1
-					)
-				)
-			)
-		)
+	_add_button("Keep current Hand", _submit_optional_hand_discard.bind(-1))
+	for card in current_request.get("hand", []):
+		_add_object_choice(card, _submit_optional_hand_discard.bind(int(card.get("hand_index", -1))), false, "spells")
 
 
 func _submit_optional_hand_discard(
@@ -2033,62 +2027,14 @@ func _submit_study_hand_limit() -> void:
 # GENERIC INDEX MULTISELECT
 # =============================================================================
 
-func _render_index_multiselect(
-	title_text: String,
-	items: Array,
-	index_key: String,
-	required_count: int,
-	submit_callback: Callable
-) -> void:
+func _render_index_multiselect(title_text: String, items: Array, index_key: String, required_count: int, submit_callback: Callable) -> void:
 	_add_section(title_text)
+	_add_info("Selected %d/%d" % [generic_selection.size(), required_count])
+	for item in items:
+		var index_value = item.get(index_key, -1)
+		_add_object_choice(item, _toggle_generic_value.bind(index_value), generic_selection.has(index_value), "quests" if index_key == "quest_index" else "spells")
+	_add_button("Confirm", submit_callback, generic_selection.size() != required_count)
 
-	_add_info(
-		"Selected "
-		+ str(generic_selection.size())
-		+ "/"
-		+ str(required_count)
-	)
-
-	for item_value in items:
-		var item: Dictionary = item_value
-		var index_value = item.get(
-			index_key,
-			-1
-		)
-
-		var selected: bool = generic_selection.has(
-			index_value
-		)
-
-		var label_text: String = str(
-			item.get(
-				"name",
-				item.get(
-					"id",
-					str(index_value)
-				)
-			)
-		)
-
-		_add_button(
-			("✓ " if selected else "")
-			+ label_text,
-			Callable(
-				self,
-				"_toggle_generic_value"
-			).bind(index_value)
-		)
-
-	_add_button(
-		"Confirm",
-		submit_callback,
-		generic_selection.size() != required_count
-	)
-
-
-# =============================================================================
-# PREPARATION
-# =============================================================================
 
 func _prep_hand_card_label(hand_index: int) -> String:
 	for card_value in current_request.get("hand", []):
@@ -2176,48 +2122,9 @@ func _submit_preparation() -> void:
 # =============================================================================
 
 func _render_trigger_decision() -> void:
-	_add_button(
-		"Pass",
-		Callable(
-			self,
-			"_submit_trigger"
-		).bind(-1)
-	)
-
-	for option_value in current_request.get(
-		"options",
-		[]
-	):
-		var option: Dictionary = option_value
-
-		_add_button(
-			"Reveal "
-			+ str(
-				option.get(
-					"spell_name",
-					"Spell"
-				)
-			)
-			+ " ["
-			+ str(
-				option.get(
-					"spell_type",
-					""
-				)
-			)
-			+ "]",
-			Callable(
-				self,
-				"_submit_trigger"
-			).bind(
-				int(
-					option.get(
-						"queue_index",
-						-1
-					)
-				)
-			)
-		)
+	_add_button("Pass", _submit_trigger.bind(-1))
+	for option in current_request.get("options", []):
+		_add_object_choice(option, _submit_trigger.bind(int(option.get("queue_index", -1))), false, "spells")
 
 
 func _submit_trigger(queue_index: int) -> void:
@@ -2311,48 +2218,11 @@ func _choose_evocation_plan(
 # =============================================================================
 
 func _render_cleanup_active_spells() -> void:
-	_add_info(
-		"Select Trap/Protection Spells to return to Hand. "
-		+ "Unselected cards go to Memories."
-	)
-
-	for option_value in current_request.get(
-		"active_spells",
-		[]
-	):
-		var option: Dictionary = option_value
-		var index_value: int = int(
-			option.get(
-				"active_index",
-				-1
-			)
-		)
-
-		var selected: bool = generic_selection.has(
-			index_value
-		)
-
-		_add_button(
-			("✓ " if selected else "")
-			+ str(
-				option.get(
-					"spell_name",
-					"Spell"
-				)
-			),
-			Callable(
-				self,
-				"_toggle_generic_value"
-			).bind(index_value)
-		)
-
-	_add_button(
-		"Confirm Clean-up",
-		Callable(
-			self,
-			"_submit_cleanup"
-		)
-	)
+	_add_info("Select Trap/Protection Spells to return to Hand. Unselected cards go to Memories.")
+	for option in current_request.get("active_spells", []):
+		var index: int = int(option.get("active_index", -1))
+		_add_object_choice(option, _toggle_generic_value.bind(index), generic_selection.has(index), "spells")
+	_add_button("Confirm Clean-up", _submit_cleanup)
 
 
 func _submit_cleanup() -> void:
@@ -2367,40 +2237,9 @@ func _submit_cleanup() -> void:
 # =============================================================================
 
 func _render_optional_quest_discard() -> void:
-	_add_button(
-		"Do not discard a Quest",
-		Callable(
-			self,
-			"_submit_optional_quest"
-		).bind(-1)
-	)
-
-	for quest_value in current_request.get(
-		"quests",
-		[]
-	):
-		var quest: Dictionary = quest_value
-
-		_add_button(
-			"Discard "
-			+ str(
-				quest.get(
-					"name",
-					"Quest"
-				)
-			),
-			Callable(
-				self,
-				"_submit_optional_quest"
-			).bind(
-				int(
-					quest.get(
-						"quest_index",
-						-1
-					)
-				)
-			)
-		)
+	_add_button("Do not discard a Quest", _submit_optional_quest.bind(-1))
+	for quest in current_request.get("quests", []):
+		_add_object_choice(quest, _submit_optional_quest.bind(int(quest.get("quest_index", -1))), false, "quests")
 
 
 func _submit_optional_quest(
@@ -2424,6 +2263,8 @@ func _submit_completed_quest_limit() -> void:
 
 # These are UI paths/callbacks only; submission still validates the original game request.
 func _center_choice_panel() -> void:
+	panel.offset_left = -330.0
+	panel.offset_right = 330.0
 	panel.anchor_top = 0.5
 	panel.anchor_bottom = 0.5
 	panel.offset_top = -240.0
@@ -2439,7 +2280,10 @@ func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: Str
 	panel.offset_top = -300.0
 	panel.offset_bottom = -12.0
 	_clear_content()
-	_add_section("Movement — click the highlighted rooms")
+	var evocation_movement: bool = str(current_request.get("type", "")) == "evocation_phase_activations" or str(current_request.get("choice_kind", "")) == "evocation_activation_plan"
+	panel.visible = not evocation_movement
+	if not evocation_movement:
+		_add_section("Movement — click the highlighted rooms")
 	_add_info("Click the current Room to stay or stop. " + " → ".join(prefix))
 	var next_rooms: Dictionary = {}
 	var complete: Array = []
@@ -2462,8 +2306,16 @@ func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: Str
 			next_rooms[stop_room] = _finish_lodge_path.bind(complete)
 	game.show_lodge_room_choices(next_rooms)
 	if not prefix.is_empty():
-		_add_button("Reset path", _render_lodge_paths.bind(choices, [], origin_room_id))
-	_add_button("← Back", _back_to_action_root if str(current_request.get("type", "")) == "action_activation_step" else _render_current_request)
+		var reset := _render_lodge_paths.bind(choices, [], origin_room_id)
+		if evocation_movement:
+			_add_confirmation("Reset path", reset)
+		else:
+			_add_button("Reset path", reset)
+	var back := _back_to_action_root if str(current_request.get("type", "")) == "action_activation_step" else _render_current_request
+	if evocation_movement:
+		_add_confirmation("← Back", back)
+	else:
+		_add_button("← Back", back)
 
 func _finish_lodge_path(choices: Array) -> void:
 	_center_choice_panel()

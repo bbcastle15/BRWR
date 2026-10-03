@@ -2,3 +2,4 @@
 .godot/
 /android/
 /output/
+/web_build.json

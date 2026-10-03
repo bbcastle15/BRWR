@@ -17,6 +17,10 @@ static func build(game, viewer: int) -> Dictionary:
 			state.slots[i][slot] = game.get_player_board_spell_slot_data(i, slot, viewer)
 			state.cast_tokens[i][slot] = game.get_player_board_cast_token(i, slot, viewer)
 		var player = game.players[i]
+		state.players[i]["trophies"] = player.trophies.duplicate()
+		for field in ["active_quests", "completed_quests"]:
+			for j in player.get(field).size():
+				state.players[i][field][j]["instance"] = player.get(field)[j].get_instance_id()
 		for j in player.evocations.size():
 			state.players[i].evocations[j]["name"] = player.evocations[j].evocation_name
 			state.players[i].evocations[j]["board_number"] = player.evocations[j].board_number
@@ -37,6 +41,8 @@ static func build(game, viewer: int) -> Dictionary:
 	for moon in game.event_decks:
 		state.event_counts[moon] = game.event_decks[moon].size()
 	state["black_rose_cubes"] = game.get_node("EventBoard").black_rose_cube_count
+	state["black_rose_trophies"] = game.black_rose_trophies.duplicate()
+	state["quest_discard"] = game.quest_discard.map(func(card): return card.id)
 	return state
 
 static func apply(game, state: Dictionary) -> void:
@@ -53,8 +59,13 @@ static func apply(game, state: Dictionary) -> void:
 	game.network_slot_views = state.slots
 	game.network_cast_tokens = state.cast_tokens
 	game.player_board_spell_slots.clear()
+	game.black_rose_trophies.assign(state.get("black_rose_trophies", []))
+	game.quest_discard.clear()
+	for id in state.get("quest_discard", []):
+		game.quest_discard.append(game.quest_database.get_quest(id))
 	for data in state.players:
 		var player = game.players[int(data.player_index)]
+		player.trophies.assign(data.get("trophies", []))
 		var old_health: int = player.mage.health
 		for field in ["power", "school_id", "starting_grimoire_id", "starting_grimoire_name", "mage_id", "available_cubes", "available_physical_actions"]:
 			player.set(field, data[field])
@@ -85,11 +96,17 @@ static func apply(game, state: Dictionary) -> void:
 		for card in data.revealed_spells:
 			player.revealed_spells.append(RevealedSpellState.new(game.spell_database.get_spell(card.id), card.use_dark_side))
 		player.active_spells.clear()
+		var old_quests: Dictionary = {}
+		for quest in player.active_quests + player.completed_quests:
+			old_quests[quest.get_meta("network_instance", -1)] = quest
 		player.active_quests.clear()
 		player.completed_quests.clear()
 		for field in ["active_quests", "completed_quests"]:
 			for card in data[field]:
-				var quest := QuestState.new(game.quest_database.get_quest(str(card.get("id", ""))), player.player_index)
+				var quest: QuestState = old_quests.get(card.get("instance", -1))
+				if quest == null or (quest.card == null and card.has("id")):
+					quest = QuestState.new(game.quest_database.get_quest(str(card.get("id", ""))), player.player_index)
+				quest.set_meta("network_instance", card.get("instance", -1))
 				for key in ["revealed", "completed", "solved", "progress"]:
 					quest.set(key, card.get(key, 0 if key == "progress" else false))
 				player.get(field).append(quest)

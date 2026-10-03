@@ -77,6 +77,14 @@ func run() -> void:
 	game.deal_damage_to_evocation(0, target, 1, [], "evocation_attack", "evocation", nigredo)
 	check(not game.waiting_for_player_input, "Immortals prevents damage and Nigredo ability")
 	game.active_events.assign([null, null, null])
+	# A redirected damage frame resumes after the ability without applying twice.
+	var redirected = game.summon_evocation(1, "succubus", "forge")
+	game.queue_resolution({"type": "damage", "step": "apply_redirect", "attacker_id": 0,
+		"target_player_index": 1, "redirected_evocation": redirected, "amount": 1,
+		"source_model_type": "evocation", "source_evocation": nigredo})
+	check(str(game.pending_input.get("choice_kind", "")) == "evocation_damage_ability", "Redirected damage triggers ability")
+	choose("")
+	check(redirected.get_damage() == 1 and game.resolution_stack.is_empty(), "Resuming after ability must not repeat redirected damage")
 	# Separate Quest sentences: range 2 conversion, then explicit range 0 placement.
 	var other: String = game._beta_adjacent_room_ids("forge")[0]
 	game.place_instability(-1, other, 2)
@@ -92,7 +100,7 @@ func run() -> void:
 	choose("room:forge")
 	check(room.get_instability_count() == before + 1 and quest.is_solved(), "Placement and Quest reward finish once")
 	check(game.get_room_by_id(other).instability_cubes.count(0) == 2, "Conversion used the first target Room")
-	# Core rulebook p.28: summoned Evocations remain when their Mage is defeated.
+	# Rulebook p.28: summoned Evocations remain; only assigned ones leave.
 	game.deal_damage(1, 0, player.mage.get_remaining_health())
 	check(player.mage.in_cell and player.evocations.has(nigredo), "Mage defeat preserves summoned Nigredo")
 	check(game.resolution_stack.is_empty() and not game.waiting_for_player_input, "All resolutions complete")

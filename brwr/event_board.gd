@@ -1,340 +1,190 @@
 extends Control
 
-
-# =========================================================
-# RESOURCES
-# =========================================================
-
-var cube_scene = preload("res://cube.tscn")
-
-
-# =========================================================
-# EVENT BOARD GEOMETRY
-# =========================================================
-
-const SMALL_CARD_SIZE = Vector2(80, 52)
-
-const R = 70.0
-const CENTER_Y = 325.0
-
-const RECT_X = 145.0
-const RECT_WIDTH = 161.0
-
-const RECT_TOP = 60.0
-const RECT_BOTTOM = 590.0
-
-const SLOT_GAP = 6.0
-
-
-# =========================================================
-# BLACK ROSE CUBES
-# =========================================================
-
+const ART_SIZE = Vector2(232, 312)
+const ART_ORIGIN = Vector2(0, 176)
+const SOURCE_SIZE = Vector2(1081, 1455)
+const LODGE_NOTCH = Vector2(190, 325)
+const SMALL_CARD_SIZE = Vector2(78, 48)
 const BLACK_ROSE_MAX_CUBES: int = 30
 
-var black_rose_cube_count: int = (
-	BLACK_ROSE_MAX_CUBES
-)
+var cube_scene = preload("res://cube.tscn")
+# Preserve the existing pool API used by Game; visual nodes never own cubes.
+var black_rose_cube_count: int = BLACK_ROSE_MAX_CUBES
+var _slots_ready := false
+var _trophy_snapshot: Array = []
+var _quest_top: QuestCardState
 
-
-# =========================================================
-# QUESTS
-#
-# Per ora EventBoard mantiene solamente il discard
-# delle Quest.
-#
-# Gli Event NON vengono conservati qui:
-#
-# Game.event_decks
-# Game.active_events
-# Game.event_discard
-# Game.current_moon
-#
-# sono l'unica fonte dello stato Event.
-# =========================================================
-
-var quest_discard: Array = []
-
-
-# =========================================================
-# READY
-# =========================================================
-
-func _ready():
-
+func _ready() -> void:
 	create_board_shape()
-
-	await get_tree().process_frame
-
 	setup_event_slots()
 	setup_lower_slots()
-
 	create_cube_pool_ui()
+	_slots_ready = true
 	update_black_rose_cube_pool()
+	await get_tree().process_frame
+	refresh_event_slots()
 
+func _art_point(point: Vector2) -> Vector2:
+	return ART_ORIGIN + point / SOURCE_SIZE * ART_SIZE
 
-# =========================================================
-# EVENT UI
-# =========================================================
+func create_board_shape() -> void:
+	# Keep a physical outline for Game's camera and PlayerBoard layout bounds.
+	var outline := PackedVector2Array([Vector2(24, 6), Vector2(552, 6),
+		Vector2(629, 140), Vector2(920, 140), Vector2(1080, 380),
+		Vector2(884, 636), Vector2(884, 714), Vector2(1080, 1010),
+		Vector2(911, 1263), Vector2(625, 1263), Vector2(519, 1440), Vector2(24, 1440)])
+	var points := PackedVector2Array()
+	for point in outline:
+		points.append(_art_point(point))
+	$BoardShape.polygon = points
+	$BoardShape.hide()
+	$Title.hide()
+	var art := TextureRect.new()
+	art.name = "EventBoardArt"
+	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	art.texture = preload("res://assets/boards/event_board_reference.png")
+	art.position = ART_ORIGIN
+	art.size = ART_SIZE
+	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(art)
+	move_child(art, 0)
 
-func refresh_event_slots():
+func setup_card_slot(slot: Control, slot_position: Vector2, label_text: String, slot_size: Vector2 = SMALL_CARD_SIZE) -> void:
+	slot.position = slot_position
+	slot.custom_minimum_size = slot_size
+	slot.size = slot_size
+	slot.tooltip_text = label_text
+	slot.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	slot.mouse_filter = Control.MOUSE_FILTER_PASS
 
-	var game = get_parent()
+func setup_event_slots() -> void:
+	setup_card_slot($EventDiscardSlot, _art_point(Vector2(85, 60)), "Event discard")
+	setup_card_slot($ActiveEvent3, _art_point(Vector2(141, 306)), "Event III")
+	setup_card_slot($ActiveEvent2, _art_point(Vector2(141, 563)), "Event II")
+	setup_card_slot($ActiveEvent1, _art_point(Vector2(141, 825)), "Event I")
+	setup_card_slot($EventDeckSlot, _art_point(Vector2(89, 1087)), "Event deck")
+	_make_badge($EventDeckSlot, "Label", Vector2(0, SMALL_CARD_SIZE.y + 3))
+	_make_badge($EventDiscardSlot, "Label", Vector2(0, -13))
 
+func setup_lower_slots() -> void:
+	setup_card_slot($BlackRoseTrophySlot, _art_point(Vector2(565, 265)), "Black Rose trophies", Vector2(78, 54))
+	setup_card_slot($BlackRoseCubePool, _art_point(Vector2(565, 856)), "Black Rose cube reserve", Vector2(78, 60))
+	setup_card_slot($QuestDiscardSlot, _art_point(Vector2(558, 571)), "Quest discard", Vector2(66, 48))
+	_make_badge($QuestDiscardSlot, "CountLabel", Vector2(0, 49))
 
-	if game == null:
-		return
+func _make_badge(parent: Control, badge_name: String, at: Vector2) -> Label:
+	var label := Label.new()
+	label.name = badge_name
+	label.position = at
+	label.size = Vector2(parent.size.x, 12)
+	label.add_theme_font_size_override("font_size", 10)
+	label.add_theme_color_override("font_color", Color(0.95, 0.87, 0.67))
+	label.add_theme_color_override("font_shadow_color", Color.BLACK)
+	label.add_theme_constant_override("shadow_outline_size", 3)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(label)
+	return label
 
-
-	# -----------------------------------------------------
-	# ACTIVE EVENTS
-	# -----------------------------------------------------
-
-	show_event_in_slot(
-		$ActiveEvent1,
-		game.active_events[0]
-	)
-
-
-	show_event_in_slot(
-		$ActiveEvent2,
-		game.active_events[1]
-	)
-
-
-	show_event_in_slot(
-		$ActiveEvent3,
-		game.active_events[2]
-	)
-
-
-	# -----------------------------------------------------
-	# DECK / DISCARD
-	# -----------------------------------------------------
-
-	update_event_deck_label()
-	update_event_discard_label()
-	show_event_in_slot($EventDiscardSlot, game.event_discard.back() if not game.event_discard.is_empty() else null)
-
-
-# =========================================================
-# SHOW EVENT
-#
-# EventCardState non è CardState.
-#
-# Card art and enlarged inspection project the existing EventCardState.
-# =========================================================
-
-func show_event_in_slot(
-	slot: Control,
-	event: EventCardState
-):
-
-	var old_view = slot.get_node_or_null(
-		"EventView"
-	)
-
-
+func _remove_view(slot: Control, view_name: String) -> void:
+	var old_view = slot.get_node_or_null(view_name)
 	if old_view != null:
-		old_view.free()
+		slot.remove_child(old_view)
+		old_view.queue_free()
 
+func _rotate_card_view(view: Button, card_size: Vector2) -> void:
+	for state in ["normal", "hover", "pressed", "focus"]:
+		view.add_theme_stylebox_override(state, StyleBoxEmpty.new())
+	# Reuse card inspection, rotating only its art counterclockwise with the board.
+	for child in view.get_children():
+		if child is TextureRect:
+			child.rotation = -PI / 2.0
+			child.position = Vector2(0, card_size.y)
 
+func show_event_in_slot(slot: Control, event: EventCardState) -> void:
+	_remove_view(slot, "EventView")
 	if event == null:
 		return
-
-
 	var game = get_parent()
 	var view = game.ReferenceCardPreview.make_card("events", event.id, event.event_name,
-		SMALL_CARD_SIZE, game.open_event_card.bind(event), true)
+		slot.size, game.open_event_card.bind(event), true)
 	view.name = "EventView"
+	_rotate_card_view(view, slot.size)
 	slot.add_child(view)
 
-
-# =========================================================
-# EVENT DECK LABEL
-# =========================================================
-
-func update_event_deck_label():
-
+func refresh_event_slots() -> void:
+	if not _slots_ready:
+		return
 	var game = get_parent()
+	for i in range(3):
+		show_event_in_slot(get_node("ActiveEvent" + str(i + 1)), game.active_events[i])
+	show_event_in_slot($EventDiscardSlot, game.event_discard.back() if not game.event_discard.is_empty() else null)
+	update_event_deck_label()
+	update_event_discard_label()
+	refresh_support_slots()
 
-
-	if game == null:
+func update_event_deck_label() -> void:
+	if not _slots_ready:
 		return
-
-
-	var label = (
-		$EventDeckSlot
-		.get_node_or_null(
-			"Label"
-		)
-	)
-
-
-	if label == null:
-		return
-
-
-	var moon: int = (
-		game.current_moon
-	)
-
-
-	var deck_size: int = 0
-
-
-	if game.event_decks.has(
-		moon
-	):
-
-		deck_size = (
-			game.event_decks[
-				moon
-			].size()
-		)
-
-
-	label.text = (
-		"EVENT DECK\n"
-		+ "Moon "
-		+ str(moon)
-		+ "\n"
-		+ str(deck_size)
-	)
-
-
-# =========================================================
-# EVENT DISCARD LABEL
-# =========================================================
-
-func update_event_discard_label():
-
 	var game = get_parent()
+	var count: int = game.event_decks.get(game.current_moon, []).size()
+	$EventDeckSlot/Label.text = "☾ %d · %d" % [game.current_moon, count]
+	$EventDeckSlot.tooltip_text = "Moon %d · %d Events" % [game.current_moon, count]
 
+func update_event_discard_label() -> void:
+	if _slots_ready:
+		$EventDiscardSlot/Label.text = str(get_parent().event_discard.size())
 
-	if game == null:
-		return
-
-
-	var label = (
-		$EventDiscardSlot
-		.get_node_or_null(
-			"Label"
-		)
-	)
-
-
-	if label == null:
-		return
-
-
-	label.text = (
-		"DISCARD\n"
-		+ str(
-			game.event_discard.size()
-		)
-	)
-
-
-# =========================================================
-# MOON UI UPDATE
-#
-# La Moon vera è Game.current_moon.
-# EventBoard non conserva una seconda copia dello stato.
-# =========================================================
-
-func set_moon(
-	moon: int
-):
-
-	print(
-		"Event Board changed to Moon ",
-		moon
-	)
-
-
+func set_moon(_moon: int) -> void:
 	update_event_deck_label()
 
-
-# =========================================================
-# BLACK ROSE CUBE POOL UI
-# =========================================================
-
-func create_cube_pool_ui():
-
-	var pool = $BlackRoseCubePool
-
-
-	if pool.get_node_or_null(
-		"CubePreview"
-	) == null:
-
+func create_cube_pool_ui() -> void:
+	for i in range(BLACK_ROSE_MAX_CUBES):
 		var cube = cube_scene.instantiate()
-
-		cube.name = "CubePreview"
-
-		cube.owner_type = (
-			cube.OwnerType.BLACK_ROSE
-		)
-
+		cube.name = "CubePreview" if i == 0 else "Cube" + str(i)
 		cube.cube_color = Color.BLACK
+		cube.owner_type = cube.OwnerType.BLACK_ROSE
+		cube.position = Vector2(12 + (i % 6) * 9, (i / 6) * 9)
+		$BlackRoseCubePool.add_child(cube)
+		cube.scale = Vector2.ONE * 0.55
+	_make_badge($BlackRoseCubePool, "CountLabel", Vector2(0, 46))
 
-		cube.position = Vector2(
-			8,
-			14
-		)
+func update_black_rose_cube_pool() -> void:
+	if not _slots_ready:
+		return
+	for i in range(BLACK_ROSE_MAX_CUBES):
+		$BlackRoseCubePool.get_child(i).visible = i < black_rose_cube_count
+	$BlackRoseCubePool/CountLabel.text = "× %d" % black_rose_cube_count
 
-
-		pool.add_child(
-			cube
-		)
-
-
-	if pool.get_node_or_null(
-		"CountLabel"
-	) == null:
-
-		var label = Label.new()
-
-		label.name = "CountLabel"
-
-		label.position = Vector2(
-			32,
-			10
-		)
-
-		label.text = (
-			"× "
-			+ str(
-				BLACK_ROSE_MAX_CUBES
-			)
-		)
-
-
-		pool.add_child(
-			label
-		)
-
-
-func update_black_rose_cube_pool():
-
-	var label = (
-		$BlackRoseCubePool
-		.get_node_or_null(
-			"CountLabel"
-		)
-	)
-
-
-	if label != null:
-
-		label.text = (
-			"× "
-			+ str(
-				black_rose_cube_count
-			)
-		)
-
+func refresh_support_slots() -> void:
+	if not _slots_ready:
+		return
+	var game = get_parent()
+	var top: QuestCardState = game.quest_discard.back() if not game.quest_discard.is_empty() else null
+	$QuestDiscardSlot/CountLabel.text = str(game.quest_discard.size())
+	if top != _quest_top:
+		_quest_top = top
+		_remove_view($QuestDiscardSlot, "QuestView")
+		if top != null:
+			var view = game.ReferenceCardPreview.make_card("quests", top.id, top.card_name,
+				$QuestDiscardSlot.size, game.open_discarded_quest_card.bind(top), true)
+			view.name = "QuestView"
+			_rotate_card_view(view, $QuestDiscardSlot.size)
+			$QuestDiscardSlot.add_child(view)
+	if _trophy_snapshot != game.black_rose_trophies:
+		_trophy_snapshot = game.black_rose_trophies.duplicate()
+		for child in $BlackRoseTrophySlot.get_children():
+			$BlackRoseTrophySlot.remove_child(child)
+			child.queue_free()
+		for i in range(_trophy_snapshot.size()):
+			var owner: int = int(_trophy_snapshot[i])
+			var token = preload("res://power_marker.tscn").instantiate()
+			token.marker_name = str(owner + 1)
+			token.marker_color = [Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE, Color.YELLOW, Color.WHITE][owner]
+			$BlackRoseTrophySlot.add_child(token)
+			token.scale = Vector2.ONE * 0.6
+			token.position = Vector2(12 + (i % 5) * 13, 12 + (i / 5) * 13)
+			token.tooltip_text = "Trophy · Player %d" % [owner + 1]
 
 func set_black_rose_cube_count(
 	value: int
@@ -389,405 +239,3 @@ func return_black_rose_cubes(
 
 
 	update_black_rose_cube_pool()
-
-
-# =========================================================
-# BOARD SHAPE
-# =========================================================
-
-func create_board_shape():
-
-	var shape = $BoardShape
-
-
-	var half_r = (
-		R / 2.0
-	)
-
-	var hex_h = (
-		sqrt(3.0) * R
-	)
-
-
-	var upper_center_y = (
-		CENTER_Y
-		- hex_h / 2.0
-	)
-
-	var lower_center_y = (
-		CENTER_Y
-		+ hex_h / 2.0
-	)
-
-
-	var board_width = (
-		RECT_X
-		+ RECT_WIDTH
-	)
-
-
-	var points = PackedVector2Array([
-
-		# Rettangolo superiore
-
-		Vector2(
-			0,
-			RECT_TOP
-		),
-
-		Vector2(
-			RECT_WIDTH,
-			RECT_TOP
-		),
-
-
-		# Collegamento superiore
-
-		Vector2(
-			board_width - RECT_X,
-			upper_center_y - hex_h / 2.0
-		),
-
-		Vector2(
-			board_width - half_r,
-			upper_center_y - hex_h / 2.0
-		),
-
-
-		# Punta superiore verso Lodge
-
-		Vector2(
-			board_width,
-			upper_center_y
-		),
-
-
-		# Vertice centrale
-
-		Vector2(
-			board_width - half_r,
-			CENTER_Y
-		),
-
-
-		# Punta inferiore verso Lodge
-
-		Vector2(
-			board_width,
-			lower_center_y
-		),
-
-		Vector2(
-			board_width - half_r,
-			lower_center_y + hex_h / 2.0
-		),
-
-
-		# Collegamento inferiore
-
-		Vector2(
-			board_width - RECT_X,
-			lower_center_y + hex_h / 2.0
-		),
-
-		Vector2(
-			RECT_WIDTH,
-			RECT_BOTTOM
-		),
-
-
-		# Rettangolo inferiore
-
-		Vector2(
-			0,
-			RECT_BOTTOM
-		)
-	])
-
-
-	shape.polygon = points
-
-	shape.color = Color(
-		0.10,
-		0.10,
-		0.10
-	)
-
-
-# =========================================================
-# EVENT SLOT LAYOUT
-# =========================================================
-
-func setup_event_slots():
-
-	var rect_center_x = (
-		RECT_WIDTH / 2.0
-	)
-
-
-	var slot_x = (
-		rect_center_x
-		- SMALL_CARD_SIZE.x / 2.0
-	)
-
-
-	var total_height = (
-		SMALL_CARD_SIZE.y * 5.0
-		+ SLOT_GAP * 4.0
-	)
-
-
-	var available_height = (
-		RECT_BOTTOM
-		- RECT_TOP
-	)
-
-
-	var start_y = (
-		RECT_TOP
-		+ available_height / 2.0
-		- total_height / 2.0
-	)
-
-
-	# -----------------------------------------------------
-	# EVENT DISCARD
-	# -----------------------------------------------------
-
-	setup_card_slot(
-		$EventDiscardSlot,
-		Vector2(
-			slot_x,
-			start_y
-		),
-		"EVENT\nDISCARD"
-	)
-
-
-	# -----------------------------------------------------
-	# ACTIVE EVENT 3
-	# -----------------------------------------------------
-
-	setup_card_slot(
-		$ActiveEvent3,
-		Vector2(
-			slot_x,
-			start_y
-			+ (
-				SMALL_CARD_SIZE.y
-				+ SLOT_GAP
-			)
-		),
-		"EVENT 3"
-	)
-
-
-	# -----------------------------------------------------
-	# ACTIVE EVENT 2
-	# -----------------------------------------------------
-
-	setup_card_slot(
-		$ActiveEvent2,
-		Vector2(
-			slot_x,
-			start_y
-			+ (
-				SMALL_CARD_SIZE.y
-				+ SLOT_GAP
-			) * 2.0
-		),
-		"EVENT 2"
-	)
-
-
-	# -----------------------------------------------------
-	# ACTIVE EVENT 1
-	# -----------------------------------------------------
-
-	setup_card_slot(
-		$ActiveEvent1,
-		Vector2(
-			slot_x,
-			start_y
-			+ (
-				SMALL_CARD_SIZE.y
-				+ SLOT_GAP
-			) * 3.0
-		),
-		"EVENT 1"
-	)
-
-
-	# -----------------------------------------------------
-	# EVENT DECK
-	# -----------------------------------------------------
-
-	setup_card_slot(
-		$EventDeckSlot,
-		Vector2(
-			slot_x,
-			start_y
-			+ (
-				SMALL_CARD_SIZE.y
-				+ SLOT_GAP
-			) * 4.0
-		),
-		"EVENT\nDECK"
-	)
-
-
-# =========================================================
-# GENERIC CARD SLOT
-# =========================================================
-
-func setup_card_slot(
-	slot: Control,
-	slot_position: Vector2,
-	label_text: String
-):
-
-	slot.position = (
-		slot_position
-	)
-
-	slot.size = (
-		SMALL_CARD_SIZE
-	)
-
-	slot.custom_minimum_size = (
-		SMALL_CARD_SIZE
-	)
-
-
-	var label = slot.get_node_or_null(
-		"Label"
-	)
-
-
-	if label == null:
-
-		label = Label.new()
-
-		label.name = "Label"
-
-		slot.add_child(
-			label
-		)
-
-
-	label.position = Vector2.ZERO
-
-	label.size = (
-		SMALL_CARD_SIZE
-	)
-
-
-	label.text = (
-		label_text
-	)
-
-
-	label.horizontal_alignment = (
-		HORIZONTAL_ALIGNMENT_CENTER
-	)
-
-	label.vertical_alignment = (
-		VERTICAL_ALIGNMENT_CENTER
-	)
-
-
-# =========================================================
-# LOWER BOARD SLOTS
-# =========================================================
-
-func setup_lower_slots():
-
-	var hex_h = (
-		sqrt(3.0) * R
-	)
-
-
-	var upper_center_y = (
-		CENTER_Y
-		- hex_h / 2.0
-	)
-
-	var lower_center_y = (
-		CENTER_Y
-		+ hex_h / 2.0
-	)
-
-
-	var board_width = (
-		RECT_X
-		+ RECT_WIDTH
-	)
-
-
-	var irregular_center_x = (
-		board_width
-		- 105.0
-	)
-
-
-	# =====================================================
-	# TROPHIES
-	# =====================================================
-
-	setup_card_slot(
-		$BlackRoseTrophySlot,
-		Vector2(
-			irregular_center_x
-			- SMALL_CARD_SIZE.x / 2.0,
-
-			upper_center_y
-			- SMALL_CARD_SIZE.y / 2.0
-		),
-		"TROPHIES"
-	)
-
-
-	# =====================================================
-	# BLACK ROSE CUBE POOL
-	# =====================================================
-
-	var cube_pool_size = Vector2(
-		80,
-		45
-	)
-
-
-	$BlackRoseCubePool.size = (
-		cube_pool_size
-	)
-
-	$BlackRoseCubePool.custom_minimum_size = (
-		cube_pool_size
-	)
-
-
-	$BlackRoseCubePool.position = Vector2(
-
-		irregular_center_x
-		- cube_pool_size.x / 2.0,
-
-		lower_center_y
-		- cube_pool_size.y / 2.0
-	)
-
-
-	# =====================================================
-	# QUEST DISCARD
-	# =====================================================
-
-	setup_card_slot(
-		$QuestDiscardSlot,
-		Vector2(
-			irregular_center_x
-			- SMALL_CARD_SIZE.x / 2.0,
-
-			CENTER_Y
-			- SMALL_CARD_SIZE.y / 2.0
-		),
-		"QUEST\nDISCARD"
-	)

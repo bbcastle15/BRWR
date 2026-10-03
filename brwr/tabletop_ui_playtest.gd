@@ -81,11 +81,12 @@ func run() -> void:
 	var event_views = game.get_node("EventBoard").find_children("EventView", "Button", true, false)
 	check(not event_views.is_empty(), "EventBoard must contain clickable cards")
 	var event_art = event_views[0].get_child(0)
-	check(is_equal_approx(event_art.rotation, PI / 2.0), "Event art must rotate clockwise in the board slot")
-	check(event_art.size.is_equal_approx(Vector2(52, 80)), "Rotated portrait must fit the 80x52 slot")
-	for corner in [Vector2.ZERO, Vector2(52, 0), Vector2(0, 80), Vector2(52, 80)]:
+	var slot_size: Vector2 = event_views[0].size
+	check(is_equal_approx(event_art.rotation, -PI / 2.0), "Event art follows counterclockwise Event Board orientation")
+	check(event_art.size.is_equal_approx(Vector2(slot_size.y, slot_size.x)), "Rotated portrait fits the physical slot")
+	for corner in [Vector2.ZERO, Vector2(event_art.size.x, 0), Vector2(0, event_art.size.y), event_art.size]:
 		var mapped: Vector2 = event_art.get_transform() * corner
-		check(mapped.x >= -0.01 and mapped.x <= 80.01 and mapped.y >= -0.01 and mapped.y <= 52.01, "Rotated art must stay inside clickable slot bounds")
+		check(mapped.x >= -0.01 and mapped.x <= slot_size.x + 0.01 and mapped.y >= -0.01 and mapped.y <= slot_size.y + 0.01, "Rotated art must stay inside clickable slot bounds")
 	event_views[0].pressed.emit()
 	check(preview.root.visible and preview.art.texture != null, "Event inspector must load actual event art")
 	check(is_zero_approx(preview.art.rotation), "Event inspection must remain upright")
@@ -148,5 +149,25 @@ func run() -> void:
 		click(overlays[0])
 	await process_frame
 	check(movement_context.get("movement_destination_room_id") == second and not game.waiting_for_player_input, "Lodge click must submit the actual validated effect token")
+	var third: String = str(game._beta_adjacent_room_ids(second).filter(func(id): return id != first)[0])
+	var paths: Array = [
+		{"path": [], "callback": choose.bind([])},
+		{"path": [second], "callback": choose.bind([second])},
+		{"path": [second, third], "callback": choose.bind([second, third])}
+	]
+	hud._render_lodge_paths(paths, [], first)
+	await process_frame
+	overlays = get_nodes_in_group("lodge_room_choices").filter(func(n): return n.visible and n.get_parent() == game.get_room_by_id(first))
+	check(overlays.size() == 1, "Current model Room must be clickable to stay")
+	if not overlays.is_empty(): click(overlays[0])
+	await process_frame
+	check(selected_path.is_empty(), "Clicking current Room submits zero movement")
+	hud._render_lodge_paths(paths, [second], first)
+	await process_frame
+	overlays = get_nodes_in_group("lodge_room_choices").filter(func(n): return n.visible and n.get_parent() == game.get_room_by_id(second))
+	check(overlays.size() == 1, "Intermediate Room must be clickable to stop")
+	if not overlays.is_empty(): click(overlays[0])
+	await process_frame
+	check(selected_path == [second], "Stopping after one step preserves only that step")
 	print("TABLETOP UI PLAYTEST: ", "PASS" if failures == 0 else str(failures) + " FAILURES")
 	quit(0 if failures == 0 else 1)

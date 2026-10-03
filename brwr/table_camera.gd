@@ -14,7 +14,7 @@ func minimum_zoom() -> float:
 func _ready() -> void:
 	position = get_viewport_rect().size * 0.5
 	zoom = Vector2.ONE * 1.2
-	call_deferred("reset_view")
+	call_deferred("focus_lodge")
 	get_viewport().size_changed.connect(_on_viewport_resized)
 
 func _on_viewport_resized() -> void:
@@ -47,6 +47,17 @@ func reset_view() -> void:
 		fitted_zoom = zoom.x
 		fitted_center = position
 	force_update_scroll()
+
+func focus_lodge() -> void:
+	# Opening the game should keep Rooms readable. Home still shows the whole
+	# table, and the zoom-out limit continues to include every PlayerBoard.
+	reset_view()
+	if get_parent().has_method("get_lodge_table_bounds"):
+		var bounds: Rect2 = get_parent().get_lodge_table_bounds().grow(24.0)
+		var view := get_viewport_rect().size
+		position = bounds.get_center()
+		zoom = Vector2.ONE * maxf(minimum_zoom(), minf(view.x / bounds.size.x, view.y / bounds.size.y))
+		force_update_scroll()
 
 func zoom_at(screen_point: Vector2, factor: float) -> void:
 	var before := get_canvas_transform().affine_inverse() * screen_point

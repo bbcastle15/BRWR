@@ -4,6 +4,7 @@ var root: Control
 var title_label: Label
 var art: TextureRect
 var description: RichTextLabel
+var panel: PanelContainer
 
 # Readable fallback while a card illustration has not yet been supplied.
 static func describe_rules(value: Variant) -> String:
@@ -65,7 +66,7 @@ func _ready() -> void:
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(center)
-	var panel := PanelContainer.new()
+	panel = PanelContainer.new()
 	panel.custom_minimum_size = Vector2(520, 650)
 	center.add_child(panel)
 	var column := VBoxContainer.new()
@@ -94,6 +95,17 @@ func show_card(kind: String, id: String, title: String, text: String) -> void:
 	art.texture = card_texture(kind, id)
 	art.visible = art.texture != null
 	description.text = text
+	description.visible = not text.is_empty()
+	if kind == "schools" and art.texture != null:
+		# The rules are printed on the School card: give the image the available
+		# height instead of reserving an empty description box below it.
+		var height := clampf(get_viewport().get_visible_rect().size.y - 140.0, 240.0, 1000.0)
+		art.custom_minimum_size = Vector2(height * art.texture.get_size().aspect(), height)
+		panel.custom_minimum_size = Vector2.ZERO
+	else:
+		art.custom_minimum_size = Vector2(480, 460)
+		panel.custom_minimum_size = Vector2(520, 650)
+	panel.size = panel.get_combined_minimum_size()
 	root.show()
 
 func hide_preview() -> void:

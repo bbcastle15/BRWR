@@ -27,6 +27,8 @@ func run() -> void:
 	root.size_changed.connect(game._on_beta_viewport_resized)
 	await settle()
 	var camera = game.get_node("TableCamera")
+	check(camera.zoom.x > camera.minimum_zoom(), "Initial view focuses the Lodge for readable Rooms")
+	camera.reset_view()
 	for screen_size in [Vector2i(1366, 768), Vector2i(1920, 1200), Vector2i(2560, 1080), Vector2i(1280, 800)]:
 		root.size = screen_size
 		root.content_scale_size = screen_size

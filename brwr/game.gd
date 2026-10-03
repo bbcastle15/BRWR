@@ -1526,6 +1526,7 @@ func refresh_player_board(
 
 
 func refresh_all_player_boards() -> void:
+	$EventBoard.refresh_support_slots()
 	_close_player_board_spell_preview()
 	for board in player_boards:
 		if board != null:
@@ -1950,6 +1951,14 @@ func open_quest_card(quest: QuestState) -> void:
 			ReferenceCardPreview.describe_rules(quest.get_task()), ReferenceCardPreview.describe_rules(quest.get_effects())])
 
 
+func open_discarded_quest_card(card: QuestCardState) -> void:
+	if card == null or not quest_discard.has(card):
+		return
+	inspected_quest = null
+	_reference_card_preview().show_card("quests", card.id, card.card_name,
+		"Task:\n%s\n\nEffects:\n%s" % [ReferenceCardPreview.describe_rules(card.task), ReferenceCardPreview.describe_rules(card.effects)])
+
+
 func open_event_card(event: EventCardState) -> void:
 	if event == null or (not active_events.has(event) and not event_discard.has(event)):
 		return
@@ -2133,7 +2142,7 @@ func update_table_layout():
 		+ Vector2(HEX_RADIUS, 0)
 	)
 
-	var power_notch = Vector2(35, 325)
+	var power_notch: Vector2 = $PowerBoard.LODGE_NOTCH
 
 	$PowerBoard.position = (
 		power_connection_point
@@ -2154,11 +2163,7 @@ func update_table_layout():
 
 	# La Event Board è specchiata:
 	# il suo rientro centrale è vicino al bordo destro.
-	var event_board_width = 306.0
-	var event_notch = Vector2(
-		event_board_width - 35.0,
-		325.0
-	)
+	var event_notch: Vector2 = $EventBoard.LODGE_NOTCH
 
 	$EventBoard.position = (
 		event_connection_point
@@ -2354,6 +2359,28 @@ func check_moon_phase():
 			current_moon
 		)
 	
+func summon_evocation_for_effect(owner_id: int, evocation_id: String, room_id: String, context: Dictionary) -> EvocationState:
+	context.erase("summon_declined")
+	context.erase("last_summoned_evocation")
+	if owner_id < 0 or owner_id >= players.size() or evocation_database.get_evocation(evocation_id).is_empty() or not is_lodge_room_id(room_id):
+		return null
+	var player = players[owner_id]
+	if not player.has_free_evocation_slot():
+		if not context.has("summon_replacement"):
+			request_effect_choice(owner_id, "summon_replacement", context, "summon_replacement",
+				_spell_secondary_evocation_options(owner_id, owner_id), 0, 1,
+				"Choose one of your Evocations to replace, or skip this summon.")
+			return null
+		var replacement = context.get("summon_replacement")
+		context.erase("summon_replacement")
+		if not replacement is EvocationState or not replacement in player.evocations:
+			context["summon_declined"] = true
+			return null
+		# Replacement returns the card/cubes without defeat or removal triggers.
+		finalize_evocation_removal(replacement)
+	return summon_evocation(owner_id, evocation_id, room_id)
+
+
 func summon_evocation(
 	owner_id: int,
 	evocation_id: String,
@@ -7251,6 +7278,26 @@ func request_effect_choice(
 		public_option.erase("value")
 		# Public board addresses travel with choices, including remote clients.
 		var value = option.get("value")
+		if token.begins_with("evocation_type:") or token.begins_with("evocation_deck:"):
+			public_option["card_kind"] = "evocations"
+		elif token.begins_with("school:"):
+			public_option["card_kind"] = "schools"
+			public_option["id"] = str(value)
+		if value is EventCardState:
+			public_option["card_kind"] = "events"
+			public_option["id"] = value.id
+		var choice_spell = value.spell if value is RevealedSpellState else value
+		if choice_spell is SpellCardState:
+			public_option["card_kind"] = "spells"
+			public_option["id"] = choice_spell.id
+			public_option["board_player_index"] = player_index
+			public_option["slot_id"] = _find_player_board_slot_for_spell(player_index, choice_spell)
+		elif value is QuestState:
+			public_option["card_kind"] = "quests"
+			public_option["id"] = value.get_id()
+			public_option["board_player_index"] = player_index
+			public_option["quest_section"] = "completed" if value.completed else "revealed"
+			public_option["quest_index"] = (players[player_index].completed_quests if value.completed else players[player_index].active_quests).find(value)
 		var evocation = value if value is EvocationState else (value.get("evocation") if value is Dictionary else null)
 		if evocation is EvocationState:
 			public_option["owner_id"] = evocation.owner_id
@@ -7666,32 +7713,8 @@ func _quest_side_has_any_element(
 	side: Dictionary,
 	required_elements: Array[String]
 ) -> bool:
-	var symbols: Array[String] = []
-
-	var main_element: String = str(side.get("element", ""))
-	if main_element != "":
-		symbols.append(main_element)
-
-	var enhancement = side.get("enhancement", {})
-	if enhancement is Dictionary:
-		var enhancement_data: Dictionary = enhancement
-
-		if enhancement_data.has("requires"):
-			for value in enhancement_data.get("requires", []):
-				symbols.append(str(value))
-		elif enhancement_data.has("elements"):
-			for value in enhancement_data.get("elements", []):
-				symbols.append(str(value))
-		elif enhancement_data.has("element"):
-			symbols.append(
-				str(enhancement_data.get("element", ""))
-			)
-
-	for symbol in symbols:
-		if symbol == "all" or symbol in required_elements:
-			return true
-
-	return false
+	# The offered cards and the resolver must apply the same Element filter.
+	return effect_resolver._side_has_any_element(side, required_elements)
 
 
 func _quest_request_single_choice(
@@ -8114,8 +8137,8 @@ func _prepare_quest_special_choice(
 			var options: Array = []
 			var owner_occurrences: Dictionary = {}
 
-			for owner_value in room.instability_cubes:
-				var owner_id: int = int(owner_value)
+			for cube_index in range(room.instability_cubes.size()):
+				var owner_id: int = int(room.instability_cubes[cube_index])
 				if owner_id == caster_id:
 					continue
 
@@ -8134,7 +8157,7 @@ func _prepare_quest_special_choice(
 						+ str(owner_id)
 						+ ":"
 						+ str(ordinal),
-					"value": owner_id,
+					"value": {"owner_id": owner_id, "cube_index": cube_index},
 					"owner_id": owner_id,
 					"owner_name": owner_name
 				})
@@ -8144,7 +8167,7 @@ func _prepare_quest_special_choice(
 				for option_value in options:
 					var option: Dictionary = option_value
 					selected_owners.append(
-						int(option.get("value", -999999))
+						option.get("value")
 					)
 
 				_set_interactive_effect_choice(
@@ -9597,7 +9620,8 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 			continue
 		var options: Array = []
 		var occurrences: Dictionary = {}
-		for owner in model.cubes:
+		for cube_index in range(model.cubes.size()):
+			var owner: int = int(model.cubes[cube_index])
 			var ordinal: int = int(occurrences.get(owner, 0))
 			occurrences[owner] = ordinal + 1
 			if int(owner) == new_owner:
@@ -9605,7 +9629,7 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 			var option: Dictionary = model.duplicate()
 			option.erase("cubes")
 			option.erase("key")
-			option.merge({"token": "damage:%d:%d" % [owner, ordinal], "value": owner})
+			option.merge({"token": "damage:%d:%d" % [owner, ordinal], "value": {"owner_id": owner, "cube_index": cube_index}})
 			options.append(option)
 		var amount := mini(int(effect.get("amount", 0)), options.size())
 		if amount <= 0 or amount == options.size():
@@ -9634,13 +9658,17 @@ func _prepare_spell_secondary_effect_choice(
 		"heal", "convert_instability":
 			return _prepare_quest_special_choice(effect, context)
 		"activate_room_from_owned_evocation":
-			if context.has("target_room_id"):
+			var selected_room: String = str(context.get("target_room_id", ""))
+			if selected_room != "" and _spell_room_target_allowed(caster_id, {"effects": [effect]}, selected_room):
 				return true
+			context.erase("target_room_id")
 			var options := _spell_room_target_options(caster_id, {"range": "*", "effects": [effect]})
 			for option in options:
 				option["value"] = option.room_id
-			return _apply_or_request_secondary_choice(caster_id, "construct_room", context,
-				"target_room_id", options, "Choose the Room to activate from a Construct.")
+			# Even a single eligible Room is confirmed on the Lodge, so activation
+			# and the subsequent Room-effect target are visibly separate choices.
+			return _quest_request_single_choice(caster_id, "construct_room", context,
+				"target_room_id", options, "Choose the Room to activate from a Construct.", true)
 		"damage_secondary_mage_per_self_damage":
 			if context.has("secondary_target_player_index"):
 				return true
@@ -10160,6 +10188,22 @@ func _request_stepwise_action_activation() -> bool:
 
 		_reset_stepwise_action_activation()
 		return advance_action_phase()
+
+	for option in options:
+		var action: Dictionary = option.get("action", {})
+		if str(action.get("type", "")) == "momentum":
+			var ready = players[player_index].quick_spell if bool(action.get("use_quick", false)) else null
+			var index: int = int(action.get("ready_index", -1))
+			if ready == null and index >= 0 and index < players[player_index].ready_spells.size():
+				ready = players[player_index].ready_spells[index]
+			if ready != null:
+				option["board_player_index"] = player_index
+				option["slot_id"] = _find_player_board_slot_for_spell(player_index, ready.spell)
+				option["spell_id"] = ready.spell.id
+		elif str(option.get("kind", "")) == "quest":
+			option["board_player_index"] = player_index
+			option["quest_section"] = "completed"
+			option["quest_index"] = int(action.get("quest_index", -1))
 
 	return request_player_input({
 		"type": "action_activation_step",
@@ -11753,6 +11797,8 @@ func request_next_trigger_decision() -> bool:
 
 			options.append({
 				"queue_index": i,
+				"board_player_index": player_index,
+				"slot_id": _find_player_board_slot_for_spell(player_index, active_spell.spell),
 				"spell_id": active_spell.spell.id,
 				"spell_name": active_spell.spell.card_name,
 				"spell_type": candidate_type
@@ -12099,6 +12145,7 @@ func process_damage_resolution(
 			var was_defeated: bool = redirected_evocation.is_defeated()
 			var dealt: int = redirected_evocation.add_damage(attacker_id, cubes)
 			resolution["actual_damage"] = dealt
+			resolution["step"] = "redirect_applied"
 			_sync_damage_result_context(resolution, dealt)
 
 			print(
@@ -12239,6 +12286,8 @@ func process_damage_resolution(
 				counts[owner] = int(counts.get(owner, 0)) + 1
 			resolution["defeat_rewards"] = ranked_power_rewards(counts, true)
 			resolution["reward_owners"] = resolution.defeat_rewards.keys()
+			# Rulebook p.28 removes assigned Evocations (e.g. Umbras), not
+			# summoned Evocations. Assignment is not implemented yet.
 			resolution["step"] = "defeat_rewards"
 			place_mage_in_cell(victim)
 			return false
@@ -12741,6 +12790,8 @@ func _queue_evocation_damage_abilities(resolution: Dictionary, actual_damage: in
 
 
 func process_evocation_damage_ability(resolution: Dictionary) -> bool:
+	if bool(resolution.get("effect_queued", false)):
+		return true
 	var context: Dictionary = resolution.context
 	var controller: int = int(context.caster_id)
 	if controller < 0 or controller >= players.size():
@@ -12758,6 +12809,7 @@ func process_evocation_damage_ability(resolution: Dictionary) -> bool:
 			str(resolution.name) + ": choose an Instability effect in its Room, or skip.")
 		return false
 	var selected = context.get("ability_choice")
+	resolution["effect_queued"] = true
 	if selected is Dictionary:
 		queue_resolution({"type": "effect_sequence", "resolver_kind": "evocation",
 			"effects": [selected], "index": 0, "context": context})
@@ -13015,6 +13067,7 @@ func process_effect_sequence_resolution(
 	context["effect_instability_converted"] = 0
 	context["effect_damage_converted"] = 0
 	context["effect_damage_healed"] = 0
+	context["effect_summoned_evocation"] = false
 	context["effect_target_room_id"] = ""
 	context["effect_target_model_type"] = ""
 
@@ -13127,7 +13180,7 @@ func process_effect_sequence_resolution(
 
 		# Current data model represents the Summon keyword through summon_*
 		# Effect types. Explicit keywords are also supported for future cards.
-		if effect_type.begins_with("summon_"):
+		if effect_type.begins_with("summon_") or bool(context.get("effect_summoned_evocation", false)):
 			keywords.append("summon")
 
 		for keyword in effect.get("keywords", []):
@@ -13598,7 +13651,7 @@ func process_spell_cast_resolution(
 			# The card leaves its prepared slot only after the Cast Action itself
 			# has been validated. This avoids consuming a prepared card on an
 			# invalid/unsupported cast request.
-			if str(targeting_side.get("target", "")) in ["room", "area"] and not _spell_room_target_allowed(
+			if str(context.get("target_room_id", "")) != "" and not _spell_room_target_allowed(
 				player_index, targeting_side, str(context.get("target_room_id", ""))
 			):
 				print("Illegal Spell Room target: ", spell.card_name)
@@ -14662,6 +14715,8 @@ func advance_cleanup_phase(
 				continue
 			active_options.append({
 				"active_index": i,
+				"board_player_index": player_index,
+				"slot_id": _find_player_board_slot_for_spell(player_index, active_spell.spell),
 				"spell_id": active_spell.spell.id,
 				"spell_name": active_spell.spell.card_name,
 				"spell_type": spell_type
@@ -18141,7 +18196,26 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 	var target: Node = null
 	var position_in_target := Vector2(-24, -24)
 	var hit_size := Vector2(48, 48)
-	if token.begins_with("damage:") or token.begins_with("instability:"):
+	var board_index: int = int(option.get("board_player_index", -1))
+	if board_index >= 0 and board_index < player_boards.size():
+		var slot_id: String = str(option.get("slot_id", ""))
+		if slot_id != "" and get_player_board_spell_slot_data(board_index, slot_id).get("can_inspect", false):
+			var slot_name: String = "QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id
+			target = player_boards[board_index].get_node_or_null("SpellSlots/" + slot_name)
+		elif option.has("quest_index"):
+			var section: String = str(option.get("quest_section", "revealed"))
+			var quests: Array = players[board_index].completed_quests if section == "completed" else players[board_index].active_quests
+			var index: int = int(option.quest_index)
+			var strip = player_boards[board_index].get_node_or_null("Quest_" + section)
+			if index >= 0 and index < quests.size() and can_inspect_quest(quests[index]) and strip != null:
+				for row in strip.get_children():
+					for card in row.get_children():
+						if card.get_meta("choice_quest", null) == quests[index]:
+							target = card
+		if target is Control:
+			position_in_target = Vector2.ZERO
+			hit_size = target.size
+	elif token.begins_with("damage:") or token.begins_with("instability:"):
 		var parts := token.split(":")
 		if parts.size() != 3:
 			return false
