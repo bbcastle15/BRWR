@@ -14,7 +14,13 @@ var local_viewer_index := -1
 var network_slot_views: Dictionary = {}
 var network_cast_tokens: Dictionary = {}
 var input_revision := 0
-var turn_banner: Label
+var table_shell = null
+var playmat: TextureRect
+var network_turn_presentation: Dictionary = {}
+# Public presentation metadata only; effects stay in the existing resolution frames.
+var card_presentation: Dictionary = {}
+var card_presentation_serial := 0
+const CARD_PRESENTATION_SECONDS := 2.3
 # =========================================================
 # INTERACTIVE PHASE STATE
 # =========================================================
@@ -305,6 +311,7 @@ func _builtin_school_specializations() -> Dictionary:
 
 func load_school_specializations() -> Dictionary:
 	var candidate_paths: Array[String] = [
+		"res://data/school_specializations_v19.json",
 		"res://data/school_specializations.json",
 		"res://school_specializations.json"
 	]
@@ -491,6 +498,10 @@ func _ready():
 		if beta_force_fullscreen:
 			get_window().mode = Window.MODE_FULLSCREEN
 
+		table_shell = preload("res://tabletop_shell.gd").new()
+		add_child(table_shell)
+		table_shell.setup(self)
+
 		beta_hud = BetaHUDScript.new()
 		add_child(beta_hud)
 		beta_hud.setup(
@@ -513,7 +524,6 @@ func _ready():
 
 	if not run_tests_on_ready \
 	and enable_beta_hud:
-		_create_turn_banner()
 		if not network_client and network_session == null:
 			call_deferred(
 				"_ensure_interactive_beta_started"
@@ -521,19 +531,14 @@ func _ready():
 	elif auto_start_game_flow:
 		start_game_flow()
 
-func _create_turn_banner() -> void:
-	var layer := CanvasLayer.new()
-	layer.layer = 90
-	add_child(layer)
-	turn_banner = Label.new()
-	turn_banner.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	turn_banner.offset_top = 8
-	turn_banner.offset_bottom = 38
-	turn_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	turn_banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	turn_banner.add_theme_color_override("font_outline_color", Color.BLACK)
-	turn_banner.add_theme_constant_override("outline_size", 6)
-	layer.add_child(turn_banner)
+func get_turn_presentation() -> Dictionary:
+	if network_client:
+		return network_turn_presentation
+	# A reaction may ask another player for input without changing the turn.
+	if current_phase == PHASE_ACTION and action_activation_active:
+		return {"player_index": action_activation_player_index, "actions_used": action_activation_actions_used}
+	return {"player_index": int(pending_input.get("player_index", -1)) if waiting_for_player_input else -1,
+		"actions_used": 0}
 
 func load_rooms():
 	var file = FileAccess.open("res://data/rooms.json", FileAccess.READ)
@@ -1075,12 +1080,6 @@ func open_evocation_inspection(evocation: EvocationState) -> void:
 
 
 func _process(_delta: float) -> void:
-	if turn_banner != null:
-		var decision := int(pending_input.get("player_index", -1))
-		var turn := "Risoluzione" if decision < 0 else "Turno: Player %d" % (decision + 1)
-		turn_banner.text = "Round %d · %s · %s" % [current_round, current_phase.capitalize(), turn]
-		if game_has_ended:
-			turn_banner.text = "Fine partita" + (" · " + turn if waiting_for_player_input else "")
 	if evocation_inspection != null and evocation_inspection.visible:
 		_update_evocation_inspection()
 	if inspected_quest != null and not can_inspect_quest(inspected_quest):
@@ -1428,6 +1427,8 @@ func deal_damage(
 	action_type: String = "",
 	suppressed_trigger_types: Array = []
 ) -> int:
+	if DeathEffectResolver.ignores(active_effect_context, target_player_index):
+		return 0
 	if target_player_index < 0 \
 	or target_player_index >= players.size():
 		print("deal_damage: invalid target player")
@@ -1842,6 +1843,8 @@ func open_player_board_action(player_index: int, category: String) -> void:
 	var options := get_player_board_action_options(player_index, category)
 	if options.is_empty():
 		return
+	if table_shell != null:
+		table_shell.close_board()
 	if category == "finish":
 		submit_beta_input(player_index, {"token": str(options[0].token)})
 	elif beta_hud != null:
@@ -1851,6 +1854,8 @@ func open_player_board_action(player_index: int, category: String) -> void:
 func activate_player_board_spell(player_index: int, slot_id: String, inspect_only: bool = false) -> void:
 	var token := get_player_board_cast_token(player_index, slot_id)
 	if not inspect_only and token != "":
+		if table_shell != null:
+			table_shell.close_board()
 		submit_beta_input(player_index, {"token": token})
 	else:
 		open_player_board_spell(player_index, slot_id)
@@ -1919,7 +1924,7 @@ func get_player_quest_cards(player_index: int, section: String) -> Array:
 		return result
 	var player = players[player_index]
 	for quest in player.active_quests + player.completed_quests:
-		var matches: bool = (section == "private" and not quest.revealed and not quest.completed) or (section == "revealed" and quest.revealed and not quest.completed) or (section == "completed" and quest.completed and not quest.solved)
+		var matches: bool = (section == "private" and not quest.revealed and not quest.completed) or (section == "revealed" and quest.revealed and not quest.completed) or (section == "active" and not quest.completed and not quest.solved) or (section == "completed" and quest.completed and not quest.solved) or (section == "solved" and quest.solved)
 		if matches and can_inspect_quest(quest):
 			result.append({"id": quest.get_id(), "name": quest.get_name(), "quest": quest})
 	return result
@@ -2003,9 +2008,12 @@ func _refresh_permanent_room_markers() -> void:
 				if str(active.get_side().get("target", "")) not in ["room", "area"] or str(active.context.get("target_room_id", "")) != str(room_id):
 					continue
 				var button := Button.new()
-				button.text = "P%d · PERMANENT" % [active.owner_id + 1]
+				button.custom_minimum_size = Vector2(44, 44)
+				button.flat = true
+				var slot_id := _find_player_board_slot_for_spell(active.owner_id, active.spell)
+				button.add_child(preload("res://tabletop_style.gd").marker("permanent", players[active.owner_id].color, Vector2(44, 44), slot_id))
 				button.tooltip_text = active.spell.card_name
-				button.pressed.connect(open_player_board_spell.bind(active.owner_id, _find_player_board_slot_for_spell(active.owner_id, active.spell)))
+				button.pressed.connect(open_player_board_spell.bind(active.owner_id, slot_id))
 				markers.add_child(button)
 
 
@@ -2040,26 +2048,26 @@ func get_lodge_table_bounds() -> Rect2:
 
 func get_tabletop_bounds() -> Rect2:
 	var bounds := get_lodge_table_bounds()
-	for board in player_boards:
-		bounds = bounds.merge(Rect2(board.position, board.BOARD_SIZE * board.scale))
-	return bounds.grow(24.0)
+	return bounds.grow(36.0)
+
+
+func get_table_view_rect() -> Rect2:
+	var view := get_viewport_rect().size
+	if table_shell != null:
+		return Rect2(220, 12, maxf(160, view.x - 232), maxf(160, view.y - 24))
+	return Rect2(Vector2.ZERO, view)
 
 
 func update_player_board_positions():
-	# Keep the tuned Lodge/side-board geometry. Place PlayerBoards outside
-	# its real bounds, using their full footprint including external cards for every player count.
-	var bounds := get_lodge_table_bounds()
-	var board_scale := 0.65
-	var gap := 24.0
-	for i in range(player_boards.size()):
-		var board = player_boards[i]
-		board.scale = Vector2.ONE * board_scale
-		var extent: Vector2 = board.BOARD_SIZE * board_scale
-		var rows := ceili(float(player_boards.size() - i % 2) / 2.0)
-		var total_height: float = rows * extent.y + (rows - 1) * gap
-		var y: float = bounds.get_center().y - total_height * 0.5 + (i / 2) * (extent.y + gap)
-		var x: float = bounds.position.x - gap - extent.x if i % 2 == 0 else bounds.end.x + gap
-		board.position = Vector2(x, y)
+	if table_shell != null:
+		table_shell._layout()
+	else:
+		for board in player_boards:
+			board.hide()
+	if playmat != null:
+		var bounds := get_tabletop_bounds()
+		playmat.position = bounds.position
+		playmat.size = bounds.size
 
 
 func _ensure_beta_background() -> void:
@@ -2073,12 +2081,20 @@ func _ensure_beta_background() -> void:
 
 	var background := ColorRect.new()
 	background.name = "BetaBackground"
-	background.color = Color(0.29, 0.29, 0.29, 1.0)
+	background.color = Color("090d0f")
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	background.set_anchors_and_offsets_preset(
 		Control.PRESET_FULL_RECT
 	)
 	beta_background_layer.add_child(background)
+	playmat = TextureRect.new()
+	playmat.name = "Playmat"
+	playmat.texture = load("res://assets/tabletop/playmat.png")
+	playmat.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	playmat.stretch_mode = TextureRect.STRETCH_SCALE
+	playmat.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	playmat.z_index = -100
+	add_child(playmat)
 
 
 func _reposition_hex_nodes() -> void:
@@ -2662,7 +2678,8 @@ func coord_to_room_id(coord: Vector2i) -> String:
 func deal_damage_from_evocation(
 	evocation: EvocationState,
 	target_player_index: int,
-	amount: int
+	amount: int,
+	controller_id: int = -1
 ) -> int:
 	if evocation == null:
 		return 0
@@ -2686,7 +2703,7 @@ func deal_damage_from_evocation(
 	queue_resolution({
 		"type": "damage",
 		"step": "pre_event",
-		"attacker_id": get_evocation_controller_id(evocation),
+		"attacker_id": controller_id if controller_id >= 0 else get_evocation_controller_id(evocation),
 		"target_player_index": target_player_index,
 		"amount": requested,
 		"action_type": "evocation_attack",
@@ -5546,6 +5563,7 @@ func place_mage_in_cell(
 	var mage = players[player_index].mage
 	if mage == null:
 		return false
+	var was_in_cell: bool = mage.in_cell
 
 	# A defeated Mage returns to THEIR Cell. room_id/room_coord while in
 	# Cell therefore point to the entrance associated with that Cell.
@@ -5573,6 +5591,12 @@ func place_mage_in_cell(
 			" gains 1 Power"
 		)
 
+	if not was_in_cell:
+		var event := GameEvent.new("mage_placed_in_cell")
+		event.source_model_type = "mage"
+		event.source_player_index = player_index
+		event.target_player_index = player_index
+		queue_resolution({"type": "game_event", "event": event})
 	return true
 
 func place_instability(
@@ -5713,6 +5737,14 @@ func place_instability(
 					)
 
 
+	if placed > 0 and owner_id >= 0 and placed == available_slots:
+		var event := GameEvent.new("last_instability_placed")
+		event.source_model_type = "mage"
+		event.source_player_index = owner_id
+		event.source_room_id = players[owner_id].mage.room_id
+		event.target_room_id = room_id
+		event.amount = placed
+		queue_resolution({"type": "game_event", "event": event})
 	return placed
 func resolve_black_rose_phase(
 	context: Dictionary = {}
@@ -9594,6 +9626,8 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 	for i in range(players.size()):
 		var mage = players[i].mage
 		var include := false
+		if DeathEffectResolver.ignores(context, i):
+			continue
 		if mode == "convert_damage_on_caster":
 			include = i == caster
 		elif i != caster:
@@ -9643,6 +9677,8 @@ func _prepare_spell_secondary_effect_choice(
 	effect: Dictionary,
 	context: Dictionary
 ) -> bool:
+	if str(effect.get("type", "")) in DeathEffectResolver.TYPES:
+		return DeathEffectResolver.prepare(self, effect, context)
 	var caster_id: int = int(
 		context.get("caster_id", -1)
 	)
@@ -11909,6 +11945,44 @@ func queue_resolution(
 
 	return process_resolution_stack()
 
+func _present_resolution_card(frame: Dictionary) -> bool:
+	if table_shell == null or network_client or bool(frame.get("_card_presented", false)):
+		return false
+	var data: Dictionary = {}
+	if frame.get("type") == "event_sequence":
+		var event: EventCardState = frame.get("event")
+		if event != null:
+			data = {"kind": "events", "id": event.id, "title": event.event_name}
+	elif frame.get("type") == "quest_resolution":
+		var quest: QuestState = frame.get("quest")
+		if quest != null and quest.is_completed() and not quest.is_solved():
+			data = {"kind": "quests", "id": quest.get_id(), "title": quest.get_name(), "player": frame.get("player_index", -1)}
+	if data.is_empty():
+		return false
+	frame["_card_presented"] = true
+	card_presentation_serial += 1
+	data["serial"] = card_presentation_serial
+	card_presentation = data
+	table_shell.sync_card_presentation()
+	if network_session != null:
+		network_session.call_deferred("publish")
+	# The host owns this short pause. A UI close, disconnected client or skipped
+	# Tween cannot strand the resolver or apply a card's effects twice.
+	get_tree().create_timer(CARD_PRESENTATION_SECONDS).timeout.connect(_finish_card_presentation.bind(card_presentation_serial))
+	return true
+
+
+func _finish_card_presentation(serial: int) -> void:
+	if int(card_presentation.get("serial", -1)) != serial or network_client:
+		return
+	card_presentation = {}
+	if table_shell != null:
+		table_shell.sync_card_presentation()
+	process_resolution_stack()
+	if network_session != null:
+		network_session.call_deferred("publish")
+
+
 func process_resolution_stack() -> bool:
 	if processing_resolution_stack:
 		return true
@@ -11916,6 +11990,9 @@ func process_resolution_stack() -> bool:
 	processing_resolution_stack = true
 
 	while true:
+		if not card_presentation.is_empty():
+			processing_resolution_stack = false
+			return true
 		if waiting_for_player_input:
 			processing_resolution_stack = false
 			return true
@@ -11937,8 +12014,22 @@ func process_resolution_stack() -> bool:
 		var frame_id: int = int(frame.get("_rid", -1))
 		var resolution_type: String = str(frame.get("type", ""))
 		var completed: bool = false
+		if _present_resolution_card(frame):
+			processing_resolution_stack = false
+			return true
 
 		match resolution_type:
+			"game_event":
+				completed = true
+				if not bool(frame.get("emitted", false)):
+					frame["emitted"] = true
+					process_game_event(frame.event)
+			"destiny_resolution":
+				completed = DeathEffectResolver.process_destiny(self, frame)
+			"mage_effects":
+				completed = DeathEffectResolver.process_mages(self, frame)
+			"spell_sentence":
+				completed = DeathEffectResolver.process_sentence(self, frame)
 			"action_events":
 				completed = process_action_events_resolution(frame)
 			"event_tribute":
@@ -12229,6 +12320,8 @@ func process_damage_resolution(
 			return false
 
 		"post_event":
+			if DeathEffectResolver.defer_damage_post_event(resolution):
+				return true
 			var post_event := GameEvent.new("damage_inflicted")
 			_fill_damage_event_source(post_event, resolution)
 			var target_player_index: int = int(resolution.get("target_player_index", -1))
@@ -12236,6 +12329,7 @@ func process_damage_resolution(
 			post_event.target_player_index = target_player_index
 			post_event.target_room_id = players[target_player_index].mage.room_id
 			post_event.amount = int(resolution.get("actual_damage", 0))
+			post_event.data["lethal"] = players[target_player_index].mage.is_defeated()
 			post_event.action_type = str(resolution.get("action_type", ""))
 			post_event.suppressed_trigger_types = _to_string_array(
 				resolution.get("suppressed_trigger_types", [])
@@ -12250,7 +12344,7 @@ func process_damage_resolution(
 			var target_mage = players[target_player_index].mage
 			var was_defeated: bool = bool(resolution.get("was_defeated", false))
 
-			if not was_defeated and target_mage.is_defeated():
+			if bool(resolution.get("forced_defeat", false)) or (not was_defeated and target_mage.is_defeated()):
 				var defeat_event := GameEvent.new("mage_defeated")
 				_fill_damage_event_source(defeat_event, resolution)
 				defeat_event.target_model_type = "mage"
@@ -12267,13 +12361,28 @@ func process_damage_resolution(
 
 		"after_defeat_event":
 			var victim: int = int(resolution.get("target_player_index", -1))
-			if not players[victim].mage.is_defeated():
+			if not bool(resolution.get("forced_defeat", false)) and not players[victim].mage.is_defeated():
 				return true
 			# Defeat interrupts only physical resolutions already in progress.
 			# A player-level flag would incorrectly cancel the next Cell exit.
 			for frame in resolution_stack:
 				if str(frame.get("type", "")) in ["explore", "fight", "command"] and int(frame.get("player_index", -1)) == victim:
 					frame["cancelled_by_defeat"] = true
+			resolution["step"] = "after_destiny"
+			if not players[victim].mage.destiny_tokens.is_empty():
+				queue_resolution({"type": "destiny_resolution", "victim": victim, "order": get_play_order(), "index": 0})
+			return false
+
+		"after_destiny":
+			var victim: int = int(resolution.get("target_player_index", -1))
+			resolution["step"] = "award_defeat"
+			# Codex p.13: Destiny resolves at step 3, before Cell placement.
+			# Only assigned Evocations are removed; owned summons remain.
+			place_mage_in_cell(victim)
+			return false
+
+		"award_defeat":
+			var victim: int = int(resolution.get("target_player_index", -1))
 			var killer: int = int(resolution.get("attacker_id", -1))
 			if is_event_active("dominion"):
 				killer = -1
@@ -12281,6 +12390,10 @@ func process_damage_resolution(
 				black_rose_trophies.append(victim)
 			elif killer >= 0 and killer < players.size():
 				players[killer].trophies.append(victim)
+			# Codex p.13 grants the automatic Destiny defeat's caster an extra Trophy.
+			var caster: int = int(resolution.get("attacker_id", -1))
+			if bool(resolution.get("destiny_defeat", false)) and caster >= 0:
+				players[caster].trophies.append(victim)
 			var counts: Dictionary = {}
 			for owner in players[victim].mage.damage_cubes:
 				counts[owner] = int(counts.get(owner, 0)) + 1
@@ -12289,7 +12402,6 @@ func process_damage_resolution(
 			# Rulebook p.28 removes assigned Evocations (e.g. Umbras), not
 			# summoned Evocations. Assignment is not implemented yet.
 			resolution["step"] = "defeat_rewards"
-			place_mage_in_cell(victim)
 			return false
 
 		"defeat_rewards":
@@ -13015,6 +13127,11 @@ func process_effect_sequence_resolution(
 
 	context["resolver_kind"] = resolver_kind
 	context.erase("effect_resolution_error")
+	if resolver_kind == "spell":
+		var announced: bool = DeathEffectResolver.announce_spell(self, context, [effect])
+		if announced and (waiting_for_player_input or trigger_window_active):
+			resolution["index"] = index
+			return false
 
 
 	# Quest Effects may require a player decision.  Do this before applying
@@ -13771,6 +13888,10 @@ func process_trigger_spell_resolution(
 			}
 			for key in active_spell.context:
 				context[key] = active_spell.context[key]
+			# Stored targets/choices of a permanent must not mask this trigger.
+			context.erase("_spell_guard_announced")
+			context.erase("ignored_spell_players")
+			DeathEffectResolver.apply_trigger_target(active_side, context, event)
 
 			resolution["context"] = context
 
@@ -14378,6 +14499,8 @@ func process_command_resolution(
 func process_evocation_activation_resolution(
 	resolution: Dictionary
 ) -> bool:
+	if bool(resolution.get("activation_ended", false)):
+		return true
 	var evocation: EvocationState = resolution.get(
 		"evocation",
 		null
@@ -15113,7 +15236,8 @@ func _beta_player_state(
 				"q": mage.room_coord.x,
 				"r": mage.room_coord.y
 			},
-			"damage_cubes": mage.damage_cubes.duplicate()
+			"damage_cubes": mage.damage_cubes.duplicate(),
+			"destiny_tokens": mage.destiny_tokens.duplicate()
 		}
 
 	var evocations: Array = []
@@ -16120,7 +16244,8 @@ func _perform_evocation_physical_attack(
 		deal_damage_from_evocation(
 			evocation,
 			target_player_index,
-			activation_strength
+			activation_strength,
+			controller_id
 		)
 
 		return true
@@ -18272,6 +18397,13 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 			target = mage_tokens[index]
 	if target == null:
 		return false
+	if table_shell != null:
+		if board_index >= 0:
+			table_shell.reveal_board_choice(board_index)
+		elif option.has("cube_player_index"):
+			table_shell.reveal_board_choice(int(option.cube_player_index))
+		else:
+			table_shell.close_board()
 	var button := Button.new()
 	button.position = position_in_target
 	button.size = hit_size
@@ -18296,6 +18428,8 @@ func clear_lodge_room_choices() -> void:
 		node.queue_free()
 
 func show_lodge_room_choices(callbacks: Dictionary, selected_rooms: Array[String] = []) -> void:
+	if table_shell != null:
+		table_shell.close_board()
 	clear_lodge_room_choices()
 	for room_id in callbacks:
 		var room = get_room_by_id(str(room_id))

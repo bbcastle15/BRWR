@@ -1,0 +1,216 @@
+{
+  "date": "2026-10-04",
+  "mode": "builtin-imagegen-reference-edit",
+  "common_prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. ",
+  "legend_references": [
+    "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-7be7ab7b-31d8-4261-a531-f942e5aa2cde.png",
+    "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-fec86774-6975-4845-b723-2dbe750a8060.png",
+    "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+  ],
+  "jobs": [
+    {
+      "id": "tearing",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-0dedff96-0c0a-45ca-8502-d4e742209829.png",
+      "edit": "On each half change only the THREE SMALL HEADER TABS: first Contingency crystal ball glints, second Profane exact horned demon skull circle, third Mage (hat-pawn C), with numeral 1 on upper half, 0 on lower half. Whole heart in Light means maximum Health. EXACT LIGHT TEXT: Assign 1 Destiny. The target removes one of their Evocations with a [whole heart] value of 3 or less. EXACT DARK TEXT: Assign 1 Destiny. Inflict 2 [broken heart]. Convert 1 [broken heart]. There is NO instability badge. Do not repeat Light text in Dark.",
+      "final_asset": "assets/spells/tearing.png",
+      "edit_stages": [
+        {
+          "id": "tearing",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. On each half change only the THREE SMALL HEADER TABS: first Contingency crystal ball glints, second Profane exact horned demon skull circle, third Mage (hat-pawn C), with numeral 1 on upper half, 0 on lower half. Whole heart in Light means maximum Health. EXACT LIGHT TEXT: Assign 1 Destiny. The target removes one of their Evocations with a [whole heart] value of 3 or less. EXACT DARK TEXT: Assign 1 Destiny. Inflict 2 [broken heart]. Convert 1 [broken heart]. There is NO instability badge. Do not repeat Light text in Dark.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-837a0aad-ecf9-4faa-875b-7accafab618b.png"
+        }
+      ]
+    },
+    {
+      "id": "entropy",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-8ff4cd01-8b22-4b1e-b2e2-3c17140a8d80.png",
+      "edit": "Only correct the six small HEADER TABS: top and bottom type Trap, exact toothed jaws WITH central horizontal bar/oval hinge from reference2; top and bottom element Magic circle FOUR separate diamond sparkles from reference1. Top target hexagon *, bottom target Mage * using C hat-pawn, NOT plain Model. All printed effects/trigger text and midpoint Instability remain identical.",
+      "final_asset": "assets/spells/entropy.png",
+      "edit_stages": [
+        {
+          "id": "entropy",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Only correct the six small HEADER TABS: top and bottom type Trap, exact toothed jaws WITH central horizontal bar/oval hinge from reference2; top and bottom element Magic circle FOUR separate diamond sparkles from reference1. Top target hexagon *, bottom target Mage * using C hat-pawn, NOT plain Model. All printed effects/trigger text and midpoint Instability remain identical.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1b46da8c-2323-4d0d-9dd5-5e6897360e70.png"
+        }
+      ]
+    },
+    {
+      "id": "bone_shield",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-b0334775-8a8d-4bb8-af40-0f2a9e59f5e0.png",
+      "edit": "Both titles must read exactly BONE SHIELD, conventional mixed case 'Bone Shield', distinct capital B/S. Small type tabs are Protection shield; element tabs ALL ELEMENTS simple six-spoke asterisk in circle; upper target exact C Mage hat-pawn *; lower target hexagon0. REMOVE black circular medallion at midpoint: straight silver rail, NO Instability. Keep every word of rules unchanged, upper ignore/conversion1/damage2, lower place2 OR convert2.",
+      "final_asset": "assets/spells/bone_shield.png",
+      "edit_stages": [
+        {
+          "id": "bone_shield",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Both titles must read exactly BONE SHIELD, conventional mixed case 'Bone Shield', distinct capital B/S. Small type tabs are Protection shield; element tabs ALL ELEMENTS simple six-spoke asterisk in circle; upper target exact C Mage hat-pawn *; lower target hexagon0. REMOVE black circular medallion at midpoint: straight silver rail, NO Instability. Keep every word of rules unchanged, upper ignore/conversion1/damage2, lower place2 OR convert2.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-88ad168a-ab0f-4ade-9c44-0de6bc003225.png"
+        },
+        {
+          "prompt": "Precisely edit this existing card. Change ONLY the two title lines at the top of each half to the clear, conventional ROMAN SERIF CAPITALS 'BONE SHIELD'. The first letter MUST be a normal capital B with two CLOSED bowls, no blackletter or flourishes. It currently reads Hone Shield: fix it to BONE SHIELD. On the small MIDDLE tab of each half replace the spiky star with a plain six-line asterisk inside the existing circle, exactly the all Elements icon from reference2. No eight-point pointed star. Leave every other icon, both target tabs, all rules text, illustration, logos, layout and colors unchanged. One 1024x1536 card, no extra panels.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-13c9677e-a64c-41c4-9744-c9d6332f1a96.png"
+        }
+      ]
+    },
+    {
+      "id": "lugubrious_toll",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-7fe3afd6-97bc-43aa-a3d3-097914ba0d12.png",
+      "edit": "Small element tabs ONLY use MAGIC: FOUR separate diamond sparkles inside circle. Retain Combat tabs, upper room hexagon0 and lower special star. Replace upper text exactly with: 'Inflict 1 [broken heart] to each [Mage C pictogram with 1] from the target Room. Assign 1 Destiny to each [Mage C pictogram with 1] from the target Room.' Both bracket Mage tokens are graphic hat-pawn with number1. Lower text unchanged. Preserve midpoint Instability.",
+      "final_asset": "assets/spells/lugubrious_toll.png",
+      "edit_stages": [
+        {
+          "id": "lugubrious_toll",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Small element tabs ONLY use MAGIC: FOUR separate diamond sparkles inside circle. Retain Combat tabs, upper room hexagon0 and lower special star. Replace upper text exactly with: 'Inflict 1 [broken heart] to each [Mage C pictogram with 1] from the target Room. Assign 1 Destiny to each [Mage C pictogram with 1] from the target Room.' Both bracket Mage tokens are graphic hat-pawn with number1. Lower text unchanged. Preserve midpoint Instability.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b43955cb-45b5-4005-b16b-693ba98ccd90.png"
+        }
+      ]
+    },
+    {
+      "id": "dark_omens",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-cba39ad7-70cc-461c-95e2-c2947ea179dc.png",
+      "edit": "Only correct SMALL HEADER TABS: Contingency crystal ball, Profane HORNED SKULL IN CIRCLE (NOT Sacred, NOT Rose) BOTH halves, upper Mage0 exact C, lower Self exact A hat/curled-arrow silhouette NO body/right arrow. In DARK TEXT replace the initial Permanent symbol with the circular cross token from reference4, then text 'gain 1 [Power rose-coin] each time a Mage is placed in their Cell.' Power must remain rose-coin; do not replace it with horned skull. Preserve no instability, Light text.",
+      "final_asset": "assets/spells/dark_omens.png",
+      "edit_stages": [
+        {
+          "id": "dark_omens",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Only correct SMALL HEADER TABS: Contingency crystal ball, Profane HORNED SKULL IN CIRCLE (NOT Sacred, NOT Rose) BOTH halves, upper Mage0 exact C, lower Self exact A hat/curled-arrow silhouette NO body/right arrow. In DARK TEXT replace the initial Permanent symbol with the circular cross token from reference4, then text 'gain 1 [Power rose-coin] each time a Mage is placed in their Cell.' Power must remain rose-coin; do not replace it with horned skull. Preserve no instability, Light text.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-30dc6f01-3c7e-45c3-b51f-c688f4421c75.png"
+        },
+        {
+          "prompt": "Edit ONLY two tiny symbols on the LOWER/DARK half of the first image. 1) Dark target tab at x560,y1040: replace hat-only silhouette with the exact SELF icon from A in reference2: a pointed wizard hat above small head with curved arrow looping back UNDER the head toward oneself. It must visibly differ from a Mage pawn, no torso. 2) First icon in Dark effect paragraph: replace starburst with PERSISTENCE/PERMANENT glyph matching right-hand tokens in reference3, a PLUS-SHAPED CROSS of four rectangular double-line arms with a little square at center, short diagonal accents, all enclosed in a BLACK circle. Not a star/asterisk, no pointed rays. Keep the rose-coin after 'gain 1' unchanged, and all text, headers, other icons, Death feather logos and art untouched.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-541e9598-5604-4c70-8525-775cb9d730e0.png"
+        }
+      ]
+    },
+    {
+      "id": "annihilation",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-5f2d52cc-3ceb-4e62-99dd-a7997bd93faa.png",
+      "edit": "Only replace the TWO SMALL ELEMENT TAB ICONS (middle tab each half) with exact MAGIC from reference1: circle with FOUR SEPARATE diamond sparkles, NO single asterisk. Keep all other icons/layout/art/text identical. Title Annihilation, Combat lightning both, upper Mage2/lower Mage1.",
+      "final_asset": "assets/spells/annihilation.png",
+      "edit_stages": [
+        {
+          "id": "annihilation",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Only replace the TWO SMALL ELEMENT TAB ICONS (middle tab each half) with exact MAGIC from reference1: circle with FOUR SEPARATE diamond sparkles, NO single asterisk. Keep all other icons/layout/art/text identical. Title Annihilation, Combat lightning both, upper Mage2/lower Mage1.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-47bcd6ee-5cc9-4f4d-a3dc-9b29d5b28a59.png"
+        }
+      ]
+    },
+    {
+      "id": "final_judgment",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-85647d5d-8d93-4fba-906d-e00627a2bcb6.png",
+      "edit": "Only the SMALL HEADER TABS: Both type tabs precise Trap jaws WITH middle horizontal bar/oval hinge; top element Sacred halo above feather wings inside circle, bottom element Profane horned skull circle. Upper target Mage * exact C; lower target Self exact A hat/curled-arrow silhouette NO pawn/right arrow. Preserve text: Light another Mage completes or solves Quest -> obtain Trophy of target and gain1Power; Dark another Mage placedCell -> Heal3; obtain Trophy of Mage placedCell. NO instability.",
+      "final_asset": "assets/spells/final_judgment.png",
+      "edit_stages": [
+        {
+          "id": "final_judgment",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Only the SMALL HEADER TABS: Both type tabs precise Trap jaws WITH middle horizontal bar/oval hinge; top element Sacred halo above feather wings inside circle, bottom element Profane horned skull circle. Upper target Mage * exact C; lower target Self exact A hat/curled-arrow silhouette NO pawn/right arrow. Preserve text: Light another Mage completes or solves Quest -> obtain Trophy of target and gain1Power; Dark another Mage placedCell -> Heal3; obtain Trophy of Mage placedCell. NO instability.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1ca3e175-61a5-40e4-8bb0-fc196d7606eb.png"
+        },
+        {
+          "prompt": "Edit ONLY the two target symbols (third small tab each half). Upper Light target is MAGE *: draw the exact icon C in reference2, a small ROUND HEAD wearing a POINTED WIZARD HAT, ABOVE a SEPARATE rounded PAWN TORSO; asterisk to its right. Current hat-alone is wrong; add head and torso. Lower Dark is SELF: copy exact A in reference2, the hat/head with arrow curving back underneath toward itself, without pawn torso. Do not change any other text/icon/art or layout.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-f0436302-02d9-4af5-abbf-dffe739b7666.png"
+        }
+      ]
+    },
+    {
+      "id": "sacrificial_pyre",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-cde83280-4326-4350-ba4b-1432fb3f496e.png",
+      "edit": "Change ONLY the two SMALL MIDDLE ELEMENT-TAB ICONS from sun to SACRED exact halo over paired feather wings, inside circle. Leave the large circular Death FEATHER LOGOS at top right and middle right EXACTLY UNCHANGED. Leave Black Rose flower in Light effect text EXACTLY UNCHANGED: 'The [Black Rose flower] inflicts 3 [broken heart] to you.' This Black Rose is NOT Sacred. Other icons and all text identical.",
+      "final_asset": "assets/spells/sacrificial_pyre.png",
+      "edit_stages": [
+        {
+          "id": "sacrificial_pyre",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Change ONLY the two SMALL MIDDLE ELEMENT-TAB ICONS from sun to SACRED exact halo over paired feather wings, inside circle. Leave the large circular Death FEATHER LOGOS at top right and middle right EXACTLY UNCHANGED. Leave Black Rose flower in Light effect text EXACTLY UNCHANGED: 'The [Black Rose flower] inflicts 3 [broken heart] to you.' This Black Rose is NOT Sacred. Other icons and all text identical.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8815240b-debf-48df-ab93-230a43568e6b.png"
+        }
+      ]
+    },
+    {
+      "id": "despair",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-c1382361-a3e8-4343-b720-af1ff55b8690.png",
+      "edit": "Change only four SMALL HEADER TAB ICONS: both first tabs exact Trap circular toothed jaws with CENTRAL HORIZONTAL BAR / oval hinge, from reference2. Both second tabs Profane exact horned DEMON SKULL in circle, from reference1. Keep Mage * targets, Death feather logos and Power/Trophy symbols/text unchanged.",
+      "final_asset": "assets/spells/despair.png",
+      "edit_stages": [
+        {
+          "id": "despair",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Change only four SMALL HEADER TAB ICONS: both first tabs exact Trap circular toothed jaws with CENTRAL HORIZONTAL BAR / oval hinge, from reference2. Both second tabs Profane exact horned DEMON SKULL in circle, from reference1. Keep Mage * targets, Death feather logos and Power/Trophy symbols/text unchanged.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5dabfd39-0fb8-4b64-b8c4-20760730b0be.png"
+        }
+      ]
+    },
+    {
+      "id": "martyrdom",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-bc6bbe27-10ac-4628-8e8a-81f480203e3b.png",
+      "edit": "Change only four SMALL HEADER TAB ICONS: both first tabs Contingency exact crystal ball with two sparkle glints/pedestal from reference2. Both second tabs Sacred: circle containing small oval HALO above paired FEATHER WINGS, exact reference1. No eye/face/sun. Keep target hexagon*, large Death feather logos, all text and midpoint Instability unchanged. Title exactly 'Martyrdom' on both.",
+      "final_asset": "assets/spells/martyrdom.png",
+      "edit_stages": [
+        {
+          "id": "martyrdom",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Change only four SMALL HEADER TAB ICONS: both first tabs Contingency exact crystal ball with two sparkle glints/pedestal from reference2. Both second tabs Sacred: circle containing small oval HALO above paired FEATHER WINGS, exact reference1. No eye/face/sun. Keep target hexagon*, large Death feather logos, all text and midpoint Instability unchanged. Title exactly 'Martyrdom' on both.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-907d22a9-5c77-4635-8d74-f486132ddfdf.png"
+        }
+      ]
+    },
+    {
+      "id": "repentance",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-1b4383bb-dd02-455d-b17f-f7b558fbc690.png",
+      "edit": "SMALL HEADER TABS only: upper element Sacred exact halo/paired feather wings circle, lower element Profane exact horned skull circle; upper target Self exact A small hat/curled-arrow silhouette, NO pawn plus right arrow; lower target Evocation exact D horned pawn *. Both Protection shields and all effect text unchanged. No instability.",
+      "final_asset": "assets/spells/repentance.png",
+      "edit_stages": [
+        {
+          "id": "repentance",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. SMALL HEADER TABS only: upper element Sacred exact halo/paired feather wings circle, lower element Profane exact horned skull circle; upper target Self exact A small hat/curled-arrow silhouette, NO pawn plus right arrow; lower target Evocation exact D horned pawn *. Both Protection shields and all effect text unchanged. No instability.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-671890af-d682-43bb-9a34-4c96db5c92aa.png"
+        },
+        {
+          "prompt": "Edit ONLY the small ELEMENT badge on UPPER/LIGHT half (middle header tab). It must be SACRED: an OPEN OVAL HALO above two FEATHERED WINGS inside a circle, as reference2 labelled Sacred. Replace the incorrect solid round dot/head with an open oval halo. Preserve all other pixels, target and shield icons, effects, logos, art and Dark half.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-adbb23b0-8a29-433d-abbe-d9854ab33560.png"
+        }
+      ]
+    },
+    {
+      "id": "consuming_soul",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-d3a7075f-6536-4a56-ab31-e6292d265635.png",
+      "edit": "Change ONLY both SMALL MIDDLE ELEMENT TAB ICONS to exact Profane horned DEMON SKULL inside circle, copying reference1. Current abstract horn diamond is incorrect. Keep top Special star, lower Mage2, Combat lightning, art and text and center instability identical.",
+      "final_asset": "assets/spells/consuming_soul.png",
+      "edit_stages": [
+        {
+          "id": "consuming_soul",
+          "prompt": "PRECISION EDIT of FIRST image. Preserve every unchanged pixel/layout/artwork/text as closely as possible; correct only the specified icon tabs/text. Three subsequent reference images are icon legends: elements, spell types, targets. Trace exact silhouettes in white on tabs, black in effect text. NEVER replace the big round school emblem: it is always the DEATH CURVED FEATHER logo, not the spell element. NEVER globally substitute an icon throughout the card. Keep Light and Dark text DIFFERENT as source, both upright; 1024x1536. Brackets below denote graphic pictograms, not literal words. Change ONLY both SMALL MIDDLE ELEMENT TAB ICONS to exact Profane horned DEMON SKULL inside circle, copying reference1. Current abstract horn diamond is incorrect. Keep top Special star, lower Mage2, Combat lightning, art and text and center instability identical.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-dc9dbbf2-9e5d-4167-89c0-05f3b8ca96f7.png"
+        }
+      ]
+    }
+  ],
+  "additional_assets": [
+    {
+      "final_asset": "assets/spells/lethal_touch.png",
+      "selected_generation": "exec-13b3d5df-8875-4bf2-92d9-1ba077d8db10.png",
+      "specification": "Death Light/Dark Lethal Touch, Sacred icons from supplied legend, Codex p.14. No Instability. 1024 x 1536."
+    },
+    {
+      "final_asset": "assets/schools/death.png",
+      "selected_generation": "exec-53cdfe13-9106-48f8-9ec4-e7950b9b52f1.png",
+      "specification": "Rules and element counts from Codex p.13, blue Death School frame, feather emblem, portrait layout matching Agony/Alchemy. Resolve Destiny at defeat step 3, bonus Trophy step 5, no Cleanup resolution."
+    },
+    {
+      "final_asset": "assets/mages/mors.png",
+      "selected_generation": "exec-ba9c5f8e-a3f5-491c-bb63-11a801ab5551.png",
+      "specification": "Mors Mage sheet from Codex p.79. Landscape 1652 x 952, two physical actions, Trophy icon; Health 11, Hand 7, Strength 2, Speed 2, Quests 2."
+    },
+    {
+      "final_asset": "assets/tokens/destiny.png",
+      "selected_generation": "exec-56e50619-003a-4267-81b2-171510e210d4.png",
+      "specification": "Transparent blue/silver Death feather medallion. Owner cube supplied at runtime, no baked player color."
+    },
+    {
+      "final_asset": "assets/tokens/permanent.png",
+      "edit_stages": [
+        {
+          "prompt": "Edit the FIRST existing circular game token. Keep its purple faceted rim, black center, top-down orientation, size and transparent background. Replace ONLY the central eight pointed rays with the exact PERSISTENCE / PERMANENT symbol shown on the RIGHT GROUP of tokens in reference2. It is a geometric equal-arm PLUS CROSS made of four narrow parallel DOUBLE-LINE rectangular arms extending from a small outlined SQUARE at the center, with short small diagonal strokes between arms. No star, no pointed diamond rays, no sunburst. Copy that symbol faithfully in silver-white. Single isolated token, transparent corners, no text, no shadow outside.",
+          "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-73dec539-d1c6-4ebb-babe-045986dab1ef.png"
+        }
+      ]
+    }
+  ],
+  "generation_directory": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/"
+}

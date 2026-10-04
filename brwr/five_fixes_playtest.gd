@@ -41,6 +41,9 @@ func solve(id: String) -> QuestState:
 	quest.revealed = true
 	game.players[0].completed_quests.append(quest)
 	check(game.quest_manager.solve_quest(game, 0, quest), "Start Quest " + id)
+	# Quest effects begin after the public card presentation finishes.
+	while not game.card_presentation.is_empty():
+		await process_frame
 	return quest
 
 func run() -> void:
@@ -98,7 +101,7 @@ func run() -> void:
 	var warrior_effect: Dictionary = game.quest_database.get_quest("warrior_wizard").effects[0]
 	check(game._quest_evocation_choice_options(0, warrior_effect).is_empty(), "Warrior excludes damaged Health-4 Nigredos")
 	var cadaver = game.summon_evocation(1, "cadaver", "garden")
-	var warrior := solve("warrior_wizard")
+	var warrior: QuestState = await solve("warrior_wizard")
 	check(not game.is_evocation_in_play(cadaver), "Warrior removes eligible Health-2 Evocation")
 	check(game.is_evocation_in_play(enemy), "Warrior preserves Health-4 Nigredo")
 	check(game.pending_input.get("choice_kind") == "target_room", "Warrior proceeds to its independent Instability target")
@@ -113,7 +116,7 @@ func run() -> void:
 	player.revealed_spells.assign([fire, earth, air])
 	var earth_card = game.quest_database.get_quest("earth_tempest")
 	check(not game.quest_manager._check_revealed_spell_elements(game, 0, earth_card.task), "Two real Elements plus an Enhancement requirement do not make three")
-	var tempest := solve("earth_tempest")
+	var tempest: QuestState = await solve("earth_tempest")
 	check(game.pending_input.get("choice_kind") == "revealed_spell", "Earth Tempest asks which card to recover")
 	check(game.pending_input.options.size() == 2, "Only the two Air/Earth cards are eligible")
 	check(not game.submit_effect_choice(0, ["revealed:0"]), "Cannot submit Fire as recovery choice")
@@ -155,7 +158,7 @@ func run() -> void:
 	game.players[1].mage.room_id = "garden"
 	game.players[1].mage.room_coord = game.room_id_to_coord("garden")
 	game.refresh_model_tokens()
-	var illusion := solve("illusory_moon")
+	var illusion: QuestState = await solve("illusory_moon")
 	choose("choice:yes")
 	choose("room:crypt")
 	check(illusion.solved, "Illusory Moon completes")

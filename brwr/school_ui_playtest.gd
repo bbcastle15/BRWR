@@ -19,10 +19,13 @@ func run() -> void:
 	var game = load("res://game.tscn").instantiate()
 	game.auto_start_game_flow = false
 	game.beta_force_fullscreen = false
-	game.enable_beta_hud = true
+	game.enable_beta_hud = false
 	game.game_seed = 1232
 	root.add_child(game)
-	while game.beta_hud == null: await process_frame
+	for i in range(12): await process_frame
+	game.beta_hud = load("res://beta_hud.gd").new()
+	game.add_child(game.beta_hud)
+	game.beta_hud.setup(game)
 	game.local_viewer_index = 0
 	var hud = game.beta_hud
 	hud.present_pending_request({"type": "starting_school_choice", "player_index": 0,
@@ -65,7 +68,7 @@ func run() -> void:
 	await settle()
 	check(game.pending_input.get("type") == "evocation_phase_activations", "Evocation phase has a real pending choice")
 	check(hud.content.get_child_count() == 0 and not hud.panel.visible, "No empty modal covers selectable Evocations")
-	check(hud.decision_bar.visible, "Activation instructions remain in the top bar")
+	check(not hud.decision_bar.visible, "No description banner covers the Lodge during Evocation selection")
 	hud._toggle_panel()
 	check(not hud.panel.visible, "F10 does not reopen an empty modal")
 	var choices = get_nodes_in_group("board_target_choices").filter(func(node): return not node.is_queued_for_deletion())

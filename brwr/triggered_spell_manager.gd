@@ -188,6 +188,22 @@ func trigger_matches(
 				return false
 
 			return event.amount > 0
+		"another_mage_places_last_instability":
+			return event.event_type == "last_instability_placed" and event.source_player_index >= 0 and event.source_player_index != active_spell.owner_id
+		"another_mage_inflicts_last_damage":
+			return event.event_type == "damage_inflicted" and event.source_model_type == "mage" and event.source_player_index != active_spell.owner_id and event.target_model_type == "mage" and bool(event.data.get("lethal", false))
+		"non_forgotten_spell_affects_caster":
+			return event.event_type == "spell_effect_about_to_resolve" and active_spell.owner_id in event.data.get("targets", [])
+		"another_mage_completes_or_solves_quest":
+			return event.event_type in ["quest_completed", "quest_solved"] and event.source_player_index >= 0 and event.source_player_index != active_spell.owner_id
+		"mage_placed_in_cell", "another_mage_placed_in_cell":
+			return event.event_type == "mage_placed_in_cell" and (trigger_type == "mage_placed_in_cell" or event.source_player_index != active_spell.owner_id)
+		"another_mage_inflicts_damage":
+			return event.event_type == "damage_inflicted" and event.amount > 0 and event.source_model_type == "mage" and event.source_player_index != active_spell.owner_id
+		"another_mage_inflicts_damage_to_caster":
+			return event.event_type == "damage_about_to_be_inflicted" and event.amount > 0 and event.target_model_type == "mage" and event.target_player_index == active_spell.owner_id and event.source_model_type == "mage" and event.source_player_index != active_spell.owner_id
+		"evocation_inflicts_damage_to_caster":
+			return event.event_type == "damage_inflicted" and event.amount > 0 and event.target_model_type == "mage" and event.target_player_index == active_spell.owner_id and event.source_model_type == "evocation" and event.source_player_index != active_spell.owner_id
 		"evocation_defeated_or_removed":
 
 			if event.event_type != "evocation_defeated_or_removed":

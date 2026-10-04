@@ -30,6 +30,9 @@ func run() -> void:
 	for school_id in game.active_school_ids:
 		assert(game.ReferenceCardPreview.card_texture("schools", school_id) != null, "Missing exported School art: " + school_id)
 	assert(load("res://assets/boards/event_board_reference.png") != null)
+	assert(game.table_shell != null and game.table_shell.banners.size() == game.players.size())
+	for path in ["res://assets/tabletop/playmat.png", "res://assets/tabletop/card_back.png", "res://assets/tokens/trap.png", "res://assets/tokens/protection.png", "res://assets/tokens/permanent.png"]:
+		assert(load(path) is Texture2D, "Missing exported tabletop art: " + path)
 	game.queue_free()
 	await process_frame
 	print("EXPORTED PACK CHECK PASS")

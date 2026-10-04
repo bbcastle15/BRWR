@@ -624,6 +624,12 @@ func _complete_quest(
 		" completed Quest: ",
 		quest.get_name()
 	)
+	var event := GameEvent.new("quest_completed")
+	event.source_model_type = "mage"
+	event.source_player_index = player_index
+	event.source_room_id = player.mage.room_id
+	event.data = {"quest_id": quest.get_id()}
+	game.queue_resolution({"type": "game_event", "event": event})
 
 
 

@@ -7,7 +7,7 @@ var fitted_center := Vector2.ZERO
 func minimum_zoom() -> float:
 	if get_parent().has_method("get_tabletop_bounds"):
 		var bounds: Rect2 = get_parent().get_tabletop_bounds()
-		var view := get_viewport_rect().size
+		var view: Vector2 = get_parent().get_table_view_rect().size
 		return minf(view.x / maxf(bounds.size.x, 1.0), view.y / maxf(bounds.size.y, 1.0))
 	return 1.0
 
@@ -30,10 +30,11 @@ func adapt_to_viewport() -> void:
 		reset_view()
 		return
 	var relative_zoom := zoom.x / fitted_zoom
-	position = bounds.get_center() + position - fitted_center
 	zoom = Vector2.ONE * maxf(next_fit, next_fit * relative_zoom)
+	var next_center := _view_center(bounds, zoom.x)
+	position += next_center - fitted_center
 	fitted_zoom = next_fit
-	fitted_center = bounds.get_center()
+	fitted_center = next_center
 	force_update_scroll()
 
 func reset_view() -> void:
@@ -41,23 +42,23 @@ func reset_view() -> void:
 	zoom = Vector2.ONE
 	if get_parent().has_method("get_tabletop_bounds"):
 		var bounds: Rect2 = get_parent().get_tabletop_bounds()
-		var viewport_size := get_viewport_rect().size
-		position = bounds.get_center()
-		zoom = Vector2.ONE * minf(viewport_size.x / bounds.size.x, viewport_size.y / bounds.size.y)
+		zoom = Vector2.ONE * minimum_zoom()
+		position = _view_center(bounds, zoom.x)
 		fitted_zoom = zoom.x
 		fitted_center = position
 	force_update_scroll()
 
 func focus_lodge() -> void:
-	# Opening the game should keep Rooms readable. Home still shows the whole
-	# table, and the zoom-out limit continues to include every PlayerBoard.
+	# Personal boards are screen overlays; all table space belongs to the Lodge.
 	reset_view()
-	if get_parent().has_method("get_lodge_table_bounds"):
-		var bounds: Rect2 = get_parent().get_lodge_table_bounds().grow(24.0)
-		var view := get_viewport_rect().size
-		position = bounds.get_center()
-		zoom = Vector2.ONE * maxf(minimum_zoom(), minf(view.x / bounds.size.x, view.y / bounds.size.y))
-		force_update_scroll()
+
+func _view_center(bounds: Rect2, scale_value: float) -> Vector2:
+	var area: Rect2 = get_parent().get_table_view_rect()
+	return bounds.get_center() - (area.get_center() - get_viewport_rect().size * 0.5) / scale_value
+
+func _table_covered() -> bool:
+	var game = get_parent()
+	return (game.table_shell != null and (game.table_shell.board_overlay.visible or game.table_shell.card_overlay.visible)) or (game.beta_hud != null and (game.beta_hud.hand_overlay.visible or game.beta_hud.panel.visible))
 
 func zoom_at(screen_point: Vector2, factor: float) -> void:
 	var before := get_canvas_transform().affine_inverse() * screen_point
@@ -68,6 +69,9 @@ func zoom_at(screen_point: Vector2, factor: float) -> void:
 	force_update_scroll()
 
 func _input(event: InputEvent) -> void:
+	if _table_covered():
+		dragging = false
+		return
 	# Right-drag works across board controls too; left clicks remain game input.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		dragging = event.pressed
@@ -77,6 +81,8 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _table_covered():
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			zoom_at(event.position, 1.15 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.15)

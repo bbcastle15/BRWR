@@ -56,5 +56,34 @@
         ]
       }
     ]
+  },
+  "death": {
+    "name": "Death",
+    "starting_grimoires": [
+      {
+        "id": "oblivion",
+        "name": "Oblivion",
+        "spell_ids": [
+          "tearing",
+          "entropy",
+          "bone_shield",
+          "lugubrious_toll",
+          "lethal_touch",
+          "dark_omens"
+        ]
+      },
+      {
+        "id": "the_end",
+        "name": "The End",
+        "spell_ids": [
+          "annihilation",
+          "final_judgment",
+          "sacrificial_pyre",
+          "despair",
+          "martyrdom",
+          "repentance"
+        ]
+      }
+    ]
   }
 }

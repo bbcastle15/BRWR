@@ -22,6 +22,10 @@ func resolve_effect(
 
 	context.erase("effect_resolution_error")
 	var effect_type = str(effect.get("type", ""))
+	if bool(effect.get("only_on_trigger", false)) and context.get("trigger_event") == null:
+		return true
+	if effect_type in DeathEffectResolver.TYPES:
+		return DeathEffectResolver.resolve(effect, context)
 
 	match effect_type:
 		# Core model effects.
@@ -310,6 +314,8 @@ func _damage_mage(
 		return 0
 
 	if attacker_id >= 0 and attacker_id == player_index:
+		return 0
+	if DeathEffectResolver.ignores(game.active_effect_context, player_index):
 		return 0
 
 	return game.deal_damage(
@@ -748,7 +754,8 @@ func convert_damage_cubes(
 	damage_cubes: Array,
 	new_owner_id: int,
 	amount: int,
-	selected_owners: Array = []
+	selected_owners: Array = [],
+	game = null
 ) -> int:
 
 	var converted = 0
@@ -775,6 +782,10 @@ func convert_damage_cubes(
 			if selected_index < 0:
 				continue
 			remaining.remove_at(selected_index)
+		if game != null:
+			if game.take_owner_cubes(new_owner_id, 1) <= 0:
+				break
+			game.return_owner_cubes(int(damage_cubes[i]), 1)
 		damage_cubes[i] = new_owner_id
 		converted += 1
 
@@ -1311,7 +1322,7 @@ func _resolve_convert_damage(
 		var converted = convert_damage_cubes(
 			game.players[caster_id].mage.damage_cubes,
 			new_owner,
-			amount, _choice_as_array(context.get("convert_mage:%d" % caster_id, null))
+			amount, _choice_as_array(context.get("convert_mage:%d" % caster_id, null)), game
 		)
 
 		if caster_id < game.player_boards.size():
@@ -1334,13 +1345,13 @@ func _resolve_convert_damage(
 		if not _valid_player(game, player_index):
 			return false
 
-		if player_index == caster_id:
+		if player_index == caster_id or DeathEffectResolver.ignores(context, player_index):
 			return true
 
 		var converted = convert_damage_cubes(
 			game.players[player_index].mage.damage_cubes,
 			caster_id,
-			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
+			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null)), game
 		)
 
 		if player_index < game.player_boards.size():
@@ -1371,7 +1382,7 @@ func _resolve_convert_damage(
 		var converted = convert_damage_cubes(
 			evocation.damage_cubes,
 			caster_id,
-			amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null))
+			amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null)), game
 		)
 		context["effect_damage_converted"] = converted
 		context["effect_target_model_type"] = "evocation"
@@ -1396,13 +1407,13 @@ func _resolve_convert_damage(
 			or game.is_mage_in_cell(player_index):
 				continue
 
-			if player_index == caster_id:
+			if player_index == caster_id or DeathEffectResolver.ignores(context, player_index):
 				continue
 
 			var converted = convert_damage_cubes(
 				mage.damage_cubes,
 				caster_id,
-				amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
+				amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null)), game
 			)
 			total_converted += converted
 
@@ -1431,7 +1442,7 @@ func _resolve_convert_damage(
 				var converted = convert_damage_cubes(
 					evocation.damage_cubes,
 					caster_id,
-					amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null))
+					amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null)), game
 				)
 				total_converted += converted
 				print(
@@ -1482,6 +1493,7 @@ func _resolve_convert_damage_each_other_mage(
 		# ignores conversion caused by their own Effect.
 		if player_index == primary_target \
 		or player_index == caster_id \
+		or DeathEffectResolver.ignores(context, player_index) \
 		or game.is_mage_in_cell(player_index):
 			continue
 
@@ -1490,7 +1502,7 @@ func _resolve_convert_damage_each_other_mage(
 				player_index
 			].mage.damage_cubes,
 			caster_id,
-			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null))
+			amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null)), game
 		)
 
 		if player_index < game.player_boards.size():

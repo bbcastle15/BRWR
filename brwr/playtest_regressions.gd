@@ -49,6 +49,8 @@ func run() -> void:
 	check(game.get_player_board_cast_token(0, "Q") != "", "Special Quick must be castable, including via another player's Construct")
 	game.activate_player_board_spell(0, "Q")
 	check(player.quick_spell == null, "Quick Soul Transfer must commit")
+	check(game.pending_input.get("choice_kind") == "construct_room", "Soul Transfer explicitly asks which Construct Room to activate")
+	choose_room(game, "forge")
 	check(game.pending_input.get("choice_kind") == "room_effect_room_target", "Soul Transfer must reach Forge's effect")
 	check(not game.pending_input.options.is_empty(), "Forge must offer target rooms")
 	for option in game.pending_input.get("options", []):
@@ -137,11 +139,7 @@ func run() -> void:
 			if cell.has_meta("owner_index"):
 				check(cell.get_node("OwnerBorder").default_color == table.players[cell.get_meta("owner_index")].color, "Cell border must match its actual player")
 		for board in table.player_boards:
-			var rect := Rect2(board.position, board.BOARD_SIZE * board.scale)
-			check(not rect.intersects(central), "PlayerBoard overlaps Lodge or side boards for %d players" % count)
-			for other in table.player_boards:
-				if other != board:
-					check(not rect.intersects(Rect2(other.position, other.BOARD_SIZE * other.scale)), "PlayerBoards overlap each other")
+			check(not board.visible, "Personal boards stay off the shared table for %d players" % count)
 		table.queue_free()
 		await process_frame
 	print("PLAYTEST REGRESSIONS: ", "PASS" if failures == 0 else "FAIL")

@@ -18,5 +18,15 @@
     "speed": 2,
     "max_active_quests": 2,
     "personal_spell_id": "emet_met"
+  },
+  "mors": {
+    "id": "mors",
+    "name": "Mors",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "consuming_soul"
   }
 }

@@ -1443,5 +1443,627 @@
         }
       ]
     }
+  },
+  {
+    "id": "tearing",
+    "name": "Tearing",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "assign_destiny",
+          "amount": 1
+        },
+        {
+          "type": "remove_targets_evocation",
+          "max_health": 3
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": 0,
+      "effects": [
+        {
+          "type": "assign_destiny",
+          "amount": 1
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "convert_damage",
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "entropy",
+    "name": "Entropy",
+    "school": "death",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "trap",
+      "element": "magic",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "convert_instability",
+          "amount": 1
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_places_last_instability"
+      },
+      "trigger_target": "event_room"
+    },
+    "dark": {
+      "type": "trap",
+      "element": "magic",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "assign_destiny",
+          "amount": 2
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_inflicts_last_damage"
+      },
+      "trigger_target": "damaged_mage"
+    }
+  },
+  {
+    "id": "bone_shield",
+    "name": "Bone Shield",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "protection",
+      "element": "all",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "ignore_spell"
+        },
+        {
+          "type": "convert_damage",
+          "amount": 1
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "trigger": {
+        "type": "non_forgotten_spell_affects_caster"
+      },
+      "trigger_target": "source_mage"
+    },
+    "dark": {
+      "type": "protection",
+      "element": "all",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_effect",
+          "choices": [
+            {
+              "label": "Place 2 Instability",
+              "effects": [
+                {
+                  "type": "place_instability",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "label": "Convert 2 Instability",
+              "effects": [
+                {
+                  "type": "convert_instability",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "another_model_inflicts_damage_to_caster"
+      },
+      "trigger_target": "caster_room"
+    }
+  },
+  {
+    "id": "lugubrious_toll",
+    "name": "Lugubrious Toll",
+    "school": "death",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "magic",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "for_each_mage",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 1
+            }
+          ],
+          "distance": 1
+        },
+        {
+          "type": "for_each_mage",
+          "effects": [
+            {
+              "type": "assign_destiny",
+              "amount": 1
+            }
+          ],
+          "distance": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "magic",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "for_each_mage",
+          "effects": [
+            {
+              "type": "convert_damage",
+              "amount": 2
+            }
+          ],
+          "min_destiny": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "lethal_touch",
+    "name": "Lethal Touch",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "for_each_mage",
+          "effects": [
+            {
+              "type": "assign_destiny",
+              "amount": 1
+            }
+          ],
+          "distance": 1
+        },
+        {
+          "type": "heal_per_assigned_destiny"
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "sacred",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "spend_trophy",
+          "effects": [
+            {
+              "type": "for_each_mage",
+              "effects": [
+                {
+                  "type": "damage",
+                  "amount": 3
+                }
+              ],
+              "min_destiny": 1
+            }
+          ],
+          "optional": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "dark_omens",
+    "name": "Dark Omens",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": 0,
+      "effects": [
+        {
+          "type": "defeat_with_destiny"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": "*",
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1,
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "mage_placed_in_cell"
+      },
+      "trigger_target": "self"
+    }
+  },
+  {
+    "id": "annihilation",
+    "name": "Annihilation",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "magic",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "destiny_threshold",
+          "amount": 2,
+          "effects": [
+            {
+              "type": "gain_trophy"
+            }
+          ]
+        },
+        {
+          "type": "assign_destiny",
+          "amount": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "magic",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "destiny_threshold",
+          "amount": 2,
+          "same_sentence": true,
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 2
+            },
+            {
+              "type": "convert_damage",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "final_judgment",
+    "name": "Final Judgment",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "sacred",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "gain_trophy"
+        },
+        {
+          "type": "gain_power",
+          "amount": 1
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_completes_or_solves_quest"
+      },
+      "trigger_target": "source_mage"
+    },
+    "dark": {
+      "type": "trap",
+      "element": "profane",
+      "target": "self",
+      "range": "*",
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3
+        },
+        {
+          "type": "gain_trophy",
+          "target_from_trigger": "source"
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_placed_in_cell"
+      },
+      "trigger_target": "self"
+    }
+  },
+  {
+    "id": "sacrificial_pyre",
+    "name": "Sacrificial Pyre",
+    "school": "death",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "sacred",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "pain",
+          "amount": 3
+        },
+        {
+          "type": "defeat_with_destiny"
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "sacred",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "spend_trophy",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 2
+            }
+          ],
+          "optional": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "despair",
+    "name": "Despair",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "profane",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "assign_destiny",
+          "amount": 1
+        },
+        {
+          "type": "gain_power",
+          "amount": 1
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_solves_quest"
+      },
+      "trigger_target": "source_mage"
+    },
+    "dark": {
+      "type": "trap",
+      "element": "profane",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "gain_trophy"
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_inflicts_damage"
+      },
+      "trigger_target": "source_mage"
+    }
+  },
+  {
+    "id": "martyrdom",
+    "name": "Martyrdom",
+    "school": "death",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "spend_trophy",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            }
+          ],
+          "optional": true
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "spend_trophy",
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 2
+            }
+          ],
+          "optional": false
+        },
+        {
+          "type": "spend_trophy",
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 1
+            }
+          ],
+          "optional": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "repentance",
+    "name": "Repentance",
+    "school": "death",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "protection",
+      "element": "sacred",
+      "target": "self",
+      "range": "*",
+      "effects": [
+        {
+          "type": "ignore_trigger_damage",
+          "amount": 1
+        },
+        {
+          "type": "gain_trophy",
+          "target_from_trigger": "source"
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_inflicts_damage_to_caster"
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "protection",
+      "element": "profane",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "end_evocation_activation"
+        },
+        {
+          "type": "activate_target_evocation_under_control"
+        }
+      ],
+      "trigger": {
+        "type": "evocation_inflicts_damage_to_caster"
+      },
+      "trigger_target": "source_evocation"
+    }
+  },
+  {
+    "id": "consuming_soul",
+    "name": "Consuming Soul",
+    "school": "",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "for_each_mage",
+          "effects": [
+            {
+              "type": "damage_per_destiny"
+            }
+          ],
+          "min_destiny": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "choose_effect",
+          "choices": [
+            {
+              "label": "Obtain a Trophy",
+              "effects": [
+                {
+                  "type": "gain_trophy"
+                }
+              ]
+            },
+            {
+              "label": "Defeat the Mage with 3 Destiny",
+              "effects": [
+                {
+                  "type": "defeat_with_destiny"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "personal": true
   }
 ]

@@ -110,6 +110,7 @@ func refresh():
 	refresh_action_tokens()
 	refresh_evocations()
 	refresh_mage_card()
+	refresh_destiny_tokens()
 	$GrimoireSlot/Label.text = "GRIMOIRE\n%d" % player_state.grimoire.size()
 	$MemoriesSlot/Label.text = "MEMORIES\n%d" % player_state.memories.size()
 
@@ -229,6 +230,13 @@ func _configure_spell_slot(slot: Control, slot_id: String) -> void:
 		back.visible = false
 		slot.add_child(back)
 		slot.move_child(back, 0)
+		var back_art := TextureRect.new()
+		back_art.texture = preload("res://assets/tabletop/card_back.png")
+		back_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		back_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		back_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		back.add_child(back_art)
+		back_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 	if slot.get_node_or_null("CardArt") == null:
 		var art := TextureRect.new()
@@ -282,24 +290,35 @@ func _render_spell_slot(
 	if game != null:
 		data = game.get_player_board_spell_slot_data(player_index, slot_id)
 	var marker = slot.get_node_or_null("SpellMarker")
-	if marker == null:
-		marker = Label.new()
+	var marker_kind := str(data.get("marker", "")).to_lower()
+	if marker != null and marker.get_meta("kind", "") != marker_kind:
+		slot.remove_child(marker)
+		marker.queue_free()
+		marker = null
+	if marker == null and not marker_kind.is_empty():
+		marker = preload("res://tabletop_style.gd").marker(marker_kind, player_state.color, Vector2(50, 50), slot_id)
 		marker.name = "SpellMarker"
-		marker.position = Vector2(2, 3)
+		marker.set_meta("kind", marker_kind)
+		marker.position = Vector2(50, 77)
 		marker.z_index = 2
-		marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		marker.add_theme_font_size_override("font_size", 11)
-		marker.add_theme_color_override("font_outline_color", Color.BLACK)
-		marker.add_theme_constant_override("outline_size", 6)
-		var badge := StyleBoxFlat.new()
-		badge.bg_color = Color(0.25, 0.13, 0.38, 0.95)
-		badge.set_corner_radius_all(5)
-		badge.content_margin_left = 4
-		badge.content_margin_right = 4
-		marker.add_theme_stylebox_override("normal", badge)
 		slot.add_child(marker)
-	marker.text = str(data.get("marker", ""))
-	marker.visible = not marker.text.is_empty()
+	var active_side = slot.get_node_or_null("ActiveSide")
+	if active_side == null:
+		active_side = Panel.new()
+		active_side.name = "ActiveSide"
+		active_side.size = Vector2(SPELL_SIZE.x, SPELL_SIZE.y * 0.5)
+		active_side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var edge := StyleBoxFlat.new()
+		edge.bg_color = Color(1, 0.86, 0.55, 0.035)
+		edge.border_color = Color(0.91, 0.78, 0.48, 0.75)
+		edge.set_border_width_all(2)
+		edge.set_corner_radius_all(3)
+		active_side.add_theme_stylebox_override("panel", edge)
+		slot.add_child(active_side)
+	active_side.visible = data.get("public", false)
+	# Source PNGs print both halves upright. Highlight the selected half without
+	# turning the text upside down when Dark is played.
+	active_side.position.y = SPELL_SIZE.y * 0.5 if data.get("use_dark_side", false) else 0.0
 
 	if data.is_empty():
 		back.visible = false
@@ -340,8 +359,11 @@ func _render_spell_slot(
 	back.visible = true
 	art.texture = null
 	art.visible = false
-	label.visible = true
+	label.visible = marker_kind.is_empty()
 	label.text = empty_label + "\nSET"
+	label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 4)
 
 	var can_inspect: bool = bool(data.get("can_inspect", false))
 	button.disabled = not can_inspect
@@ -636,6 +658,34 @@ func refresh_mage_card() -> void:
 		trophies.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(trophies)
 	trophies.text = "Trophies: %d" % player_state.trophies.size()
+
+
+func refresh_destiny_tokens() -> void:
+	var row = get_node_or_null("DestinyTokens")
+	if row == null:
+		row = Control.new()
+		row.name = "DestinyTokens"
+		row.position = Vector2(523, 210)
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(row)
+	for child in row.get_children():
+		row.remove_child(child)
+		child.queue_free()
+	for i in range(player_state.mage.destiny_tokens.size()):
+		var owner: int = player_state.mage.destiny_tokens[i]
+		var token := TextureRect.new()
+		token.texture = game.ReferenceCardPreview.card_texture("tokens", "destiny")
+		token.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		token.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		token.position = Vector2(i * 34, 0)
+		token.size = Vector2(32, 32)
+		token.tooltip_text = "Destiny — assigned by Player %d" % (owner + 1)
+		row.add_child(token)
+		var cube = cube_scene.instantiate()
+		cube.cube_color = get_damage_cube_color(owner)
+		token.add_child(cube)
+		cube.scale = Vector2(0.7, 0.7)
+		cube.position = Vector2(20, 19)
 
 
 func refresh_evocations() -> void:

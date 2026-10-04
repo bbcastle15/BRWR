@@ -78,6 +78,12 @@ var clear_button: Button
 var confirm_button: Button
 
 var feedback_label: Label
+var tabs: TabBar
+var quest_scroll: ScrollContainer
+var quest_columns: HBoxContainer
+var quest_signature := ""
+var cards_heading := ""
+var cards_instructions := ""
 
 
 func setup(game_node) -> void:
@@ -117,15 +123,7 @@ func _build_ui() -> void:
 	main_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
-	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.075, 0.075, 0.075, 0.98)
-	panel_style.border_color = Color(0.34, 0.34, 0.34, 1.0)
-	panel_style.set_border_width_all(2)
-	panel_style.corner_radius_top_left = 10
-	panel_style.corner_radius_top_right = 10
-	panel_style.corner_radius_bottom_left = 10
-	panel_style.corner_radius_bottom_right = 10
-	main_panel.add_theme_stylebox_override("panel", panel_style)
+	main_panel.add_theme_stylebox_override("panel", preload("res://tabletop_style.gd").panel())
 
 	outer_margin.add_child(main_panel)
 
@@ -183,6 +181,11 @@ func _build_ui() -> void:
 	# -----------------------------------------------------
 	# LARGE CARD STRIP
 	# -----------------------------------------------------
+	tabs = TabBar.new()
+	tabs.add_tab("Cards")
+	tabs.add_tab("Quests")
+	tabs.tab_changed.connect(_change_tab)
+	root.add_child(tabs)
 
 	var hand_body := HBoxContainer.new()
 	hand_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -211,6 +214,16 @@ func _build_ui() -> void:
 	card_row.add_theme_constant_override("h_separation", CARD_GAP)
 	card_row.add_theme_constant_override("v_separation", 12)
 	card_center.add_child(card_row)
+	quest_scroll = ScrollContainer.new()
+	quest_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	quest_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	quest_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	hand_body.add_child(quest_scroll)
+	quest_columns = HBoxContainer.new()
+	quest_columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	quest_columns.add_theme_constant_override("separation", 18)
+	quest_scroll.add_child(quest_columns)
+	quest_scroll.hide()
 
 	root.add_child(HSeparator.new())
 
@@ -343,6 +356,7 @@ func open_study(request: Dictionary) -> void:
 	move_to_front()
 	_render_cards()
 	_update_controls()
+	_select_cards_tab(true)
 
 
 func open_preparation(
@@ -395,6 +409,7 @@ func open_preparation(
 
 	_render_cards()
 	_update_controls()
+	_select_cards_tab(true)
 
 
 func open_browse(
@@ -405,6 +420,8 @@ func open_browse(
 
 	if player_index < 0 \
 	or player_index >= game.players.size():
+		return
+	if player_index != game.get_ui_viewer_player_index():
 		return
 
 	mode = MODE_BROWSE
@@ -472,6 +489,138 @@ func open_browse(
 
 	_render_cards()
 	_update_controls()
+	_select_cards_tab(true)
+
+
+func _select_cards_tab(refresh_heading: bool = false) -> void:
+	if refresh_heading:
+		cards_heading = title_label.text
+		cards_instructions = instruction_label.text
+	tabs.set_current_tab(0)
+	_change_tab(0)
+
+
+func _change_tab(index: int) -> void:
+	card_scroll.visible = index == 0
+	quest_scroll.visible = index == 1
+	prep_controls.visible = index == 0 and mode == MODE_PREPARATION
+	if index == 1:
+		title_label.text = "PLAYER %d — QUESTS" % (owner_player_index + 1)
+		instruction_label.text = "Complete the Task of an Active Quest, then resolve its Effects during your Activation. Solved Quests award Power."
+		count_label.text = ""
+		_render_quests()
+	else:
+		title_label.text = cards_heading
+		instruction_label.text = cards_instructions
+		count_label.text = "%d cards" % cards.size()
+		call_deferred("_layout_cards")
+	# A preparation/study draft belongs to the Cards tab, and is preserved.
+	if mode in [MODE_PREPARATION, MODE_STUDY]:
+		_update_controls()
+
+
+func _process(_delta: float) -> void:
+	if not visible or game == null:
+		return
+	if owner_player_index != game.get_ui_viewer_player_index():
+		close_overlay(true)
+		return
+	if tabs.current_tab == 1:
+		var signature := str(game.get_player_board_action_options(owner_player_index, "quests"))
+		for data in game.get_player_quest_cards(owner_player_index, "active") + game.get_player_quest_cards(owner_player_index, "completed") + game.get_player_quest_cards(owner_player_index, "solved"):
+			var quest: QuestState = data.quest
+			signature += str([quest.get_instance_id(), quest.revealed, quest.progress, quest.completed, quest.solved])
+		if signature != quest_signature:
+			quest_signature = signature
+			_render_quests()
+
+
+func _render_quests() -> void:
+	for child in quest_columns.get_children():
+		quest_columns.remove_child(child)
+		child.queue_free()
+	for section in ["active", "completed", "solved"]:
+		var column := VBoxContainer.new()
+		column.name = section.capitalize()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		column.size_flags_stretch_ratio = 1.0
+		column.add_theme_constant_override("separation", 12)
+		quest_columns.add_child(column)
+		var entries: Array = game.get_player_quest_cards(owner_player_index, section)
+		var heading := Label.new()
+		heading.text = "%s · %d" % [section.capitalize(), entries.size()]
+		heading.add_theme_font_size_override("font_size", 21)
+		heading.add_theme_color_override("font_color", Color("cbb178"))
+		heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		column.add_child(heading)
+		if entries.is_empty():
+			var empty := Label.new()
+			empty.text = "—"
+			empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			column.add_child(empty)
+		for data in entries:
+			var quest: QuestState = data.quest
+			var center := CenterContainer.new()
+			column.add_child(center)
+			var width := clampf((main_panel.size.x - 160) / 3.0, 140, 260)
+			var card_size := Vector2(width, width * 1.42)
+			var card: Button = game.ReferenceCardPreview.make_card("quests", quest.get_id(), quest.get_name(), card_size, game.open_quest_card.bind(quest))
+			card.set_meta("choice_quest", quest)
+			center.add_child(card)
+			# Solved cards are face down on the physical table, but their now-public
+			# identity can still be consulted through the same inspector.
+			if section == "solved":
+				for art in card.get_children():
+					art.hide()
+				var back := TextureRect.new()
+				back.texture = preload("res://assets/tabletop/card_back.png")
+				back.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				back.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				card.add_child(back)
+				back.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+				var caption := Label.new()
+				caption.text = quest.get_name() + "\nSolved · %d Power" % quest.get_power_reward()
+				caption.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+				caption.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+				caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				caption.add_theme_color_override("font_outline_color", Color.BLACK)
+				caption.add_theme_constant_override("outline_size", 6)
+				caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				card.add_child(caption)
+			elif quest.get_cube_slots() > 0:
+				var track := HBoxContainer.new()
+				track.name = "QuestProgress"
+				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				track.add_theme_constant_override("separation", 5)
+				var width_value := quest.get_cube_slots() * 19.0 - 5.0
+				track.position = Vector2((card_size.x - width_value) * 0.5, card_size.y * 0.5 - 7)
+				card.add_child(track)
+				for i in quest.get_cube_slots():
+					var cube = preload("res://cube.tscn").instantiate()
+					cube.cube_color = game.players[owner_player_index].color if i < quest.progress else Color("222728")
+					track.add_child(cube)
+			var status := Label.new()
+			status.text = "Revealed" if quest.revealed else "Private"
+			if section != "active": status.text = section.capitalize()
+			status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			column.add_child(status)
+			if section == "completed":
+				var solve := Button.new()
+				solve.text = "Resolve Quest"
+				solve.disabled = true
+				for option in game.get_player_board_action_options(owner_player_index, "quests"):
+					var index: int = int(option.get("descriptor", {}).get("quest_index", -1))
+					if index >= 0 and index < game.players[owner_player_index].completed_quests.size() and game.players[owner_player_index].completed_quests[index] == quest:
+						solve.disabled = false
+						solve.pressed.connect(_resolve_quest.bind(str(option.token)), CONNECT_DEFERRED)
+				column.add_child(solve)
+
+
+func _resolve_quest(token: String) -> void:
+	if owner_player_index != game.get_ui_viewer_player_index():
+		return
+	game.submit_beta_input(owner_player_index, {"token": token})
 
 
 func close_overlay(
@@ -731,6 +880,8 @@ func _create_card_widget(
 func _assignment_badge(
 	hand_index: int
 ) -> String:
+	if mode != MODE_PREPARATION:
+		return ""
 	var numbered_index: int = ready_hand_indices.find(
 		hand_index
 	)

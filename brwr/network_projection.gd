@@ -5,6 +5,8 @@ extends RefCounted
 static func build(game, viewer: int) -> Dictionary:
 	var state: Dictionary = game.get_beta_game_state(viewer)
 	state["revision"] = game.input_revision
+	state["turn_presentation"] = game.get_turn_presentation()
+	state["card_presentation"] = game.card_presentation.duplicate()
 	state["slots"] = {}
 	state["cast_tokens"] = {}
 	state["rooms"] = []
@@ -55,6 +57,8 @@ static func apply(game, state: Dictionary) -> void:
 	game.current_moon = state.moon
 	game.current_phase = state.phase
 	game.input_revision = state.revision
+	game.network_turn_presentation = state.get("turn_presentation", {})
+	game.card_presentation = state.get("card_presentation", {}).duplicate()
 	game.pending_input = state.pending_input
 	game.network_slot_views = state.slots
 	game.network_cast_tokens = state.cast_tokens
@@ -75,6 +79,7 @@ static func apply(game, state: Dictionary) -> void:
 			player.mage.set(field, data.mage[field])
 		player.mage.room_coord = Vector2i(data.mage.room_coord.q, data.mage.room_coord.r)
 		player.mage.damage_cubes.assign(data.mage.damage_cubes)
+		player.mage.destiny_tokens.assign(data.mage.get("destiny_tokens", []))
 		if old_health != player.mage.health:
 			game.player_boards[player.player_index].create_damage_track()
 		player.hand.clear()
@@ -162,6 +167,8 @@ static func apply(game, state: Dictionary) -> void:
 	game.refresh_model_tokens()
 	game.refresh_all_player_boards()
 	game._refresh_permanent_room_markers()
+	if game.table_shell != null:
+		game.table_shell.sync_card_presentation()
 	if previous_revision != game.input_revision or not game.waiting_for_player_input:
 		game.player_input_resolved.emit({})
 		if game.waiting_for_player_input:

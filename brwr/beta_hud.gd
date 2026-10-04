@@ -2,6 +2,7 @@ class_name BetaHUD
 extends CanvasLayer
 
 const HandOverlayScript = preload("res://hand_overlay.gd")
+const TabletopStyle = preload("res://tabletop_style.gd")
 
 
 const CardViewScene = preload("res://card_view.tscn")
@@ -133,6 +134,7 @@ func supports_input_type(input_type: String) -> bool:
 func _build_ui() -> void:
 	overlay = Control.new()
 	overlay.name = "BetaHUDRoot"
+	overlay.theme = TabletopStyle.make_theme()
 	# Only the decision panel and modal children intercept tabletop clicks.
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.set_anchors_and_offsets_preset(
@@ -197,6 +199,7 @@ func _build_ui() -> void:
 	hand_button.custom_minimum_size = Vector2(0, 42)
 	hand_button.pressed.connect(_open_hand_overlay)
 	var toolbar := HBoxContainer.new()
+	toolbar.visible = game.table_shell == null
 	toolbar.position = Vector2(12, 8)
 	overlay.add_child(toolbar)
 	toolbar.add_child(hand_button)
@@ -213,6 +216,7 @@ func _build_ui() -> void:
 			camera.reset_view())
 	toolbar.add_child(view_button)
 	var window_toolbar := HBoxContainer.new()
+	window_toolbar.visible = game.table_shell == null
 	window_toolbar.position = Vector2(12, 56)
 	overlay.add_child(window_toolbar)
 	var window_button := Button.new()
@@ -280,6 +284,9 @@ func _sync_hand_confirmation(source: Button) -> void:
 	for child in decision_actions.get_children():
 		decision_actions.remove_child(child)
 		child.queue_free()
+	if hand_overlay.tabs.current_tab == 1:
+		_add_confirmation("Back to cards", hand_overlay._select_cards_tab)
+		return
 	_add_confirmation(source.text, source.pressed.emit, source.disabled)
 
 
@@ -289,27 +296,29 @@ func _build_decision_bar() -> void:
 	add_child(top_layer)
 	decision_bar = PanelContainer.new()
 	decision_bar.name = "DecisionBar"
-	decision_bar.anchor_left = 0.30
-	decision_bar.anchor_right = 1.0
-	decision_bar.offset_left = 12
-	decision_bar.offset_right = -12
-	decision_bar.offset_top = 44
-	top_layer.add_child(decision_bar)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 14)
-	decision_bar.add_child(row)
-	var messages := VBoxContainer.new()
-	messages.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(messages)
-	prompt_label.reparent(messages)
+	decision_bar.theme = TabletopStyle.make_theme()
+	decision_bar.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	center.offset_left = 220
+	center.offset_right = -12
+	center.offset_top = 12
+	center.offset_bottom = 64
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	top_layer.add_child(center)
+	center.add_child(decision_bar)
+	# Instructions belong to an actual choice window, never a persistent banner.
+	# On-table choices keep only their floating confirmation/back buttons.
 	decision_info = Label.new()
 	decision_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	decision_info.max_lines_visible = 3
-	messages.add_child(decision_info)
-	feedback_label.reparent(messages)
+	decision_info.add_theme_font_size_override("font_size", 14)
+	decision_info.add_theme_color_override("font_color", TabletopStyle.MUTED)
+	var choices_root := prompt_label.get_parent()
+	choices_root.add_child(decision_info)
+	choices_root.move_child(decision_info, prompt_label.get_index() + 1)
 	decision_actions = HBoxContainer.new()
-	decision_actions.alignment = BoxContainer.ALIGNMENT_END
-	row.add_child(decision_actions)
+	decision_actions.add_theme_constant_override("separation", 10)
+	decision_bar.add_child(decision_actions)
 	phase_label.hide()
 	player_label.hide()
 	decision_bar.hide()
@@ -319,7 +328,7 @@ func _add_confirmation(text_value: String, callback: Callable, disabled: bool = 
 	var button := Button.new()
 	button.text = text_value
 	button.disabled = disabled
-	button.custom_minimum_size = Vector2(135, 42)
+	button.custom_minimum_size = Vector2(108, 40)
 	button.pressed.connect(callback, CONNECT_DEFERRED)
 	decision_actions.add_child(button)
 	decision_bar.show()
@@ -342,6 +351,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _open_hand_overlay() -> void:
+	if game.table_shell != null:
+		game.table_shell.close_board()
 	if str(current_request.get("type", "")) == "study_keep_cards":
 		_show_study_cards()
 		return
@@ -691,7 +702,6 @@ func _add_section(title_text: String) -> void:
 
 func _add_info(text_value: String) -> void:
 	decision_info.text += ("\n" if decision_info.text != "" else "") + text_value
-	decision_bar.show()
 
 
 func _add_button(
@@ -739,7 +749,6 @@ func _render_current_request() -> void:
 	)
 
 	prompt_label.text = str(current_request.get("prompt", _request_title(input_type)))
-	decision_bar.show()
 
 	match input_type:
 		"final_winner_choice":
@@ -1227,17 +1236,6 @@ func _back_to_action_root() -> void:
 
 
 func _render_action_step() -> void:
-	_add_info(
-		"Actions used: "
-		+ str(
-			current_request.get(
-				"actions_used",
-				0
-			)
-		)
-		+ "/2"
-	)
-
 	match action_menu_mode:
 		"root":
 			_render_action_root()
@@ -1269,7 +1267,7 @@ func open_board_actions(category: String) -> void:
 
 func _render_action_root(category: String = "") -> void:
 	if category == "":
-		_add_info("Choose a physical token or a prepared Spell on your PlayerBoard. Shift-click a Spell to inspect it.")
+		_add_info("Open your banner, then choose a physical token or a prepared Spell. Shift-click a Spell to inspect.")
 		panel.hide()
 		return
 	for entry_value in get_action_root_entries_for_request(
