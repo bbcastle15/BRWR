@@ -1,8 +1,10 @@
 extends Control
 
 const Invite = preload("res://online_invite.gd")
+const TLSConfig = preload("res://tls_config.gd")
 var session
 var web_host
+var upnp_manager
 var menu: PanelContainer
 var message: Label
 var address: LineEdit
@@ -27,6 +29,10 @@ func _ready() -> void:
 	if not OS.has_feature("web"):
 		web_host = preload("res://web_host.gd").new()
 		add_child(web_host)
+		upnp_manager = preload("res://upnp_manager.gd").new()
+		upnp_manager.name = "UPNPManager"
+		add_child(upnp_manager)
+
 	var layer := CanvasLayer.new()
 	layer.layer = 110
 	add_child(layer)
@@ -37,23 +43,29 @@ func _ready() -> void:
 	menu.anchor_right = 0.77
 	menu.anchor_top = 0.04
 	menu.anchor_bottom = 0.96
+
 	var margin := MarginContainer.new()
-	for side in ["left", "right", "top", "bottom"]: margin.add_theme_constant_override("margin_" + side, 24)
+	for side in ["left", "right", "top", "bottom"]:
+		margin.add_theme_constant_override("margin_" + side, 24)
 	menu.add_child(margin)
+
 	var scroll := ScrollContainer.new()
 	margin.add_child(scroll)
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 10)
 	scroll.add_child(box)
+
 	var title := _label(box, "BLACK ROSE WARS · REBIRTH")
 	title.add_theme_font_size_override("font_size", 26)
+
 	var solo_row := HBoxContainer.new()
 	box.add_child(solo_row)
 	solo_count = _count(solo_row)
 	solo_button = _button(solo_row, "Modalità solo-test", _solo)
 	box.add_child(HSeparator.new())
-	_label(box, "PvP online · Il tuo PC ospita, gli amici entrano dal browser.")
+
+	_label(box, "PvP online · Host e giocatori si collegano al server BRWR su Render.")
 	if OS.has_feature("web"):
 		_label(box, "Apri il link ricevuto dall'host e premi Entra nella partita.")
 	else:
@@ -64,30 +76,40 @@ func _ready() -> void:
 		mages.load_database()
 		online_count.max_value = mini(6, mages.get_mage_ids().size())
 		host_button = _button(host_row, "Crea sala PvP", _host)
+
 		public_address = LineEdit.new()
-		public_address.placeholder_text = "IP pubblico per amici su Internet · vuoto = link per rete locale"
-		public_address.text_changed.connect(func(_value): _refresh_invite())
+		public_address.placeholder_text = "Server BRWR su Render"
+		public_address.text = Invite.configured_web_base()
+		public_address.editable = false
 		box.add_child(public_address)
-		_label(box, "Internet: inoltra TCP 8080 e 27847 al PC host. In LAN basta il firewall.")
+		_label(box, "Internet: nessun port forwarding. Tutti i PC aprono solo connessioni WSS in uscita verso Render.")
+
 		invite_link = LineEdit.new()
 		invite_link.editable = false
-		invite_link.placeholder_text = "Il link apparirà dopo Crea sala"
+		invite_link.placeholder_text = "Il link Render apparirà dopo Crea sala"
 		box.add_child(invite_link)
+
 		_button(box, "Copia link d'invito", func():
-			if not invite_link.text.is_empty(): DisplayServer.clipboard_set(invite_link.text))
+			if not invite_link.text.is_empty():
+				DisplayServer.clipboard_set(invite_link.text))
+
 		start_button = _button(box, "Avvia partita", func(): session.start_match())
 		start_button.disabled = true
+
 	roster = _label(box, "")
 	address = LineEdit.new()
-	address.placeholder_text = "Incolla il link d'invito (oppure l'IP dell'host)"
+	address.placeholder_text = "Incolla il link d'invito BRWR"
 	box.add_child(address)
+
 	code = LineEdit.new()
 	code.placeholder_text = "Codice sala · compilato automaticamente dal link"
 	code.max_length = 128
 	box.add_child(code)
+
 	join_button = _button(box, "Entra nella partita", _join)
 	message = _label(box, "")
 	message.custom_minimum_size.y = 50
+
 	_button(box, "Torna al menu / Annulla connessione", _reset)
 	if not OS.has_feature("web"):
 		_button(box, "Chiudi gioco", func(): get_tree().quit())
@@ -98,8 +120,11 @@ func _ready() -> void:
 			address.text = invitation.address
 			code.text = invitation.code
 			_status("Invito pronto. Premi Entra nella partita.")
-		# Keep right-drag panning available on the game canvas.
-		JavaScriptBridge.eval("document.addEventListener('contextmenu', function(e) { e.preventDefault(); });", true)
+		JavaScriptBridge.eval(
+			"document.addEventListener('contextmenu', function(e) { e.preventDefault(); });",
+			true
+		)
+
 	_refresh_lobby()
 
 func _label(box: Control, text: String) -> Label:
@@ -128,7 +153,8 @@ func _button(box: Control, title: String, callback: Callable) -> Button:
 	return button
 
 func _solo() -> void:
-	if session.started or session.connected or session.connection_started > 0: return
+	if session.started or session.connected or session.connection_started > 0:
+		return
 	var game = load("res://game.tscn").instantiate()
 	game.player_count = int(solo_count.value)
 	game.beta_force_fullscreen = not OS.has_feature("web")
@@ -142,33 +168,26 @@ func _web_directory() -> String:
 	return ProjectSettings.globalize_path("res://output/web")
 
 func _host() -> void:
-	var error: Error = web_host.start(_web_directory())
-	if error != OK:
-		_status("Versione browser non pronta o TCP 8080 occupata. Avvia tools/host_web.ps1 per creare il pacchetto e aprire il gioco. " + error_string(error))
+	var endpoint := Invite.websocket_address()
+	if endpoint.is_empty():
+		_status("Server Render non configurato. Inserisci l'URL reale in online_server_url.txt.")
 		return
-	error = session.host(int(online_count.value))
+
+	var error: Error = session.host(int(online_count.value))
 	if error != OK:
-		web_host.stop()
-		_status("Impossibile aprire TCP 27847: " + error_string(error))
+		_status("Impossibile collegarsi al server online: " + error_string(error))
+		return
+
 	_refresh_lobby()
-	_refresh_invite()
 
 func _refresh_invite() -> void:
-	if invite_link == null or not session.hosting: return
-	var host := public_address.text.strip_edges()
-	if host.begins_with("https://"):
-		invite_link.text = ""
-		_status("Il server integrato usa HTTP. Inserisci l'IP pubblico oppure http://nome-host:8080.")
+	if invite_link == null or not session.hosting or session.room_code.is_empty():
 		return
-	if host.is_empty():
-		host = "127.0.0.1"
-		for ip in IP.get_local_addresses():
-			if ip.begins_with("192.168.") or ip.begins_with("10.") or ip.begins_with("172."):
-				host = ip
-				break
-	invite_link.text = Invite.create(host, session.room_code)
-	invite_link.tooltip_text = "Rete locale" if public_address.text.strip_edges().is_empty() else "Internet · richiede porte raggiungibili"
-	if invite_link.text.is_empty(): _status("Indirizzo non valido. Inserisci IP pubblico o http://nome-host:8080.")
+
+	invite_link.text = Invite.create(session.room_code)
+	invite_link.tooltip_text = "BRWR online · Render relay"
+	if invite_link.text.is_empty():
+		_status("Server Render non configurato. Controlla online_server_url.txt.")
 
 func _join() -> void:
 	var target := address.text.strip_edges()
@@ -177,10 +196,11 @@ func _join() -> void:
 		target = invitation.address
 		code.text = invitation.code
 	if target.is_empty() or code.text.is_empty():
-		_status("Inserisci il link d'invito oppure IP e codice della sala.")
+		_status("Inserisci il link d'invito oppure il codice della sala.")
 		return
 	var error: Error = session.join(target, code.text)
-	if error != OK: _status(error_string(error))
+	if error != OK:
+		_status(error_string(error))
 	_refresh_lobby()
 
 func _refresh_lobby() -> void:
@@ -193,15 +213,26 @@ func _refresh_lobby() -> void:
 		host_button.disabled = in_session
 		start_button.disabled = not session.can_start()
 		online_count.editable = not in_session
+
 	var names := PackedStringArray()
 	if session.connected:
-		for seat in session.seats: names.append("Player %d%s" % [seat + 1, " (tu)" if seat == session.local_player else ""])
+		for seat in session.seats:
+			names.append(
+				"Player %d%s"
+				% [seat + 1, " (tu)" if seat == session.local_player else ""]
+			)
 	roster.text = " · ".join(names)
+	if host_button != null and session.hosting and not session.room_code.is_empty():
+		_refresh_invite()
 
 func _status(text: String) -> void:
 	message.text = text
-	if session.started and not session.connected: menu.show()
+	if session.started and not session.connected:
+		menu.show()
 
 func _reset() -> void:
-	if web_host != null: web_host.stop()
+	if upnp_manager != null:
+		upnp_manager.close_brwr_ports()
+	if web_host != null:
+		web_host.stop()
 	session.return_to_menu()

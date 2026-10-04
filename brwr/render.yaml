@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: brwr-rebirth-bbcastle15
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix relay --omit=dev
+    startCommand: node relay/server.js
+    healthCheckPath: /health
+    autoDeployTrigger: commit
