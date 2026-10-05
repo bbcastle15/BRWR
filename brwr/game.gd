@@ -98,6 +98,14 @@ var study_phase_cursor: int = 0
 # dal giocatore che sta risolvendo lo Study.
 var study_drawn_cards: Array[SpellCardState] = []
 
+# Online PvP: Library selection/draw remains authoritative and ordered, then
+# every player resolves the private post-draw Study choices concurrently.
+# These dictionaries live only on the authoritative host; each client receives
+# only its own request through get_beta_pending_input().
+var study_parallel_active: bool = false
+var study_parallel_drawn_cards: Dictionary = {}
+var study_parallel_requests: Dictionary = {}
+
 # =========================================================
 # GAME FLOW / BOARD STATE
 # =========================================================
@@ -1052,6 +1060,12 @@ func _sync_evocation_tokens() -> void:
 
 
 func open_evocation_inspection(evocation: EvocationState) -> void:
+	# PlayerBoard is a modal tabletop view. A Lodge token that happens to sit
+	# under the clicked card must never receive the same pointer interaction.
+	if table_shell != null \
+	and table_shell.board_overlay != null \
+	and table_shell.board_overlay.visible:
+		return
 	if not is_evocation_in_play(evocation):
 		return
 	if evocation_inspection == null:
@@ -2048,7 +2062,10 @@ func get_lodge_table_bounds() -> Rect2:
 
 func get_tabletop_bounds() -> Rect2:
 	var bounds := get_lodge_table_bounds()
-	return bounds.grow(36.0)
+	# Leave visible playmat around the physical side boards as well. This is
+	# especially useful in the 3-player layout, where the Event Board sits
+	# farther back from the Lodge.
+	return bounds.grow(96.0)
 
 
 func get_table_view_rect() -> Rect2:
@@ -2170,12 +2187,24 @@ func update_table_layout():
 	# EVENT BOARD
 	# -------------------------
 
-	var left_center_room = hex_to_pixel(Vector2i(-2, 1))
-
-	var event_connection_point = (
-		left_center_room
-		- Vector2(HEX_RADIUS, 0)
-	)
+	var event_connection_point: Vector2
+	if player_count == 3:
+		# Three-player layout: the Event Board notch sits in the seam between
+		# the two upper Rooms of the left-side column. Keep the same vertical
+		# seam used by the physical layout, but pull the board farther outside
+		# the Lodge so its artwork does not cover either Room.
+		var upper_left_a := hex_to_pixel(Vector2i(-1, -1))
+		var upper_left_b := hex_to_pixel(Vector2i(-1, 0))
+		event_connection_point = (
+			(upper_left_a + upper_left_b) * 0.5
+			- Vector2(HEX_RADIUS * 2.65, 0)
+		)
+	else:
+		var left_center_room = hex_to_pixel(Vector2i(-2, 1))
+		event_connection_point = (
+			left_center_room
+			- Vector2(HEX_RADIUS, 0)
+		)
 
 	# La Event Board è specchiata:
 	# il suo rientro centrale è vicino al bordo destro.
@@ -5015,39 +5044,29 @@ func take_crown(
 
 	if player_index < 0 \
 	or player_index >= players.size():
-
 		print(
 			"take_crown: invalid player ",
 			player_index
 		)
-
 		return false
 
-
 	if crown_owner_id == player_index:
-
 		print(
 			"Player ",
 			player_index + 1,
 			" already has the Crown"
 		)
-
 		return true
 
-
 	var previous_owner: int = crown_owner_id
-
 	crown_owner_id = player_index
 
-
 	if previous_owner >= 0:
-
 		print(
 			"Player ",
 			previous_owner + 1,
 			" loses the Crown"
 		)
-
 
 	print(
 		"Player ",
@@ -5055,7 +5074,10 @@ func take_crown(
 		" takes the Crown"
 	)
 
-
+	# The Crown is presentation state for the left player rail. PowerBoard
+	# markers must not be touched when ownership changes. The shell refreshes
+	# its banners from crown_owner_id.
+	refresh_all_player_boards()
 	return true
 
 func activate_evocation(
@@ -6322,6 +6344,9 @@ func resolve_study_phase(
 
 	study_phase_cursor = 0
 	study_drawn_cards.clear()
+	study_parallel_active = false
+	study_parallel_drawn_cards.clear()
+	study_parallel_requests.clear()
 
 
 	return advance_study_phase()
@@ -8191,7 +8216,11 @@ func _prepare_quest_special_choice(
 						+ str(ordinal),
 					"value": {"owner_id": owner_id, "cube_index": cube_index},
 					"owner_id": owner_id,
-					"owner_name": owner_name
+					"owner_name": owner_name,
+					# Keep instability selection on the Lodge. Without this address
+					# the generic board-target projection cannot find the physical
+					# cube and may fall back to unrelated PlayerBoard UI.
+					"cube_room_id": room_id
 				})
 
 			if options.size() <= max_convert:
@@ -10820,13 +10849,20 @@ func advance_study_phase() -> bool:
 	if waiting_for_player_input:
 		return true
 
+	if study_parallel_active:
+		return true
+
 
 	# =====================================================
-	# ALL PLAYERS COMPLETED STUDY
+	# ALL PLAYERS HAVE DRAWN / COMPLETED STUDY
 	# =====================================================
 
 	if study_phase_cursor \
 	>= current_phase_play_order.size():
+
+		if _use_parallel_online_study() \
+		and study_parallel_drawn_cards.size() == current_phase_play_order.size():
+			return _begin_parallel_study_post_draw()
 
 		return finish_study_phase()
 
@@ -10993,6 +11029,15 @@ func submit_study_school_choices(
 	# =====================================================
 	# FIRST INPUT COMPLETED
 	# =====================================================
+
+	if _use_parallel_online_study():
+		# Keep each player's four physical draws private on the host until all
+		# players have drawn. Only then do the post-draw choices open together.
+		study_parallel_drawn_cards[player_index] = study_drawn_cards.duplicate()
+		study_drawn_cards.clear()
+		clear_player_input()
+		study_phase_cursor += 1
+		return advance_study_phase()
 
 	clear_player_input()
 
@@ -11651,12 +11696,237 @@ func complete_player_study(
 
 
 	return advance_study_phase()
+func _use_parallel_online_study() -> bool:
+	return network_session != null and not network_client and players.size() > 1
+
+
+func _make_parallel_study_keep_request(player_index: int) -> Dictionary:
+	var drawn: Array = study_parallel_drawn_cards.get(player_index, [])
+	var card_data: Array = []
+	for i in range(drawn.size()):
+		var spell: SpellCardState = drawn[i]
+		card_data.append({
+			"draw_index": i,
+			"id": spell.id,
+			"name": spell.card_name,
+			"school_id": spell.school_id
+		})
+	return {
+		"type": "study_keep_cards",
+		"phase": PHASE_STUDY,
+		"player_index": player_index,
+		"keep_count": 2,
+		"cards": card_data
+	}
+
+
+func _make_parallel_study_optional_request(player_index: int) -> Dictionary:
+	var hand_data: Array = []
+	for i in range(players[player_index].hand.size()):
+		var spell: SpellCardState = players[player_index].hand[i]
+		hand_data.append({
+			"hand_index": i,
+			"id": spell.id,
+			"name": spell.card_name,
+			"school_id": spell.school_id
+		})
+	return {
+		"type": "study_optional_discard",
+		"phase": PHASE_STUDY,
+		"player_index": player_index,
+		"optional": true,
+		"max_discard": 1,
+		"hand": hand_data
+	}
+
+
+func _make_parallel_study_hand_limit_request(player_index: int, discard_count: int) -> Dictionary:
+	var hand_data: Array = []
+	for i in range(players[player_index].hand.size()):
+		var spell: SpellCardState = players[player_index].hand[i]
+		hand_data.append({
+			"hand_index": i,
+			"id": spell.id,
+			"name": spell.card_name,
+			"school_id": spell.school_id
+		})
+	return {
+		"type": "study_hand_limit",
+		"phase": PHASE_STUDY,
+		"player_index": player_index,
+		"discard_count": discard_count,
+		"hand": hand_data
+	}
+
+
+func _begin_parallel_study_post_draw() -> bool:
+	if not _use_parallel_online_study() or study_parallel_active:
+		return false
+
+	study_parallel_requests.clear()
+	for player_index in current_phase_play_order:
+		var drawn: Array = study_parallel_drawn_cards.get(player_index, [])
+		if drawn.size() != 4:
+			print("Study parallel: expected 4 drawn cards for Player ", player_index + 1)
+			return false
+		study_parallel_requests[player_index] = _make_parallel_study_keep_request(player_index)
+
+	study_parallel_active = true
+	pending_input = {
+		"type": "study_parallel",
+		"phase": PHASE_STUDY,
+		"player_index": -1,
+		"private": true
+	}
+	waiting_for_player_input = true
+	input_revision += 1
+	refresh_all_player_boards()
+
+	var viewer: int = get_ui_viewer_player_index()
+	if study_parallel_requests.has(viewer):
+		var viewer_request: Dictionary = study_parallel_requests[viewer]
+		player_input_requested.emit(viewer_request.duplicate(true))
+	if network_session != null:
+		network_session.call_deferred("publish")
+	return true
+
+
+func _set_parallel_study_request(player_index: int, request: Dictionary) -> void:
+	var previous: Dictionary = {}
+	if study_parallel_requests.has(player_index):
+		var stored_previous: Dictionary = study_parallel_requests[player_index]
+		previous = stored_previous.duplicate(true)
+	study_parallel_requests[player_index] = request.duplicate(true)
+	refresh_all_player_boards()
+
+	if player_index == get_ui_viewer_player_index():
+		if not previous.is_empty():
+			player_input_resolved.emit(previous)
+		player_input_requested.emit(request.duplicate(true))
+	if network_session != null:
+		network_session.call_deferred("publish")
+
+
+func _submit_parallel_study_input(player_index: int, payload: Dictionary) -> bool:
+	if not study_parallel_requests.has(player_index):
+		return false
+	var request: Dictionary = study_parallel_requests[player_index]
+	var request_type: String = str(request.get("type", ""))
+	# Global input_revision stays stable while different players advance at their
+	# own pace. Tag each wire submission with the private stage it answered so a
+	# delayed Keep packet cannot accidentally become an Optional Discard skip.
+	if str(payload.get("_request_type", "")) != request_type:
+		return false
+	match request_type:
+		"study_keep_cards":
+			return _submit_parallel_study_keep(player_index, payload.get("keep_indices", []))
+		"study_optional_discard":
+			return _submit_parallel_study_optional_discard(player_index, int(payload.get("hand_index", -1)))
+		"study_hand_limit":
+			return _submit_parallel_study_hand_limit(player_index, payload.get("hand_indices", []))
+	return false
+
+
+func _submit_parallel_study_keep(player_index: int, keep_indices: Array) -> bool:
+	var drawn: Array = study_parallel_drawn_cards.get(player_index, [])
+	if drawn.size() != 4 or keep_indices.size() != 2:
+		return false
+	var first_index: int = int(keep_indices[0])
+	var second_index: int = int(keep_indices[1])
+	if first_index < 0 or first_index >= 4 or second_index < 0 or second_index >= 4 or first_index == second_index:
+		return false
+
+	var player = players[player_index]
+	for i in range(drawn.size()):
+		var spell: SpellCardState = drawn[i]
+		if i == first_index or i == second_index:
+			player.add_spell_to_hand(spell)
+		else:
+			if not discard_to_school(spell.school_id, spell):
+				return false
+	study_parallel_drawn_cards[player_index] = []
+	_set_parallel_study_request(player_index, _make_parallel_study_optional_request(player_index))
+	return true
+
+
+func _submit_parallel_study_optional_discard(player_index: int, hand_index: int = -1) -> bool:
+	var player = players[player_index]
+	if hand_index != -1:
+		if hand_index < 0 or hand_index >= player.hand.size():
+			return false
+		var spell: SpellCardState = player.hand[hand_index]
+		if not is_school_active(spell.school_id):
+			return false
+		player.hand.remove_at(hand_index)
+		if not discard_to_school(spell.school_id, spell):
+			player.hand.insert(hand_index, spell)
+			return false
+
+	var excess: int = player.get_hand_size() - player.get_hand_limit()
+	if excess > 0:
+		_set_parallel_study_request(player_index, _make_parallel_study_hand_limit_request(player_index, excess))
+		return true
+	return _complete_parallel_player_study(player_index)
+
+
+func _submit_parallel_study_hand_limit(player_index: int, hand_indices: Array) -> bool:
+	var request: Dictionary = study_parallel_requests.get(player_index, {})
+	var required_count: int = int(request.get("discard_count", 0))
+	if hand_indices.size() != required_count:
+		return false
+
+	var player = players[player_index]
+	var validated_indices: Array[int] = []
+	for value in hand_indices:
+		var hand_index: int = int(value)
+		if hand_index < 0 or hand_index >= player.hand.size() or validated_indices.has(hand_index):
+			return false
+		validated_indices.append(hand_index)
+	validated_indices.sort()
+	validated_indices.reverse()
+	for hand_index in validated_indices:
+		var spell: SpellCardState = player.hand[hand_index]
+		player.hand.remove_at(hand_index)
+		move_spell_to_memories_or_remove(player_index, spell)
+	return _complete_parallel_player_study(player_index)
+
+
+func _complete_parallel_player_study(player_index: int) -> bool:
+	if players[player_index].get_hand_size() > players[player_index].get_hand_limit():
+		return false
+	var resolved_request: Dictionary = {}
+	if study_parallel_requests.has(player_index):
+		var stored_request: Dictionary = study_parallel_requests[player_index]
+		resolved_request = stored_request.duplicate(true)
+	study_parallel_requests.erase(player_index)
+
+	print("Player ", player_index + 1, " completed simultaneous Study | Hand: ", players[player_index].get_hand_size())
+
+	if player_index == get_ui_viewer_player_index() and not resolved_request.is_empty():
+		player_input_resolved.emit(resolved_request)
+	if network_session != null:
+		network_session.call_deferred("publish")
+
+	if not study_parallel_requests.is_empty():
+		return true
+
+	study_parallel_active = false
+	study_parallel_drawn_cards.clear()
+	pending_input.clear()
+	waiting_for_player_input = false
+	refresh_all_player_boards()
+	return finish_study_phase()
+
+
 func finish_study_phase() -> bool:
 	if current_phase != PHASE_STUDY or waiting_for_player_input:
 		return false
 
 	study_phase_cursor = 0
 	study_drawn_cards.clear()
+	study_parallel_active = false
+	study_parallel_drawn_cards.clear()
+	study_parallel_requests.clear()
 	current_phase_play_order.clear()
 
 	print("")
@@ -11962,13 +12232,28 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	frame["_card_presented"] = true
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
+	# Events stay on screen until the host/current local player acknowledges
+	# them. Quest reward cards retain the short fallback timer, but can also be
+	# dismissed by clicking the presentation overlay.
+	data["requires_click"] = str(data.get("kind", "")) == "events"
 	card_presentation = data
 	table_shell.sync_card_presentation()
 	if network_session != null:
 		network_session.call_deferred("publish")
-	# The host owns this short pause. A UI close, disconnected client or skipped
-	# Tween cannot strand the resolver or apply a card's effects twice.
-	get_tree().create_timer(CARD_PRESENTATION_SECONDS).timeout.connect(_finish_card_presentation.bind(card_presentation_serial))
+	if not bool(data.get("requires_click", false)):
+		get_tree().create_timer(CARD_PRESENTATION_SECONDS).timeout.connect(
+			_finish_card_presentation.bind(card_presentation_serial)
+		)
+	return true
+
+
+func dismiss_card_presentation(serial: int = -1) -> bool:
+	if network_client or card_presentation.is_empty():
+		return false
+	var active_serial: int = int(card_presentation.get("serial", -1))
+	if serial >= 0 and serial != active_serial:
+		return false
+	_finish_card_presentation(active_serial)
 	return true
 
 
@@ -12909,6 +13194,15 @@ func process_evocation_damage_ability(resolution: Dictionary) -> bool:
 	if controller < 0 or controller >= players.size():
 		return true
 	var ability: Dictionary = resolution.ability
+
+	# Rebuilt (flipped) Rooms cannot receive or contain Instability. Nigredo's
+	# optional on-damage ability must therefore finish silently instead of
+	# asking the controller to choose an effect that cannot resolve.
+	var source_room = get_room_by_id(str(context.get("caster_room_id", "")))
+	if source_room != null and source_room.flipped:
+		resolution["effect_queued"] = true
+		return true
+
 	if not context.has("ability_choice"):
 		var options: Array = []
 		for effect in ability.get("choices", []):
@@ -12993,6 +13287,49 @@ func process_quest_resolution_frame(
 
 
 
+func _room_move_choice_options(player_index: int) -> Array:
+	var options: Array = []
+	if player_index < 0 or player_index >= players.size():
+		return options
+	var mage = players[player_index].mage
+	if mage == null or mage.in_cell:
+		return options
+	for room_id in _beta_adjacent_room_ids(mage.room_id):
+		var room = get_room_by_id(room_id)
+		options.append({
+			"token": "room:" + room_id,
+			"value": room_id,
+			"target_type": "room",
+			"room_id": room_id,
+			"path": [room_id],
+			"name": str(room.room_name) if room != null else room_id
+		})
+	return options
+
+
+func _room_attack_choice_options(player_index: int) -> Array:
+	var options: Array = []
+	if player_index < 0 or player_index >= players.size():
+		return options
+	var mage = players[player_index].mage
+	if mage == null or mage.in_cell:
+		return options
+	for target_index in range(players.size()):
+		if target_index == player_index:
+			continue
+		var target_mage = players[target_index].mage
+		if target_mage == null or target_mage.in_cell or target_mage.room_id != mage.room_id:
+			continue
+		options.append({
+			"token": "mage:" + str(target_index),
+			"value": target_index,
+			"player_index": target_index,
+			"target_type": "mage",
+			"name": players[target_index].player_name
+		})
+	return options
+
+
 func _prepare_room_effect_choice(
 	effect: Dictionary,
 	context: Dictionary
@@ -13008,6 +13345,38 @@ func _prepare_room_effect_choice(
 		return true
 
 	var effect_type: String = str(effect.get("type", ""))
+
+	# Rebuilt Forge resolves a sequence of Move / Attack sentences. These are
+	# interactive Room effects, so ask for each destination/target as the
+	# sentence is reached instead of letting the low-level resolver fail and
+	# merely turn the activation token.
+	if effect_type == "move" and str(effect.get("target", "")) == "self":
+		if context.has("destination_room_id"):
+			return true
+		var move_options := _room_move_choice_options(caster_id)
+		if move_options.is_empty():
+			_set_interactive_effect_choice(context, "_skip_room_effect", true)
+			return true
+		_set_interactive_effect_choice(context, "movement_origin_room_id", players[caster_id].mage.room_id)
+		return not request_effect_choice(
+			caster_id, "movement_destination", context, "destination_room_id",
+			move_options, 1, 1, "Forge: choose where to Move 1."
+		)
+
+	if effect_type == "attack" and str(effect.get("target", "")) == "self":
+		if context.has("target_player_index"):
+			return true
+		var attack_options := _room_attack_choice_options(caster_id)
+		if attack_options.is_empty():
+			# No legal Mage in the current Room: this Attack sentence has no
+			# target, but the remaining Forge sequence must continue.
+			_set_interactive_effect_choice(context, "_skip_room_effect", true)
+			return true
+		return not request_effect_choice(
+			caster_id, "room_attack_target", context, "target_player_index",
+			attack_options, 1, 1, "Forge: choose a Mage in your Room to Attack."
+		)
+
 	if effect_type == "draw_forgotten_choose":
 		if context.has("selected_forgotten_spell"):
 			return true
@@ -13202,10 +13571,13 @@ func process_effect_sequence_resolution(
 			)
 
 		"room":
-			success = room_effect_resolver.resolve_effect(
-				effect,
-				context
-			)
+			if bool(context.get("_skip_room_effect", false)):
+				success = true
+			else:
+				success = room_effect_resolver.resolve_effect(
+					effect,
+					context
+				)
 
 		_:
 			print(
@@ -13349,6 +13721,10 @@ func process_effect_sequence_resolution(
 			),
 			"effect_target_room_id": effect_room_id,
 			"effect_room_color": effect_room_color,
+			# Quest tasks use room_color for generic Room filters. For an
+			# effect_resolved event this is the Room actually affected by the
+			# Effect, not necessarily the Room where the caster stands.
+			"room_color": effect_room_color,
 			"effect_target_model_type": str(
 				context.get(
 					"effect_target_model_type",
@@ -15323,6 +15699,19 @@ func get_beta_pending_input(
 	if not waiting_for_player_input:
 		return {}
 
+	if study_parallel_active and current_phase == PHASE_STUDY:
+		if study_parallel_requests.has(viewer_player_index):
+			var viewer_request: Dictionary = study_parallel_requests[viewer_player_index]
+			return viewer_request.duplicate(true)
+		# A player who already finished Study sees no other player's private
+		# request while the remaining seats finish concurrently.
+		return {
+			"type": "study_waiting",
+			"phase": PHASE_STUDY,
+			"player_index": viewer_player_index,
+			"private": true
+		}
+
 	var owner_id: int = int(
 		pending_input.get("player_index", -1)
 	)
@@ -16702,6 +17091,9 @@ func _submit_beta_input_authoritative(player_index: int, payload: Dictionary) ->
 	if not waiting_for_player_input:
 		print("submit_beta_input: no pending input")
 		return false
+
+	if study_parallel_active and current_phase == PHASE_STUDY:
+		return _submit_parallel_study_input(player_index, payload)
 
 	if player_index != int(
 		pending_input.get("player_index", -1)
@@ -18385,8 +18777,10 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 					target = nodes[i]
 					break
 				ordinal += 1
-		position_in_target = Vector2(-3, -3)
-		hit_size = Vector2(20, 20)
+		# Slightly larger hit/highlight area makes multi-cube conversion choices
+		# readable; selected cubes also receive the explicit checkmark below.
+		position_in_target = Vector2(-7, -7)
+		hit_size = Vector2(28, 28)
 	elif int(option.get("evocation_index", -1)) >= 0:
 		var evocation = get_evocation_by_owner_index(int(option.get("owner_id", -1)), int(option.evocation_index))
 		if evocation != null:
@@ -18405,19 +18799,41 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 		else:
 			table_shell.close_board()
 	var button := Button.new()
-	button.position = position_in_target
+	var overlay_parent: Node = target
+	var overlay_position: Vector2 = position_in_target
+	# Quest/Spell cards are themselves Buttons. Put the choice hitbox on the
+	# PlayerBoard root, above the card, so the inspection callback underneath
+	# cannot also fire (Pleasures Room discard, card-selection effects, etc.).
+	if board_index >= 0 and board_index < player_boards.size() and target is Control:
+		overlay_parent = player_boards[board_index]
+		overlay_position = (
+			player_boards[board_index].get_global_transform().affine_inverse()
+			* target.get_global_transform().origin
+		)
+	button.position = overlay_position
 	button.size = hit_size
-	button.z_index = 100
+	button.z_index = 1000
+	button.mouse_filter = Control.MOUSE_FILTER_STOP
+	button.focus_mode = Control.FOCUS_NONE
 	button.tooltip_text = str(option.get("name", token))
+	button.text = "✓" if selected else ""
+	button.add_theme_font_size_override("font_size", 20)
+	button.add_theme_color_override("font_color", Color.WHITE)
+	button.add_theme_color_override("font_outline_color", Color.BLACK)
+	button.add_theme_constant_override("outline_size", 4)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(1, 0.8, 0.15, 0.3 if selected else 0.04)
-	style.border_color = Color(1, 0.8, 0.15)
-	style.set_border_width_all(2)
+	style.bg_color = Color(0.18, 0.75, 0.34, 0.62) if selected else Color(1, 0.8, 0.15, 0.08)
+	style.border_color = Color(0.55, 1.0, 0.62) if selected else Color(1, 0.8, 0.15)
+	style.set_border_width_all(4 if selected else 2)
 	button.add_theme_stylebox_override("normal", style)
+	var hover := style.duplicate()
+	hover.bg_color = Color(0.25, 0.85, 0.42, 0.72) if selected else Color(1, 0.8, 0.15, 0.22)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_stylebox_override("pressed", hover)
 	button.add_to_group("board_target_choices")
 	button.set_meta("choice_token", token)
 	button.pressed.connect(callback, CONNECT_DEFERRED)
-	target.add_child(button)
+	overlay_parent.add_child(button)
 	return true
 
 

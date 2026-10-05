@@ -25,6 +25,7 @@ var board_choices: Dictionary = {}
 var card_overlay: Control
 var presentation_art: TextureRect
 var presentation_title: Label
+var presentation_hint: Label
 var card_tween: Tween
 var shown_card_serial := -1
 
@@ -108,10 +109,24 @@ func _build_sidebar() -> void:
 		count.add_theme_font_size_override("font_size", 14)
 		count.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		banner.add_child(count)
+		var crown := Label.new()
+		crown.name = "Crown"
+		crown.text = "♛"
+		crown.position = Vector2(126, 61)
+		crown.size = Vector2(26, 30)
+		crown.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		crown.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		crown.add_theme_font_size_override("font_size", 23)
+		crown.add_theme_color_override("font_color", Style.GOLD)
+		crown.add_theme_color_override("font_outline_color", Color(0.04, 0.04, 0.04, 0.95))
+		crown.add_theme_constant_override("outline_size", 4)
+		crown.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		crown.hide()
+		banner.add_child(crown)
 		var detail := Label.new()
 		detail.name = "Detail"
 		detail.position = Vector2(12, 39)
-		detail.size = Vector2(134, 54)
+		detail.size = Vector2(112, 54)
 		detail.add_theme_font_size_override("font_size", 13)
 		detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		banner.add_child(detail)
@@ -135,9 +150,17 @@ func _build_board_overlay() -> void:
 	board_overlay.offset_top = 12
 	board_overlay.offset_right = -12
 	board_overlay.offset_bottom = -12
+	# Lodge model tokens use high z_index values (Evocations currently use 79).
+	# Put the modal PlayerBoard above the whole world canvas, otherwise those
+	# token Buttons can still win hit-testing through the open board.
+	board_overlay.z_index = 200
+	# When a PlayerBoard is open, the overlay must own the entire table input
+	# region so clicks can never fall through to Lodge models underneath.
+	board_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	root.add_child(board_overlay)
 	var background := Panel.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	background.mouse_filter = Control.MOUSE_FILTER_STOP
 	background.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Color("0d1216")))
 	board_overlay.add_child(background)
 	board_title = Label.new()
@@ -155,7 +178,7 @@ func _build_board_overlay() -> void:
 	board_overlay.add_child(close)
 	board_stage = Control.new()
 	board_stage.name = "BoardStage"
-	board_stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	board_stage.mouse_filter = Control.MOUSE_FILTER_PASS
 	board_overlay.add_child(board_stage)
 	board_overlay.hide()
 
@@ -185,7 +208,24 @@ func _build_card_overlay() -> void:
 	presentation_art = TextureRect.new()
 	presentation_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	presentation_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	presentation_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(presentation_art)
+	presentation_hint = Label.new()
+	presentation_hint.text = "Click to continue"
+	presentation_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	presentation_hint.add_theme_font_size_override("font_size", 16)
+	presentation_hint.add_theme_color_override("font_color", Style.GOLD)
+	presentation_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(presentation_hint)
+	var dismiss := Button.new()
+	dismiss.name = "PresentationDismiss"
+	dismiss.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	dismiss.flat = true
+	dismiss.text = ""
+	dismiss.focus_mode = Control.FOCUS_NONE
+	dismiss.mouse_filter = Control.MOUSE_FILTER_STOP
+	dismiss.pressed.connect(_dismiss_card_presentation)
+	card_overlay.add_child(dismiss)
 	card_overlay.hide()
 
 func sync_card_presentation() -> void:
@@ -207,11 +247,24 @@ func sync_card_presentation() -> void:
 	presentation_art.texture = game.ReferenceCardPreview.card_texture(str(data.kind), str(data.id))
 	var category := "EVENT" if data.kind == "events" else "QUEST"
 	presentation_title.text = category + " · " + str(data.title)
+	if presentation_hint != null:
+		presentation_hint.text = "Click to continue" if bool(data.get("requires_click", false)) else "Click to continue · closes automatically"
 	_layout_card_presentation()
 	card_overlay.modulate.a = 0.0
 	card_overlay.show()
 	card_tween = create_tween()
 	card_tween.tween_property(card_overlay, "modulate:a", 1.0, 0.18)
+
+func _dismiss_card_presentation() -> void:
+	if card_overlay == null or not card_overlay.visible or game == null:
+		return
+	if game.network_client:
+		# Client acknowledgement is local-only; the authoritative host controls
+		# when resolution continues. Do not re-show the same serial.
+		card_overlay.hide()
+		return
+	game.dismiss_card_presentation(shown_card_serial)
+
 
 func _layout_card_presentation() -> void:
 	if presentation_art == null:
@@ -289,12 +342,14 @@ func _refresh_banners() -> void:
 	for i in banners.size():
 		var player = game.players[i]
 		var active := i == int(turn.get("player_index", -1))
-		var signature := str([active, player.mage_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i)])
+		var has_crown: bool = i == game.crown_owner_id
+		var signature := str([active, player.mage_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i), has_crown])
 		if banners[i].get_meta("signature", "") == signature:
 			continue
 		banners[i].set_meta("signature", signature)
 		banners[i].get_node("Name").text = player.player_name
 		banners[i].get_node("Count").text = "%d/2" % int(turn.get("actions_used", 0)) if active and game.current_phase == game.PHASE_ACTION else ""
+		banners[i].get_node("Crown").visible = has_crown
 		banners[i].get_node("Detail").text = "%s\nHP %d/%d · Power %d" % [str(player.mage_id).capitalize() if player.mage_id != "" else "Choose a Mage", player.mage.get_remaining_health(), player.mage.health, player.power]
 		var edge: Color = player.color.lerp(Color.WHITE, 0.22)
 		var normal := Style.panel(edge if active or board_choices.has(i) else edge.darkened(0.5), Color("252925") if active else Style.INK, 3 if active else 1)

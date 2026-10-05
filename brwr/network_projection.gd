@@ -49,6 +49,7 @@ static func build(game, viewer: int) -> Dictionary:
 
 static func apply(game, state: Dictionary) -> void:
 	var previous_revision: int = game.input_revision
+	var previous_pending: Dictionary = game.pending_input.duplicate(true)
 	var previous_result: Dictionary = game.final_result.duplicate(true)
 	game.final_result = state.get("final_result", {}).duplicate(true)
 	for field in ["black_rose_power", "crown_owner_id", "game_flow_active", "game_has_ended", "waiting_for_player_input"]:
@@ -169,8 +170,9 @@ static func apply(game, state: Dictionary) -> void:
 	game._refresh_permanent_room_markers()
 	if game.table_shell != null:
 		game.table_shell.sync_card_presentation()
-	if previous_revision != game.input_revision or not game.waiting_for_player_input:
-		game.player_input_resolved.emit({})
+	var pending_changed: bool = previous_pending != game.pending_input
+	if previous_revision != game.input_revision or pending_changed or not game.waiting_for_player_input:
+		game.player_input_resolved.emit(previous_pending)
 		if game.waiting_for_player_input:
 			game.player_input_requested.emit(game.pending_input)
 	if not game.final_result.is_empty() and int(game.final_result.get("winner", -999)) != -999 and (previous_result != game.final_result or not game.waiting_for_player_input):

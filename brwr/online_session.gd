@@ -384,22 +384,32 @@ func _snapshot(state: Dictionary) -> void:
 func submit_local(player: int, payload: Dictionary) -> bool:
 	if not connected or busy or game == null or player != game.local_viewer_index:
 		return false
-	if player != int(game.pending_input.get("player_index", -1)):
+	var active_request: Dictionary = game.get_beta_pending_input(player)
+	if bool(active_request.get("private", false)) \
+	or player != int(active_request.get("player_index", -1)):
 		return false
+
+	var submitted_payload: Dictionary = payload.duplicate(true)
+	if str(active_request.get("type", "")) in [
+		"study_keep_cards",
+		"study_optional_discard",
+		"study_hand_limit"
+	]:
+		submitted_payload["_request_type"] = str(active_request.get("type", ""))
 
 	if game.network_client:
 		busy = true
 		var error := _send_game_to_host({
 			"op": "choose",
 			"revision": game.input_revision,
-			"payload": payload,
+			"payload": submitted_payload,
 		})
 		if error != OK:
 			busy = false
 			return false
 		return true
 
-	var accepted: bool = game._submit_beta_input_authoritative(local_player, payload)
+	var accepted: bool = game._submit_beta_input_authoritative(local_player, submitted_payload)
 	publish()
 	return accepted
 
@@ -411,7 +421,10 @@ func _choose(peer_id: String, revision: int, payload: Dictionary) -> void:
 
 	var actor: int = int(peer_players[peer_id])
 	var accepted := false
-	if revision == game.input_revision and int(game.pending_input.get("player_index", -1)) == actor:
+	var active_request: Dictionary = game.get_beta_pending_input(actor)
+	if revision == game.input_revision \
+	and not bool(active_request.get("private", false)) \
+	and int(active_request.get("player_index", -1)) == actor:
 		accepted = game._submit_beta_input_authoritative(actor, payload)
 	publish()
 	if not accepted:

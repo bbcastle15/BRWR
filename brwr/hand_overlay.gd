@@ -14,10 +14,11 @@ const MODE_STUDY := "study"
 var study_selection: Array[int] = []
 var study_confirm_button: Button
 
-const CARD_ASPECT := 630.0 / 880.0
+const CARD_ASPECT := 2.0 / 3.0
 const CARD_MAX_WIDTH := 630.0
 const CARD_GAP := 18
 const VISIBLE_CARD_LIMIT := 6
+const CARD_FRAME_HEIGHT := 44.0
 
 # First try the common deterministic paths. If none exists, the script performs
 # one cached recursive search for <spell_id>.png under res://.
@@ -98,6 +99,7 @@ func setup(game_node) -> void:
 	visible = false
 
 	_build_ui()
+	visibility_changed.connect(_update_controls)
 
 
 func _build_ui() -> void:
@@ -115,7 +117,7 @@ func _build_ui() -> void:
 	)
 	outer_margin.add_theme_constant_override("margin_left", 12)
 	outer_margin.add_theme_constant_override("margin_right", 12)
-	outer_margin.add_theme_constant_override("margin_top", 132)
+	outer_margin.add_theme_constant_override("margin_top", 12)
 	outer_margin.add_theme_constant_override("margin_bottom", 12)
 	add_child(outer_margin)
 
@@ -210,7 +212,7 @@ func _build_ui() -> void:
 	var card_center := CenterContainer.new()
 	card_margin.add_child(card_center)
 	card_row = GridContainer.new()
-	card_row.columns = 4
+	card_row.columns = 1
 	card_row.add_theme_constant_override("h_separation", CARD_GAP)
 	card_row.add_theme_constant_override("v_separation", 12)
 	card_center.add_child(card_row)
@@ -234,16 +236,22 @@ func _build_ui() -> void:
 	prep_controls = VBoxContainer.new()
 	prep_controls.add_theme_constant_override("separation", 8)
 	root.add_child(prep_controls)
+	var preparation_summary := HBoxContainer.new()
+	preparation_summary.add_theme_constant_override("separation", 20)
+	prep_controls.add_child(preparation_summary)
 
 	selection_label = Label.new()
 	selection_label.add_theme_font_size_override("font_size", 17)
 	selection_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	prep_controls.add_child(selection_label)
+	selection_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	preparation_summary.add_child(selection_label)
 
 	slots_label = Label.new()
 	slots_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	slots_label.add_theme_font_size_override("font_size", 15)
-	prep_controls.add_child(slots_label)
+	slots_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slots_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	preparation_summary.add_child(slots_label)
 
 	var choice_row := HBoxContainer.new()
 	choice_row.add_theme_constant_override("separation", 8)
@@ -300,15 +308,11 @@ func _build_ui() -> void:
 	)
 	choice_row.add_child(unassign_button)
 
-	var action_row := HBoxContainer.new()
-	action_row.add_theme_constant_override("separation", 8)
-	prep_controls.add_child(action_row)
-
 	feedback_label = Label.new()
 	feedback_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	feedback_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	feedback_label.modulate = Color(0.90, 0.82, 0.55)
-	action_row.add_child(feedback_label)
+	prep_controls.add_child(feedback_label)
 
 	clear_button = Button.new()
 	clear_button.text = "Clear"
@@ -316,7 +320,7 @@ func _build_ui() -> void:
 	clear_button.pressed.connect(
 		_clear_preparation
 	)
-	action_row.add_child(clear_button)
+	choice_row.add_child(clear_button)
 
 	confirm_button = Button.new()
 	confirm_button.text = "Confirm"
@@ -324,7 +328,8 @@ func _build_ui() -> void:
 	confirm_button.pressed.connect(
 		_confirm_preparation
 	)
-	action_row.add_child(confirm_button)
+	header.add_child(confirm_button)
+	header.move_child(confirm_button, header.get_child_count() - 2)
 	study_confirm_button = Button.new()
 	study_confirm_button.text = "Keep selected cards"
 	study_confirm_button.pressed.connect(func():
@@ -392,9 +397,7 @@ func open_preparation(
 	)
 
 	instruction_label.text = (
-		"Select a card, choose Light or Dark, then assign it to the "
-		+ "next numbered Spell Slot or to Quick. "
-		+ "Prepare 2–4 Spells total, with at most 3 numbered Spells."
+		"Choose Light or Dark, then prepare 2–4 Spells in I–III or Quick. Scroll to see more cards."
 	)
 
 	close_button.visible = true
@@ -709,15 +712,15 @@ func _render_cards() -> void:
 
 
 func _card_display_size(
-	card_count: int
+	_card_count: int
 ) -> Vector2:
-	var columns: int = clampi(card_count, 1, VISIBLE_CARD_LIMIT)
-	# Keep a single row, sized for at most six cards; extra cards scroll sideways.
+	# Readability comes from the available height. Width may require scrolling,
+	# including with fewer than six cards on a laptop; never shrink to fit all.
 	var available_width: float = maxf(1.0, card_scroll.size.x - 36.0)
 	var available_height: float = maxf(1.0, card_scroll.size.y - 32.0)
-	var width_limit: float = (available_width - (columns - 1) * CARD_GAP) / columns - 20.0
-	var height_limit: float = available_height - 80.0
-	var width: float = maxf(1.0, minf(CARD_MAX_WIDTH, minf(width_limit, height_limit * CARD_ASPECT)))
+	var height_limit: float = available_height - CARD_FRAME_HEIGHT
+	# One card still fits on narrow viewports; image height must fit vertically.
+	var width: float = maxf(1.0, minf(CARD_MAX_WIDTH, minf(available_width - 20.0, height_limit * CARD_ASPECT)))
 	return Vector2(width, width / CARD_ASPECT)
 
 
@@ -730,7 +733,7 @@ func _layout_cards() -> void:
 	if cards.size() > VISIBLE_CARD_LIMIT:
 		frame_width = maxf(frame_width, (card_scroll.size.x - 36.0 - (VISIBLE_CARD_LIMIT - 1) * CARD_GAP) / VISIBLE_CARD_LIMIT)
 	for frame in card_row.get_children():
-		frame.custom_minimum_size = Vector2(frame_width, display_size.y + 80.0)
+		frame.custom_minimum_size = Vector2(frame_width, display_size.y + CARD_FRAME_HEIGHT)
 		var button: TextureButton = frame.get_meta("card_button")
 		button.custom_minimum_size = display_size
 
@@ -786,6 +789,8 @@ func _create_card_widget(
 	margin.add_child(column)
 
 	var header := HBoxContainer.new()
+	# The illustration already contains the card name; keep only its tooltip.
+	header.hide()
 	column.add_child(header)
 
 	var name_label := Label.new()
@@ -861,11 +866,8 @@ func _create_card_widget(
 	column.add_child(card_button)
 
 	var hint := Label.new()
-	hint.text = (
-		"SELECTED"
-		if selected
-		else "Click to select"
-	)
+	var assignment := _assignment_badge(hand_index)
+	hint.text = assignment if not assignment.is_empty() else ("SELECTED" if selected else "")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hint.modulate = (
 		Color(0.93, 0.72, 0.24)
@@ -1164,6 +1166,7 @@ func _confirm_preparation() -> void:
 
 
 func _update_controls() -> void:
+	confirm_button.visible = mode == MODE_PREPARATION and tabs.current_tab == 0
 	if mode == MODE_STUDY:
 		study_confirm_button.disabled = study_selection.size() != 2
 		study_confirm_button.text = "Keep selected cards (%d/2)" % study_selection.size()
@@ -1171,6 +1174,7 @@ func _update_controls() -> void:
 		return
 	if mode != MODE_PREPARATION:
 		return
+	feedback_label.visible = not feedback_label.text.is_empty()
 
 	var has_selection: bool = (
 		selected_hand_index != -1

@@ -280,14 +280,16 @@ func _build_ui() -> void:
 func _sync_hand_confirmation(source: Button) -> void:
 	if str(current_request.get("type", "")) not in ["preparation", "study_keep_cards"]:
 		return
-	source.hide()
 	for child in decision_actions.get_children():
 		decision_actions.remove_child(child)
 		child.queue_free()
-	if hand_overlay.tabs.current_tab == 1:
-		_add_confirmation("Back to cards", hand_overlay._select_cards_tab)
+	# Use the hand's own header: a second floating button would cover it.
+	if hand_overlay.visible:
+		source.visible = hand_overlay.tabs.current_tab == 0
+		decision_bar.hide()
 		return
-	_add_confirmation(source.text, source.pressed.emit, source.disabled)
+	source.hide()
+	_add_confirmation("Show cards", _open_hand_overlay)
 
 
 func _build_decision_bar() -> void:
@@ -1738,6 +1740,12 @@ func _render_effect_choice() -> void:
 		)
 	)
 
+	if max_select > 1:
+		var selection_label := "Selected %d/%d" % [generic_selection.size(), max_select]
+		if str(current_request.get("choice_kind", "")) == "convert_damage_cubes":
+			selection_label = "DAMAGE CUBES SELECTED: %d / %d" % [generic_selection.size(), max_select]
+		_add_info(selection_label)
+
 	var options: Array = current_request.get(
 		"options",
 		[]
@@ -1766,8 +1774,26 @@ func _render_effect_choice() -> void:
 		panel.offset_bottom = -12.0
 		_add_info("Click the highlighted target or cubes on the board.")
 
+	# Rebuilt Pleasures Room requires selecting Quests to discard. Keep the
+	# PlayerBoard highlights, but also expose explicit selection buttons so a
+	# Quest can never be inspection-only during this mandatory choice.
+	if str(current_request.get("choice_kind", "")) == "room_discard":
+		var quest_options := options.filter(func(option): return str(option.get("card_kind", "")) == "quests")
+		if not quest_options.is_empty():
+			_add_info("Choose the Quests to discard (highlighted cards or list below).")
+			for option in quest_options:
+				var token := str(option.get("token", ""))
+				var selected := generic_selection.has(token)
+				_add_button(("✓ " if selected else "□ ") + _option_label(option), _toggle_generic_value.bind(token))
+
+	# A non-Room target may carry room_id only as public location metadata.
+	# Treating that field as a Room choice made Evocation-targeting Spells such
+	# as Purifying Aludel fall back to selecting the Evocation's Room.
 	var room_options: Array = options.filter(func(option):
-		return not board_tokens.has(str(option.get("token", ""))) and (str(option.get("target_type", "")) in ["room", "area"] or str(option.get("room_id", "")) != "" or str(option.get("token", "")).begins_with("room:")))
+		return not board_tokens.has(str(option.get("token", ""))) and (
+			str(option.get("target_type", "")) in ["room", "area"]
+			or str(option.get("token", "")).begins_with("room:")
+		))
 	if not room_options.is_empty():
 		panel.anchor_top = 1.0
 		panel.anchor_bottom = 1.0
@@ -1787,7 +1813,7 @@ func _render_effect_choice() -> void:
 			if not room_options.has(option) and not board_tokens.has(str(option.get("token", ""))):
 				_add_object_choice(option, _submit_effect_single.bind(str(option.get("token", ""))) if max_select <= 1 else _toggle_generic_value.bind(str(option.get("token", ""))), generic_selection.has(str(option.get("token", ""))))
 		if max_select > 1:
-			_add_button("Confirm selection (%d)" % generic_selection.size(), _submit_effect_multi,
+			_add_button("Confirm selection (%d/%d)" % [generic_selection.size(), max_select], _submit_effect_multi,
 				generic_selection.size() < min_select or generic_selection.size() > max_select)
 		elif min_select == 0:
 			_add_button("Skip", _submit_effect_single.bind(""))
@@ -1848,7 +1874,7 @@ func _render_effect_choice() -> void:
 		)
 
 	_add_button(
-		"Confirm selection",
+		"Confirm selection (%d/%d)" % [generic_selection.size(), max_select],
 		Callable(
 			self,
 			"_submit_effect_multi"
@@ -1894,6 +1920,10 @@ func _toggle_generic_value(value) -> void:
 	if generic_selection.has(value):
 		generic_selection.erase(value)
 	else:
+		var max_select: int = int(current_request.get("max_select", 1))
+		if max_select > 0 and generic_selection.size() >= max_select:
+			feedback_label.text = "Selection full: %d/%d" % [generic_selection.size(), max_select]
+			return
 		generic_selection.append(value)
 
 	_render_current_request()
@@ -2279,10 +2309,11 @@ func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: Str
 	panel.offset_bottom = -12.0
 	_clear_content()
 	var evocation_movement: bool = str(current_request.get("type", "")) == "evocation_phase_activations" or str(current_request.get("choice_kind", "")) == "evocation_activation_plan"
-	panel.visible = not evocation_movement
-	if not evocation_movement:
+	var board_only_navigation: bool = str(current_request.get("type", "")) == "action_activation_step"
+	panel.visible = not evocation_movement and not board_only_navigation
+	if panel.visible:
 		_add_section("Movement — click the highlighted rooms")
-	_add_info("Click the current Room to stay or stop. " + " → ".join(prefix))
+		_add_info("Click the current Room to stay or stop. " + " → ".join(prefix))
 	var next_rooms: Dictionary = {}
 	var complete: Array = []
 	for choice in choices:
@@ -2303,17 +2334,18 @@ func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: Str
 		if game.is_lodge_room_id(stop_room):
 			next_rooms[stop_room] = _finish_lodge_path.bind(complete)
 	game.show_lodge_room_choices(next_rooms)
-	if not prefix.is_empty():
+	if not prefix.is_empty() and panel.visible:
 		var reset := _render_lodge_paths.bind(choices, [], origin_room_id)
 		if evocation_movement:
 			_add_confirmation("Reset path", reset)
 		else:
 			_add_button("Reset path", reset)
 	var back := _back_to_action_root if str(current_request.get("type", "")) == "action_activation_step" else _render_current_request
-	if evocation_movement:
-		_add_confirmation("← Back", back)
-	else:
-		_add_button("← Back", back)
+	if panel.visible:
+		if evocation_movement:
+			_add_confirmation("← Back", back)
+		else:
+			_add_button("← Back", back)
 
 func _finish_lodge_path(choices: Array) -> void:
 	_center_choice_panel()

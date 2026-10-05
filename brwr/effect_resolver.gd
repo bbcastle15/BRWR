@@ -3183,6 +3183,19 @@ func _resolve_summon_effect(
 				room_id = str(context.get("caster_room_id", ""))
 			else:
 				room_id = str(context.get("target_room_id", ""))
+				# Triggered Room-target Traps such as Liquefy the Pain determine
+				# their Room from the event that caused the trigger. The card text
+				# targets the Room the defeated Model was in; no target is chosen
+				# when the Trap is armed.
+				if room_id == "":
+					var trigger_event = context.get("trigger_event")
+					if trigger_event != null:
+						room_id = str(trigger_event.target_room_id)
+						if room_id == "":
+							room_id = str(trigger_event.source_room_id)
+				if room_id != "":
+					context["target_room_id"] = room_id
+					context["effect_target_room_id"] = room_id
 
 		"summon_evocation_at_triggering_model":
 			evocation_id = str(effect.get("evocation_id", ""))

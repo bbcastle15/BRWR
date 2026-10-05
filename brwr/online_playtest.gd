@@ -2,6 +2,7 @@ extends SceneTree
 
 var session
 var last_revision := -1
+var last_request_signature := ""
 var choices := 0
 var elapsed := 0.0
 var host_mode := false
@@ -46,7 +47,7 @@ func _process(delta: float) -> bool:
 			for slot in ["Q", "I", "II", "III"]:
 				var card: Dictionary = game.get_player_board_spell_slot_data(other, slot)
 				if not card.get("public", false): assert(not card.has("id"))
-	var request: Dictionary = game.pending_input
+	var request: Dictionary = game.get_beta_pending_input(session.local_player)
 	if game.current_phase == "action" and game.players.all(func(player): return not player.mage.in_cell):
 		if action_seen_at < 0:
 			action_seen_at = elapsed
@@ -56,7 +57,14 @@ func _process(delta: float) -> bool:
 		return false
 	if not game.waiting_for_player_input: return false
 	var actor: int = int(request.get("player_index", -1))
-	if actor != game.local_viewer_index or game.input_revision == last_revision: return false
+	var request_signature := "%d:%s:%d:%s:%d" % [
+		game.input_revision,
+		str(request.get("type", "")),
+		actor,
+		str(request.get("choice_kind", "")),
+		int(request.get("discard_count", -1))
+	]
+	if actor != game.local_viewer_index or request_signature == last_request_signature: return false
 	assert(not session.submit_local((actor + 1) % game.players.size(), {}), "Cannot submit on behalf of opponent")
 	if not host_mode:
 		if stale_sent_at < 0:
@@ -100,6 +108,7 @@ func _process(delta: float) -> bool:
 			return false
 	print("TEST INPUT ", request.type, " ", payload)
 	last_revision = game.input_revision
+	last_request_signature = request_signature
 	assert(session.submit_local(actor, payload))
 	choices += 1
 	return false

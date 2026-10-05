@@ -91,6 +91,7 @@ func create_power_markers(player_count: int):
 
 		add_child(marker)
 		player_markers.append(marker)
+
 func create_power_track():
 	var track = $PowerTrack
 	for child in track.get_children():
@@ -157,7 +158,7 @@ func _layout_power_markers() -> void:
 	for score in groups:
 		var markers: Array = groups[score]
 		for i in range(markers.size()):
-			var offset := Vector2.ZERO
+			var offset := Vector2.ZERO	
 			if markers.size() > 1:
 				# A compact, symmetric fan remains inside the score cell.
 				var angle: float = TAU * i / markers.size()
@@ -165,11 +166,31 @@ func _layout_power_markers() -> void:
 			markers[i].position = get_power_position(int(score)) + offset
 	
 func update_black_rose_marker():
-	black_rose_marker.set_meta("display_power", black_rose_power % end_game_threshold if black_rose_power > end_game_threshold else black_rose_power)
-	black_rose_marker.get_node("Label").text = "+" + str(int(black_rose_power / end_game_threshold) * end_game_threshold) if black_rose_power > end_game_threshold else ""
+	if not is_instance_valid(black_rose_marker):
+		return
+
+	black_rose_marker.set_meta(
+		"display_power",
+		black_rose_power % end_game_threshold
+		if black_rose_power > end_game_threshold
+		else black_rose_power
+	)
+
+	black_rose_marker.get_node("Label").text = (
+		"+" + str(
+			int(black_rose_power / end_game_threshold)
+			* end_game_threshold
+		)
+		if black_rose_power > end_game_threshold
+		else ""
+	)
 
 	_layout_power_markers()
-	black_rose_marker.tooltip_text = "Black Rose · %d Power" % black_rose_power
+
+	black_rose_marker.tooltip_text = (
+		"Black Rose · %d Power"
+		% black_rose_power
+	)
 
 func create_threshold_markers():
 	for marker in threshold_markers:

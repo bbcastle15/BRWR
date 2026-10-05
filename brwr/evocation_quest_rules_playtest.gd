@@ -61,6 +61,11 @@ func run() -> void:
 	check(room.get_instability_count() == 1, "Optional ability may be skipped")
 	game.deal_damage_from_evocation(nigredo, 1, 0)
 	check(not game.waiting_for_player_input, "Zero damage does not trigger Nigredo")
+	# Rebuilt Rooms cannot receive Instability, so Nigredo must not open a dead choice.
+	room.flipped = true
+	game.deal_damage_from_evocation(nigredo, 1, 1)
+	check(not game.waiting_for_player_input, "Nigredo does not ask for Instability in a rebuilt Room")
+	room.flipped = false
 	# Damage to another Evocation also triggers; controller owns the new cube.
 	var target = game.summon_evocation(1, "cadaver", "forge")
 	game.place_instability(-1, "forge", 1)

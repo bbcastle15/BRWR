@@ -1,0 +1,61 @@
+{
+  "mode": "builtin-imagegen-reference-edit",
+  "references": {
+    "self": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+    "mage": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png",
+    "rose": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png",
+    "power": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png",
+    "persistent": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-29468d09-666e-4033-8c59-effcd47588f7.png",
+    "evocation": "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+  },
+  "jobs": [
+    {
+      "id": "dark_omens",
+      "path": "assets/spells/dark_omens.png",
+      "refs": [
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-29468d09-666e-4033-8c59-effcd47588f7.png"
+      ],
+      "prompt": "Precision icon-only edit of FIRST image, an existing Death school card. Keep exact title, every word and numeral, all illustration, proportions 1024x1536, layout, borders, spell-type icons, element icons, Death feather logos, and all unrelated pixels unchanged. References after the first image are enlarged canonical pictograms. Faithfully copy only the small pictogram silhouettes, omitting legend words/letters. Recolor to white on header tabs, black in paragraphs. Do not invent arrows, heads, circles or stems. Ref2 SELF = wizard HAT + FACE with MOUSTACHE and pointed BEARD, NO BODY or arrow. Replace LOWER target tab with that white bearded-face silhouette. Ref3 MAGE MODEL = hat + small separate head + rounded shoulder bust; copy it to UPPER target tab, preserve numeral 0. Ref4 POWER = outlined open-petal ROSE viewed from top, NO stem, NO enclosing coin circle: use black outlines on parchment after 'gain 1' in lower paragraph. Ref5 PERSISTENT = solid BLACK circle containing EIGHT slender white pointed rays, four long cardinal and four short diagonal: replace the FIRST symbol of lower paragraph with EXACTLY that eight-ray icon, no double-line cross. Do not alter Profane icons."
+    },
+    {
+      "id": "repentance",
+      "path": "assets/spells/repentance.png",
+      "refs": [
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "prompt": "Precision icon-only edit of FIRST image, an existing Death school card. Keep exact title, every word and numeral, all illustration, proportions 1024x1536, layout, borders, spell-type icons, element icons, Death feather logos, and all unrelated pixels unchanged. References after the first image are enlarged canonical pictograms. Faithfully copy only the small pictogram silhouettes, omitting legend words/letters. Recolor to white on header tabs, black in paragraphs. Do not invent arrows, heads, circles or stems. Ref2 SELF is a wizard hat above a bearded FACE, white face opening and pointed beard/moustache silhouette, no body or arrow. Replace UPPER target tab with its exact white silhouette. Ref3 EVOCATION MODEL is a horned LONG POINTED HEAD above a rounded shoulder bust, with a thin separation at the neck; replace LOWER target tab with its white silhouette, KEEP the asterisk to its right. Do not use a round human head with horns. Preserve Sacred upper and Profane lower."
+    },
+    {
+      "id": "final_judgment",
+      "path": "assets/spells/final_judgment.png",
+      "refs": [
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "prompt": "Precision icon-only edit of FIRST image, an existing Death school card. Keep exact title, every word and numeral, all illustration, proportions 1024x1536, layout, borders, spell-type icons, element icons, Death feather logos, and all unrelated pixels unchanged. References after the first image are enlarged canonical pictograms. Faithfully copy only the small pictogram silhouettes, omitting legend words/letters. Recolor to white on header tabs, black in paragraphs. Do not invent arrows, heads, circles or stems. Ref2 SELF = wizard HAT + FACE with MOUSTACHE and BEARD, no torso or arrow: replace LOWER target tab with exact white silhouette. Ref3 MAGE = hat + small separated head + rounded torso: copy to UPPER target tab, preserve *. Ref4 POWER = outlined rose with open petals and no enclosing coin, no stem: replace the black power glyph after 'Gain 1' in upper paragraph. Keep all other glyphs and all wording."
+    },
+    {
+      "id": "sacrificial_pyre",
+      "path": "assets/spells/sacrificial_pyre.png",
+      "refs": [
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "prompt": "Precision icon-only edit of FIRST image, an existing Death school card. Keep exact title, every word and numeral, all illustration, proportions 1024x1536, layout, borders, spell-type icons, element icons, Death feather logos, and all unrelated pixels unchanged. References after the first image are enlarged canonical pictograms. Faithfully copy only the small pictogram silhouettes, omitting legend words/letters. Recolor to white on header tabs, black in paragraphs. Do not invent arrows, heads, circles or stems. Ref2 MAGE MODEL hat+separate head+rounded torso: copy exact white silhouette into UPPER target tab, keep 1. Leave LOWER Model2 unchanged (plain pawn without hat). Ref3 BLACK ROSE is a solid rose with leaves and diagonal thorned STEM: copy exact black icon after 'The' in UPPER effect paragraph. Preserve both Sacred badges and instability badge."
+    },
+    {
+      "id": "despair",
+      "path": "assets/spells/despair.png",
+      "refs": [
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "prompt": "Precision icon-only edit of FIRST image, an existing Death school card. Keep exact title, every word and numeral, all illustration, proportions 1024x1536, layout, borders, spell-type icons, element icons, Death feather logos, and all unrelated pixels unchanged. References after the first image are enlarged canonical pictograms. Faithfully copy only the small pictogram silhouettes, omitting legend words/letters. Recolor to white on header tabs, black in paragraphs. Do not invent arrows, heads, circles or stems. Ref2 MAGE MODEL hat+separate head+rounded shoulder bust: copy exact white silhouette into BOTH target tabs; preserve each *. Ref3 POWER is black outlined top-view rose, open petals, no stem or enclosing coin: replace the Power glyph after 'Gain 1' in LIGHT paragraph. Preserve Trap jaws and Profane emblems."
+    }
+  ]
+}

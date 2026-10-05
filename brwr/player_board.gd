@@ -7,6 +7,11 @@ var player_index: int = -1
 
 var cube_scene = preload("res://cube.tscn")
 
+const TROPHY_TOKEN_SIZE = Vector2(56, 56)
+# Printed Trophy slot on the Mage card, lower-right circular recess.
+const TROPHY_STACK_LOCAL_POSITION = Vector2(272, 116)
+const TROPHY_STACK_SIZE = Vector2(58, 70)
+
 
 # =========================================================
 # DIMENSIONI PLAYER BOARD
@@ -110,6 +115,7 @@ func refresh():
 	refresh_action_tokens()
 	refresh_evocations()
 	refresh_mage_card()
+	refresh_trophies()
 	refresh_destiny_tokens()
 	$GrimoireSlot/Label.text = "GRIMOIRE\n%d" % player_state.grimoire.size()
 	$MemoriesSlot/Label.text = "MEMORIES\n%d" % player_state.memories.size()
@@ -650,14 +656,120 @@ func refresh_mage_card() -> void:
 		art.texture = atlas
 	$MageCardSlot/Label.visible = art.texture == null
 	$MageCardSlot/Label.text = player_state.mage.mage_id.capitalize() + "\nStrength %d · Movement %d" % [player_state.mage.strength, player_state.mage.speed]
-	var trophies = get_node_or_null("Trophies")
-	if trophies == null:
-		trophies = Label.new()
-		trophies.name = "Trophies"
-		trophies.position = Vector2(610, 248)
-		trophies.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		add_child(trophies)
-	trophies.text = "Trophies: %d" % player_state.trophies.size()
+
+
+func _trophy_circle(radius: float, center: Vector2 = Vector2.ZERO) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	for i in range(32):
+		var angle := TAU * float(i) / 32.0
+		points.append(center + Vector2(cos(angle), sin(angle)) * radius)
+	return points
+
+
+func _make_trophy_token(owner_id: int, total_count: int) -> Control:
+	var token := Control.new()
+	token.size = TROPHY_TOKEN_SIZE
+	token.custom_minimum_size = TROPHY_TOKEN_SIZE
+	token.mouse_filter = Control.MOUSE_FILTER_PASS
+	var center := TROPHY_TOKEN_SIZE * 0.5
+
+	# Soft offset shadow creates the physical stack/column effect.
+	var shadow := Polygon2D.new()
+	shadow.polygon = _trophy_circle(25.0, center + Vector2(3, 4))
+	shadow.color = Color(0, 0, 0, 0.45)
+	token.add_child(shadow)
+
+	# The Trophy owner is encoded by the rim itself, matching the physical token.
+	var outer := Polygon2D.new()
+	outer.polygon = _trophy_circle(25.0, center)
+	outer.color = get_damage_cube_color(owner_id).lightened(0.10)
+	token.add_child(outer)
+
+	var rim_inner := Polygon2D.new()
+	rim_inner.polygon = _trophy_circle(20.5, center)
+	rim_inner.color = Color(0.18, 0.18, 0.20)
+	token.add_child(rim_inner)
+
+	var face := Polygon2D.new()
+	face.polygon = _trophy_circle(17.0, center)
+	face.color = Color(0.045, 0.05, 0.055)
+	token.add_child(face)
+
+	# Crisp white trophy/cup pictogram, drawn procedurally so it remains sharp
+	# at PlayerBoard zoom levels and does not depend on the low-res reference.
+	var cup := Polygon2D.new()
+	cup.polygon = PackedVector2Array([
+		center + Vector2(-10, -9),
+		center + Vector2(10, -9),
+		center + Vector2(7, 3),
+		center + Vector2(-7, 3)
+	])
+	cup.color = Color(0.92, 0.94, 0.95)
+	token.add_child(cup)
+
+	var left_handle := Polygon2D.new()
+	left_handle.polygon = PackedVector2Array([
+		center + Vector2(-10, -7), center + Vector2(-15, -6),
+		center + Vector2(-14, 0), center + Vector2(-8, 2),
+		center + Vector2(-7, -1), center + Vector2(-11, -2)
+	])
+	left_handle.color = Color(0.92, 0.94, 0.95)
+	token.add_child(left_handle)
+
+	var right_handle := Polygon2D.new()
+	right_handle.polygon = PackedVector2Array([
+		center + Vector2(10, -7), center + Vector2(15, -6),
+		center + Vector2(14, 0), center + Vector2(8, 2),
+		center + Vector2(7, -1), center + Vector2(11, -2)
+	])
+	right_handle.color = Color(0.92, 0.94, 0.95)
+	token.add_child(right_handle)
+
+	var stem := ColorRect.new()
+	stem.position = center + Vector2(-2.5, 3)
+	stem.size = Vector2(5, 8)
+	stem.color = Color(0.92, 0.94, 0.95)
+	stem.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	token.add_child(stem)
+
+	var base := ColorRect.new()
+	base.position = center + Vector2(-9, 10)
+	base.size = Vector2(18, 5)
+	base.color = Color(0.92, 0.94, 0.95)
+	base.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	token.add_child(base)
+
+	token.tooltip_text = "Trophies: %d\nTrophy of Player %d" % [total_count, owner_id + 1]
+	return token
+
+
+func refresh_trophies() -> void:
+	var parent: Control = $MageCardSlot
+	var stack = parent.get_node_or_null("TrophyStack") as Control
+	if stack == null:
+		stack = Control.new()
+		stack.name = "TrophyStack"
+		stack.position = TROPHY_STACK_LOCAL_POSITION
+		stack.size = TROPHY_STACK_SIZE
+		stack.mouse_filter = Control.MOUSE_FILTER_PASS
+		stack.z_index = 30
+		parent.add_child(stack)
+
+	for child in stack.get_children():
+		stack.remove_child(child)
+		child.queue_free()
+
+	stack.tooltip_text = "Trophies: %d" % player_state.trophies.size()
+	stack.visible = not player_state.trophies.is_empty()
+	var total := player_state.trophies.size()
+	for i in range(total):
+		var owner_id: int = int(player_state.trophies[i])
+		var token := _make_trophy_token(owner_id, total)
+		# Keep the printed Trophy recess visible while making duplicates read as
+		# a physical stack. Newest Trophy sits on top.
+		token.position = Vector2(0, maxf(0.0, 12.0 - float(total - 1 - i) * 6.0))
+		token.z_index = 20 + i
+		stack.add_child(token)
 
 
 func refresh_destiny_tokens() -> void:
@@ -665,7 +777,8 @@ func refresh_destiny_tokens() -> void:
 	if row == null:
 		row = Control.new()
 		row.name = "DestinyTokens"
-		row.position = Vector2(523, 210)
+		# Keep Destiny clearly above the two Physical Action tokens.
+		row.position = Vector2(385, 168)
 		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(row)
 	for child in row.get_children():

@@ -230,10 +230,14 @@ static func process_destiny(game, frame: Dictionary) -> bool:
 	if not frame.has("destiny_count"):
 		var options: Array = []
 		for n in range(count + 1):
-			options.append({"token": "destiny:%d" % n, "value": n,
-				"label": "Resolve %d Destiny" % n if n > 0 else "Keep Destiny assigned"})
+			var label := "Resolve %d of %d Destiny" % [n, count]
+			if n == 0:
+				label = "Resolve none — keep all %d Destiny" % count
+			elif n == count:
+				label = "Resolve all %d Destiny" % count
+			options.append({"token": "destiny:%d" % n, "value": n, "label": label})
 		game.request_effect_choice(owner, "destiny_resolution", frame, "destiny_count", options, 1, 1,
-			"Player %d is defeated: choose how many Destiny tokens to resolve." % (victim + 1))
+			"Optional Destiny resolution — Player %d is defeated. Choose how many of your %d Destiny to resolve." % [victim + 1, count])
 		return false
 	var chosen: int = mini(int(frame.destiny_count), count)
 	if chosen > 0:
