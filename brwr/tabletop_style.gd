@@ -5,6 +5,14 @@ const PAPER := Color("efe4cd")
 const GOLD := Color("b69a63")
 const MUTED := Color("a5aaa7")
 
+static func fabric_panel() -> StyleBoxTexture:
+	var box := StyleBoxTexture.new()
+	box.texture = preload("res://assets/tabletop/ui_panel.png")
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+		box.set_texture_margin(side, 64)
+		box.set_content_margin(side, 16 if side in [SIDE_LEFT, SIDE_RIGHT] else 12)
+	return box
+
 static func panel(accent: Color = GOLD, fill: Color = INK, border: int = 1) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new()
 	box.bg_color = fill
@@ -24,7 +32,7 @@ static func make_theme() -> Theme:
 	var result := Theme.new()
 	result.default_font_size = 16
 	result.set_color("font_color", "Label", PAPER)
-	result.set_stylebox("panel", "PanelContainer", panel())
+	result.set_stylebox("panel", "PanelContainer", fabric_panel())
 	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
 		var fill := Color("1b2328")
 		var edge := Color("5b5343")

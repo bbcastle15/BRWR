@@ -4,6 +4,7 @@ extends Control
 
 signal preparation_confirmed(payload: Dictionary)
 signal study_confirmed(indices: Array)
+signal quest_selection_confirmed(tokens: Array)
 signal overlay_closed
 signal confirmation_changed(button: Button)
 
@@ -11,8 +12,13 @@ signal confirmation_changed(button: Button)
 const MODE_BROWSE := "browse"
 const MODE_PREPARATION := "preparation"
 const MODE_STUDY := "study"
+const MODE_MEMORIES := "memories"
+const MODE_QUEST_SELECTION := "quest_selection"
 var study_selection: Array[int] = []
 var study_confirm_button: Button
+var quest_selection: Array[String] = []
+var quest_selection_min: int = 0
+var quest_selection_max: int = 0
 
 const CARD_ASPECT := 2.0 / 3.0
 const CARD_MAX_WIDTH := 630.0
@@ -82,6 +88,9 @@ var feedback_label: Label
 var tabs: TabBar
 var quest_scroll: ScrollContainer
 var quest_columns: HBoxContainer
+var jinx_scroll: ScrollContainer
+var jinx_row: HBoxContainer
+var jinx_signature := ""
 var quest_signature := ""
 var cards_heading := ""
 var cards_instructions := ""
@@ -112,6 +121,7 @@ func _build_ui() -> void:
 	add_child(dim_background)
 
 	var outer_margin := MarginContainer.new()
+	outer_margin.mouse_filter = Control.MOUSE_FILTER_STOP
 	outer_margin.set_anchors_and_offsets_preset(
 		Control.PRESET_FULL_RECT
 	)
@@ -122,10 +132,11 @@ func _build_ui() -> void:
 	add_child(outer_margin)
 
 	main_panel = PanelContainer.new()
+	main_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	main_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
-	main_panel.add_theme_stylebox_override("panel", preload("res://tabletop_style.gd").panel())
+	main_panel.add_theme_stylebox_override("panel", preload("res://tabletop_style.gd").fabric_panel())
 
 	outer_margin.add_child(main_panel)
 
@@ -186,6 +197,7 @@ func _build_ui() -> void:
 	tabs = TabBar.new()
 	tabs.add_tab("Cards")
 	tabs.add_tab("Quests")
+	tabs.add_tab("Jinx")
 	tabs.tab_changed.connect(_change_tab)
 	root.add_child(tabs)
 
@@ -226,6 +238,16 @@ func _build_ui() -> void:
 	quest_columns.add_theme_constant_override("separation", 18)
 	quest_scroll.add_child(quest_columns)
 	quest_scroll.hide()
+	jinx_scroll = ScrollContainer.new()
+	jinx_scroll.name = "JinxCards"
+	jinx_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	jinx_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	jinx_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	hand_body.add_child(jinx_scroll)
+	jinx_row = HBoxContainer.new()
+	jinx_row.add_theme_constant_override("separation", 20)
+	jinx_scroll.add_child(jinx_row)
+	jinx_scroll.hide()
 
 	root.add_child(HSeparator.new())
 
@@ -332,9 +354,7 @@ func _build_ui() -> void:
 	header.move_child(confirm_button, header.get_child_count() - 2)
 	study_confirm_button = Button.new()
 	study_confirm_button.text = "Keep selected cards"
-	study_confirm_button.pressed.connect(func():
-		if study_selection.size() == 2:
-			study_confirmed.emit(study_selection.duplicate()))
+	study_confirm_button.pressed.connect(_on_header_selection_confirmed)
 	study_confirm_button.hide()
 	header.add_child(study_confirm_button)
 	header.move_child(study_confirm_button, header.get_child_count() - 2)
@@ -362,6 +382,44 @@ func open_study(request: Dictionary) -> void:
 	_render_cards()
 	_update_controls()
 	_select_cards_tab(true)
+
+
+func _on_header_selection_confirmed() -> void:
+	if mode == MODE_STUDY:
+		if study_selection.size() == 2:
+			study_confirmed.emit(study_selection.duplicate())
+		return
+	if mode == MODE_QUEST_SELECTION:
+		if quest_selection.size() >= quest_selection_min and quest_selection.size() <= quest_selection_max:
+			quest_selection_confirmed.emit(quest_selection.duplicate())
+
+
+func open_quest_selection(request: Dictionary) -> void:
+	if game == null:
+		return
+	mode = MODE_QUEST_SELECTION
+	current_request = request.duplicate(true)
+	owner_player_index = int(request.get("player_index", -1))
+	if owner_player_index < 0 or owner_player_index >= game.players.size():
+		return
+	quest_selection.clear()
+	quest_selection_min = int(request.get("min_select", 0))
+	quest_selection_max = int(request.get("max_select", 1))
+	cards.clear()
+	selected_hand_index = -1
+	title_label.text = "PLAYER %d — QUESTS" % (owner_player_index + 1)
+	instruction_label.text = str(request.get("prompt", "Choose Quest cards."))
+	close_button.visible = true
+	close_button.disabled = false
+	close_button.text = "Hide"
+	prep_controls.hide()
+	study_confirm_button.show()
+	study_confirm_button.text = "Confirm Quest selection"
+	visible = true
+	move_to_front()
+	tabs.set_current_tab(1)
+	_change_tab(1)
+	_update_controls()
 
 
 func open_preparation(
@@ -410,6 +468,38 @@ func open_preparation(
 	visible = true
 	move_to_front()
 
+	_render_cards()
+	_update_controls()
+	_select_cards_tab(true)
+
+
+func open_memories(player_index: int) -> void:
+	if game == null or player_index < 0 or player_index >= game.players.size():
+		return
+	mode = MODE_MEMORIES
+	study_confirm_button.hide()
+	current_request.clear()
+	owner_player_index = player_index
+	cards.clear()
+	for i in range(game.players[player_index].memories.size()):
+		var spell = game.players[player_index].memories[i]
+		if spell == null:
+			continue
+		cards.append({
+			"hand_index": i,
+			"id": spell.id,
+			"name": spell.card_name,
+			"school_id": spell.school_id
+		})
+	selected_hand_index = -1
+	title_label.text = "PLAYER %d — MEMORIES" % (player_index + 1)
+	instruction_label.text = "Public Spell discard pile."
+	close_button.visible = true
+	close_button.disabled = false
+	close_button.text = "Close"
+	prep_controls.hide()
+	visible = true
+	move_to_front()
 	_render_cards()
 	_update_controls()
 	_select_cards_tab(true)
@@ -504,28 +594,38 @@ func _select_cards_tab(refresh_heading: bool = false) -> void:
 
 
 func _change_tab(index: int) -> void:
+	if mode == MODE_MEMORIES and index != 0:
+		tabs.set_current_tab(0)
+		index = 0
 	card_scroll.visible = index == 0
 	quest_scroll.visible = index == 1
+	jinx_scroll.visible = index == 2
 	prep_controls.visible = index == 0 and mode == MODE_PREPARATION
 	if index == 1:
 		title_label.text = "PLAYER %d — QUESTS" % (owner_player_index + 1)
-		instruction_label.text = "Complete the Task of an Active Quest, then resolve its Effects during your Activation. Solved Quests award Power."
+		if mode == MODE_QUEST_SELECTION:
+			instruction_label.text = str(current_request.get("prompt", "Choose Quest cards."))
+		else:
+			instruction_label.text = "Complete the Task of an Active Quest, then resolve its Effects during your Activation. Solved Quests award Power."
 		count_label.text = ""
 		_render_quests()
+	elif index == 2:
+		title_label.text = "PLAYER %d — JINX" % (owner_player_index + 1)
+		instruction_label.text = "Assigned Jinxes. Complete each card's Task to discard it. Click a card to inspect."
+		_render_jinxes()
 	else:
 		title_label.text = cards_heading
 		instruction_label.text = cards_instructions
 		count_label.text = "%d cards" % cards.size()
 		call_deferred("_layout_cards")
 	# A preparation/study draft belongs to the Cards tab, and is preserved.
-	if mode in [MODE_PREPARATION, MODE_STUDY]:
-		_update_controls()
+	_update_controls()
 
 
 func _process(_delta: float) -> void:
 	if not visible or game == null:
 		return
-	if owner_player_index != game.get_ui_viewer_player_index():
+	if mode != MODE_MEMORIES and owner_player_index != game.get_ui_viewer_player_index():
 		close_overlay(true)
 		return
 	if tabs.current_tab == 1:
@@ -536,6 +636,96 @@ func _process(_delta: float) -> void:
 		if signature != quest_signature:
 			quest_signature = signature
 			_render_quests()
+	elif tabs.current_tab == 2:
+		var signature := str(game.players[owner_player_index].mage.jinxes)
+		if signature != jinx_signature:
+			_render_jinxes()
+
+
+func _render_jinxes() -> void:
+	for child in jinx_row.get_children():
+		jinx_row.remove_child(child)
+		child.queue_free()
+	var assigned: Array = game.players[owner_player_index].mage.jinxes
+	jinx_signature = str(assigned)
+	count_label.text = "%d Jinx" % assigned.size()
+	if assigned.is_empty():
+		var empty := Label.new()
+		empty.text = "No Jinx assigned."
+		jinx_row.add_child(empty)
+	for jinx in assigned:
+		var data := ForgottenAttachments.definition("jinxes", str(jinx.id))
+		var column := VBoxContainer.new()
+		column.name = "Jinx_" + str(jinx.id)
+		jinx_row.add_child(column)
+		var height: float = clampf(get_viewport_rect().size.y - 340, 320, 590)
+		var card: Button = game.ReferenceCardPreview.make_card("jinxs", str(jinx.id), str(data.get("name", jinx.id)),
+			Vector2(height * 0.65, height), game.open_jinx_card.bind(owner_player_index, str(jinx.id)))
+		column.add_child(card)
+		var progress := HBoxContainer.new()
+		progress.alignment = BoxContainer.ALIGNMENT_CENTER
+		column.add_child(progress)
+		for i in int(data.get("slots", 0)):
+			var cube = preload("res://cube.tscn").instantiate()
+			cube.cube_color = game.players[owner_player_index].color if i < int(jinx.progress) else Color("35373c")
+			progress.add_child(cube)
+		var count := Label.new()
+		count.text = "  %d / %d" % [int(jinx.progress), int(data.get("slots", 0))]
+		progress.add_child(count)
+
+
+func _quest_selection_option(quest: QuestState, section: String) -> Dictionary:
+	if mode != MODE_QUEST_SELECTION or quest == null:
+		return {}
+	var normalized_section: String = section
+	for option_value in current_request.get("options", []):
+		if not option_value is Dictionary:
+			continue
+		var option: Dictionary = option_value
+		var option_section: String = str(option.get("quest_section", ""))
+		if option_section == "revealed":
+			option_section = "active"
+		if option_section != "" and option_section != normalized_section:
+			continue
+		if str(option.get("id", "")) == quest.get_id():
+			return option
+	return {}
+
+
+func _toggle_quest_selection(token: String) -> void:
+	if mode != MODE_QUEST_SELECTION or token == "":
+		return
+	if quest_selection.has(token):
+		quest_selection.erase(token)
+	elif quest_selection.size() < quest_selection_max:
+		quest_selection.append(token)
+	_render_quests()
+	_update_controls()
+
+
+func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: Vector2) -> void:
+	# Printed Quest art already contains the empty slots. Overlay only cubes that
+	# are actually on the card, aligned left-to-right over the printed row.
+	var placed: int = mini(quest.progress, quest.get_cube_slots())
+	if placed <= 0:
+		return
+	var overlay := Control.new()
+	overlay.name = "QuestProgress"
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(overlay)
+	var cube_scale: float = card_size.x / 112.0 * 0.82
+	var cube_visual: float = 14.0 * cube_scale
+	var gap: float = 3.0 * cube_scale
+	var total_width: float = placed * cube_visual + maxi(0, placed - 1) * gap
+	var start_x: float = (card_size.x - total_width) * 0.5
+	var slot_y: float = card_size.y * 0.555 - cube_visual * 0.5
+	for i in range(placed):
+		var cube = preload("res://cube.tscn").instantiate()
+		cube.cube_color = game.players[owner_player_index].color
+		cube.scale = Vector2.ONE * cube_scale
+		cube.position = Vector2(start_x + i * (cube_visual + gap), slot_y)
+		overlay.add_child(cube)
 
 
 func _render_quests() -> void:
@@ -567,48 +757,39 @@ func _render_quests() -> void:
 			column.add_child(center)
 			var width := clampf((main_panel.size.x - 160) / 3.0, 140, 260)
 			var card_size := Vector2(width, width * 1.42)
-			var card: Button = game.ReferenceCardPreview.make_card("quests", quest.get_id(), quest.get_name(), card_size, game.open_quest_card.bind(quest))
+			var selection_option: Dictionary = _quest_selection_option(quest, section)
+			var selection_token: String = str(selection_option.get("token", ""))
+			var callback: Callable = game.open_quest_card.bind(quest)
+			if mode == MODE_QUEST_SELECTION and selection_token != "":
+				callback = _toggle_quest_selection.bind(selection_token)
+			var card: Button = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", card_size, callback) if section == "solved" else game.ReferenceCardPreview.make_card("quests", quest.get_id(), quest.get_name(), card_size, callback)
 			card.set_meta("choice_quest", quest)
 			center.add_child(card)
-			# Solved cards are face down on the physical table, but their now-public
-			# identity can still be consulted through the same inspector.
-			if section == "solved":
-				for art in card.get_children():
-					art.hide()
-				var back := TextureRect.new()
-				back.texture = preload("res://assets/tabletop/card_back.png")
-				back.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-				back.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-				back.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				card.add_child(back)
-				back.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-				var caption := Label.new()
-				caption.text = quest.get_name() + "\nSolved · %d Power" % quest.get_power_reward()
-				caption.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-				caption.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-				caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-				caption.add_theme_color_override("font_outline_color", Color.BLACK)
-				caption.add_theme_constant_override("outline_size", 6)
-				caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				card.add_child(caption)
-			elif quest.get_cube_slots() > 0:
-				var track := HBoxContainer.new()
-				track.name = "QuestProgress"
-				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				track.add_theme_constant_override("separation", 5)
-				var width_value := quest.get_cube_slots() * 19.0 - 5.0
-				track.position = Vector2((card_size.x - width_value) * 0.5, card_size.y * 0.5 - 7)
-				card.add_child(track)
-				for i in quest.get_cube_slots():
-					var cube = preload("res://cube.tscn").instantiate()
-					cube.cube_color = game.players[owner_player_index].color if i < quest.progress else Color("222728")
-					track.add_child(cube)
+			if mode == MODE_QUEST_SELECTION:
+				card.disabled = selection_token == ""
+				card.modulate = Color.WHITE if selection_token != "" else Color(0.55, 0.55, 0.55, 0.72)
+				if selection_token != "" and quest_selection.has(selection_token):
+					var selected_frame := Panel.new()
+					selected_frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+					selected_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+					var style := StyleBoxFlat.new()
+					style.bg_color = Color(0.15, 0.65, 0.25, 0.08)
+					style.border_color = Color(0.3, 1.0, 0.45, 0.95)
+					style.set_border_width_all(5)
+					style.set_corner_radius_all(8)
+					selected_frame.add_theme_stylebox_override("panel", style)
+					selected_frame.z_index = 40
+					card.add_child(selected_frame)
+			if section != "solved":
+				_render_quest_progress_cubes(card, quest, card_size)
 			var status := Label.new()
 			status.text = "Revealed" if quest.revealed else "Private"
 			if section != "active": status.text = section.capitalize()
+			if mode == MODE_QUEST_SELECTION and selection_token != "":
+				status.text = "SELECTED" if quest_selection.has(selection_token) else "Click to select"
 			status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			column.add_child(status)
-			if section == "completed":
+			if section == "completed" and mode != MODE_QUEST_SELECTION:
 				var solve := Button.new()
 				solve.text = "Resolve Quest"
 				solve.disabled = true
@@ -680,7 +861,7 @@ func _render_cards() -> void:
 
 	if cards.is_empty():
 		var empty := Label.new()
-		empty.text = "Your Hand is empty."
+		empty.text = "No cards." if mode == MODE_MEMORIES else "Your Hand is empty."
 		empty.add_theme_font_size_override("font_size", 20)
 		card_row.add_child(empty)
 		return
@@ -954,10 +1135,32 @@ func _assigned_dark_side(
 	return false
 
 
+func _selected_dark_playable() -> bool:
+	for card in cards:
+		if card is Dictionary and int(card.get("hand_index", -1)) == selected_hand_index:
+			if card.has("dark_playable"):
+				return bool(card.dark_playable)
+			if game != null:
+				var spell: SpellCardState = game.spell_database.get_spell(str(card.get("id", "")))
+				return spell == null or spell.is_playable_side(true)
+			return true
+	return true
+
+
+func _single_effect_card(hand_index: int) -> bool:
+	for card in cards:
+		if int(card.get("hand_index", -1)) == hand_index:
+			var spell: SpellCardState = game.spell_database.get_spell(str(card.get("id", "")))
+			return spell != null and spell.has_single_effect()
+	return false
+
+
 func _set_selected_side(
 	use_dark: bool
 ) -> void:
 	if selected_hand_index == -1:
+		return
+	if use_dark and not _selected_dark_playable():
 		return
 
 	selected_dark = use_dark
@@ -1168,10 +1371,18 @@ func _confirm_preparation() -> void:
 func _update_controls() -> void:
 	confirm_button.visible = mode == MODE_PREPARATION and tabs.current_tab == 0
 	if mode == MODE_STUDY:
+		study_confirm_button.visible = tabs.current_tab == 0
 		study_confirm_button.disabled = study_selection.size() != 2
 		study_confirm_button.text = "Keep selected cards (%d/2)" % study_selection.size()
 		confirmation_changed.emit(study_confirm_button)
 		return
+	if mode == MODE_QUEST_SELECTION:
+		study_confirm_button.visible = tabs.current_tab == 1
+		var valid_count: bool = quest_selection.size() >= quest_selection_min and quest_selection.size() <= quest_selection_max
+		study_confirm_button.disabled = not valid_count
+		study_confirm_button.text = "Confirm Quest selection (%d/%d)" % [quest_selection.size(), quest_selection_max]
+		return
+	study_confirm_button.hide()
 	if mode != MODE_PREPARATION:
 		return
 	feedback_label.visible = not feedback_label.text.is_empty()
@@ -1179,6 +1390,7 @@ func _update_controls() -> void:
 	var has_selection: bool = (
 		selected_hand_index != -1
 	)
+	var single_effect: bool = has_selection and _single_effect_card(selected_hand_index)
 
 	var selected_name: String = (
 		_card_name_by_hand_index(
@@ -1193,14 +1405,17 @@ func _update_controls() -> void:
 		+ selected_name
 		+ (
 			" — "
-			+ _side_name(selected_dark)
+			+ ("Single effect" if single_effect else _side_name(selected_dark))
 			if has_selection
 			else ""
 		)
 	)
 
 	light_button.disabled = not has_selection
-	dark_button.disabled = not has_selection
+	light_button.visible = not single_effect
+	dark_button.visible = not single_effect
+	dark_button.disabled = not has_selection or not _selected_dark_playable()
+	dark_button.tooltip_text = "This face is a Transformation, obtained by casting the Light side." if has_selection and not _selected_dark_playable() else ""
 
 	light_button.set_pressed_no_signal(
 		has_selection

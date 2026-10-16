@@ -106,7 +106,7 @@
     "power_reward": 1
   },
   "magic_stem": {
-    "name": "Magic Stem",
+    "name": "Magic Steam",
     "moon": 1,
     "task": {
       "trigger": "effect_resolved",
@@ -128,7 +128,7 @@
         ]
       },
       {
-        "type": "convert_damage",
+        "type": "convert_instability",
         "amount": 1,
         "target": "room",
         "range": "*"
@@ -252,7 +252,7 @@
       "progress": 1,
       "reveal_immediately": true
     },
-    "cube_slots": 2,
+    "cube_slots": 3,
     "effects": [
       {
         "type": "activate_owned_evocation",
@@ -345,7 +345,7 @@
       "room_color": "red",
       "progress": 1
     },
-    "cube_slots": 2,
+    "cube_slots": 3,
     "effects": [
       {
         "type": "damage",
@@ -588,9 +588,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "alchemical_laboratory",
-      "elements": [
-        "fire",
-        "water"
+      "spell_types": [
+        "combat",
+        "contingency"
       ]
     },
     "cube_slots": 0,
@@ -603,7 +603,7 @@
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve a Fire or Water Spell while you are in the Alchemical Laboratory.",
+    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Alchemical Laboratory.",
     "raw_effect": "You can draw 1 Event. If you do, inflict 3 Damage to a Mage within 1."
   },
   "persuasive_moon": {
@@ -695,9 +695,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "oracle_room",
-      "spell_types": [
-        "combat",
-        "contingency"
+      "elements": [
+        "air",
+        "water"
       ]
     },
     "cube_slots": 0,
@@ -708,7 +708,7 @@
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Oracle Room.",
+    "raw_task": "After you resolve an Air or Water Spell while you are in the Oracle Room.",
     "raw_effect": "Shuffle your Memories into your Grimoire, then draw 3 Spells from your Grimoire."
   },
   "emerald_amethyst": {
@@ -1206,11 +1206,12 @@
         "type": "heal",
         "amount": 5,
         "target": "model",
+        "include_self": true,
         "range": "*"
       }
     ],
     "power_reward": 3,
     "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Sacred and/or Profane symbols on the Active Side of your Revealed Spells.",
-    "raw_effect": "Heal 5 Damage."
+    "raw_effect": "Any Model or Self: heal 5 Damage."
   }
 }

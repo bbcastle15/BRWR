@@ -1,0 +1,49 @@
+{
+  "mode": "built-in imagegen",
+  "jobs": [
+    {
+      "id": "trophy",
+      "dest": "assets/tokens/trophy_token.png",
+      "refs": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/tokens/protection.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/tokens/trophy_token.png"
+      ],
+      "transparent": true,
+      "prompt": "Use case: precise-object-edit. Edit image 1, the purple protection token, into the game's matching TROPHY token. Keep the exact circular shape, purple faceted rim, black textured inner disc, top-down framing and silver beveled symbol style. Replace only the shield with a single simple silver trophy cup with two handles, stem and flat pedestal, taking its recognizable silhouette from image 2. Center the cup, let it occupy 60% of disc width. The purple rim will be recolored by a shader, so preserve its saturation and the neutral silver/black interior. No text, no numerals, no new extra symbols. Transparent outside the circle, clean alpha. 1024x1024.",
+      "generated": "exec-2a4c6462-39f6-4d7c-a342-20aafe616476.png"
+    },
+    {
+      "id": "panel",
+      "dest": "assets/tabletop/ui_panel.png",
+      "refs": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/tabletop/playmat.png"
+      ],
+      "transparent": false,
+      "prompt": "Use case: style-transfer. Create a reusable square game interface background based on this Black Rose tabletop playmat: dark charcoal leather, subdued antique bronze fine thorn filigree confined to the four corners, thin double bronze rectangular frame about 20 pixels from the edge. Same texture and palette as the reference. Large 85% central area must remain very dark, quiet and almost empty for readable cards and UI text. Remove all large central circles, moon graphics and flowers. Flat orthographic UI surface, no perspective, no drop shadow, no lettering, no icons, no controls. Frame is continuous and straight. 1024x1024 opaque background suitable for nine-slice scaling.",
+      "generated": "exec-f29919d2-4cbb-4d85-8982-7ee864fbe02d.png"
+    },
+    {
+      "id": "dark_omens_final",
+      "dest": "assets/spells/dark_omens.png",
+      "refs": [
+        "assets/spells/dark_omens.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-9e4af43f-8b6b-4367-8aac-4b6f377d3f29.png"
+      ],
+      "transparent": false,
+      "prompt": "Precision icon-only edit. Keep the entire Dark Omens card unchanged except the upper Mage target pictogram. Copy the reference Mage silhouette: wizard hat, separate head and rounded shoulder bust. Preserve the numeral 0, Profane on both sides, lower Self target, Persistent and Power symbols, all wording, artwork, borders and layout.",
+      "generated": "exec-70ead91c-0e10-4a89-bb17-3668d41a63a6.png"
+    },
+    {
+      "id": "theurge_model_or_self",
+      "dest": "assets/quests/theurge.png",
+      "refs": [
+        "assets/quests/theurge.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png"
+      ],
+      "transparent": false,
+      "prompt": "Edit the FIRST image: the existing portrait Theurge quest card. Preserve its title, elaborate bronze border, orange banner, parchment, chest divider, upper task text EXACTLY, and bottom reward 3 with the rose, layout and quality. The other images are reference sheets for target icons only, not cards to edit. Change ONLY the lower reward area currently saying 'Model, any range: heal 5 Damage.' Replace it with a clear centered target row: a black generic Model icon (plain round head and torso, NO hat, as reference B) followed by a small * for any range, then a slash, then the black Self icon (pointed bent wizard hat over bearded face, as reference A and the third closeup image), then a colon. Below this icon row put the exact readable serif text 'heal 5 Damage.' The reward must unambiguously allow ANY MODEL OR SELF. Keep all upper task wording exactly as in first reference including '3 Magic and/or Sacred symbols'. Sharp high resolution portrait card, matching existing aspect ratio, no external background or captions.",
+      "generated": "exec-0b7bf35f-34fe-4db2-a495-62c40bb09eb6.png"
+    }
+  ]
+}

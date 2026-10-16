@@ -3,6 +3,7 @@ extends Node2D
 
 var player_index: int = -1
 var token_color: Color = Color.WHITE
+var transformation_id: String = ""
 
 
 func setup(index: int, color: Color):
@@ -39,6 +40,32 @@ func create_shape():
 	tint.shader = preload("res://assets/tokens/player_token.gdshader")
 	tint.set_shader_parameter("player_color", token_color)
 	art.material = tint
+
+
+func set_transformation(form: String) -> void:
+	if form == transformation_id:
+		return
+	transformation_id = form
+	$Label.text = "P%d" % (player_index + 1) + (" · " + form.capitalize() if not form.is_empty() else "")
+	$Label.position.x = -45 if not form.is_empty() else -22
+	$Label.size.x = 90 if not form.is_empty() else 44
+	var badge := get_node_or_null("Transformation") as Label
+	if badge == null:
+		badge = Label.new()
+		badge.name = "Transformation"
+		badge.position = Vector2(-20, -19)
+		badge.size = Vector2(40, 34)
+		badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		badge.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		badge.add_theme_font_size_override("font_size", 19)
+		badge.add_theme_color_override("font_color", token_color.lightened(0.3))
+		badge.add_theme_color_override("font_outline_color", Color.BLACK)
+		badge.add_theme_constant_override("outline_size", 7)
+		add_child(badge)
+	badge.text = form.left(1).to_upper()
+	badge.visible = not form.is_empty()
+	$MageArt.modulate.a = 0.65 if not form.is_empty() else 1.0
 
 
 func _circle_points(

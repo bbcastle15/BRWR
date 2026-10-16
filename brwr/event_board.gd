@@ -13,6 +13,7 @@ var black_rose_cube_count: int = BLACK_ROSE_MAX_CUBES
 var _slots_ready := false
 var _trophy_snapshot: Array = []
 var _quest_top: QuestCardState
+var _starved_snapshot: Array = []
 
 func _ready() -> void:
 	create_board_shape()
@@ -152,14 +153,45 @@ func create_cube_pool_ui() -> void:
 func update_black_rose_cube_pool() -> void:
 	if not _slots_ready:
 		return
+	var game = get_parent()
+	var starved: Array = game.players.map(func(player): return player.starved_cubes)
+	var has_starved: bool = starved.any(func(amount): return amount > 0)
 	for i in range(BLACK_ROSE_MAX_CUBES):
-		$BlackRoseCubePool.get_child(i).visible = i < black_rose_cube_count
+		var cube = $BlackRoseCubePool.get_child(i)
+		cube.visible = i < black_rose_cube_count
+		cube.position = Vector2(10 + (i % 10) * 6, 2 + (i / 10) * 6) if has_starved else Vector2(12 + (i % 6) * 9, (i / 6) * 9)
+		cube.scale = Vector2.ONE * (0.35 if has_starved else 0.55)
 	$BlackRoseCubePool/CountLabel.text = "× %d" % black_rose_cube_count
+	$BlackRoseCubePool/CountLabel.position.y = 54 if has_starved else 46
+	var details: PackedStringArray = ["Black Rose reserve: %d Cubes" % black_rose_cube_count]
+	for owner in game.players.size():
+		if game.players[owner].starved_cubes > 0:
+			details.append("%s: %d Starved Cubes (unavailable)" % [game.players[owner].player_name, game.players[owner].starved_cubes])
+	$BlackRoseCubePool.tooltip_text = "\n".join(details)
+	if starved == _starved_snapshot:
+		return
+	_starved_snapshot = starved
+	_remove_view($BlackRoseCubePool, "StarvedCubes")
+	var layer := Control.new()
+	layer.name = "StarvedCubes"
+	layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$BlackRoseCubePool.add_child(layer)
+	for owner in game.players.size():
+		var amount: int = game.players[owner].starved_cubes
+		if amount <= 0:
+			continue
+		for i in amount:
+			var cube = cube_scene.instantiate()
+			cube.cube_color = game.players[owner].color
+			cube.position = Vector2(10 + i * 6, 23 + owner * 5)
+			cube.scale = Vector2.ONE * 0.3
+			layer.add_child(cube)
 
 func refresh_support_slots() -> void:
 	if not _slots_ready:
 		return
 	var game = get_parent()
+	update_black_rose_cube_pool()
 	var top: QuestCardState = game.quest_discard.back() if not game.quest_discard.is_empty() else null
 	$QuestDiscardSlot/CountLabel.text = str(game.quest_discard.size())
 	if top != _quest_top:
@@ -171,20 +203,24 @@ func refresh_support_slots() -> void:
 			view.name = "QuestView"
 			_rotate_card_view(view, $QuestDiscardSlot.size)
 			$QuestDiscardSlot.add_child(view)
-	if _trophy_snapshot != game.black_rose_trophies:
+	if _trophy_snapshot != game.black_rose_trophies or $BlackRoseTrophySlot.get_node_or_null("TrophyCount") == null:
 		_trophy_snapshot = game.black_rose_trophies.duplicate()
 		for child in $BlackRoseTrophySlot.get_children():
 			$BlackRoseTrophySlot.remove_child(child)
 			child.queue_free()
 		for i in range(_trophy_snapshot.size()):
 			var owner: int = int(_trophy_snapshot[i])
-			var token = preload("res://power_marker.tscn").instantiate()
-			token.marker_name = str(owner + 1)
-			token.marker_color = [Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE, Color.YELLOW, Color.WHITE][owner]
+			var token = preload("res://tabletop_style.gd").marker("trophy_token", game.players[owner].color, Vector2(28, 28))
 			$BlackRoseTrophySlot.add_child(token)
-			token.scale = Vector2.ONE * 0.6
-			token.position = Vector2(12 + (i % 5) * 13, 12 + (i / 5) * 13)
+			token.position = Vector2(4 + (i % 4) * 13, 8 + (i / 4) * 8)
 			token.tooltip_text = "Trophy · Player %d" % [owner + 1]
+		var inspect := Button.new()
+		inspect.name = "TrophyCount"
+		inspect.flat = true
+		inspect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		inspect.tooltip_text = "Black Rose · %d trophies" % _trophy_snapshot.size()
+		inspect.pressed.connect(func(): game._reference_card_preview().show_card("tokens", "trophy_token", "Black Rose trophies", "%d trophies" % game.black_rose_trophies.size()))
+		$BlackRoseTrophySlot.add_child(inspect)
 
 func set_black_rose_cube_count(
 	value: int

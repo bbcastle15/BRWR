@@ -88,6 +88,10 @@ func resolve_effect(
 	effect: Dictionary,
 	context: Dictionary
 ) -> bool:
+	if bool(effect.get("shared", false)):
+		return context.game.effect_resolver.resolve_effect(effect, context)
+	if str(effect.get("type", "")) in AlternativeRoomRules.EFFECT_TYPES:
+		return AlternativeRoomRules.resolve(effect, context)
 
 	var effect_type = str(
 		effect.get(
@@ -1280,7 +1284,7 @@ func _resolve_summon_evocation(
 	)
 
 
-	var room_id = _room_id(
+	var room_id = _target_room_id(
 		context
 	)
 
@@ -1531,6 +1535,9 @@ func _resolve_move(
 
 			return false
 
+		if destination_room_id == game.players[player_index].mage.room_id:
+			context["_room_move_index"] = move_index + 1
+			return true
 
 		var success: bool = (
 			game.move_mage_to_room_id(
@@ -1574,6 +1581,8 @@ func _resolve_move(
 		return false
 
 
+	if destination_room_id == game.players[player_index].mage.room_id:
+		return true
 	return game.move_mage_to_room_id(
 		player_index,
 		destination_room_id,
@@ -2270,73 +2279,48 @@ func _resolve_search_grimoire_or_memories(
 	return true
 
 func _resolve_replace_revealed_spell_from_hand(
-	effect: Dictionary,
+	_effect: Dictionary,
 	context: Dictionary
 ) -> bool:
-
-	var game = context.get(
-		"game",
-		null
-	)
-
-	var player_index: int = int(
-		context.get(
-			"player_index",
-			-1
-		)
-	)
-
-
-	if game == null:
+	var game = context.get("game")
+	var player_index: int = int(context.get("player_index", -1))
+	if game == null or player_index < 0 or player_index >= game.players.size():
 		return false
-
-
-	if player_index < 0 \
-	or player_index >= game.players.size():
-
+	var player = game.players[player_index]
+	if player.hand.is_empty() or player.revealed_spells.is_empty():
+		return true
+	if not context.has("armory_revealed"):
+		var options: Array = []
+		for index in player.revealed_spells.size():
+			var revealed: RevealedSpellState = player.revealed_spells[index]
+			if game._find_player_board_slot_for_spell(player_index, revealed.spell) == "" and revealed.slot_id == "":
+				continue
+			options.append({"token": "armory:revealed:%d" % index, "value": revealed, "name": revealed.spell.card_name})
+		if options.is_empty():
+			return true
+		game.request_effect_choice(player_index, "armory_revealed", context, "armory_revealed", options, 1, 1,
+			"Choose a revealed Spell to discard and replace in its slot.")
 		return false
-
-
-	var revealed_spell_id: String = str(
-		context.get(
-			"revealed_spell_id",
-			""
-		)
-	)
-
-	var hand_spell_id: String = str(
-		context.get(
-			"hand_spell_id",
-			""
-		)
-	)
-
-
-	if revealed_spell_id.is_empty():
-
-		print(
-			"replace_revealed_spell_from_hand: "
-			+ "revealed Spell selection required"
-		)
-
+	if not context.has("armory_replacement"):
+		var options: Array = []
+		for index in player.hand.size():
+			var spell: SpellCardState = player.hand[index]
+			options.append({"token": "armory:hand:%d" % index, "value": spell, "name": spell.card_name})
+		game.request_effect_choice(player_index, "armory_replacement", context, "armory_replacement", options, 1, 1,
+			"Choose a Spell from your Hand to ready in that slot.")
 		return false
-
-
-	if hand_spell_id.is_empty():
-
-		print(
-			"replace_revealed_spell_from_hand: "
-			+ "Hand Spell selection required"
-		)
-
+	if not context.has("armory_dark"):
+		if not context.armory_replacement.is_playable_side(true):
+			context["armory_dark"] = false
+			return game.replace_revealed_spell_from_hand(player_index, context.armory_revealed, context.armory_replacement, false)
+		game.request_effect_choice(player_index, "spell_side", context, "armory_dark", [
+			{"token": "armory:light", "value": false, "name": "Light"},
+			{"token": "armory:dark", "value": true, "name": "Dark"}
+		], 1, 1, "Choose the side of the replacement Spell.")
 		return false
+	return game.replace_revealed_spell_from_hand(player_index, context.armory_revealed,
+		context.armory_replacement, bool(context.armory_dark))
 
-
-	return game.replace_revealed_spell_from_hand(
-		player_index,
-		revealed_spell_id,
-		hand_spell_id
-	)
 func _resolve_discard_spell(
 	effect: Dictionary,
 	context: Dictionary
@@ -2623,183 +2607,50 @@ func _resolve_attack(
 	_effect: Dictionary,
 	context: Dictionary
 ) -> bool:
-
-	var game = _game(
-		context
-	)
-
-	var player_index: int = _player_index(
-		context
-	)
-
-	if not _valid_player(
-		game,
-		player_index
-	):
+	var game = _game(context)
+	var player_index: int = _player_index(context)
+	if not _valid_player(game, player_index):
 		return false
 
+	var attacker_mage = game.players[player_index].mage
+	if attacker_mage == null or attacker_mage.in_cell:
+		return false
 
-	var attacker_mage = game.players[
-		player_index
-	].mage
+	var chosen_target = context.get("room_attack_target", null)
 
-
-	# =====================================================
-	# TARGET
-	#
-	# Supportiamo più Attack consecutivi.
-	#
-	# Forge può quindi ricevere:
-	#
-	# "attack_target_player_indices": [1, 2]
-	# =====================================================
-
-	var target_player_index: int = -1
-
-
-	if context.has(
-		"attack_target_player_indices"
-	):
-
-		var targets = context[
-			"attack_target_player_indices"
-		]
-
+	# Compatibility with older tests/data that supplied a list of Mage indices.
+	if chosen_target == null and context.has("attack_target_player_indices"):
+		var targets = context["attack_target_player_indices"]
 		if not targets is Array:
-
-			print(
-				"Room Attack: attack_target_player_indices is not an Array"
-			)
-
 			return false
-
-
-		var attack_index: int = int(
-			context.get(
-				"_room_attack_index",
-				0
-			)
-		)
-
-
+		var attack_index: int = int(context.get("_room_attack_index", 0))
 		if attack_index >= targets.size():
-
-			print(
-				"Room Attack: not enough targets"
-			)
-
 			return false
+		chosen_target = int(targets[attack_index])
+		context["_room_attack_index"] = attack_index + 1
+	elif chosen_target == null:
+		chosen_target = int(context.get("target_player_index", -1))
 
-
-		target_player_index = int(
-			targets[
-				attack_index
-			]
-		)
-
-
-		context[
-			"_room_attack_index"
-		] = attack_index + 1
-
-
-	else:
-
-		target_player_index = int(
-			context.get(
-				"target_player_index",
-				-1
-			)
-		)
-
-
-	if not _valid_player(
-		game,
-		target_player_index
-	):
-
-		print(
-			"Room Attack: invalid target"
-		)
-
-		return false
-
-
-	# Non puoi attaccare te stesso.
-	if target_player_index == player_index:
-
-		print(
-			"Room Attack: Mage cannot attack itself"
-		)
-
-		return false
-
-
-	var target_mage = game.players[
-		target_player_index
-	].mage
-
-
-	# =====================================================
-	# RANGE 0
-	#
-	# Attack della Forge:
-	# il bersaglio deve trovarsi nella stessa Room.
-	# =====================================================
-
-	if target_mage.in_cell:
-
-		print(
-			"Room Attack: target Mage is in its Cell"
-		)
-
-		return false
-
-
-	if attacker_mage.room_id != target_mage.room_id:
-
-		print(
-			"Room Attack: target Mage is not in the same Room"
-		)
-
-		return false
-
-
-	# =====================================================
-	# STRENGTH
-	# =====================================================
-
-	var damage_amount: int = (
-		attacker_mage.strength
-	)
-
-
+	var damage_amount: int = attacker_mage.strength
 	if damage_amount <= 0:
-
-		print(
-			"Room Attack: Mage Strength is ",
-			damage_amount
-		)
-
 		return false
 
+	if chosen_target is EvocationState:
+		var target_evocation: EvocationState = chosen_target
+		if not game._valid_mage_physical_attack_evocation(player_index, target_evocation):
+			return false
+		game.deal_damage_to_evocation(
+			player_index, target_evocation, damage_amount, [], "attack", "mage", null
+		)
+		return true
 
-	# =====================================================
-	# DAMAGE
-	#
-	# Passiamo dalla normale pipeline di Damage.
-	# action_type = "attack" permette ai trigger futuri
-	# di distinguere un Attack da altri Damage.
-	# =====================================================
-
-	game.deal_damage(
-		player_index,
-		target_player_index,
-		damage_amount,
-		"attack"
-	)
-
-
+	var target_player_index: int = int(chosen_target)
+	if not _valid_player(game, target_player_index) or target_player_index == player_index:
+		return false
+	var target_mage = game.players[target_player_index].mage
+	if target_mage == null or target_mage.in_cell or attacker_mage.room_id != target_mage.room_id:
+		return false
+	game.deal_damage(player_index, target_player_index, damage_amount, "attack")
 	return true
 
 func _resolve_return_all_mages_to_cells(

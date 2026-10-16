@@ -1,0 +1,1893 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "source": "materials/Codex Arcanum.pdf, pages 84-99",
+  "specifications": "alternatives_specs.json",
+  "assets": [
+    {
+      "room": "black_rose_apocalypse",
+      "variant": "destroyed",
+      "path": "assets/rooms/black_rose_apocalypse.png",
+      "codex_page": 84,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side board-game Room tile, flat-top regular hexagon, around 1348x1168, transparent exterior.\nImage 1 is the original Codex source. Select ONLY its LEFT hexagonal room illustration in row 2, titled \"Black Rose Room - Apocalypse\" in English on the page. Reproduce that exact room interior and arrangement in detailed high-quality top-down art: the original fiery Black Rose ritual chamber.\nImage 2 is the game's established template for border, parchment proportions, fonts, reward shields, regular hex shape and EXACT TEN black square sockets. Retain the sockets at exactly the same ten template positions: four upright bottom row, three tilted on each lower diagonal edge. NO extra or missing squares.\nReplace ALL Polish writing with title \"Black Rose Room - Apocalypse\" and effect \"[Self]: discard 3 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.\". Replace bracketed terms by small correct black glyphs from the English rules in Image 1: Self=pointed-hat bearded wizard face, Spell=small vertical card bearing a rose, Quick=black hexagonal lightning quick-spell icon. Print no brackets, no icon names. Keep every other word verbatim. Readable crisp serif text, balanced centered line wrapping within parchment. Charcoal rolled parchment ends and BLACK hexagon containing white ROSE type icon beside title. Reward shields 6,3,1 beneath parchment. No people or cubes. Match the original source scene, not another room.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-084.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-80427566-c970-42e3-aa40-a9cc4db9e11a.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "black_rose_apocalypse",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/black_rose_apocalypse.png",
+      "codex_page": 84,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of the Room in Image1. Reconstruct the central rose-shaped black stone altar with contained red-gold mystical glow and intact surrounding ritual paths. Preserve the room-specific scene composition and high-detail top-down painted style. Remove the ENTIRE parchment INCLUDING both scroll ends, ALL three reward shields, and ALL TEN black square sockets. Fill their areas with consistent repaired floor/scenery. Image2 is only the established rebuilt layout style: small top-center room name and icon, no gameplay boxes. Add only title \"Black Rose Room - Apocalypse\" with the correct WHITE OUTLINED ROSE in BLACK HEXAGON type symbol copied from Image1. Do not borrow Image2's room interior. No rules text, no shields, no black squares, no figures. Regular flat-top hex fills frame about1348x1168 with genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose_apocalypse.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-17dfb0e6-19d0-485b-93b9-fe0b15e53170.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "black_rose_apocalypse",
+      "variant": "available",
+      "path": "assets/rooms/tokens/black_rose_apocalypse_available.png",
+      "codex_page": 84,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into ONE available activation token for \"Black Rose Room - Apocalypse\". Preserve its wide 3:1 shape, cream parchment, muted dark grey rolled ends, borders, texture, serif style, transparent exterior. Keep the correct outlined white rose in a black hexagon beside the title. Remove ALL old text and put title \"Black Rose Room - Apocalypse\" and effect \"[Self]: discard 2 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.\". Render EVERY bracket item as a black game glyph, never its bracket name: Self = wizard hat and bearded face from Image2; Spell = rectangular spell card with rose, Quick = small black hexagon with white lightning bolt, Power = outlined rose without stem from Image3. Preserve all other English wording, exact quantities and conditions; wrap effect over 2–3 legible centered lines, title above. No rewards, no square sockets, no extra effect lines.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-094a6201-d3f2-4bfd-b6c8-13fec2e414f3.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "black_rose_apocalypse",
+      "variant": "used",
+      "path": "assets/rooms/tokens/black_rose_apocalypse_used.png",
+      "codex_page": 84,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Make ONE used room activation token by editing Image2: replace title with \"Black Rose Room - Apocalypse\", centered on one line in matching typeface and style. Beside it use the exact outlined ROSE in black hexagon type icon from Image1, rendered pale for contrast. Keep the charcoal scroll center, grey-black rolled ends, red painted X, exact 3:1 silhouette, material texture and transparency from Image2. No other text, no scenery, no shields. High resolution 2172x724.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose_apocalypse.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8394530e-e801-429e-8687-2c8f22868d18.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "deep_black_rose",
+      "variant": "destroyed",
+      "path": "assets/rooms/deep_black_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side board-game Room tile, flat-top regular hexagon, around 1348x1168, transparent exterior.\nImage 1 is the original Codex source. Select ONLY its LEFT hexagonal room illustration in row 1, titled \"Deep Black Rose Room\" in English on the page. Reproduce that exact room interior and arrangement in detailed high-quality top-down art: a ruined ship-like wooden chamber flooded by dark water and giant purple tentacles.\nImage 2 is the game's established template for border, parchment proportions, fonts, reward shields, regular hex shape and EXACT TEN black square sockets. Retain the sockets at exactly the same ten template positions: four upright bottom row, three tilted on each lower diagonal edge. NO extra or missing squares.\nReplace ALL Polish writing with title \"Deep Black Rose Room\" and effect \"[Self]: discard your Ready [Quick] and 1 [Spell] from your Hand. If you do, draw 1 Forgotten [Spell].\". Replace bracketed terms by small correct black glyphs from the English rules in Image 1: Self=pointed-hat bearded wizard face, Spell=small vertical card bearing a rose, Quick=black hexagonal lightning quick-spell icon. Print no brackets, no icon names. Keep every other word verbatim. Readable crisp serif text, balanced centered line wrapping within parchment. Charcoal rolled parchment ends and BLACK hexagon containing white ROSE type icon beside title. Reward shields 6,3,1 beneath parchment. No people or cubes. Match the original source scene, not another room.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-085.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d1cd6b22-aa35-4ab5-8c55-d89367695db0.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "deep_black_rose",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/deep_black_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of the Room in Image1. Repair the wooden decks and their stone border around the dark central pool; preserve the purple tentacles and aquatic ritual chamber identity, without loose broken boards. Preserve the room-specific scene composition and high-detail top-down painted style. Remove the ENTIRE parchment INCLUDING both scroll ends, ALL three reward shields, and ALL TEN black square sockets. Fill their areas with consistent repaired floor/scenery. Image2 is only the established rebuilt layout style: small top-center room name and icon, no gameplay boxes. Add only title \"Deep Black Rose Room\" with the correct WHITE OUTLINED ROSE in BLACK HEXAGON type symbol copied from Image1. Do not borrow Image2's room interior. No rules text, no shields, no black squares, no figures. Regular flat-top hex fills frame about1348x1168 with genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/deep_black_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6a1c9662-c6e3-4d10-95db-109f99a872a3.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "deep_black_rose",
+      "variant": "available",
+      "path": "assets/rooms/tokens/deep_black_rose_available.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into ONE available activation token for \"Deep Black Rose Room\". Preserve its wide 3:1 shape, cream parchment, muted dark grey rolled ends, borders, texture, serif style, transparent exterior. Keep the correct outlined white rose in a black hexagon beside the title. Remove ALL old text and put title \"Deep Black Rose Room\" and effect \"[Self]: discard your Ready [Quick] and 3 [Spell] from your Hand. If you do, draw 2 Forgotten [Spell].\". Render EVERY bracket item as a black game glyph, never its bracket name: Self = wizard hat and bearded face from Image2; Spell = rectangular spell card with rose, Quick = small black hexagon with white lightning bolt, Power = outlined rose without stem from Image3. Preserve all other English wording, exact quantities and conditions; wrap effect over 2–3 legible centered lines, title above. No rewards, no square sockets, no extra effect lines.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6305476b-7103-4cfe-bd0a-1d2d7e18696e.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "deep_black_rose",
+      "variant": "used",
+      "path": "assets/rooms/tokens/deep_black_rose_used.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Make ONE used room activation token by editing Image2: replace title with \"Deep Black Rose Room\", centered on one line in matching typeface and style. Beside it use the exact outlined ROSE in black hexagon type icon from Image1, rendered pale for contrast. Keep the charcoal scroll center, grey-black rolled ends, red painted X, exact 3:1 silhouette, material texture and transparency from Image2. No other text, no scenery, no shields. High resolution 2172x724.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/deep_black_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-78906964-04ff-4aae-bc76-7ee1023b5770.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "emerald_rose",
+      "variant": "destroyed",
+      "path": "assets/rooms/emerald_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side board-game Room tile, flat-top regular hexagon, around 1348x1168, transparent exterior.\nImage 1 is the original Codex source. Select ONLY its LEFT hexagonal room illustration in row 2, titled \"Emerald Rose\" in English on the page. Reproduce that exact room interior and arrangement in detailed high-quality top-down art: a central green magical rose formation overgrown by vivid emerald roots and vines.\nImage 2 is the game's established template for border, parchment proportions, fonts, reward shields, regular hex shape and EXACT TEN black square sockets. Retain the sockets at exactly the same ten template positions: four upright bottom row, three tilted on each lower diagonal edge. NO extra or missing squares.\nReplace ALL Polish writing with title \"Emerald Rose\" and effect \"[Self]: discard 2 [Spell]. If you do: draw 1 Forgotten [Spell].\". Replace bracketed terms by small correct black glyphs from the English rules in Image 1: Self=pointed-hat bearded wizard face, Spell=small vertical card bearing a rose, Quick=black hexagonal lightning quick-spell icon. Print no brackets, no icon names. Keep every other word verbatim. Readable crisp serif text, balanced centered line wrapping within parchment. Charcoal rolled parchment ends and BLACK hexagon containing white ROSE type icon beside title. Reward shields 6,3,1 beneath parchment. No people or cubes. Match the original source scene, not another room.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-085.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-04c6dd43-4ef7-45ae-8a45-48bf05e3056f.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "emerald_rose",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/emerald_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of the Room in Image1. Restore the stone dais and paths around the huge emerald rose with living green roots; preserve its green glow and rose garden identity. Preserve the room-specific scene composition and high-detail top-down painted style. Remove the ENTIRE parchment INCLUDING both scroll ends, ALL three reward shields, and ALL TEN black square sockets. Fill their areas with consistent repaired floor/scenery. Image2 is only the established rebuilt layout style: small top-center room name and icon, no gameplay boxes. Add only title \"Emerald Rose\" with the correct WHITE OUTLINED ROSE in BLACK HEXAGON type symbol copied from Image1. Do not borrow Image2's room interior. No rules text, no shields, no black squares, no figures. Regular flat-top hex fills frame about1348x1168 with genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/emerald_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-a89c2e13-9939-4c08-988f-0bc420e4f1ff.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "emerald_rose",
+      "variant": "available",
+      "path": "assets/rooms/tokens/emerald_rose_available.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into ONE available activation token for \"Emerald Rose\". Preserve its wide 3:1 shape, cream parchment, muted dark grey rolled ends, borders, texture, serif style, transparent exterior. Keep the correct outlined white rose in a black hexagon beside the title. Remove ALL old text and put title \"Emerald Rose\" and effect \"[Self]: search for 1 Forgotten [Spell] from the Forgotten Spells deck and draw it, then shuffle the deck. You lose 1 [Power].\". Render EVERY bracket item as a black game glyph, never its bracket name: Self = wizard hat and bearded face from Image2; Spell = rectangular spell card with rose, Quick = small black hexagon with white lightning bolt, Power = outlined rose without stem from Image3. Preserve all other English wording, exact quantities and conditions; wrap effect over 2–3 legible centered lines, title above. No rewards, no square sockets, no extra effect lines.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-84e2476b-2f00-407f-9195-58f9e4da17b2.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "emerald_rose",
+      "variant": "used",
+      "path": "assets/rooms/tokens/emerald_rose_used.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Make ONE used room activation token by editing Image2: replace title with \"Emerald Rose\", centered on one line in matching typeface and style. Beside it use the exact outlined ROSE in black hexagon type icon from Image1, rendered pale for contrast. Keep the charcoal scroll center, grey-black rolled ends, red painted X, exact 3:1 silhouette, material texture and transparency from Image2. No other text, no scenery, no shields. High resolution 2172x724.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/emerald_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-a6561e0e-39f7-4f21-9d14-d5690f95d810.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "occult_black_rose",
+      "variant": "destroyed",
+      "path": "assets/rooms/occult_black_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side board-game Room tile, flat-top regular hexagon, around 1348x1168, transparent exterior.\nImage 1 is the original Codex source. Select ONLY its LEFT hexagonal room illustration in row 3, titled \"Occult Black Rose Room\" in English on the page. Reproduce that exact room interior and arrangement in detailed high-quality top-down art: an ash-grey ritual chamber with large outlined rose floor design and broken stone debris.\nImage 2 is the game's established template for border, parchment proportions, fonts, reward shields, regular hex shape and EXACT TEN black square sockets. Retain the sockets at exactly the same ten template positions: four upright bottom row, three tilted on each lower diagonal edge. NO extra or missing squares.\nReplace ALL Polish writing with title \"Occult Black Rose Room\" and effect \"[Self]: discard 2 Ready [Spell]. If you do: draw 1 Forgotten [Spell].\". Replace bracketed terms by small correct black glyphs from the English rules in Image 1: Self=pointed-hat bearded wizard face, Spell=small vertical card bearing a rose, Quick=black hexagonal lightning quick-spell icon. Print no brackets, no icon names. Keep every other word verbatim. Readable crisp serif text, balanced centered line wrapping within parchment. Charcoal rolled parchment ends and BLACK hexagon containing white ROSE type icon beside title. Reward shields 6,3,1 beneath parchment. No people or cubes. Match the original source scene, not another room.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-085.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d8010b2c-beb8-49b5-960e-12cff20156af.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "occult_black_rose",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/occult_black_rose.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of the Room in Image1. Reconstruct the outlined rose mosaic at the center of the grey stone ritual chamber, repair the stairs, floor and columns, clear rubble; preserve its austere smoky grey mood. Preserve the room-specific scene composition and high-detail top-down painted style. Remove the ENTIRE parchment INCLUDING both scroll ends, ALL three reward shields, and ALL TEN black square sockets. Fill their areas with consistent repaired floor/scenery. Image2 is only the established rebuilt layout style: small top-center room name and icon, no gameplay boxes. Add only title \"Occult Black Rose Room\" with the correct WHITE OUTLINED ROSE in BLACK HEXAGON type symbol copied from Image1. Do not borrow Image2's room interior. No rules text, no shields, no black squares, no figures. Regular flat-top hex fills frame about1348x1168 with genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/occult_black_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/black_rose.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7e0bdc99-27e3-4690-8231-c5ac4c9baf25.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "occult_black_rose",
+      "variant": "available",
+      "path": "assets/rooms/tokens/occult_black_rose_available.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into ONE available activation token for \"Occult Black Rose Room\". Preserve its wide 3:1 shape, cream parchment, muted dark grey rolled ends, borders, texture, serif style, transparent exterior. Keep the correct outlined white rose in a black hexagon beside the title. Remove ALL old text and put title \"Occult Black Rose Room\" and effect \"[Self]: discard 1 Ready [Spell]. If you do: draw 1 Forgotten [Spell].\". Render EVERY bracket item as a black game glyph, never its bracket name: Self = wizard hat and bearded face from Image2; Spell = rectangular spell card with rose, Quick = small black hexagon with white lightning bolt, Power = outlined rose without stem from Image3. Preserve all other English wording, exact quantities and conditions; wrap effect over 2–3 legible centered lines, title above. No rewards, no square sockets, no extra effect lines.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-f4895b4a-9600-4181-94a6-fa47c6b89070.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "occult_black_rose",
+      "variant": "used",
+      "path": "assets/rooms/tokens/occult_black_rose_used.png",
+      "codex_page": 85,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Make ONE used room activation token by editing Image2: replace title with \"Occult Black Rose Room\", centered on one line in matching typeface and style. Beside it use the exact outlined ROSE in black hexagon type icon from Image1, rendered pale for contrast. Keep the charcoal scroll center, grey-black rolled ends, red painted X, exact 3:1 silhouette, material texture and transparency from Image2. No other text, no scenery, no shields. High resolution 2172x724.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/occult_black_rose.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/black_rose_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3e77d215-ed00-43ef-8a44-87a13c624bf8.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crypt_of_the_saint",
+      "variant": "destroyed",
+      "path": "assets/rooms/crypt_of_the_saint.png",
+      "codex_page": 86,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Genuine transparent exterior. Flat-top regular hex fills canvas approximately1348x1168.\nImage1 is the Codex page: faithfully reproduce ONLY its LEFT hexagonal tile in row 3, \"Crypt of the Saint\", preserving its distinctive scenery, colors, objects, arrangement, ruined condition. Do not copy other tiles or the page layout.\nImage2 is the style and layout template: detailed painted stone borders, cream parchment with GREY scroll ends, small white SKULL in GREY hexagon beside title, serif typography, and SIX sockets. Match six sockets exactly: four upright squares across bottom at x .35,.45,.55,.65 y .91; one tilted square lower-left x .25 y .81 and mirrored lower-right x .75 y .81. Keep these six positions and count.\nParchment title \"Crypt of the Saint\". Effect exactly \"[Self]: the [Black Rose] inflicts 2 [Damage] to you. Summon a Templarii in a [Room 0].\". Replace bracket terms with black board-game glyphs: Room n = outline hexagon enclosing n, Instability = black circular swirl, Damage = broken heart with a zig-zag crack, Self = only the wizard face silhouette at left of Image3, Black Rose = the solid rose-on-stem silhouette of Image4. No bracket labels or icon names. All non-bracket words/numbers must be exact English text. Reward shields 4,2,1 directly below parchment. No extra text, people, cubes, or watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-086.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-fa5486fa-9a41-4a1d-8487-e6b8745f6f11.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crypt_of_the_saint",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/crypt_of_the_saint.png",
+      "codex_page": 86,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Crypt of the Saint\" in Image1, preserving its distinctive overhead room scenery, arrangement, colors and detailed painted fantasy style. Remove the ENTIRE parchment including BOTH rolled ends, the three reward shields, and ALL SIX black square sockets. Restore those areas with coherent floor/scenery continuous with the original. Tidy debris and restore masonry subtly; retain the identity and dominant objects from Image1. Image2 is only the established rebuilt layout reference: unobstructed room floor and small title at top center. Add ONLY small title \"Crypt of the Saint\" with the white SKULL in grey hexagon type icon from Image1. Never copy the crypt interior from Image2. No rules, no reward shields, no square sockets, no tokens or figures. Output single flat-top hex filling frame about1348x1168, genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt_of_the_saint.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b0ea3d1e-9d7b-4884-8223-9547e769153d.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crypt_of_the_saint",
+      "variant": "available",
+      "path": "assets/rooms/tokens/crypt_of_the_saint_available.png",
+      "codex_page": 86,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Delete ONLY the unwanted rose symbol between \"summon a\" and \"Templarii\" in the first effect line. Close the gap so it reads exactly \"summon a Templarii. It activates.\" Keep the starting hexagon0 target and second line exactly unchanged. Preserve ALL other parts of this image exactly: title, skull type badge, parchment, grey rolled ends, serif font, wide 3:1 shape, resolution, genuine transparency. No new words, numbers, icons or ornaments.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_of_the_saint_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-e9b691b6-e424-4153-98e7-a63c650f89f8.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crypt_of_the_saint",
+      "variant": "used",
+      "path": "assets/rooms/tokens/crypt_of_the_saint_used.png",
+      "codex_page": 86,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 used Room token. Change title to \"Crypt of the Saint\" and replace its incorrect circle type icon by the WHITE SKULL IN GREY HEXAGON shown beside the title of Image2. Keep the wide 3:1 token shape, grey scroll ends, dark charcoal textured center, ivory serif lettering, large red painted X and transparent exterior exactly. No effect text, no extra objects.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt_of_the_saint.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3807e2d2-f8d0-48df-9856-a1bcbe694ca9.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "room_of_rebirth",
+      "variant": "destroyed",
+      "path": "assets/rooms/room_of_rebirth.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Genuine transparent exterior. Flat-top regular hex fills canvas approximately1348x1168.\nImage1 is the Codex page: faithfully reproduce ONLY its LEFT hexagonal tile in row 1, \"Room of Rebirth\", preserving its distinctive scenery, colors, objects, arrangement, ruined condition. Do not copy other tiles or the page layout.\nImage2 is the style and layout template: detailed painted stone borders, cream parchment with GREY scroll ends, small white SKULL in GREY hexagon beside title, serif typography, and SIX sockets. Match six sockets exactly: four upright squares across bottom at x .35,.45,.55,.65 y .91; one tilted square lower-left x .25 y .81 and mirrored lower-right x .75 y .81. Keep these six positions and count.\nParchment title \"Room of Rebirth\". Effect exactly \"Summon a Phoenix Familiar of your choice.\". Replace bracket terms with black board-game glyphs: Room n = outline hexagon enclosing n, Instability = black circular swirl, Damage = broken heart with a zig-zag crack, Self = only the wizard face silhouette at left of Image3, Black Rose = the solid rose-on-stem silhouette of Image4. No bracket labels or icon names. All non-bracket words/numbers must be exact English text. Reward shields 3,1,0 directly below parchment. No extra text, people, cubes, or watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-087.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-e5a1e0de-3811-48c1-92a5-5741a1fa5174.png",
+      "size": [
+        1346,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "room_of_rebirth",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/room_of_rebirth.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Room of Rebirth\" in Image1, preserving its distinctive overhead room scenery, arrangement, colors and detailed painted fantasy style. Remove the ENTIRE parchment including BOTH rolled ends, the three reward shields, and ALL SIX black square sockets. Restore those areas with coherent floor/scenery continuous with the original. Tidy debris and restore masonry subtly; retain the identity and dominant objects from Image1. Image2 is only the established rebuilt layout reference: unobstructed room floor and small title at top center. Add ONLY small title \"Room of Rebirth\" with the white SKULL in grey hexagon type icon from Image1. Never copy the crypt interior from Image2. No rules, no reward shields, no square sockets, no tokens or figures. Output single flat-top hex filling frame about1348x1168, genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/room_of_rebirth.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-09bcf3b8-93ed-498e-8762-c76d179ee406.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "room_of_rebirth",
+      "variant": "available",
+      "path": "assets/rooms/tokens/room_of_rebirth_available.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Remove ONLY the hexagonal outline around the final Power rose glyph. Keep the outlined black rose itself, WITHOUT ANY enclosing shape or stem. Leave every word unchanged, ending \"Gain 1\" then the bare rose then period. Preserve ALL other parts of this image exactly: title, skull type badge, parchment, grey rolled ends, serif font, wide 3:1 shape, resolution, genuine transparency. No new words, numbers, icons or ornaments.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/room_of_rebirth_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5d8df824-6b68-42c8-a691-107f14713e73.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "room_of_rebirth",
+      "variant": "used",
+      "path": "assets/rooms/tokens/room_of_rebirth_used.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 used Room token. Change title to \"Room of Rebirth\" and replace its incorrect circle type icon by the WHITE SKULL IN GREY HEXAGON shown beside the title of Image2. Keep the wide 3:1 token shape, grey scroll ends, dark charcoal textured center, ivory serif lettering, large red painted X and transparent exterior exactly. No effect text, no extra objects.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/room_of_rebirth.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-52d805f3-ad00-4f48-a66e-26dc28c4d188.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sacrificial_altar_of_madness",
+      "variant": "destroyed",
+      "path": "assets/rooms/sacrificial_altar_of_madness.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Genuine transparent exterior. Flat-top regular hex fills canvas approximately1348x1168.\nImage1 is the Codex page: faithfully reproduce ONLY its LEFT hexagonal tile in row 3, \"Sacrificial Altar of Madness\", preserving its distinctive scenery, colors, objects, arrangement, ruined condition. Do not copy other tiles or the page layout.\nImage2 is the style and layout template: detailed painted stone borders, cream parchment with GREY scroll ends, small white SKULL in GREY hexagon beside title, serif typography, and SIX sockets. Match six sockets exactly: four upright squares across bottom at x .35,.45,.55,.65 y .91; one tilted square lower-left x .25 y .81 and mirrored lower-right x .75 y .81. Keep these six positions and count.\nParchment title \"Sacrificial Altar of Madness\". Effect exactly \"[Room 1]: convert 1 [Instability]. Convert 1 [Damage].\". Replace bracket terms with black board-game glyphs: Room n = outline hexagon enclosing n, Instability = black circular swirl, Damage = broken heart with a zig-zag crack, Self = only the wizard face silhouette at left of Image3, Black Rose = the solid rose-on-stem silhouette of Image4. No bracket labels or icon names. All non-bracket words/numbers must be exact English text. Reward shields 4,2,1 directly below parchment. No extra text, people, cubes, or watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-087.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ca8dc1d7-67eb-4fe4-8b68-f4ff071aead5.png",
+      "size": [
+        1346,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sacrificial_altar_of_madness",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/sacrificial_altar_of_madness.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Sacrificial Altar of Madness\" in Image1, preserving its distinctive overhead room scenery, arrangement, colors and detailed painted fantasy style. Remove the ENTIRE parchment including BOTH rolled ends, the three reward shields, and ALL SIX black square sockets. Restore those areas with coherent floor/scenery continuous with the original. Tidy debris and restore masonry subtly; retain the identity and dominant objects from Image1. Image2 is only the established rebuilt layout reference: unobstructed room floor and small title at top center. Add ONLY small title \"Sacrificial Altar of Madness\" with the white SKULL in grey hexagon type icon from Image1. Never copy the crypt interior from Image2. No rules, no reward shields, no square sockets, no tokens or figures. Output single flat-top hex filling frame about1348x1168, genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sacrificial_altar_of_madness.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-dd179e7e-23c5-4750-9834-5fff7cc04934.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sacrificial_altar_of_madness",
+      "variant": "available",
+      "path": "assets/rooms/tokens/sacrificial_altar_of_madness_available.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 available Room token. Preserve wide 3:1 shape, cream parchment, grey scroll ends, trim, serif style and transparent exterior. Replace ALL text with title \"Sacrificial Altar of Madness\" and effect \"[Room *]: convert 2 [Instability]. Convert 2 [Damage].\". Replace the incorrect triangle room type icon with WHITE SKULL IN GREY HEXAGON from the title in Image2. Render brackets as glyphs rather than names: Room n = outlined hexagon containing n (asterisk for *); Instability = black swirling disc; Damage = clearly BROKEN heart with zigzag crack; Power = outlined rose without stem from Image3. Exact quantities and ALL remaining wording unchanged, 1–2 centered legible lines below title. No old effects, rewards or square slots.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sacrificial_altar_of_madness.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-96ea9644-c960-4f95-a934-3f786acb216f.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sacrificial_altar_of_madness",
+      "variant": "used",
+      "path": "assets/rooms/tokens/sacrificial_altar_of_madness_used.png",
+      "codex_page": 87,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 used Room token. Change title to \"Sacrificial Altar of Madness\" and replace its incorrect circle type icon by the WHITE SKULL IN GREY HEXAGON shown beside the title of Image2. Keep the wide 3:1 token shape, grey scroll ends, dark charcoal textured center, ivory serif lettering, large red painted X and transparent exterior exactly. No effect text, no extra objects.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sacrificial_altar_of_madness.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5e575aa1-c5cf-4454-abe9-2391b9b71235.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "whales_cemetery",
+      "variant": "destroyed",
+      "path": "assets/rooms/whales_cemetery.png",
+      "codex_page": 88,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Genuine transparent exterior. Flat-top regular hex fills canvas approximately1348x1168.\nImage1 is the Codex page: faithfully reproduce ONLY its LEFT hexagonal tile in row 1, \"Whales Cemetery\", preserving its distinctive scenery, colors, objects, arrangement, ruined condition. Do not copy other tiles or the page layout.\nImage2 is the style and layout template: detailed painted stone borders, cream parchment with GREY scroll ends, small white SKULL in GREY hexagon beside title, serif typography, and SIX sockets. Match six sockets exactly: four upright squares across bottom at x .35,.45,.55,.65 y .91; one tilted square lower-left x .25 y .81 and mirrored lower-right x .75 y .81. Keep these six positions and count.\nParchment title \"Whales Cemetery\". Effect exactly \"[Room 0]: summon a Dagon.\". Replace bracket terms with black board-game glyphs: Room n = outline hexagon enclosing n, Instability = black circular swirl, Damage = broken heart with a zig-zag crack, Self = only the wizard face silhouette at left of Image3, Black Rose = the solid rose-on-stem silhouette of Image4. No bracket labels or icon names. All non-bracket words/numbers must be exact English text. Reward shields 5,3,2 directly below parchment. No extra text, people, cubes, or watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-088.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crypt.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8200c4b4-a768-474d-b176-7fd85d11c539.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "whales_cemetery",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/whales_cemetery.png",
+      "codex_page": 88,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Whales Cemetery\" in Image1, preserving its distinctive overhead room scenery, arrangement, colors and detailed painted fantasy style. Remove the ENTIRE parchment including BOTH rolled ends, the three reward shields, and ALL SIX black square sockets. Restore those areas with coherent floor/scenery continuous with the original. Tidy debris and restore masonry subtly; retain the identity and dominant objects from Image1. Image2 is only the established rebuilt layout reference: unobstructed room floor and small title at top center. Add ONLY small title \"Whales Cemetery\" with the white SKULL in grey hexagon type icon from Image1. Never copy the crypt interior from Image2. No rules, no reward shields, no square sockets, no tokens or figures. Output single flat-top hex filling frame about1348x1168, genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/whales_cemetery.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3cffdb82-be73-47ae-a53b-bb6cb0965658.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "whales_cemetery",
+      "variant": "available",
+      "path": "assets/rooms/tokens/whales_cemetery_available.png",
+      "codex_page": 88,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Delete BOTH unwanted icons from the second effect line: the black swirl after first \"It\", and the broken heart after second \"It\". The second line must read exactly \"It activates. It activates.\" with NO symbols on that line. Keep the first line \"hexagon0: summon a Dagon.\" exactly unchanged. Preserve ALL other parts of this image exactly: title, skull type badge, parchment, grey rolled ends, serif font, wide 3:1 shape, resolution, genuine transparency. No new words, numbers, icons or ornaments.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/whales_cemetery_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b61f1973-242f-4e67-a41a-688c54a3dbd9.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "whales_cemetery",
+      "variant": "used",
+      "path": "assets/rooms/tokens/whales_cemetery_used.png",
+      "codex_page": 88,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 used Room token. Change title to \"Whales Cemetery\" and replace its incorrect circle type icon by the WHITE SKULL IN GREY HEXAGON shown beside the title of Image2. Keep the wide 3:1 token shape, grey scroll ends, dark charcoal textured center, ivory serif lettering, large red painted X and transparent exterior exactly. No effect text, no extra objects.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/crypt_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/whales_cemetery.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ee8d8b99-fac0-4c89-8c4f-a050beb6bd78.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crusaders_summoner_room",
+      "variant": "destroyed",
+      "path": "assets/rooms/crusaders_summoner_room.png",
+      "codex_page": 89,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the effect line in this tile. Delete the erroneous hexagon containing 0 and its colon from the start. The ONLY effect must be horned evocation pawn glyph followed by 1 and colon, then the words \"inflict 2\" and the broken-heart damage glyph and period. Center that single shorter line. Preserve absolutely everything else: title, crossed-swords room type, scene, 4/2/1 shields, exactly six sockets, resolution, tile silhouette and transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crusaders_summoner_room.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-dd83742e-1e45-4b7c-9555-2300d7afccf7.png",
+      "size": [
+        1346,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crusaders_summoner_room",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/crusaders_summoner_room.png",
+      "codex_page": 89,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt tile of \"Crusaders' Summoner Room\" from Image1. Preserve the specific overhead room interior, materials, composition, key objects and painted style. Remove ENTIRE top parchment including BOTH rolled ends, ALL three reward shields and ALL 6 black square instability sockets. Fill those areas with continuous room scenery, subtly repair the ruins. Image2 is a layout template only: unobstructed room floor, small top-centered name. Add only small title \"Crusaders' Summoner Room\" and white CROSSED SWORDS in RED hexagon beside it. No other text, parchment, sockets, shields, people, tokens. Flat-top regular hex fills frame approximately1348x1168; genuine transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crusaders_summoner_room.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/ludus_arena.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-a39c29e0-7739-4982-b8aa-fbcf24877727.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crusaders_summoner_room",
+      "variant": "available",
+      "path": "assets/rooms/tokens/crusaders_summoner_room_available.png",
+      "codex_page": 89,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Crusaders' Summoner Room\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Crusaders' Summoner Room\" and white CROSSED SWORDS in RED hexagon beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: One effect line: horned Evocation pawn with torso, then numeral 1, colon, words \"inflict 10\", then a broken-heart damage glyph, then period. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/ludus_arena_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/crusaders_summoner_room.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8ce42e2e-1904-4d04-965c-995c4ab9d74d.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "crusaders_summoner_room",
+      "variant": "used",
+      "path": "assets/rooms/tokens/crusaders_summoner_room_used.png",
+      "codex_page": 89,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit this used Room activation token. Change ONLY title to \"Crusaders' Summoner Room\". Keep its correct white CROSSED SWORDS in RED hexagon, same colored rolled ends, dark charcoal center, large red painted X, ivory serif typography, texture, trim, wide3:1 shape and transparent exterior. No effect text, no extra symbols.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/ludus_arena_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-fcbe2578-3463-4ef0-904c-e33c97167039.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "lost_alchemical_laboratory",
+      "variant": "destroyed",
+      "path": "assets/rooms/lost_alchemical_laboratory.png",
+      "codex_page": 90,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side hexagonal Room tile, flat top, 1348x1168 approximately, true transparent exterior. Source Image1: faithfully recreate ONLY the LEFT tile in row 1, \"Lost Alchemical Laboratory\", its distinctive scene and arrangement. Replace Polish text with English. Image2: match its border, parchment, typography, hexagon proportions and exact socket layout. Use red rolled parchment ends and white crossed-swords in a red hexagon type icon beside title. Title \"Lost Alchemical Laboratory\". Effect \"[Mage 1]: inflict 2 [Damage].\", replacing bracket terms with exact target glyphs from Image3: Mage=hat-wearing pawn WITH torso, Model=plain round head and torso WITHOUT hat, Evocation=horned pawn WITH rounded body, Self=bearded wizard face. Suffix range1 or * directly beside glyph. Room0=outline hex with 0 inside. Damage=BROKEN HEART with obvious zigzag split, Instability=black circular swirl, Black Rose=solid stemmed rose from Image4. Never print bracket words or change targets. Reward shields 4/2/1 beneath scroll. EXACT 6 black empty square sockets: four upright bottom-row positions x .35,.45,.55,.65 y .91, plus ONE tilted on each lower diagonal at (.25,.81) and (.75,.81). NO extra sockets, no figures/cubes, no watermark. Detailed overhead painted scene faithful to selected Codex image.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-090.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/ludus_arena.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d10a0170-56a9-4817-b1bc-6e8bf4f9f796.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "lost_alchemical_laboratory",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/lost_alchemical_laboratory.png",
+      "codex_page": 90,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt tile of \"Lost Alchemical Laboratory\" from Image1. Preserve the specific overhead room interior, materials, composition, key objects and painted style. Remove ENTIRE top parchment including BOTH rolled ends, ALL three reward shields and ALL 6 black square instability sockets. Fill those areas with continuous room scenery, subtly repair the ruins. Image2 is a layout template only: unobstructed room floor, small top-centered name. Add only small title \"Lost Alchemical Laboratory\" and white CROSSED SWORDS in RED hexagon beside it. No other text, parchment, sockets, shields, people, tokens. Flat-top regular hex fills frame approximately1348x1168; genuine transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/lost_alchemical_laboratory.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/ludus_arena.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1a565f80-d552-461f-89b7-a9d101ec25d3.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "lost_alchemical_laboratory",
+      "variant": "available",
+      "path": "assets/rooms/tokens/lost_alchemical_laboratory_available.png",
+      "codex_page": 90,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Lost Alchemical Laboratory\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Lost Alchemical Laboratory\" and white CROSSED SWORDS in RED hexagon beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: One or two lines exactly: wizard-hat bearded Self FACE, colon, \"draw 2 random\", rectangular rose-marked Spell card icon, \"from your\", Memories pouch-with-card icon, period. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/ludus_arena_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/lost_alchemical_laboratory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-27635274-4955-465b-ba74-0fcf7335d293.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "lost_alchemical_laboratory",
+      "variant": "used",
+      "path": "assets/rooms/tokens/lost_alchemical_laboratory_used.png",
+      "codex_page": 90,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit this used Room activation token. Change ONLY title to \"Lost Alchemical Laboratory\". Keep its correct white CROSSED SWORDS in RED hexagon, same colored rolled ends, dark charcoal center, large red painted X, ivory serif typography, texture, trim, wide3:1 shape and transparent exterior. No effect text, no extra symbols.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/ludus_arena_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-f171d61a-3e70-4107-b82a-37b6c7e49330.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ludus_arena",
+      "variant": "destroyed",
+      "path": "assets/rooms/ludus_arena.png",
+      "codex_page": 90,
+      "status": "generated",
+      "source": "exec-48f48c03-f269-46de-a432-433af63b981e.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ludus_arena",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/ludus_arena.png",
+      "codex_page": 90,
+      "status": "generated",
+      "source": "exec-f267d24c-50a7-4e4f-b618-4bd7e2c06652.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ludus_arena",
+      "variant": "available",
+      "path": "assets/rooms/tokens/ludus_arena_available.png",
+      "codex_page": 90,
+      "status": "generated",
+      "source": "exec-d07ba742-1951-47aa-8978-3f42e5542d21.png",
+      "size": [
+        2171,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ludus_arena",
+      "variant": "used",
+      "path": "assets/rooms/tokens/ludus_arena_used.png",
+      "codex_page": 90,
+      "status": "generated",
+      "source": "exec-1aaaed3d-a521-40ab-9e65-70e4f0ee0845.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyssal_observatory",
+      "variant": "destroyed",
+      "path": "assets/rooms/abyssal_observatory.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Image1 source Codex page: reproduce ONLY its LEFT hexagonal tile in row 1, \"Abyssal Observatory\", preserving distinctive scenery, objects, colors, arrangement and ruined condition. Image2 is style and layout template ONLY, not the interior. Match detailed painted stone border, top cream parchment with golden YELLOW rolled ends, white DIAMOND in yellow HEXAGON room-type icon beside title and serif lettering. Exactly FIVE square black sockets across bottom at x .30,.40,.50,.60,.70 y .91; none on diagonal sides. Three reward shields 3,2,1 below parchment. Title \"Abyssal Observatory\". Effect exactly \"[Self]: lose 1 [Power]. If you do, inflict 1 [Damage] on each Evocation in the Lodge.\". Replace every bracket term with black board-game glyph: Self=wizard hat with bearded face of Image3; Room n=outline hexagon enclosing n; Damage=broken heart with zigzag crack; Power=outlined stemless rose of Image4; Spell=rectangular card with rose; Memories=small spilling pouch with card; Grimoire=closed book with rose. Preserve ALL nonbracket English words and numbers exactly, wrapping for legibility. Do not print bracket names. Regular flat-top hex fills frame around1348x1168, genuine transparent outside. No page background, other tiles, extra text or figures.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-091.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/observatory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-c5cac851-69f2-4ce5-948c-828351efc533.png",
+      "size": [
+        1349,
+        1166
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyssal_observatory",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/abyssal_observatory.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Make the rebuilt face of \"Abyssal Observatory\" from Image1. Preserve its unique overhead interior, composition, colors, main objects and painted stone border. Remove the ENTIRE top parchment including BOTH rolled ends, ALL THREE reward shields, and ALL FIVE bottom sockets, filling with continuous restored scenery. Lightly restore ruined stonework and furnishings. Image2 is only the established rebuilt layout style, not its interior. Small top-centered serif title \"Abyssal Observatory\" with correct white DIAMOND in YELLOW HEXAGON. No rules text, scrolls, shields, square sockets, tokens or people. One regular flat-top hex fills canvas around1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyssal_observatory.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/observatory.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-301b964b-2d01-41a4-b7ba-d6feefc189c7.png",
+      "size": [
+        1349,
+        1166
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyssal_observatory",
+      "variant": "available",
+      "path": "assets/rooms/tokens/abyssal_observatory_available.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Abyssal Observatory\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Abyssal Observatory\" and white DIAMOND in YELLOW hexagon (not the incorrect existing icon) beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: Two or three centered lines: solid black five-point Special star, colon, \"lose 1\", outlined stemless Power rose glyph, period, exact words \"If you do, remove all Evocations from the Lodge (yours included) in the order you prefer.\" Only two effect glyphs total: the star and Power rose. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyssal_observatory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-0aeb0636-b563-4954-b183-e63cc9ee1c91.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyssal_observatory",
+      "variant": "used",
+      "path": "assets/rooms/tokens/abyssal_observatory_used.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change Image1 used token title to \"Abyssal Observatory\", and replace the incorrect circle type icon by the white DIAMOND in YELLOW hexagon from Image2. Keep exact golden rolled ends, dark charcoal center, large red painted X, ivory serif type, trim, wide3:1 shape and transparent exterior. No effect text, no extra icons.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyssal_observatory.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-260224f2-d59f-4ccf-91ce-58baed0990e6.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "bibliotheca_of_the_order",
+      "variant": "destroyed",
+      "path": "assets/rooms/bibliotheca_of_the_order.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Image1 source Codex page: reproduce ONLY its LEFT hexagonal tile in row 3, \"Bibliotheca of the Order\", preserving distinctive scenery, objects, colors, arrangement and ruined condition. Image2 is style and layout template ONLY, not the interior. Match detailed painted stone border, top cream parchment with golden YELLOW rolled ends, white DIAMOND in yellow HEXAGON room-type icon beside title and serif lettering. Exactly FIVE square black sockets across bottom at x .30,.40,.50,.60,.70 y .91; none on diagonal sides. Three reward shields 3,1,1 below parchment. Title \"Bibliotheca of the Order\". Effect exactly \"[Self]: discard 1 Ready [Spell] into your [Memories]. If you do: draw 2 [Spell] from your [Grimoire].\". Replace every bracket term with black board-game glyph: Self=wizard hat with bearded face of Image3; Room n=outline hexagon enclosing n; Damage=broken heart with zigzag crack; Power=outlined stemless rose of Image4; Spell=rectangular card with rose; Memories=small spilling pouch with card; Grimoire=closed book with rose. Preserve ALL nonbracket English words and numbers exactly, wrapping for legibility. Do not print bracket names. Regular flat-top hex fills frame around1348x1168, genuine transparent outside. No page background, other tiles, extra text or figures.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-091.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/observatory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3a4011f9-510c-495b-8de3-a2a0922491ac.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "bibliotheca_of_the_order",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/bibliotheca_of_the_order.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Make the rebuilt face of \"Bibliotheca of the Order\" from Image1. Preserve its unique overhead interior, composition, colors, main objects and painted stone border. Remove the ENTIRE top parchment including BOTH rolled ends, ALL THREE reward shields, and ALL FIVE bottom sockets, filling with continuous restored scenery. Lightly restore ruined stonework and furnishings. Image2 is only the established rebuilt layout style, not its interior. Small top-centered serif title \"Bibliotheca of the Order\" with correct white DIAMOND in YELLOW HEXAGON. No rules text, scrolls, shields, square sockets, tokens or people. One regular flat-top hex fills canvas around1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/bibliotheca_of_the_order.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/observatory.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-831d4638-e2f9-491f-8d3c-67fdf1e2eb06.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "bibliotheca_of_the_order",
+      "variant": "available",
+      "path": "assets/rooms/tokens/bibliotheca_of_the_order_available.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Bibliotheca of the Order\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Bibliotheca of the Order\" and white DIAMOND in YELLOW hexagon (not the incorrect existing icon) beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: One line: wizard-hat bearded Self FACE, colon, \"draw 2\", rectangular rose-marked Spell card icon, \"from your\", closed rose-marked Grimoire book icon, period. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/bibliotheca_of_the_order.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b0ef27b8-1e04-49d2-8d22-823f837e9d79.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "bibliotheca_of_the_order",
+      "variant": "used",
+      "path": "assets/rooms/tokens/bibliotheca_of_the_order_used.png",
+      "codex_page": 91,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change Image1 used token title to \"Bibliotheca of the Order\", and replace the incorrect circle type icon by the white DIAMOND in YELLOW hexagon from Image2. Keep exact golden rolled ends, dark charcoal center, large red painted X, ivory serif type, trim, wide3:1 shape and transparent exterior. No effect text, no extra icons.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/bibliotheca_of_the_order.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-a12a88b5-6218-4146-9820-8d82edbf5b0b.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sanctuary_of_anubis",
+      "variant": "destroyed",
+      "path": "assets/rooms/sanctuary_of_anubis.png",
+      "codex_page": 92,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Produce ONE high-quality overhead fantasy board-game hexagonal tile, destroyed face. Image1 source Codex page: reproduce ONLY its LEFT hexagonal tile in row 3, \"Sanctuary of Anubis\", preserving distinctive scenery, objects, colors, arrangement and ruined condition. Image2 is style and layout template ONLY, not the interior. Match detailed painted stone border, top cream parchment with golden YELLOW rolled ends, white DIAMOND in yellow HEXAGON room-type icon beside title and serif lettering. Exactly FIVE square black sockets across bottom at x .30,.40,.50,.60,.70 y .91; none on diagonal sides. Three reward shields 3,1,1 below parchment. Title \"Sanctuary of Anubis\". Effect exactly \"[Room 0]: summon a Pharaoh.\". Replace every bracket term with black board-game glyph: Self=wizard hat with bearded face of Image3; Room n=outline hexagon enclosing n; Damage=broken heart with zigzag crack; Power=outlined stemless rose of Image4; Spell=rectangular card with rose; Memories=small spilling pouch with card; Grimoire=closed book with rose. Preserve ALL nonbracket English words and numbers exactly, wrapping for legibility. Do not print bracket names. Regular flat-top hex fills frame around1348x1168, genuine transparent outside. No page background, other tiles, extra text or figures.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-092.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/observatory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7547b64e-579e-4509-b755-8a96aedb3e13.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sanctuary_of_anubis",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/sanctuary_of_anubis.png",
+      "codex_page": 92,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Make the rebuilt face of \"Sanctuary of Anubis\" from Image1. Preserve its unique overhead interior, composition, colors, main objects and painted stone border. Remove the ENTIRE top parchment including BOTH rolled ends, ALL THREE reward shields, and ALL FIVE bottom sockets, filling with continuous restored scenery. Lightly restore ruined stonework and furnishings. Image2 is only the established rebuilt layout style, not its interior. Small top-centered serif title \"Sanctuary of Anubis\" with correct white DIAMOND in YELLOW HEXAGON. No rules text, scrolls, shields, square sockets, tokens or people. One regular flat-top hex fills canvas around1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sanctuary_of_anubis.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/observatory.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ec094b8e-6da2-45b5-913e-e287ed665c09.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sanctuary_of_anubis",
+      "variant": "available",
+      "path": "assets/rooms/tokens/sanctuary_of_anubis_available.png",
+      "codex_page": 92,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Sanctuary of Anubis\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Sanctuary of Anubis\" and white DIAMOND in YELLOW hexagon (not the incorrect existing icon) beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: One line: horned Evocation pawn WITH TORSO from Image3, immediately followed by asterisk then colon, exact words \"the target activates under your control.\" No other effect icons. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sanctuary_of_anubis.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-4c806086-8ed3-49cf-b249-e5e98c3de0c9.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "sanctuary_of_anubis",
+      "variant": "used",
+      "path": "assets/rooms/tokens/sanctuary_of_anubis_used.png",
+      "codex_page": 92,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change Image1 used token title to \"Sanctuary of Anubis\", and replace the incorrect circle type icon by the white DIAMOND in YELLOW hexagon from Image2. Keep exact golden rolled ends, dark charcoal center, large red painted X, ivory serif type, trim, wide3:1 shape and transparent exterior. No effect text, no extra icons.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/observatory_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/sanctuary_of_anubis.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-978f1508-9f09-4102-ae6e-9d8353389b9b.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "forge_of_the_void",
+      "variant": "destroyed",
+      "path": "assets/rooms/forge_of_the_void.png",
+      "codex_page": 93,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the instability sockets in this exact Forge of the Void tile. There must be exactly FOUR square black sockets, all four upright in a single bottom horizontal row. Remove the TWO tilted sockets on the lower diagonal edges entirely and reconstruct the matching stone/brick floor beneath them. Keep the four existing bottom row squares and center them at normalized x=0.35,0.45,0.55,0.65 and y=0.91. Preserve all other scenery, parchment, correct existing English title and effect, leaf type icon, reward shields 3/2/1, flat-top hexagonal shape and size. No additional sockets. True transparent exterior. Preserve image dimensions and quality.",
+      "source": "C:/Users/bigba/.codex/generated_images/01a0e25e-e965-76c3-af9d-987ce7e4e470/exec-4956511a-dd92-40ea-b06b-e2b98298072a.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "forge_of_the_void",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/forge_of_the_void.png",
+      "codex_page": 93,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Edit Image 1 only in two places: remove BOTH remaining green scroll rollers near its top corners and fill those areas with matching stone floor; replace its small three-leaf/sprout symbol with the correct SINGLE-LEAF symbol inside the green hexagon shown in Image 2. Keep \"Forge of the Void\" title size and position. Preserve the entire rest of Image 1 exactly, all foundry scene, floor, furnace, hex shape, transparency and dimensions. Image 2 is only the icon reference. Do not add back its parchment, shields or sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/forge_of_the_void.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/forge_of_the_void.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-cc48d40a-1d4c-480c-b729-97e7d51c56d2.png",
+      "size": [
+        1346,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "forge_of_the_void",
+      "variant": "available",
+      "path": "assets/rooms/tokens/forge_of_the_void_available.png",
+      "codex_page": 93,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit this existing green room activation scroll token. Preserve its exact shape, green rolled ends, parchment texture, trim, font style, leaf type icon, wide 3:1 aspect ratio, transparent exterior and resolution. Change title from Garden to \"Forge of the Void\". Replace the two effect lines with ONE centered effect line: hexagon containing an asterisk, followed by \": remove or convert 2\", followed by the black circular instability symbol from the reference, and a period. Printed wording exactly \"remove or convert 2\". No other wording or icon changes.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-cb7fea16-8535-477d-a73d-3e07d3041ae3.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "forge_of_the_void",
+      "variant": "used",
+      "path": "assets/rooms/tokens/forge_of_the_void_used.png",
+      "codex_page": 93,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change ONLY the title \"Garden\" to \"Forge of the Void\" in this used room token, preserving matching typography and fitting it legibly on one centered line. Keep green leaf hex type icon, charcoal parchment, green rolled ends, red painted X, 3:1 shape, texture, transparency, high resolution, everything else unchanged.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-55028ec2-9ff9-4d5c-9c47-803811041a02.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "indoor_forest",
+      "variant": "destroyed",
+      "path": "assets/rooms/indoor_forest.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the Evocation target glyph at the start of the parchment effect in Image1. Replace the horned head with the exact black horned PAWN with rounded body/bust from Image2. Retain its following asterisk and colon. Scale glyph to same size as text. Preserve absolutely everything else in Image1, title, entire effect text, solid health heart, rewards, four sockets, foliage, hexagon and transparent exterior. No other changes.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/indoor_forest.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-481348ed-8401-4d39-bd5d-c9b9460d5588.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "indoor_forest",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/indoor_forest.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Produce ONE rebuilt Room tile from Image 1, preserving its unique interior composition and overhead painted style. Keep the room's central tree with red autumn foliage and stone floor under its roots. Restore broken stone paths and wall borders, tidy fallen branches and rubble, preserve a lush indoor autumn forest. Remove the ENTIRE parchment including BOTH green rolled ends; remove all three reward shields and ALL FOUR bottom square sockets, replacing these with continuous repaired interior scenery. Image 2 is only the rebuilt tile layout reference: small title at top-center and no gameplay boxes. Title exactly \"Indoor Forest\". Beside this small title put the EXACT SINGLE LEAF white-outline symbol in a green hexagon from Image 1, not the sprout/three-leaf symbol in Image 2. No effect text, no numbers, no sockets, no parchment, no scroll ends, no extra labels. Regular flat-top hexagon filling frame, around 1348x1168, genuine transparent exterior. Preserve all six hexagonal edges, camera, high resolution, detailed stone and vegetation textures.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/indoor_forest.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d8d8ad13-6633-42a2-987d-01d66829b35d.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "indoor_forest",
+      "variant": "available",
+      "path": "assets/rooms/tokens/indoor_forest_available.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Make a precise local correction to the first reference PNG. Replace EVERY existing physical Attack burst glyph in the effect text with the EXACT black-and-white silhouette in the second reference: a clenched fist facing right, outlined in white, on a black spiked impact burst. Retain the white negative spaces in the fist. Size each glyph to align with the text. Preserve all wording, numbers, other symbols, room type, illustration, border, proportions, slots and transparency. Do not add glyphs anywhere else; only replace the incorrect Attack glyph(s). Keep the resolution and aspect ratio of the first image. Output one corrected transparent PNG.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/indoor_forest_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/physical_attack_glyph.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5b76d1cf-8cec-40e0-a72d-13b5cbb6c191.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "indoor_forest",
+      "variant": "used",
+      "path": "assets/rooms/tokens/indoor_forest_used.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change ONLY title \"Garden\" in the reference token to \"Indoor Forest\". Fit it on one centered line with the same font, texture and excellent readability. Keep the single-leaf green hex icon, charcoal parchment, green rolled ends, red painted X, exact 3:1 silhouette, transparent exterior, high resolution, no other text. ONE isolated token, no background scene.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1912b881-ce4f-4107-a6b3-6161f25503f6.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "life_fountain",
+      "variant": "destroyed",
+      "path": "assets/rooms/life_fountain.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the black heart symbol following \"heal 3\" on the top parchment of this exact Life Fountain tile. It must be a BROKEN HEART damage glyph: two black halves of a heart separated by a very visible cream/transparent zig-zag crack running vertically through its center, NOT a solid health heart. Preserve the full tile, all other artwork, title, Self wizard icon, text, rewards 2/1/0, four sockets, flat-top hexagon and transparent exterior, dimensions unchanged.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/life_fountain.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d311958c-c66f-43e5-a205-8cf9b8badd32.png",
+      "size": [
+        1346,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "life_fountain",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/life_fountain.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Produce ONE rebuilt Room tile from Image 1, preserving its unique interior composition and overhead painted style. Keep the central green-water stone fountain with pointed pale stone rocks, restore cracked paths and masonry, tidy the surrounding garden. Remove the ENTIRE parchment including BOTH green rolled ends; remove all three reward shields and ALL FOUR bottom square sockets, replacing these with continuous repaired interior scenery. Image 2 is only the rebuilt tile layout reference: small title at top-center and no gameplay boxes. Title exactly \"Life Fountain\". Beside this small title put the EXACT SINGLE LEAF white-outline symbol in a green hexagon from Image 1, not the sprout/three-leaf symbol in Image 2. No effect text, no numbers, no sockets, no parchment, no scroll ends, no extra labels. Regular flat-top hexagon filling frame, around 1348x1168, genuine transparent exterior. Preserve all six hexagonal edges, camera, high resolution, detailed stone and vegetation textures.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/life_fountain.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-47dd6884-ee17-4825-8e13-106b1aa31ee1.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "life_fountain",
+      "variant": "available",
+      "path": "assets/rooms/tokens/life_fountain_available.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Create ONE rebuilt activation parchment token matching exactly Image 1 shape, colors, green rolled ends, leaf type icon, texture, border, 3:1 aspect and transparent exterior. Replace title with \"Life Fountain\". Replace the entire effect area with this exact English sentence: \"[Self]: heal 3 [Damage]. You gain 1 [Power].\". Bracketed terms must be ICONS not printed words. Keep all wording and numbers outside brackets verbatim. Self = bearded wizard-hat face as in Image 2. Damage = BROKEN HEART with clearly visible zig-zag crack (NOT solid heart). Power = outlined rose exactly as Image 4 if present. Evocation * = horned PAWN bust silhouette (head and rounded body, not just bull head) with small asterisk; Image 4 shows this exact silhouette for Indoor Forest. Health = SOLID heart. Attack = small spiked circular physical-attack icon as shown in English effect on Image 3. Movement = small walking figure as shown in Image 3. Source Room effect icons from the corresponding English rules on Image 3. Use large crisp black serif text on cream parchment, wrap below title into two or three balanced lines where needed. No sockets, numbers other than effect numbers, shields or scenery. Produce 2172x724 or equivalent high resolution.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/life_fountain.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-094.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ccc00c79-cfa8-4485-9602-0e64dc3415f1.png",
+      "size": [
+        2170,
+        725
+      ],
+      "alpha": true
+    },
+    {
+      "room": "life_fountain",
+      "variant": "used",
+      "path": "assets/rooms/tokens/life_fountain_used.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change ONLY title \"Garden\" in the reference token to \"Life Fountain\". Fit it on one centered line with the same font, texture and excellent readability. Keep the single-leaf green hex icon, charcoal parchment, green rolled ends, red painted X, exact 3:1 silhouette, transparent exterior, high resolution, no other text. ONE isolated token, no background scene.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d1131c51-cac2-4b54-953a-a15e1dc26211.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_treasure_room",
+      "variant": "destroyed",
+      "path": "assets/rooms/templars_treasure_room.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Production fantasy tabletop room tile PNG, transparent exterior, ONE flat-top regular hexagon filling canvas, approximately 1348x1168.\n Image 1 is the original Codex page: reproduce ONLY the LEFT hexagon in row 3 of three, \"Templars' Treasure Room\". Preserve its distinct floor scene, props, colors and ruined condition in rich high-resolution top-down painted detail. Do not reproduce page text or other tiles.\n Image 2 is the established game's Garden tile: match exactly its hex silhouette, realistic parchment with green scroll ends, borders, typography, green hexagon leaf type icon, layout and FOUR bottom instability sockets. This is a structural/style reference only; use the specified Codex scene, not Garden's scene.\n Parchment top: title \"Templars' Treasure Room\". Below print exactly \"[Self]: heal 2 [Damage].\", replacing bracket terms by actual small black board-game icons, never bracket labels. Self = bearded face in pointed wizard hat. Damage = broken heart. Evocation * = horned pawn with small asterisk. Health = solid heart. Use icons as visible in right-hand English rules of the Codex source.\n Three reward shields immediately below parchment, values 2, 1, 0.\n EXACTLY FOUR dark empty square instability sockets, upright, one horizontal row at bottom; centers at fractional x .35,.45,.55,.65 and y .91. NO sloped sockets, no extra squares.\n Preserve usable open central scene for play tokens, readable black effect text, title in same style as Garden. No figures, cubes, watermark or extra text. Transparent outside actual regular hex.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-094.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-98abf7ea-5692-4f53-94ae-a7e91d572ebf.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_treasure_room",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/templars_treasure_room.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Produce ONE rebuilt Room tile from Image 1, preserving its unique interior composition and overhead painted style. Restore the treasury's squared green-and-cream geometric tiled floor and ornate treasure chests, vases and shelves. Clear fallen masonry and rubble while retaining the reference's arrangement and mood. Remove the ENTIRE parchment including BOTH green rolled ends; remove all three reward shields and ALL FOUR bottom square sockets, replacing these with continuous repaired interior scenery. Image 2 is only the rebuilt tile layout reference: small title at top-center and no gameplay boxes. Title exactly \"Templars' Treasure Room\". Beside this small title put the EXACT SINGLE LEAF white-outline symbol in a green hexagon from Image 1, not the sprout/three-leaf symbol in Image 2. No effect text, no numbers, no sockets, no parchment, no scroll ends, no extra labels. Regular flat-top hexagon filling frame, around 1348x1168, genuine transparent exterior. Preserve all six hexagonal edges, camera, high resolution, detailed stone and vegetation textures.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/templars_treasure_room.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-16ea15bc-f490-4959-b3db-812b15ee45c1.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_treasure_room",
+      "variant": "available",
+      "path": "assets/rooms/tokens/templars_treasure_room_available.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Create ONE rebuilt activation parchment token matching exactly Image 1 shape, colors, green rolled ends, leaf type icon, texture, border, 3:1 aspect and transparent exterior. Replace title with \"Templars' Treasure Room\". Replace the entire effect area with this exact English sentence: \"[Self]: heal 6 [Damage].\". Bracketed terms must be ICONS not printed words. Keep all wording and numbers outside brackets verbatim. Self = bearded wizard-hat face as in Image 2. Damage = BROKEN HEART with clearly visible zig-zag crack (NOT solid heart). Power = outlined rose exactly as Image 4 if present. Evocation * = horned PAWN bust silhouette (head and rounded body, not just bull head) with small asterisk; Image 4 shows this exact silhouette for Indoor Forest. Health = SOLID heart. Attack = small spiked circular physical-attack icon as shown in English effect on Image 3. Movement = small walking figure as shown in Image 3. Source Room effect icons from the corresponding English rules on Image 3. Use large crisp black serif text on cream parchment, wrap below title into two or three balanced lines where needed. No sockets, numbers other than effect numbers, shields or scenery. Produce 2172x724 or equivalent high resolution.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/templars_treasure_room.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-094.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-e4a5f6e2-9da0-480b-a8ff-4c5d32e97866.png",
+      "size": [
+        2171,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_treasure_room",
+      "variant": "used",
+      "path": "assets/rooms/tokens/templars_treasure_room_used.png",
+      "codex_page": 94,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Change ONLY title \"Garden\" in the reference token to \"Templars' Treasure Room\". Fit it on one centered line with the same font, texture and excellent readability. Keep the single-leaf green hex icon, charcoal parchment, green rolled ends, red painted X, exact 3:1 silhouette, transparent exterior, high resolution, no other text. ONE isolated token, no background scene.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6b2d0e5f-9d54-4992-bc24-61bf7b03eed8.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "thorny_clearing",
+      "variant": "destroyed",
+      "path": "assets/rooms/thorny_clearing.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-resolution destroyed-side hexagonal Room tile, flat top, 1348x1168 approximately, true transparent exterior. Source Image1: faithfully recreate ONLY the LEFT tile in row 1, \"Thorny Clearing\", its distinctive scene and arrangement. Replace Polish text with English. Image2: match its border, parchment, typography, hexagon proportions and exact socket layout. Use green rolled parchment ends and white single-leaf in a green hexagon type icon beside title. Title \"Thorny Clearing\". Effect \"[Model *]: inflict 2 [Damage]. The [Black Rose] places 2 [Instability] in a [Room 0].\", replacing bracket terms with exact target glyphs from Image3: Mage=hat-wearing pawn WITH torso, Model=plain round head and torso WITHOUT hat, Evocation=horned pawn WITH rounded body, Self=bearded wizard face. Suffix range1 or * directly beside glyph. Room0=outline hex with 0 inside. Damage=BROKEN HEART with obvious zigzag split, Instability=black circular swirl, Black Rose=solid stemmed rose from Image4. Never print bracket words or change targets. Reward shields 2/1/0 beneath scroll. EXACT 4 black empty square sockets: four upright bottom-row positions x .35,.45,.55,.65 y .91 ONLY, no diagonal sockets. NO extra sockets, no figures/cubes, no watermark. Detailed overhead painted scene faithful to selected Codex image.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-095.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/garden.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d2669a09-5587-4554-902f-9c996349be2d.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "thorny_clearing",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/thorny_clearing.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt tile of \"Thorny Clearing\" from Image1. Preserve the specific overhead room interior, materials, composition, key objects and painted style. Remove ENTIRE top parchment including BOTH rolled ends, ALL three reward shields and ALL 4 black square instability sockets. Fill those areas with continuous room scenery, subtly repair the ruins. Image2 is a layout template only: unobstructed room floor, small top-centered name. Add only small title \"Thorny Clearing\" and single white LEAF in GREEN hexagon beside it. No other text, parchment, sockets, shields, people, tokens. Flat-top regular hex fills frame approximately1348x1168; genuine transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/thorny_clearing.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1a9f62ec-7af5-4e0d-80a4-8780375c27c1.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "thorny_clearing",
+      "variant": "available",
+      "path": "assets/rooms/tokens/thorny_clearing_available.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Thorny Clearing\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Thorny Clearing\" and white single LEAF in GREEN hexagon beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: Two separate lines. First line: plain round-headed Model pawn (no hat/horns), asterisk, colon, \"inflict 1\", broken-heart damage glyph, period. Second line: same plain Model pawn, asterisk, colon, \"inflict 2\", same broken-heart glyph, period. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/thorny_clearing.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-be61d7aa-1ae7-45a1-ac48-5d086ec27537.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "thorny_clearing",
+      "variant": "used",
+      "path": "assets/rooms/tokens/thorny_clearing_used.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit this used Room activation token. Change ONLY title to \"Thorny Clearing\". Keep its correct single white LEAF in GREEN hexagon, same colored rolled ends, dark charcoal center, large red painted X, ivory serif typography, texture, trim, wide3:1 shape and transparent exterior. No effect text, no extra symbols.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d26dca52-d93b-4ca1-845d-d67c05ea2a42.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "zen_garden",
+      "variant": "destroyed",
+      "path": "assets/rooms/zen_garden.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the effect target glyph in Image1. Replace wizard-face symbol with plain MODEL pawn silhouette (round head and rounded torso, no hat or horns), copied from row B of Image2, immediately followed by an ASTERISK. The line must be model-pawn + asterisk + \": move up to 1.\" Preserve absolutely all other features: title Zen Garden, leaf type icon, scroll, 2/1/0 shields, EXACTLY FOUR bottom square sockets, garden scenery and hex silhouette, resolution, genuine transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/zen_garden.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-647a12f8-1967-4b2a-b98b-544a5720643c.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "zen_garden",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/zen_garden.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt tile of \"Zen Garden\" from Image1. Preserve the specific overhead room interior, materials, composition, key objects and painted style. Remove ENTIRE top parchment including BOTH rolled ends, ALL three reward shields and ALL 4 black square instability sockets. Fill those areas with continuous room scenery, subtly repair the ruins. Image2 is a layout template only: unobstructed room floor, small top-centered name. Add only small title \"Zen Garden\" and single white LEAF in GREEN hexagon beside it. No other text, parchment, sockets, shields, people, tokens. Flat-top regular hex fills frame approximately1348x1168; genuine transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/zen_garden.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/garden.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-9773b584-831a-4c26-abaa-7cf60c164c2f.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "zen_garden",
+      "variant": "available",
+      "path": "assets/rooms/tokens/zen_garden_available.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit Image1 into the AVAILABLE Room activation token for \"Zen Garden\". Retain exact wide3:1 silhouette, parchment texture, trim, colored scroll ends and serif style. Title \"Zen Garden\" and white single LEAF in GREEN hexagon beside title, matching Image2. Erase ALL prior effect text/icons. New effect specification: One or two lines: plain round-headed Model pawn (no hat/horns), asterisk, colon, exact words \"move up to 1. Move up to 1. Move up to 1.\" There is only ONE Model target glyph, before the first clause. No glyphs beyond the ones explicitly specified. Do not print icon names. Every word and number exact. Legible, centered, well-spaced. Single token on genuine transparent exterior, no shields or square sockets.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/zen_garden.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7996cc6f-092b-4fa2-b12c-c46d53f1a461.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "zen_garden",
+      "variant": "used",
+      "path": "assets/rooms/tokens/zen_garden_used.png",
+      "codex_page": 95,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit this used Room activation token. Change ONLY title to \"Zen Garden\". Keep its correct single white LEAF in GREEN hexagon, same colored rolled ends, dark charcoal center, large red painted X, ivory serif typography, texture, trim, wide3:1 shape and transparent exterior. No effect text, no extra symbols.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-588a6f9d-c6c1-4798-98bf-af08657fe58c.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_faith",
+      "variant": "destroyed",
+      "path": "assets/rooms/abyss_of_faith.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-quality top-down fantasy board-game hexagonal Room tile, destroyed face. Source Image1: faithfully enlarge/localize ONLY the LEFT tile in ROW 1, \"Abyss of Faith\", preserve room-specific interior, dominant objects, colors, arrangement and ruins. Image2 is border/layout/style template ONLY, do not copy its interior. Top parchment with blue rolled ends, WHITE EYE inside LIGHT BLUE HEXAGON beside title, clear serif text. SIX black square sockets: four upright across bottom x .35,.45,.55,.65 y .91, one tilted lower left x .25 y .81, one tilted lower right x .75 y .81. Reward shields exactly 4,2,1. Title \"Abyss of Faith\". Print effect exactly \"[Evocation 1]: it activates under your control.\", with bracket terms replaced by black glyphs: Self=bearded wizard FACE, Model=plain round-headed pawn without hat/horns, Evocation=HORNED PAWN WITH TORSO, like appropriate row of Image3, followed by number or asterisk outside the pawn; Room n=outlined hexagon enclosing n; Attack=spiked physical attack burst; Spell=card with rose; Grimoire=closed rose-marked book; Crown=black royal crown; Damage=BROKEN heart with zigzag crack; Black Rose=solid stemmed rose Image4; Power=outlined stemless rose Image5. Do not print bracket words. Do not add any glyph absent from the exact effect. Regular flat-top hex fills frame about1348x1168, actual transparency outside, no extra tiles, figures, text, watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-096.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/oracle_room.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-e01c0093-175c-402b-9c8d-923b84538517.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_faith",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/abyss_of_faith.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Abyss of Faith\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 6 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Abyss of Faith\" with white EYE in blue hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_faith.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d743f1cb-cc96-4330-b7dd-65886a023f09.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_faith",
+      "variant": "available",
+      "path": "assets/rooms/tokens/abyss_of_faith_available.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Make a precise local correction to the first reference PNG. Replace EVERY existing physical Attack burst glyph in the effect text with the EXACT black-and-white silhouette in the second reference: a clenched fist facing right, outlined in white, on a black spiked impact burst. Retain the white negative spaces in the fist. Size each glyph to align with the text. Preserve all wording, numbers, other symbols, room type, illustration, border, proportions, slots and transparency. Do not add glyphs anywhere else; only replace the incorrect Attack glyph(s). Keep the resolution and aspect ratio of the first image. Output one corrected transparent PNG.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/abyss_of_faith_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/physical_attack_glyph.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6e93342c-2850-497f-914a-e0ac9c3ae759.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_faith",
+      "variant": "used",
+      "path": "assets/rooms/tokens/abyss_of_faith_used.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Abyss of Faith\" with white EYE in blue hexagon from Image2. Recolor both rolled ends BLUE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_faith.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-da91670a-1583-46f6-ab85-136c218db416.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_hel",
+      "variant": "destroyed",
+      "path": "assets/rooms/abyss_of_hel.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Correct ONLY the effect target in this hex tile. Replace the black wizard-face symbol at the start of \"summon a Crocodilus.\" by a black outline HEXAGON containing the numeral 0. The exact effect is hexagon0 followed by \": summon a Crocodilus.\" No wizard icon. Keep every other part EXACTLY: Abyss of Hel title, blue eye type badge, scroll, 4/2/1 shields, six sockets, watery chasm scenery, hex shape, resolution and transparent exterior.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_hel.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1c4826f7-957e-43b1-9d58-7d70f1b4669c.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_hel",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/abyss_of_hel.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Abyss of Hel\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 6 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Abyss of Hel\" with white EYE in blue hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_hel.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d2b2c4c4-7db2-4542-a29c-4a907a7a83b9.png",
+      "size": [
+        1347,
+        1168
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_hel",
+      "variant": "available",
+      "path": "assets/rooms/tokens/abyss_of_hel_available.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Create one production-ready high-resolution 2172x724 transparent PNG horizontal board-game activation scroll token for Black Rose Wars Rebirth. Match the first reference token's proportions, ornate dark stone outline, cream parchment, serif type and rolled colored ends. The second reference establishes the correct Room type and name, but the effect must be REBUILT effect below, not the destroyed text. Title exactly \"Abyss of Hel\", centered with its Room type emblem immediately left. Effect printed large crisp black with ample spacing below. The effect uses two sentences: an outlined Room hexagon containing 0, colon, 'summon an Ursa. It activates with', a Movement walking-figure glyph, '+2.' This is Room 0, not Self. Pale blue rollers and a white EYE in a pale blue hexagon for Room type. Use only the text and necessary glyphs specified here. No additional symbols, values, rewards, sockets, cards, tiles or surrounding scene. Whole token fits canvas; alpha transparent around its outer edge. Reference wizard/evocation glyph images are silhouettes only; never copy their labels or white rectangles. Required semantic effect: [Room 0]: summon an Ursa. It activates with [Movement]+2.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/oracle_room_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_hel.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6901367c-7361-4156-b4f0-552aa68c436d.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "abyss_of_hel",
+      "variant": "used",
+      "path": "assets/rooms/tokens/abyss_of_hel_used.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Abyss of Hel\" with white EYE in blue hexagon from Image2. Recolor both rolled ends BLUE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/abyss_of_hel.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-9252f5fd-3b97-4b75-a300-0599e66e465d.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "blasphemous_oracle_room",
+      "variant": "destroyed",
+      "path": "assets/rooms/blasphemous_oracle_room.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-quality top-down fantasy board-game hexagonal Room tile, destroyed face. Source Image1: faithfully enlarge/localize ONLY the LEFT tile in ROW 3, \"Blasphemous Oracle Room\", preserve room-specific interior, dominant objects, colors, arrangement and ruins. Image2 is border/layout/style template ONLY, do not copy its interior. Top parchment with blue rolled ends, WHITE EYE inside LIGHT BLUE HEXAGON beside title, clear serif text. SIX black square sockets: four upright across bottom x .35,.45,.55,.65 y .91, one tilted lower left x .25 y .81, one tilted lower right x .75 y .81. Reward shields exactly 4,2,1. Title \"Blasphemous Oracle Room\". Print effect exactly \"[Self]: lose 1 [Power]. If you do: search for 1 [Spell] in your [Grimoire] and draw it.\", with bracket terms replaced by black glyphs: Self=bearded wizard FACE, Model=plain round-headed pawn without hat/horns, Evocation=HORNED PAWN WITH TORSO, like appropriate row of Image3, followed by number or asterisk outside the pawn; Room n=outlined hexagon enclosing n; Attack=spiked physical attack burst; Spell=card with rose; Grimoire=closed rose-marked book; Crown=black royal crown; Damage=BROKEN heart with zigzag crack; Black Rose=solid stemmed rose Image4; Power=outlined stemless rose Image5. Do not print bracket words. Do not add any glyph absent from the exact effect. Regular flat-top hex fills frame about1348x1168, actual transparency outside, no extra tiles, figures, text, watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-096.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/oracle_room.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7dc3e79b-ca4e-4c74-99a8-c7ec1b039938.png",
+      "size": [
+        1348,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "blasphemous_oracle_room",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/blasphemous_oracle_room.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Blasphemous Oracle Room\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 6 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Blasphemous Oracle Room\" with white EYE in blue hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/blasphemous_oracle_room.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ec3799b7-ea42-4283-a862-67d1ccaf73b5.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "blasphemous_oracle_room",
+      "variant": "available",
+      "path": "assets/rooms/tokens/blasphemous_oracle_room_available.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Precisely correct only TWO Spell glyphs on the first scroll. Immediately after 'draw 1' in line 1 and after 'random' in line 2, replace the book/deck icon with a SINGLE upright flat rounded rectangular black playing-card glyph with a white outlined rose in its center. Use the single card in the second reference as the shape. The separate Grimoire icon immediately after 'from your' in line 1 must remain a closed book, distinct from the single-card glyph. Keep the Memories bag after 'your' in line 2. All text, title, blue type eye, Self icon, parchment, proportions and transparency unchanged. Output corrected transparent PNG, about 2172x724.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/blasphemous_oracle_room_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/bibliotheca_of_the_order_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-11260b0d-b4db-432a-baea-dc870b9bf763.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "blasphemous_oracle_room",
+      "variant": "used",
+      "path": "assets/rooms/tokens/blasphemous_oracle_room_used.png",
+      "codex_page": 96,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Blasphemous Oracle Room\" with white EYE in blue hexagon from Image2. Recolor both rolled ends BLUE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/blasphemous_oracle_room.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ebe7661e-7151-4a30-980c-b7582347422c.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ancient_pleasures_room",
+      "variant": "destroyed",
+      "path": "assets/rooms/ancient_pleasures_room.png",
+      "codex_page": 98,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-quality top-down fantasy board-game hexagonal Room tile, destroyed face. Source Image1: faithfully enlarge/localize ONLY the LEFT tile in ROW 1, \"Ancient Pleasures Room\", preserve room-specific interior, dominant objects, colors, arrangement and ruins. Image2 is border/layout/style template ONLY, do not copy its interior. Top parchment with purple rolled ends, WHITE TILTED OVAL/MIRROR inside PURPLE HEXAGON beside title, clear serif text. SIX black square sockets: four upright across bottom x .35,.45,.55,.65 y .91, one tilted lower left x .25 y .81, one tilted lower right x .75 y .81. Reward shields exactly 4,2,1. Title \"Ancient Pleasures Room\". Print effect exactly \"[Self]: draw 1 [Spell] from a School in the Library.\", with bracket terms replaced by black glyphs: Self=bearded wizard FACE, Model=plain round-headed pawn without hat/horns, Evocation=HORNED PAWN WITH TORSO, like appropriate row of Image3, followed by number or asterisk outside the pawn; Room n=outlined hexagon enclosing n; Attack=spiked physical attack burst; Spell=card with rose; Grimoire=closed rose-marked book; Crown=black royal crown; Damage=BROKEN heart with zigzag crack; Black Rose=solid stemmed rose Image4; Power=outlined stemless rose Image5. Do not print bracket words. Do not add any glyph absent from the exact effect. Regular flat-top hex fills frame about1348x1168, actual transparency outside, no extra tiles, figures, text, watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-098.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/armory.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-596be3da-aec2-4c54-9169-bfae180bfe23.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ancient_pleasures_room",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/ancient_pleasures_room.png",
+      "codex_page": 98,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Ancient Pleasures Room\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 6 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Ancient Pleasures Room\" with white tilted OVAL/MIRROR in purple hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/ancient_pleasures_room.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-0e8ea81b-4a4f-4694-a1af-b451985c205e.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ancient_pleasures_room",
+      "variant": "available",
+      "path": "assets/rooms/tokens/ancient_pleasures_room_available.png",
+      "codex_page": 98,
+      "status": "generated",
+      "prompt": "Create one production-ready high-resolution 2172x724 transparent PNG horizontal board-game activation scroll token for Black Rose Wars Rebirth. Match the first reference token's proportions, ornate dark stone outline, cream parchment, serif type and rolled colored ends. The second reference establishes the correct Room type and name, but the effect must be REBUILT effect below, not the destroyed text. Title exactly \"Ancient Pleasures Room\", centered with its Room type emblem immediately left. Effect printed large crisp black with ample spacing below. Two lines of effect: black Self bearded wizard-face glyph then ': search 1' then small Spell card glyph then 'from a School in the Library.' Second line: 'Shuffle the deck of that School.' Lavender purple rollers; Room type is a single tilted OVAL mirror inside a lavender hexagon, not a crown. Use only the text and necessary glyphs specified here. No additional symbols, values, rewards, sockets, cards, tiles or surrounding scene. Whole token fits canvas; alpha transparent around its outer edge. Reference wizard/evocation glyph images are silhouettes only; never copy their labels or white rectangles. Required semantic effect: [Self]: search 1 [Spell] from a School in the Library. Shuffle the deck of that School.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/armory_available.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/ancient_pleasures_room.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-3d25e063-90c8-4d94-b6f2-b922954a8fdf.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-d67c2300-ef5c-464f-a966-451c1bc5905e.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-46f15776-1876-4779-b3b5-6655d5f40433.png",
+      "size": [
+        2171,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "ancient_pleasures_room",
+      "variant": "used",
+      "path": "assets/rooms/tokens/ancient_pleasures_room_used.png",
+      "codex_page": 98,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Ancient Pleasures Room\" with white tilted OVAL/MIRROR in purple hexagon from Image2. Recolor both rolled ends PURPLE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/ancient_pleasures_room.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-05c6c7b2-124c-45da-a703-12ba69e2f42f.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "skulls_throne",
+      "variant": "destroyed",
+      "path": "assets/rooms/skulls_throne.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Use case: text-localization. ONE high-quality top-down fantasy board-game hexagonal Room tile, destroyed face. Source Image1: faithfully enlarge/localize ONLY the LEFT tile in ROW 1, \"Skulls' Throne Room\", preserve room-specific interior, dominant objects, colors, arrangement and ruins. Image2 is border/layout/style template ONLY, do not copy its interior. Top parchment with purple rolled ends, WHITE CROWN inside PURPLE HEXAGON (unique Throne type, do NOT use the oval icon) beside title, clear serif text. TEN black square sockets in precisely the positions of Image2: four upright across bottom, three on each lower diagonal, tilted to align with those edges. Reward shields exactly 6,3,1. Title \"Skulls' Throne Room\". Print effect exactly \"[Self]: obtain the [Crown]. The [Black Rose] inflicts 1 [Damage] to you.\", with bracket terms replaced by black glyphs: Self=bearded wizard FACE, Model=plain round-headed pawn without hat/horns, Evocation=HORNED PAWN WITH TORSO, like appropriate row of Image3, followed by number or asterisk outside the pawn; Room n=outlined hexagon enclosing n; Attack=spiked physical attack burst; Spell=card with rose; Grimoire=closed rose-marked book; Crown=black royal crown; Damage=BROKEN heart with zigzag crack; Black Rose=solid stemmed rose Image4; Power=outlined stemless rose Image5. Do not print bracket words. Do not add any glyph absent from the exact effect. Regular flat-top hex fills frame about1348x1168, actual transparency outside, no extra tiles, figures, text, watermark.",
+      "references": [
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/source-099.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/throne.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1fd7f8df-d481-4ba0-b8b8-2a96b95a4f19.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-1c35c28d-5eb3-40c4-822f-1231dc286675.png",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-c5bfd82e-d658-4485-9dba-002e54e7e839.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-f571bf4d-d4ff-4584-96d1-b7a623571ad4.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "skulls_throne",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/skulls_throne.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Skulls' Throne Room\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 10 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Skulls' Throne Room\" with white CROWN in purple hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/skulls_throne.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d5830da6-d94a-42fe-9dca-c2318e5cb8a7.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "skulls_throne",
+      "variant": "available",
+      "path": "assets/rooms/tokens/skulls_throne_available.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Precisely edit this transparent horizontal scroll: remove only the DUPLICATE purple hexagonal crown emblem to the RIGHT of the title. Keep the purple hexagonal crown to the LEFT of the title, so there is exactly one Room type emblem. Recenter that one emblem plus the title as a balanced header. Preserve the black Crown in the first effect line, Self icon, Room 1 hexagon, broken heart, all wording, numbers, parchment, rollers and outer transparency. Same high resolution and aspect ratio. Output only one transparent scroll.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/skulls_throne_available.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6ac9ae47-d369-48aa-878d-fd2cb3638fd1.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "skulls_throne",
+      "variant": "used",
+      "path": "assets/rooms/tokens/skulls_throne_used.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Skulls' Throne Room\" with white CROWN in purple hexagon, no oval from Image2. Recolor both rolled ends PURPLE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/skulls_throne.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-a7bc8115-43e3-4bd0-84b8-d816948402a9.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_armory",
+      "variant": "destroyed",
+      "path": "assets/rooms/templars_armory.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Make a precise local correction to the first reference PNG. Replace EVERY existing physical Attack burst glyph in the effect text with the EXACT black-and-white silhouette in the second reference: a clenched fist facing right, outlined in white, on a black spiked impact burst. Retain the white negative spaces in the fist. Size each glyph to align with the text. Preserve all wording, numbers, other symbols, room type, illustration, border, proportions, slots and transparency. Do not add glyphs anywhere else; only replace the incorrect Attack glyph(s). Keep the resolution and aspect ratio of the first image. Output one corrected transparent PNG.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/templars_armory.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/physical_attack_glyph.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ea3bb39e-6b81-4ce1-a426-7645922b8c1e.png",
+      "size": [
+        1346,
+        1169
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_armory",
+      "variant": "rebuilt",
+      "path": "assets/rooms/rebuilt/templars_armory.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Use case: precise-object-edit. Rebuilt face of \"Templars' Armory\" in Image1. Keep the distinctive room scenery, placement of objects, overall colors and high-detail overhead painted style. Remove ENTIRE parchment with BOTH scroll ends, ALL THREE reward shields, and ALL 6 black square sockets. Replace their areas seamlessly with repaired scenery/floor consistent with Image1. Tidy debris/restore masonry subtly without redesigning the room. Image2 is only a layout reference for small top-center name and unobstructed floor. Add only the small serif title \"Templars' Armory\" with white tilted OVAL/MIRROR in purple hexagon. No rules, parchment, sockets, shields, tokens or extra people. Same regular flat-top hex fills canvas approximately1348x1168, genuine transparent outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/templars_armory.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/rebuilt/crypt.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-fbc19c6e-3f34-4752-b3af-b07c99de46a7.png",
+      "size": [
+        1347,
+        1167
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_armory",
+      "variant": "available",
+      "path": "assets/rooms/tokens/templars_armory_available.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Make a precise local correction to the first reference PNG. Replace EVERY existing physical Attack burst glyph in the effect text with the EXACT black-and-white silhouette in the second reference: a clenched fist facing right, outlined in white, on a black spiked impact burst. Retain the white negative spaces in the fist. Size each glyph to align with the text. Preserve all wording, numbers, other symbols, room type, illustration, border, proportions, slots and transparency. Do not add glyphs anywhere else; only replace the incorrect Attack glyph(s). Keep the resolution and aspect ratio of the first image. Output one corrected transparent PNG.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/templars_armory_available.png",
+        "C:/Users/bigba/AppData/Local/Temp/BRWR_alternative_rooms_20261013/physical_attack_glyph.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-574427ce-0a3c-44b5-b8ea-39b55184dec8.png",
+      "size": [
+        2169,
+        725
+      ],
+      "alpha": true
+    },
+    {
+      "room": "templars_armory",
+      "variant": "used",
+      "path": "assets/rooms/tokens/templars_armory_used.png",
+      "codex_page": 99,
+      "status": "generated",
+      "prompt": "Use case: text-localization. Edit the used activation token Image1. Title must be \"Templars' Armory\" with white tilted OVAL/MIRROR in purple hexagon from Image2. Recolor both rolled ends PURPLE to match the ends in Image2. Preserve exact wide3:1 silhouette, parchment-scroll material/trim, dark charcoal center, ivory serif style and big red painted X. No effect text or extra symbols. One token with genuine transparency outside.",
+      "references": [
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/tokens/garden_used.png",
+        "C:/Users/bigba/Desktop/BRWR/brwr/assets/rooms/templars_armory.png"
+      ],
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-e6f19537-6e70-439a-9136-3525eee23b6f.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true
+    }
+  ]
+}

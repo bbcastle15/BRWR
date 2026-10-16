@@ -26,6 +26,8 @@ var damage_cubes: Array[int] = []
 # One owner id per assigned Destiny token (maximum three in total).
 # Each token reserves one cube from that owner's pool until it is resolved.
 var destiny_tokens: Array[int] = []
+var infectio_tokens: Array[int] = []
+var jinxes: Array[Dictionary] = []
 
 
 func _init(

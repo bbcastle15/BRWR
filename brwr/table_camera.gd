@@ -8,7 +8,7 @@ func minimum_zoom() -> float:
 	if get_parent().has_method("get_tabletop_bounds"):
 		var bounds: Rect2 = get_parent().get_tabletop_bounds()
 		var view: Vector2 = get_parent().get_table_view_rect().size
-		return minf(view.x / maxf(bounds.size.x, 1.0), view.y / maxf(bounds.size.y, 1.0))
+		return maxf(view.x / maxf(bounds.size.x, 1.0), view.y / maxf(bounds.size.y, 1.0))
 	return 1.0
 
 func _ready() -> void:
@@ -35,6 +35,7 @@ func adapt_to_viewport() -> void:
 	position += next_center - fitted_center
 	fitted_zoom = next_fit
 	fitted_center = next_center
+	clamp_to_playmat()
 	force_update_scroll()
 
 func reset_view() -> void:
@@ -46,6 +47,7 @@ func reset_view() -> void:
 		position = _view_center(bounds, zoom.x)
 		fitted_zoom = zoom.x
 		fitted_center = position
+	clamp_to_playmat()
 	force_update_scroll()
 
 func focus_lodge() -> void:
@@ -56,8 +58,23 @@ func _view_center(bounds: Rect2, scale_value: float) -> Vector2:
 	var area: Rect2 = get_parent().get_table_view_rect()
 	return bounds.get_center() - (area.get_center() - get_viewport_rect().size * 0.5) / scale_value
 
+func clamp_to_playmat() -> void:
+	if not get_parent().has_method("get_tabletop_bounds"):
+		return
+	var bounds: Rect2 = get_parent().get_tabletop_bounds()
+	var area: Rect2 = get_parent().get_table_view_rect()
+	var half := area.size / (2.0 * zoom.x)
+	var offset := (area.get_center() - get_viewport_rect().size * 0.5) / zoom.x
+	var center := position + offset
+	center.x = clampf(center.x, bounds.position.x + half.x, bounds.end.x - half.x)
+	center.y = clampf(center.y, bounds.position.y + half.y, bounds.end.y - half.y)
+	position = center - offset
+
 func _table_covered() -> bool:
 	var game = get_parent()
+	var preview = game.get_node_or_null("ReferenceCardPreview")
+	if preview != null and preview.root.visible:
+		return true
 	return (game.table_shell != null and (game.table_shell.board_overlay.visible or game.table_shell.card_overlay.visible)) or (game.beta_hud != null and (game.beta_hud.hand_overlay.visible or game.beta_hud.panel.visible))
 
 func zoom_at(screen_point: Vector2, factor: float) -> void:
@@ -66,6 +83,7 @@ func zoom_at(screen_point: Vector2, factor: float) -> void:
 	force_update_scroll()
 	var after := get_canvas_transform().affine_inverse() * screen_point
 	position += before - after
+	clamp_to_playmat()
 	force_update_scroll()
 
 func _input(event: InputEvent) -> void:
@@ -78,6 +96,8 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	if event is InputEventMouseMotion and dragging:
 		position -= event.relative / zoom
+		clamp_to_playmat()
+		force_update_scroll()
 		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -3,6 +3,7 @@ const SMALL_CARD_SIZE = Vector2(74, 48)
 const ART_SIZE = Vector2(240, 312)
 const ART_ORIGIN = Vector2(0, 173)
 const LODGE_NOTCH = Vector2(44, 325)
+const TRACK_MAX_POWER: int = 35
 
 const RECT_X = 145.0
 const RECT_WIDTH = 161.0
@@ -17,7 +18,7 @@ var black_rose_marker
 var player_markers: Array = []
 @export var second_moon_threshold: int = 6
 @export var third_moon_threshold: int = 18
-@export var end_game_threshold: int = 35
+@export var end_game_threshold: int = 30
 
 var black_rose_power: int = 0
 
@@ -136,8 +137,8 @@ func set_black_rose_power(value: int):
 	
 func update_player_marker(player_index: int, value: int):
 	var marker = player_markers[player_index]
-	marker.set_meta("display_power", value % end_game_threshold if value > end_game_threshold else value)
-	marker.get_node("Label").text = "+" + str(int(value / end_game_threshold) * end_game_threshold) if value > end_game_threshold else ""
+	marker.set_meta("display_power", value % TRACK_MAX_POWER if value > TRACK_MAX_POWER else value)
+	marker.get_node("Label").text = "+" + str(int(value / TRACK_MAX_POWER) * TRACK_MAX_POWER) if value > TRACK_MAX_POWER else ""
 
 	_layout_power_markers()
 	marker.tooltip_text = "Player %d · %d Power" % [player_index + 1, value]
@@ -171,17 +172,17 @@ func update_black_rose_marker():
 
 	black_rose_marker.set_meta(
 		"display_power",
-		black_rose_power % end_game_threshold
-		if black_rose_power > end_game_threshold
+		black_rose_power % TRACK_MAX_POWER
+		if black_rose_power > TRACK_MAX_POWER
 		else black_rose_power
 	)
 
 	black_rose_marker.get_node("Label").text = (
 		"+" + str(
-			int(black_rose_power / end_game_threshold)
-			* end_game_threshold
+			int(black_rose_power / TRACK_MAX_POWER)
+			* TRACK_MAX_POWER
 		)
-		if black_rose_power > end_game_threshold
+		if black_rose_power > TRACK_MAX_POWER
 		else ""
 	)
 
@@ -241,6 +242,64 @@ func setup_card_slots():
 	var y_positions := [0.136, 0.315, 0.504, 0.690]
 	for i in range(slots.size()):
 		setup_card_slot(slots[i], ART_ORIGIN + Vector2(0.162, y_positions[i]) * ART_SIZE, ["QUEST", "EVOCATION", "JINX", "UPGRADE"][i])
+	setup_forgotten_evocation_deck()
+
+
+func setup_forgotten_evocation_deck() -> void:
+	if $EvocationSlot.has_node("ForgottenEvocationDeck"):
+		return
+	# Reuse the red Evocation back printed on the supplied board artwork.
+	# Normalized UVs also work with the smaller texture imported for Web.
+	var back := AtlasTexture.new()
+	back.atlas = preload("res://assets/boards/power_board_reference.png")
+	back.region = Rect2(Vector2(0.163, 0.315) * back.atlas.get_size(), Vector2(0.300, 0.158) * back.atlas.get_size())
+	back.filter_clip = true
+	var deck := Button.new()
+	deck.name = "ForgottenEvocationDeck"
+	deck.size = SMALL_CARD_SIZE
+	deck.custom_minimum_size = SMALL_CARD_SIZE
+	deck.tooltip_text = "Forgotten Evocations · Browse cards and available copies"
+	deck.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	deck.pressed.connect(_inspect_forgotten_evocations, CONNECT_DEFERRED)
+	for style_name in ["normal", "hover", "pressed", "focus"]:
+		var edge := StyleBoxFlat.new()
+		edge.bg_color = Color(0, 0, 0, 0.3)
+		edge.set_corner_radius_all(2)
+		if style_name in ["hover", "focus"]:
+			edge.set_border_width_all(1)
+			edge.border_color = Color("e4c884")
+		deck.add_theme_stylebox_override(style_name, edge)
+	$EvocationSlot.add_child(deck)
+	for layer_index in range(3, -1, -1):
+		var card := TextureRect.new()
+		card.name = "CardBack" if layer_index == 0 else "Stack%d" % layer_index
+		card.texture = back
+		card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		card.position = Vector2.ONE * (1.0 + layer_index * 1.2)
+		card.size = SMALL_CARD_SIZE - Vector2(6, 6)
+		card.modulate = Color.WHITE * (1.0 - layer_index * 0.12)
+		card.modulate.a = 1.0
+		card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		deck.add_child(card)
+
+
+func _inspect_forgotten_evocations() -> void:
+	var game = get_parent()
+	game.inspected_quest = null
+	var cards: Array = game.evocation_database.get_all_evocations().filter(func(data): return bool(data.get("forgotten", false)))
+	cards.sort_custom(func(a, b): return str(a.name).naturalnocasecmp_to(str(b.name)) < 0)
+	game._reference_card_preview().show_reference_pile("evocations", cards, "Forgotten Evocations", _describe_evocation)
+
+
+func _describe_evocation(data: Dictionary) -> String:
+	var game = get_parent()
+	var text := "Available copies: %d / %d · %s\nHealth %d · Strength %d · Speed %d" % [
+		game.get_available_evocation_copies(str(data.id)), int(data.get("copies", 0)),
+		str(data.get("archetype", "")).capitalize(), int(data.health), int(data.strength), int(data.speed)]
+	if game.ReferenceCardPreview.card_texture("evocations", str(data.id)) == null:
+		text += "\n\n" + game.ReferenceCardPreview.describe_rules(data.get("abilities", []))
+	return text
 
 
 func setup_card_slot(slot: Control, slot_position: Vector2, label_text: String):

@@ -1,0 +1,418 @@
+[
+  {
+    "id": "black_rose_apocalypse",
+    "name": "Black Rose Room - Apocalypse",
+    "page": 84,
+    "row": 2,
+    "color": "black",
+    "slots": 10,
+    "rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_text": "[Self]: discard 3 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.",
+    "rebuilt_text": "[Self]: discard 2 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.",
+    "replaces": "black_rose"
+  },
+  {
+    "id": "deep_black_rose",
+    "name": "Deep Black Rose Room",
+    "page": 85,
+    "row": 1,
+    "color": "black",
+    "slots": 10,
+    "rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_text": "[Self]: discard your Ready [Quick] and 1 [Spell] from your Hand. If you do, draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: discard your Ready [Quick] and 3 [Spell] from your Hand. If you do, draw 2 Forgotten [Spell].",
+    "replaces": "black_rose"
+  },
+  {
+    "id": "emerald_rose",
+    "name": "Emerald Rose",
+    "page": 85,
+    "row": 2,
+    "color": "black",
+    "slots": 10,
+    "rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_text": "[Self]: discard 2 [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: search for 1 Forgotten [Spell] from the Forgotten Spells deck and draw it, then shuffle the deck. You lose 1 [Power].",
+    "replaces": "black_rose"
+  },
+  {
+    "id": "occult_black_rose",
+    "name": "Occult Black Rose Room",
+    "page": 85,
+    "row": 3,
+    "color": "black",
+    "slots": 10,
+    "rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_text": "[Self]: discard 2 Ready [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: discard 1 Ready [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "replaces": "black_rose"
+  },
+  {
+    "id": "crypt_of_the_saint",
+    "name": "Crypt of the Saint",
+    "page": 86,
+    "row": 3,
+    "color": "grey",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Self]: the [Black Rose] inflicts 2 [Damage] to you. Summon a Templarii in a [Room 0].",
+    "rebuilt_text": "[Room 0]: summon a Templarii. It activates. Summon a Templarii in a [Room *].",
+    "replaces": "crypt"
+  },
+  {
+    "id": "room_of_rebirth",
+    "name": "Room of Rebirth",
+    "page": 87,
+    "row": 1,
+    "color": "grey",
+    "slots": 6,
+    "rewards": [
+      3,
+      1,
+      0
+    ],
+    "destroyed_text": "Summon a Phoenix Familiar of your choice.",
+    "rebuilt_text": "Summon a Phoenix Familiar of your choice. Gain 1 [Power].",
+    "replaces": ""
+  },
+  {
+    "id": "sacrificial_altar_of_madness",
+    "name": "Sacrificial Altar of Madness",
+    "page": 87,
+    "row": 3,
+    "color": "grey",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Room 1]: convert 1 [Instability]. Convert 1 [Damage].",
+    "rebuilt_text": "[Room *]: convert 2 [Instability]. Convert 2 [Damage].",
+    "replaces": "sacrificial_altar"
+  },
+  {
+    "id": "whales_cemetery",
+    "name": "Whales Cemetery",
+    "page": 88,
+    "row": 1,
+    "color": "grey",
+    "slots": 6,
+    "rewards": [
+      5,
+      3,
+      2
+    ],
+    "destroyed_text": "[Room 0]: summon a Dagon.",
+    "rebuilt_text": "[Room 0]: summon a Dagon. It activates. It activates.",
+    "replaces": "cemetery"
+  },
+  {
+    "id": "crusaders_summoner_room",
+    "name": "Crusaders' Summoner Room",
+    "page": 89,
+    "row": 3,
+    "color": "red",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Evocation 1]: inflict 2 [Damage].",
+    "rebuilt_text": "[Evocation 1]: inflict 10 [Damage].",
+    "replaces": "summoner_room"
+  },
+  {
+    "id": "lost_alchemical_laboratory",
+    "name": "Lost Alchemical Laboratory",
+    "page": 90,
+    "row": 1,
+    "color": "red",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Mage 1]: inflict 2 [Damage].",
+    "rebuilt_text": "[Self]: draw 2 random [Spell] from your [Memories].",
+    "replaces": "alchemical_laboratory"
+  },
+  {
+    "id": "ludus_arena",
+    "name": "Ludus Arena",
+    "page": 90,
+    "row": 2,
+    "color": "red",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Room 0]: summon an Aruspice.",
+    "rebuilt_text": "[Room *]: summon an Aruspice. It activates.",
+    "replaces": "arena"
+  },
+  {
+    "id": "abyssal_observatory",
+    "name": "Abyssal Observatory",
+    "page": 91,
+    "row": 1,
+    "color": "yellow",
+    "slots": 5,
+    "rewards": [
+      3,
+      2,
+      1
+    ],
+    "destroyed_text": "[Self]: lose 1 [Power]. If you do, inflict 1 [Damage] on each Evocation in the Lodge.",
+    "rebuilt_text": "[Special]: lose 1 [Power]. If you do, remove all Evocations from the Lodge (yours included) in the order you prefer.",
+    "replaces": "observatory"
+  },
+  {
+    "id": "bibliotheca_of_the_order",
+    "name": "Bibliotheca of the Order",
+    "page": 91,
+    "row": 3,
+    "color": "yellow",
+    "slots": 5,
+    "rewards": [
+      3,
+      1,
+      1
+    ],
+    "destroyed_text": "[Self]: discard 1 Ready [Spell] into your [Memories]. If you do: draw 2 [Spell] from your [Grimoire].",
+    "rebuilt_text": "[Self]: draw 2 [Spell] from your [Grimoire].",
+    "replaces": "bibliotheca"
+  },
+  {
+    "id": "sanctuary_of_anubis",
+    "name": "Sanctuary of Anubis",
+    "page": 92,
+    "row": 3,
+    "color": "yellow",
+    "slots": 5,
+    "rewards": [
+      3,
+      1,
+      1
+    ],
+    "destroyed_text": "[Room 0]: summon a Pharaoh.",
+    "rebuilt_text": "[Evocation *]: the target activates under your control.",
+    "replaces": "sanctuary"
+  },
+  {
+    "id": "forge_of_the_void",
+    "name": "Forge of the Void",
+    "page": 93,
+    "row": 2,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      3,
+      2,
+      1
+    ],
+    "destroyed_text": "[Room 1]: remove 1 [Instability].",
+    "rebuilt_text": "[Room *]: remove or convert 2 [Instability].",
+    "replaces": "forge"
+  },
+  {
+    "id": "indoor_forest",
+    "name": "Indoor Forest",
+    "page": 94,
+    "row": 1,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control.",
+    "rebuilt_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control with [Attack]+2 and [Movement]+1.",
+    "replaces": "treasure_room"
+  },
+  {
+    "id": "life_fountain",
+    "name": "Life Fountain",
+    "page": 94,
+    "row": 2,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_text": "[Self]: heal 3 [Damage].",
+    "rebuilt_text": "[Self]: heal 3 [Damage]. You gain 1 [Power].",
+    "replaces": "garden"
+  },
+  {
+    "id": "templars_treasure_room",
+    "name": "Templars' Treasure Room",
+    "page": 94,
+    "row": 3,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_text": "[Self]: heal 2 [Damage].",
+    "rebuilt_text": "[Self]: heal 6 [Damage].",
+    "replaces": "treasure_room"
+  },
+  {
+    "id": "thorny_clearing",
+    "name": "Thorny Clearing",
+    "page": 95,
+    "row": 1,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_text": "[Model *]: inflict 2 [Damage]. The [Black Rose] places 2 [Instability] in a [Room 0].",
+    "rebuilt_text": "[Model *]: inflict 1 [Damage].\n[Model *]: inflict 2 [Damage].",
+    "replaces": "forge"
+  },
+  {
+    "id": "zen_garden",
+    "name": "Zen Garden",
+    "page": 95,
+    "row": 3,
+    "color": "green",
+    "slots": 4,
+    "rewards": [
+      2,
+      1,
+      0
+    ],
+    "destroyed_text": "[Model *]: move up to 1.",
+    "rebuilt_text": "[Model *]: move up to 1. Move up to 1. Move up to 1.",
+    "replaces": "garden"
+  },
+  {
+    "id": "abyss_of_faith",
+    "name": "Abyss of Faith",
+    "page": 96,
+    "row": 1,
+    "color": "blue",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Evocation 1]: it activates under your control.",
+    "rebuilt_text": "[Evocation 1]: it activates under your control and has [Attack]+2.",
+    "replaces": "the_abyss"
+  },
+  {
+    "id": "abyss_of_hel",
+    "name": "Abyss of Hel",
+    "page": 96,
+    "row": 2,
+    "color": "blue",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Room 0]: summon a Crocodilus.",
+    "rebuilt_text": "[Room 0]: summon an Ursa. It activates with [Movement]+2.",
+    "replaces": "the_abyss"
+  },
+  {
+    "id": "blasphemous_oracle_room",
+    "name": "Blasphemous Oracle Room",
+    "page": 96,
+    "row": 3,
+    "color": "blue",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Self]: lose 1 [Power]. If you do: search for 1 [Spell] in your [Grimoire] and draw it.",
+    "rebuilt_text": "[Self]: draw 1 [Spell] from your [Grimoire]. Draw 1 random [Spell] from your [Memories].",
+    "replaces": "oracle_room"
+  },
+  {
+    "id": "ancient_pleasures_room",
+    "name": "Ancient Pleasures Room",
+    "page": 98,
+    "row": 1,
+    "color": "purple",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Self]: draw 1 [Spell] from a School in the Library.",
+    "rebuilt_text": "[Self]: search 1 [Spell] from a School in the Library. Shuffle the deck of that School.",
+    "replaces": "pleasures_room"
+  },
+  {
+    "id": "skulls_throne",
+    "name": "Skulls' Throne Room",
+    "page": 99,
+    "row": 1,
+    "color": "throne",
+    "slots": 10,
+    "rewards": [
+      6,
+      3,
+      1
+    ],
+    "destroyed_text": "[Self]: obtain the [Crown]. The [Black Rose] inflicts 1 [Damage] to you.",
+    "rebuilt_text": "[Self]: obtain the [Crown].\n[Room 1]: inflict 3 [Damage].",
+    "replaces": "throne"
+  },
+  {
+    "id": "templars_armory",
+    "name": "Templars' Armory",
+    "page": 99,
+    "row": 2,
+    "color": "purple",
+    "slots": 6,
+    "rewards": [
+      4,
+      2,
+      1
+    ],
+    "destroyed_text": "[Self]: move up to 1. You may perform an [Attack] against a [Model 0].",
+    "rebuilt_text": "[Self]: move up to 4. You may perform an [Attack] with [Attack]+2 against a [Model 0].",
+    "replaces": "armory"
+  }
+]

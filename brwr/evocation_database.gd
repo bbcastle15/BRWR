@@ -73,6 +73,8 @@ func get_evocations_with_max_health(
 
 	for evocation_data in evocations.values():
 
+		if str(evocation_data.get("archetype", "")) == "nightmare":
+			continue
 		if int(
 			evocation_data.get(
 				"health",

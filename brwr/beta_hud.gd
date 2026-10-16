@@ -48,12 +48,14 @@ func setup(
 	sidebar_width: float = 340.0
 ) -> void:
 	game = game_node
+	layer = 20 # Modal decisions and Hand stay above the table and player rail.
 	reserved_width = max(
 		320.0,
 		sidebar_width
 	)
 
 	_build_ui()
+	get_viewport().size_changed.connect(_resize_mage_choices, CONNECT_DEFERRED)
 
 	if not game.player_input_requested.is_connected(
 		_on_player_input_requested
@@ -272,6 +274,7 @@ func _build_ui() -> void:
 	hand_overlay.setup(game)
 	hand_overlay.preparation_confirmed.connect(_on_hand_overlay_preparation_confirmed)
 	hand_overlay.study_confirmed.connect(func(indices): _submit({"keep_indices": indices}))
+	hand_overlay.quest_selection_confirmed.connect(_on_hand_overlay_quest_selection_confirmed)
 	_build_decision_bar()
 	hand_overlay.confirmation_changed.connect(_sync_hand_confirmation)
 	panel.hide()
@@ -356,7 +359,11 @@ func _open_hand_overlay() -> void:
 	if game.table_shell != null:
 		game.table_shell.close_board()
 	if str(current_request.get("type", "")) == "study_keep_cards":
-		_show_study_cards()
+		# Cards / Quests is always the player's actual Hand browser. The pending
+		# Study draw can be reopened with Choices/F10 without replacing the Hand.
+		current_player_index = game.get_ui_viewer_player_index()
+		if current_player_index >= 0:
+			hand_overlay.open_browse(current_player_index)
 		return
 	if hand_overlay == null or game == null:
 		return
@@ -365,7 +372,26 @@ func _open_hand_overlay() -> void:
 	if current_player_index < 0:
 		return
 
-	if str(current_request.get("type", "")) == "preparation":
+	var current_type: String = str(current_request.get("type", ""))
+	if current_type == "effect_choice" and _open_owned_quest_selection(
+		current_request.get("options", []), int(current_request.get("min_select", 1)),
+		int(current_request.get("max_select", 1)), str(current_request.get("prompt", "Choose a Quest."))
+	):
+		return
+	if current_type == "action_activation_step" and action_menu_mode == "quests":
+		_render_action_root("quests")
+		return
+	if current_type == "black_rose_optional_quest_discard":
+		_render_optional_quest_discard()
+		return
+	if current_type == "black_rose_active_quest_limit":
+		_render_quest_limit_in_hand("active")
+		return
+	if current_type == "black_rose_completed_quest_limit":
+		_render_quest_limit_in_hand("completed")
+		return
+
+	if current_type == "preparation":
 		# Hiding the overlay must retain the current Preparation draft.
 		hand_overlay.show()
 		hand_overlay.move_to_front()
@@ -376,6 +402,14 @@ func _open_hand_overlay() -> void:
 		return
 
 	hand_overlay.open_browse(current_player_index)
+
+
+func open_public_memories(player_index: int) -> void:
+	if hand_overlay == null or game == null:
+		return
+	if game.table_shell != null:
+		game.table_shell.close_board()
+	hand_overlay.open_memories(player_index)
 
 
 func _on_hand_overlay_preparation_confirmed(payload: Dictionary) -> void:
@@ -394,7 +428,7 @@ func _toggle_window_mode() -> void:
 
 func _toggle_panel() -> void:
 	if str(current_request.get("type", "")) == "study_keep_cards":
-		hand_overlay.visible = not hand_overlay.visible
+		_show_study_cards()
 		return
 	if panel != null:
 		panel.visible = not panel.visible and content.get_child_count() > 0
@@ -407,6 +441,7 @@ func _on_phase_completed(_phase: String) -> void:
 func _on_game_over(winner_data: Dictionary) -> void:
 	_refresh_header()
 	_clear_content()
+	_center_choice_panel()
 	panel.show()
 	prompt_label.text = "Fine partita"
 	var winner: int = int(winner_data.get("winner", -999))
@@ -419,6 +454,9 @@ func _on_player_input_resolved(
 	_request: Dictionary
 ) -> void:
 	panel.hide()
+	game._clear_direct_lodge_effect_choice()
+	game._hide_chaos_reveal_overlay()
+	game._hide_chaos_wildcard_overlay()
 	_clear_content()
 	if hand_overlay != null:
 		hand_overlay.close_overlay(true)
@@ -644,6 +682,8 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 		gallery = scroll
 	var id: String = str(option.get("id", option.get("spell_id", option.get("evocation_id", ""))))
 	var texture: Texture2D = hand_overlay._resolve_card_texture({"id": id}) if kind == "spells" else game.ReferenceCardPreview.card_texture(kind, id)
+	if bool(option.get("hidden", false)):
+		texture = preload("res://assets/tabletop/card_back.png")
 	var button := Button.new()
 	button.custom_minimum_size = Vector2(235, 335) if kind != "mages" else Vector2(450, 260)
 	if kind == "schools":
@@ -660,6 +700,8 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 	button.add_theme_stylebox_override("normal", style)
 	if texture == null:
 		button.text = _option_label(option)
+		if kind == "schools":
+			button.text += "\n\n" + str(game.school_specialization_database.get(id, {}).get("description", ""))
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	else:
 		var art := TextureRect.new()
@@ -771,6 +813,10 @@ func _render_current_request() -> void:
 
 		"effect_choice":
 			_render_effect_choice()
+		"chaos_reveal_ack":
+			panel.hide()
+			if game.network_client:
+				game._show_chaos_reveal_overlay(game.spell_database.get_spell(str(current_request.spell_id)), current_player_index)
 
 		"study_choose_schools":
 			_render_study_schools()
@@ -822,38 +868,10 @@ func _render_current_request() -> void:
 			_render_optional_quest_discard()
 
 		"black_rose_active_quest_limit":
-			_render_index_multiselect(
-				"Discard Active Quests",
-				current_request.get("quests", []),
-				"quest_index",
-				int(
-					current_request.get(
-						"discard_count",
-						0
-					)
-				),
-				Callable(
-					self,
-					"_submit_active_quest_limit"
-				)
-			)
+			_render_quest_limit_in_hand("active")
 
 		"black_rose_completed_quest_limit":
-			_render_index_multiselect(
-				"Discard Completed Quests",
-				current_request.get("quests", []),
-				"quest_index",
-				int(
-					current_request.get(
-						"discard_count",
-						0
-					)
-				),
-				Callable(
-					self,
-					"_submit_completed_quest_limit"
-				)
-			)
+			_render_quest_limit_in_hand("completed")
 
 		"action_activation":
 			_add_info(
@@ -942,9 +960,64 @@ func _submit(payload: Dictionary) -> void:
 
 
 func _render_starting_mage_choice() -> void:
-	_add_info("Choose your Mage card. Mages already chosen are unavailable.")
+	_add_info("Choose a Mage · personal Spell shown alongside · scroll down for more Mages.")
+	var view := get_viewport().get_visible_rect().size
+	panel.anchor_left = 0.0
+	panel.anchor_right = 1.0
+	panel.anchor_top = 0.0
+	panel.anchor_bottom = 1.0
+	panel.offset_left = 24
+	panel.offset_right = -24
+	panel.offset_top = 16
+	panel.offset_bottom = -16
+	var scroll := content.get_parent() as ScrollContainer
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var card_height := clampf(view.y - 260, 300, 530)
+	var spell_size := Vector2(card_height * 2.0 / 3.0, card_height)
+	var mage_width := minf(720, view.x - spell_size.x - 150)
+	var gallery := VBoxContainer.new()
+	gallery.name = "MageChoices"
+	gallery.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	gallery.add_theme_constant_override("separation", 24)
+	content.add_child(gallery)
 	for mage in current_request.get("available_mages", []):
-		_add_object_choice(mage, _submit_starting_mage.bind(str(mage.get("id", ""))), false, "mages")
+		var row := HBoxContainer.new()
+		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		row.add_theme_constant_override("separation", 24)
+		gallery.add_child(row)
+		var column := VBoxContainer.new()
+		column.alignment = BoxContainer.ALIGNMENT_CENTER
+		row.add_child(column)
+		var id: String = str(mage.id)
+		var choose: Button = game.ReferenceCardPreview.make_card("mages", id, str(mage.name), Vector2(mage_width, mage_width / 1.73), _submit_starting_mage.bind(id))
+		choose.set_meta("choice_option", mage)
+		column.add_child(choose)
+		var button := Button.new()
+		button.text = "Choose " + str(mage.name)
+		button.pressed.connect(_submit_starting_mage.bind(id), CONNECT_DEFERRED)
+		column.add_child(button)
+		var spell_id: String = str(mage.get("personal_spell_id", ""))
+		var spell: Button = game.ReferenceCardPreview.make_card("spells", spell_id, str(mage.get("personal_spell_name", "Personal Spell")), spell_size, _inspect_personal_spell.bind(spell_id))
+		spell.name = "PersonalSpell"
+		row.add_child(spell)
+
+func _inspect_personal_spell(id: String) -> void:
+	var spell = game.spell_database.get_spell(id)
+	if spell != null:
+		game._reference_card_preview().show_card("spells", id, spell.card_name, "")
+
+
+func _resize_mage_choices() -> void:
+	var gallery := content.get_node_or_null("MageChoices")
+	if gallery == null:
+		return
+	var view := get_viewport().get_visible_rect().size
+	var height := clampf(view.y - 260, 300, 530)
+	var spell_size := Vector2(height * 2.0 / 3.0, height)
+	var mage_width := minf(720, view.x - spell_size.x - 150)
+	for row in gallery.get_children():
+		row.get_node("PersonalSpell").custom_minimum_size = spell_size
+		row.get_child(0).get_child(0).custom_minimum_size = Vector2(mage_width, mage_width / 1.73)
 
 
 func _submit_starting_mage(
@@ -1196,7 +1269,7 @@ func get_action_root_entries_for_request(
 				)
 
 				label = "Command " + evocation_name
-				mode = "command_plans"
+				mode = "direct" if bool(action.get("context", {}).get("extended_activation", false)) else "command_plans"
 
 			"spell", "quick":
 				key = str(option.get("token", ""))
@@ -1267,7 +1340,36 @@ func open_board_actions(category: String) -> void:
 	_set_action_menu(category)
 
 
+func _open_owned_quest_selection(options: Array, minimum: int, maximum: int, prompt: String) -> bool:
+	if hand_overlay == null or options.is_empty():
+		return false
+	for option in options:
+		if str(option.get("card_kind", "")) != "quests" \
+		or int(option.get("board_player_index", -1)) != current_player_index:
+			return false
+	panel.hide()
+	if game.table_shell != null:
+		game.table_shell.close_board()
+	hand_overlay.open_quest_selection({
+		"player_index": current_player_index, "prompt": prompt,
+		"min_select": minimum, "max_select": maximum, "options": options
+	})
+	return true
+
+
 func _render_action_root(category: String = "") -> void:
+	if category == "quests":
+		var quest_options: Array = []
+		for option in game.get_player_board_action_options(current_player_index, "quests"):
+			var entry: Dictionary = option.duplicate(true)
+			var index: int = int(entry.get("quest_index", -1))
+			if index < 0 or index >= game.players[current_player_index].completed_quests.size():
+				continue
+			entry["id"] = game.players[current_player_index].completed_quests[index].get_id()
+			entry["card_kind"] = "quests"
+			quest_options.append(entry)
+		if _open_owned_quest_selection(quest_options, 1, 1, "Choose a completed Quest to resolve."):
+			return
 	if category == "":
 		_add_info("Open your banner, then choose a physical token or a prepared Spell. Shift-click a Spell to inspect.")
 		panel.hide()
@@ -1514,17 +1616,25 @@ func _attack_target_option(action: Dictionary, prefix: String = "") -> Dictionar
 
 func _render_board_variants(choices: Array) -> void:
 	_clear_content()
+	var evocation_targeting: bool = (
+		str(current_request.get("type", "")) == "evocation_phase_activations"
+		or str(current_request.get("choice_kind", "")) == "evocation_activation_plan"
+	)
 	panel.anchor_top = 1.0
 	panel.anchor_bottom = 1.0
 	panel.offset_top = -240.0
 	panel.offset_bottom = -12.0
-	panel.show()
-	_add_info("Click a highlighted target; then choose how to act.")
+	panel.visible = not evocation_targeting
+	if not evocation_targeting:
+		_add_info("Click a highlighted target; then choose how to act.")
 	var groups: Dictionary = {}
 	for choice in choices:
 		var target: Dictionary = choice.get("board_target", {})
 		if target.is_empty():
-			_add_button(str(choice.get("label", "Continue")), choice.callback)
+			if evocation_targeting:
+				_add_confirmation("Finish without attack", choice.callback)
+			else:
+				_add_button(str(choice.get("label", "Continue")), choice.callback)
 			continue
 		var key: String = JSON.stringify(target)
 		if not groups.has(key):
@@ -1537,7 +1647,10 @@ func _render_board_variants(choices: Array) -> void:
 		var callback: Callable = variants[0].callback if variants.size() == 1 else _render_target_variants.bind(variants)
 		if not game.show_board_target_choice(target, callback):
 			_add_button(str(variants[0].get("label", "Target")), callback)
-	_add_button("← Back", _render_current_request)
+	if evocation_targeting:
+		_add_confirmation("← Back", _render_current_request)
+	else:
+		_add_button("← Back", _render_current_request)
 
 
 func _render_target_variants(choices: Array) -> void:
@@ -1716,6 +1829,21 @@ func _submit_action_token(token: String) -> void:
 # =============================================================================
 
 func _render_effect_choice() -> void:
+	# The same serializable board choices drive the host and remote clients.
+	# These requests deliberately have no text-menu options.
+	if bool(current_request.get("board_only", false)):
+		panel.hide()
+		game._show_direct_lodge_effect_choice(current_player_index,
+			str(current_request.get("choice_kind", "")), current_request.get("board_options", []),
+			int(current_request.get("min_select", 1)), int(current_request.get("max_select", 1)))
+		if int(current_request.get("min_select", 1)) == 0:
+			_add_confirmation("Skip", _submit_effect_single.bind(""))
+		return
+	if str(current_request.get("choice_kind", "")) == "chaos_all_element":
+		panel.hide()
+		if game.network_client:
+			game._show_chaos_wildcard_overlay(current_player_index, current_request.get("options", []))
+		return
 	var min_select: int = int(
 		current_request.get(
 			"min_select",
@@ -1751,6 +1879,11 @@ func _render_effect_choice() -> void:
 		[]
 	)
 
+	# Route all owned Quest choices before creating any PlayerBoard hitboxes.
+	if _open_owned_quest_selection(options, min_select, max_select,
+		str(current_request.get("prompt", "Choose a Quest."))):
+		return
+
 	if max_select == 1 and str(current_request.get("choice_kind", "")) in ["movement_destination", "evocation_activation_plan", "event_cell_destination"]:
 		var choices: Array = []
 		if min_select == 0:
@@ -1773,18 +1906,6 @@ func _render_effect_choice() -> void:
 		panel.offset_top = -240.0
 		panel.offset_bottom = -12.0
 		_add_info("Click the highlighted target or cubes on the board.")
-
-	# Rebuilt Pleasures Room requires selecting Quests to discard. Keep the
-	# PlayerBoard highlights, but also expose explicit selection buttons so a
-	# Quest can never be inspection-only during this mandatory choice.
-	if str(current_request.get("choice_kind", "")) == "room_discard":
-		var quest_options := options.filter(func(option): return str(option.get("card_kind", "")) == "quests")
-		if not quest_options.is_empty():
-			_add_info("Choose the Quests to discard (highlighted cards or list below).")
-			for option in quest_options:
-				var token := str(option.get("token", ""))
-				var selected := generic_selection.has(token)
-				_add_button(("✓ " if selected else "□ ") + _option_label(option), _toggle_generic_value.bind(token))
 
 	# A non-Room target may carry room_id only as public location metadata.
 	# Treating that field as a Room choice made Evocation-targeting Spells such
@@ -1996,19 +2117,29 @@ func _add_study_school(school_id: String) -> void:
 		return
 
 	school_draft.append(school_id)
-	_render_current_request()
+	_refresh_study_schools()
 
 
 func _undo_study_school() -> void:
 	if not school_draft.is_empty():
 		school_draft.pop_back()
 
-	_render_current_request()
+	_refresh_study_schools()
 
 
 func _clear_study_schools() -> void:
 	school_draft.clear()
+	_refresh_study_schools()
+
+
+func _refresh_study_schools() -> void:
+	# Preserve the inspected end of the Library when rebuilding the draw draft.
+	var gallery := content.get_node_or_null("ObjectChoices") as ScrollContainer
+	var scroll_position: int = gallery.scroll_horizontal if gallery != null else 0
 	_render_current_request()
+	var rebuilt := content.get_node_or_null("ObjectChoices") as ScrollContainer
+	if rebuilt != null:
+		rebuilt.set_deferred("scroll_horizontal", scroll_position)
 
 
 func _submit_study_schools() -> void:
@@ -2264,10 +2395,74 @@ func _submit_cleanup() -> void:
 # BLACK ROSE QUEST CHOICES
 # =============================================================================
 
+func _quest_discard_overlay_options(section: String) -> Array:
+	var result: Array = []
+	for quest_value in current_request.get("quests", []):
+		if not quest_value is Dictionary:
+			continue
+		var quest: Dictionary = quest_value
+		var index: int = int(quest.get("quest_index", -1))
+		if index < 0:
+			continue
+		var option: Dictionary = quest.duplicate(true)
+		option["token"] = "quest:" + str(index)
+		option["quest_section"] = section
+		option["card_kind"] = "quests"
+		result.append(option)
+	return result
+
+
 func _render_optional_quest_discard() -> void:
-	_add_button("Do not discard a Quest", _submit_optional_quest.bind(-1))
-	for quest in current_request.get("quests", []):
-		_add_object_choice(quest, _submit_optional_quest.bind(int(quest.get("quest_index", -1))), false, "quests")
+	panel.hide()
+	hand_overlay.open_quest_selection({
+		"player_index": current_player_index,
+		"prompt": "Discard up to one Active Quest, or confirm with none selected.",
+		"min_select": 0,
+		"max_select": 1,
+		"options": _quest_discard_overlay_options("active")
+	})
+
+
+func _render_quest_limit_in_hand(section: String) -> void:
+	var amount: int = int(current_request.get("discard_count", 0))
+	panel.hide()
+	hand_overlay.open_quest_selection({
+		"player_index": current_player_index,
+		"prompt": "Choose exactly %d %s Quest%s to discard." % [amount, section.capitalize(), "" if amount == 1 else "s"],
+		"min_select": amount,
+		"max_select": amount,
+		"options": _quest_discard_overlay_options(section)
+	})
+
+
+func _on_hand_overlay_quest_selection_confirmed(tokens: Array) -> void:
+	var input_type: String = str(current_request.get("type", ""))
+	if input_type == "action_activation_step":
+		if not tokens.is_empty():
+			_submit_action_token(str(tokens[0]))
+		return
+	if input_type == "effect_choice":
+		if int(current_request.get("max_select", 1)) <= 1:
+			_submit_effect_single(str(tokens[0]) if not tokens.is_empty() else "")
+		else:
+			generic_selection.clear()
+			for token in tokens:
+				generic_selection.append(str(token))
+			_submit_effect_multi()
+		return
+	var indices: Array = []
+	for token_value in tokens:
+		var token: String = str(token_value)
+		if token.begins_with("quest:"):
+			indices.append(int(token.trim_prefix("quest:")))
+	if input_type == "black_rose_optional_quest_discard":
+		_submit_optional_quest(int(indices[0]) if not indices.is_empty() else -1)
+	elif input_type == "black_rose_active_quest_limit":
+		generic_selection = indices.duplicate()
+		_submit_active_quest_limit()
+	elif input_type == "black_rose_completed_quest_limit":
+		generic_selection = indices.duplicate()
+		_submit_completed_quest_limit()
 
 
 func _submit_optional_quest(
@@ -2291,6 +2486,8 @@ func _submit_completed_quest_limit() -> void:
 
 # These are UI paths/callbacks only; submission still validates the original game request.
 func _center_choice_panel() -> void:
+	panel.anchor_left = 0.5
+	panel.anchor_right = 0.5
 	panel.offset_left = -330.0
 	panel.offset_right = 330.0
 	panel.anchor_top = 0.5

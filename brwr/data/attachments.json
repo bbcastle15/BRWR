@@ -1,0 +1,278 @@
+{
+  "upgrades": [
+    {
+      "id": "bone_shield",
+      "name": "Bone Shield",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "reduce_opponent_instability",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "cerebral_implant",
+      "name": "Cerebral Implant",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "power_when_inflicts_damage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "corrosive_plasma",
+      "name": "Corrosive Plasma",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "attack_room",
+          "range": 0
+        }
+      ]
+    },
+    {
+      "id": "explosive_bones",
+      "name": "Explosive Bones",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "damage_room_on_defeat_or_removal",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grafted_crossbow",
+      "name": "Grafted Crossbow",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "steal_power_instead_mage_attack",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "hyperdermis",
+      "name": "Hyperdermis",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "stats",
+          "strength": 1,
+          "health": 1,
+          "speed": -1
+        }
+      ]
+    },
+    {
+      "id": "muscular_implant",
+      "name": "Muscular Implant",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "stats",
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "id": "pegasus_feathers",
+      "name": "Pegasus’s Feathers",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "on_activate",
+          "effects": [
+            {
+              "type": "optional_effect",
+              "effects": [
+                {
+                  "type": "self_room_effect",
+                  "effects": [
+                    {
+                      "type": "place_instability",
+                      "amount": 1
+                    }
+                  ]
+                }
+              ],
+              "prompt": "Pegasus’s Feathers: place 1 Instability in this Evocation’s Room."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regenerating_ichor",
+      "name": "Regenerating Ichor",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "reduce_incoming_damage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "reinforced_dermis",
+      "name": "Reinforced Dermis",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "stats",
+          "health": 2
+        }
+      ]
+    },
+    {
+      "id": "skinblade",
+      "name": "Skinblade",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "stats",
+          "strength": 2
+        },
+        {
+          "type": "after_attack",
+          "effects": [
+            {
+              "type": "damage_source_evocation",
+              "amount": 2,
+              "black_rose": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tendon_implant",
+      "name": "Tendon Implant",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "stats",
+          "speed": 1
+        },
+        {
+          "type": "move_after_black_rose"
+        }
+      ]
+    },
+    {
+      "id": "warscratch",
+      "name": "Warscratch",
+      "copies": 3,
+      "abilities": [
+        {
+          "type": "extra_phase_activation_then_remove"
+        }
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "id": "bane_of_baktiotha",
+      "name": "Bane of Baktiotha",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "other_trap_protection",
+      "task": "room_colors",
+      "colors": [
+        "grey",
+        "purple"
+      ],
+      "damage": 2
+    },
+    {
+      "id": "divine_dance",
+      "name": "Divine Dance",
+      "copies": 3,
+      "slots": 2,
+      "trigger": "enter_room",
+      "task": "placed_cell",
+      "damage": 1
+    },
+    {
+      "id": "hourglass_of_seth",
+      "name": "Hourglass of Seth",
+      "copies": 3,
+      "slots": 2,
+      "trigger": "reduce_power",
+      "task": "power_reduced"
+    },
+    {
+      "id": "inverted_pyramid",
+      "name": "Inverted Pyramid",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "assigned_or_solve_quest",
+      "task": "room_colors",
+      "colors": [
+        "red",
+        "blue"
+      ],
+      "damage": 2
+    },
+    {
+      "id": "locusts",
+      "name": "Locusts",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "any_summon",
+      "task": "own_summon",
+      "damage": 2
+    },
+    {
+      "id": "oblivion",
+      "name": "Oblivion",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "reduce_instability",
+      "task": "instability_reduced"
+    },
+    {
+      "id": "slowness",
+      "name": "Slowness",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "speed_one",
+      "task": "explore_momentum"
+    },
+    {
+      "id": "spinning_wheel_sting",
+      "name": "Spinning Wheel Sting",
+      "copies": 3,
+      "slots": 2,
+      "trigger": "gain_power",
+      "task": "placed_cell",
+      "damage": 1
+    },
+    {
+      "id": "vulnerability",
+      "name": "Vulnerability",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "assigned_optional_damage",
+      "task": "discard_jinx_or_quest",
+      "damage": 1
+    },
+    {
+      "id": "weakness",
+      "name": "Weakness",
+      "copies": 3,
+      "slots": 3,
+      "trigger": "assigned_or_cell",
+      "task": "room_colors",
+      "colors": [
+        "yellow",
+        "green"
+      ],
+      "damage": 2
+    }
+  ]
+}

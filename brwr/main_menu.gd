@@ -18,8 +18,11 @@ var solo_button: Button
 var solo_count: SpinBox
 var online_count: SpinBox
 var roster: Label
+var room_selections: Dictionary = {}
+var room_setup_button: Button
 
 func _ready() -> void:
+	theme = preload("res://tabletop_style.gd").make_theme()
 	session = preload("res://online_session.gd").new()
 	session.name = "OnlineSession"
 	add_child(session)
@@ -36,8 +39,17 @@ func _ready() -> void:
 	var layer := CanvasLayer.new()
 	layer.layer = 110
 	add_child(layer)
+	var background := TextureRect.new()
+	background.texture = preload("res://assets/tabletop/playmat.png")
+	background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(background)
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu = PanelContainer.new()
+	menu.theme = theme
 	layer.add_child(menu)
+	menu.visibility_changed.connect(func(): background.visible = menu.visible)
 	menu.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu.anchor_left = 0.23
 	menu.anchor_right = 0.77
@@ -63,6 +75,7 @@ func _ready() -> void:
 	box.add_child(solo_row)
 	solo_count = _count(solo_row)
 	solo_button = _button(solo_row, "Modalità solo-test", _solo)
+	room_setup_button = _button(box, "Stanze della Loggia · originali / alternative", _open_room_setup)
 	box.add_child(HSeparator.new())
 
 	_label(box, "PvP online · Host e giocatori si collegano al server BRWR su Render.")
@@ -157,6 +170,7 @@ func _solo() -> void:
 		return
 	var game = load("res://game.tscn").instantiate()
 	game.player_count = int(solo_count.value)
+	game.room_variants = room_selections.duplicate()
 	game.beta_force_fullscreen = not OS.has_feature("web")
 	add_child(game)
 	menu.hide()
@@ -173,6 +187,7 @@ func _host() -> void:
 		_status("Server Render non configurato. Inserisci l'URL reale in online_server_url.txt.")
 		return
 
+	session.room_variants = room_selections.duplicate()
 	var error: Error = session.host(int(online_count.value))
 	if error != OK:
 		_status("Impossibile collegarsi al server online: " + error_string(error))
@@ -206,6 +221,7 @@ func _join() -> void:
 func _refresh_lobby() -> void:
 	var in_session: bool = session.connected or session.connection_started > 0 or session.started
 	solo_button.disabled = in_session
+	room_setup_button.disabled = in_session
 	join_button.disabled = in_session
 	address.editable = not in_session
 	code.editable = not in_session
@@ -236,3 +252,79 @@ func _reset() -> void:
 	if web_host != null:
 		web_host.stop()
 	session.return_to_menu()
+
+
+func _open_room_setup() -> void:
+	var definitions: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/rooms.json"))
+	var overlay := PanelContainer.new()
+	overlay.theme = theme
+	menu.get_parent().add_child(overlay)
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	menu.hide()
+	var margin := MarginContainer.new()
+	for side in ["left", "right", "top", "bottom"]:
+		margin.add_theme_constant_override("margin_" + side, 24)
+	overlay.add_child(margin)
+	var column := VBoxContainer.new()
+	margin.add_child(column)
+	var title := _label(column, "STANZE DELLA LOGGIA")
+	title.add_theme_font_size_override("font_size", 26)
+	_label(column, "Ogni alternativa sostituisce solo la stanza corrispondente e conta come quella stanza per le Quest.")
+	var toolbar := HBoxContainer.new()
+	column.add_child(toolbar)
+	var controls: Dictionary = {}
+	_button(toolbar, "Tutte originali", func(): _set_all_rooms(controls, false))
+	_button(toolbar, "Varianti casuali", func(): _set_all_rooms(controls, true))
+	var close := _button(toolbar, "Conferma e torna al menu", func():
+		menu.show()
+		overlay.queue_free())
+	close.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	column.add_child(scroll)
+	var rows := VBoxContainer.new()
+	rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(rows)
+	for base in definitions:
+		if not bool(base.get("core", false)):
+			continue
+		var variants: Array = definitions.filter(func(d): return d.get("replaces", "") == base.id and bool(d.get("playable", true)))
+		if variants.is_empty():
+			continue
+		_label(rows, str(base.name))
+		var group := ButtonGroup.new()
+		var choices := HFlowContainer.new()
+		choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		rows.add_child(choices)
+		variants.push_front(base)
+		variants.append({"id": "random", "name": "Casuale"})
+		controls[str(base.id)] = {}
+		for definition in variants:
+			var base_id: String = str(base.id)
+			var variant_id: String = str(definition.id)
+			var button := Button.new()
+			button.text = str(definition.name)
+			button.toggle_mode = true
+			button.button_group = group
+			button.custom_minimum_size = Vector2(225, 185)
+			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			var path: String = "res://assets/rooms/%s.png" % variant_id
+			if ResourceLoader.exists(path):
+				button.icon = load(path)
+				button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				button.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+				button.add_theme_constant_override("icon_max_width", 160)
+			button.button_pressed = str(room_selections.get(base_id, base_id)) == variant_id
+			button.pressed.connect(func(): room_selections[base_id] = variant_id)
+			choices.add_child(button)
+			controls[base_id][variant_id] = button
+		rows.add_child(HSeparator.new())
+	_label(rows, "Apocalypse e Room of Rebirth saranno disponibili con le rispettive modalità.")
+
+
+func _set_all_rooms(controls: Dictionary, randomize_variants: bool) -> void:
+	room_selections.clear()
+	for base_id in controls:
+		var selected: String = "random" if randomize_variants else str(base_id)
+		room_selections[base_id] = selected
+		controls[base_id][selected].button_pressed = true

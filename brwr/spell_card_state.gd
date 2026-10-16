@@ -59,6 +59,16 @@ func get_side(use_dark_side: bool) -> Dictionary:
 	return light_side
 
 
+func is_playable_side(use_dark_side: bool) -> bool:
+	return not str(get_side(use_dark_side).get("type", "")) in ["transformation", "unavailable", "on_draw"]
+
+
+func has_single_effect() -> bool:
+	# Full-height cards such as Rotten keep two equivalent definitions for
+	# compatibility with existing saves; they have no Light/Dark decision.
+	return light_side == dark_side
+
+
 func get_effects(use_dark_side: bool) -> Array:
 	var side = get_side(use_dark_side)
 

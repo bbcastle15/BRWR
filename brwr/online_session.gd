@@ -18,6 +18,7 @@ var hosting := false
 var busy := false
 var version := ""
 var player_count := 2
+var room_variants: Dictionary = {}
 var local_player := 0
 var seats: Array[int] = []
 
@@ -45,14 +46,32 @@ func _ready() -> void:
 		"game.gd",
 		"effect_resolver.gd",
 		"death_effect_resolver.gd",
+		"druidic_rules.gd",
+		"famine_rules.gd",
+		"school_effects.gd",
+		"oracle_rules.gd",
+		"pestilence_rules.gd",
+		"equipment_rules.gd",
+		"forgotten_rules.gd",
+		"forgotten_evocations.gd",
+		"forgotten_passives.gd",
+		"forgotten_attachments.gd",
+		"evocation_state.gd",
+		"mage_state.gd",
+		"data/attachments.json",
+		"player_state.gd",
+		"spell_card_state.gd",
 		"triggered_spell_manager.gd",
 		"room_effect_resolver.gd",
+		"alternative_room_rules.gd",
 		"event_effect_resolver.gd",
 		"quest_manager.gd",
 		"network_projection.gd",
+		"room.gd",
 		"online_session.gd",
 		"data/spells.json",
 		"data/mages.json",
+		"data/evocations.json",
 		"data/school_specializations_v19.json",
 		"data/rooms.json",
 		"data/events.json",
@@ -340,6 +359,8 @@ func _create_game(client: bool) -> void:
 	game.network_client = client
 	game.local_viewer_index = local_player
 	game.player_count = player_count
+	if not client:
+		game.room_variants = room_variants.duplicate()
 	game.auto_start_game_flow = false
 	game.beta_force_fullscreen = false
 	add_child(game)
@@ -391,6 +412,7 @@ func submit_local(player: int, payload: Dictionary) -> bool:
 
 	var submitted_payload: Dictionary = payload.duplicate(true)
 	if str(active_request.get("type", "")) in [
+		"preparation",
 		"study_keep_cards",
 		"study_optional_discard",
 		"study_hand_limit"
@@ -433,7 +455,10 @@ func _choose(peer_id: String, revision: int, payload: Dictionary) -> void:
 func _choice_rejected() -> void:
 	busy = false
 	if game != null and game.beta_hud != null:
-		game.beta_hud.present_pending_request(game.pending_input)
+		var viewer: int = game.get_ui_viewer_player_index()
+		var active_request: Dictionary = game.get_beta_pending_input(viewer)
+		if not active_request.is_empty() and not bool(active_request.get("private", false)):
+			game.beta_hud.present_pending_request(active_request)
 		game.beta_hud.feedback_label.text = "Scelta non valida o superata. Seleziona di nuovo."
 
 func _peer_left(peer_id: String) -> void:

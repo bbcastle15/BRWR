@@ -24,6 +24,12 @@ var room_data: Dictionary = {}
 var instability_cubes: Array = []
 var instability_cube_nodes: Array = []
 
+# Chaos School: a Room can contain at most one Vastum token.  The boolean is
+# authoritative game state; the TextureRect below is only its projection.
+var vastum_present: bool = false
+static var _vastum_texture_cache: Texture2D = null
+static var _vastum_texture_checked: bool = false
+
 var flipped: bool = false:
 	set(value):
 		flipped = value
@@ -62,14 +68,108 @@ func _ready():
 
 	$RoomName.text = room_name
 	refresh_art()
+	_refresh_vastum_token()
 
 
 func refresh_art() -> void:
 	$Background.color = room_color
-	var has_art := preload("res://room_art.gd").apply($Background, room_id, radius, flipped)
+	var has_art := preload("res://room_art.gd").apply($Background, get_art_id(), radius, flipped)
 	$RoomName.visible = not has_art
 	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_refresh_activation_token()
+	_refresh_vastum_token()
+
+
+func _find_vastum_texture_recursive(
+	directory_path: String,
+	depth: int = 0
+) -> Texture2D:
+	if depth > 7:
+		return null
+
+	var dir := DirAccess.open(directory_path)
+	if dir == null:
+		return null
+
+	dir.list_dir_begin()
+	var entry: String = dir.get_next()
+	while entry != "":
+		if entry != "." and entry != "..":
+			var full_path := directory_path.path_join(entry)
+			if dir.current_is_dir():
+				if entry != ".godot" and entry != ".git":
+					var nested := _find_vastum_texture_recursive(full_path, depth + 1)
+					if nested != null:
+						dir.list_dir_end()
+						return nested
+			elif entry.to_lower().contains("vastum") and entry.to_lower().ends_with(".png"):
+				if ResourceLoader.exists(full_path):
+					var texture := load(full_path) as Texture2D
+					if texture != null:
+						dir.list_dir_end()
+						return texture
+		entry = dir.get_next()
+
+	dir.list_dir_end()
+	return null
+
+
+func _vastum_texture() -> Texture2D:
+	if _vastum_texture_checked:
+		return _vastum_texture_cache
+
+	_vastum_texture_checked = true
+	for path in [
+		"res://assets/tokens/vastum_token.png",
+		"res://assets/tokens/vastum.png",
+		"res://assets/vastum_token.png",
+		"res://assets/vastum.png"
+	]:
+		if ResourceLoader.exists(path):
+			_vastum_texture_cache = load(path) as Texture2D
+			if _vastum_texture_cache != null:
+				return _vastum_texture_cache
+
+	_vastum_texture_cache = _find_vastum_texture_recursive("res://")
+	return _vastum_texture_cache
+
+
+func _refresh_vastum_token() -> void:
+	var token := get_node_or_null("VastumToken") as TextureRect
+
+	if token == null:
+		token = TextureRect.new()
+		token.name = "VastumToken"
+		token.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		token.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		token.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		token.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		token.z_index = 24
+		add_child(token)
+
+	token.visible = vastum_present
+	if not vastum_present:
+		return
+
+	token.position = Vector2(radius * 0.32, -radius * 0.08)
+	token.size = Vector2(radius * 0.46, radius * 0.46)
+	token.texture = _vastum_texture()
+
+	# Keep the state visible even if a local checkout uses a different token
+	# filename.  The actual project asset is used as soon as one of the paths
+	# above exists.
+	if token.texture == null:
+		token.tooltip_text = "Vastum"
+
+
+func has_vastum_token() -> bool:
+	return vastum_present
+
+
+func set_vastum_present(value: bool) -> void:
+	vastum_present = value
+	if is_node_ready():
+		_refresh_vastum_token()
 
 
 func _refresh_activation_token() -> void:
@@ -88,7 +188,7 @@ func _refresh_activation_token() -> void:
 		return
 	token.position = Vector2(-radius * 0.60, -radius * 0.77)
 	token.size = Vector2(radius * 1.20, radius * 0.40)
-	token.texture = preload("res://room_art.gd").activation_token(room_id, activated_this_turn)
+	token.texture = preload("res://room_art.gd").activation_token(get_art_id(), activated_this_turn)
 
 
 func setup_room(
@@ -97,12 +197,10 @@ func setup_room(
 
 	room_data = data.duplicate(true)
 
-	room_id = str(
-		data.get(
-			"id",
-			""
-		)
-	)
+	# A variant occupies the same Lodge identity as its corresponding core Room.
+	# Quests, movement, range and fixed-Room rules keep that identity; the selected
+	# definition supplies its own name, effects, rewards and artwork.
+	room_id = str(data.get("replaces", data.get("id", "")))
 
 	room_name = str(
 		data.get(
@@ -127,6 +225,10 @@ func setup_room(
 
 func get_room_id() -> String:
 	return room_id
+
+
+func get_art_id() -> String:
+	return str(room_data.get("id", room_id))
 
 
 func get_room_data() -> Dictionary:

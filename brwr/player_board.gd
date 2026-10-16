@@ -117,6 +117,7 @@ func refresh():
 	refresh_mage_card()
 	refresh_trophies()
 	refresh_destiny_tokens()
+	refresh_transformation()
 	$GrimoireSlot/Label.text = "GRIMOIRE\n%d" % player_state.grimoire.size()
 	$MemoriesSlot/Label.text = "MEMORIES\n%d" % player_state.memories.size()
 
@@ -222,8 +223,39 @@ func setup_deck_slots():
 		frame.set_border_width_all(1)
 		frame.set_corner_radius_all(6)
 		deck.add_theme_stylebox_override("panel", frame)
+		if deck.get_node_or_null("DeckBack") == null:
+			var art := TextureRect.new()
+			art.name = "DeckBack"
+			art.texture = preload("res://assets/tabletop/card_back.png")
+			art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			deck.add_child(art)
+			art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			deck.move_child(art, 0)
+		var caption: Label = deck.get_node("Label")
+		caption.add_theme_color_override("font_outline_color", Color.BLACK)
+		caption.add_theme_constant_override("outline_size", 6)
+		caption.add_theme_font_size_override("font_size", 14)
+		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if $MemoriesSlot.get_node_or_null("PublicBrowseButton") == null:
+		var browse := Button.new()
+		browse.name = "PublicBrowseButton"
+		browse.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		browse.flat = true
+		browse.text = ""
+		browse.focus_mode = Control.FOCUS_NONE
+		browse.tooltip_text = "View public Memories"
+		browse.pressed.connect(_open_public_memories)
+		$MemoriesSlot.add_child(browse)
 	$HandInfo.position = Vector2(690, 8)
 	$HandInfo.size = Vector2(110, 25)
+
+
+func _open_public_memories() -> void:
+	if game == null or game.beta_hud == null:
+		return
+	game.beta_hud.open_public_memories(player_index)
 
 
 func _configure_spell_slot(slot: Control, slot_id: String) -> void:
@@ -325,6 +357,9 @@ func _render_spell_slot(
 	# Source PNGs print both halves upright. Highlight the selected half without
 	# turning the text upside down when Dark is played.
 	active_side.position.y = SPELL_SIZE.y * 0.5 if data.get("use_dark_side", false) else 0.0
+	var definition: SpellCardState = game.spell_database.get_spell(str(data.get("id", "")))
+	if definition != null and definition.has_single_effect():
+		active_side.visible = false
 
 	if data.is_empty():
 		back.visible = false
@@ -389,6 +424,9 @@ func _on_spell_slot_pressed(slot_id: String) -> void:
 func refresh_action_tokens() -> void:
 	if game == null or player_state == null:
 		return
+	var action_names := PackedStringArray(["Explore", "Fight", "Command"])
+	for action in player_state.get_transformation_data().get("actions", []):
+		action_names.append(str(action.name))
 	for i in range(PlayerState.MAX_PHYSICAL_ACTIONS):
 		var token = get_node_or_null("PhysicalAction" + str(i))
 		if token == null:
@@ -401,7 +439,7 @@ func refresh_action_tokens() -> void:
 			add_child(token)
 		var available: bool = i < player_state.available_physical_actions
 		token.text = "+" if available else "×"
-		token.tooltip_text = "Physical action: Explore / Fight / Command" if available else "Physical action exhausted"
+		token.tooltip_text = "Physical action: " + " / ".join(action_names) if available else "Physical action exhausted"
 		token.disabled = not available or game.get_player_board_action_options(player_index, "physical").is_empty()
 		for state in ["normal", "hover", "pressed", "disabled"]:
 			var style := StyleBoxFlat.new()
@@ -463,40 +501,18 @@ func refresh_quests() -> void:
 		strip.add_child(row)
 		for data in game.get_player_board_quest_cards(player_index, section):
 			var card: Button
+			var quest: QuestState = data.get("quest")
 			if not data.get("can_inspect", false):
-				card = Button.new()
-				card.custom_minimum_size = Vector2(112, 154)
-				card.text = "QUEST\nSET"
-				card.disabled = true
+				card = game.ReferenceCardPreview.make_back("Private Quest", Vector2(112, 154))
+			elif quest != null and quest.solved:
+				card = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", Vector2(112, 154), game.open_quest_card.bind(quest))
 			else:
 				card = game.ReferenceCardPreview.make_card("quests", data.id, data.name,
 					Vector2(112, 154), game.open_quest_card.bind(data.quest))
 			row.add_child(card)
-			var quest: QuestState = data.get("quest")
 			card.set_meta("choice_quest", quest)
-			if quest != null and quest.get_cube_slots() > 0:
-				var track := HBoxContainer.new()
-				track.name = "QuestProgress"
-				# Anchor the complete row to the card, rather than leaving short
-				# tracks aligned to a fixed left margin. Keep it centred on resize.
-				var track_width: float = quest.get_cube_slots() * 12.0 + (quest.get_cube_slots() - 1) * 3.0
-				track.anchor_left = 0.5
-				track.anchor_right = 0.5
-				track.anchor_top = 0.5
-				track.anchor_bottom = 0.5
-				track.offset_left = -track_width * 0.5
-				track.offset_right = track_width * 0.5
-				track.offset_top = -6.0
-				track.offset_bottom = 6.0
-				track.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				track.add_theme_constant_override("separation", 3)
-				card.add_child(track)
-				for i in range(quest.get_cube_slots()):
-					var cube := ColorRect.new()
-					cube.custom_minimum_size = Vector2(12, 12)
-					cube.color = get_damage_cube_color(player_index) if i < quest.progress else Color(0.12, 0.12, 0.12, 0.85)
-					cube.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					track.add_child(cube)
+			if quest != null and not quest.solved:
+				_render_quest_progress_cubes(card, quest, Vector2(112, 154))
 	var counter = get_node_or_null("SolvedQuestCount")
 	if counter == null:
 		counter = Label.new()
@@ -510,6 +526,34 @@ func refresh_quests() -> void:
 		if quest.solved:
 			solved += 1
 	counter.text = "Solved Quests: " + str(solved)
+
+
+func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: Vector2) -> void:
+	# The Quest artwork already prints every cube slot.  Overlay only the cubes
+	# actually placed by the player, left-to-right on the printed slot row.
+	var placed: int = mini(quest.progress, quest.get_cube_slots())
+	if placed <= 0:
+		return
+	var overlay := Control.new()
+	overlay.name = "QuestProgress"
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(overlay)
+	var cube_scale: float = card_size.x / 112.0 * 0.82
+	var cube_visual: float = 14.0 * cube_scale
+	var gap: float = 3.0 * cube_scale
+	var total_width: float = placed * cube_visual + maxi(0, placed - 1) * gap
+	var start_x: float = (card_size.x - total_width) * 0.5
+	# Rebirth Quest cube slots are printed across the central task/reward divider.
+	# Keeping this as a proportion makes the overlay line up in both compact and
+	# enlarged Hand views without drawing synthetic empty slots over the art.
+	var slot_y: float = card_size.y * 0.555 - cube_visual * 0.5
+	for i in range(placed):
+		var cube = cube_scene.instantiate()
+		cube.cube_color = get_damage_cube_color(player_index)
+		cube.scale = Vector2.ONE * cube_scale
+		cube.position = Vector2(start_x + i * (cube_visual + gap), slot_y)
+		overlay.add_child(cube)
 
 
 func create_damage_track():
@@ -658,87 +702,65 @@ func refresh_mage_card() -> void:
 	$MageCardSlot/Label.text = player_state.mage.mage_id.capitalize() + "\nStrength %d · Movement %d" % [player_state.mage.strength, player_state.mage.speed]
 
 
-func _trophy_circle(radius: float, center: Vector2 = Vector2.ZERO) -> PackedVector2Array:
-	var points := PackedVector2Array()
-	for i in range(32):
-		var angle := TAU * float(i) / 32.0
-		points.append(center + Vector2(cos(angle), sin(angle)) * radius)
-	return points
+func refresh_transformation() -> void:
+	var panel := get_node_or_null("TransformationCard") as Control
+	if panel == null:
+		panel = Control.new()
+		panel.name = "TransformationCard"
+		panel.position = Vector2(916, 94)
+		panel.size = Vector2(250, 370)
+		add_child(panel)
+		var title := Label.new()
+		title.name = "Title"
+		title.position = Vector2(0, -34)
+		title.size = Vector2(250, 30)
+		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		title.add_theme_font_size_override("font_size", 20)
+		title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.add_child(title)
+		var art := TextureRect.new()
+		art.name = "Art"
+		art.size = Vector2(250, 342)
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		panel.add_child(art)
+		# User PNGs print the transformation upright; retain that readable face.
+		var edge := Panel.new()
+		edge.position = Vector2(0, 133)
+		edge.size = Vector2(250, 209)
+		edge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(1, 0.86, 0.55, 0.035)
+		style.border_color = Color(0.91, 0.78, 0.48, 0.8)
+		style.set_border_width_all(2)
+		edge.add_theme_stylebox_override("panel", style)
+		panel.add_child(edge)
+		var button := Button.new()
+		button.name = "Inspect"
+		button.size = art.size
+		button.flat = true
+		button.pressed.connect(_inspect_transformation, CONNECT_DEFERRED)
+		panel.add_child(button)
+	panel.visible = player_state != null and player_state.transformation != null
+	if not panel.visible:
+		return
+	var card: SpellCardState = player_state.transformation.spell
+	panel.get_node("Art").texture = game.ReferenceCardPreview.card_texture("spells", card.id)
+	panel.get_node("Title").text = player_state.get_transformation_id().capitalize()
+	panel.get_node("Inspect").tooltip_text = "Inspect %s · Strength %d" % [player_state.get_transformation_id().capitalize(), player_state.get_mage_strength()]
+
+
+func _inspect_transformation() -> void:
+	if player_state.transformation == null or game == null:
+		return
+	var card: SpellCardState = player_state.transformation.spell
+	game._reference_card_preview().show_card("spells", card.id, player_state.get_transformation_id().capitalize(), "Physical Actions available from your Action tokens.")
 
 
 func _make_trophy_token(owner_id: int, total_count: int) -> Control:
-	var token := Control.new()
-	token.size = TROPHY_TOKEN_SIZE
-	token.custom_minimum_size = TROPHY_TOKEN_SIZE
+	var token := preload("res://tabletop_style.gd").marker("trophy_token", get_damage_cube_color(owner_id), TROPHY_TOKEN_SIZE)
 	token.mouse_filter = Control.MOUSE_FILTER_PASS
-	var center := TROPHY_TOKEN_SIZE * 0.5
-
-	# Soft offset shadow creates the physical stack/column effect.
-	var shadow := Polygon2D.new()
-	shadow.polygon = _trophy_circle(25.0, center + Vector2(3, 4))
-	shadow.color = Color(0, 0, 0, 0.45)
-	token.add_child(shadow)
-
-	# The Trophy owner is encoded by the rim itself, matching the physical token.
-	var outer := Polygon2D.new()
-	outer.polygon = _trophy_circle(25.0, center)
-	outer.color = get_damage_cube_color(owner_id).lightened(0.10)
-	token.add_child(outer)
-
-	var rim_inner := Polygon2D.new()
-	rim_inner.polygon = _trophy_circle(20.5, center)
-	rim_inner.color = Color(0.18, 0.18, 0.20)
-	token.add_child(rim_inner)
-
-	var face := Polygon2D.new()
-	face.polygon = _trophy_circle(17.0, center)
-	face.color = Color(0.045, 0.05, 0.055)
-	token.add_child(face)
-
-	# Crisp white trophy/cup pictogram, drawn procedurally so it remains sharp
-	# at PlayerBoard zoom levels and does not depend on the low-res reference.
-	var cup := Polygon2D.new()
-	cup.polygon = PackedVector2Array([
-		center + Vector2(-10, -9),
-		center + Vector2(10, -9),
-		center + Vector2(7, 3),
-		center + Vector2(-7, 3)
-	])
-	cup.color = Color(0.92, 0.94, 0.95)
-	token.add_child(cup)
-
-	var left_handle := Polygon2D.new()
-	left_handle.polygon = PackedVector2Array([
-		center + Vector2(-10, -7), center + Vector2(-15, -6),
-		center + Vector2(-14, 0), center + Vector2(-8, 2),
-		center + Vector2(-7, -1), center + Vector2(-11, -2)
-	])
-	left_handle.color = Color(0.92, 0.94, 0.95)
-	token.add_child(left_handle)
-
-	var right_handle := Polygon2D.new()
-	right_handle.polygon = PackedVector2Array([
-		center + Vector2(10, -7), center + Vector2(15, -6),
-		center + Vector2(14, 0), center + Vector2(8, 2),
-		center + Vector2(7, -1), center + Vector2(11, -2)
-	])
-	right_handle.color = Color(0.92, 0.94, 0.95)
-	token.add_child(right_handle)
-
-	var stem := ColorRect.new()
-	stem.position = center + Vector2(-2.5, 3)
-	stem.size = Vector2(5, 8)
-	stem.color = Color(0.92, 0.94, 0.95)
-	stem.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	token.add_child(stem)
-
-	var base := ColorRect.new()
-	base.position = center + Vector2(-9, 10)
-	base.size = Vector2(18, 5)
-	base.color = Color(0.92, 0.94, 0.95)
-	base.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	token.add_child(base)
-
 	token.tooltip_text = "Trophies: %d\nTrophy of Player %d" % [total_count, owner_id + 1]
 	return token
 
@@ -760,8 +782,10 @@ func refresh_trophies() -> void:
 		child.queue_free()
 
 	stack.tooltip_text = "Trophies: %d" % player_state.trophies.size()
-	stack.visible = not player_state.trophies.is_empty()
+	stack.show()
 	var total := player_state.trophies.size()
+	# Hover/click also reports zero, without inventing a Trophy in the stack.
+	var was_pinned: bool = bool(stack.get_meta("count_pinned", false))
 	for i in range(total):
 		var owner_id: int = int(player_state.trophies[i])
 		var token := _make_trophy_token(owner_id, total)
@@ -770,6 +794,39 @@ func refresh_trophies() -> void:
 		token.position = Vector2(0, maxf(0.0, 12.0 - float(total - 1 - i) * 6.0))
 		token.z_index = 20 + i
 		stack.add_child(token)
+
+	var count_badge := Label.new()
+	count_badge.name = "TrophyCountBadge"
+	count_badge.text = "%d trophies" % total
+	count_badge.position = Vector2(-18, -30)
+	count_badge.size = Vector2(90, 24)
+	count_badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	count_badge.add_theme_font_size_override("font_size", 14)
+	count_badge.add_theme_color_override("font_color", Color.WHITE)
+	count_badge.add_theme_color_override("font_outline_color", Color.BLACK)
+	count_badge.add_theme_constant_override("outline_size", 5)
+	count_badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	count_badge.z_index = 2001
+	count_badge.visible = was_pinned
+	stack.add_child(count_badge)
+	var hover := Button.new()
+	hover.name = "TrophyCountHitbox"
+	hover.position = Vector2(-6, -6)
+	hover.size = stack.size + Vector2(12, 12)
+	hover.flat = true
+	hover.text = ""
+	hover.focus_mode = Control.FOCUS_NONE
+	hover.tooltip_text = "%d trophies" % total
+	hover.z_index = 2000
+	hover.mouse_entered.connect(func(): count_badge.show())
+	hover.mouse_exited.connect(func():
+		if not bool(stack.get_meta("count_pinned", false)):
+			count_badge.hide())
+	hover.pressed.connect(func():
+		var pinned := not bool(stack.get_meta("count_pinned", false))
+		stack.set_meta("count_pinned", pinned)
+		count_badge.visible = pinned)
+	stack.add_child(hover)
 
 
 func refresh_destiny_tokens() -> void:
@@ -799,6 +856,17 @@ func refresh_destiny_tokens() -> void:
 		token.add_child(cube)
 		cube.scale = Vector2(0.7, 0.7)
 		cube.position = Vector2(20, 19)
+	for i in player_state.mage.infectio_tokens.size():
+		var owner: int = player_state.mage.infectio_tokens[i]
+		var token := Panel.new()
+		token.position = Vector2(i * 34, 34)
+		token.size = Vector2(30, 30)
+		token.tooltip_text = "Infectio — assigned by Player %d" % (owner + 1)
+		row.add_child(token)
+		var cube = cube_scene.instantiate()
+		cube.cube_color = get_damage_cube_color(owner)
+		token.add_child(cube)
+		cube.position = Vector2(15, 15)
 
 
 func refresh_evocations() -> void:
@@ -813,11 +881,42 @@ func refresh_evocations() -> void:
 	for child in row.get_children():
 		row.remove_child(child)
 		child.queue_free()
+	var attachments := ScrollContainer.new()
+	attachments.name = "AssignedCards"
+	attachments.position = Vector2(762, 525)
+	attachments.size = Vector2(126, 159)
+	attachments.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	row.add_child(attachments)
+	var attached_list := VBoxContainer.new()
+	attached_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	attachments.add_child(attached_list)
+	for jinx in player_state.mage.jinxes:
+		var definition := ForgottenAttachments.definition("jinxes", str(jinx.id))
+		var label := Button.new()
+		label.text = "%s\n%d / %d" % [definition.get("name", jinx.id), int(jinx.progress), int(definition.get("slots", 0))]
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.custom_minimum_size = Vector2(110, 42)
+		label.add_theme_font_size_override("font_size", 15)
+		label.tooltip_text = label.text
+		label.pressed.connect(game.open_jinx_card.bind(player_index, str(jinx.id)))
+		attached_list.add_child(label)
 	for evocation in player_state.evocations:
 		if not game.is_evocation_in_play(evocation):
 			continue
+		if evocation.assigned_mage >= 0 or bool(evocation.definition.get("no_slot", false)):
+			var nightmare := Button.new()
+			nightmare.text = "%s\nSlot %d · HP %s" % [evocation.evocation_name, evocation.assigned_slot,
+				"∞" if not ForgottenEvocations.ability(game, evocation, "immune_damage").is_empty() else str(evocation.get_remaining_health())]
+			if bool(evocation.definition.get("no_slot", false)):
+				nightmare.text = "%s\nHP %d · %s" % [evocation.evocation_name, evocation.get_remaining_health(), evocation.room_id.replace("_", " ")]
+			nightmare.custom_minimum_size = Vector2(110, 50)
+			nightmare.add_theme_font_size_override("font_size", 14)
+			nightmare.pressed.connect(game.open_evocation_inspection.bind(evocation, true))
+			nightmare.set_meta("evocation", evocation)
+			attached_list.add_child(nightmare)
+			continue
 		var card = game.ReferenceCardPreview.make_card("evocations", evocation.evocation_id,
-			evocation.get_display_name(), Vector2(164, 110), game.open_evocation_inspection.bind(evocation))
+			evocation.get_display_name(), Vector2(164, 110), game.open_evocation_inspection.bind(evocation, true))
 		card.name = "EvocationSlot" + str(evocation.board_number)
 		card.position = Vector2(196 + (evocation.board_number - 1) * 169, 552)
 		card.set_meta("evocation", evocation)
@@ -838,3 +937,20 @@ func refresh_evocations() -> void:
 		label.add_theme_font_size_override("font_size", 12)
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card.add_child(label)
+		for index in evocation.upgrades.size():
+			var id: String = evocation.upgrades[index]
+			var data := ForgottenAttachments.definition("upgrades", id)
+			var upgrade = game.ReferenceCardPreview.make_card("upgrades", id,
+				str(data.get("name", id)), Vector2(68, 44), _inspect_upgrade.bind(evocation, id))
+			upgrade.name = "Upgrade_" + id
+			upgrade.position = Vector2(92 - index * 25, 62)
+			upgrade.tooltip_text = str(data.get("name", id)) + " → " + evocation.get_display_name()
+			card.add_child(upgrade)
+
+
+func _inspect_upgrade(evocation: EvocationState, id: String) -> void:
+	if not game.is_evocation_in_play(evocation) or not evocation.upgrades.has(id):
+		return
+	var data := ForgottenAttachments.definition("upgrades", id)
+	game._reference_card_preview().show_card("upgrades", id, str(data.get("name", id)),
+		"Assigned to " + evocation.get_display_name() + " · Player %d" % (evocation.owner_id + 1))

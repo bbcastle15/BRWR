@@ -1,11 +1,13 @@
 # Room artwork
 
-- `<room_id>.png`: existing destroyed-side tile (unchanged).
-- `rebuilt/<room_id>.png`: rebuilt-side tile, including Black Rose Room.
-- `tokens/<room_id>_available.png`: available activation token.
-- `tokens/<room_id>_used.png`: exhausted activation token.
+- `<art_id>.png`: destroyed-side tile.
+- `rebuilt/<art_id>.png`: rebuilt-side tile, including Black Rose Room.
+- `tokens/<art_id>_available.png`: available activation token.
+- `tokens/<art_id>_used.png`: exhausted activation token.
 
-Room IDs come from `data/rooms.json`. Tiles use a flat-top hexagon with a
+Artwork IDs come from `data/rooms.json`. Alternative definitions use their own
+`id` for artwork and retain `replaces` as the canonical Lodge/Quest identity.
+Tiles use a flat-top hexagon with a
 2:sqrt(3) bounding-box ratio and transparent exterior. Token images are
 approximately 3:1 and also have transparent exteriors.
 
@@ -20,8 +22,14 @@ reference screenshots are preserved in `materials/room_references` at the
 repository root. Forge's available token was corrected to retain both
 movement/activation sequences.
 
-Validation scripts:
+Alternative Rooms are specified in `alternatives_specs.json`, from Codex
+Arcanum pp. 84–99. `alternatives_manifest.json` records each requested asset,
+its source page, generated file, prompt when retained, dimensions, alpha and
+completion status. All 104 alternative-room PNGs are present: 26 complete sets.
+Apocalypse and Room of Rebirth have complete artwork but remain disabled
+until their respective Personal Library and Phoenix Familiar modes exist.
 
-- `room_art_playtest.gd`: texture coverage, state transitions, existing rules.
-- `room_rebuilt_preview.gd`: renders all rebuilt rooms with available and used
-  tokens to `output/rooms-rebuilt-available.png` and `output/rooms-rebuilt-used.png`.
+The alternative-room integration checks cover both faces of all 24 playable
+variants, replacement restrictions, canonical Quest identity, interactive
+choices, new Evocation abilities, and network projection. Test scripts and
+preview captures are kept outside the project so they are not shipped.

@@ -26,7 +26,8 @@
           "heart_of_ice"
         ]
       }
-    ]
+    ],
+    "rules_implemented": true
   },
   "alchemy": {
     "name": "Alchemy",
@@ -55,7 +56,8 @@
           "silver_of_the_sages"
         ]
       }
-    ]
+    ],
+    "rules_implemented": true
   },
   "death": {
     "name": "Death",
@@ -84,6 +86,480 @@
           "repentance"
         ]
       }
-    ]
+    ],
+    "rules_implemented": true
+  },
+  "chaos": {
+    "name": "Chaos",
+    "starting_grimoires": [
+      {
+        "id": "affliction",
+        "name": "Affliction",
+        "spell_ids": [
+          "shapeshifting_energy",
+          "erratic_vortex",
+          "necrotic_plague",
+          "void_wandering",
+          "mutagenic_madness",
+          "arrogance"
+        ]
+      },
+      {
+        "id": "auromancer",
+        "name": "Auromancer",
+        "spell_ids": [
+          "reclamation",
+          "disorder",
+          "fumbling_in_the_dark",
+          "ephemeral_bond",
+          "dark_path",
+          "corruption_veil"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "geomancy": {
+    "name": "Geomancy",
+    "starting_grimoires": [
+      {
+        "id": "geodesy",
+        "name": "Geodesy",
+        "spell_ids": [
+          "arcane_sinkhole",
+          "instable_creek",
+          "whips_of_thorns",
+          "contortion",
+          "cemetarial_mist",
+          "earthflow"
+        ]
+      },
+      {
+        "id": "geomancy",
+        "name": "Geomancy",
+        "spell_ids": [
+          "fortuna_major",
+          "fortuna_minor",
+          "caput_draconis",
+          "cauda_draconis",
+          "carcer",
+          "conjunctio"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "druidic": {
+    "name": "Druidic",
+    "starting_grimoires": [
+      {
+        "id": "guiding_spirit",
+        "name": "Guiding Spirit",
+        "spell_ids": [
+          "pact_of_the_claw",
+          "frenzy",
+          "raging_lash",
+          "empathy",
+          "fur_of_thorns",
+          "quick_reflexes"
+        ]
+      },
+      {
+        "id": "mystification",
+        "name": "Mystification",
+        "spell_ids": [
+          "lifeblood",
+          "thriving_growth",
+          "reinforcements",
+          "solstice",
+          "pact_of_the_jaws",
+          "star_tears"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "famine": {
+    "name": "Famine",
+    "description": "Starve N: each target Mage places N reserve Cubes on the Event Board (maximum 10 per Mage). These Cubes are unavailable. Room targets exclude yourself. Feed N: instead of the normal Spell Effect, return N of the target's Cubes from the Event Board to their reserve, then resolve the alternative Effect. The target must have at least N Cubes there.",
+    "starting_grimoires": [
+      {
+        "id": "marasmus",
+        "name": "Marasmus",
+        "spell_ids": [
+          "gluttony",
+          "marcescent_stocks",
+          "hunger_bites",
+          "quicksand",
+          "pollute",
+          "intoxication"
+        ]
+      },
+      {
+        "id": "catastrophe",
+        "name": "Catastrophe",
+        "spell_ids": [
+          "hailstorm",
+          "wither",
+          "sand_devil",
+          "flood",
+          "rotten",
+          "acid_rain"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "forge": {
+    "name": "Forge",
+    "description": "Equipments occupy Evocation slots, follow their owner and cannot receive Upgrades. You cannot own two Equipments with the same name. Upgrades modify Evocations; normally each Evocation can keep one. When assigning another, its owner chooses which Upgrade to discard.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "automation",
+        "name": "Automation",
+        "spell_ids": [
+          "shiny_automaton",
+          "hammer_and_anvil",
+          "cyclopean_command",
+          "blacksmiths_chant",
+          "mass_production",
+          "hammerfall"
+        ]
+      },
+      {
+        "id": "divine_s_favor",
+        "name": "Divine's Favor",
+        "spell_ids": [
+          "chain_lightning",
+          "hardened_blades",
+          "mars_glory",
+          "bewitching_garments",
+          "talos_intervention",
+          "divine_wings"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "heka": {
+    "name": "Heka",
+    "description": "Jinx cards impose a penalty and a task. Each completed task places one of the affected Mage's Cubes on the Jinx. Discard it when all slots are filled. A Mage cannot have two Jinxes with the same name; exhausted copies cannot be assigned.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "revenants",
+        "name": "Revenants",
+        "spell_ids": [
+          "sun_of_amon_ra",
+          "cursed_hieroglyphics",
+          "mummify",
+          "weighing_of_souls",
+          "brazier_of_anubis",
+          "moon_of_nut"
+        ]
+      },
+      {
+        "id": "sentence",
+        "name": "Sentence",
+        "spell_ids": [
+          "branding",
+          "misfortune",
+          "plague_of_the_nile",
+          "stinging_sand",
+          "sarcophagus",
+          "power_of_the_ankh"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "hex": {
+    "name": "Hex",
+    "description": "Assign Jinx cards to opposing Mages. Each completed Jinx task places one of that Mage's Cubes on its slots; discard a filled Jinx and return the Cubes. Duplicate Jinx names cannot be assigned. Hex also removes Jinxes to power additional Effects.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "malediction",
+        "name": "Malediction",
+        "spell_ids": [
+          "litany",
+          "crypt_fever",
+          "black_feather",
+          "baleful_curse",
+          "ca_darios_amulet",
+          "cerebral_worm"
+        ]
+      },
+      {
+        "id": "doomsayer",
+        "name": "Doomsayer",
+        "spell_ids": [
+          "feverish_dreams",
+          "an_eye_for_an_eye",
+          "suffocation",
+          "curse",
+          "bad_luck",
+          "cursed_oracle"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "lex": {
+    "name": "Lex",
+    "description": "Command Undead and manipulate Instability. Some Spells assign Upgrades. Each Evocation normally has one Upgrade; its owner chooses which to discard when another is assigned.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "knight",
+        "name": "Knight",
+        "spell_ids": [
+          "macabre_order",
+          "obscure_power",
+          "deadly_bolt",
+          "tremor",
+          "lurk_in_the_shadows",
+          "invisible_strike"
+        ]
+      },
+      {
+        "id": "chaplain",
+        "name": "Chaplain",
+        "spell_ids": [
+          "assumption",
+          "give_and_take",
+          "fusion",
+          "obscure_shift",
+          "minor_control",
+          "duress"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "nightmare": {
+    "name": "Nightmare",
+    "description": "Nightmares belong to the Black Rose and are assigned to Mages without consuming Evocation slots. They follow their assigned Mage and activate at the beginning of the Evocation Phase in the order chosen by the Crown holder. They are removed when the assigned Mage is defeated.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "scarecrow",
+        "name": "Scarecrow",
+        "spell_ids": [
+          "hysterical_escape",
+          "throne_of_thorns",
+          "persecution",
+          "shifting_nightmare",
+          "mental_chasm",
+          "shadow_blast"
+        ]
+      },
+      {
+        "id": "incubus",
+        "name": "Incubus",
+        "spell_ids": [
+          "humiliation",
+          "traitor_nightmare",
+          "painful_loss",
+          "anguish",
+          "recurring_nightmare",
+          "ephialtes"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "oracle": {
+    "name": "Oracle",
+    "description": "Prophecy reveals the first non-Instant Event of the current Moon and places it in any slot without Crown or Black Rose Power. Revelation discards chosen board Events before resolving the Spell and repeats its Revelation Effect once per discarded Event, without Black Rose Power.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "dark_pitfalls",
+        "name": "Dark Pitfalls",
+        "spell_ids": [
+          "pneuma",
+          "sisyphus_lie",
+          "poisoned_words",
+          "oracle_misfortune",
+          "nefarious_prophecy",
+          "mists_over_tomorrow"
+        ]
+      },
+      {
+        "id": "liberation",
+        "name": "Liberation",
+        "spell_ids": [
+          "prepare",
+          "apollonian_brazier",
+          "thyrsus",
+          "thirst_for_knowledge",
+          "purification",
+          "omphalos"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "pestilence": {
+    "name": "Pestilence",
+    "description": "Infectio tokens reserve an owner cube and resolve for 1 Damage during Clean-up and after Mage defeat. At most 3 Infectio may be assigned to a Mage. Pestis do not occupy Evocation slots; their stats cannot change and they cannot receive Upgrades.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "corruption",
+        "name": "Corruption",
+        "spell_ids": [
+          "pyoderma",
+          "proliferate",
+          "infected_colony",
+          "aggravate",
+          "outbreak",
+          "pandemic"
+        ]
+      },
+      {
+        "id": "plague",
+        "name": "Plague",
+        "spell_ids": [
+          "ulcer",
+          "endemia",
+          "putrid_lair",
+          "contaminate",
+          "high_fever",
+          "putrescence"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "shamanic": {
+    "name": "Shamanic",
+    "description": "Summon Altars, manipulate Quests and guide Models. A Totem activates by letting its controller heal or convert 1 Damage on a Model within 1 of it.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "sacred_guide",
+        "name": "Sacred Guide",
+        "spell_ids": [
+          "binding_totem",
+          "astral_path",
+          "earth_totem",
+          "wind_spirit",
+          "valor_totem",
+          "river_spirit"
+        ]
+      },
+      {
+        "id": "spirit_speaker",
+        "name": "Spirit Speaker",
+        "spell_ids": [
+          "dominion_totem",
+          "source_of_life",
+          "channeling_energy",
+          "rain_totem",
+          "steppe_spirit",
+          "pyre_spirit"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "technomancy": {
+    "name": "Technomancy",
+    "description": "Summon and rework Undead. Upgrade cards modify Evocations; when a second Upgrade is assigned, its owner chooses which to discard. Exhausted Upgrade copies cannot be assigned.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "creator",
+        "name": "Creator",
+        "spell_ids": [
+          "protean_genesis",
+          "living_liquid",
+          "acid_blood",
+          "kinetic_infusion",
+          "vigorous_infusion",
+          "indoctrination"
+        ]
+      },
+      {
+        "id": "thanatos",
+        "name": "Thanatos",
+        "spell_ids": [
+          "nefarious_evolution",
+          "mutant_energies",
+          "graft",
+          "mechanical_archive",
+          "dracos_skin",
+          "necrotic_pheromones"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "void": {
+    "name": "Void",
+    "description": "Manipulate Demons, Instability and prepared Spells. Persistent Effects can alter Spell damage, target range and the Physical Actions available to the Mage.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "despoiler",
+        "name": "Despoiler",
+        "spell_ids": [
+          "shub_niggurath_embrace",
+          "azathoth_chasm",
+          "abysm",
+          "controlled_madness",
+          "eldritch_tentacle",
+          "oniric_step"
+        ]
+      },
+      {
+        "id": "weaver",
+        "name": "Weaver",
+        "spell_ids": [
+          "nightmare_absinthe",
+          "rite_of_hastur",
+          "the_faceless_power",
+          "consume_the_void",
+          "legacy_of_the_void",
+          "echo_of_the_void"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
+  "war": {
+    "name": "War",
+    "description": "Summon Equipment attached to your Mage or restore a Physical Action token. Equipment follows its Mage, consumes an Evocation slot, cannot receive Upgrades, and grants actions or ongoing bonuses.",
+    "art_pending": true,
+    "starting_grimoires": [
+      {
+        "id": "domination",
+        "name": "Domination",
+        "spell_ids": [
+          "blind_rage",
+          "brute_force",
+          "gratuitous_violence",
+          "cruelty",
+          "slicing",
+          "immolation"
+        ]
+      },
+      {
+        "id": "tyranny",
+        "name": "Tyranny",
+        "spell_ids": [
+          "winners_chariot",
+          "overwhelm",
+          "bloodline",
+          "retaliation",
+          "final_duel",
+          "field_maneuvers"
+        ]
+      }
+    ],
+    "rules_implemented": true
   }
 }

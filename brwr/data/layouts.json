@@ -67,17 +67,17 @@
     "cells": [
       {
         "slot": 1,
-        "position": [0, -3],
+        "position": [-1, -2],
         "entrance_room": [0, -2]
       },
       {
         "slot": 2,
-        "position": [-3, 0],
+        "position": [-3, 1],
         "entrance_room": [-2, 0]
       },
       {
         "slot": 3,
-        "position": [3, -3],
+        "position": [3, -2],
         "entrance_room": [2, -2]
       },
       {
@@ -98,32 +98,32 @@
     "cells": [
       {
         "slot": 1,
-        "position": [0, -3],
+        "position": [-1, -2],
         "entrance_room": [0, -2]
       },
       {
         "slot": 2,
-        "position": [-3, 0],
+        "position": [-3, 1],
         "entrance_room": [-2, 0]
       },
       {
         "slot": 3,
-        "position": [3, -3],
+        "position": [2, -3],
         "entrance_room": [2, -2]
       },
       {
         "slot": 4,
-        "position": [-3, 3],
+        "position": [-2, 3],
         "entrance_room": [-2, 2]
       },
       {
         "slot": 5,
-        "position": [3, 0],
+        "position": [3, -1],
         "entrance_room": [2, 0]
       },
       {
         "slot": 6,
-        "position": [0, 3],
+        "position": [1, 2],
         "entrance_room": [0, 2]
       }
     ]

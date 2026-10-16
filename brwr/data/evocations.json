@@ -20,7 +20,6 @@
       }
     ]
   },
-
   {
     "id": "nigredo",
     "name": "Nigredo",
@@ -32,7 +31,7 @@
     "abilities": [
       {
         "type": "on_inflict_damage",
-        "optional": true,
+        "optional": false,
         "choices": [
           {
             "type": "place_instability",
@@ -48,7 +47,6 @@
       }
     ]
   },
-
   {
     "id": "cadaver",
     "name": "Cadaver",
@@ -65,19 +63,1331 @@
     ]
   },
   {
-  "id": "colossus",
-  "name": "Colossus",
-  "archetype": "undead",
-  "health": 4,
-  "strength": 3,
-  "speed": 2,
-  "copies": 3,
-  "abilities": [
-    {
-      "type": "damage_mage_entering_room",
-      "trigger": "mage_enters_room",
-      "amount": 3
-    }
-  ]
-}
+    "id": "colossus",
+    "name": "Colossus",
+    "archetype": "undead",
+    "health": 4,
+    "strength": 3,
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "damage_mage_entering_room",
+        "trigger": "mage_enters_room",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "myrmidones",
+    "name": "Myrmidones",
+    "archetype": "demon",
+    "health": 4,
+    "strength": 1,
+    "speed": 2,
+    "copies": 3,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "strength_per_other_same_evocation_in_room",
+        "amount_per_other": 1
+      }
+    ]
+  },
+  {
+    "id": "hyperion",
+    "name": "Hyperion",
+    "archetype": "legend",
+    "health": 6,
+    "strength": 3,
+    "speed": 1,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "attack_room",
+        "range": 1
+      },
+      {
+        "type": "damage_models_entering_room",
+        "trigger": "model_enters_room",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "cinis",
+    "name": "Cinis",
+    "archetype": "beast",
+    "health": 4,
+    "strength": 3,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "store_owner_cube_on_summon",
+        "amount": 1
+      },
+      {
+        "type": "prevent_defeat_with_stored_cube",
+        "heal_all_damage": true
+      },
+      {
+        "type": "attack_room",
+        "range": 0
+      }
+    ]
+  },
+  {
+    "id": "ancestral_totem",
+    "name": "Ancestral Totem",
+    "archetype": "altar",
+    "health": 7,
+    "strength": 0,
+    "speed": 0,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "on_activate",
+        "effects": [
+          {
+            "type": "gain_power",
+            "amount": 2,
+            "target": "controller"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mystic_totem",
+    "name": "Mystic Totem",
+    "archetype": "altar",
+    "health": 7,
+    "strength": 0,
+    "speed": 0,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "on_activate",
+        "optional": true,
+        "effects": [
+          {
+            "type": "place_instability",
+            "amount": 3,
+            "target": "room",
+            "range": "*"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ursa",
+    "name": "Ursa",
+    "archetype": "beast",
+    "health": 2,
+    "strength": 3,
+    "speed": 1,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "damage_room_on_defeat_or_removal",
+        "amount": 1,
+        "range": 0
+      }
+    ]
+  },
+  {
+    "id": "crocodilus",
+    "name": "Crocodilus",
+    "archetype": "beast",
+    "health": 3,
+    "strength": 1,
+    "speed": 3,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "power_on_attack_if_not_leading",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "sun_wukong",
+    "name": "Sun Wukong",
+    "archetype": "beast",
+    "health": 5,
+    "strength": 4,
+    "speed": 0,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "before_attack",
+        "optional": true,
+        "effects": [
+          {
+            "type": "place_evocation_in_any_room"
+          }
+        ]
+      },
+      {
+        "type": "after_attack",
+        "optional": true,
+        "effects": [
+          {
+            "type": "place_evocation_in_any_room"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "albedo",
+    "name": "Albedo",
+    "archetype": "construct",
+    "health": 4,
+    "strength": 5,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "ignore_spell_effects"
+      }
+    ]
+  },
+  {
+    "id": "anubis",
+    "name": "Anubis",
+    "archetype": "divinity",
+    "health": 8,
+    "strength": 2,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "after_attack",
+        "effects": [
+          {
+            "type": "assign_jinx"
+          },
+          {
+            "type": "damage_per_jinxed_mage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bellum",
+    "name": "Bellum",
+    "archetype": "demon",
+    "health": 7,
+    "strength": 4,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "cannot_be_physically_attacked"
+      }
+    ]
+  },
+  {
+    "id": "cacus",
+    "name": "Cacus",
+    "archetype": "legend",
+    "health": 6,
+    "strength": 3,
+    "speed": 1,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "attack_room",
+        "range": 0
+      },
+      {
+        "type": "before_attack",
+        "effects": [
+          {
+            "type": "pull_model_to_source_room",
+            "distance": 2,
+            "optional": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "chimera",
+    "name": "Chimera",
+    "archetype": "beast",
+    "health": 6,
+    "strength": 0,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "replace_attack",
+        "choices": [
+          {
+            "label": "Inflict 3 in Room 0",
+            "effects": [
+              {
+                "type": "self_room_effect",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "amount": 3
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Convert 4 Damage on Model 0",
+            "effects": [
+              {
+                "type": "independent_target",
+                "target": "model",
+                "range": 0,
+                "effects": [
+                  {
+                    "type": "convert_damage",
+                    "amount": 4
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Place 3 Instability in Room 0",
+            "effects": [
+              {
+                "type": "self_room_effect",
+                "effects": [
+                  {
+                    "type": "place_instability",
+                    "amount": 3
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cthully",
+    "name": "Cthully",
+    "archetype": "nightmare",
+    "health": 1,
+    "strength": 3,
+    "speed": 0,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "immune_damage"
+      },
+      {
+        "type": "cannot_be_removed_by_spells"
+      },
+      {
+        "type": "assigned_attack"
+      },
+      {
+        "type": "reassign_on_defeat"
+      }
+    ]
+  },
+  {
+    "id": "devi",
+    "name": "Devi",
+    "archetype": "divinity",
+    "health": 6,
+    "strength": 3,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "reflect_damage",
+        "bonus": 2
+      },
+      {
+        "type": "on_activate",
+        "effects": [
+          {
+            "type": "damage_source_evocation",
+            "amount": 1,
+            "black_rose": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "draco",
+    "name": "Draco",
+    "archetype": "beast",
+    "health": 6,
+    "strength": 3,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "replace_summon_with_heal",
+        "amount": 1
+      },
+      {
+        "type": "cap_incoming_damage",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "fames",
+    "name": "Fames",
+    "archetype": "demon",
+    "health": 9,
+    "strength": 1,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "on_activation_start",
+        "effects": [
+          {
+            "type": "damage_source_evocation",
+            "amount": 1,
+            "black_rose": true
+          }
+        ]
+      },
+      {
+        "type": "store_cube_when_damaged"
+      },
+      {
+        "type": "strength_per_stored_cube"
+      }
+    ]
+  },
+  {
+    "id": "fenrir",
+    "name": "Fenrir",
+    "archetype": "beast",
+    "health": 5,
+    "strength": 5,
+    "speed": 4,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "damage_room_on_defeat_or_removal",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "gaea",
+    "name": "Gaea",
+    "archetype": "legend",
+    "health": 6,
+    "strength": 1,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "after_attack",
+        "effects": [
+          {
+            "type": "choose_effect",
+            "choices": [
+              {
+                "label": "Remove 2 of your Instability here; gain 2 Power",
+                "effects": [
+                  {
+                    "type": "instability_cost",
+                    "amount": 2,
+                    "effects": [
+                      {
+                        "type": "gain_power",
+                        "amount": 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "label": "Convert 3 Damage on Mage 1",
+                "effects": [
+                  {
+                    "type": "independent_target",
+                    "target": "mage",
+                    "range": 1,
+                    "effects": [
+                      {
+                        "type": "convert_damage",
+                        "amount": 3
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "label": "Convert 3 Instability in Room 1",
+                "effects": [
+                  {
+                    "type": "independent_target",
+                    "target": "room",
+                    "range": 1,
+                    "effects": [
+                      {
+                        "type": "convert_instability",
+                        "amount": 3
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "grypas",
+    "name": "Grypas",
+    "archetype": "beast",
+    "health": 6,
+    "strength": 2,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "event_strength_aura",
+        "distance": 1
+      }
+    ]
+  },
+  {
+    "id": "hastur",
+    "name": "Hastur",
+    "archetype": "divinity",
+    "health": 7,
+    "strength": 0,
+    "speed": 0,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "ignore_spell_effects"
+      },
+      {
+        "type": "owner_activation_power",
+        "amount": 1
+      },
+      {
+        "type": "cap_incoming_damage",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "ignis",
+    "name": "Ignis",
+    "archetype": "construct",
+    "health": 5,
+    "strength": 2,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "strength_per_damage",
+        "amount_per_damage": 1
+      },
+      {
+        "type": "redirect_owner_damage",
+        "amount": 1,
+        "optional": true
+      },
+      {
+        "type": "cap_incoming_damage",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "jack",
+    "name": "Jack",
+    "archetype": "demon",
+    "health": 3,
+    "strength": 2,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "store_trophies_on_summon"
+      },
+      {
+        "type": "strength_per_stored_trophy",
+        "max": 3
+      },
+      {
+        "type": "immortal_while_trophies"
+      }
+    ]
+  },
+  {
+    "id": "janara",
+    "name": "Janara",
+    "archetype": "legend",
+    "health": 6,
+    "strength": 2,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "on_room_entry",
+        "effects": [
+          {
+            "type": "optional_effect",
+            "effects": [
+              {
+                "type": "self_room_effect",
+                "effects": [
+                  {
+                    "type": "place_instability",
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "on_activate",
+        "effects": [
+          {
+            "type": "activate_source_room",
+            "optional": true,
+            "allow_activated": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "minotaurus",
+    "name": "Minotaurus",
+    "archetype": "beast",
+    "health": 6,
+    "strength": 3,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "attack_again_if_survived"
+      }
+    ]
+  },
+  {
+    "id": "mors",
+    "name": "Mors",
+    "archetype": "demon",
+    "health": 3,
+    "strength": 4,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "extra_trophy_on_defeat"
+      },
+      {
+        "type": "return_spell_on_defeat",
+        "spell_id": "requiem"
+      }
+    ]
+  },
+  {
+    "id": "nocturnus",
+    "name": "Nocturnus",
+    "archetype": "demon",
+    "health": 6,
+    "strength": 0,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "block_other_non_nightmare_activations"
+      },
+      {
+        "type": "strength_per_other_nightmare"
+      }
+    ]
+  },
+  {
+    "id": "odin",
+    "name": "Odin",
+    "archetype": "divinity",
+    "health": 5,
+    "strength": 2,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "replace_attack",
+        "choose_count": 2,
+        "optional": true,
+        "choices": [
+          {
+            "label": "Inflict 1 on Model 1",
+            "effects": [
+              {
+                "type": "independent_target",
+                "target": "model",
+                "range": 1,
+                "effects": [
+                  {
+                    "type": "damage",
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Place 1 Instability in Room 0",
+            "effects": [
+              {
+                "type": "self_room_effect",
+                "effects": [
+                  {
+                    "type": "place_instability",
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Heal Odin 2",
+            "effects": [
+              {
+                "type": "heal_source_evocation",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "parcae",
+    "name": "Parcae",
+    "archetype": "demon",
+    "health": 6,
+    "strength": 1,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "after_attack",
+        "effects": [
+          {
+            "type": "instability_per_event",
+            "range": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pestilentia",
+    "name": "Pestilentia",
+    "archetype": "demon",
+    "health": 7,
+    "strength": 1,
+    "speed": 4,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "opponents_gain_less_power",
+        "threshold": 2,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "putridum",
+    "name": "Putridum",
+    "archetype": "undead",
+    "health": 4,
+    "strength": 4,
+    "speed": 2,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "upgrade_capacity",
+        "amount": 3
+      },
+      {
+        "type": "upgrades_on_summon",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "rubedo",
+    "name": "Rubedo",
+    "archetype": "construct",
+    "health": 6,
+    "strength": 3,
+    "speed": 3,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "before_attack",
+        "effects": [
+          {
+            "type": "convert_damage",
+            "amount": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sphynx",
+    "name": "Sphynx",
+    "archetype": "beast",
+    "health": 8,
+    "strength": 3,
+    "speed": 1,
+    "copies": 1,
+    "forgotten": true,
+    "abilities": [
+      {
+        "type": "other_mage_quest_power",
+        "amount": 1
+      },
+      {
+        "type": "other_mage_defeat_trophy"
+      }
+    ]
+  },
+  {
+    "id": "templarii",
+    "name": "Templarii",
+    "archetype": "undead",
+    "health": 3,
+    "strength": 2,
+    "speed": 2,
+    "copies": 3,
+    "forgotten": false,
+    "abilities": [
+      {
+        "type": "on_activation_start",
+        "effects": [
+          {
+            "type": "instability_cost",
+            "amount": 1,
+            "effects": [
+              {
+                "type": "heal_source_evocation",
+                "amount": 1
+              },
+              {
+                "type": "activation_strength_bonus",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "umbra",
+    "name": "Umbra",
+    "archetype": "nightmare",
+    "health": 2,
+    "strength": 1,
+    "speed": 0,
+    "copies": 9,
+    "forgotten": false,
+    "abilities": [
+      {
+        "type": "assigned_attack"
+      },
+      {
+        "type": "damage_assigned_slot",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "aruspice",
+    "name": "Aruspice",
+    "archetype": "beast",
+    "health": 2,
+    "strength": 1,
+    "speed": 2,
+    "copies": 5,
+    "abilities": [
+      {
+        "type": "strength_per_event"
+      }
+    ],
+    "source": "Codex Arcanum: alternative Rooms"
+  },
+  {
+    "id": "pharaoh",
+    "name": "Pharaoh",
+    "archetype": "undead",
+    "health": 2,
+    "strength": 1,
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "strength_per_jinxed_mage"
+      }
+    ],
+    "source": "Codex Arcanum: alternative Rooms"
+  },
+  {
+    "id": "dagon",
+    "name": "Dagon",
+    "archetype": "demon",
+    "health": 2,
+    "strength": 2,
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "optional_attack_replacement",
+        "effects": [
+          {
+            "type": "self_room_effect",
+            "effects": [
+              {
+                "type": "place_instability",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "convert_instability_on_defeat_or_removal",
+        "amount": 2
+      }
+    ],
+    "source": "Codex Arcanum: alternative Rooms"
+  },
+  {
+    "id": "pupa",
+    "name": "Pupa",
+    "archetype": "construct",
+    "health": 2,
+    "strength": 1,
+    "speed": 2,
+    "copies": 5,
+    "abilities": [
+      {
+        "type": "strength_if_room_instability",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "eros_bow",
+    "name": "Eros's Bow",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "id": "aim_at_the_heart",
+        "name": "Aim at the Heart",
+        "effects": [
+          {
+            "type": "filtered_model_effect",
+            "range": 2,
+            "effects": [
+              {
+                "type": "damage",
+                "amount": 1
+              },
+              {
+                "type": "if_effect_result",
+                "key": "last_damage_dealt",
+                "effects": [
+                  {
+                    "type": "steal_power",
+                    "amount": 1
+                  }
+                ]
+              }
+            ],
+            "target": "mage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mars_claws",
+    "name": "Mars's Claws",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "convert_after_owner_attack",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "talos_corset",
+    "name": "Talos's Corset",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "redirect_owner_damage",
+        "mandatory": true
+      },
+      {
+        "type": "immune_room_damage"
+      },
+      {
+        "type": "instability_on_removal",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "tartarus_axe",
+    "name": "Tartarus's Axe",
+    "archetype": "equipment",
+    "health": 1,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "owner_stats",
+        "strength": 2
+      }
+    ]
+  },
+  {
+    "id": "winged_sandals",
+    "name": "Winged Sandals",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "owner_stats",
+        "speed": 1
+      },
+      {
+        "type": "ignore_room_entry_traps"
+      }
+    ]
+  },
+  {
+    "id": "pestis",
+    "name": "Pestis",
+    "archetype": "beast",
+    "health": 1,
+    "strength": 0,
+    "speed": 1,
+    "copies": 10,
+    "abilities": [
+      {
+        "type": "store_owner_cube_on_summon",
+        "amount": 1
+      },
+      {
+        "type": "replace_attack",
+        "choices": [
+          {
+            "label": "Assign Infectio and remove Pestis",
+            "effects": [
+              {
+                "type": "filtered_model_effect",
+                "target": "model",
+                "range": 0,
+                "optional": true,
+                "effects": [
+                  {
+                    "type": "assign_infectio",
+                    "amount": 1
+                  },
+                  {
+                    "type": "remove_source_evocation"
+                  }
+                ],
+                "physical_attack_target": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "no_slot": true,
+    "fixed_stats": true,
+    "requires_owner_cube": true
+  },
+  {
+    "id": "totem",
+    "name": "Totem",
+    "archetype": "altar",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 5,
+    "abilities": [
+      {
+        "type": "on_activation_start",
+        "effects": [
+          {
+            "type": "filtered_model_effect",
+            "range": 1,
+            "effects": [
+              {
+                "type": "choose_one",
+                "options": [
+                  {
+                    "id": "0",
+                    "label": "Heal 1",
+                    "effects": [
+                      {
+                        "type": "heal",
+                        "amount": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "1",
+                    "label": "Convert 1",
+                    "effects": [
+                      {
+                        "type": "convert_damage",
+                        "amount": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "target": "model",
+            "optional": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cloak_of_rage",
+    "name": "Cloak of Rage",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "id": "assault",
+        "name": "Assault",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_attack",
+            "range": 0,
+            "optional": true,
+            "strength_bonus": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crimson_whip",
+    "name": "Crimson Whip",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "id": "fleshing_out",
+        "name": "Fleshing Out",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "ranged_mage_attack",
+            "range": 1,
+            "followup_damage": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "destroyer",
+    "name": "Destroyer",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "id": "slashing",
+        "name": "Slashing",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "self_room_effect",
+            "effects": [
+              {
+                "type": "place_instability",
+                "amount": 1
+              }
+            ]
+          },
+          {
+            "type": "self_room_effect",
+            "effects": [
+              {
+                "type": "relative_room_effect",
+                "range": 1,
+                "effects": [
+                  {
+                    "type": "place_instability",
+                    "amount": 1
+                  }
+                ],
+                "different_from_origin": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sanguine",
+    "name": "Sanguine",
+    "archetype": "equipment",
+    "health": 2,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "id": "slice",
+        "name": "Slice",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "self_room_effect",
+            "effects": [
+              {
+                "type": "scaled_school_effect",
+                "value": "mage_strength",
+                "effect": {
+                  "type": "damage"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "trophy_belt",
+    "name": "Trophy Belt",
+    "archetype": "equipment",
+    "health": 4,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "immune_room_damage"
+      },
+      {
+        "type": "collect_trophy_on_cell",
+        "threshold": 3,
+        "power": 3
+      }
+    ]
+  }
 ]

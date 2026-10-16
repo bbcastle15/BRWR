@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-16",
+  "mode": "built-in imagegen, reference image edit",
+  "purpose": "Evocation token portrait pilot; rings and copy numbers drawn by Godot, no alteration of source cards",
+  "assets": [
+    {
+      "id": "nigredo",
+      "reference": "assets/evocations/nigredo.png",
+      "output": "assets/tokens/evocations/nigredo.png",
+      "prompt": "Create a single square game UI portrait asset derived from the supplied reference card. Preserve the creature's established identity, anatomy, colors and costume closely. Use ONLY the creature illustration as reference, ignore every letter, symbol, border and rules panel on the card. Tight centered head-and-shoulders composition, face/helmet and distinctive horns occupying most of the square; all identity-defining features inside a central circular safe area with 8% breathing space. Painterly dark fantasy, sculptural lighting, readable broad shapes, crisp silhouette, restrained fine detail. Very dark neutral charcoal background, no scene clutter. Strong separation between head and backdrop, designed to remain recognizable when displayed inside a 36-pixel circular token. Absolutely NO text, NO numbers, NO UI, NO medallion, NO frame, NO ring, NO symbols. This file is the portrait only; the application adds all borders and identifiers. Do not depict a physical card.\nSubject: Nigredo. Blackened plate helmet and shoulder armor with sparse gold edges, a single vivid acid-green internal glow through the visor, tall thornlike crown/crest. Preserve the helmet design from the reference. The luminous green visor is the principal small-scale recognition cue. Helmet front in a gentle three-quarter view; do not turn it into a face or skull."
+    },
+    {
+      "id": "succubus",
+      "reference": "assets/evocations/succubus.png",
+      "output": "assets/tokens/evocations/succubus.png",
+      "prompt": "Create a single square game UI portrait asset derived from the supplied reference card. Preserve the creature's established identity, anatomy, colors and costume closely. Use ONLY the creature illustration as reference, ignore every letter, symbol, border and rules panel on the card. Tight centered head-and-shoulders composition, face/helmet and distinctive horns occupying most of the square; all identity-defining features inside a central circular safe area with 8% breathing space. Painterly dark fantasy, sculptural lighting, readable broad shapes, crisp silhouette, restrained fine detail. Very dark neutral charcoal background, no scene clutter. Strong separation between head and backdrop, designed to remain recognizable when displayed inside a 36-pixel circular token. Absolutely NO text, NO numbers, NO UI, NO medallion, NO frame, NO ring, NO symbols. This file is the portrait only; the application adds all borders and identifiers. Do not depict a physical card.\nSubject: Succubus. Violet-skinned adult female demon, swept pink-lavender hair, two large curling black horns and golden glowing eyes. Face and BOTH horns entirely visible inside the circular safe area, regal confident expression. Show head, neck and armored shoulders only, no full body. Preserve the reference face and horn silhouette."
+    },
+    {
+      "id": "cadaver",
+      "reference": "assets/evocations/cadaver.png",
+      "output": "assets/tokens/evocations/cadaver.png",
+      "prompt": "Create a single square game UI portrait asset derived from the supplied reference card. Preserve the creature's established identity, anatomy, colors and costume closely. Use ONLY the creature illustration as reference, ignore every letter, symbol, border and rules panel on the card. Tight centered head-and-shoulders composition, face/helmet and distinctive horns occupying most of the square; all identity-defining features inside a central circular safe area with 8% breathing space. Painterly dark fantasy, sculptural lighting, readable broad shapes, crisp silhouette, restrained fine detail. Very dark neutral charcoal background, no scene clutter. Strong separation between head and backdrop, designed to remain recognizable when displayed inside a 36-pixel circular token. Absolutely NO text, NO numbers, NO UI, NO medallion, NO frame, NO ring, NO symbols. This file is the portrait only; the application adds all borders and identifiers. Do not depict a physical card.\nSubject: Cadaver. An ochre/olive bone skull undead with enormous asymmetrical forward-curving dark horns, fiery red eyes, exposed teeth and angular spiked shoulder armor. Preserve this horned skull identity and reference palette, unmistakably different from a black armored knight. Show close head and upper shoulders, high contrast ivory/ochre skull against near-black background, both main horns safely inside the circular portrait area."
+    }
+  ]
+}

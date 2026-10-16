@@ -1,15 +1,15 @@
 {
-	"rikkart": {
-		"id": "rikkart",
-		"name": "Rikkart",
-		"health": 11,
-		"hand_limit": 7,
-		"strength": 2,
-		"speed": 2,
-		"max_active_quests": 2,
-		"personal_spell_id": "cube_of_lamentations"
-	},
-	"angela": {
+  "rikkart": {
+    "id": "rikkart",
+    "name": "Rikkart",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "cube_of_lamentations"
+  },
+  "angela": {
     "id": "angela",
     "name": "Angela",
     "health": 11,
@@ -28,5 +28,68 @@
     "speed": 2,
     "max_active_quests": 2,
     "personal_spell_id": "consuming_soul"
+  },
+  "landolfo_ii": {
+    "id": "landolfo_ii",
+    "name": "Landolfo II",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "ethereal_tentacles"
+  },
+  "gaea": {
+    "id": "gaea",
+    "name": "Gaea",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "lifeline"
+  },
+  "kormac": {
+    "id": "kormac",
+    "name": "Kormac",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "animal_affinity"
+  },
+  "fames": {
+    "id": "fames",
+    "name": "Fames",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "akharistia"
+  },
+  "etna": {
+    "id": "etna",
+    "name": "Etna",
+    "health": 12,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 1,
+    "personal_spell_id": "master_craftsman"
+  },
+  "anubis": {
+    "id": "anubis",
+    "name": "Anubis",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "eternal_curse",
+    "excluded_forgotten_spell_ids": [
+      "wrath_of_the_jackal_god"
+    ]
   }
 }

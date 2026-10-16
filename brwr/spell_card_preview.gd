@@ -108,6 +108,10 @@ func show_spell(
 		("Played • " if public_card else "Prepared • ")
 		+ ("Dark" if use_dark_side else "Light")
 	)
+	var card_database = get_parent().get("spell_database")
+	var definition: SpellCardState = card_database.get_spell(spell_id) if card_database != null else null
+	if definition != null and definition.has_single_effect():
+		side_label.text = ("Played" if public_card else "Prepared") + " • Single effect"
 
 	if texture != null:
 		image.texture = texture
@@ -123,6 +127,12 @@ func show_spell(
 			+ spell_id
 			+ ".png"
 		)
+		var database = get_parent().get("spell_database")
+		if database != null:
+			var spell: SpellCardState = database.get_spell(spell_id)
+			if spell != null and not str(spell.get_side(use_dark_side).get("text", "")).is_empty():
+				var side: Dictionary = spell.get_side(use_dark_side)
+				fallback_label.text = "%s · %s\nTarget: %s %s\n\n%s" % [str(side.type).capitalize(), str(side.element).capitalize(), str(side.target).capitalize(), str(side.get("range", "")).trim_suffix(".0"), str(side.text)]
 
 	root.visible = true
 

@@ -22,10 +22,32 @@ func resolve_effect(
 
 	context.erase("effect_resolution_error")
 	var effect_type = str(effect.get("type", ""))
+	var game = context.get("game")
+	if game != null:
+		ForgottenPassives.prepare_context(game, context)
+		var target_ev: EvocationState = context.get("target_evocation")
+		if target_ev != null and str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, target_ev, "ignore_spell_effects").is_empty():
+			return true
 	if bool(effect.get("only_on_trigger", false)) and context.get("trigger_event") == null:
+		return true
+	if bool(effect.get("only_on_initial_cast", false)) and context.get("trigger_event") != null:
+		return true
+	if _caput_direct_target_is_ignored(context):
 		return true
 	if effect_type in DeathEffectResolver.TYPES:
 		return DeathEffectResolver.resolve(effect, context)
+	if effect_type in DruidicRules.EFFECT_TYPES:
+		return DruidicRules.resolve(effect, context)
+	if effect_type in ForgottenRules.EFFECT_TYPES:
+		return ForgottenRules.resolve(effect, context)
+	if effect_type in PestilenceRules.TYPES:
+		return PestilenceRules.resolve(effect, context)
+	if effect_type in OracleRules.TYPES:
+		return OracleRules.resolve(effect, context)
+	if effect_type in SchoolEffects.TYPES:
+		return SchoolEffects.resolve(effect, context)
+	if effect_type in FamineRules.EFFECT_TYPES:
+		return FamineRules.resolve(effect, context)
 
 	match effect_type:
 		# Core model effects.
@@ -37,12 +59,46 @@ func resolve_effect(
 			return _resolve_power(effect, context, effect_type)
 		"place_instability":
 			return _resolve_place_instability(effect, context)
+		"remove_instability":
+			return _resolve_remove_instability(effect, context)
+		"place_instability_from_context":
+			return _resolve_place_instability_from_context(effect, context)
 		"pain":
 			return _resolve_pain(effect, context)
 		"convert_damage", "convert_damage_on_caster":
 			return _resolve_convert_damage(effect, context, effect_type)
 		"convert_instability":
 			return _resolve_convert_instability(effect, context)
+		"choose_one":
+			return _resolve_choose_one(effect, context)
+		"place_vastum":
+			return _resolve_place_vastum(effect, context)
+		"remove_vastum":
+			return _resolve_remove_vastum(effect, context)
+		"remove_vastum_from_lodge":
+			return _resolve_remove_vastum_from_lodge(effect, context)
+		"chaos":
+			return _resolve_chaos(effect, context)
+		"damage_equal_vastum_count":
+			return _resolve_damage_equal_vastum_count(effect, context)
+		"move_target_up_to":
+			return _resolve_move_target_up_to(effect, context)
+		"memory_to_top_grimoire":
+			return _resolve_memory_to_top_grimoire(effect, context)
+		"search_grimoire_to_top":
+			return _resolve_search_grimoire_to_top(effect, context)
+		"place_caster_in_target_room":
+			return _resolve_place_caster_in_target_room(effect, context)
+		"place_target_in_vastum_room":
+			return _resolve_place_target_in_vastum_room(effect, context)
+		"place_target_in_caster_room":
+			return _resolve_place_target_in_caster_room(effect, context)
+		"place_target_in_any_room":
+			return _resolve_place_target_in_any_room(effect, context)
+		"place_caster_in_vastum_room":
+			return _resolve_place_caster_in_vastum_room(effect, context)
+		"lose_caster_power":
+			return _resolve_lose_caster_power(effect, context)
 		"convert_damage_each_other_mage":
 			return _resolve_convert_damage_each_other_mage(effect, context)
 		"damage_within_distance":
@@ -121,6 +177,8 @@ func resolve_effect(
 		"summon_evocation_from_deck", \
 		"summon_evocation_at_removed_evocation":
 			return _resolve_summon_effect(effect, context, effect_type)
+		"summon_evocations_distinct_rooms":
+			return _resolve_summon_evocations_distinct_rooms(effect, context)
 
 		# Removal family.
 		"remove_target_evocation", \
@@ -134,6 +192,8 @@ func resolve_effect(
 		"activate_target_evocation", \
 		"activate_target_evocation_under_control":
 			return _resolve_activation_effect(effect, context, effect_type)
+		"activate_distinct_summoned_evocations":
+			return _resolve_activate_distinct_summoned_evocations(effect, context)
 
 		# Damage variants sharing the same low-level primitives.
 		"damage_triggering_model", \
@@ -146,15 +206,45 @@ func resolve_effect(
 		"damage_models_damaged_by_effect":
 			return _resolve_damage_variant(effect, context, effect_type)
 
+		# Geomancy: Fortuna / Cauda / Carcer / Conjunctio / Lifeline.
+		"discard_active_events":
+			return _resolve_discard_active_events(effect, context)
+		"gain_power_from_context":
+			return _resolve_gain_power_from_context(effect, context)
+		"conditional_payment":
+			return _resolve_conditional_payment(effect, context)
+		"discard_spell":
+			return _resolve_discard_spell(effect, context)
+		"discard_unsolved_quest":
+			return _resolve_discard_unsolved_quest(effect, context)
+		"discard_solved_quest":
+			return _resolve_discard_solved_quest(effect, context)
+		"draw_from_memories":
+			return _resolve_draw_from_memories(effect, context)
+		"draw_from_library":
+			return _resolve_draw_from_library(effect, context)
+		"place_self_in_room":
+			return _resolve_place_self_in_room(effect, context)
+		"place_self_in_target_room":
+			return _resolve_place_self_in_target_room(effect, context)
+		"activate_evocation_owned_by_target_under_control":
+			return _resolve_activate_evocation_owned_by_target_under_control(effect, context)
+		"heal_from_context":
+			return _resolve_heal_from_context(effect, context)
+
 		# Trigger / flow control.
 		"conditional":
 			return _resolve_conditional(effect, context)
+		"geoform":
+			return _resolve_geoform(effect, context)
 		"redirect_damage_to_evocation":
 			return _resolve_redirect_damage(effect, context)
 		"gain_power_from_defeating_model":
 			return _resolve_gain_power_from_defeat(effect, context)
 		"ignore_trigger_damage":
 			return _resolve_ignore_trigger_damage(effect, context)
+		"ignore_trigger_spell_effect":
+			return _resolve_ignore_trigger_spell_effect(effect, context)
 
 		# Targeting / movement / Room interaction.
 		"modify_spell_target":
@@ -164,8 +254,26 @@ func resolve_effect(
 				effect,
 				context
 			)
+		"set_target_room_from_triggering_mage":
+			return resolve_set_target_room_from_triggering_mage(
+				effect,
+				context
+			)
+		"set_target_mage_from_triggering_mage":
+			return resolve_set_target_mage_from_triggering_mage(
+				effect,
+				context
+			)
+		"steal_power":
+			return _resolve_steal_power(effect, context)
+		"activate_target_room":
+			return _resolve_activate_target_room(effect, context)
 		"move_one_model_damaged_by_effect":
 			return _resolve_move_damaged_model(effect, context)
+		"damage_rooms_in_range_from_target":
+			return _resolve_damage_rooms_in_range_from_target(effect, context)
+		"move_one_mage_in_target_room":
+			return _resolve_move_one_mage_in_target_room(effect, context)
 		"activate_room_from_owned_evocation":
 			return _resolve_activate_room_from_evocation(effect, context)
 
@@ -221,6 +329,9 @@ func _valid_player(game, player_index: int) -> bool:
 
 func _target_type(context: Dictionary) -> String:
 	var result = str(context.get("spell_target_type", ""))
+	if result == "model" and not bool(context.get("target_is_dummy", false)):
+		if context.get("target_evocation") != null: return "evocation"
+		if int(context.get("target_player_index", -1)) >= 0: return "mage"
 
 	# Compatibility with old direct tests.
 	if result == "" \
@@ -317,6 +428,8 @@ func _damage_mage(
 		return 0
 	if DeathEffectResolver.ignores(game.active_effect_context, player_index):
 		return 0
+	if action_type == "spell" and game.active_effect_context.get("resolver_kind") == "physical":
+		action_type = "physical"
 
 	return game.deal_damage(
 		attacker_id,
@@ -338,6 +451,8 @@ func _damage_evocation(
 	if game == null or evocation == null:
 		return 0
 
+	if str(game.active_effect_context.get("spell_target_type", "")) in ["room", "area"] and not ForgottenEvocations.ability(game, evocation, "immune_room_damage").is_empty():
+		return 0
 	var controller_id: int = int(evocation.controller_id)
 	if controller_id < 0:
 		controller_id = int(evocation.owner_id)
@@ -497,7 +612,8 @@ func _damage_within_distance(
 	origin_room_id: String,
 	distance: int,
 	amount: int,
-	context: Dictionary
+	context: Dictionary,
+	suppressed: Array[String] = []
 ) -> bool:
 
 	var origin_coord = game.room_id_to_coord(origin_room_id)
@@ -522,7 +638,9 @@ func _damage_within_distance(
 			game,
 			caster_id,
 			player_index,
-			amount
+			amount,
+			"spell",
+			suppressed
 		)
 
 		if dealt > 0:
@@ -552,7 +670,8 @@ func _damage_within_distance(
 				game,
 				caster_id,
 				evocation,
-				amount
+				amount,
+				suppressed
 			)
 
 			if dealt > 0:
@@ -704,7 +823,9 @@ func _remove_evocation(
 	if game == null or evocation == null:
 		return false
 
-	var owner_id = int(evocation.owner_id)
+	if not ForgottenEvocations.can_remove(game, evocation, context):
+		return false
+	var owner_id = evocation.assigned_mage if evocation.assigned_mage >= 0 else int(evocation.owner_id)
 	if not _valid_player(game, owner_id):
 		return false
 
@@ -1213,6 +1334,8 @@ func _resolve_power(
 	var target = int(context.get("target_player_index", -1))
 	if target < 0:
 		return false
+	if DeathEffectResolver.ignores(context, target):
+		return true
 
 	game.add_player_power(target, -amount)
 	return true
@@ -1264,10 +1387,286 @@ func _resolve_place_instability(
 		after_count = target_room.get_instability_count()
 
 	context["effect_target_room_id"] = room_id
-	context["effect_instability_placed"] = max(
+	var actually_placed: int = max(
 		0,
 		after_count - before_count
 	)
+	context["effect_instability_placed"] = actually_placed
+
+	# Cards such as Gaea's Lifeline need the number to survive into a later
+	# Geoform sentence. Per-effect metadata is reset between sentences, so an
+	# explicit store_as key is persistent within the Spell context.
+	var store_key: String = str(effect.get("store_as", ""))
+	if store_key != "":
+		context[store_key] = actually_placed
+
+	return true
+
+
+
+# INSTABLE_CREEK_V1
+func _resolve_remove_instability(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var room_id: String = _target_room(context)
+	if room_id == "":
+		print("remove_instability: target Room missing")
+		return false
+
+	var room = game.get_room_by_id(room_id)
+	if room == null:
+		print("remove_instability: Room not found: ", room_id)
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 0)))
+	var up_to: bool = bool(effect.get("up_to", false))
+	var store_key: String = str(
+		effect.get("store_as", "instability_removed")
+	)
+	var choice_key: String = str(
+		effect.get(
+			"choice_key",
+			"_selected_remove_instability_cubes"
+		)
+	)
+
+	if amount <= 0:
+		context[store_key] = 0
+		context["effect_instability_removed"] = 0
+		return true
+
+	# First pass: choose the physical Instability cubes on the Lodge.
+	# "up to" intentionally allows choosing zero cubes.
+	if not context.has(choice_key):
+		var options: Array = []
+		var owner_occurrences: Dictionary = {}
+
+		for cube_index in range(room.instability_cubes.size()):
+			var owner_id: int = int(room.instability_cubes[cube_index])
+			var ordinal: int = int(
+				owner_occurrences.get(owner_id, 0)
+			)
+			owner_occurrences[owner_id] = ordinal + 1
+			if effect.get("owner") == "self" and owner_id != caster_id:
+				continue
+
+			var owner_name: String = "Black Rose"
+			if owner_id >= 0 and owner_id < game.players.size():
+				owner_name = game.players[owner_id].player_name
+
+			options.append({
+				"token":
+					"instability:"
+					+ str(owner_id)
+					+ ":"
+					+ str(ordinal),
+				"value": owner_id,
+				"owner_id": owner_id,
+				"owner_name": owner_name,
+				"cube_room_id": room_id
+			})
+
+		var max_select: int = mini(amount, options.size())
+		if max_select <= 0:
+			context[store_key] = 0
+			context["effect_instability_removed"] = 0
+			return true
+
+		var min_select: int = 0 if up_to else max_select
+		var prompt: String = (
+			"Choose up to " + str(max_select)
+			+ " Instability cubes to remove."
+			if up_to
+			else "Choose " + str(max_select)
+			+ " Instability cubes to remove."
+		)
+
+		if not game.request_effect_choice(
+			caster_id,
+			"instability_cubes",
+			context,
+			choice_key,
+			options,
+			min_select,
+			max_select,
+			prompt
+		):
+			return false
+
+		return false
+
+	var selected: Array = _choice_as_array(
+		context.get(choice_key, [])
+	)
+	var remove_limit: int = mini(amount, selected.size())
+	var removed: int = 0
+
+	for selected_index in range(remove_limit):
+		var selected_value = selected[selected_index]
+		var owner_id: int = (
+			int(selected_value.get("owner_id", 999999))
+			if selected_value is Dictionary
+			else int(selected_value)
+		)
+
+		if owner_id == 999999:
+			continue
+
+		if not room.remove_instability_cube(owner_id):
+			continue
+
+		game.return_owner_cubes(owner_id, 1)
+		removed += 1
+
+	context.erase(choice_key)
+	context[store_key] = removed
+	context["effect_instability_removed"] = removed
+	context["effect_target_room_id"] = room_id
+
+	print(
+		"Player ", caster_id + 1,
+		" removed ", removed,
+		" Instability from ", room_id
+	)
+
+	return true
+
+
+func _resolve_place_instability_from_context(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount_key: String = str(
+		effect.get("amount_key", "instability_removed")
+	)
+	var amount: int = maxi(
+		0,
+		int(context.get(amount_key, 0))
+	)
+
+	# Removing zero means there is nothing to place, so do not ask for a Room.
+	if amount <= 0:
+		context["effect_instability_placed"] = 0
+		return true
+
+	var origin_room_id: String = _target_room(context)
+	if origin_room_id == "":
+		print("place_instability_from_context: target Room missing")
+		return false
+
+	var distance: int = maxi(
+		0,
+		int(effect.get("range_from_target", 0))
+	)
+	var choice_key: String = str(
+		effect.get(
+			"choice_key",
+			"_instability_from_context_destination_room_id"
+		)
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+
+		# This is printed Range from the original target, not movement, so
+		# candidate Rooms obey the normal Effect range / line-of-sight rules.
+		for room_value in game.room_id_by_coord.values():
+			var destination_room_id: String = str(room_value)
+			if not game.is_room_within_effect_range(
+				origin_room_id,
+				destination_room_id,
+				distance
+			):
+				continue
+
+			var destination_room = game.get_room_by_id(
+				destination_room_id
+			)
+			var room_name: String = destination_room_id
+			if destination_room != null:
+				room_name = str(destination_room.room_name)
+
+			options.append({
+				"token":
+					"room:instability_from_context:"
+					+ destination_room_id,
+				"value": destination_room_id,
+				"room_id": destination_room_id,
+				"target_type": "room",
+				"name": room_name
+			})
+
+		if options.is_empty():
+			return true
+
+		# Do not overwrite target_room_id: a following Geoform must still check
+		# the original target Room, not the Room chosen for this placement.
+		if not game.request_effect_choice(
+			caster_id,
+			"secondary_room",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose a Room within "
+			+ str(distance)
+			+ " of the target."
+		):
+			return false
+
+		return false
+
+	var destination_room_id: String = str(
+		context.get(choice_key, "")
+	)
+	context.erase(choice_key)
+
+	if destination_room_id == "":
+		return false
+
+	# Revalidate after the choice (important for online/stale requests).
+	if not game.is_room_within_effect_range(
+		origin_room_id,
+		destination_room_id,
+		distance
+	):
+		print(
+			"place_instability_from_context: invalid destination ",
+			destination_room_id
+		)
+		return false
+
+	var placed: int = game.place_instability(
+		caster_id,
+		destination_room_id,
+		amount
+	)
+
+	context["effect_target_room_id"] = destination_room_id
+	context["effect_instability_placed"] = placed
+	context["last_instability_transfer_origin_room_id"] = origin_room_id
+	context["last_instability_transfer_destination_room_id"] = (
+		destination_room_id
+	)
+	context["last_instability_transfer_amount"] = placed
 
 	return true
 
@@ -1400,55 +1799,79 @@ func _resolve_convert_damage(
 			return false
 
 		var total_converted: int = 0
+		var room_key: String = "convert_room:" + room_id
+		var selected: Array = _choice_as_array(context.get(room_key, null))
+
+		# Normal runtime path: Game collected every eligible cube in the Room in
+		# one choice, so the printed amount is a global cap across all Models.
+		for selection_value in selected:
+			if total_converted >= amount or not selection_value is Dictionary:
+				break
+			var selection: Dictionary = selection_value
+			var model_type: String = str(selection.get("model_type", ""))
+			var cube_index: int = int(selection.get("cube_index", -1))
+			var old_owner: int = int(selection.get("owner_id", -999))
+			var cubes: Array = []
+			if model_type == "mage":
+				var player_index: int = int(selection.get("player_index", -1))
+				if not _valid_player(game, player_index):
+					continue
+				var mage = game.players[player_index].mage
+				if mage == null or mage.in_cell or mage.room_id != room_id or DeathEffectResolver.ignores(context, player_index):
+					continue
+				cubes = mage.damage_cubes
+			elif model_type == "evocation":
+				var owner_index: int = int(selection.get("owner_index", -1))
+				var evocation_index: int = int(selection.get("evocation_index", -1))
+				if not _valid_player(game, owner_index) or evocation_index < 0 or evocation_index >= game.players[owner_index].evocations.size():
+					continue
+				var evocation = game.players[owner_index].evocations[evocation_index]
+				if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
+					continue
+				cubes = evocation.damage_cubes
+			else:
+				continue
+			if cube_index < 0 or cube_index >= cubes.size() or int(cubes[cube_index]) != old_owner or old_owner == caster_id:
+				continue
+			if game.take_owner_cubes(caster_id, 1) <= 0:
+				break
+			game.return_owner_cubes(old_owner, 1)
+			cubes[cube_index] = caster_id
+			total_converted += 1
+
+		# Backward-compatible direct-test path: if no interactive selection was
+		# supplied, convert up to `amount` eligible cubes across the Room once.
+		if selected.is_empty():
+			for player_index in range(game.players.size()):
+				if total_converted >= amount:
+					break
+				var mage = game.players[player_index].mage
+				if mage == null or mage.in_cell or mage.room_id != room_id or DeathEffectResolver.ignores(context, player_index):
+					continue
+				total_converted += convert_damage_cubes(
+					mage.damage_cubes,
+					caster_id,
+					amount - total_converted,
+					[], game
+				)
+			for player in game.players:
+				if total_converted >= amount:
+					break
+				for evocation in player.evocations:
+					if total_converted >= amount:
+						break
+					if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
+						continue
+					total_converted += convert_damage_cubes(
+						evocation.damage_cubes,
+						caster_id,
+						amount - total_converted,
+						[], game
+					)
 
 		for player_index in range(game.players.size()):
-			var mage = game.players[player_index].mage
-			if mage.room_id != room_id \
-			or game.is_mage_in_cell(player_index):
-				continue
-
-			if player_index == caster_id or DeathEffectResolver.ignores(context, player_index):
-				continue
-
-			var converted = convert_damage_cubes(
-				mage.damage_cubes,
-				caster_id,
-				amount, _choice_as_array(context.get("convert_mage:%d" % player_index, null)), game
-			)
-			total_converted += converted
-
 			if player_index < game.player_boards.size():
 				game.player_boards[player_index].refresh()
-
-			print(
-				"Albify Room: converted ", converted,
-				" Damage on P", player_index + 1
-			)
-
-		for player in game.players:
-			for evocation in player.evocations:
-				if evocation == null \
-				or evocation.is_defeated() \
-				or evocation.room_id != room_id:
-					continue
-
-				var controller_id: int = int(evocation.controller_id)
-				if controller_id < 0:
-					controller_id = int(evocation.owner_id)
-
-				if controller_id == caster_id:
-					continue
-
-				var converted = convert_damage_cubes(
-					evocation.damage_cubes,
-					caster_id,
-					amount, _choice_as_array(context.get("convert_evocation:%d" % evocation.get_instance_id(), null)), game
-				)
-				total_converted += converted
-				print(
-					"Albify Room: converted ", converted,
-					" Damage on ", evocation.evocation_name
-				)
 
 		context["effect_target_room_id"] = room_id
 		context["effect_damage_converted"] = total_converted
@@ -1561,7 +1984,8 @@ func _resolve_damage_within_distance_effect(
 		room_id,
 		distance,
 		amount,
-		context
+		context,
+		_suppressed_triggers(effect)
 	)
 
 
@@ -1760,44 +2184,10 @@ func _resolve_draw_library(
 	effect: Dictionary,
 	context: Dictionary
 ) -> bool:
-	var game = _game(context)
-	var caster_id := _caster(context)
-	if not _valid_player(game, caster_id):
-		return false
-
-	var amount: int = maxi(0, int(effect.get("amount", 1)))
-	var requested_school := str(context.get("selected_school_id", ""))
-
-	for i in range(amount):
-		var spell: SpellCardState = null
-
-		if requested_school != "":
-			if not game.is_school_active(requested_school):
-				print("draw_library: selected School is not active: ", requested_school)
-				return false
-			spell = game.draw_from_school_library(requested_school)
-		else:
-			if str(context.get("resolver_kind", "")) == "quest":
-				print("draw_library: player School choice missing")
-				return false
-
-			for school_id in game.active_school_ids:
-				spell = game.draw_from_school_library(str(school_id))
-				if spell != null:
-					break
-
-		# If the Library cannot supply a card, that part of the Effect is skipped.
-		if spell == null:
-			continue
-
-		game.players[caster_id].add_spell_to_hand(spell)
-		print(
-			"Player ", caster_id + 1,
-			" drew ", spell.card_name,
-			" from the Library"
-		)
-
-	return true
+	# Quests use the same resumable, one-School-per-card draw as Spell effects.
+	var draw_effect := effect.duplicate()
+	draw_effect["school_choice_key"] = str(effect.get("school_choice_key", "selected_school_id"))
+	return _resolve_draw_from_library(draw_effect, context)
 
 
 func _resolve_take_crown(
@@ -2079,25 +2469,13 @@ func _place_mage_direct(
 	player_index: int,
 	room_id: String
 ) -> bool:
-	if not _valid_player(
-		game,
-		player_index
-	):
+	if game == null:
 		return false
 
-	var coord: Vector2i = game.room_id_to_coord(
+	return game.place_mage_in_room_direct(
+		player_index,
 		room_id
 	)
-
-	if coord == Vector2i(9999, 9999):
-		return false
-
-	game.players[player_index].mage.room_id = room_id
-	game.players[player_index].mage.room_coord = coord
-	game.players[player_index].mage.in_cell = false
-	game.refresh_model_tokens()
-
-	return true
 
 
 func _resolve_swap_with_target_mage_optional(
@@ -2714,6 +3092,13 @@ func _resolve_draw_three_forgotten_keep_one(
 		return false
 
 	for candidate in candidates:
+		if str(candidate.light_side.get("type", "")) == "on_draw":
+			for drawn in candidates:
+				game.forgotten_deck.erase(drawn)
+			game.resolve_drawn_forgotten(caster_id, candidate, candidates)
+			return true
+
+	for candidate in candidates:
 		game.forgotten_deck.erase(
 			candidate
 		)
@@ -2841,6 +3226,759 @@ func _resolve_steal_power_from_up_to_mages(
 
 	return true
 
+
+
+
+# =============================================================================
+# GEOMANCY — FORTUNA / CAUDA / CARCER / CONJUNCTIO / LIFELINE
+# =============================================================================
+
+func _geomancy_choice_array(value) -> Array:
+	if value == null:
+		return []
+	if value is Array:
+		return value.duplicate()
+	return [value]
+
+
+func _resolve_discard_active_events(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 0)))
+	var up_to: bool = bool(effect.get("up_to", true))
+	var choice_key: String = str(
+		effect.get("choice_key", "_geomancy_event_discard_indices")
+	)
+	var store_key: String = str(
+		effect.get("store_as", "events_discarded")
+	)
+
+	if amount <= 0:
+		context[store_key] = 0
+		return true
+
+	if not context.has(choice_key):
+		var options: Array = []
+		for slot_index in range(game.active_events.size()):
+			var event = game.active_events[slot_index]
+			if event == null:
+				continue
+			options.append({
+				"token": "geomancy:event:" + str(slot_index),
+				"value": slot_index,
+				"slot_index": slot_index,
+				"name": event.event_name
+			})
+
+		var max_select: int = mini(amount, options.size())
+		if max_select <= 0:
+			context[store_key] = 0
+			return true
+
+		var min_select: int = 0 if up_to else max_select
+		if game.request_effect_choice(
+			caster_id,
+			"event_discard",
+			context,
+			choice_key,
+			options,
+			min_select,
+			max_select,
+			"Choose up to %d Events to discard." % amount
+		):
+			return false
+		return false
+
+	var selected: Array = _geomancy_choice_array(
+		context.get(choice_key, [])
+	)
+	var unique_slots: Array[int] = []
+	for selected_value in selected:
+		var slot_index: int = int(selected_value)
+		if slot_index < 0 or slot_index >= game.active_events.size():
+			continue
+		if unique_slots.has(slot_index):
+			continue
+		if game.active_events[slot_index] == null:
+			continue
+		unique_slots.append(slot_index)
+
+	var discarded: int = 0
+	for slot_index in unique_slots:
+		var event = game.active_events[slot_index]
+		if event == null:
+			continue
+		game.active_events[slot_index] = null
+		# Fortuna Major explicitly prevents the Black Rose from gaining the
+		# Event's normal discard Power.
+		game.discard_event(event, false)
+		discarded += 1
+
+	context.erase(choice_key)
+	context[store_key] = discarded
+	if game.has_node("EventBoard"):
+		game.get_node("EventBoard").refresh_event_slots()
+
+	return true
+
+
+func _resolve_gain_power_from_context(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount_key: String = str(effect.get("amount_key", ""))
+	var multiplier: int = int(effect.get("multiplier", 1))
+	var amount: int = maxi(
+		0,
+		int(context.get(amount_key, 0)) * multiplier
+	)
+	if effect.has("max"):
+		amount = mini(amount, maxi(0, int(effect.get("max", amount))))
+
+	if amount > 0:
+		game.add_player_power(caster_id, amount)
+	return true
+
+
+func _resolve_conditional_payment(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var cost_value = effect.get("cost", {})
+	if not cost_value is Dictionary:
+		return false
+	var cost: Dictionary = cost_value.duplicate(true)
+
+	var state_key: String = str(
+		effect.get("state_key", "_geomancy_conditional_payment_state")
+	)
+	var optional: bool = bool(effect.get("optional", false))
+	var state: String = str(context.get(state_key, ""))
+
+	if state == "skipped":
+		context.erase(state_key)
+		return true
+
+	if state != "paid":
+		if optional and state == "":
+			var game = _game(context)
+			var caster_id: int = _caster(context)
+			if game == null or not _valid_player(game, caster_id):
+				return false
+
+			var decision_key: String = state_key + "_decision"
+			if not context.has(decision_key):
+				var options: Array = [
+					{
+						"token": "geomancy:payment:skip",
+						"value": false,
+						"name": "Do not pay"
+					},
+					{
+						"token": "geomancy:payment:pay",
+						"value": true,
+						"name": "Pay the cost"
+					}
+				]
+				if game.request_effect_choice(
+					caster_id,
+					"optional_payment",
+					context,
+					decision_key,
+					options,
+					1,
+					1,
+					"Pay the optional cost?"
+				):
+					return false
+				return false
+
+			var pay: bool = bool(context.get(decision_key, false))
+			context.erase(decision_key)
+			if not pay:
+				context.erase(state_key)
+				return true
+
+			context[state_key] = "paying"
+
+		cost["_conditional_payment_cost"] = true
+		if not resolve_effect(cost, context):
+			return false
+
+		var paid_key: String = str(
+			cost.get("paid_store_as", "_geomancy_payment_paid")
+		)
+		if not bool(context.get(paid_key, true)):
+			context.erase(paid_key)
+			context.erase(state_key)
+			return true
+
+		context.erase(paid_key)
+		context[state_key] = "paid"
+
+	var nested = effect.get("effects", [])
+	if not nested is Array:
+		return false
+
+	var success: bool = resolve_effects(nested, context)
+	if success:
+		context.erase(state_key)
+	return success
+
+
+func _resolve_discard_spell(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 1)))
+	var choice_key: String = str(
+		effect.get("choice_key", "_geomancy_discard_spell_ids")
+	)
+	var paid_key: String = str(
+		effect.get("paid_store_as", "_geomancy_payment_paid")
+	)
+
+	if amount <= 0:
+		context[paid_key] = true
+		return true
+
+	if not context.has(choice_key):
+		var options: Array = []
+		for hand_index in range(game.players[caster_id].hand.size()):
+			var spell = game.players[caster_id].hand[hand_index]
+			options.append({
+				"token": "geomancy:hand:" + str(hand_index),
+				"value": spell.id,
+				"spell_id": spell.id,
+				"name": spell.card_name
+			})
+
+		if options.size() < amount:
+			context[paid_key] = false
+			return true
+
+		if game.request_effect_choice(
+			caster_id,
+			"spell_discard",
+			context,
+			choice_key,
+			options,
+			amount,
+			amount,
+			"Choose %d Spell%s from your Hand to discard." % [
+				amount,
+				"" if amount == 1 else "s"
+			]
+		):
+			return false
+		return false
+
+	var selected_ids: Array = _geomancy_choice_array(
+		context.get(choice_key, [])
+	)
+	if selected_ids.size() != amount:
+		context.erase(choice_key)
+		context[paid_key] = false
+		return true
+
+	var success: bool = game.discard_player_spells_by_id(
+		caster_id,
+		selected_ids
+	)
+	context.erase(choice_key)
+	context[paid_key] = success
+	return true
+
+
+func _geomancy_unsolved_quest_options(
+	game,
+	player_id: int
+) -> Array:
+	var options: Array = []
+	if not _valid_player(game, player_id):
+		return options
+
+	for quest in game.players[player_id].active_quests:
+		if quest == null or quest.is_solved():
+			continue
+		options.append({
+			"token": "geomancy:unsolved:active:" + str(quest.get_instance_id()),
+			"value": {
+				"zone": "active",
+				"quest": quest
+			},
+			"name": quest.get_name()
+		})
+
+	for quest in game.players[player_id].completed_quests:
+		if quest == null or quest.is_solved():
+			continue
+		options.append({
+			"token": "geomancy:unsolved:completed:" + str(quest.get_instance_id()),
+			"value": {
+				"zone": "completed",
+				"quest": quest
+			},
+			"name": quest.get_name()
+		})
+
+	return options
+
+
+func _geomancy_return_quest_progress_cubes(
+	game,
+	player_id: int,
+	quest
+) -> void:
+	if game == null or quest == null:
+		return
+	var progress: int = maxi(0, int(quest.progress))
+	if progress > 0:
+		game.return_owner_cubes(player_id, progress)
+
+
+func _resolve_discard_unsolved_quest(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var choice_key: String = str(
+		effect.get("choice_key", "_geomancy_unsolved_quest")
+	)
+	var paid_key: String = str(
+		effect.get("paid_store_as", "_geomancy_payment_paid")
+	)
+
+	if not context.has(choice_key):
+		var options: Array = _geomancy_unsolved_quest_options(
+			game,
+			caster_id
+		)
+		if options.is_empty():
+			context[paid_key] = false
+			return true
+
+		if game.request_effect_choice(
+			caster_id,
+			"unsolved_quest",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose one of your Unsolved Quests to discard."
+		):
+			return false
+		return false
+
+	var selected = context.get(choice_key, null)
+	context.erase(choice_key)
+	if not selected is Dictionary:
+		context[paid_key] = false
+		return true
+
+	var quest = selected.get("quest", null)
+	var zone: String = str(selected.get("zone", ""))
+	if quest == null:
+		context[paid_key] = false
+		return true
+
+	var player = game.players[caster_id]
+	var removed: bool = false
+	if zone == "active" and quest in player.active_quests:
+		player.active_quests.erase(quest)
+		removed = true
+	elif zone == "completed" and quest in player.completed_quests:
+		player.completed_quests.erase(quest)
+		removed = true
+
+	if removed:
+		_geomancy_return_quest_progress_cubes(
+			game,
+			caster_id,
+			quest
+		)
+		game.refresh_player_board(caster_id)
+
+	context[paid_key] = removed
+	return true
+
+
+func _resolve_discard_solved_quest(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var target_id: int = int(
+		context.get(
+			"target_player_index",
+			context.get("marked_player_index", -1)
+		)
+	)
+	if not _valid_player(game, target_id):
+		return false
+
+	var choice_key: String = str(
+		effect.get("choice_key", "_geomancy_solved_quest")
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+		for quest in game.players[target_id].completed_quests:
+			if quest == null or not quest.is_solved():
+				continue
+			options.append({
+				"token": "geomancy:solved:" + str(quest.get_instance_id()),
+				"value": quest,
+				"name": quest.get_name()
+			})
+
+		# If the target has no Solved Quest, this sentence simply does nothing.
+		if options.is_empty():
+			return true
+
+		if game.request_effect_choice(
+			target_id,
+			"solved_quest",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose a Solved Quest to discard."
+		):
+			return false
+		return false
+
+	var quest = context.get(choice_key, null)
+	context.erase(choice_key)
+	if quest == null:
+		return true
+
+	if quest in game.players[target_id].completed_quests:
+		game.players[target_id].completed_quests.erase(quest)
+		# Solved Quest progress cubes have already been returned by the normal
+		# Quest solve flow; discarding the card must not return them twice.
+		game.refresh_player_board(target_id)
+
+	return true
+
+
+func _resolve_draw_from_memories(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	for _i in range(maxi(0, int(effect.get("amount", 1)))):
+		game.draw_random_memory(caster_id)
+	return true
+
+
+func _resolve_draw_from_library(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var school_key: String = str(
+		effect.get("school_choice_key", "_geomancy_library_school")
+	)
+	var progress_key := school_key + "_drawn"
+	var amount := maxi(0, int(effect.get("amount", 1)))
+	var drawn := int(context.get(progress_key, 0))
+	if drawn >= amount:
+		context.erase(progress_key)
+		return true
+
+	# Each Library draw has its own School choice. Retain the number already
+	# drawn while this same Effect pauses for the next decision.
+	if context.has(school_key):
+		var school_id := str(context[school_key])
+		context.erase(school_key)
+		if not game.is_school_active(school_id):
+			return false
+		var card: SpellCardState = game.draw_from_school_library(school_id)
+		if card != null:
+			game.players[caster_id].add_spell_to_hand(card)
+		drawn += 1
+		context[progress_key] = drawn
+		if drawn >= amount:
+			context.erase(progress_key)
+			return true
+
+	if not context.has(school_key):
+		var options: Array = []
+		for school_value in game.active_school_ids:
+			var school_id: String = str(school_value)
+			var library: Array = game.school_libraries.get(school_id, [])
+			var discard: Array = game.school_discards.get(school_id, [])
+			if library.is_empty() and discard.is_empty():
+				continue
+			options.append({
+				"token": "geomancy:school:" + school_id,
+				"value": school_id,
+				"school_id": school_id,
+				"name": school_id
+			})
+
+		if options.is_empty():
+			context.erase(progress_key)
+			return true
+
+		if game.request_effect_choice(
+			caster_id,
+			"library_school",
+			context,
+			school_key,
+			options,
+			1,
+			1,
+			"Choose the School Library for card %d / %d." % [drawn + 1, amount]
+		):
+			return false
+		return false
+
+	return false
+
+
+func _resolve_place_self_in_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var room_id: String = str(
+		effect.get(
+			"room_id",
+			context.get("target_room_id", "")
+		)
+	)
+	if room_id == "":
+		return false
+
+	return game.place_mage_in_room_direct(
+		caster_id,
+		room_id
+	)
+
+
+func _resolve_place_self_in_target_room(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(context.get("target_player_index", -1))
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id):
+		return false
+
+	var room_id: String = str(game.players[target_id].mage.room_id)
+	if room_id == "":
+		return false
+
+	return game.place_mage_in_room_direct(
+		caster_id,
+		room_id
+	)
+
+
+func _resolve_activate_evocation_owned_by_target_under_control(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	var target_id: int = int(context.get("target_player_index", -1))
+	if not _valid_player(game, caster_id) \
+	or not _valid_player(game, target_id):
+		return false
+
+	var choice_key: String = str(
+		effect.get(
+			"choice_key",
+			"_geomancy_target_evocation_to_activate"
+		)
+	)
+
+	if not context.has(choice_key):
+		var target_room_id: String = str(
+			game.players[target_id].mage.room_id
+		)
+		var range_value = effect.get("range_from_target", 2)
+		var options: Array = []
+
+		for evocation_index in range(
+			game.players[target_id].evocations.size()
+		):
+			var evocation = game.players[target_id].evocations[
+				evocation_index
+			]
+			if evocation == null or evocation.is_defeated():
+				continue
+			if not game.is_room_within_effect_range(
+				target_room_id,
+				str(evocation.room_id),
+				range_value
+			):
+				continue
+
+			options.append({
+				"token":
+					"geomancy:target_evocation:"
+					+ str(target_id)
+					+ ":"
+					+ str(evocation_index),
+				"value": evocation,
+				"owner_id": target_id,
+				"evocation_index": evocation_index,
+				"name": evocation.get_display_name()
+			})
+
+		if options.is_empty():
+			return true
+
+		if game.request_effect_choice(
+			caster_id,
+			"target_evocation",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose one of the target Mage's Evocations to activate."
+		):
+			return false
+		return false
+
+	var evocation = context.get(choice_key, null)
+	context.erase(choice_key)
+	if evocation == null:
+		return true
+
+	var activation_context: Dictionary = context.duplicate(true)
+	activation_context["controller_id"] = caster_id
+	return game.activate_evocation(
+		evocation,
+		caster_id,
+		activation_context
+	)
+
+
+func _resolve_heal_from_context(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+
+	var amount_key: String = str(
+		effect.get("amount_key", "instability_removed")
+	)
+	var amount: int = maxi(
+		0,
+		int(context.get(amount_key, 0))
+		* int(effect.get("multiplier", 1))
+	)
+
+	var mage = game.players[caster_id].mage
+	var heal_count: int = mini(
+		amount,
+		mage.damage_cubes.size()
+	)
+	if heal_count <= 0:
+		return true
+
+	var choice_key: String = str(
+		effect.get(
+			"choice_key",
+			"_geomancy_heal_damage_owner_ids"
+		)
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+		var owner_occurrences: Dictionary = {}
+
+		for owner_value in mage.damage_cubes:
+			var owner_id: int = int(owner_value)
+			var ordinal: int = int(
+				owner_occurrences.get(owner_id, 0)
+			)
+			owner_occurrences[owner_id] = ordinal + 1
+			var owner_name: String = "Black Rose"
+			if owner_id >= 0 and owner_id < game.players.size():
+				owner_name = game.players[owner_id].player_name
+
+			options.append({
+				"token":
+					"geomancy:heal:"
+					+ str(owner_id)
+					+ ":"
+					+ str(ordinal),
+				"value": owner_id,
+				"owner_id": owner_id,
+				"owner_name": owner_name
+			})
+
+		if game.request_effect_choice(
+			caster_id,
+			"heal_damage",
+			context,
+			choice_key,
+			options,
+			heal_count,
+			heal_count,
+			"Choose %d Damage to heal." % heal_count
+		):
+			return false
+		return false
+
+	var owner_ids: Array = _geomancy_choice_array(
+		context.get(choice_key, [])
+	)
+	var healed: int = _heal_any_mage_damage(
+		game,
+		caster_id,
+		heal_count,
+		owner_ids,
+		false
+	)
+	context.erase(choice_key)
+	context["effect_damage_healed"] = healed
+	return true
 
 
 # =============================================================================
@@ -3177,7 +4315,10 @@ func _resolve_summon_effect(
 			evocation_id = str(effect.get("evocation_id", ""))
 			var room_mode = str(effect.get("room", ""))
 
-			if room_mode == "trigger_evocation_room":
+			if effect.has("room_id"):
+				room_id = str(effect.get("room_id", ""))
+				context["effect_target_room_id"] = room_id
+			elif room_mode == "trigger_evocation_room":
 				room_id = str(context.get("trigger_evocation_room_id", ""))
 			elif room_mode == "caster_room":
 				room_id = str(context.get("caster_room_id", ""))
@@ -3263,6 +4404,8 @@ func _resolve_summon_effect(
 	)
 
 	if summoned == null:
+		if bool(context.get("summon_declined", false)):
+			return true
 		print(mode, ": summon failed")
 		return false
 
@@ -3271,6 +4414,278 @@ func _resolve_summon_effect(
 		summoned.evocation_name,
 		" in ", room_id
 	)
+	return true
+
+
+
+# A_BURNING_WORLD_V1
+# =============================================================================
+# A BURNING WORLD
+# =============================================================================
+
+func _resolve_summon_evocations_distinct_rooms(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var evocation_id: String = str(
+		effect.get("evocation_id", "")
+	)
+	var requested_count: int = max(
+		0,
+		int(effect.get("count", 0))
+	)
+
+	if evocation_id == "" or requested_count <= 0:
+		return true
+
+	var available_count: int = min(
+		requested_count,
+		game.get_available_evocation_copies(
+			evocation_id
+		)
+	)
+
+	if available_count <= 0:
+		return true
+
+	var choice_key: String = str(
+		effect.get(
+			"room_choice_key",
+			"distinct_summon_rooms"
+		)
+	)
+	var result_key: String = str(
+		effect.get(
+			"summoned_context_key",
+			"last_distinct_summoned_evocations"
+		)
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+		var seen_rooms: Dictionary = {}
+
+		for room_value in game.room_id_by_coord.values():
+			var room_id: String = str(room_value)
+
+			if room_id == "" \
+			or seen_rooms.has(room_id) \
+			or not game.is_lodge_room_id(room_id):
+				continue
+
+			seen_rooms[room_id] = true
+
+			var room = game.get_room_by_id(room_id)
+			if effect.has("room_color") and (room == null or str(room.get_room_data().get("color", "")) != str(effect.room_color)):
+				continue
+			var room_name: String = (
+				str(room.room_name)
+				if room != null
+				else room_id
+			)
+
+			options.append({
+				"token": "room:" + room_id,
+				"value": room_id,
+				"target_type": "room",
+				"room_id": room_id,
+				"name": room_name
+			})
+
+		if options.size() < available_count:
+			return false
+
+		game.request_effect_choice(
+			caster_id,
+			"distinct_summon_rooms",
+			context,
+			choice_key,
+			options,
+			available_count,
+			available_count,
+			"Choose "
+			+ str(available_count)
+			+ " different Rooms for the Myrmidones."
+		)
+
+		return false
+
+	var selected_value = context.get(choice_key)
+	if not selected_value is Array:
+		return false
+
+	var selected_rooms: Array = selected_value
+	if selected_rooms.size() != available_count:
+		return false
+
+	var unique_rooms: Dictionary = {}
+
+	for room_value in selected_rooms:
+		var room_id: String = str(room_value)
+
+		if room_id == "" \
+		or unique_rooms.has(room_id) \
+		or not game.is_lodge_room_id(room_id):
+			return false
+
+		unique_rooms[room_id] = true
+
+	context.erase(choice_key)
+	context[result_key] = []
+
+	game.queue_resolution({
+		"type": "summon_distinct_evocations",
+		"owner_id": caster_id,
+		"evocation_id": evocation_id,
+		"room_ids": selected_rooms.duplicate(),
+		"cursor": 0,
+		"context": context,
+		"result_key": result_key
+	})
+
+	return true
+
+
+func _resolve_activate_distinct_summoned_evocations(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var source_key: String = str(
+		effect.get(
+			"summoned_context_key",
+			"last_distinct_summoned_evocations"
+		)
+	)
+	var choice_key: String = str(
+		effect.get(
+			"choice_key",
+			"distinct_summoned_evocations_to_activate"
+		)
+	)
+	var evocation_id: String = str(
+		effect.get("evocation_id", "")
+	)
+
+	var candidates: Array = []
+
+	for candidate in context.get(source_key, []):
+		if not candidate is EvocationState:
+			continue
+
+		var evocation: EvocationState = candidate
+
+		if evocation.is_defeated() \
+		or not game.is_evocation_in_play(evocation):
+			continue
+
+		if evocation_id != "" \
+		and str(evocation.evocation_id) != evocation_id:
+			continue
+
+		if not candidates.has(evocation):
+			candidates.append(evocation)
+
+	var requested_count: int = max(
+		0,
+		int(effect.get("count", 0))
+	)
+	var actual_count: int = min(
+		requested_count,
+		candidates.size()
+	)
+
+	if actual_count <= 0:
+		return true
+
+	var selected: Array = []
+
+	if candidates.size() <= actual_count:
+		selected = candidates.duplicate()
+	elif not context.has(choice_key):
+		var options: Array = []
+
+		for evocation in candidates:
+			options.append({
+				"token":
+					"evocation:"
+					+ str(evocation.owner_id)
+					+ ":"
+					+ str(
+						game.players[
+							evocation.owner_id
+						].evocations.find(evocation)
+					),
+				"value": evocation,
+				"target_type": "evocation",
+				"name": evocation.get_display_name(),
+				"room_id": evocation.room_id
+			})
+
+		game.request_effect_choice(
+			caster_id,
+			"distinct_summoned_evocations",
+			context,
+			choice_key,
+			options,
+			actual_count,
+			actual_count,
+			"Choose "
+			+ str(actual_count)
+			+ " different Myrmidones to activate."
+		)
+
+		return false
+	else:
+		var selected_value = context.get(choice_key)
+		if not selected_value is Array:
+			return false
+		selected = selected_value
+
+	if selected.size() != actual_count:
+		return false
+
+	var unique: Dictionary = {}
+
+	for selected_value in selected:
+		if not selected_value is EvocationState:
+			return false
+
+		var evocation: EvocationState = selected_value
+		var instance_id: int = evocation.get_instance_id()
+
+		if unique.has(instance_id) \
+		or not candidates.has(evocation):
+			return false
+
+		unique[instance_id] = true
+
+	context.erase(choice_key)
+
+	for index in range(
+		selected.size() - 1,
+		-1,
+		-1
+	):
+		var evocation: EvocationState = selected[index]
+
+		game.activate_evocation(
+			evocation,
+			game.get_evocation_controller_id(evocation),
+			{}
+		)
+
 	return true
 
 
@@ -3361,6 +4776,7 @@ func _resolve_activation_effect(
 			evocation = context.get("last_summoned_evocation")
 			if evocation != null:
 				controller_id = evocation.owner_id
+			if effect.get("controller") == "crown": controller_id = game.crown_owner_id
 			bonus = int(effect.get("strength_bonus", 0))
 
 		"activate_owned_evocation":
@@ -3667,6 +5083,13 @@ func _resolve_conditional(
 			)
 
 
+		"target_evocation_health_at_most":
+			var target_evocation = context.get("target_evocation", null)
+			condition_met = (
+				target_evocation != null
+				and int(target_evocation.health) <= int(effect.get("value", 0))
+			)
+
 		"caster_defeated_by_last_black_rose_damage":
 
 			var caster_id: int = _caster(
@@ -3736,6 +5159,48 @@ func _resolve_conditional(
 			"else_effects",
 			[]
 		),
+		context
+	)
+
+
+
+# GEOMANCY_GEOFORM_V1
+func _resolve_geoform(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+
+	var room_id: String = _target_room(context)
+	if room_id == "":
+		print("Geoform: target Room missing")
+		return false
+
+	var room_data = game.get_room(room_id)
+	if room_data == null or not room_data is Dictionary:
+		print("Geoform: Room not found: ", room_id)
+		return false
+
+	var room_color: String = str(room_data.get("color", ""))
+	var allowed_colors: Array[String] = []
+	for color_value in effect.get("room_colors", []):
+		allowed_colors.append(str(color_value))
+
+	if allowed_colors.is_empty():
+		print("Geoform: no Room colors configured")
+		return false
+
+	context["last_geoform_room_id"] = room_id
+	context["last_geoform_room_color"] = room_color
+	context["last_geoform_active"] = allowed_colors.has(room_color)
+
+	if not bool(context["last_geoform_active"]):
+		return true
+
+	return resolve_effects(
+		effect.get("effects", []),
 		context
 	)
 
@@ -3810,6 +5275,69 @@ func _resolve_gain_power_from_defeat(
 	return true
 
 
+
+# CAPUT_DRACONIS_V1
+func _caput_direct_target_is_ignored(context: Dictionary) -> bool:
+	var target_type: String = _target_type(context)
+	if target_type != "mage" and target_type != "model":
+		return false
+
+	if target_type == "model":
+		var model_type: String = str(context.get("target_model_type", ""))
+		if model_type != "" and model_type != "mage":
+			return false
+
+	var player_index: int = int(context.get("target_player_index", -1))
+	if player_index < 0:
+		return false
+	return DeathEffectResolver.ignores(context, player_index)
+
+
+func _resolve_ignore_trigger_spell_effect(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var event = context.get("trigger_event")
+	if event == null:
+		print("Caput Draconis: trigger event missing")
+		return false
+
+	if not event.has_meta("caput_spell_effect"):
+		print("Caput Draconis: source Spell Effect context missing")
+		return false
+
+	# Caput Draconis excludes Forgotten; Quicksand protects from any Combat Spell.
+	if bool(event.get_meta("source_spell_forgotten", false)) and not bool(effect.get("include_forgotten", false)):
+		print("Caput Draconis: source Spell is Forgotten; Effect is not ignored")
+		return true
+
+	var source_context_value = event.get_meta("source_spell_context", null)
+	if not source_context_value is Dictionary:
+		print("Caput Draconis: invalid source Spell context")
+		return false
+	var source_context: Dictionary = source_context_value
+
+	var protected_player: int = _caster(context)
+	if protected_player < 0:
+		return false
+
+	var ignored: Array = source_context.get("ignored_spell_players", [])
+	if not ignored.has(protected_player):
+		ignored.append(protected_player)
+		source_context["ignored_spell_players"] = ignored
+
+	context["caput_ignored_spell_id"] = str(event.get_meta("source_spell_id", ""))
+	context["caput_ignored_player_index"] = protected_player
+
+	print(
+		"Caput Draconis: Player ",
+		protected_player + 1,
+		" ignores the non-Forgotten Spell Effect of ",
+		str(event.get_meta("source_spell_id", ""))
+	)
+	return true
+
+
 func _resolve_ignore_trigger_damage(
 	effect: Dictionary,
 	context: Dictionary
@@ -3817,7 +5345,7 @@ func _resolve_ignore_trigger_damage(
 
 	var event = context.get("trigger_event")
 	if event == null:
-		print("Silver of the Sages: trigger event missing")
+		print("ignore_trigger_damage: trigger event missing")
 		return false
 
 	var limit = int(effect.get("amount", 0))
@@ -3830,7 +5358,7 @@ func _resolve_ignore_trigger_damage(
 	context["silver_damage_ignored"] = ignored
 
 	print(
-		"Silver of the Sages: ignored ", ignored,
+		"Ignored ", ignored,
 		" Damage | ", original,
 		" -> ", event.amount
 	)
@@ -3904,6 +5432,346 @@ func _resolve_move_damaged_model(
 		)
 
 	return false
+
+
+
+# WHIPS_OF_THORNS_V1
+func _whips_choice_first(value):
+	if value is Array:
+		if value.is_empty():
+			return null
+		return value[0]
+	return value
+
+
+func _resolve_damage_rooms_in_range_from_target(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var origin_room_id: String = _target_room(context)
+	if origin_room_id == "":
+		print("damage_rooms_in_range_from_target: target Room missing")
+		return false
+
+	var amount: int = maxi(0, int(effect.get("amount", 0)))
+	var max_distance: int = maxi(
+		0,
+		int(effect.get("range_from_target", 0))
+	)
+
+	if amount <= 0:
+		return true
+
+	if not context.has("models_damaged_by_effect"):
+		context["models_damaged_by_effect"] = []
+
+	var seen_rooms: Dictionary = {}
+
+	for room_value in game.room_id_by_coord.values():
+		var room_id: String = str(room_value)
+
+		if seen_rooms.has(room_id):
+			continue
+		seen_rooms[room_id] = true
+
+		if not game.is_room_within_effect_range(
+			origin_room_id,
+			room_id,
+			max_distance
+		):
+			continue
+
+		for player_index in range(game.players.size()):
+			if game.is_mage_in_cell(player_index):
+				continue
+
+			var mage = game.players[player_index].mage
+			if mage == null or str(mage.room_id) != room_id:
+				continue
+
+			var dealt: int = _damage_mage(
+				game,
+				caster_id,
+				player_index,
+				amount
+			)
+
+			if dealt > 0:
+				register_damaged_model(
+					context,
+					{
+						"type": "mage",
+						"player_index": player_index,
+						"room_id": room_id
+					}
+				)
+
+		for player in game.players:
+			for evocation in player.evocations.duplicate():
+				if evocation == null:
+					continue
+				if evocation.is_defeated():
+					continue
+				if str(evocation.room_id) != room_id:
+					continue
+
+				var dealt: int = _damage_evocation(
+					game,
+					caster_id,
+					evocation,
+					amount
+				)
+
+				if dealt > 0:
+					register_damaged_model(
+						context,
+						{
+							"type": "evocation",
+							"evocation": evocation,
+							"room_id": room_id
+						}
+					)
+
+	context["last_area_damage_origin_room_id"] = origin_room_id
+	context["last_area_damage_range"] = max_distance
+	context["last_area_damage_amount"] = amount
+
+	return true
+
+
+func _resolve_move_one_mage_in_target_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var target_room_id: String = _target_room(context)
+	if target_room_id == "":
+		print("move_one_mage_in_target_room: target Room missing")
+		return false
+
+	var distance: int = maxi(
+		0,
+		int(effect.get("distance", 1))
+	)
+	var optional: bool = bool(effect.get("optional", true))
+
+	var mage_choice_key: String = str(
+		effect.get(
+			"mage_choice_key",
+			"_whips_selected_mage"
+		)
+	)
+	var destination_choice_key: String = str(
+		effect.get(
+			"destination_choice_key",
+			"_whips_mage_destination_room"
+		)
+	)
+
+	if not context.has(mage_choice_key):
+		var mage_options: Array = []
+
+		for player_index in range(game.players.size()):
+			if game.is_mage_in_cell(player_index):
+				continue
+			if DeathEffectResolver.ignores(context, player_index):
+				continue
+
+			var mage = game.players[player_index].mage
+			if mage == null or str(mage.room_id) != target_room_id:
+				continue
+
+			mage_options.append({
+				"token": "mage:whips:" + str(player_index),
+				"value": player_index,
+				"player_index": player_index,
+				"target_type": "mage",
+				"name": "Player " + str(player_index + 1)
+			})
+
+		if mage_options.is_empty():
+			return true
+
+		var min_select: int = 0 if optional else 1
+
+		if not game.request_effect_choice(
+			caster_id,
+			"mage",
+			context,
+			mage_choice_key,
+			mage_options,
+			min_select,
+			1,
+			"Choose a Mage in the target Room to move"
+			+ (" (optional)." if optional else ".")
+		):
+			return false
+
+		return false
+
+	var selected_mage_value = _whips_choice_first(
+		context.get(mage_choice_key, null)
+	)
+
+	if selected_mage_value == null or str(selected_mage_value) == "":
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		return true
+
+	var selected_player_index: int
+	if selected_mage_value is Dictionary:
+		selected_player_index = int(
+			selected_mage_value.get("player_index", -1)
+		)
+	else:
+		selected_player_index = int(selected_mage_value)
+
+	if not _valid_player(game, selected_player_index):
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		return false
+
+	if DeathEffectResolver.ignores(context, selected_player_index):
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		return true
+
+	var selected_mage = game.players[selected_player_index].mage
+	if selected_mage == null \
+	or game.is_mage_in_cell(selected_player_index) \
+	or str(selected_mage.room_id) != target_room_id:
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		print(
+			"move_one_mage_in_target_room: "
+			+ "selected Mage is no longer in the target Room"
+		)
+		return false
+
+	if not context.has(destination_choice_key):
+		var from_coord: Vector2i = game.room_id_to_coord(
+			target_room_id
+		)
+		var room_options: Array = []
+		var seen_rooms: Dictionary = {}
+
+		for room_value in game.room_id_by_coord.values():
+			var destination_room_id: String = str(room_value)
+
+			if seen_rooms.has(destination_room_id):
+				continue
+			seen_rooms[destination_room_id] = true
+
+			if destination_room_id == target_room_id:
+				continue
+
+			var to_coord: Vector2i = game.room_id_to_coord(
+				destination_room_id
+			)
+
+			if from_coord == Vector2i(9999, 9999) \
+			or to_coord == Vector2i(9999, 9999):
+				continue
+
+			if game.get_hex_distance(
+				from_coord,
+				to_coord
+			) > distance:
+				continue
+
+			var destination_room = game.get_room_by_id(
+				destination_room_id
+			)
+			var room_name: String = destination_room_id
+			if destination_room != null:
+				room_name = str(destination_room.room_name)
+
+			room_options.append({
+				"token":
+					"room:whips_movement:"
+					+ destination_room_id,
+				"value": destination_room_id,
+				"room_id": destination_room_id,
+				"target_type": "room",
+				"name": room_name
+			})
+
+		if room_options.is_empty():
+			context.erase(mage_choice_key)
+			context.erase(destination_choice_key)
+			return true
+
+		var destination_min_select: int = 0 if optional else 1
+
+		if not game.request_effect_choice(
+			caster_id,
+			"secondary_room",
+			context,
+			destination_choice_key,
+			room_options,
+			destination_min_select,
+			1,
+			"Choose where to move Player "
+			+ str(selected_player_index + 1)
+			+ " (up to "
+			+ str(distance)
+			+ ")."
+		):
+			return false
+
+		return false
+
+	var destination_value = _whips_choice_first(
+		context.get(destination_choice_key, null)
+	)
+
+	if destination_value == null or str(destination_value) == "":
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		return true
+
+	var destination_room_id: String
+	if destination_value is Dictionary:
+		destination_room_id = str(
+			destination_value.get("room_id", "")
+		)
+	else:
+		destination_room_id = str(destination_value)
+
+	if destination_room_id == "":
+		context.erase(mage_choice_key)
+		context.erase(destination_choice_key)
+		return false
+
+	var success: bool = game.move_mage_to_room_id(
+		selected_player_index,
+		destination_room_id,
+		distance
+	)
+
+	context.erase(mage_choice_key)
+	context.erase(destination_choice_key)
+
+	if success:
+		context["last_moved_mage_player_index"] = (
+			selected_player_index
+		)
+		context["last_moved_mage_destination_room_id"] = (
+			destination_room_id
+		)
+
+	return success
 
 
 func _resolve_activate_room_from_evocation(
@@ -4155,7 +6023,173 @@ func _resolve_activate_then_black_rose_damage(
 		" Damage to ", evocation.evocation_name
 	)
 	return true
-	
+
+
+# CONTORTION_V1
+func resolve_set_target_mage_from_triggering_mage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+
+	var game = _game(context)
+	if game == null:
+		return false
+
+	var player_index: int = int(
+		context.get("triggering_player_index", -1)
+	)
+
+	if not _valid_player(game, player_index):
+		print(
+			"set_target_mage_from_triggering_mage: "
+			+ "triggering Mage missing"
+		)
+		return false
+
+	context["target_player_index"] = player_index
+	context["target_model_type"] = "mage"
+	context["spell_target_type"] = "mage"
+
+	var room_id: String = str(
+		context.get("triggering_room_id", "")
+	)
+	if room_id != "":
+		context["target_room_id"] = room_id
+
+	return true
+
+
+func _resolve_steal_power(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var target_player_index: int = int(
+		context.get("target_player_index", -1)
+	)
+	if not _valid_player(game, target_player_index):
+		print("steal_power: target Mage missing")
+		return false
+
+	if DeathEffectResolver.ignores(context, target_player_index) \
+	or (target_player_index != caster_id and game.is_mage_in_cell(target_player_index)):
+		context["last_power_stolen"] = 0
+		return true
+
+	var amount: int = maxi(
+		0,
+		int(effect.get("amount", 0))
+	)
+	if amount <= 0:
+		return true
+
+	var available: int = maxi(
+		0,
+		int(game.players[target_player_index].power)
+	)
+	var stolen: int = mini(amount, available)
+
+	if stolen <= 0:
+		context["last_power_stolen"] = 0
+		return true
+
+	game.add_player_power(
+		target_player_index,
+		-stolen
+	)
+	game.add_player_power(
+		caster_id,
+		stolen
+	)
+
+	context["last_power_stolen"] = stolen
+	context["last_power_stolen_from"] = target_player_index
+
+	print(
+		"Steal Power: Player ",
+		caster_id + 1,
+		" stole ",
+		stolen,
+		" Power from Player ",
+		target_player_index + 1
+	)
+
+	return true
+
+
+func _resolve_activate_target_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var room_id: String = _target_room(context)
+	if room_id == "":
+		print("activate_target_room: target Room missing")
+		return false
+
+	var allow_reactivate: bool = bool(
+		effect.get("allow_reactivate", false)
+	)
+
+	return game.activate_room(
+		caster_id,
+		room_id,
+		allow_reactivate,
+		context
+	)
+
+
+func resolve_set_target_room_from_triggering_mage(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+
+	if _is_dummy_target(context):
+		return true
+
+	var game = _game(context)
+	if game == null:
+		return false
+
+	var player_index: int = int(
+		context.get("triggering_player_index", -1)
+	)
+	if not _valid_player(game, player_index):
+		print(
+			"set_target_room_from_triggering_mage: "
+			+ "triggering Mage missing"
+		)
+		return false
+
+	var room_id: String = str(
+		context.get("triggering_room_id", "")
+	)
+	if room_id == "":
+		print(
+			"set_target_room_from_triggering_mage: "
+			+ "triggering Mage Room missing"
+		)
+		return false
+
+	context["target_room_id"] = room_id
+	context["target_player_index"] = player_index
+	context["target_model_type"] = "mage"
+
+	return true
+
+
 func resolve_set_target_room_from_target_evocation(
 	effect: Dictionary,
 	context: Dictionary
@@ -4202,4 +6236,783 @@ func resolve_set_target_room_from_target_evocation(
 	)
 
 
+	return true
+
+# =============================================================================
+# CHAOS SCHOOL
+# =============================================================================
+
+func _chaos_target_room(context: Dictionary) -> String:
+	var game = _game(context)
+	if game == null:
+		return ""
+	if str(context.get("target_room_id", "")) != "":
+		return str(context.get("target_room_id", ""))
+	var target_evocation = context.get("target_evocation", null)
+	if target_evocation != null:
+		return str(target_evocation.room_id)
+	var target_player_index: int = int(context.get("target_player_index", -1))
+	if _valid_player(game, target_player_index):
+		return str(game.players[target_player_index].mage.room_id)
+	return ""
+
+
+func _vastum_room_choice_options(
+	game,
+	caster_id: int,
+	effect: Dictionary,
+	context: Dictionary
+) -> Array:
+	var result: Array = []
+	if game == null or not _valid_player(game, caster_id):
+		return result
+
+	var origin_mode: String = str(effect.get("origin", "caster"))
+	var origin_room_id: String = str(game.players[caster_id].mage.room_id)
+	if origin_mode == "target":
+		origin_room_id = _chaos_target_room(context)
+
+	var range_value = effect.get("range", "*")
+	var excluded_room_id: String = ""
+	if bool(effect.get("exclude_target_room", false)):
+		excluded_room_id = _chaos_target_room(context)
+	var exclude_origin_room: bool = bool(effect.get("exclude_origin_room", false))
+
+	for room_value in game.room_id_by_coord.values():
+		var room_id: String = str(room_value)
+		if room_id == excluded_room_id:
+			continue
+		if exclude_origin_room and room_id == origin_room_id:
+			continue
+		if origin_room_id != "" and not game.is_room_within_effect_range(
+			origin_room_id,
+			room_id,
+			range_value
+		):
+			continue
+		var room = game.get_room_by_id(room_id)
+		result.append({
+			"token": "vastum_room:" + room_id,
+			"value": room_id,
+			"room_id": room_id,
+			"name": str(room.room_name) if room != null else room_id
+		})
+
+	return result
+
+
+func _choice_option_available(
+	option: Dictionary,
+	context: Dictionary
+) -> bool:
+	var requirements = option.get("requires", {})
+	if not requirements is Dictionary or requirements.is_empty():
+		return true
+
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null:
+		return false
+
+	if bool(requirements.get("target_room_has_vastum", false)):
+		if not game.room_has_vastum(_chaos_target_room(context)):
+			return false
+
+	if requirements.has("lodge_vastum_at_least"):
+		if game.count_vastum() < int(requirements.get("lodge_vastum_at_least", 0)):
+			return false
+
+	if bool(requirements.get("active_quest_available", false)):
+		if not _valid_player(game, caster_id) or game.players[caster_id].active_quests.is_empty():
+			return false
+
+	if requirements.has("caster_power_at_least"):
+		if not _valid_player(game, caster_id) \
+		or int(game.players[caster_id].power) < int(requirements.get("caster_power_at_least", 0)):
+			return false
+
+	if requirements.has("vastum_room_choice_available"):
+		var spec = requirements.get("vastum_room_choice_available", {})
+		if not spec is Dictionary:
+			return false
+		if _vastum_room_choice_options(game, caster_id, spec, context).is_empty():
+			return false
+
+	return true
+
+
+func _resolve_choose_one(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var choice_key: String = str(effect.get("choice_key", "chaos_branch"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for option_value in effect.get("options", []):
+			if not option_value is Dictionary:
+				continue
+			var option: Dictionary = option_value
+			if not _choice_option_available(option, context):
+				continue
+			var option_id: String = str(option.get("id", ""))
+			if option_id == "":
+				continue
+			options.append({
+				"token": "branch:" + choice_key + ":" + option_id,
+				"value": option_id,
+				"name": str(option.get("label", option_id.capitalize()))
+			})
+		if options.is_empty():
+			return true
+		game.request_effect_choice(
+			caster_id,
+			"chaos_branch",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			str(effect.get("prompt", "Choose one Effect."))
+		)
+		return false
+
+	var selected_id: String = str(context.get(choice_key, ""))
+	for option_value in effect.get("options", []):
+		if not option_value is Dictionary:
+			continue
+		var option: Dictionary = option_value
+		if str(option.get("id", "")) != selected_id:
+			continue
+		var nested_effects: Array = option.get("effects", [])
+		context.erase(choice_key)
+		if nested_effects.is_empty():
+			return true
+		game.queue_resolution({
+			"type": "effect_sequence",
+			"resolver_kind": str(context.get("resolver_kind", "spell")),
+			"effects": nested_effects,
+			"index": 0,
+			"context": context
+		})
+		return true
+
+	context.erase(choice_key)
+	return false
+
+
+func _resolve_place_vastum(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var room_source: String = str(effect.get("room_source", "target"))
+	var room_id: String = ""
+
+	match room_source:
+		"target":
+			room_id = str(context.get("target_room_id", ""))
+		"caster":
+			room_id = str(game.players[caster_id].mage.room_id)
+		"target_model":
+			room_id = _chaos_target_room(context)
+		"choose":
+			var choice_key: String = str(effect.get("choice_key", "vastum_room"))
+			if not context.has(choice_key):
+				var options: Array = _vastum_room_choice_options(
+					game,
+					caster_id,
+					effect,
+					context
+				)
+				if options.is_empty():
+					return true
+				game.request_effect_choice(
+					caster_id,
+					"vastum_room",
+					context,
+					choice_key,
+					options,
+					1,
+					1,
+					"Choose the Room for the Vastum."
+				)
+				return false
+			room_id = str(context.get(choice_key, ""))
+			context.erase(choice_key)
+		_:
+			return false
+
+	if room_id == "" or not game.is_lodge_room_id(room_id):
+		return false
+
+	context["effect_target_room_id"] = room_id
+	# The Chaos rule explicitly says the Effect still resolves if that Room
+	# already contains a Vastum; only the placement is ignored.
+	game.place_vastum(room_id)
+	return true
+
+
+func _resolve_remove_vastum(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+	var room_source: String = str(effect.get("room_source", "target"))
+	var room_id: String = ""
+	if room_source == "target":
+		room_id = _chaos_target_room(context)
+	elif room_source == "caster":
+		var caster_id: int = _caster(context)
+		if _valid_player(game, caster_id):
+			room_id = str(game.players[caster_id].mage.room_id)
+	if room_id == "":
+		return false
+	context["effect_target_room_id"] = room_id
+	return game.remove_vastum(room_id)
+
+
+func _resolve_remove_vastum_from_lodge(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var amount: int = maxi(0, int(effect.get("amount", 1)))
+	if amount == 0:
+		return true
+	var choice_key: String = str(effect.get("choice_key", "vastum_remove_rooms"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for room_id_value in game.get_vastum_room_ids():
+			var room_id: String = str(room_id_value)
+			var room = game.get_room_by_id(room_id)
+			options.append({
+				"token": "remove_vastum:" + room_id,
+				"value": room_id,
+				"room_id": room_id,
+				"name": str(room.room_name) if room != null else room_id
+			})
+		if options.size() < amount:
+			return false
+		game.request_effect_choice(
+			caster_id,
+			"remove_vastum",
+			context,
+			choice_key,
+			options,
+			amount,
+			amount,
+			"Choose %d Vastum to remove." % amount
+		)
+		return false
+
+	var selected: Array = _choice_as_array(context.get(choice_key))
+	if selected.size() != amount:
+		return false
+	for room_id_value in selected:
+		if not game.room_has_vastum(str(room_id_value)):
+			return false
+	for room_id_value in selected:
+		game.remove_vastum(str(room_id_value))
+	context.erase(choice_key)
+	return true
+
+
+func _resolve_damage_equal_vastum_count(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	if game == null:
+		return false
+	var amount: int = mini(
+		game.count_vastum(),
+		int(effect.get("max", 999))
+	)
+	if amount <= 0:
+		return true
+	return _resolve_damage(
+		{"type": "damage", "amount": amount},
+		context
+	)
+
+
+func _target_model_room(context: Dictionary) -> String:
+	return _chaos_target_room(context)
+
+
+func _resolve_move_target_up_to(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var target_id: int = int(context.get("target_player_index", -1))
+	if str(context.get("target_model_type", "mage")) == "mage" \
+	and target_id != caster_id and game.is_mage_in_cell(target_id):
+		return true
+	var origin_room_id: String = _target_model_room(context)
+	if origin_room_id == "":
+		return false
+	var distance: int = maxi(0, int(effect.get("distance", 1)))
+	var choice_key: String = str(effect.get("choice_key", "move_target_destination"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for room_value in game.room_id_by_coord.values():
+			var room_id: String = str(room_value)
+			var origin_coord: Vector2i = game.room_id_to_coord(origin_room_id)
+			var room_coord: Vector2i = game.room_id_to_coord(room_id)
+			if origin_coord == Vector2i(9999, 9999) \
+			or room_coord == Vector2i(9999, 9999) \
+			or game.get_hex_distance(origin_coord, room_coord) > distance:
+				continue
+			var room = game.get_room_by_id(room_id)
+			options.append({
+				"token": "move_target:" + room_id,
+				"value": room_id,
+				"room_id": room_id,
+				"name": ("Stay in " if room_id == origin_room_id else "Move to ") + (str(room.room_name) if room != null else room_id)
+			})
+		game.request_effect_choice(
+			caster_id,
+			"movement_destination",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Move the target up to %d." % distance
+		)
+		return false
+	var destination_room_id: String = str(context.get(choice_key, ""))
+	context.erase(choice_key)
+	if destination_room_id == origin_room_id:
+		return true
+	var model_type: String = str(context.get("target_model_type", ""))
+	if model_type == "mage" or (model_type == "" and context.has("target_player_index")):
+		return game.move_mage_to_room_id(
+			int(context.get("target_player_index", -1)),
+			destination_room_id,
+			distance
+		)
+	if model_type == "evocation":
+		return game.move_evocation_to_room_id(
+			context.get("target_evocation", null),
+			destination_room_id,
+			distance
+		)
+	return false
+
+
+func _resolve_memory_to_top_grimoire(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var player = game.players[caster_id]
+	if player.memories.is_empty():
+		return true
+	var choice_key: String = str(effect.get("choice_key", "memory_to_top"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for i in range(player.memories.size()):
+			var spell: SpellCardState = player.memories[i]
+			options.append({
+				"token": "memory_spell:%d" % i,
+				"value": spell,
+				"name": spell.card_name
+			})
+		game.request_effect_choice(caster_id, "memory_spell", context, choice_key, options, 1, 1, "Choose a Spell from your Memories.")
+		return false
+	var chosen: SpellCardState = context.get(choice_key, null)
+	context.erase(choice_key)
+	if chosen == null:
+		return false
+	var index: int = player.memories.find(chosen)
+	if index < 0:
+		return false
+	player.memories.remove_at(index)
+	player.grimoire.append(chosen)
+	return true
+
+
+func _resolve_search_grimoire_to_top(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var player = game.players[caster_id]
+	if player.grimoire.is_empty():
+		return true
+	var choice_key: String = str(effect.get("choice_key", "grimoire_to_top"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for i in range(player.grimoire.size()):
+			var spell: SpellCardState = player.grimoire[i]
+			options.append({
+				"token": "grimoire_spell:%d" % i,
+				"value": spell,
+				"name": spell.card_name
+			})
+		game.request_effect_choice(caster_id, "grimoire_spell", context, choice_key, options, 1, 1, "Search your Grimoire for a Spell to put on top.")
+		return false
+	var chosen: SpellCardState = context.get(choice_key, null)
+	context.erase(choice_key)
+	if chosen == null:
+		return false
+	var index: int = player.grimoire.find(chosen)
+	if index < 0:
+		return false
+	player.grimoire.remove_at(index)
+	game.shuffle_with_rng(player.grimoire)
+	player.grimoire.append(chosen)
+	return true
+
+
+func _resolve_place_caster_in_target_room(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	# Works both for a Room primary target and for a Mage/Evocation target.
+	var room_id: String = _chaos_target_room(context)
+	if room_id == "":
+		return false
+	return _place_mage_direct(game, caster_id, room_id)
+
+
+func _place_target_model_direct(
+	game,
+	context: Dictionary,
+	room_id: String
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+	if game == null or room_id == "":
+		return false
+	if str(context.get("spell_target_type", "")) == "self":
+		return _place_mage_direct(game, int(context.get("caster_id", -1)), room_id)
+
+	var model_type: String = str(context.get("target_model_type", ""))
+
+	if model_type == "mage" \
+	or (model_type == "" and context.has("target_player_index")):
+		return _place_mage_direct(
+			game,
+			int(context.get("target_player_index", -1)),
+			room_id
+		)
+
+	if model_type == "evocation":
+		var evocation = context.get("target_evocation", null)
+		if evocation == null:
+			return false
+
+		return game.place_evocation_in_room_direct(
+			evocation,
+			room_id
+		)
+
+	return false
+
+
+func _resolve_place_target_in_caster_room(
+	_effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var room_id: String = str(game.players[caster_id].mage.room_id)
+	if room_id == "":
+		return false
+
+	return _place_target_model_direct(game, context, room_id)
+
+
+func _resolve_place_target_in_any_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var choice_key: String = str(
+		effect.get("choice_key", "place_target_any_room")
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+
+		for room_value in game.room_id_by_coord.values():
+			var room_id: String = str(room_value)
+			if effect.has("range_from_caster") and not game.is_room_within_effect_range(
+				game.players[caster_id].mage.room_id, room_id, effect.range_from_caster):
+				continue
+			var room = game.get_room_by_id(room_id)
+			options.append({
+				"token": "place_target_any_room:" + room_id,
+				"value": room_id,
+				"room_id": room_id,
+				"name": str(room.room_name) if room != null else room_id
+			})
+
+		if options.is_empty():
+			return false
+
+		game.request_effect_choice(
+			caster_id,
+			"movement_destination",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose the Room in which to place the target."
+		)
+		return false
+
+	var room_id: String = str(context.get(choice_key, ""))
+	context.erase(choice_key)
+
+	if not game.is_lodge_room_id(room_id):
+		return false
+
+	return _place_target_model_direct(game, context, room_id)
+
+
+func _resolve_place_caster_in_vastum_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+
+	var choice_key: String = str(
+		effect.get("choice_key", "caster_vastum_destination")
+	)
+
+	if not context.has(choice_key):
+		var options: Array = []
+
+		for room_id_value in game.get_vastum_room_ids():
+			var room_id: String = str(room_id_value)
+			var room = game.get_room_by_id(room_id)
+			options.append({
+				"token": "caster_vastum_destination:" + room_id,
+				"value": room_id,
+				"room_id": room_id,
+				"name": str(room.room_name) if room != null else room_id
+			})
+
+		# The card says "may"; if no Vastum exists, there is simply no placement.
+		if options.is_empty():
+			return true
+
+		game.request_effect_choice(
+			caster_id,
+			"vastum_destination",
+			context,
+			choice_key,
+			options,
+			1,
+			1,
+			"Choose a Room containing a Vastum."
+		)
+		return false
+
+	var room_id: String = str(context.get(choice_key, ""))
+	context.erase(choice_key)
+
+	if not game.room_has_vastum(room_id):
+		return false
+
+	return _place_mage_direct(game, caster_id, room_id)
+
+
+func _resolve_place_target_in_vastum_room(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	if _is_dummy_target(context):
+		return true
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var choice_key: String = str(effect.get("choice_key", "vastum_destination"))
+	if not context.has(choice_key):
+		var options: Array = []
+		for room_id_value in game.get_vastum_room_ids():
+			var room_id: String = str(room_id_value)
+			var room = game.get_room_by_id(room_id)
+			options.append({
+				"token": "vastum_destination:" + room_id,
+				"value": room_id,
+				"room_id": room_id,
+				"name": str(room.room_name) if room != null else room_id
+			})
+		if options.is_empty():
+			return true
+		game.request_effect_choice(caster_id, "vastum_destination", context, choice_key, options, 1, 1, "Choose a Room containing a Vastum.")
+		return false
+	var room_id: String = str(context.get(choice_key, ""))
+	context.erase(choice_key)
+	if not game.room_has_vastum(room_id):
+		return false
+	return _place_target_model_direct(game, context, room_id)
+
+
+func _resolve_lose_caster_power(
+	effect: Dictionary,
+	context: Dictionary
+) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if game == null or not _valid_player(game, caster_id):
+		return false
+	var amount: int = maxi(0, int(effect.get("amount", 1)))
+	if int(game.players[caster_id].power) < amount:
+		return false
+	game.add_player_power(caster_id, -amount)
+	return true
+
+
+func _resolve_chaos(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not _valid_player(game, caster_id):
+		return false
+	var player = game.players[caster_id]
+	var key: String = str(effect.get("key", "chaos"))
+	var shuffle_key := key + "_shuffle_memories"
+	var shuffle_applied_key := key + "_shuffle_applied"
+	var room_key := key + "_room"
+	var card_key := key + "_revealed_spell"
+	var ack_key := key + "_reveal_ack"
+	var all_key := key + "_all_choice"
+
+	if not bool(context.get(shuffle_applied_key, false)):
+		if not player.memories.is_empty() and not context.has(shuffle_key):
+			game.request_effect_choice(caster_id, "chaos_shuffle", context, shuffle_key, [
+				{"token": key + ":shuffle:no", "value": false, "name": "Keep Memories as they are"},
+				{"token": key + ":shuffle:yes", "value": true, "name": "Shuffle Memories into your Grimoire"}
+			], 1, 1, "Chaos: you may shuffle your Memories into your Grimoire.")
+			return false
+		if bool(context.get(shuffle_key, false)):
+			game.shuffle_memories_into_grimoire(caster_id)
+		context.erase(shuffle_key)
+		context[shuffle_applied_key] = true
+
+	if not context.has(room_key):
+		var options: Array = []
+		for room_id in game.get_vastum_room_ids():
+			var room = game.get_room_by_id(room_id)
+			options.append({"token": key + ":room:" + room_id, "value": room_id,
+				"room_id": room_id, "name": str(room.room_name)})
+		if options.is_empty():
+			context.erase(shuffle_applied_key)
+			return true
+		game.request_effect_choice(caster_id, "chaos_room", context, room_key, options,
+			1, 1, "Chaos: choose a Vastum.")
+		return false
+
+	# The revealed physical card stays in this resolution until its effect has
+	# finished, including nested Room activations and their player decisions.
+	# It is neither discarded nor available for drawing/shuffling in the meantime.
+	if not context.has(card_key):
+		if player.grimoire.is_empty():
+			context.erase(room_key)
+			context.erase(shuffle_applied_key)
+			return true
+		context[card_key] = player.grimoire.pop_back()
+	var revealed: SpellCardState = context[card_key]
+	if not bool(context.get(ack_key, false)):
+		game.request_chaos_reveal_ack(caster_id, revealed, context, ack_key)
+		return false
+
+	var mode := "none"
+	match str(revealed.light_side.get("element", "")).to_lower():
+		"profane": mode = "damage"
+		"sacred": mode = "instability"
+		"magic": mode = "activate_room"
+		"all", "any", "wild", "wildcard", "all_elements":
+			if not context.has(all_key):
+				game.request_effect_choice(caster_id, "chaos_all_element", context, all_key, [
+					{"token": key + ":all:damage", "value": "damage", "name": "Inflict 2 Damage"},
+					{"token": key + ":all:instability", "value": "instability", "name": "Place 1 Instability"},
+					{"token": key + ":all:activate", "value": "activate_room", "name": "Activate the Room"}
+				], 1, 1, "Chaos: choose one of the three wildcard effects.")
+				return false
+			mode = str(context[all_key])
+
+	var room_id: String = str(context[room_key])
+	for temporary_key in [shuffle_applied_key, room_key, card_key, ack_key, all_key]:
+		context.erase(temporary_key)
+	return game.queue_resolution({"type": "chaos_resolution", "context": context.duplicate(false),
+		"card": revealed, "mode": mode, "room_id": room_id})
+
+
+func process_chaos_resolution(resolution: Dictionary) -> bool:
+	var context: Dictionary = resolution.context
+	var game = _game(context)
+	var caster_id: int = _caster(context)
+	if not bool(resolution.get("started", false)):
+		resolution["started"] = true
+		var room_id: String = str(resolution.room_id)
+		match str(resolution.mode):
+			"damage":
+				var damage_context := context.duplicate(false)
+				damage_context["target_room_id"] = room_id
+				damage_context["spell_target_type"] = "room"
+				_resolve_damage({"type": "damage", "amount": 2, "target": "room"}, damage_context)
+			"instability":
+				game.place_instability(caster_id, room_id, 1)
+			"activate_room":
+				game.activate_room(caster_id, room_id, true, {"source_kind": "chaos",
+					"caster_id": caster_id, "caster_room_id": game.players[caster_id].mage.room_id,
+					"force_room_activation": true})
+		return false
+
+	# Array.back() is the top of the Grimoire. Returning at index zero also
+	# preserves the order of all other cards, including identical printed copies.
+	var card: SpellCardState = resolution.card
+	game.players[caster_id].grimoire.push_front(card)
+	print("Chaos: ", card.card_name, " returned to the bottom of Player ", caster_id + 1, "'s Grimoire")
 	return true

@@ -152,35 +152,23 @@ func process_effect(frame: Dictionary, game) -> bool:
 		"each_mage_may_summon_evocation":
 			options.append(_option("decline", "", "Decline"))
 			var evocation_id: String = str(effect.get("evocation_id", "cadaver"))
-			var copies: int = int(game.evocation_database.get_evocation(evocation_id).get("copies", 0))
-			for owner in game.players:
-				for evocation in owner.evocations:
-					if evocation.evocation_id == evocation_id:
-						copies -= 1
-			if not mage.in_cell and copies > 0:
+			var replaces_summon: bool = player.evocations.any(func(ev): return not ForgottenEvocations.ability(game, ev, "replace_summon_with_heal").is_empty())
+			if not mage.in_cell and (game.get_available_evocation_copies(evocation_id) > 0 or replaces_summon):
 				options.append(_option("summon", mage.room_id, "Summon " + str(effect.get("evocation_id", "cadaver"))))
 			if not _supplied_choice(frame, context, "event_summon_choices", player_index) and not _choose(game, frame, player_index, options, prompt):
 				return false
 			var room_id: String = str(frame.choice)
-			if copies <= 0:
-				_advance(frame)
-				return false
-			if room_id == mage.room_id and not mage.in_cell and not player.has_free_evocation_slot():
-				if not frame.has("replacement"):
-					var replacements: Array = []
-					for i in range(player.evocations.size()):
-						var evocation: EvocationState = player.evocations[i]
-						replacements.append({"token": "evocation:%d:%d" % [player_index, i], "value": evocation,
-							"owner_id": player_index, "evocation_index": i, "name": evocation.get_display_name()})
-					game.request_effect_choice(player_index, "event_replace_evocation", frame, "replacement", replacements, 1, 1, prompt + ": choose an Evocation to replace.")
-					return false
-				var replaced: EvocationState = frame.replacement
-				# Rulebook: replacing an Evocation is not a removal/defeat trigger.
-				game.finalize_evocation_removal(replaced)
-				return false
-			_advance(frame)
 			if not mage.in_cell and room_id == mage.room_id:
-				game.summon_evocation(player_index, str(effect.get("evocation_id", "cadaver")), room_id)
+				if not frame.has("summon_context"):
+					frame["summon_context"] = {"game": game, "caster_id": player_index, "resolver_kind": "event"}
+				game.summon_evocation_for_effect(player_index, evocation_id, room_id, frame.summon_context)
+				if game.waiting_for_player_input:
+					return false
+				var summon_event := GameEvent.new("forgotten_summon_effect")
+				summon_event.source_player_index = player_index
+				game.queue_resolution({"type": "game_event", "event": summon_event})
+			frame.erase("summon_context")
+			_advance(frame)
 		"each_mage_discard_hand_or_lose_power", "each_mage_discard_solved_quest_or_lose_power":
 			var quests: bool = kind == "each_mage_discard_solved_quest_or_lose_power"
 			var cards: Array = player.completed_quests.filter(func(q): return q.is_solved()) if quests else player.hand
@@ -315,7 +303,8 @@ func _option(token: String, value, label: String) -> Dictionary:
 func _choose(game, frame: Dictionary, player_index: int, options: Array, prompt: String, kind: String = "event_choice") -> bool:
 	if frame.has("choice"):
 		return true
-	if options.size() <= 1:
+	# Quest selection stays explicit in Cards/Quests even with one legal card.
+	if options.is_empty() or (options.size() == 1 and not options[0].value is QuestState):
 		frame["choice"] = options[0].value if options.size() == 1 else null
 		return true
 	game.request_effect_choice(player_index, kind, frame, "choice", options, 1, 1, prompt)

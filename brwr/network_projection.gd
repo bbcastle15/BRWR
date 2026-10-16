@@ -7,6 +7,11 @@ static func build(game, viewer: int) -> Dictionary:
 	state["revision"] = game.input_revision
 	state["turn_presentation"] = game.get_turn_presentation()
 	state["card_presentation"] = game.card_presentation.duplicate()
+	state["active_schools"] = game.active_school_ids.duplicate()
+	state["school_discards"] = {}
+	for school_id in game.school_discards:
+		# Discards are public; library order and hidden Spell identities stay private.
+		state.school_discards[school_id] = game.get_school_discard(school_id).map(func(card): return card.id)
 	state["slots"] = {}
 	state["cast_tokens"] = {}
 	state["rooms"] = []
@@ -20,6 +25,8 @@ static func build(game, viewer: int) -> Dictionary:
 			state.cast_tokens[i][slot] = game.get_player_board_cast_token(i, slot, viewer)
 		var player = game.players[i]
 		state.players[i]["trophies"] = player.trophies.duplicate()
+		state.players[i].mage["infectio_tokens"] = player.mage.infectio_tokens.duplicate()
+		state.players[i].mage["jinxes"] = player.mage.jinxes.duplicate(true)
 		for field in ["active_quests", "completed_quests"]:
 			for j in player.get(field).size():
 				state.players[i][field][j]["instance"] = player.get(field)[j].get_instance_id()
@@ -27,14 +34,15 @@ static func build(game, viewer: int) -> Dictionary:
 			state.players[i].evocations[j]["name"] = player.evocations[j].evocation_name
 			state.players[i].evocations[j]["board_number"] = player.evocations[j].board_number
 			state.players[i].evocations[j]["damage_cubes"] = player.evocations[j].damage_cubes.duplicate()
+			state.players[i].evocations[j]["stored_owner_cubes"] = game.get_evocation_stored_owner_cube_count(player.evocations[j])
 		for active in player.active_spells:
-			if active.active and active.get_side().get("target", "") in ["room", "area"] and game._is_ongoing_revealed_spell(active.get_side()):
-				state.permanents.append({"owner": i, "slot": game._find_player_board_slot_for_spell(i, active.spell), "id": active.spell.id, "dark": active.use_dark_side, "room": str(active.context.get("target_room_id", ""))})
+			if active.active and game._is_ongoing_revealed_spell(active.get_side()):
+				state.permanents.append({"owner": i, "slot": game._find_player_board_slot_for_spell(i, active.spell), "id": active.spell.id, "dark": active.use_dark_side, "room": str(active.context.get("target_room_id", "")), "target_player": active.target_player_index})
 	for child in game.get_children():
 		if not child.has_meta("hex_coord"):
 			continue
 		if child.get("room_id") != null:
-			state.rooms.append({"id": child.room_id, "coord": child.get_meta("hex_coord"), "flipped": child.flipped, "activated": child.activated_this_turn, "cubes": child.instability_cubes.duplicate()})
+			state.rooms.append({"id": child.room_id, "variant_id": child.get_art_id(), "coord": child.get_meta("hex_coord"), "flipped": child.flipped, "activated": child.activated_this_turn, "cubes": child.instability_cubes.duplicate(), "vastum": game.room_has_vastum(child.room_id)})
 		elif child.has_meta("owner_index"):
 			state.cells.append({"owner": child.get_meta("owner_index"), "coord": child.get_meta("hex_coord")})
 	state["events"] = game.active_events.map(func(card): return "" if card == null else card.id)
@@ -60,12 +68,19 @@ static func apply(game, state: Dictionary) -> void:
 	game.input_revision = state.revision
 	game.network_turn_presentation = state.get("turn_presentation", {})
 	game.card_presentation = state.get("card_presentation", {}).duplicate()
+	game.active_school_ids.assign(state.get("active_schools", game.active_school_ids))
+	game.school_discards.clear()
+	for school_id in state.get("school_discards", {}):
+		game.school_discards[school_id] = []
+		for card_id in state.school_discards[school_id]:
+			game.school_discards[school_id].append(game.spell_database.get_spell(card_id))
 	game.pending_input = state.pending_input
 	game.network_slot_views = state.slots
 	game.network_cast_tokens = state.cast_tokens
 	game.player_board_spell_slots.clear()
 	game.black_rose_trophies.assign(state.get("black_rose_trophies", []))
 	game.quest_discard.clear()
+	game.stored_evocation_owner_cubes.clear()
 	for id in state.get("quest_discard", []):
 		game.quest_discard.append(game.quest_database.get_quest(id))
 	for data in state.players:
@@ -75,12 +90,15 @@ static func apply(game, state: Dictionary) -> void:
 		for field in ["power", "school_id", "starting_grimoire_id", "starting_grimoire_name", "mage_id", "available_cubes", "available_physical_actions"]:
 			player.set(field, data[field])
 		player.player_name = data.name
+		player.starved_cubes = int(data.get("starved_cubes", 0))
 		player.mage.mage_id = data.mage_id
 		for field in ["health", "strength", "speed", "in_cell", "room_id"]:
 			player.mage.set(field, data.mage[field])
 		player.mage.room_coord = Vector2i(data.mage.room_coord.q, data.mage.room_coord.r)
 		player.mage.damage_cubes.assign(data.mage.damage_cubes)
 		player.mage.destiny_tokens.assign(data.mage.get("destiny_tokens", []))
+		player.mage.jinxes.assign(data.mage.get("jinxes", []))
+		player.mage.infectio_tokens.assign(data.mage.get("infectio_tokens", []))
 		if old_health != player.mage.health:
 			game.player_boards[player.player_index].create_damage_track()
 		player.hand.clear()
@@ -92,13 +110,21 @@ static func apply(game, state: Dictionary) -> void:
 		player.grimoire.clear()
 		player.grimoire.resize(data.grimoire_count)
 		player.memories.clear()
-		player.memories.resize(data.memories_count)
+		for card in data.get("memories", []):
+			var memory_spell = game.spell_database.get_spell(str(card.get("id", "")))
+			if memory_spell != null:
+				player.memories.append(memory_spell)
+		# Backward compatibility with old snapshots that exposed only a count.
+		if not data.has("memories"):
+			player.memories.resize(data.memories_count)
 		player.ready_spells.clear()
 		for card in data.get("ready_spells", []):
 			player.ready_spells.append(ReadySpellState.new(game.spell_database.get_spell(card.id), card.use_dark_side))
 		var quick: Dictionary = data.get("quick_spell", {})
 		player.quick_spell = null if quick.is_empty() else ReadySpellState.new(game.spell_database.get_spell(quick.id), quick.use_dark_side)
 		player.revealed_spells.clear()
+		var transformed: Dictionary = data.get("transformation", {})
+		player.transformation = null if transformed.is_empty() else RevealedSpellState.new(game.spell_database.get_spell(transformed.id), false)
 		for card in data.revealed_spells:
 			player.revealed_spells.append(RevealedSpellState.new(game.spell_database.get_spell(card.id), card.use_dark_side))
 		player.active_spells.clear()
@@ -124,24 +150,45 @@ static func apply(game, state: Dictionary) -> void:
 			var evocation = old_evocations.get(card.board_number)
 			if evocation == null or evocation.evocation_id != card.id:
 				evocation = EvocationState.new(card.id, card.name, card.archetype, card.health, card.strength, card.speed, card.owner_id)
+				evocation.definition = game.evocation_database.get_evocation(card.id)
 			for field in ["controller_id", "board_number", "room_id", "health", "strength", "speed"]:
 				evocation.set(field, card[field])
+			evocation.strength = int(card.get("base_strength", card.strength))
 			evocation.damage_cubes.assign(card.damage_cubes)
+			evocation.owner_id = int(card.owner_id)
+			evocation.assigned_mage = int(card.get("assigned_mage", -1))
+			evocation.assigned_slot = int(card.get("assigned_slot", 0))
+			evocation.upgrades.assign(card.get("upgrades", []))
+			evocation.stored_trophies.assign(card.get("stored_trophies", []))
+			game.stored_evocation_owner_cubes[game._evocation_storage_key(evocation)] = int(card.get("stored_owner_cubes", 0))
 			player.evocations.append(evocation)
 		game.get_node("PowerBoard").set_player_power(player.player_index, player.power)
 	for data in state.permanents:
 		var active := ActiveSpellState.new(game.spell_database.get_spell(data.id), data.owner, data.dark)
 		active.context["target_room_id"] = data.room
+		active.target_player_index = int(data.get("target_player", -1))
 		game.players[data.owner].active_spells.append(active)
-		game._ensure_player_board_spell_slots(data.owner)[data.slot] = {"spell": active.spell, "state": "revealed", "use_dark_side": data.dark}
+		if not str(data.slot).is_empty():
+			game._ensure_player_board_spell_slots(data.owner)[data.slot] = {"spell": active.spell, "state": "revealed", "use_dark_side": data.dark}
 	game.room_id_by_coord.clear()
+	game.vastum_room_state.clear()
 	for data in state.rooms:
 		var room = game.get_room_by_id(data.id)
+		if room == null:
+			continue
+		var variant_id: String = str(data.get("variant_id", data.id))
+		if room.get_art_id() != variant_id:
+			var definition = game.get_room(variant_id)
+			if definition != null and str(definition.get("replaces", definition.id)) == str(data.id):
+				room.setup_room(definition)
+				room.room_color = game.get_room_color(str(definition.color))
 		room.set_meta("hex_coord", data.coord)
 		room.position = game.hex_to_pixel(data.coord)
 		game.room_id_by_coord[data.coord] = data.id
 		room.flipped = data.flipped
 		room.activated_this_turn = data.activated
+		if bool(data.get("vastum", false)):
+			game.vastum_room_state[str(data.id)] = true
 		if room.instability_cubes != data.cubes:
 			room.clear_instability()
 			for owner in data.cubes:
@@ -166,6 +213,7 @@ static func apply(game, state: Dictionary) -> void:
 	game.get_node("PowerBoard").set_black_rose_power(game.black_rose_power)
 	game.update_table_layout()
 	game.refresh_model_tokens()
+	game.refresh_vastum_tokens()
 	game.refresh_all_player_boards()
 	game._refresh_permanent_room_markers()
 	if game.table_shell != null:

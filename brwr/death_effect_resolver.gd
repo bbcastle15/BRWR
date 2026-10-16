@@ -38,6 +38,7 @@ static func defer_damage_post_event(frame: Dictionary) -> bool:
 		return false
 	var pending := frame.duplicate(false)
 	pending["sentence_replayed"] = true
+	frame["post_event_deferred"] = true
 	var result_context := context.duplicate(false)
 	result_context.erase("sentence_damage_frames")
 	pending["result_context"] = result_context
@@ -152,7 +153,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return true
 		"gain_trophy":
 			if valid_target:
-				game.players[caster].trophies.append(target)
+				game.gain_player_trophy(caster, target)
 				game.refresh_all_player_boards()
 			return true
 		"spend_trophy":
@@ -265,19 +266,33 @@ static func apply_trigger_target(side: Dictionary, context: Dictionary, event: G
 	context.erase("target_player_index")
 	context["spell_target_type"] = str(side.get("target", ""))
 	match kind:
+		"source_model":
+			context["target_model_type"] = event.source_model_type
+			context["spell_target_type"] = event.source_model_type
+			if event.source_evocation != null: context["target_evocation"] = event.source_evocation
+			else: context["target_player_index"] = event.source_player_index
 		"source_mage", "damaged_mage":
 			context["target_player_index"] = event.source_player_index if kind == "source_mage" else event.target_player_index
 			context["target_model_type"] = "mage"
+			context["spell_target_type"] = "mage"
+		"damaged_evocation":
+			context["target_evocation"] = event.target_evocation
+			context["target_model_type"] = "evocation"
+			context["spell_target_type"] = "evocation"
 		"source_evocation":
 			context["target_evocation"] = event.source_evocation
 			context["target_model_type"] = "evocation"
-		"event_room":
+			context["spell_target_type"] = "evocation"
+		"event_room", "victim_room":
 			context["target_room_id"] = event.target_room_id
+			context["spell_target_type"] = "room"
 		"caster_room":
 			context["target_room_id"] = str(context.get("caster_room_id", ""))
+			context["spell_target_type"] = "room"
 		"self":
 			context["target_player_index"] = int(context.caster_id)
 			context["target_model_type"] = "mage"
+			context["spell_target_type"] = "mage"
 
 static func announce_spell(game, context: Dictionary, effects: Array) -> bool:
 	if str(context.get("spell_id", "")).is_empty():
@@ -302,6 +317,8 @@ static func announce_spell(game, context: Dictionary, effects: Array) -> bool:
 			affected = affected_mages(game, {"distance": int(effect.get("distance", 1))}, context)
 		elif kind == "damage_all_models_of_type" and effect.get("model_type") == "mage":
 			affected = affected_mages(game, {} if effect.get("scope") == "lodge" else {"distance": 0}, context)
+		elif kind == "starve":
+			affected = FamineRules.target_mages(game, effect, context)
 		for id in affected:
 			if not id in targets:
 				targets.append(id)

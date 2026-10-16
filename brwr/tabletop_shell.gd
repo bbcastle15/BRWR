@@ -8,6 +8,7 @@ const SIDEBAR_WIDTH := 204.0
 var game
 var root: Control
 var sidebar: VBoxContainer
+var sidebar_phase: Label
 var banners: Array[Button] = []
 var board_overlay: Control
 var board_stage: Control
@@ -28,10 +29,11 @@ var presentation_title: Label
 var presentation_hint: Label
 var card_tween: Tween
 var shown_card_serial := -1
+var evocation_names_visible := false
 
 func setup(game_node) -> void:
 	game = game_node
-	layer = 0 # Under decision windows, hands and inspection overlays.
+	layer = 10 # Above world controls, below decisions, hands and inspection.
 	root = Control.new()
 	root.name = "TabletopShell"
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -56,27 +58,43 @@ func setup(game_node) -> void:
 func _build_sidebar() -> void:
 	var rail := PanelContainer.new()
 	rail.name = "PlayerRail"
+	rail.mouse_filter = Control.MOUSE_FILTER_STOP
 	rail.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
 	rail.offset_left = 12
 	rail.offset_top = 12
 	rail.offset_right = SIDEBAR_WIDTH
 	rail.offset_bottom = -12
-	rail.add_theme_stylebox_override("panel", Style.panel(Color("4a463d"), Color("101518")))
+	rail.add_theme_stylebox_override("panel", Style.fabric_panel())
 	root.add_child(rail)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 10)
 	rail.add_child(column)
+	var header := PanelContainer.new()
+	header.name = "SidebarHeader"
+	var header_style := Style.panel(Color("65563d"), Style.INK)
+	header_style.content_margin_left = 8
+	header_style.content_margin_right = 8
+	header_style.content_margin_top = 8
+	header_style.content_margin_bottom = 8
+	header.add_theme_stylebox_override("panel", header_style)
+	column.add_child(header)
+	var heading := VBoxContainer.new()
+	heading.add_theme_constant_override("separation", 5)
+	header.add_child(heading)
 	var title := Label.new()
 	title.text = "BLACK ROSE"
-	title.add_theme_color_override("font_color", Style.GOLD)
-	title.add_theme_font_size_override("font_size", 19)
-	column.add_child(title)
-	var phase := Label.new()
-	phase.name = "Phase"
-	phase.add_theme_font_size_override("font_size", 13)
-	phase.add_theme_color_override("font_color", Style.MUTED)
-	column.add_child(phase)
-	column.add_child(HSeparator.new())
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_color_override("font_color", Color("e2c991"))
+	title.add_theme_font_size_override("font_size", 17)
+	heading.add_child(title)
+	sidebar_phase = Label.new()
+	sidebar_phase.name = "Phase"
+	sidebar_phase.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sidebar_phase.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	sidebar_phase.add_theme_font_size_override("font_size", 14)
+	sidebar_phase.add_theme_color_override("font_color", Style.PAPER)
+	heading.add_child(sidebar_phase)
+	header.minimum_size_changed.connect(_layout.call_deferred)
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -109,17 +127,13 @@ func _build_sidebar() -> void:
 		count.add_theme_font_size_override("font_size", 14)
 		count.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		banner.add_child(count)
-		var crown := Label.new()
+		var crown := TextureRect.new()
 		crown.name = "Crown"
-		crown.text = "♛"
+		crown.texture = preload("res://assets/tabletop/crown.svg")
+		crown.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		crown.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		crown.position = Vector2(126, 61)
 		crown.size = Vector2(26, 30)
-		crown.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		crown.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		crown.add_theme_font_size_override("font_size", 23)
-		crown.add_theme_color_override("font_color", Style.GOLD)
-		crown.add_theme_color_override("font_outline_color", Color(0.04, 0.04, 0.04, 0.95))
-		crown.add_theme_constant_override("outline_size", 4)
 		crown.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		crown.hide()
 		banner.add_child(crown)
@@ -130,17 +144,31 @@ func _build_sidebar() -> void:
 		detail.add_theme_font_size_override("font_size", 13)
 		detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		banner.add_child(detail)
-	for entry in [["Cards / Quests", _open_hand], ["Lodge · Home", _show_lodge], ["Choices · F10", _show_choices], ["Window / Fullscreen", _window_mode]]:
+	for entry in [["Cards / Quests / Jinx", _open_hand], ["Lodge · Home", _show_lodge], ["Choices · F10", _show_choices], ["Window / Fullscreen", _window_mode]]:
 		var button := Button.new()
 		button.text = entry[0]
 		button.add_theme_font_size_override("font_size", 13)
 		button.pressed.connect(entry[1])
 		column.add_child(button)
+	var names_button := Button.new()
+	names_button.name = "EvocationNames"
+	names_button.text = "Evocation names"
+	names_button.toggle_mode = true
+	names_button.tooltip_text = "Show Evocation names beside their tokens on the Lodge"
+	names_button.add_theme_font_size_override("font_size", 13)
+	names_button.toggled.connect(_set_evocation_names_visible)
+	column.add_child(names_button)
 	var exit_button := Button.new()
 	exit_button.text = "Main menu" if OS.has_feature("web") else "Exit game"
 	exit_button.add_theme_font_size_override("font_size", 13)
 	exit_button.pressed.connect(_exit_game)
 	column.add_child(exit_button)
+
+func _set_evocation_names_visible(value: bool) -> void:
+	evocation_names_visible = value
+	for token in game.evocation_tokens.values():
+		if is_instance_valid(token):
+			token.set_names_visible(value)
 
 func _build_board_overlay() -> void:
 	board_overlay = Control.new()
@@ -161,7 +189,7 @@ func _build_board_overlay() -> void:
 	var background := Panel.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_STOP
-	background.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Color("0d1216")))
+	background.add_theme_stylebox_override("panel", Style.fabric_panel())
 	board_overlay.add_child(background)
 	board_title = Label.new()
 	board_title.position = Vector2(22, 12)
@@ -245,7 +273,11 @@ func sync_card_presentation() -> void:
 	if game.beta_hud != null:
 		game.beta_hud.hand_overlay.close_overlay()
 	presentation_art.texture = game.ReferenceCardPreview.card_texture(str(data.kind), str(data.id))
-	var category := "EVENT" if data.kind == "events" else "QUEST"
+	if data.kind == "rooms" and bool(data.get("flipped", false)):
+		var rebuilt_path := "res://assets/rooms/rebuilt/%s.png" % str(data.id)
+		if ResourceLoader.exists(rebuilt_path):
+			presentation_art.texture = load(rebuilt_path)
+	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM"}.get(str(data.kind), "")
 	presentation_title.text = category + " · " + str(data.title)
 	if presentation_hint != null:
 		presentation_hint.text = "Click to continue" if bool(data.get("requires_click", false)) else "Click to continue · closes automatically"
@@ -277,8 +309,25 @@ func _layout_card_presentation() -> void:
 func _layout() -> void:
 	if board_overlay == null:
 		return
+	# Keep every active player visible without scrolling, including 5/6 seats.
+	var rail = root.get_node("PlayerRail")
+	var column: VBoxContainer = rail.get_child(0)
+	var fixed_height: float = 24 + (column.get_child_count() - 1) * 10
+	for child in column.get_children():
+		if not child is ScrollContainer:
+			fixed_height += child.get_combined_minimum_size().y
+	var available_rail_height := get_viewport().get_visible_rect().size.y - 24 - fixed_height
+	var banner_height := clampf(floorf((available_rail_height - (banners.size() - 1) * 10) / maxf(1, banners.size())) - 2, 42, 102)
+	for banner in banners:
+		banner.custom_minimum_size.y = banner_height
+		banner.get_node("Detail").position.y = 31
+		banner.get_node("Detail").size.y = banner_height - 33
+		banner.get_node("Detail").visible = banner_height >= 60
+		banner.get_node("Crown").position.y = maxf(8, banner_height - 34)
 	var available := board_overlay.size - Vector2(28, 64)
 	var board_size := Vector2(900, 730)
+	if shown_player >= 0 and game.players[shown_player].transformation != null:
+		board_size.x = 1180
 	var ratio := maxf(0.1, minf(available.x / board_size.x, available.y / board_size.y))
 	board_stage.position = Vector2((board_overlay.size.x - board_size.x * ratio) * 0.5, 54)
 	board_stage.size = board_size
@@ -302,6 +351,7 @@ func _show_board(index: int) -> void:
 	# must not rebuild those nodes and erase their pending choice callbacks.
 	game.player_boards[index].refresh_spell_slots()
 	game.player_boards[index].refresh_action_tokens()
+	game.player_boards[index].refresh_transformation()
 	board_title.text = game.players[index].player_name + " · " + str(game.players[index].mage_id).capitalize()
 	board_overlay.show()
 	_layout()
@@ -317,13 +367,18 @@ func reveal_board_choice(index: int) -> void:
 		open_board(index)
 
 func _on_request(_request: Dictionary) -> void:
-	# A new decision must never be obscured by an old player's personal view.
-	close_board()
-	board_choices.clear()
+	# The HUD may already have opened the board needed by this new request.
+	# Old addresses are cleared by player_input_resolved; preserve new choices.
+	if not board_choices.has(shown_player):
+		close_board()
 
 func _process(_delta: float) -> void:
 	if game == null or root == null:
 		return
+	if board_overlay.visible and shown_player >= 0:
+		var board_width := 1180.0 if game.players[shown_player].transformation != null else 900.0
+		if not is_equal_approx(board_stage.size.x, board_width):
+			_layout()
 	var viewer: int = game.get_ui_viewer_player_index()
 	if viewer != observed_viewer:
 		observed_viewer = viewer
@@ -338,19 +393,19 @@ func _process(_delta: float) -> void:
 
 func _refresh_banners() -> void:
 	var turn: Dictionary = game.get_turn_presentation()
-	root.get_node("PlayerRail").get_child(0).get_node("Phase").text = "ROUND %d · %s" % [game.current_round, str(game.current_phase).capitalize()]
+	sidebar_phase.text = "ROUND %d · %s" % [game.current_round, str(game.current_phase).capitalize()]
 	for i in banners.size():
 		var player = game.players[i]
 		var active := i == int(turn.get("player_index", -1))
 		var has_crown: bool = i == game.crown_owner_id
-		var signature := str([active, player.mage_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i), has_crown])
+		var signature := str([active, player.mage_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i), has_crown, banners[i].custom_minimum_size.y])
 		if banners[i].get_meta("signature", "") == signature:
 			continue
 		banners[i].set_meta("signature", signature)
 		banners[i].get_node("Name").text = player.player_name
 		banners[i].get_node("Count").text = "%d/2" % int(turn.get("actions_used", 0)) if active and game.current_phase == game.PHASE_ACTION else ""
 		banners[i].get_node("Crown").visible = has_crown
-		banners[i].get_node("Detail").text = "%s\nHP %d/%d · Power %d" % [str(player.mage_id).capitalize() if player.mage_id != "" else "Choose a Mage", player.mage.get_remaining_health(), player.mage.health, player.power]
+		banners[i].get_node("Detail").text = "%s\nHP %d/%d · Power %d" % [str(player.mage_id).capitalize() if player.mage_id != "" else "Choose a Mage", player.mage.get_remaining_health(), player.mage.health, player.power] if banners[i].custom_minimum_size.y >= 78 else "HP %d · %d PP" % [player.mage.get_remaining_health(), player.power]
 		var edge: Color = player.color.lerp(Color.WHITE, 0.22)
 		var normal := Style.panel(edge if active or board_choices.has(i) else edge.darkened(0.5), Color("252925") if active else Style.INK, 3 if active else 1)
 		normal.border_width_left = 6
@@ -374,7 +429,10 @@ func _observe(animate: bool) -> void:
 				animation_queue.append({"player": i, "node": "PhysicalAction" + str(snapshot.physical), "kind": "physical"})
 			for slot_id in snapshot.slots:
 				var value: Array = snapshot.slots[slot_id]
-				if value[0] and old.slots[slot_id] != value:
+				# Hidden Preparation occupancy is private and must not animate/open a
+				# PlayerBoard. Animate only a public reveal/marker change. This also
+				# prevents the post-Preparation board flicker in online games.
+				if value[0] and bool(value[1]) and old.slots[slot_id] != value:
 					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id), "kind": "spell", "slot": slot_id})
 		observed[i] = snapshot
 
@@ -412,7 +470,7 @@ func _play_next_animation() -> void:
 
 func _finish_animation() -> void:
 	animation = null
-	layer = 0
+	layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.scale = Vector2.ONE
@@ -430,7 +488,7 @@ func _cancel_animation() -> void:
 	if animation != null:
 		animation.kill()
 	animation = null
-	layer = 0
+	layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.scale = Vector2.ONE
@@ -474,6 +532,10 @@ func _exit_game() -> void:
 		get_tree().quit()
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE and board_overlay.visible:
-		close_board()
-		get_viewport().set_input_as_handled()
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		if card_overlay.visible:
+			_dismiss_card_presentation()
+			get_viewport().set_input_as_handled()
+		elif board_overlay.visible:
+			close_board()
+			get_viewport().set_input_as_handled()

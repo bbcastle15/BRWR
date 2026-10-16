@@ -17,6 +17,8 @@ var power: int = 0
 var trophies: Array[int] = []
 var hand_limit: int = 6
 var available_cubes: int = MAX_CUBES
+# Famine: these Cubes are on the Event Board, outside the usable reserve.
+var starved_cubes: int = 0
 var max_active_quests: int = 2
 var active_quests: Array[QuestState] = []
 var completed_quests: Array[QuestState] = []
@@ -31,6 +33,25 @@ var starting_grimoire_name: String = ""
 var mage: MageState
 
 var revealed_spells: Array[RevealedSpellState] = []
+# Physical card beside the Mage Sheet; it survives Cleanup and is public.
+var transformation: RevealedSpellState = null
+
+func get_transformation_data() -> Dictionary:
+	if transformation == null or transformation.spell == null:
+		return {}
+	return transformation.spell.dark_side.get("transformation", {})
+
+func get_transformation_id() -> String:
+	return str(get_transformation_data().get("id", ""))
+
+func get_mage_strength() -> int:
+	return mage.strength + int(get_transformation_data().get("strength_bonus", 0)) + ForgottenPassives.value(self, "strength_bonus") + EquipmentRules.stat_bonus(self, "strength")
+
+func get_mage_speed() -> int:
+	if mage.jinxes.any(func(j): return j.id == "slowness"):
+		return 1
+	return mage.speed + ForgottenPassives.value(self, "speed_bonus") + EquipmentRules.stat_bonus(self, "speed")
+
 # =========================================================
 # READY SPELLS
 # =========================================================
@@ -114,15 +135,22 @@ func return_cubes(
 # =========================================================
 
 func has_free_evocation_slot() -> bool:
-	return evocations.size() < 3
+	return evocations.filter(func(ev): return ev.assigned_mage < 0 and not bool(ev.definition.get("no_slot", false))).size() < 3
 
 
 func add_evocation(
 	evocation: EvocationState
 ) -> bool:
 
-	if not has_free_evocation_slot():
+	if not bool(evocation.definition.get("no_slot", false)) and not has_free_evocation_slot():
 		return false
+
+	if bool(evocation.definition.get("no_slot", false)):
+		evocation.board_number = 200
+		while evocations.any(func(e): return e.board_number == evocation.board_number):
+			evocation.board_number += 1
+		evocations.append(evocation)
+		return true
 
 	# Keep a physical number for this instance; removing another does not renumber it.
 	var used_numbers: Array[int] = []
@@ -319,7 +347,7 @@ func add_ready_spell(
 	use_dark_side: bool = false
 ) -> bool:
 
-	if spell == null:
+	if spell == null or not spell.is_playable_side(use_dark_side):
 		return false
 
 	if ready_spells.size() >= 3:
@@ -351,7 +379,7 @@ func set_quick_spell(
 	use_dark_side: bool = false
 ) -> bool:
 
-	if spell == null:
+	if spell == null or not spell.is_playable_side(use_dark_side):
 		return false
 
 	if quick_spell != null:

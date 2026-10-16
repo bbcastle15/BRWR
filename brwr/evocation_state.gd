@@ -5,10 +5,16 @@ extends RefCounted
 var evocation_id: String = ""
 var evocation_name: String = ""
 var archetype: String = ""
+# Reference to the existing EvocationDatabase definition (also rebuilt on clients).
+var definition: Dictionary = {}
 
 var owner_id: int = -1
 var controller_id: int = -1
 var board_number: int = 0
+var assigned_mage: int = -1
+var assigned_slot: int = 0
+var upgrades: Array[String] = []
+var stored_trophies: Array[int] = []
 
 var health: int = 0
 var strength: int = 0
@@ -53,7 +59,9 @@ func get_remaining_health() -> int:
 
 
 func is_defeated() -> bool:
-	return get_damage() >= health
+	# Jack cannot be defeated while its card still holds any Trophy.
+	var immortal: bool = definition.get("abilities", []).any(func(a): return a.get("type") == "immortal_while_trophies")
+	return get_damage() >= health and (not immortal or stored_trophies.is_empty())
 
 
 func add_damage(owner: int, amount: int) -> int:

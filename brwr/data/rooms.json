@@ -578,5 +578,1266 @@
         "amount": 2
       }
     ]
+  },
+  {
+    "id": "black_rose_apocalypse",
+    "name": "Black Rose Room - Apocalypse",
+    "color": "black",
+    "core": false,
+    "fixed": true,
+    "replaces": "black_rose",
+    "playable": false,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 84
+    },
+    "destroyed_text": "[Self]: discard 3 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.",
+    "rebuilt_text": "[Self]: discard 2 [Spell]. If you do search for 1 [Spell] in your Personal Library and add it to your Hand, then shuffle your Personal Library.",
+    "destroyed_effects": [],
+    "rebuilt_effects": [],
+    "requires_mode": "personal_library"
+  },
+  {
+    "id": "deep_black_rose",
+    "name": "Deep Black Rose Room",
+    "color": "black",
+    "core": false,
+    "fixed": true,
+    "replaces": "black_rose",
+    "playable": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 85
+    },
+    "destroyed_text": "[Self]: discard your Ready [Quick] and 1 [Spell] from your Hand. If you do, draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: discard your Ready [Quick] and 3 [Spell] from your Hand. If you do, draw 2 Forgotten [Spell].",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 1
+          }
+        ],
+        "ready": 1,
+        "quick_only": true,
+        "hand": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 2
+          }
+        ],
+        "ready": 1,
+        "quick_only": true,
+        "hand": 3
+      }
+    ]
+  },
+  {
+    "id": "emerald_rose",
+    "name": "Emerald Rose",
+    "color": "black",
+    "core": false,
+    "fixed": true,
+    "replaces": "black_rose",
+    "playable": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 85
+    },
+    "destroyed_text": "[Self]: discard 2 [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: search for 1 Forgotten [Spell] from the Forgotten Spells deck and draw it, then shuffle the deck. You lose 1 [Power].",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 1
+          }
+        ],
+        "hand": 2
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_search_deck",
+        "source": "forgotten"
+      },
+      {
+        "type": "lose_power",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "occult_black_rose",
+    "name": "Occult Black Rose Room",
+    "color": "black",
+    "core": false,
+    "fixed": true,
+    "replaces": "black_rose",
+    "playable": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 85
+    },
+    "destroyed_text": "[Self]: discard 2 Ready [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "rebuilt_text": "[Self]: discard 1 Ready [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 1
+          }
+        ],
+        "ready": 2
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 1
+          }
+        ],
+        "ready": 1
+      }
+    ]
+  },
+  {
+    "id": "crypt_of_the_saint",
+    "name": "Crypt of the Saint",
+    "color": "grey",
+    "core": false,
+    "fixed": false,
+    "replaces": "crypt",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 86
+    },
+    "destroyed_text": "[Self]: the [Black Rose] inflicts 2 [Damage] to you. Summon a Templarii in a [Room 0].",
+    "rebuilt_text": "[Room 0]: summon a Templarii. It activates. Summon a Templarii in a [Room *].",
+    "destroyed_effects": [
+      {
+        "type": "room_black_rose_damage",
+        "amount": 2
+      },
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "templarii"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "templarii"
+          },
+          {
+            "type": "room_activate_evocation",
+            "last_summoned": true
+          }
+        ]
+      },
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": "*",
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "templarii"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "room_of_rebirth",
+    "name": "Room of Rebirth",
+    "color": "grey",
+    "core": false,
+    "fixed": false,
+    "replaces": "",
+    "playable": false,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      3,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 87
+    },
+    "destroyed_text": "Summon a Phoenix Familiar of your choice.",
+    "rebuilt_text": "Summon a Phoenix Familiar of your choice. Gain 1 [Power].",
+    "destroyed_effects": [],
+    "rebuilt_effects": [],
+    "requires_mode": "phoenix_familiars"
+  },
+  {
+    "id": "sacrificial_altar_of_madness",
+    "name": "Sacrificial Altar of Madness",
+    "color": "grey",
+    "core": false,
+    "fixed": false,
+    "replaces": "sacrificial_altar",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 87
+    },
+    "destroyed_text": "[Room 1]: convert 1 [Instability]. Convert 1 [Damage].",
+    "rebuilt_text": "[Room *]: convert 2 [Instability]. Convert 2 [Damage].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 1,
+        "effects": [
+          {
+            "type": "convert_instability",
+            "shared": true,
+            "amount": 1
+          },
+          {
+            "type": "convert_damage",
+            "shared": true,
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": "*",
+        "effects": [
+          {
+            "type": "convert_instability",
+            "shared": true,
+            "amount": 2
+          },
+          {
+            "type": "convert_damage",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "whales_cemetery",
+    "name": "Whales Cemetery",
+    "color": "grey",
+    "core": false,
+    "fixed": false,
+    "replaces": "cemetery",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      5,
+      3,
+      2
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 88
+    },
+    "destroyed_text": "[Room 0]: summon a Dagon.",
+    "rebuilt_text": "[Room 0]: summon a Dagon. It activates. It activates.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "dagon"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "dagon"
+          },
+          {
+            "type": "room_activate_evocation",
+            "last_summoned": true
+          },
+          {
+            "type": "room_activate_evocation",
+            "last_summoned": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crusaders_summoner_room",
+    "name": "Crusaders' Summoner Room",
+    "color": "red",
+    "core": false,
+    "fixed": false,
+    "replaces": "summoner_room",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 89
+    },
+    "destroyed_text": "[Evocation 1]: inflict 2 [Damage].",
+    "rebuilt_text": "[Evocation 1]: inflict 10 [Damage].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": 1,
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": 1,
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 10
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lost_alchemical_laboratory",
+    "name": "Lost Alchemical Laboratory",
+    "color": "red",
+    "core": false,
+    "fixed": false,
+    "replaces": "alchemical_laboratory",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 90
+    },
+    "destroyed_text": "[Mage 1]: inflict 2 [Damage].",
+    "rebuilt_text": "[Self]: draw 2 random [Spell] from your [Memories].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "mage",
+        "range": 1,
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_random_memories",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "ludus_arena",
+    "name": "Ludus Arena",
+    "color": "red",
+    "core": false,
+    "fixed": false,
+    "replaces": "arena",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 90
+    },
+    "destroyed_text": "[Room 0]: summon an Aruspice.",
+    "rebuilt_text": "[Room *]: summon an Aruspice. It activates.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "aruspice"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": "*",
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "aruspice"
+          },
+          {
+            "type": "room_activate_evocation",
+            "last_summoned": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "abyssal_observatory",
+    "name": "Abyssal Observatory",
+    "color": "yellow",
+    "core": false,
+    "fixed": false,
+    "replaces": "observatory",
+    "playable": true,
+    "instability_resistance": 5,
+    "completion_rewards": [
+      3,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 91
+    },
+    "destroyed_text": "[Self]: lose 1 [Power]. If you do, inflict 1 [Damage] on each Evocation in the Lodge.",
+    "rebuilt_text": "[Special]: lose 1 [Power]. If you do, remove all Evocations from the Lodge (yours included) in the order you prefer.",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "room_damage_evocations",
+            "amount": 1
+          }
+        ],
+        "power": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "room_remove_evocations"
+          }
+        ],
+        "power": 1
+      }
+    ]
+  },
+  {
+    "id": "bibliotheca_of_the_order",
+    "name": "Bibliotheca of the Order",
+    "color": "yellow",
+    "core": false,
+    "fixed": false,
+    "replaces": "bibliotheca",
+    "playable": true,
+    "instability_resistance": 5,
+    "completion_rewards": [
+      3,
+      1,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 91
+    },
+    "destroyed_text": "[Self]: discard 1 Ready [Spell] into your [Memories]. If you do: draw 2 [Spell] from your [Grimoire].",
+    "rebuilt_text": "[Self]: draw 2 [Spell] from your [Grimoire].",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "draw_grimoire",
+            "amount": 2
+          }
+        ],
+        "ready": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "sanctuary_of_anubis",
+    "name": "Sanctuary of Anubis",
+    "color": "yellow",
+    "core": false,
+    "fixed": false,
+    "replaces": "sanctuary",
+    "playable": true,
+    "instability_resistance": 5,
+    "completion_rewards": [
+      3,
+      1,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 92
+    },
+    "destroyed_text": "[Room 0]: summon a Pharaoh.",
+    "rebuilt_text": "[Evocation *]: the target activates under your control.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "pharaoh"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_activate_evocation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forge_of_the_void",
+    "name": "Forge of the Void",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "forge",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      3,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 93
+    },
+    "destroyed_text": "[Room 1]: remove 1 [Instability].",
+    "rebuilt_text": "[Room *]: remove or convert 2 [Instability].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 1,
+        "effects": [
+          {
+            "type": "remove_instability",
+            "shared": true,
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_choice",
+            "choices": [
+              {
+                "label": "Remove 2 Instability",
+                "effects": [
+                  {
+                    "type": "remove_instability",
+                    "shared": true,
+                    "amount": 2
+                  }
+                ]
+              },
+              {
+                "label": "Convert 2 Instability",
+                "effects": [
+                  {
+                    "type": "convert_instability",
+                    "shared": true,
+                    "amount": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "indoor_forest",
+    "name": "Indoor Forest",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "treasure_room",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 94
+    },
+    "destroyed_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control.",
+    "rebuilt_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control with [Attack]+2 and [Movement]+1.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_activate_evocation"
+          }
+        ],
+        "max_health": 3
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_activate_evocation",
+            "strength_bonus": 2,
+            "speed_bonus": 1
+          }
+        ],
+        "max_health": 3
+      }
+    ]
+  },
+  {
+    "id": "life_fountain",
+    "name": "Life Fountain",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "garden",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 94
+    },
+    "destroyed_text": "[Self]: heal 3 [Damage].",
+    "rebuilt_text": "[Self]: heal 3 [Damage]. You gain 1 [Power].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "heal",
+            "shared": true,
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "heal",
+            "shared": true,
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "type": "gain_power",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "templars_treasure_room",
+    "name": "Templars' Treasure Room",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "treasure_room",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 94
+    },
+    "destroyed_text": "[Self]: heal 2 [Damage].",
+    "rebuilt_text": "[Self]: heal 6 [Damage].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "heal",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "heal",
+            "shared": true,
+            "amount": 6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "thorny_clearing",
+    "name": "Thorny Clearing",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "forge",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 95
+    },
+    "destroyed_text": "[Model *]: inflict 2 [Damage]. The [Black Rose] places 2 [Instability] in a [Room 0].",
+    "rebuilt_text": "[Model *]: inflict 1 [Damage].\n[Model *]: inflict 2 [Damage].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "place_black_rose_instability",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zen_garden",
+    "name": "Zen Garden",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "garden",
+    "playable": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 95
+    },
+    "destroyed_text": "[Model *]: move up to 1.",
+    "rebuilt_text": "[Model *]: move up to 1. Move up to 1. Move up to 1.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_move",
+            "distance": 1
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_move",
+            "distance": 1
+          },
+          {
+            "type": "room_move",
+            "distance": 1
+          },
+          {
+            "type": "room_move",
+            "distance": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "abyss_of_faith",
+    "name": "Abyss of Faith",
+    "color": "blue",
+    "core": false,
+    "fixed": false,
+    "replaces": "the_abyss",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 96
+    },
+    "destroyed_text": "[Evocation 1]: it activates under your control.",
+    "rebuilt_text": "[Evocation 1]: it activates under your control and has [Attack]+2.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": 1,
+        "effects": [
+          {
+            "type": "room_activate_evocation"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "evocation",
+        "range": 1,
+        "effects": [
+          {
+            "type": "room_activate_evocation",
+            "strength_bonus": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "abyss_of_hel",
+    "name": "Abyss of Hel",
+    "color": "blue",
+    "core": false,
+    "fixed": false,
+    "replaces": "the_abyss",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 96
+    },
+    "destroyed_text": "[Room 0]: summon a Crocodilus.",
+    "rebuilt_text": "[Room 0]: summon an Ursa. It activates with [Movement]+2.",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "crocodilus"
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 0,
+        "effects": [
+          {
+            "type": "summon_evocation",
+            "evocation_id": "ursa"
+          },
+          {
+            "type": "room_activate_evocation",
+            "last_summoned": true,
+            "speed_bonus": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blasphemous_oracle_room",
+    "name": "Blasphemous Oracle Room",
+    "color": "blue",
+    "core": false,
+    "fixed": false,
+    "replaces": "oracle_room",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 96
+    },
+    "destroyed_text": "[Self]: lose 1 [Power]. If you do: search for 1 [Spell] in your [Grimoire] and draw it.",
+    "rebuilt_text": "[Self]: draw 1 [Spell] from your [Grimoire]. Draw 1 random [Spell] from your [Memories].",
+    "destroyed_effects": [
+      {
+        "type": "room_payment",
+        "effects": [
+          {
+            "type": "room_search_deck",
+            "source": "grimoire",
+            "shuffle": false
+          }
+        ],
+        "power": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 1
+      },
+      {
+        "type": "draw_random_memories",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "ancient_pleasures_room",
+    "name": "Ancient Pleasures Room",
+    "color": "purple",
+    "core": false,
+    "fixed": false,
+    "replaces": "pleasures_room",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 98
+    },
+    "destroyed_text": "[Self]: draw 1 [Spell] from a School in the Library.",
+    "rebuilt_text": "[Self]: search 1 [Spell] from a School in the Library. Shuffle the deck of that School.",
+    "destroyed_effects": [
+      {
+        "type": "room_library_draw"
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_search_deck",
+        "source": "library"
+      }
+    ]
+  },
+  {
+    "id": "skulls_throne",
+    "name": "Skulls' Throne Room",
+    "color": "purple",
+    "core": false,
+    "fixed": true,
+    "replaces": "throne",
+    "playable": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 99
+    },
+    "destroyed_text": "[Self]: obtain the [Crown]. The [Black Rose] inflicts 1 [Damage] to you.",
+    "rebuilt_text": "[Self]: obtain the [Crown].\n[Room 1]: inflict 3 [Damage].",
+    "destroyed_effects": [
+      {
+        "type": "take_crown"
+      },
+      {
+        "type": "room_black_rose_damage",
+        "amount": 1
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "take_crown"
+      },
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": 1,
+        "effects": [
+          {
+            "type": "damage",
+            "shared": true,
+            "amount": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "templars_armory",
+    "name": "Templars' Armory",
+    "color": "purple",
+    "core": false,
+    "fixed": false,
+    "replaces": "armory",
+    "playable": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Codex Arcanum",
+      "page": 99
+    },
+    "destroyed_text": "[Self]: move up to 1. You may perform an [Attack] against a [Model 0].",
+    "rebuilt_text": "[Self]: move up to 4. You may perform an [Attack] with [Attack]+2 against a [Model 0].",
+    "destroyed_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_attack",
+            "shared": true,
+            "optional": true
+          }
+        ]
+      }
+    ],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "range": "*",
+        "effects": [
+          {
+            "type": "room_move",
+            "distance": 4
+          },
+          {
+            "type": "mage_attack",
+            "shared": true,
+            "optional": true,
+            "strength_bonus": 2
+          }
+        ]
+      }
+    ]
   }
 ]
