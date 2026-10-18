@@ -1,0 +1,218 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 3
+GAME SEED: 0
+Spells loaded: 267
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - geomancy
+  - death
+  - heka
+  - forge
+  - chaos
+  - famine
+Selected 6 / 9 available schools
+
+SCHOOL LIBRARIES:
+  geomancy: 36 cards
+  death: 36 cards
+  heka: 36 cards
+  forge: 36 cards
+  chaos: 36 cards
+  famine: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 9
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Players created: 3
+Events DB: 15
+Event Deck Moon 1: 5
+Event Deck Moon 2: 5
+Event Deck Moon 3: 5
+Initial Crown assigned to Player 1
+Player 1 takes the Crown
+Player 1 Cell exits: ["the_abyss", "forge"] | primary: forge | starts in Cell: true
+Player 2 Cell exits: ["bibliotheca", "garden"] | primary: garden | starts in Cell: true
+Player 3 Cell exits: ["mirrors_room", "treasure_room"] | primary: treasure_room | starts in Cell: true
+Cells created: 3
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 3 players
+Player 3 gained 3 Power
+COMMAND: possessed_release_energy
+Black Rose Room received instability from owner -1 | 1/10
+Black Rose Room received instability from owner -1 | 2/10
+Owner 2 placed 2 Instability in Black Rose Room
+COMMAND: possessed_tales_of_destruction
+Player 3 moved to summoner_room
+Player 3 activated Summoner Room [destroyed]
+Player 3 drew Quest: Acquire Wealth | revealed=false
+Player 3 gained 2 Power
+Player 3 solved Quest: Acquire Wealth | Reward: 2 Power
+COMMAND: possessed_book_of_nature
+Player 3 moved to forge
+Forge received instability from owner -1 | 1/4
+Owner 2 placed 1 Instability in Forge
+Player 3 activated Forge [destroyed]
+Player 3 summoned Cadaver in room forge
+Player 3 summoned Cadaver in room forge
+COMMAND: possessed_energy_of_the_rose
+GAME: Moon changed to 2
+Player 3 gained 1 Power
+Waiting for Player 1 | input type: effect_choice
+Forge received instability from owner -1 | 2/4
+Owner 2 placed 1 Instability in Forge
+Damage: attacker 2 -> Player 1 | 2 damage | Target HP: 8/10
+Player 3 moved to the_abyss
+COMMAND: possessed_corrupted_ray
+Player 3 moved to sanctuary
+COMMAND: possessed_incendiary_ball
+Damage: attacker 2 -> Player 1 | 3 damage | Target HP: 5/10
+Damage: attacker 2 -> Player 2 | 3 damage | Target HP: 7/10
+Waiting for Player 1 | input type: effect_choice
+Sanctuary received instability from owner -1 | 1/5
+Owner 2 placed 1 Instability in Sanctuary
+Damage: attacker 2 -> Player 1 | 2 damage | Target HP: 3/10
+COMMAND: possessed_frost_spear
+Player 3 moved to black_rose
+Damage: attacker 2 -> Player 1 | 3 damage | Target HP: 0/10
+Player 1 Mage placed in Cell | entrance forge
+GAME: Moon changed to 2
+COMMAND: possessed_revenge_of_the_thorn
+Damage: attacker 2 -> Player 2 | 1 damage | Target HP: 6/10
+GAME: Moon changed to 2
+COMMAND: possessed_unstable_thorns
+Black Rose Room received instability from owner -1 | 3/10
+Owner 2 placed 1 Instability in Black Rose Room
+Damage: attacker 2 -> Player 2 | 1 damage | Target HP: 5/10
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Player 3 moved to cemetery
+Player 3 moved to garden
+Garden received instability from owner -1 | 1/4
+Owner 2 placed 1 Instability in Garden
+Player 3 activated Garden [destroyed]
+Player 3 summoned Cadaver in room garden
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Cadaver in room garden
+COMMAND: possessed_tomb_reinforcements
+Garden received instability from owner -1 | 2/4
+Owner 2 placed 1 Instability in Garden
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Colossus in room black_rose
+GAME: Moon changed to 2
+Player 3 gained 1 Power
+Damage: attacker 2 -> Player 2 | 3 damage | Target HP: 2/10
+Evocation activated: Colossus | controller P3 | Strength 3
+COMMAND: possessed_release_force
+Waiting for Player 1 | input type: effect_choice
+Player 3 moved to cemetery
+Player 3 moved to black_rose
+Black Rose Room received instability from owner -1 | 4/10
+Black Rose Room received instability from owner -1 | 5/10
+Owner 2 placed 2 Instability in Black Rose Room
+Black Rose Room received instability from owner -1 | 6/10
+Owner 2 placed 1 Instability in Black Rose Room
+Damage: attacker 2 -> Player 2 | 1 damage | Target HP: 1/10
+COMMAND: possessed_conspirators_study
+Player 3 moved to armory
+Player 3 activated Armory [destroyed]
+Player 3 drew Quest: Wise Moon | revealed=false
+Player 3 gained 2 Power
+Player 3 solved Quest: Wise Moon | Reward: 2 Power
+COMMAND: possessed_technomancy_book
+Player 3 moved to treasure_room
+Treasure Room received instability from owner -1 | 1/4
+Owner 2 placed 1 Instability in Treasure Room
+Player 3 activated Treasure Room [destroyed]
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Cadaver in room treasure_room
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Cadaver in room treasure_room
+COMMAND: possessed_sap_of_the_black_rose
+Player 3 gained 2 Power
+COMMAND: possessed_corrupted_spear
+Treasure Room received instability from owner -1 | 2/4
+Owner 2 placed 1 Instability in Treasure Room
+Damage: attacker 2 -> Player 2 | 1 damage | Target HP: 0/10
+Player 2 Mage placed in Cell | entrance garden
+GAME: Moon changed to 3
+Player 3 moved to mirrors_room
+COMMAND: possessed_blaze
+Black Rose Room received instability from owner -1 | 7/10
+Owner 2 placed 1 Instability in Black Rose Room
+COMMAND: possessed_freeze_soil
+COMMAND: possessed_revenge_embodied
+COMMAND: possessed_explosion_of_thorns
+Mirrors Room received instability from owner -1 | 1/6
+Owner 2 placed 1 Instability in Mirrors Room
+COMMAND: possessed_infernal_reinforcements
+Mirrors Room received instability from owner -1 | 2/6
+Owner 2 placed 1 Instability in Mirrors Room
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Cadaver in room black_rose
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Cadaver in room black_rose
+GAME: Moon changed to 3
+Player 3 gained 1 Power
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Evocation activated: Cadaver | controller P3 | Strength 2
+COMMAND: possessed_tap_into_the_black_rose
+Player 3 moved to throne
+Player 3 moved to black_rose
+Player 3 activated Black Rose Room [destroyed]
+Player 3 gained 2 Power
+COMMAND: possessed_research_on_fire
+Player 3 moved to summoner_room
+Player 3 activated Summoner Room [destroyed]
+Player 3 drew Quest: Theurge | revealed=false
+Player 3 gained 3 Power
+Player 3 solved Quest: Theurge | Reward: 3 Power
+COMMAND: possessed_manuscript_on_deceptions
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Player 3 moved to forge
+Player 3 moved to the_abyss
+The Abyss received instability from owner -1 | 1/6
+Owner 2 placed 1 Instability in The Abyss
+COMMAND: possessed_explosion_of_dark_petals
+The Abyss received instability from owner -1 | 2/6
+Owner 2 placed 1 Instability in The Abyss
+COMMAND: possessed_dark_blade
+Player 3 moved to forge
+COMMAND: possessed_dark_fire
+Black Rose Room received instability from owner -1 | 8/10
+Owner 2 placed 1 Instability in Black Rose Room
+Player 3 moved to the_abyss
+The Abyss received instability from owner -1 | 3/6
+Owner 2 placed 1 Instability in The Abyss
+The Abyss received instability from owner -1 | 4/6
+Owner 2 placed 1 Instability in The Abyss
+COMMAND: possessed_thorns_of_frost
+COMMAND: possessed_dark_hammer
+COMMAND: possessed_poisoned_thorns
+COMMAND: possessed_abyssal_reinforcements
+Waiting for Player 1 | input type: effect_choice
+Player 3 summoned Colossus in room black_rose
+Player 3 moved to sanctuary
+Player 3 moved to black_rose
+Player 3 activated Black Rose Room [destroyed]
+Player 3 gained 2 Power
+Player 3 moved to summoner_room
+Player 3 activated Summoner Room [destroyed]
+Player 3 drew Quest: Pyromancer | revealed=false
+Player 3 gained 2 Power
+Player 3 solved Quest: Pyromancer | Reward: 2 Power
+Waiting for Player 1 | input type: effect_choice
+Evocation activated: Colossus | controller P3 | Strength 3
+AVATAR CHECKS: 41 FAILURES: []

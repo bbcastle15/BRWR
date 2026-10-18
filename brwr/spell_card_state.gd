@@ -30,6 +30,7 @@ var copies: int = 3
 var personal: bool = false
 var forgotten: bool = false
 var instability: bool = false
+var avatar_command: Dictionary = {}
 
 
 func _init(

@@ -1,0 +1,12 @@
+Progetto: C:\Users\bigba\Desktop\BRWR\brwr
+Motore: 4.7.2.stable.official.ed1daf0bf
+Log: C:\Users\bigba\AppData\Local\Temp\BRWR-resume-20261018-233230-e44e9e
+JSON validi: 13; riferimenti atlas Avatar presenti.
+Eseguo avatar_smoke...
+Evocation activated: Colossus | controller P3 | Strength 3
+AVATAR CHECKS: 41 FAILURES: []
+Eseguo presentations...
+GAME: Moon changed to 2
+PRESENTATION/HEKA CHECK: 156 checks, 0 failures
+Verifiche concluse. Log: C:\Users\bigba\AppData\Local\Temp\BRWR-resume-20261018-233230-e44e9e
+Il passaggio degli smoke test NON certifica il completamento di Possessed. Leggi HANDOFF-AVATAR-2026-10-18.md.

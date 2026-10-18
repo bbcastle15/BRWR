@@ -12,11 +12,33 @@ var player_name: String
 var color: Color
 
 var evocations: Array[EvocationState] = []
+var avatar: AvatarState = null
 
-var power: int = 0
-var trophies: Array[int] = []
+var power: int = 0:
+	get:
+		return avatar.game.black_rose_power if avatar != null else power
+	set(value):
+		if avatar != null:
+			avatar.game.black_rose_power = maxi(0, value)
+		else:
+			power = value
+var trophies: Array[int] = []:
+	get:
+		return avatar.game.black_rose_trophies if avatar != null else trophies
+	set(value):
+		if avatar != null:
+			avatar.game.black_rose_trophies = value
+		else:
+			trophies = value
 var hand_limit: int = 6
-var available_cubes: int = MAX_CUBES
+var available_cubes: int = MAX_CUBES:
+	get:
+		return avatar.game.get_node("EventBoard").black_rose_cube_count if avatar != null else available_cubes
+	set(value):
+		if avatar != null:
+			avatar.game.get_node("EventBoard").set_black_rose_cube_count(value)
+		else:
+			available_cubes = value
 # Famine: these Cubes are on the Event Board, outside the usable reserve.
 var starved_cubes: int = 0
 var max_active_quests: int = 2
@@ -70,10 +92,24 @@ var quick_spell: ReadySpellState = null
 # =========================================================
 
 # Carte attualmente in mano.
-var hand: Array[SpellCardState] = []
+var hand: Array[SpellCardState] = []:
+	get:
+		return avatar.active_deck() if avatar != null else hand
+	set(value):
+		if avatar != null:
+			avatar.decks[avatar.game.current_moon] = value
+		else:
+			hand = value
 
 # Mazzo personale del giocatore.
-var grimoire: Array[SpellCardState] = []
+var grimoire: Array[SpellCardState] = []:
+	get:
+		return avatar.active_deck() if avatar != null else grimoire
+	set(value):
+		if avatar != null:
+			avatar.decks[avatar.game.current_moon] = value
+		else:
+			grimoire = value
 
 # Pila degli scarti personale.
 var memories: Array[SpellCardState] = []
@@ -124,6 +160,9 @@ func take_cubes(
 func return_cubes(
 	amount: int
 ):
+	if avatar != null:
+		avatar.game.get_node("EventBoard").return_black_rose_cubes(amount)
+		return
 	available_cubes = min(
 		available_cubes + max(amount, 0),
 		MAX_CUBES

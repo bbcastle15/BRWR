@@ -1,6 +1,11 @@
 class_name EquipmentRules
 extends RefCounted
 
+static func can_target_as(evocation: EvocationState, caster: int, target_kind: String) -> bool:
+	# Codex p.22: Equipment has no Lodge model. Only its owner can target
+	# the card as an Evocation; a generic Model target does not include it.
+	return evocation.archetype != "equipment" or (evocation.owner_id == caster and target_kind == "evocation")
+
 static func stat_bonus(player: PlayerState, stat: String) -> int:
 	var result: int = 0
 	for ev in player.evocations:

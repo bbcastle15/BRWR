@@ -1,0 +1,30 @@
+[
+  {
+    "id": "possessed",
+    "name": "Possessed",
+    "health": 12,
+    "strength": 2,
+    "speed": 2,
+    "skill": "dominion",
+    "setup_room": "black_rose",
+    "implemented": false,
+    "command_prefix": "possessed_",
+    "priorities": {
+      "1": [
+        "most_damage",
+        "nearest",
+        "most_power"
+      ],
+      "2": [
+        "nearest",
+        "most_power",
+        "most_trophies"
+      ],
+      "3": [
+        "most_mages",
+        "most_models",
+        "most_instability"
+      ]
+    }
+  }
+]

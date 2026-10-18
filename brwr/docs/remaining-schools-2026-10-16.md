@@ -44,8 +44,8 @@ Una scuola entra nella selezione casuale soltanto se:
   direttamente richiesti dagli effetti.
 
 Attualmente risultano complete **Agony, Alchemy, Death, Chaos, Geomancy,
-Druidic, Famine e Forge**. La partita seleziona sei scuole da questo gruppo.
-Le altre dieci restano implementate nei JSON e nel motore, ma escluse dalla
+Druidic, Famine, Forge e Heka**. La partita seleziona sei scuole da questo gruppo.
+Le altre nove restano implementate nei JSON e nel motore, ma escluse dalla
 selezione finché mancano le immagini. Aggiungendo gli asset nei percorsi
 consueti saranno riconosciute al prossimo avvio/esportazione, senza una
 seconda lista manuale di scuole abilitate.

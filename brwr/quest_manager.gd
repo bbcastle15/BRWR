@@ -7,6 +7,7 @@ extends RefCounted
 # =========================================================
 
 func draw_phase_quest(game, player_index: int) -> QuestState:
+	if AvatarRules.is_avatar(game, player_index): return null
 	if not _valid_player(game, player_index):
 		return null
 	# Visibility does not affect whether a Quest occupies the active slot.

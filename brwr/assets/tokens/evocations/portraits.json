@@ -1,0 +1,319 @@
+{
+  "succubus": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "nigredo": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "cadaver": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "colossus": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "myrmidones": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "hyperion": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "cinis": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "ancestral_totem": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "mystic_totem": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "ursa": {
+    "width": 0.23,
+    "center": [
+      0.245,
+      0.29
+    ]
+  },
+  "crocodilus": {
+    "width": 0.27,
+    "center": [
+      0.235,
+      0.39
+    ]
+  },
+  "sun_wukong": {
+    "width": 0.29,
+    "center": [
+      0.215,
+      0.32
+    ]
+  },
+  "albedo": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "anubis": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "bellum": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "cacus": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "chimera": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "cthully": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.33
+    ]
+  },
+  "devi": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "draco": {
+    "width": 0.26,
+    "center": [
+      0.22,
+      0.46
+    ]
+  },
+  "fames": {
+    "width": 0.16,
+    "center": [
+      0.195,
+      0.255
+    ]
+  },
+  "fenrir": {
+    "width": 0.26,
+    "center": [
+      0.235,
+      0.39
+    ]
+  },
+  "gaea": {
+    "width": 0.3,
+    "center": [
+      0.2,
+      0.24
+    ],
+    "path": "res://assets/spells/gaea.png"
+  },
+  "grypas": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "hastur": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "ignis": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "jack": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "janara": {
+    "width": 0.145,
+    "center": [
+      0.925,
+      0.13
+    ],
+    "path": "res://assets/spells/woodland_spirit.png"
+  },
+  "minotaurus": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "mors": {
+    "width": 0.19,
+    "center": [
+      0.21,
+      0.29
+    ]
+  },
+  "nocturnus": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "odin": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "parcae": {
+    "width": 0.2,
+    "center": [
+      0.24,
+      0.21
+    ]
+  },
+  "pestilentia": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "putridum": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "rubedo": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "sphynx": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "templarii": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "umbra": {
+    "width": 0.19,
+    "center": [
+      0.28,
+      0.41
+    ]
+  },
+  "aruspice": {
+    "width": 0.23,
+    "center": [
+      0.2,
+      0.34
+    ]
+  },
+  "pharaoh": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  },
+  "dagon": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.3
+    ]
+  },
+  "pupa": {
+    "width": 0.22,
+    "center": [
+      0.245,
+      0.41
+    ]
+  },
+  "pestis": {
+    "width": 0.2,
+    "center": [
+      0.145,
+      0.37
+    ]
+  },
+  "totem": {
+    "width": 0.28,
+    "center": [
+      0.2,
+      0.24
+    ]
+  }
+}

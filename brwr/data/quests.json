@@ -453,9 +453,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "crypt",
-      "elements": [
-        "fire",
-        "profane"
+      "spell_types": [
+        "combat",
+        "contingency"
       ]
     },
     "cube_slots": 0,
@@ -471,7 +471,7 @@
       }
     ],
     "power_reward": 1,
-    "raw_task": "After you resolve a Fire or Profane Spell while you are in the Crypt.",
+    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Crypt.",
     "raw_effect": "Summon a Colossus. It activates."
   },
   "illusory_moon": {

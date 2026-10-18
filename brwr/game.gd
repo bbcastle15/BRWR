@@ -20,6 +20,9 @@ var network_turn_presentation: Dictionary = {}
 # Public presentation metadata only; effects stay in the existing resolution frames.
 var card_presentation: Dictionary = {}
 var card_presentation_serial := 0
+var avatar_selection: Dictionary = {}
+var avatar: AvatarState = null
+var avatar_board: Node2D = null
 const CARD_PRESENTATION_SECONDS := 2.3
 # =========================================================
 # INTERACTIVE PHASE STATE
@@ -568,8 +571,14 @@ func _ready():
 	create_event_decks()
 
 	create_players()
+	AvatarRules.setup(self)
 	assign_initial_crown()
 	create_lodge()
+	AvatarRules.place_at_setup(self)
+	if avatar != null:
+		avatar_board = AvatarBoard.new()
+		add_child(avatar_board)
+		avatar_board.setup(self)
 	create_model_tokens()
 	create_player_boards()
 
@@ -624,6 +633,8 @@ func _ready():
 func get_turn_presentation() -> Dictionary:
 	if network_client:
 		return network_turn_presentation
+	if avatar != null and resolution_stack.any(func(f): return str(f.get("type", "")) in ["avatar_activation", "avatar_command", "avatar_section"]):
+		return {"player_index": avatar.player_index, "actions_used": avatar.commands_used, "action_limit": avatar.command_limit()}
 	# A reaction may ask another player for input without changing the turn.
 	if current_phase == PHASE_ACTION and action_activation_active:
 		return {"player_index": action_activation_player_index, "actions_used": action_activation_actions_used}
@@ -1108,7 +1119,7 @@ func _sync_evocation_tokens() -> void:
 		var owner = players[owner_index]
 
 		for evocation in owner.evocations:
-			if evocation == null:
+			if evocation == null or evocation.archetype == "equipment":
 				continue
 
 			var instance_id: int = int(
@@ -1566,6 +1577,7 @@ func remove_player_instability(player_index: int, room_id: String, amount: int =
 	)
 	
 func take_owner_cubes(owner_id: int, amount: int) -> int:
+	owner_id = AvatarRules.cube_owner(self, owner_id)
 	if owner_id == -1:
 		return $EventBoard.take_black_rose_cubes(amount)
 
@@ -1576,6 +1588,7 @@ func take_owner_cubes(owner_id: int, amount: int) -> int:
 	return players[owner_id].take_cubes(amount)
 	
 func return_owner_cubes(owner_id: int, amount: int):
+	owner_id = AvatarRules.cube_owner(self, owner_id)
 	if owner_id == -1:
 		$EventBoard.return_black_rose_cubes(amount)
 		return
@@ -1591,8 +1604,10 @@ func deal_damage(
 	target_player_index: int,
 	amount: int,
 	action_type: String = "",
-	suppressed_trigger_types: Array = []
+	suppressed_trigger_types: Array = [],
+	source_evocation: EvocationState = null
 ) -> int:
+	if AvatarRules.immune_to_damage(self, attacker_id, target_player_index, action_type): return 0
 	if DeathEffectResolver.ignores(active_effect_context, target_player_index):
 		return 0
 	if target_player_index < 0 \
@@ -1629,8 +1644,8 @@ func deal_damage(
 		"amount": requested,
 		"action_type": action_type,
 		"suppressed_trigger_types": suppressed_trigger_types.duplicate(),
-		"source_model_type": "black_rose" if attacker_id == -1 else "mage",
-		"source_evocation": null,
+		"source_model_type": "black_rose" if attacker_id == -1 else ("evocation" if source_evocation != null else "mage"),
+		"source_evocation": source_evocation,
 		"event": null,
 		"actual_damage": 0,
 		"result_context": result_context
@@ -2205,6 +2220,7 @@ func create_player_boards():
 	
 func get_lodge_table_bounds() -> Rect2:
 	var bounds := Rect2(board_center, Vector2.ZERO)
+	if avatar_board != null: bounds = bounds.merge(avatar_board.get_bounds())
 	for child in get_children():
 		if child.has_meta("hex_coord"):
 			bounds = bounds.merge(Rect2(child.position - Vector2(HEX_RADIUS, HEX_RADIUS), Vector2.ONE * HEX_RADIUS * 2.0))
@@ -2342,12 +2358,16 @@ func update_table_layout():
 				power_anchor = coord
 	$EventBoard.position = hex_to_pixel(event_anchor) - Vector2(HEX_RADIUS, 0) - $EventBoard.LODGE_NOTCH
 	$PowerBoard.position = hex_to_pixel(power_anchor) + Vector2(HEX_RADIUS, 0) - $PowerBoard.LODGE_NOTCH
+	if avatar_board != null: avatar_board.reposition()
 
 	update_player_board_positions()
 	refresh_model_tokens()
 
 
 func set_player_power(player_index: int, value: int):
+	if AvatarRules.is_avatar(self, player_index):
+		set_black_rose_power(value)
+		return
 	if player_index < 0 or player_index >= players.size():
 		print("ERRORE: player_index non valido: ", player_index)
 		return
@@ -3105,6 +3125,8 @@ func process_game_event(
 		event,
 		triggered
 	)
+	AvatarRules.append_reaction(self, event, triggered)
+	AvatarEvents.on_event(self, event)
 
 	if triggered.is_empty():
 		return true
@@ -3129,6 +3151,9 @@ func handle_triggered_spell(
 
 	if active_spell == null or event == null:
 		return false
+
+	if active_spell.context.has("avatar_command"):
+		return AvatarRules.trigger_reaction(self, active_spell, event)
 
 	return queue_resolution({
 		"type": "trigger_spell",
@@ -3672,7 +3697,7 @@ func move_evocation_to_room_id(
 	max_distance: int
 ) -> bool:
 
-	if evocation == null:
+	if evocation == null or evocation.archetype == "equipment":
 		return false
 
 	var from_coord = room_id_to_coord(
@@ -3759,6 +3784,7 @@ func place_evocation_in_room_direct(
 	room_id: String
 ) -> bool:
 	if evocation == null \
+	or evocation.archetype == "equipment" \
 	or evocation.is_defeated() \
 	or not is_evocation_in_play(evocation):
 		return false
@@ -5299,6 +5325,7 @@ func clone_spell_card(
 	copy.personal = spell.personal
 	copy.forgotten = spell.forgotten
 	copy.instability = spell.instability
+	copy.avatar_command = spell.avatar_command.duplicate(true)
 
 	return copy
 
@@ -6479,6 +6506,7 @@ func return_all_mages_to_cells() -> bool:
 func take_crown(
 	player_index: int
 ) -> bool:
+	if AvatarRules.is_avatar(self, player_index): return false
 
 	if player_index < 0 \
 	or player_index >= players.size():
@@ -7117,7 +7145,7 @@ func place_instability(
 	for i in range(taken):
 
 		if not room.add_instability_cube(
-			owner_id
+			AvatarRules.cube_owner(self, owner_id)
 		):
 
 			# Se per qualsiasi motivo il cubo non entra,
@@ -7231,7 +7259,7 @@ func resolve_black_rose_phase(
 	print("             BLACK ROSE PHASE")
 	print("==============================================")
 
-	current_phase_play_order = get_play_order()
+	current_phase_play_order = AvatarRules.human_order(self)
 
 	if current_phase_play_order.is_empty():
 		return false
@@ -7403,7 +7431,7 @@ func assign_initial_crown() -> bool:
 
 	var player_index: int = rng.randi_range(
 		0,
-		players.size() - 1
+		players.size() - (2 if avatar != null else 1)
 	)
 
 
@@ -7719,7 +7747,7 @@ func resolve_study_phase(
 	# =====================================================
 
 	current_phase_play_order = (
-		get_play_order()
+		AvatarRules.human_order(self)
 	)
 
 
@@ -8148,7 +8176,7 @@ func resolve_preparation_phase(
 	# =====================================================
 
 	current_phase_play_order = (
-		get_play_order()
+		AvatarRules.human_order(self)
 	)
 
 
@@ -8203,6 +8231,7 @@ func resolve_preparation_phase(
 func player_has_available_action(
 	player_index: int
 ) -> bool:
+	if AvatarRules.is_avatar(self, player_index): return avatar.can_activate()
 	if player_index < 0 \
 	or player_index >= players.size():
 		return false
@@ -8548,6 +8577,7 @@ func resolve_action_phase(
 	] = current_phase_play_order.duplicate()
 
 
+	if avatar != null: avatar.commands_used = 0
 	action_phase_cursor = 0
 	action_phase_activation_round = 1
 	_reset_stepwise_action_activation()
@@ -8845,6 +8875,9 @@ func request_effect_choice(
 	max_select: int = 1,
 	prompt: String = ""
 ) -> bool:
+	if AvatarRules.is_avatar(self, player_index):
+		player_index = crown_owner_id
+		prompt = "Choice of the Crown · " + prompt
 	if waiting_for_player_input:
 		return false
 
@@ -9270,6 +9303,8 @@ func _quest_evocation_choice_options(
 
 			if evocation == null or evocation.is_defeated():
 				continue
+			if not EquipmentRules.can_target_as(evocation, caster_id, str(effect.get("target", "evocation"))):
+				continue
 
 			if archetype_filter != "" \
 			and evocation.archetype != archetype_filter:
@@ -9352,6 +9387,8 @@ func _quest_model_choice_options(
 		var evocation = evocation_option.get(
 			"value"
 		)
+		if not EquipmentRules.can_target_as(evocation, caster_id, "model"):
+			continue
 
 		options.append({
 			"token": str(
@@ -10863,6 +10900,8 @@ func _spell_model_target_options(
 	caster_id: int,
 	side: Dictionary
 ) -> Array:
+	side = side.duplicate()
+	side["target"] = "model"
 	var result: Array = []
 	var archetype_filter: String = str(
 		side.get("target_archetype", "")
@@ -12260,6 +12299,9 @@ func advance_action_phase() -> bool:
 
 		action_phase_cursor += 1
 		checked_players += 1
+		if AvatarRules.is_avatar(self, player_index):
+			if avatar.can_activate(): return AvatarRules.begin_activation(self)
+			continue
 
 
 		# This Mage has finished all Actions.
@@ -13914,7 +13956,7 @@ func order_optional_triggers(
 	var result: Array = []
 	var play_order: Array[int] = current_phase_play_order.duplicate()
 
-	if play_order.is_empty():
+	if play_order.is_empty() or avatar != null:
 		play_order = get_play_order()
 
 	for player_index in play_order:
@@ -13937,7 +13979,7 @@ func request_next_trigger_decision() -> bool:
 		# another trigger from the same event. Otherwise push_front reverses
 		# the chosen order and decisions see state from before the first Trap.
 		if resolution_stack.any(func(frame):
-			return str(frame.get("type", "")) == "trigger_spell" and frame.get("event") == trigger_window_event):
+			return str(frame.get("type", "")) in ["trigger_spell", "avatar_command"] and frame.get("event") == trigger_window_event):
 			return true
 		if trigger_window_cursor >= trigger_window_queue.size():
 			finish_trigger_window()
@@ -13952,6 +13994,10 @@ func request_next_trigger_decision() -> bool:
 
 		var spell_type: String = current_spell.get_spell_type()
 		var optional: bool = spell_type == "trap" or spell_type == "protection"
+		if current_spell.context.has("avatar_command"):
+			trigger_window_queue.remove_at(trigger_window_cursor)
+			handle_triggered_spell(current_data)
+			return true
 
 		# Permanents are mandatory. Remove them from this trigger queue before
 		# pushing their resolution so they cannot be selected twice.
@@ -14094,10 +14140,23 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	if table_shell == null or network_client or bool(frame.get("_card_presented", false)):
 		return false
 	var data: Dictionary = {}
-	if frame.get("type") == "spell_resolution" and bool(frame.get("context", {}).get("drawn_forgotten", false)):
+	if frame.get("type") == "avatar_command":
+		var command: SpellCardState = frame.card
+		data = {"kind": "spells", "id": command.id, "title": command.card_name,
+			"player": avatar.player_index, "single": true, "avatar": true}
+	elif frame.get("type") == "spell_resolution":
 		var spell: SpellCardState = frame.get("spell")
 		if spell != null:
-			data = {"kind": "spells", "id": spell.id, "title": spell.card_name}
+			data = {"kind": "spells", "id": spell.id, "title": spell.card_name,
+				"player": int(frame.get("context", {}).get("caster_id", -1)),
+				"dark": bool(frame.get("use_dark_side", false)), "single": spell.has_single_effect()}
+	elif frame.get("type") == "trigger_spell":
+		var active: ActiveSpellState = frame.get("active_spell")
+		# An armed card stays hidden until it actually triggers. Ongoing public
+		# permanents do not announce a new cast every time their passive fires.
+		if active != null and active.get_spell_type() in ["trap", "protection"]:
+			data = {"kind": "spells", "id": active.spell.id, "title": active.spell.card_name,
+				"player": active.owner_id, "dark": active.use_dark_side, "single": active.spell.has_single_effect()}
 	elif frame.get("type") == "event_sequence":
 		var event: EventCardState = frame.get("event")
 		if event != null:
@@ -14115,10 +14174,12 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	frame["_card_presented"] = true
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
-	# Events stay on screen until the host/current local player acknowledges
-	# them. Quest reward cards retain the short fallback timer, but can also be
-	# dismissed by clicking the presentation overlay.
-	data["requires_click"] = str(data.get("kind", "")) == "events"
+	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells"]
+	data["acknowledge_player"] = int(data.get("player", get_turn_presentation().get("player_index", 0)))
+	if AvatarRules.is_avatar(self, int(data.acknowledge_player)):
+		data.acknowledge_player = crown_owner_id
+	if int(data.acknowledge_player) < 0:
+		data.acknowledge_player = 0
 	card_presentation = data
 	table_shell.sync_card_presentation()
 	if network_session != null:
@@ -14128,6 +14189,11 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 			_finish_card_presentation.bind(card_presentation_serial)
 		)
 	return true
+
+
+func can_acknowledge_card_presentation(player_index: int) -> bool:
+	return not card_presentation.is_empty() and (
+		network_session == null or player_index == int(card_presentation.get("acknowledge_player", 0)))
 
 
 func dismiss_card_presentation(serial: int = -1) -> bool:
@@ -14187,6 +14253,16 @@ func process_resolution_stack() -> bool:
 			return true
 
 		match resolution_type:
+			"avatar_activation":
+				completed = AvatarRules.process_activation(self, frame)
+			"avatar_command":
+				completed = AvatarRules.process_command(self, frame)
+			"avatar_section":
+				completed = AvatarEffects.process_section(self, frame)
+			"avatar_event":
+				completed = AvatarEvents.process(self, frame)
+			"avatar_cleanup":
+				completed = AvatarRules.process_cleanup(self, frame)
 			"room_move":
 				completed = AlternativeRoomRules.process_movement(self, frame)
 			"forgotten_activation_start":
@@ -14396,6 +14472,9 @@ func process_damage_resolution(
 	if step in ["pre_event", "after_pre_event", "apply_damage"]:
 		var target_id: int = int(resolution.get("target_player_index", -1))
 		var source_id: int = int(resolution.get("attacker_id", -1))
+		if AvatarRules.immune_to_damage(self, source_id, target_id, str(resolution.get("action_type", ""))):
+			_sync_damage_result_context(resolution, 0)
+			return true
 		if source_id >= 0 and source_id != target_id and is_mage_in_cell(target_id) \
 		and str(resolution.get("action_type", "")) not in ["event", "infectio"]:
 			_sync_damage_result_context(resolution, 0)
@@ -14525,7 +14604,7 @@ func process_damage_resolution(
 				return true
 
 			var was_defeated: bool = redirected_evocation.is_defeated()
-			var dealt: int = redirected_evocation.add_damage(attacker_id, cubes)
+			var dealt: int = redirected_evocation.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes)
 			resolution["actual_damage"] = dealt
 			resolution["step"] = "redirect_applied"
 			_sync_damage_result_context(resolution, dealt)
@@ -14591,7 +14670,7 @@ func process_damage_resolution(
 				return true
 
 			resolution["was_defeated"] = target_mage.is_defeated()
-			var damage_dealt: int = target_mage.add_damage(attacker_id, cubes_available)
+			var damage_dealt: int = target_mage.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes_available)
 			resolution["actual_damage"] = damage_dealt
 			_sync_damage_result_context(resolution, damage_dealt)
 			_refresh_damage_boards(target_player_index, attacker_id)
@@ -15057,7 +15136,7 @@ func process_evocation_damage_resolution(
 				return true
 
 			var damage_dealt: int = evocation.add_damage(
-				attacker_id,
+				AvatarRules.cube_owner(self, attacker_id),
 				cubes_available
 			)
 
@@ -15093,6 +15172,8 @@ func process_evocation_damage_resolution(
 			return false
 
 		"post_event":
+			if DeathEffectResolver.defer_damage_post_event(resolution):
+				return true
 			var post_event := GameEvent.new(
 				"damage_inflicted"
 			)
@@ -15261,7 +15342,7 @@ func process_quest_resolution_frame(
 				return true
 
 			resolution["step"] = "finish"
-			var effects: Array = quest.get_effects()
+			var effects: Array = [] if AvatarRules.is_avatar(self, player_index) else quest.get_effects()
 
 			if not effects.is_empty():
 				queue_resolution({
@@ -16531,7 +16612,7 @@ func process_room_activation_resolution(
 			queue_resolution({
 				"type": "effect_sequence",
 				"resolver_kind": "room",
-				"effects": room.get_effects(),
+				"effects": [] if bool(room_context.get("avatar_no_room_effect", false)) else room.get_effects(),
 				"index": 0,
 				"context": room_context
 			})
@@ -17098,6 +17179,8 @@ func process_command_resolution(
 func process_evocation_activation_resolution(
 	resolution: Dictionary
 ) -> bool:
+	if AvatarRules.is_avatar(self, int(resolution.get("controller_id", -1))) and not bool(resolution.get("avatar_planned", false)):
+		if not AvatarRules.prepare_evocation(self, resolution): return false
 	var extended_evocation: EvocationState = resolution.get("evocation")
 	if extended_evocation != null and ForgottenEvocations.extended(self, extended_evocation):
 		return ForgottenEvocations.process_activation(self, resolution)
@@ -17379,6 +17462,8 @@ func _handle_resolution_completion(frame: Dictionary):
 			_request_stepwise_action_activation()
 		"advance_evocation_phase":
 			advance_evocation_phase()
+		"advance_cleanup_phase":
+			advance_cleanup_phase()
 		"finish_cleanup":
 			finish_cleanup_phase()
 		"continue_black_rose_event":
@@ -17406,6 +17491,14 @@ func advance_evocation_phase() -> bool:
 	while evocation_phase_cursor < current_phase_play_order.size():
 		var player_index: int = current_phase_play_order[evocation_phase_cursor]
 		var player = players[player_index]
+		if AvatarRules.is_avatar(self, player_index):
+			var remaining: Array = player.evocations.filter(func(ev): return ev.assigned_mage < 0 and ForgottenEvocations.can_activate(self, ev) and not ev in evocation_phase_activated)
+			remaining.sort_custom(func(a, b): return a.board_number < b.board_number)
+			if remaining.is_empty():
+				evocation_phase_cursor += 1
+				continue
+			evocation_phase_activated.append(remaining[0])
+			return queue_resolution({"type": "evocation_activation", "step": "start", "evocation": remaining[0], "controller_id": player_index, "context": {}, "on_complete": "advance_evocation_phase"})
 		var evocation_data: Array = []
 		for i in range(player.evocations.size()):
 			var evocation: EvocationState = player.evocations[i]
@@ -17550,6 +17643,9 @@ func advance_cleanup_phase(
 	while cleanup_phase_cursor < current_phase_play_order.size():
 		var player_index: int = current_phase_play_order[cleanup_phase_cursor]
 		var player = players[player_index]
+		if AvatarRules.is_avatar(self, player_index):
+			cleanup_phase_cursor += 1
+			return queue_resolution({"type": "avatar_cleanup", "on_complete": "advance_cleanup_phase"})
 		var active_options: Array = []
 
 		for i in range(player.active_spells.size()):
@@ -17819,18 +17915,19 @@ func check_end_game() -> bool:
 	var quest_counts: Dictionary = {}
 	var trophy_counts: Dictionary = {-1: black_rose_trophies.size()}
 	for player in players:
-		quest_counts[player.player_index] = player.completed_quests.filter(func(quest): return quest.is_solved()).size()
-		trophy_counts[player.player_index] = player.trophies.size()
+		quest_counts[AvatarRules.cube_owner(self, player.player_index)] = player.completed_quests.filter(func(quest): return quest.is_solved()).size()
+		trophy_counts[AvatarRules.cube_owner(self, player.player_index)] = player.trophies.size()
 	var quest_rewards: Dictionary = ranked_power_rewards(quest_counts)
 	var trophy_rewards: Dictionary = ranked_power_rewards(trophy_counts)
 	var scores: Array = []
 	for owner in range(-1, players.size()):
+		if AvatarRules.is_avatar(self, owner): continue
 		var base: int = black_rose_power if owner == -1 else players[owner].power
 		var quest_bonus: int = int(quest_rewards.get(owner, 0))
 		var trophy_bonus: int = int(trophy_rewards.get(owner, 0))
 		var crown_bonus: int = 1 if owner >= 0 and owner == crown_owner_id else 0
 		var total: int = base + quest_bonus + trophy_bonus + crown_bonus
-		scores.append({"player_index": owner, "name": "Black Rose" if owner == -1 else "Player " + str(owner + 1), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
+		scores.append({"player_index": owner, "name": (str(avatar.definition.name) if avatar != null else "Black Rose") if owner == -1 else "Player " + str(owner + 1), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
 		# Final bonuses do not open gameplay trigger windows.
 		if owner == -1:
 			set_black_rose_power(total)
@@ -17978,7 +18075,7 @@ func _beta_player_state(
 		return {}
 
 	var player: PlayerState = players[player_index]
-	var is_owner_view: bool = viewer_player_index == player_index
+	var is_owner_view: bool = viewer_player_index == player_index and player.avatar == null
 	var mage = player.mage
 
 	var result: Dictionary = {
@@ -20169,7 +20266,7 @@ func begin_starting_school_setup() -> bool:
 		)
 		return false
 
-	starting_setup_order = get_play_order()
+	starting_setup_order = AvatarRules.human_order(self)
 
 	if starting_setup_order.is_empty():
 		return false
@@ -21319,6 +21416,42 @@ func clear_board_target_choices() -> void:
 		node.queue_free()
 
 
+func connect_card_choice(button: Button, option: Dictionary, callback: Callable) -> void:
+	if not bool(option.get("hidden", false)) and (str(option.get("card_kind", "")) == "spells" or option.has("spell_id") or str(option.get("slot_id", "")) != ""):
+		button.tooltip_text += "\nClick to select · Shift-click to inspect"
+		# Read Shift while the signal is emitted, before deferring either action.
+		# Deferring only the action also keeps selection from freeing its emitter.
+		button.pressed.connect(_on_card_choice_pressed.bind(option, callback))
+	else:
+		button.pressed.connect(callback, CONNECT_DEFERRED)
+
+
+func _on_card_choice_pressed(option: Dictionary, callback: Callable) -> void:
+	if Input.is_key_pressed(KEY_SHIFT):
+		_inspect_card_choice.call_deferred(option)
+	else:
+		callback.call_deferred()
+
+
+func _inspect_card_choice(option: Dictionary) -> void:
+	var slot_id: String = str(option.get("slot_id", ""))
+	if slot_id != "":
+		open_player_board_spell(int(option.get("board_player_index", -1)), slot_id)
+	else:
+		_reference_card_preview().show_card("spells", str(option.get("id", option.get("spell_id", ""))), str(option.get("name", "Spell")), "")
+
+
+func _evocation_board_card(owner_index: int, evocation: EvocationState) -> Control:
+	if owner_index < 0 or owner_index >= player_boards.size():
+		return null
+	var cards = player_boards[owner_index].get_node_or_null("EvocationCards")
+	if cards != null:
+		for card in cards.get_children():
+			if card.has_meta("evocation") and card.get_meta("evocation") == evocation:
+				return card
+	return null
+
+
 func show_board_target_choice(option: Dictionary, callback: Callable, selected: bool = false) -> bool:
 	var token: String = str(option.get("token", ""))
 	var target: Node = null
@@ -21366,22 +21499,31 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 			var player_index: int = int(option.get("cube_player_index", -1))
 			if option.has("cube_evocation_owner"):
 				var evocation = get_evocation_by_owner_index(int(option.cube_evocation_owner), int(option.cube_evocation_index))
-				if evocation == null or not evocation_tokens.has(evocation.get_instance_id()):
+				if evocation == null:
 					return false
 				owners = evocation.damage_cubes
-				var model_token: Node = evocation_tokens[evocation.get_instance_id()]
-				# Damage cubes are projected next to the Evocation while choosing.
-				for i in range(owners.size()):
-					var name_value := "ChoiceDamage%d" % i
-					var cube = model_token.get_node_or_null(name_value)
-					if cube == null or cube.is_queued_for_deletion():
-						cube = preload("res://cube.tscn").instantiate()
-						cube.name = name_value
-						cube.cube_color = Color.BLACK if int(owners[i]) < 0 else players[int(owners[i])].color
-						cube.position = Vector2(i * 18 - owners.size() * 9, 30)
-						cube.add_to_group("board_target_choices")
-						model_token.add_child(cube)
-					nodes.append(cube)
+				if evocation.archetype == "equipment":
+					board_index = int(option.cube_evocation_owner)
+					var card := _evocation_board_card(board_index, evocation)
+					if card == null or card.get_node_or_null("EvocationDamage") == null:
+						return false
+					nodes = card.get_node("EvocationDamage").get_children()
+				else:
+					if not evocation_tokens.has(evocation.get_instance_id()):
+						return false
+					var model_token: Node = evocation_tokens[evocation.get_instance_id()]
+					# Damage cubes are projected next to the Evocation while choosing.
+					for i in range(owners.size()):
+						var name_value := "ChoiceDamage%d" % i
+						var cube = model_token.get_node_or_null(name_value)
+						if cube == null or cube.is_queued_for_deletion():
+							cube = preload("res://cube.tscn").instantiate()
+							cube.name = name_value
+							cube.cube_color = Color.BLACK if int(owners[i]) < 0 else players[int(owners[i])].color
+							cube.position = Vector2(i * 18 - owners.size() * 9, 30)
+							cube.add_to_group("board_target_choices")
+							model_token.add_child(cube)
+						nodes.append(cube)
 			elif player_index >= 0 and player_index < player_boards.size():
 				owners = players[player_index].mage.damage_cubes
 				for slot in player_boards[player_index].get_node("DamageTrack").get_children():
@@ -21403,6 +21545,12 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 		var evocation = get_evocation_by_owner_index(int(option.get("owner_id", -1)), int(option.evocation_index))
 		if evocation != null:
 			target = evocation_tokens.get(evocation.get_instance_id())
+			if evocation.archetype == "equipment":
+				board_index = int(option.get("owner_id", -1))
+				target = _evocation_board_card(board_index, evocation)
+				if target != null:
+					position_in_target = Vector2.ZERO
+					hit_size = target.size
 	elif option.has("player_index"):
 		var index: int = int(option.player_index)
 		if index >= 0 and index < mage_tokens.size():
@@ -21459,7 +21607,7 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 		target.style_target_button(button, selected)
 	button.add_to_group("board_target_choices")
 	button.set_meta("choice_token", token)
-	button.pressed.connect(callback, CONNECT_DEFERRED)
+	connect_card_choice(button, option, callback)
 	overlay_parent.add_child(button)
 	return true
 

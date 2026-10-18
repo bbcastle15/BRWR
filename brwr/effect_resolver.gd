@@ -430,13 +430,17 @@ func _damage_mage(
 		return 0
 	if action_type == "spell" and game.active_effect_context.get("resolver_kind") == "physical":
 		action_type = "physical"
+	var source: EvocationState = game.active_effect_context.get("source_evocation") if game.active_effect_context.get("resolver_kind") == "evocation" else null
+	if source != null:
+		action_type = "evocation_effect"
 
 	return game.deal_damage(
 		attacker_id,
 		player_index,
 		amount,
 		action_type,
-		suppressed
+		suppressed,
+		source
 	)
 
 
@@ -465,7 +469,9 @@ func _damage_evocation(
 		evocation,
 		amount,
 		suppressed,
-		"spell" if game.active_effect_context.get("resolver_kind", "") == "spell" else ""
+		"evocation_effect" if game.active_effect_context.get("resolver_kind") == "evocation" else ("spell" if game.active_effect_context.get("resolver_kind") == "spell" else ""),
+		"evocation" if game.active_effect_context.get("resolver_kind") == "evocation" else "mage",
+		game.active_effect_context.get("source_evocation") if game.active_effect_context.get("resolver_kind") == "evocation" else null
 	)
 
 
@@ -6560,6 +6566,9 @@ func _resolve_move_target_up_to(
 ) -> bool:
 	if _is_dummy_target(context):
 		return true
+	var target_evocation: EvocationState = context.get("target_evocation")
+	if target_evocation != null and target_evocation.archetype == "equipment":
+		return true
 	var game = _game(context)
 	var caster_id: int = _caster(context)
 	if game == null or not _valid_player(game, caster_id):
@@ -6733,6 +6742,8 @@ func _place_target_model_direct(
 		var evocation = context.get("target_evocation", null)
 		if evocation == null:
 			return false
+		if evocation.archetype == "equipment":
+			return true
 
 		return game.place_evocation_in_room_direct(
 			evocation,

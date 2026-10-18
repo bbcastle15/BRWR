@@ -20,6 +20,7 @@ var animation_queue: Array[Dictionary] = []
 var animation: Tween
 var animated_node: Control
 var animated_player := -1
+var animated_rest_position := Vector2.ZERO
 var transient_board := false
 var prior_player := -1
 var board_choices: Dictionary = {}
@@ -27,6 +28,8 @@ var card_overlay: Control
 var presentation_art: TextureRect
 var presentation_title: Label
 var presentation_hint: Label
+var presentation_side: Panel
+var presentation_rules: RichTextLabel
 var card_tween: Tween
 var shown_card_serial := -1
 var evocation_names_visible := false
@@ -238,6 +241,26 @@ func _build_card_overlay() -> void:
 	presentation_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	presentation_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(presentation_art)
+	presentation_side = Panel.new()
+	presentation_side.name = "ActiveSide"
+	presentation_side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var highlight := StyleBoxFlat.new()
+	highlight.bg_color = Color(1, 0.86, 0.55, 0.025)
+	highlight.border_color = Color("ecc779")
+	highlight.set_border_width_all(3)
+	highlight.set_corner_radius_all(6)
+	presentation_side.add_theme_stylebox_override("panel", highlight)
+	presentation_art.add_child(presentation_side)
+	presentation_rules = RichTextLabel.new()
+	presentation_rules.name = "MissingArtRules"
+	presentation_rules.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	presentation_rules.offset_left = 24
+	presentation_rules.offset_right = -24
+	presentation_rules.offset_top = 24
+	presentation_rules.offset_bottom = -24
+	presentation_rules.add_theme_font_size_override("normal_font_size", 23)
+	presentation_rules.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	presentation_art.add_child(presentation_rules)
 	presentation_hint = Label.new()
 	presentation_hint.text = "Click to continue"
 	presentation_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -277,10 +300,22 @@ func sync_card_presentation() -> void:
 		var rebuilt_path := "res://assets/rooms/rebuilt/%s.png" % str(data.id)
 		if ResourceLoader.exists(rebuilt_path):
 			presentation_art.texture = load(rebuilt_path)
-	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM"}.get(str(data.kind), "")
+	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM", "spells": "SPELL"}.get(str(data.kind), "")
 	presentation_title.text = category + " · " + str(data.title)
+	presentation_side.visible = data.kind == "spells" and not bool(data.get("single", false))
+	presentation_rules.visible = presentation_art.texture == null
+	presentation_rules.text = ""
+	if presentation_rules.visible and data.kind == "spells":
+		var spell: SpellCardState = game.spell_database.get_spell(str(data.id))
+		if spell != null:
+			presentation_rules.text = game.ReferenceCardPreview.describe_rules(spell.get_side(bool(data.get("dark", false))))
+		presentation_side.visible = false
+	if presentation_side.visible:
+		presentation_title.text += " · " + ("Dark" if bool(data.get("dark", false)) else "Light")
 	if presentation_hint != null:
 		presentation_hint.text = "Click to continue" if bool(data.get("requires_click", false)) else "Click to continue · closes automatically"
+		if game.network_session != null and not game.can_acknowledge_card_presentation(game.local_viewer_index):
+			presentation_hint.text = "Click to close · waiting for Player %d" % (int(data.get("acknowledge_player", 0)) + 1)
 	_layout_card_presentation()
 	card_overlay.modulate.a = 0.0
 	card_overlay.show()
@@ -290,10 +325,12 @@ func sync_card_presentation() -> void:
 func _dismiss_card_presentation() -> void:
 	if card_overlay == null or not card_overlay.visible or game == null:
 		return
-	if game.network_client:
-		# Client acknowledgement is local-only; the authoritative host controls
-		# when resolution continues. Do not re-show the same serial.
-		card_overlay.hide()
+	if game.network_session != null:
+		if game.can_acknowledge_card_presentation(game.local_viewer_index):
+			# Keep the modal until the authoritative acknowledgement arrives.
+			game.network_session.acknowledge_presentation(shown_card_serial)
+		else:
+			card_overlay.hide()
 		return
 	game.dismiss_card_presentation(shown_card_serial)
 
@@ -305,6 +342,8 @@ func _layout_card_presentation() -> void:
 	var ratio := presentation_art.texture.get_size().aspect() if presentation_art.texture != null else 0.67
 	var height := minf(view.y - 110, (view.x - 64) / ratio)
 	presentation_art.custom_minimum_size = Vector2(height * ratio, height)
+	presentation_side.size = Vector2(height * ratio, height * 0.5)
+	presentation_side.position = Vector2(0, height * 0.5 if bool(game.card_presentation.get("dark", false)) else 0)
 
 func _layout() -> void:
 	if board_overlay == null:
@@ -384,7 +423,6 @@ func _process(_delta: float) -> void:
 		observed_viewer = viewer
 		close_board()
 		game._close_player_board_spell_preview()
-		animation_queue.clear()
 	_refresh_banners()
 	sync_card_presentation()
 	_observe(true)
@@ -403,7 +441,7 @@ func _refresh_banners() -> void:
 			continue
 		banners[i].set_meta("signature", signature)
 		banners[i].get_node("Name").text = player.player_name
-		banners[i].get_node("Count").text = "%d/2" % int(turn.get("actions_used", 0)) if active and game.current_phase == game.PHASE_ACTION else ""
+		banners[i].get_node("Count").text = "%d/%d" % [int(turn.get("actions_used", 0)), int(turn.get("action_limit", 2))] if active and game.current_phase == game.PHASE_ACTION else ""
 		banners[i].get_node("Crown").visible = has_crown
 		banners[i].get_node("Detail").text = "%s\nHP %d/%d · Power %d" % [str(player.mage_id).capitalize() if player.mage_id != "" else "Choose a Mage", player.mage.get_remaining_health(), player.mage.health, player.power] if banners[i].custom_minimum_size.y >= 78 else "HP %d · %d PP" % [player.mage.get_remaining_health(), player.power]
 		var edge: Color = player.color.lerp(Color.WHITE, 0.22)
@@ -429,11 +467,10 @@ func _observe(animate: bool) -> void:
 				animation_queue.append({"player": i, "node": "PhysicalAction" + str(snapshot.physical), "kind": "physical"})
 			for slot_id in snapshot.slots:
 				var value: Array = snapshot.slots[slot_id]
-				# Hidden Preparation occupancy is private and must not animate/open a
-				# PlayerBoard. Animate only a public reveal/marker change. This also
-				# prevents the post-Preparation board flicker in online games.
-				if value[0] and bool(value[1]) and old.slots[slot_id] != value:
-					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id), "kind": "spell", "slot": slot_id})
+				# Markers are public, even on a face-down Trap/Protection. Revealed
+				# spells have their own full-screen presentation; do not flip twice.
+				if value[0] and str(value[2]) != "" and old.slots[slot_id][2] != value[2]:
+					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id) + "/SpellMarker", "kind": "marker", "slot": slot_id})
 		observed[i] = snapshot
 
 func _play_next_animation() -> void:
@@ -449,22 +486,24 @@ func _play_next_animation() -> void:
 	if animated_node == null:
 		_finish_animation()
 		return
+	animated_rest_position = animated_node.position
 	animated_node.pivot_offset = animated_node.size * 0.5
-	var flip: bool = event.kind == "physical" or bool(game.get_player_board_spell_slot_data(index, str(event.get("slot", ""))).get("public", false))
 	animation = create_tween()
-	if flip:
-		if event.kind == "physical":
-			animated_node.text = "+"
-		else:
-			animated_node.get_node("CardArt").hide()
-			animated_node.get_node("ActiveSide").hide()
-			animated_node.get_node("CardBack").show()
+	if event.kind == "physical":
+		animated_node.text = "+"
 		animation.tween_property(animated_node, "scale:x", 0.03, 0.15).set_trans(Tween.TRANS_SINE)
 		animation.tween_callback(_refresh_animated_board)
 		animation.tween_property(animated_node, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE)
 	else:
-		animated_node.modulate = Color(1.4, 1.3, 1.0)
-		animation.tween_property(animated_node, "modulate", Color.WHITE, 0.4)
+		animated_node.position -= Vector2(0, 55)
+		animated_node.scale = Vector2.ONE * 1.7
+		animated_node.modulate.a = 0.0
+		animation.set_parallel(true)
+		animation.tween_property(animated_node, "position", animated_rest_position, 0.38).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		animation.tween_property(animated_node, "scale", Vector2.ONE, 0.38).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		animation.tween_property(animated_node, "modulate:a", 1.0, 0.18)
+		animation.chain()
+		animation.set_parallel(false)
 	animation.tween_interval(0.75)
 	animation.tween_callback(_finish_animation)
 
@@ -473,6 +512,7 @@ func _finish_animation() -> void:
 	layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
+		animated_node.position = animated_rest_position
 		animated_node.scale = Vector2.ONE
 		animated_node.modulate = Color.WHITE
 	animated_node = null
@@ -491,6 +531,7 @@ func _cancel_animation() -> void:
 	layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
+		animated_node.position = animated_rest_position
 		animated_node.scale = Vector2.ONE
 		animated_node.modulate = Color.WHITE
 	animated_node = null

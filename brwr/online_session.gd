@@ -19,6 +19,7 @@ var busy := false
 var version := ""
 var player_count := 2
 var room_variants: Dictionary = {}
+var avatar_selection: Dictionary = {}
 var local_player := 0
 var seats: Array[int] = []
 
@@ -266,12 +267,18 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 				_ready_for_state(peer_id)
 			"choose":
 				_choose(peer_id, int(payload.get("revision", -1)), payload.get("payload", {}))
+			"ack_presentation":
+				if connected and receiving.has(peer_id) and peer_players.has(peer_id) and game != null \
+				and game.can_acknowledge_card_presentation(int(peer_players[peer_id])) \
+				and int(payload.get("serial", -2)) == int(game.card_presentation.get("serial", -1)):
+					game.dismiss_card_presentation(int(payload.get("serial", -2)))
 		return
 
 	match op:
 		"lobby":
 			_lobby(int(payload.get("count", 2)), int(payload.get("seat", local_player)), payload.get("joined", []))
 		"begin":
+			avatar_selection = payload.get("avatar", {}).duplicate(true)
 			_begin(int(payload.get("count", 2)), int(payload.get("seat", local_player)))
 		"snapshot":
 			_snapshot(payload.get("state", {}))
@@ -329,11 +336,16 @@ func start_match() -> bool:
 	if not can_start():
 		return false
 	started = true
+	# Resolve random selection once, before any client constructs its table.
+	if avatar_selection.get("id") == "random":
+		var choices := AvatarRules.available()
+		if not choices.is_empty(): avatar_selection["id"] = choices.pick_random().id
 	_send_json({"type": "lock"})
 	for id in peer_players:
 		_send_game_to_peer(str(id), {
 			"op": "begin",
 			"count": player_count,
+			"avatar": avatar_selection,
 			"seat": int(peer_players[id]),
 		})
 	_create_game.call_deferred(false)
@@ -358,7 +370,8 @@ func _create_game(client: bool) -> void:
 	game.network_session = self
 	game.network_client = client
 	game.local_viewer_index = local_player
-	game.player_count = player_count
+	game.avatar_selection = avatar_selection.duplicate(true)
+	game.player_count = player_count + (0 if avatar_selection.is_empty() else 1)
 	if not client:
 		game.room_variants = room_variants.duplicate()
 	game.auto_start_game_flow = false
@@ -401,6 +414,16 @@ func _snapshot(state: Dictionary) -> void:
 	received_sequence = sequence
 	busy = false
 	BoardProjection.apply(game, state)
+
+func acknowledge_presentation(serial: int) -> bool:
+	if not connected or game == null or not game.can_acknowledge_card_presentation(local_player):
+		return false
+	if serial != int(game.card_presentation.get("serial", -1)) or serial < 0:
+		return false
+	if game.network_client:
+		return _send_game_to_host({"op": "ack_presentation", "serial": serial}) == OK
+	return game.dismiss_card_presentation(serial)
+
 
 func submit_local(player: int, payload: Dictionary) -> bool:
 	if not connected or busy or game == null or player != game.local_viewer_index:

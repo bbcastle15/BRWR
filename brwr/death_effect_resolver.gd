@@ -52,9 +52,13 @@ static func finish_sentence(game, context: Dictionary) -> bool:
 	# Damage has already been applied. Reactions and defeats now follow play
 	# order, after the whole sentence, including any conversion, has resolved.
 	var order: Array = game.get_play_order()
-	pending.sort_custom(func(a, b): return order.find(int(a.target_player_index)) < order.find(int(b.target_player_index)))
+	pending.sort_custom(func(a, b): return order.find(_damage_target_owner(a)) < order.find(_damage_target_owner(b)))
 	game.queue_resolution(pending.pop_front())
 	return false
+
+static func _damage_target_owner(frame: Dictionary) -> int:
+	var evocation: EvocationState = frame.get("evocation")
+	return evocation.owner_id if evocation != null else int(frame.get("target_player_index", -1))
 
 static func process_sentence(game, frame: Dictionary) -> bool:
 	if not bool(frame.started):

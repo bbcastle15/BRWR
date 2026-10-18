@@ -21,6 +21,9 @@ var player_markers: Array = []
 @export var end_game_threshold: int = 30
 
 var black_rose_power: int = 0
+var marker_tweens: Dictionary = {}
+var markers_dirty := false
+var instant_updates := false
 
 
 func _ready():
@@ -92,6 +95,7 @@ func create_power_markers(player_count: int):
 
 		add_child(marker)
 		player_markers.append(marker)
+		marker.visible = not AvatarRules.is_avatar(get_parent(), i)
 
 func create_power_track():
 	var track = $PowerTrack
@@ -137,6 +141,7 @@ func set_black_rose_power(value: int):
 	
 func update_player_marker(player_index: int, value: int):
 	var marker = player_markers[player_index]
+	marker.set_meta("total_power", value)
 	marker.set_meta("display_power", value % TRACK_MAX_POWER if value > TRACK_MAX_POWER else value)
 	marker.get_node("Label").text = "+" + str(int(value / TRACK_MAX_POWER) * TRACK_MAX_POWER) if value > TRACK_MAX_POWER else ""
 
@@ -148,9 +153,15 @@ func get_marker_offset(player_index: int) -> Vector2:
 	return marker.position - get_power_position(int(marker.get_meta("display_power", 0)))
 
 func _layout_power_markers() -> void:
+	# Scores are already authoritative. Wait only for a clear view of the table
+	# before playing the visual change, coalescing updates received together.
+	if not instant_updates and _presentation_covered():
+		markers_dirty = true
+		return
+	markers_dirty = false
 	var groups: Dictionary = {}
 	for marker in player_markers + [black_rose_marker]:
-		if not is_instance_valid(marker):
+		if not is_instance_valid(marker) or not marker.visible:
 			continue
 		var score: int = int(marker.get_meta("display_power", 0))
 		if not groups.has(score):
@@ -164,7 +175,55 @@ func _layout_power_markers() -> void:
 				# A compact, symmetric fan remains inside the score cell.
 				var angle: float = TAU * i / markers.size()
 				offset = Vector2(cos(angle) * 7.0, sin(angle) * 3.0)
-			markers[i].position = get_power_position(int(score)) + offset
+			_move_marker(markers[i], int(score), offset)
+
+
+func _presentation_covered() -> bool:
+	var game = get_parent()
+	var camera = game.get_node_or_null("TableCamera")
+	return camera != null and camera._table_covered()
+
+
+func _process(_delta: float) -> void:
+	if markers_dirty and not _presentation_covered():
+		_layout_power_markers()
+
+
+func _move_marker(marker: Control, score: int, offset: Vector2) -> void:
+	var destination := get_power_position(score) + offset
+	var total: int = black_rose_power if marker == black_rose_marker else int(marker.get_meta("total_power", score))
+	var previous: int = int(marker.get_meta("animated_power", total))
+	var first := not marker.has_meta("animated_power")
+	var old_destination: Vector2 = marker.get_meta("destination", marker.position)
+	marker.set_meta("animated_power", total)
+	marker.set_meta("destination", destination)
+	if not first and previous == total and old_destination.is_equal_approx(destination):
+		return
+	if marker_tweens.has(marker):
+		marker_tweens[marker].kill()
+		marker_tweens.erase(marker)
+	if first or instant_updates or not is_inside_tree():
+		marker.position = destination
+		return
+	var tween := create_tween()
+	marker_tweens[marker] = tween
+	var distance := absi(total - previous)
+	if marker == black_rose_marker and total > previous:
+		var camera = get_parent().get_node_or_null("TableCamera")
+		if camera != null:
+			camera.focus_power_board()
+		# Let the camera approach before the Rose starts sliding.
+		tween.tween_interval(0.25)
+	if distance > 0 and distance <= TRACK_MAX_POWER:
+		var direction := 1 if total > previous else -1
+		for step in range(1, distance + 1):
+			var value := previous + step * direction
+			var cell := value % TRACK_MAX_POWER if value > TRACK_MAX_POWER else value
+			var target := destination if step == distance else get_power_position(cell)
+			tween.tween_property(marker, "position", target, clampf(0.65 / distance, 0.025, 0.18))
+	else:
+		tween.tween_property(marker, "position", destination, 0.25).set_trans(Tween.TRANS_SINE)
+	tween.tween_callback(func(): marker_tweens.erase(marker))
 	
 func update_black_rose_marker():
 	if not is_instance_valid(black_rose_marker):

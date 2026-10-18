@@ -1,0 +1,416 @@
+{
+  "possessed_tomb_reinforcements": {
+    "file": "commands_1.png",
+    "rect": [
+      19,
+      14,
+      258,
+      407
+    ]
+  },
+  "possessed_revenge_of_the_thorn": {
+    "file": "commands_1.png",
+    "rect": [
+      317,
+      15,
+      251,
+      411
+    ]
+  },
+  "possessed_frost_spear": {
+    "file": "commands_1.png",
+    "rect": [
+      595,
+      14,
+      251,
+      404
+    ]
+  },
+  "possessed_unstable_thorns": {
+    "file": "commands_1.png",
+    "rect": [
+      885,
+      12,
+      267,
+      408
+    ]
+  },
+  "possessed_tales_of_destruction": {
+    "file": "commands_1.png",
+    "rect": [
+      1181,
+      5,
+      256,
+      412
+    ]
+  },
+  "possessed_book_of_nature": {
+    "file": "commands_1.png",
+    "rect": [
+      16,
+      434,
+      263,
+      397
+    ]
+  },
+  "possessed_energy_of_the_rose": {
+    "file": "commands_1.png",
+    "rect": [
+      322,
+      433,
+      250,
+      405
+    ]
+  },
+  "possessed_corrupted_ray": {
+    "file": "commands_1.png",
+    "rect": [
+      597,
+      430,
+      252,
+      415
+    ]
+  },
+  "possessed_incendiary_ball": {
+    "file": "commands_1.png",
+    "rect": [
+      888,
+      427,
+      258,
+      414
+    ]
+  },
+  "possessed_release_energy": {
+    "file": "commands_1.png",
+    "rect": [
+      1181,
+      423,
+      253,
+      407
+    ]
+  },
+  "possessed_sap_of_the_black_rose": {
+    "file": "commands_2.png",
+    "rect": [
+      20,
+      26,
+      260,
+      412
+    ]
+  },
+  "possessed_corrupted_spear": {
+    "file": "commands_2.png",
+    "rect": [
+      314,
+      25,
+      258,
+      413
+    ]
+  },
+  "possessed_release_force": {
+    "file": "commands_2.png",
+    "rect": [
+      602,
+      21,
+      270,
+      417
+    ]
+  },
+  "possessed_blaze": {
+    "file": "commands_2.png",
+    "rect": [
+      897,
+      13,
+      269,
+      418
+    ]
+  },
+  "possessed_freeze_soil": {
+    "file": "commands_2.png",
+    "rect": [
+      1204,
+      19,
+      264,
+      415
+    ]
+  },
+  "possessed_conspirators_study": {
+    "file": "commands_2.png",
+    "rect": [
+      36,
+      445,
+      259,
+      414
+    ]
+  },
+  "possessed_explosion_of_thorns": {
+    "file": "commands_2.png",
+    "rect": [
+      331,
+      437,
+      253,
+      413
+    ]
+  },
+  "possessed_revenge_embodied": {
+    "file": "commands_2.png",
+    "rect": [
+      618,
+      438,
+      250,
+      414
+    ]
+  },
+  "possessed_infernal_reinforcements": {
+    "file": "commands_2.png",
+    "rect": [
+      902,
+      432,
+      262,
+      420
+    ]
+  },
+  "possessed_technomancy_book": {
+    "file": "commands_2.png",
+    "rect": [
+      1204,
+      437,
+      261,
+      416
+    ]
+  },
+  "possessed_tap_into_the_black_rose": {
+    "file": "commands_3.png",
+    "rect": [
+      74,
+      20,
+      257,
+      386
+    ]
+  },
+  "possessed_abyssal_reinforcements": {
+    "file": "commands_3.png",
+    "rect": [
+      359,
+      22,
+      253,
+      382
+    ]
+  },
+  "possessed_poisoned_thorns": {
+    "file": "commands_3.png",
+    "rect": [
+      627,
+      22,
+      256,
+      391
+    ]
+  },
+  "possessed_thorns_of_frost": {
+    "file": "commands_3.png",
+    "rect": [
+      931,
+      29,
+      255,
+      387
+    ]
+  },
+  "possessed_dark_hammer": {
+    "file": "commands_3.png",
+    "rect": [
+      1206,
+      34,
+      259,
+      391
+    ]
+  },
+  "possessed_research_on_fire": {
+    "file": "commands_3.png",
+    "rect": [
+      46,
+      425,
+      259,
+      384
+    ]
+  },
+  "possessed_manuscript_on_deceptions": {
+    "file": "commands_3.png",
+    "rect": [
+      331,
+      424,
+      253,
+      390
+    ]
+  },
+  "possessed_explosion_of_dark_petals": {
+    "file": "commands_3.png",
+    "rect": [
+      601,
+      422,
+      259,
+      397
+    ]
+  },
+  "possessed_dark_blade": {
+    "file": "commands_3.png",
+    "rect": [
+      915,
+      424,
+      263,
+      394
+    ]
+  },
+  "possessed_dark_fire": {
+    "file": "commands_3.png",
+    "rect": [
+      1200,
+      432,
+      260,
+      393
+    ]
+  },
+  "avatar_traces_of_texture": {
+    "file": "events_1.png",
+    "rect": [
+      14,
+      39,
+      270,
+      407
+    ]
+  },
+  "avatar_remnants_of_magic": {
+    "file": "events_1.png",
+    "rect": [
+      319,
+      33,
+      271,
+      412
+    ]
+  },
+  "avatar_divinatory_secrets": {
+    "file": "events_1.png",
+    "rect": [
+      619,
+      29,
+      270,
+      408
+    ]
+  },
+  "avatar_thorny_corruption": {
+    "file": "events_1.png",
+    "rect": [
+      926,
+      0,
+      267,
+      414
+    ]
+  },
+  "avatar_crown_of_thorns": {
+    "file": "events_1.png",
+    "rect": [
+      1234,
+      0,
+      269,
+      408
+    ]
+  },
+  "avatar_illness": {
+    "file": "events_2.png",
+    "rect": [
+      9,
+      18,
+      302,
+      432
+    ]
+  },
+  "avatar_letters_of_destruction": {
+    "file": "events_2.png",
+    "rect": [
+      334,
+      0,
+      303,
+      451
+    ]
+  },
+  "avatar_singing_victory_again": {
+    "file": "events_2.png",
+    "rect": [
+      680,
+      15,
+      298,
+      437
+    ]
+  },
+  "avatar_magic_of_the_rose": {
+    "file": "events_2.png",
+    "rect": [
+      1009,
+      0,
+      298,
+      448
+    ]
+  },
+  "avatar_revolt_of_the_servants": {
+    "file": "events_2.png",
+    "rect": [
+      1383,
+      0,
+      298,
+      445
+    ]
+  },
+  "avatar_cursed_trophy": {
+    "file": "events_3.png",
+    "rect": [
+      16,
+      10,
+      310,
+      421
+    ]
+  },
+  "avatar_manipulating_the_past": {
+    "file": "events_3.png",
+    "rect": [
+      377,
+      0,
+      293,
+      431
+    ]
+  },
+  "avatar_sorrow": {
+    "file": "events_3.png",
+    "rect": [
+      703,
+      0,
+      295,
+      430
+    ]
+  },
+  "avatar_pledge": {
+    "file": "events_3.png",
+    "rect": [
+      1055,
+      0,
+      288,
+      422
+    ]
+  },
+  "avatar_conspiracy_book": {
+    "file": "events_3.png",
+    "rect": [
+      1377,
+      0,
+      292,
+      431
+    ]
+  },
+  "possessed": {
+    "file": "sheet.png",
+    "rect": [
+      15,
+      18,
+      557,
+      404
+    ]
+  }
+}

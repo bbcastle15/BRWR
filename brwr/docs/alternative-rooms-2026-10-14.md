@@ -20,8 +20,8 @@ applica alla modalità solo-test e alle partite create dall'host online.
 | Bibliotheca | Bibliotheca of the Order |
 | Sanctuary | Sanctuary of Anubis |
 | Forge | Forge of the Void, Thorny Clearing |
-| Treasure Room | Indoor Forest, Templars' Treasure Room |
-| Garden | Life Fountain, Zen Garden |
+| Treasure Room | Life Fountain, Templars' Treasure Room |
+| Garden | Indoor Forest, Zen Garden |
 | The Abyss | Abyss of Faith, Abyss of Hel |
 | Oracle Room | Blasphemous Oracle Room |
 | Pleasures Room | Ancient Pleasures Room |

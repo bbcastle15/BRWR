@@ -34,6 +34,8 @@ static func models(game, context: Dictionary, kind: String = "model", distance =
 		if kind == "mage":
 			continue
 		for ev in p.evocations:
+			if not EquipmentRules.can_target_as(ev, caster, kind):
+				continue
 			if not ev.is_defeated() and (include_owned or game.get_evocation_controller_id(ev) != caster) and game.is_room_within_effect_range(center, ev.room_id, distance):
 				result.append({"token": "evocation:%d:%d" % [i, p.evocations.find(ev)], "value": {"target_type": "evocation", "evocation": ev}, "room_id": ev.room_id, "name": ev.get_display_name()})
 	return result

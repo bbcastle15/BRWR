@@ -1,0 +1,283 @@
+[
+  {
+    "id": "avatar_traces_of_texture",
+    "name": "Traces of Texture",
+    "moon": 1,
+    "phase": "black_rose",
+    "slot": 1,
+    "crown": true,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_instability_if_color",
+        "colors": [
+          "green",
+          "grey",
+          "purple"
+        ],
+        "amount": 2
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_remnants_of_magic",
+    "name": "Remnants of Magic",
+    "moon": 1,
+    "phase": "black_rose",
+    "slot": 1,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_instability_if_color",
+        "colors": [
+          "red",
+          "yellow",
+          "blue"
+        ],
+        "amount": 2
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_divinatory_secrets",
+    "name": "Divinatory Secrets",
+    "moon": 1,
+    "phase": "action",
+    "slot": 2,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_room_activation",
+        "colors": [
+          "yellow",
+          "grey"
+        ],
+        "power": 1,
+        "damage": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_thorny_corruption",
+    "name": "Thorny Corruption",
+    "moon": 1,
+    "phase": "action",
+    "slot": 2,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_convert_new_instability",
+        "minimum": 2,
+        "amount": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_crown_of_thorns",
+    "name": "Crown of Thorns",
+    "moon": 1,
+    "phase": "instant",
+    "slot": 0,
+    "crown": true,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_crown_power_damage",
+        "power": 1,
+        "damage": 2
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_illness",
+    "name": "Illness",
+    "moon": 2,
+    "phase": "black_rose",
+    "slot": 3,
+    "crown": true,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_convert_damaged_mages",
+        "amount": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_letters_of_destruction",
+    "name": "Letters of Destruction",
+    "moon": 2,
+    "phase": "action",
+    "slot": 2,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_room_activation",
+        "colors": [
+          "green",
+          "red"
+        ],
+        "power": 1,
+        "damage": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_singing_victory_again",
+    "name": "Singing Victory Again",
+    "moon": 2,
+    "phase": "instant",
+    "slot": 0,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_compare_power"
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_magic_of_the_rose",
+    "name": "Magic of the Rose",
+    "moon": 2,
+    "phase": "black_rose",
+    "slot": 1,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_near_black_rose_instability",
+        "range": 1,
+        "amount": 2
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_revolt_of_the_servants",
+    "name": "Revolt of the Servants",
+    "moon": 2,
+    "phase": "instant",
+    "slot": 0,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_power_or_evocation"
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_cursed_trophy",
+    "name": "Cursed Trophy",
+    "moon": 3,
+    "phase": "instant",
+    "slot": 0,
+    "crown": false,
+    "reveal_power": 2,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_trophy_power_loss",
+        "amount": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_manipulating_the_past",
+    "name": "Manipulating the Past",
+    "moon": 3,
+    "phase": "instant",
+    "slot": 0,
+    "crown": true,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_discard_solved_quest"
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_sorrow",
+    "name": "Sorrow",
+    "moon": 3,
+    "phase": "black_rose",
+    "slot": 3,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_damaged_power_loss",
+        "amount": 1
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_pledge",
+    "name": "Pledge",
+    "moon": 3,
+    "phase": "black_rose",
+    "slot": 1,
+    "crown": false,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_damage_nearby",
+        "range": 1,
+        "amount": 2
+      }
+    ],
+    "text": ""
+  },
+  {
+    "id": "avatar_conspiracy_book",
+    "name": "Conspiracy Book",
+    "moon": 3,
+    "phase": "action",
+    "slot": 2,
+    "crown": true,
+    "reveal_power": 0,
+    "discard_power": 0,
+    "effects": [
+      {
+        "type": "avatar_room_activation",
+        "colors": [
+          "purple",
+          "blue"
+        ],
+        "power": 1,
+        "damage": 1
+      }
+    ],
+    "text": ""
+  }
+]

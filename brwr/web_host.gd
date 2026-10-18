@@ -13,8 +13,14 @@ const MIME := {
 var server := TCPServer.new()
 var clients: Array[Dictionary] = []
 var files: Dictionary = {}
+var tls_server_options: TLSOptions = null
 
-func start(directory: String, port: int = PORT, bind_address: String = "*") -> Error:
+func start(
+	directory: String,
+	port: int = PORT,
+	bind_address: String = "*",
+	options: TLSOptions = null
+) -> Error:
 	if OS.has_feature("web"): return ERR_UNAVAILABLE
 	for required in ["index.html", "index.js", "index.wasm", "index.pck"]:
 		if not FileAccess.file_exists(directory.path_join(required)):
@@ -24,24 +30,64 @@ func start(directory: String, port: int = PORT, bind_address: String = "*") -> E
 		if (filename.begins_with("index.") or filename == "favicon.png") and MIME.has(filename.get_extension()):
 			files["/" + filename] = directory.path_join(filename)
 	files["/"] = files["/index.html"]
+	tls_server_options = options
 	return server.listen(port, bind_address)
 
 func _process(_delta: float) -> void:
 	while server.is_connection_available():
-		var peer := server.take_connection()
+		var tcp := server.take_connection()
 		if clients.size() >= MAX_CLIENTS:
-			peer.disconnect_from_host()
+			tcp.disconnect_from_host()
 			continue
-		clients.append({"peer": peer, "request": PackedByteArray(), "pending": PackedByteArray(), "file": null, "responding": false, "sent": 0, "time": Time.get_ticks_msec()})
+
+		var peer: StreamPeer = tcp
+		if tls_server_options != null:
+			var tls := StreamPeerTLS.new()
+			var error := tls.accept_stream(tcp, tls_server_options)
+			if error != OK:
+				tcp.disconnect_from_host()
+				continue
+			peer = tls
+
+		clients.append({
+			"peer": peer,
+			"request": PackedByteArray(),
+			"pending": PackedByteArray(),
+			"file": null,
+			"responding": false,
+			"sent": 0,
+			"time": Time.get_ticks_msec()
+		})
+
 	for client in clients.duplicate():
-		var peer: StreamPeerTCP = client.peer
-		peer.poll()
-		if peer.get_status() != StreamPeerTCP.STATUS_CONNECTED or Time.get_ticks_msec() - int(client.time) > 30000:
+		var peer: StreamPeer = client.peer
+
+		if peer is StreamPeerTLS:
+			var tls_peer := peer as StreamPeerTLS
+			tls_peer.poll()
+			var tls_status := tls_peer.get_status()
+			if tls_status == StreamPeerTLS.STATUS_HANDSHAKING:
+				if Time.get_ticks_msec() - int(client.time) > 30000:
+					_close(client)
+				continue
+			if tls_status != StreamPeerTLS.STATUS_CONNECTED:
+				_close(client)
+				continue
+		elif peer is StreamPeerTCP:
+			var tcp_peer := peer as StreamPeerTCP
+			tcp_peer.poll()
+			if tcp_peer.get_status() != StreamPeerTCP.STATUS_CONNECTED:
+				_close(client)
+				continue
+
+		if Time.get_ticks_msec() - int(client.time) > 30000:
 			_close(client)
 			continue
+
 		if not client.responding:
 			var available := peer.get_available_bytes()
-			if available == 0: continue
+			if available == 0:
+				continue
 			if available + client.request.size() > 8192:
 				_error(client, "431 Request Header Fields Too Large")
 				continue
@@ -50,8 +96,10 @@ func _process(_delta: float) -> void:
 				_close(client)
 				continue
 			client.request.append_array(result[1])
+			client.time = Time.get_ticks_msec()
 			if client.request.get_string_from_utf8().contains("\r\n\r\n"):
 				_prepare_response(client)
+
 		if client.responding:
 			_send_chunk(client)
 
@@ -64,24 +112,30 @@ func _prepare_response(client: Dictionary) -> void:
 	if first[0] not in ["GET", "HEAD"]:
 		_error(client, "405 Method Not Allowed")
 		return
+
 	# Exact allowlist lookup: no decoding/concatenation of user-controlled paths.
 	var route := first[1].get_slice("?", 0)
 	if not files.has(route):
 		_error(client, "404 Not Found")
 		return
+
 	var path: String = files[route]
 	var encoding := ""
 	for header in request.split("\r\n"):
 		if header.to_lower().begins_with("accept-encoding:") and header.to_lower().contains("gzip") and FileAccess.file_exists(path + ".gz"):
 			encoding = "Content-Encoding: gzip\r\n"
+
 	var file := FileAccess.open(path + (".gz" if not encoding.is_empty() else ""), FileAccess.READ)
 	if file == null:
 		_error(client, "503 Service Unavailable")
 		return
+
 	client.pending = _headers("200 OK", int(file.get_length()), MIME[path.get_extension()], encoding).to_utf8_buffer()
 	client.responding = true
-	if first[0] == "GET": client.file = file
-	else: file.close()
+	if first[0] == "GET":
+		client.file = file
+	else:
+		file.close()
 
 func _headers(status: String, length: int, content_type: String, extra: String = "") -> String:
 	return "HTTP/1.1 %s\r\nContent-Type: %s\r\nContent-Length: %d\r\nConnection: close\r\nCache-Control: no-store\r\nVary: Accept-Encoding\r\nX-Content-Type-Options: nosniff\r\nReferrer-Policy: no-referrer\r\n%s\r\n" % [status, content_type, length, extra]
@@ -109,13 +163,20 @@ func _send_chunk(client: Dictionary) -> void:
 		client.time = Time.get_ticks_msec()
 
 func _close(client: Dictionary) -> void:
-	client.peer.disconnect_from_host()
-	if client.file != null: client.file.close()
+	var peer: StreamPeer = client.peer
+	if peer is StreamPeerTLS:
+		(peer as StreamPeerTLS).disconnect_from_stream()
+	elif peer is StreamPeerTCP:
+		(peer as StreamPeerTCP).disconnect_from_host()
+	if client.file != null:
+		client.file.close()
 	clients.erase(client)
 
 func stop() -> void:
 	server.stop()
-	for client in clients.duplicate(): _close(client)
+	for client in clients.duplicate():
+		_close(client)
+	tls_server_options = null
 
 func _exit_tree() -> void:
 	stop()

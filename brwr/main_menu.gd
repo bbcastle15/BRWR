@@ -20,6 +20,8 @@ var online_count: SpinBox
 var roster: Label
 var room_selections: Dictionary = {}
 var room_setup_button: Button
+var avatar_selection: Dictionary = {}
+var avatar_setup_button: Button
 
 func _ready() -> void:
 	theme = preload("res://tabletop_style.gd").make_theme()
@@ -76,6 +78,8 @@ func _ready() -> void:
 	solo_count = _count(solo_row)
 	solo_button = _button(solo_row, "Modalità solo-test", _solo)
 	room_setup_button = _button(box, "Stanze della Loggia · originali / alternative", _open_room_setup)
+	avatar_setup_button = _button(box, "Avatar · disattivato", _open_avatar_setup)
+	avatar_setup_button.disabled = AvatarRules.available().is_empty()
 	box.add_child(HSeparator.new())
 
 	_label(box, "PvP online · Host e giocatori si collegano al server BRWR su Render.")
@@ -169,7 +173,8 @@ func _solo() -> void:
 	if session.started or session.connected or session.connection_started > 0:
 		return
 	var game = load("res://game.tscn").instantiate()
-	game.player_count = int(solo_count.value)
+	game.avatar_selection = avatar_selection.duplicate(true)
+	game.player_count = int(solo_count.value) + (0 if avatar_selection.is_empty() else 1)
 	game.room_variants = room_selections.duplicate()
 	game.beta_force_fullscreen = not OS.has_feature("web")
 	add_child(game)
@@ -188,6 +193,7 @@ func _host() -> void:
 		return
 
 	session.room_variants = room_selections.duplicate()
+	session.avatar_selection = avatar_selection.duplicate(true)
 	var error: Error = session.host(int(online_count.value))
 	if error != OK:
 		_status("Impossibile collegarsi al server online: " + error_string(error))
@@ -328,3 +334,53 @@ func _set_all_rooms(controls: Dictionary, randomize_variants: bool) -> void:
 		var selected: String = "random" if randomize_variants else str(base_id)
 		room_selections[base_id] = selected
 		controls[base_id][selected].button_pressed = true
+
+func _open_avatar_setup() -> void:
+	if session.connected or session.started: return
+	var overlay := PanelContainer.new()
+	menu.get_parent().add_child(overlay)
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	menu.hide()
+	var margin := MarginContainer.new()
+	for side in ["left", "right", "top", "bottom"]: margin.add_theme_constant_override("margin_" + side, 30)
+	overlay.add_child(margin)
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 18)
+	margin.add_child(column)
+	var title := _label(column, "MODALITÀ AVATAR")
+	title.add_theme_font_size_override("font_size", 30)
+	_label(column, "L’Avatar occupa un posto nella Loggia e controlla la Rosa Nera. Le parità e le scelte non determinate dalle priorità spettano al giocatore con la Corona.")
+	var selection := OptionButton.new()
+	selection.custom_minimum_size.y = 48
+	selection.add_item("Disattivato")
+	selection.set_item_metadata(0, "")
+	selection.add_item("Avatar casuale")
+	selection.set_item_metadata(1, "random")
+	for definition in AvatarRules.available():
+		selection.add_item(str(definition.name))
+		selection.set_item_metadata(selection.item_count - 1, str(definition.id))
+	for i in selection.item_count:
+		if selection.get_item_metadata(i) == avatar_selection.get("id", ""): selection.select(i)
+	column.add_child(selection)
+	var difficulty := OptionButton.new()
+	difficulty.custom_minimum_size.y = 48
+	difficulty.add_item("Apprendista · 3 Comandi per fase Azione")
+	difficulty.add_item("Maestro · 4 Comandi per fase Azione")
+	difficulty.select(1 if avatar_selection.get("difficulty") == "master" else 0)
+	column.add_child(difficulty)
+	var art := TextureRect.new()
+	art.texture = AvatarArt.texture("possessed")
+	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	art.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	column.add_child(art)
+	_label(column, "Possessed · 12 Salute · 2 Forza · 2 Velocità\nDominion: se inizia la propria attivazione in Cella, si piazza nella Black Rose Room senza rivelare un Comando.")
+	_button(column, "Conferma e torna al menu", func():
+		var id: String = str(selection.get_selected_metadata())
+		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
+		avatar_setup_button.text = "Avatar · " + ("disattivato" if id.is_empty() else ("casuale" if id == "random" else id.capitalize()))
+		solo_count.min_value = 2 if id.is_empty() else 1
+		solo_count.max_value = 6 if id.is_empty() else 5
+		if online_count != null: online_count.max_value = 6 if id.is_empty() else 5
+		menu.show()
+		overlay.queue_free())

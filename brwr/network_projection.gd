@@ -7,6 +7,7 @@ static func build(game, viewer: int) -> Dictionary:
 	state["revision"] = game.input_revision
 	state["turn_presentation"] = game.get_turn_presentation()
 	state["card_presentation"] = game.card_presentation.duplicate()
+	state["avatar"] = game.avatar.public_data() if game.avatar != null else {}
 	state["active_schools"] = game.active_school_ids.duplicate()
 	state["school_discards"] = {}
 	for school_id in game.school_discards:
@@ -56,6 +57,11 @@ static func build(game, viewer: int) -> Dictionary:
 	return state
 
 static func apply(game, state: Dictionary) -> void:
+	var power_board = game.get_node("PowerBoard")
+	# Joining a running table positions markers directly; subsequent score
+	# changes use the same animations as local games.
+	power_board.instant_updates = not game.has_meta("received_network_snapshot")
+	game.set_meta("received_network_snapshot", true)
 	var previous_revision: int = game.input_revision
 	var previous_pending: Dictionary = game.pending_input.duplicate(true)
 	var previous_result: Dictionary = game.final_result.duplicate(true)
@@ -64,6 +70,12 @@ static func apply(game, state: Dictionary) -> void:
 		game.set(field, state[field])
 	game.current_round = state.round
 	game.current_moon = state.moon
+	if game.avatar != null:
+		game.avatar.network_public = state.get("avatar", {}).duplicate(true)
+		game.avatar.commands_used = int(game.avatar.network_public.get("commands_used", 0))
+		for moon in game.avatar.decks:
+			game.avatar.decks[moon].clear()
+			game.avatar.decks[moon].resize(int(game.avatar.network_public.get("deck_counts", {}).get(moon, 0)))
 	game.current_phase = state.phase
 	game.input_revision = state.revision
 	game.network_turn_presentation = state.get("turn_presentation", {})
@@ -211,6 +223,7 @@ static func apply(game, state: Dictionary) -> void:
 	game.get_node("EventBoard").set_black_rose_cube_count(state.black_rose_cubes)
 	game.get_node("EventBoard").refresh_event_slots()
 	game.get_node("PowerBoard").set_black_rose_power(game.black_rose_power)
+	power_board.instant_updates = false
 	game.update_table_layout()
 	game.refresh_model_tokens()
 	game.refresh_vastum_tokens()

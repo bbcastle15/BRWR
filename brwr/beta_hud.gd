@@ -692,7 +692,9 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 	if kind == "mages":
 		button.tooltip_text += "\nHP %s · Hand %s · STR %s · SPD %s\n%s" % [option.get("health", ""), option.get("hand_limit", ""), option.get("strength", ""), option.get("speed", ""), option.get("personal_spell_name", "")]
 	button.set_meta("choice_option", option)
-	button.pressed.connect(callback, CONNECT_DEFERRED)
+	var inspect_option := option.duplicate()
+	inspect_option["card_kind"] = kind
+	game.connect_card_choice(button, inspect_option, callback)
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(0.08, 0.08, 0.08)
 	style.border_color = Color.GOLD if selected else Color(0.4, 0.4, 0.4)

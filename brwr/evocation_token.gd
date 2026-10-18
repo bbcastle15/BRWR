@@ -3,6 +3,9 @@ extends Node2D
 signal inspect_requested
 
 const PORTRAIT_SHADER = preload("res://assets/tokens/evocation_portrait.gdshader")
+const ReferenceArt = preload("res://reference_card_preview.gd")
+static var portrait_cache: Dictionary = {}
+static var portrait_regions: Dictionary = {}
 
 # Circle-shaped hit area, shared by inspection and the existing target chooser.
 # Transparent corners must not intercept another model's click.
@@ -41,12 +44,36 @@ func setup(
 	board_number = number
 	_state = state
 	z_index = 79
-	var portrait_path := "res://assets/tokens/evocations/%s.png" % evocation_id
-	_portrait = load(portrait_path) if ResourceLoader.exists(portrait_path) else null
+	_portrait = portrait_texture(evocation_id)
 
 	_build_visual()
 	_refresh_details()
 	queue_redraw()
+
+
+static func portrait_texture(id: String) -> Texture2D:
+	if portrait_cache.has(id):
+		return portrait_cache[id]
+	var portrait_path := "res://assets/tokens/evocations/%s.png" % id
+	if ResourceLoader.exists(portrait_path):
+		portrait_cache[id] = load(portrait_path)
+		return portrait_cache[id]
+	if portrait_regions.is_empty():
+		portrait_regions = JSON.parse_string(FileAccess.get_file_as_string("res://assets/tokens/evocations/portraits.json"))
+	var region: Dictionary = portrait_regions.get(id, {})
+	var source: Texture2D = load(str(region.path)) if region.has("path") else ReferenceArt.card_texture("evocations", id)
+	if source == null:
+		return null
+	# Reuse the exact creature painted on its card, with a per-creature crop.
+	# Normalized coordinates survive Web's smaller imported textures.
+	var center: Array = region.get("center", [0.20, 0.24])
+	var side := source.get_width() * float(region.get("width", 0.28))
+	var crop := AtlasTexture.new()
+	crop.atlas = source
+	crop.region = Rect2(Vector2(center[0], center[1]) * source.get_size() - Vector2.ONE * side * 0.5, Vector2.ONE * side)
+	crop.filter_clip = true
+	portrait_cache[id] = crop
+	return crop
 
 
 func _build_visual() -> void:
@@ -93,6 +120,10 @@ func _build_medallion() -> void:
 	portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	var mask := ShaderMaterial.new()
 	mask.shader = PORTRAIT_SHADER
+	if _portrait is AtlasTexture:
+		var region: Rect2 = _portrait.region
+		var atlas_size: Vector2 = _portrait.atlas.get_size()
+		mask.set_shader_parameter("portrait_region", Vector4(region.position.x / atlas_size.x, region.position.y / atlas_size.y, region.size.x / atlas_size.x, region.size.y / atlas_size.y))
 	portrait.material = mask
 	add_child(portrait)
 	_copy_badge = Label.new()
@@ -103,6 +134,7 @@ func _build_medallion() -> void:
 	_copy_badge.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_copy_badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_copy_badge.add_theme_font_size_override("font_size", 11)
+	_copy_badge.add_theme_constant_override("outline_size", 0)
 	_copy_badge.add_theme_color_override("font_color", Color.WHITE)
 	add_child(_copy_badge)
 	_update_badge_style()

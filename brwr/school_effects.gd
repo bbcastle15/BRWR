@@ -26,6 +26,7 @@ static func model_options(game, effect: Dictionary, context: Dictionary) -> Arra
 	var options := ForgottenRules.models(game, context, str(effect.get("target", "evocation")), effect.get("range", "*"), center)
 	return options.filter(func(o):
 		var ev: EvocationState = o.value.get("evocation")
+		if bool(effect.get("movable", false)) and ev != null and ev.archetype == "equipment": return false
 		if bool(effect.get("physical_attack_target", false)):
 			if ev != null and (ev == context.get("source_evocation") or game.get_evocation_controller_id(ev) == caster or not ForgottenEvocations.ability(game, ev, "cannot_be_physically_attacked").is_empty()): return false
 			if ev == null and ForgottenPassives.value(game.players[int(o.value.player_index)], "cannot_be_evocation_attack_target") > 0: return false
@@ -173,7 +174,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			context.erase("school_remove_models")
 			return ForgottenRules.queue(game, effect.get("effects", []), context)
 		"place_owned_evocation_in_target_room":
-			var options := model_options(game, {"owner": "self", "distinct_key": "school_placed_evocations"}, context)
+			var options := model_options(game, {"owner": "self", "movable": true, "distinct_key": "school_placed_evocations"}, context)
 			if not DruidicRules.choose(game, caster, context, "school_place_evocation", options, "Choose one of your Evocations to place and activate.", false, "evocation_target"): return false
 			var chosen = context.get("school_place_evocation")
 			context.erase("school_place_evocation")

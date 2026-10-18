@@ -1,5 +1,13 @@
 # AGENTS.md — Black Rose War Rebirth
 
+## Active handoff — 18 October 2026
+
+Before resuming, read `RIPRENDI_QUI.md` and
+`docs/HANDOFF-AVATAR-2026-10-18.md`. The current user task is to complete
+Possessed / Avatar mode. It is work in progress and remains disabled in the
+menu until the outstanding checks pass. The prepared-spells priority below
+is historical; do not restart it or discard the current uncommitted changes.
+
 ## Project
 
 Digital/local adaptation of **Black Rose Wars: Rebirth** built with **Godot 4.7.2**.

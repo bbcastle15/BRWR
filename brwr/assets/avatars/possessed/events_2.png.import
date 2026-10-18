@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfky4t083tvu0"
-path="res://.godot/imported/power_of_ankh.png-6f5fc2c46c6a38c007a5f83dcaf0dd6a.ctex"
+uid="uid://pehkeyeuqimu"
+path="res://.godot/imported/events_2.png-607e1940b6b99b40ae26859138ef7169.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/power_of_ankh.png"
-dest_files=["res://.godot/imported/power_of_ankh.png-6f5fc2c46c6a38c007a5f83dcaf0dd6a.ctex"]
+source_file="res://assets/avatars/possessed/events_2.png"
+dest_files=["res://.godot/imported/events_2.png-607e1940b6b99b40ae26859138ef7169.ctex"]
 
 [params]
 

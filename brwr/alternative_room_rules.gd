@@ -35,7 +35,8 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			if kind == "self":
 				nested.merge({"spell_target_type": "self", "target_model_type": "mage", "target_player_index": caster}, true)
 			else:
-				var options: Array = ForgottenRules.rooms(game, context, effect.get("range", "*")) if kind == "room" else ForgottenRules.models(game, context, kind, effect.get("range", "*"))
+				var include_owned: bool = str(effect.get("target_owner", "")) != "opponent"
+				var options: Array = ForgottenRules.rooms(game, context, effect.get("range", "*")) if kind == "room" else ForgottenRules.models(game, context, kind, effect.get("range", "*"), "", include_owned)
 				if effect.has("max_health"):
 					options = options.filter(func(o): return o.value is Dictionary and o.value.get("evocation") != null and o.value.evocation.health <= int(effect.max_health))
 				if not DruidicRules.choose(game, caster, context, "room_choice", options, "Choose a " + kind + ".", false, "secondary_room" if kind == "room" else "model_target"):

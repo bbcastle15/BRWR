@@ -253,7 +253,7 @@
     ],
     "destroyed_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control.",
     "rebuilt_text": "[Evocation *]: target an Evocation with a [Health] 3 or less. It activates under your control with [Attack]+2 and [Movement]+1.",
-    "replaces": "treasure_room"
+    "replaces": "garden"
   },
   {
     "id": "life_fountain",
@@ -269,7 +269,7 @@
     ],
     "destroyed_text": "[Self]: heal 3 [Damage].",
     "rebuilt_text": "[Self]: heal 3 [Damage]. You gain 1 [Power].",
-    "replaces": "garden"
+    "replaces": "treasure_room"
   },
   {
     "id": "templars_treasure_room",

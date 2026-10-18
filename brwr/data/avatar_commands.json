@@ -1,0 +1,1103 @@
+[
+  {
+    "id": "possessed_release_energy",
+    "name": "Release Energy",
+    "number": 1,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "black",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "release_energy"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_tales_of_destruction",
+    "name": "Tales of Destruction",
+    "number": 2,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "red",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "sacred",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "quest"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_book_of_nature",
+    "name": "Book of Nature",
+    "number": 3,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "green",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "water",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "cadavers"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_energy_of_the_rose",
+    "name": "Energy of the Rose",
+    "number": 4,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "self",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "power_if_none": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "damage",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "ignore_damage",
+          "amount": 3
+        },
+        {
+          "type": "instability_per_ignored"
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_corrupted_ray",
+    "name": "Corrupted Ray",
+    "number": 5,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "convert_damage",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "yellow",
+            "priority": 0
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_incendiary_ball",
+    "name": "Incendiary Ball",
+    "number": 6,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_frost_spear",
+    "name": "Frost Spear",
+    "number": 7,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 1
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "water",
+        "target": "mage",
+        "range": 1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "remove_target_evocation",
+            "max_health": 3
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_revenge_of_the_thorn",
+    "name": "Revenge of the Thorn",
+    "number": 8,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1
+          },
+          {
+            "type": "convert_damage",
+            "amount": 2
+          },
+          {
+            "type": "target_power_per_missing_conversion"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "suffered_damage",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "trophy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_unstable_thorns",
+    "name": "Unstable Thorns",
+    "number": 9,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage_each_mage",
+            "amount": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_tomb_reinforcements",
+    "name": "Tomb Reinforcements",
+    "number": 10,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "summon",
+            "evocation_id": "colossus",
+            "at": "black_rose"
+          },
+          {
+            "type": "power",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "activate_evocation",
+            "evocation_id": "colossus"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_release_force",
+    "name": "Release Force",
+    "number": 11,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "black",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "release_force"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_conspirators_study",
+    "name": "Conspirator's Study",
+    "number": 12,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "purple",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "sacred",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "quest"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_technomancy_book",
+    "name": "Technomancy Book",
+    "number": 13,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "green",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "water",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "cadavers"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_sap_of_the_black_rose",
+    "name": "Sap of the Black Rose",
+    "number": 14,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "self",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "power_per_missing": 1,
+            "up_to": true
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "damage",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "ignore_damage",
+          "amount": 3
+        },
+        {
+          "type": "damage_per_ignored"
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_corrupted_spear",
+    "name": "Corrupted Spear",
+    "number": 15,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": 2,
+        "priority": 1,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "convert_damage",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "blue",
+            "priority": 0
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_blaze",
+    "name": "Blaze",
+    "number": 16,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_freeze_soil",
+    "name": "Freeze Soil",
+    "number": 17,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "water",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "discard_hand",
+            "amount": 2
+          },
+          {
+            "type": "target_power_per_missing_discard"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_revenge_embodied",
+    "name": "Revenge Embodied",
+    "number": 18,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "convert_damage",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "combat_spell",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "ignore_spell"
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_explosion_of_thorns",
+    "name": "Explosion of Thorns",
+    "number": 19,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage_each_mage",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_infernal_reinforcements",
+    "name": "Infernal Reinforcements",
+    "number": 20,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "summon",
+            "evocation_id": "cadaver",
+            "at": "black_rose"
+          },
+          {
+            "type": "summon",
+            "evocation_id": "cadaver",
+            "at": "black_rose"
+          },
+          {
+            "type": "power",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "activate_evocation",
+            "evocation_id": "cadaver"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_tap_into_the_black_rose",
+    "name": "Tap into the Black Rose",
+    "number": 21,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "black",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "power",
+            "amount": 2
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_research_on_fire",
+    "name": "Research on Fire",
+    "number": 22,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "red",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "sacred",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "activate_without_effect",
+            "reward": "quest"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_manuscript_on_deceptions",
+    "name": "Manuscript on Deceptions",
+    "number": 23,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "blue",
+            "priority": 0
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "air",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "discard_each_hand",
+            "amount": 2
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_explosion_of_dark_petals",
+    "name": "Explosion of Dark Petals",
+    "number": 24,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "area",
+        "range": 0,
+        "priority": 0,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage_models_around_target",
+            "amount": 2,
+            "range": 2
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "damage",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "ignore_damage",
+          "amount": 2
+        },
+        {
+          "type": "damage_models_around_self",
+          "amount": 2,
+          "range": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_dark_blade",
+    "name": "Dark Blade",
+    "number": 25,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": -1,
+        "priority": 1,
+        "instability": true,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1
+          },
+          {
+            "type": "convert_damage",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "green",
+            "priority": 0
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_dark_fire",
+    "name": "Dark Fire",
+    "number": 26,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_thorns_of_frost",
+    "name": "Thorns of Frost",
+    "number": 27,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "water",
+        "target": "mage",
+        "range": 2,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "discard_hand",
+            "amount": 2
+          },
+          {
+            "type": "remove_per_discard",
+            "max_health": 3
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_dark_hammer",
+    "name": "Dark Hammer",
+    "number": 28,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "color": "",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "convert_damage",
+            "amount": 1
+          },
+          {
+            "type": "target_power_per_missing_conversion"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "trigger": "combat_spell",
+      "type": "protection",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "convert_damage",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "possessed_poisoned_thorns",
+    "name": "Poisoned Thorns",
+    "number": 29,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "convert_each_mage",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  },
+  {
+    "id": "possessed_abyssal_reinforcements",
+    "name": "Abyssal Reinforcements",
+    "number": 30,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "summon",
+            "evocation_id": "colossus",
+            "at": "black_rose"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "activate_evocation",
+            "evocation_id": "colossus"
+          }
+        ]
+      }
+    ],
+    "reaction": {}
+  }
+]

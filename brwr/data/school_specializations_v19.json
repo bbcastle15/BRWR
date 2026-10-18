@@ -245,7 +245,7 @@
   "heka": {
     "name": "Heka",
     "description": "Jinx cards impose a penalty and a task. Each completed task places one of the affected Mage's Cubes on the Jinx. Discard it when all slots are filled. A Mage cannot have two Jinxes with the same name; exhausted copies cannot be assigned.",
-    "art_pending": true,
+    "art_pending": false,
     "starting_grimoires": [
       {
         "id": "revenants",

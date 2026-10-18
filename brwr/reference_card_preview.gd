@@ -27,6 +27,8 @@ static func describe_rules(value: Variant) -> String:
 	return str(value).replace("_", " ")
 
 static func card_texture(kind: String, id: String) -> Texture2D:
+	var avatar_texture := AvatarArt.texture(id)
+	if avatar_texture != null: return avatar_texture
 	if kind == "spells":
 		return SpellArtResolver.get_texture(id)
 	# Keep the supplied filename; resource paths are case-sensitive in Web exports.

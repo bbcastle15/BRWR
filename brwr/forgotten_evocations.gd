@@ -311,6 +311,8 @@ static func process_nightmare_attack(game, frame: Dictionary) -> bool:
 		return true
 	frame["nightmare_attacked"] = true
 	var controller: int = int(frame.controller_id)
+	# FAQ: an Umbra assigned to the Avatar also spares the Evocation in its slot.
+	if AvatarRules.is_avatar(game, ev.assigned_mage) and AvatarRules.cube_owner(game, controller) == -1: return true
 	game.deal_damage_from_evocation(ev, ev.assigned_mage, game.get_evocation_effective_strength(ev, int(frame.get("strength_bonus", 0))), controller)
 	var extra := ability(game, ev, "damage_assigned_slot")
 	if not extra.is_empty():

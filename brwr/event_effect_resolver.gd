@@ -35,6 +35,10 @@ func resolve_effect(effect: Dictionary, context: Dictionary) -> bool:
 	if game == null:
 		return false
 	var kind: String = str(effect.get("type", ""))
+	if kind in AvatarEvents.PASSIVES:
+		return true
+	if kind.begins_with("avatar_"):
+		return game.queue_resolution({"type": "avatar_event", "effect": effect, "context": context})
 	if kind in PASSIVE_EFFECTS:
 		return true
 	if kind == "each_mage_optional_black_rose_damage_then_activate_evocation":
@@ -295,7 +299,7 @@ func _advance(frame: Dictionary) -> void:
 func _play_order(context: Dictionary) -> Array:
 	var game = context.game
 	# Taking the Crown during an Event changes the first Mage next phase only.
-	return context.get("play_order", game.current_phase_play_order if not game.current_phase_play_order.is_empty() else game.get_play_order()).duplicate()
+	return context.get("play_order", game.current_phase_play_order if not game.current_phase_play_order.is_empty() else game.get_play_order()).filter(func(index): return not AvatarRules.is_avatar(game, int(index)))
 
 func _option(token: String, value, label: String) -> Dictionary:
 	return {"token": token, "value": value, "label": label}

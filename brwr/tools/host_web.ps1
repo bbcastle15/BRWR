@@ -1,10 +1,25 @@
 param(
     [string]$Godot = '',
+    [string]$Cert = '',
+    [string]$Key = '',
     [switch]$BuildOnly
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $webRoot = Join-Path $projectRoot 'output/web'
+$tlsRoot = Join-Path $projectRoot '.tls'
+
+if (-not $Cert) { $Cert = Join-Path $tlsRoot 'brwr-local.crt' }
+if (-not $Key) { $Key = Join-Path $tlsRoot 'brwr-local.key' }
+
+if (-not (Test-Path -LiteralPath $Cert -PathType Leaf) -or -not (Test-Path -LiteralPath $Key -PathType Leaf)) {
+    throw "Certificato TLS non configurato. Esegui prima: powershell -ExecutionPolicy Bypass -File `"$PSScriptRoot\setup_tls.ps1`""
+}
+
+# The native host inherits these paths. The files remain outside output/web and
+# are never served by web_host.gd.
+$env:BRWR_TLS_CERT = (Resolve-Path -LiteralPath $Cert).Path
+$env:BRWR_TLS_KEY = (Resolve-Path -LiteralPath $Key).Path
 
 if (-not $Godot) {
     $command = Get-Command godot, godot4 -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -22,7 +37,7 @@ $engineVersion = (& $Godot --version | Out-String).Trim()
 if ($engineVersion -notlike '4.7.2.stable*') { throw "Richiesto Godot 4.7.2 stable. Trovato: $engineVersion" }
 $template = Join-Path $env:APPDATA 'Godot/export_templates/4.7.2.stable/web_nothreads_release.zip'
 if (-not (Test-Path -LiteralPath $template)) {
-    throw 'Installa i template ufficiali Godot 4.7.2 da Editor > Gestisci modelli di esportazione, poi riprova. https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable'
+    throw 'Installa i template ufficiali Godot 4.7.2 da Editor > Gestisci modelli di esportazione, poi riprova.'
 }
 New-Item -ItemType Directory -Path $webRoot -Force | Out-Null
 
@@ -66,8 +81,8 @@ if ($LASTEXITCODE -ne 0 -or (Select-String -LiteralPath $checkLog -Pattern 'SCRI
     throw "Il pacchetto esportato non supera il controllo: $checkLog"
 }
 Write-Host "Pronto: $webRoot"
+Write-Host "TLS cert: $env:BRWR_TLS_CERT"
 if ($BuildOnly) { return }
-Write-Host 'Scegli Crea sala PvP, copia il link e avvia quando gli amici sono collegati.'
-# This uses the existing Godot executable; no web server, VPN or client program
-# needs to be installed. No Git pull/push and no changes during a running match.
+
+Write-Host 'Scegli Crea sala PvP. Il link generato sarà HTTPS e il multiplayer userà WSS.'
 & $Godot --path $webRoot --main-pack (Join-Path $webRoot 'index.pck') --rendering-method gl_compatibility -- "--web-root=$webRoot"

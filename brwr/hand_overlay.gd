@@ -75,6 +75,7 @@ var card_row: GridContainer
 var prep_controls: VBoxContainer
 var selection_label: Label
 var slots_label: Label
+var side_label: Label
 
 var light_button: Button
 var dark_button: Button
@@ -279,7 +280,7 @@ func _build_ui() -> void:
 	choice_row.add_theme_constant_override("separation", 8)
 	prep_controls.add_child(choice_row)
 
-	var side_label := Label.new()
+	side_label = Label.new()
 	side_label.text = "Side:"
 	side_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	choice_row.add_child(side_label)
@@ -1070,6 +1071,8 @@ func _assignment_badge(
 	)
 
 	if numbered_index != -1:
+		if _single_effect_card(hand_index):
+			return _roman_slot(numbered_index)
 		return (
 			_roman_slot(
 				numbered_index
@@ -1083,6 +1086,8 @@ func _assignment_badge(
 		)
 
 	if quick_hand_index == hand_index:
+		if _single_effect_card(hand_index):
+			return "Q"
 		return (
 			"Q • "
 			+ (
@@ -1412,6 +1417,7 @@ func _update_controls() -> void:
 	)
 
 	light_button.disabled = not has_selection
+	side_label.visible = not single_effect
 	light_button.visible = not single_effect
 	dark_button.visible = not single_effect
 	dark_button.disabled = not has_selection or not _selected_dark_playable()
@@ -1536,18 +1542,9 @@ func _slots_summary() -> String:
 		)
 
 		if i < ready_hand_indices.size():
-			text_value += (
-				_card_name_by_hand_index(
-					ready_hand_indices[i]
-				)
-				+ " ("
-				+ (
-					"D"
-					if ready_dark_sides[i]
-					else "L"
-				)
-				+ ")"
-			)
+			text_value += _card_name_by_hand_index(ready_hand_indices[i])
+			if not _single_effect_card(ready_hand_indices[i]):
+				text_value += " (D)" if ready_dark_sides[i] else " (L)"
 		else:
 			text_value += "—"
 
@@ -1556,18 +1553,9 @@ func _slots_summary() -> String:
 	var quick_text := "Quick: "
 
 	if quick_hand_index != -1:
-		quick_text += (
-			_card_name_by_hand_index(
-				quick_hand_index
-			)
-			+ " ("
-			+ (
-				"D"
-				if quick_dark_side
-				else "L"
-			)
-			+ ")"
-		)
+		quick_text += _card_name_by_hand_index(quick_hand_index)
+		if not _single_effect_card(quick_hand_index):
+			quick_text += " (D)" if quick_dark_side else " (L)"
 	else:
 		quick_text += "—"
 
@@ -1620,6 +1608,8 @@ func _card_name_by_hand_index(
 func _side_name(
 	use_dark: bool
 ) -> String:
+	if _single_effect_card(selected_hand_index):
+		return "Single effect"
 	return (
 		"Dark"
 		if use_dark

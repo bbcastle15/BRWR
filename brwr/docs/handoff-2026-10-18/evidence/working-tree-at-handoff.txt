@@ -1,0 +1,111 @@
+ M brwr/AGENTS.md
+ M brwr/alternative_room_rules.gd
+ M brwr/assets/rooms/alternatives_specs.json
+ D brwr/assets/spells/power_of_ankh.png
+ D brwr/assets/spells/power_of_ankh.png.import
+ M brwr/assets/tokens/evocation_portrait.gdshader
+ M brwr/beta_hud.gd
+ M brwr/data/quests.json
+ M brwr/data/rooms.json
+ M brwr/data/school_specializations_v19.json
+ M brwr/docs/alternative-rooms-2026-10-14.md
+ M brwr/docs/remaining-schools-2026-10-16.md
+ M brwr/effect_resolver.gd
+ M brwr/equipment_rules.gd
+ M brwr/event_effect_resolver.gd
+ M brwr/evocation_token.gd
+ M brwr/export_presets.cfg
+ M brwr/forgotten_evocations.gd
+ M brwr/forgotten_rules.gd
+ M brwr/game.gd
+ M brwr/hand_overlay.gd
+ M brwr/main_menu.gd
+ M brwr/network_projection.gd
+ M brwr/online_session.gd
+ M brwr/output/web/index.html
+ M brwr/output/web/index.js.gz
+ M brwr/output/web/index.pck
+ M brwr/output/web/index.pck.gz
+ M brwr/output/web/index.wasm.gz
+ M brwr/player_state.gd
+ M brwr/power_board.gd
+ M brwr/quest_manager.gd
+ M brwr/reference_card_preview.gd
+ M brwr/school_effects.gd
+ M brwr/spell_art_resolver.gd
+ M brwr/spell_card_state.gd
+ M brwr/table_camera.gd
+ M brwr/tabletop_shell.gd
+ M brwr/tools/host_web.ps1
+ M brwr/web_host.gd
+?? brwr/.tls/.gitignore
+?? brwr/README_FASTGATE_UPNP.md
+?? brwr/README_TLS_LAN.md
+?? brwr/README_UPNP.md
+?? brwr/README_UPNP_DIAGNOSTIC.md
+?? brwr/RIPRENDI_QUI.md
+?? brwr/assets/avatars/possessed/atlas.json
+?? brwr/assets/avatars/possessed/board_reference.png
+?? brwr/assets/avatars/possessed/board_reference.png.import
+?? brwr/assets/avatars/possessed/commands_1.png
+?? brwr/assets/avatars/possessed/commands_1.png.import
+?? brwr/assets/avatars/possessed/commands_2.png
+?? brwr/assets/avatars/possessed/commands_2.png.import
+?? brwr/assets/avatars/possessed/commands_3.png
+?? brwr/assets/avatars/possessed/commands_3.png.import
+?? brwr/assets/avatars/possessed/events_1.png
+?? brwr/assets/avatars/possessed/events_1.png.import
+?? brwr/assets/avatars/possessed/events_2.png
+?? brwr/assets/avatars/possessed/events_2.png.import
+?? brwr/assets/avatars/possessed/events_3.png
+?? brwr/assets/avatars/possessed/events_3.png.import
+?? brwr/assets/avatars/possessed/sheet.png
+?? brwr/assets/avatars/possessed/sheet.png.import
+?? brwr/assets/spells/power_of_the_ankh.png
+?? brwr/assets/spells/power_of_the_ankh.png.import
+?? brwr/assets/tokens/evocations/portraits.json
+?? brwr/avatar_art.gd
+?? brwr/avatar_art.gd.uid
+?? brwr/avatar_board.gd
+?? brwr/avatar_board.gd.uid
+?? brwr/avatar_effects.gd
+?? brwr/avatar_effects.gd.uid
+?? brwr/avatar_events.gd
+?? brwr/avatar_events.gd.uid
+?? brwr/avatar_rules.gd
+?? brwr/avatar_rules.gd.uid
+?? brwr/avatar_state.gd
+?? brwr/avatar_state.gd.uid
+?? brwr/data/avatar_commands.json
+?? brwr/data/avatar_events.json
+?? brwr/data/avatars.json
+?? brwr/docs/HANDOFF-AVATAR-2026-10-18.md
+?? brwr/docs/handoff-2026-10-18/README.md
+?? brwr/docs/handoff-2026-10-18/Verify-Resume.ps1
+?? brwr/docs/handoff-2026-10-18/checks/alternative_rooms.gd
+?? brwr/docs/handoff-2026-10-18/checks/alternative_rooms.gd.uid
+?? brwr/docs/handoff-2026-10-18/checks/alternative_rooms_ui.gd
+?? brwr/docs/handoff-2026-10-18/checks/alternative_rooms_ui.gd.uid
+?? brwr/docs/handoff-2026-10-18/checks/avatar_smoke.gd
+?? brwr/docs/handoff-2026-10-18/checks/avatar_smoke.gd.uid
+?? brwr/docs/handoff-2026-10-18/checks/playtest.gd
+?? brwr/docs/handoff-2026-10-18/checks/playtest.gd.uid
+?? brwr/docs/handoff-2026-10-18/checks/presentations.gd
+?? brwr/docs/handoff-2026-10-18/checks/presentations.gd.uid
+?? brwr/docs/handoff-2026-10-18/checks/schools.gd
+?? brwr/docs/handoff-2026-10-18/checks/schools.gd.uid
+?? brwr/docs/handoff-2026-10-18/evidence/avatar_smoke.txt
+?? brwr/docs/handoff-2026-10-18/evidence/import.txt
+?? brwr/docs/handoff-2026-10-18/evidence/presentations.txt
+?? brwr/docs/handoff-2026-10-18/evidence/resume-validation.txt
+?? brwr/docs/handoff-2026-10-18/evidence/working-tree-at-handoff.txt
+?? brwr/docs/playtest-alternative-rooms-2026-10-17.md
+?? brwr/docs/playtest-forge-anubis-2026-10-16.md
+?? brwr/docs/presentations-and-portraits-2026-10-18.md
+?? brwr/fastgate_brwr_portmap.ps1
+?? brwr/tls_config.gd
+?? brwr/tls_config.gd.uid
+?? brwr/tools/install_client_ca.ps1
+?? brwr/tools/setup_tls.ps1
+?? brwr/upnp_manager.gd
+?? brwr/upnp_manager.gd.uid
