@@ -1,0 +1,3951 @@
+
+ACKNOWLEDGMENTS
+Welcome to Rocca Civetta, an enchanting region of 
+the Italian hinterland, which is home to one of the 
+most bizarre universities that the human mind has 
+ever conceived.
+Here, the chair of Dungeonology deals with studying 
+the structure and organization of different cultures, 
+above all the most atypical and strange ones... not 
+to mention mythical! Recently, this faculty has lost 
+its professor and the rector is looking for a valid 
+replacement. You are the ideal candidate for this job!
+Set in the Renaissance world of Nova Aetas, 
+Dungeonology will guide you to the discovery of many 
+different civilizations in order to learn their habits and 
+customs. But be careful: the people you meet will not 
+always be happy with your intrusions!
+The object of the game is to guide your Scholars in the 
+exploration of a Dungeon, collecting as much information 
+as possible regarding the people who live there. All the 
+information gained provides points to the Scholars that 
+need to be reach by the end of their exploration. Each 
+Scholar will strive to have a greater number than their 
+opponents, hoping to be able to successfully present their 
+thesis on the clan they studied.
+Development Team: Andrea Colletti
+Game Design: Diego Fonseca, Danilo Guidi
+Development Team: Ludus Magnus Studio
+Editor and Writer Manager: Paolo Scippo
+English Translation: Frank Calcagno
+Lead Graphic Designer: Diego Fonseca 
+Graphic Design: Paolo Scippo, Diana Maranzano
+Art Director: Andrea Colletti
+Concept Artist: Giovanni Pirrotta, Simone De Paolis
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Web Editors: Marco Presentino, Luca Bernardini
+Kickstarter Manager: Andrea Colletti
+Fullfillment: Michele Mirizio
+Production, Advertising and Fulfillment: Fabio Braghettoni
+Playtesters: Daniele De Lorenzo, David Condemi, Serena Falivene, Giovanni Franzini, Cinzia Grasso, Daniele Longo, Andrea Gianfermo, Carlo Scopa, Danilo Rizzo, Davide Longo, 
+Davide Becciu, Tiziano Leonardi, Luca Longo, Diana Maranzano, Jacopo Valente, Francesco Della Ragione, Claudia Minozzi, Stefano De Luca, Marco Boschiero, Ilaria Negri, 
+Andrea Fatigati, Daniele Pallozzi, Michele “Lisk” Mirizio, Lucca Games, Macro Games Night, Modena Play.
+Ludus Magnus Store: shop.ludusmagnusstudio.com
+• • •
+DUNGEONOLOGY: 
+THE EXPEDITION
+2
+CONTENTS
+• • •
+GAME COMPONENTS . . . . . . . . . . . . . . . . . . . . . . . . . 4
+GAME SETUP . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Randomizer deck. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Reserve. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+BASIC INFORMATION . . . . . . . . . . . . . . . . . . . . . . . . 6
+Object of the Game. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Starting Zones. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Note Board and Scholar Card. . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Exalted Scholars. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Stun and Knowledge Tokens. . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Students. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Omega Congregation. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Omega Students, Jinx Cards, Alert Card and the University 8
+Player Level. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+GAME TURN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Rest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Submit the Thesis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Clan Cards. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Exploration...................................10
+Movement Phase. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Information Cubes. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Dungeon Zones . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Placing Zones and Stairs. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Example: Stairs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Example: Placing a New Zone . . . . . . . . . . . . . . . . . . . . . . . 11
+Icon Effects. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Auxiliary Effects. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Trick Cards. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Action Phase. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Study - Stealth Test. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Espionage - Stealth Test. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Example: Study . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+End of Turn Phase. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Jinx Cards. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Example: Espionage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+END GAME . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Game Scoring. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+ADVANCED RULES . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+BOSS..........................................17
+Boss View and Starting Zone. . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Zone Effect: Boss. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+The Boss. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Boss Movement. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+DANGEROUS ZONES . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Zone Effects. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Example: Zone Effects Activation . . . . . . . . . . . . . . . . . . . . . 18
+MAXIMUM ALERT . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Select the Panic Card. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Panic Card. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Maximum Alert. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+The Game ends if .... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+MAIN EFFECTS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Play a Main Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Main Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Check if the Effect is an Action. . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Check the Timing of the Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Declare the Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Pay the Cost of the Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Resolve the Effect. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Priority. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Zone Effect Tokens. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Intern Cards. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Protected Information Cubes. . . . . . . . . . . . . . . . . . . . . . . . . . 21
+CROSSOVER . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Sine Tempore. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Black Rose Wars. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+ROCCA CIVETTA . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+3
+1. Scholar Models (4)
+2. Laetus Boss Model
+3. Boss Card
+4. Scholar Cards (4)
+5. Zone Tiles (18)
+6. Starting Zone (1)
+7. Clan Cards (3)
+8. Trick Cards (105)
+9. Note Boards (4)
+10. Civilization Information Cubes (Green 20)
+11. Militia Information Cubes (Red 15)
+12. Worship Information Cubes (Blue 13)
+13. Riches Information Cubes (Yellow 10)
+14. Caste Information Cubes (Purple 6)
+15. University (Bag) 
+16. Jinx Cards (15)
+17. Intern Cards (10)
+18. Randomizer Deck (16)
+19. Alert Cards (3)
+20. Panic Cards (3)
+21. Campus Board
+22. Stun Tokens (14)
+23. Knowledge Tokens (4)
+24. Secret Passage Tokens X (6)
+25. Teleportation Tokens (3)
+26. Stop (Trap) Tokens (3)
+27. Toll (Trap) Tokens (3)
+28. Ambush (Trap) Tokens (3)
+29. Stair Tokens (9)
+30. Wall Tokens (18)
+31. Student Models (40 Gray) 
+32. Omega Student Models (5 Red)
+9
+22
+23 29
+30
+24
+25
+26
+27 28
+GAME COMPONENTS 1 2
+SIGHTING Zone Eff ect was activated and activates . ACTIVATION Move Laetus 3 Zones, without letting him Scholar, or if he must retrace his steps. ENCOUNTER Each Scholar encountered takes a Stun Token.
+3
+3
+4
+3
+3
+3
+the NoVice
+SERMON Discard a Magic Trick Card: 
+1
+• • •
+DIVINE INTERVENTION Take 1 Stun Token (you cannot avoid this eff ect by Sacrifi cing a Student): 2
+4
+6
+5
+4
+1
+2
+3
+7
+8
+9
+10
+11
+12
+21
+20
+7
+difficultY: 
+medium
+time: 
+ 
+X 20’ ΩΩΩΩ
+19
+15
+31
+32
+10
+11
+12
+13
+14
+8
+18
+16
+17
+65
+4
+To start a game of Dungeonology, follow these steps in order. Take into consideration 
+the points regarding the Advanced Rules (indicated in orange) only when you are 
+comfortable with the basic rules of the game, inserting the ones into your play that you 
+think are best suited to your group’s play style.
+A. Each player takes a Note Board (9) and sets the Study Bonus (the wheel numbered 
+at top right) to 0.
+B. Each player randomly chooses or draws a Scholar Card (4) and places it on their 
+Note Board.
+C. Each player takes from the Reserve a number of Students (31) equal to the value 
+of your Scholar’s Initial Students.
+D. Shuffle the Randomizer Deck (18) and draw a card to determine the first player 
+(see the Randomizer Deck box).
+E. Shuffle the deck of Trick Cards (8) and deal as many cards in turn order (for 
+example, in a four-player game, 1 card to the first player, 2 to the second, 3 to the 
+third and 4 to the fourth player).
+F. Place the Campus board (21) on the table.
+G. Advanced Rule: if you use the Boss advanced rule (see page 17), select a Boss card 
+(3), choose one of the two profiles on it, and place it with the chosen profile facing 
+up next to the Campus.
+H. Select an Alert Card (19) from those available and place it on the Campus, choosing 
+the difficulty of the game from Introductory, Easy, Medium and Hard. Optionally, 
+it is also possible to choose a Player Level (see page 8) for more challenging games.
+I. Advanced rule: if you use the Maximum Alert advanced rule (see page 19), 
+a Panic Card (20) must be selected without looking at it and placed face-down 
+under the Alert Card.
+J. Draw a Clan Card (7) from those available and place it face-down on the Campus 
+without revealing it.
+K. Shuffle the deck of Jinx Cards (16) and place the deck on the table.
+L. Advanced rule: if you use the Main Effects advanced rule (see page 20), shuffle 
+the Intern deck (17) and place the deck on the table.
+M. Place the Starting Zone (6) in the center of the table and place the Scholar Models 
+on it.
+N. Create 3 stacks of Zones (5) dividing them according to the design on the back, 
+shuffling each stack individually, and place them face-down on the table.
+O. Put in the University (15) the number of Students (31) multiplied by the number 
+of players, plus an Omega Student (32) as indicated on the Alert Card (19).
+P. The first player takes her turn.
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+5 6
+3 4
+2
++14
++12
++10
++8
++6
++4
++2
+0 3 3 2 3 5
+the appreNtice
+MAGIC PRODIGY The Magic Trick Card Bonus Value of the cards 
+you play from your hand counts double for you. • • • RESEARCH ARCANA
+Discard a Subterfuge Trick Card: Reveal up to 5 Trick Cards from the deck. If you reveal a Magic Trick Card, stop and take 
+it, then shuff le the other drawn cards and place them back on the top of the deck.
+A
+B
+C
+F
+I
+J
+H
+RESERVE
+All materials not in play go to the Reserve. Some game effects may refer to it, 
+for example by indicating: “place a component (cards, cubes, Students, etc ...) 
+from the game to the Reserve”.
+When a game element must be chosen randomly, the effect or rule that requires 
+it will indicate “Randomize”.
+The Randomizing player shuffles the Randomizer Deck and draws cards, one at 
+a time, until he gets a result applicable to the situation.
+A Randomizer card indicates:
+1. A target Scholar: the color of the triangle is matched to the triangle in the 
+upper right corner of each of the Scholar Note Boards. The Scholar who 
+owns the Note Board with the triangle of the same color drawn becomes the 
+target of the effect that the Randomization has requested.
+2. Direction: if an effect requests to Randomize a direction, it is determined 
+by the direction the triangle points to. In this case the color 
+of the triangle is irrelevant.
+3. Passage: if an effect requests to Randomize a Passage with 
+respect to a Zone, this is determined by the arrow in the 
+central drawing of the map. If that step does not exist, the 
+first available clockwise Passage is selected.
+4. Information: if an effect requests to Randomize a type of 
+Information (or Information Cube), this is determined by 
+the information indicated in the center of the drawn card.
+Designer’s Note: For convenience, it is recommended that the 
+Randomizer is managed by the same player throughout the 
+duration of the game.
+1-2
+3
+4
+RANDOMIZER DECK
+medium
+time: X 20’ O
+GAME SETUP
+5
+Before starting a game of Dungeonology, you need to become familiar with a few 
+materials and elements of the game, specifically:
+• Object of the game
+• Starting Zone
+• Note Board and Scholar Card
+• Exalted Scholars
+• Stun and Knowledge tokens
+• Students
+• Omega Students, Jinx Cards, Alert Card and University
+Once you understand how these game materials work, you will be ready to start the first 
+round of the game by following the rules indicated on the following pages.
+OBJECT OF THE GAME
+• • •
+In Dungeonology, each player controls a Scholar from the University of Rocca Civetta 
+while exploring a dungeon, in an attempt to discover the secrets of the dwellers who 
+live there.
+The Scholar will not want to disturb the dungeon dwellers, but will need to collect 
+information about them, represented by Information Cubes, and by moving stealthily 
+in the various zones making up their habitat. In this mission, the Scholar will be helped 
+by the Students of the university, prepared even for the extreme sacrifice, helping their 
+mentor Scholar collect important information. Unfortunately, hidden among the 
+Students is a nest of advocates of the evil Omega Congregation who will try to ruin 
+the Scholar’s exploration by alerting the dungeon dwellers. And if that is not enough, 
+other university Scholars will compete in gathering information in a not very sporting 
+way.
+The aim of a game of Dungeonology is to earn more points than the other players in 
+the following ways:
+• Earn Information Cubes by collecting them while exploring the Zones making 
+up the Dungeon. Collecting enough Information Cubes also allows Scholars to 
+earn Stars.
+• Submit the Thesis when you have enough Information Cubes and at least two Stars.
+• Avoid the jinxes that will be given to Scholars by the Omega Students.
+STARTING ZONE
+• • •
+All Scholars start the game from this Zone, which can be distinguished from others by a 
+different back and for the owl symbol on the front. The Starting Zone is part of Level I 
+(see page 10).
+This Zone is a safe Zone, the Scholars inside it do not need to fear anything. When a Scholar is in this Zone they:
+• Cannot be the subject of game effects. • Cannot be targeted (not even by a Boss). • Cannot be selected for Randomizations. • Cannot be affected by Trick Cards. • Cannot play Trick Cards. • Can only carry out the Exploration action (see page 10).
+NOTE BOARD AND SCHOLAR CARD
+• • •
+The Note Board and the Scholar Card are the main tools the players use to interact with 
+the game and keep track of their accumulated points. On them are:
+A. Scholar’s name and title.
+B. Scholar’s Skills: each Skill can be activated as many times as you like during their 
+turn; if it is preceded by the icon it can also be activated during the other players’ 
+turn.
+C. Initial Students: the number of Students that the Scholar takes from the Reserve 
+at the beginning of the game. When replenished, Students are always taken from 
+the Reserve, when the Scholar performs the Rest Action.
+D. Hand Value: in the End of Turn Phase, if a player has a number of Trick Cards in 
+her hand less than this value, she draws from the deck until she has that number 
+in hand. There is no limit to the number of Trick Cards a player may have in their 
+hand.
+E. Speed: during their turn, a Scholar has this number of Speed points available to 
+explore the Dungeon (see page 10).
+F. Intelligence: the maximum number of Information Cubes the Scholar can 
+attempt to gain during a single Study Action (see page 13).
+G. Stamina: when a Scholar has a number of Stun Tokens equal to this value, at the 
+beginning of her next turn she will be forced to execute the Rest Activity (see page 
+9).
+H. Knowledge Combo: if at any time, even for a single moment, the Scholar has this 
+combination of Information Cubes on his Note Board, he immediately gains one 
+Knowledge Token and places it on the Knowledge Slot (I).
+I. Knowledge Slot: a Scholar who obtains the Knowledge Token places it here. 
+J. Table of Information Cubes: the Information Cubes gained by the Scholar are 
+placed in these slotted columns, always respecting the color indicated under the 
+column (the green cubes in the first column, the red cubes in the second, etc...), 
+and starting from the bottom. Each column indicates the points granted by 
+Information Cubes placed in it; the first visible number starting from the bottom 
+4 4 4 2 4
+the SQuire
+HEADBUTT Take 1 Stun Token (you cannot avoid this eff ect 
+by Sacrifi cing a Student) to target a Scholar in your Zone not targeted by this Skill during this turn, then choose one: • The targeted Scholar Randomizes to Drop an 
+Information Cube.
+• The targeted Scholar discards a random Trick 
+Card, then you take that Trick Card.
+B
+C D E F G H
+I
+J
+M
+M
+L
+K
+A
+BASIC INFORMATION
+6
+indicates the points scored by the column. Under each column, the individual 
+value is shown for each Information Cube.
+K. Stars: when a Scholar reaches one of the Stars shown to the left of the column 
+with an Information Cube, she also gains that Star. A Scholar has a Star as 
+long as there is an Information Cube next to it; if the Information Cube 
+is lost by the Scholar, she also loses that Star. The number of Stars in the 
+player’s possession affects some aspects of the game such as the Submitting 
+the Thesis Activity (see page 9) or the Exalted Scholar’s rule (see below).
+Attention: the Stars can be silver or gold and bordered by different colors; these 
+details are only used in the game’s expansions. In the base game, all Stars are 
+considered equal.
+L. Scholar’s Color: when a game effect requires you to choose a random Scholar, this 
+triangle color identifies the chosen Scholar (see Randomizer Deck, p. 5).
+M. Study Bonus: arrows to the left of the columns are gained and lost just like 
+the Stars. Each time a Scholar earns an Arrow, they increase their Study Bonus 
+(indicated on the Note Board wheel) by one. Likewise, when he loses an Arrow, he 
+reduces it by one. The Study Bonus makes the Study Action easer (see page 13).
+EXALTED SCHOLARS
+• • •
+When a Scholar earns a Star, all Scholars who have fewer Stars than her become 
+Exalted (if they are not already). Their Scholar cards are flipped over and their players use the new values and Skills shown on this side.
+An Exalted Scholar remains in this state until she becomes the Scholar (or one of Scholars) 
+who has the most Stars. STUN AND KNOWLEDGE TOKENS
+• • •
+Stun Tokens represent the Scholar’s fatigue accumulated during exploration, while the 
+Knowledge Token indicates the fact that the Scholar has discovered the identity of the 
+Clan that lives in the Dungeon.
+These tokens are the most commonly earned by Scholars during the game.
+Stun Tokens
+1. The moment a Scholar gets a Stun Token, he can Sacrifice one of his 
+Students to avoid getting it.
+2. A Scholar can have a maximum number of Stun Tokens equal to his 
+Stamina (you cannot go beyond this limit in any way, not even using a 
+Skill that gives Stun Tokens, such as Vincenzo’s “Divine Intervention”). 
+3. A Scholar who has Stun Tokens equal to their Stamina value continues to play 
+normally this turn. Nonetheless, he cannot use any game effects that require him 
+to obtain additional Stun Tokens for activation (for example, Valerio’s “Headbutt” 
+skill).
+4. If at the beginning of their turn a Scholar has Stun Tokens equal to their Stamina 
+value, that Scholar must perform the Rest Action.
+5. If at any time a Scholar has a number of Stun Tokens higher than their Stamina value, 
+discard any excess.
+Knowledge Token
+The Knowledge Token can be obtained in two ways during the game: complete the 
+Knowledge Combo indicated on your Scholar Card, or the first time you perform the 
+Submit the Thesis Action.
+• A Scholar who has earned this token can freely examine the Clan 
+Card for the rest of the game (being careful not to reveal it to other 
+players).
+• Once gained, the Knowledge Token can no longer be lost for the rest 
+of the game.
+• If all Scholars participating in the game obtain the Knowledge Token, the Clan 
+Card can be publicly revealed.
+7
+The arrival of Students from the University, as well as 
+giving support to Scholars, also marks the pace of the 
+game.
+Many game effects will require Scholars to draw Students from the 
+University (the Bag); these Effects are indicated on the icon to the 
+right.
+A game effect preceded by this icon indicates that the Scholar must:
+• Draw the indicated number of Students from the University (or all of those in the 
+University if there are fewer than the indicated number inside the bag).
+• Place all the gray Students drawn into the free spaces of the Bonfire; if all spaces of 
+the Bonfire are filled, the drawn Student must be placed in the Reserve.
+• If an Omega Student (red colored) was drawn, follow the rules of next paragraph.
+The evil Students of the Omega Fraternity will attempt to sabotage the Scholar’s work 
+by alerting the dungeon dwellers against them.
+When an Omega Student is drawn, proceed as follows:
+• Place the Omega Student in the top free space on the Alert Card. If there are no 
+free places to place the Omega Student, the game enters its final phase (see “End 
+of Game” p. 16).
+• Remove all the Students present at the Campus Bonfire and put them in the Reserve.
+• The Scholar who has drawn the Omega Student draws a Jinx Card from 
+its deck and places it face down in front of him (he will reveal it during the 
+next End of Turn Phase, either his own or another player’s, see page 15).
+When an Omega Student is placed on the Alert Card, the following game effects are 
+activated, which must be resolved before continuing the current turn:
+A. Alert Bonus: this value is added to the Alert Value of all Dungeon Zones for 
+the rest of the game; use only the highest number activated by the lowest Omega 
+Student.
+B. Replenish the University: these two columns indicate the number of Students 
+to be recovered from the Reserve and added in the University. The first column 
+indicates a number of gray Students, multiplied by the number of players 
+participating in the game. If there are not enough Students in the Reserve to reach 
+this number, all those available are entered in the University. The second column 
+indicates the number of Omega Students in the University to be placed, along 
+with the others.
+6
+5
+4
+1
+2
+3
+7
+8
+9
+10
+11
+12
+difficultY: medium
+time: X 20’
+Ω
+Ω
+Ω
+Ω
+STUDENTS
+• • •
+OMEGA STUDENTS, JINX CARDS, ALERT 
+CARDS AND THE UNIVERSITY
+• • •
+Rocca Civetta hosts many student 
+brotherhoods and sisterhoods; among 
+these, the most ambitious and influential 
+is the Omega Congregation!
+The students of this congregation are led 
+by a mysterious Grand Master who aims 
+to control the chair of Dungeonology 
+and the entire University.
+The Omega Students who hinder 
+Scholars on their expeditions belong to 
+this congregation; these annoying guys 
+will also appear in future expansions, to 
+oppose our heroes.
+A
+B
+C
+difficultY: medium
+time: X 20’
+Ω
+Ω
+Ω
+Ω
+difficultY: medium
+time: X 20’
+Ω
+Ω
+Ω
+Ω
+OMEGA CONGREGATION
+The four Alert Cards allow you to select a “Dungeon” difficulty and provides an 
+indication of game duration in minutes per player . 
+The number of players is also used to multiply the number of Students who must be 
+entered into the University at the start of the game and every time an Omega Student 
+is placed on the Alert Card.
+After the players have gained more experience, at point H of the Game Setup, they 
+will also be able to choose a Player Level (among those listed below) to make the 
+exploration of the Dungeon more difficult by increasing the probability of the arrival 
+of Omega Students.
+• Students: use the instructions on the Alert Card.
+• Scholars: reduce the number of players by 1 for all calculations of the Alert 
+Card.
+• Professors (3+ players): reduce the number of players by 2 for all calculations 
+of the Alert Card.
+• Rectors (4+ players): reduce the number of players by 3 for all calculations 
+of the Alert Card.
+PLAYER LEVELS
+1
+8
+• Add to your score the bonus points for whoever delivered the Thesis first: 10 for 
+the first, 7 for the second, 5 for the third and 3 for the fourth.
+• Announce your final score to other players.
+• Remove your Scholar from the game: she no longer participates in the game, and 
+she no longer is taken into account for any game effects.
+• Your turn and your game end.
+• Refer to the paragraph “End of Game” (p. 16) and apply what is indicated. 
+FAILURE!
+You have a score lower than the Thesis Target Score (B)
+indicated on the Clan Card.
+You are a donkey! You annoyed the whole academic college of Rocca Civetta with your 
+carelessness. With your cap in your hands you go back to studying.
+Follow these points:
+• Put the Clan Card back on the Campus, face down if it was covered when you 
+took it.
+• Draw a Jinx Card and reveal it immediately.
+• Place in Reserve the most valuable Information Cube on your Note Board (Caste 
+cube first, then, Riches, Worship, Militia and finally Civilization).
+• Your turn ends.
+CHOOSE AN ACTIVITY!
+On your turn, you can perform one, and only one, of these three Activities:
+• Rest: the Scholar can return to the Starting Zone to recover from the fatigue of 
+the expedition. If you have Stun Tokens equal to your Stamina, you must take this 
+action.
+• Submit the Thesis: the Scholar returns to the Starting Zone attempting to deliver 
+the Thesis.
+• Explore: the Scholar explores the dungeon trying to unravel the secrets of the 
+inhabitants. If you start your turn in the Starting Zone you must perform this action.
+You can choose to perform this Action, but, if you have Stun Tokens equal to your 
+Stamina, you must perform this activity.
+When taking a rest follow these steps:
+• Move your Scholar to the Starting Zone.
+• Discard all Stun Tokens in your possession.
+• Discard a Jinx Card in your possession.
+• If you have fewer Students than your Starting Student value, take some from the 
+Reserve (if available) until you have a number equal to this value.
+• Discard any number of Trick Cards (optional).
+• Draw Trick Cards until you have a number equal to your Hand value.
+• Your turn ends. 
+You must have at least 2 Stars to carry out this Action. When you decide to Submit the 
+Thesis, follow these points:
+• Move your Scholar to the Starting Zone.
+• Consult the Clan Card (see box) being careful not to reveal it to other players; 
+obtain the Knowledge token if you don’t already have it.
+• Count the points on your Note Board, applying the Modifiers (C) indicated on 
+the Card Clan (A); do not add or subtract bonus points (PTs) from different 
+sources from the Note Board in this calculation, such as those indicated on the 
+Intern Cards or Jinx Cards.
+At this point two things can happen:
+SUCCESS!
+You have a score equal to or greater than the Thesis Target Score (B) 
+indicated in the Clan Card.
+Congratulations, you have delivered your Thesis to the University of Rocca Civetta! 
+Proceed to the following points:
+• Reveal the Clan Card to everyone and place it face up on the Campus.
+• Add bonus points from sources other than the Note Board to your score, such as 
+the Intern Cards. Subtract penalties from Jinx Cards in your possession.
+REST
+SUBMIT THE THESIS
+A Student reminds you nonstop 
+about your trusted pet dog, which 
+recently abandoned you . . .
+If you are Exalted, return to 
+the Standard state.
+As long as you have this 
+card, you cannot become 
+Exalted.
+SurViValiSt +1 PT
++1
+SurViValiSt +1 PT
++1
+Penalties and bonus points deriving from sources external to the Note Board.
+A Student reminds you nonstop 
+about your trusted pet dog, which 
+recently abandoned you . . .
+If you are Exalted, return to 
+the Standard state.
+As long as you have this 
+card, you cannot become 
+Exalted.
+A
+C
+B
+CLAN CARD
+Scholars explore the Dungeon knowing the race of its inhabitants (The Fauns), 
+but not the Clan they belong to. It will be vital for their research to learn as 
+much as possible about the Clan before their 
+opponents do.
+A Clan Card contains these elements:
+A. Name of the Clan.
+B. Thesis Target Score: a Scholar must 
+have reached this value (derived from 
+the Information Cubes) on your Note 
+Board in order to successfully Submit the 
+Thesis.
+C. Score Modifiers: each individual 
+Information Cube on the Note Board 
+of a Scholar may have its value modified 
+as shown by these Modifiers. If, for 
+example, the Scholar’s Note Board has 
+4 Militia Cubes (red, 3 points each) and 
+the Clan Card in the game are the Blood 
+Worshipers (Militia +2), each Militia
+Cube will have a final value of 5 points (3 
++ 2 for each) allowing the player to score 
+20 points instead of 12.
+GAME TURN
+9
+Civilization
+20 Cubes
+2 Points
+Militia
+15 Cubes
+3 Points
+Worship
+13 Cubes
+4 Points
+Riches
+10 Cubes
+5 Points
+Caste
+6 Cubes
+6 Points
+INFORMATION CUBES
+Zone Effects: a Zone may contain Zone Effects that modify the rules within it, or 
+are activated when a Scholar enters it. If you do not use the Boss and Danger Zones
+advanced rules (see pages 17 and 18), the only Zone Effect to take into account is the 
+Stairs Effect (see box Placing Zones and Stairs, p. 11).
+EXPLORATION
+Venture into the depths of the Dungeon, reveal its Zones and reveal the secrets of the 
+villagers by obtaining valuable Information Cubes!
+If you start your turn in the Starting Zone, you must do this Activity.
+This activity is divided into three phases to be played in sequence:
+1. Movement Phase
+2. Action Phase
+3. End of Turn Phase
+During this Activity, except in the End of Turn Phase, you can play your Cards Trick 
+(see page 13). Your opponents can do it too, but they can only use the Effects indicated 
+by the icon . There is no limit to the number of Trick Cards that you can play as long 
+as you respect the rules of the Effects you want to activate.
+1. MOVEMENT PHASE
+• • •
+Your Scholar has a Speed value in points that you can “spend” during this phase to 
+move around the Dungeon and reveal new Zones. You can spend a Speed point on:
+• Move to an adjacent and linked Zone from the one you are in.
+• Draw a Zone from the stack of the Floor level you are currently in (I, II or III). 
+Place it Adjacent and Linked to the Zone you are in and move immediately inside 
+it (see box Placing Zones and Stairs, page 11).
+At any time during this phase, or when you have no more Speed points to 
+spend, you can move on to the Action Phase.
+You can earn additional Speed points by playing Exploration Trick Cards 
+(see page 12).
+After the Movement Phase is over, you can no longer move your Scholar by utilizing 
+the Speed points of the Scholar Card, but you can use other Game Effects (such as 
+that of the Exploration Trick Cards) to move during other Phases.
+N
+G
+G
+E
+A
+B
+C
+C
+C
+D
+F
+The Zones represent the various environments of the Dungeon. The following 
+describes what you will find in them:
+A. Spaces (for Information Cubes): these slots are where you initially 
+place the Information Cubes of the indicated color.
+B. Alert Value: the value the Scholars must equal or exceed during a 
+Stealth Test to collect cubes with a Study Action.
+C. Passage: each Zone can have from 1 to 8 Passages.
+D. Zone Effects: used with the Dangerous Zones advanced rule, only 
+consider the Stairs Effect if you do not use this rule.
+E. Dungeon icon: this icon indicates the clan type living in this 
+Dungeon for these Zones (Fauns) and allows you to identify the 
+Panic Cards (see p. 19) compatible with it.
+F. Floor and Number: the Roman numeral indicates the Floor level 
+of the Dungeon (I, II or III) and therefore the pile it belongs to, also 
+recognizable from the back of the tile. The Arabic number simply identifies 
+the individual tile.
+G. Doors: doors obstruct the entrance to a Zone (restricted Exit). Such 
+Passages are considered Blocked for Scholars who do not have at least 
+one Information Cube of the same color as the door. If the door has two 
+different colors, the Scholar must have at least an Information Cube of both 
+colors to use the Passage.
+DUNGEON ZONES 
+C
+F
+10
+EXAMPLE: STAIRS
+A
+B
+C
+D
+Rules you encounter can refer to these terms to identify a particular portion of the 
+Dungeon or the status of a Zone compared to the others:
+• Zone: a single tile.
+• Adjacent Zones: two Zones that touch on one side, but do not necessarily 
+have Passages in common that link them.
+• Linked Zones: two adjacent Zones that have one or two Passages between 
+them that link them.
+• Floor: all Adjacent and Linked Zones belonging to the same floor, I, II or III 
+(see box Zones of the Dungeon, F).
+• Area: a group of Adjacent Zones in its entirety, regardless of Clan type of the 
+Zones that compose it (the Dungeon of the Fauns consists of a single Area, 
+this changes in the game’s expansions).
+When you need to place a new Zone on the table: 
+• Draw a Zone from the top of the pile of the same Floor as the Zone you are 
+in and place it Adjacent and Linked to your Zone. If the Zones cannot be 
+Linked (usually due to lack of matching Passages), place the Zone you just 
+drew to the bottom of the stack and draw another. If you can’t find a Zone in 
+the stack that can be Linked, the Scholar does not move from their Zone (the 
+Speed point is still spent).
+• Place the indicated Information Cubes in the Spaces of the Zone.
+• Move into it immediately, unless you are blocked by a Door (G, the Speed 
+point is still spent). If you entered and the Stairs Effect is present, activate it 
+(if the Dangerous Zone advanced rule is used, activate the other Effects in 
+sequence starting from left to right, see p. 18).
+If the Stairs Effect is present, and you are the first to enter a Zone:
+• Choose a stack of Zones on a Floor level above or below the Floor of the Zone 
+containing the Stairs Effect (Floor I: pile II / Floor II: pile I or III /Floor III: 
+pile II).
+• Draw a Zone from the top of the chosen pile and place it Adjacent and 
+Linked to your Zone.
+• Place the Stairs Marker on all Passages linking this zone and the 
+New.
+• Place a Wall Token on all other Passages to previously placed 
+Zones if those Zones are of different Floor levels that would have 
+needed Stairs to connect them.
+PLACING ZONES AND STAIRS
+A. Rebecca is located in Zone “I-3”; spends one Speed point, draws and places 
+the Zone “I-2” and moves inside.
+B. She checks the Zone Effects, and must activate the Stairs Effect, so Rebecca 
+reveals a Zone from the Floor level II stack, drawing “II-2”, and connects it 
+as she prefers to the Zone she is in.
+C. She places the Stair Token to mark the available Floor Passage.
+D. She must place a Wall Token to block the Passage to the previously placed 
+“I-3” Zone.
+11
+EXAMPLE: PLACING A NEW ZONE
+ 
+Adjacent and
+Linked
+Adjacent
+and Linked
+Adjacent
+
+Add N to a Stealth Value during a 
+Stealth Test.
+Add N to an Alert Value during a 
+Stealth Test.
+N
+Draw N Students from the University, 
+then place them in the Bonfire area of 
+the Campus (see page 8).
+N Gain N Students from the Campus 
+Bonfire.
+N Sacrifice N Students you own and 
+put them in Reserve.
+N Get N Speed points.
+N Gain N Stun Tokens (see p. 7).
+N
+N Draw N Trick Cards.
+Discard or make opponent discard N 
+Trick Cards.
+The Effect preceded by this icon can be 
+played even if it is not your turn.
+The Effect preceded by this icon can be 
+played at any time as a response to the effect 
+of another Trick card just played by an 
+opponent. This effect is resolved before all 
+other played effects.
+N
+Divination, see “Spell” on the right.
+ICON EFFECTS
+Good
+Bad
+Stealth
+Timing
+Danger
+Exploration 1: play in your Movement Phase or Action Phase to get 1 Speed 
+point.
+Exploration 2: play in your Movement Phase or Action Phase to get 2 Speed 
+points.
+Exploration 3: play in your Movement Phase or Action Phase; draw 1 Student 
+and place it at the Bonfire, then get 3 Speed points.
+Subterfuge 1: play during a Stealth Test (yours or an opponent’s) to increase 
+the Scholar’s Stealth Value or the Alert Value of a Zone by 1.
+Fate 4/5: play during a Stealth Test (yours or an opponent’s) to Increase the 
+Scholar’s Stealth Value by 4/5, first Draw 1 Student and place it at the Campus 
+Bonfire.
+Fate 4/5: play during a Stealth Test (yours or an opponent’s) to increase 
+the Zone’s Alert Value by 4/5, first Draw 2 Students and place them at the 
+Campus Bonfire.
+Subterfuge 2: like Subterfuge 1 but increases the Values by 2; increases the 
+number of Students drawn by 1.
+Subterfuge 3: same as Subterfuge 2 but increases the Values by 3.
+Spell 1 (Divination 1): play during a Stealth Test (yours or an opponent). 
+Reveal the first Trick Card from the deck, add its Value Bonus to the Scholar’s 
+Stealth Value or the Zone’s Alert Value.
+Spell 2 (Divination 2): play during a Stealth Test (yours or an opponent). 
+Draw 1 Student and place it at the Bonfire, then reveal the first two Trick Cards 
+from the deck, add the highest Bonus Value among them to the Scholar’s 
+Stealth Value or the Zone’s Alert Value.
+Spell 3 (Divination 3): same as Magic 2 but draw 2 Students and reveal 3 
+Trick Cards.
+Notoriety 1: play during your Movement or Action Phase to get 1 Student, 
+taking it from the Campus Bonfire, if available.
+Notoriety 2: play during your Movement or Action Phase to get up to 2 
+Students, taking them from the Campus Bonfire, if available.
+Notoriety 3: play during your Movement or Action Phase; draw 1 Student 
+and place it at the Bonfire, then get 3 Students from the Campus Bonfire, if 
+available.
+Social 1: draw 1 Trick Card from the deck.
+Social 2: sacrifice 1 Student, then draw 2 Trick Cards from the deck.
+Social 3: sacrifice 1 Student, then draw 2 Trick Cards from the deck, or discard 
+or have an opponent discard a Trick Card. You can play this Effect even during 
+an opponent’s turn.
+To better understand the mechanics of the Action Phase, AUXILIARY EFFECTS
+it is good to familiarize yourself with the icons of the game 
+Effects and with the Auxiliary Effects of Action Cards. 
+The N indicated in the Effects Icons below represents the 
+number associated with the effect (different according to 
+the card in which it appears).
+12
+2. ACTION PHASE
+• • •
+In this phase you can perform one (and only one) Action; choose from the following:
+• Study: you try to collect a certain number of Information Cubes from your 
+current Zone by taking a Stealth Test (see Study - Stealth Test below).
+• Espionage: you try to steal an Information Cube from an opponent who is in 
+your Zone or in an adjacent and linked Zone by taking a Stealth Test (see page 14 
+Espionage - Stealth Test).
+• Main Effect of a Trick Card with an “Action” cost: if you use the Advanced 
+Main Effects rule, you can use the main effect of a Trick Card that requires an 
+Action to be activated (see page 20).
+• Action Zone Effect: if you use the Advanced Dangerous Zones rule, you can use 
+a Zone Effect that requires an Action (circular icons) to be used (see pg. 18).
+Study - Stealth Test
+When you attempt a Study Action to collect Information Cubes in your Zone, you 
+must perform a Stealth Test against the Alert Value of that Zone to avoid being 
+discovered by its inhabitants. Careful! Your opponents might try to get you discovered. 
+Proceed as follows:
+1. Check the Alert Value of the Zone you are in and add to it the possible Alert 
+Bonus indicated by the last Omega Student placed on the Alert 
+Card (see page 8); this is the value that you must reach or exceed 
+with your Stealth Value, which is currently equal to 0.
+2. Indicate the number of Information Cubes in your Zone you 
+wish to collect, always starting from the one furthest to the 
+left. You can indicate from 1 to a maximum number equal to 
+your Intelligence Value (see page 6). These are the Cubes you 
+will attempt to collect, based on how many you indicated. The 
+Zone Alert Value will increase: +1 if you indicated 2; +3 if you 
+indicated 3; +6 if you indicated 4; +10 if you indicated 5.
+3. Play as many Trick Cards at the same time as desired from your 
+Hand (at least one), taking into consideration only their Bonus 
+Value. Add up all the Bonus Values of the cards played and any Study Bonus 
+indicated on the wheel of your Note Board (see page 6). The total obtained is your 
+Stealth Value. Once declared, this value cannot be changed any further from 
+the Bonus Value of the Trick Cards, but only from other game effects such as the 
+Auxiliary Effects of Subterfuge, Fate and Magic Cards (see Auxiliary Effects, p. 12).
+4. Now, the player to your left can play as many Trick Cards as desired, provided that 
+the Effects on the cards used are preceded by . She must play one card at a time, 
+completely resolving the effect of a card before playing the next. The opponent 
+will use these cards in an attempt to raise the Alert Value of the Zone you are in as 
+much as possible (with the Auxiliary Effects of Subterfuge, Fate and Magic Cards). 
+If she really loves you, she may try to help you by increasing your Stealth Value, 
+but don’t hope too much. When she declares that she has played all the cards she 
+desires (or does not want to play any at all), it’s up to the player to her left to do 
+the same.
+5. Once the tour around the table is finished, it’s up to you to have the last say. As 
+your opponents did, you may play as many Trick Cards as desired using their 
+Auxiliary Effects to increase your Stealth Value.
+At this point two things can happen:
+SUCCESS or FAILURE
+(see next page)
+Trick Cards allow Scholars to interact in various ways with the Dungeons, 
+Information Cubes and opponents. If the Deck of Trick Cards runs out, shuffle 
+the discards and form the Deck again. Trick Cards contain these effects and 
+information:
+A. Type: there are 6 types of Trick Cards: Exploration, Subterfuge, Magic, 
+Social, Fame and Fate. The Trick Card type causes its effects to apply to a 
+certain part of the game. For example, Exploration cards allow Scholars to 
+move more easily; also, some Scholars use a specific type of Trick Cards in 
+their abilities, such as Rebecca with Magic cards.
+B. Bonus Value: needed to declare your Stealth Value in a Stealth Test.
+C. Name and Main Effect: to be taken into consideration only if you use the 
+Main Effects advanced rule (see page 20).
+D. Auxiliary Effect: one or two effects that allow you to manipulate the rules 
+of the game to your advantage
+TRICK CARDS
+eXploratioN
+Discard a Jinx Card. Discard all of your Stun Tokens.
+Draw Trick Cards until you reach your 
+Hand Value.
+Gain Students from the Bonfi re (or 
+from the Reserve if the Bonfi re is 
+empty) to reach your Student Value if 
+you have less.
+3
+3
+1
+There’s no place like home .
+maKeShift camp
+NotorietY
+My lawyer will send you the bill!
+You doN’t KNoW Who i am!
+Cancel the eff ects of a Trick Card that has 
+just been played to activate its Main or 
+Auxiliary Eff ect.
+Steal 1 Randomized Information Cube 
+from the Scholar who played that card.
+1 2 1
+1 3
+maGic
+2
+STEALTH TEST: Succeed at the Stealth 
+Test.
+Chant the spell of the supreme snore!
+SNoramuS
+1
+2 1 SuBterfuGe
+1
+Ω
+Randomize for each Scholar in your same 
+or an Adjacent and Linked Zone. If the 
+result is Militia, Steal 1 Randomized 
+Information Cube from that Scholar.
+2
+Use the age-old art of pickpocketing
+and blame a Student .
+liGht-fiNGered
+Social
+2
+Choose a player. Until the end of your 
+turn they may not play Trick Cards.
+You remember old times
+with one of your colleagues .
+old frieNd
+1 2
+1
+2
+4 4 4 2 4
+the SQuire
+HEADBUTT
+Take 1 Stun Token (you cannot avoid this eff ect 
+by Sacrifi cing a Student) to target a Scholar in 
+your Zone not targeted by this Skill during this 
+turn, then choose one: • The targeted Scholar Randomizes to Drop an 
+Information Cube.
+• The targeted Scholar discards a random Trick 
+Card, then you take that Trick Card.
+maGic
+2
+STEALTH TEST: Succeed at the Stealth 
+Test.
+Chant the spell of the supreme snore!
+SNoramuS
+1
+2 1
+Social
+2
+Choose a player. Until the end of your 
+turn they may not play Trick Cards.
+You remember old times
+with one of your colleagues .
+old frieNd
+2 1
+Fate Trick Cards have no Main Effect, only one very high Bonus Value in the 
+center, and two Auxiliary Effects.
+1
+2
+A
+B
+Social
+2
+Choose a player. Until the end of your 
+turn they may not play Trick Cards.
+You remember old times
+with one of your colleagues .
+old frieNd
+2 1
+B
+C
+C
+C
+maGic
+2
+STEALTH TEST: Succeed at the Stealth 
+Test.
+Chant the spell of the supreme snore!
+SNoramuS
+1
+2 1
+D
+13
+Espionage - Stealth Test
+When you attempt an Espionage Action to steal an Information Cube from an 
+opponent, you must take a Stealth Test against your opponent’s Alert Rating. But your 
+target’s Students will defend his studies at the cost of their lives. Proceed as follows:
+1. First, you must Sacrifice a Student! This brave soul will sacrifice herself by 
+distracting your opponent, hopefully giving you enough time to steal his research.
+2. Choose a single Information Cube present on the target Scholar’s Note Board. 
+You may only target an opponent in the same Zone as you or an Adjacent and 
+Linked Zone. This is the Cube you will try to steal.
+3. Determine the target’s Alert Value by adding the value in points of the selected 
+Information Cube to the number of Students the target has. This is the value 
+you must reach or exceed with your Stealth Value, which begins at 0.
+4. Play as many Trick Cards as you want from your Hand, playing all chosen cards 
+at once (at least one), taking into consideration only their Bonus Value. Add all 
+the Bonus values of the cards played. The total is your Stealth Rating; and once 
+declared, this value can no longer be modified by the Bonus Value of Trick 
+Cards, but only from other game effects such as Auxiliary Effects of Subterfuge, 
+Fate and Magic Cards (see Auxiliary Effects, p. 12).
+5. Now, the target Scholar plays as many Trick Cards as he desires, provided that 
+the Effects used are preceded by . The target needs to play one card at a time, 
+completely resolving the effect of a card before playing the next. He will play these 
+cards in an attempt to raise his Alert Value as much as possible (with the Auxiliary 
+Effects of Subterfuge, Fate and Magic Cards).
+3. The other Scholars don’t play cards and now 
+Sofia has one last chance to succeed in her Stealth 
+Test, so she plays the Auxiliary Effect of a Spell card: 
+Divination, which allows her to draw a Trick Card 
+from the deck and add the Bonus Value to her Stealth 
+Value. She draw a 2, reaching a Stealth Value of 6.
+maGic
+2
+STEALTH TEST: Succeed at the Stealth 
+Test.
+Chant the spell of the supreme snore!
+SNoramuS
+1
+2 1
+SuBterfuGe
+Ω
+Move to another Scholar’s position, in 
+your same Area.
+You are your colleagues’ silent shadow!
+purSuit
+1 / 1
+eXploratioN
+Ω
+1
+Move another Scholar
+or a Boss up to 2 Zones.
+A Scholar moved in this way activates 
+Zone Eff ects normally.
+A Boss moved in this way does not 
+activate the Activation or Encounter 
+Eff ects of his Boss Card.
+I promise you, that’s where they keep the treasure!
+falSe iNStructioNS
+1 / 1
++ +
+SuBterfuGe
+1
+Ω
+ACTION: Steal a Randomized Information 
+Cube from a Scholar in your Zone. If the 
+randomization result is Civilization, Steal 
+another Randomized Information Cube from 
+the same Scholar.
+1
+2
+Use a Student to swap bags with a colleague!
+QuicK SWap
+1
+maGic
+ACTION: Choose 1 Information Cube 
+on any Note Board, then swap it with one 
+from the Reserve as follows:
+Nothing is lost, nothing is created,
+everything is transformed!
+eQual eXchaNGe
+1 / 1
+Sofia wishes to Collect an Information Cube 
+in Zone “I-3”. To do so she must attempt a 
+Study Action.
+She needs to reach a Stealth Rating of 4 or more, 
+as this Zone has an Alert Value of 3, and the 
+Alert Card has reached a Penalty to the Study 
+of +1 (the last Omega Student was placed next to +1). Sofia could Collect two 
+Information Cubes thanks to her Intelligence of 2, but the Alert Value would 
+increase by 1 to 5, and she doesn’t feel that brave.
+difficultY: eaSY
+time: X 25’
+Ω
+Ω
+Ω
+Ω
+Zone Alert + Study Penalty 4. Her Stealth Test is SUCCESSFUL, so she collects the Civilization 
+Information Cube (the first to the left in the Zone), and places it in the first 
+available space in the Civilization Column on her Note Board. Covering the 
+number 0 of the column with this cube, Sofia earns the points corresponding to 
+the last visible value of the column, i.e. 2.
+1. Sofia plays 3 Trick Cards, adding their 
+Bonus Values and thus declaring a Stealth 
+Value o 4.
+2. Another Scholar plays an Auxiliary 
+Effect of a Subterfuge Card which 
+increases the Alert Value to 6.
+2 5 4 2 3
+the Scum
+ROGUE When you perform an ESPIONAGE Action: • Don’t Sacrifi ce a Student.
+• The Target Scholar’s Students don’t raise 
+their Alert Value.
+• After you have generated your Stealth Value:
+1 1
+EXAMPLE: STUDY
++
+NotorietY
+2
+Your expedition is fi nanced
+by important high society friends .
+Draw Trick Cards until you fi ll your 
+hand.
+fiNaNcierS
+1 2
+NotorietY
+2
+fiNaNcierS
+1
+2
+SUCCESS!
+Your Stealth Value is equal to or greater than the Zone Alert Value!
+Congratulations, you have collected information about the dungeon dwellers without 
+alerting them and dodging the tricks of your opponents. Collect the Information 
+Cubes you indicated in point 2 of the Stealth Test and place them on your Note Board, 
+each in the column of its color from bottom to top.
+FAILURE!
+Your Stealth Value is less than the Zone Alert Value!
+It went wrong, the dungeon dwellers discovered you and pummeled you 
+with blows. Get a Stun Token (see page 7) and you must immediately draw 
+a Student from the University and place it at the Campus Bonfire (hoping 
+it is not an Omega Student, in which case, see page 8). 1
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+2 3 4 5 6
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+2 3 4 5 6
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+2 3 4 5 6
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+2 3 4 5 6
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++14
++12
++10
++8
++6
++4
++2
+0
++15
++12
++9
++6
++3
+0
++16
++12
++8
++4
+0
++15
++10
++5
+0
++6
+0
++23
++14
++25
++24
++26
+2 3 4 5 6
++14
++12
++10
++8
++6
++4
++2
+4 4 4 2 4 0
+the SQuire
+HEADBUTT
+Take 1 Stun Token (you cannot avoid this eff ect 
+by Sacrifi cing a Student) to target a Scholar in 
+your Zone not targeted by this Skill during this 
+turn, then choose one: • The targeted Scholar Randomizes to Drop an 
+Information Cube.
+• The targeted Scholar discards a random Trick 
+Card, then you take that Trick Card.
+14
+6. When the target declares that he has played all the cards he wanted to play (or if he 
+does not want to play any), it’s up to you to do the same.
+7. Repeat steps 5 and 6 until both the target and you declare that you don’t want 
+to play any additional Trick Cards. During this test, only the two involved 
+Scholars, without exception, may play Trick Cards.
+At this point two things can happen:
+SUCCESS or FAILURE
+SUCCESS!
+Your Stealth Value is equal to or greater than the opponent’s Alert Value!
+Congratulations, you stole the information from your opponent. Collect the 
+Information Cube you indicated in step 2 of the Stealth Test and place it on your Note 
+Board, in the lowest available space in the column matching its color.
+FAILURE!
+Your Stealth Value is lower than the opponent’s Alert Value!
+It went wrong, your opponent found you and his Students pummel you 
+with blows. Get a Stun Token (see page 7) and you must immediately 
+draw a Student from the University and place it at the Campus Bonfire 
+(hoping it is not an Omega Student, in which case, see p. 8).
+3. END OF TURN PHASE
+• • •
+Arrange your notes, take stock of your Students, and come up with new tricks to hinder 
+your opponents!
+Your turn is ending, but before moving on to the next player, you have a little paperwork 
+to attend to. Remember that no one can play Trick Cards at this stage. Proceed by 
+following these steps:
+• If you don’t use the Main Effects advanced rule (see page 20), draw one Student 
+from the University and place it at the Campus Bonfire (hoping it is not an Omega 
+Student, in which case, see p. 8).
+• Each player who has face down cards reveals them one at a time and apply their 
+effects.
+• Draw Trick Cards until you reach your Hand limit.
+• Your turn ends.
+1
+Sofia wants to steal a Militia Information Cube from Valerio. To do this, she executes 
+an Espionage Action. She therefore needs to reach a Stealth Value of at least 3, as this is 
+the Point Value of the Militia Information Cube. Sofia, thanks to her “Rogue” Skill, can 
+ignore all of Valerio’s Students during an Espionage Action.
+2 3 5 4 2
+the Scum
+ROGUE When you perform an ESPIONAGE Action: • Don’t Sacrifi ce a Student.
+• The Target Scholar’s Students don’t raise 
+their Alert Value.
+• After you have generated your Stealth Value:
+1 1
+1. Sofia plays 2 Trick Cards, adding their Bonus Values, 
+thus achieving a Stealth Value equal to 2.
+2. Thanks to her “Rogue” skill, she performs a Divination 1 twice, drawing the excellent Fate 
+Card with a Bonus Value of 5, and a second Trick Card with a Bonus Value of 1, reaching a 
+Stealth Value of 8.
+3. Valerio could respond by playing Trick Cards himself, but against such a high result he decides not to respond!
+Since her Stealth Test is a Success, Sofia steals the red Information Cube which is higher up on the relative column of 
+Valerio’s Note Board. She then places it in the first available space of the Militia column on her Note Board. By covering 
+the number 0 in the column with the Cube, Sofia earns the points corresponding to the last value visible in the column, 
+i.e. 3. By adding these points to the 2 provided by the Civilization Information Cube already on her Note Board, 
+this brings her to a total of 5 points. 
+4 4 4 2 4
+the SQuire
+HEADBUTT Take 1 Stun Token (you cannot avoid this eff ect 
+by Sacrifi cing a Student) to target a Scholar in your Zone not targeted by this Skill during this turn, then choose one: • The targeted Scholar Randomizes to Drop an 
+Information Cube.
+• The targeted Scholar discards a random Trick 
+Card, then you take that Trick Card.
+2 5 4 2 3
+the Scum
+ROGUE When you perform an ESPIONAGE Action: • Don’t Sacrifi ce a Student.
+• The Target Scholar’s Students don’t raise 
+their Alert Value.
+• After you have generated your Stealth Value:
+1 1
+EXAMPLE: ESPIONAGE
+1
+NotorietY
+You boast about your qualifi cations
+to impress the Students .
+Steal 1 Student each from the Scholars in 
+your Zone, or in any Adjacent and Linked 
+Zones, up to a maximum of 3 Students.
+reallY famouS
+1 / 1
+SuBterfuGe
+Ω
+Move to another Scholar’s position, in 
+your same Area.
+You are your colleagues’ silent shadow!
+purSuit
+1 / 1
++
+1
+NotorietY
+You boast about your qualifi cations to impress the Students .
+Steal 1 Student each from the Scholars in 
+your Zone, or in any Adjacent and Linked 
+Zones, up to a maximum of 3 Students.
+reallY famouS
+1 / 1
+1
+2
+JINX CARDS
+Jinx Cards represent unfortunate situations Scholars 
+can encounter. Usually, they are caused by being 
+caught by an Omega Student from the University. A 
+Jinx Card is made up of:
+1. Name.
+2. Effect: A penalty that will affect the Scholar for 
+the remainder of the game, unless the card can be 
+removed during the Rest Phase.
+3. Penalty to the score at the end of the game.
+Important: Jinx Cards are always drawn face down and are revealed during the 
+active player’s next End of Turn Phase.
+A loud and off -key bard decides to 
+follow you to compose an ode about 
+your accomplishments .
+As long as you have this 
+card, before you perform a 
+Stealth Test, draw a Trick 
+Card and add its Bonus 
+Value to the Alert Value.
+1
+2
+3
+15
+ADVANCED RULES CED RULES
+We are running out of time! The Dungeon has been explored, its inhabitants 
+scrutinized and studied, the clan discovered and the theses are ready (more or less). 
+The winner will soon be discovered.
+Warning: if you use the Maximum Alert advanced rule, use the End Game rules on 
+p. 19.
+The game enters its final phase, or ends, due to one of these three events:
+• The first Thesis is successfully Submitted: the game continues for all Scholars who 
+have not yet successfully Submitted the Thesis. In each new turn of the player who 
+first Submitted the Thesis, this player takes an Omega Student from the Reserve or, 
+if not available, takes it from the University. The player places the Omega Student 
+on an empty space of the Alert Card; if there are no free spaces on the Alert Card, 
+the last turn of the game begins, then, you move on to Game Scoring.
+• An Omega Student is drawn and there are no more free places to place it on 
+the Alert Card: the game ends at the beginning of the next turn of the current 
+player, then, we move on to Game Scoring.
+• There are no more Information Cubes available in the Dungeon and no new 
+Zones can be placed: the game ends immediately, and you move on to Game 
+Scoring.
+GAME SCORING
+• • •
+Only those Scholars who successfully Submit the Thesis participate in the end game 
+scoring, the others have lost regardless of the points accumulated and do not compete 
+for victory. If no one managed to successfully Submit the Thesis during the game, the 
+university will still be satisfied; all players will be able to participate in the scoring.
+Each player calculates the points obtained as follows:
+• Add the points of the Information Cubes on your Note Board; the total obtained 
+from each column is indicated by the number visible above the cubes placed inside it.
+• Apply the Modifiers indicated in the Clan Card for each individual Information 
+Cube in your possession.
+• The first Scholar who has Submitted the Thesis gets 10 bonus points, the second 
+7, the third 5 and the fourth 3.
+• Add bonuses from Intern Cards (only if using the Main Effects advanced rule) 
+and any other sources (found in game expansions).
+• Subtract the penalties from the Jinx Cards.
+Draw up the ranking and declare the winner!
+In the event of a tie, follow these criteria for all those tied to determine a winner (in 
+this order):
+1. Whoever Submitted the Thesis first wins.
+2. Whoever has the most Students wins.
+3. The youngest player wins.
+END OF GAME
+SurViValiSt +1 PT
++1
+SurViValiSt +1 PT
++1
+A Student reminds you nonstop 
+about your trusted pet dog, which 
+recently abandoned you . . .
+If you are Exalted, return to 
+the Standard state.
+As long as you have this 
+card, you cannot become 
+Exalted.
+A Student reminds you nonstop 
+about your trusted pet dog, which 
+recently abandoned you . . .
+If you are Exalted, return to 
+the Standard state.
+As long as you have this 
+card, you cannot become 
+Exalted.
+Clan Card Modifiers 
+must be added or 
+subtracted for each 
+individual Information 
+Cube. Then, the 
+modifiers of other cards 
+such as Jinx and Intern 
+Cards are added and 
+subtracted.
+STOP! You don’t need to read any further for your first Dungeonology 
+games. Once you are familiar with the game, you can use the Advanced Rules 
+in the next chapter.
+16
+ADVANCED RULES CED RULES
+You are back in one piece from your first expeditions, 
+and now you think it’s time to raise the difficulty bar, huh?
+Great, if you are familiar with the basic rules of the game, you can test your skills 
+as a dungeon explorer by adding a few more advanced rules presented in this 
+chapter.
+Be careful, though; if you are playing your first few games don’t use these rules, as 
+the Dungeons will become extremely more hostile places!
+In this chapter, four advanced rules are presented to make the game deeper and more 
+complex; the game group is free to use one, some or all of them by agreeing to it before 
+the start of the game. The advanced rules shown below are:
+• Boss: no Dungeon is worthy of the name without a Boss to face inside. The Boss 
+will appear early in the game and then hunt down the Scholars, trying to drive 
+them out of his domain.
+• Dangerous Zones: each Dungeon Zone will have positive and negative effects that 
+will allow Scholars to exploit them for their own purposes, or will put the most 
+unwary in bad trouble. Secret passages, traps, teleporters and makeshift camps are 
+just some of the things the Scholars will face during their explorations.
+• Maximum Alert: Omega Students will not simply end games. With the 
+introduction of the very dangerous Panic Cards, when the inhabitants of the 
+Dungeon are alerted, they will set in motion apocalyptic events that will lead to a 
+finale with a bang!
+• Main Effects: make the most of Trick Cards by introducing a multitude of new 
+effects into the game. Each Main Effect allows Scholars incredible moves, capable 
+of reversing any situation. These rules introduce a very technical aspect to the 
+game, and are therefore recommended for experienced players.
+Using these rules, a Boss, a terrible and dangerous enemy, will appear in the Dungeon 
+hunting the Scholars (see Game Setup, page 5, point G). In the basic game box there 
+is the Boss Laetus, and his card shows his “Quarrelsome” and “Drunk” profiles. In 
+the game expansions there are many other Bosses that can be used during a game of 
+Dungeonology.
+ZONE EFFECT: BOSS
+• • •
+This effect is activated when a Scholar enters a Zone that contains them for the first 
+time during a given turn. In fact, during the same turn, the Boss Effect 
+can only be activated once. Remember that Zone Effects must always be 
+activated starting from the leftmost one and proceeding to the right; the Boss Effect is 
+always the one furthest to the right and is always activated last in the Zones they are in.
+When the Boss Effect is activated, the game stops momentarily and one of the following 
+options must be resolved:
+• If the Boss Model is not in the Dungeon: resolve the “Sighting” Effect (C) 
+shown on the Boss Card.
+• If the Boss Model is in the Dungeon: resolve the “Activation” Effect (D) shown 
+on the Boss Card.
+THE BOSS
+• • •
+Each Boss Card contains the following information:
+A. Boss Name and Profiles: the Boss Card includes two profiles; you can choose or 
+determine at random which one to use during the game (see Game Setup).
+B. Alert Modifier: the presence of a Boss increases the Alert Value of the Zone it 
+occupies by the indicated number.
+C. Sighting: this Effect allows the Boss to appear in the Dungeon (see above).
+D. Activation: this Effect allows the Boss to interact with the Scholars and the 
+Dungeon (see Boss View and Starting Zone box).
+E. Encounter: when the Boss enters a Zone containing one or more Scholars, this 
+effect is activated on each of those present (in turn order). Warning: this does not 
+happen if, conversely, a scholar enters the zone with the Boss.
+Boss Movement
+When a Scholar must move a Boss, he must follow these 
+guidelines:
+• If the Boss must make a choice not covered by his card 
+or by the rules, the player activating him will choose for 
+him.
+• A Boss does not reveal new Zones by moving, unless 
+specified on its card. It only moves among those already 
+placed.
+• Whenever possible, the Boss always moves in such a 
+way as to generate as many interactions with the game 
+and the Scholars as possible.
+• If you use the Dangerous Zones advanced rule, the 
+Boss can use the Secret Passage Effect to move more 
+easily towards his targets.
+• A Boss always ignores Doors.
+SIGHTING
+Zone Eff ect was activated and activates Encounter.
+ACTIVATION Move Laetus 3 Zones toward a Randomized 
+Scholar. He stops if he enters a Zone with a Scholar.
+ENCOUNTER Randomize for each Scholar encountered:
+The Scholar Drops an Information Cube in 
+his possession.
+The Scholar takes a Stun Token.
+The Scholar discards a random Trick Card.
+The Scolar Collects an Information Cube from 
+the Zone they are in or from an Adjacent Zone.
+The Scholar Collects an Information Cube 
+from any Zone.
+A
+BOSS VIEW AND 
+STARTING ZONE
+Boss View: when activated, the Boss does not “see” 
+the Scholars in his Starting Zone, does not take them 
+into consideration and does not generate an Encounter 
+(see below). If during the Activation the movement of 
+the Boss leads him to exit and then re-enter the Zone 
+from which he started, then, he will “see” the Scholars, 
+generating an Encounter. In the case of Randomized 
+movements (as for the Activation of Drunk Laetus), 
+if a Scholar is selected who is in the same Boss Zone 
+(and therefore he does not “see”), he must be moved, if 
+possible, in a way to leave and re-enter the Zone from 
+which he started, so as to “see” the Scholar.
+Starting Zone: a Boss can enter the Starting Zone, but, as this is a safe area for 
+Scholars (see page 6), Encounters are not generated, and, as usual, Randomizations 
+(even if generated by the Boss Card) do not take Scholars into account.
+SIGHTING
+Zone Eff ect was activated and activates .
+ACTIVATION Move Laetus 3 Zones, without letting him 
+Scholar, or if he must retrace his steps.
+ENCOUNTER Each Scholar encountered takes a Stun Token.
+D
+A
+B
+C
+E
+BOSS
+ADVANCED RULE
+17
+ADVANCED RULES
+Sofia enters a Zone containing 3 Zone 
+Effects, and must activate them starting 
+from left to right.
+A. The first, with four red converging 
+arrows, is an Entry Effect, which is 
+activated every time a Scholar enters 
+the Zone. The Effect is Ambush 1: 
+Sofia puts one of her Students in the 
+Reserve, if she doesn’t have one, she 
+gets a Stun Token.
+B. After resolving the first Effect, Sofia 
+checks the second; Danger 2, a Passive 
+Effect that will activate only in certain 
+conditions, in this case if a Scholar fails 
+a Stealth Test in this Zone. 
+C. Sofia then moves on to the third Effect, another Entry Effect; it deals with 
+the Boss Effect! If the Advanced Boss rule is used in the game, Sofia must 
+activate the fearsome Boss (see page 17).
+EXAMPLE: ZONE EFFECTS ACTIVATION
+Using these rules each Zone will contain one or more Zone Effects that will drastically 
+change the way Scholars explore the Dungeon. Before entering a Zone, a Scholar needs 
+to evaluate the positive and negative effects it contains, and decide whether to continue 
+or change path. Furthermore, every time a Scholar places a new Zone, being forced to 
+enter it (see page 10), he will need to take a leap of faith hoping not to run into negative 
+effects.
+ZONE EFFECTS
+• • •
+The icons shown at the top of the Zones are the Zone Effects. When a Scholar enters a 
+Zone she must check the Effects it contains and see if any of them are activated, starting 
+in order from the left to right. Based on the shape of their icon, these effects follow 
+different activation rules:
+• Passive Effects: the Effects found within a square icon without arrows on the 
+sides are passive, and are activated in specific cases indicated in their description.
+• Incoming Effects: effects showing four converging arrows must be resolved when 
+a Scholar enters that Zone and must always be resolved in order from left to right. 
+Also part of these effects are the Stairs Effect, used regardless of this Advanced rule 
+(see page 11), and the Boss effect, used only with the Advanced Boss rule (see page 
+17). 
+• Outgoing Effects: these Effects with the circular icon show four diverging arrows, 
+they affect a Scholar who leaves this Zone or allows her to take advantage of special 
+movement while exiting it.
+• Action Zone Effect: these Effects are found within circular icons without arrows. 
+They can be activated in the Action Phase of the current Scholar as an Action (see 
+page 13).
+• Colored Effects: effects icons may have a background color. These icons affect and 
+/ or can only be activated by Scholars who have at least one Information Cube on 
+their Note Board of the same color as the icon. 
+Stop:when a Scholar enters this Zone all remaining Speed points are lost. 
+Can get new Speed points using the Auxiliary Effect of the Exploration 
+Trick Cards (see page 12).
+Toll N: the Scholar entering this Zone must drop N Information Cubes 
+of your choice, moving them from your Note Board to the gaps as far to 
+the left in this Zone as possible (without consideration of colors shown 
+in this Zone). If there are not enough empty spaces in this Zone, place 
+them in an Adjacent and Linked Zone; if this is not possible, they are 
+placed in Reserve.
+Ambush N: when a Scholar enters this Zone, he gains N Stun Tokens
+Secret Passage: a Scholar in this Zone can spend a Speed point during 
+the Movement Phase to move into a Zone already placed that shows a 
+Secret Passage Effect having the same letter.
+Stairs: see pg. 11.
+Boss: see pg. 17.
+Good Luck N / Bad Luck N: a Scholar who performs a Stealth Test 
+in this Zone, after generating their Stealth Value, must reveal N Trick 
+Cards from the deck, (see page 13) and:
+• If the number is Blue, adds the highest Bonus Value of any cards 
+drawn to their Stealth Value.
+• If the number is Red, adds the highest Bonus Value among the the 
+cards drawn to the Alert Value of this Zone.
+Danger N: a Scholar who fails the Stealth Test in this Zone (see pages 
+13 and 14), must draw N Students from the University (instead of 1 as 
+usual).
+Bivouac - ACTION: carry out these steps in order:
+• Discard all Stun Tokens in your possession.
+• Discard a Jinx Card in your possession.
+• If you have fewer Students than your Initial Student value, take 
+Students from the Reserve (if available) up to a number equal to 
+this value.
+• Discard any number of Trick Cards (optional).
+• Draw Trick Cards until you have a number equal to your Hand 
+Value.
+In the Faun Dungeon, this Effect appears with a yellow or green background 
+(see Colored Effects).
+A B C
+DANGEROUS ZONES
+ADVANCED RULE
+18
+ADVANCED RULES
+Using these rules, a Panic Card will be put into play (see Game Setup, p. 5, point I), 
+which will drastically change the end game rules, making the last turns of each game 
+always different and insanely dangerous!
+SELECTING THE PANIC CARD
+• • •
+During step I of the Game Setup, a player must build a deck of Panic Cards following 
+these criteria:
+• All Panic Cards without Dungeon or Boss requirements can be inserted into the 
+deck (such as “Darkness” present in the basic game box).
+• Panic Cards that show the same icon as the Dungeon (B) in use in the game can 
+be inserted into the deck (attention, some expansions require you to include only 
+these cards in the deck).
+• If you use the Advanced Boss rule, Panic Cards that show the name of the Boss 
+(C) in use in the game as a requirement can be inserted into the deck (note, some 
+expansions require you to only include these cards in the deck).
+Once the deck has been built, draw a Panic Card without looking at it, place it under 
+the Alert Card as indicated on p. 5, and continue with the game setup.
+PANIC CARD
+A Panic Card contains this information:
+A. Name.
+B. Dungeon Requirement: indicates that the card can be included in the 
+Panic Deck only in games where the Dungeon with the same symbol is used.
+C. Boss Requirement: indicates that the card can be included in the Panic 
+Deck only in games where the indicated Boss is used.
+D. Instructions for filling the University: when the card is revealed, these 
+instructions are used to fill the University bag.
+E. Maximum Alert Effects: these additional rules will put a spoke in the wheel 
+for Scholars who are still in the Dungeon and end the game soon.
+F. Alert Modifier: this modifier is applied to the Alert Value of all Zones in 
+the Dungeon.
+• At the beginning of each player’s turn (including 
+those who have fi nished their games), the player 
+must Randomize. If the result is Worship, 
+Riches, or Caste, they must remove all the 
+Information Cubes of a color of their choice 
+from all Zones.
+• At the end of each player’s turn, if their Scholar 
+isn’t in the Starting Zone and is the only one 
+present in a Zone, they Randomize to Lose an 
+Information Cube.
+Darkness envelopes the Dungeon, 
+swallowing those left alone .
+Empty the University Bag and ...
+• Discard the Boss Card.
+• At the beginning of each player’s turn (including 
+those who have fi nished their games), the player 
+must move the Boss through 2 Linked Zones, 
+selecting the Zones that contain the most 
+cumulative Information Cubes if possible 
+(player’s choice, if tied). Remove all the cubes 
+from the Zones that the Boss moves through or 
+stops. 
+• When the Boss passes through or stops in a 
+Zone that contains one or more Scholars, each 
+of those Scholars must Randomize to Lose an 
+Information Cube.
+The Faun Leader announces the beginning of 
+Pandemonium, the festivity of festivities, which only 
+they can survive .
+Empty the University Bag and ...
+• Discard the Laetus Boss Card.
+• At the beginning of each player’s turn, if their 
+Scholar has a number of Stun Tokens equal to 
+their Stamina, their game ends immediately.
+• At the beginning of each player’s turn (including 
+those who have fi nished their games), the player 
+must move Laetus up to 3 Linked Zones, heading 
+towards the Zone that contains the Scholar with 
+the least number of Stun Tokens.
+• When Laetus passes through or stops in a 
+Zone that contains any Scholars, each of those 
+Scholars takes 1 Stun Token (unless a Student is 
+immediately Sacrifi ced).
+Annoyed by your presence, the Grand Marshal Laetus 
+tries his best to banish you from the Faun’s domains .
+Empty the University Bag and ...
+LAETUS ONLY
+A B
+• Discard the Boss Card.
+• At the beginning of each player’s turn (including 
+those who have fi nished their games), the player 
+must move the Boss through 2 Linked Zones, 
+selecting the Zones that contain the most 
+cumulative Information Cubes if possible 
+(player’s choice, if tied). Remove all the cubes 
+from the Zones that the Boss moves through or 
+stops. 
+• When the Boss passes through or stops in a 
+Zone that contains one or more Scholars, each 
+of those Scholars must Randomize to Lose an 
+Information Cube.
+The Faun Leader announces the beginning of 
+Pandemonium, the festivity of festivities, which only 
+they can survive .
+Empty the University Bag and ...
+C
+D
+E
+F
+MAXIMUM ALERT
+• • •
+These rules replace those of the “End of Game” paragraph (page 16).
+The Maximum Alert is a game state that is triggered when one of the following events 
+occurs:
+• The first Thesis is successfully submitted.
+• An Omega Student is drawn and there are no more free places for it on the 
+Alert Card.
+When one of the two events occurs, proceed as follows:
+• Remove the Alert Card from the game, put all Omega Students in the Reserve.
+• Reveal the Panic Card.
+• Completely empty the University by placing all the Students contained there in 
+the Reserve.
+• Follow the instructions to fill the University (D) described in the Panic Card.
+• Follow point-by-point the new rules reported in the Panic Card (E), which will 
+affect the game until it ends. If one of the rules on the card asks each player to do 
+something at the beginning of her turn, the players who control Scholars who have 
+already Submitted the Thesis must do so also.
+The following additional rules come into effect during the Maximum Alert, regardless 
+of the Panic Card revealed:
+• Exploration only: it is not possible to choose the Activities “Submitting the 
+Thesis” and “Rest” as you action. Only the “Exploration” action remains available.
+• Stun: Stun Tokens can no longer be discarded for any reason. A Scholar who has 
+Stun Tokens equal to his Stamina Value still plays the “Exploration” action during 
+his turn.
+• Omega Infinity: the infinity sign above the Omega Student in point D of the 
+Panic Card indicates that when the Omega Student is drawn from the University, 
+whoever selected it draws a Jinx Card (following the normal rules, see page 15) and 
+then puts the Omega Student back in the Bag.
+• No Zone: it is not possible to place new Zones in any way.
+• No Information Cubes: it is not possible to place new Information Cubes in the 
+Zones from the Reserve in any way.
+• Forced Thesis: if a Scholar ends her turn within the Starting Zone, she immediately 
+performs the “Submit the Thesis” action. Regardless of its outcome, her game 
+ends and the Scholar is removed from the game.
+The Game Ends if...
+When one of these events occurs, the game ends immediately and you move on to 
+Game Scoring (p. 16):
+• There are no more Information Cubes available in the Dungeon.
+• The Omega Student is drawn from the University and the bag is empty 
+before having to put the Student back in.
+• All Scholars who are still in the Dungeon are unable to play.
+• All Scholars Submitted the Thesis.
+MAXIMUM ALERT
+ADVANCED RULE
+19
+ADVANCED RULES
+maGic
+Ω
+1
+N+1
+ACTION: Collect 1 Information Cube 
+from the Zone you are in.
+Each Scholar in that Zone must Give you 1 
+Information Cube.
+Draw Students from the University Bag equal 
+to the Information Cubes received +1.
+Gets everyone in the room charmed!
+loVe potioN
+2 1
+F
+G
+maGic
+Ω
+1
+N+1
+ACTION: Collect 1 Information Cube 
+from the Zone you are in.
+Each Scholar in that Zone must Give you 1 
+Information Cube.
+Draw Students from the University Bag equal 
+to the Information Cubes received +1.
+Gets everyone in the room charmed!
+loVe potioN
+2 1
+MAIN EFFECT
+A Main Effect is made up of these elements:
+A. Name of the Effect.
+B. Timing: indicates whether the Effect 
+can be played only in one’s own turn, 
+even in that of the opponents, or only 
+in response to another Main Effect.
+C. Flavor Text.
+D. Cost: this cost must be paid to activate 
+the effect, before it is activated.
+E. Effect: effect produced by the card.
+F. Action: this Effect requires the 
+character’s Action to be used.
+G. Additional cost or other: to be paid 
+after the resolution of the other Effects.
+The Main Effects of the Trick Cards allow the Scholars who use them wisely to do the 
+unthinkable. These effects are texts shown in the center of each Trick Card, and they 
+bring to the game a tactical and complexity level recommended for experienced players.
+Using this advanced rule, it is advisable to use the Student Player Level (see page 8).
+PLAY A MAIN EFFECT
+• • •
+Using this rule, the Main Effects of the Trick Cards become available, which can be 
+used in place of the Auxiliary Effect or Bonus Value when playing the card. When using 
+this rule the following must be kept in mind:
+• There is no limit to the Effects of cards a player can use during his turn (or that of 
+the others if the Effects are Instant, see below), as long as he can meet the Costs (D) 
+of the Effects and respect the Timings (B) of the same.
+• Once the Main Effect of a card has been played, it is not possible to play new Trick 
+Cards, or activate Scholar Skills, until the Effect played is completely resolved. The 
+only exception to this rule are Effects with Reaction Timing (see below).
+• A Trick Card can only be used for one of its Effects (Bonus Value, Main Effect or 
+Auxiliary Effect), then, it is discarded.
+• During a Stealth Test it is possible to use the Main Effects of your cards, respecting 
+the rules that indicate when each player can play her cards during the test (see page 
+13).
+• If two players want to play a Trick Card at the same time, the current player has 
+Priority, and then the others in turn order starting with her. For more precise 
+information on Priority, see the box.
+In order to use a Main Effect you need to follow these steps:
+1. Check if the Effect is an ACTION (F).
+2. Check the Timing of the Effect (B).
+3. Declare the Effect.
+4. Pay the Cost of the Effect (D).
+5. Resolve the Main Effect (E).
+1. Check if the Effect is an Action
+If the text of the effect (E) is preceded by the word ACTION (F), the effect can only be 
+played in the player’s Action Phase and will constitute his turn Action. This Effect will 
+therefore replace any Scholar Study or Espionage Action. Only one Main Effect with 
+the word Action can be played during your turn, except in rare cases such as the Exalted 
+version of Sofia.
+2. Check the Timing of the Effect
+The Timing of an Effect indicates the moments in the game in which the Effect can be 
+played, there are three:
+• Standard: an Effect that doesn’t show Timing icons can be played during the 
+Movement Phase and Action Phase of your turn.
+• Instant: can be played during the Movement Phase and Action Phase of your turn 
+or your opponents’ turn.
+• Reaction: it can be played at any time, but only in response to an Effect just 
+declared (point 3) by an opponent. The Reaction Effect occurs before the declared 
+Effect, usually by cancelling it. An opponent will therefore not have to pay the 
+costs of the effect (point 4) if this is canceled. It is possible to use a Reaction in 
+response to another Reaction.
+When a player wants to play a Main Effect, if she respects the Timing limitations, she 
+can declare it by going to step 3.
+3. Declare the Effect
+The player who plays the Effect places the card on the table so that everyone can see it. 
+If no opponent declares that they want to play a Reaction, the player can go to step 4.
+4. Pay the Cost of the Effect
+If the Effect requires a Cost, this must be paid before it can be resolved. The Cost is 
+indicated by icons of various kinds (see page 12). If there are more icons in the Cost, 
+all the costs indicated must be paid. If, on the other hand, the Cost indicates different 
+icons separated by a / symbol, it is possible to choose which of the Costs to pay. Once 
+the Cost has been paid, the effect is resolved in point 5. If for any reason the cost cannot 
+be paid, the Trick Card is discarded with no effect.
+Draw 2 Students from the University 
+and place them at the Campus Bonfire 
+and get a Stun Token.
+Sacrifice your Student by placing it in 
+Reserve or Draw a Student from the 
+University and place it at the Campus 
+Bonfire.
+1
+maGic
+Play this card before your Movement 
+Phase.
+Skip your Movement Phase and move to 
+any placed Zone in your same Area.
+Then, place the Teleport Token in your 
+starting Zone.
+BOMF!
+Bomf!
+1 / 1
+NotorietY
+2
+Your expedition is fi nanced
+by important high society friends .
+Draw Trick Cards until you fi ll your 
+hand.
+fiNaNcierS
+2 1
+MAIN EFFECTS
+1
+NotorietY
+You boast about your qualifi cations to impress the Students .
+Steal 1 Student each from the Scholars in 
+your Zone, or in any Adjacent and Linked 
+Zones, up to a maximum of 3 Students.
+reallY famouS
+1 / 1
+A
+B
+C
+D
+E
+ADVANCED RULE
+20
+ADVANCED RULES
+When you have doubts about who has the right to first use a Trick Card or a Scholar’s 
+Skill, especially if two players simultaneously declare that they want to do so, it is good 
+to follow the Priority rule explained below.
+During a Stealth Test: use the rules described on p. 13 and 14 to check who is entitled to play Trick Cards.
+Outside a Stealth Test: the current player always has Priority, and may decide to play Trick or Skill Cards first. He has the option of playing 1 Trick Card (if possible) or 
+activating a Skill. Once the current player plays one of these (or declares that he does 
+not want to play one), the next player in turn order (the one to his left) gets Priority 
+and can play 1 Trick Card or activate an Ability (which have Instant Timing ), 
+followed by the next player in turn order This cycle continues until no player wants 
+to play any more cards.
+The effect of each individual card or ability must be resolved before a new card or 
+ability can be played.
+Effects with Reaction Timing are beyond Priority, and can be played at any time, 
+generally affecting the last Trick Card played and whose effects have not yet been 
+resolved (see page 12).
+Designer’s Note: Priority is a rule for experienced players. To easily decide which 
+player is first entitled to play a Trick Card or Skill, it is sufficient for the players not 
+currently involved to ask the current player (and those to her right) if they can do so.
+The current player (and in order those to her left) will decide whether to let them do 
+it or whether to play a Trick Card or a Skill before she can do the same.
+Using some Trick Cards, it is possible to place in the Dungeon Zones some Tokens 
+that indicate new Zone Effects present in them.
+As for the Stairs Effect, the Zone Effects represented by these tokens are taken into 
+account even if the Dangerous Zones advanced rule is not used. Keep in mind the general operation of Zone Effects to use these tokens (see page 18).
+PRIORITY
+ZONE EFFECT TOKENS 5. Resolve the Effect
+The text of the Main Effect gives all the information needed to solve it. These must 
+be read and performed from right to left and from top to bottom. Some Effects may 
+contain Additional Costs or Effects icons (G) explained on p. 12.
+PROTECTED INFORMATION CUBES
+The colored shields on some Intern Cards indicate that the Information 
+Cubes of that color in the Scholar’s possession are Protected. When a 
+Protected Information Cube is the target of an effect that would cause 
+the Scholar who owns it to Lose (see Lose), he may decide not to lose 
+it. Protection cannot be used to reverse effects that would cause an 
+Information Cube to be Given to another Scholar.
+The Intern Cards represent improved versions of the 
+Students. Some Trick Cards allow Scholars to obtain an 
+Intern. When a Scholar plays one of these cards he will get 
+the corresponding Intern Card. An Intern Card is made up 
+of:
+A. Name.
+B. End of Game Bonus Points (PT).
+C. Effect.
+When a Scholar acquires an Intern Card, they keep it next to 
+their Note Board. As long as she is the owner, the player gets 
+the benefits indicated by the effect, as well as getting bonus 
+points at the end of the game (not useful for discussing the 
+Thesis, see page 9).
+Scholars must, however, pay attention to the loyalty of their 
+Interns! In fact, there is only one copy of each Intern Card.
+The first Scholar to play the relevant Trick Card will get the Intern as 
+described above. If during the game other Scholars play the same Trick Card, they 
+will steal the Intern from the current owner.
+eXploratioN
+2
+Prepare a Student for life in the wild .
+eXpert SurViValiSt
+SurViValiSt
+Gain or Steal the 
+Intern:
++1
+1 1
+SurViValiSt +1 PT
++1
+A B
+C
+INTERN CARDS
+Trap Token: adds a hidden Effect to the Zone. It is always placed 
+covered showing the face with the trap icon, and always to the left of 
+all other Zone Effects (it is always the first to activate).
+The first Scholar to enter a Zone containing this marker must flip 
+it over, suffer the indicated effects, and then place it in Reserve. The 
+Zone Effects hidden under this marker can be “Ambush”, “Stop”, 
+and “Toll” (see page 12).
+Secret Passage Marker: this marker adds the Secret Passage Zone 
+Effect X to the Zone for the rest of the game (see page 12). 
+Teleport Token: this token adds the Teleport Zone Effect to the 
+Zone for the rest of the game.
+Teleport - ACTION: the Scholar moves to any placed Dungeon 
+Zone. The Scholar must have at least one Worship Information 
+Cube to use this Effect.
+21
+Bard
+Your Caste Information Cubes are protected. 
+Guard
+-
+Your Militia Information Cubes 
+are protected. 
++1 PT
+ADVANCED RULES
+CROSSOVER
+Thanks to the Dungeonology: the Expedition Kickstarter campaign, special 
+additional materials have been produced for the Sine Tempore and Black Rose 
+Wars games. This page contains the rules for utilizing these materials in their 
+respective games Basilisk
+The Forgotten Spell “Petrifier” is added to the Forgotten Spells 
+deck. One of its effects allows you to summon the Basilisk as 
+an Evocation under your control; its stats are shown on its 
+Evocation Card.
+Use the Basilisk miniature supplied with this box to represent 
+him in the Lodge.
+Scholar Andromeda
+The Scholar Andromeda Evocation Card allows you 
+to summon an alternative version of the Andromeda 
+Evocation. When a Mage summons Andromeda, she 
+may choose to summon Scholar Andromeda instead, 
+whose stats are listed on her Evocation Card. Only one 
+Scholar Andromeda can be present in the Lodge at 
+a time. Use the Andromeda miniature provided with this box to represent 
+her in the Lodge.
+Nina the Manticore
+Nina the Manticore is a pet summoned by Mages as a trusted and powerful 
+ally. The rules of the Black Rose Wars Pets can be downloaded from the 
+Ludusmagnusstudio.com website, or using the QR-Code on this page.
+To use the Manticore in a Black Rose Wars game, you need the Manticore 
+miniature, its Pet Card (A) and the Pet Activation token (B), the seven 
+Egg miniatures, one white cube and six black cubes supplied with this. 
+box (see page 24). Use the following rules to include it in the game.
+Setup: once the game setup is finished, before starting the game, the player 
+with the Crown prepares the 7 Eggs by inserting 1 white cube and 6 black 
+cubes into the others. Once ready, mix the Eggs, then choose two colors 
+of Rooms. Place six of the Eggs on the rooms of those colors (one per 
+Room), and place the last one in the Room of the Black Rose.
+Summon the Manticore: unlike the other Pets, the Manticore is not 
+summoned from its Room, but through the Eggs scattered around the 
+Lodge. When a Wizard activates a Room containing an Egg he can, instead of activating 
+the Room, open the Egg. If he finds a black cube he gets 1PP and discards the Egg. 
+If he finds the White Cube, he gets the Manticore and discards the Egg; when this 
+happens, follow the directions described in the Black Rose Wars Pet rules.
+If the Manticore is defeated, the player with the Crown removes all Eggs from the 
+Lodge, and performs the Setup again (see above).
+Crono’s Crown
+This new equipment for Sine Tempore will allow psionic 
+members of the Genesis crew to manipulate time itself.
+This Equipment Card is added to those available to be 
+built by players. The materials required to create the 
+Crono’s Crown are indicated on the back of the card.
+Yocca
+Yocca joins the Pets that can be used 
+as companions by the heroes of the 
+Genesis.
+The Sine Tempore Pets rules can be downloaded from 
+the Ludusmagnusstudio.com website, or by using the QR-Code on 
+this page.
+
+002 / 002
+  
+Summon Basilisk in the Target Room. 
+It activates immediately.
+  
+ Place in the target Room and 
+ in all adjacent Rooms, then, 
+ in each Room where you have placed at least with this Spell. 
+2AP RNG: 4 - Once per mission, you can target 
+another Hero or Enemy (Troop/Elite).
+Move the target’s Activation Token up to 5 Sectors 
+forward or backward on the Momentum.
+The chosen Activation Token cannot be placed in the 
+Sector where the Activation Token of the bearer of 
+this Equipment is located.
+RULES
+PSIONIC
+CRONO’S CROWN
+Time Distortion
+ACCESSORY
+Instead of  you can .
+  
+Basilisk
+YOCCA
+Instead of  you can  or  .
+  
+Andromeda
+Scholar
+Manticore
+F
+ F
+  
+ and  to two different 
+targets within .
+If Nina is in your Room, her 
+Attack becomes:
+  
+B 
+A
+22
+ROCCA CIVETTA
+The University opens its doors to reveal the knowledge kept in its ancient libraries. 
+Join one of the Student Societies and, led by charismatic leaders, enjoy a year 
+of carefree campus life, dedicating yourself to your favorite studies. Explore the 
+surroundings by studying the fauna, or enter the underground inhabited by 
+strange monstrous species. Perhaps you will be daring explorers enough to find 
+the entrances to the mysterious supernatural caves deep in the region, from which 
+even the most experienced dungeonologist, the famous Enrico Giovanni, has not 
+returned. The legends of Bosco Beone say that divine entities from other times and 
+other realities live in these remote places. Will you be the one to reveal their secrets?
+The rules for using the additional materials present in the Rocca Civetta box are 
+collected in the following pages. These materials expand the game by adding many new 
+elements and variations to Dungeonology games.
+The rules for using each new element are presented in independent chapters; based on 
+the color of the flag containing the chapter title, the rules can be:
+• Standard: rrules for items that can be added to all Dungeonology 
+games. • Advanced: optional rules that can be used to make the game experience more profound and competitive. • Dependents: optional rules whose use requires you to also use 
+certain Advanced Rules (indicated in the description of each 
+dependent rule) during the game.
+In the final part of the manual there are the rules to play in Solitaire, challenging the terrible 
+Boss Omega, and to play in Dungeonology Campaign Mode which, in 12 consecutive 
+scenarios, reveals the secrets of the University of Rocca Civetta and the characters that 
+gravitate around it.
+The first scenarios of the Campaign Mode are ideal for introducing the game to new 
+players, taking into consideration only the most basic rules of the game.
+CONTENTS
+Manticore
+F
+ F
+  
+ and  to two different 
+targets within .
+If Nina is in your Room, her 
+Attack becomes:
+  
+NEW COMPONENTS . . . . . . . . . . . . . . . . . . . . . . . . . 24
+STAR TOKENS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+NEW SCHOLARS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+NEW CLAN CARDS . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+NEW BOSSES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+ALCHEMY CARDS . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+INTERN CARDS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+SPRIGGEN CARDS . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Add Two or more Types to the Deck. . . . . . . . . . . . . . . . . . . . 26
+NEW ZONES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Level IV Zones. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Special Zones. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+New Zone Effects. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+FAMILIES . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+RESEARCH CARDS . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+STUDENT SOCIETIES . . . . . . . . . . . . . . . . . . . . . . . . 28
+False Information. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Universal Information. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+OMEGA AGAINST ALL . . . . . . . . . . . . . . . . . . . . . . . 29
+BIG BOSS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+SOLITARY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Changes to the Rules. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Managing Omega. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Omega Phase. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+CAMPAIGN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Preparation. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+The Campaign. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Support Points. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+End of Scenario. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+End of Campaign. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Campaign Sheets. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Scenarios. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+SUMMARY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+STANDARD
+DEPENDENTS
+ADVANCED
+23
+1. Scholar Models (7)
+2. Boss Models (9)
+3. Egg Models (7)
+4. Tentacle Models (7)
+5. Pet Models (2)
+6. Iota Student Models (6)
+7. Phi Student Models (3)
+8. Zeta Student Models (3)
+9. Lambda Student Models (3)
+10. Boss Cards (12)
+11. Scholar Cards (7)
+12. Level IV Zones (6)
+13. Crypt Trap Zone (1)
+14. Catacomb Trap Zone (1)
+15. Camp Z Zone (1)
+16. Marconiglio’s Den Zone (1)
+17. Thermal Bath Zone (1)
+18. Lair of Charybdis Megazone (1)
+19. Clan Cards (12)
+20. Trick Cards (46)
+21. Student Society Cards (4)
+22. Intern Cards (10)
+23. Jinx Cards (8)
+24. Pet Cards (2)
+25. Research Cards (12)
+26. Backpack Card (1)
+27. Panic Cards (5)
+28. Omega Action Cards (21)
+29. Tome of Secrets Cards (2)
+30. Idol Trap (1)
+31. Bridge Trap (1)
+32. Pillar Trap (1)
+33. Snake Pit Trap Token (1)
+34. Fool’s Token (1)
+35. Winter Campus Skin (1)
+36. False Information Cubes (10)
+37. Universal Information Cubes (10)
+38. Hot Water Token 
+(12)
+39. Star Tokens (48)
+40. Downloadable Summary Cards 
+(scan QR-Code)
+37 36
+AVVISTAMENTO stato attivato ed esegue 
+.
+ATTIVAZIONE Zona di Partenza) tutti gli Studenti dentro di essa si Eff etti di Zona. INCONTRO Capagrezza gli Dona un Cubo Informazione piazzandolo Spazi liberi su questa carta quando uno Studente non viene indicato uno degli Studenti nella stessa Zona Informazione su questa carta.
+10
+1
+4
+5
+2
+3
+IL MIO ZAINETTO Inizi la partita con la Carta Zainetto. Quando Ottieni un Cubo Informazione puoi 
+piazzarlo su uno degli spazi liberi della Carta 
+Zainetto. Quando esegui l’Attività di Riposo 
+o Discutere la Tesi puoi distribuire come 
+preferisci i tuoi Cubi Informazione tra la tua Bacheca e la Carta Zainetto. • • • MAPPATRICE Quando devi piazzare una nuova Zona da 
+una pila, pesca due Zone da quella pila (se 
+disponibili) e piazza quella che preferisci. Metti l’altra Zona in fondo alla pila.
+l’eSploratrice
+11
+1
+2
+3
+4
+6
+8
+97
+5
+27
+Tomo dei Segreti
+• 
+Rimuovere dal mazzo delle Carte Sfi ga le carte che non riportano il simbolo Ω.
+• 
+Ogni volta che l’Università viene riempita di Matricole, conteggiare Omega come uno Studente.
+• 
+Omega subisce gli eff etti delle Carte Trucchetto solo se esse presentano l’icona Omega (Ω) nell’angolo in basso a destra. 
+• 
+Rivela una Carta Omega ed esegui Sabotaggio dopo aver dichiarato ogni tuo Valore di Furtività. Ω
+23
+26
+22
+19
+20
+25
+NEW COMPONENTS
+28 29
+21
+24
+24
+35
+39
+38
+40
+In this box there are many new Scholars of Rocca Civetta who will join the expeditions 
+of Rebecca, Valerio, Sofia and Vincenzo.
+Sara the explorer, Caterina the alchemist, Claudio the hunter, Andromeda the gynoid, 
+Onamor the gravedigger, Ingrid the Valkyrie and Enrico the archaeologist can all be 
+chosen as Scholars by players during the Game Setup, bringing many new skills to the 
+game to thwart your opponents’ plans and become the next Dungeonology Professor.
+These markers represent the Stars on the Scholar’s Note Boards. They are used to 
+clearly keep track of how many and which Stars each Scholar has, and, consequently, 
+which Scholars become Exalted, and which ones are entitled to Submit the Thesis. 
+When a Scholar reaches a Star on their Note Board, they take the Token that represents 
+that specific Star (silver or gold, with the border of the specific color) and place it 
+clearly visible in front of their Note Board. When a Scholar loses a Star, she discards 
+the relevant token.
+The Clan Cards included in this expansion are added to those of the 
+base game and used in all Dungeonology games.
+Unlike the Clan Cards of the basic game, when performing the 
+Submit the Thesis Action with one of these cards, in order to be 
+Successful, in addition to having reached the point value indicated 
+as in the standard rules of the game (A), it is also necessary to have 
+reached the requirement of the Stars of the indicated color (B), 
+paying attention to whether the required star is silver or gold.
+During the End Game Scoring, if the Scholar has reached all the 
+Stars with colored borders shown under the name of the card 
+(present only in some of them), he gets the bonus points indicated 
+(C). These points must be added last in the calculation and are not 
+taken into consideration for reaching the value indicated in point 
+A to successfully Submit the Thesis.
+Many new Bosses are in this box, ready to hinder the Scholars of Rocca Civetta. To 
+bring them into the game you need to use the Boss advanced rule. Capagrezza, the 
+Basilisk, Shadow Lord, Tree Frog, Jukas and Omega can be chosen by players as the 
+Boss of the game, adding dangerous new mechanics to the game. Many of these Bosses 
+feature two profiles, one on each side of their card, and can be used in either version, 
+such as Laetus in the game’s base box.
+NEW SCHOLARS
+STAR TOKENS
+NEW CLAN CARDS
+NEW BOSSES
+DEPENDENTS RULE
+SS
+A
+B
+SS
+C
+1 1 1
+12
+13
+14
+17
+18
+15
+16
+30
+31
+32 33
+34
+25
+ADD 2 OR MORE TYPES TO THE DECK
+If at least two Types of Trick Cards are added to the deck used during the game 
+(Alchemists and Interns provided with this expansion, and / or other Types 
+provided with other expansions in the game), the Scholar Skills that require 
+you to discard a certain Type of Trick Card to work (like Rebecca’s “Arcane 
+Quest”), they also work by discarding Fate Trick Cards.
+The Spriggan Trick Card contains only one Main 
+Effect: a Bonus Value of 8 that you can use to declare 
+your Stealth Value.
+The Scholar who uses it takes the Spriggan Intern 
+Card from the Intern deck or from the Scholar who 
+currently owns it.
+AUXILIARY EFFECT
+Specialists: play during your own Stealth Test. Add 
+a bonus equal to the number of Interns you have to 
+your Stealth Value.
+AUXILIARY EFFECTS
+The Alchemy Trick Cards allow you to manipulate the elements and transform them 
+by changing their form and helping Scholars to always have what they need.
+To use Alchemy Cards in Dungeonology games follow these Game Setup steps first:
+• Add the 18 Alchemy Trick Cards to the deck.
+• Add 2 Fate Trick Cards with the number 4 (supplied with this expansion) to the 
+deck.
+• Add a Fate Trick Card with the number 5 (supplied with this expansion) to the 
+deck.
+The Intern Trick Cards allow you to call upon the best Interns of Rocca Civetta, such 
+as the Cerusico, the sentient stone Wikiantir or the powerful Fool!
+To use Intern Cards in Dungeonology games follow these steps before the Game Setup:
+• Add the 18 Intern Trick Cards to the deck.
+• Add 2 Fate Trick Cards with the number 4 (provided with this expansion) to the 
+deck.
+• Add a Fate Trick Card with the number 5 (provided with this expansion) to the 
+deck.
+• The Main Effects advanced rule must be used during the game.
+The Spriggan, the mischievous dweller of the woods, can be the best ally or the worst 
+misfortune for the Scholar who invokes his help.
+To use Spriggan Cards in Dungeonology games follow these steps before the Game 
+Setup:
+• Add the 4 Spriggan Trick Cards to the deck
+• The Main Effects advanced rule must be used during the game.
+ALCHEMY CARDS
+alchimia
+2
+omuNculuS
+1 2
+Scegli una Zona piazzata. Per il resto 
+del turno quando esegui azioni di 
+Studio o Spionaggio, o utilizzi Carte 
+Trucchetto, puoi decidere di farlo 
+come se ti trovassi in quella Zona. 
+Genera un furtivo ed
+effi mero aiutante alchemico.
+alchimia
+2 3
+traSmuta roccia
+Plasma la terra e scombina i 
+progetti dell’architetto
+1 1
+Sostituisci una Zona appena piazzata 
+con la prima Zona della stessa pila, se 
+disponibile.
+ Metti la Zona scartata in fondo alla 
+sua pila.
+alchimia
+1 2
+piccolo uroBoro
+Tracci il segno della conoscienza infi nita, 
+ma alla fi ne, sembra solo uno scarabocchio...
+1 1
+Scambia di posto i primi due Cubi 
+Informazione che si trovano nella tua 
+Zona.
+/
+SpecialiSti
+chiama il matto
+Arriva l’anima della festa!
+matto
+Prendi o Ruba lo 
+Specializzando:
+1 1
+Fa casino .
+SpriGGaN
+Prendi o Ruba lo 
+Specializzando:
+Alchemy 1: during your Movement Phase or Action 
+Phase, discard 1 Trick Card from your Hand, then, 
+Draw 2 Trick Cards from the Deck.
+Alchemy 2: during your Movement Phase or Action 
+Phase, discard 2 Trick Cards from your Hand, then, 
+Draw 3 Trick Cards from the Deck.
+Alchemy 3: during your Movement Phase or Action 
+Phase, Draw 2 Trick Cards from the Deck.
+INTERN CARDS
+DEPENDENTS RULE
+SPRIGGAN CARDS
+DEPENDENTS RULE
+26
+maNticora
+Yocca
++1 +1 +1
+A maNticora
+B
+NEW ZONES
+DEPENDENTS RULE
+PETS
+DEPENDENTS RULE
+The university needs some specific knowledge that only you, promising 
+dungeonology Scholars, can get through your field studies. Help Rocca Civetta. On 
+the Campus Note Board you will find the brand new Research!
+Research Cards contain missions to complete during the game. Each Quest completed 
+by a Scholar allows them to earn bonus victory points at the end of the game.
+To use Research in a Dungeonology game, proceed as follows:
+• Setup: during Game Setup, draw three Research Cards and place them face up 
+near the Campus for all to see.
+• Complete a Quest: at any time during their turn, but only once per turn, a Scholar 
+can designate a single Quest Card they meet the requirements for and take the card 
+for themselves.
+• New Research: each time a Research is completed and its card is taken by a 
+Scholar, a new Research Card is drawn from the deck to replace it, becoming 
+available to all.
+• End of Game: during Scoring, all completed Research Cards grant the owner 
+bonus victory points equal to those indicated.
+RESEARCH CARDS
+ADVANCED RULE
+27
+To use Pets in a game of Dungeonology, the Dangerous Zones advanced rule must also 
+be used and Level IV Zones in play.
+Pets are powerful allies that can be hired by Scholars by paying their Engagement Cost 
+(A), which requires them to put a certain number and type of Information Cubes in 
+Reserve from their Note Board.
+At the start of the game, the Models and Pet Cards are placed in the Reserve. When 
+a Scholar uses the Engage Familiar Zone Effect combined 
+with a specific Pet, he takes its Model (wherever 
+it is as long as it is not Linked to another Scholar), 
+Linking it to his own, and takes its card where the 
+bonuses it grants are indicated as long as the Model 
+remain attached (B).
+If a Scholar who owns a Pet performs the Rest 
+Activity, the Pet releases, leaving its Model in the 
+Zone it is in, while its card is placed in Reserve. This 
+Zone counts as if it contained the Engage Familiar 
+Zone Effect related to that Pet. It follows that once 
+released, the Pet can be Engaged both from the Zone 
+containing the Engage Familiar Effect and from the 
+Zone in which its Model is located.
+Only the most intrepid explorers will be able to find the passages to reach the 
+recesses of the subsoil, where fabled places are hidden, and in which information of 
+incredible value and true divine secrets, can be found!
+Level IV Zones
+To use Level IV Zones in a Dungeonology game, the Dangerous Zones advanced rule 
+must also be used.
+The Level IV Zones expand the dungeons of your games by adding a level to your 
+explorations. These Zones follow the rules of the Zones of the base game. Their stack is 
+shuffled and placed next to each other during the Game Setup, and can be reached by 
+revealing Floor III Zones that contain the Stairs Effect.
+Unlike other Zones, Level IV Zones contain only False Information Cubes (black) 
+and Universal Information Cubes (white, see page 28).
+These Zones are well protected from ancient dangers or hard-to-pass doors, and some 
+of them contain new Zone Effects to summon the powerful Yocca and Manticore Pets.
+Special Zones
+The “Marconiglio’s Den”, “Crypt”, “Catacombs”, and “Lair of Charybdis” Zones 
+are linked to some Bosses supplied with this expansion and come into play exclusively 
+by playing a game in Big Boss mode with one of them (see page . 29). “Camp Z”, on 
+the other hand, is exploited by the student “Caterina”. These Zones are recognizable 
+thanks to the face of the Boss or Scholar who uses them, placed on the back of the Zone.
+New Zone Effects
+Engage Familiar - ACTION: 
+Engage the Pet depicted in the icon, as long as it is not Linked, by paying 
+its Engagement Cost (see the Pet paragraph).
+Bucket: 
+A Scholar entering this Zone can Discard up to 2 Trick Cards to get that 
+many Hot Water Tokens if available. A Scholar cannot have more than 
+2 Hot Water Tokens.
+Hecatombs: 
+When a Scholar enters this Zone, she Sacrifices all of her Students.
+Mandatory Passage: 
+Once this Zone is linked to two other Zones, it cannot be linked to new 
+Zones by exiting it or otherwise.
+If the positioning of the Zones leads to connecting other Passages of this 
+Zone (in addition to those of the first two linked), Wall Tokens must be 
+placed on them to indicate that the Passage is unusable.
+rituali
+La tua Bacheca contiene i Cubi Informazione indicati:
++3 PT
+Entra in 6 Zone diff erenti durante un tuo singolo Turno.
+VelocitÀ
+6+
++2 PT
+Possiedi 2 o più Carte Sfi ga.
+fortuNa +3 PT
+phi
+Quando Peschi una Matricola Phi 
+dall’Università:
+Matricola Phi senza sacrifi care una prendi per te la 
+Matricola standard.
+Quando Sacrifi chi una Matricola 
+Phi: prendi una Matricola standard dalla Riserva.
+lamBda
+Sacrifi ca una Matricola Lambda:
+piazza un Segnalino Trappola a tua 
+scelta in una qualsiasi Zona del 
+Dungeon.
+iota
+Sacrifi ca una Matricola Iota: invece che in Riserva, piazza la Matricola 
+nella tua stessa Zona. Finché la 
+Matricola Iota si trova nella Zona, 
+i Cubi Informazione dentro di essa 
+non possono essere raccolti se 
+non da te. 
+Rimuovi la Matricola Iota dalla 
+Zona all’inizio del tuo prossimo 
+turno, e mettila in Riserva.
+Zeta
+Sacrifi ca una Matricola Zeta: scarta due segnalini Stordito. 
+Sacrifi ca due Matricole Zeta: scarta una Carta Sfi ga.
+FALSE INFORMATION UNIVERSAL INFORMATION
+The black cubes featured in this expansion are a new type of information, 
+False Information. These cubes are used by many elements in this 
+manual, such as the Level IV Zones.
+A False Information Cube follows the normal basic game rules for 
+being picked up by Scholars, but once obtained, instead of being placed 
+on their Note Board, it is placed in Reserve. This is because a False 
+Information Cube has no value, and its presence in a Zone has the sole 
+purpose of hindering the collection of the cubes to its right. If there are 
+not enough False Information Cubes in Reserve when a Zone containing 
+them is placed, the spaces in those cubes remain empty.
+The white cubes featured in this expansion are a new type of information, 
+Universal Information. These cubes are used by many elements in this manual, 
+such as the Level IV Zones. A Universal Information Cube follows the 
+normal basic game rules for being collected by Scholars, but once obtained, 
+it can be placed on its Note Board in any of the five columns. A Universal 
+Information Cube (and its point value) counts as an Information Cube of 
+the appropriate color for the column it is in as long as it is placed on a Note 
+Board. If there are not enough Universal Information Cubes in Reserve when 
+a Zone containing them is placed, the spaces of those cubes remain empty.
+A
+At the University of Rocca Civetta, Students and Scholars gather in Student 
+“Societies” specialized in the most diverse fields. Under their own color and their 
+own letter of the Greek alphabet, the Students of a society come together thanks to 
+their passions that push them to excel in areas such as sports, socializing or even 
+esoteric and mysterious subjects such as reading the stars.
+Four new Student Societes are introduced in this expansion, joining the vile Omega 
+Fraternity presented in the base game.
+• The Phi, dressed in purple, are a mysterious society who have devoted themselves 
+to the teachings of a mysterious traveler, through whom they have developed 
+occult mental powers.
+• The Zetas, dressed in black, are expert alchemists, capable of transmuting matter 
+and energy.
+• The Iotas, who dress in celestial blue, are a lost society whose members vanished 
+into thin air in an expedition to the Arctic lands many years ago; now they are back 
+with the ability to manipulate temperature and freeze their opponents!
+• Green-clad Lambdas are expert hunters, and can help Scholars survive the most 
+extreme expeditions (these Students use the Trap Token rules explained on page 21). 
+To use the Student Societies you must first decide which of them to include in the 
+game. There is no limit to the number of Societies that can be used at the same time, 
+but, if there are some Bosses or Scholars in the game, some of the Societies cannot be 
+used, their Student Society Cards will be placed in the box and will not be available:
+• Freddo (Boss): if he is the Boss of the game, the Iota Society is not available.
+• Jukas (Boss): if he is the Boss of the game, the Phi Society is used in the game, but 
+the three Phi Students are not entered in the University during Game Setup (see 
+Jukas Boss card).
+• Caterina (Scholar): if she participates in the game, the Zeta Society is not available.
+• Claudio (Scholar): if he participates in the game, the Lambda Society is not 
+available.
+To enter the Societies in the game, follow these steps:
+• Select the Societies to be used from those available, take their Student Society 
+Cards and place them on the table visible to all players.
+• Put 3 Students per Society in Reserve and leave the others in the box.
+• During Game Setup, enter a Student for each Society among those in the Reserve 
+at the University; these replace an equivalent number of standard Students.
+• Each time the University is replenished with the Students indicated on the Alert 
+Card, first insert a Student for each Society among those found in Reserve, 
+always replacing an equal number of standard Students. If for any reason there 
+are not enough to fill the University or are no longer available, complete the filling 
+with the standard Students.
+• When more than one Student must be placed at the Campus Bonfire, the current 
+player chooses the order in which to place them.
+• When the Students are picked up from the Campus Bonfire by a Scholar, they 
+must take them starting from the last one available (the one furthest from the slot 
+with the arrow).
+• When a Scholar draws a Student belonging to a Society, they can choose to Sacrifice 
+a standard Student in their possession to keep it for themselves instead of placing 
+it at the Bonfire.
+Each Student belonging to a Society works exactly like a standard Student, but each has 
+one or more Effects. The effect of a Student can be activated by a Scholar who owns 
+it by following what is indicated in his Student Society card (example, Sacrifice a Zeta 
+Student to discard two Stun Tokens).
+Student Effects can be activated by a Scholar on their turn or, if the symbol is present 
+in their description, even during their opponents’ turns, following the Priority rules as 
+if they were Effects of a Trick Card (see pg. 13)
+STUDENT SOCIETIES
+ADVANCED RULE
+28
+You can take advantage of the Omega Deck and the rules of Solitaire mode (p. 30) to 
+include Omega and his deviousness in a normal game of Dungeonology.
+To best play a game using these rules it is good to use the following advanced rules 
+during the game: Boss and Main Effects. Other advanced rules can be included in the 
+game to modify the game experience to your liking.
+To play a game in Omega Versus All mode, complete Game Setup by adding the 
+following:
+• Omega cannot be chosen as the boss of the game.
+• Place the Omega Boss Model in the Starting Zone along with the Scholars.
+• Omega does NOT count as a Scholar when the University is first filled and 
+replenished during the game.
+• Shuffle all the Omega Cards to create the Omega Deck.
+• Select the right Tome of Secrets for the game based on the number of participating 
+players: Omega VS 2 for 2-player games, Omega VS 3 for 3-player games, Omega 
+VS 4 for 4-player games. Keep the Tome of Secrets close at hand.
+The game proceeds normally with the difference being that each player, after carrying 
+out their chosen Action, performs an Omega Phase (see page 31) before the end of his 
+turn.
+You take advantage of all the rules to manage Omega and the Omega Deck explained in 
+the Solo Play mode, with the following changes:
+• Target Scholar: any effect of the Omega Cards that refers to a Scholar, always 
+targets the current Scholar (the one who is performing the Omega Phase), for 
+example for the Teleport movement effect.
+• Encounter and Black Star: the Encounter effect (E) applies to each Scholar 
+encountered by Omega. The Black Star effect (F) applies to each Scholar 
+individually if they have more Stars than the Black Stars owned by Omega.
+• Star and Double Star: these effects (G-H) are activated based on the Stars 
+possessed by the current Scholar.
+• Sabotage: this effect (I) is only performed to obstruct Espionage Actions that 
+target Omega.
+Game End: the game follows the normal rules (including the Maximum Alert
+advanced rule if used), unless Omega occupies all spaces of the Tome of Secrets with 
+the Information Cubes obtained (see below).
+Omega wins if:
+• At the beginning of an Omega Phase, all spaces of the Tome of Secrets are occupied 
+by Information Cubes up to the OMEGA symbol.
+• The game ends and no Scholars have successfully Submitted the Thesis.
+Some of the Bosses in this box are particularly dangerous and 
+difficult to deal with. Freddo, Mamma Basilisco, Marconiglio, 
+Enrico, Scilla and Cariddi are Big Bosses, and they follow 
+special rules to be included in a game of Dungeonology.
+To bring them into the game you need to use the Boss
+advanced rule. As well, to make the most of the mechanics 
+of some of them, it is good to use the Dangerous 
+Zones advanced rule.
+Each Big Boss has only one profile (A) on 
+their Boss Card and is used in a specific game 
+mode indicated on the back of their card and 
+recognizable thanks to a black and gold scroll 
+bearing their name (B).
+Here are the rules of the mode to be considered 
+throughout the game, as well as the additional 
+rules for Game Setup.
+To find all the materials listed in the Big Boss 
+mode, please refer to the material list on p. 24.
+Scylla and Charybdis are a particular and powerful 
+Boss, and they have two Boss Cards; both must be 
+used when deciding to include Scylla and Charybdis 
+in the game.
+OMEGA AGAINST ALL
+DEPENDENTS RULE
+BIG BOSS
+DEPENDENTS RULE
+29
+Omega VS 3 • Ogni volta che l’Università viene riempita 
+di Matricole, NON conteggiare Omega come 
+uno Studente.
+• Omega subisce gli eff etti delle Carte 
+Trucchetto solo se esse presentano l’icona 
+Omega (Ω) nell’angolo in basso a destra. 
+• Rivela una Carta Omega ed esegui 
+Sabotaggio dopo aver dichiarato ogni tuo 
+Valore di Furtività.
+Ω
+AVVISTAMENTO
+collegandola al Dungeon; fa parte dello stesso Piano di 
+di conseguenza). 
+esegui .
+• ATTIVAZIONE
+Zona appena piazzata contiene l’Eff etto “Scale”, viene 
+termina il suo movimento nella Zona di Partenza, 
+Randomizza un’altra volta.
+• Piazza un Uovo nella Zona in cui si ferma 
+Cubi Informazione presenti nella Zona (quelli più a 
+sinistra).
+Negli spazi della Zona “Tana del Marconiglio” non SPECIALE
+Cubi Informazione Falsa contenuti nelle Uova.
+possono essere rimossi da essa in alcuna maniera.
+CACCIA ALLE UOVA
+CACCIA ALLE UOVA
+SETUP • 
+• . • 
+• 
+Falsa. Mischiale e ponile in Riserva. 
+APRIRE UN UOVO (AZIONE) Uno Studente può utilizzare la sua Azione per 
+aprire un Uovo nella sua stessa Zona. Se trova 
+un Cubo Informazione Universale lo Raccoglie, altrimenti, lo piazza nella Zona “Tana del Marconiglio”. L’Uovo aperto viene preso e tenuto dallo Studente sulla sua Bacheca.
+PUNTI BONUS DELLE UOVA Durante la conta dei punti di Fine Gioco 
+ogni Uovo conferisce, allo Studente che lo 
+possiede, punti vittoria bonus pari ai Cubi 
+Informazione Falsa presenti nella Zona “Tana del Marconiglio”.
+Omega VS 2 • Ogni volta che l’Università viene riempita 
+di Matricole, NON conteggiare Omega come 
+uno Studente.
+• Omega subisce gli eff etti delle Carte 
+Trucchetto solo se esse presentano l’icona 
+Omega (Ω) nell’angolo in basso a destra. 
+• Rivela una Carta Omega ed esegui 
+Sabotaggio dopo aver dichiarato ogni tuo 
+Valore di Furtività.
+Ω
+Tomo dei Segreti • Rimuovere dal mazzo delle Carte Sfi ga le 
+carte che non riportano il simbolo Ω.
+• Ogni volta che l’Università viene riempita 
+di Matricole, conteggiare Omega come uno 
+Studente.
+• Omega subisce gli eff etti delle Carte 
+Trucchetto solo se esse presentano l’icona 
+Omega (Ω) nell’angolo in basso a destra. 
+• Rivela una Carta Omega ed esegui 
+Sabotaggio dopo aver dichiarato ogni tuo 
+Valore di Furtività.
+Ω
+The rector sent you all alone to study a dungeon that she 
+deems not very dangerous. You left full of hope and with the 
+certainty of having the thesis in your pocket, but when you reached the 
+study area a shiver ran down your spine seeing the banners of the Omega 
+Fraternity soaring among the Campus tents. Your mission won’t be that easy 
+after all!
+The machinations of the Omega Fraternity are 
+represented by a deck of cards called the Omega 
+Deck, whose cards will describe the actions carried 
+out by the Omega Boss during the game. Omega 
+will collect or steal Information Cubes by placing 
+them on his Tome of Secrets; the more this is 
+filled with cubes, the more powerful it becomes!
+To best play a Solitaire game of Dungeonology 
+it is good to use the following advanced rules 
+during the game: Boss and Main Effects. Other 
+advanced rules can be included in the game to 
+modify the game experience to your liking.
+To play a game in Solitaire Mode, complete Game 
+Setup by adding the following:
+• Place the Omega Boss Model in the 
+Starting Zone along with the Scholar.
+• Omega counts as a Scholar, so 2 Scholars 
+are always considered in the game when 
+the University is filled for the first time 
+and replenished during the game (it is 
+recommended to play at Player Level: 
+Student).
+• Shuffle all the Omega Cards (D) to create the Omega Deck.
+• Keep the Tome of Secrets (A) close at hand.
+• Remove Jinx Cards from the game that do not have the Omega symbol. 
+• The Player begins the game by drawing Trick Cards equal to her Hand value 
+(instead of one).
+Changes to the Rules
+Substantial changes to the game rules must be made during the solo game:
+Game Turn: the player takes her normal game turn. Once the chosen Activity has been 
+completed, before her turn ends, she performs an Omega Phase (see below).
+Submit the Thesis: in order to perform this Action you must have at least two Stars 
+on your Note Board (as per standard rules), and have at least one Star more than the 
+number of Black Stars (B) Omega has on the Tome of Secrets.
+Game End: the game follows the normal rules, (including those of the Maximum 
+Alert advanced rule if used), unless Omega fills all spaces of the Tome of Secrets with 
+Information Cubes (see below).
+The player wins only if he successfully Submits the Thesis, and loses if:
+• At the beginning of an Omega Phase, all spaces of the Tome of Secrets are occupied 
+by Information Cubes up to the OMEGA symbol (C).
+• The game ends and the Scholar has not successfully Submitted the Thesis.
+Managing Omega
+Nobody knows who the head of the evil Omega Fraternity is, but everyone knows that 
+he leads the Red Students to thwart the plans of the poor Scholars on duty! Omega is 
+managed through the following rules:
+Boss: Omega is not affected by the Boss.
+Omega is a Scholar: Omega’s Model is considered a Scholar and follows the 
+same rules, and can be targeted by effects that target a Scholar. Nonetheless, 
+the only Zone Effect that Omega activates is the Stairs Effect.
+Trick Cards: Omega suffers the Main Effects of Trick Cards only if they 
+have the Omega icon in the lower right corner.
+Zones: if an Omega Card effect causes Omega to leave a Zone via an 
+unlinked passage, it reveals new Zones as if he were a Scholar; the player 
+will decide how to place the new Zone (and the Zones uncovered by the Stairs Effect).
+Information Cubes: when Omega gets Information Cubes, he places them on the 
+Tome of Secrets in order from the first space in the upper left to the last space in the 
+lower right. Omega can Lose Information Cubes due to Scholar Trick Cards or Skills. 
+If Omega is to Give or Drop an Information Cube of his choice, always Give or Drop 
+the one with the lowest point value among those in his possession.
+When a space on the Tome of Secrets becomes free, optimize the remaining Information 
+Cubes to fill the spaces starting from the top left.
+Espionage: when performing an Espionage Action against Omega, proceed by 
+following these points:
+• Calculate the Omega Alert value:
+Point value of the target Information Cube
++ the Alert Modifier on the Alert Card
+• The Scholar declares his Stealth Value by playing Trick Cards.
+• Reveal an Omega Card and perform Sabotage (if any).
+• The Scholar plays additional Trick Cards and determines whether he achieves a 
+Success or a Failure.
+Tomo dei Segreti • Rimuovere dal mazzo delle Carte Sfi ga le 
+carte che non riportano il simbolo Ω.
+• Ogni volta che l’Università viene riempita 
+di Matricole, conteggiare Omega come uno 
+Studente.
+• Omega subisce gli eff etti delle Carte 
+Trucchetto solo se esse presentano l’icona 
+Omega (Ω) nell’angolo in basso a destra. 
+• Rivela una Carta Omega ed esegui 
+Sabotaggio dopo aver dichiarato ogni tuo 
+Valore di Furtività.
+Ω
+A
+B
+B
+B
+C
+Tomo dei Segreti
+• Rimuovere dal mazzo delle Carte Sfi ga le 
+carte che non riportano il simbolo Ω.
+• Ogni volta che l’Università viene riempita 
+di Matricole, conteggiare Omega come uno 
+Studente.
+• Omega subisce gli eff etti delle Carte 
+Trucchetto solo se esse presentano l’icona 
+Omega (Ω) nell’angolo in basso a destra. 
+• Rivela una Carta Omega ed esegui 
+Sabotaggio dopo aver dichiarato ogni tuo 
+Valore di Furtività.
+Ω
+SOLITARY
+MODE
+30
+SOLITARY MODE
+Omega Raccoglie un Cubo Informazione in 
+ogni Zona in cui entra. • • •
+INCONTRO: Omega ti sottrae un Cubo Informazione Ricchezze; se non può, ottieni 
+un segnalino Stordito. : Scarta due Carte Trucchetto casuali. • • • : Omega Raccoglie un Cubo Informazione nella Zona in cui si ferma. • • • : Omega Raccoglie tutti i Cubi Informazione nella Zona in cui si ferma.
+Ombra dell’Est
+1
+• • • • • • • • • • • • • • • • • • • • • • • • • • • 
+SABOTAGGIO: 1
++4
+Omega mette in Riserva un tuo Cubo 
+Informazione Gerarchia; se non può, mette 
+in Riserva il Cubo Informazione più a destra 
+di tutte le Zone in cui è entrato.
+• • • INCONTRO: Scarta una Carta Trucchetto casuale.
+: Ripeti Incontro.
+• • •
+: Omega Raccoglie tutti i Cubi Informazione 
+messi in Riserva con questa carta.
+• • • : Rivela e applica gli eff etti della 
+prossima Carta Omega.
+Sobillare la Rivolta
+3
+• • • • • • • • • • • • • • • • • • • • • • • • • • • 
+SABOTAGGIO: 1 1
++4
+Inverti l’Ordine dei Cubi Informazione di 
+ogni Zona in cui Omega entra. 
+INCONTRO: • • • Metti in Riserva il Cubo Informazione con il valore in punti maggiore 
+piazzato sulla tua Bacheca. : Ripeti Incontro. • • • : Omega Raccoglie un Cubo Informazione dalla Zona in cui si ferma. • • • : Omega Raccoglie un Cubo Informazione da tutte le Zone in cui è 
+entrato tramite questa carta.
+Trame Inesplicabili
+1
+• • • • • • • • • • • • • • • • • • • • • • • • • • • 
+SABOTAGGIO: 1 1
++3
+D
+OMEGA PHASE
+• • •
+The Omega Phase is played in addition to the player’s turn after the End of Turn Phase. 
+In the Omega Phase, the player draws a card from the Omega Action Deck and applies its 
+effects from top to bottom. If the deck runs out, shuffle all discarded cards to reform it:
+A. Student: Omega draws the indicated number of Students from the University. If 
+an Omega Student is drawn, the normal rules are followed, but the Scholar will get 
+the Jinx Card (to be revealed, as usual, in the next End of Turn Phase).
+B. Movement through Passages: Omega moves through the Passages 
+following the indicated patterns (using the rules of the Randomizer Deck in 
+the game manual), but respecting the following rules:
+• The Passage is not linked: Omega reveals Zones from the suitable Stack 
+until the player manages to place one, then enters it. If he cannot place a 
+Zone from the suitable Stack (they are exhausted), Omega chooses the next 
+clockwise Passage.
+• The Passage is linked to a Zone containing Information Cubes or the 
+Scholar: Omega enters the Zone.
+• The Passage is linked to a Zone that does not contain Information Cubes 
+or Scholar: Omega chooses the next clockwise Passage.
+• If no new Zones can be linked and all Zones Omega can enter contain no 
+Information Cubes or Scholars: Omega uses Teleport (see below).
+C. Teleport: Omega is placed in the Scholar’s Zone. Omega moves to a Zone 
+containing the Information Cube of higher value than those in play if the Scholar 
+is in the Starting Zone.
+D. Effect: during or after movement, Omega does what is written in this section, 
+usually by collecting, eliminating or subtracting Information Cubes
+E. Encounter: Omega resolves this effect on the Scholar if he Encounters it during or 
+at the end of his movement.
+F. Black Star: on the Tome of Secrets there are Black Stars, which Omega reaches 
+every time he places an Information Cube on the indicated space. If the Scholar has 
+fewer Stars than Omega’s number of Black Stars, the Scholar becomes Exalted. If 
+the Scholar is Exalted, Omega performs what is written in this section in addition 
+to the Encounter Effect.
+G. Star: if the Scholar has at least one more Star than Omega, the latter also 
+performs what is written in this section.
+H. Double Star: if the Scholar has at least two more Stars than Omega, the 
+latter also performs what is written in this section.
+I. Sabotage: whenever the Scholar declares a Stealth Value (for a Study or Espionage 
+Action), she must draw an Omega Card and perform the Sabotage Effect, if 
+indicated. This effect consists of one or more Divinations, to be performed one 
+after the other, aimed at increasing the Alert Value that the Scholar needs to beat 
+with her Stealth Value.
+J. Reaction: if Omega is targeted by the Effect of a Trick Card, before applying its 
+effects, a card from the Omega Action Deck must be revealed, and the effects listed 
+under Reaction must be applied, if any.
+K. Alert Bonus: the Alert of the Zone in which Omega is located increases by the 
+value indicated on the last drawn Omega Card.
+Omega Raccoglie un Cubo Informazione in 
+ogni Zona in cui entra. • • • INCONTRO: Omega ti sottrae un Cubo Informazione Civiltà; se non può, ottieni un segnalino Stordito. : Scarta due Carte Trucchetto casuali. • • • : Omega Raccoglie un Cubo Informazione nella Zona in cui si ferma. • • • : Omega Raccoglie tutti i Cubi Informazione nella Zona in cui si ferma.
+Ombra del Nord
+1
+• • • • • • • • • • • • • • • • • • • • • • • • • • • 
+SABOTAGGIO: 1
++4
+• • •
+INCONTRO: Scarta Carte Trucchetto e Dona Cubi Informazione ad Omega per un totale 
+di 3.: Pesca una Carta Sfi ga. • • • : Omega ti sottrae un Cubo Informazione 
+a tua scelta. • • •
+: Rivela e applica gli eff etti della prossima Carta Omega.
+Vile Compiacimento
+• • • • • • • • • • • • • • • • • • • • • • • • • • • REAZIONE Annulla la Carta Trucchetto.
+• • • • • • • • • • • • • • • • • • • • • • • • • • • 
+SABOTAGGIO: 2 2
+3 +3
+A
+B
+C
+D
+F
+G
+H
+I
+J
+K
+E
+31
+SOLITARY MODE
+September 14XX, Rocca Civetta.
+The rector, Magalli the Magnificent, during the opening ceremony of 
+the university year, announces the death of yet another professor of Dungeonology, 
+Enrico Giovanni, the well-known archaeologist.
+Despite himself, he must communicate that the lessons of this important subject 
+will be suspended until a worthy replacement is found, and for this he announces 
+a call for tenders in which all the brave teachers who think they can replace the 
+late professor will be able to participate.
+During the academic year, the participating professors will be sent by the rector 
+himself to carry out research into mysterious peoples and dangerous monsters 
+whose habitats have been identified in previous years. For this reason, each teacher 
+will select a team of promising Scholars who will explore these places on their 
+behalf, in order to write a thesis on what they discover. But it will not be that easy: 
+Scholars will need to study the habitats and creatures that populate them without 
+disturbing them, in order to report information and facts not contaminated by 
+external intervention.
+The teacher who at the end of the year presents the best theses from his team of 
+Scholars to the rector, will become the new professor of Dungeonology!
+PREPARATION
+• • •
+To play in Campaign Mode, before playing the first scenario, do the following:
+• Photocopy the Campaign Sheet on p. 33, or download it from the 
+Ludusmagnusstudio.com website.
+• In a campaign, the players represent the Teachers. Write the names of the players 
+in the spaces provided (A). Each of these spaces has a colored triangle, necessary to 
+determine which Teacher is selected in case of Randomizations; each teacher must 
+always use the Note Board with the same colored triangle during the campaign.
+• With all the players seated at the table, Randomize a Teacher.
+• Take all available Scholar Cards (excluding Enrico’s, which cannot be used in this 
+mode).
+• Starting with the Randomized Teacher, and continuing to the left, each player 
+chooses a Scholar Card for himself. Proceed in this way until each Teacher has 2 
+Scholar Cards. This will be the Teacher’s team for the campaign
+• Each Teacher chooses a name for their team and notes it on the Scholar Sheet (B).
+THE CAMPAIGN
+• • •
+In Campaign Mode, Teachers will face 12 scenarios representing the 12 months of the 
+academic year, starting from the first (September) and proceeding in order.
+During Game Setup, the instructions given in the scenario that the group is about to 
+play must be followed and, if indicated, it must be decided by mutual agreement which 
+optional advanced rules to include in the game. Note that in some scenarios, if the 
+Maximum Alert optional advanced rule is used, it is also shown which Panic Card is 
+to be used. Furthermore, each Teacher must:
+• Choose which of your Scholars will participate in the game.
+• Mark that you have used it on the Campaign Sheet (C) to keep track of the number 
+of times that Scholar participated; In fact, during the entire campaign game, the 
+same Scholar cannot be chosen more than 6 times.
+• Spend Support Points at the end of the setup, to benefit the Scholar (see right).
+Support PPoinntss
+At the end of each game, each Teacher may obtain, based on the ranking of the game, a 
+certain number of Support Points (PS) to be noted on the Campaign Sheet (D).
+At the end of Game Setup, before playing the first turn, and starting with the first 
+player on the turn, each Teacher can spend Support Points to buy a single bonus from 
+those listed below. When all the Teachers have chosen the first bonus, they continue, 
+always in turn order, to buy a second one, then a third one, and so on, until all the 
+Teachers declare that they do not want (or cannot) buy more bonuses.
+Some bonuses show the name of Advanced rules or Dependents in brackets that must 
+be among those indicated in the current scenario. Otherwise, the bonus cannot be 
+chosen:
+• Specializing – 2SP (Main Effects and Specialist Cards): shuffle the deck of 
+Intern Cards, draw two, choose one and put the other back in the deck. Your 
+Scholar starts the game with the Intern in her possession. 
+• Student – 1SP: take a Student from the Reserve. Your Scholar leaves with this 
+additional Student.
+• Student Societies – 2SP (Student Societies): take a Student Society model from 
+the Reserve, your Scholar leaves with this additional Society Student.
+• Study Bonus – 3SP: your Scholar starts the scenario with the Study Bonus on the 
+Note Board wheel increased by 1 point (set immediately).
+• Trick Card – 2SP: add a Trick Card to your hand by drawing it from the deck.
+EEnnd of Scennario
+At the end of each game, after determining the ranking, each Teacher marks on the 
+Campaign Sheet her position in the ranking (E) or if her Scholar was unable to Submit 
+the Thesis (NA); these results will contribute to campaign victory at the end of the 
+campaign.
+Then, each Teacher earns Support Points (SP) based on the parameters indicated 
+below, and notes them on the Campaign Sheet (D):
+• Each Teacher who participated: +1 SP
+• The Scholar Who Submitted the Thesis: +1 SP
+• First classified Scholar: +3 SP
+• Second classified Scholar: +2 SP
+EEnnd of CCampaigngn
+At the end of the twelfth scenario of the campaign (August), the end-of-campaign 
+ranking must be determined and the winner elected to become the new professor of 
+Dungeonology!
+Each column of the ranking position (E) at the bottom indicates a value in Victory 
+Points. This value must be multiplied by the number of results obtained by each 
+Teacher in a given column.
+Once you have obtained the Victory Points of each Teacher’s column, add them all 
+together to obtain the final result.
+The Teacher who has the most Victory Points wins!
+CAMPAIGN
+MODE
+32
+CAMPAIGN MODE
+SCENARIO
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+MULTIPLIER
+VICTORY POINTS
+TOTAL VP
+TEACHERS
+TEAM
+SCHOLARS
+TEACHERS
+TEAM
+SCHOLARS
+1° 2° 3° 4°+ NA 1° 2° 3° 4°+ 1° 2° 3° 4°+ 1° 2° 3° 4°+ 1° 2° 3° 4°+ 1° 2° 3° 4°+
+x4 x3 x2 x1 /2 x4 x3 x2 x1 /2 x4 x3 x2 x1 /2 x4 x3 x2 x1 /2 x4 x3 x2 x1 /2 x4 x3 x2 x1 /2
+NA NA NA NA NA
+SP:
+SP:
+SP:
+SP:
+SP:
+SP:
+33
+CAMPAIGN MODE
+September: Preliminary Research
+October: Beer Festival
+December: Winter is Coming
+November: the Concert
+The rector, Magalli the Magnificent, for the first month of research requires a 
+brief exploration of the Bosco Beone site, where traces of the activities of a strange 
+and obscure tribe that are thought to be non-humans have been recorded.
+The exploration is aimed at conducting a first contact with their habitat and 
+habits. Therefore, very in-depth theses will not be required.
+However, the rector advises all to be careful: if Enrico Giovanni himself has 
+disappeared during similar searches, it is better not to take the mysterious 
+inhabitants of this place too lightly!
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: None.
+• Alert Card: Introductory Game.
+The first month of research on the community of strange humanoids in Bosco 
+Beone, identified as “Fauns”, allowed the university to establish that in October 
+these natives are preparing for their own sacred festival: the beer festival known 
+as Bacchanal!
+It is in the university college’s interest that information on this custom of theirs 
+is collected, stealing as much knowledge as possible from the grand master of 
+ceremonies of the fauns, the mighty host of the community known as Laetus.
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: Boss.
+• Alert Card: Easy.
+• Boss: Drunk Laetus.
+For some time, a mysterious coldness has been blowing inside the classrooms of 
+Rocca Civetta, and firmly closing doors and windows does not seem to be enough to 
+stop it. A growing chill makes its way into the University, and the mystery remains 
+unsolved even when the cooks in the canteen reveal that a part of the cellars, frozen 
+since time immemorial, seems to have melted and mysterious footprints of someone 
+who came from “beyond the barrier ”of ice.
+When the Scholars prepare for the December expedition, they find a mysterious 
+figure at the camp who insists on joining the group. He introduces himself as 
+Freddo, and claims to be a student of Rocca Civetta, the head of the Iota Student 
+Society, who were forgotten for time immemorial in the university cellars during 
+a winter hide-and-seek competition!
+Complete Game Setup including these items and advanced rules:
+• Mode: Winter is Coming (see the back of the Freddo Boss Card).
+• Advanced Rules: Boss, Dangerous Zones.
+• Optional Advanced Rules: Main Effects.
+• Alert Card: Medium.
+• Boss: Freddo
+Fauns are a peculiar society. Despite being organized in rigid castes among which 
+violent warriors, cunning hunters and dark mystics stand out, the population 
+lives in harmony by organizing community events that keep all the social strata 
+of the village together.
+November is considered the month of preparation for the cold winter, and before 
+the cold arrives, the fauns organize one big final party, a concert open to all, in 
+which even the most modest of farmers can celebrate with the most important of 
+the hierarchy. The artist who will perform this year is a famous singing faun from 
+southern Italy, known as Capagrezza.
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: Boss.
+• Optional Advanced Rules: Main Effects, Maximum Alert (Outside the 
+Dungeon).
+• Alert Card: Easy.
+• Boss: Hypnotist Capagrezza.
+34
+CAMPAIGN MODE
+March: the Temple of Doom
+April: Spring Festival
+January: the Initiation
+February: Omega to the Rescue
+During the previous expedition, the mysterious Omega leader turned out to be 
+your worst enemy. Your research has allowed you to unravel his dark plans, to 
+become the Professor of Dungeonology and keep all the secrets in Rocca Civetta for 
+himself. You suspect that the disappearance of the last professor of Dungeonology, 
+the well-known archaeologist Enrico Giovanni, was caused precisely by him. In 
+the depths of the caves of Bosco Beone, following the moves of the Students of the 
+Omega Fraternity, you have noticed some deep galleries beyond the village of the 
+fauns, in which not even they venture. The tales of the people of the woods say that 
+those passages hide a cursed temple. Perhaps by exploring them you can find out 
+what happened to the famous archaeologist.
+Complete Game Setup including these items and advanced 
+rules:
+• Mode: Temple of Cursed (see back of Enrico Giovanni’s 
+Boss Card).
+• Advanced Rules: Boss, Dangerous 
+Zones, Dangerous Zones.
+• Optional Advanced Rules: Main 
+Effects, Maximum Alert (Rolling Stone), 
+Student Societies, Research Cards.
+• Alert Card: Medium.
+• Boss: Enrico Giovanni.
+Still shaken and out of his mind due to the terrible experiences of the year spent 
+in captivity in the cursed temple, Enrico Giovanni has finally returned to Rocca 
+Civetta. As the university prepares for the typical spring student parties, the 
+famous archaeologist, who is slowly coming to his senses, confusedly begins to 
+mumble about a terrifying danger from the past, something that could destroy 
+the university or even worse.
+But it is not the time to get carried away by dark thoughts, spring is upon us and 
+the master of the festivals of Rocca Civetta, Marconiglio, expects the fun to be at 
+the highest levels, even during your expeditions; get ready for a challenging egg 
+hunt!
+Complete Game Setup including these items and advanced rules:
+• Mode: Egg Hunt (see back of Marconiglio Boss Card).
+• Advanced Rules: Boss, Dangerous Zones.
+• Optional Advanced Rules: Main Effects, Maximum Alert (Egg Hunt), Student 
+Societies, Research Cards.
+• Alert Card: Medium.
+• Boss: Marconiglio.
+After the first months inside the university, all the students have finally found a 
+place in one of the Student Societies of Rocca Civetta. The Machiavellian Omega, 
+and the icy Iota, are joined by the expert alchemists of the Zeta sisterhood, the 
+Lambda hunters, and the scholars of the occult arts of the mysterious Phi Society.
+It’s time for the initiation rite for first-year newbies, and the society leaders 
+convince the rector to send them with you for their first field experience. Meanwhile, 
+your research leads you to study the arcane rites of the fauns of Bosco Beone; you 
+have identified a witch among them called Raganella, and she will be the focus of 
+your attention.
+Complete Game Setup including these items and 
+advanced rules:
+• Advanced Rules: Boss, Dangerous Zones, Student 
+Societies.
+• Optional Advanced Rules: 
+Main Effects, Maximum 
+Alert (Cooking Time).
+• Alert Card: Medium.
+• Boss: Witch Raganella.
+As you prepare for the February expedition for some very specific but essential 
+minor research, the pompous society leader of the Omega, fully dressed in red 
+livery, and with a glittering gold mask, declares that he will join your group. 
+After months in which his student society thwarted your studies, this mysterious 
+individual, whose identity is a mystery, has decided to bury the hatchet and help 
+you for the good of the university.
+But what will his real goals be?
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: Boss, Dangerous Zones, Research Cards.
+• Optional Advanced Rules: Main Effects, Maximum Alert, Student Societies.
+• Alert Card: Difficult.
+• Boss: Mind Omega.
+35
+CAMPAIGN MODE
+July: the Stone Brood
+August: the Goddess and the Kraken
+You stopped Jukas, but you didn’t foil his plans. The time traveler has turned out 
+to be an unstable individual, driven insane by a green, sentient crystal fused into 
+his arm. Listening to his delusions, you discovered that, stealing knowledge from 
+the university, he put into practice an ancient ritual to evoke the gods Scylla and 
+Cariddi with the hopes of breaking his bond with the crystal with their powers. 
+If the two divinities were to reveal themselves, they could trigger a cataclysm that 
+would overwhelm the community of fauns of Bosco Beone and the university itself, 
+canceling them all out.
+The rector urges you to find out where the ritual was performed, but beware! 
+Apparently, Jukas himself was guided by a hidden hand. It seems that the two 
+have left a dangerous beast to defend their machinations: a basilisk that has 
+nested in the underbelly of Bosco Beone.
+Complete Game Setup including these items and advanced rules:
+• Modae: The Brood (see back of Mother Basilisk’s Boss Card).
+• Advanced Rules: Boss, Dangerous Zones.
+• Optional Advanced Rules: Main Effects, Maximum Alert, Student Societies, 
+Research Card, Omega Against All (maximum 4 players).
+• Alert Card: Difficult.
+• Boss: Mother Basilisk.
+You removed the basilisk mother from Bosco Beone by moving her brood 
+peacefully, but you did not arrive in time to stop the ritual of summoning Scylla 
+and Cariddi. Divine beings indisposed by such disrespect now require a test of 
+faith and ingenuity to peacefully leave Bosco Beone. And the troubles don’t end 
+there: the head of the Omega Fraternity reveals himself as the hidden hand behind 
+all the nefarious plans that have hindered you in your expeditions. It was he who 
+imprisoned Enrico, found the time traveler Jukas in his time machine, and exploited 
+his confused mind for his plans. Putting him at the head of the Phi Society and 
+using their powers, he stole the knowledge reserved for the Dungeonology teacher 
+from Rocca Civetta and implemented the ritual to summon the deities in order to 
+absorb their powers!
+Your latest expedition is of vital importance: you will need to stop Omega, save 
+the fauns and the university, and even deal with gods who will have the burden of 
+deciding who will be the next dungeon professor, or ...
+Complete Game Setup including these items and advanced rules:
+• Mode: Goddess of the Sea (see back of the Scylla and Charybdis Boss Cards).
+• Advanced Rules: Boss, Dangerous Zones, Level IV Zones.
+• Optional Advanced Rules: Main Effects, Maximum Alert, Student Societies, 
+Research Card, Omega Against All (maximum 4 players).
+• Alert Card: Medium.
+• Boss: Scylla and Charybdis.
+June: the Future Man
+You have found the mysterious time machine described by Enrico and, thanks to 
+this discovery, you have revealed the identity of the time traveler: Jukas!
+This individual has been in hiding for a year in Rocca Civetta, and has converted 
+the Phi Society to his evil ends thanks to his dark mental powers. Now that you 
+have discovered it, he has thrown away the mask, revealing that for some time he 
+has stolen precious knowledge from the university to evoke and bend to his will a 
+powerful and mysterious goddess. Jukas hides under Bosco Beone, protected by Phi 
+Students. You must investigate what they are plotting if you hope to stop his plans.
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: Boss, Dangerous Zones, Level IV Zones.
+• Optional Advanced Rules: Main Effects, Maximum Alert (Mind Distort), 
+Student Societies, Research Cards.
+• Alert Card: Difficult.
+• Boss: Jukas.
+May: the Catacombs
+Enrico, still recovering, recalled in his months of imprisonment that someone came 
+from the past using an incredible machine hidden in the depths of Bosco Beone! 
+The traveler managed to enter Enrico’s mind with strange mystical powers driving 
+him into madness. The dark figure abandoned the archaeologist, declaring that 
+he would hide among the students of Rocca Civetta to obtain the information 
+necessary to carry out his nefarious plans.
+To stop the machinations of this dark individual, you must find out who he is 
+by finding his time machine, hidden beyond the ancient catacombs of the cursed 
+temple, but beware of the spirits that dwell in those places!
+Complete Game Setup including these items and advanced rules:
+• Advanced Rules: Boss, Dangerous Zones, Level IV Zones.
+• Optional Advanced Rules: Main Effects, Maximum Alert, Student Societies, 
+Research Card.
+• Alert Card: Difficult.
+• Boss: Lord Ombra.
+36
+CAMPAIGN MODE
+EXCELSIOR!
+What an extraordinary year, what superlative students, what exceptional teachers! Rector Magalli the 
+Magnificent congratulates you all. You have overcome all the most difficult academic challenges, facing 
+dangerous research, passing tests that would make the best of the students of other universities pale. You 
+have discovered intrigues, revealed the origins of mysterious creatures and made friends with a people as 
+mysterious as they are incredible. As if that were not enough, you have pleased the deities by demonstrating 
+your incredible competence and preparation.
+The Scholars of the participating teams are all invested with the honorary title of Doctors of Dungeonology. 
+The Teachers who guided them in this turbulent year are all welcomed into the university directorate of 
+Rocca Civetta. But the greatest honor goes to the one who was distinguished by obtaining the blessing of 
+Scilla herself, and to whom the long-awaited title of Distinguished Professor of Dungeonology is conferred!
+37
+CAMPAIGN MODE
+The goal of a Scholar during a Stealth Test is to equal or exceed the Alert Value indicated in the Zone (Study) or possessed 
+by an opponent (Espionage). The player must generate a Stealth Value by playing Trick Cards and adding together their 
+Bonus Value (white numbers), and, if is performing a Study Action, add their Study Bonus to the total (blue number 
+on the Note Board wheel).
+Once the Stealth Value has been generated, it can only be changed by Effects such as Divination or the Auxiliary Effect of 
+the Subterfuge, Fate, and Magic Trick Cards. The Bonus Values (white numbers) of the Trick Cards can no longer be 
+added to it.
+STEALTH TEST
+STUDY
+ESPIONAGE
+eSploraZioNe
+1
+Per il resto del tuo turno, puoi decidere 
+di non attivare gli Eff etti di Zona e i 
+Segnalini Trappola indicati su questa carta.
+1 1
+Lento e costante . . .
+cautela
+/
+eSploraZioNe
+1
+Per il resto del tuo turno, puoi decidere 
+di non attivare gli Eff etti di Zona e i 
+Segnalini Trappola indicati su questa 
+carta.
+1 1
+Lento e costante . . .
+cautela
+/
+SotterfuGio
+Ω
+Piazzati nella Zona di un altro Studente 
+nella tua stessa Area.
+Sarò la tua ombra . . .
+iNSeGuire
+1 / 1
+SotterfuGio
+Ω
+Piazzati nella Zona di un altro Studente 
+nella tua stessa Area.
+Sarò la tua ombra . . .
+iNSeGuire
+1 / 1
+SotterfuGio
+Ω
+Piazzati nella Zona di un altro Studente 
+nella tua stessa Area.
+Sarò la tua ombra . . .
+iNSeGuire
+1 / 1
+2 5 4 2 3
+la caNaGlia
+FURFANTE
+Quando esegui un azione di SPIONAGGIO: • Non Sacrifi chi Matricole.
+• Le Matricole degli altri Studenti non 
+aumentano il loro Valore D’Allerta.
+• Dopo aver generato il tuo Valore di Furtività:
+1 1
+2 5 4 2 3
+la caNaGlia
+FURFANTE
+Quando esegui un azione di SPIONAGGIO: • Non Sacrifi chi Matricole.
+• Le Matricole degli altri Studenti non 
+aumentano il loro Valore D’Allerta.
+• Dopo aver generato il tuo Valore di Furtività:
+1 1
+2 5 4 2 3
+la caNaGlia
+FURFANTE
+Quando esegui un azione di SPIONAGGIO: • Non Sacrifi chi Matricole.
+• Le Matricole degli altri Studenti non 
+aumentano il loro Valore D’Allerta.
+• Dopo aver generato il tuo Valore di Furtività:
+1 1
+2 5 4 2 3
+la caNaGlia
+FURFANTE
+Quando esegui un azione di SPIONAGGIO: • Non Sacrifi chi Matricole.
+• Le Matricole degli altri Studenti non 
+aumentano il loro Valore D’Allerta.
+• Dopo aver generato il tuo Valore di Furtività:
+1 1
+2 5 4 2 3
+la caNaGlia
+FURFANTE
+Quando esegui un azione di SPIONAGGIO: • Non Sacrifi chi Matricole.
+• Le Matricole degli altri Studenti non 
+aumentano il loro Valore D’Allerta.
+• Dopo aver generato il tuo Valore di Furtività:
+1 1
+difficoltÀ: facile
+durata: X 25’
+Ω
+Ω
+Ω
+Ω
+AVVISTAMENTO
+attivato l’Eff etto di Zona del Boss e attiva .
+ATTIVAZIONE
+Muovi Laetus di 3 Zone, senza farlo tornare 
+sui suoi passi. Si ferma se incontra uno 
+Studente, o se è costretto a tornare sui suoi 
+passi.
+INCONTRO
+Ogni Studente incontrato prende un 
+Segnalino Stordito.
+Zone 
+Alert 
+Value
+Cube 
+Point 
+Value
+Trick Card 
+Bonus Value
+Trick Card 
+Bonus Value
+Note Board 
+Study Bonus
+Good Luck 
+Zone Effect
+Divination 
+Effect
+Divination 
+Effects
+Divination Effects
+Divination 
+Effects
+Divination Effects
+Divination 
+Effects
+Alert Card 
+Study 
+Penalty
+Number of 
+Students
+Auxiliary Effects Penalty
+Auxiliary 
+Effects 
+Penalty
+Auxiliary Effects Bonus
+Zone Alert Value
+Target Scholar
+Alert Value
+Modification imposed by other Scholars
+Target Scholar Modifiers
+Scholar Stealth Value
+Scholar Stealth Value
+Scholar Stealth Modifiers
+Scholar Modifications
+Boss Zone 
+Modifier
+Bad Luck
+Zone Effect
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+1 Sacrifice 1 Student
+SuBterfuGe
+Ω
+Move to another Scholar’s position, in 
+your same Area.
+You are your colleagues’ silent shadow!
+purSuit
+1 / 1
+2 5 4 2 3
+the Scum
+ROGUE
+When you perform an ESPIONAGE Action: • Don’t Sacrifi ce a Student.
+• The Target Scholar’s Students don’t raise 
+their Alert Value.
+• After you have generated your Stealth Value:
+1 1
+Auxiliary 
+Effects 
+Bonus
+SUMMARY
+Bonnuss Value Stealth Value Bonus
+Alert Value Bonus
+maGic
+Select the brightest Student to be your apprentice .
+NomiNate aN appreNtice
+appreNtice
+Gain or Steal the 
+Intern:
+1
+1
++1
+2 1
+1
+2
+SuBterfuGe
+Your Stealth Value gains +N.
+N
+They’ll never fi nd me!
+hide aNd SeeK
+DDivvinnationn
+Add N to a Stealth Value during a 
+Stealth Test.
+Add N to an Alert Value during a 
+Stealth Test.
+N
+Draw N Students from the University, 
+then place them in the Bonfire area of 
+the Campus (see page 8).
+N Gain N Students from the Campus 
+Bonfire.
+N Sacrifice N Students you own and 
+put them in Reserve.
+N Get N Speed points.
+N Gain N Stun Tokens (see p. 7).
+N
+N Draw N Trick Cards.
+Discard or make opponent discard N 
+Trick Cards.
+The Effect preceded by this icon can be 
+played even if it is not your turn.
+The Effect preceded by this icon can be 
+played at any time as a response to the effect 
+of another Trick card just played by an 
+opponent. This effect is resolved before all 
+other played effects.
+N
+Divination, see “Spell” on the right.
+ICON EFFECTS
+Good
+Bad
+Stealth
+Timing
+Danger
+INFORMATION CUBE KEYWORDS
+• • •
+GAIN
+The term “Gain” means any method a Scholar uses to obtain Information Cubes, 
+either by Collecting or Stealing them. The Earned Cubes are placed in the column of 
+the Note Board corresponding to their color, in the first available space starting from 
+the bottom.
+• Collect: indicates the act of collecting an Information Cube from a Zone. 
+When an Information Cube is obtained in this way, it must be taken starting 
+from the first available in the Zone (the one furthest left), unless an effect allows 
+you to freely choose the Information Cube to Collect. If the column where the 
+Cube should be placed on a Scholar’s Note Board is full, the player takes the next 
+available Information Cube that can be placed on his Scholar’s Board.
+• Steal: indicates the act of stealing an Information Cube from another Scholar 
+by taking it from his Note Board. When this occurs, the player who Steals the 
+Information Cube takes the one placed highest in the corresponding Column from 
+the Target’s Note Board. If the column where the Stolen Information Cube should 
+be placed is full on the Stealing Scholar’s Note Board, the stolen Information Cube 
+is placed in Reserve.
+LOSE
+The term “Lose” means any situation where a Scholar is obliged to remove one of their 
+Information Cubes from their Note Board, whether it has been Stolen, Eliminated or Lost 
+for any other reason. Lost Information Cubes are always taken from the top of their Note 
+Board column.
+• Drop: indicates the act of selecting an Information Cube from those on your Note 
+Board and placing it in the Scholar’s current Zone. The cube must be placed in a free 
+space of the Zone, starting from the first available one to the right. It should be noted 
+that the Dropped cubes can be placed in any order and in any space; they do not need 
+to occupy a space of their color. If there are no empty spaces in the Scholar’s Zone, 
+the Cube must be placed in an empty space within a Linked Zone. If there are no 
+available slots, the Cube is placed in Reserve (Eliminated).
+• Eliminate: indicates the act of taking an Information Cube (from a Zone or a 
+Note Board) and placing it in the Reserve.
+GIVE
+Indicates the act of moving an Information Cube from the top of a column from your 
+own Note Board to the same column of another Scholar’s Note Board. The Donated 
+Cube is not considered Lost (see above). If the column in which it should be placed is 
+full on the Note Board of the Scholar receiving the Cube, the Donated Cube is placed 
+in Reserve.
+PROTECTED
+The colored shields on some Intern Cards indicate that the Information Cubes of the 
+same color in the Scholar’s possession are Protected. When a Protected Information 
+Cube is the target of an effect that would cause the Scholar to Lose it (see Lose), that 
+Scholar may decide not to lose it. Protection cannot be used to negate effects that would 
+cause an Information Cube to be Given (see above) to another Scholar.
+Stop: when a Scholar enters this Zone the Scholar loses all their Speed 
+points. The Scholar can get new Speed points by using the Auxiliary Effect 
+of the Exploration Trick Cards (see page 12).
+Toll N: the Scholar who enters this Zone must Drop N Information 
+Cubes of their choice, moving them from the Note Board to the leftmost 
+empty spaces of the current Zone (without taking into account the color 
+at the bottom of the spaces). If there are not enough empty spaces in the 
+current Zone, place them in an Adjacent and Linked Zone; if this is not 
+possible, place them in Reserve.
+Ambush N: when a Scholar 
+enters this Zone, they get N 
+Stun Tokens.
+Secret Passage: a Scholar in this Zone may spend one Speed point during 
+the Movement Phase to move to a revealed Zone that has a Secret Passage 
+with the same letter.
+Boss: see p. 17. Stairs: see p. 11.
+Good Luck N / Bad Luck N: A Scholar who performs a Stealth Test in 
+this Zone, after declaring their Stealth Value, must reveal N Trick Cards 
+from the deck, (see page 13) and:
+• If the number is Blue, add the highest Bonus Value of the cards drawn 
+to your Stealth Value.
+• If the number is Red, add the highest Bonus Value of the cards drawn 
+to the Alert Value of this Zone.
+Danger N: a Scholar who fails the Stealth Test in this Zone (see pages 13 
+and 14), must draw N Students from the University (instead of 1 as usual).
+Bivouac - ACTION: Carry out these steps in order:
+• Discard all Stun Tokens in your possession.
+• Discard a Jinx Card from those in your possession.
+• If you have fewer Students than your Starting Student Value, take 
+them from the Reserve (if available) until you have a number equal 
+to that value.
+• Discard any number of Trick Cards (optional).
+• Draw Trick Cards until you have a number equal to your Hand Value.
+In the Faun Dungeon, this Effect appears with a yellow or green background 
+(see Color Effects).
+Bucket: a Scholar entering this Zone can Discard up to 2 Trick Cards to 
+get that many Hot Water Tokens if available. A Scholar cannot have more 
+than 2 Hot Water Tokens.
+Hecatomb: when a 
+Scholar enters this Zone, 
+the Scholar Sacrifices all 
+their Students.
+Forced Passage: once this Zone is linked to two other Zones, it is not 
+possible to connect it to new Zones by exiting it or in any other way. If 
+the positioning of the Zones leads to linking other Passages of this Zone 
+(besides those of the first two linked), Wall Tokens must be placed on them 
+to indicate that the Passage is unusable.
+Engage Familiar - ACTION: engage the Pet depicted in the icon, as long 
+as it is not Linked, by paying its Engagement Cost (see the Pets paragraph).
+Dungeonology: the Expedition - Rules v.2.0
+Ludus Magnus Studio - 2021 ©
+All rights reserved
+www.ludusmagnustudio.com

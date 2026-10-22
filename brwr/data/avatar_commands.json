@@ -77,7 +77,7 @@
         "effects": [
           {
             "type": "move_toward",
-            "color": "green",
+            "color": "grey",
             "priority": 0
           }
         ]

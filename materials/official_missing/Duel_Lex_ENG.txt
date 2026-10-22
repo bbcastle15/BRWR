@@ -1,0 +1,2653 @@
+lex
+2
+Project Manager and Art Director: Andrea Colletti
+Based on a game by: Marco Montanaro
+Game Designer: Andrea Colletti
+Additional Game Design and Development: Diego Fonseca
+Graphic Director: Paolo Scippo
+Graphic Design: Elisa Fiore, Diego Fonseca
+Concept Artist: Giovanni Pirrotta
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Louis Angelli
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Francesco Granitto
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Amir Hajar, Andrea Vella, Alessandro Angelini, Andrea Schiariti, Beto Caprera, Francesco Pica, Giulia 
+Marchese, Luca Noschese, Massimiliano Grotti, Pasquale Carotenuto, Sofia Alterio
+Credits
+The Shrine of the Teutonic Order is a long abandoned site.
+Its exact location is unknown.
+Once a symbol of power and grandeur, it is now a shell of its former glory, and so is its last host.
+The Order deliberately built it in a secluded location to secretly guard the remains of the greatest Knights, those 
+who had distinguished themselves by their abilities.
+And so the Shrine became the final resting place for many Grand Magisters.
+Ulrich was the last Guest, not by merit, but by his own specific order.
+Defeated in the Battle of Grunwald, he was left to die locked up in the Shrine, as he wished.
+Since then, the Shrine has been abandoned by the Order. No one dares to set foot there again.
+Thanks to the knowledge of dark magic, Ulrich's spirit survives in his weathered body.
+A few fools have attempted to breach the Shrine, now adding to the ranks of the undead.
+Venturing there could open the door to great power, but are you sure you want to pay the price?
+Mittlerer Schwarzwald - 1522 AD
+3
+Components.......................................................................4
+Basics...................................................................................6
+The Lodge and the Rooms................................................ 6
+ - The Mage...................................................................... 6
+Mage Card...............................................................................6
+Mage Card Anatomy ..................................................................6
+ - Power Points............................................................... 7
+ - Spell Cards................................................................... 7
+School Spells............................................................................7
+Personal Spells.........................................................................7
+Forgotten Spells ......................................................................7
+Cells...................................................................................... 7
+Events and Quest Cards..................................................... 7
+ - Damage/Instability Cubes......................................... 7
+Setup ...................................................................................8
+School Reference ...........................................................................8
+Card Anatomy..............................................................................8
+Game Turn ........................................................................10
+1. Black Rose Phase ...........................................................10
+Golden Rule..................................................................................10
+Effects and Targets ......................................................................11
+Effects......................................................................................11
+Targets.....................................................................................11
+2. Study Phase ....................................................................12
+Spell Card Anatomy ...................................................................12
+3. Action Phase ..................................................................13
+Physical Action Tokens................................................................13
+Entering a Room.........................................................................13
+Example:revealing a Spell Card...............................................13
+Actions............................................................................................13
+Limitation on Spell Casting ......................................................13
+4. Evocation Phase .............................................................14
+Activating an Evocation........................................................14
+Evocations......................................................................................14
+Evocation Card Anatomy.....................................................14
+Activation by Effects or Physical Actions.................................14
+5. Cleanup Phase................................................................15
+Example: Rebuilt Room.............................................................15
+End of Game Tally............................................................16
+Rules Compendium .........................................................17
+Inflict/Convert Damage, Defeat and Immunity ......17
+Inflict Damage........................................................................17
+Convert Damage....................................................................17
+Defeat of an evocation...........................................................17
+Defeat of a Mage....................................................................17
+Immunity ...............................................................................17
+Example: Inflict and convert ...........................................17
+Defeat of a Mage ................................................................18
+Place/Convert Instability ............................................18
+Placing Instability..................................................................18
+Converting Instability...........................................................18
+Example: Placing and converting ..................................18
+Rooms and Room Activation Tokens.............................19
+Activating a Room ................................................................19
+Room Activation Tokens .....................................................19
+Cells.....................................................................................19
+Room Anatomy............................................................................19
+Range, Line of Sight, Dummy Target.............................20
+Range......................................................................................20
+Dummy Target.......................................................................20
+Persistent Effects...........................................................20
+ Persistent ..........................................................................20
+Quests.............................................................................21
+Beyond the Duel...............................................................21
+Table of Contents
+HOW TO READ THIS RULEBOOK
+This rulebook is divided into six chapters, which are to be consulted as indicated below in order to understand the game as simply 
+and straightforwardly as possible.
+1. Components: this chapter visually presents all the game components in the box.
+2. Basics: this chapter introduces the game without going into the rules, but rather provides a foundation for better 
+understanding the following chapters.
+3. Setup: this chapter contains all the instructions for setting up the game area.
+4. Game Turn: this chapter explains in detail the rules that come into play during the five phases that make up a game turn, 
+clarifying the flow of actions that each player must put into practice, but without going into detail about rules that are not 
+strictly related to a single game Phase, all of which are recalled by cross-references and directions to the chapter that contains 
+them.
+5. End of Game Tally: this chapter covers the rules for determining the winner at the end of the game.
+6. Rules Compendium: this chapter explains in detail all the in-depth rules that affect the game continuously or that require 
+a temporary interruption of the game flow in order to be applied.
+7. Beyond the Duel: this chapter provides practical instructions for using this product in combination with the other 
+products in the Black Rose Wars line.
+4
+
+U LRICH
+
+ 11
+
+
+ 7
+2
+2
+2
+
+Black Rose Phase (p. 10)
+Apply the Effect of the current Turn Event.
+Study Phase (p. 12)
+1. Each Mage Draws 2 from their Grimoire.
+2. Each Mage Draws 2 from the School of Magic of the 
+ Library.
+3. Each Mage Discard  from their Hand to their 
+Memories  until they have cards in Hand equal to 
+their  value.
+4. Each Mage places 2 to 4  from their Hand to their 
+Mage Sheet. Those Spell  cards are considered 
+Ready Spells.
+Action Phase (p. 13)
+1. In play order, each Mage performs their Activation (up 
+to 2 Actions per Activation).
+2. When all Mages cannot perform any more Actions, the 
+Phase ends.
+Evocation Phase (p. 14)
+In play order each Mage choose one of their Evocation 
+that has not been activated during this Phase, that 
+Evocation activates. This continues until each Evocation 
+in the Lodge have been activated.
+Clean-up Phase (p. 15)
+1. Each Mage discards all  on their Mage Sheet to their 
+Memories  (Forgotten  are removed from the 
+game instead), take back all their  tokens, and flip 
+their Physical Activation Tokens on the available side.
+2. Check if there are any Rooms that must been Rebuilt 
+and assign  due to that.
+3. The Crown Holder move the cube on the Turn Traker 
+by one space and pass the Crown Token to the other 
+Mage; then start a new Turn from the Black Rose 
+Phase. If the fourth Turn is ended, the game ends and 
+players proceed with the Endgame Calculations (p. 
+16).
+GAME TURN
+ Quests  
+First Blood You have defeated the other Mage.
+: the  infl icts 1 to you. 
+Gain 1.
+Destroyer You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you. 
+Gain 2.
+Controller You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you.
+Gain 2.
+1
+2
+2
+ Quests  
+Devoted You have drawn 1 Forgotten .
+: the 
+Gain 2
+infl icts 2 to you.
+.
+Summoner You own 
+
+3 Evocations.
+: the 
+Gain 2
+infl icts 2 to you.
+.
+Elementalist You have at least three revealed 
+Spells with three different Elements 
+(). 
+: the 
+Gain
+infl icts 3 to you.
+ 3.
+2
+2
+3
+Turn 1: Living Lodge : the  gains 1 and infl icts 2 to each Mage.
+Turn 2: Tribute to Command : in play order each Mage places 1 of the  in a  from themselves. If they do: the 
+gains 1 and the Mage chooses an Evocation in the Lodge; it activates under their control.
+Turn 3: Gift to the Fools : each Mage draws 1 from their own Grimoire. 
+The  gains 2 and places 1 in a  from each Mage.
+Turn 4: A Hard Lesson : the  gains 2 and places 1 in each Room.
+: summon a Templarii. It activates.
+Summon a Templarii in a .
+ Crypt of the Saint
+: move up to 4. You may perform 
+a  with 2 against a .
+ Templars' Armory
+ Crusaders' 
+
+Summoner Room
+: infl ict 10.
+ Templars' Treasure Room
+: heal 6.
+
+: draw 2 from your .
+Bibliotheca of the Order
+Components
+2 M AG E 
+C A R D S 
+2 Q U E S T 
+C A R D S 
+EVENTS
+CARD
+2 R E F E R E N C E 
+CARDS
+4 P H Y S I C A L AC T I O N 
+TOKENS
+8 P E R S I S T E N C E 
+TOKENS
+7 5 DA M AG E / I N S TA B I L I T Y C U B E S 
+7 ROOMS 36 LEX SPELL CARDS 6 P E R S O N A L S P E L L 
+CARDS
+6 UPGRADE CARDS 3 EVOCATION CARDS
+1 GAME BOARD
+1 SCHOOL
+ REFERENCE CARD
+
+
+8
+
+6
+
+10
+Some Spells of this School can assign 
+an Upgrade card to a target Evocation. 
+These cards must be taken from the 
+corresponding deck and placed next 
+to the target Evocation card. Upgrades 
+follow these rules:
+• An Evocation can have a maximum of 
+one Upgrade assigned to it.
+• If an Upgrade in addition to the fi rst one 
+is about to be assigned to an Evocation, 
+the owner chooses which one to keep 
+and discards the other.
+• If an Upgrade Card whose 
+corresponding card is not available in 
+the deck is about to be assigned, it is 
+not assigned.
+Lex
+Lex
+Knight 
+Macabre Order      
+Obscure Power      
+Deadly Bolt      
+Tremor      
+Lurk in the Shadows      
+Invisible Strike      
+Chaplain 
+Assumption      
+Give and Take      
+Fusion      
+Obscure Shift      
+Minor Control      
+Duress      
+
+8
+
+6
+
+10
+
+
+: infl ict 2 to the target 
+whenever it infl icts  to you.
+   
+The  places 1.
+If she does: summon a 
+Templarii.
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+ to the target 2 infl ict : 
+ to you.  infl icts whenever it 
+   
+.  places 1  The 
+a summon If she does: 
+. Templarii
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+2 F O R G OT T E N S P E L L 
+C A R D S 
+
+
+Keepers of the Temple    
+. Templarii all Remove 
+ from  in a Templarii a Summon 
+. activates yourself. It from  in a Templarii a Summon 
+. activates yourself. It 
+ from  in a Templarii a Summon 
+. activates yourself. It 
+Keepers of the Temple    
+.  Convert 3
+.  Place 5
+Keepers of the Temple
+   
+Remove all Templarii. Summon a Templarii in a  from yourself. It activates.
+Summon a Templarii in a  from 
+yourself. It activates.
+Summon a Templarii in a  from 
+yourself. It activates.
+Keepers of the Temple
+   
+Convert 3.
+Place 5.
+Arcane Bond
+  
+: after another Mage placed 
+, you may place 1 in a 
+ from yourself.
+Arcane Bond
+  
+: after a Mage has resolved 
+an Effect with the summon
+keyword, gain 1. When one 
+of your Evocations is defeated or 
+removed, lose 1.
+
+Arcane Bond
+  
+ after another Mage :  placed 
+, you may   place 1 in a 
+ from yourself. 
+Arcane Bond
+  
+ after a Mage has resolved : 
+an Effect with the summon
+keyword,  gain 1 . When one 
+of your Evocations is defeated or 
+removed,  lose 1 .
+
+Imperishable Fate
+  
+Choose an Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+in the Undead Choose an
+ under your activates Lodge. It 
+control.
+in the Lodge Undead Choose an 
+other than the previous one. It 
+ under your control. activates
+Imperishable Fate
+  
+ to each of  infl icts 1  The 
+your Evocations.
+ your Evocations have : 
+. 1 
+Non Morto
+Templarii
+2 2 3
+Quando il Templarii si attiva il 
+suo controllore può rimuovere 
+1 propria  da una  dal 
+Templarii. Se lo fa: cura 1
+il Templarii, ed il Templarii 
+ha +1 fi no al termine della 
+propria attivazione.
+Non Morto
+Templarii Quando un Mago diverso dal suo proprietario 
+sta per piazzare  nella Stanza in cui si trova 
+questo Modello, piazza 1 in meno.
+Scudo d'Ossa
+
+B ARTHOLOMÄUS
+
+ 10
+
+
+ 8
+2
+2
+2
+
+ Abyss of Faith
+: it activates under your control 
+and has 2.
+3 POWER TOKENS 1 C R OW N TO K E N 
+7 R O O M AC T I VAT I O N 
+TOKENS
+: discard 1 Ready . If you do: 
+draw 1 Forgotten .
+ Occult Black Rose Room  Physical Action
+ The Black Rose
+ Power Points
+ Speed value
+ Strength value/Physical Attack
+ Hand value
+ Health value
+ Memories
+ Spell Card
+ Combat
+ Contingency
+ Persistent
+ Model within 0
+ Mage within 0
+ Evocation within 0
+ Room within 0
+ Anywhere in the Lodge
+ Self
+ Special
+ Crown
+ Quest
+ Thropy Tracker
+ Room Tracker
+ Forgotten Spells
+ Quick Spell
+Library
+During the Activation a Mage must perform one or two Actions. 
+A Physical Action is considered a group of separate and different 
+Effects, which are resolved in whichever order the Mage prefers 
+(p. 13).
+ Explore (Physical Action):
+• Move 1. You can perform this Effect a number of times equal to 
+your Speed value . Each single Move, separated by a period (.), is a different Effect, and you can use all or part of them, but 
+you cannot use different Effects between them. Unused Move 
+Effects are lost. 
+• Activate a .
+ Fighting (Physical Action): • Perform a Physical Attack () on a  (a Physical Attack infl icts 
+Damage  equal to your Mage's Strength value  to the target). 
+• Activate a .
+ Command (Physical Action): 
+Choose one of your , it activates.
+Cast a Spell: reveal one of your Ready Spells. You are considered 
+the caster of that Spell. If the Spell Card shows  in the middle 
+of itself, place 1 in a  before resolving that Spell's Effect.
+You may cast the Quick Spell  or the Spell placed in the lowest 
+ACTIONS
+ICONS
+numbered Spell Slot (I, II, III).
+Momentum: choose one of your Ready Spells and discard it to 
+your Memories , then Move 1.
+CASTING A SPELL: LIMITATIONS In the same Activation, using both of their Actions, a Mage can 
+perform the Cast a Spell Action twice only if one of the two 
+Actions reveals the Quick Spell  (p. 13).
+
+2 1 0
+ Bibliotheca of the Order
+3 1 1
+
+4 2 1
+ Crypt of the Saint
+4 2 1
+ Templars' Armory
+4 2 1
+  
+: discard 2 Ready . If you do: 
+draw 1 Forgotten .
+ Occult Black Rose Room
+6 3 1
+5
+3 Templarii
+6 Evocation Bases
+3 per player color
+Models and Bases
+Bartholomäus
+Ulrich
+Bartholomäus is the leader of the dark occultist coven known as 
+Totentanz.
+Traditionally, the coven leader chooses their successor and trains 
+them, until the latter defeats the Master and takes their place.
+When this happens, the new leader buries their mentor and takes 
+their mask, forever concealing their identity from the eyes of the 
+rest of the coven.
+Behind Bartholomäus' mask anyone can hide, man or woman, 
+young or old.
+Only one thing is certain: their total dedication to the cause.
+This is why Bartholomäus is now on a quest to find the lost Shrine 
+of the Order of the Teutonic Knights. Reports tell of an enormous 
+power held in its rooms. A power capable of summoning hosts of 
+Templars under its control—the power of the Lex school of magic!
+Ulrich von Jungingen was the 26th Grand Master of the Teutonic 
+Order.
+In a mad quest for power he practiced dark magic throughout his 
+life, hoping to make history and be remembered forever.
+At the height of his power he created the obscure school of magic 
+known as Lex Intoxicated with power,he decided to unleash the 
+Teutonic Order against Poland and Lithuania, convinced that 
+he could easily subjugate them, but his thirst for power made him 
+arrogant, and in 1410 A.D. he lost his life in battle.
+Because of his dark practices, his remains now restlessly lie in a 
+shrine in his homeland. 
+He continues to defend his legacy, and will do so until a brave one 
+succeeds in defeating him by taking away his dark power.
+6
+Basics
+Black Rose Wars Duel: Lex is a game of mage duels set in the Black Rose 
+Lodge, a sentient place where a powerful supernatural being, the Black 
+Rose, resides. 
+In this place, the most powerful mages in the world gather, learn, and 
+challenge each other to determine who is the best among them, the one 
+who will become the next Grand Magister of the Lodge.
+This game allows two players to compete in a terrifying battle of magic 
+and teaches the fundamentals of this game's older brother, Black Rose 
+Wars. Everything in this box can be used with Black Rose Wars to 
+expand the core game. 
+But it doesn't stop there: Schools of Magic, Rooms and Mages from 
+any product in the Black Rose Wars line can be used in place of the 
+materials in this box to create ever-changing duels using the rules 
+described in this rulebook. 
+MAGE CARD ANATOMY
+ - The Mage
+The Lodge and the Rooms
+The Mage represents the player during the game. Each Mage has 
+their own Model representing them in the Lodge and a Mage Card 
+describing their characteristics.
+Please note: On all game components, players are identified with 
+the term "Mage."
+The Lodge is the battleground where the mages duel during the 
+game. The Lodge consists of 7 Rooms, which are placed on the 
+board during game setup.
+A Room has two states, Destroyed or Rebuilt. The side with the 
+slots (called Instability Slots, see page 18) represents the Destroyed 
+side and the reverse side represents Rebuilt Rooms.
+The specific rules for Rooms and their Effects are explained in 
+detail on page 19.
+
+C
+D
+E
+G
+A
+MAGE CARD
+A Name
+B  Health value: the maximum number of  Damage
+the Mage may have assigned before being defeated (see page 
+18). The slot indicating the defeat of the Mage is marked by 
+an arrow (). 
+C  Hand value: the maximum number of Spell Cards the 
+Mage can have in their Hand (see page 12).
+D  Strength value: the amount of  Damage the Mage 
+inflicts on the target when they perform a Physical Attack 
+(see page 13).
+E  Speed value: the number of "Move 1." effects the Mage can 
+perform with a single Explore Physical Action (see page 13).
+F  Maximum Quest value: this value is not taken into 
+account in a Black Rose Wars Duel game, but is used in 
+other products in the Black Rose Wars line.
+G Trophy Tokens Slot: this value is not taken into account 
+in a Black Rose Wars Duel game, but is used in other 
+products in the Black Rose Wars line.
+H Physical Action Tokens Slot: these are the slots in which 
+the player's two Physical Action tokens are to be placed. 
+F
+
+B
+H
+Mage 
+Model
+ Abyss of Faith
+2 1
+Destroyed Room Rebuilt Room
+7
+Imperishable Fate
+  
+Choose an Undead
+Lodge. It 
+in the 
+activates under your 
+control.
+Choose an Undead 
+other than the previous one. It 
+in the Lodge 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+Choose an Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+ The  infl icts 1 to each of 
+your Evocations.
+ your Evocations have : 
+. 1 
+
+
+Shadowy Form
+   
+you have :  . When you +2 
+are about to  suffer ignore , 
+1  of that .
+Shadowy Form
+   
+ Gain 1 .
+: when you are about to 
+ suffer ignore 2 , of that 
+. 
+Shadowy Form
+   
+: you have +2. When you 
+are about to 
+1
+suffer , ignore 
+ of that .
+Shadowy Form
+   
+: when you are about to 
+Gain 1.
+suffer , ignore 2
+
+ of that 
+.
+Mages use Spell Cards to unleash powerful spells in the Lodge.
+There are three types of Spell Cards: School Spell Cards, Personal Spell 
+Cards and Forgotten Spell Cards.
+SCHOOL SPELLS
+The School of Magic (Lex in this box) consists of a Deck of 36 School 
+Spell Cards (12 different Spell Cards, 3 copies each). Its deck constitutes 
+the Library.
+PERSONAL SPELLS
+Each Mage comes with three copies of their Personal Spell Card. 
+The illustration shows the Mage the cards are associated with.
+Each player is given 25 of these cubes of a specific color. The 25 black￾colored cubes are used to track effects related to the Black Rose, the 
+entity that dwells in the Lodge and participates in the game as the third 
+player.
+The Game Effects indicate whether to use a Damage/Instability 
+Cube to represent a  Damage, the wounds the Mage inflicts on 
+the opponent and the Evocations they control, or to represent 
+Instability, magical energy that the Mage releases in the Lodge Rooms 
+to gain control of them.
+Damage/Instability Cubes are also used during the game for other 
+purposes besides those just described such as, for example, keeping 
+track on the game board of what turn is in progress or how many times 
+you have defeated your opponent.
+Players must use their cubes wisely, because once they are exhausted 
+These two slots on the game board house the Mages' Models at the 
+beginning of the game. Each Mage is matched to the Cell on their 
+player's side of the game board (recognizable by color).
+When defeated, a Mage is placed in their Cell.
+See page 19 for Cell's complete rules. 
+The Event Card indicates Effects that the Black Rose applies at the 
+beginning of each Game Turn to influence the game and try to win 
+(see page 10).
+Quest Cards show six  Quests available to players to collect additional 
+points during the game. For the complete rules of Quests see page 
+21.
+ - Damage/Instability Cubes
+Cells
+Events and Quest Cards
+ - Spell Cards
+ - Power Points
+To win the game, Mages must accumulate  Power Points; 
+whoever has the most at the end of the game is the winner (see End 
+of Game Tally on page 16).  Power Points may be accumulated 
+in several ways, such as defeating the opposing Mage, rebuilding 
+Rooms or completing Quests.
+Note: the  Black Rose also accumulates Power Points.
+they will not be able to perform Effects that 
+require placing cubes. Whenever an Effect 
+requires a player to place more cubes than 
+they have left, the Effect is resolved using all 
+available cubes.
+If an Effect forces a player to place more cubes 
+than the number of cubes available to them, 
+they may use the available Cubes as they wish 
+(for example, if a Spell inflicts 3 to two 
+Models and the player has only 4 cubes available, 
+they can distribute those 4 cubes as they 
+prefer between the two Models).
+FORGOTTEN SPELLS
+Forgotten Spells are particularly powerful spells 
+from ancient times. These Spell Cards have 
+unique graphics that set them apart and can 
+only be drawn from Effects such as that of the 
+Occult Black Rose Room.
+ Quests  
+First Blood You have defeated the other Mage.
+: the  infl icts 1 to you. 
+Gain 1.
+Destroyer You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you. 
+Gain 2.
+Controller You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you.
+Gain 2.
+1
+2
+2
+Turn 1: Living Lodge : the  gains 1 and infl icts 2 to each Mage.
+Turn 2: Tribute to Command : in play order each Mage places 1 of the  in a  from themselves. If they do: the 
+gains 1 and the Mage chooses an Evocation in the Lodge; it activates under their control.
+Turn 3: Gift to the Fools : each Mage draws 1 from their own Grimoire. 
+The  gains 2 and places 1 in a  from each Mage.
+Turn 4: A Hard Lesson : the  gains 2 and places 1 in each Room.
+The Power Board track on the game board will hold the Power 
+Tokens, which are used to track the  Power Points accumulated 
+by the players and the  Black Rose. If a Mage or the Black Rose 
+exceeds 20, turn their Power Token to the side showing the +20 
+value and move it along the track to reflect the new score. For example: 
+a score of 27 would place the +20 Power Token in the space 7 of 
+the track.
+8
+Lex
+Knight 
+Macabre Order 
+Obscure Power
+      
+Deadly Bolt
+      
+      
+Tremor
+Lurk in the Shadows
+     
+Invisible Strike
+      
+      
+Chaplain 
+Assumption      
+Give and Take      
+Fusion
+Obscure Shift
+     
+      
+Minor Control      
+Duress      
+
+8
+
+6
+
+10
+A
+C
+E
+F
+D
+Setup
+Follow the steps below to set up the game:
+1 Open the game board A in the center of the Game Area.
+2 Place the Occult Black Rose Room B in the center of the 
+game board so that the Destroyed side is visible, that is, the side 
+showing the Instability Slots (the holes).
+Shuffle the remaining six Rooms and place them randomly 
+around the Occult Black Rose Room so that the Destroyed side 
+is visible; the set of seven Rooms is called the Lodge.
+3 Place the Events Card C in the corresponding slot on the 
+game board, so that one of the two sides chosen randomly or 
+by mutual agreement is visible. Place the two Quest Cards D
+in the corresponding slots of the game board, so that one of the 
+two randomly or mutually chosen faces of each is visible.
+4 Place the Room Activation Tokens E and the Black Rose's 
+Damage/Instability Cubes (black cubes) F next to the 
+Game Board, so that they are within reach of both players.
+5 The player who last received a rose (or a randomly chosen 
+player) gains the Crown Token () G , becoming the 
+Crown Holder.
+6 Starting with the Crown Holder and proceeding clockwise, 
+each player chooses a color and sits on the side of the game board 
+showing that color. They then take the Damage/Instability 
+Cubes, Physical Action Tokens, Persistence Tokens, Power 
+Token, and Evocation Bases corresponding to that color H . 
+The player then chooses a Mage, takes the corresponding Model
+and places it in the Cell I of their color. They take their Mage 
+Card and place it on the corresponding slot on their side of the 
+game board and place their Physical Action Tokens on it J . 
+then they take their Mage's three Personal Spell Cards. K and 
+keeps them in front of them, revealed.
+7 Take the Lex Spell School deck and place it next to the game 
+board so that it is within reach of all players. Place the School 
+Reference Card L under the School of Magic deck as shown 
+in the image. This deck is considered the Library M .
+Shuffle the available Forgotten Spells and create a deck; place 
+it next to the game board in the corresponding slot N .
+Place the Models of Evocations, 3 Templarii, within reach O .
+8 The Crown Holder takes the School Reference Card L
+from the Library and selects one of the two Starting Grimoires 
+E indicated on it. The player searches the School of Magic 
+deck for the six cards indicated, then adds to them a Personal 
+Spell Card of their own Mage and shuffles them. This seven￾card deck is their Grimoire; they place it in the corresponding 
+slot on their side of the game board () P , Then they take 
+their other two Personal Spell Cards and place them revealed 
+in the Memories slot () of their side of the game board Q . 
+The other player does the same, however, choosing the Starting 
+Grimoire that the Crown Holder did not choose.
+Once this process is completed, shuffle the rest of the School of 
+Magic deck of the Library and place it back on the side of the 
+game board above the School Reference Card. 
+9 Each player places one of their Damage/Instability Cube on slot 
+0 of the Trophy Track and Room Track of their side of the 
+game board R ; then places their own Power Token on slot 0 of 
+the Power Track S .
+The Crown Holder places a Damage/Instability Cube of the 
+Black Rose on slot 0 of the Trophy Track, Room Track, and 
+Turn Track of the game board T ; then they place the Black 
+Rose Power Token on square 0 of the Power Track U .
+Now you are ready to play.
+S C H O O L R E F E R E N C E 
+CARD ANATOMY
+A Name of School of Magic
+B Special Rules and Keywords
+C Elements on Spell Cards
+D School of Magic Symbol
+E Starting Grimoires
+F Type, Element, and Target of each Spell Card in the 
+corresponding starting Grimoire (Dark Side and Light 
+Side)
+
+
+8
+
+6
+
+10
+Some Spells of this School can assign 
+an Upgrade card to a target Evocation. 
+These cards must be taken from the 
+corresponding deck and placed next 
+to the target Evocation card. Upgrades 
+follow these rules:
+• An Evocation can have a maximum of 
+one Upgrade assigned to it.
+• If an Upgrade in addition to the fi rst one 
+is about to be assigned to an Evocation, 
+the owner chooses which one to keep 
+and discards the other.
+• If an Upgrade Card whose 
+corresponding card is not available in 
+the deck is about to be assigned, it is 
+not assigned.
+Lex A
+C
+B
+D
+L
+9
+
+2 1 0
+ Bibliotheca of the Order
+3 1 1
+
+4 2 1
+ Crypt of the Saint
+4 2 1
+ Templars' Armory
+4 2 1
+  
+: discard 2 Ready . If you do: 
+draw 1 Forgotten .
+ Occult Black Rose Room
+6 3 1
+Turn 1: Living Lodge : the  gains 1 and infl icts 2 to each Mage.
+Turn 2: Tribute to Command : in play order each Mage places 1 of the  in a  from themselves. If they do: the 
+gains 1 and the Mage chooses an Evocation in the Lodge; it activates under their control.
+Turn 3: Gift to the Fools : each Mage draws 1 from their own Grimoire. 
+The  gains 2 and places 1 in a  from each Mage.
+Turn 4: A Hard Lesson : the  gains 2 and places 1 in each Room.
+ Quests  
+First Blood You have defeated the other Mage.
+: the  infl icts 1 to you. 
+Gain 1.
+Destroyer You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you. 
+Gain 2.
+Controller You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you.
+Gain 2.
+1
+2
+2
+ Quests 
+Insight You placed the last  in a Room.
+: the  infl icts 1 to you.
+Gain 1.
+Assassin You have defeated an Evocation.
+: the  infl icts 1 to you.
+Gain 1.
+Balance You have at least two Spells  and at 
+least two  Spells revealed. 
+: the  infl icts 2 to you.
+Gain 2.
+
+1
+1
+2
+ Crypt of the Saint
+ Crypt of the Saint
+ Crypt of the Saint
+ Crypt 
+ Crypt of the Saint
+ Templars' 
+of the Saint
+Treasure Room
+: heal 6.
+: discard 1 Ready . If you do: 
+draw 1 Forgotten .
+ Occult Black Rose Room
+
+U LRICH
+
+11
+
+
+
+7 
+2
+2
+2
+
+
+B ARTHOLOMÄUS
+
+10
+
+
+
+8 
+2
+2
+2 
+Arcane Bond
+ 
+
+
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+ 
+
+
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1
+
+.
+Arcane Bond
+  
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+  
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1.
+
+Arcane Bond
+ 
+
+
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+ 
+
+
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1
+
+.
+Arcane Bond
+  
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+  
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1.
+
+Arcane Bond
+ 
+: after another Mage 
+
+placed 
+, you may place 1 in a 
+ from yourself.
+Arcane Bond
+ 
+:
+
+ after a Mage has resolved 
+an Effect with the summon
+keyword, gain 1. When one of your Evocations is defeated or 
+removed, lose 1
+
+.
+Arcane Bond
+  
+: after another Mage placed 
+, you may place 1 in a 
+ from yourself.
+Arcane Bond
+  
+: after a Mage has resolved 
+an Effect with the summon
+keyword, gain 1. When one of your Evocations is defeated or 
+removed, lose 1.
+
+Arcane Bond
+  
+: after another Mage placed 
+, you may place 1 in a 
+ from yourself.
+Arcane Bond
+ 
+: 
+
+ after a Mage has resolved an Effect with the summon
+keyword, gain 1. When one 
+of your Evocations is defeated or removed, lose 1.
+
+Arcane Bond
+  
+: after another Mage placed 
+, you may place 1 in a 
+
+Arcane Bond
+ from yourself.
+  
+: after a Mage has resolved an Effect with the summon
+keyword, gain 1. When one 
+of your Evocations is defeated or removed, lose 1.
+
+Imperishable Fate
+  
+Choose an
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+ 
+Choose an
+
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+ 
+The 
+
+ infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+Choose an
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+ 
+Choose an
+
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+ 
+The 
+
+ infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+Choose an
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+ 
+Choose an
+
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+ 
+The 
+
+ infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+Choose an Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+ 
+Choose an
+
+Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+activates
+other than the previous one. It 
+ under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+
+
+8
+
+6
+
+10
+Some Spells of this School can assign 
+ card to a target Evocation. Upgrade an 
+These cards must be taken from the 
+corresponding deck and placed next 
+to the target Evocation card. Upgrades 
+follow these rules:
+An Evocation can have a maximum of • 
+one Upgrade assigned to it.
+If an Upgrade in addition to the fi rst one • 
+is about to be assigned to an Evocation, 
+the owner chooses which one to keep 
+and discards the other.
+If an Upgrade Card whose • 
+corresponding card is not available in 
+the deck is about to be assigned, it is 
+not assigned.
+Lex
+Imperishable Fate
+  
+Choose an
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+ 
+Choose an
+
+Undead
+in the 
+Lodge. It 
+activates under your 
+control.
+Choose an 
+Undead 
+in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+ 
+The 
+
+ infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Arcane Bond
+ 
+
+
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+ 
+
+
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1
+
+.
+Arcane Bond
+  
+: after another Mage 
+placed 
+, you may 
+place 1 in a 
+ from yourself.
+Arcane Bond
+  
+: after a Mage has resolved 
+an Effect with the 
+summon
+keyword, 
+gain 1. When one 
+of your Evocations is defeated or 
+removed, 
+lose 1.
+
+A
+T
+B
+D C D
+E F
+G
+Q
+H
+I I
+J
+K
+L
+M
+N
+H
+T T
+S
+Q
+R
+O
+K
+P
+P
+J
+R
+U
+10
+A Game Turn consists of five Phases to be played in the order 
+shown below.
+1. Black Rose Phase 
+2. Study Phase
+3. Action Phase
+4. Evocation Phase
+5. Cleanup Phase
+1. Black Rose Phase
+Consult the Events Card and apply the current turn's Event Effect (indicated by the Black Rose's Damage/Instability Token in the 
+corresponding track).
+These Effects always affect Mages, even if they are in their Cell (see page 19).
+C R OW N H O L D E R A N D 
+PLAY ORDER
+The Mage who has the Crown Token is referred to as the 
+Crown Holder, and is considered the First Mage for the 
+entire duration of the current Phase. The Crown Holder 
+has the final say on any ambiguous situation that may occur 
+during the game.
+Play Order: on many occasions it is indicated to solve something 
+in "play order." This means to resolve starting with the First Mage 
+and proceeding clockwise.
+GOLDEN RULE
+A specific rule stated on a game component takes priority over 
+the basic rules stated in this rulebook.
+Turn 1: Rebuilding : the  gains 1 and places 1 in each Room.
+Turn 2: Control
+: in play order each Mage chooses an Evocation in the Lodge, it activates under their control; 
+the  converts all the  infl icted by that Evocation during this activation.
+Turn 3: Inversion
+: the  gains 2 and converts 3 on each Mage.
+Turn 4: Collapse : the  gains 2 and infl icts 3 to each Model.
+Game Turn
+11
+4 2 1
+ Abyss of Faith
+C
+C
+EFFECTS
+The game often refers to Effects. Most components of the game 
+and every Physical Action (see page 13) have Effects, which are 
+composed of one or more phrases and/or symbols that allow 
+you to influence the game. Each phrase that makes up an Effect 
+must be applied, starting with the first and proceeding in order. 
+If a phrase cannot be applied in its entirety, the parts that cannot 
+be applied (even all) are skipped and the game continues by 
+applying the next phrase. An Effect is considered resolved
+when an attempt has been made to apply all the phrases that 
+make up the Effect, even if none of them could be applied.
+Effects are found on the following game components:
+A Events Card
+B Quest Cards
+C Room or Room Activation Token
+Spell Cards (see page 15)
+D Place Instability: this Effect is 
+to be read as "Place 1 in a .", 
+referring to the Mage who has just 
+revealed the Spell Card (see page 18).
+E Light Side Effect: see page 12.
+F Dark Side Effect: see page 12.
+Physical Actions
+Physical Actions () allow you to 
+perform a number of different Effects 
+(see page 13).
+
+
+Infl ict 2.
+   
+Infl ict 3.
+   
+Deadly Bolt
+Deadly Bolt
+
+.  Infl ict 2
+   
+.  Infl ict 3
+   
+Deadly Bolt
+Deadly Bolt
+
+
+
+Infl ict 2.
+   
+Infl ict 3.
+   
+Deadly Bolt
+Deadly Bolt
+
+.  Infl ict 2
+   
+.  Infl ict 3
+   
+Deadly Bolt
+Deadly Bolt
+
+
+
+Infl ict 2.
+   
+Infl ict 3.
+   
+Deadly Bolt
+Deadly Bolt
+
+.  Infl ict 2
+   
+.  Infl ict 3
+   
+Deadly Bolt
+Deadly Bolt
+
+
+
+Infl ict 2.
+   
+Infl ict 3.
+   
+Deadly Bolt
+Deadly Bolt
+
+.  Infl ict 2
+   
+.  Infl ict 3
+   
+Deadly Bolt
+Deadly Bolt
+
+D
+E
+F
+EFFECTS AND TARGETS
+TARGETS
+The Effects of Spells and other 
+components of the game always have 
+a specific target. That target must be 
+chosen from those available by the player 
+resolving the Effect. 
+The target of an Effect is always indicated 
+before the text of the Effect itself followed 
+by a colon (:), except for the Spell Card 
+Effect targets, which are listed in the 
+third banner under the Spell name.
+Effects resolved by a Mage with 
+targets other than , unless specified 
+in their text, never harm the Mage themselves and/or their 
+Evocations. 
+Targets may be:
+•  Model: the Effect can target a Model other than itself. 
+The number next to the icon (, , ) indicates the 
+range, i.e., the number of Rooms of distance from the 
+Model resolving the Effect in which the target might be; to 
+choose a target, it must be possible to draw a straight line 
+not blocked by the walls of the Rooms between the Room 
+in which the target is and the Room in which the Model 
+resolving the Effect is. If the icon is followed by an asterisk 
+(), the Effect can target a Model in the Lodge regardless 
+of distance, and even if an unbroken straight line cannot be 
+drawn as indicated above.
+•  Mage Model: as Model , but only a Mage's Model can 
+be targeted.
+•  Evocation Model: as Model , but only an Evocation's 
+Model can be targeted.
+•  Room: the Effect targets a Room and affects all 
+Opposing Models (Mages and their Evocations) within that 
+Room. The number within the icon (, , ) indicates 
+the range, i.e., the number of Rooms away from the 
+Model applying the Effect to the target Room; to choose 
+the target Room, it must be possible to draw a straight 
+line not blocked by the walls of the Rooms between it and 
+the Room in which the Model resolving the Effect is. If 
+the icon contains an asterisk (), the Effect can target a 
+Lodge Room regardless of distance and even if an unbroken 
+straight line cannot be drawn as indicated above.
+•  Personal: This Effect targets the Mage who resolves it.
+•  Special: no specific target. The text of the Effect 
+indicates how to apply it and which elements of the game 
+are affected by it.
+For examples and in-depth rules on Targets, Range and 
+Line of Sight see page 20.
+
+
+: infl ict 2 to the target 
+whenever it infl icts  to you.
+   
+The  places 1.
+If she does: summon a 
+Templarii.
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+ to the target 2 infl ict : 
+ to you.  infl icts whenever it 
+   
+.  places 1  The 
+a summon If she does: 
+. Templarii
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+
+
+: infl ict 2 to the target 
+whenever it infl icts  to you.
+   
+The  places 1.
+If she does: summon a 
+Templarii.
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+ to the target 2 infl ict : 
+ to you.  infl icts whenever it 
+   
+.  places 1  The 
+a summon If she does: 
+. Templarii
+   
+Lurk in the Shadows
+Lurk in the Shadows
+
+ Templars' Treasure Room
+: heal 6.
+ Templars' Treasure Room
+: heal 6.
+ Quests  
+Devoted You have drawn 
+: 
+1 Forgotten .
+the  infl icts 2 to you.
+Gain 2.
+Summoner You own 3 Evocations.
+: the  infl icts 2 to you.
+Gain 2.
+Elementalist You have at least three revealed 
+Spells with three different Elements 
+(
+
+). 
+: the  infl icts 3 to you.
+Gain 3.
+2
+2
+3
+B
+Turn 1: Rebuilding : the  gains 1 and places 1 in each Room.
+Turn 2: Control : in play order each Mage chooses an Evocation in the Lodge, it activates under their control; 
+the  converts all the  infl icted by that Evocation during this activation.
+Turn 3: Inversion : the  gains 2 and converts 3 on each Mage.
+Turn 4: Collapse : the  gains 2 and infl icts 3 to each Model.
+A
+RESOLUTION OF MULTIPLE EFFECTS
+During the game, it may happen that more than one Effect 
+needs to be resolved when a certain condition occurs, or while 
+another effect is being resolved. When this happens, the Effect 
+being resolved is resolved until the period (.), then the game 
+stops and each Mage (or the ) in play order can resolve 1 or 
+more Effects. When all Effects are resolved, the interrupted 
+Effect resumes resolving from the period (.) at which it was 
+interrupted.
+12
+2. Study Phase
+Starting with the First Mage, each Mage draws 2 Spell Cards 
+from their Grimoire A and 2 Spell Cards from the School 
+deck of the Library B . 
+If a Mage has to draw from the  Grimoire but it does not 
+contain enough cards, the Mage shuffles their  Memories C
+(their discard pile) and forms the  Grimoire again. After doing 
+so, they keep drawing.
+The Mage Card indicates a  Hand value D , which is the 
+maximum limit of Spell Cards that the Mage can hold at the same 
+time. After drawing  Spell Cards, if the player has in their Hand 
+a number of cards greater than this value, they must discard cards 
+(into their  Memories) until their number of cards is within 
+their Hand value.
+After carefully reading the two Effects of the Spell Cards in your 
+Hand (Light Side Effect, indicated by an arrow to the left of the 
+Spell name, and Dark Side Effect, indicated by a crescent moon to 
+the left of the Spell name), each Mage positions from 2 to 4 of the 
+ Spell Cards from their Hand on the Spell Slots E of their side 
+of the game board (Quick Spell  slot, slot I, slot II and slot III). 
+These cards are placed face-down oriented with the chosen side 
+(Light or Dark) toward the Mage who placed them, and the Effect 
+on this side will be the only one used of the card during the Action 
+Phase (see below), called the Active Side.
+ Spell Cards placed in this way are considered Ready Spells.
+Note: to choose wisely which of the two Card Effects to use later 
+in the Turn and the order in which to place the  Spell Cards it 
+is best to consult the section on Targets (page 11) and the in-depth 
+rules in the Rules Compendium chapter (page 17),
+SPELL CARD ANATOMY
+
+
+Infl ict 2.
+   
+Infl ict 3.
+   
+Deadly Bolt
+Deadly Bolt
+
+.  Infl ict 2
+   
+.  Infl ict 3
+   
+Deadly Bolt
+Deadly Bolt
+
+D
+F
+C
+C
+E
+E
+F
+D
+G
+B
+B
+A
+A
+Light Side
+Dark 
+Side
+A Name.
+B School of Magic symbol.
+C Effects, one on the Light Side and the other on the Dark 
+Side. During the Study Phase, the Mage must choose 
+which of the two Effects they will use.
+D Spell Type:  Combat,  Contingency.
+E Elements: the Element of a Spell is used in specific 
+situations that may occur during the game; the Elements 
+are:
+ Air,  Earth,  Fire,  Water,  Sacred,
+ Profane,  Magic,  all Elements (when necessary, 
+the Mage chooses which Element it represents).
+F Target: the type of target and the range of the Effect. (see 
+page 11).
+G Instability: this Effect is to be read as "Place 1 in a .", 
+referring to the Mage who has just revealed the Spell Card 
+(see page 13).
+A
+B
+C
+
+B ARTHOLOMÄUS
+
+ 10
+
+
+ 8
+2
+2
+2
+
+D
+E E E E
+13
+3. Action Phase
+The First Mage (the Crown Holder) performs up to two Actions 
+of their choice from those shown in the Actions box on the right. 
+When the First Mage has resolved all of their Actions, the other 
+Mage does the same. This continues until both Mages no longer 
+have the ability to perform Actions, then the Action Phase ends.
+Note: if a Mage is in their Cell, they have a limited number of 
+options available to them, see Cells on page 19.
+During their Activation, a Mage must perform 
+one or two of the Actions described in this box.
+To perform a Physical Action, the Mage must Exhaust (see 
+box at left) one of their Available Physical Action Tokens 
+(). A Physical Action is considered a separate and 
+different group of Effects, and they are resolved in the 
+order the Mage prefers; a Mage may also choose to ignore 
+some or all of these Effects.
+Explore (Physical Action,  ) 
+• Move 1. You may perform this Effect a number of times 
+equal to your Speed Value . Each individual "Move 1.", 
+separated by a period (.), is a different Effect, and the player 
+may choose to use all or only part of them; nevertheless, 
+different Effects cannot be used between one "Move 1." and 
+another. Unused "Move 1." Effects are lost. 
+• Activate a  (see Activate a Room on the next page).
+Example: you may move to an adjacent Room, then move to 
+another adjacent Room and then activate the Room you are in. 
+Or, you can move to an adjacent Room and activate the Room 
+you are in. Or, you can activate the Room you are in and then 
+move, but you cannot move to an adjacent Room, activate it 
+and then move to another adjacent Room.
+Fighting (Physical Action, )
+• Perform a Physical Attack () on a  (a Physical Attack 
+inflicts on the target an amount of  Damage equal to 
+your Strength Value ). 
+• Activate a  (see Activate a Room on the next page).
+Example: you may perform a Physical Attack and then 
+Activate the Room you are in, or, you may Activate the Room 
+you are in and then perform a Physical Attack.
+Command (Physical Action, )
+Choose one of your , it activates (see Activate an 
+Evocation on the next page).
+Casting a Spell
+Choose one of your Ready Spells (face-down) located in the 
+numbered Spell Slot (I, II, III) with the lowest number, or 
+the one located in the Quick Spell Slot ().
+Reveal that Ready Spell flipping it over so as to swap the 
+positions of the two short sides of the  Spell Card (see 
+example). You are considered the Mage who casts that Spell. 
+If you reveal a Spell showing the symbol of Instability () 
+in the middle of the card, place 1 in a  (see page 18 for 
+Instability rules), then resolve the Effect of the Spell Card you 
+had placed in the Active Side during the Study Phase. 
+Momentum
+Choose one of your Ready Spells and discard it into your 
+Memories. When you do this, you may perform "Move 1".
+LIMITATION ON SPELL CASTING
+A Mage may perform the Action "Cast a Spell" twice 
+during the same Activation (using both of their Actions) 
+only if one of the two Actions is used to cast the Spell that 
+is in the  Quick Spell Slot.
+ACTIONS
+PHYSICAL ACTION TOKENS
+When a Mage performs a Physical Action (see box to the right) 
+they must flip one of their two Available Physical Action 
+Tokens so that it shows the Exhausted side.
+A Available Physical Action Token.
+B Exhausted Physical Action Token.
+
+B ARTHOLOMÄUS
+
+ 10
+
+
+ 8
+2
+2
+2
+
+A B
+Imperishable Fate
+  
+Choose an Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+Imperishable Fate
+  
+in the Undead Choose an
+ under your activates Lodge. It 
+control.
+in the Lodge Undead Choose an 
+other than the previous one. It 
+ under your control. activates
+Imperishable Fate
+  
+ to each of  infl icts 1  The 
+your Evocations.
+ your Evocations have : 
+. 1 
+Imperishable Fate
+  
+in the Undead Choose an
+ under your activates Lodge. It 
+control.
+in the Lodge Undead Choose an 
+other than the previous one. It 
+ under your control. activates
+Imperishable Fate
+  
+ to each of  infl icts 1  The 
+your Evocations.
+ your Evocations have : 
+. 1 
+Imperishable Fate
+  
+Choose an Undead in the 
+Lodge. It activates under your 
+control.
+Choose an Undead in the Lodge 
+other than the previous one. It 
+activates under your control.
+Imperishable Fate
+  
+The  infl icts 1 to each of 
+your Evocations.
+: your Evocations have 
+1.
+EXAMPLE:
+REVEALING A SPELL CARD
+When a Mage Reveals a Ready Spell, 
+they must flip it from bottom to top so 
+as to swap the positions of the two short 
+sides of the  Spell Card.
+The Effect that is applied will be the 
+one whose texts are readable and which 
+the Mage had chosen during the Study 
+Phase.
+Flip 
+upward
+Do not flip 
+sideways
+ENTERING A ROOM
+Regardless of how a Model is placed in a Room (Movement, 
+Evocation, direct placement, or other), it is considered to 
+have entered the Room. 
+MOVE A MODEL IN THE LODGE
+When a Model performs "Move," its controller moves it to an 
+adjacent Room; they repeat this operation a number of times 
+equal to the number indicated after the word "Move."
+PLACE A MODEL IN THE LODGE
+When a Model places itself (or is placed) in a Lodge Room, 
+if it is not already in the Lodge, it is taken from the reserve. If 
+that Model is already in the Lodge its position changes from 
+the Room it was in directly to the Room in which it is placed, 
+without passing through other Rooms.
+14
+Evocations are creatures summoned by the magic and controlled by 
+Mages. Each of them is represented in the Lodge by a Model.
+During this Phase all Evocations in the Lodge are activated.
+The First Mage chooses one of their available Evocations and it 
+activates. After the activation is complete, the Mage rotates the 
+chosen Evocation card 90° (thus orienting it vertically) to show that 
+it has already been activated in this Evocation Phase (make sure to 
+keep all Damage Cubes on the card). If a Mage has no Evocations in 
+the Lodge or has already activated all of their Evocations, they end 
+their Evocation Phase.
+After activating the chosen Evocation, the other Mage does the 
+same. This alternation is repeated until all the Evocations in the 
+Lodge have been activated.
+2 2 3
+When the Templarii activates, 
+its controller can remove 1 of 
+their own  from a  from 
+the Templarii. If they do: heal 
+1 on the Templarii, and the 
+Templarii has +1 until the 
+end of the activation.
+Undead
+Templarii
+EVOCATIONS
+EVOCATION CARD ANATOMY
+A Name.
+B Archetype: Evocations have one or more Archetypes that 
+allows them to be influenced by specific Effects.
+C Skill: this Effect is applied as written following its specific 
+directions.
+D  Speed Value: an Evocation may perform a series of 
+consecutive "Move 1." Effects equal to this number.
+E  Strength Value: When an Evocation inflicts  Damage, 
+place Damage Cubes of its controller's color on the target's 
+Mage Sheet or Evocation Card; this Damage is considered 
+inflicted by the Evocation Model (not from its controller).
+F  Health Value: when an Evocation has an amount of 
+Damage on its card equal to this value, it is defeated. Place 
+the Model outside the Lodge and put its card back into the 
+Evocation Card Deck. The owner takes back the Evocation 
+Base clipped to the defeated Model.
+B
+A
+D
+C
+E
+F
+SUMMONING EVOCATIONS
+A Mage may summon an Evocation through different Effects.
+A Mage who resolves an Effect that summons an Evocation 
+takes the Model of that Evocation and places it in the Lodge, 
+following the Effect's instructions. They then take the card of 
+that Evocation and place it at one of the three Evocation slots on 
+their side of the game board. They take the Evocation Base with 
+the number of  indicated on the chosen Evocation Slot and 
+clip it to the base of the Model; this will help associate a Model 
+with the corresponding Evocation Card. In addition, if a Mage 
+has two or more identical Models among their Evocations, the 
+number of  helps to distinguish them when they are targeted 
+by Effects.
+If there are no available Models of a specific Evocation (because 
+they are all in the Lodge), the Mage can still resolve the Effect 
+that summons it, but does not place any Evocation in the Lodge.
+OW N E R A N D C O N T R O L L E R O F A N 
+EVOCATION
+When a Mage summons an Evocation they are considered the 
+Owner of that Evocation as long as that Model is clipped to an 
+Evocation Base of the same color as the Mage. The ownership of 
+a Model never changes.
+The Controller of an Evocation is the Mage who makes any 
+decisions related to that Evocation. By default, the owner of an 
+Evocation is its controller.
+During the course of the game, the controller of an Evocation 
+may change due to various Effects. In this case, its ownership 
+does not change and the new controller takes all decisions related 
+to the Evocation. An Evocation that inflicts Damage or places 
+Instability always places Cubes of its controller's color.
+4. Evocation Phase
+AC T I VAT I N G A N E VO C AT I O N
+When an Evocation is activated, its controller can have it perform 
+a number of "Move 1." Effects equal to the Speed Value of the 
+Evocation (). Each individual "Move 1.", separated by periods (.), 
+is a different Effect and the Evocation can use all or part of these 
+Effects, but cannot perform other Effects between them. Unused 
+"Move 1." Effects are lost.
+Before or after the "Move 1." Effects, the Evocation may perform a 
+Physical Attack against a . A Physical Attack inflicts Damage
+equal to the Strength value of the Evocation (). The Evocation 
+uses the cubes of its controller to indicate the Damage it inflicts; 
+this Damage is considered inflicted by both the Evocation and the 
+Mage controlling it.
+ACTIVATION BY EFFECTS 
+OR PHYSICAL ACTIONS
+the Evocation Card is to be rotated 90° to indicate that 
+the Evocation has already activated exclusively during the 
+Evocation Phase; if an Evocation is activated for any other 
+reason (such as the Effect of a  Spell Card or through the 
+Physical Action Command) its Evocation Card must not be 
+rotated.
+15
+5. Cleanup Phase
+This is the Final Step of the Game Turn. Perform the three steps 
+shown below in order:
+1 Game Board Cleanup: all Mages discard the  Spell Cards
+on their Spell Slots in their Memories. 
+All Revealed Forgotten Spells are removed from the game 
+(they do not return to the Forgotten Spell deck).
+All  Persistence Tokens on the Mage Cards return to their 
+respective owners.
+All Evocations become available again; turn each Evocation 
+Card horizontally.
+Each Mage turns their Physical Action Tokens over to the 
+Available side.
+2 Majority and Rebuilding: check to see if there are any Rooms 
+in the Lodge with all Instability slots occupied; these Rooms 
+must be Rebuilt one at a time in any order. 
+For each Room that is rebuilt, assign the Power Points () 
+indicated in the three room banners (under the Room’s name 
+banner) to the Mages and/or the Black Rose based on the 
+number of  Instability they placed in the Room:
+1. The largest amount of  (the leftmost one) to the Mage 
+(or the ) who placed the most  Instability. If all the 
+Instability Cubes in the Room belong to a single Mage (or 
+the ), they gain 1 additional . Whoever gains these 
+points advances their cube by one slot on the Room 
+Track of their side of the game board.
+2. The intermediate amount of  (the one in the middle 
+part) to the Mage (or the ) who placed the second highest 
+number of  Instability.
+3. The lowest amount of  (the one furthest to the right) to 
+the Mage (or the ) who placed the lowest number of 
+Instability.
+In case of a tie, all the Mages (and the ) who have tied gain 1 
+less  than indicated in the banner.
+Once the  are assigned, the cubes in the Instability slots from 
+the Room return to their respective owners and the Room is 
+flipped to the Rebuilt side; then place the corresponding Room 
+Activation Token on it so that it shows the Available side.
+When a Room is Rebuilt, nothing happens to the Mages and 
+Evocations inside it; simply put their Models back inside the 
+Room once it has been flipped. A Rebuilt Room is not flipped 
+again for the rest of the game.
+3 End of Turn: if the cube on the Turn Track is on slot 4 the 
+game ends and we move on to End of Game Tally (see page 
+16) otherwise, the Crown Holder moves the cube on the Turn 
+Track one slot to the next number, then passes theCrown 
+Token to the other player who becomes the new Crown 
+Holder, in which case the new Turn starts by restarting from 
+the 1. Black Rose Phase.
+ Bibliotheca of the Order
+
+
+
+: discard 1 ready  into your .
+ If you do: draw 2 from your .
+ Bibliotheca of the Order
+3 1 1
+E X A M P L E : R E B U I LT R O O M
+: draw 2 from your .
+ Bibliotheca of the Order
+FLIP
+3 1
+Each Mage keeps all the cards in their Hand at the beginning of 
+each new Game Turn.
+: draw 2 from your .
+ Bibliotheca of the Order  Bibliotheca of the Order
+Available Room 
+Activation Token
+Used Room Activation 
+Token
+16
+At the end of the game (having completed the fourth Turn) the Mages 
+and the Black Rose count the  Power Points gained to determine 
+the new Grand Magister of the Lodge; if the  Black Rose is the 
+winner, she decrees that no participating Mage is worthy of this title.
+The Mages and the  Black Rose advance their respective 
+Power Tokens on the Power Track of the game 
+board according to the points indicated below 
+(remember to turn the Power Token over and 
+place it at the beginning of the Power Track if you 
+exceed 20).
+• Trophies : +3 to whoever owns the 
+cube in the most advanced position on the 
+Trophy Track (). In case of a tie, +2 to 
+anyone who has the cube in the most advanced position on the 
+End o f Gam e Ta l ly
+track.
+•  Majority: check who has the most  Instability in 
+each of the Destroyed Rooms. For each Destroyed Room in 
+which a Mage (or the  Black Rose) owns more Instability, 
+advance the cube on its Slot Track by one slot; in case of a tie, 
+the  Black Rose advances the cube on her Room Track 
+(provided she has at least 1 in the Room). +3 to whoever 
+owns the cube in the most advanced position of the Room Track 
+(). In case of a tie, +2 to everyone who has the cube on the 
+most advanced position of the Room Track.
+• Quests : the  Black Rose gains the  indicated on each 
+Quest Slot of Quest Cards not covered by a Cube.
+Once all the Power Points are added up, whoever has the highest 
+total wins. In case of a tie between the two Mages, or between Mage 
+and the  Black Rose, the  Black Rose wins.
+17
+Rules Compendium
+This chapter collects all the rules that do not directly come into play in a specific Phase of the game, but which must be followed when the 
+situation calls for it, as well as featuring many examples of how to apply the rules in different situations.
+INFLICT DAMAGE
+When a Mage or the  Black Rose inflicts  Damage to a 
+Model, they place as many of their Damage/Instability Cubes on 
+the Damage Slots of the Mage's Health Bar, or in the case of an 
+Evocation they place them on their card; those cubes are considered 
+ Damage. 
+A Mage cannot in any way inflict Damage on themselves and/
+or the Evocations they own or control, and vice versa.
+CONVERT DAMAGE
+When a Mage or the  Black Rose convert  Damage on a 
+Model, they replace Damage on it that is from the other Mage or 
+the Black Rose with their own cubes, up to a maximum of 
+Damage equal to that indicated by the Effect that allows you to 
+convert.
+The  Black Rose converts  Damage starting with the 
+rightmost cubes in the Health Track, while a Mage can freely 
+choose which cubes to convert.
+A Mage cannot in any way convert Damage on themselves 
+and/or to on the Evocations they own or control, and vice 
+versa.
+DEFEAT OF AN EVOCATION
+When an Evocation has an amount of  Damage equal to its 
+Health value,It is defeated and placed outside the Lodge.
+DEFEAT OF A MAGE
+When a Mage has suffered  Damage equal to their Health value 
+(), the Mage is defeated: see Defeat of a Mage (page 18).
+IMMUNITY
+Unless specified by the Effect, a Mage (or the) and their 
+Evocations ignore any Effect resolved by that Mage (or the) that 
+inflicts or converts Damage on themselves and/or their Evocations. 
+An Evocation cannot inflict Damage on the Mage that summoned 
+it or on another Evocation under that Mage's control, unless it acts 
+under the control of an opposing Mage (see page 14).
+Inflict/Convert  Damage, Defeat and Immunity
+
+U LRICH
+
+ 11
+
+
+ 7
+2
+2
+2
+
+
+U LRICH
+
+ 11
+
+
+ 7
+2
+2
+2
+
+
+U LRICH
+
+ 11
+
+
+ 7
+2
+2
+2
+
+
+B ARTHOLOMÄUS
+
+ 10
+
+
+ 8
+2
+2
+2
+
+Ulrich suffered  equal to his own value of , 
+therefore he is Defeated.
+The blue Mage inflicted 3 to Bartholomäus.
+The red Mage converted 2 on Ulrich.
+Inflicts 3
+Converts 2
+E X A M P L E : I N F L I C T A N D C O N V E RT 
+18
+PLACING INSTABILITY
+When a Mage or the  Black Rose place  Instability in a 
+Room, they place as many of their Damage/Instability Cubes on 
+the available Instability Slots of the target Room. It is only possible 
+to place cubes in this way on available Instability Slots. If there are 
+not enough slots, excess cubes are not placed.
+Some Spells show the  symbol in the center of 
+the card; these Spells place 1 Instability in the 
+Room where the Mage who reveals them is. 
+When a Mage reveals one of these Spells, they must 
+immediately resolve this Effect: "Place 1 in a ", 
+before resolving any other Effect of that Card..
+A Room in which all Instability Slots are occupied by Instability 
+Cubes will be rebuilt during the Cleanup Phase (see page 15).
+CONVERTING INSTABILITY
+When a Mage or the  Black Rose converts  Instability on a 
+Room, they replace the Instability of the other Mage or Black Rose 
+with their own cubes, up to a maximum of  Instability equal to 
+that indicated by the Effect that allows you to convert. 
+The  Black Rose converts  Instability starting with the 
+rightmost cubes in the Room, while a Mage can freely choose 
+which cubes to convert.
+When a Mage has suffered  Damage equal to their Health value 
+(), the Mage is defeated and the following occurs:
+• The Effect that defeated it resolves to the period (.) of the 
+sentence being resolved, at which point it is interrupted and 
+the Mage's defeat must be resolved (see below). Once the 
+defeat is resolved, the interrupted Effect resumes resolving 
+from the period (.) at which it was interrupted.
+• The Model of the defeated Mage is placed in their Cell.
+• The  Power Points gained by the opponents (the other 
+Mage and the Black Rose) are established in this way:
+• 3 to whoever inflicted the most , 1 to whoever 
+inflicted at least 1.
+• 2 to both opponents if they inflicted the same number 
+of .
+• 4 to the opponent if they inflicted all the .
+• Whoever inflicted the last  on the defeated Mage advances 
+their cube on the Trophy Track () by one slot.
+• All  cubes assigned to the defeated Mage return to the 
+owners' supply. 
+Place/Convert  Instability
+Defeat of a Mage
+
+
+
+Minor Control 
+Minor Control
+Choose another Mage, that 
+Mage places 1. If they do: 
+one of the target's Evocations 
+activates under your control.
+  
+The target gains 1. 
+One of the target's Evocations 
+activates under your control.
+  
+
+
+ Minor Control
+Minor Control
+another Mage, that Choose 
+. If they do:  places 1 Mage 
+one of the target's Evocations 
+ under your control. activates
+  
+.  gains 1 The target 
+One of the target's Evocations 
+ under your control. activates
+  
+
+
+U LRICH
+
+ 11
+
+
+ 7
+2
+2
+2
+
+1 3, 1
+ Bibliotheca of the Order
+3 1 1
+ Bibliotheca of the Order
+3 1 1
+Places 3
+Converts 1
+E X A M P L E : P L AC I N G A N D C O N V E RT I N G 
+The Blue Mage Places 3
+in Mystic Observatory.
+the red Mage converts 1
+in Mystic Observatory.
+19
+Each Lodge Room is represented by a hexagonal tile. 
+At the beginning of the game, each Room shows its Destroyed side, 
+which allows Mages who activate the Room (see below) to use its 
+Effect. 
+During the game, a Room can be Rebuilt (see page 15). On a 
+Rebuilt Room there is always the corresponding Room Activation 
+Token, which allows the Mage activating the Room to use a very 
+powerful Effect (see below).
+AC T I VAT I N G A RO O M
+When a Mage activates a Room (for example, by resolving the 
+Effect "Activate a " with an Explore or Fighting action), they 
+must resolve the Effect indicated in the Room or, if present, on its 
+Room Activation Token.
+RO O M AC T I VAT I O N TO K E N S
+When a Room in which there is a Room Activation Token 
+showing the Available side is activated E , the Mage activating it 
+must resolve the Effect indicated on it and then flip that token over 
+to show the Used side F .
+When this happens, the Effect of that Room Activation Token 
+cannot be used for the rest of the game. A Mage who activates a 
+Room in which there is a Room Activation Token showing the 
+Used side does not resolve any Effect.
+Rooms and Room Activation Tokens
+These two slots on the game board house the Mages' Models at the 
+beginning of the game. Each Mage is matched to the Cell on their 
+player's side of the game board (recognizable by color).
+Cells and the Mages within them use the following rules:
+• No Model can move, be moved or placed in a Cell; only when a 
+Mage is defeated (see page 18) is their Model placed in their Cell. 
+• A Mage in a Cell may exclusively perform the following:
+▶ Activate their Evocations during the Evocation Phase.
+▶ Perform the Momentum Action.
+▶ Perform the Explore Action.
+• When a Mage begins their Activation in a Cell, they must
+perform an Explore Action or a Momentum Action to get 
+out of it. If they cannot do so, they remain in the Cell.
+• A Mage in a Cell is not considered to be in the Lodge and cannot 
+be targeted by Effects or affected by anything, except for Events 
+Card Effects, Quest Cards (see pages 7) and Effects that specify 
+that they apply to a Mage in their Cell.
+Cells
+ Abyss of Faith
+ Abyss of Faith
+: it activates under your control 
+and has 2.
+ Abyss of Faith
+ROOM ANATOMY
+B
+A
+E
+F
+C
+D
+A Name, symbol, color (      ) and 
+Effect. The Lodge consists of 7 Rooms of different colors.
+B  Power Points Banners: these indicate the  gained if 
+the Room is Rebuilt (see page 15).
+C Instability Slots: these determine how much 
+Instability can be placed in the Room (see page 18).
+D Rebuilt Room: it shows the name, symbol and color of 
+the Room. Its Effect can be found on the Available side of 
+the corresponding Room Activation Token. E .
+Available Room 
+Activation Token
+Used Room Activation 
+Token
+Destroyed Room
+Rebuilt Room
+20
+RANGE
+The numerical value of the targets (see page 11) is called the range, 
+and it indicates the distance at which the target chosen to apply the 
+Effect can be located. Ranges with a value greater than 0 ( ) 
+require line-of-sight between the person resolving the Effect and 
+the target.
+A  range ( ) or one with a value of 0 ( ) instead, does 
+not require any line of sight.
+LINE OF SIGHT
+The line of sight is an imaginary, straight line between the center of 
+the Room in which the Model resolving the Effect is located and the 
+center of the Room in which the target of the Effect or the Room 
+targeted by the Effect is located. This line must always run through 
+the centers of a row of Rooms, and can never run along the edge of 
+a Room traversing a maximum number of Rooms (excluding the 
+starting Room) equal to the range indicated on the Effect's target.
+DUMMY TARGET
+You can choose a Dummy Target as the target of an Effect that 
+targets Models (). The Dummy Target counts as a Model, 
+even if it is not physically in the Lodge; the purpose of choosing 
+it as a target is to allow Mages to cast a Spell and resolve as much 
+of its Effect as possible, even when there are no Models available 
+as targets. A Dummy Target does not suffer Damage. It is not 
+possible to choose a Dummy Model as the target of a Physical 
+Attack. ().
+EXAMPLE: LINE OF SIGHT AND DUMMY TARGET
+ Occult Black Rose Room
+6 3 1
+ Templars' Armory
+4 2 1
+ Bibliotheca of the Order
+3 1 1
+
+2 1 0
+
+4 2 1
+ Crypt of the Saint
+4 2 1
+
+
+
+
+
+BERSAGLIO
+FITTIZIO
+EXAMPLE: READING SYMBOLS 1
+A : a Model in a Room within range 1.
+ Occult Black Rose Room
+6 3 1
+ Templars' Armory
+4 2 1
+ Bibliotheca of the Order
+3 1 1
+
+2 1 0
+
+4 2 1
+ Crypt of the Saint
+4 2 1
+
+
+EXAMPLE: READING SYMBOLS 2
+All the : all Models in a Room within range 1.
+The Effect resolved by Bartholomäus applies on 
+all Models at range 0 and 1 from him.
+ Occult Black Rose Room
+6 3 1
+ Templars' Armory
+4 2 1
+ Bibliotheca of the Order
+3 1 1
+
+2 1 0
+
+4 2 1
+ Crypt of the Saint
+4 2 1
+
+ P E R S I S T E N T 
+A Persistent Effect affects the game for the duration of the Turn 
+in which it is resolved. The player who resolved it can apply it 
+whenever the condition required in its text is met.
+To show that one of these Effects is active, the Mage who resolved 
+it places on the target Mage Card the Persistence Token of their 
+color and corresponding to the Spell Slot (, I, II o III) in which 
+
+
+: when an Evocation is 
+defeated or removed, gain 
+1.
+   
+: when you enter a Room 
+where none of your own 
+is placed convert 1 in that 
+Room.
+   
+Invisible Strike
+Invisible Strike
+ when an Evocation is : 
+removed or defeated gain , 
+. 1
+   
+ when you enter a Room : 
+ where none of your own 
+convert is placed in that 1
+Room.
+   
+Invisible Strike
+Invisible Strike
+Range, Line of Sight, Dummy Target
+ Persistent Effects
+the revealed  Spell Card showing the 
+Persistent Effect is located.
+The Persistent Effect ends when the  Spell 
+Card is no longer in play after Step 1 of the 
+Cleanup Phase. 
+BERSAGLIO
+FITTIZIO
+
+21
+In the two Quest Cards placed on the game board are six different 
+ Quests A .
+Each  Quest consists of these elements:
+A Name. 
+B Condition.
+C Effect.
+D Quest Slot.
+The moment a Mage fulfills the Condition of a  Quest, they 
+may declare that they have completed it; when this happens, the 
+Mage places one of their cubes on the Quest Slot of the Quest they 
+have completed and immediately applies its Effect. 
+A  Quest with the Slot Quest occupied by a cube is considered 
+completed and solved, and is no longer available for the rest of the 
+game.
+If a Mage forgets to declare that they have completed a Quest, or 
+does not want to complete it despite having fulfilled the Condition, 
+the  Quest will remain available.
+In the End of Game Tally, the  Black Rose gains  from all 
+Quests still available (see page 16).
+ Quests  Quests  
+Devoted You have drawn 
+: 
+1 Forgotten .
+the  infl icts 2 to you.
+Gain 2.
+Summoner You own 3 Evocations.
+: the  infl icts 2 to you.
+Gain 2.
+Elementalist You have at least three revealed 
+Spells with three different Elements 
+(
+
+). 
+: the  infl icts 3 to you.
+Gain 3.
+2
+2
+3
+ Quests  
+First Blood You have defeated the other Mage.
+: the  infl icts 1 to you. 
+Gain 1.
+Destroyer You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you. 
+Gain 2.
+Controller
+You have at least three revealed 
+Spells. 
+: the  infl icts 2 to you.
+Gain 2.
+1
+2
+2
+A
+B
+C D
+Beyond the Duel
+D U E L I N TO B L AC K RO S E WA R S
+The Material in this box can be used to expand Black Rose Wars by 
+including it in games as shown below.
+Lex School of Magic: during step 9 of the Setup you may replace 
+one of the Schools of Magic present in the core game with the Lex 
+School.
+Forgotten Spells: you may add these cards to the Forgotten Spells 
+deck of the core game. 
+Bartholomäus and Ulrich: these two Mages can be chosen as a Mage 
+during step 8 of the Setup described in the core game rulebook.
+Rooms: the Rooms in this box (and the corresponding Activation 
+Token) can replace Rooms in the core game that have the same Name 
+without regard to the italicized part, to have a Lodge with more 
+varied Effects; for example, you can replace the Black Rose Room of 
+the core game with the Occult Black Rose Room, or the Armory of 
+the core game with the Templar Armory.
+B L A C K R O S E WA R S I N T O D U E L 
+Material from the other products in the Black Rose Wars line can be 
+used to expand this game by including it in games as shown below.
+School of Magic: you may replace the Lex School of Magic with any 
+School of Magic from the other products, making sure to include in 
+the game all the materials necessary for the operation of that School 
+(such as Evocations). Due to the head-to-head challenge nature of 
+this game, some of the Schools of Magic that develop complex tactics 
+may not be impactful in a duel. It should also be kept in mind that if a 
+School of Magic involves the use of additional rules, these will need to 
+be consulted in the rulebook of the Black Rose Wars core game or in 
+the rulebook of the expansion from which the chosen School of Magic 
+comes.
+Forgotten Spells: you may add any Forgotten Spells from the other 
+Black Rose Wars products to the games of Duel by adding them to the 
+deck during Setup. 
+Mages: you may use all Mages from the other Black Rose Wars 
+products in Duel games.
+Rooms: you may replace the seven Rooms with Rooms from other 
+Black Rose Wars products when playing Duel. 
+Incompatible Materials: No Quest Cards or Event Cards from 
+Black Rose Wars are included in a Duel game. Materials that generate 
+Effects (usually Spells and Rooms) that call upon these types of cards 
+must never be included in the game.
+22
+Magic does not exist.
+This is true for skeptics, the ignorant, or those who have 
+simply stopped believing.
+Magic must not exist.
+This is true for those who are afraid, for those who want 
+to maintain Power, for those who have decided to wipe 
+it off the face of the Earth.
+The Church has acknowledged the existence of Magic 
+and has banned it.
+But the Voice continues to travel, light and swift, carried 
+by invisible winds.
+It reaches the ears of the Perceivers, people who are able 
+to pick it up and use it in different ways.
+The origin of the Voice is the Black Rose, a sentient 
+being upon which the Lodge was founded.
+The Voice calls all the Perceivers, vulgarly called Mages 
+by the ignorant. It calls them to gather and have them 
+challenge each other to elect a new Grand Magister.
+For the next ten years, the Grand Magister will be the one 
+who speaks for the Black Rose, giving strong directives 
+aimed at the survival and future proliferation of the 
+Perceivers.
+This is the world of Black Rose Wars, many will be the 
+adventures you will experience, each adding a dash 
+of insight to your knowledge, waiting for the spark 
+brought by the Voice to ignite your perceptive vessel so 
+that you can hear the Call.
+Tu r i n 1 5 2 2 A . D.
+23
+B L AC K RO S E WA R S
+Black Rose Wars is the first chapter in this thrilling saga. 
+The Black Rose, a mysterious sentient being, rules the winds 
+of magic and calls upon the best Mages. Every ten years, 
+the mages compete in deadly battles to choose the Grand 
+Magister. The power of spells and terrifying evocations 
+eventually comes to destroy the rooms of the Lodge. Each 
+time, however, the magic of the Black Rose repairs the Lodge 
+until the next challenge.
+INFERNO
+Inferno is the expansion that introduces the first Avatar to 
+the game, and presents players with a challenge that borders 
+on the impossible.
+Lucifero has escaped the control of his summoner, and the 
+Lodge has been transformed into the Circles of Hell.
+In the bloody battle that ensues, the power of Magic will 
+be so great as to destroy the Lodge forever, and with it, the 
+Order of the Black Rose.
+REBIRTH
+Black Rose Wars: Rebirth is the second installment of the 
+game, a new core box that introduces new game mechanics, 
+new Schools of Magic, new Mages, and more. Mages are 
+called upon to rebuild the Lodge. The Voice of the Black 
+Rose calls to the Perceivers, men and women who can hear 
+her faint call. Now it is your duty to rebuild what Lucifero 
+has destroyed.
+APOCALYPSE
+Apocalypse is the expansion that lets you take on the role of 
+the Horsemen of the Apocalypse, four of the most incredible 
+Mages in history. A breathtaking challenge with pre-built 
+decks and a new game mechanic. With this expansion, you 
+can also build your own Mages and decks from scratch 
+for even faster and more furious games. Apocalypse also 
+includes all the rules you need to organize and play real Black 
+Rose Wars tournaments.
+Black Rose Wars: Duel Lex v.1.1
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+lex

@@ -57,7 +57,7 @@ static func process_section(game, frame: Dictionary) -> bool:
 				return false
 			var effect: Dictionary = effects[index]
 			if not frame.has("effect_frame"): frame["effect_frame"] = {"effect": effect, "context": context}
-			if section.kind == "spell" and not frame.effect_frame.get("announced", false):
+			if section.kind != "physical" and not frame.effect_frame.get("announced", false):
 				frame.effect_frame["announced"] = true
 				announce_effect(game, effect, context)
 				return false
@@ -90,7 +90,9 @@ static func announce_effect(game, effect: Dictionary, context: Dictionary) -> vo
 	elif kind in ["damage_models_around_target", "damage_models_around_self"] or (kind == "damage" and context.get("spell_target_type") == "area"):
 		var origin: String = str(context.get("target_room_id", game.players[game.avatar.player_index].mage.room_id))
 		affected = AvatarRules.model_options(game, int(effect.get("range", 0)), origin).map(func(o): return int(o.value.player_index))
-	elif context.has("target_player_index"):
+	elif kind in ["damage", "damage_per_ignored", "convert_damage", "discard_hand",
+		"target_power_per_missing_conversion", "target_power_per_missing_discard",
+		"remove_target_evocation", "remove_per_discard", "trophy"] and context.has("target_player_index"):
 		affected = [int(context.target_player_index)]
 	if affected.is_empty(): return
 	var event := GameEvent.new("spell_effect_about_to_resolve")
@@ -107,6 +109,9 @@ static func announce_effect(game, effect: Dictionary, context: Dictionary) -> vo
 	event.set_meta("source_spell_type", str(context.get("spell_type", "")))
 	event.set_meta("source_spell_forgotten", false)
 	event.set_meta("affected_player_indices", affected)
+	# Bone Shield and other Death Protections consume the same trigger through
+	# event.data; keep it linked to the authoritative section context too.
+	event.data = {"targets": affected, "spell_context": context}
 	game.process_game_event(event)
 
 static func _valid_target(game, context: Dictionary) -> int:
@@ -292,8 +297,8 @@ static func _heal(game, frame: Dictionary, amount: int) -> bool:
 
 static func _human_choice(game, player: int, frame: Dictionary, key: String, options: Array, prompt: String) -> bool:
 	if frame.has(key): return true
-	if options.size() == 1:
-		frame[key] = options[0].value
+	if options.is_empty():
+		frame[key] = null
 		return true
 	game.request_effect_choice(player, "avatar_effect", frame, key, options, 1, 1, prompt)
 	return false

@@ -1,0 +1,1099 @@
+
+=== PAGE 1 ===
+A p oca ly ps e
+
+=== PAGE 2 ===
+Project Manager: Luca Bernardini
+Art Director: Andrea Colletti
+From an idea by Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Vincenzo Pratticò, Eleonora Lisi
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfi llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alterio Sofi a, Angelini Alessandro, Benedetti Luca, Caprera Benito, Carotenuto Pasquale, Caruso 
+Pietro, De Feo Luigi, Francescangeli Luca, Galmacci Flavio, Granitto Francesco, Macchioro Gabriele, 
+Meucci Lorenzo, Milani Giovanni, Noschese Luca, Perra Luca, Pica Francesco, Polverari Giuliano, Punzo 
+Giovanni, Sabatini Alice, Samele Daniele, Schiariti Andrea, Spagnoletto Chiara, Vella Andrea, Vendittozzi 
+Daniele
+Credits
+Hannibal dared to challenge Rome because he knew he 
+was a great leader.
+During his lifetime, to improve his strategic and martial 
+skills, he had turned to the use of magic.
+Once he was dead, the Black Rose chose him as her 
+Horseman of the Apocalypse, and now he is War.
+"And out came another horse, bright red. Its rider 
+was permitted to take peace from the earth, so that 
+people should slay one another, and he was given a 
+great sword." 
+Revelation 6:4
+2
+
+=== PAGE 3 ===
+Components ...........................................................4
+Standard Game ......................................................6
+Apocalypse Mode ...................................................7
+Game Setup for Apocalypse Mode ..............................7
+Apocalypse Game Rules ..............................................7
+Feats .....................................................................................7
+Library .................................................................................7
+Using the Options................................................................................................ 7
+Tournament Mode .................................................8
+Creating a Mage ....................................................8
+Creation Points ............................................................8
+Creating a Mage ..........................................................8
+Feats .............................................................................8
+Mage Model ............................................................................................................. 8
+ Physical Action Feats ....................................................9
+ Library Feats ..................................................................9
+ Trait Feats ......................................................................9
+Feats List .................................................................................................................... 9
+Contents
+Creating a Personal Library........................................10
+Building Rules ...................................................................10
+Tournament Game ................................................10
+Change of Moon ...............................................................10
+Drawing Spell Cards .........................................................10
+Tournament Mode Game Setup .................................10
+Tournament Format ..............................................11
+Options .......................................................................11
+Plentiful Quests .................................................................11
+Crown of the Summoner .................................................11
+Quick Study .......................................................................11
+Magic Tutor ......................................................................11
+Instinctive Spell .................................................................11
+Rules Updates ...........................................................12
+Limited and Banned Spell Cards .....................................12
+Rules ...................................................................................12
+Hypatia was a great philosopher and one of the fi rst 
+great alchemists.
+She studied the treatises and tools of Mary the 
+Prophetess before they were destroyed.
+Killed by the crowd, she was chosen by the Black 
+Rose as her champion of the Apocalypse, and became 
+Pestilence.
+"And I looked, and behold, a huge hound! And its 
+rider had a bow, and a crown was given to her, and 
+she came out conquering, and to conquer."
+Revelation 6:2
+3
+
+=== PAGE 4 ===
+These tokens are used by the 
+Death School of Magic Effects.
+These tokens are used by the 
+Pestilence School of Magic 
+Effects.
+4
+Components
+F AMES
+ 11
+ 7
+ 2
+
+4 MAGE CARDS / APOCALYPSE MAGE CARDS
+ 2
+4 MAGE CARDS / APOCALYPSE MAGE CARDS
+ 2
+ 2
+
+
+
+
+
+
+
+P ESTILENTIA
+
+10
+6
+2
+2
+2  Horde
+ Dominion
+
+
+
+
+
+
+ 9 10 11 12
+
+50 CUSTOMIZABLE 
+MAGE CARDS
+50 TOURNAMENT 
+SLEEVES
+18 DESTINY TOKENS 18 INFECTIO TOKENS
+12 PERSONAL SPELL 
+CARDS
+Calamity
+  
+Calamity
+  
+Infectio Assign 2 
+Infl ict 2
+Calamity
+Calamity
+
+Summon 
+Summon 
+A Pestis activates 
+control.
+
+to the target. Infectio
+ Infl ict 2
+Calamity
+ 
+Summon a Pestis.
+Summon a Pestis.
+activates under your 
+control.
+Consuming Soul
+  
+Infl ict 1 to each Mage for Summon 
+each Destiny assigned to them. A Pestis activates 
+Consuming Soul
+  
+control.
+
+Consuming Soul
+  
+1 Obtain of the target.
+or to the target. 3 . If the target has at least 
+ assigned, Destiny defeat the 
+target.
+Calamity
+
+36 FAMINE SPELL 
+CARDS
+4 FORGOTTEN SPELL 
+CARDS
+36 WAR SPELL 
+CARDS
+36 DEATH SPELL 
+CARDS
+36 PESTILENCE 
+SPELL CARDS
+4 SCHOOL 
+REFERENCE CARDS
+
+
+   
+Starve 2.
+Infl ict 2 Infl ict 2.
+   
+Gluttony
+Gluttony
+
+. 1
+. 3 Starve
+the target up to Move 
+.  Infl ict 2
+   
+   
+Gluttony
+Gluttony
+
+
+   
+
+Move up to 1.
+Summon Destroyer Destroyer.
+or
+Restore Restore .
+   
+Brute Force
+Brute Force
+.
+.
+2
+2
+or
+Place
+Convert 
+   
+   
+Brute Force
+Brute Force
+ 
+
+
+   
+If the target has at least If the target has at least If the target has at least 3
+Destiny assigned, assigned, defeat the 
+target. target.
+   
+Dark Omens
+Dark Omens
+
+ each time a Mage 
+gain1 : 
+is placed in their Cell.
+   
+   
+Dark Omens
+Dark Omens
+
+
+   
+Remove
+ up to 2 Pestis. If you 
+do, for each Pestis removed 
+due to this Effect, due to this Effect, infl ict 2 infl ict 2 to 
+each  from that from that from that Pestis.
+   
+Pandemic
+Pandemic
+Summon . estis Pa
+. estis Pa Summon 
+an Evocation remove You may 
+or less that 3 value of  with a 
+is in the target Room.
+   
+   
+Pandemic
+Pandemic
+an Evocation 
+or less that 
+ 
+
+Some Spells of this School allow you 
+to summon special Evocations with the 
+Equipment special Archetype. Equipments 
+follow these rules:
+
+follow these rules:
+• An Equipment can be targeted as though as An Equipment can be targeted as though as 
+it was a it was a  from the Mage who owns it.
+• An Equipment with the An Equipment with the  symbol ignores 
+all  infl icted by Effects that target a 
+• An Equipment cannot have Upgrades An Equipment cannot have Upgrades 
+assigned assigned to it.
+• A Mage cannot own more than one A Mage cannot own more than one 
+Equipment with the same name. Equipment with the same name.
+Some Spells of this School have Effects with Some Spells of this School have Effects with 
+the Restore  keyword. A Mage that resolves 
+Restore Restore  fl ips one of their Exhausted fl ips one of their Exhausted 
+Physical Action Tokens onto the Available side.
+
+2
+
+6
+
+8
+
+8
+
+to summon special Evocations with the 
+ special Archetype. Equipments 
+An Equipment can be targeted as though as 
+ from the Mage who owns it.
+ symbol ignores 
+by Effects that target a 
+An Equipment cannot have Upgrades 
+A Mage cannot own more than one 
+Equipment with the same name.
+Some Spells of this School have Effects with 
+ keyword. A Mage that resolves 
+ fl ips one of their Exhausted fl ips one of their Exhausted 
+onto the Available side.
+War
+
+2
+
+
+to summon special Evocations with the 
+ special Archetype. Equipments 
+An Equipment can be targeted as though as 
+
+An Equipment can be targeted as though as 
+ from the Mage who owns it. from the Mage who owns it.
+ symbol ignores symbol ignores 
+by Effects that target a .
+An Equipment cannot have Upgrades An Equipment cannot have Upgrades 
+A Mage cannot own more than one 
+Some Spells of this School have Effects with 
+ keyword. A Mage that resolves 
+ fl ips one of their Exhausted fl ips one of their Exhausted 
+onto the Available side.
+War
+
+6
+ symbol ignores 
+Some Spells of this School have Effects with Some Spells of this School have Effects with 
+A Mage cannot own more than one A Mage cannot own more than one 
+ keyword. A Mage that resolves keyword. A Mage that resolves 
+ fl ips one of their Exhausted fl ips one of their Exhausted 
+onto the Available side.
+War
+
+8
+
+8
+Famine Marasmus Marasmus 
+Gluttony Gluttony Some Spells of this School have Effects with 
+Gluttony Some Spells of this School have Effects with Glutony Some Spells of this School have Effects with Glutony       Marcescent Stocks Marcescent Stocks keyword. A Mage that resolves 
+Marcescent Stocks keyword. A Mage that resolves Marcescent Stocks keyword. A Mage that resolves 
+    Hunger Bites Hunger Bites Hunger Bites  fl ips one of their Exhausted fl ips one of their Exhausted Hunger Bites fl ips one of their Exhausted 
+onto the Available side.
+Hunger Bites      
+Quicksand onto the Available side.      
+Pollute      
+Intoxication   
+WarCatastrophe Catastrophe 
+Catastrophe 
+Hailstorm       
+Wither 8
+Wither8            
+Sand Devil 8      
+Flood      
+Rotten   
+Acid Rain      
+
+4
+
+4
+
+6
+
+5
+
+2 An Equipment can be targeted as though as 
+ symbol ignores 
+.
+An Equipment cannot have Upgrades 
+ symbol ignores 
+Add these cards to the Evocation 
+Cards Deck of the core game.
+Add these cards to the Evocation 
+Cards Deck of the core game.
+6 PESTIS EVOCATION 
+CARDS
+19 EVOCATION 
+CARDS
+Beast
+Pestis 1 0 1
+This card does not occupy an Evocation Slot, and represents 
+each Pestis under your control. Pestis Evocations do not count towards the limit of Evocations you can own. under your control. 
+When it performs a , assign 1 Infectio to the target Model. After it has performed a 
+When it performs a , assign 1 
+, remove the Infectio Pestis.
+When it is defeated or removed, before removing its Model from the Lodge, choose one:
+• Assign 1 Infectio on a  from it.
+• Place 1 in a  from it.
+Beast
+Pestis
+Equipment
+Crimson Whip
+Equipment 4 Trophy Belt 
+When a Mage is placed in their 
+Cell (including yourself ), place 
+1 of your  on this card.
+When there are 3 or more 
+on this card, discard them.
+If you do, remove Trophy Belt. Gain 3.
+
+. 
+. 
+Pestilentia
+Place 2 Summon 
+. activates She 
+Violent Epidemic    
+Violent Epidemic
+   
+Place 5 Place 5.
+Each  in the target Room in the target Room in the target Room 
+loses 2 loses 2.
+18 COMPETITIVE 
+EVENT CARDS
+When a Mage is placed in their 
+Cell, the 
+0
+Action Phase
+Funeral
+When a Mage is placed in their 
+ gains 2.
+3
+Action Phase
+Funeral
+These sleeves are ideal for 
+playing in Tournament Mode; 
+they can be used for your Library 
+and Forgotten Spells Deck.
+These Customizable Mage Cards 
+are fi lled out to create your own 
+Mage in Tournament Mode.
+Mage Cards are used in standard games. The Apocalypse Mage Card 
+side is used in Apocalypse Mode.
+In Apocalypse Mode and 
+Tournament Mode, these 
+Event Cards replace the core 
+game ones. Add these cards to the Forgotten 
+Spells Deck of the core game.
+
+=== PAGE 5 ===
+Bellum
+Mors
+Fames
+Pestilentia
+10 Pestis These tokens can be used in 
+Tournament Mode.
+: discard 3. If you do search 
+in your Personal Library and add it to your 
+for 1
+Hand, then shuffl e your Personal Library.
+ Black Rose Room
+6 3 1
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library. in your Personal Library and add it to your 
+
+Hand, then 
+6 
+ your Personal Library.
+3 
+ your Personal Library.
+ Black Rose Room
+: discard 2. If you do search for 1
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library.
+6 LARGE MAGE BASES
+1 for each color (6 colors)
+These tokens can be used in 
+2 ACTIVATION 
+TOKENS
+5
+
+=== PAGE 6 ===
+Follow these directions to use the Apocalypse components in a 
+standard Black Rose Wars game:
+• Bellum, Fames, Mors and Pestilentia can be chosen as a 
+Mage during step 8 of the Setup described in the core 
+game rulebook. The player using one of these Mages must 
+use the matching Mage Card on its standard side.
+
+F AMES
+ 11
+ 7
+ 2
+ 2
+ 2
+
+Standard Game
+• You can change one or more of the Schools of Magic 
+featured in the core game with the Schools of Famine, 
+War, Death and Pestilence during step 9 of the Setup 
+described in the core game rulebook.
+• During step 9 of the Setup described in the core game 
+rulebook, if one or more Mages were chosen among 
+Bellum, Fames, Mors and Pestilentia in step 8 , remove 
+the following cards from the Forgotten Spells deck:
+○ Bellum: the Epic Finale Forgotten Spell cannot be added.
+○ Fames: the Denutrition Forgotten Spell cannot be added.
+○ Mors: the Requiem Forgotten Spell cannot be added.
+○ Pestilentia: the Violent Epidemic Forgotten Spell cannot 
+be added.
+Merneptah unleashed the plagues in Egypt.
+A leader for many, famine for others.
+The Black Rose chose him to be one of her Horsemen of the 
+Apocalypse, Famine.
+"And when the Lamb opened the third seal, I heard the 
+third living creature say, “Come!” Then I looked and 
+saw a black horse, and its rider held in his hand a pair of 
+scales."
+Revelation 6:5
+6
+
+=== PAGE 7 ===
+• Replace the Events Decks of each Moon Phase with the 
+matching Competitive Events Deck during step 7 of the 
+Setup.
+When a Mage is placed in their 
+Cell, the 
+0
+Action Phase
+Funeral
+When a Mage is placed in their 
+ gains 2.
+3
+Action Phase
+Funeral
+• Only Bellum, Fames, Mors and Pestilentia can be selected 
+as a Mage during step 8 of the Setup described in the core 
+game rulebook. When using one of these Mages, the player 
+must use the matching Apocalypse Mage Card.
+ P ESTILENTIA
+
+ Horde
+ Dominion
+Apocalypse Mode can be used as an introduction to the Tournament Mode (see next page): it is recommended to play at least one 
+game of this mode before tackling Tournament Mode. 
+Apocalypse Mode allows games to be played by 2 to 4 players. Each player must choose a Horseman of the Apocalypse as their Mage, 
+and will gain access exclusively to the School of Magic matched to them.
+A p oca ly ps e Mod e
+Game Setup for Apocalypse Mode
+• Do not form the Library during step 9 of the Setup 
+described in the core game rulebook. Instead, each player 
+obtains the School of Magic Deck associated with their 
+Mage as shown below and places it next to themself:
+○ Bellum: War
+○ Fames: Famine
+○ Mors: Death
+○ Pestilentia: Pestilence
+• During step 9 of the Setup described in the core game 
+rulebook, remove the Epic Finale, Denutrition, Requiem and 
+Violent Epidemic Cards from the Forgotten Spells deck.
+game rulebook. When using one of these Mages, the player 
+Apocalypse Mage Card.
+
+
+
+
+
+
+ESTILENTIA
+
+10
+6
+2
+2
+2
+A game in Apocalypse Mode uses all the standard rules of the 
+core game, save for the following.
+FEATS
+In Apocalypse mode, each Mage has Feats, listed on their Mage 
+Card. A Feat changes certain rules of the game for the Mage 
+who has it. The list of Feats and their detailed explanation can 
+be found on page 9.
+LIBRARY
+There is no shared Library; instead, each player has their own 
+Personal Library, consisting solely of the deck obtained by the 
+Mage during step 9 of the Setup.
+Apocalypse Game Rules
+Any Eff ect that would direct a Mage to draw cards from the 
+Library instead causes that Mage to draw cards from their 
+Personal Library. Eff ects that allow Forgotten Spell Cards to be 
+drawn, on the other hand, follow the standard rules.
+USING THE OPTIONS
+Tournament Mode Options, shown on page 11, can also be 
+used freely in Apocalypse Mode.
+7
+
+=== PAGE 8 ===
+The fi rst step in playing in Tournament 
+Mode is to create your own Mage. To 
+do this, use a Customizable Mage Card 
+provided in this box. If you run out of 
+them, you can download them for free at 
+the Rebirth link on our website:
+https://bit.ly/BRWR-Apocalypse
+At the beginning of their formation, a Mage has the following 
+values for their starting Characteristics:
+
+
+
+
+
+
+ 9 10 11 12
+ 9
+5
+1
+1
+1
+Feats aff ect the rules of the game for the Mage who has them, 
+and are acquirable during its creation. Each Feat alters or adds 
+for the Mage who gains it a special rule, stated in its description, 
+or gives them new Physical Actions to use by exhausting their 
+Physical Action Tokens. 
+Feats
+A Feat can be acquired by a Mage by spending Creation Points 
+as shown in the chart on the following page. 
+Please note: each Feat can be acquired only once.
+Creating a Mage
+For each individual Characteristic value you want to increase, 
+you need to spend the corresponding Creation Points as shown 
+in the chart below:
+Starting 
+Characteristics 
+values
+COST IN CREATION POINTS
+1 2 3 4 5
+ 9 10 11 12
+ 5 6 7 8 9 10
+ 1 2 3
+ 1 2 3
+ 1 2 3 4
+After choosing how to spend Creation Points to change the 
+Mage's Characteristics, the new values should be noted on the 
+Customizable Mage Card.
+To create a Mage and Personal Library, a player has 10 Creation 
+Points available; the player can spend all or some of these points 
+to improve their Mage's Characteristics values and acquire 
+Feats that will provide them with new and powerful options.
+Creation Points
+In Tournament Mode, each player can create the Mage of their dreams and their 
+Personal Library through a points system that balances their potential.
+Tournament Mode
+Creating a Mage
+MAGE MODEL
+To represent your Mage in the Lodge, you can choose any 
+Mage Model from Black Rose Wars.
+8
+
+=== PAGE 9 ===
+FEATS LIST
+Creation 
+Points FEAT
+3
+Channeling (Physical Action, )
+• Move 1. You can perform this Eff ect a number of times equal to your Speed value . Each separate Movement, 
+separated by a period (.) counts as a diff erent Eff ect; you can use all or part of them, but you cannot use other 
+Eff ects between them. Unused Movements are lost.
+• Place 1 in a .
+• Place 1 in a  other than the Room you are in.
+3
+Charge (Physical Action, ) 
+• Move 1. You can perform this Eff ect a number of times equal to your Speed value . Each separate Movement, 
+separated by a period (.) counts as a diff erent Eff ect; you can use all or part of them, but you cannot use other 
+Eff ects between them. Unused Movements are lost.
+• Perform  on a .
+6
+Teleportation (Physical Action, )
+• Place yourself in a .
+• Activate a .
+2
+Study (Physical Action, )
+• Draw 1 from your Personal Library.
+• Activate a .
+3
+Dominion (Physical Action, )
+Choose one of your . It activates. It has 1 for the duration of this Activation. At the end of the 
+Activation the  infl icts 1 on it.
+2 Horde 
+At the beginning of the Cleanup Phase, heal all  suff ered by your Evocations.
+1
+Creator 
+You can include in your Personal Library up to three copies of a single Mage's Personal Spell (instead of 
+none).
+1 Belligerent 
+You can include up to 21  Spell Cards in your Personal Library (instead of 15).
+1 Pacifi st 
+You can include up to 21  Spell Cards in your Personal Library (instead of 15).
+1 Incautious 
+You may include 0 or more  Spell Cards (instead of at least 3) in your Personal Library.
+1 Pragmatic 
+You may include 0 or more  Spell Cards (instead of at least 3) in your Personal Library.
+2 Trimagic 
+You can include Spell Cards from up to 3 diff erent Schools of Magic in your Personal Library (instead of 2).
+1
+Builder 
+You can include up to 21 Spell Cards displaying the  symbol in the center in your Personal Library (instead 
+of 18).
+Once the Feats for the Mage have been chosen, they are to be 
+noted on the Customizable Mage Card. There are three types of 
+Feats, each denoted by a diff erent symbol: 
+Physical Action , Library , Trait .
+ PHYSICAL ACTION FEATS
+This type of Feat grants new Physical Actions. For a full 
+explanation of how Physical Actions work, see page 24 of the 
+core game rulebook.
+ LIBRARY FEATS
+This type of Feat changes the creation parameters of the Personal 
+Library.
+ TRAIT FEATS
+These Feats change a game rule or give the Mage access to a 
+special rule.
+FEATS LIST
+FEAT
+Channeling (Physical Action, )
+Move 1. You can perform this Eff ect a number of times equal to your Speed value . Each separate Movement, 
+separated by a period (.) counts as a diff erent Eff ect; you can use all or part of them, but you cannot use other 
+Eff ects between them. Unused Movements are lost.
+Place 1 in a .
+1 in a  other than the Room you are in.
+Charge (Physical Action, ) 
+Move 1. You can perform this Eff ect a number of times equal to your Speed value . Each separate Movement, 
+separated by a period (.) counts as a diff erent Eff ect; you can use all or part of them, but you cannot use other 
+Eff ects between them. Unused Movements are lost.
+Perform  on a .
+Teleportation (Physical Action, )
+yourself in a .
+Activate a .
+Study (Physical Action, )
+Draw 1 from your Personal Library.
+Activate a .
+Dominion (Physical Action, )
+Choose one of your . It activates. It has 1 for the duration of this Activation. At the end of the 
+Activation the  infl icts 1 on it.
+
+At the beginning of the Cleanup Phase, heal all  suff ered by your Evocations.
+
+You can include in your Personal Library up to three copies of a single Mage's Personal Spell (instead of 
+Belligerent 
+You can include up to 21  Spell Cards in your Personal Library (instead of 15).
+
+You can include up to 21  Spell Cards in your Personal Library (instead of 15).
+Incautious 
+You may include 0 or more  Spell Cards (instead of at least 3) in your Personal Library.
+Pragmatic 
+You may include 0 or more  Spell Cards (instead of at least 3) in your Personal Library.
+Trimagic 
+You can include Spell Cards from up to 3 diff erent Schools of Magic in your Personal Library (instead of 2).
+
+You can include up to 21 Spell Cards displaying the  symbol in the center in your Personal Library (instead 
+Once the Feats for the Mage have been chosen, they are to be 
+noted on the Customizable Mage Card. There are three types of 
+Feats, each denoted by a diff erent symbol: 
+, Library , Trait .
+ PHYSICAL ACTION FEATS
+This type of Feat grants new Physical Actions. For a full 
+explanation of how Physical Actions work, see page 24 of the 
+ LIBRARY FEATS
+This type of Feat changes the creation parameters of the Personal 
+Library.
+ TRAIT FEATS
+These Feats change a game rule or give the Mage access to a 
+special rule.
+9
+
+=== PAGE 10 ===
+Tournament Mode games use the rules of the core game, save 
+for the following:
+CHANGE OF MOON
+Mages do not gain the Personal Spell Card upon the change of 
+Moon.
+Tournament Game
+Once the player has created their Mage, they must create their 
+Personal Library. 
+The choice of Spell Cards to include in the personal Library 
+must meet the following building rules, which can be modifi ed 
+by Library Feats  chosen during the creation of the Mage.
+Creating a Personal Library
+BUILDING RULES
+• The Personal Library must consist of exactly 36 Spell 
+Cards.
+• Spell Cards included in the Personal Library can belong to 
+a maximum of 2 diff erent Schools of Magic.
+• No Personal Spell Cards can be included.
+• A maximum of 3 copies of the same Spell Card can be 
+included.
+• A maximum of 15  Spell Cards can be included.
+• A maximum of 15  Spell Cards can be included.
+• At least 3  Spell Cards must be included.
+• At least 3  Spell Cards must be included.
+• A maximum of 18 Spell Cards displaying the  symbol 
+in their center can be included.
+• The section Creating a Personal Library has been updated 
+in case a Spell Card has 2 diff erent symbols on Light Side 
+and Dark Side.
+• During step 1 of the Setup, arrange the Lodge as shown 
+in the Layout.
+ 
+ 
+• During step 7 replace the Events Deck from each Moon 
+Phase with the corresponding Competitive Events Deck. 
+Unlike what is described in the core game, randomly 
+choose the player who gets the Crown Token () during 
+this step.
+Funeral
+Tournament Mode Game Setup
+• During step 8 players do not choose a Mage, but 
+instead use the Model they chose for their Mage and use 
+the Customizable Mage Card they previously fi lled out.
+• During step 9 of the Setup described in the core game 
+rulebook do not form the Library. Instead, each player 
+places their own Personal Library next to them.
+• During step 10 of the Setup described in the core game 
+rulebook, instead of proceeding as indicated, follow these 
+instructions:
+1. Each Mage shuffl es their Personal Library before drawing 
+seven cards from it and consulting them (these cards will 
+form their Grimoire).
+2. Mulligan: each Mage may take a mulligan one single 
+time, proceeding as follows:
+• They pick any number of drawn cards and set them 
+aside, forming the mulligan pile.
+• They draw cards from their Library until they have a 
+hand of seven.
+• Shuffl e the mulligan pile into the Personal Library.
+3. Each Mage shuffl es the seven drawn cards and uses them 
+to form their Grimoire; they place it to the left of their 
+Mage Sheet, in the Grimoire Slot (), then take the 
+fi rst card of the Grimoire and place it revealed in the 
+Memories Slot of their Mage Sheet ().
+D R AW I N G S P E L L CA R D S
+Any Eff ect that would direct a Mage to draw cards from the 
+Library instead causes that Mage to draw cards from their 
+Personal Library. The normal rules apply to Eff ects that allow 
+you to draw Forgotten Spell Cards instead.
+Tournament Mode games use the rules of the core game, save 
+for the following:
+CHANGE OF MOON
+Mages do not gain the Personal Spell Card upon the change of 
+Moon.
+Tournament Game
+Once the player has created their Mage, they must create their 
+Personal Library. 
+The choice of Spell Cards to include in the personal Library 
+must meet the following building rules, which can be modifi ed 
+by Library Feats  chosen during the creation of the Mage.
+Creating a Personal Library
+BUILDING RULES
+• The Personal Library must consist of exactly 
+Cards.
+• Spell Cards included in the Personal Library can belong to 
+a maximum of 2 diff erent Schools of Magic
+• No Personal Spell Cards can be included.
+• A maximum of 3 copies of the same Spell Card
+included.
+• A maximum of 15  Spell Cards
+• A maximum of 15  Spell Cards
+• At least 3  Spell Cards must be included.
+• At least 3  Spell Cards must be included.
+• A maximum of 18 Spell Cards displaying the 
+in their center can be included.
+• The section Creating a Personal Library has been updated 
+in case a Spell Card has 2 diff erent symbols on Light Side 
+and Dark Side.
+• During step 1 of the Setup, arrange the Lodge as shown 
+in the Layout.
+ 
+ 
+• During step 7 replace the Events Deck from each Moon 
+Phase with the corresponding Competitive Events Deck. 
+Unlike what is described in the core game, randomly 
+choose the player who gets the Crown Token () during 
+this step.
+When a Mage is placed in their 
+Cell, the 
+0
+Action Phase
+Funeral
+When a Mage is placed in their 
+ gains 2
+Action Phase
+Funeral
+Tournament Mode Game Setup
+• During step 8 players do not choose a Mage
+instead use the Model they chose for their Mage and use 
+the Customizable Mage Card they previously fi lled out.
+• During step 9 of the Setup described in the core game 
+rulebook do not form the Library. Instead, each player 
+places their own Personal Library 
+• During step 10 of the Setup described in the core game 
+rulebook, instead of proceeding as indicated, follow these 
+instructions:
+1. Each Mage shuffl es their Personal Library before drawing 
+seven cards from it and consulting them (these cards will 
+form their Grimoire).
+2. Mulligan: each Mage may take a mulligan one single 
+time, proceeding as follows:
+• They pick any number of drawn cards and set them 
+aside, forming the mulligan pile.
+• They draw cards from their Library until they have a 
+hand of seven.
+• Shuffl e the mulligan pile into the Personal Library.
+3. Each Mage shuffl es the seven drawn cards and uses them 
+to form their Grimoire; they place it to the left of their 
+Mage Sheet, in the Grimoire Slot (
+fi rst card of the Grimoire and place it revealed in the 
+Memories Slot of their Mage Sheet (
+D R AW I N G S P E L L CA R D S
+Any Eff ect that would direct a Mage to draw cards from the 
+Library instead causes that Mage to draw cards from 
+Personal Library. The normal rules apply to Eff ects that allow 
+you to draw Forgotten Spell Cards instead.
+10
+
+=== PAGE 11 ===
+This chapter introduces a number of options that modify the 
+rules of the core game. 
+By choosing one or more of these options to apply to your 
+games in Tournament Mode, you will defi ne your Tournament 
+Tournament Format
+PLENTIFUL QUESTS
+During step 5 of the Black Rose Phase, each Mage who is to 
+draw 1 Quest Card draws 2 instead, chooses one of them to add 
+to their Active Quests, and places the other at the bottom of the 
+Quest Card Deck of the current Moon.
+CROWN OF THE SUMMONER
+Follow the optional rule indicated on page 30 of the core game 
+rulebook, with the following exceptions:
+• All Evocations under the Black Rose's control activate 
+before the fi rst Evocation activated by the First Player.
+• In the case of Evocation Models which are not paired to 
+a specifi c Evocation Card (such as Pestis), indicate their 
+activation by placing one of your unused Tokens (e.g. 
+Protection/Trap, Trophy, Persistent) next to the Model; 
+remove this Token during step 1 of the next Cleanup 
+Phase.
+QUICK STUDY
+Replace the rules of the Study Phase with the following: 
+In the Study Phase each Mage performs these steps:
+• Draw 2 Spell Cards from your own Grimoire. 
+• Draw 2 Spell Cards from your own Personal Library.
+• If they have more Spell Cards in their hand than their Hand 
+Value (), they discard cards to their Memories until they 
+have a number equal to their Hand Value.
+When all the Mages have performed these points, the Study 
+Phase ends.
+Options
+MAGIC TUTOR
+The Forgotten Spell Deck is not used in games where this 
+option is applied: remove it from the game. During game setup, 
+place the Activation Token A on the Black Rose Room. This 
+token is not turned to the Exhausted side (it does not have it) 
+when a Mage activates the Black Rose Room.
+If the Black Rose Room is rebuilt, remove the A Token and 
+place the Activation Token B on the Room. This token is
+turned to the Exhausted side when a Mage activates the Black 
+Rose Room.
+When this option is used, if a Mage has a chance to gain a 
+Forgotten Spell for any reason (Eff ect of a Spell, Eff ect of a 
+Quest, etc.), they do not gain it; instead, they search for a Spell 
+Card from their Personal Library and add it to their Hand, then 
+shuffl e the Personal Library.
+: discard 3. If you do search for 1
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library.
+ Black Rose Room
+6 3 1
+ Black Rose Room : discard 2. If you do search for 1
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library.
+A B
+INSTINCTIVE SPELL
+During the Preparation Phase, Mages do not place any Spell 
+Cards in the Quick Spell slot.
+During their Activation, when a Mage uses the Cast a Spell 
+Action, they may place a Spell Card from their Hand in the 
+Quick Spell slot in the Ready (covered) position. If they do, 
+they must use the Cast a Spell Action to reveal (or activate, 
+in the case of Trap or Protection Spells) the Spell in the Quick 
+Spell slot.
+Format, through which you can disclose to all participants the 
+variations from the core game.
+New options and Tournament Formats will be released over 
+time, and will be available in the game app (see p. 12).
+This chapter introduces a number of options that modify the 
+By choosing one or more of these options to apply to your 
+games in Tournament Mode, you will defi ne your Tournament 
+Tournament Format
+PLENTIFUL QUESTS
+Black Rose Phase, each Mage who is to 
+ draws 2 instead, chooses one of them to add 
+to their Active Quests, and places the other at the bottom of the 
+Quest Card Deck of the current Moon.
+CROWN OF THE SUMMONER
+Follow the optional rule indicated on page 30 of the core game 
+rulebook, with the following exceptions:
+All Evocations under the Black Rose's control activate 
+before the fi rst Evocation activated by the First Player.
+In the case of Evocation Models which are not paired to 
+a specifi c Evocation Card (such as Pestis), indicate their 
+activation by placing one of your unused Tokens (e.g. 
+Protection/Trap, Trophy, Persistent) next to the Model; 
+remove this Token during step 1 of the next Cleanup 
+Study Phase with the following: 
+In the Study Phase each Mage performs these steps:
+2 Spell Cards from your own Grimoire. 
+ 2 Spell Cards from your own Personal Library.
+If they have more Spell Cards in their hand than their Hand 
+), they discard cards to their Memories until they 
+have a number equal to their Hand Value.
+When all the Mages have performed these points, the Study 
+MAGIC TUTOR
+The Forgotten Spell Deck is not used in games where this 
+option is applied: remove it from the game. During game setup, 
+place the Activation Token A on the Black Rose Room. This 
+token is not turned to the Exhausted side (it does not have it) 
+when a Mage activates the Black Rose Room.
+If the Black Rose Room is rebuilt, remove the A Token and 
+place the Activation Token B on the Room. This token is
+turned to the Exhausted side when a Mage activates the Black 
+Rose Room.
+When this option is used, if a Mage has a chance to gain a 
+Forgotten Spell for any reason (Eff ect of a Spell, Eff ect of a 
+Quest, etc.), they do not gain it; instead, they search for a Spell 
+Card from their Personal Library and add it to their Hand, then 
+shuffl e the Personal Library.
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library.
+: discard 3. If you do search for 1
+in your Personal Library and add it to your 
+: discard 3. If you do search for 1
+ Black Rose Room : discard 3. If you do search for 1
+
+Hand, then 
+6 
+ your Personal Library.
+3 
+ your Personal Library.
+1
+ Black Rose Room : discard 2
+Black Rose Room
+. If you do search for 1
+in your Personal Library and add it to your 
+Hand, then shuffl e your Personal Library.
+
+A
+
+B
+INSTINCTIVE SPELL
+During the Preparation Phase, Mages do not place any Spell 
+Cards in the Quick Spell slot.
+During their Activation, when a Mage uses the Cast a Spell 
+Action, they may place a Spell Card from their Hand in the 
+Quick Spell slot in the Ready (covered) position. If they do, 
+they must use the Cast a Spell Action to reveal (or activate, 
+in the case of Trap or Protection Spells) the Spell in the Quick 
+Spell slot.
+Format, through which you can disclose to all participants the 
+variations from the core game.
+New options and Tournament Formats will be released over 
+time, and will be available in the game app (see p. 12).
+11
+
+=== PAGE 12 ===
+Black Rose Wars Apocalypse v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+RULES UPDATES
+LIMITED AND BANNED SPELL CARDS
+The Personal Library can include any Spell Card taken from 
+the Schools of the Black Rose Wars: Rebirth core box and the 
+Apocalypse expansion. 
+New Schools will be added to those available for Tournament 
+Mode.
+The updated list of Spell Cards Restricted and Banned from 
+Offi cial Tournaments can be found on our website.
+RULES
+The Tournament Mode Rules included with this rulebook 
+are meant to be current as of the date of printing and 
+may not accurately refl ect the current state of the game. 
+We recommend that you always consult the updated 
+Tournament Mode Rules on our website in order to always 
+have the most up-to-date information and avoid showing up 
+at a Tournament with unusable material.
+https://bit.ly/BRWR-Apocalypse
+Rebecca was a fl ame burning full of life.
+But like any fi re, she was destined to die out.
+Through her enormous strength, she came to terms with the 
+Black Rose, and in a kind of immortality, she is now Death.
+"Then I looked and saw a pale green horse. Its rider’s 
+name was Death, and Inferno followed close behind. 
+And they were given authority over a fourth of the 
+earth, to kill by sword, by famine, by plague, and by the 
+beasts of the earth."
+Revelation 6:8

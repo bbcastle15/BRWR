@@ -113,9 +113,7 @@ static func relative_room_effect(game, caster: int, effect: Dictionary, context:
 			ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, str(options[i].room_id)))
 		return true
 	var key := "famine_relative_room"
-	if options.size() == 1:
-		context[key] = str(options[0].room_id)
-	elif not DruidicRules.choose(game, caster, context, key, options, "Choose a Room within %s of the target." % str(effect.get("range", 0)), false, "secondary_room"):
+	if not DruidicRules.choose(game, caster, context, key, options, "Choose a Room within %s of the target." % str(effect.get("range", 0)), false, "secondary_room"):
 		return false
 	var room_id: String = str(context.get(key, ""))
 	context.erase(key)

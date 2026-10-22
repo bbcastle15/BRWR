@@ -1,0 +1,1000 @@
+
+=== PAGE 1 ===
+Antiquities
+
+=== PAGE 2 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+2
+
+=== PAGE 3 ===
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar — Parcae ...................................................8
+Avatar Card Anatomy .................................................................................8
+Parcae Setup .......................................................................................................8
+Avatar Special Rules — Parcae ...........................................9
+Avatar Skills — Parcae ........................................................9
+Parcae Priority ..................................................................................................9
+Avatar — Cacus ...................................................10
+Avatar Card Anatomy ............................................................................... 10
+Cacus Setup ...................................................................................................... 10
+Cacus Priority ................................................................................................. 10
+Avatar Special Rules — Cacus ............................................11
+Avatar Skills — Cacus ........................................................11
+Legendary Scenario: Strands of Destiny ..............12
+Additional Setup .................................................................12
+Scenario Rules .....................................................................12
+Honorable Mention ...........................................................13
+Lodge Layouts ....................................................................13
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar — Parcae ...................................................8
+Avatar Card Anatomy .................................................................................8
+Parcae Setup .......................................................................................................8
+Avatar Special Rules — Parcae ...........................................9
+Avatar Skills — Parcae ........................................................9
+Parcae Priority ..................................................................................................9
+Avatar — Cacus ...................................................10
+Avatar Card Anatomy ............................................................................... 10
+Cacus Setup ...................................................................................................... 10
+Cacus Priority ................................................................................................. 10
+Avatar Special Rules — Cacus ............................................11
+Avatar Skills — Cacus ........................................................11
+Legendary Scenario: Strands of Destiny ..............12
+Additional Setup .................................................................12
+Scenario Rules .....................................................................12
+Honorable Mention ...........................................................13
+Lodge Layouts ....................................................................13
+3
+
+=== PAGE 4 ===
+During step 9 of the Setup you can replace 
+one of the Schools of Magic present in the 
+core game with the Oracle School.
+Game Components
+1 MAGE CARD
+
+36 ORACLE SPELL 
+CARDS
+
+
+Pneuma
+Pneuma
+  
+  
+
+
+Pneuma
+Pneuma
+  
+  
+1 SCHOOL REFERENCE 
+CARD
+Cassandra can be chosen as a Mage during 
+step 8 of the Setup described in the core 
+game rulebook.
+
+2
+
+4
+
+4
+
+5
+
+6
+
+2
+
+4
+
+4
+
+5
+
+6
+3 PERSONAL SPELL 
+CARDS
+Pythia of Delphi
+  
+Pythia of Delphi
+  
+During step 9 of the Setup you can replace 
+one of the Schools of Magic present in the 
+core game with the Oracle School.
+Game Components
+1 MAGE CARD
+
+C ASSANDRA
+
+ 11
+
+
+ 7
+2
+2
+2
+
+36 ORACLE SPELL 
+CARDS
+
+
+ Pneuma
+Prophecy 
+Prophecy.
+Look at 2 from a single deck from a single deck from a single deck 
+of the Library, add one of those of the Library, add one of those of the Library, add one of those 
+cards to your Hand and cards to your Hand and cards to your Hand and discard
+the other one. the other one. the other one.
+  
+ the other one. the other one. the other one.
+
+ Pneuma
+.  
+. 
+heal 2 : 
+or
+Heal 2 Revelation
+  
+1 SCHOOL REFERENCE 
+CARD
+Cassandra can be chosen as a Mage during 
+step 8 of the Setup described in the core 
+game rulebook.
+
+Some Spells of this school have the Prophecy keyword. When a Mage resolves an Effect with 
+Prophecy, they reveal cards from the top of the current Moon Event Deck until they 
+reveal a non-Instant card. That Mage places that card on the Event Board as if it had just 
+
+that card on the Event Board as if it had just 
+been drawn, on the slot that they prefer (even been drawn, on the slot that they prefer (even 
+if occupied). If they do, that Mage if occupied). If they do, that Mage does not get 
+if occupied). If they do, that Mage if occupied). If they do, that Mage the  and the  if occupied). If they do, that Mage  if occupied). If they do, that Mage does not gain due to that Event nor due to Events that are due to that Event nor due to Events that are 
+discarded in this way. discarded in this way.
+Shuffl e any Shuffl e any non-Instant cards revealed into the current Moon Event Deck. the current Moon Event Deck.
+Some Spells of this school have the Some Spells of this school have the 
+Revelation Revelation keyword. When a Mage reveals a Spell with the a Spell with the Revelation keyword (before 
+resolving its Effect) they can resolving its Effect) they can discard Events as they like from the Event Board. Events as they like from the Event Board.
+If they do, If they do, Revelation is added to the Spell is added to the Spell Effect a number of times equal to the number 
+of Events discarded due to that Effect. The 
+does not gain  due to Events discarded in 
+this way.
+Oracle
+
+2
+
+
+of the current Moon Event Deck until they -Instant card. That Mage places that card on the Event Board as if it had just 
+
+that card on the Event Board as if it had just 
+been drawn, on the slot that they prefer (even does not does not gain due to that Event nor due to Events that are 
+-Instant cards revealed into 
+Some Spells of this school have the keyword. When a Mage reveals keyword (before 
+discard Events as they like from the Event Board. is added to the Spell is added to the Spell Effect a number of times equal to the number 
+of Events discarded due to that Effect. The due to Events discarded in 
+Oracle
+
+4
+
+of the current Moon Event Deck until they -Instant card. That Mage places that card on the Event Board as if it had just 
+
+that card on the Event Board as if it had just 
+been drawn, on the slot that they prefer (even been drawn, on the slot that they prefer (even does not does not does not gain  due to that Event nor due to Events that are due to that Event nor due to Events that are 
+-Instant cards revealed into -Instant cards revealed into 
+Some Spells of this school have the keyword. When a Mage reveals keyword (before 
+discard as many Events as they like from the Event Board. is added to the Spell is added to the Spell Effect a number of times equal to the number 
+of Events discarded due to that Effect. The due to Events discarded in 
+Oracle
+
+4
+
+4
+Some Spells of this school have the Some Spells of this school have the 
+ keyword. When a Mage reveals keyword. When a Mage reveals keyword (before keyword (before as many as many Events as they like from the Event Board. is added to the Spell is added to the Spell Effect a number of times equal to the number 
+of Events discarded due to that Effect. The  due to Events discarded in 
+Oracle
+
+4
+
+5
+
+6
+Dark Pitfalls Dark Pitfalls Some Spells of this school have the 
+Dark Pitfalls Some Spells of this school have the 
+Dark Pitfalls Some Spells of this school have the keyword. When a Mage reveals 
+Dark Pitfalls keyword. When a Mage reveals Dark Pitfalls keyword. When a Mage reveals keyword (before Dark Pitfalls keyword (before Dark Pitfalls keyword (before Dark Pitfalls Pneuma as many Pneuma as many Pneuma as many Pneuma       Sisyphus' Lie Sisyphus' Lie Events as they like from the Event Board. Sisyphus' Lie Events as they like from the Event Board. is added to the Spell 
+Sisyphus' Lie is added to the Spell Sisyphus' Lie is added to the Spell      
+Poisoned Words  is added to the Spell is added to the Spell Poisoned Words is added to the Spell Effect a number of times equal to the number Poisoned Words      
+Misfortune Effect a number of times equal to the number 
+of Events discarded due to that Effect. The  due to Events discarded in   
+Nefarious Prophecy due to Events discarded in Nefarious Prophecy   
+Mists over Tomorrow      
+OracleLiberation Liberation 
+Liberation 
+Prepare       
+6      
+Apollonian Brazier 5 Apollonian Brazier 6      
+Thyrsus 5
+   
+Thirst for Knowledge      
+Purifi cation      
+Omphalos      
+Oracle
+
+2
+
+4
+
+4
+
+5
+
+6
+does not  due to that Event nor due to Events that are 
+-Instant cards revealed into 
+3 PERSONAL SPELL 
+CARDS
+Pythia of Delphi
+  
+Heal 4.
+Prophecy. 
+Prophecy. 
+
+Pythia of Delphi
+  
+. It Aruspice an Summon
+. activates
+. It Aruspice an Summon
+. activates
+4
+
+=== PAGE 5 ===
+Game Components
+3 FORGOTTEN 
+SPELL CARDS
+Beast
+Aruspice
+2 1 2 Beast
+Aruspice
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+5 EVOCATION 
+CARDS
+Add these cards to the 
+Evocation Deck of the 
+core game.
+This Room (and its associated 
+Activation Token) can be used 
+in any game to replace the 
+Arena Room in the core game.
+Beast — Forgotten
+Grypas
+Beast 2 2 6 Forgotten
+Grypas
+3 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+1 LUDUS ARENA 
+ROOM
+1 ROOM 
+ACTIVATION 
+TOKEN
+3 FORGOTTEN 
+SPELL CARDS
+Ruling the Heavens
+  
+under your activates The target 
+under activates control. The target 
+activates your control. The target 
+under your control.
+or
+ Gain 4
+
+Ruling the Heavens
+  
+Summon Grypas.
+It activates.
+.  Gain 4
+
+
+Aruspice
+Beast
+2 1 2
+Aruspice has 1
+for each Event Card on the 
+Event Board.
+Beast
+Aruspice
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+5 EVOCATION 
+CARDS
+Add these cards to the 
+Evocation Deck of the 
+core game.
+This Room (and its associated 
+Activation Token) can be used 
+in any game to replace the 
+Arena Room in the core game.
+Beast — Forgotten
+Grypas
+2 2 6
+Grypas and your other 
+Evocations in each  from 
+Grypas have 1 for each 
+Event on the Event Board.
+Beast
+Forgotten
+Grypas
+3 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+This Room (and its associated 
+1 LUDUS ARENA 
+ROOM
+ Ludus Arena
+4 2 1
+1 ROOM 
+ACTIVATION 
+TOKEN
+5
+
+=== PAGE 6 ===
+3 AVATAR CARDS
+: if there are no  in the 
+target Room, place 1. 
+If they do not place any  due 
+to this Effect, infl ict 2 to the 
+other Mage(s) with the most .
+Parcae
+:     
+:    
+Ineluctability
+Cacus
+Hunt, Gigantomachia
+30 CACUS 
+COMMAND CARDS
+30 PARCAE 
+COMMAND CARDS
+Cacus
+
+   
+Chokeslam
+
+   
+Spinning
+Parcae
+Avatar Components
+12 FATE TOKENS
+3 AVATAR CARDS
+: if there are no  in the 
+target Room, place 1. 
+If they do not place any  due 
+to this Effect, infl ict 2 to the 
+other Mage(s) with the most .
+Parcae
+ 10
+ 1
+ 2
+Parcae
+Ineluctability
+to this Effect, 
+other Mage(s) with the most 
+Parcae
+Ineluctability
+: converts 1 on each 
+. Infl icts  equal to his 
+ value in a . 
+Cacus
+ 11
+ 3
+ 3
+:    
+Cacus
+Hunt, Gigantomachia
+30 CACUS 
+COMMAND CARDS
+30 PARCAE 
+COMMAND CARDS
+Cacus
+
+ 
+: heals 2.
+. Summons an Aruspice.
+ 
+Chokeslam
+
+  
+: infl icts 1 for each 
+Event on the Event Board.
+
+.
+Infl icts 2.
+.
+Spinning
+ for each 
+Event on the Event Board.
+
+Parcae
+Avatar Components
+12 FATE TOKENS
+6
+
+=== PAGE 7 ===
+Models
+Cassandra Cacus
+Parcae Grypas
+5 Aruspice
+Models
+Cassandra Cacus
+Parcae Grypas
+7
+
+=== PAGE 8 ===
+PARCAE SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Clip the Avatar Base to the Parcae Model.
+• Place the Parcae Model in the Black Rose Room.
+• Remove the Weaving the Destiny card from the Forgotten Spells Deck.
+Avata r — Pa rc a e
+The Parcae are now in the service of the 
+Black Rose, weaving the web of destiny 
+according to her plans. Can you stop them 
+before the pattern is completed?
+Parcae
+Ineluctability
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. The Parcae's Tool is the 
+Fate Token.
+C Avatar Skills:
+ The Parcae have the Avatar Skills 
+explained in detail on page 9.
+AVATAR CARD ANATOMY
+Parcae
+Ineluctability
+Parcae
+Ineluctability
+A
+B
+C
+B
+PARCAE SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Clip the Avatar Base to the Parcae Model.
+• Place the Parcae Model in the Black Rose Room.
+• Remove the Weaving the Destiny card from the Forgotten Spells Deck.
+Avata r — Pa rc a e
+The Parcae are now in the service of the 
+Black Rose, weaving the web of destiny 
+according to her plans. Can you stop them 
+before the pattern is completed?
+Avata r — Pa rc a e
+The Parcae are now in the service of the 
+Black Rose, weaving the web of destiny 
+according to her plans. Can you stop them 
+before the pattern is completed?
+other Mage(s) with the most 
+Parcae
+ 10
+ 1
+ 2
+:     
+:    
+Parcae
+Ineluctability
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. The Parcae's Tool is the 
+Fate Token.
+C Avatar Skills:
+ The Parcae have the Avatar Skills 
+explained in detail on page 9.
+AVATAR CARD ANATOMY
+If they do not 
+to this Effect, 
+other Mage(s) with the most 
+: 
+target Room, place any due 
+infl ict 2 to the 
+other Mage(s) with the most .
+If they do not place
+to this Effect, infl ict 2
+if there are no 
+target Room, 
+If they do not 
+if there are no 
+ due 
+ to the 
+target Room, place
+place any 
+if there are no 
+If they do not 
+if there are no  in the 
+place  if there are no 
+A
+infl ict 2 to the 
+other Mage(s) with the most 
+ due any 
+
+place
+infl ict 2 to the 
+ due any 
+
+place 1B
+C
+B
+8
+
+=== PAGE 9 ===
+When this happens, reveal 
+the top card of the current 
+Moon Avatar Command 
+Cards Deck and resolve the 
+Trap Eff ect of the revealed 
+card, then discard the Fate 
+Token. The target of this Trap Eff ect is 
+always the Room where the Fate Token that 
+triggered it is located.
+Command Cards resolved in this way do not 
+count towards the limit of cards the Avatar 
+must resolve in the Action Phase.
+FATE TOKENS 
+Some Eff ects of Parcae Command Cards 
+place Fate Tokens  in the Rooms. A Room 
+may contain a single Fate Token. If an Eff ect 
+indicates to place a Fate Token in a Room that 
+already has one, or indicates to place one but no 
+Fate Tokens are present in the game pool, no 
+Fate Token is placed.
+TRAP OF FATE
+The back of each Parcae Command Card 
+shows a Trap Activation Token.
+This Trap Eff ect is triggered if another Mage 
+enters a Room with a Fate Token inside. 
+Ineluctability
+If the Parcae begin their Activation in their 
+own Cell, they place themselves in the Black 
+Rose Room before revealing the Command 
+Card.
+Avatar Special Rules — Parcae 
+Avatar Skills — Parcae 
+Parcae
+PARCAE PRIORITY
+:   
+The Parcae choose as a target:
+: the Room with the fewest , if tied...
+ : the closest Room, if tied...
+ : the Room with the fewest Models, if tied, the Choice of the Crown applies.
+   
+The Parcae choose as a target:
+: the Room with the most Models, if tied...
+: the Room with the least , if tied...
+: the closest Room, if tied, the Choice of the Crown applies.
+When this happens, reveal 
+the top card of the current 
+Moon Avatar Command 
+Cards Deck and resolve the 
+Trap Eff ect of the revealed 
+card, then discard the Fate 
+Token. The target of this Trap Eff ect is 
+always the Room where the Fate Token that 
+triggered it is located.
+Command Cards resolved in this way do not 
+FATE TOKENS 
+Some Eff ects of Parcae Command Cards 
+place Fate Tokens  in the Rooms. A Room 
+may contain a single Fate Token. If an Eff ect 
+indicates to place a Fate Token in a Room that 
+already has one, or indicates to place one but no 
+Fate Tokens are present in the game pool, no 
+Fate Token is placed.
+TRAP OF FATE
+The back of each Parcae Command Card 
+shows a Trap Activation Token.
+This Trap Eff ect is triggered if another Mage 
+enters a Room with a Fate Token inside. 
+Ineluctability
+If the Parcae begin their Activation in their 
+own Cell, they place themselves in the Black 
+Rose Room before revealing the Command 
+Card.
+Avatar Special Rules — Parcae 
+Avatar Skills — Parcae 
+Token. The target of this Trap Eff ect is 
+Parcae
+Command Cards resolved in this way do not 
+count towards the limit of cards the Avatar 
+must resolve in the Action Phase.
+PARCAE PRIORITY
+:   
+The Parcae choose as a target:
+: the Room with the fewest , if tied...
+ : the closest Room, if tied...
+ : the Room with the fewest Models, if tied, the Choice of the Crown applies.
+   
+The Parcae choose as a target:
+: the Room with the most Models, if tied...
+: the Room with the least , if tied...
+: the closest Room, if tied, the Choice of the Crown applies.
+9
+
+=== PAGE 10 ===
+CACUS SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• The First Mage places the Cacus Model in a Room adjacent to their Cell.
+• Remove the Titan's Attack card from the Forgotten Spells Deck. 
+• Place the Cacus Avatar Card (not the Enraged Cacus one) on the Avatar Card Slot 
+of the Avatar Board.
+• Place the Enraged Cacus Avatar Card on one side of the table.
+Avata r — C ac u s
+The mighty giant of legends now serves the Black Rose, sowing destruction in the Lodge. 
+Will you survive the wrath of Cacus? Or will there be nothing left of you but dust?
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Skills:
+ Cacus has the Avatar Skills explained 
+in detail on page 11.
+AVATAR CARD ANATOMY
+CACUS PRIORITY
+:       
+Cacus chooses as a target:
+: the Room in which the Mage with the most  is, if tied...
+: the Room with the most Mages, if tied...
+ : the Room with the most Models, if tied...
+ : the closest Room, if tied, the Choice of the Crown applies.
+Cacus
+Hunt, Gigantomachia
+Cacus
+Hunt, Gigantomachia
+A
+B
+CACUS SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• The First Mage places the Cacus Model in a Room adjacent to their Cell.
+• Remove the Titan's Attack card from the Forgotten Spells Deck. 
+• Place the Cacus Avatar Card (not the Enraged Cacus one) on the Avatar Card Slot 
+of the Avatar Board.
+• Place the Enraged Cacus Avatar Card on one side of the table.
+Avata r — C ac u s
+The mighty giant of legends now serves the Black Rose, sowing destruction in the Lodge. 
+Will you survive the wrath of Cacus? Or will there be nothing left of you but dust?
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Skills:
+ Cacus has the Avatar Skills explained 
+in detail on page 11.
+AVATAR CARD ANATOMY
+CACUS PRIORITY
+:       
+Cacus chooses as a target:
+: the Room in which the Mage with the most  is, if tied...
+: the Room with the most Mages, if tied...
+ : the Room with the most Models, if tied...
+ : the closest Room, if tied, the Choice of the Crown applies.
+ Cacus has the Avatar Skills explained 
+ on each 
+ equal to his 
+. 
+Cacus
+ 11
+ 3
+ 3
+:    
+Cacus
+Hunt, Gigantomachia
+ on each 
+ equal to his 
+ value in a 
+: converts 1
+  equal to his 
+ value in a 
+: converts 1
+
+A
+B
+10
+
+=== PAGE 11 ===
+FREGIUM
+Game materials and rules that refer to 
+"Cacus", also refer to Enraged Cacus.
+Avatar Special Rules — Cacus
+Hunt
+If Cacus begins his activation in his own 
+Cell, before revealing the Command Card 
+he places himself in the Room in which the 
+Mage with the most  is. If this Mage is in 
+their own Cell, Cacus places himself in the 
+Black Rose Room.
+Avatar Skills — Cacus 
+ETERNAL STRUGGLE
+When Cacus is defeated, starting from the 
+First Mage, each Mage who has infl icted 
+at least 4 draws 1 from the Forgotten 
+Spells Deck.
+Gigantomachia
+When Cacus is defeated, replace the Cacus 
+card with the Enraged Cacus card. When 
+Enraged Cacus is defeated, replace the 
+Enraged Cacus card with the Cacus card.
+FREGIUM
+Game materials and rules that refer to 
+"Cacus", also refer to Enraged Cacus.
+Avatar Special Rules — Cacus
+Hunt
+If Cacus begins his activation in his own 
+Cell, before revealing the Command Card 
+he places himself in the Room in which the 
+Mage with the most  is. If this Mage is in 
+their own Cell, Cacus places himself in the 
+Black Rose Room.
+Avatar Skills — Cacus 
+ETERNAL STRUGGLE
+When Cacus is defeated, starting from the 
+First Mage, each Mage who has infl icted 
+at least 4 draws 1 from the Forgotten 
+Spells Deck.
+Gigantomachia
+When Cacus is defeated, replace the Cacus 
+card with the Enraged Cacus card. When 
+Enraged Cacus is defeated, replace the 
+Enraged Cacus card with the Cacus card.
+11
+
+=== PAGE 12 ===
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : replace the Arena Room with the Ludus Arena Room.
+• Turn The Abyss, Mirrors Room and Oracle Room so as to show the Rebuilt side. Place the 
+corresponding Room Activation Tokens on these Rooms.
+Once the Setup is complete:
+1. Place the Second Moon Cube on 
+Slot 8, the Third Moon Cube on 
+Slot 21, and the Black Rose Cube 
+on Slot 31 of the Power Board.
+2. Carry out the steps of the Avatar 
+Setup indicated in the core rulebook 
+of the game. The Parcae are the Avatar 
+for this Legendary Scenario.
+3. Starting from the First Mage, each Mage must place 1 Fate Token  in a Room 
+adjacent to their own Cell.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Astral Conjunction: when a Mage triggers a Parcae Trap Eff ect, that Mage must 
+immediately place 1 of their own  on the Parcae Avatar Card.
+• Astral Recovery: When a Mage is defeated, they take all their own  on the Parcae Avatar 
+Card and place them in their own pool.
+• Fortuitous Event: whenever a single Eff ect is to place one or more Fate Tokens, if at least 
+one of those tokens cannot be placed, the Parcae gain 1.
+• Ancient Memories: at the beginning of the Study Phase, any Mage who is in a  draws 
+1 from the Library.
+• Quest Change: If a Mage gains a Quest Card that requires placing  in a  Room 
+to be completed, the Mage may reveal the Quest Card, discard it, and draw a new one.
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Strands of Destiny, the Parcae have come to the Lodge to unveil the fate of the mages 
+who will dare to face their dreadful trials.
+Le g e n d a ry S c e n a r i o : 
+Strands of Destiny
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : replace the Arena Room with the Ludus Arena Room.
+• Turn The Abyss, Mirrors Room and Oracle Room so as to show the Rebuilt side. Place the 
+corresponding Room Activation Tokens on these Rooms.
+Once the Setup is complete:
+1. Place the Second Moon Cube on 
+Slot 8, the Third Moon Cube on 
+Slot 21, and the Black Rose Cube 
+on Slot 31 of the Power Board.
+2. Carry out the steps of the Avatar 
+Setup indicated in the core rulebook 
+of the game. The Parcae are the Avatar 
+for this Legendary Scenario.
+3. Starting from the First Mage, each Mage must place 1 Fate Token  in a Room 
+adjacent to their own Cell.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Astral Conjunction: when a Mage triggers a Parcae Trap Eff ect, that Mage must 
+immediately place 1 of their own  on the Parcae Avatar Card.
+• Astral Recovery: When a Mage is defeated, they take all their own 
+immediately place
+ on the Parcae Avatar 
+Card and place them in their own pool.
+• Fortuitous Event: whenever a single Eff ect is to place one or more Fate Tokens, if at least 
+one of those tokens cannot be placed, the Parcae gain 1.
+• Ancient Memories: at the beginning of the Study Phase, any Mage who is in a  draws 
+1 from the Library.
+ at the beginning of the 
+• Quest Change: If a Mage gains a Quest Card that requires placing  in a  Room 
+to be completed, the Mage may reveal the Quest Card, discard it, and draw a new one.
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Strands of Destiny, the Parcae have come to the Lodge to unveil the fate of the mages 
+who will dare to face their dreadful trials.
+Le g e n d a ry S c e n a r i o : 
+Strands of Destiny
+12
+
+=== PAGE 13 ===
+Lodge Layouts
+TWO PLAYERS
+THREE PLAYERS
+FOUR PLAYERS
+SIX PLAYERS
+FIVE PLAYERS
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+Honorable Mention
+At the end of the game, according to the number of their  on the Parcae Avatar Card, each 
+Mage gains  as follows:
+• The Mage(s) with the highest amount of  on the Avatar Card: 4.
+• The Mage(s) with the second highest amount of  on the Avatar Card: 2.
+• All other Mages with any  on the Avatar Card: 1.
+Lodge Layouts
+TWO PLAYERS
+THREE PLAYERS
+FOUR PLAYERS
+SIX PLAYERS
+FIVE PLAYERS
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+Honorable Mention
+At the end of the game, according to the number of their  on the Parcae Avatar Card, each 
+Mage gains  as follows:
+• The Mage(s) with the highest amount of  on the Avatar Card: 4.
+• The Mage(s) with the second highest amount of  on the Avatar Card: 2.
+• All other Mages with any  on the Avatar Card: 1.
+13
+
+=== PAGE 14 ===
+14
+
+=== PAGE 15 ===
+15
+
+=== PAGE 16 ===
+Antiquities Rulebook v.1.1
+©2024 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+PARCAE PRIORITY CACUS PRIORITY
+:   
+The Parcae choose as a target:
+: the Room with the fewest , if 
+tied...
+ : the closest Room, if tied...
+ : the Room with the fewest Models, if 
+tied, the Choice of the Crown applies.
+   
+The Parcae choose as a target:
+: the Room with the most Models, if 
+tied...
+: the Room with the least , if tied...
+: the closest Room, if tied, the Choice 
+of the Crown applies.
+:       
+Cacus chooses as a target:
+: the Room in which the Mage with 
+the most  is, if tied...
+: the Room with the most Mages, if 
+tied...
+ : the Room with the most Models, if 
+tied...
+ : the closest Room, if tied, the Choice 
+of the Crown applies.
+Hunt
+If Cacus begins his activation in his own Cell, 
+before revealing the Command Card he places 
+himself in the Room in which the Mage with 
+the most  is. If this Mage is in their own Cell, 
+Cacus places himself in the Black Rose Room.
+Gigantomachia
+When Cacus is defeated, replace the Cacus card 
+with the Enraged Cacus card. When Enraged 
+Cacus is defeated, replace the Enraged Cacus 
+card with the Cacus card.
+Ineluctability
+If the Parcae begin their Activation in their 
+own Cell, they place themselves in the Black 
+Rose Room before revealing the Command 
+Card.

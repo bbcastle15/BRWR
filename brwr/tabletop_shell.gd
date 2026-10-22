@@ -21,6 +21,9 @@ var animation: Tween
 var animated_node: Control
 var animated_player := -1
 var animated_rest_position := Vector2.ZERO
+var animated_rest_scale := Vector2.ONE
+var animated_damage_ghost: bool = false
+var hidden_damage_cube: Control = null
 var transient_board := false
 var prior_player := -1
 var board_choices: Dictionary = {}
@@ -47,6 +50,7 @@ func setup(game_node) -> void:
 	_build_board_overlay()
 	_build_card_overlay()
 	for board in game.player_boards:
+		if board is AvatarBoard: continue
 		board.reparent(board_stage)
 		board.hide()
 		board.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -300,8 +304,10 @@ func sync_card_presentation() -> void:
 		var rebuilt_path := "res://assets/rooms/rebuilt/%s.png" % str(data.id)
 		if ResourceLoader.exists(rebuilt_path):
 			presentation_art.texture = load(rebuilt_path)
-	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM", "spells": "SPELL"}.get(str(data.kind), "")
+	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM", "spells": "SPELL", "jinxs": "JINX"}.get(str(data.kind), "")
 	presentation_title.text = category + " · " + str(data.title)
+	if data.kind == "jinxs":
+		presentation_title.text += " · Player %d" % (int(data.player) + 1)
 	presentation_side.visible = data.kind == "spells" and not bool(data.get("single", false))
 	presentation_rules.visible = presentation_art.texture == null
 	presentation_rules.text = ""
@@ -365,6 +371,8 @@ func _layout() -> void:
 		banner.get_node("Crown").position.y = maxf(8, banner_height - 34)
 	var available := board_overlay.size - Vector2(28, 64)
 	var board_size := Vector2(900, 730)
+	if shown_player >= 0 and AvatarRules.is_avatar(game, shown_player):
+		board_size = Vector2(1300, 1500)
 	if shown_player >= 0 and game.players[shown_player].transformation != null:
 		board_size.x = 1180
 	var ratio := maxf(0.1, minf(available.x / board_size.x, available.y / board_size.y))
@@ -372,6 +380,12 @@ func _layout() -> void:
 	board_stage.size = board_size
 	board_stage.scale = Vector2.ONE * ratio
 	for board in game.player_boards:
+		if board is AvatarBoard:
+			if board.expanded:
+				board.position = Vector2(280, 1500)
+				board.rotation = -PI / 2
+				board.scale = Vector2.ONE
+			continue
 		board.position = Vector2.ZERO
 		board.scale = Vector2.ONE
 	_layout_card_presentation()
@@ -383,9 +397,18 @@ func open_board(index: int) -> void:
 func _show_board(index: int) -> void:
 	if index < 0 or index >= game.player_boards.size():
 		return
+	if game.avatar_board != null and game.avatar_board.expanded:
+		game.avatar_board.set_expanded(false, game)
 	shown_player = index
 	for i in game.player_boards.size():
+		if game.player_boards[i] is AvatarBoard: continue
 		game.player_boards[i].visible = i == index
+	if AvatarRules.is_avatar(game, index):
+		game.avatar_board.set_expanded(true, board_stage)
+		board_title.text = "Possessed · HP %d/%d · %d/%d Commands · gold outline: Health limit" % [game.players[index].mage.get_remaining_health(), game.players[index].mage.health, game.avatar.commands_used, game.avatar.command_limit()]
+		board_overlay.show()
+		_layout()
+		return
 	# Quest/cube choices are attached to existing nodes. Opening the window
 	# must not rebuild those nodes and erase their pending choice callbacks.
 	game.player_boards[index].refresh_spell_slots()
@@ -397,12 +420,14 @@ func _show_board(index: int) -> void:
 
 func close_board() -> void:
 	_cancel_animation()
+	if game.avatar_board != null and game.avatar_board.expanded:
+		game.avatar_board.set_expanded(false, game)
 	board_overlay.hide()
 	shown_player = -1
 
 func reveal_board_choice(index: int) -> void:
 	board_choices[index] = true
-	if not board_overlay.visible:
+	if not board_overlay.visible or shown_player != index:
 		open_board(index)
 
 func _on_request(_request: Dictionary) -> void:
@@ -416,6 +441,7 @@ func _process(_delta: float) -> void:
 		return
 	if board_overlay.visible and shown_player >= 0:
 		var board_width := 1180.0 if game.players[shown_player].transformation != null else 900.0
+		if AvatarRules.is_avatar(game, shown_player): board_width = 1300.0
 		if not is_equal_approx(board_stage.size.x, board_width):
 			_layout()
 	var viewer: int = game.get_ui_viewer_player_index()
@@ -426,7 +452,8 @@ func _process(_delta: float) -> void:
 	_refresh_banners()
 	sync_card_presentation()
 	_observe(true)
-	if not card_overlay.visible and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
+	var evocation_resolving: bool = game.resolution_stack.any(func(frame): return frame.get("type") == "evocation_activation")
+	if not evocation_resolving and not game.resolution_visual_yield_active and not card_overlay.visible and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
 		_play_next_animation()
 
 func _refresh_banners() -> void:
@@ -456,7 +483,7 @@ func _refresh_banners() -> void:
 
 func _observe(animate: bool) -> void:
 	for i in game.players.size():
-		var snapshot := {"physical": game.players[i].available_physical_actions, "slots": {}}
+		var snapshot := {"physical": game.players[i].available_physical_actions, "damage": game.players[i].mage.get_damage(), "slots": {}}
 		for slot_id in ["Q", "I", "II", "III"]:
 			var data: Dictionary = game.get_player_board_spell_slot_data(i, slot_id)
 			# This signature deliberately contains no private identity or active side.
@@ -473,6 +500,14 @@ func _observe(animate: bool) -> void:
 					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id) + "/SpellMarker", "kind": "marker", "slot": slot_id})
 		observed[i] = snapshot
 
+func queue_damage_placement(player_index: int, previous_damage: int, owners: Array) -> void:
+	# Snapshot the dealt cubes: defeat can clear authoritative damage before
+	# the visual queue is displayed. No animation changes game state.
+	if AvatarRules.is_avatar(game, player_index): return
+	for index in range(previous_damage, owners.size()):
+		animation_queue.append({"player": player_index, "node": "DamageTrack/DamageSlot_%d" % index,
+			"kind": "damage", "owner": int(owners[index])})
+
 func _play_next_animation() -> void:
 	# Pure visual feedback: no rule waits on a Tween, and Close always skips it.
 	var event: Dictionary = animation_queue.pop_front()
@@ -483,10 +518,23 @@ func _play_next_animation() -> void:
 	_show_board(index)
 	animated_node = game.player_boards[index].get_node_or_null(event.node)
 	animated_player = index
+	animated_damage_ghost = false
+	hidden_damage_cube = null
+	if event.kind == "damage" and animated_node != null:
+		var slot: Control = animated_node
+		hidden_damage_cube = slot.get_node_or_null("DamageCube")
+		if hidden_damage_cube != null: hidden_damage_cube.hide()
+		animated_node = preload("res://cube.tscn").instantiate()
+		animated_node.cube_color = game.player_boards[index].get_damage_cube_color(int(event.owner))
+		animated_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		slot.add_child(animated_node)
+		animated_node.scale = Vector2.ONE * game.player_boards[index].DAMAGE_CUBE_SCALE
+		animated_damage_ghost = true
 	if animated_node == null:
 		_finish_animation()
 		return
 	animated_rest_position = animated_node.position
+	animated_rest_scale = animated_node.scale
 	animated_node.pivot_offset = animated_node.size * 0.5
 	animation = create_tween()
 	if event.kind == "physical":
@@ -496,11 +544,11 @@ func _play_next_animation() -> void:
 		animation.tween_property(animated_node, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE)
 	else:
 		animated_node.position -= Vector2(0, 55)
-		animated_node.scale = Vector2.ONE * 1.7
+		animated_node.scale = animated_rest_scale * 1.7
 		animated_node.modulate.a = 0.0
 		animation.set_parallel(true)
 		animation.tween_property(animated_node, "position", animated_rest_position, 0.38).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		animation.tween_property(animated_node, "scale", Vector2.ONE, 0.38).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		animation.tween_property(animated_node, "scale", animated_rest_scale, 0.38).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		animation.tween_property(animated_node, "modulate:a", 1.0, 0.18)
 		animation.chain()
 		animation.set_parallel(false)
@@ -513,8 +561,12 @@ func _finish_animation() -> void:
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.position = animated_rest_position
-		animated_node.scale = Vector2.ONE
+		animated_node.scale = animated_rest_scale
 		animated_node.modulate = Color.WHITE
+	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_damage_cube): hidden_damage_cube.show()
+	animated_damage_ghost = false
+	hidden_damage_cube = null
 	animated_node = null
 	animated_player = -1
 	if transient_board:
@@ -532,8 +584,12 @@ func _cancel_animation() -> void:
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.position = animated_rest_position
-		animated_node.scale = Vector2.ONE
+		animated_node.scale = animated_rest_scale
 		animated_node.modulate = Color.WHITE
+	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_damage_cube): hidden_damage_cube.show()
+	animated_damage_ghost = false
+	hidden_damage_cube = null
 	animated_node = null
 	animated_player = -1
 	transient_board = false

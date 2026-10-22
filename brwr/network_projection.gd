@@ -191,8 +191,8 @@ static func apply(game, state: Dictionary) -> void:
 		var variant_id: String = str(data.get("variant_id", data.id))
 		if room.get_art_id() != variant_id:
 			var definition = game.get_room(variant_id)
-			if definition != null and str(definition.get("replaces", definition.id)) == str(data.id):
-				room.setup_room(definition)
+			if definition != null and (variant_id == str(data.id) or preload("res://room_variants.gd").allows(game.get_room(str(data.id)), definition)):
+				room.setup_room(preload("res://room_variants.gd").for_slot(game.get_room(str(data.id)), definition))
 				room.room_color = game.get_room_color(str(definition.color))
 		room.set_meta("hex_coord", data.coord)
 		room.position = game.hex_to_pixel(data.coord)

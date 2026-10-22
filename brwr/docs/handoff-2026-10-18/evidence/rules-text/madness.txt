@@ -1,0 +1,726 @@
+
+=== PAGE 1 ===
+Madness
+
+=== PAGE 2 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+Contents
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+2
+
+=== PAGE 3 ===
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Rubedo Setup ....................................................................................................8
+Avatar Skills — Rubedo ......................................................9
+Rubedo Priority ...............................................................................................9
+Legendary Scenario: Equivalent Exchange .........10
+Additional Setup .................................................................10
+Scenario Rules .....................................................................10
+Honorable Mention ...........................................................10
+Rubedo Priority ............................................................................................. 12
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Rubedo Setup ....................................................................................................8
+Avatar Skills — Rubedo ......................................................9
+Rubedo Priority ...............................................................................................9
+Legendary Scenario: Equivalent Exchange .........10
+Additional Setup .................................................................10
+Scenario Rules .....................................................................10
+Honorable Mention ...........................................................10
+Rubedo Priority ............................................................................................. 12
+3
+
+=== PAGE 4 ===
+During Step 9 of the Setup, it is possible to 
+replace one of the Schools of Magic present 
+in the core game with the School of Chaos.
+Game Components
+1 MAGE CARD
+
+36 CHAOS SPELL 
+CARDS
+   
+   
+Shapeshifting Energy
+Shapeshifting Energy
+   
+   
+Shapeshifting Energy
+Shapeshifting Energy
+1 SCHOOL REFERENCE 
+CARD
+Landolfo II can be chosen as a Mage during 
+Step 8 of the Setup described in the core 
+game rulebook.
+
+8
+
+8
+
+8
+
+8
+
+8
+
+8
+3 PERSONAL SPELL 
+CARDS
+  
+Ethereal Tentacles
+  
+Ethereal Tentacles
+During Step 9 of the Setup, it is possible to 
+replace one of the Schools of Magic present 
+in the core game with the School of Chaos.
+Game Components
+1 MAGE CARD
+
+L ANDOLFO II
+
+ 10
+
+
+ 8
+2
+2
+2
+
+36 CHAOS SPELL 
+CARDS
+
+
+Infl ict Infl ict 2.
+Place a Vastum. Vastum.
+Shapeshifting Energy
+   
+
+.
+.
+2
+Chaos
+Infl ict 
+   
+Shapeshifting Energy
+1 SCHOOL REFERENCE 
+CARD
+Landolfo II can be chosen as a Mage during 
+Step 8 of the Setup described in the core 
+game rulebook.
+
+Some Spells of this School allow you to place a 
+Vastum token in a Room. Each Room can have 
+a maximum of one Vastum Token inside it. If an 
+Effect would place a Vastum Token in a Room that 
+already has one in it, resolve the Effect without 
+
+already has one in it, resolve the Effect without 
+placing the placing the Vastum Token.
+Some Spells of this School have the Some Spells of this School have the Chaos
+in their Effect. When a Mage resolves the in their Effect. When a Mage resolves the 
+keyword, they keyword, they may shuffl e their Memories into shuffl e their Memories into 
+their Grimoire, then they their Grimoire, then they must choose a 
+a Vastum Token inside it and reveal the fi rst 
+their own Grimoire. If the Element of the revealed their own Grimoire. If the Element of the revealed 
+ coincides with one of those listed below, the coincides with one of those listed below, the 
+Mage resolves the associated Effect in the chosen Mage resolves the associated Effect in the chosen 
+Room, then places the revealed Room, then places the revealed  at the bottom of 
+their own Grimoire: their own Grimoire:
+• : inflict 2.
+• : place 1.
+• : activate the Room even if it is 
+• : choose one of the above.
+Chaos
+
+
+ Token inside it. If an 
+ Token in a Room that 
+already has one in it, resolve the Effect without 
+
+already has one in it, resolve the Effect without 
+Chaos keyword 
+in their Effect. When a Mage resolves the 
+ shuffl e their Memories into 
+ choose a 
+ Token inside it and reveal the fi rst 
+their own Grimoire. If the Element of the revealed 
+ coincides with one of those listed below, the 
+Mage resolves the associated Effect in the chosen 
+ at the bottom of 
+the Room even if it is 
+ one of the above.
+Chaos
+
+8
+
+ Token in a Room that 
+already has one in it, resolve the Effect without already has one in it, resolve the Effect without 
+ keyword keyword 
+in their Effect. When a Mage resolves the Chaos
+ shuffl e their Memories into shuffl e their Memories into 
+ choose a  with 
+ Token inside it and reveal the fi rst  of 
+their own Grimoire. If the Element of the revealed their own Grimoire. If the Element of the revealed 
+ coincides with one of those listed below, the 
+Mage resolves the associated Effect in the chosen 
+ at the bottom of 
+the Room even if it is used
+Chaos
+
+8
+
+8
+ Token inside it and reveal the fi rst 
+their own Grimoire. If the Element of the revealed their own Grimoire. If the Element of the revealed 
+ coincides with one of those listed below, the coincides with one of those listed below, the 
+Mage resolves the associated Effect in the chosen Mage resolves the associated Effect in the chosen 
+ at the bottom of at the bottom of 
+used
+Chaos
+
+8
+
+8
+Affl iction Affl iction coincides with one of those listed below, the 
+Affl iction coincides with one of those listed below, the Affl iction coincides with one of those listed below, the 
+Mage resolves the associated Effect in the chosen 
+Affl iction Mage resolves the associated Effect in the chosen Affl iction Mage resolves the associated Effect in the chosen Affl iction Shapeshifting Energy Shapeshifting Energy at the bottom of Shapeshifting Energy at the bottom of Shapeshifting Energy at the bottom of Shapeshifting Energy       Erratic Vortex Erratic Vortex Erratic Vortex       Necrotic Plague Necrotic Plague Necrotic Plague      
+Void Wandering used.
+      
+Mutagenic Madness      
+Arrogance      
+ChaosAuromancer Auromancer Auromancer 
+Reclamation       
+Disorder 8 Disorder      
+Fumbling in the Dark 8
+      
+Ephemeral Bond      
+Dark Path      
+Corruption Veil      
+Chaos
+
+8
+
+8
+
+8
+ keyword 
+Chaos
+ shuffl e their Memories into 
+ with 
+ keyword 
+Chaos
+3 PERSONAL SPELL 
+CARDS
+Ethereal Tentacles
+Infl ict 1. You may place the 
+target in a  from yourself. Place a
+Vastum in a  from the target. You 
+may place yourself in a  from 
+the target.
+  
+the target.
+
+. Chaos .  the target in a Place
+ yourself in a place You may 
+Vastum. from a 
+  
+Ethereal Tentacles
+4
+
+=== PAGE 5 ===
+Game Components
+3 FORGOTTEN 
+SPELL CARDS
+Steal 1 from each Mage that 
+has more than you. 
+ Gain 1 for each Mage that 
+has fewer than you. 
+Assign Umbra an to the target.
+Assign Umbra an to the target.
+The Nightmares assigned to 
+the target activate under your 
+control.
+Summon Nocturnus  in a .
+Steal 1 from each Mage that 
+has more  than you.
+Gain 1 for each Mage that 
+has fewer  than you.
+Assign an Umbra to the target.
+Assign an Umbra to the target.
+The Nightmares assigned to 
+the target activate under your 
+control.
+Summon Nocturnus in a .
+Add these cards to the Forgotten Spell Deck 
+of the core game.
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the Sacrifi cial Altar Room in the core game.
+Demon — Forgotten
+Nocturnus
+Undead 2 4 4 Forgotten
+Putridum
+• : inflict 2.
+• : place 1.
+• : activate the Room even if it is used.
+• : choose one of the above.
+3 FORGOTTEN 
+EVOCATION 
+CARDS
+6 CHAOS EFFECTS 
+CARDS
+Add these cards to the Evocation Deck of the 
+core game.
+A player using Spells of the School of Chaos 
+can keep one of these cards at hand to consult 
+when they need to resolve Chaos Eff ects.
+1 SACRIFICIAL 
+ALTAR OF MADNESS ROOM
+1 ROOM ACTIVATION 
+TOKEN
+12 VASTUM TOKENS
+3 FORGOTTEN 
+SPELL CARDS
+
+
+
+ from each Mage that 
+ than you.
+ than you.
+ for each Mage that 
+
+
+Assign an 
+
+Umbra to the target. to the target.
+Assign an Umbra to the target.
+The Nightmares Nightmares assigned to assigned to 
+the target activate under your 
+control.
+Summon Nocturnus in a .
+  
+Night Falls
+
+
+ from each Mage that 
+ than you. 
+ for each Mage that 
+ than you. 
+Night Falls
+ 
+Night Falls
+
+Steal 1 from each Mage that 
+has more 
+ Gain 1 for each Mage that 
+has fewer  has fewer 
+Steal 1
+has more 
+Gain 1
+has fewer has fewer 
+
+
+.  on each 
+Convert 3
+.  to each  Infl ict 2
+  
+Final Formula
+Summon has fewer 
+Summon 
+has fewer 
+Summon Rubedo.
+He Gain 1
+He activates activates activates.
+  
+Final Formula 
+Add these cards to the Forgotten Spell Deck 
+of the core game.
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the Sacrifi cial Altar Room in the core game.
+Demon — Forgotten
+Nocturnus
+2 4 4
+Putridum can have up to three Upgrades assigned.
+When it is summoned, shuffle the Upgrades Deck and reveal cards 
+until you reveal three cards into 
+different names, then assign those 
+Upgrades to Putridum; shuffle the 
+others with the Upgrades Deck.
+Undead
+Forgotten
+Putridum
+• : inflict 2.
+• : place 1.
+• : activate the Room even if it is used.
+• : choose one of the above.
+Chaos Effects
+3 FORGOTTEN 
+EVOCATION 
+CARDS
+6 CHAOS EFFECTS 
+CARDS
+Add these cards to the Evocation Deck of the 
+core game.
+A player using Spells of the School of Chaos 
+can keep one of these cards at hand to consult 
+when they need to resolve Chaos Eff ects.
+1 SACRIFICIAL 
+ALTAR OF MADNESS ROOM
+1 ROOM ACTIVATION 
+TOKEN
+ Sacrifi cial Altar of Madness
+4 2 1
+
+12 VASTUM TOKENS
+5
+
+=== PAGE 6 ===
+1 AVATAR CARD
+Rubedo
+Dominion
+30 COMMAND 
+CARDS
+Rubedo
+
+   
+Alchemical Energy
+Moves 
+. 
+towards the target.
+Avatar Components
+1 AVATAR CARD
+: reveals 1 card from the 
+Command Deck of the Current Moon 
+and resolves the Effect associated 
+with the Element of that card as 
+indicated below; then places the card 
+at the bottom of the Command Deck.
+: converts 1 in a . 
+: converts 1 on each .
+: infl icts 1 to each .
+Rubedo
+ 11
+ 2
+ 2
+      
+      
+Rubedo 
+Dominion
+30 COMMAND 
+CARDS
+Rubedo
+
+
+   
+Alchemical Energy
+Moves 
+. 
+towards the target.
+Removes
+Heals 2 on himself. 
+ the rightmost 
+the target Room.
+ in 
+ If he does: .
+
+Avatar Components
+6
+
+=== PAGE 7 ===
+Landolfo I I Putridum
+Nocturnus Albedo
+Rubedo
+Models
+This Model replaces the 
+Albedo Token provided in 
+the Black Rose Wars: Rebirth
+core game box.
+Landolfo I I Putridum
+Nocturnus Albedo
+Rubedo
+Landolfo I I Putridum
+Models
+This Model replaces the 
+Albedo Token provided in 
+the Black Rose Wars: Rebirth
+core game box.
+7
+
+=== PAGE 8 ===
+RUBEDO SETUP
+Apply the following steps during step 
+3 of the Avatar Setup:
+• Place the Rubedo Model in the 
+Black Rose Room.
+• Remove the Final Formula card 
+from the Forgotten Spells Deck.
+Avata r
+The legendary alchemical knight Rubedo rages in the Lodge with the sole purpose of 
+looting it and fi nding the components necessary to complete the Philosopher’s Stone 
+formula. Will the Mages be able to stop him, or will they be overwhelmed by his fury?
+Rubedo
+Dominion
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Skills:
+ Rubedo has the Avatar Skills 
+explained in detail on the next page.
+AVATAR CARD ANATOMY
+Rubedo
+Dominion
+A
+B
+RUBEDO SETUP
+Apply the following steps during step 
+3 of the Avatar Setup:
+• Place the Rubedo Model in the 
+Black Rose Room.
+• Remove the Final Formula card 
+from the Forgotten Spells Deck.
+Avata r
+The legendary alchemical knight Rubedo rages in the Lodge with the sole purpose of 
+looting it and fi nding the components necessary to complete the Philosopher’s Stone 
+formula. Will the Mages be able to stop him, or will they be overwhelmed by his fury?
+ card from the 
+Command Deck of the Current Moon 
+and resolves the Effect associated 
+with the Element of that card as 
+indicated below; then places the card 
+at the bottom of the Command Deck.
+: converts 1 in a . 
+: converts 1 on each .
+: infl icts 1 to each .
+Rubedo
+ 11
+ 2
+ 2
+      
+     
+Rubedo
+
+Dominion
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Skills:
+AVATAR CARD ANATOMY
+reveals 1 card from the 
+Command Deck of the Current Moon 
+and resolves the Effect associated 
+with the Element of that card as 
+indicated below; then places the card 
+at the bottom of the Command Deck.
+reveals
+Command Deck of the Current Moon 
+and resolves the Effect associated 
+with the Element of that card as 
+indicated below; then places the card 
+at the bottom of the Command Deck.
+: reveals
+Command Deck of the Current Moon 
+ reveals
+reveals
+A
+Dominion
+B   
+Avatar Skills:
+ Rubedo has the Avatar Skills 
+explained in detail on the next page.
+8
+
+=== PAGE 9 ===
+Dominion
+If Rubedo is to activate when he is in his Cell, 
+he will not activate and will place himself in 
+the Black Rose Room.
+Avatar Skills — Rubedo 
+RUBEDO PRIORITY
+       
+Rubedo chooses as a target:
+: the Mage with the most , if tied...
+: the closest Mage, if tied...
+ : the Mage with the most , if tied...
+ : the Mage with the most , if tied, the Choice of the Crown applies.
+       
+Rubedo chooses as a target:
+: the Room with the most Models, if tied...
+: the Room with the most , if tied...
+: the closest Room, if tied...
+: the Room with the most Mages, if tied, the Choice of the Crown applies.
+If Rubedo is to activate when he is in his Cell, 
+he will not activate and will place himself in 
+Black Rose Room.
+Avatar Skills — Rubedo 
+RUBEDO PRIORITY
+      
+Rubedo chooses as a target:
+the Mage with the most , if tied...
+ the closest Mage, if tied...
+ the Mage with the most , if tied...
+ the Mage with the most , if tied, the Choice of the Crown applies.
+      
+Rubedo chooses as a target:
+ the Room with the most Models, if tied...
+the Room with the most , if tied...
+the closest Room, if tied...
+ the Room with the most Mages, if tied, the Choice of the Crown applies.
+Dominion
+If Rubedo is to activate when he is in his Cell, 
+he will not activate and will place himself in 
+the Black Rose Room
+Avatar Skills — Rubedo 
+RUBEDO PRIORITY
+  
+Rubedo chooses as a target:
+: the Mage with the most 
+: the closest Mage, if tied...
+ : the Mage with the most 
+ : the Mage with the most 
+ 
+Rubedo chooses as a target:
+: the Room with the most Models, if tied...
+: the Room with the most 
+: the closest Room, if tied...
+: the Room with the most Mages, if tied, the Choice of the Crown applies.
+9
+
+=== PAGE 10 ===
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before Step 4 : Replace the Sacrifi cial Altar Room with the Sacrifi cial Altar of Madness 
+Room.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+31 of the Power Board.
+2. Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. Rubedo is the Avatar for this Legendary Scenario.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Quintessence: When Rubedo is to convert at least 1 in a rebuilt Room, the  gains 
+1.
+• Mercy: When Rubedo is to convert at least 1 on a Mage who has no  on their own 
+Mage Sheet, the  gains 1.
+Honorable Mention
+At the end of the game, the Mage of whom the  has the most  gains 3. If tied, no Mage 
+gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Equivalent Exchange, Rubedo seeks to complete the alchemical process that will let the 
+Black Rose gain an immortal body capable of leaving the Lodge. Will the Mages succeed in 
+putting a stop to his dangerous plan?
+Le g e n d a ry S c e n a r i o : 
+E q u i va l e n t E xc h a n g e
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before Step 4 : Replace the Sacrifi cial Altar Room with the Sacrifi cial Altar of Madness 
+Room.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+31 of the Power Board.
+2. Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. Rubedo is the Avatar for this Legendary Scenario.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Quintessence: When Rubedo is to convert at least 1 in a rebuilt Room, the  gains 
+1.
+• Mercy: When Rubedo is to convert at least 1 on a Mage who has no  on their own 
+Mage Sheet, the  gains 1.
+Honorable Mention
+At the end of the game, the Mage of whom the  has the most  gains 3. If tied, no Mage 
+gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Equivalent Exchange, Rubedo seeks to complete the alchemical process that will let the 
+Black Rose gain an immortal body capable of leaving the Lodge. Will the Mages succeed in 
+putting a stop to his dangerous plan?
+Le g e n d a ry S c e n a r i o : 
+E q u i va l e n t E xc h a n g e
+10
+
+=== PAGE 11 ===
+11
+
+=== PAGE 12 ===
+Madness Rulebook v.1.0
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+RUBEDO PRIORITY
+       
+Rubedo chooses as a target:
+: the Mage with the most , if tied...
+: the closest Mage, if tied...
+ : the Mage with the most , if tied...
+ : the Mage with the most , if tied, the Choice of the Crown applies.
+       
+Rubedo chooses as a target:
+: the Room with the most Models, if tied...
+: the Room with the most , if tied...
+: the closest Room, if tied...
+: the Room with the most Mages, if tied, the Choice of the Crown applies.
+Dominion
+If Rubedo is to activate when he is in his Cell, 
+he will not activate and will place himself in the 
+Black Rose Room.

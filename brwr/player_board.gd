@@ -437,6 +437,16 @@ func refresh_action_tokens() -> void:
 			token.add_theme_font_size_override("font_size", 36)
 			token.pressed.connect(game.open_player_board_action.bind(player_index, "physical"))
 			add_child(token)
+		# Anubis prints the two action recesses at different positions from
+		# the other Mage cards. Map their source-art centres into the card slot.
+		if player_state.mage.mage_id == "anubis":
+			var printed_size := Vector2(1671, 941)
+			var art_scale: float = minf(MAGE_CARD_SIZE.x / printed_size.x, MAGE_CARD_SIZE.y / printed_size.y)
+			var art_offset: Vector2 = (MAGE_CARD_SIZE - printed_size * art_scale) * 0.5
+			var centre := Vector2(233 + i * 334, 698)
+			token.position = $MageCardSlot.position + art_offset + centre * art_scale - token.size * 0.5
+		else:
+			token.position = Vector2(385 + i * 70, 215)
 		var available: bool = i < player_state.available_physical_actions
 		token.text = "+" if available else "×"
 		token.tooltip_text = "Physical action: " + " / ".join(action_names) if available else "Physical action exhausted"

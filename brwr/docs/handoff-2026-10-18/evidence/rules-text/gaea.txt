@@ -1,0 +1,1387 @@
+
+=== PAGE 1 ===
+Gaea Reborn
+
+=== PAGE 2 ===
+Gaea Reborn Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+2
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Angelica Donarini
+Environment Artist: Cristian Casado Otazu, Paolo Scippo
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller, Frank Calcagno
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, 
+Chiara Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio 
+Galmacci, Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, 
+FrankZappa, Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, 
+Luca Benedetti, Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo 
+guerrieronuvola, Paolo Bianchi, Pasquale Carotenuto
+
+=== PAGE 3 ===
+3
+Contents
+Credits ..................................................................2
+Contents ...............................................................3
+Game Components ..............................................4
+Models ..................................................................................5
+Avatar Components ............................................................6
+Legendary Scenario Components ......................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Gaea Setup ..........................................................................................................8
+Avatar Special Rules — Gaea ...............................................9
+Roots Tokens  ............................................................9
+Arbor Vitae ......................................................................9
+Avatar Skills — Gaea ...........................................................10
+Gaea Priority ................................................................................................... 10
+Servant — Filius ..................................................................11
+Special Rules ....................................................................11
+Filius Model ..................................................................................................... 11
+Filius Priority .................................................................................................. 11
+Paths ...................................................................12
+Path Start Card Anatomy ......................................................................12
+Path Card Anatomy .................................................................................... 12
+Using Paths .........................................................................13
+Gaining a Path Card .......................................................14
+Reaching an Eff ect Passage  ......................................14
+Reaching an End Point  ............................................14
+End of the Game — Additional  ...................................15
+Legendary Scenario: Stop the Threat ..................16
+Additional Setup .................................................................16
+Scenario Rules .....................................................................16
+Honorable Mention ...........................................................16
+Lodge Layouts ....................................................................17
+
+=== PAGE 4 ===
+4
+Game Components
+1 MAGE CARD
+
+T ALIA
+
+ 10
+
+
+ 8
+2
+2
+2
+
+3 PERSONAL SPELL 
+CARDS
+
+Mastery
+  
+Geoform Geoform ,: infl ict 3 infl ict 3.
+Geoform Geoform ,: place 3 place 3.
+Geoform ,: draw 2 from 
+your Grimoire. Heal 2. You may 
+place yourself in the target Room.
+Geoform : convert 2. Steal 
+1.
+MAGO 1 / 1
+36 GEOMANCY 
+SPELL CARDS
+
+
+ 
+  
+Arcane Sinkhole
+Target the Room that Mage is in. Target the Room that Mage is in. Target the Room that Mage is in. Infl ict Infl ict 2. 
+Place 2
+  
+Another Mage enters a  or 
+ Room:
+Arcane Sinkhole
+
+
+
+ Place 2.
+
+Infl ict 2.  Place 1 . 
+: ,  Geoform
+.  Place 1 . 2 Infl ict
+  
+Arcane Sinkhole
+  
+
+
+Arcane Sinkhole
+
+
+GAEA - 001 / 12
+1 SCHOOL REFERENCE 
+CARD
+Talia can be chosen as a Mage during Step
+8 of the Setup described in the core game 
+rulebook.
+During Step 9 of the Setup, it is possible 
+to replace one of the Schools of Magic 
+present in the core game with the School of 
+Geomancy.
+
+Some Spells of this School have the Some Spells of this School have the 
+Geoform Geoform keyword in their Effect.
+This keyword is always followed This keyword is always followed 
+by at least one Room color symbol by at least one Room color symbol 
+(,,,,,,). 
+The part of the Effect indicated after The part of the Effect indicated after 
+Geoform Geoform is resolved only if the target 
+Room of that Effect is one of the colors Room of that Effect is one of the colors 
+indicated after the keyword. indicated after the keyword.
+Geomancy
+
+2
+
+4
+
+2
+
+2
+
+4
+
+8
+
+2
+
+Some Spells of this School have the 
+ keyword in their Effect.
+This keyword is always followed 
+by at least one Room color symbol 
+The part of the Effect indicated after 
+ is resolved only if the target 
+Room of that Effect is one of the colors 
+Geomancy
+
+4
+
+
+Some Spells of this School have the Some Spells of this School have the 
+This keyword is always followed This keyword is always followed 
+by at least one Room color symbol by at least one Room color symbol 
+The part of the Effect indicated after The part of the Effect indicated after 
+ is resolved only if the target 
+Room of that Effect is one of the colors 
+Geomancy 
+2
+The part of the Effect indicated after The part of the Effect indicated after 
+ is resolved only if the target is resolved only if the target 
+Room of that Effect is one of the colors Room of that Effect is one of the colors 
+Geomancy 
+2
+
+4
+
+8
+
+2
+Geomancy Geodesy Geodesy is resolved only if the target 
+Geodesy is resolved only if the target Geodesy is resolved only if the target 
+Room of that Effect is one of the colors Geodesy Room of that Effect is one of the colors Geodesy Room of that Effect is one of the colors 
+ 
+Arcane Sinkhole Arcane Sinkhole       Unstable Creek Unstable Creek Unstable Creek       Whips of Thorns Whips of Thorns Whips of Thorns      
+Contortion      
+Cemeterial Mist      
+Earthfl ow Earthfl ow     
+Geomorphology Geomancy Geomorphology
+
+Geomorphology  
+Fortuna Major 
+4
+
+8 2
+Fortuna Major      
+Fortuna Minor 2 4 8 2 Fortuna Minor      
+Caput Draconis      
+Cauda Draconis      
+Carcer      
+Conjuctio      
+
+2
+
+4
+
+2
+
+2
+
+4
+
+8
+
+2
+This keyword is always followed 
+by at least one Room color symbol 
+
+=== PAGE 5 ===
+5
+Game Components
+1 FORGOTTEN EVOCATION 
+CARD
+1 FORGOTTEN 
+SPELL CARD
+Nature's Fury
+  
+. Gaea Summon 
+. activates It 
+Nature's Fury
+  
+Summon Gaea.
+Convert 1 in a .
+Convert 1 in a .
+Convert 1 in a .
+Convert 1 in a .
+BRW-R -  - 014 / 085
+Legend — Forgotten
+Gaea
+Legend 2 6 Forgotten
+Gaea 1
+After she have performed a , 
+choose an Effect:
+• Remove 2 of your  in a . If 
+you do, gain 2. 
+• Convert 3 on a  from her.
+• Convert 3 in a  from her.
+GAEA - EVO - 1 / 2 
+Add this card to the Evocation Card deck of 
+the core game.
+Add this card to the Forgotten Spell deck of 
+the core game.
+Models
+Gaea Talia
+
+=== PAGE 6 ===
+6
+1 AVATAR CARD
+1 FILIUS 
+TOKEN
+12 ROOT 
+TOKENS ()
+3 ARBOR VITAE 
+TOKENS
+: Places 1 in a  from the 
+target. 
+Moves up to 1 from each 
+from 1 onto that .
+If in the Lodge there are at least 
+3 with 2: removes 3 of those 
+ and places an Arbor Vitae in 
+the .
+Blossoming Burst, Dominion
+Gaea
+ 12 
+ 1
+ 2
+:   .
+   .
+30 COMMAND 
+CARDS
+Gaea
+
+   
+Places 1 on each  in 
+each  from the target Room.
+Places 1.
+.
+Primal Command
+. Moves 
+Filius
+toward a .
+activates.
+BRW-R - AVAT 2/30
+1 FILIUS EVOCATION 
+CARD
+Beast — Servant
+Filius
+Beast 2 3 Servant
+Filius 2
+Priority, Settle, Comeback
+When it performs a , if the  is:
+, , , : Filius's  target is 
+.
+, , , : Filius has +1.
+    
+GAEA - EVO - 2 / 2 
+Avatar Components
+
+=== PAGE 7 ===
+7
+3 LEGENDARY SCENARIO 
+CARDS
+4 ROOM ACTIVATION 
+TOKENS
+6 PATH START 
+CARDS
+4 ROOMS
+
+
+Path
+Start
+You gain 1.
+
+
+Path
+Start
+
+
+
+Path
+Start
+You gain 1.
+Whenever a Mage is defeated
+before resolving that Mage's 
+, 
+defeat, Gaea 
+
+places 1 in a 
+ from that Mage. 
+0 0
+Action Phase
+Infesting Blossoms
+STOP THE THREAT
+EVN - 2 / 30 - BRW-R
+24 PATH CARDS
+
+
+
+Perform a Momentum.
+
+from your 
+,  draw 2
+.
+ 2  1
+ +2.
+
+
+
+Life Fountain
+0
+Life Fountain  Life Fountain
+1
+
+0
+2
+
+1
+
+1 0 2
+
+2
+2 1
+Emerald Rose
+3 1
+Legendary Scenario Components
+
+=== PAGE 8 ===
+GAEA SETUP
+8
+Avata r
+Gaea is a powerful primordial creature, venerated by 
+the fauns as a deity.
+To enter her sylvan realm is to violate her domain's 
+sanctity and incur her wrath.
+The luckiest intruders will be hunted down, captured 
+and executed by her faun servants.
+The most unfortunate, on the other hand, will take their 
+last breath suff ocated by Gaea's roots.
+Apply the following steps during Step 3 of the Avatar Setup:
+• Place the Gaea Model in the Black Rose Room.
+• Place the Filius Token in the Throne Room.
+• Place the Filius Evocation Card in the  slot of the Avatar Board.
+• Place a  Root Token in each  Room.
+• Remove the Nature's Fury card from the Forgotten Spells deck.
+ in a  from the 
+target. 
+ 1 from each 
+from  onto that .
+If in the Lodge there are at least 
+3 with 2: removes 3 of those 
+ and places an Arbor Vitae in 
+the .
+Blossoming Burst, Dominion
+Gaea
+ 12 
+ 1
+ 2
+ .
+  .
+A Avatar Eff ect 
+ The Eff ect indicated by the  symbol 
+on the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool 
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. 
+ Gaea's Tool is the Root Token. 
+C Avatar Skills
+ Gaea has the Avatar Skills explained in 
+detail on page 10.
+ 
+AVATAR CARD ANATOMY
+1
+target. 
+up to 1
+from 1
+1
+Moves up to
+: Places
+Blossoming Burst, Dominion
+Gaea
+ 
+ 
+: 
+ 
+Blossoming Burst, Dominion
+Gaea
+
+Moves 
+A
+C
+ 
+B
+
+=== PAGE 9 ===
+Emerald Rose
+6 3 1
+9
+ARBOR VITAE
+Arbor Vitae Tokens E represent the 
+consolidation of Gaea's power in the Lodge 
+and are taken into account by the Eff ects 
+related to Gaea.
+ROOTS TOKENS 
+Some Eff ects related to Gaea place a Root 
+Token in a Room. A Room may contain a 
+single Root Token. If an Eff ect indicates to 
+place a Root Token in a Room that already 
+contains one, or indicates to place one but no 
+Root Tokens are present in the game pool, do 
+not place any tokens.
+Root Tokens follow these rules:
+• Placement: when a Root Token is placed in 
+a Room, it must be placed to the left of the 
+Instability Slots D , adding two Instability 
+Slots to the Room. It is possible to place a 
+Root Token in a Rebuilt Room.
+• Instability: when  is placed in a Room 
+where a Root Token is, the  must fi rst be 
+placed on the Root Token's Instability Slots, 
+if available. The  on the Root Token 
+is considered to be placed in the Room 
+where the token is. If the Root Token is in 
+a Rebuilt Room, only the Black Rose can 
+place  on it.
+• Destruction: a Root Token is considered as 
+a Model (). It can be targeted like a normal 
+Model and suff ers Eff ects that target the 
+Room in which it is (). A Root Token 
+that suff ers an Eff ect completely ignores it 
+unless it infl icts at least 2 to it, in which 
+case the Root Token is removed from 
+the Lodge and each  on it returns to its 
+owner's pool.
+• Rebuilding: When a Room containing a 
+Root Token is rebuilt, the Token is removed.
+Avatar Special Rules — Gaea
+E
+D
+
+=== PAGE 10 ===
+10
+:   
+Gaea chooses as a target:
+: the Room with no , if tied... 
+: the Room with the most , if tied... 
+: the Room with the most Models, if tied, the Choice of the Crown applies.
+   
+Gaea chooses as a target:
+: the Room with no , if tied... 
+: the Room with the most , if tied... 
+: the Room with the least Models, if tied, the Choice of the Crown applies.
+Blossoming Burst
+At the beginning of the Clean-up Phase (before resolving Step 1 of the Phase) the  gains 
+1 for each Arbor Vitae Token and for each Root Token in the Lodge with both Instability 
+Slots occupied. Then, if there are at least three Arbor Vitae Tokens in the Lodge, the 
+immediately wins the game.
+Dominion
+If Gaea has to activate when she is in a Cell, she does not activate and places herself in the 
+Black Rose Room.
+GAEA PRIORITY
+Avatar Skills — Gaea
+
+=== PAGE 11 ===
+11
+
+Filius chooses as a target:
+: the Mage with the most , if 
+tied... 
+: the Mage with the most , if 
+tied... 
+: the closest Mage, if tied... 
+: the Mage with the most , if tied, 
+the Choice of the Crown applies
+If Filius cannot reach its target, it moves 
+as close to it as possible. If there are 
+no Mages in the Lodge when Filius 
+activates, it does not move and ends its 
+activation.
+Servant — Filius
+A Servant is an Evocation that has a special 
+bond with the Avatar. 
+Filius is the Servant of Gaea and is represented 
+in the Lodge by the Filius Token (which 
+counts as if it was a regular Evocation Model) 
+and its own Servant Evocation Card. The 
+Servant Evocation Card is never discarded 
+from the  slot of the Avatar Board, even if 
+Filius is defeated or removed.
+SPECIAL RULES
+Priority
+When activated, Filius follows the Priority 
+on its Servant Evocation Card (also see box) 
+to choose a target, move closer to it and 
+attack it.
+Settle
+When Filius is defeated, it places 1 in a 
+from the Room in which it was defeated.
+Comeback
+If Filius has to activate when its Model is not 
+in the Lodge (it was previously defeated or 
+removed), Filius does not activate, and the 
+places its Model in the Throne Room.
+FILIUS PRIORITY
+Gaea's Servant, Filius, is a faun of the 
+Primaevi people, who appear in the game 
+Nova Aetas Renaissance. If you have a copy 
+of the game, you can replace the Filius Token 
+with the Model of any faun.
+FILIUS MODEL
+Beast 2 3 Servant
+Filius 2
+Priority, Settle, Comeback
+When it performs a , if the  is:
+, , , : Filius's  target is 
+.
+, , , : Filius has +1.
+    
+
+=== PAGE 12 ===
+12
+
+
+
+Path
+Start
+You gain 1.
+
+You gain 1.
+A Path Start 
+B Track
+C Advance Condition
+B Track
+C Advance Condition
+D End Point  
+E Eff ect
+F Empty Passage
+G Eff ect Passage
+H  Penalty Box
+I  Points Box
+PATH START CARD 
+ANATOMY 
+PATH CARD ANATOMY
+ 1
+ 2
+,  place
+2.
+ +2.
+Convert at least 1.
+
+
+
+
+
+
+
+
+
+A
+
+Path
+Start 
+ 2  1
+ 
+ +  . 
+
+,  place
+2.
+
+
+ 
+
+
+
+ 
+Convert at least 1.
+B
+ H
+ I
+C
+C
+
+
+
+B
+F
+D 
+G 
+place
+E
+
+B
+The rules introduced in this chapter allow the use of Paths, a new way Mages can gain . 
+Once the regular game Setup is completed, Paths can be inserted into any Black Rose Wars: 
+Rebirth game as an additional module by following these steps:
+• Create a Path Deck with all the Path Cards available, making sure not to mix Path Start 
+Cards into it.
+• Place the Path Deck next to the Quests Deck. 
+• Assign each Mage a Path Start Card. That Mage places it in front of them and places one 
+of their  on the  symbol.
+• Starting with the Mage who has the  and proceeding clockwise, each Mage draws 
+three Path Cards from the Path Deck, chooses one and places it to the right of their Path 
+Start Card so that it is adjacent to it and so that the Tracks B on the two cards match; 
+they then shuffl e and place the cards not chosen at the bottom of the Path Deck.
+Pat hs
+
+=== PAGE 13 ===
+13
+Using Paths
+During the game, a Mage must try to meet the Advance Condition C of the Path Card 
+or Path Start Card, on which their  is. Whenever they succeed, the Mage can move their 
+ onto one of the next Passages connected (with a continuous Track B ) to the one from 
+which the  starts.
+The Mage's goal is to advance their  as far as possible, moving on to the next Path Card 
+until they reach an End Point  D (see next page).
+
+
+You gain 1.
+ 2  1
+,  place
+2.
+ +2.
+Convert at least 1.
+
+
+ 
+ 
+
+
+
+ 
+A Room with at least 1 of your 
+ is rebuilt.
+,  draw 2
+from your .
+ 2  1
+ +2.
+
+  
+
+
+You lose at least 1.
+,  look at 4
+from the Library. 
+Draw 2 of those 
+ and discard the others.
+ 1  2
+ +2.
+
+
+
+ 
+
+You gain  due to a Mage's 
+defeat.
+,  place
+yourself in
+the target Room.
+ 2  1
+ +2.
+ 
+
+
+
+    
+
+Path
+Start ,  place
+2.
+ +2. 
+
+ 
+ 
+
+
+
+ 
+,  draw 2
+from your .
+ +2.
+
+  
+
+
+,  look at 4
+from the Library. 
+Draw 2 of those 
+ and discard the 
+others.
+ +2.
+
+
+
+    
+
+
+ 
+
+
+=== PAGE 14 ===
+14
+GAINING A PATH CARD
+A Mage can gain a new Path Card in two ways:
+Advance: whenever a Mage moves their  onto the Passage of a diff erent card than the 
+one they started from and that is not an End Point  D , that Mage draws three Path Cards 
+from the Path Deck, chooses one and places it to the right of their last Path Card so that it is 
+adjacent to it and the Tracks of the two cards match; they then shuffl e and place the cards not 
+chosen at the bottom of the Path Deck.
+Quests: whenever a Mage would draw a Quest Card they can instead draw three Path Cards 
+from the Path Deck, choose one and place it to the right of their last Path Card (or Path Start 
+Card) so that it is adjacent to it and the Tracks of the two cards match; they then shuffl e and 
+place the cards not chosen at the bottom of the Path Deck.
+REACHING AN EFFECT PASSAGE 
+When a Mage moves their  onto an Eff ect Passage  G , they can resolve the Eff ect E of 
+the Passage Card on which their  is. These Eff ects are treated as if they were generated by a 
+triggered Trap () Spell which uses the rules indicated on page 18 of the core game manual.
+REACHING AN END POINT 
+When the  of a Mage reaches an End Point  D they gain a Complete Path and the 
+gains the  indicated in the Eff ect next to the End Point . 
+For the remainder of the game, the Mage can no longer meet the Advance Condition C
+of the Path Card on which their  is and cannot gain any new Path Cards. That Mage must 
+then wait until the End of the Game to calculate the  gained thanks to their Path Cards.
+
+Infl ict 2. Place 1.
+Geoform ,:
+Infl ict 2. Place 1.
+  
+Arcane Sinkhole
+Target the Room that Mage is in. 
+Infl ict 2. 
+Place 2.
+  
+Another Mage enters a  or 
+ Room:
+Arcane Sinkhole
+
+
+
+.  Place 1 .  Infl ict 2
+: ,  Geoform
+.  Place 1 . 2 Infl ict
+  
+Arcane Sinkhole
+Target the Room that Mage is in. 
+. 2 Infl ict
+. 2 Place
+  
+ or  Another Mage enters a 
+ Room: 
+Arcane Sinkhole
+
+
+
+GAEA - 001 / 12
+
+Arcane Sinkhole 
+
+ 
+Place
+Another Mage enters a  or 
+ Room:
+
+Place 2.
+
+Target the Room that Mage is in. 
+
+Target the Room that Mage is in. Target the Room that Mage is in. Target the Room that Mage is in. Target the Room that Mage is in. Infl ict Infl ict Infl ict Infl ict 2. Place 2
+
+
+
+
+
+
+
+
+
+
+
+Place 2
+Infl ict 2. Place 1.
+Geoform ,:
+Infl ict 2. Place 1.
+  
+Arcane Sinkhole
+Target the Room that Mage is in. 
+Infl ict 2. 
+Place 2.
+  
+Another Mage enters a  or 
+ Room:
+Arcane Sinkhole
+
+
+
+.  Place 1 .  Infl ict 2
+: ,  Geoform
+.  Place 1 . 2 Infl ict
+  
+Arcane Sinkhole
+Target the Room that Mage is in. 
+. 2 Infl ict
+. 2 Place
+  
+ or  Another Mage enters a 
+ Room: 
+Arcane Sinkhole
+
+
+
+GAEA - 001 / 12
+
+ 
+A Room with at least 1 of your 
+ is rebuilt.
+,  draw 2
+from your .
+ 2  1
+ +2.
+
+  
+A Room with at least 
+rebuilt
+2
+.
+
+
+
+
+
+
+You lose at least 1.
+,  look 
+from the Library. 
+at 4
+Draw 2 of those 
+ and discard the others.
+ 2  1
+ +2.
+
+
+ from the Library. 
+ of those 
+discard the 
+others.
+
+ +2.
+
+ 
+
+You gain  due to a Mage's 
+defeat.
+,  place
+yourself in
+the target Room.
+ 1  2
+ +2.
+ 
+
+
+
+
+
+Path
+Start
+You gain 1.
+
+
+
+
+Infl ict  to at least 2 Models 
+with a single Effect.
+,  convert 
+2.
+ 1  2
+ +2.
+
+
+
+
+
+
+You gain 1. with a single Effect.
+  convert 
+
+gain 1 with a single Effect. Advance: the  is moved 
+to the Passage of a Path 
+Card diff erent from the one 
+from which it started.
+Quests: the Mage would 
+draw a Quest Card. Instead, the Mage draws three Path 
+Cards, chooses one and places it to 
+the right of their rightmost Path 
+Card.
+EXAMPLE: A MAGE GAINS A NEW PATH CARD
+
+=== PAGE 15 ===
+15
+
+
+
+Path
+Start
+You gain 1.
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+
+ 
+Place at least 2 in a Room 
+using a single Effect.
+,  convert 
+2.
+ 2  1
+ +2.
+ 
+
+
+
+
+Path
+Start
+You gain 1.
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+
+ 
+Place at least 2 in a Room 
+using a single Effect.
+,  convert 
+2.
+ 2  1
+ +2.
+ 
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+ Complete Path
+: +2
+Incomplete Path 
+: -6
+ 
+ 2
+    
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+
+
+  
+ 1
+  
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+
+
+ 
+ 1
+ 
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+ 2
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+ 
+ 1
+  
+
+
+ 
+You summon an Evocation.
+,  draw 1 Quest of 
+the current Moon.
+ 2  1
+ +2.
+  
+
+End of the Game — Additional 
+During the end of game calculations, Mages gain additional  from Path Cards as described 
+below:
+• The Mage has a Complete Path: the Mage gains the sum of the  indicated on the 
+ Points Box I of the Path Card with their  and all the Path Cards to the left of it.
+• The Mage does not have a Complete Path: the Mage loses the sum of the  indicated 
+on the  Penalty Box H of all their Path Cards.
+convert 
+.
+ +2.
+
+ at least 2 in a Room 
+using a single Effect.
+
+ 
+,  draw 1 Quest of 
+the current Moon.
+ +2.
+  
+
+You summon an Evocation.
+Complete Path
+: +2
+   
+  1
+ 
+ 2  1
+  
+  1
+
+=== PAGE 16 ===
+16
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules and using Legendary Scenario 
+Cards dedicated to it.
+In Stop the Threat, the Mages will have to stop the awakening of Gaea, progenitor of the 
+titans, who is attempting to subdue the power of the Black Rose.
+TWO PLAYERS
+Le g e n d a ry S c e n a r i o : 
+Stop the Threat
+Additional Setup
+Apply the following during the regular Game Setup:
+• Step 1, 2 and 3: Instead of what is indicated in these points, arrange the Rooms and Cells 
+as shown in the image in relation to the number of players participating in the game.
+• Before step 4: Replace the Black Rose Room with the Emerald Rose Room. Replace the 
+Forge, Garden and Treasure Room with the Thorny Clearing, Life Fountain and Indoor Forest 
+Rooms.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 5, the Third 
+Moon Cube on Slot 21, and
+the Black Rose Cube on Slot 
+28 of the Power Board. 
+2. Follow the steps of Gaea's 
+Avatar Setup.
+3. Carry out the additional 
+setup to include the Path Deck in the game.
+4. Place the Legendary Scenario Card Stop the Threat of the relevant Moon Phase on top 
+of each of the three Event decks. These cards will be the fi rst Event to be resolved in each 
+of the Moon Phases.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• False Idols: when a Mage defeats Gaea they do not gain a  of the .
+• Toll: when a Mage removes a Root Token, they gain 1 of the .
+Honorable Mention
+At the end of the game, the Mage with the most  gains 3. If tied, no Mage gains 
+additional .
+
+=== PAGE 17 ===
+17
+Lodge Layouts
+
+
+ONE PLAYER
+
+FOUR PLAYERS
+
+
+ 
+TWO PLAYERS
+
+
+
+FIVE PLAYERS
+
+
+
+ 
+
+THREE PLAYERS
+ 
+ 
+
+=== PAGE 18 ===
+18
+
+=== PAGE 19 ===
+19
+
+=== PAGE 20 ===
+ is expansion adds a new Hunt Mission to be included in any Nova Aetas Renaissance 
+Campaign of the Core Game or any Expansion.
+If you decide to use Gaea in your Campaign, add the Event Card found in this box to 
+the Core Game Event Card Deck. 
+Gaea is a Hunt Mission and follows all the rules for this type of Mission, described in 
+the core Rulebook of Nova Aetas Renaissance.
+Instead of waiting to draw the Event Card "Weeds," at any point in the Main Campaign 
+you can mark the title of this Side Mission in the Active Side Mission Slot and play it 
+as if you had drawn the Event Card "Weeds."
+Bounty
+How to use this Expansion
+Some Models occupy more than a single Battle eld Square.  ese Models are called 
+Large Models.  ese Models occupy only a single Square during movement. In other 
+words, while moving, a Large Model is considered as a normal Model, and then 
+returns to occupying more Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they choose any of the Squares 
+occupied by the Model and count starting from the chosen Square (a normal-sized 
+Model can be used to simulate the movement of the Large Model). When the Large 
+Model  nishes its movement, the players place the Model so that the Squares occupied 
+include the Square where it  nished its movement. If placement is not possible because 
+the required Squares (usually 4) are not all available, players refer to the following 
+rules:
+If there are Models occupying the Squares, the Large Model pushes the Models ◆
+occupying them into adjacent available Squares or the nearest available Square.
+If there are Scenic Elements occupying Squares, place the Large Model in Squares ◆
+that are available or occupied by other Models. If this is not possible, the Large 
+Model ends its Movement in a Square that allows its placement.
+Large Models
+A Large Model is considered to be targeted by an Attack with the Area Trait 
+if at least one of the Squares it occupies is within the Area of the Attack.
+If a Large Model is the target of an Attack with the Area Trait, it su ers only the 
+E ect intended for the target, even if it occupies multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area Trait and occupies more 
+than one Square within the Area, it su ers the additional E ect only once.
+A Large Model always has a valid Line of Sight on all other Models and vice versa
+Large Models and Area Effects
+Large Models and Line of Sight
+
+=== PAGE 21 ===
+ is expansion adds a new Hunt Mission to be included in any Nova Aetas Renaissance 
+Campaign of the Core Game or any Expansion.
+If you decide to use Gaea in your Campaign, add the Event Card found in this box to 
+the Core Game Event Card Deck. 
+Gaea is a Hunt Mission and follows all the rules for this type of Mission, described in 
+the core Rulebook of Nova Aetas Renaissance.
+Instead of waiting to draw the Event Card "Weeds," at any point in the Main Campaign 
+you can mark the title of this Side Mission in the Active Side Mission Slot and play it 
+as if you had drawn the Event Card "Weeds."
+Bounty
+How to use this Expansion
+Some Models occupy more than a single Battle eld Square.  ese Models are called 
+Large Models.  ese Models occupy only a single Square during movement. In other 
+words, while moving, a Large Model is considered as a normal Model, and then 
+returns to occupying more Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they choose any of the Squares 
+occupied by the Model and count starting from the chosen Square (a normal-sized 
+Model can be used to simulate the movement of the Large Model). When the Large 
+Model  nishes its movement, the players place the Model so that the Squares occupied 
+include the Square where it  nished its movement. If placement is not possible because 
+the required Squares (usually 4) are not all available, players refer to the following 
+rules:
+If there are Models occupying the Squares, the Large Model pushes the Models ◆
+occupying them into adjacent available Squares or the nearest available Square.
+If there are Scenic Elements occupying Squares, place the Large Model in Squares ◆
+that are available or occupied by other Models. If this is not possible, the Large 
+Model ends its Movement in a Square that allows its placement.
+Large Models
+ is expansion adds a new Hunt Mission to be included in any Nova Aetas Renaissance 
+Campaign of the Core Game or any Expansion.
+If you decide to use Gaea in your Campaign, add the Event Card found in this box to 
+the Core Game Event Card Deck. 
+Gaea is a Hunt Mission and follows all the rules for this type of Mission, described in 
+the core Rulebook of Nova Aetas Renaissance.
+Instead of waiting to draw the Event Card "Weeds," at any point in the Main Campaign 
+you can mark the title of this Side Mission in the Active Side Mission Slot and play it 
+as if you had drawn the Event Card "Weeds."
+Some Models occupy more than a single Battle eld Square.  ese Models are called 
+Large Models.  ese Models occupy only a single Square during movement. In other 
+words, while moving, a Large Model is considered as a normal Model, and then 
+returns to occupying more Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they choose any of the Squares 
+occupied by the Model and count starting from the chosen Square (a normal-sized 
+Model can be used to simulate the movement of the Large Model). When the Large 
+Model  nishes its movement, the players place the Model so that the Squares occupied 
+include the Square where it  nished its movement. If placement is not possible because 
+the required Squares (usually 4) are not all available, players refer to the following 
+rules:
+◆
+◆
+Large Models
+
+=== PAGE 22 ===
+1 Event Mission Card 8 Mission Cards
+4 Reward Cards 1 Enemy Card
+1 Enemy Draft Card 16 Gaea Action Cards
+Weeds
+ Alarmed farmers stop you when you 
+pass by their farm. A plague is ruining 
+their crops. Strange plants are growing 
+in the  elds, making it impossible for 
+them to do their farm work.  ey hand 
+you a map on which a speci c spot in the 
+forest is marked, “It all started when we 
+eradicated some weeds from here.”
+You can mark ◆
+the G1 “ e 
+Revolt of Nature” 
+Side Mission in 
+the Active Side 
+Missions.
+1 Enemy Card
+
+
+
+
+
+
+4
+7
+5
+6
+4 
+Geomancer
+7 
+ 1 2 
+6
+3
+ 1-6
+3   
+, Blind 1  
+
+4 Reward Cards
+Reward 
+G1
+Reward 
+16 Gaea Action Cards
+Gaea
+UNT H
+1 Enemy Draft Card
+4 Reward Cards
+Swarm of Bugs 
+Blind 
+3 +1 1-4  3     
+Swarm of Bugs Magic Trick Magic Trick 
+16 Gaea Action Cards
+Gaea
+Gaea places herself adjacent to the 
+nearest Hero and performs the 
+following Attack on them.
+Pierce
+ Hinder 
+3
+ 6+
+ 1
+
+Time of  Sowing 3 1
+1 Enemy Draft Card
+ 
+1
+Geomancer
+ G1  
+the revolt of 
+nature
+Components
+Key
+.  Read the back of ◆
+Components
+1x Gaea • 
+1x Geomancer (Talia) • 
+1x Gaea Deck (do not shu e or reveal this deck) • 
+4x Tree • 
+Tiles 1A, 2A, 3A, 4A • 
+: G1, G2, G3, G4 (do not reveal these cards)  • 
+Key
+ Heroes
+ Gaea
+ Geomancer (Talia)
+.  Read the back of ◆
+H2
+
+=== PAGE 23 ===
+Geomancer Gaea
+Components
+1 Mission Envelope
+G1
+2 Activation Tokens 
+
+=== PAGE 24 ===
+Gaea

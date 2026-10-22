@@ -1,0 +1,1705 @@
+
+Sator Box
+Table of Contents Components
+Components . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+New and Modified Rules . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Modified Setup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Becoming an Evocation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Fading Evocations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Auto Immunity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+New Magic Schools and Mechanics . . . . . . . . . . . . . . . . . 4
+Trickery . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Room Infestation Evocation Cards . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Omnia . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Blood . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Poison Tokens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Hashomer Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Elementalism . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Bardic............................................ 6
+Cartomancy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Tarot Cards Quest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Mind . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Mutated Pigmen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Enchantment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Equipment Evocation Cards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Demonology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Void . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Chronomancy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Interruptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Solo Play . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Components . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Activation Tokens (8) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Solo Play Quests (15) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Solo Play Events (15) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Evocation Tokens (30) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Perilium (1) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Black Rose Evocations (31) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Solo Play Setup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Activating the Black Rose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Playing in solo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Power Points and End Game . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Earning Power Points (PP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+End Game and Final Score . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Preconstructed Decks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Annihilator. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .13
+Dominator. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+Gatherer. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+New Rooms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+New Mage Sheets and Mage Cards . . . . . . . . . . . . . . . . . 15
+The Black Rose War - Campaign Mode . . . . . . . . . . . . . . 16
+Schools . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Legendary Scenarios . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Alternative Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Honorable Mentions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Turin, Italy - The First Lodge . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Plymouth, England - The Shattered Rose . . . . . . . . . . . . . . . . 17
+Black Rose Power Cards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Versailles, France - The Rebel Lodge . . . . . . . . . . . . . . . . . . . 18
+Sevilla, Spain - Conqueror King . . . . . . . . . . . . . . . . . . . . . . . 18
+Buda, Hungary - the Lodge of the Keepers . . . . . . . . . . . . . . 19
+Amsterdam, Holland - The Portals Lodge . . . . . . . . . . . . . . . 20
+Using Portals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Bronte, Kingdom of Sicily - The Artifacts . . . . . . . . . . . . . . . 21
+Asymmetrical Mages . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Campaign Sheet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+Spells
+• 396 Spell Cards • 51 Custom Spell Cards • 9 Forgotten Spell Cards • 18 School Reference Cards
+Mages
+• 6 Mage Sheets • 24 Mage Cards • 17 Mage Models
+Evocations
+• 59 Evocation Cards • 56 Evocation Models
+Rooms
+• 13 Room Activation Tokens • 13 Room Tiles
+Solo Play
+• 1 Perilium • 8 Solo Room Activation Tokens • 30 Solo Evocation Tokens • 31 Solo Evocation Cards • 15 Solo Quest Cards • 15 Solo Event Cards • 1 Solo Reference Card
+Legendary Events
+• 20 Artifact Cards • 13 Black Rose’s Power Cards • 3 Portals
+Old Jukas - Sine Tempore Material
+• 16 Skill Tokens • 1 Activation Token • 1 Hero Datapad • 1 Skill Datapad • 9 Equipment Cards
+Old Jukas - Nova Aetas Material
+• 1 Activation Token • 1 Personae Sheet • 3 Skill Cards • 3 Equipment Cards •
+Various Tokens
+• 60 Trophy Tokens • 6 Power Point Tokens • 7 Mini Power Point Tokens • 9 Cartomancy Tokens • 3 Room Infestations Tokens • 3 Blade Barrier Tokens • 12 Poison Tokens
+2
+New and Modified Rules
+This rule replaces points 8, 9 and 11 of the Game Setup indicated in the 
+Rulebook of the basic game of Black Rose Wars (page 16).
+8. Starting with the First Player (proceeding clockwise from there) 
+choose a Mage, take the matching miniature, the Mage Card and the 
+Custom spells of the chosen Mage.
+Choose a color among those Mage Cell colors chosen in step 4:
+0 0 0 0 ; 0 0 if you own the Hidden Thorns expansion.
+Take all Damage/Instability Tokens, Action Tokens, Rose Pins of the 
+chosen color from the core game box. Take the Protection and Trap 
+Tokens, the Trophy Tokens; the Mage Sheet and the Power Point 
+Token of the chosen color from this box.
+9. Starting with the First Player, each Mage chooses their starting 
+Magic School from those available; the six in the core game, the eleven 
+in the Sator Box, and the Myth school in the Crono expansion if available 
+(a School already chosen by another Mage may not be selected). 
+Each chosen school becomes one of the six schools of the Library for the 
+rest of the game (see 11). 
+Then they choose their own Starting Grimoire. This choice is made 
+between the two available on the back of the Reference Cards of the 
+chosen School; select these spells from the Magic School according to 
+the Starting Grimoire they chose. Everyone adds 1 of their Custom 
+Spells to the chosen Grimoire. The remaining 2 Custom Spells are kept 
+aside by the owner. When a change of Moon occurs, this player can add 
+one of these cards to their Hand.
+11. Place the decks of the Magic Schools selected by the players near 
+the board, reachable by all players. Put the Reference Cards under the 
+decks to indicate the Magic schools (see below). 
+In games with less than six players, take a card from each school left out 
+of the game; create a deck with them and shuffle it, then draw a number 
+of cards from this deck equal to 6 minus the players participating in the 
+game. The schools of origin of the extracted Spell Cards will be part of 
+the Library of the game.
+The deck of Forgotten Spells should be set nearby - it will be needed 
+when the game enters the Second Moon Phase.
+These seven decks make up the Library.
+This rule replaces the lower box in the Rulebook of the core game of 
+Black Rose Wars on page 26.
+A Mage and the Mage’s Evocations are immune to any effect produced 
+by that Mage, their Spells or Evocations. As a result, a Mage cannot 
+voluntarily inflict damage to them self or their Evocations. An Evocation 
+cannot damage the Mage who summoned it or another Evocation under 
+its control unless it acts under the control of an opposing Mage (in which 
+case it will place Damage Tokens of the Mage who controls it for that action).
+Effects of any kind never affect the Mage who generate them unless they 
+are Trap or Defense effects, or the text of the spell explicitly states it.
+The only exceptions to this rule are effects that allow you to remove or 
+convert damage to your Mage or Summons, or activate your Evocations.
+This rule replaces the rules of the reverse effect of Disfiguring Mutation 
+in the Codex Arcana of the basic game of Black Rose Wars on page 14.
+Some effects of the game allow Mages to become an Evocation; 
+specifically, a Mage can become an Abomination, a Mutated Pigman, or 
+the Necrodragon. When this happens, replace its model with that of the 
+Evocation. For the duration of the effect, the Mage uses theand
+characteristics indicated on the Evocation card instead of theirs; the 
+Mage continues to use its normal Wound value. In the Action Phase, 
+the Mage acts normally, in addition they can also act as an Evocation in 
+the Evocation Phase following the instructions on the Evocation Card. 
+A Mage in this state is considered to be both a Mage and an Evocation, 
+and is influenced by Spells that can target either. Spells that remove the 
+This rule also affects the Abomination provided with the Black Rose 
+Wars core game box; replace the Abomination Evocation Cards supplied 
+with the core box with those in this box.
+Some Evocations have one or more  icons. When one of these 
+Evocations is summoned, place a Black Rose Damage/Instability Token on 
+each of these icons. During each Clean-up Phase, one of these tokens is 
+removed; when the last token is removed, that Evocation leaves the game.
+Some Evocations, such as Necrodragon, indicate 
+alternative ways to remove 
+tokens from their 
+cards that replace 
+the removal during 
+the Clean-up Phase.
+Modified Setup
+Auto Immunity
+Becoming an Evocation
+Fading Evocations
+transformed Evocation status of a Mage, will return the Mage to their 
+standard form.
+A Mage who is defeated while in the form of an Evocation returns to 
+their Cell as usual; do not remove the Evocation form. If a Mage in an 
+Evocation form is again transformed into an Evocation, replace the 
+current Evocation with the new one (e.g., if a Mage has become a Mutated 
+Pigman, and the effect of a spell makes it become a Necrodragon, the 
+Mutated Pigman Evocation is removed and replaced by the Necrodragon).
+A transformed Mage returns to their Mage form using the rules indicated 
+on the card for that Evocation.
+
+  
+Abomination
+*
+001 / 009
+
+
+3
+“Happiness, light-heartedness, and wonder are powerful feelings. Silly 
+the Mage who underestimates them.”
+The Mage of the Trickery school mocks opponents, moves them, steals 
+their Power Points, and hits them hard. Many of the strategies of this 
+school aim at eliminating their opponents and positioning Instability. 
+The Trickery Mage steals Power Points in chaotic and unmanageable ways.
+The trademark of these Mages are the peculiar evocations called Room 
+Infestations. These immortal Evocations infest the Rooms, and it is almost 
+impossible to get rid of them. Pink Elephants who trample the Mages in 
+their crazy dance; animated objects that defend their room; floods and 
+other oddities will invade the Lodge because of these crazy Spells.
+Key elements of the spells: Opponent 
+movement, Stealing Points, Instability 
+positioning, focused damage, Room 
+Infestations, Evocations, disturbing 
+opponents.
+Affinity with other schools: None... or 
+maybe all!
+Difficulty: Medium/High
+“True power is knowing everything.”
+The Mages of the Omnia school are practical and versatile. Direct 
+pupils of the last Magister (who has now been deposed), these Mages 
+know the secrets of all the six Black Rose primary Schools. Their magic 
+does not focus on a single strategy, but pursues all ways: eliminate 
+opponents, destroy the Lodge, complete Quests, and gain power.
+Simplicity and effectiveness are the heart of this school that 
+ranges from starting fires to making one’s opponents trapped.
+Nonetheless, Mages who decide to specialize in this school must be very 
+careful about what they learn, mastering all possible strategies, and trying 
+to pursue them at the same time. This school is only for great minds.
+Key elements of the spells: Kills, Power Points, Instabilities, Quests, 
+Events.
+Affinity with other schools: All
+Difficulty: Low
+New Magic Schools and Mechanics
+Trickery
+Omnia
+Room Infestations Evocation Cards (green scroll)
+Room Infestation cards are a new type of Evocation that allow 
+Mages to add dangers to the Lodge Rooms.
+These Evocations have no Health Points (), and 
+do not take damage. However, they are considered 
+as Models, and they can be targeted and eliminated 
+only through Spells that remove them from the game.
+During the Summoning Phase, they act using only the 
+effect indicated on their card and attack if they have the 
+characteristic. 
+
+4
+Blood
+Poison Tokens
+Some Blood School spells assign 
+Poison tokens to the enemy Mages. 
+These allow you to gain some perks, 
+in addition to inflicting damage with 
+a delayed effect.
+Through the effects of the Blood 
+School spells, it is possible to assign 
+Poison Tokens to opposing Mages. A Mage cannot have more 
+than 3 Poison Tokens assigned to it. The excess ones are 
+discarded. It is not possible to assign more than the 12 Poison 
+Tokens in the game. 
+A defeated Mage must still keep all Poison Tokens.
+Whenever a Poison Token is assigned to an opposing 
+mage, place a Damage cube directly on the token, 
+using the color of the Mage who inflicted that status.
+Any effect that heals a Mage can be used to remove a Poison 
+Token (along with the temporary Damage cube on it) Instead 
+of removing a Damage cube from that Mage’s sheet. All Poison 
+Tokens will only cause Damage if they remain on the Mage into 
+the following Clean-up Phase.
+In the Clean-up Phase, all Poison Tokens assigned to a Mage 
+are discarded, and the Damage cubes that were on the Poison 
+Tokens are moved to the victim’s sheet (even if the Mage is in 
+their Cell). The affected Mage then discards cards from their 
+hand based on the damage suffered: 1 to 2 damage - discard 1 
+card; 3 damage - discard 2 cards.
+115 / 158
+ and assign  Infl ict 
+ to the Target. Token Poison 1 
+ .  and  You may 
+If Hashomer is in an adjacent Room 
+ more  choose: Infl ict 
+Hashomer Action. or use a 
+  
+Boiling Poison
+  
+Boiling Poison
+Hashomer Model
+If, in the Setup phase, you add Blood School to the game, the Hashomer model must be placed in the Black Rose Room. Hashomer’s 
+model is immune to any effect from the game, does not activate Traps, and does not take damage. It can only be targeted by effects 
+that would affect Hashomer Actions (see below).
+Hashomer Actions (red scroll)
+The Cards: Just like normal Evocations, they occupy one of the three dedicated spaces on the Mage Sheet. Each Hashomer Action 
+Card shows the name of the action on the front and the game Effect.
+In the Lodge: Summoned Hashomer Actions do not use a token or miniature for identification; they can be affected by targeting Hashomer’s 
+model and count as if they were Evocations in the room containing Hashomer. When Hashomer attacks via a Hashomer Action, it counts as if it 
+were an Evocation attack. Hashomer Actions can be affected by effects that remove Evocations. To target them with one of these effects, you must 
+target the Hashomer model and choose one of the Hashomer Actions in play.
+Activate Hashomer Actions: Hashomer Actions can be activated in the Evocation Phase as normal Evocations 
+or through the effects of spells from the Blood School during the Action Phase. Each Hashomer Action, when 
+activated, describes a series of actions performed by the Hashomer model.
+
+
+“Your crimson lifeblood! I don’t want anything else from you since 
+nothing can match its power.”
+Blood school Mages are masters of murder. They prefer the use of 
+spells that poison the opponent and allow them to move like shadows.
+Their most formidable weapon is Hashomer, an Avatar of Death that 
+they unleash against their opponents by taking advantage of the special 
+Evocations (called Hashomer Actions). Command of Hashomer through 
+these spells empowers the Mages of the Blood School to unleash his fury 
+against their enemies.
+Key elements of the spells: Kill opponents, melee damage, movement, 
+Hashomer actions, Poison, heavy damage on a single target, combinations 
+with Hashomer presence. 
+Affinity with other schools: Transmutation, Enchantment, Myth.
+Difficulty: Low/Medium
+Poison Token
+5
+“Impure adulterers, rapists of our land; we are your punishment, finally 
+arrived!”
+Elementalist Mages favor the annihilation of their opponents through the 
+wise use of the Elements, through combat magic and Evocations. By 
+merging spells of fire, earth, water, and air, these Mages can invoke Lava 
+Rains, Powerful Geysers, and summon powerful Elementals.
+This school’s spells can contain Synergies between Elements that, 
+working together, can create more powerful effects than usual. Synergies 
+are always between fire and earth, or between air and water. When a spell 
+is played, if it contains Synergy with an Element present in one of the 
+spells already revealed (Traps and Protections still covered do not count), 
+the spell obtains the additional effect of the Synergy.
+Key elements of the spells: Killing opponents, area damage, Instability, 
+Evocations, Synergy between Elements.
+Affinity with other schools: Destruction, Necromancy.
+Difficulty: Medium
+“Music is the key to the soul, the song of a veil of eternity. 
+Challenge us and you will be like a sailor among the sirens: 
+lost.”
+Any feeling - joy, fear, pain, anger - can be used as a blade 
+sharpened by these Mages, capable of channeling magic into 
+their music and songs.
+Mages specialized in this particular type of magic exploit the 
+versatility of music to create effects that can confuse opponents. 
+This devious magic benefits their opponents, allowing them to solve 
+Quests, draw cards, heal friends and enemies, and obtain shared Power 
+Points.
+All these possibilities, if exploited properly, can benefit the Bard and 
+influence the actions of their opponents with promises of help and 
+power.
+You should never take the temptations of a Bard lightly!
+Key elements of the spells: Manipulate opponents, gain Power Points, 
+solve Quests, disturb opponents, benefit opponents, heal.
+Affinity with other schools: Conspiracy, Illusion, Destruction, 
+Divination, Mind.
+Difficulty: High
+Elementalism
+Bardic
+6
+“Cards are not mere tools of clairvoyance. Tarot cards manipulate fate 
+and can influence it for better or for worse.”
+Mages who rely on Cartomancy gain complete control of their 
+Grimoire and Library, as well as being able to influence their 
+opponents’ Grimoire. 
+The spells of this school are represented by Arcane Tarot 
+cards, each of which can change fate in mysterious ways.
+A Cartomancer needs to manage their hand of cards in the best possible 
+way, and these spells help by allowing this mage to draw more cards 
+than usual from your Grimoire and Library, and, above all, to discard 
+unwanted cards for some benefit.
+Key elements of the spells: Kill opponents, draw cards, discard cards, 
+Power Points, Spell Quests, Evocations.
+Affinity with other schools: Divination, Necromancy, Mind, Elemental.
+Difficulty: Medium/High
+“The only real control worthy of being exercised is that of the mind. 
+Mind shapes reality, and I shape minds.”
+Mind Mages exercise complete control over the wishes 
+of their opponents, manipulating them like puppets.
+The Mind magic allows you to move your opponents, steal their power, 
+control their Evocations, or even transform them into filthy Pigs that are 
+subject to the will of those who dominate them!
+Key elements of the spells: Control opponents, Traps on rooms, 
+subtract Power Points, inflict wounds, transform opponents into Mutated 
+Pigmen, control Beasts.
+Affinity with other schools: Illusion, Cronomancy, Conspiracy, Blood.
+Difficulty: Medium
+Cartomancy
+Mind
+Tarot Cards Quest
+Mutated Pigmen
+Some spells of the Cartomancy School allow you to solve 
+Quests contained in them, keeping them covered until you can 
+satisfy their requests.
+Some of these school’s spells contain 
+Quests (quite similar to the core game 
+Quests) instead of one of the two effects. 
+As for Trap and Protection spells, when 
+you activate one of these cards using the 
+Quest effect, the card remains covered, 
+and a Quest Token is placed on it. At 
+any time during the current turn in 
+which the Quest objective can be 
+completed, this can be revealed and 
+resolved (like a standard Quest). The 
+card is discarded and will not count 
+in the final ranking to determine who 
+solved the most Quests.
+Mind School allows you to transform your opponents into 
+Pigmen submissive to your will.
+Some effects present in this 
+school’s spells allow you to 
+transform target Mages into a 
+Mutated Pigman. When they 
+do, summon a Pigman as you 
+would any other Evocation, and 
+change the target Mage model 
+with a Mutated Pigman model. 
+The Mage will use this model 
+until the Spell effect wears off.
+The turn of the transformed 
+Mage is not affected, but the 
+following rules apply:
+• The Mage is considered both 
+Mage and Evocation (Beast 
+archetype). • As indicated on the 
+Evocation card, the rooms where it is 
+located cannot be activated by anyone, 
+including the transformed Mage. • During the Evocation Phase, it is treated 
+as an Evocation under the control of 
+the Mage who transformed it; the 
+controlling Mage can only use it to 
+move and attack.
+• If the transformed Mage is defeated, 
+do not remove the Mutated Pigman 
+transformation.
+• At the end of the Clean-up Phase, the 
+effect wears off.
+Any effect that removes or kills an Evocation does not kill the 
+Mage but only removes the Mutated Pigman model (which 
+returns to the form of the original Mage) and the relevant 
+Evocation Card.
+
+
+
+Quest Token
+7
+“The Gods have given me these powers; now they too tremble before me!”
+This school’s Mages are warriors and strategists who summon powerful 
+artifacts forged in the lava of Vulcano to annihilate their enemies. 
+Among these artifacts are the Axe of Aetna (to tear apart the most resistant 
+armor), the Blade of Aithérios (imbued with vibrating magic which pierces 
+enemies), and the Tartarus’ Hammer (forged with the wrath of the Titan 
+Perse to make the earth tremble with his heavy blows). These and other 
+artifacts of unspeakable power accompany the Enchanting Mage.
+Key elements of the spells: Kill opponents, Area damage, enhance 
+Physical Attacks, solve Quests, Power Points, activate rooms, synergies 
+between Equipment.
+Affinity with other schools: Transmutation, Myth, Blood, Divination.
+Difficulty: Low/Medium
+Enchantment
+Equipment Evocation Cards
+Equipment Cards are a type of Evocation 
+that empower the Mages that summon 
+them.
+The Cards: Just like normal evocations, they occupy one of the 
+three dedicated spaces on the Mage Sheet.
+Each equipment card shows the name of the object on the front, 
+its Health Points and the game effect.
+Spell Cards: If the Equipment icon is present on a Spell card of 
+the Enchantment School, the linked text effect can be activated.
+In the Lodge: Equipment items do not use a token or miniature 
+for identification; they are considered equipped by the Mage 
+and are identified by their card alone. 
+Damage and Health Points: Equipment can be targeted as if it 
+is an Evocation in the equipped Mage’s room.
+Nevertheless, they do not suffer room effect damage like other 
+models if the  icon is present on their card. 
+When an Equipment item is struck by an enemy effect, the 
+attacker assigns damage of their color, just like a normal 
+evocation.
+When the damage tokens on an Equipment card reaches the 
+number of Health Points, the Equipment breaks and its Mage 
+removes the corresponding card from their sheet.
+“Under the mask, my thousand faces are hidden. Through them, I have 
+deceived, corrupted, and subdued the demons that infest the lands of 
+my ancestors...now you will get to know them.”
+The Demonological Princes, as the Mages of this school call themselves, 
+have sacrificed a part of their soul to have the power to open gashes in the 
+fabric of reality, from which they draw demonic hosts under their control.
+In addition to dominating powerful malevolent energies to influence vast 
+areas with destruction and death, a Demonologist Mage can count on the 
+strength of the demons of the eastern lands, such as the Kappa, Tengu, 
+Oni and the terrifying Kyuubi no Kitsune.
+Key elements of the spells: Kill opponents, area damage, Evocations, 
+Demon Control, Traps.
+Affinity with other schools: Destruction, Elemental, Void.
+Difficulty: Low/Medium
+Demonology
+8
+Void
+Chronomancy
+“The Void looks at you. The Void awaits you. It is essential, terrifying, 
+inevitable; abandon yourself to it and forget even death.”
+Mages who approach the powers of Void are ready for anything, 
+even to lose their very essence, to acquire incredible power.
+The spells of the Void cancel reality and are particularly useful 
+in generating Instability, through which the Void Mages disrupt 
+the world as they pass. Mastering space distortion, Void Mages 
+may move from one place to another in the blink of an eye.
+The most daring connoisseurs of the Void manage to manipulate it by 
+giving shape to nightmarish creatures such as the terrifying Dagon.
+Key elements of the spells: Instability, Moving Instability, Immunity 
+Effects, Room Destruction, Summoning Demons.
+Affinity with other schools: Transmutation, Demonology, Myth.
+Difficulty: Medium
+“Time is the second largest tyrant in any universe. I am the first... “
+Chronomancers are the masters of time. They manipulate time at their 
+pleasure, being able to travel into the future (returning to the present 
+strengthened by that knowledge) or by moving to the past to set traps for 
+current versions of their enemies.
+With their powers, the Mages of this school slow down magic and distort 
+the timeline, thus turning it against those who trigger it.
+Key elements of the spells: Stealing Power Points, Traps, Protections, 
+Killing opponents, Interrupt Effect, spells played from the hand.
+Affinity with other schools: Conspiracy, Destruction Divination, 
+Illusion.
+Difficulty: High
+Interruptions
+Interruptions from the Chronomancy School can be played 
+from the hand to hinder opponents.
+Some of the Chronomancy School spells 
+have an Interrupt effect (), both of 
+their effects are shown in the same way 
+but have different colors.
+To play the standard effect, follow the 
+normal rules. To activate the Stop effect, 
+the card must be played directly from 
+your Hand during an opponent’s turn.
+Each of these effects can only be played 
+in the specific situations indicated. 
+For the same specific situation, it is 
+possible to play all the Interruption 
+cards you want, resolving them one at 
+a time, and then discarding them in your Memories.
+
+9
+Important: All the “Solo Play” components are identified by the symbol . 
+In the “Solo Play” mode, some Activation 
+tokens in the core game rooms are replaced 
+with those provided in this expansion .
+Activation tokens and their effects are 
+explained below.
+Activation Tokens (8)
+Room effect
+During the next Clean-up Phase, choose a Spell 
+on your Mage Sheet and return it to your hand; 
+you cannot return Forgotten Magic to your hand.
+Room effect
+Copy the effect of an already activated room. 
+Beware: this effect does not resolve the Quests of 
+the copied effect. The activated room is always the 
+Mirrors Room. You cannot copy the effect of the 
+Black Rose Room.
+Room effect
+Reduce your Perilium’s value by 1 until the end of 
+the Game Turn.
+Room effect
+Choose a Black Rose Evocation in this room or 
+an adjacent one that has an Aggressiveness value 
+equal to or less than your Perilium. Remove that 
+Evocation.
+Room effect
+Move one of the Events on the Event Board one 
+space (forward or backward). Space reached must 
+not currently be occupied by another Event Card.
+Room effect
+You must discard 3 spells from your hand to your 
+Memories. Draw the first 3 cards of the Forgotten 
+Spells deck: choose 1 and add it to your hand. 
+Place the others at the bottom of the Forgotten 
+Spells deck in any order you like. Once played, 
+the Forgotten Spells card must be removed from 
+play during the Clean-up Phase.
+Room effect
+Choose a Black Rose Evocation that has an 
+Aggressiveness value equal to or less than your 
+Perilium, and move it to reach this room.
+Black Rose 
+Evocation
+Room effect
+Choose a Black Rose Evocation; shift it into this 
+room. Play a spell from your hand. If the moved 
+Evocation is still alive, it attacks you.
+Black Rose 
+Evocation
+Perilium -1
+Solo Play
+Components
+10
+In the “Solo Play” mode, only the 15 Quests supplied with this expansion 
+are used. Otherwise, the Quests for the “Solo Play” mode work exactly 
+like those of the core game.
+These numbered tokens are used to identify the Black Rose Evocations.
+Whenever the Black Rose gets an Evocation, the marker that shows the 
+increasing number and the color indicated on the Evocation card must 
+be placed in the base of the model, in the slots for the Pins of the Rose.
+Solo Play Quests (15)
+Evocation Tokens (30)
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+Solo Play Events (15)
+Black Rose Evocations (31)
+These cards replace the core game Event Cards for “Solo Play” games. 
+Solo Play Event Cards contain the following information:
+(A) The number and the type of Evocations summoned by the Black 
+Rose, this effect is performed only once, when the card is revealed.
+(B) The main action of the Black Rose.
+(C) The position where the Event comes into play and the Power Points 
+earned by the Black Rose (as for the core game).
+(D) Objective: a task to be solved to earn the indicated Power Points and 
+immediately remove the Event from the Event Board.
+These cards contain the stats to use when the Black Rose controls any 
+Evocations and are for use only during a game in the “Solo Play” mode. 
+Any time the player controls any Evocations (even during solo play), 
+they use the Evocation cards provided in the core game. These new 
+Evocation cards present additional information necessary to manage 
+their activations for the Black Rose:
+(A) Aggressiveness: When it is time to activate the Black Rose 
+Evocations, each Evocation will act only if the Mage has a Perilium Value 
+equal to or higher than its Aggressiveness (see the box “Activating the 
+Black Rose” on page 12).
+(B) Identification Code: Each Black Rose Evocation has an 
+Identification Code consisting of a colored icon, which indicates two 
+letters of the model name and an increasing number. When the Black 
+Rose summons an Evocation of a specific type (see Event Cards of the 
+Black Rose), it summons that type with the lowest progressive number. 
+When the Evocation’s model is placed on the game board, the Black 
+Rose Evocation token with the corresponding code and increasing 
+number must be placed on its base. In this way, you can always identify 
+the Evocation on the game board, to see which model corresponds to 
+each Evocation card.
+Perilium (1)
+The Perilium is a numbered disc 
+that can be set with a value ranging 
+from -5 to +5. At the start of the 
+game, the Mage will take the Perilium 
+and set it to 0. 
+During the game the value of the Perilium 
+must always be set indicating a value equal to the 
+difference in PP between the player and the Black Rose. Some elements 
+of the game will increase or decrease the value of the Perilium.
+Any effects that bring the Perilium beyond +5 or below -5 must be 
+ignored.
+-5
+A
+B
+ 
+
+A
+B
+C
+D 0
+11
+Run the standard game setup as indicated in the Black Rose Wars core 
+box rulebook with the exceptions shown below:
+Steps 1 and 2. As indicated in the core game Rulebook.
+Step 3. Replace the Activation Tokens indicated in the game components 
+of the “Solo Play” mode (see page 10), and use the remaining Activation 
+Tokens provided in the core box.
+Step 4. Place a single Mage cell face up as you wish on the game board.
+Step 5. As indicated in the core game Rulebook. Steps 6 and 7. Use this expansion material. Keep the Evocation Deck 
+from the base game close to the Power Board, but do not mix it with the 
+Evocation Deck of the Black Rose that comes with this box.
+Step 8. As indicated in the core game Rulebook.
+Steps 9, 10 and 11. Ignore these steps.
+Then perform these additional steps:
+12. Place your Mage token and Black Rose token on the Power Point 
+track.
+13. Take the Perilium and set its value to 0.
+14. Choose and compose one of the preconstructed Decks as indicated 
+on the following page, and add Personal Spells to it.
+15. Choose the game difficulty between Easy, Medium, or Hard. Shuffle 
+the Black Rose Evocation Deck and draw 4 cards if you chose Easy, 6 if 
+you chose Medium, and 8 if you chose Hard. Place the model of the first 
+Solo Evocation card drawn directly into the Black Rose Room. Place the 
+model of the second drawn Solo Evocation card into the Throne Room. 
+Then, continue to place models of Solo Evocation cards in the order they 
+are drawn into rooms adjacent to the Black Rose Room starting clockwise 
+after the Throne Room until all Black Rose Evocations are placed. 
+NOTE: when playing at the Hard difficulty level, you must place 8 Black 
+Rose Evocations; in this case, place the final drawn Evocation model 
+into the Black Rose Room with the first. If the Infamy of Crete is present 
+among the cards drawn, replace it with another card, and reshuffle its 
+card in the deck.
+A game in the “Solo Play” mode follows the same structure as a regular 
+Black Rose Wars game. Any choice to be made during the game that is not 
+covered by the rules shown in the game material is made by the player. 
+The phases of the game work as in a standard game, with the following 
+exceptions:
+Black Rose Phase
+Follow the core game rules, but use only Solo Events. The effects of the 
+Event cards must be resolved in order, first effect A, then effect B (see the 
+previous page). These Events will typically summon enemies under the 
+control of the Black Rose.
+Study Phase
+In this mode, the Library is not present; the Mage will only draw cards 
+from his or her Grimoire (each game effect that indicates to draw from 
+the Library will point to the Grimoire). In this phase, the Mage draws 4 
+cards and puts them in their hand, together with any cards held in the 
+previous rounds.
+Preparation Phase
+Follow the core game rules.
+When it is the turn of the Black Rose, the player activates 
+the Black Rose Evocations by following these points:
+The Mage compares the value of his Perilium with the 
+Aggressiveness value of each Black Rose Evocation present in the 
+Lodge. All Evocations with Aggressiveness equal to or less than 
+the player’s Perilium will activate. The activation order, based on 
+the Evocations present, is always the following:
+• Mutant Altar from 1 to 5. • Andromeda from 1 to 3. • Landsknecht from 1 to 8. • Divine Altar from 1 to 5. • Cerbero from1 to 3. • Bone Knight from 1 to 3. • Malacoda from 1 to 3. • Infamy of Crete. 
+Once an Evocation is activated, perform the first of the following 
+actions (starting from the top). The action must be able to be 
+performed entirely; otherwise move on to the next.
+• The Evocation moves towards the Mage and attacks them. • The Evocation moves to reach the Evocation controlled by 
+the Mage and attacks it. • The Evocation moves as close to the Mage as possible, 
+always choosing to stay in the rooms with the least Black 
+Rose Evocations.
+During the Evocation Phase, in the Black Rose’s turn, all its 
+Evocations in the Lodge will activate, regardless of the value 
+indicated on the Mage’s Perilium.
+Activating the Black Rose
+Solo Play Setup
+Playing in solo
+Action Phase
+The player takes the Mage’s turn (up to 2 actions as in the base 
+game). Each Spell that targets another Mage can target Black Rose 
+Evocations in this mode, producing their effects if possible. PPs 
+stolen from Mages are taken from the Black Rose.
+Once the Player’s turn is over, it is the Black Rose’s turn, and the 
+Player will control the activation of the Evocations by following the 
+rules indicated in the “Black Rose Activations” box.
+The Mage’s turn and the Black Rose’s turn will continue to alternate 
+until the Mage runs out of the last available action (using all his 
+Physical Actions and revealing all the Spells on his card); at this 
+point the Action Phase ends.
+Evocation Phase
+In this phase, the Black Rose acts as if it were a player.
+Follow the core game rules for the Mage. Once the player’s turn is over, 
+they will check the activation of the Black Rose’s Evocations by following 
+the rules indicated in the “Black Rose Activations” box above, with the 
+difference that all those present will be activated, regardless of the 
+current value of the Mage’s Perilium.
+Clean-up Phase:
+Follow the core game rules.
+12
+Use one of the following preconstructed decks as your Grimoire to face 
+the Solo Play mode.
+ANNIHILATOR
+CONSPIRACY
+• Magic Door
+DESTRUCTION
+• Obscure Armor
+• Maelstrom
+• Maelstrom
+• Fireball
+• Fireball
+• Meteor Swarm
+• Meteor Swarm
+DIVINATION
+• Forget the Grief
+ILLUSION
+• Shadow Step
+• Shadow Step
+NECROMANCY
+• Ice Grip
+• Bone Armor
+• Sick Withering
+• Sick Withering
+TRANSMUTATION
+• Stone Claws
+• Stone Claws
+• Unstable Flames
+• Unstable Flames
+GATHERER
+CONSPIRACY
+• Whispering Wind
+• Whispering Wind
+• Magic Door
+• Magic Door
+• Obscure Intuition
+DESTRUCTION
+• Obscure Explosion
+DIVINATION
+• Arcane Vision
+• Arcane Vision
+• Forget Grief
+• Summer Rite
+• Autumn Rite
+• Spring Rite
+NECROMANCY
+• Bone Armor
+• Bone Armor
+TRANSMUTATION
+• Magic Eruption
+• Unstable Bind
+• Rite of Change
+• Rite of Change
+• Rite of Control
+• Rite of Control
+DOMINATOR
+DESTRUCTION
+• Demon’s Howl
+• Demon’s Howl
+DIVINATION
+• Arcane Vision
+• Arcane Vision
+• Read the Past and 
+Future
+• Read the Past and 
+Future
+ILLUSION
+• Suggestion
+• Suggestion
+NECROMANCY
+• Summon Obscurity
+• Summon Obscurity
+• Invoke Obscurity
+• Invoke Obscurity
+• Vampire’s Bite
+• Vampire’s Bite
+• Obscurity’s Grasp
+• Obscurity’s Grasp
+TRANSMUTATION
+• Disfiguring Mutation
+• Disfiguring Mutation
+Preconstructed Decks
+Power Points and End Game
+Earning Power Points (PP)
+During a game in the “Solo Play” mode, the score is calculated differently 
+than in the base game. To track the Power Points earned by the player on 
+the Power Board, use the following rules:
+• Solo Play Quest: These Quests confer the amount of PP indicated if 
+resolved. Once resolved, they must be discarded. In this mode, the 
+number of quests resolved does not give an additional score 
+at the end of the game. • Solo Play Event: These Events contain a goal. 
+If the Mage manages to satisfy the requests 
+contained therein, the player immediately gains 
+the indicated PP and removes the Solo Play Event 
+from the Event Board, discarding it. • Trophy: Only the Black Rose can earn Trophies in 
+this mode. Each Trophy in possession of the Black 
+Rose at the end of the game will award it with 3PP. • Destroyed Room: When a room is destroyed, whoever 
+has the most Instability tokens on it immediately gains the amount 
+of PP indicated on the Activation tokens. The Activation token is 
+then discarded. In the case of a tie between the Mage and the Black 
+Rose, the PP of the destroyed rooms are assigned to the Black Rose. • Crown: The Crown is not used in this mode.
+End Game and Final Score
+The game ends when the Mage or the Black Rose reaches 30 PP on the 
+Power Board.
+At this point, add the PP obtained from the Trophies to the score of the 
+Black Rose.
+Once you have obtained the final score of the Black Rose, decide the 
+winner of the game!
+13
+The new rooms presented in this expansion, identified by their golden title, can be freely used to 
+replace those of the core game:
+• During setup, you may add one of these new rooms to your game, but you must remove a core 
+game room of the same color (players may mutually decide which room(s) to replace, or the 
+First Player decides, if necessary). You must always end up with the same number of colored 
+rooms.
+• These new rooms do not have dedicated quests. When a player draws a Quest that requires a 
+room in the base game that has been replaced, discard this Quest and draw a new one.
+Room effect
+Discard 1 card from your hand into the Library: 
+then gain 1 PP, or draw up to 2 cards from the 
+Library.
+Room effect
+Lose 1 PP, then summon Ezio to this room. See 
+Ezio’s Evocation Card for additional rules.
+Room effect
+Return one of your ready and/or revealed spells to 
+your hand and play a ready Trap Spell from your 
+hand.
+Room effect
+Discard 1 Quest, then Draw 3 Quests from the 
+current Moon and keep one. Put the rest on the 
+top of the Quest deck, in the order you prefer.
+Room effect
+Target Mage within  becomes a Mutated 
+Pigman (see page 7 for complete rules).
+Room effect
+Deal 2 damage to a single target within Range 1, 
+or place 1 Instability in a room within Range 1.
+Room effect
+Place 1 instability in this room and 1 Instability in 
+a room at Range 1.
+Room effect
+Flip one of your already used Physical Actions.
+If you decide to lose 1 PP, you may repeat this 
+effect.
+Room effect
+You lose 1 PP to resolve the second effect of a 
+Contingency or Combat type spell you revealed 
+(the effect you see upside down).
+Room effect
+Move the target Mage into this room, then change 
+the direction of one of their unresolved spells 
+(other than the Quick Spell) so that when the spell 
+is activated, the Mage must play the alternative 
+effect to the original one programmed. If the 
+card has two effects facing the same direction, the 
+target Mage ignores this effect.
+Room effect
+Lose 1 PP and take 1 damage from the Black Rose, 
+then Summon 2 Landsknecht in a room within 
+Range 1.
+2 Landsknecht
+, - 
+Room effect
+Draw two Artifact cards from the Artifacts deck, 
+keep one and discard the other (see complete 
+Artifacts rules on page 21).
+Equipment
+Room effect
+Deal 1 damage to target Mage; then choose 
+another Mage who deals 1 damage to the same 
+target Mage (use only in games with 3+ players).
+, 3
+Pigmen
+-
+- ,
+-
+Ezio
+New Rooms
+14
+This expansion provides six new Mage Sheets that replace those of the base 
+game and allow you to use the new 24 Mage Cards. Each player chooses a 
+Mage Sheet during the game setup, and its color will determine the color 
+of the Power Point Tokens, Trap / Protection Tokens, Action Tokens, and 
+Trophy Tokens that they will use. The base game Power Point Tokens and 
+Trophy Tokens must be replaced with those provided in this expansion.
+By inserting your Mage card in space (A) of the Mage Sheet, the maximum Health 
+Points of the Mage (B) will also be indicated. When the damage counters on the Mage 
+Sheet reach the white marker on the Mage Card, the Mage is defeated.
+New Mage Sheets and Mage Cards
+Eliumbra
+
+
+
+
+
+Arianna
+
+
+
+
+
+ArthurVox
+
+
+
+
+
+OldJukas
+
+
+
+
+
+A
+B
+Mage Sheets
+Mage Cards
+Power Point/ Trophy Tokens
+15
+The Black Rose War - Campaign Mode
+(D) Activation Tokens: Victory Points are 
+awarded based on the total value in Power 
+Points of the Rooms destroyed by each 
+Mage, following the box on the right.
+(E) Completed Quests: Victory Points are 
+awarded based on the number of Quests 
+completed during the game following the 
+box on the right.
+(F) Trophies: Victory Points are awarded 
+based on the number of enemy Trophies 
+gained, following the box on the right.
+(G) Crown: in the space of the Crown, mark 1 Victory Point if you are the 
+owner of the Crown at the end of the game. 
+(H) Honorable Mentions (HM), each scenario has its own Honorable 
+Mentions that can assign different Victory Points to those who perform 
+them. Each HM can be obtained only once per game.
+Grimoire
+At the end of each game, a player can replace one of his 6 starting 
+Grimoire cards by marking them in the space provided (I). Forgotten 
+Spells cannot be chosen for this purpose. If the player is able to choose 
+a seventh spell, he will have to replace one of those previously chosen. 
+This system guarantees a high level of personalization of your Mage.
+End of Campaign
+After playing all 7 Legendary Scenarios, add up all the partial Victory 
+Points (L) and you will get the winner of the Black Rose War!
+Custom Rules
+Schools of Magic
+In the Setup section of the Legendary Scenarios there is always a “Schools” 
+section. Here, you will find the rules for selecting different schools that can 
+give a small advantage to the player who obtained the worst result in the 
+last game played. This part of the setup can be skipped in order to use the 
+favorite schools of the game group; in this case, use the Setup rules on page 
+3 of this Sator rule book.
+Legendary Scenarios
+Although the Legendary Scenarios presented here are used to play a 7-game 
+Campaign, they can also be used freely to play a single game, or they can be 
+taken as inspiration to create your own Legendary Scenarios.
+Alternative Rooms
+During Legendary Scenarios, Base game Rooms are often replaced by Sator 
+expansion Rooms. These new Rooms do not have dedicated Quests. Any 
+Quests drawn that take place in a Room that has been replaced must be 
+ignored (discarded), and a new Quest is drawn.
+Honorable Mentions
+If you play a Legendary Scenario as a single game, outside of a campaign, 
+each HM earned during the Game End gives its vp value in PP instead.
+“The war began, and it would not be fought only in the Loggia di Torino. 
+All over the world, the Magisters of the magic schools have coveted the 
+place of the High Magister... this could lead to only one thing: Total War.”
+The War of the Black Rose is a Campaign in which players will control their 
+Mage one game after another, following the specific rules of the different 
+countries that will host them.
+The War of the Black Rose takes place in a series of 7 Legendary Scenarios. 
+After each game, the players will score on the Campaign Sheet (page 23). 
+Legendary Scenarios grant Honorable Mentions to wizards who meet 
+certain requirements. These particular prizes may be the key to the final 
+victory.
+During the Black Rose War, Mages will have the opportunity to keep some 
+of the Spells obtained during previous games, which will replace those of 
+the chosen base deck; in this way, advancing through the campaign, each 
+Mage will be able to build a completely personalized deck.
+Campaign Sheet (A)
+At the beginning of the Campaign, write the names of the Mage and the 
+Player (B) in the Campaign Sheet, presented to be photocopied on page 23.
+End Game and Victory Points
+The Campaign score is calculated differently from a standard game. At 
+the end of each game calculate the score, in Victory Points (abbreviated 
+vp), following the instructions below and reporting the values in the 
+Campaign Sheet. After playing all 7 Legendary Scenarios the winner will 
+be established.
+(C) Ranking Position of the game just 
+ended. The ranking must not include the 
+Power Points given by: Trophies, number of 
+Completed Quests, value of the Destroyed 
+Rooms and that provided by the Crown 
+owner. So before counting the Points on page 35 of the core rulebook, 
+Victory Points are assigned following vps shown in the boxes on the right.
+1° 7vp
+2° 5vp
+3° 3vp
+4° 2vp
+5° 1vp
+6° 0vp
+1° 6vp
+2° 4vp
+3° 2vp
+4° 1vp
+5° 0vp
+6° 0vp
+1° 5vp
+2° 3vp
+3° 1vp
+4° 0vp
+5° 0vp
+6° 0vp
+1° 3vp
+2° 2vp
+3° 1vp
+4° 0vp
+5° 0vp
+6° 0vp
+Campaign Sheet
+Player: ___________________
+Mage: ___________________
+Spell 1: ___________________
+Spell 2: ___________________
+Spell 3: ___________________
+Spell 4: ___________________
+Spell 5: ___________________
+Spell 6: ___________________
+Ranking
+Position
+Completed
+Quests
+Trophies
+Crown
+Honorable
+Mentions
+Activation 
+Tokens
+Turin
+Plymouth
+Versailles
+Siviglia
+Buda
+Amsterdam
+Bronte
+TOTALE
+FINALE
+Scheda della Campagna
+Giocatore: _________________
+Mago: ___________________
+Magia 1: ___________________
+Magia 2: ___________________
+Magia 3: ___________________
+Magia 4: ___________________
+Magia 5: ___________________
+Magia 6: ___________________
+Posizione in 
+Classifica
+Missioni
+Trofei
+Corona
+Menzioni
+d’Onore
+Segnalini
+Attivazione
+Torino
+Plymouth
+Versailles
+Siviglia
+Buda
+Amsterdam
+Bronte
+TOTAL
+FINAL SCORE
+A
+B C
+D
+E
+F
+G
+H
+L
+I
+If you play the campaign with Asymmetrical Mages, consider 
+their bonuses for the end-of-game PP for calculating the Ranking 
+Position.
+Asymmetrical Mages
+16
+“In the magical city lies the first and oldest of the Lodges. Here the 
+original Black Rose, the most powerful of the guardians of the forgotten 
+spells, awaits the arrival of a Mage powerful enough to dominate its 
+power!”
+Additional Components:
+None.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge.
+• Schools: Before point 9 of the game setup (see page 3), include 
+Cartomancy School in the Library, so that in a 6 player game at least 
+one player will have to choose it.
+Special Rules:
+None.
+Honorable Mentions: • 4vp - Invincible: At the end of the game, no opposing Mage has one 
+of your Trophies. • 2vp - Forbidden knowledge: You used a Forgotten Spell during the 
+game.
+“Once rich, the Plymouth Lodge fell out of favor when a dark cult 
+devoted to blasphemous gods hiding behind the night stars and in the 
+depths of the oceans took root in the city, supplanting the old religion. 
+Magisters devoted to worship have corrupted the Black Rose by dividing 
+it into shards of incredible power. It’s time for the shards to come back 
+together!”
+Additional Components:
+• 13 Black Rose Power Cards.
+• 2 Rooms: Clinging Swamp and Cursed Temple.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge. • Swap the Garden room with the Clinging Swamp room. • Swap the Crypt with the Cursed Temple room.
+• First player: the player ranked last in the previous game.
+• Schools: Before point 9 of the game setup, the player ranked last in 
+the previous game chooses three magic schools to be used during 
+the game other than Void, Demonology, and Mind. Add to them the 
+Void, Demonology, and Mind schools. These will be the only schools 
+available for this scenario. • Draft the Black Rose Power Cards: Each player draws 2 Power 
+Cards from the deck and chooses one and passes the other to the 
+player on his left. Before starting the game each player must reveal a 
+Power Card. The second Power Card will be revealed once you reach 
+the second Moon.
+Special Rules:
+• Black Rose Power Cards: Each player can use the revealed Power 
+Cards in their possession following the rules shown on them.
+• Second Moon: Each player reveals their second Power Card.
+Honorable Mentions:
+• 1vp - Master of the Rose: At the end of the game, your Mage is in the 
+Black Rose Room.
+Turin, Italy - The First Lodge
+Plymouth, England - The Shattered Rose
+The Black Rose Power Cards give unique skills to Mages. Skills 
+take effect whenever indicated by the specific Power Card (for 
+example, the Apocalypse power causes 1 Instability to be placed 
+each time a spell is played).
+There is no way to remove or lose Powers.
+The other game conditions are unchanged.
+Black Rose Power Cards
+ T
+3
+4 2
+5
+6
+1
+ T
+3
+4 2
+5
+6
+1
+17
+“The Versailles Lodge... known as the rebel Mages lodge... Heretics of 
+this lodge are convinced that they can dominate the forces of Forgotten 
+Magic with their blasphemous rituals. Destroyed by their experiments, 
+the lodge is now permeated by the wild power of an unstable Black 
+Rose. The Lodge is on the verge of collapse, but its power will infuse the 
+Mages who compete in this place with enormous powers... “
+Additional Components:
+• Black Rose Room “Solo Play“ 
+Activation Token
+Setup:
+• Follow the standard Black Rose Wars setup as indicated 
+in the core box manual. Use the indicated map to create the Lodge.
+• First player: the player ranked last in the previous game.
+• Schools: Before Step 9 of the game setup, the player ranked last in 
+the previous game chooses three schools of magic to be used during 
+the game other than Cartomancy, Trickery, and Necromancy. Add the 
+Cartomancy, Trickery, and Necromancy schools to them. These will be 
+the only schools available for this scenario.
+• Each Mage draws 2 Forgotten Spells, chooses one, and mixes it with 
+their starting deck. • Shuffle all remaining and unchosen Forgotten Spells, draw a number 
+equal to the number of players +1, and form the deck of Forgotten 
+Spells with these cards; put the others in the box.
+Special Rules: • First Moon: Replace the Black Rose Room Activation token with that 
+of the Black Rose Wars Solo Play (see image). Place the Activation 
+“In the richest city in Spain, the Lodge of conquering Magisters is hidden. 
+Traditionally explorers and merchants, they traveled to distant and 
+unknown lands and returned with incredible riches. The Lodge holds 
+these treasures in splendid gold and silver rooms; Mages who challenge 
+each other in this place must fight to conquer them by taking possession 
+of the Black Rose and driving away their opponents!”
+Additional Components:
+• 3 rooms: Alehouse, Eerie Machinery, and Horologium.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge.
+• First player: the player ranked last in the previous game.
+• Schools: Before Step 9 of the game setup, the player ranked last in 
+the previous game chooses three Magic Schools to be used during 
+the game other than Bardic, Omnia, and Transmutation. Add to them 
+the Bardic, Omnia, and Transmutation schools. These will be the only 
+schools available for this scenario.
+token in the Black Rose Room from the start of the game (not from 
+the Second Moon as usual). • Third Moon: Activating the Black Rose Room does not flip its 
+Activation token; the room is always able to be Activated. • Immortal Rose: During the game, never place Instability tokens in 
+the Black Rose Room. When there are no more cards in the Forgotten 
+Spells deck, destroy the Black Rose Room and discard its activation 
+token. No one gains PP for this destruction. • Wild Power: Forgotten Spells are not eliminated from the game once 
+used, but must be placed in the Memories of the Mage who used 
+them. • The Void: The game ends only at the end of a turn started with no 
+cards available in the Forgotten Spells deck.
+Honorable Mentions: • 2vp - Forbidden Mastery: At the end of the game, you are the Mage 
+(or one of the Mages) who has the most Forgotten Spells.
+• Replace the Sanctuary, Observatory and Abyss rooms with the 
+Alehouse, Eerie Machinery, and Horologium rooms; place these 
+rooms adjacent to the Black Rose Room.
+• Don’t place any Mage Cells; starting from the first player, each player 
+places their Mage in an external room (indicated in blue in the Lodge 
+map) currently not occupied by other Mages.
+Special Rules:
+• Death Chain: A defeated Mage restarts from an external room (indicated 
+in blue in the Lodge map) of the defeated Mage’s choice, currently not 
+occupied by other Mages. The Mage can be immediately targeted with 
+other spells and effects. • Clean up Phase: Each Mage in the Black Rose Room takes 1 Black 
+Rose Damage/Instability token and sets it aside; if there is only one 
+Mage in the room, that Mage takes 2. • Fallen King: If a Mage dies in the Black Rose Room, whoever takes 
+their Trophy also takes 1 Black Rose Damage/Instability token and 
+keeps it aside. • Second Moon, Study Phase: If there is only one Mage in the Black 
+Rose Room, that Mage draws a Forgotten Spell. • Third Moon, Study Phase: Each Mage draws a Forgotten Spell. • End Game: When calculating the end game points, draw up a ranking 
+of the Mages who have more Damage / Instability tokens of the Black 
+Rose (black cubes taken thanks to the Fallen King rules), Mages will 
+gain additional PP based on their placement as indicated in the box 
+to the left.
+Honorable Mentions:
+• 1vp - Master of the Rose: At the end of the game, your Mage is in the 
+Black Rose Room.
+Versailles, France - The Rebel Lodge
+Sevilla, Spain - Conqueror King
+ T
+
+T
+3 2
+4
+5 6
+1
+Most Black 
+Rose Tokens:
+1st place
+2nd place
+3nd place 
+Participation
+18
+“In the underground of Buda lies the loggia where the Assassins, the 
+Keepers of the Magisters, are trained. Dangerous, bloodthirsty living 
+blades protect the Black Rose here. Mages who challenge each other in 
+this place can evoke the spirit of one of the leaders of the Assassin Order, 
+the fearsome Ezio Auditore, an avatar of death in constant search for 
+the blood of the powerful!”
+Additional Components:
+• 3 Blade Barrier tokens.
+• 2 rooms: Assassin’s Brotherhood and Theater.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge.
+• First player: the player ranked last in the previous game.
+• Schools: Before Step 9 of the game setup, the player ranked last in 
+the previous game chooses three schools of magic to be used during 
+the game other than Blood, Illusion, and Conspiracy. Add to them 
+the Blood, Illusion, and Conspiracy schools. These will be the only 
+schools available for this scenario.
+• Replace the Alchemy Laboratory room with the Assassin’s Brotherhood 
+room; place this room adjacent to the Black Rose Room, but not 
+adjacent to the Throne Room or Theater.
+• Replace the Oracle Room with the Theater room; place this room 
+adjacent to the Black Rose Room, but not adjacent to the Throne 
+Room or Assassin’s Brotherhood.
+• Place the Barrier of Blades tokens as indicated (A).
+Buda, Hungary - the Lodge of the Keepers
+Brotherhood 
+Ezio Auditore and Ottoman Crest Logo 
+used under License from Ubisoft. 
+Assassin’s Creed TM & © Ubisoft 
+Entertainment. All Rights Reserved.
+ T
+3
+4 2
+5
+6
+1
+A A
+A
+Special Rules:
+• Blade Barriers: These Evocations use the Room Infestations rules 
+(see page 4), but are not targeted and cannot be removed from the 
+game in any way. • Blades Damage: Blade Barriers are considered to be under the 
+control of the Black Rose, so the damage they deal is from it. If a Mage 
+moves any model (Mage or Evocation) not under their control into 
+a room containing a Barrier of Blades, that model suffers 2 damage 
+from the Mage who moved it. • Blade Barriers Movement: Barrier of Blades tokens move in a 
+clockwise direction, always remaining inside the rooms adjacent 
+to the Black Rose Room. The Crown owner moves all the tokens 
+clockwise one room each time a player uses a Physical Action token.
+Honorable Mentions:
+• 1vp - Lethal Pushes: You have dealt damage to an opposing Mage 
+using the Blade Barriers, or you eliminated an Evocation under an 
+opponent’s control using the Blade Barriers. • 1vp - Master of the Assassins: You summoned Ezio and killed a 
+Mage with him.
+19
+“In the Dutch Lodge, imaginative Mages constantly study ways to apply 
+magic in new and creative ways, trying to blend their arcane skills with 
+science and technology. Even though most of their experiments end up 
+creating unexpected quirks, the portals created by these Mages could 
+represent a revolution for the future of humanity.”
+Additional Components:
+• 3 Portal tokens.
+• 2 Rooms: Tana dei Troll and the Garden of Ice and Fire.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge.
+• Place the Portal Tokens as indicated.
+• Replace the Treasure Room with the Tana dei Troll Room.
+• Replace the Alchemic Laboratory room with the Garden of Ice and 
+Fire Room.
+• First player: the player ranked last in the previous game.
+• Schools: Before Step 9 of the game setup, the player ranked last in the 
+previous game chooses three schools of magic to use during the game 
+other than Divination, Chronomancy, and Destruction. Add to them the 
+Divination, Chronomancy, and Destruction schools. These will be the 
+only schools available for this scenario.
+Special Rules:
+• Portals: Portal tokens have two faces, one blue and one orange, and 
+occupy a passageway that connects two rooms. When a Mage crosses 
+the passage occupied by a Portal, entering the blue face, the Mage’s 
+model must be moved to a room in which the blue face of a different 
+Portal faces. The same applies to the orange face.
+• Targets and Spell Range through the Portals: The rooms on the 
+blue side of the portals are considered adjacent (therefore at a distance 
+of 1); when determining whether a target is visible and reachable by a 
+spell; the straight line that must be drawn to reach it can pass through 
+the blue side of a Portal to exit the blue side of another Portal. This 
+also applies to orange sides. • Second Moon: Turn all Portals by 180°. • Third Moon: Turn all Portals by 180°.
+Amsterdam, Holland - The Portals Lodge
+1. Howard (H) wants to hit Skultor (S) with a Fireball spell 
+(red arrow), which hits from a distance . The rooms with 
+both of them are considered adjacent because a blue side of 
+a portal (A and B) overlooks both. Howard can then target 
+Skultor through portal A because he is actually in the range 
+ for him, and he is considered to see the room where the 
+portal B faces.
+2. Vivian (V) wants to get to the Assassin’s Brotherhood room 
+but he needs 2 steps (black arrow). Instead, he decides to 
+cross the orange side of portal B (blue arrow), so that he can 
+reach the room with a single step, leaving the orange side of 
+portal A.
+Using Portals
+ 
+
+
+
+A B
+2
+1
+H
+V
+S
+
+T
+3
+2
+4
+5
+6
+1
+Honorable Mentions:
+• 3vp - Magic Carambola: Kill a Mage by inflicting the coup de grace 
+with a spell that has passed through a Portal.
+20
+“The Bronte’s Lodge houses the Forging Mages, among which the giant 
+cyclops of the southern lands stand out. Specialized in the creation of 
+powerful magical artifacts, the keepers of this place claim that magic is 
+not enough to prove they are worthy of the title of Magister. Mages will 
+have to conquer the artifacts - long hidden from the view of the mortal 
+world - if they hope to conquer their opponents!”
+Additional Components:
+• 8 Treasure Chest models.
+• 1 Mimic model.
+• 12 Artifact Cards.
+• 3 rooms: Cyclop’s Room, Cyclop’s Forge, and Garden of Ice and Fire.
+Setup:
+• Follow the standard Black Rose Wars setup as indicated in the core 
+box manual. Use the indicated map to create the Lodge.
+• Replace the Arena Room with the Cyclop’s Room.
+• Replace the Observatory Room with the Cyclops’ Forge Room.
+• Replace the Alchemic Laboratory Room with the Garden of Ice and 
+Fire Room.
+• First player: the player ranked last in the previous game.
+• Schools: Before Step 9 of the game setup, the player ranked last in 
+the previous game chooses three schools of magic to be used during 
+the game other than Enchantment, Elementalist, and Destruction. 
+Add the Enchantment, Elementalist, and Destruction schools to them. 
+These will be the only schools available for this scenario.
+• Starting from the player ranked last in the previous game, each player 
+places a model of the Treasure Chest in a room adjacent to the Black 
+Rose that does not already contain one.
+• Shuffle the Artifact card deck, and keep it within reach of all players.
+Special Rules:
+• Treasure Chest: A Treasure Chest is an indestructible model; it 
+cannot be wounded, moved or removed (except by opening it). A 
+chest remains in the Room in which it is located even if that Room is 
+destroyed. • Open a Chest: a Mage can use one of his Physical Actions which allows 
+him to Activate a Room to open a Chest. Once a Chest is opened, the 
+Mage draws 1 Artifact Card and removes the Chest from the game. 
+The Mage who opened the Chest also takes a cube of the Black Rose 
+and keeps it aside. • Artifact Cards: These cards are obtained by a Mage opening a 
+Chest. An Artifact card can be played by the Mage who owns it at 
+any time during the Actions Phase. A Mage can only have one 
+Artifact card in their hand at a time; if the Mage gets a second one, 
+immediately play or discard one of the two. The “Equipment”
+Artifact cards (A) have permanent effects and are managed as 
+an Evocation (they use the same rules as the equipment of the 
+Enchantment school, see page 8). “Consumable” Artifact cards (B) 
+have instant effects and are played from the hand and discarded 
+after use. Some Artifact cards are Alternative Evocations (C), which 
+you can directly summon from your Hand during the Action Phase. 
+All Artifact Cards consumed or destroyed are shuffled back into the 
+available Artifact Cards deck. • Second Moon: If available, first place a Chest in the Black Rose Room. 
+Then each player, starting with the one with the Crown, places a Chest 
+in a room of their choice that does not already contain one. • Third Moon: the player who owns the Crown, places all available 
+Chests (if available) trying to place at least one Chest in each Room 
+adjacent to the Black Rose Room; excess Chests can be placed in any 
+other Room.
+• Game End: at the end of the game each player will count the cubes 
+of the Black Rose that he has set aside to create a ranking with the 
+other players. Assign the following Power Points according to the 
+positioning of each Mage, managing ties as usual: 5/3/1 PP.
+Honorable Mentions: • 2vp - Mimic Master: You controlled the Mimic during the game.
+• 2vp - Fully Equipped: You controlled 3 Equipment Evocations 
+simultaneously.
+Bronte, Kingdom of Sicily - The Artifacts
+
+A B
+C
+
+T
+3 2
+4
+5 6
+1
+21
+The Mage Cards included in this expansion provide 
+two versions of each BRW Mage; a standard one (A 
+- for more balanced games) and an asymmetric one 
+(B - indicated by the  Symbol near the name of the 
+Mage). The asymmetric side can be used for more 
+atypical and complex games. If it is decided to use the 
+asymmetrical version of the Mages, all players must 
+use this version.
+Each Asymmetric Mage has additional Skills, 
+represented by icons on the Mage Card. The effects 
+of these Skills are described in detail below.
+Asymmetrical Mages
+End Game: this Mage gets 1 PP for each Trophy Token 
+in the Mage’s possession.
+Instead of one of the two standard effects, using an 
+Action token, the Mage can move (up to the Mage’s 
+Step value) and attack (with the Mage’s attack value) 
+a Model in the same room, or vice-versa.
+Instead of one of the two standard effects, using an 
+Action token, the Mage can attack a Model twice (with 
+the Mage’s attack value) in the same room.
+Instead of one of the two standard effects, by using an 
+Action token, the Mage can heal 3 (remove 3 Damage 
+tokens of the Mage’s choice from the Mage Sheet).
+As one of the Mage’s two Turn Actions, the Mage can 
+lose one PP to rotate one of the spells not activated 
+on their Mage Sheet (thus changing the Active Side 
+of that Spell).
+Instead of one of the two standard effects, using an 
+Action token, the Mage can shift into any Room.
+End Game: this Mage loses 1 PP for each Trophy 
+Token in the Mage’s possession.
+End Game: this Mage gets 1 PP for each Activation 
+Token in the Mage’s possession.
++1 The Mage starts the game with two Custom Spells  instead of one (Game Setup, page 16, Step 9)
+If this Mage possesses the Crown at the end of the 
+game, score 3 PP instead of 1 (End of the game, p.   35, point 4).
+
+This Mage cannot keep the Crown. If the Mage earns 
+it, they must immediately give it to another Mage  (unless no Mage can keep it). X
+
+-1
+As an Action, the Mage can discard an unactivated 
+Spell card to perform a 2 Physical Attack against a  Model in the same room.
+This Mage’s Evocations have an additional Health 
+point. Evo+1
+End Game: this Mage gets 1 PP for each Quest Card 
+he completed in the Mage’s possession.
+End Game: this Mage loses 1 PP for each Activation token 
+in the Mage’s possession.
+End Game: this Mage loses 1 PP for each Quest Card 
+played in the Mage’s possession.
+When this Mage is defeated, no one gets the Mage’s 
+Trophy.
+When defeated, this Mage can place the Mage’s model 
+in any Room of the Lodge, including the opponent’s 
+Cells.
+-1
++1
++1
+-1
+This Mage’s Demon Archetype Evocations have their Dem+ attack value increased by 1. 1
+This Mage’s Construct Archetype Evocations have their 
+health value increased by 1. Con+1
+This Mage’s Undead Archetype Evocations have their Und+ attack value increased by 1. 1
+This Mage’s Elemental Archetype Evocations have their 
+attack value increased by 1. Ele+1
+As an Action, the Mage can discard an unactivated  Spell card to move 2 steps (instead of one).
+Bronte
+
+
+
+
+
+Bronte 
+
+
+
+
+
+
+
+
+
+This Mage does not take damage from Area spells:  (see Core Game Rulebook page 29). X
+ X
+This Mage’s Beast Archetype Evocations have their attack Bea+ value increased by 1. 1
+This Mage does not take damage from target spells:  Single (see Core Game Rulebook page 29). X
+
+Whenever the Mage can make a Physical Attack; 
+instead of the attack, place an Instability Marker in  the room.
+-
+A B
+22
+Campaign Sheet
+Player: ___________________
+Mage: ___________________
+Spell 1: ___________________
+Spell 2: ___________________
+Spell 3: ___________________
+Spell 4: ___________________
+Spell 5: ___________________
+Spell 6: ___________________
+Ranking
+Position
+Completed 
+Quests
+Trophies
+Crown
+Honorable 
+Mentions
+Activation 
+Tokens
+Player: ___________________
+Mage: ___________________
+Spell 1: ___________________
+Spell 2: ___________________
+Spell 3: ___________________
+Spell 4: ___________________
+Spell 5: ___________________
+Spell 6: ___________________
+Ranking
+Position
+Completed 
+Quests
+Trophies
+Crown
+Honorable 
+Mentions
+Activation 
+Tokens
+Player: ___________________
+Mage: ___________________
+Spell 1: ___________________
+Spell 2: ___________________
+Spell 3: ___________________
+Spell 4: ___________________
+Spell 5: ___________________
+Spell 6: ___________________
+Ranking
+Position
+Completed 
+Quests
+Trophies
+Crown
+Honorable 
+Mentions
+Activation 
+Tokens
+Player: ___________________
+Mage: ___________________
+Spell 1: ___________________
+Spell 2: ___________________
+Spell 3: ___________________
+Spell 4: ___________________
+Spell 5: ___________________
+Spell 6: ___________________
+Players are granted permission to photocopy this page for personal use.
+Ranking
+Position
+Completed 
+Quests
+Trophies
+Crown
+Honorable 
+Mentions
+Activation 
+Tokens
+Torino
+Plymouth
+Versailles
+Siviglia
+Buda
+Amsterdam
+Bronte
+TOTAL
+FINAL SCORE
+Black Rose Wars Sator v.1.0
+Ludus Magnus Studio - 2020 ©
+All rights reserved
+www.ludusmagnusstudio.com
+Project Manager: Andrea Colletti
+Fulfillment: Michele Mirizio
+Game design: Marco Montanaro
+Additional Game design: Diego Fonseca
+Development: Ludus Magnus Team
+Editing and Translations Manager: Paolo Scippo
+Graphic Design: Paolo Scippo, Diego Fonseca
+Art director: Andrea Colletti
+Concept artists and Illustrations: Antonio De Luca, Daniel Comerci, 
+Davide Scalia, Giovanni Pirrotta, Macs Gallo, Paolo Parente, Simone de Paolis 
+Lead 3D sculptor: Fernando Armentano
+3D sculptors: Alberto Acquaviva, Alessandro Depaoli, Alexei Popovicii, 
+Fernando Armentano, Francesco Pizzo, Krisztián Hartmann,
+Tommaso Incecchi
+Editors: Christopher Nelson, Frank Calcagno, Louis Angelli
+Customer Care and Social Media: Luca Bernardini, Marco Presentino
+Web editors: Marco Presentino, Luca Bernardini, Roberto Piscitelli
+Kickstarter manager: Andrea Colletti
+Writer: Marco Olivieri
+Translations: Flavia Frauzel, Silvia Franci, Luisa Marzullo
+Advertising: Vincenzo Piscitelli
+Production: Andrea Colletti
+Playtest: Andrea Compiani, Andrea Fatigati, Andrea Gianfermo, Andrea 
+Pomelli, Antonio Gentile,Carlo Trifogli, Daniele Casali, Daniele De Lorenzo, 
+Daniele Longo, Daniele Pallozzi, David Condemi, Davide Becciu, Demetrio 
+D’Alessandro, Enrico Savioli, Fabio Capelli, Florian D’Anna, Francesco 
+Montanaro, Giovanni Tomaselli, Giuseppe Verrengia, Ilaria Pisani, Luca 
+Ricci, Mauro Baranello, Michele Artusi, Michele Morosini, Pier Luigi, Roberta 
+D’Anna, Saverio Ronchese, Schedar Marchetti, Simone Scarpellini, Stefano 
+Castelli, Tiziano Leonardi, Tommaso Battista.
+Special thanks to our backers who made possible this amazing feat!
+Ludus Magnus Store: shop.ludusmagnusstudio.com
+Credits

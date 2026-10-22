@@ -1,0 +1,2612 @@
+Catacombs
+2
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Andrea Colletti, Luca Bernardini
+Development: Marco Presentino, Massimiliano Grotti
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi, Veronica Frizzo
+ Lead 3D Sculptor : Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation Manager: Elettra Nuzzo
+Translation: Giulia Pira
+Social Media: Massimiliano Grotti, Emiliano Caretti
+Customer Care: Francesco Granitto, Nicoletta Soldi
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Ful llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtesters: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Andrea Vella, 
+Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele 
+Macchioro, Giovanni Milani, Luca Francescangeli, Luca Perra, Pasquale Carotenuto
+CONTENT S
+Forgotten for centuries, ancient catacombs are rediscovered 
+beneath the cities of Renaissance Italy. Many rush to explore 
+them, searching for ancient treasures and lost knowledge, 
+but no one imagines what lies hidden in the dark tunnels 
+of these mysterious places. Among the ancient rooms and 
+maze-like corridors, an evil force has awakened, and with 
+it the cadaverous guardians of these cursed places. It will be 
+your task to face this new enemy before its damned forces 
+emerge from the darkness of the catacombs to bring their 
+curse to those who live on the surface!
+2
+Graphic Design:
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi, Veronica Frizzo
+Social Media: 
+Customer Care:
+Advertising:
+Production: 
+Playtesters: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Andrea Vella, 
+Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele 
+Macchioro, Giovanni Milani, Luca Francescangeli, Luca Perra, Pasquale Carotenuto
+Components ............................................... 3
+How to use this Expansion .................... 5
+Quitting the Side Campaign ............................... 5
+Hunt Mission ...................................................... 5
+Completing the Side Campaign ......................... 5
+New Rules ................................................... 6
+New Hero: Luca ................................................... 6
+Relic Cards ................................................................6
+Archeology and the Discovery Die ........................6
+Trinket Tokens ..........................................................7
+New Tiles ............................................................. 7
+Orange - Debris ...................................................7
+Purple - Cursed Ground ......................................7
+Blue - Stagnant Water ..........................................7
+Green - Toxic Fumes ...........................................7
+Starting Tile ..............................................................7
+New Psychostasia Card for Gregorio .................. 7
+New Scenic Elements .......................................... 8
+New Tokens ......................................................... 8
+New Actions ........................................................ 9
+Achievement Cards and Catacombs Missions . 10
+Achievement Cards ................................................10
+Catacombs Missions ..............................................10
+New Cards ......................................................... 10
+Torch Cards .............................................................10
+Catacombs Cards ...................................................11
+Room Cards .......................................................11
+Corridor Cards ..................................................11
+Corridor Cards - Trap ........................................12
+Event Cards (E) ..................................................12
+Prey Cards: Stalking Shadow ................................13
+Treasure Cards ........................................................13
+Enemy Cards...........................................................14
+Ancient Formulae Cards .......................................14
+Reward Cards .........................................................15
+Prey Cards: Abomination .....................................15
+Pro le Cards ...........................................................16
+New Traits ......................................................... 17
+New Skills .......................................................... 17
+Expedition Mode .................................... 18
+Choosing a Catacombs ..................................... 18
+How do you tackle Catacombs Missions? ......... 19
+Lit and Dark Models ......................................... 20
+Victory or Defeat Conditions ........................... 21
+Game Flow ............................................... 30
+3
+Components
+Legio Italica Heroes
+3D Elements
+8 Doorways
+Luca
+Patrician
+3 Legionnaire s 3 Scutum
+Abomination
+2 Centurion s
+Heroes
+ 29 Mission Cards 3 Mission Envelopes
+La Missione
+Obiettivi degli Eroi
+◆ Eliminare Guardia Sacra: leggete CT1-4.
+Scon tta degli Eroi
+◆ Almeno tre Eroi sono KO: leggete CT1-5.
+Obiettivi dei Nemici
+◆ Attaccare gli Eroi.
+Regole Speciali
+Evento Gemini: quando il settore Gemini diventa 
+quello attivo, ogni Eroe fuori dal  della Torcia, 
+prima di qualsiasi Attivazione, legge CT1-11.
+Evento Sagittarius: quando il settore Sagittarius 
+diventa quello attivo, ogni Eroe fuori dal  della 
+Torcia, prima di qualsiasi Attivazione, legge 
+CT1-7.
+◆ Iniziate la Missione.
+CT1-4.
+CT1-5.
+ quando il settore Gemini diventa 
+CT1 
+Eliminare Guardia Sacra: leggete CT1-4.
+Almeno tre Eroi sono KO: leggete CT1-5.
+ quando il settore Gemini diventa 
+ della Torcia, 
+CT1-11.
+ quando il settore Sagittarius 
+diventa quello attivo, ogni Eroe fuori dal  della 
+Torcia, prima di qualsiasi Attivazione, legge 
+
+Mappa
+Horologium
+Inizio: 12:00.
+Capricorn: Eroi
+Aquarius: Guardia Sacra
+Gemini: 1 Segnalino Evento
+Sagittarius: 1 Segnalino Evento
+◆ Rivelate .
+CB2
+CB3
+B
+CT1 
+Mappa
+CB2
+ CT1 
+Nell'oscurità
+
+
+CT1
+CA0
+
+SPIRIT OF THE LANISTA
+CB0 Ludus magnus 2
+Each Hero in the Catacombs performs a  Test:
+3+: Gain a Blessed Token. 2: Nothing happens. 0-1
+: Nothing happens.
+: Gain a Cursed Token.
+  e spirit of a Lanista  allenges you in his arena.
+
+
+Verso l’Ignoto
+Uno scavo antico ha aperto una voragine 
+nel tufo sottostante. Cercatori di tesori e 
+tombaroli sono stati attratti dalla struttura 
+romana sottostante l’apertura, ma pochi 
+hanno fatto ritorno e chi ci è riuscito ha 
+perso il senno. Il Vaticano ne ha proibito 
+l’accesso. Che queste antiche rovine 
+nascondano un nuovo e terribile artefatto?
+◆Potete segnare 
+la Missione 
+Secondaria CT1 
+- Nell’Oscurità 
+nelle Missioni 
+Secondarie 
+Attive.
+44 Catacomb s Cards 1 Event Card
+ 31 Treasure Cards
+
+Respiro della 
+Morte
+1 Scaglia del Mito
+1 Erba dei Campi Elisi
+Respiro della 
+Morte
+ Scaglia del Mito
+ Erba dei Campi Elisi
+ Tesoro
+6 Achievement Cards
+Esploratori Novizi
+"Ogni leggenda comincia 
+con il primo passo nel buio"
+Conquista  CT01
+Esploratori Novizi
+"Ogni leggenda comincia 
+con il primo passo nel buio"
+Conquista  
+Esploratori Novizi Conquista
+ Conquista
+CT01
+
+
+
+
+
+
+
+
+
+4
+4
+5
+6
+6
+Legionario
+Perforare
+ Svantaggiare
+Perforare
+4
+ 5+
+
+Non Morto 
+
+3
+1
+6
+5
+6
+  Stordire, Svantaggiare
+ 37 Enemy Cards
+
+
+
+
+
+
+
+
+Scutum 
+7+
+
+Stordire, Svantaggiare
+
+
+
+
+
+
+
+
+
+4
+3
+6
+6
+6
+Signore del Crepuscolo
+1
+ 8+
+ 1-3
+3
+ 
+ 1 ,Bruciare, Intralciare
+Non Morto, Barriera 3
+
+3 Torch Cards
+0: piazza 3 Segnalini 
+Fiammelle Blu nel 
+Se ore dell'Horologium 
+in cui si trova il 
+Segnalino A ivazione, 
+entro 2 da te.
+Torcia
+Blu
+: piazza 3 Segnalini 
+Fiammelle Blu nel Se ore dell'Horologium 
+in cui si trova il Segnalino A ivazione, 
+2 da te.
+Torcia
+ 
+Blu Torcia
+Rossa
+—
+1 Cuoio
+1 Legno
+1 Zolfo
+4
+9 Formulae Cards
+ 9 Equipment Cards
+7 Reward Cards
+6 Destiny Cards
+1 Psychostasia Card 
+22 Prey Cards
+6 Relic Cards
+Tokens
+30 Enemy Draft Cards
+1 Rage Card
+1 Discovery Die 1 Gate
+Scudo dell'Oblio Scudo
+Resistenza 1
+Reazione 1. Ombra 
+Sfuggente .
+(Gira questa carta a faccia 
+in giù dopo averla usata).
+Armatura di Cuoio Armatura
+Resistenza 1.
+Artefatto
+Amuleto del Tempo Perduto
+1: Una volta per A ivazione 
+piazza un Segnalino Carica 
+Temporale su questa carta (Max 
+3). Una volta per Missione puoi 
+eliminare tu i i Segnalini presenti 
+su questa carta e guadagni 
+per ogni Segnalino.
+1
+Amuleto del Tempo Perduto
+Dopo una vita passata a frugare 
+tra le tombe per raccimolare 
+qualche Fiorino, ti si o re 
+l'occasione di fare qualcosa di 
+importante!
+Obiettivo
+◆ Al termine di una 
+Missione, Hai 3 segnalini 
+Cianfrusaglia sulla carta 
+Equipaggiamento Zaino
+Durante la prossima Fase di 
+Riposo leggi  CT1-30.
+1
+1: Puoi scartare una o più 
+che contengano almeno 2 Cuoio 
+
+di Morte. Se lo fai, puoi scartare 
+1 Segnalino Satus Negativo 
+dalla Scheda Eroe di ogni Eroe 
+entro 4 da te (tu incluso).
+Ammit Scarta una  dal Bo ino per usare 
+questo A acco.
+2  2-5 +2
+   
+Maat
+Psicostasia
+Persecutrice
+Sangue di S.Gennaro
+ Se non hai Nemici 
+adiacenti o ieni un Segnalino Sanguinante altrimenti un Nemico a , 
+te adiacente subisce 2 Imbloccabili. 
+Carica: 1
+ Se non hai Nemici 
+Reliquia Sangue di S.Gennaro
+
+Scudo dell'Oblio
+6
+Scudo
+Resistenza 1
+ Ombra Sfuggente . (Gira questa carta a faccia 
+in giù dopo averla usata).
+—
+1 Scaglia del Mito
+1 Acciaio delle Cripte
+Scudo dell'Oblio
+1 Scaglia del Mito
+Formulae antica
+Armatura di Cuoio Armatura
+Resistenza 1.
+—
+Luca - Tombarolo
+Piccone Piccone Equipaggiamento di Partenza
+Amuleto del Tempo Perduto
+ Una volta per A ivazione 
+piazza un Segnalino Carica 
+Temporale su questa carta (Max 
+3). Una volta per Missione puoi 
+eliminare tu i i Segnalini presenti 
+su questa carta e guadagni 1
+per ogni Segnalino.
+Artefatto
+Amuleto del Tempo Perduto
+Artefatto
+ Ricompensa
+MC1
+ Ricompensa
+Dopo una vita passata a frugare 
+tra le tombe per raccimolare 
+qualche Fiorino, ti si o re 
+l'occasione di fare qualcosa di 
+importante!
+Al termine di una 
+Missione, Hai 3 segnalini 
+Cianfrusaglia sulla carta 
+Equipaggiamento Zaino
+Durante la prossima Fase di  CT1-30.
+ 1 — Luca - Tombarolo
+Destino
+: Puoi scartare una o più 
+che contengano almeno 2 Cuoio 
+di Morte. Se lo fai, puoi scartare 
+1 Segnalino Satus Negativo 
+dalla Scheda Eroe di ogni Eroe 4 da te (tu incluso).
+Ammit
+ dal Bo ino per usare 
+questo A acco.
+ 2-5 +2
+  
+Maat
+Psicostasia
+Ankh 1: Puoi scartare una o più 
+ che contengano almeno 1 Membrana e 1 Scaglia del Mito.
+Se lo fai, scegli un Eroe a te 
+adiacente, quell'Eroe scarta 
+ no a 3 dalla sua Scheda 
+Eroe.
+Tatenen 1: Puoi scartare una o più  che contengano almeno 1 Fungo 
+Tenebroso. Se lo fai, aggiungi 
+un Segnalino Fiammella a quelli 
+già presenti su di un Se ore 
+dell'Horologium  no ad un 
+massimo di 3.
+Psicostasia
+CACCIA
+Ombra 
+Abomination Persecutrice
+HUNT
+Sangue di S.Gennaro
+adiacenti o ieni un Sanguinante altrimenti un Nemico a 
+te adiacente subisce 2 Imbloccabili.
+ Se non hai Nemici 
+Sangue di S.Gennaro
+ Se non hai Nemici 
+Reliquia
+Penitente
+2 Hero Sheets 2 Skill Sheets
+Prerequisiti:
+CACCIATORE 
+DI RELIQUIE
+Prerequisiti:
+ARCHEOLOGO Colpo Violento
+Sopravvivenza
+Mano Lesta
+Scassinare
+Tutto è Utile
+Sopravvivenza
+Esperto di 
+Sotterranei
+ Istruzione
+Condivisione
+Passo Sicuro
+Istruzione
+3 Abilità 
+Tombarolo
+-
+Reliquiario
+3 Abilità 
+Tombarolo
+-
+Libro della 
+Conoscenza
+5
+0 1 2 3 4 5 6
+LUCA
+
+5
+3
+2
+2
+5
+
+
+Prerequisiti:
+CACCIATORE 
+DI RELIQUIE
+Prerequisiti:
+ARCHEOLOGO Colpo Violento
+Sopravvivenza
+Mano Lesta
+Scassinare
+Tutto è Utile
+Sopravvivenza
+Esperto di 
+Sotterranei
+ Istruzione
+Condivisione
+Passo Sicuro
+Istruzione
+Prerequisiti:
+3 Abilità 
+Tombarolo
+-
+Reliquiario
+Prerequisiti:
+3 Abilità 
+Tombarolo
+-
+Libro della 
+Conoscenza
+ Accumulatore Compulsivo 
+Passiva. +1: Ogni volta che utilizzi un Segnalino 
+Cianfrusaglia.
+5: Ogni Eroe sul Campo di Battaglia ottiene 
+un Segnalino Cianfrusaglia. Se siete in una 
+Catacomba, ogni Eroe ottiene invece 2 Segnalini 
+Cianfrusaglia.
+ Colpo Violento 3
+Sopravvivenza.
++1(Potenziamento): Questo attacco 
+guadagna:  Critico: Devastante.
+ Mano Lesta 1
+Scassinare.
+Passiva.Se quando a ronti un Test di Difesa, 
+ottieni , piazza un Segnalino Cianfrusaglia 
+sulla Carta Equipaggiamento Borsa.
+ Tutto è Utile 2
+Sopravvivenza.
+Reazione 1: Puoi usare questa Abilità dopo 
+aver a rontato un Test di Difesa. Puoi 
+un per ogni Segnalino Cianfrusaglia che 
+possiedi. Per ogni ottenuta devi scartare 1 
+Segnalino Cianfrusaglia che possiedi.
+Esperto di Sotterranei 1
+Istruzione.
+Reazione 2. Quando ti trovi in una 
+Catacomba, puoi far ritirare tutti i dadi 
+lanciati da un altro Eroe per un Test che ha 
+appena a rontato.
+Condivisione 1
+Sopravvivenza.
+1: puoi spostare un Segnalino Cianfrusaglia 
+dalla carta Equipaggiamento Borsa sulla 
+Scheda Eroe di un altro Eroe entro 3 da te.
+ Passo Sicuro 2
+Istruzione.
+Una volta per attivazione puoi scartare 1 
+Segnalino Cianfrusaglia per eseguire uno 
+Scatto senza provocare attacchi di Reazione.
+2 Skill Sheets
+ Accumulatore Compulsivo 
+Passiva. +1: Ogni volta che utilizzi un Segnalino 
+Cianfrusaglia.
+5: Ogni Eroe sul Campo di Battaglia ottiene 
+un Segnalino Cianfrusaglia. Se siete in una 
+Catacomba, ogni Eroe ottiene invece 2 Segnalini 
+Cianfrusaglia.
+ Colpo Violento 3
+Sopravvivenza.
++1(Potenziamento): Questo attacco 
+guadagna:  Critico: Devastante.
+ Mano Lesta 1
+Scassinare.
+Passiva.Se quando a ronti un Test di Difesa, 
+ottieni , piazza un Segnalino Cianfrusaglia 
+sulla Carta Equipaggiamento Borsa.
+ Tutto è Utile 2
+Sopravvivenza.
+Reazione 1: Puoi usare questa Abilità dopo 
+aver a rontato un Test di Difesa. Puoi 
+un per ogni Segnalino Cianfrusaglia che 
+possiedi. Per ogni ottenuta devi scartare 1 
+Segnalino Cianfrusaglia che possiedi.
+Esperto di Sotterranei 1
+Istruzione.
+Reazione 2. Quando ti trovi in una 
+Catacomba, puoi far ritirare tutti i dadi 
+lanciati da un altro Eroe per un Test che ha 
+appena a rontato.
+Condivisione 1
+Sopravvivenza.
+1: puoi spostare un Segnalino Cianfrusaglia 
+dalla carta Equipaggiamento Borsa sulla 
+Scheda Eroe di un altro Eroe entro 3 da te.
+ Passo Sicuro 2
+Istruzione.
+Una volta per attivazione puoi scartare 1 
+Segnalino Cianfrusaglia per eseguire uno 
+Scatto senza provocare attacchi di Reazione.
+ Accumulatore Compulsivo 
+Passiva. +1: Ogni volta che utilizzi un Segnalino 
+Cianfrusaglia.
+5: Ogni Eroe sul Campo di Battaglia ottiene 
+un Segnalino Cianfrusaglia. Se siete in una 
+Catacomba, ogni Eroe ottiene invece 2 Segnalini 
+Cianfrusaglia.
+LUCA Colpo Violento 3
+Sopravvivenza.
++1(Potenziamento): Questo attacco 
+guadagna:  Critico: Devastante.
+ Mano Lesta 1
+Scassinare.
+Passiva.Se quando a ronti un Test di Difesa, 
+ottieni , piazza un Segnalino Cianfrusaglia 
+sulla Carta Equipaggiamento Borsa.
+ Tutto è Utile 2
+Sopravvivenza.
+Reazione 1: Puoi usare questa Abilità dopo 
+aver a rontato un Test di Difesa. Puoi 
+un per ogni Segnalino Cianfrusaglia che 
+possiedi. Per ogni ottenuta devi scartare 1 
+Segnalino Cianfrusaglia che possiedi.
+Esperto di Sotterranei 1
+Istruzione.
+Reazione 2. Quando ti trovi in una 
+Catacomba, puoi far ritirare tutti i dadi 
+lanciati da un altro Eroe per un Test che ha 
+appena a rontato.
+Condivisione 1
+Sopravvivenza.
+1: puoi spostare un Segnalino Cianfrusaglia 
+dalla carta Equipaggiamento Borsa sulla 
+Scheda Eroe di un altro Eroe entro 3 da te.
+ Passo Sicuro 2
+Istruzione.
+Una volta per attivazione puoi scartare 1 
+Segnalino Cianfrusaglia per eseguire uno 
+Scatto senza provocare attacchi di Reazione.
+18 Tiles 
+6 Brazier s 6 Flames
+6 Activation 
+Tokens
+12 Terrorized 
+Tokens
+6 Trap Tokens 4 Defused 
+Tokens
+1 Rage 
+Token
+2 Chest 
+Token (A/B)
+ 4 Map Tokens
+ 3 Temporal 
+Charge Tokens
+5 Reliquary 
+Charge 
+Tokens
+1 Rope Token
+ 2 Amphora 
+Tokens
+8 Trinket 
+Tokens
+1 Chasm / 
+Pillar Token
+1 Chasm / 
+Sarcophagus 
+Token
+1 Broken 
+Shield 
+Token
+ 9 Flame 
+Tokens
+3 Shovel 
+Tokens
+ 9 Equipment Cards
+18 Tiles 
+CA0
+1 Rage 
+6 Trap Tokens
+6 Brazier s
+9 Flame 
+1 Chasm / 1 Chasm / 
+Charge Tokens
+1
+3
+1
+6
+2
+
+
+
+
+
+
+
+Mantenimento 1: se l'evocatore non paga questo costo, rimuovere Furia (Modello e Segnalino) dal 
+Campo di Battaglia.
+Alleato,
+Non Morto,
+Legame Vitale
+Furia
+
+se l'evocatore non paga questo costo, rimuovere Furia (Modello e Segnalino) dal questo 
+
+6+
+Alleato,
+6+
+Non Morto, Non Morto,
+
+6+
+Non Morto,
+Legame Vitale
+Furia
+Legame Vitale: ogni ferita  sica subita dalla Furia viene subita anche dal suo evocatore.
+Attivazione: Furia si attiva seguendo queste regole: ◆ Condivide l'Attivazione con il suo evocatore.
+◆ Il suo evocatore lo controlla.
+◆ Esegue le Azioni scelte dal suo evocatore 
+spendendo i propri . ◆ Il suo  è pari a quello del suo evocatore +1. ◆ Il suo evocatore può alternare le proprie Azioni 
+con quelle del Furia.
+2 Chest 
+5
+How to use this Expansion
+ is Expansion adds a Side Campaign that can be 
+incorporated into any Main Campaign of Nova Aetas 
+Renaissance from the Core Game or the Vesuvius 
+Expansion.  is Side Campaign consists of 2 Side Missions 
+and 1 Hunt Mission that must be played in sequence, 
+starting with Mission CT1 - “Into Darkness.” If you decide 
+to use the Catacombs Expansion in your Campaign, add the 
+Event Card found in this box to the deck of Event Cards 
+you are using in your Campaign. If you draw the “Into the 
+Unknown” Event Card during a Travel Phase, you may 
+choose to undertake it as a normal Side Mission. Once you 
+have undertaken this Side Campaign, you must play the 3 
+Side Missions that comprise it consecutively, starting with 
+Mission CT1 - “Into Darkness.”
+In addition, this expansion adds Expedition mode, which 
+allows you to play new Side Misions to explore randomly 
+generated Catacombs during a main campaign in the Core 
+Game or Vesuvius Expansion. Finally, Catacombs adds a 
+new Hero that can be played in any Campaign.
+At the end of Missions CT1 and CT2 - “Back re” you may 
+wish to quit the Side Campaign. In this case, return the 
+“Into the Unknown” Event Card to the Event Card deck 
+and play the next Campaign Mission. You can resume the 
+Side Campaign, but if you have not completed it previously, 
+you will have to play it from the beginning, starting with 
+Mission CT1 - “Into Darkness.”
+ e CT3 Mission - “ e  ing on the  reshold” of this 
+Side Campaign is a Hunt Mission and follows all the rules 
+for this type of Mission, as described in the Nova Aetas 
+Renaissance Rulebook
+Some Abomination Prey Cards may feature the  symbol. 
+E ects preceded by the  symbol activate only if the Attack 
+Target is “In the Dark” (Roman, no itals) and are always 
+applied before the target Hero's Defense Test. Otherwise, 
+the E ect is ignored and only the attack traits without the 
+ symbol are applied.
+A er playing Mission CT3 - “ e  ing on the  reshold,”
+regardless of the outcome, follow the normal rules to resume 
+the Nova Aetas Renaissance Campaign. If you want to face 
+the Abomination in the future, you must play Mission CT3
+exclusively without replaying the entire Side Campaign. 
+Mark the “Abomination” Hunt among those available on 
+the Campaign Sheet.
+Hunt Mission
+Completing the Side Campaign
+5
+Quitting the Side Campaign 
+Verso l’Ignoto
+Uno scavo antico ha aperto una voragine 
+nel tufo sottostante. Cercatori di tesori e 
+tombaroli sono stati attratti dalla struttura 
+romana sottostante l’apertura, ma pochi 
+hanno fatto ritorno e chi ci è riuscito ha 
+perso il senno. Il Vaticano ne ha proibito 
+l’accesso. Che queste antiche rovine 
+nascondano un nuovo e terribile artefatto?
+◆Potete segnare 
+la Missione 
+Secondaria CT1 
+- Nell’Oscurità 
+nelle Missioni 
+Secondarie 
+Attive.
+6
+New Rules
+An orphan raised on the streets, Luca learned to fend for 
+himself by earning a living as a tomb raider, exploring 
+ancient tombs to recover their treasures and sell them 
+to wealthy benefactors. Fascinated by the classical world 
+and driven by a desire for fortune and glory, he traveled 
+throughout Renaissance Italy in search of lost relics and 
+artifacts. Armed with ingenuity and courage, he is ready to 
+venture into even the darkest depths of the Catacombs... but 
+what secret does his legendary hat really conceal?
+Relic Cards are associated with the Bond Equipment Reliquary, 
+which can be obtained by choosing the Advanced Class Relic 
+Hunter.  anks to this Equipment, during the Mission Setup 
+phase, Luca chooses 2 of the 6 Relics available to be associated 
+with the Reliquary Card. By using the Reliquary's action, Luca 
+can use the e ects of the Relic Cards associated with it and 
+resolve the e ects indicated on both cards. Please note that 
+Luca MUST resolve both e ects; he cannot decide to resolve 
+only one of them. Each Relic Card indicates the number of 
+Charges that the Relic has.  e total number of Charges of the 
+ 2 Relics associated with the Reliquary represents the number 
+of times the Reliquary can be used for that Mission. Place a 
+number of Reliquary Charge Tokens on the Reliquary equal 
+to the total number of Charges of the 2 Relics. 
+At the beginning of his Activation, the Archeologist may 
+roll a  Discovery Die to gain the Find Tokens shown 
+on its faces.  ere are 3 types of Find Token : Map, Shovel, 
+and Amphora.  ese tokens are used by the Archeology 
+rule, which allows Luca to enhance a Skill a er using the 
+ required to use it. Archeology can either add E ects to a 
+Skill or replace its E ect with a new one; in the latter case, 
+the E ect is preceded by “Instead of ”.
+New Hero: Luca
+Relic Cards
+Archeology and the Discovery Die ()
+Sangue di S.Gennaro
+ Se non hai Nemici 
+adiacenti o ieni un Segnalino Sanguinante altrimenti un Nemico a , 
+te adiacente subisce 2 Imbloccabili. 
+Carica: 1
+ Se non hai Nemici 
+Reliquia Sangue di S.Gennaro
+adiacenti o ieni un Sanguinante altrimenti un Nemico a 
+te adiacente subisce 2 Imbloccabili.
+ Se non hai Nemici 
+Sangue di S.Gennaro
+ Se non hai Nemici 
+Reliquia
+number of Reliquary Charge Tokens on the Reliquary equal 
+At the beginning of his Activation, the Archeologist may 
+Find Tokens shown 
+Map, Shovel, 
+.  ese tokens are used by the Archeology 
+rule, which allows Luca to enhance a Skill a er using the 
+ required to use it. Archeology can either add E ects to a 
+Skill or replace its E ect with a new one; in the latter case, 
+Archeology and the Discovery Die ()
+7
+ e new Catacomb s tiles introduce greater variety 
+and tactical depth during underground expeditions.
+Each tiles can come in di erent sizes to suit the complexity 
+of the scenario or the type of environment represented , 
+from small corridors to vast forgotten rooms. 
+Some tiles feature special squares, recognizable by their 
+colored borders, which introduce unique rules and di erent 
+game situations. All the new special squares are listed below.
+Orange - Debris 
+ A Square containing Debris cannot be 
+occupied by any Model and cannot be 
+moved through, but it does not block 
+Line of Sight.
+ ese tokens can be gained by Luca (and in rare cases by 
+other Heroes) in various ways. A er performing a Test, 
+Luca may discard a Trinket Token to increase the result of 
+one of the dice used for the Test by 1.
+ is dashboard represents the starting point for every 
+Mission that takes place in the Catacombs.
+ is Expansion also includes a new Psychostasia card for 
+Gregorio. If Gregorio takes part in any mission played in 
+a Catacomb s, replace the standard Psychostasia card with 
+the one included in this Expansion.  is will allow him to 
+use the powers of Psychostasia, taking advantage of the new 
+Reagents that can be recovered within the Catacombs.
+New Tiles
+New Psychostasia Card for Gregorio
+Trinket Tokens
+Starting Tile
+Purple - Cursed Ground
+A Hero who moves or ends their 
+Movement on this Square receives a 
+Cursed Token.
+Blue - Stagnant Water
+A Hero moving into this Square 
+must spend 1 more than regular 
+movement (refer to the Water Tile
+rule s of the Core Game rulebook) .
+Green - Toxic Fumes 
+A Hero who ends their Movement on 
+this Square gains a Poisoned Token.
+You may discard multiple Tokens at the same time to 
+increase the outcome of the chosen die by 1 for each Token 
+discarded.
+1: Puoi scartare una o più 
+che contengano almeno 2 Cuoio 
+
+di Morte. Se lo fai, puoi scartare 
+1 Segnalino Satus Negativo 
+dalla Scheda Eroe di ogni Eroe 
+entro 4 da te (tu incluso).
+Ammit Scarta una  dal Bo ino per usare questo A acco.
+2  2-5 +2
+   
+Maat
+Psicostasia
+New Psychostasia Card for Gregorio
+: Puoi scartare una o più 
+che contengano almeno 2 Cuoio 
+di Morte. Se lo fai, puoi scartare 
+1 Segnalino Satus Negativo 
+dalla Scheda Eroe di ogni Eroe 
+4 da te (tu incluso).
+Ammit
+ dal Bo ino per usare questo A acco.
+ 2-5 +2
+  
+Maat
+Psicostasia
+Ankh 1: Puoi scartare una o più 
+ che contengano almeno 1 Membrana e 1 Scaglia del Mito.
+Se lo fai, scegli un Eroe a te 
+adiacente, quell'Eroe scarta 
+ no a 3 dalla sua Scheda 
+Eroe.
+Tatenen 1: Puoi scartare una o più 
+che contengano almeno 1 Fungo 
+Tenebroso. Se lo fai, aggiungi 
+un Segnalino Fiammella a quelli 
+già presenti su di un Se ore 
+dell'Horologium  no ad un 
+massimo di 3.
+Psicostasia
+CS0
+8
+Brazier
+ e Brazier is a new 3D Scenic Element consisting of 2 parts: 
+Brazier and Flame. Each time a Room is revealed, a Brazier 
+without the Flame Scenic Element is placed. In this case, the 
+Brazier is considered “Unlit” and has no special rules. When 
+a Hero with an Active Torch uses the “Kindle” Action, they 
+place the Flame Scenic Element on the Brazier, and from that 
+moment on, the Brazier is considered Lit. A Room containing 
+a Lit Brazier is considered Illuminated, as are all models inside 
+it.  e Brazier is a 3D Scenic Element that occupies 1 Square, 
+with the Blocking and Interactive rules.
+Doorways
+Miniatures representing the doors that separate the Rooms and 
+Corridors inside the Catacomb s. Doorways can only be placed 
+adjacent to speci c areas called “ resholds.”  resholds are 
+indicated on the map shown on the Catacomb s Cards and are 
+graphically indicated on the Tiles.  e Tiles within a Catacomb s 
+can only be connected to each other by the presence of a 
+Doorway; there cannot be adjacent Tiles without a Doorway 
+between them.
+Terrorized
+A Hero with the Terrorized Negative Status 
+receives a -1 penalty to their Mind 
+characteristic. An Enemy with the Terrorized 
+Negative Status receives a -1 penalty to their 
+Mind Defense characteristic. At the end of the 
+Model Activation, discard this token.
+Trap
+Mission tokens used in the Catacomb s 
+Campaign.  e rules for their use are 
+listed directly on the Mission Cards that 
+require them.  ese tokens occupy 1 
+Square, but it is possible to move and stop 
+on them. 
+Defused
+A token associated with the Treasure/
+Formulae Card Defusing Tools.  is 
+token is placed on the Persistent Trap 
+Corridor Tile and serves to remind 
+players to ignore the e ect of the Trap for 
+the rest of the expedition inside the 
+Catacomb s.
+New Scenic Elements
+New Tokens
+Rope
+At the beginning of an Expedition, this 
+token must be placed on a Square of your 
+choice on the Catacomb s Starting Tile 
+and serves to mark the entrance, and 
+therefore also the exit, of the Catacomb s. 
+ e Square where this token is located is 
+considered empty. 
+Flame 
+(3 per color: yellow, red, blue) .
+ e Flame Token is associated with 1 
+of the 3 Torch Cards included in the 
+expansion. Flame Tokens are divided 
+into groups of 3 based on color.  ey 
+are placed on the Horologium and 
+serve as a reminder to indicate the 
+brightness of the Torch.
+Temporal Charge
+Token associated with the “Amulet of Lost 
+Time” Reward Card, obtainable a er 
+completing a Catacomb s Mission.
+9
+Trinket
+Token associated with Luca's (Tomb Raider) 
+Equipment Card: Bag.
+Chasm / Sarcophagus / Pillar
+Scenic elements used in the Catacomb s Campaign.  e 
+rules and instructions on how to use these tokens are listed 
+as Special Rules within the Mission Cards. 
+ ese Scenic Elements follow these rules:
+Chasm
+Blocking, 
+Interactive
+Sarcophagus
+Blocking, 
+Interactive
+Pillar
+Blocking
+1 Kindle 
+Only if you are adjacent to a Brazier, place the Flame Scenic 
+ Element on the Brazier. From this moment on, the Brazier is 
+“Lit” and the entire Room is considered Illuminated.
+1 Cros s the Threshold 
+Only if you are adjacent to a  reshold Reveal the top 
+card of the Catacomb s Deck, take the associated tile and 
+place it wherever you like.  en place your Hero on the 
+new tile placed on the Battle eld. Follow the normal rules 
+for the newly revealed Room or Corridor. Continue your 
+Activation.
+CB0
+
+SPIRIT OF THE LANISTA
+2 Ludus magnus CB0
+Each Hero in the Catacombs performs a  Test:
+3+: Gain a Blessed Token. 2: Nothing happens. 0-1
+: Nothing happens.
+: Gain a Cursed Token.
+  e spirit of a Lanista  allenges you in his arena.
+
+New Actions
+9
+Map, Amphora, Shovel
+ ese Tokens are associated with Luca's (Archeologist) 
+Equipment Card: Travel Journal. 
+Broken Shield
+ is is a Negative Status Token that only 
+applies to Enemies. An Enemy with the Shield 
+Skill cannot use that Skill until Luca's next 
+Activation, at which point the Token is 
+discarded from the Enemy Card targeted by 
+the Shieldbreaker trait 
+Reliquary Charge Token x5
+ ese represent the charges on Luca's 
+ Reliquary Equipment Card. Each time Luca 
+uses the Reliquary's E ect, discard 1 of these 
+tokens from the card.
+1 Escape Rope 
+You can only use this Action to Exit the Catacombs if you 
+are adjacent to or on a Rope Token.  at Hero is no longer 
+considered in play and cannot re-enter the Catacomb s in 
+any way. 
+10
+Achievement Cards and Catacomb s Missions
+New Cards
+Achievement Cards are numbered from CT1 to CT6.  ese 
+are Special Cards that can only be obtained a er completing 
+a Catacomb s by either: Exiting the Catacomb s or Partially 
+Exiting the Catacomb s. For more information, see the 
+section “Choosing a Catacomb s.”
+ ere are 3 Catacomb s Missions (“Lost in the Dark,” 
+“Guardian Spirit,” “ e Ritual”), and they can only be 
+attempted a er obtaining the 2 required Achievement Cards. 
+ ese special Catacomb s Missions are played normally, 
+following the rules of Expeditions, but have Mission 
+Requirements that, when met, trigger a special Event that 
+requires additional Setup and provides new Victory and 
+Defeat conditions. As with the Standard Missions in Nova 
+Aetas Renaissance, depending on the outcome, players will 
+read the corresponding paragraph.
+If the party fails the Mission in any way, they can try again 
+later. If they win the Mission, it will not be possible to replay 
+an Expedition in the Catacombs of that size for the rest of 
+the current Campaign. (For example, once the “Guardian 
+Spiri t” Mission is won, it will no longer be possible to 
+undertake Expeditions in Medium-sized Catacombs).
+All the information you need to play these missions is listed 
+starting on page 18.
+Achievement Cards
+Catacomb s Missions
+Maestro delle Vie Sepolte
+" Ogni eco, ogni silenzio 
+e ogni inganno vi è noto, 
+considerate il so osuolo 
+come una seconda casa"
+Conquista
+Maestro delle Vie Sepolte
+ CT06
+Maestro delle Vie Sepolte Conquista
+" Ogni eco, ogni silenzio 
+e ogni inganno vi è noto, 
+considerate il so osuolo 
+come una seconda casa"
+Maestro delle Vie Sepolte Conquista
+ Conquista
+CT01
+ is Expansion includes 3 di erent Torch cards in 3 colors: 
+Red, Blue, and Yellow. Each card has 3 Flame Tokens of the 
+same color associated with it.  ese are Equipment items 
+that can be cra ed by the Artisan by satisfying the reagent 
+requirements of the corresponding Formulae card.  e 
+Torch is an Equipment with a  Encumbrance.  e Hero 
+carrying the Torch, and any other Model within the Torch's 
+range, is considered Illuminated 
+During their Activation, a Hero may decide to activate the 
+Torch they have equipped. If they do so, the player places 
+3 Flame Tokens of the same color as their Torch in the 
+Horologium Sector where their Hero's Activation Token is 
+currently located. Each time the Horologium Hand reaches 
+the sector containing the Flame Tokens again, 1 Flame 
+Torch Cards
+Token must be discarded.  is represents the e ectiveness 
+of the Torch, which decreases over time. In fact, based on 
+the number of Flame Tokens present on the Horologium, 
+the Torch's range of action will be as follows:
+• 3 Flame Tokens:  e Torch illuminates within 4 Squares 
+of the Torch Bearer.
+• 2 Flame Tokens:  e Torch illuminates within 3 Squares 
+of the Torch Bearer.
+• 1 Flame Token:  e Torch illuminates within 1 Square of 
+the Torch Bearer.
+11
+Room Cards 
+
+SPIRIT OF THE LANISTA
+CB0 Ludus magnus 2
+Each Hero in the Catacombs performs a 
+3+: Gain a Blessed Token. 2: Nothing happens. 0-1
+: Nothing happens.
+: Gain a Cursed Token.
+  e spirit of a Lanista  allenges you in his arena.
+
+Ludus magnus
+A
+B
+C
+A Room Name . 
+B Representation of the corresponding Tile .
+C  e number of Treasure Cards that the rty draws 
+when there is at least 1 Hero present and there are 
+no more Enemies.
+D Deployment Points: Indicate where to place 
+enemies generated by the Enemy Dra .
+E Special Rules .
+F Identi cation code, important for forming the 
+Catacomb Deck according to the Expedition 
+Chart.
+G Brazier .
+CB0 2
+  e spirit of a Lanista  allenges you in his arena.
+
+CB0 2
+  e spirit of a Lanista  allenges you in his arena.
+
+D
+Each Hero in the Catacombs performs a  Test: Each Hero in the Catacombs performs a 
+  e spirit of a Lanista  allenges you in his 
+ Test:
+  e spirit of a Lanista  allenges you in his arena.
+E
+ G 
+F CB0
+ e Room Card, like other Catacomb s Cards, can be drawn 
+when a Hero uses the Cross the   reshold Action. 
+• When a Room Card is drawn from the Catacomb s Deck, 
+the Tile corresponding to the identi cation code of the 
+Room Card drawn must be taken from the Box.
+•  e player of that Hero chooses how to orient the Tile 
+based on the  resholds indicated on the Map on the 
+Room Card and on the corresponding Tile.
+•  e Player places their Hero inside the room, in the 
+Square closest to the  reshold connecting the previous 
+Tile to the Tile of the newly drawn Room.
+•  e Enemy Dra is performed on the positions indicated 
+on the Card.
+Room Cards may have Special Rules that activate at speci c 
+times, so pay close attention to the text on the card before 
+placing your Hero and Enemies. Each Room Card contains 
+a Brazier, which is always unlit when the Room is revealed. 
+Catacomb s Cards
+A Hero who has a Lit Torch and is adjacent to the Brazier 
+can use the Kindle Action.
+Some Room Cards show 1 or more spaces where you can 
+place a Cube.  ese spaces indicate the number of times 
+the room's E ect can be used. Each time you use the room's 
+ E ect, place a Cube on 1 of the available spaces. When all 
+spaces are occupied by a Cube, the E ect cannot be used.
+ One Hero in this Room 
+PERFECT WEAPONS
+
+
+When a Room is Illuminated, all Enemies inside the Room, 
+or who enter it a erwards, must turn their Enemy Card over 
+to the Lit side.
+Corridor Cards 
+Corridor
+CORRIDOR
+CA2
+X1
+X1
+X4
+  
+1: Enemy Dra 
+2-3-4-5: Nothing happens
+6-7: 1x Shadow Veil
+8: Gain a Disadvantaged Token
+A
+B
+A Corridor Name . 
+B Representation of the corresponding Tile .
+C Black Squares: indicate where to place Enemies 
+generated by the Enemy Dra .
+D Shot in the Dark Chart .
+E Identi cation code, important for setting up the 
+Catacomb s Deck according to the Expedition 
+Chart.
+F Colored Squares: Orange, Green, Blue, and Purple. 
+CA2 CA2 Corridor
+C
+: Nothing happens
+: 1x Shadow Veil
+D
+F
+E CA2
+Catacomb s Cards can be of 3 types: Room Cards, Corridor 
+Cards, or Event Cards. Together, these types form the Cat￾acomb s Deck, which is created according to the Expedition 
+Chart (on page 19 of this rulebook). 
+Please note: Catacomb s Cards and all the rules described 
+below are not used in the 3 Missions that make up the Side 
+Campaign. In those Missions, the rules for Rooms and 
+Corridors are described directly on the Mission Cards.
+
+SPIRIT OF THE LANISTA
+2 Ludus magnus CB0
+Each Hero in the Catacombs performs a 
+ Token.
+Token.
+  e spirit of a Lanista  allenges you in his arena.
+
+SPIRIT OF THE LANISTA
+Ludus magnus CB0
+Each Hero in the Catacombs performs a  Test:
+Blessed : Nothing happens. Token.
+Cursed Token.
+  e spirit of a Lanista  allenges you in his arena.
+
+CA0
+12
+ e Corridor Card, like other Catacomb s Cards, can be 
+drawn when a Hero uses the Cross the  reshold action. 
+When a Corridor Card is drawn from the Catacomb s Deck, 
+the Board corresponding to the identi cation code of the 
+Corridor Card drawn must be taken from the Box. Next, the 
+player of that Hero chooses how to orient the Tile based on 
+the  resholds indicated on the Map on the Corridor Card 
+and on the corresponding Tile. Finally, the Player places 
+their Hero inside the Corridor, in the  rst Square closest 
+to the  reshold that connects the previous Tile to the one 
+of the Corridor just drawn. Unlike Room Cards, Corridor 
+Cards don't include enemies, so no dra s are made when 
+the tile is placed in the Game Area. 
+Corridor Cards always feature a table with results ranging 
+from 1 to 8.
+Each Hero who begins their Activation In the Dark in a 
+Corridor must roll a die and compare the result to the chart 
+on the corresponding Corridor Card. Enemies, on the other 
+hand, never have to make Darkness Rolls.  e consequences 
+of a Darkness Roll on Corridors can vary, including an 
+Enemy Dra . To avoid having to roll for the chart, simply 
+be within range of a Torch when you begin your Activation 
+in a corridor.
+However, Corridor E ects are exhaustible. In fact, each time 
+one of the e ects is resolved, you must place a Cube in the 
+corresponding space. When the number of Cubes indicated 
+is present next to an E ect, that E ect cannot be applied 
+even if it is the result of a Darkness Roll. In this case, do not 
+apply any Corridor Card E ects.
+Corridor Cards - Trap
+ ese are special Corridor Cards that follow the normal rules 
+for Corridor Cards with regard to the Cross the   reshold 
+rule, but their cards do not feature charts for Darkness Roll 
+results. Instead, they feature a mandatory Test that can lead 
+to terrible consequences. Traps can be of 2 types: Instant or 
+Persistent.
+CD7 Corridor
+ Test:
+0-1: Su er 1 and gain a Bleeding Token. 2+
+Bleeding : Nothing happens.. Bleeding
+DEADLY DART
+INSTANTANEOUS
+Instant Traps are triggered when 
+they are revealed, and the Hero 
+who performed the Cross the 
+  reshold Action is the only one 
+who must perform the Test. If the 
+test is passed, nothing happens and 
+the Trap loses its E ect; if the Test 
+is failed, the consequences are 
+applied, but even in this case, the 
+Trap loses its E ect. From that 
+moment on, it is considered a 
+Corridor Tile where no Darkness Rolls are made.
+CI7 Corridor
+ Test:
+0-2: Gain a Disadvantaged Token. 3+: Nothing happens. Disadvantaged
+ARCANE ATRIUM
+PERSISTENT
+Persistent Traps trigger when they 
+are revealed, and the Hero who 
+performed the Cross the 
+  reshold Action , must perform 
+the Test. If the Test is passed, 
+nothing happens; if the Test is 
+failed, the consequences are 
+applied, but in either case, the Trap 
+does not lose its E ect. From that 
+moment on, every Hero who enters a Persistent Trap Tile 
+must face the Room Test.  e only way to eliminate the 
+e ects of a Persistent Trap is to successfully use Defusing 
+tools. 
+Event Cards (E) 
+ A section of the ceiling collapses on 
+you. You assess your injuries as a 
+beam of light shines down .
+Sudden Collapse
+ Each Hero must perform a 
+ Test -  Survival 1:
+ 3+: Your re exes saved you! 0-2: Su er 1 Unblockable  .
+ If the next revealed Tile is a Corridor, it will 
+be considered Lit as if under the E ect of a 
+.
+ ese are special Catacomb s Cards 
+that are shu ed into the 
+Catacomb s Deck. Event Cards 
+present unexpected events that 
+apply to the next Room or Corridor 
+ Card that is drawn. For this reason, 
+once an Event Card is revealed 
+a er the Cross the   reshold 
+action, Event Cards must continue 
+to be revealed until a Room, 
+Corridor, or Trap Card is revealed, 
+and the e ects of the Event Cards revealed up to that point 
+must be applied. If multiple Event Cards are revealed before 
+a Room or Corridor Card, the Event Cards must be applied 
+in the order in which they were revealed.
+13
+ ese are the Activation Cards for the Stalking Shadow Prey 
+Pro le Card.  ese Prey Cards are used during the Medium 
+Catacombs - “Guardian Spiri t” Mission.  e cards must 
+be played in a speci c order according to their numbering 
+(from 1 to 6), so be careful not to mix them up when tackling 
+the Mission.  e Stalking Shadow Prey Cards follow all the 
+normal rules applicable to Prey Cards found in the Core 
+Game Rulebook.
+Prey Cards: Stalking Shadow
+1
+2
+L'Ombra Persecutrice si piazza 
+adiacente all'Eroe bersaglio, 
+in modo da essere adiacente a 
+più Eroi possibili, dopo esegue 
+il seguente Attacco sull'Eroe 
+bersaglio:
+ Debole
+Intralciare
+dell'Ombra
+L'Ombra Persecutrice si piazza 
+adiacente all'Eroe bersaglio, 
+in modo da essere adiacente a 
+più Eroi possibili, dopo esegue 
+il seguente Attacco sull'Eroe 
+7+
+
+ Debole
+Intralciare
+Passo 
+CACCIA
+dell'Ombra
+Ombra Persecutrice
+13
+ ere are 3 di erent types of Treasure Cards: Ancient 
+Formula e Cards, Equipment Cards, and Reagent Cards. 
+Together, they form the Treasure Deck, which must be 
+placed in the Game Area before each Expedition to any type 
+of Catacomb s (S, M, or L).
+Ancient Formulae Cards are special Treasure Cards that 
+allow players to add a speci c Formulae Card to the Deck 
+of cards that the Artisan can consult during a Rest Phase. 
+Equipment Cards are Treasure Cards that allow players to add 
+that speci c equipment to the Campaign Sheet's Treasury.
+ Reagent Cards are Treasure Cards that, once obtained, allow 
+Players to record new types of Reagents on the Campaign 
+Sheet. Keep in mind that the new types of Reagents will be 
+used to build Formula e obtained through Ancient Formula e. 
+Treasure Cards
+
+Essenza della Notte Eterna
+1Popolino 1 Cuoio di Morte
+1 Scaglia del Mito
+1 Obolo di Caronte
+Essenza della Notte Eterna
+Popolino
+ Cuoio di Morte
+ Scaglia del Mito
+ Obolo di Caronte
+ Tesoro
+14
+Unlike the normal Formulae Cards in the base game, these 
+will not be immediately available from the Cra sman. In 
+fact, Ancient Formulae Cards can only be unlocked by 
+the corresponding Treasure Card s. Furthermore, once 
+unlocked, they must be cra ed as usual using the Reagents 
+required on the back of the Card.  e Reagents required 
+for Ancient Formulae Cards can only be obtained through 
+Reagent Treasure Cards, which can be obtained as loot from 
+an Expedition.
+Ancient Formulae Cards Anello della Resurrezione Accessorio
+Una volta per Missione, 
+quando sei KO all'inizio della 
+tua A ivazione, scarta 1
+dalla tua Scheda, poi assegna 
+ 
+1 Segnalino Terrorizzato ad un 
+Eroe entro  3 da te.
+Una volta per Missione, 
+Anello della Resurrezione
+Una volta per Missione, 
+quando sei KO all'inizio della 
+tua A ivazione, scarta 1
+dalla tua Scheda, poi assegna 
+ 
+1 Segnalino Terrorizzato ad un 
+ 3 da te.
+Accessorio
+Una volta per Missione, 
+—
+1 Scaglia del Mito
+1 Acciaio delle Cripte
+Scudo dell'Oblio
+1 Scaglia del Mito
+Formulae antica
+ e Enemy Cards in Catacombs all belong to the Undead 
+faction, even though they retain the symbol of their original 
+faction (Fauns, Rome, Venice, Mercenaries, or Myths).  e 
+Faction Symbol is used to determine which factions will 
+make up the Dra deck, information that can be obtained 
+from the City Card during the Rest Phase. In addition, the 
+Enemy Cards in the expansion are double-sided: Dark side 
+and Light side.  e Dark side represents the basic form of 
+the Enemy, while the Light side represents the weakened 
+form due to the e ect of light (caused by a Torch or Brazier). 
+When an Enemy becomes Lit, for whatever reason, the Card 
+must be turned over to the side with the  symbol and 
+the characteristics and attack shown on this side must be 
+used immediately (even if it was In the D when the target of 
+the attack was chosen). Whenever a Hero decides to target 
+an Enemy, or when Enemies are activated, you must always 
+check whether the Enemy is Lit or In the Dark and turn the 
+card over accordingly. 
+Enemy Cards
+
+
+
+
+
+
+
+
+
+4
+4
+5
+6
+6
+Legionario
+Perforare
+ Svantaggiare
+Perforare
+4
+
+5+ 1  
+
+Non Morto
+
+
+
+
+
+
+
+
+
+3
+1
+6
+5
+6
+Scutum 
+7+
+
+  Stordire, Svantaggiare
+
+Scutum 
+2
+1  
+Stordire, Svantaggiare
+
+
+
+
+
+
+
+
+
+
+4
+3
+6
+6
+6
+Signore del Crepuscolo
+1
+ 8+
+
+1-3
+3
+ 
+ 1 ,Bruciare, Intralciare
+Non Morto, Barriera 3
+
+Reagent Treasure Cards, which can be obtained as loot from 
+15
+Special equipment that can only be obtained a er ful lling 
+the victory conditions of one of the Catacombs Missions: 
+Lost in the Dark, Guardian Spirit, and  e Ritual.
+ ese are the Activation Cards for the Abomination Prey 
+Pro le Card.  ese Prey Cards are used during Mission CT3 
+-  e  ing on the  reshold, which is playable within the 
+Catacombs Side Campaign.  e Cards must be played in a 
+speci c order according to their numbering, so be careful 
+not to mix them up when you play the Mission for the  rst 
+time. 
+Abomination Prey Cards add a new mechanic to take 
+advantage of the Light and Dark rules in the Expansion. 
+Prey Cards that have an Attack trait preceded by the 
+symbol only add that trait if the Abomination is In the Dark 
+and is not Illuminated. If the Abomination is within the 
+Reward Cards
+Prey Cards: Abomination
+15
+
+6+
+
+  e Abomination places a Trap 
+Token adjacent to the nearest 
+Hero, then places itself adjacent 
+to the furthest Hero and performs 
+the following Attack on the latter:
+Curse
+Poison
+Crawling 
+Wrath 1
+1
+Artefatto
+Amuleto del Tempo Perduto
+1: Una volta per A ivazione 
+piazza un Segnalino Carica 
+Temporale su questa carta (Max 
+3). Una volta per Missione puoi 
+eliminare tu i i Segnalini presenti 
+su questa carta e guadagni 
+per ogni Segnalino.
+1
+Amuleto del Tempo Perduto
+3
+1
+
+  e Abomination places a Trap 
+Token adjacent to the nearest 
+Hero, then places itself adjacent 
+to the furthest Hero and performs 
+the following Attack on the latter:
+Curse Poison
+Crawling 
+Wrath
+1
+Abomination
+HUNT
+Amuleto del Tempo Perduto
+ Una volta per A ivazione 
+piazza un Segnalino Carica 
+Temporale su questa carta (Max 
+3). Una volta per Missione puoi 
+eliminare tu i i Segnalini presenti 
+su questa carta e guadagni 
+per ogni Segnalino.
+Artefatto
+Amuleto del Tempo Perduto
+Artefatto
+ Ricompensa
+MC1
+ Ricompensa
+light radius of a Torch, then that Trait must be ignored.
+Abomination Prey Cards follow all the normal rules 
+applicable to Prey Cards found in the Basic Game Rules.
+16
+
+
+
+
+
+
+
+
+1
+ Devastante, 
+Terrorizzare
+Non Morto, Destino, Corridore
+:L'Eroe più vicino, l'Eroe con più 
+Nutrirsi del Terrore: Per ogni Eroe entro 3 
+da questo Modello, che possiede un Segnalino 
+Terrorizzato sulla propria Scheda Eroe, la 
+Creatura Evocata guadagna+1
+Suscettibile alla Luce: 
+.
+Se la Creatura Evocata si 
+trova entro il raggio della Torcia o di un Braciere 
+Acceso, questo Modello guadagna -2 e -1.
+Creatura Evocata
+5
+1
+7
+7
+15
+ ese 2 Pro le Cards are used in the Medium and Large 
+Catacomb s Missions.
+Speci cally, the Stalking Shadow Pro le Card is used in the 
+Guardian Spirit Mission, while the Summoned Creature 
+Pro le Card is used in the  e Ritual Mission.
+Profile Cards
+1
+7+
+
+:L'Eroe più vicino, l'Eroe con più 
+,standard.
+da questo Modello, che possiede un Segnalino 
+Per ogni Eroe entro 
+Terrorizzato sulla propria Scheda Eroe, la 
+Creatura Evocata guadagna+1
+Se la Creatura Evocata si 
+trova entro il raggio della Torcia o di un Braciere 
+Acceso, questo Modello guadagna -2
+Creatura Evocata
+
+
+
+
+
+
+
+3
+ 8
+ 1
+
+
+ :L'Eroe più lontano, standard.
+Caccia Tombale: questa Missione segue le regole descritte 
+nel paragrafo Missione di Caccia del Regolamento, con la 
+di erenza che per scon ggere la Nemesi almeno 3 Eroi 
+devono uscire dalla Catacomba.
+Ombra Ghermitrice: Un Eroe che inizia la sua Attivazione 
+adiacente a questo Nemico, ha -2per il resto della sua 
+Attivazione.
+Frenesia della banshee: Ogni volta che un Eroe viene 
+messo K.O. da questo Modello, l'Ombra Persecutrice si 
+muove per diventare adiacente all'Eroe più vicino entro 3.
+Ombra Persecutrice
+8
+-
+-
+-
+-
+17
+Shield breaker
+If an Attack with this Trait is successful, the Enemy 
+that suffered it gains a Broken Shield Token.
+Elusive Shadow /
+A model with this Skill can only be targeted by the indicated 
+type of Attack if it is adjacent to the attacking model. For 
+Heroes, this Skill is only provided by certain Equipment and 
+is activated according to the rules of Reaction. 
+The Effect can be activated after the Hero has been targeted 
+by an Enemy and lasts until the start of their next activation. 
+If activating this Skill prevents the enemy from targeting that 
+Hero, the Enemy may select another target according to their 
+regular rules. After activating this Effect, the Hero gains the 
+Reaction Token indicated on the Equipment card and flips it 
+over to indicate that it can no longer be used until the end of 
+the Mission. 
+New Traits
+New Skills
+Terrorize
+If an Attack with this Trait is successful, the 
+model that suffered it gains a Terrorized
+Token.
+Recovery X
+At the start of this Model's activation, all other models in its 
+Faction and with the Undead Skill withinX, discard 1.
+17
+type of Attack if it is adjacent to the attacking model. For 
+Heroes, this Skill is only provided by certain Equipment and 
+is activated according to the rules of Reaction. 
+The Effect can be activated after the Hero has been targeted 
+by an Enemy and lasts until the start of their next activation. 
+If activating this Skill prevents the enemy from targeting that 
+Hero, the Enemy may select another target according to their 
+regular rules. After activating this Effect, the Hero gains the 
+Reaction Token indicated on the Equipment card and flips it 
+over to indicate that it can no longer be used until the end of 
+the Mission. 
+18
+ is game mode is the heart of the 
+Catacombs Expansion. During the 
+Setup Phase, if the City/Town Card 
+where you last performed the Rest 
+Phase features the Torch icon, you 
+can decide to play an Expedition.
+If the Location Card allows you to 
+play an Expedition, it also indicates 
+the size of the Catacombs available 
+and the factions you may encounter 
+within.
+Catacombs Cards, boards, Treasure Cards, and Catacombs 
+Event Cards allow you to enjoy a full- edged Dungeon 
+Crawler experience!
+ Catacombs are characterized not only by their size, which 
+represents the number of cards that make up the Catacomb s 
+Deck, but also by the number of Doorways associated with 
+them.  e Doorways are a very important counter within the 
+Catacomb s and represent its state of exploration. In fact, only 
+when the last Doorway has been placed can the Catacomb s 
+be said to have been fully explored. Fully exploring a 
+Catacomb s is one of the fundamental prerequisites for 
+meeting the Victory conditions and obtaining the greatest 
+number of treasures from an Expedition to the Catacombs. 
+ e Expedition has at its disposal:
+• 4 Doorways for Small Catacombs 
+• 6 Doorways for Medium Catacombs
+• 8 Doorways for Large Catacombs
+ e size of a Catacomb s also determines 
+the number and type of Enemies you may encounter during 
+your Expedition, the number of Rooms you will face, the 
+presence of Trap Corridor Cards, etc.
+For each type of Catacomb s (Small, Medium, and Large), 
+there are 3 versions, which di er in terms of the Catacomb s 
+Cards that make up the deck and the type of Enemies, 
+while sharing some characteristics such as the number of 
+Catacomb s Cards and the time limit. 
+ e size of the Catacomb s can be chosen by players from 
+those available in the City or Village where they are located.
+When a Catacomb s is completed for the  rst time, in 
+addition to the loot, the party gets a  according to the size 
+Choosing a Catacomb s
+Small Catacombs are recommended for a party of Heroes 
+with few  or for those who want a shorter gaming 
+experience, as the time limit set for this size of Catacomb s is 
+3 Horologium hours.
+Medium Catacombs are recommended for a party of 
+Heroes with a fair number of  or for those who want a 
+slightly more challenging gaming experience. In this case, 
+the time limit set for this size of Catacomb s is 7 Horologium 
+hours.
+Large Catacombs are recommended for a party of Heroes 
+with many  or for those who want a challenging and 
+unpredictable gaming experience. In fact, the time limit set 
+for this size of Catacomb s is 10 Horologium hours.
+of the Completed Catacomb s:
+• When the party successfully completes the exploration of 
+a Small Catacomb, s they gain CT01.
+• When the party successfully completes the second 
+exploration of a Small Catacomb s, they gain CT02.
+• When the party successfully completes the exploration of 
+a Medium Catacomb s, they gain CT03.
+• When the party successfully completes the second 
+exploration of a Medium Catacomb, s they gain CT04.
+• When the party successfully completes the exploration of 
+a Large Catacomb s, they gain CT05.
+• When the party successfully completes the second 
+exploration of a Large Catacomb s, they gain CT06.
+As explained below, in the Catacomb s Missions section, 
+these special  cards are a prerequisite for undertaking a 
+Mission within a Catacomb s. If you successfully complete 2 
+expeditions within the Small, Medium, or Large Catacombs, 
+you gain the corresponding 2.  ese 2 allow you to 
+undertake the mission linked to those explorations. For 
+example, if you successfully explore 2 Small Catacombs, you 
+can tackle the Mission: “Lost in the Dark .”
+Maestro
+Cerusico
+Locanda
+Chiesa
+Artigiano
+Mercato
+Caserma
+Terme
+Roma  
+Catacombe (medie / grandi)
+
+
+
+
+
+
+
+
+
+-2
++1
+-2
+
+-1
+
+
+
+4
+Maestro
+Cerusico
+Locanda
+Artigiano
+Mercato
+Caserma
+Chiesa Terme
+Roma  
+
+
+
+
+
+
+
+
+-2
++1
+-2
+
+-1 
+If the Location Card allows you to 
+play an Expedition, it also indicates 
+the size of the Catacombs available 
+and the factions you may encounter 
+within.
+   
+Maestro
+Cerusico
+Locanda
+Chiesa
+Artigiano
+Mercato
+Caserma
+Terme
+Roma  
+Catacombe (medie / grandi)
+
+
+
+
+
+
+
+
+
+-2
++1
+-2
+
+-1
+
+
+
+4
+Catacombe (medie / grandi)
+
+Expedition Mode
+19
+Once you have gained the 2 Conquest cards for a type of 
+Catacomb s (in the previous example, CT01 and CT02 
+for the Small Catacomb s), you will have access to the 
+corresponding mission, which you can tackle from the third 
+expedition onwards. 
+Catacomb s Deck
+To build the Catacomb s Deck for the Expedition you are 
+about to undertake, follow the instructions in the table below.
+Once you have selected a Catacomb s from those listed in 
+the table, take the Catacomb s cards indicated and shu e 
+them to form a Catacomb s Deck.  e Event cards indicated 
+should be chosen at random from those available.
+Similarly, the chart also indicates the rank of the Enemies 
+that will populate the Catacomb s (see next paragraph).
+How do you tackle Catacomb s Missions?
+CATACOMB S CATACOMB S CARDS ENEMY CARDS
+
+SMALL 1
+CA3, CB3, CA6, CA1, CB5, CD1, 3 Event Cards 
+All
+
+-
+
+-
+
+SMALL 2
+CC3, CD3, CB6, CB1, CA5 CD5, 3 Event Cards 
+All
+
+-
+
+-
+
+SMALL 3
+CG3, CF3, CA6, CB2, CD4, CH7, 3 Event Cards 
+All
+
+1
+
+-
+
+MEDIUM 1
+CA8, CB6, CD3, CB3, CC3, CC1, CA4, CD4, CD7 4 Event 
+Cards
+
+All
+
+2
+
+-
+
+MEDIUM 2
+CB8, CA6, CF3, CG3, CA3, CA2, CB4, CC7, CI7, 4 Event 
+Cards
+
+All
+
+3
+
+1
+
+MEDIUM 3
+CB8, CB0, CB3, CF3, CD3, CB2, CC4, CH7, CF7, 4 Event 
+Cards
+
+All
+
+All
+
+1
+
+LARGE 1
+CA0, CB6, CA3, CB3, CB8, CC3, CA2, CA4, CA7, CA1, 
+CB1, CB7 5 Event Cards
+
+All
+
+All
+
+2
+
+LARGE 2
+CB0, CA6, CD3, CF3, CA8, CG3, CB2, CB4, CC7 CC1, 
+CD1, CF7, 5 Event Cards
+
+All
+
+All
+
+2
+
+LARGE 3
+CA0, CB6, CA3, CC3, CA8, CG3, CA2, CC4, CB7 CC5, 
+CG7, CA7 5 Event Cards
+
+All
+
+All
+
+All
+Draft Deck
+ e Dra deck to be used in Catacombs is the one provided 
+in this expansion. It contains an Undead version of all 
+factions (and all corresponding models), which nevertheless 
+retain their original faction.
+ e Enemy Dra Deck consists of all the Enemy Dra Cards 
+of the Factions listed on the City Card.  e Deck must be 
+formed by consulting the Catacomb s Composition Table 
+(see below). Next to each variant of the Small, Medium, 
+and Large Catacombs, the number of Enemy Cards to be 
+included based on their Rank is listed. 
+For example, in Small Catacomb s 3, all Enemy Troop Dra 
+Cards from all Factions present in the Catacomb s must be 
+added (refer to the City Card to  nd out which factions are 
+present), plus a single Elite-rank Enemy Dra Card chosen 
+at random from among those of the Factions present in the 
+Catacomb s. Once the Enemy Dra Deck has been formed, 
+it will represent the enemies you may face during this 
+Expedition.
+20
+In the Catacombs Expansion, there are 2 conditions: Lit and 
+Dark. A Model that is not within the range of a Torch or 
+inside a Room with a Lit Brazier is considered to be “Dark.” 
+ ese 2 conditions are very important for both Heroes and 
+Enemies. In fact, Heroes who begin their Activation In the 
+Dark inside a Corridor must roll according to the chart 
+corresponding to the Corridor Card and resolve the e ects. 
+Catacombs Enemies do not have to roll for Dark, but their 
+cards have di erent pro les on both sides. 
+ e Lit side is marked with in the upper right corner, and 
+shows the pro le of the Enemy to be used when it is within 
+the range of a Torch or Brazier. For more details, see the 
+ Enemy Cards section. 
+Please note: these rules also apply when playing the 3 Side 
+Campaign Missions CT1, CT2, and CT3.
+Lit and Dark Models
+
+
+
+
+
+
+
+4
+6
+6
+6
+Legionario
+Perforare
+ Svantaggiare,Terrorizzare
+4
+ 6+
+
+1
+ 
+Non Morto
+Legionario
+ Svantaggiare,Terrorizzare
+
+3
+
+
+
+
+
+
+
+
+
+4
+5
+6
+6
+Legionario
+Perforare
+ Svantaggiare
+Perforare
+4
+ 5+
+
+1
+
+3
+ 
+
+Non Morto
+Legionario
+
+Legionario
+
+
+4
+
+Legionario 
+ 4
+21
+Victory or Defeat Conditions
+Catacomb s Exit
+•  e last Doorway was placed by one of the using the Cross 
+the  reshold Action.
+• All Heroes have reached the Rope Token inside the 
+Starting Corridor (Tile CS0) and used the Cross the 
+ reshold Action to exit the Catacomb s.
+Loot: All Treasure Cards gained during the Expedition.
+Partial Exit
+•  e last Doorway was placed by one of the group’s Heroes. 
+using the Cross the  reshold Action.
+• At least 2 Heroes have reached the Rope Token inside 
+the Starting Corridor (Tile CS0) and used the Cross the 
+ reshold Action to exit the Catacomb.
+Loot: Half of the Treasure Cards gained during the 
+Expedition.
+Escape from the Catacombs
+•  e last Door was not placed by a Hero 1 the party using 
+the Cross the  reshold Action.
+• All Heroes have reached the Rope Token inside the 
+Starting Corridor (Tile CS0) and used the Cross the 
+ reshold Action to exit the Catacomb.
+Loot: Half of the Treasure Cards gained during the 
+Expedition.
+Partial Escape from the Catacomb s
+•  e last Door was not placed by a Hero in the party using 
+the Cross the  reshold Action.
+• At least 2 Heroes have reached the Rope Token inside 
+the Starting Corridor (Tile CS0) and used the Cross the 
+ reshold Action to exit the Catacomb.
+Loot: 1/4 of the Treasure Cards obtained during the 
+Expedition (rounded down).
+Lost to Darkness
+•  e time available for the Expedition ends and at least 2 
+Heroes have not le the Catacomb s.
+◆ Each Hero gains an Injury card
+Loot: All Treasure Cards in the Loot are discarded.
+21
+Victory or Defeat Conditions
+22
+23
+Catacomb s Missions
+Small Catacomb s Mission 
+Lost in the Dark
+24
+◆ You may unlock this Mission only if the party has CT01 
+and CT02.
+ ere is no trace of the exit. Not even the traces you le behind you. 
+ e shadows of the Catacombs have closed behind you like silent 
+jaws.  e tunnels intertwine in a labyrinth without logic, made of 
+stone, dampness, and unease.
+Are you walking in circles? Or perhaps... is the place itself changing, 
+sucking you deeper and deeper?
+Worse still... you are not alone.
+Your only salvation is an old torch, found by pure chance or perhaps 
+abandoned by someone who... never made it out.
+Its  ame is weak. Flickering.
+Its light creates more shadows than it dispels.
+Every step you take, every wrong choice, every hesitation... the torch 
+dims a little more.
+Until you are le at the mercy of the darkness.
+Until you are blind to what is moving around the corner.
+Because in the Catacombs, darkness is not just the absence of light.
+It is a predator.
+And you... are its prey.
+Mission Requirements
+•  e Catacomb s has been fully explored (all Doorways have 
+been placed).
+•  ere are no Enemies in the Catacomb s.
+ When the Requirements are met, perform this Setup:
+◆ Remove all Catacomb s Cards, Tiles, Hero Models, and 
+ Tokens from the Battle eld, but set aside the Starting 
+Corridor Tile (CS0) and the Rope Token.
+◆ Do not discard  Tokens or Tokens of any kind from 
+ Hero Card s.
+◆ Do not discard any Flame Tokens on the Horologium 
+and do not move the Hero Activation Tokens.
+◆ Take Tile A2 and place it in the Game Area, then place 
+the Heroes on it.
+◆ Form a new Catacomb s Deck by randomly choosing 1 
+of the other 2 Small Catacombs available in the chart on 
+page 19.
+◆ Take 3 Doorways and continue the Mission.
+Mission Rules
+◆Finding the rope again: A er a Hero has placed the third 
+ Doorway on the Battle eld, do not draw a new Catacomb s 
+Card. Instead, attach it directly to the Starting Board (CS0). 
+Place the Rope Token furthest away from the Hero who used 
+the Cross the  reshold Action a er resolving it.
+Victory Conditions 
+◆At least 3 Heroes exit the Catacomb s before the time runs 
+out.
+Defeat Conditions 
+◆3 Heroes are KO .
+◆ e time limit for the Mission runs out. 
+25
+Victory
+When the  re  ickers for the last time, all that remains is a 
+trembling glow. A breath of light, as subtle as a held breath. 
+And yet, it’s enough.
+In that suspended moment, the darkness seems to hesitate. 
+It does not disappear—no, darkness never surrenders—but it 
+retreats, as if it recognizes something in you that it cannot 
+extinguish: a stubborn will, an unshakeable faith, or perhaps 
+just the desperation of someone who has nothing le to lose.
+ e tunnels around you, which until now seemed to bend 
+into meaningless labyrinths, straighten out as if guided by an 
+invisible design.
+A passage opens where before there was only stone.
+And at your feet, buried in dust and protected by ancient 
+seals, you discover a small relic. It is engraved with forgotten 
+symbols, which pulsate so ly when touched by the light of the 
+torch, as if awakening from a thousand-year slumber.
+It’s not just an object. It’s a gi .
+A fragment of Darkness itself, tamed but not defeated. A token 
+le by something—or someone—who watches you in silence.
+And now, watches you move forward.
+◆ e party gains MC1, mark it in the corresponding 
+slot on the Campaign Sheet.
+◆Loot: Whole
+◆ e Small Catacombs Mission - Lost in the Dark
+cannot be played again.
+Defeat
+ e torch goes out with a whisper, as if the  ame itself had 
+chosen silence. No roar, no tear; the darkness doesn’t explode... 
+it simply takes back what is its own.
+It slides down the walls, descends on your faces, creeps into 
+your thoughts. It envelops you without violence, like a cloak 
+that smells of wet earth and lost time. It separates you from 
+each other, isolates you.
+Suddenly your steps become uncertain, you hold your breath. 
+All that remains is to listen. Every drop that falls, every distant 
+creak, every sound that is not your own.
+In that dense and absolute silence, even your heart seems 
+to beat faster, as if to challenge the darkness. But there is no 
+challenge. Only waiting.
+ en, a er what seems like an eternity, the dim lights of the 
+upper tunnels reappear.  ere is no triumph. No relief. Only 
+the weight of what you leave behind.
+Because something has followed you. Something has 
+scrutinized your every move, your every hesitation, your 
+every unspoken thought.
+And even if the expedition has failed, even if you haven’t 
+found what you were looking for... something has happened.
+ e darkness now knows you.
+It knows your voices, the rhythm of your breathing, the light 
+in your eyes.
+And it waits for you. Not with anger, not with haste... but 
+with the millennial patience of that which does not forget.
+◆ e party discards all  Cards from the Loot.
+◆ e Small Catacombs Mission - Lost in the Dark can 
+be played again when selecting a Small Catacomb.
+Medium Catacomb s Mission 
+Guardian Spirit
+26
+◆ You may unlock this Mission only if the party has CT03 
+and CT04.
+You crossed thresholds that should not have been opened.
+You broke ancient chains, forced doors that time itself had forgotten.
+You did it to survive. To move forward. To escape this labyrinth of 
+stone and silence.
+But every wall torn down, every boundary violated... came at a 
+price.
+Here, beneath the world, something watched, motionless.
+Something that has existed since before legends began.
+Something that does not truly sleep... but waits.
+ e Guardian Spirit is not a simple guardian.
+It is the  erce will of the Catacombs.
+It is their rage.
+It is their protective instinct.
+It has no  xed face. It has no form that the human mind can hold 
+onto for too long.
+Membranous wings that fold in the shadows.
+A body that changes, twists, adapts.
+A demonic being, neither man nor woman, but a perfect predator in 
+this world of darkness.
+You cannot  ght it.
+You cannot deceive it.
+You can only  ee.
+Quickly. Silently.
+Hoping that will be enough.
+Mission Requirements
+•  e Catacomb s ha ve been fully explored (All Doorways 
+have been placed).
+ When the Requirements are met, perform this Setup:
+◆ Take the following components:
+6x Stalking Shadow Prey Cards
+1x Succubus Model
+1x Stalking Shadow Pro le Card  (Guardian Spirit) 
+◆ Place the Succubus Model in the Square furthest from 
+the exit.
+◆   e Succubus Model represents the Stalking Shadow in 
+this Mission.
+◆ Place the Stalking Shadow Activation Token on the 
+Holorogium Sector following the Active one.
+◆ Reveal  Guardian Spirit.
+Mission Rules
+◆Hunt:  is Mission follows the rules described in the Hunt 
+Mission s section of the Rulebook.
+Victory Conditions 
+ e Catacomb s is fully explored and at least 3 Heroes exit the 
+Catacomb s before the time limit runs out. 
+Defeat Conditions 
+◆3 Heroes are KO.
+◆A card must be drawn from the Stalking Shadow Deck, but 
+you cannot do so.
+27
+Victory
+Your breaths chase each other through the corridors, broken 
+by fatigue, mixed with the beating of your hearts that still 
+echo in your chests like war drums.
+ e echo of your footsteps slowly dissolves into the stone, 
+swallowed by a silence that is no longer hostile, but attentive. 
+ e creature... is no longer following you. No rustling, no 
+moaning.
+Perhaps it has retreated into the darkness from whence it 
+emerged.
+Perhaps it has accepted your escape as su cient tribute.
+Or perhaps it has simply let you go, not out of pity... but out 
+of respect.
+Only now do you truly understand.
+It was not just a hunt. Not a simple defense of territory.
+ e Guardian Spirit was not protecting a passage: it was 
+guarding a judgment.
+It was not defending a secret... it was testing those who dared 
+to challenge the will of the Catacombs.
+And you, even in fear and  ight, passed the test.
+ e darkness becomes less dense, as if it has stopped holding 
+its breath.  e walls tremble slightly, shaken by a quiver that 
+is not an earthquake, but a sign.
+A whisper in the stone. An answer.
+ en, from a niche that was not there before—or perhaps was 
+there but was not visible to you—an ancient artifact emerges.
+Stone, bone, metal... or something you do not recognize.  e 
+engraved symbols glow slightly, pulsing as if alive.
+It’s a gi . Or perhaps a reward.
+Not the spoils of the survivor, but the reward of the worthy.
+Something that the Shadow has chosen to grant to those who 
+have shown strength, heart... and respect.
+You have not simply been spared. You have been recognized.
+And now the passage is yours.
+◆ e party gains MC2, mark it in the corresponding 
+slot on the Campaign Sheet.
+◆Loot: Whole
+◆ e Medium Catacomb Mission - Guardian Spirit 
+cannot be played again.
+Defeat
+It wasn’t an escape.
+Not really.
+It was a blind, desperate race against something you couldn’t 
+stop.
+A race against the inevitable.
+And you weren’t fast enough.
+ e Spirit caught up with you. It overwhelmed you with its 
+presence, knocked you down, brought you to your knees.
+You felt its icy gaze, like a weight on the back of your neck. Its 
+proximity was total, su ocating.
+But it didn’t destroy you.
+It didn’t annihilate you.
+Because that wasn’t its purpose.
+Perhaps it was looking for something in your eyes.
+Perhaps it just wanted to know who you really were.
+Not invaders, not thieves... but fragile, exhausted beings who 
+were still trying to resist.
+And that, somehow, was enough for him.
+When the  ickering lights of the lanterns  nally reappear, 
+when the familiar stone of the catacombs stands out before 
+you again, you realize you are still alive.
+But something is not right.
+Something inside you has changed.
+Perhaps it is the fear that still grips your stomach, cold and 
+persistent.
+Perhaps it is the silence that now follows you everywhere, 
+heavier than your footsteps.
+Or perhaps it is the look: the same look that you now carry 
+in your eyes.
+ at of someone who has glimpsed the abyss and has not 
+forgotten it.
+You have crossed a threshold that can no longer be closed.
+Whatever price you paid, it has remained with you like an 
+invisible scar.
+You will carry it with you.
+In your steps. In your breath. In your dreams.
+And every time the darkness comes calling again... it will 
+know that you have already answered.
+◆ e party discards all  Cards from the Loot.
+◆ e Medium Catacomb Mission - Guardian Spirit can 
+be played again when selecting a Medium Catacomb.
+Large Catacomb s Mission 
+The Ritual
+28
+◆ You may unlock this Mission only if the party has CT05 
+and CT06.
+It was no accident.
+It wasn't just survival.
+Every step led you here.
+Engraved in stone, traced on the  oor, whispered through the silence 
+of centuries...
+You found signs.
+Fragments of words.
+Ancient symbols of forgotten knowledge.
+Someone, long ago, le a message among these ruins.
+A way out?
+A call?
+Or perhaps... a warning.
+ e braziers are not just for lighting up the darkness.
+ ey are part of something greater.
+A path. A design. A ritual.
+Lighting them all is the only way to activate the power buried in the 
+Catacombs.
+But each  ame is also a signal. A voice calling out to something that 
+does not like to be distLocationd.
+Only by completing the ritual can you summon the Lord of the 
+Catacombs and face him.
+Mission Requirements
+•  e Catacomb s has been fully explored (All Doorways have 
+been placed)
+•  ere are no Enemies in the Catacomb s.
+• All Braziers in the Room are Lit
+ When the Requirements are met, perform this Setup:
+◆ Take the following components:
+1x Abomination Model
+1x Summoned Creature Pro le Card  ( e Ritual)
+◆   e Abomination Model represents the Summoned 
+Creature in this Mission.
+◆ Reveal   e Ritual.
+Nightmare Appearance:
+◆Remove the Brazier 3D Element and place the 
+Abomination Model in its place.  e Abomination 
+represents the Summoned Creature for this Mission.
+◆Place the Abomination Activation Token on the 
+Holorogium Sector following the Active one.
+◆ e Room is considered to be In the Dark.
+◆Read the new Victory Conditions to complete the 
+Catacomb s.
+Mission's Actions
+◆0, O ciate the Rite: If a Hero is in a Room, and all 
+Mission Requirements are met, they may read the Mission 
+Rule: “Nightmare Appearan ce.”
+Mission Rules
+◆No Escape: Remove the Rope Token from the Battle eld.
+Victory Conditions 
+◆ e Summoned Creature is defeated.
+Defeat Conditions 
+◆3 Heroes are KO .
+◆ e time limit for the Mission runs out. 
+29
+Victory
+ e last  ame ignites, slowly but inexorably, as if responding 
+to an ancient command forgotten by time.
+ e symbol engraved in the center of the room lights up, not 
+with bright light... but with something deeper. A pulsating 
+glow, dark and warm like blood beneath the skin.
+Like a heart beating again a er centuries of silence, awakened 
+by your audacity.
+Everything stops.
+ e silence is broken by a sound that is not a sound—a 
+whisper in the stone, a call in the  esh.
+And for a moment, the whole world seems to hold its breath.
+ e walls tremble, the shadows writhe.
+ en, between the darkness and the uncertain light, the Lord 
+of the Catacombs manifests himself.
+He doesn’t speak. He doesn’t threaten.
+He is presence. He is will.
+And you don’t back down
+Not because you’re not afraid... but because you know you 
+can’t fail.
+ e confrontation is brutal.  e energies summoned shake the 
+hall, the stone groans, the  ames twist into unnatural spirals.
+But in the end, the power consumes itself.
+With a gasp, a  nal mu ed roar, the summoning dies away.
+ e burning embers crumble into  ne ash.
+ e air calms.
+ e ritual is complete.
+But it was more than a call.
+It was a judgment.
+Someone—or something—observed every gesture, every 
+word, every hesitation.
+And decided.
+In the silence that follows, among the dust and stones 
+blackened by the clash, you see what was not there before: a 
+residual fragment, intact.
+A dark, ancient form, still pulsing with the power that has just 
+been subdued.
+A gi .
+Or perhaps a curse.
+A silent legacy, passed down without words.
+You will never truly know what it means.
+But now it belongs to you.
+And it will accompany you.
+◆ e party gains MC3, mark it in the corresponding 
+slot on the Campaign Sheet.
+◆Loot: Whole
+◆ e Large Catacomb Mission -  e Ritual cannot be 
+played again.
+Defeat
+ e  ames ignite... but something goes wrong.
+ ey don’t follow the expected order, they don’t respond to the 
+carefully studied gestures.
+ e design traced on the  oor cracks and  ickers, as if it had 
+lost its connection with the world.
+ e outline wavers.
+And what responds to the call is not what you hoped for.
+It’s not the expected presence, it’s not the power to be 
+questioned or contained.
+It’s something else.
+It’s distortion. Anger. Hunger.
+ e Lord of the Catacombs emerges nonetheless, but not as a 
+judge or guardian.
+ e incomplete ritual has freed him without guidance, 
+without purpose... without restraint.
+He is unstable, ferocious, uncontrollable.
+His body deforms, vibrates, explodes into fragments of shadow 
+that tear through the air.
+ ere is no confrontation. Only chaos.
+You are overwhelmed.
+ e hall shatters.  e braziers explode in showers of  re.
+ e walls crack, the corridors collapse behind you.
+You are separated, forced to  ee through unknown passages, 
+amid dust and incandescent rubble.
+Your breath burns, your hands tremble, every step is an 
+unheard prayer.
+When the silent shadows  nally re-emerge—when surreal 
+calm returns to the ruins—you are still alive.
+But something has changed forever.
+Failure is not just an absence.
+It’s a wound.
+A mark that burns on your skin, but above all in your 
+thoughts.
+A void that you know will not be easily  lled.
+Power has escaped you.
+And now it knows you are looking for it.
+You will not be the  rst to  nd it.
+It will be... it that comes looking for you.
+◆ e party discards all  Cards from the Loot.
+◆ e Large Catacomb Mission -  e Ritual can be 
+played again when selecting a Large Catacomb.
+30
+Game Flow
+1. Expansion Setup
+• Keep all the materials included in the Catacombs Expansion (Catacomb s Cards, Tiles, Tokens, 3D elements, Miniatures, Dra 
+Cards, etc.) to hand.
+• If you want to tackle the Catacombs Side Mission, add the “Into the Unknown” Event Card to your Event Card deck. 
+6. Exploration
+• Hero and Enemy Activations follow the normal rules of Nova Aetas Renaissance, but Heroes can also use the Cross the  reshold 
+Action to place a Doorway and reveal a new Catacomb s Card.
+• If the revealed card is an Event, set it aside and draw a new card. Continue drawing until you reveal a Room or Corridor Card.
+• If the card drawn is a Corridor or Room, the player takes the Tile with the same Code as the Catacomb s Card drawn and places it in 
+any orientation they prefer.
+• If the Catacomb s Card represents a Corridor, the Hero is placed in the Square of the new tile, as close as possible to the Doorway 
+At this point, resolve any Events drawn before this Room, if there are any, a er which the Hero can continue their Activation,  rst 
+making a Darkness Roll, if necessary. At this point, resolve any Events drawn before this Corridor, a er which the Hero can continue 
+their Activation. 
+• If the Catacomb s Card represents a Room, the Hero is placed in the Square on the new tile, as close as possible to the Doorway A er 
+that, proceed with the Enemy dra , placing the Enemy Models drawn in the spots indicated on the Catacomb s Card. At this point, 
+resolve all Events drawn before this Room, a er which the Hero can continue their Activation.
+5. Starting Setup
+• Place the Starting Tile (CS0).
+• Place the Rope Token in a Square on the Starting Tile (CS0).
+• Place the Hero Models on the Starting Tile (CS0) as you wish. 
+• Set the Horologium to a starting time chosen by the players.
+• Keep the Torch Flame Tokens and the Brazier and Flame 3D Elements at hand.
+4. Deck Composition
+• Catacomb s Deck: Use the chart on page 19 to assemble the Catacomb s Deck.
+• Enemies Dra Deck: Include the Dra cards of the factions indicated on the City Card, respecting the quantities of Enemy Cards 
+for each Rank indicated in the chart on page 19. Not all enemy ranks will be available for all Catacomb s sizes.
+3. Catacomb s Selection
+• Choose the size of the Catacomb s ( Small, Medium, or Large) based on the City/ Village map you are in, as well as the di culty and 
+time available (3/7/10 Horologium hours).
+• Choose 1 of the Catacomb s con gurations from the chart on page 19, or you can randomly choose 1 of the 3 variants for each of 
+the 3 sizes (S, M, and L).
+2. Rest Phase & City Card
+• During the Rest Phase, take the City Card corresponding to the City or Village you are in.
+• If the card indicates access to the Catacombs, you can decide whether to undertake the Expedition a er visiting the shops in the 
+City/Village you are in.
+31
+Light and Darkness Management
+• Models outside the range of a Torch or Brazier are considered 
+ In the Dark. A Hero in a corridor, while considered In the Dark, 
+must always make a Darkness Roll and check the result on the 
+Catacomb s Corridor Card corresponding to the Corridor Tile 
+where the Hero is. When an Enemy is In the Dark, for the 
+purposes of any Test involving them, always consult the side 
+of the Enemy Card without the  symbol in the upper right 
+corner. Enemies never have to make a Darkness Roll. 
+• All squares in a room with a Lit Brazier are considered Lit, as 
+are any Heroes or Enemies located in a Square in that room. 
+Please note, however, that even if the room is Lit, the Flame 
+Token is discarded according to the normal rules of the Torch 
+Card.
+Doorway Placement
+• Each time you use the Cross the  reshold Action, you place 
+a Doorway.
+• A Catacomb s Card is revealed, and if it is a Room, Corridor, 
+or Corridor Trap Card, its corresponding Tile is placed on the 
+Game Area. If an Event Card is revealed, a new Catacomb s 
+Card is revealed until a Room, Corridor, or Corridor Trap Card 
+is revealed.
+• When all Doorways are positioned, the Catacomb s is Fully 
+Explored 
+Special Mission Conditions
+• If it is the third expedition of that size and you have the required 
+Achievement cards, you must play the speci c Catacombs 
+Mission (Small, Medium, or Large).
+Leaving the Catacombs
+• When you decide to retreat or the last Doorway is successfully 
+placed, all Heroes can use the Escape Rope Action when 
+adjacent to the Rope Token to escape from the Catacomb s.
+• Check which Victory or Defeat Condition applies and 
+determine the Loot (see page 21).
+Loot and Achievement
+• If necessary, discard Treasure Cards randomly to balance the 
+Loot you have obtained.
+• If it is the  rst or second Expedition of that size to be successfully 
+completed, take the corresponding  Achievement Card 
+(CT01–CT06).
+Returning to the Campaign
+• Any rewards (Achievement Cards or Mission Reward Cards) 
+are marked on the Campaign Sheet.
+• Perform a new Rest Phase in the City/Town where you are. 
+• A er that, you can choose 1 of the following options:
+▶ Play the next Campaign Mission
+▶ Play an Active Side Mission (of any type)
+Please note: It is not possible to play an Expedition a er a Side 
+Mission (of any kind).
+Nova Aetas Renaissance - Catacombs - Rulebook v.1.0
+©2026 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+
+ Catacomb Treasury 
+owned
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+Death Leather
+Mythical Scale
+Charon's Obol
+ Elysian Grass
+ Gloomy Mushroom
+Shadow Veil
+ Membrane
+Crypt Steel
+ Black Pearl
+Soul Fragment
+ Florins

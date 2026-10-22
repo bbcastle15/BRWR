@@ -1,0 +1,173 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inizializzazione del progetto (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scansione della struttura dei file...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Caricamento dei nomi delle classi globali…[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifica dei GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creazione degli script autoload...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inizializzazione delle estensioni...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Avvio della scansione dei file...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scansione delle azioni... (47 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | avatar_conspiracy_book.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | avatar_crown_of_thorns.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | avatar_cursed_trophy.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | avatar_divinatory_secrets.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | avatar_illness.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | avatar_letters_of_destruction.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | avatar_magic_of_the_rose.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | avatar_manipulating_the_past.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | avatar_pledge.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | avatar_remnants_of_magic.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | avatar_revolt_of_the_servants.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | avatar_singing_victory_again.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | avatar_sorrow.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | avatar_thorny_corruption.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | avatar_traces_of_texture.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | command_back.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | possessed.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | possessed_abyssal_reinforcements.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | possessed_blaze.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | possessed_book_of_nature.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | possessed_conspirators_study.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | possessed_corrupted_ray.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | possessed_corrupted_spear.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | possessed_dark_blade.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | possessed_dark_fire.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | possessed_dark_hammer.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | possessed_energy_of_the_rose.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | possessed_explosion_of_dark_petals.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | possessed_explosion_of_thorns.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | possessed_freeze_soil.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | possessed_frost_spear.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | possessed_incendiary_ball.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | possessed_infernal_reinforcements.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | possessed_manuscript_on_deceptions.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | possessed_poisoned_thorns.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | possessed_release_energy.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | possessed_release_force.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | possessed_research_on_fire.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | possessed_revenge_embodied.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | possessed_revenge_of_the_thorn.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | possessed_sap_of_the_black_rose.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | possessed_tales_of_destruction.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | possessed_tap_into_the_black_rose.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | possessed_technomancy_book.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | possessed_thorns_of_frost.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | possessed_tomb_reinforcements.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | possessed_unstable_thorns.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (47 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   4% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   6% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  12% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  14% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  29% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  35% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  39% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  43% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  54% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  56% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  64% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  70% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  79% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  87% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  89% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  93% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di pre-reimportazione...[39m[0m
+[   0% ] [90m[1mreimport[22m | possessed_dark_fire.png[39m[0m
+[   2% ] [90m[1mreimport[22m | possessed_dark_hammer.png[39m[0m
+[   4% ] [90m[1mreimport[22m | possessed_energy_of_the_rose.png[39m[0m
+[   6% ] [90m[1mreimport[22m | possessed_explosion_of_dark_petals.png[39m[0m
+[   8% ] [90m[1mreimport[22m | possessed_explosion_of_thorns.png[39m[0m
+[  10% ] [90m[1mreimport[22m | possessed_freeze_soil.png[39m[0m
+[  12% ] [90m[1mreimport[22m | possessed_frost_spear.png[39m[0m
+[  14% ] [90m[1mreimport[22m | possessed_incendiary_ball.png[39m[0m
+[  16% ] [90m[1mreimport[22m | possessed_infernal_reinforcements.png[39m[0m
+[  18% ] [90m[1mreimport[22m | possessed_manuscript_on_deceptions.png[39m[0m
+[  20% ] [90m[1mreimport[22m | possessed_poisoned_thorns.png[39m[0m
+[  22% ] [90m[1mreimport[22m | possessed_release_energy.png[39m[0m
+[  25% ] [90m[1mreimport[22m | possessed_release_force.png[39m[0m
+[  27% ] [90m[1mreimport[22m | possessed_research_on_fire.png[39m[0m
+[  29% ] [90m[1mreimport[22m | possessed_revenge_embodied.png[39m[0m
+[  31% ] [90m[1mreimport[22m | possessed_revenge_of_the_thorn.png[39m[0m
+[  33% ] [90m[1mreimport[22m | possessed_sap_of_the_black_rose.png[39m[0m
+[  35% ] [90m[1mreimport[22m | possessed_tales_of_destruction.png[39m[0m
+[  37% ] [90m[1mreimport[22m | possessed_tap_into_the_black_rose.png[39m[0m
+[  39% ] [90m[1mreimport[22m | possessed_technomancy_book.png[39m[0m
+[  41% ] [90m[1mreimport[22m | possessed_thorns_of_frost.png[39m[0m
+[  43% ] [90m[1mreimport[22m | possessed_tomb_reinforcements.png[39m[0m
+[  45% ] [90m[1mreimport[22m | possessed_unstable_thorns.png[39m[0m
+[  47% ] [90m[1mreimport[22m | avatar_conspiracy_book.png[39m[0m
+[  50% ] [90m[1mreimport[22m | avatar_crown_of_thorns.png[39m[0m
+[  52% ] [90m[1mreimport[22m | avatar_cursed_trophy.png[39m[0m
+[  54% ] [90m[1mreimport[22m | avatar_divinatory_secrets.png[39m[0m
+[  56% ] [90m[1mreimport[22m | avatar_illness.png[39m[0m
+[  58% ] [90m[1mreimport[22m | avatar_letters_of_destruction.png[39m[0m
+[  60% ] [90m[1mreimport[22m | avatar_magic_of_the_rose.png[39m[0m
+[  62% ] [90m[1mreimport[22m | avatar_manipulating_the_past.png[39m[0m
+[  64% ] [90m[1mreimport[22m | avatar_pledge.png[39m[0m
+[  66% ] [90m[1mreimport[22m | avatar_remnants_of_magic.png[39m[0m
+[  68% ] [90m[1mreimport[22m | avatar_revolt_of_the_servants.png[39m[0m
+[  70% ] [90m[1mreimport[22m | avatar_singing_victory_again.png[39m[0m
+[  72% ] [90m[1mreimport[22m | avatar_sorrow.png[39m[0m
+[  75% ] [90m[1mreimport[22m | avatar_thorny_corruption.png[39m[0m
+[  77% ] [90m[1mreimport[22m | avatar_traces_of_texture.png[39m[0m
+[  79% ] [90m[1mreimport[22m | command_back.png[39m[0m
+[  81% ] [90m[1mreimport[22m | possessed.png[39m[0m
+[  83% ] [90m[1mreimport[22m | possessed_abyssal_reinforcements.png[39m[0m
+[  85% ] [90m[1mreimport[22m | possessed_blaze.png[39m[0m
+[  87% ] [90m[1mreimport[22m | possessed_book_of_nature.png[39m[0m
+[  89% ] [90m[1mreimport[22m | possessed_conspirators_study.png[39m[0m
+[  91% ] [90m[1mreimport[22m | possessed_corrupted_ray.png[39m[0m
+[  93% ] [90m[1mreimport[22m | possessed_corrupted_spear.png[39m[0m
+[  95% ] [90m[1mreimport[22m | possessed_dark_blade.png[39m[0m
+[  97% ] [90m[1mreimport[22m | Finalizzazione dell'importazione delle risorse...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (47 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di post-reimportazione...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Caricamento dell'editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Caricamento dei pannelli…[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Riapertura delle scene...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor centrale...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione della finestra delle estensioni...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Disposizione dell'editor preparata.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

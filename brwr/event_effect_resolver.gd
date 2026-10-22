@@ -308,8 +308,8 @@ func _choose(game, frame: Dictionary, player_index: int, options: Array, prompt:
 	if frame.has("choice"):
 		return true
 	# Quest selection stays explicit in Cards/Quests even with one legal card.
-	if options.is_empty() or (options.size() == 1 and not options[0].value is QuestState):
-		frame["choice"] = options[0].value if options.size() == 1 else null
+	if options.is_empty():
+		frame["choice"] = null
 		return true
 	game.request_effect_choice(player_index, kind, frame, "choice", options, 1, 1, prompt)
 	return false

@@ -1,0 +1,332 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inizializzazione del progetto (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scansione della struttura dei file...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Caricamento dei nomi delle classi globali…[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifica dei GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creazione degli script autoload...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inizializzazione delle estensioni...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Avvio della scansione dei file...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scansione delle azioni... (219 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | e9a0.png[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | e9a0_white.png[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | e9a3.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | e9a3_white.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | e9a4.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | e9a4_white.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | e9a5.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | e9a5_white.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | e9a6.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | e9a6_white.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | e9a9.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | e9a9_white.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | e9ae.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | e9ae_white.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | e9af.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | e9af_white.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | e9b0.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | e9b0_white.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | e9b1.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | e9b1_white.png[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | e9b2.png[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | e9b2_white.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | e9b3.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | e9b3_white.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | e9b4.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | e9b4_white.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | e9b5.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | e9b5_white.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | e9b6.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | e9b6_white.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | e9b7.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | e9b7_white.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | e9ba.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | e9ba_white.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | e9bb.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | e9bb_white.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | e9bc.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | e9bc_white.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | e9bd.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | e9bd_white.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | e90b.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | e90b_white.png[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | e90c.png[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | e90c_white.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | e90e.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | e90e_white.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | e91a.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | e91a_white.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | e91b.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | e91b_white.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | e91e.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | e91e_white.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | e91f.png[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | e91f_white.png[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | e93a.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | e93a_white.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | e93b.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | e93b_white.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | e93c.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | e93c_white.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | e93d.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | e93d_white.png[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | e93e.png[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | e93e_white.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | e93f.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | e93f_white.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | e94b.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | e94b_white.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | e94c.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | e94c_white.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | e96a.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | e96a_white.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | e96b.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | e96b_white.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | e97b.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | e97b_white.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | e98c.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | e98c_white.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | e98d.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | e98d_white.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | e98e.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | e98e_white.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | e98f.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | e98f_white.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | e900.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | e900_white.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | e901.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | e901_white.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | e902.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | e902_white.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | e903.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | e903_white.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | e904.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | e904_white.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | e905.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | e905_white.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | e910.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | e910_white.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | e911.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | e911_white.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | e913.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | e913_white.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | e914.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | e914_white.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | e915.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | e915_white.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | e916.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | e916_white.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | e917.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | e917_white.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | e918.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | e918_white.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | e919.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | e919_white.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | e920.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | e920_white.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | e921.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | e921_white.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | e922.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | e922_white.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | e932.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | e932_white.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | e933.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | e933_white.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | e934.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | e934_white.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | e935.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | e935_white.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | e937.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | e937_white.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | e938.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | e938_white.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | e939.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | e939_white.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | e940.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | e940_white.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | e941.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | e941_white.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | e942.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | e942_white.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | e943.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | e943_white.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | e945.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | e945_white.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | e946.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | e946_white.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | e947.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | e947_white.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | e948.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | e948_white.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | e949.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | e949_white.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | e950.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | e950_white.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | e951.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | e951_white.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | e952.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | e952_white.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | e953.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | e953_white.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | e964.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | e964_white.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | e965.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | e965_white.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | e966.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | e966_white.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | e967.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | e967_white.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | e968.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | e968_white.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | e969.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | e969_white.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | e978.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | e978_white.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | e990.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | e990_white.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | e991.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | e991_white.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | e992.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | e992_white.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | avatar_crown_of_thorns.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | avatar_divinatory_secrets.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | avatar_illness.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | avatar_remnants_of_magic.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | avatar_thorny_corruption.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | avatar_traces_of_texture.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | board_material.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | parchment_material.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | possessed_abyssal_reinforcements.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | possessed_blaze.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | possessed_book_of_nature.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | possessed_conspirators_study.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | possessed_corrupted_ray.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | possessed_corrupted_spear.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | possessed_dark_blade.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | possessed_dark_fire.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | possessed_dark_hammer.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | possessed_energy_of_the_rose.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | possessed_explosion_of_dark_petals.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | possessed_explosion_of_thorns.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | possessed_freeze_soil.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | possessed_frost_spear.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | possessed_incendiary_ball.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | possessed_infernal_reinforcements.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | possessed_manuscript_on_deceptions.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | possessed_poisoned_thorns.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | possessed_release_energy.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | possessed_release_force.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | possessed_research_on_fire.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | possessed_revenge_embodied.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | possessed_revenge_of_the_thorn.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | possessed_sap_of_the_black_rose.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | possessed_tales_of_destruction.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | possessed_tap_into_the_black_rose.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | possessed_technomancy_book.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | possessed_thorns_of_frost.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | possessed_tomb_reinforcements.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | possessed_unstable_thorns.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | avatar-production-board.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (39 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  12% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  32% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  35% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  42% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  57% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  67% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  70% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  87% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  90% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  92% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di pre-reimportazione...[39m[0m
+[   0% ] [90m[1mreimport[22m | possessed_freeze_soil.png[39m[0m
+[   0% ] [90m[1mreimport[22m | possessed_freeze_soil.png[39m[0m
+[   2% ] [90m[1mreimport[22m | possessed_frost_spear.png[39m[0m
+[   5% ] [90m[1mreimport[22m | possessed_incendiary_ball.png[39m[0m
+[   7% ] [90m[1mreimport[22m | possessed_infernal_reinforcements.png[39m[0m
+[  10% ] [90m[1mreimport[22m | possessed_manuscript_on_deceptions.png[39m[0m
+[  12% ] [90m[1mreimport[22m | possessed_poisoned_thorns.png[39m[0m
+[  15% ] [90m[1mreimport[22m | possessed_release_energy.png[39m[0m
+[  17% ] [90m[1mreimport[22m | possessed_release_force.png[39m[0m
+[  20% ] [90m[1mreimport[22m | possessed_research_on_fire.png[39m[0m
+[  22% ] [90m[1mreimport[22m | possessed_revenge_embodied.png[39m[0m
+[  25% ] [90m[1mreimport[22m | possessed_revenge_of_the_thorn.png[39m[0m
+[  27% ] [90m[1mreimport[22m | possessed_sap_of_the_black_rose.png[39m[0m
+[  30% ] [90m[1mreimport[22m | possessed_tales_of_destruction.png[39m[0m
+[  32% ] [90m[1mreimport[22m | possessed_tap_into_the_black_rose.png[39m[0m
+[  35% ] [90m[1mreimport[22m | possessed_technomancy_book.png[39m[0m
+[  37% ] [90m[1mreimport[22m | possessed_thorns_of_frost.png[39m[0m
+[  40% ] [90m[1mreimport[22m | possessed_tomb_reinforcements.png[39m[0m
+[  42% ] [90m[1mreimport[22m | possessed_unstable_thorns.png[39m[0m
+[  45% ] [90m[1mreimport[22m | avatar-production-board.png[39m[0m
+[  47% ] [90m[1mreimport[22m | avatar_crown_of_thorns.png[39m[0m
+[  47% ] [90m[1mreimport[22m | avatar_crown_of_thorns.png[39m[0m
+[  50% ] [90m[1mreimport[22m | avatar_divinatory_secrets.png[39m[0m
+[  52% ] [90m[1mreimport[22m | avatar_illness.png[39m[0m
+[  55% ] [90m[1mreimport[22m | avatar_remnants_of_magic.png[39m[0m
+[  57% ] [90m[1mreimport[22m | avatar_thorny_corruption.png[39m[0m
+[  60% ] [90m[1mreimport[22m | avatar_traces_of_texture.png[39m[0m
+[  62% ] [90m[1mreimport[22m | board_material.png[39m[0m
+[  65% ] [90m[1mreimport[22m | parchment_material.png[39m[0m
+[  67% ] [90m[1mreimport[22m | possessed_abyssal_reinforcements.png[39m[0m
+[  70% ] [90m[1mreimport[22m | possessed_blaze.png[39m[0m
+[  70% ] [90m[1mreimport[22m | possessed_blaze.png[39m[0m
+[  72% ] [90m[1mreimport[22m | possessed_book_of_nature.png[39m[0m
+[  75% ] [90m[1mreimport[22m | possessed_conspirators_study.png[39m[0m
+[  77% ] [90m[1mreimport[22m | possessed_corrupted_ray.png[39m[0m
+[  80% ] [90m[1mreimport[22m | possessed_corrupted_spear.png[39m[0m
+[  82% ] [90m[1mreimport[22m | possessed_dark_blade.png[39m[0m
+[  85% ] [90m[1mreimport[22m | possessed_dark_fire.png[39m[0m
+[  87% ] [90m[1mreimport[22m | possessed_dark_hammer.png[39m[0m
+[  90% ] [90m[1mreimport[22m | possessed_energy_of_the_rose.png[39m[0m
+[  92% ] [90m[1mreimport[22m | possessed_explosion_of_dark_petals.png[39m[0m
+[  95% ] [90m[1mreimport[22m | possessed_explosion_of_thorns.png[39m[0m
+[  97% ] [90m[1mreimport[22m | Finalizzazione dell'importazione delle risorse...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (39 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di post-reimportazione...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Caricamento dell'editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Caricamento dei pannelli…[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Riapertura delle scene...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor centrale...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione della finestra delle estensioni...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Disposizione dell'editor preparata.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

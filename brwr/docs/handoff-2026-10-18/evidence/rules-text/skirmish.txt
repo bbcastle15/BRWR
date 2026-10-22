@@ -1,0 +1,1254 @@
+
+=== PAGE 1 ===
+Skirmish
+
+=== PAGE 2 ===
+The Lodge is now destroyed, the order of 
+Mages governed and managed by the Grand 
+Magister is but a faint memory. The Magisters 
+of the various schools have died or have 
+chosen exile.
+But the Rose lives on...
+What you need to Play ..........................................3
+Basic Concepts .......................................................4
+Allied Models ....................................................................4
+Opposing Models .............................................................4
+Rerolling the Dice ...........................................................6
+Creation of the Coven ...........................................6
+Mage Features .....................................................................6
+Follower Features ...............................................................7
+Setting up a game ..................................................8
+Game Flow ............................................................10
+Crown Token ....................................................................10
+Study Phase.................................................................10
+Action Phase ...............................................................10
+Actions ................................................................................10
+Movement ..........................................................................10
+Physical Attack ..................................................................11
+Cast a Spell (Mage only) ...................................................11
+Adventure Actions ............................................................11
+Cleanup Phase ............................................................11
+End of Game ...............................................................11
+Contents
+Spells ......................................................................12
+Attack Spells .......................................................................12
+Contingency Spells ...........................................................12
+Spell Anatomy: ..................................................................12
+Protection Spells ................................................................13
+Trap Spells ..........................................................................13
+Defeat of a Model .................................................13
+Damage Infl icted by the Black Rose ...............................13
+Defeated Mage ..................................................................13
+Defeated Follower .............................................................13
+Followers' Skills .....................................................14
+Adventures ............................................................15
+Relics of the Coven .....................................................15
+Cleanup Phase ...................................................................15
+End of the Game ...............................................................15
+Black Rose Petal .........................................................16
+Cleanup Phase ...................................................................16
+End of the Game ...............................................................16
+2GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 3 ===
+W h at yo u n e e d t o P l ay
+COLORED CUBES
+BASES FOR MAGES 
+AND EVOCATIONS
+PHYSICAL 
+ACTION TOKENS, 
+TROPHY TOKENS, 
+PERSISTENCE 
+TOKENS, TRAP/
+PROTECTION 
+TOKENS, POWER 
+TOKENS, AND THE 
+CROWN TOKEN
+THE OFFICIAL PLAYMAT FOR 
+REBIRTH
+A HANDFUL OF 
+8-SIDED DICE (D8)
+MINIATURES
+POWER BOARD
+You need to print the Print&Play components found in the app under BRWR: Print&Play.
+You will also need the following components from the Black Rose Wars Rebirth Core Box: 
+You will then need to print out the Mage Sheets, Follower Sheets, Measuring Tools and Trophy Board attached to this rulebook.
+3GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 4 ===
+Basic Concepts
+Models may be Opposing or Allied with one another.
+ALLIED MODELS
+Models under the control of the same player are considered 
+Allied Models.
+OPPOSING MODELS
+Models under the control of two diff erent players are considered 
+Opposing Models.
+Walls and some other elements drawn on the Playmat (shown 
+in white in the Game Area diagram to the side) are Blocking 
+Elements (BE). These elements hinder Line of Sight (see below), 
+but not Model Movement. Nevertheless, a Model cannot stop 
+on a blocking element.
+A Model is considered to have a Line of Sight (LoS) on all 
+Models on the Playmat.
+The LoS is considered Clean if by drawing a straight line 
+between the two aff ected Models it does not pass over any BE.
+The LoS is considered Obstructed if by drawing a straight line 
+between the two aff ected Models it passes over at least one BE; 
+an Obstructed LoS forces a Reduction (see Distance Measuring 
+on the next page) to all distances measured between the two 
+aff ected Models. For example, in the image on the right, if 
+Gramigna wants to target Baron Doria with a Spell with Range 
+6, but there is an EB between the two Models, the range of 
+the Spell becomes 3.
+Models and Bases
+Blocking Elements (BE)
+Line of Sight (LoS)
+4GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 5 ===
+Distance Measuring
+E n g a g e m e n t A r e a 
+In Rebirth Skirmish, distances are measured in centimeters using 
+a tape measure or one of the Measuring Tools provided with 
+this document (which must be printed and cut out).
+The distances on the game components are also indicated with 
+colored arrows called Categories, also shown on the Measuring 
+Tool:
+3cm: 
+3
+
+6cm: 
+6
+
+9cm: 
+9
+
+12cm: 12
+
+Some Game Eff ects or Rules may apply an Increase or Reduction 
+in one or more Categories to a distance indicated on the game 
+component. 
+An Increase always equals to 3cm more than what is stated on 
+the game component, this means that a category 
+3
+ becomes 
+6
+, a category 
+6
+ becomes 
+9
+, a category 
+9
+ becomes 12
+; a 
+category 12
+ cannot be increased in any way.
+A Decrease always equals to 3cm less than what is stated on the 
+game component, this means that a category 12
+ becomes 
+9
+, a 
+category 
+9
+ becomes 
+6
+, a category 
+6
+ becomes 
+3
+; a category 
+3
+ cannot be decreased in any way.
+It is possible to measure distances at any time.
+To measure distances between two Models, consider the closest 
+points on their bases. 
+If a rule applies 'within' a certain distance, it applies to any 
+distance that is not greater than the specifi ed distance. For 
+example, within 3cm means any distance that does not exceed 
+3cm.
+As long as a Model is within 
+3
+ of an Opposing Model on 
+which it has Clean LoS, both are in each other's Engagement 
+Area and are considered Engaged. An Engaged Model is subject 
+to some limitations (see Engaged Models). 
+For convenience, you can check whether two Models are 
+Engaged by using the black Mage Base included in the core 
+game box, which has a diameter of 
+3
+
+.
+3
+
+3
+6
+6
+9
+12
+
+5GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 6 ===
+Dice
+Success Threshold (ST)
+Cubes and Pool
+The game uses 8-sided dice (d8) to perform rolls.
+REROLLING THE DICE
+Some rules allow dice to be rerolled. Regardless of how many Eff ects or rules allow a die to be rerolled, a single die can never be 
+rerolled more than once. The reroll must be made before any modifi ers are applied.
+When performing an attack roll each die used in the roll must 
+equal or exceed a value called Success Threshold or ST. This 
+value is 5, so a die obtains a Success if it shows a result of 5 or 
+higher (5+). The Success Threshold can be changed in various 
+ways during the game.
+Each player has at their disposal a number of colored Cubes 
+that form their Pool. These Cubes will be used in various ways 
+during the game, mainly to represent Instability (the power of 
+Spells) and the Damage infl icted on Opposing Models. Unless 
+otherwise specifi ed in a game rule and Eff ect, when a player's 
+Cube is to be removed from a spot in the game (a Pool, a 
+Playmat spot, etc...) it returns to the owner's Pool.
+
+5
+Creation o f the Coven
+Each player forms their Coven by choosing a Mage and some Followers using the following rules.
+The Mages
+Each Coven must include a Mage chosen from those available 
+to the players. 
+MAGE FEATURES
+A Name: The Mage's Name
+B Type: Keywords owned by the Model that can trigger 
+eff ects if mentioned in the rules of a Skill or Spell.
+C Actions: The number of Actions the Model can perform 
+during its activation.
+D Speed: The maximum number of cm the Model can move 
+with a Movement action.
+E Physical Attack: The number of d8 the Model rolls to 
+perform a physical attack against an Enemy Model within 
+the engagement distance.
+F Health: The number of damage cubes the Model can gain 
+before being Defeated.
+G Spells: Each Mage has 3 Spells available, these are Actions 
+that the Mage can perform to obtain a variety of eff ects, but 
+they must be prepared during the Study Phase
+H Passive Skills: Eff ects whose rules always apply as long as 
+the Mage is in the Lodge.
+
+ 
+3 9 2 6
+ 
+A RIANNA
+ Draco Skin
+1  -
+Physical Attacks and Magic Attacks that 
+target you have ST+1.
+ Acid Blood
+1  9
+Perform a Magic Attack with 4d8.
+ Vigorous Infusion
+1  6
+: The target has +1 and +1.
+A RIANNA
+
+THE TECHNOMANCER
+A RIANNA
+-Mage￾3 9 2 6 Expert Repairwoman
+At the beginning of your Turn choose an 
+Undead Follower within 6 of Arianna. If you 
+do, remove 1 from that Follower.
+A
+A
+B
+
+C
+
+D
+
+E
+
+F
+H
+G
+C
+D
+E
+F
+G
+H
+Perform a Magic Attack with 4d8.
+ Vigorous Infusion
+1  6
+: The target has +1 and +1.
+6GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 7 ===
+Each Coven must include one to three Followers. The player has 6 ● (Follower Slots) at their disposal, which they must spend to select 
+their Followers from the list found at the end of this document. Each Follower requires the expense of a certain number of ● (indicated 
+under their Cost) to be included in the Coven, this expense can range from ● to ●●●●●●. Regardless of the Followers chosen by 
+player, a Coven must consist of a minimum of one Mage and one Follower, up to a maximum of one Mage and three Followers.
+FOLLOWER FEATURES
+A Name: The Follower's Name.
+B Cost: The number of ● that the player must spend to include 
+the Follower in their Coven.
+C Type: Keywords owned by the Model that can trigger 
+eff ects if mentioned in the rules of a Skill or Spell.
+D Actions: The number of Actions that the Model can perform 
+during its activation.
+E Speed: The maximum number of cm the Model can move 
+with a Movement Action.
+F Physical Attack: The number of d8 the Model rolls to 
+perform a Physical Attack against an Enemy Model within 
+the engagement distance.
+G Health: The number of damage cubes the Model can gain 
+before being Defeated.
+H Skills: These eff ects can be applied by following the rules 
+described in the Follower Sheet.
+The Followers
+ 
+3 6 2 3
+ 
+Cadaver
+Follower - Undead Follower - Undead
+Cadaver A
+C
+
+D
+
+E
+
+F
+
+G
+B
+H
+before being Defeated.
+H Skills: These eff ects can be applied by following the rules 
+described in the Follower Sheet.
+3 6 2 3
+COST:●
+Evocation 1 - Horde
+B
+H
+7GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 8 ===
+Follow these steps to set up a game of Rebirth Skirmish:
+1 Lay the Playmat A on a table large enough to fi t it completely.
+2 Each player places their Mage B and Follower C Sheets and Miniatures.
+3 Each player chooses one of the player colors available in the core box of Black Rose Wars: Rebirth (blue, red, purple, or white), 
+then:
+4 They take 15 cubes of the chosen color D and form a Pool of cubes next to their Mage Sheet. 
+Setting up a game
+
+ 
+2 3 6 9
+ 
+RIANNA A -Mage￾A
+THE TECHNOMANCER
+ Draco Skin 
+ 1 -
+Physical Attacks and Magic Attacks that target you have ST+1.
+Expert Repairwoman At the beginning of your Turn choose an 
+Undead Follower 6 within of Arianna. If you 
+do, remove from that Follower. 1
+ Acid Blood 
+ 1 9
+Perform a Magic Attack with 4d8.
+ Vigorous Infusion 
+ 1 6
++1  : The target has  +1  and .
+
+ 
+3 2
+ 
+6 8
+ Shared Torture
+1  9
+Perform a Magic Attack with 3d8. You can reroll any number of Dice from this Magic Attack; for each die rerolled that obtains a 
+Success, the target inflicts 1 on you.
+ Tor ment
+1  -
+Choose any number of  within 6 of the target; 
+assign a  Token to each chosen  .
+When a  with at least one of your  Tokens assigned 
+infl icts , roll a die; if successful, discard any number 
+of  Tokens assigned to that Opponent and infl ict 
+2 on them for each Trap discarded in this way.
+ Ineluctable Pain
+1  -
+Choose any number of  assigned to the 
+target. Remove the  chosen from the 
+target’s Sheet and assign them to another 
+.
+-Mage￾R THE SADIST
+IKKART
+Sadism
+When Rikkart has at least 6 assigned, he has +2.
+
+ 
+3 2
+ 
+3 8
+-Mage￾THE JINX
+G RAMIGNA
+Misfortune You can reroll the dice of your Coven Attacks 
+that target a  who has one of your  Tokens 
+assigned.
+ Malevolent Curse
+1  -
+Whenever a  is about to suffer any amount 
+of , you can discard a single one of your 
+ tokens assigned to a  to reduce that 
+amount of  by 1 (it can become 0).
+ Black Feather
+1  -
+Choose a location within 6 of the target 
+and where the target can be placed. Place 
+the target in the chosen location. Assign a 
+ Token to all  Engaged with the target 
+after placement.
+ Feverish Dreams
+1  9
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 1
+because of this Effect, assign it a  Token.
+
+ 
+6 2 3
+ 
+6
+-Mage￾Oniric Raid
+ on a 1 Whenever Baron Doria inflicts at least 
+through a Magic Attack, he can attach to it a Follower 
+with Infest that is in his Reserve.
+L’ONIROMANTE
+ORIA D ARON B
+ Hysterical Escape 
+9  1
+Perform a Magic Attack with 2d8. If the 
+ because of this 1 target suffers at least 
+Effect, they immediately take a Movement 
+Action under your control.
+ Persecution 
+-  1
+Whenever an opposing Mage targets you with 
+an Attack, before resolving the Attack, perform 
+a Magic Attack with 2d8 against them.
+ Treacherous Nightmare 
+6  1
+Choose any number of Nightmares on the 
+Playmat. In the order you choose, each 
+one performs a Physical Attack against the 
+Model it is attached to as if it were your 
+own.
+
+3
+Cadaver
+Follower - Undead
+
+3
+Cadaver
+Follower - Undead
+Evocation 1 - Horde
+ 
+3 6 2 3
+ 
+Cadaver
+Follower - Undead
+
+Follower - Undead
+6
+Colossus
+ 
+3
+ 
+9
+Follower - Demon
+1 4
+Follower - Demon
+Succubus
+ 
+3
+ 
+9
+Follower - Demon
+1 4
+Follower - Demon
+Succubus
+Evocation 2 - Masochism
+
+Follower - Nightmare
+3
+Umbra
+   
+1
+Follower - Nightmare
+2 3
+Follower - Nightmare
+Umbra
+   
+1
+Follower - Nightmare
+2 3
+Follower - Nightmare
+Umbra
+
+Follower - Construct
+Nigredo
+   
+3 6
+Follower - Construct
+3 5
+Follower - Construct
+Nigredo
+Evocation 2 - Inviolable
+
+Follower - Altar
+Totem
+A
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 
+
+1
+ Token.
+B
+B B
+
+3 6 2 3 B Evocation 1 - Horde
+3 6 2
+Evocation 1 - Horde
+COST:●
+C
+D
+D
+D
+D
+E E
+E
+
+E
+H G
+I
+3 9 1 4
+Evocation 2 - Masochism
+3 9
+COST:●●
+1
+Evocation 2 - Masochism
+C
+3 9 1 4
+Evocation 2 - Masochism
+9
+COST:●●
+1 4
+Evocation 2 - Masochism
+C
+1 - 2 3
+COST:●
+2 3
+Evocation 2 - Infest
+C
+1 - 2 3
+Evocation 2 - Infest
+COST:●
+2 3
+Evocation 2 - Infest
+C
+3 6 3 5
+Evocation 2 - Inviolable
+6
+COST:● ●
+3 5
+Evocation 2 - Inviolable
+C
+Perform a Magic Attack with 4d8. B
+   
+3 1
+   
+- 1
+●: COST
+3 2
+Evocation 2 - Infest C  
+3
+ 
+6
+Evocation 3 - Brutal
+
+3
+ 
+6
+●●●● : COST
+3
+Evocation 3 - Brutal C   
+Evocation 1 - Horde
+
+2 6 3
+ 
+Evocation 1 - Horde
+●: COSTC    
+3
+Evocation 2 - Recall
+  
+0
+● ● : COST
+5 3
+C Evocation 2 - Recall
+   
+5 3
+Evocation 2 - Inviolable
+   
+6
+● ● : COST
+5 3
+C Evocation 2 - Inviolable
+ 
+3 3
+ 
+Evocation 1 - Horde
+
+2 6 3
+ 
+Evocation 1 - Horde F ●
+C: COST
+F
+F
+F
+1 3 2 1
+J
+8GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 9 ===
+5 They then take all the bases of their chosen color and clip 
+them to their Miniatures, making sure to use the Mage one 
+for the Mage Miniature and the Evocation ones for their 
+Followers.
+6 They take the Persistence Tokens and stack them on their 
+Mage Sheet so that the token showing the number III is the 
+bottom one in the stack and the one showing the number I 
+E is the top one.
+7 They take the Trophy Tokens F and the Power Token of 
+their chosen color and place them in front of them. 
+8 Take the Black Cubes G and create a Pool for the Black 
+Rose on one side of the table.
+9 Mutually choose one of the available Adventures and follow 
+the directions for setting it up as described in its rules.
+10 Each player rolls 3d8 and adds up the results. The player 
+with the highest result chooses one of the Deployment 
+Zones indicated in the chosen Adventure and deploys their 
+Coven according to the rules specifi ed in that Adventure. 
+The player with the second highest result does the same, 
+proceeding in this way until all players have deployed their 
+Coven. The last player to deploy the Coven takes the Crown 
+Token.
+11 Set up the Power Board H by placing each player's and the 
+Black Rose's Power Token I on the 0 slot of the Power 
+Points track.
+12 Place the Trophy Board J on the Power Board as shown 
+in the fi gure 
+1 2 3
+J
+H
+I
+13 Place one Trophy Token of each player in the 3 slot of 
+the Trophy Board. Place two Trophy Tokens of each player 
+in the 2 slot of the Trophy Board.
+14 Place four Trophy Tokens of each player in the 1 slot of 
+the Trophy Board.
+1 2 3
+The game can begin.
+9GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 10 ===
+Game Flow
+A game of Rebirth Skirmish is divided into Rounds. Each Round 
+is divided into 4 Phases:
+• Study Phase
+• Action Phase
+• Black Rose Phase
+• Cleanup Phase
+Each Adventure indicates the maximum number of Rounds for 
+its duration. When a Round ends a new one begins unless the 
+maximum number of Rounds indicated in the Adventure have 
+been played. Once the last Round is played the game ends and 
+Power Point calculations are made to determine the winner.
+CROWN TOKEN
+This token indicates who is the fi rst player for the Round.
+Study Phase
+In this phase, players decide how much Instability (the power 
+with which they fuel their powers) to invest in their Spells. 
+Each player takes up to 3 cubes from their Pool; these cubes 
+represent Instability. The player places the Instability as they 
+prefer on their Mage Sheet by assigning it to the Spells indicated 
+on it; any number of an Instability can be assigned to the same 
+Spell (even none).
+G RAMIGNA
+ Malevolent Curse
+1  -
+Whenever a  is about to suffer any amount 
+of , you can discard a single one of your 
+ tokens assigned to a  to reduce that 
+amount of  by 1 (it can become 0).
+ Black Feather
+1  -
+Choose a location within 6 of the target 
+and where the target can be placed. Place 
+the target in the chosen location. Assign a 
+ Token to all  Engaged with the target 
+after placement.
+ Feverish Dreams
+1  9
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 1
+because of this Effect, assign it a  Token.
+ is about to suffer any amount 
+ Malevolent Curse
+, you can discard a single one of your 
+ to reduce that 
+A Spell that has Instability assigned to it can be cast during the 
+Action Phase of the current Round.
+When all players have decided how to assign Instability, the 
+Study Phase ends and you move on to the Action Phase.
+Action Phase
+Starting with the player with the Crown and proceeding 
+clockwise, each player performs a Turn.
+In a Turn, a player must activate their Mage and may choose to 
+activate one of their Followers who does not have a Persistence 
+Token on their Card; they may activate these two Models in any 
+order they choose. When their Turn begins, the player takes the 
+topmost Persistence Token in the stack on their Mage Sheet and 
+places it on the Card of the Follower they chose to Activate; if 
+they do not activate any Follower they simply set them aside.
+When the player has resolved the activations of their Models, 
+the Turn passes to the player to their left; this continues until 
+each player has removed all Persistence Tokens from their Mage 
+sheet.
+ACTIONS
+Actions allow Models to infl uence the game in diff erent ways. 
+When a Model is Activated, it can perform a number of Actions 
+equal to the Actions feature indicated on its Sheet. The player 
+who controls it chooses which Actions the Model performs, 
+and may choose the same Action several times during a single 
+Activation.
+The actions are:
+MOVEMENT
+The Model can move a maximum number of cm equal to its 
+Speed feature.
+During this Movement the Model can be moved freely without 
+regard to the BEs (shown in white in the Playmat diagram 
+attached to this document).
+The Model can end its Movement with its base partially on a 
+BE, as long as the center of its base is not on a BE; the Model is 
+considered Hindered as long as it is in that position (see Physical 
+Attack).
+If the Model's Movement ends with the center of its base above 
+a BE, you must follow these rules:
+• The Model must be moved the minimum distance possible 
+that brings the center of its base not above the BE on which 
+it sits.
+• After the move, the Model should have its base partially 
+on the BE. 
+10GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 11 ===
+If during its Movement Action a Model does not stand with 
+the center of its base on a BE and is in an Opposing Model's 
+Engagement Area, it becomes Engaged and the Movement 
+Action ends immediately (the remaining cm of speed are lost).
+An Engaged Model may perform this Action and leave its 
+Opponents' Engagement Area; when the controlling player 
+declares the Movement Action, any Opponent who has the 
+active Model in their Engagement Area and who is not in turn 
+Engaged by Opponents other than the active Model performs a 
+Physical Attack on it.
+PHYSICAL ATTACK
+A Model may perform a Physical Attack by targeting an 
+opponent with whom it is Engaged.
+During its Activation, a Model may perform this Action a single 
+time.
+When it does, roll a number of d8 equal to its Physical Attack 
+feature; for each Success it infl icts one Damage on the targeted 
+Model. The player controlling the Model that performed the 
+Physical Attack takes a number of cubes equal to the Damage 
+infl icted from their Pool and assigns them to the target Model 
+by placing them on its Sheet; these cubes represent the Damage.
+Before rolling for a Physical Attack, the Success Threshold can 
+be modifi ed by applying the following modifi ers:
+• The attacking Model is Engaged with Opponents other than 
+the target of its Physical Attack: ST+1.
+• The target of the Physical Attack is Engaged with Opponents 
+other than the attacking Model: ST-1.
+• The Target is Hindered: ST-1.
+• Skills and Spells: Skills and Spells can modify the ST for a 
+Physical Attack.
+If the conditions for applying more than one modifi er to the ST 
+are met, all modifi ers must be applied before the roll is made.
+CAST A SPELL (MAGE ONLY)
+During one of their activations, a Mage may cast one of the 
+Spells described on their Sheet that has at least one Instability 
+assigned to it. To do so, the controlling player must indicate 
+the Spell they want to cast and remove a number of Instabilities 
+assigned to it equal to the Spell's Casting Cost (CC). The player 
+places the newly removed cubes in their Pool. At this point, the 
+player resolves the Spell's Eff ect as described in its text.
+ADVENTURE ACTIONS
+Some Adventure Sheets indicate Special Actions that can be 
+used by Models while participating in that Adventure. The 
+Eff ects of Special Actions are described in the Adventure Sheet.
+Cleanup Phase
+In this Phase all players must perform these steps:
+Apply what is indicated in the Adventure under the Cleanup 
+Phase item.
+Remove all Instability on the Mage Sheets.
+Remove all Protection Tokens assigned to the Models, but not 
+the Trap Tokens.
+The player with the fewest Power Points takes the Crown 
+Token. If there is a tie between several players, they each roll 
+1d8 by rerolling equal results until there is a diff erent result for 
+each player; the player who obtains the highest number gets the 
+Crown Token.
+If the last Round of the Adventure has not been played, the new 
+Round begins.
+End of Game
+When all the Rounds included in the Adventure have been 
+played a fi nal Power Point  score is calculated. Each Adventure 
+has instructions on how to gain . 
+Use the Power Board and Power Tokens to keep track of the 
+gained by each player.
+When all the tallies have been made, the player with the most 
+PP is declared the winner of the Game!
+11GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 12 ===
+SPELL ANATOMY:
+Casting Cost (CC) A : The number of Instabilities that 
+must be removed from the Spell, through the Cast a Spell 
+action, in order to apply its Eff ect.
+Spell Type B :  Attack,  Contingency,  Protection, 
+ Trap.
+Target C : Indicates which type of Model can be designated 
+as the target of the Spell Eff ect, usually a Mage, a Follower, 
+or any type of Model. Some Spells indicate Personal as the 
+target, which indicates that they aff ect only the Model of the 
+Mage using them. Some Spells indicate Special as the target, 
+and what they aff ect is indicated directly in the text of their 
+Eff ect. 
+Personal , Opposing Mage , Opposing Model , Opposing 
+Follower , Allied Model , Allied Follower , Special .
+Range D : The distance at which the target of the Spell can 
+be.
+Eff ect: the Eff ect of the Spell.
+Spells
+Spells are Eff ects that only Mages can resolve, usually using the Spell Casting Action. Each Spell falls into one of 4 Types (Attack, 
+Contingency, Protection, Trap) described below. 
+ Shared Torture
+1  9
+Perform a Magic Attack with 3d8. You can 
+reroll any number of Dice from this Magic 
+Attack; for each die rerolled that obtains a 
+Success, the target inflicts 1 on you.
+ Tor ment
+1  -
+Choose any number of  within 6 of the target; 
+assign a  Token to each chosen  .
+When a  with at least one of your  Tokens assigned 
+infl icts , roll a die; if successful, discard any number 
+of  Tokens assigned to that Opponent and infl ict 
+2 on them for each Trap discarded in this way.
+ Ineluctable Pain
+1  -
+Choose any number of  assigned to the 
+target. Remove the  chosen from the 
+target’s Sheet and assign them to another 
+.
+RIKKART
+
+1
+Perform a Magic Attack with 3d8. You can 
+A C  D
+B
+ATTACK SPELLS
+G RAMIGNA
+ Malevolent Curse
+1  -
+Whenever a  is about to suffer any amount 
+of , you can discard a single one of your 
+ tokens assigned to a  to reduce that 
+amount of  by 1 (it can become 0).
+ Black Feather
+1  -
+Choose a location within 6 of the target 
+and where the target can be placed. Place 
+the target in the chosen location. Assign a 
+ Token to all  Engaged with the target 
+after placement.
+ Feverish Dreams
+1  9
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 1
+because of this Effect, assign it a  Token.
+An Attack Spell allows you to infl ict Damage on opponents, 
+usually by performing a Magic Attack. The target of an Attack 
+Spell must be a Model not belonging to your own Coven.
+To apply the Eff ect of one of these Spells there must be LoS 
+between the Model performing the Cast a Spell action and the 
+target of the Spell, and the target must be within the Distance 
+indicated in the Spell. When measuring the Distance of an 
+Attack Spell it suff ers a Reduction for each BE that the Mage 
+performing the Cast a Spell action and its target are located.
+To resolve a Magic Attack, the player rolls the number of d8 
+indicated in the Spell Eff ect. For each Success they infl ict one 
+Damage on the target Model. 
+Before rolling for a Magic Attack, the Success Threshold can be 
+modifi ed by applying the following modifi ers:
+The target is Hindered: ST-1.
+Skills and Spells: Skills and Spells can change the ST for a Magic 
+Attack.
+The player who controls the Model that performed the Attack 
+Spell takes a number of cubes equal to the Damage infl icted 
+from their Pool and assigns them to the target Model by placing 
+them on its Sheet; these cubes represent the Damage.
+CONTINGENCY SPELLS
+G RAMIGNA
+ Malevolent Curse
+1  -
+Whenever a  is about to suffer any amount 
+of , you can discard a single one of your 
+ tokens assigned to a  to reduce that 
+amount of  by 1 (it can become 0).
+ Black Feather
+1  -
+Choose a location within 6 of the target 
+and where the target can be placed. Place 
+the target in the chosen location. Assign a 
+ Token to all  Engaged with the target 
+after placement.
+ Feverish Dreams
+1  9
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 1
+because of this Effect, assign it a  Token.
+A Contingency Spell generates an Eff ect of various kinds that 
+alters some aspect of the game, such as, for example, providing 
+numerical bonuses to the rolls or features of a Model. When 
+the Eff ect of one of these Spells is applied, if it shows the 
+symbol assign a Quick Persistence Token by placing it next to 
+the target, and move it along with it if the target is moved. The 
+part of the Eff ect preceded by the  symbol is active as long as 
+the Quick Persistence Token is located next to the target.
+Each player has a single Quick Persistence Token at their 
+disposal; if they cast a new Contingency Spell, the player can 
+move their Persistence Token to the target of the newly cast 
+Spell by removing it from the Model which it is currently 
+assigned to.
+12GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 13 ===
+De feat o f a Model
+PROTECTION SPELLS
+B ARON D ORIA
+ Hysterical Escape
+1  9
+Perform a Magic Attack with 2d8. If the 
+target suffers at least 1 because of this 
+Effect, they immediately take a Movement 
+Action under your control.
+ Persecution
+1  -
+Whenever an opposing Mage targets you with 
+an Attack, before resolving the Attack, perform 
+a Magic Attack with 2d8 against them.
+ Treacherous Nightmare
+1  6
+Choose any number of Nightmares on the 
+Playmat. In the order you choose, each 
+one performs a Physical Attack against the 
+Model it is attached to as if it were your 
+own.
+These Spells provide defensive eff ects to their target. 
+When the Eff ect of one of these Spells is applied, assign a 
+Protection Token by placing it next to the target, and move it 
+along with it if the target is moved. The Eff ect is active as long 
+as the Protection Token is next to the target. A Model with 
+an assigned Protection Token cannot be chosen as a target for 
+Protection Spells.
+Each player has four Trap/Protection Tokens at their disposal; 
+if they cast a new Protection Spell, the player can move their 
+Trap/Protection Tokens to the target of the newly cast Spell by 
+removing them from the Models to which they are currently 
+assigned.
+When a Model is assigned a number of Damage equal to its 
+Health feature, it is Defeated. When this happens, apply as 
+outlined in the next paragraphs according to the type of Model 
+that was Defeated.
+
+G RAMIGNA
+ Malevolent Curse
+1  -
+Whenever a  is about to suffer any amount 
+of , you can discard a single one of your 
+ tokens assigned to a  to reduce that 
+amount of  by 1 (it can become 0).
+ Black Feather
+1  -
+Choose a location within 6 of the target 
+and where the target can be placed. Place 
+the target in the chosen location. Assign a 
+ Token to all  Engaged with the target 
+after placement.
+ Feverish Dreams
+1  9
+Perform a Magic Attack with 2d8 against 
+the target. If the target suffers at least 1
+because of this Effect, assign it a  Token.
+DAMAGE INFLICTED BY THE BLACK ROSE
+Some Eff ects of Adventures infl ict  Black Rose Damage on 
+Models. These Damages are indicated on the Model Sheets 
+using Black Cubes.
+DEFEATED MAGE
+To resolve the following consider the Black Rose as if she 
+were a Mage who participates in the Mage's Defeat due to the 
+Damage she infl icts on them. If the  gains , advance her 
+Power Token on the Power Board. If the  gains Trophies, 
+place them in her Pool.
+When a Mage is Defeated the controlling player applies the 
+following:
+TRAP SPELLS
+ Shared Torture
+1  9
+Perform a Magic Attack with 3d8. You can 
+reroll any number of Dice from this Magic 
+Attack; for each die rerolled that obtains a 
+Success, the target inflicts 1 on you.
+ Tor ment
+1  -
+Choose any number of  within 6 of the target; 
+assign a  Token to each chosen  .
+When a  with at least one of your  Tokens assigned 
+infl icts , roll a die; if successful, discard any number 
+of  Tokens assigned to that Opponent and infl ict 
+2 on them for each Trap discarded in this way.
+ Ineluctable Pain
+1  -
+Choose any number of  assigned to the 
+target. Remove the  chosen from the 
+target’s Sheet and assign them to another 
+.
+RIKKARTThese Spells infl ict negative eff ects on their target.
+When the Eff ect of one of these Spells is applied, assign a 
+number of Trap Tokens by placing them next to the target, and 
+moving them along with it if the target is moved.
+When the condition indicated in the Eff ect of the Trap Spell 
+occurs, the target discards one or more of the Trap Tokens 
+assigned to it and suff ers the Eff ect indicated on the Spell; this 
+will generally apply during the Activation of the target Model 
+by temporarily interrupting the performance of one of its 
+Actions.
+Each player has four Trap/Protection Tokens at their disposal; 
+if they cast a new Trap Spell, the player can move their Trap/
+Protection Tokens to the target of the newly cast Spell by 
+removing them from the Models to which they are currently 
+assigned.
+The player who controls the Model that infl icted the Damage 
+that Defeated the Mage takes one of their Tokens from the 
+leftmost column of the Trophy Board that contains at least one 
+of them, gaining the Power Points indicated on that column. All 
+players who have infl icted at least one Damage on the Defeated 
+Mage take one of their Trophy Tokens from the rightmost 
+column of the Trophy Board, each gaining 1 Power Point. If 
+a player has to take a Mage's Trophy Token but there are no 
+more on the Trophy Board, they do not take any Trophy or 
+Power Point.
+They remove Damage, Trap Tokens and Defense Tokens from 
+the Mage Sheet and returns them to their owners (Black Rose 
+Damage returns to a Pool on one side of the table).
+They place the Model in a location entirely within their 
+Deployment Area.
+DEFEATED FOLLOWER
+When a Follower is Defeated the controlling player applies the 
+following:
+They remove Damage, Trap Tokens, and Defense Tokens from 
+the Follower Sheet and return them to their owners.
+They remove the Model of the Follower from the Playmat.
+13GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 14 ===
+ 
+3 6 2 3
+ 
+Cadaver
+Follower - Undead
+Evocation 1 - Horde
+COST:●
+ 
+3
+ 
+Follower - Undead
+6
+COST:●●●●
+3 6
+Follower - Undead
+Colossus
+Evocation 3 - Brutal
+   
+1 -
+COST:●
+Follower - Nightmare
+2 3
+Follower - Nightmare
+Umbra
+Evocation 2 - Infest
+   
+3 6
+COST:● ●
+Follower - Construct
+3 5
+Follower - Construct
+Nigredo
+Evocation 2 - Inviolable
+Evocation N: During the Study Phase, if this Follower is 
+Defeated, their player may remove from play a number of cubes 
+equal to N from their Pool. If they do, they place this Follower's 
+Model within 6 of their Mage.
+Horde: When this Model attacks, it gains Physical Attack +1 if 
+its target is in the Engagement Area of another Model of your 
+Coven.
+Masochism: When this Model attacks, it gains Physical Attack 
++1 for each Damage cube it has.
+Inviolable: This Model can never gain Status Tokens.
+Brutal: When this Model performs a Physical Attack, all 
+Opposing Models within its Engagement Area suff er the attack 
+(roll the dice separately for each Model in the Engagement 
+Area).
+Infest: This Model follows these rules:
+• It is not deployed on the Playmat during game setup, but 
+is kept in the Pool of the player who included it in their 
+Coven. 
+• When Summoned during the Study Phase (because 
+defeated previously), this Model is placed in the player's 
+Pool.
+• When this Model is placed on the Playmat, the player 
+controlling it places a Cube from their Pool next to it to 
+indicate that they own it; when the Model moves, the 
+Cube moves along with it.
+• When the Mage of this Model's Coven performs a 
+Movement Action, they may choose not to move; if they 
+Followers' Skills
+do, they attach one of the Models of their Coven with this 
+Skill that is in their Pool to an Opposing Model on which 
+they have LoS, and place one of their cubes next to it to 
+indicate that it is their property. 
+When this Model is attached it follows these rules:
+• It is considered Engaged exclusively by the Model with 
+which it is Attacked and is never considered Engaged by 
+other Models.
+• It does not perform Physical Attacks on Engaged 
+Opponents who perform a Movement Action.
+• It is considered Allied by all Models that are not part of the 
+Coven of the Model to which it is Attached. 
+• When the Model to which it is Attached moves, it 
+moves with it; the location of the Model at the end of the 
+movement is decided by the owner of the Model to which 
+it is Attached.
+• The Speed of the Model to which it is attached is reduced 
+by one Category.
+• It can perform Physical Attack Actions exclusively by 
+targeting the Model to which it is attached.
+• If the Model it is attached to is defeated, this Model returns 
+to the owner's Pool; all tokens assigned to it return to the 
+owners, while any Damage suff ered by the Model remains 
+on its Sheet.
+• This Model can stop on BEs; if its base is completely inside 
+one of them, no LoS can be drawn on this Model.
+Recall: when the Mage of this Model's Coven performs a 
+Movement Action, they may choose not to move; if they do, 
+they choose any number of Models in their Coven with this 
+Skill and place them within 3 of themselves.
+14GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 15 ===
+Adventures
+Adventures indicate additional rules for the game, and objectives useful for players to gain points in specifi c ways.
+In the Adventures, Physical Action Tokens are used to represent specifi c points on the Playmat or items that need to be retrieved or 
+conquered by the Covens. Each Adventure indicates what the Physical Action Tokens represent during the game.
+A Physical Action Token takes up no slots, and is not a BE unless otherwise specifi ed in the text of the Adventure. Distance 
+measurements from the Physical Action Token should be made by considering its outer edge as if it were a base.
+Relics of the Coven
+Some Lodge Rooms have been temporarily reactivated by teleporting within them powerful Relics that the Covens had 
+found among the Ruins. The Mages must retrieve the Relics of their Covens while their opponents stand in their way, and 
+while the dormant power of the reactivated Rooms continues to try to bring the Relics back inside them. 
+RELIC
+The Relic is a power object that the Coven lost among the 
+ruins of the Lodge. 
+The Relic follows these rules.
+• When a Mage who is within 3 of their Coven's Relic 
+ends their Activation, if they are not Engaged, they can 
+collect it. If they do, the controlling player places the Relic 
+on their Mage Sheet.
+• A Mage who has collected the Relic suff ers a Reduction to 
+their Speed.
+• A Mage who has collected the Relic is Hindered.
+• When a Mage who has collected the Relic is Defeated, 
+the controlling player must place the Relic from the Mage 
+Sheet at the location on the Playmat indicated on the 
+Adventure Map.
+CLEANUP PHASE
+Apply the following Eff ects in order:
+• Each player whose Mage has collected the Relic gains 2.
+• Each player whose Mage has collected the Relic, and whose 
+Mage is in their Deployment Zone gains an additional 2.
+• The  Infl icts 1 Damage on each Mage who has collected 
+the Relic.
+• The  gains 2 For each Relic not collected by a Mage.
+END OF THE GAME
+The player who owns the most Trophy Tokens gains 2.
+Duration: 4 Rounds. 
+Physical Action Token: Relic.
+
+ 
+ 
+ 
+ 
+15GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 16 ===
+Black Rose Petal
+A Black Rose petal, a concentration of arcane power that every Mage greedily covets, has appeared at the center of the Lodge 
+ruins. The Covens are ready to compete to gain the petal's power! 
+PETAL
+The Petal unleashes waves of power that Mages must absorb 
+at the risk of their own lives. 
+The Petal follows these rules.
+• When a Mage performs a Magic Attack while within 6
+of the Petal, they cannot use the Movement Action for the 
+remainder of their Activation.
+• When a Mage who is within 3 of the Petal performs a 
+Magic Attack, they cast an additional 2d8 and the ST has 
+-2 for that Magic Attack.
+• When a Mage that is within 6 of the Petal performs a 
+Magic Attack, they cast an additional 1d8 and the ST has 
+-1 for that Magic Attack.
+CLEANUP PHASE
+Apply the following Eff ects in order:
+• Each player whose Mage is within 6 of the Petal gains 
+1, then the  infl icts 1 Damage on that Mage.
+• Each player whose Mage is within 3 of the Petal gains 
+3, then the  Infl icts 3 Damage on that Mage.
+• If the  infl icted no Damage in this Phase, she gains 5.
+END OF THE GAME
+The player who owns the most Trophy Tokens gains 2.
+PETAL
+Duration: 4 Rounds. 
+Physical Action Token: Petal.
+ruins. The Covens are ready to compete to gain the petal's power! 
+
+ 
+ 
+
+16GAME COMPONENTS SETUP GAME TURN END OF THE GAME AVATAR
+
+=== PAGE 17 ===
+Black Rose Wars: Skirmish v0.9
+©2024 Ludus Magnus Studio
+All Rights Reserved
+www.ludusmagnusstudio.com

@@ -1,0 +1,24 @@
+{
+  "mode": "builtin-imagegen-reference-restoration",
+  "backs": [
+    {
+      "moon": 1,
+      "prompt": "Faithful restoration of the original Black Rose Wars Rebirth Possessed card BACK. The attached screenshot is authoritative: extract ONLY card 1 from left (Moon 1) and restore it as one single upright full-bleed high resolution portrait card, 1024x1536 or larger. Preserve the EXACT original hooded figure, pose, silhouette, thorny hanging vines, pale moon behind, original muted dark green blue background, bone ornate horizontal title rules, and black title panel with original word \"Possessed\". Restore sharp detail, remove screen moire and blur, do NOT redesign or add armor or text. The moon badge above the title is a slim crescent moon. Keep rounded original corners. NO tabletop, screenshot edge, shadows, other cards, prose, stats or extra symbols. This is a production card back, faithful to the source rather than a new interpretation.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-e14bb2fd-b54a-4747-8dd2-7a3de7a05990.png"
+    },
+    {
+      "moon": 2,
+      "prompt": "Faithful restoration of the original Black Rose Wars Rebirth Possessed card BACK. The attached screenshot is authoritative: extract ONLY card 2 from left (Moon 2) and restore it as one single upright full-bleed high resolution portrait card, 1024x1536 or larger. Preserve the EXACT original hooded figure, pose, silhouette, thorny hanging vines, pale moon behind, original muted dark green blue background, bone ornate horizontal title rules, and black title panel with original word \"Possessed\". Restore sharp detail, remove screen moire and blur, do NOT redesign or add armor or text. The moon badge above the title is a half moon, precisely half illuminated. Keep rounded original corners. NO tabletop, screenshot edge, shadows, other cards, prose, stats or extra symbols. This is a production card back, faithful to the source rather than a new interpretation.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-efe181e7-945e-46dc-91cf-ea269614a057.png"
+    },
+    {
+      "moon": 3,
+      "prompt": "Faithful restoration of the original Black Rose Wars Rebirth Possessed card BACK. The attached screenshot is authoritative: extract ONLY card 3 from left (Moon 3) and restore it as one single upright full-bleed high resolution portrait card, 1024x1536 or larger. Preserve the EXACT original hooded figure, pose, silhouette, thorny hanging vines, pale moon behind, original muted dark green blue background, bone ornate horizontal title rules, and black title panel with original word \"Possessed\". Restore sharp detail, remove screen moire and blur, do NOT redesign or add armor or text. The moon badge above the title is a golden full moon. Keep rounded original corners. NO tabletop, screenshot edge, shadows, other cards, prose, stats or extra symbols. This is a production card back, faithful to the source rather than a new interpretation.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-19c74535-3fc5-4878-98f6-769acf6c3fe5.png"
+    }
+  ],
+  "raging_lash": {
+    "prompt": "Make ONE surgical correction to this existing card image; preserve all other pixels, artwork, typography, values and symbols. In the LOWER HALF ONLY, the very last sentence reads 'Bjorn: convert 1 [black circular Instability icon].' Replace ONLY that last black circular icon following 'convert 1' with the SAME broken-heart DAMAGE icon already printed immediately above in 'Inflict 2 [broken heart]'. Match its black printed style and size to the adjacent text. Keep the top half Instability icon unchanged, and keep every other component identical. Output the full single card at original high resolution. No redesign, no textual rewriting.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-2a59395b-bfac-40ae-9fe9-0b46ff888eb6.png"
+  }
+}

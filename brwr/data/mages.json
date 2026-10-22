@@ -91,5 +91,165 @@
     "excluded_forgotten_spell_ids": [
       "wrath_of_the_jackal_god"
     ]
+  },
+  "bartholomaus": {
+    "id": "bartholomaus",
+    "name": "Bartholomäus",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "arcane_bond"
+  },
+  "cassandra": {
+    "id": "cassandra",
+    "name": "Cassandra",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "pythia_of_delphi"
+  },
+  "venticello": {
+    "id": "venticello",
+    "name": "Venticello",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "the_eight_spells"
+  },
+  "pestilentia": {
+    "id": "pestilentia",
+    "name": "Pestilentia",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "calamity"
+  },
+  "sefu": {
+    "id": "sefu",
+    "name": "Sefu",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "mask_of_the_world"
+  },
+  "hastur": {
+    "id": "hastur",
+    "name": "Hastur",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "demonic_crown"
+  },
+  "prospero": {
+    "id": "prospero",
+    "name": "Prospero",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "alchemical_fireball"
+  },
+  "dai_jin": {
+    "id": "dai_jin",
+    "name": "Dai Jin",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "fulu"
+  },
+  "janara": {
+    "id": "janara",
+    "name": "Janara",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "mystic_guide"
+  },
+  "imhotep": {
+    "id": "imhotep",
+    "name": "Imhotep",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "great_architect"
+  },
+  "hogwarz": {
+    "id": "hogwarz",
+    "name": "Hogwarz",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "incanto_porkonus"
+  },
+  "mediceo": {
+    "id": "mediceo",
+    "name": "Mediceo",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "inspiration"
+  },
+  "bellum": {
+    "id": "bellum",
+    "name": "Bellum",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "carnage"
+  },
+  "pyotr": {
+    "id": "pyotr",
+    "name": "Pyotr",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "dictat"
+  },
+  "onamor": {
+    "id": "onamor",
+    "name": "Onamor",
+    "health": 12,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "necroflame"
+  },
+  "parcae": {
+    "id": "parcae",
+    "name": "Parcae",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "three_visions"
   }
 }

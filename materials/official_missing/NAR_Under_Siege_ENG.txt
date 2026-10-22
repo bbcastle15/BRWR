@@ -1,0 +1,1828 @@
+Under Siege
+2
+CONTENTS
+Several years have passed since your group’s last adventure. Rome 
+has welcomed all of you back, and life goes on peacefully within 
+her walls. Each of you has taken a diff erent path, but every now 
+and then you manage to get together for a drink and recall the 
+good old days. Th e amber color of the beer, sipped as you bask 
+in front of a large fi replace, seems to come alive as the irregular 
+glass of your mug refl ects the light of the fl ames. Th is orange 
+dance mesmerizes you, taking you back in time. But here in the 
+present—the inn door bursts open as a group of young men rush 
+into the hall. Th eir voices overlap, agitated and eager to be the 
+fi rst to spread the news of the day: the Holy Roman Empire is 
+marching to invade the Papal States. From outside, you hear 
+loud voices; people are out in the streets discussing the news. You 
+make your way to the notice board where a herald is posting 
+a proclamation calling for “volunteers” from the population of 
+Rome. Someone in the crowd recognizes you and, knowing of 
+your deeds, cries out to you, hoping to convince you to respond 
+to the call. Th e herald approaches you and says, “If you’re really 
+interested, report to this address tomorrow, and you will receive 
+all the information you need.” Th e events of the following days 
+are turbulent and accompanied by growing fear amongst the 
+Roman population. Th e army, composed of Landsknechts and 
+other mercenaries, is advancing every day. No one seems able to 
+stop it; indeed, many duchies and cities have provided support to 
+the invader for the sole purpose of not attracting his wrath. Now, 
+by order of Monsignor Ennio Filonardi, you and your group 
+must leave the Eternal City to join Giovanni dalle Bande Nere, 
+son of Giovanni de Medici and Caterina Sforza, the Lioness of 
+Forlì.
+You turn your homes upside down in search of equipment from 
+your old adventures, but unfortunately many of your belongings 
+now too worn out, while you got rid of others long ago. You 
+decide to stop by the market to get what you need before setting 
+off for Mantua, using the money you received from the prelate as 
+an advance on your salary.
+Components .......................................................3
+How to use this expansion ............................5
+Setup for the Under Siege Campaign ........................... 5
+Skip the Past .................................................................. 6
+New Rules ...........................................................7
+New Hero: Brynhildr .................................................... 7
+Glory Cards .........................................................................7
+ Glory Points ..................................................................8
+New Tokens ................................................................... 8
+New Cards ..................................................................... 8
+Landscape Mission Cards .................................................8
+Formulae Cards and Reward Cards .................................9
+Cibus Reagent Cards..........................................................9
+Scenic Element Cards ........................................................9
+ Achievement Cards ......................................................9
+New Scenic Elements .......................................................10
+Passetto/Aqueduct ............................................................ 10
+Falconet .............................................................................. 10
+New Tiles: Border/Stream ...............................................10
+Campaign Rules .......................................................... 11
+New Traits .........................................................................11
+Persistence ......................................................................... 11
+Counteroff ensive ............................................................... 11
+Getting around Rome ......................................................11
+Travel and Rest Phase ....................................................... 11
+Cooking .............................................................................11
+Recipes and Cooking........................................................ 11
+Recipes Eff ects ................................................................... 12
+Starvation ........................................................................... 12
+Cooking Skills ................................................................... 12
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Andrea Colletti, Luca Bernardini
+Development: Marco Presentino
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana 
+Maranzano
+Concept Artist: Giovanni Pirrotta, Antonio de Luca, 
+Simone de Paolis, Andrea Franciolli, Veronica Frizzo.
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Texts and Editing: Massimiliano Grotti
+Translation: Elettra Nuzzo
+Social Media: Massimiliano Grotti, Emiliano Caretti
+Customer Care: Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertisement: Fabio Braghettoni, Emiliano Caretti
+Ful llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro 
+Angelini, Alessandro Brogi, Andrea Vella, Daniele 
+Samele, Daniele Vendittozzi, Federico Morara, Flavio 
+Galmacci, Francesco Pica, Gabriele Macchioro, 
+Gianni Punzo, Giovanni Milani, Lorenzo Meucci, 
+Luca Benedetti, Luca Francescangeli, Luca Perra, 
+Massimiliano Grotti, Pasquale Carotenuto.
+3
+Components
+Empire Rome
+Heroes
+Brynhildr
+Jager
+3 Tercio of Flanders 5 Landsknechts
+5 Spanish Mercenaries
+3 Doppelsöldner
+Imperial Commander
+12 Mission Envelopes
+US0.1
+119 Mission Cards
+
+the mincio runs red the mincio runs red
+ 0.1 
+
+the mincio runs red
+
+
+
+ USthe mincio runs red
+ 0.1 
+the mincio runs red
+
+
+
+
+
+
+2
+6
+5
+6
+
+
+ 4
+Landsknecht
+ 6
+
+Landsknecht
+3
+ 5+
+
+Persistence
+2
+3
+7
+6
+12
+5
+Pierce
+  Disadvantage, Curse
+
+Holy Roman Empire
+Each time you must perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies), you may 
+add the Dra cards of Enemies from the 
+ Mercenaries faction in your possession, ignoring the Rank required by the Enemy Dra .
+6 Enemy Cards 1 Faction Card
+
+
+
+
+
+
+
+
+Jager
+7+
+
+Disadvantage, Curse
+Elusive - Climb 2 - Persistence - 
+ 4 
+ Imperial Commander
+
+
+
+
+5
+7
+6
+9
+
+
+ 5
+ Imperial Commander
+ 9
+Pierce
+ Disadvantage, Devastating
+2
+ 8+
+ 1
+3
+ 
+
+
+Fate - Charge - Persistence - Countero ensive
+3 1 3
+1 Menu
+Cacio, vino e pane bono, er desinare nun 
+è mai un’opzione, ma ‘na religgione!
+26 Cibus Reagent Cards 6 Enemy Draft Cards 8 Glory Cards
+
+1
+Jager
+3: Your  value is considered 1 
+point higher until the end of your 
+Activation.
+Jager
+5
+26 Cibus Reagent Cards
+Fish Mouse
+8 Glory Cards
+Loki's 
+Cunning
+ value is considered 1 
+point higher until the end of your 
+Guided by the Gods
+2: A Hero (including you) 
+within 3 gains an Astro Token.
+6 Enemy Draft Cards
+
+5
+
+
+5
+Landsknecht
+Rome
+Giovanni 
+dalle Bande Nere
+4
+COMPANION
+ Brynhildr 
+4 Scenic Element 
+Cards
+3: Choose a Hero within 3 
+(including you) and perform a 
+ Test. For each  obtained 
+that Hero discards 1.
+Healing Ointment Artifact
+Dragonfang Relic
+When you perform an A ack 
+Test, you may  for each Status Token the target has.
+: Choose a Hero within 
+(including you) and perform a 
+ Test. For each 
+that Hero discards 1 
+Healing Ointment
+ Spear
+Weapon
+3  1-2 +0
+   
+ +1.
+
+When you perform an A ack 
+Test, you may  Status Token the target has.
+Helm of the Valkyrie Armor
+When you use a Prayer, 
+you may .
+Place a  on this card. Th e Hero suff ers 1 
+Unblockable  and gains a Burned Token. 
+As soon as there are 2  on this card, remove 
+the Falconet from the Battlefi eld. Th e Hero 
+rolls a  and applies the result:
+◆ 1-2-3: Th e Hero suff ers 1 Unblockable  .
+◆ 4-5-6: Th e Hero suff ers 2 Unblockable .
+◆ 7-8: Th e Hero suff ers 3 Unblockable .
+Continue your Activation.
+Spear
+Weapon
+1-2 +0
+ 
+.
+Plate Armor 
+Plate Armor Armor
+Resistance 1.
+Helm of the Valkyrie Armor
+When you use a Prayer, 
+. 3: All Enemies within 3 
+gain 1 Distracted Token.
+War Horn
+Artifact 
+Falconet Failure
+ on this card. Th e Hero suff ers 1 
+ and gains a Burned Token. 
+
+
+As soon as there are 2  on this card, remove the Falconet from the Battlefi eld. Th e Hero and applies the result:
+1-2-3: Th e Hero suff ers 1 Unblockable 4-5-6: Th e Hero suff ers 2 Unblockable 7-8: Th e Hero suff ers 3 Unblockable 
+ 8 Towering,
+Bulky
+-
+Placement: Th e Aqueduct occupies 6 Squares and must be placed at least 1 Square away from a Bulky Scenery Element.
+Collapse: When the Aqueduct suff ers the fi nal , each Model adjacent to any Square occupied by 
+the Aqueduct suff ers 1 Unblockable  and gains a Stunned Token and a Hindered Token. Remove the 
+Aqueduct from the Battlefi eld.
+Aqueduct
+8 Blo ing,
+Towering,
+Blo ing,
+1 Companion Card
+2 Hero Sheets 2 Skill Sheets
+0 1 4 5 6
+BRYNHILDR
+
+5
+1
+4
+2
+5
+
+
+Prerequisites:
+VALKYRIE
+Prerequisites:
+WYVERN Impale
+ Brutality
+Blade Storm
+War Cry
+ Mysticism
+Warrior 
+Sisterhood
+ Mysticism
+Glorious Step
+ Survival
+Champion's 
+Grace
+ Survival
+3 Lancer Skills
+-
+Valkyrie Helm
+Prerequisites:
+3 Lancer Skills
+-
+Helm of the 
+Wyvern
+2 3 4
+ 0 1 2 3 4 5
+ Impale 1
+Brutality.
++1(Upgrade): Th is attack gains: Spear 
+Area. +1.
+ Blade Storm 3
++2(Upgrade): If the Attack Test obtains 
+, this Attack infl icts an Unblockable  on 
+any Enemies adjacent to the target Enemy. In 
+addition, the Attack gains: +1.
+ War Cry 2
+Mysticism.
+Reaction 2: Apply the eff ect of the Active 
+Glory Card to a Hero within 2 of you, who 
+is about to perform any Test.
+Warrior Sisterhood 1
+Mysticism.
+Passive. Each time you gain a Positive Status 
+Token, select another Hero within 3 of 
+you. Th at Hero gains the same Positive Status 
+Token.
+Glorious Step 2
+Survival.
+2: Perform up to 1 Dash. Th en place the 
+Active Glory Card at the bottom of the deck, 
+without applying its Eff ect, and reveal a new 
+one. Once per Activation.
+ Champion's Grace 1
+Survival.
+Passive. If you move at least 2 Squares over the 
+course of your Activation, a Hero within 3 
+gains 1 Advantaged Token.
+ Ragnarok 
+Passive. +1: Each time you reveal a card from 
+the Glory deck.
+5: Until the end of your Activation, Glory Card 
+Eff ects cost 1 fewer.
+BRYNHILDR Impale 1
+Brutality.
++1(Upgrade): Th is attack gains: Spear 
+Area. +1.
+ Blade Storm 3
++2(Upgrade): If the Attack Test obtains 
+, this Attack infl icts an Unblockable  on 
+any Enemies adjacent to the target Enemy. In 
+addition, the Attack gains: +1.
+ War Cry 2
+Mysticism.
+Reaction 2: Apply the eff ect of the Active 
+Glory Card to a Hero within 2 of you, who 
+is about to perform any Test.
+Warrior Sisterhood 1
+Mysticism.
+Passive. Each time you gain a Positive Status 
+Token, select another Hero within 3 of 
+you. Th at Hero gains the same Positive Status 
+Token.
+Glorious Step 2
+Survival.
+2: Perform up to 1 Dash. Th en place the 
+Active Glory Card at the bottom of the deck, 
+without applying its Eff ect, and reveal a new 
+one. Once per Activation.
+ Champion's Grace 1
+Survival.
+Passive. If you move at least 2 Squares over the 
+course of your Activation, a Hero within 3 
+gains 1 Advantaged Token.
+ Ragnarok 
+Passive. +1: Each time you reveal a card from 
+the Glory deck.
+5: Until the end of your Activation, Glory Card 
+Eff ects cost 1 fewer.
+3 Starting Equipment 
+Cards
+6 Advanced Equipment 
+Cards
+2 Tiles 
+3U
+4U
+17 Activation Tokens
+2 Falconets
+2 Passetti/Aqueducts
+6 Destiny Cards
+ 2 — Brynhildr - Lancer
+ Destiny
+ 1 — Brynhildr - Lancer
+Destiny
+6 Destiny Cards
+Destiny —
+3
+You have chosen the path of the 
+Valkyrie. Will you be able to 
+keep your vow of sacrifi ce and 
+selfl essness?
+Objective
+◆ Successfully use at least 3 
+Prayers before the end of 
+the Mission. Once achieved, 
+during the next Rest Phase, 
+read  US 0.1-11.
+17 Activation Tokens
+Aqueduct
+Passetto
+2 Passetti/Aqueducts
+5
+How to use this expansion
+Under Siege adds a new campaign that is best played 
+aft er completing the Core Game and the fi rst Nova Aetas 
+Renaissance expansion: Vesuvius. You can continue playing 
+with the Heroes you played with in the previous campaign, 
+or, if you prefer, you can create new Heroes to play with in 
+this expansion’s campaign (see the Skip the Past section).
+To play the Under Siege Campaign, in addition to the material 
+contained in this expansion, you will need many components 
+from the core game. Th ese will be indicated within the 
+Mission Cards and the paragraphs of the Plotbook, as usual.
+In the sections of this Rulebook, you will fi nd all the new 
+rules and components introduced by this expansion.
+Th e Under Siege Campaign takes place many years aft er the 
+events of Th e League of Cambrai (the Core Game Campaign), 
+and those narrated in Vesuvius. During the time since your 
+last adventure, your heroes have hung up their swords and 
+settled down to the quieter life in Rome. 
+Now that they have been called back into action, unfortunately 
+they discover that much of their equipment has been lost 
+or worn out. To depict this setback, please go through the 
+following steps before beginning the Under Siege Campaign:
+◆ Delete all reagents noted on the Campaign Sheet used for 
+your previous campaign.
+◆ Each Hero begins the Under Siege Campaign with only 
+their Bond Equipment (if they have any) and one other 
+piece of equipment of their choice from those noted on 
+the Campaign Sheet. (Th is includes any  gained during 
+previous campaigns). Please consider what you might 
+want to do with any Basic Class Equipment, as it cannot 
+be craft ed again (since it doesn’t have a Formulae Card).
+◆ All Equipment noted on the Campaign Sheet that has 
+not been selected by any Hero must be discarded. All 
+Equipment craft ed using Formulas is returned to the 
+Formulae deck and can be craft ed again by visiting the 
+Artisan and spending the required Reagents.
+Setup for the Under Siege Campaign
+◆ Heroes discard all Injury Cards and all  Achievements 
+in their possession (if they have any).
+◆ Th e party receives 30 Florins that can be used to purchase 
+Reagents or Equipment from the Artisan during a Rest 
+Phase before Mission: US 0.1 Th e Mincio runs Red.
+6
+If you wish, you can launch a new campaign starting with 
+the Under Siege Expansion, without playing (or replaying) 
+the League of Cambrai Campaign from the core Nova Aetas 
+Renaissance game or the Vesuvius Expansion. If you choose 
+to do this, you will create new Heroes from scratch.
+If you wish to follow this route, please follow these steps:
+Each Hero can spend up to 13  Experience Points. 
+You may spend these  to acquire Skills and an Advanced 
+Class, always taking into account all limitations on character 
+development. Th ese include prerequisites and a requirement 
+to choose at least 3 Basic Skills before you can choose your 
+character’s Advanced Class (see the “Campaign” chapter of 
+the Core Game Rulebook). 
+Equipment follows these rules:
+◆ If your Hero spends  to select an Advanced Class, they, 
+automatically acquire the Bond Equipment for that Class.
+◆ Discuss as a group and choose up to two Heroes who have 
+upgraded to an Advanced Class. Th ey can read the fi nal 
+Destiny card associated with their Advanced Class and 
+Skip the Past
+gain the Equipment Card associated with it. Th ese two 
+Heroes may also read all the previous Destiny cards and 
+their associated paragraphs to learn their backstory. 
+◆ Other Heroes may read the fi rst of their Destiny cards 
+associated with their chosen Advanced Class. To 
+progress, they must fulfi l its objective as normal during 
+the Campaign Missions. Th ese Heroes may also read 
+all the previous Destiny cards and their corresponding 
+paragraphs.
+◆ Each Hero begins the Under Siege Campaign with only 
+their Bond Equipment (if they have any), plus one other 
+piece of equipment of their choice from their Basic Class/
+Advanced Class,  Rewards, or any equipment obtained 
+through Destiny Cards. 
+◆ Th e party receives 30 Florins that can be used to purchase 
+Reagents or Equipment from the Artisan during a Rest 
+Phase before Mission: US 0.1 Th e Mincio runs Red.
+7
+New Rules
+Hailing from the frozen regions of Northern Europe, 
+Brynhildr is a mystical warrior who draws her strength and 
+abilities from ancient Norse traditions. She is a member of 
+the mysterious “Sisterhood of the Spear,” an all-female order 
+dedicated to the art of spear fi ghting, who strive to pass on 
+the techniques of this unique weapon to future generations. 
+What could she possibly be doing in Italy, so far from home?
+Brynhildr is a new Hero who can be used in any Nova Aetas 
+Renaissance campaign.
+Brynhildr can also be used as a Companion, using the 
+corresponding card and following the normal rules of the 
+Nova Aetas Renaissance core game.
+New Hero: Brynhildr
+Th ese cards represent the powers granted to Brynhildr by her 
+connection to the Nordic traditions of the Sisterhood of the 
+Spear. Th ey show the following information:
+Guided by the 
+Gods
+2: A Hero (including you) 
+within 3 gains an Astro Token.
+Guided by the A
+2: A Hero (including you) 
+B
+Astro Token.
+C
+A Card name
+B Cost in  Glory Points to activate the Eff ect
+C Glory Card Eff ect 
+During the setup for each Mission, the player controlling 
+Brynhildr must perform the following steps:
+◆ Shuffl e the 8 Glory Cards and place them next to their 
+Hero Sheet.
+◆ Reveal the fi rst Glory Card from the deck and place it face 
+up on top of the deck so that its Eff ect is visible.
+Th e Glory Card revealed on top of the deck is the Active 
+Glory Cards
+Glory Card. 
+During her Activation, Brynhildr can spend her  Glory 
+Points at any time to activate the Eff ect of the Active Glory 
+Card. When she does this, she performs all the following 
+steps, in order:
+◆ Move the cube on the  Glory Points track to the left by 
+a number of spaces equal to the number of Points spent.
+◆ Resolve the Eff ect of the Active Glory Card.
+◆ Place it face down at the bottom of the deck.
+◆ Turn the top card of the deck face up and place it on top of 
+it so that its Eff ect is visible. Th is is the new Active Glory 
+Card.
+If Brynhildr uses the Eff ect of her Active Glory Card thanks 
+to a Skill or Equipment instead of by spending  Glory 
+Points, she skips the fi rst step above but must still perform 
+all the others.
+Brynhildr can use Glory Cards with both her Basic Class and 
+either of her two Advanced Classes, as well as when she is 
+used as a Companion.
+8
+Some of Brynhildr’s Equipment and Skills allow her to gain a 
+specifi c type of  Class Points called  Glory Points.
+You can keep track of them using the  Glory Points Track 
+on Brynhildr’s Hero Sheet.
+During her Activation, Brynhildr can spend one or more 
+ Glory Points to use the Eff ect of her Active Glory Card. 
+Spending  Glory Points to use the Eff ect of the Active 
+Glory Card is not an Action, doesn’t cost any  , and can be 
+performed at any time during Brynhildr’s Activation.
+Brynhildr can use multiple Glory Cards during her activation, 
+as long as she has enough  Glory Points to pay their cost.
+Th ese cards work similarly to the Location Cards in the 
+core game, but are tied to a specifi c Tile. When you reveal 
+a Landscape Card, place it next to the indicated Tile. A 
+Landscape Card is a window into the scenery your Hero is 
+looking out over. Its wealth of detail provides new interactions 
+with the Scenic Elements on its associated Tile. Unlike 
+Location Cards, Heroes can’t be placed on Landscape Cards. 
+You can interact with a Landscape Card from anywhere 
+on the Tile connected to the card. Because an interaction 
+with a Landscape Card represents the Hero simply looking 
+around their surroundings, it normally costs 0 . Further 
+explanations in the Plotbook will indicate how you can 
+interact with the Scenic Elements depicted.
+Landscape Cards can provide useful clues about the 
+Mission you are currently playing, so we recommend 
+paying close attention to the details of their illustrations.
+ Glory Points
+Landscape Mission Cards
+0 1 4 5 6
+BRYNHILDR
+
+5
+1
+4
+2
+5
+
+
+Prerequisites:
+VALKYRIE
+Prerequisites:
+WYVERN Impale
+ Brutality
+Blade Storm
+War Cry
+ Mysticism
+Warrior 
+Sisterhood
+ Mysticism
+Glorious Step
+ Survival
+Champion's Grace
+ Survival
+3 Lancer Skills
+-
+Valkyrie Helm
+Prerequisites:
+3 Lancer Skills
+-
+Helm of the 
+Wyvern
+2 3 4
+ 0 1 2 3 4 5
+Bivouac Token: Th e Bivouac Token is required to 
+access the Cooking Phase during the Rest Phase. 
+Th e Bivouac Token can be gained in two ways: as 
+a reward for a Campaign Mission, or by spending 
+3 Elementum Reagents: Wood.
+Serum Token: Th is Token represents a Mission 
+item from the Under Siege Campaign.
+Marc Token: Th is special 40 mm Token is used in 
+place of a Model for the character Marc, who 
+appears in a Mission of the Under Siege Campaign.
+New Tokens
+New Cards
+Jean Token: Th is special 40 mm is used in place of 
+a Model for the character Jean, who appears in a 
+Mission of the Under Siege Campaign.
+Condottiero Token: Th is Token is used with the 
+“Condottiero’s Manual” Equipment card. See that 
+card for details of how to use this Token.
+4 Viewpoint Tokens: Viewpoints are 
+Tokens linked to Mission’s Actions that 
+allow you to reveal the corresponding 
+Landscape Card.
+Brynhildr can use  Glory Points to activate Glory Cards 
+even when used as a Companion. Use the 3 slots at the 
+bottom of the Companion Card and up to 3 cubes to keep 
+track of Brynhildr’s  Glory Points. When she is played as a 
+Companion, she can accumulate a maximum of 3 .
+Captain Kaspar
+◆ 0, US 0.7-28
+Stefano Colonna
+◆ 0, US 0.7-10
+Agitated Crowd
+◆ 0, US 0.7-20
+  Captain Kaspar
+◆ 0,  Captain Kaspar
+US 0.7-28
+Stefano Colonna
+◆ 0, US 0.7-10
+Agitated Crowd
+◆ 0,  Agitated Crowd
+US 0.7-20
+US 0.7
+
+Captain Kaspar
+Inspect the Building
+◆ 0, US 0.7-32
+Inspect the Building
+◆ 0,  Inspect the Building
+US 0.7-32
+US 0.7
+
+9
+Th is Expansion introduces new Equipment Cards. You can 
+also use these cards in the League of Cambrai Campaign 
+from the core game and the Vesuvius Campaign. Th e 10 
+new Formulae Equipment Cards are identical to those from 
+the core game and can be craft ed by visiting the Artisan’s 
+Workshop as usual.
+Th e two  Reward Cards can only be acquired during Under 
+Siege Campaign Missions.
+Enemies in the Under Siege Expansion will provide you with 
+a new type of Reagent: Cibus. Draw the number of Cibus 
+Reagent cards indicated on the Enemy Card when you defeat 
+them, just as you would with other Reagents. Add the Cibus 
+cards you draw to your Loot.
+Th e Under Siege Expansion introduces new Scenic Element 
+Cards, used in the setup of Exploration Missions. Scenic 
+Element Cards are drawn randomly during the setup of the 
+Battlefi eld and describe the placement and rules of the Scenic 
+Elements included in this expansion (Passetto/Aqueduct and 
+Falconet). A detailed explanation of all the rules for Scenic 
+Element Cards can be found in the Nova Aetas Renaissance 
+Stretch Goal Rulebook.
+During the Under Siege Campaign, your group of Heroes 
+will have the opportunity to gain new Achievement Cards, 
+some of which will introduce Special Actions that can be 
+performed during the game. Cards with the  asymbol 
+can only be assigned to specifi c Models as indicated by the 
+Mission rules. Th is type of Conquest Card cannot be used by 
+Heroes until a Mission’s Action allows it.
+Formulae Cards and Reward Cards
+Cibus Reagent Cards
+Scenic Element Cards
+ Achievement Cards
+Commander's Spaulder Artifact
+Resistance 1. 
+Counts as 2 
+Equipment Cards with Encumbrance .
+Resistance 1. 
+Counts as 2 
+Commander's Spaulder Artifact
+Equipment Cards with 
+Encumbrance 
+Resistance 1. 
+Counts as 2 
+Commander's Spaulder Artifact —
+2 Mandrake
+1 Silver
+1 Metal
+1 Gold
+Sword of the Redeemer
+—
+ Mandrake
+Sword of the Redeemer Formulae
+Fish
+Placement: Th e Falconet occupies 2 Squares and may be placed anywhere on the Battlefi eld, at least 1 Square 
+away from any Bulky Scenic Element.
+Failure: Ignore the result of the attack. Follow the 
+rules for Failure as indicated on the Falconet Failure 
+Card.
+Falconet
+Bulky, 
+Interactive
+-
+Weapon
+Achievement US16
+Cutting Blow: Once per Activation
+Stefano Colonna in icts 3 on Captain Kaspar's Model
+Weapon
+ Th e Falconet occupies 2 Squares and may be placed anywhere on the Battlefi eld, at least 1 Square Scenic Element.
+Ignore the result of the attack. Follow the 
+rules for Failure as indicated on the Falconet Failure 
+Falconet
+Bulky, 
+Interactive
+, su er Failure.
++0
+ 8
+ 
+Towering,
+Bulky
+-
+Placement: Th e Aqueduct occupies 6 Squares and must be placed at least 1 Square away from a Bulky Scenery Element.
+Collapse: When the Aqueduct suff ers the fi nal , each Model adjacent to any Square occupied by 
+the Aqueduct suff ers 1 Unblockable  and gains a Stunned Token and a Hindered Token. Remove the 
+Aqueduct from the Battlefi eld.
+Aqueduct
+8 Blo ing,
+Towering,
+Blo ing,
+Achievement
+Weapon
+Cutting Blow: Once per Activation
+Stefano Colonna in icts 3 on Captain Kaspar's Model
+Weapon
+Achievement
+Revitalizing Tonic
+ Achievement US17
+Drink: Once per Activation.
+Remove 3 from 
+Revitalizing Tonic
+ Achievement
+10
+Two new Tiles introduced in this Expansion show the Border 
+(1U and 2U) on one side and the Stream (3U and 4U) on the 
+other. 
+Th e Border Tiles represent the limits of a settlement and 
+have no Special Rules. Th e Stream Tiles show some Squares 
+with a blue border. Th ese Squares follow the Water Tile Rules 
+described in the Nova Aetas Renaissance Rulebook.
+New Tiles: Border/Stream
+3U
+2U
+New Scenic Elements
+Passetto/Aqueduct
+Th is 3D Scenic Element represents the Passetto di Borgo di 
+Castel Sant’Angelo, the protected passageway connecting the 
+Bastione San Marco di Castel Sant’Angelo to the Vatican’s 
+Apostolic Palace.
+Th is Scenic Element is modular, with gates that can either 
+be inserted or removed, depending on the Mission you’re 
+playing. If you fl ip each piece used to construct the Passetto 
+round to its other side, you can assemble a generic Aqueduct. 
+Aqueduct. Both of these Scenic Elements follow these Special 
+Rules:
+◆ Blocking
+◆ Towering
+◆ Bulky
+No game eff ect (Skill, Equipment, or Trait) of Enemies, 
+Heroes, or Allies can allow a Model to be placed on a Passetto/
+Aqueduct Square. Furthermore, no game eff ect can allow 
+movement through the Passetto/Aqueduct if it is placed on 
+the Battlefi eld with the Gates Closed. In this scenario, there 
+will be a Mission rule that will cause Heroes or Enemies to 
+interact with the Scenic Element.
+Falconet 
+Th is Scenic Element represents an imperial war machine 
+loaded with gunpowder. Th e falconet follows these Special 
+Rules:
+◆ Bulky
+◆ Interactive
+If you encounter this Scenic Element during a Campaign 
+Mission, simply follow the Mission rules to interact with it or 
+defend yourself from its deadly attacks.
+Th e Falconet is also a Scenic Element that you may come 
+across during Exploration Missions. If this happens, you will 
+fi nd everything you need to know in order to interact with 
+it during your Mission on the Falconet and Falconet Failure 
+Cards.
+Th is 3D Scenic Element represents the Passetto di Borgo di 
+Castel Sant’Angelo, the protected passageway connecting the 
+Bastione San Marco di Castel Sant’Angelo to the Vatican’s 
+Th is Scenic Element is modular, with gates that can either 
+be inserted or removed, depending on the Mission you’re 
+playing. If you fl ip each piece used to construct the Passetto 
+round to its other side, you can assemble a generic Aqueduct. 
+Aqueduct. Both of these Scenic Elements follow these Special 
+No game eff ect (Skill, Equipment, or Trait) of Enemies, 
+Heroes, or Allies can allow a Model to be placed on a Passetto/
+Aqueduct Square. Furthermore, no game eff ect can allow 
+movement through the Passetto/Aqueduct if it is placed on 
+the Battlefi eld with the Gates Closed. In this scenario, there 
+will be a Mission rule that will cause Heroes or Enemies to 
+Aqueduct
+Passetto
+11
+Persistence
+If a Hero doesn’t take  from the initial attack of an Enemy 
+with this Skill, that Enemy will carry out a second attack. 
+Th e Hero must immediately perform another Defense Test 
+to defend themselves from this follow-up attack. Th is Skill 
+triggers only once per Attack.
+Travel and Rest Phases
+Th e Under Siege Campaign is mainly set in Rome, so there 
+is no Travel Phase. You will be reminded of this at the end of 
+each Mission.
+Each Mission in the core game lists, under its title, the name 
+of the place where you will rest and the type of location where 
+this phase will take place, i.e. whether it is a village or a city.
+In Under Siege, instead of the name of the place, you can fi nd 
+the name of the district of Rome where you will carry out 
+the Rest Phase and a list of icons related to the stores in that 
+district. Th ese will be the only activities available during the 
+next Rest Phase.
+New Skills
+Getting Around Rome
+Campaign Rules
+Counteroff ensive
+Enemies with this Skill can hit back if they manage to avoid 
+. If they avoid all  from the attack of an adjacent Hero, 
+that Hero takes 1 Unblockable . 
+During the siege of Rome, the city’s population didn’t get 
+many supplies, as almost all roads into and out of the city 
+were controlled by Georg von Frundsberg’s army. Th e citizens 
+of Rome therefore had to live by their wits, trying to survive 
+as best they could and feeding themselves with whatever they 
+could fi nd.
+You too will be forced to put old lessons into practice or learn 
+new skills to resist that most deadly of enemies—hunger.
+Recipes and Cooking
+In Under Siege you will have at your disposal the Menu, 
+which is a sheet from which you can access a series of recipes. 
+Making these will allow you to avoid Starvation (see next 
+section).
+All possible Recipes are listed in the Menu and are divided 
+into 3 categories: Camp Kitchen Dishes, Special Dishes, and 
+Chef ’s Dishes.
+Cooking
+Camp Kitchen Dishes are always available to all Heroes, and 
+allow them to avoid the penalty infl icted by the Starvation 
+rule. Special Dishes and Chef ’s Dishes are only available 
+to Heroes who have acquired specifi c Cooking Skills. In 
+addition to allowing Heroes to avoid Starvation, Special and 
+Chef ’s Dishes also provide additional Eff ects. Th ese can be 
+utilized in the Mission that the Heroes embark on aft er the 
+Rest Phase during which they make the Recipe.
+Critical
+If this Attack infl icts at least 3, the Eff ect described aft er 
+the colon is applied, and the Hero who performed the Attack 
+gains +1.
+Th is Eff ect replaces the Critical X Trait from the core game.
+New Rule 
+Rest Phase during which they make the Recipe.
+12
+Each Recipe lists a set of Cibus Reagents (Ingredients) that 
+must be used in order to make it A , as well as the Eff ect 
+gained by making the Recipe B . In addition, the listed 
+Ingredients (e.g., Meat, Fish, Bread, etc.) may also function 
+as keywords required for interactions with certain Cooking 
+Skills C .
+Semo gente de forchetta,
+ qui se magna e se rispetta!
+Menu
+The Lost Paladin’s Fettuccine
+Ingredients: 1 Mouse, 1 Egg, 1 Water, 1 Flour
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Disadvantaged Token.
+Dragon Coda alla Vaccinara
+Ingredients: 1 Mouse, 1 Salt, 1 Tomato, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Stunned Token; on a result of  gain an 
+Advantaged Token.
+The Wandering Cleric’s 
+Saltimbocca
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Poisoned Token; on a result of  gain an 
+Advantaged Token.
+Necromancer’s Gricia
+Ingredients: 1 Egg, 1 Water, 1 Flour, 1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Poisoned Token.
+Alchemist’s Trippa
+Ingredients: 3 Mouse, 1 Salt, 1 Seasonings, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Cursed Token; on a result of  gain an Astro 
+Token; on a result of  gain a Marked Token.
+Supplì of the Hidden Blades
+Ingredients: 1 Salt, 2 Flour, 1 Cheese
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Bleeding Token; on a result of  gain a Blessed 
+Token.
+Dark Alley Stew
+Ingredients: 1 Mouse, 1 Chicken, 1 Water, 
+1 Seasonings, 1 Hops
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Cursed Token.
+Squire’s Stale Bread
+Ingredients: 1 Salt, 3 Water, 1 Flour, 1 Yeast
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Hindered Token; on a result of  gain 
+a Disadvantaged Token; on a result of  gain a Shielded 
+Token.
+The Sora’s Amatriciana
+Ingredients: 1 Mouse, 1 Salt, 2 Water, 1 Tomato, 
+1 Flour
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Advantaged Token; on a result of  gain a 
+Poisoned Token; on a result of  gain a Blessed Token.
+Camp Kitchen Dishes
+Penne alla Lost Glory
+Ingredients: 1 Egg, 2 Water, 1 Flour, 1 Cheese, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Advantaged Token; on a result of  gain a 
+Disadvantaged Token.
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Astro Token; on a result of  gain a Cursed 
+Token.
+Porchetta of Eternal Oblivion
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a +1 Token; on a result of  gain a Reaction 2 
+Token.
+Leviathan Fillet with Arcane 
+Mist
+Ingredients: 2 Fish, 1 Fruit, 2 Tomato, 1 Cheese, 1 
+Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Lucky Token.
+Imperial Griffin Chicken
+Ingredients: 1 Chicken, 2 Egg, 1 Tomato, 
+1 Cheese, 1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a +1 Token.
+Stew of Silent Bones
+Ingredients: 2 Chicken, 1 Water, 1 Seasonings, 1 Oil, 
+1 Hops
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Shielded Token; on a result of  gain a Marked 
+Token; on a result of  gain a +1 Token.
+Fillet of the Whispering Waters
+Ingredients: 3 Fish, 2 Water, 1 Tomato
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain an Astro Token; on a result of  gain an 
+Advantaged Token; on a result of  gain a Poisoned Token.
+Treasures of the Veiled River en 
+Papillote
+Ingredients: 2 Fish, 1 Salt, 1 Tomato, 1 Flour, 
+1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Blessed Token; on a result of  gain an 
+Advantaged Token.
+Monte dei Cocci Dessert
+Ingredients: 1 Egg, 1 Water, 1 Fruit, 1 Honey, 
+3 Yeast
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Astro Token; on a result of  gain a Lucky 
+Token.
+Special Dishes
+Chef’s Dishes
+Leviathan Fillet with Arcane 
+Ingredients: 2 Fish, 1 Fruit, 2 Tomato, 1 Cheese, 1 
+ Ignore the effects of Starvation. Roll 1
+ gain a Lucky 
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Astro Token; on a result of  gain a Lucky 
+Token.
+Dal tempo de li Medici e li Papi, se beve, 
+se magna e se lascia soddisfatti!
+Skills
+“I’ll bring the wine” .................................................1
+When a Hero with this Skill makes a Recipe, they gain 
+the “Ignore the eff ects of Starvation” Eff ect, then select 
+another Hero and applies the eff ects of the dice roll to 
+them.
+Baker ......................................................................1
+Th e Hero with this Skill can re-roll the die once for each 
+Recipe they’re making this turn.
+Culinary Mastery ....................................................3
+When a Hero makes a Recipe, instead of using its Eff ect, 
+they can sell it and gain Florins equal to the purchase 
+value of the Cibus Reagent cards used for that Recipe. 
+Th ey can only use this Skill once per Rest Phase.
+Farmer ....................................................................2
+Decrease the cost of the following Reagents by 1 (their 
+cost can never go below 1): Flour, Fruit, Tomato.
+Roaster ....................................................................1
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Mouse, Chicken.
+Seasonings Expert ...................................................2
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil.
+Fisherman ...............................................................1
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Fish.
+Barbecue Chef .........................................................2
+When they have this Skill, a Hero can reduce the amount 
+of Wood the party needs to gain 1 Bivouac Token by 1. 
+Multiple Heroes in the party can acquire this Skill and 
+can use it at the same time, cumulatively. Th e amount of 
+Wood needed to gain a Bivouac Token can never be less 
+than 1.
+Expert Chef .............................................................2
+You may cook Special Dishes.
+Virtuoso Chef ..........................................................3
+Prerequisite: Expert Chef. 
+You may cook Chef ’s Dishes.
+Menu
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+ Ignore the effects of Starvation. Roll 1: On a 
+Poisoned Token; on a result of  gain an Dark Alley Stew
+Ingredients: 1 Mouse, 1 Chicken, 1 Water, 
+1 Seasonings, 1 Hops
+Disadvantaged 
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+Effect: Ignore the effects of Starvation. Roll 1
+ gain an 
+Token.
+Porchetta of Eternal Oblivion
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1
+ gain a 
+Token.
+Disadvantaged 
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+ Ignore the effects of Starvation. Roll 1
+ gain an Astro 
+Porchetta of Eternal Oblivion
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+1 Seasonings
+ Ignore the effects of Starvation. Roll 1
+ gain a +1 
+Menu
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+1 Seasonings
+Effect:
+of  gain a 
+Token.
+Menu
+The Lost Paladin’s Fettuccine
+Ingredients: 1 Mouse, 1 Egg, 1 Water, 1 Flour
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of 
+Dragon Coda alla Vaccinara
+Ingredients: 1 Mouse, 1 Salt, 1 Tomato, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+ Token; on a result of  gain an 
+Supplì of the Hidden Blades
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+ gain a 
+Token.
+Supplì of the Hidden Blades
+Camp Kitchen Dishes
+The Lost Paladin’s Fettuccine
+Ingredients: 1 Mouse, 1 Egg, 1 Water, 1 Flour Ingredients: 1 Salt, 2 Flour, 1 Cheese
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+ gain a Disadvantaged Token.
+ Ignore the effects of Starvation. Roll 1
+of  gain a Bleeding Token; on a result of  gain a 
+Token.
+Effect: Ignore the effects of Starvation. Roll 1
+Stunned Token; on a result of 
+The Lost Paladin’s Fettuccine
+Ingredients: 1 Mouse, 1 Egg, 1 Water, 1 Flour
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Disadvantaged Token.
+Dragon Coda alla Vaccinara
+Ingredients: 1 Mouse, 1 Salt, 1 Tomato, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Stunned Token; on a result of  gain an 
+Advantaged Token.
+The Wandering Cleric’s 
+Saltimbocca
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Poisoned Token; on a result of  gain an 
+Advantaged Token.
+Necromancer’s Gricia
+Ingredients: 1 Egg, 1 Water, 1 Flour, 1 Seasonings
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Poisoned Token.
+Alchemist’s Trippa
+Ingredients: 3 Mouse, 1 Salt, 1 Seasonings, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Cursed Token; on a result of  gain an Astro 
+Token; on a result of  gain a Marked Token.
+Supplì of the Hidden Blades
+Ingredients: 1 Salt, 2 Flour, 1 Cheese
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Bleeding Token; on a result of  gain a Blessed 
+Token.
+Dark Alley Stew
+Ingredients: 1 Mouse, 1 Chicken, 1 Water, 
+1 Seasonings, 1 Hops
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain a Cursed Token.
+Squire’s Stale Bread
+Ingredients: 1 Salt, 3 Water, 1 Flour, 1 Yeast
+Effect: Ignore the effects of Starvation. Roll 1: On a 
+result of  gain a Hindered Token; on a result of  gain 
+a Disadvantaged Token; on a result of  gain a Shielded 
+Token.
+The Sora’s Amatriciana
+Ingredients: 1 Mouse, 1 Salt, 2 Water, 1 Tomato, 
+1 Flour
+Effect: Ignore the effects of Starvation. Roll 1: On a result 
+of  gain an Advantaged Token; on a result of  gain a 
+Poisoned Token; on a result of  gain a Blessed Token.
+Supplì of the Hidden Blades
+Camp Kitchen Dishes Camp Kitchen Dishes Disadvantaged 
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+Effect:
+ gain an 
+Token.
+Porchetta of Eternal Oblivion
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+Disadvantaged 
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+Effect:
+of  gain an 
+Token.
+Porchetta of Eternal Oblivion
+Ingredients: 1 Mouse, 2 Chicken, 1 Fish, 1 Salt, 
+Supplì of the Hidden Blades
+: On a result 
+ gain a 
+The Lost Paladin’s Fettuccine
+: On a result 
+Disadvantaged 
+Black Rose Tart
+Ingredients: 1 Egg, 2 Fruit, 2 Flour, 1 Honey
+Effect:
+of 
+Token.
+Supplì of the Hidden Blades
+: On a result 
+ gain a Blessed 
+The Lost Paladin’s Fettuccine
+: On a result 
+A
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+ Ignore the effects of Starvation. Roll 1
+Poisoned
+Saltimbocca
+ Ignore the effects of Starvation. Roll 1
+result of of  gain a gain a gin a Ignore the effects of Starvation. Roll 1
+Stunned
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1
+result of  gain a Poisoned
+Advantaged Token.
+Saltimbocca
+Ingredients: 1 Chicken, 1 Cheese, 1 Oil
+result of gain a 
+Advantaged Token.
+result of of  gain a gin a Stunned
+ Token.
+B
+ ...................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil.
+ ...............................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+ .........................................................
+When they have this Skill, a Hero can reduce the amount 
+of Wood the party needs to gain 1 Bivouac Token by 1. 
+Multiple Heroes in the party can acquire this Skill and 
+can use it at the same time, cumulatively. Th e amount of 
+Recipe they’re making this turn.
+Culinary Mastery ....................................................3
+When a Hero makes a Recipe, instead of using its Eff ect, 
+they can sell it and gain Florins equal to the purchase 
+Ingredients: 1 Egg, 2 Water, 1 Flour, 1 Cheese, 1 Oil
+Effect: Ignore the effects of Starvation. Roll 1
+ gain an 
+Disadvantaged 
+Advantaged 
+Effect:
+of 
+Skills
+ ...................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+Th e Hero with this Skill can re-roll the die once for each Penne alla Lost GloryRecipe they’re making this turn.
+Skills
+“I’ll bring the wine” .................................................1
+the “Ignore the eff ects of Starvation” Eff ect, then select 
+Seasonings Expert
+them.
+“I’ll bring the wine”
+When a Hero with this Skill makes a Recipe, they gain Reduce the cost of the following Reagents by 1 (their cost 
+another Hero and applies the eff ects of the dice roll to 
+“I’ll bring the wine” .................................................1
+When a Hero with this Skill makes a Recipe, they gain 
+the “Ignore the eff ects of Starvation” Eff ect, then select 
+another Hero and applies the eff ects of the dice roll to 
+them.
+Baker ......................................................................1
+Th e Hero with this Skill can re-roll the die once for each 
+Recipe they’re making this turn.
+Culinary Mastery ....................................................3
+When a Hero makes a Recipe, instead of using its Eff ect, 
+they can sell it and gain Florins equal to the purchase 
+value of the Cibus Reagent cards used for that Recipe. 
+Th ey can only use this Skill once per Rest Phase.
+Farmer ....................................................................2
+Decrease the cost of the following Reagents by 1 (their 
+cost can never go below 1): Flour, Fruit, Tomato.
+Roaster ....................................................................1
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Mouse, Chicken.
+Seasonings Expert ...................................................2
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil.
+Fisherman ...............................................................1
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Fish.
+Barbecue Chef .........................................................2
+When they have this Skill, a Hero can reduce the amount 
+of Wood the party needs to gain 1 Bivouac Token by 1. 
+Multiple Heroes in the party can acquire this Skill and 
+can use it at the same time, cumulatively. Th e amount of 
+Wood needed to gain a Bivouac Token can never be less 
+than 1.
+Expert Chef .............................................................2
+You may cook Special Dishes.
+Virtuoso Chef ..........................................................3
+Prerequisite: Expert Chef. 
+You may cook Chef ’s Dishes.
+Wood needed to gain a Bivouac Token can never be less 
+than 1.
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil.
+ ...............................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+ .........................................................
+When they have this Skill, a Hero can reduce the amount 
+of Wood the party needs to gain 1 Bivouac Token by 1. 
+Multiple Heroes in the party can acquire this Skill and 
+can use it at the same time, cumulatively. Th e amount of 
+Reduce the cost of the following Reagents by 1 (their cost the “Ignore the eff ects of Starvation” Eff ect, then select 
+another Hero and applies the eff ects of the dice roll to can never go below 1): Seasonings, Salt, Oil.
+ ...............................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Fish.
+ .........................................................
+When they have this Skill, a Hero can reduce the amount 
+of Wood the party needs to gain 1 Bivouac Token by 1. 
+Multiple Heroes in the party can acquire this Skill and 
+can use it at the same time, cumulatively. Th e amount of 
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil.
+ ...............................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Fish.
+Barbecue Chef .........................................................
+When they have this Skill, a Hero can reduce the amount 
+can never go below 1): Seasonings, Salt, Oil.
+Fisherman ...............................................................
+Reduce the cost of the following Reagents by 1 (their cost 
+the “Ignore the eff ects of Starvation” Eff ect, then select Reduce the cost of the following Reagents by 1 (their cost 
+can never go below 1): Seasonings, Salt, Oil. another Hero and applies the eff ects of the dice roll to Fisherman
+C
+You may make a Recipe at the end of any Rest Phase, even if 
+all Heroes have already been placed on a Store.
+Place the Bivouac 
+Token on the menu 
+as a reminder to use 
+the recipes at the end 
+of the Rest Phase.
+To make Recipes during a Rest Phase, you must fi rst acquire 
+the Bivouac Token. If you don’t have the Token, no Hero 
+can make Recipes. You can gain the Token by spending 
+3 Elementum Reagents: Wood, removing them from the 
+Campaign Sheet. It is also possible to gain the Token at the 
+end of a Mission, in which case the Plotbook will indicate 
+that “Th e party gains the Bivouac Token.” Th e token can then 
+be used in the next Rest Phase. Place the Bivouac Token on 
+the Menu when you gain it, as a reminder. Once you have the 
+Bivouac Token, each Hero can make as many Recipes as they 
+have Ingredients for at the end of the current Rest Phase.
+Remember: Elementum Reagent: Wood can be purchased 
+at the Market during the Rest Phase.
+Follow these rules when making a Recipe:
+◆ When you use an Ingredient to create a Recipe, remove it 
+from the Campaign Sheet.
+◆ Each Hero who wishes to cook during a Rest Phase selects 
+1 or more Recipes that they are able to cook from the 
+Menu.
+◆ Each Hero can use their Cooking Skills and apply the 
+Eff ects of the Recipes they cook only on themselves.
+◆ A Hero can make multiple Recipes to gain diff erent 
+bonuses. Fully resolve the Eff ects of 1 Recipe before 
+making the next.
+◆ Each Recipe can be cooked by multiple Heroes, as long as 
+the required Ingredients are available. 
+Recipe Effects
+Recipes have an Eff ect that must be applied immediately aft er 
+removing the required Ingredients from the Campaign Sheet. 
+Th e Eff ects of a Recipe follow these rules:
+Automatic Eff ect: Must be applied immediately aft er use. 
+Triggered Eff ect: Eff ects that will only come into play if 
+you obtain specifi c symbols. Th e Eff ect can be Positive or 
+Negative. Rolling the dice for these Eff ects is mandatory.
+Th e bonuses provided by a Recipe’s Eff ect (including not 
+suff ering Starvation) apply only to the Mission following the 
+Rest Phase in which the Recipe is made.
+Starvation
+If a Hero fails to gain the “Ignore Starvation” bonus during a 
+Rest Phase, they suff er the eff ects of Starvation.
+A Hero suff ering from Starvation must roll a  and apply 
+the following:
+◆ No Symbol: -1 penalty on the  Characteristic.
+◆ Star: -1 penalty on the  Characteristic.
+◆ Sun: -1 penalty on the  Characteristic.
+◆ Moon: -1 penalty on the  Characteristic.
+Th is Starvation penalty remains in eff ect until the start of the 
+next Rest Phase.
+Cooking Skills
+Under Siege introduces a new type of Skill that all Heroes can 
+learn during this campaign. All available Cooking Skills are 
+listed in the Menu.
+During the Rest Phase, each Hero who has  available may 
+spend them to purchase Cooking Skills, along with the Skills 
+available on their Skill Sheets.
+On the new Under Siege Campaign Sheet each Hero has 3 
+new slots in the Skills section to mark the Cooking Skills they 
+have learned. Each Hero can learn a maximum of 3 Cooking 
+Skills. All learned Cooking Skills can be used during any Rest 
+Phase, without needing to be equipped like Class Skills.
+Each Cooking Skill is individual and can’t be used to cook for 
+others, unless otherwise specifi ed.
+13Foro di Traiano
+Porta Santo Spirito
+Porta Torrione
+Castel Sant’Angelo Borgo
+fuori le
+mura
+Prati
+San Pietro
+Circo Massimo
+Fidenae
+14
+ Treasury    Inventory  
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+Achievements
+
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________
+Campaign Missions
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+ 
+Nova Aetas Renaissance - Campaign Sheet 
+
+ Belladonna
+ Leather
+ Wood
+ Mandrake
+ Mercury
+Philosopher's Stone
+ Raelgar
+ Sulfur
+ Silver
+ Metal
+ Gold
+ Florins
+Fish
+Egg
+Seasonings
+Flour
+Water
+Oil
+Yeast
+Salt
+Honey
+ Fruit
+Tomato
+Hops
+ Chicken
+Mouse
+Cheese
+buy
+3
+
+2
+
+1
+3
+
+2
+
+9
+
+4
+
+2
+
+5
+
+3
+
+6 
+-
+3
+
+2
+
+2
+
+3
+
+1
+3
+
+3
+
+3
+
+3
+
+2
+
+4
+
+3
+
+3
+
+1
+4
+
+sell
+2
+
+1
+1
+2
+
+1
+5
+
+2
+
+1
+3
+
+2
+
+3
+
+-
+2
+
+1
+1
+1
+1
+2
+
+2
+
+2
+
+2
+
+1
+2
+
+1
+2
+
+0
+
+2
+
+owned
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______ 
+______ 
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+15
+
+Hero
+ Gained
+Player
+Advanced Class
+ Bond
+Achievements
+Injury
+Injury
+Injury
+Destiny
+Upgrade
+Skill
+Skill
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill
+Cooking Skill
+Cooking Skill
+Cooking Skill
+ Spent
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+Under Siege - Rulebook v.1.0
+©2025 Ludus Magnus Studio
+All rights reserved 
+www.ludusmagnusstudio.com
+

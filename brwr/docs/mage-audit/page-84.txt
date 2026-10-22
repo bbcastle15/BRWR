@@ -1,0 +1,25 @@
+84
+T h e L o d g e
+e - B l a c k R o s e r o o m s
+B l a c k R o s e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 3;. If you do draw 1 Forgotten ;. The & places 
+1I in a M.
+REBUILD ROOM EFFECT
+Y: discard 3;. If you do draw 2 Forgotten ; keep one of 
+them, discard the other.
+B l a c k R o s e R o o m - A p o c a l y p s e
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 3;. If you do search for 1; in your Personal 
+Library and add it to you Hand, then shuffle your Personal 
+Library.
+REBUILD ROOM EFFECT
+Y: discard 2;. If you do search for 1; in your Personal 
+Library and add it to you Hand, then shuffle your Personal 
+Library.

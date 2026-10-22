@@ -1,0 +1,1771 @@
+
+=== PAGE 1 ===
+Core Game
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+AVATAR DEFEATED AND ADDITIONAL 
+CARD
+Q.
+• What happens if the Avatar is defeated, for example due 
+to a Trap, while they are resolving the top Effect of a 
+Command Card?
+• If the second Effect of the Command Card is a Spell, is 
+it ignored because the Avatar is in their Cell?
+• If an Avatar is defeated while resolving an Effect and 
+that Effect shows the Additional Card symbol, does the 
+Avatar have to reveal the additional card?
+• If the top Effect of the additional card (in case it must 
+be revealed) shows a Spell must it be resolved even 
+if the Avatar is in their own Cell? Is this Spell Effect 
+considered an integral part of the previous Effect that 
+contained the additional card symbol or is it considered 
+a new "Cast a Spell" Action?
+A.
+• The Avatar continues to resolve the Effect up to 
+the period (.), then the Avatar's defeat is resolved. 
+Finally, the Avatar continues to resolve the Effect 
+they were resolving at the time they were defeated. 
+Then they attempt to perform the lower Effect of 
+the same Command Card, but this effect is ignored 
+because the Avatar is located in their own Cell. The 
+Avatar never performs Momentum or Explore Actions.
+Note that any Trap/Protect Effects of the Avatar resolve 
+even if they are placed in the Cell, as with any other 
+Mage.
+• Yes, like any other Mage, if the Avatar is in their Cell, 
+they cannot Cast a Spell. For the Avatar, the Spell Effect 
+of a Command Card is equivalent to a Spell Casting 
+Action for a player-controlled Mage. 
+• Yes, the additional card must be revealed. (No rule 
+prohibits resolving the Additional Card symbol, even if 
+no Avatar can perform Momentum or Explore).
+• The answer in step 2 applies. The Avatar reveals the 
+Additional Card, but Spell Effects cannot be performed 
+as long as the Avatar is in the Cell. It is not considered 
+part of the previous Effect.
+AVATAR DEFEAT, DOMINION
+Q. Does the Possessed Avatar's Domination skill only apply 
+if they are in their Cell at the start of their activation, or 
+does it apply anytime they must resolve an Effect outside 
+of their activation?
+A. The Dominion skill applies only at the beginning of their 
+activation.
+ERRATA & FAQ — February 2026 
+This document refers to version 1.0 of the game
+Game Components corrected by an Errata are available
+at this link
+UPDATES IN YELLOW
+1
+
+=== PAGE 2 ===
+HEAL
+Q. If a Heal effect targets a Room, are all models in the 
+Room healed, both my Mage and other players' Mages 
+and Evocations?
+A. Yes.
+EMPTY DECK, LIBRARY, EVENT, QUESTS 
+(page 14)
+Q. What happens if in the Study Phase I want to draw a Spell 
+Card from a school but that school's deck is empty?
+A. As a general rule, when the player is to draw/reveal/add/
+search a card from an empty deck, all the discards from 
+that deck must be shuffled. Then the player can resume 
+the Effect using the new deck. This applies to school 
+decks in the Library, a Mage's Grimoire, the Event deck, 
+and the Quest deck.
+TASK, QUEST OR JINX (page 12)
+Q. It is mandatory to place the Cube on a Quest or Jinx Card 
+when my Mage fulfills the condition of a Task?
+A. Yes, it is mandatory.
+EVOCATIONS, VALUES WITH ASTERISK (*)
+Q. What happens if an Effect targets an Evocation with a 
+Health value of 3 or less, but that Evocation has only an 
+Asterisk (*) printed on its Health value, without any other 
+number?
+A. In BRW there are Evocation Cards with Health values 
+indicated only by an Asterisk (*). Those values are neither 
+greater nor less than any number, so they are never taken 
+into account by Effects that target a Model based on 
+that value. These Effects therefore cannot be applied to 
+Models in the game that show only an Asterisk (*) value 
+with no other values.
+However, if a value shows a number together with an 
+Asterisk (*), only the numerical value printed on the card 
+must be taken into consideration and the Asterisk (*) 
+must be ignored.
+REVEALED TRAP/PROTECTION CARD (page 17)
+Q. When is a Trap Spell considered cast and when is it 
+considered revealed?
+A. If a Trigger Condition requires a Spell to be Cast, it must 
+be read as if the Spell were Revealed. In fact, when a Mage 
+performs the Cast a Spell Action on a Trap/Protection 
+Spell, it is not revealed, but a Trap/Protection Token 
+must be placed on it. From this moment it is no longer 
+considered a Ready Spell, but is considered an Active 
+Spell. A Trap/Protection Spell is Revealed when the card 
+is flipped face up.
+ELEMENT, SPELL (page 15)
+Q. Does the All Elements  symbol on the Spell Card have 
+to be decided when the Spell is revealed? 2) Does the 
+choice made last until the end of the current Turn?
+A. Whenever a Mage must count the number of their 
+Elements to resolve an Effect, they consider the All 
+Elements symbol  as 1 symbol of any element of their 
+choice. This choice lasts until the Effect is completely 
+resolved. Subsequently, when the Mage resolves a 
+different Effect in which they must count the number 
+of their elements again, they can treat the All Elements 
+symbol  as 1 element identical or different from the 
+previously chosen one."
+AVATAR, EVOCATIONS (page 40)
+Q. When an Avatar determines a target Room according to 
+the "most Models" criteria, do they also have to consider 
+their own Evocations?
+A. No, Avatar Evocations must not be considered in this 
+case. Even the Avatar model itself does not have to be 
+considered when counting the models in the Room 
+where the Avatar is located.
+FORGOTTEN SPELL OPERA, "IGNORE" 
+EFFECT
+Q. What Effects are ignored by a Mage who has played the 
+Opera Forgotten Spell on themselves?
+Can that Mage's Evocations be targeted?
+Can that Mage's Instability Cubes be converted?
+A. This Spell allows the Mage to ignore the Effects of other 
+Mage's Spells. The Spells cast are resolved in their entirety, 
+but the Mage targeted by Opera ignores the Effects on 
+their Model. Traps and Protections can trigger if Opera's 
+target meets the Trigger Condition, but they ignore the 
+Effect.
+The Opera Effect does not extend to components owned 
+by the Mage such as Evocations or Damage/Instability 
+Cubes, however if an Effect requires targeting (or 
+affecting) the Mage to affect these components, they 
+ignore it.
+TARGET OF A SPELL
+Q. If the text of a Protection Spell says: "You are the Target 
+of an  Spell" can I use this protection if the Spell Card 
+shows a Room Symbol as the Target and the Effect of that 
+Spell applies to my Mage?
+A. No, if the Trigger Condition specifies that your Mage 
+is the target of a Spell you can resolve the Effect of that 
+Protection if the other Mage's Spell targets have one of 
+the symbols , , ... or , , ... and if your Mage 
+is targeted. 
+NIGHTMARE SCHOOL, AVATAR
+Q. Can I assign an Umbra to the Avatar?
+A. Yes, it is possible to assign an Umbra to an Avatar. During 
+the Evocation Phase that Umbra does not inflict Damage 
+neither to the Avatar nor to the Evocation on the same 
+slot as the Umbra.
+2
+
+=== PAGE 3 ===
+NIGHTMARE ACTIVATION
+Q. When the Umbra performs a Physical Attack, does it 
+target both the Mage and the Evocation that occupies the 
+same slot as the Umbra?
+Or does it target just one between the Mage and the 
+Evocation?
+A. When an Umbra performs a Physical Attack the target 
+is always the Mage to whom it is assigned. Additionally, 
+because of the Effect of the Umbra Evocation Card, its 
+controller deals 1 Damage to the Evocation that is in the 
+same Slot as the Umbra.
+DISCARD SPELL CARDS
+Q. When an Effect says to discard a Spell Card, do I always 
+have to choose one of the cards from my hand?
+A. Yes, in the absence of any other specification the target 
+must discard one of the cards from their hand.
+CONVERT DAMAGE, SELF
+Q. Can I convert other Mage's Damage on my Mage Sheet?
+A. No, when a Mage resolves an Effect that allows to convert 
+Damage this does not apply to themselves or their 
+Evocations.
+EFFECTS ON MY MAGE
+Q. An Effect inflicts 1 Damage in the target Room and 
+moves all models in that Room to an adjacent Room. 
+What happens to my Mage if they are in the target Room? 
+What happens to one of my Evocation if it is in a target 
+Room?
+A. According to the Immunity rule, a Mage cannot inflict or 
+convert Damage on themselves or their Evocations. Any 
+other Effects apply normally.
+SOLVE A MISSION
+Q. If an Effect allows me to solve a Quest, can I solve the 
+Quest's Effect at that time?
+A. No. According to the rules, I can resolve the Effect of a 
+Completed Quest on my Turn, then that Quest becomes 
+Solved and I gain the Power Points. When an Effect 
+allows me to Solve a Quest, it means that I immediately 
+gain the Power Points indicated by the card, furthermore 
+at the end of the game, that Quest counts towards the 
+number of Solved Quests. In this case the Quest Effect is 
+not resolved.
+SPELL CASTING
+Q. At what point in the spell casting process (see FAQ 1.1, 
+page 3, “Casting a Spell”) is the Mage considered to 
+have cast a spell? This is important for certain Traps that 
+trigger when a Mage has cast a spell.
+A. The process of “Casting a Spell” begins with the action 
+of revealing a Spell Card and ends with the complete 
+resolution of that Spell's Effect.
+“WHEN,” “AFTER,” AND “EACH TIME”
+Q. What are the differences between the terms “When,” 
+“After,” and “Each time”?
+A. The phrases “When,” “After,” and “Each time” can be 
+considered synonyms in this game.
+ALCHEMY SPELL - FOUNTAIN OF THE THREE
+Q. Is Enhancement part of the "OR" Effect, or is it actually 
+always applied even if I choose to resolve the phrase 
+under "OR"?
+A. The Enhancement segment is always performed.
+DISCARD SPELL CARDS
+Q. According to the rulebook, I can discard a Spell Card 
+from my hand during the Study Phase. Where is a 
+Personal Spell Card discarded during this phase placed?
+A. When a Mage discards a Spell, they place it in their 
+Memories. If an Effect indicates that a Spell Card must 
+be discarded into the discard pile of its School of Magic 
+(Library discard pile), a Mage may discard a Personal 
+Spell, but it is removed from the game.
+LARGE EVOCATION (page 20)
+Q. Can I summon an Evocation with a large base (such as 
+the Colossus) and a Forgotten Evocation larger than the 
+large Evocation Base?
+A. No, an Evocation that is larger than the large Evocation 
+Base must be considered as a large Evocation, the same as 
+a Colossus.
+TRIGGER CONDITION, RESOLVE (page 18)
+Q. If multiple Mages have Traps/Protections triggered at the 
+same time, in what order should they declare whether to 
+resolve the Effects? In what order are they resolved?
+A. When a Trigger Condition occurs, each Mage, in Order 
+of Play, has a chance to resolve one or more Effects that 
+require that Trigger Condition. If a Mage must resolve 
+more than one Effect they choose the order in which 
+those Effects are resolved. If there are Effects that must 
+be resolved by the Black Rose these take precedence 
+over any Mage, that is, they must be resolved before the 
+Effects of the First Mage. If a Mage must resolve one 
+Effect involving multiple targets that Effect is considered 
+resolved simultaneously on all targets.
+So if a Mage does not resolve any Effect when a Trigger 
+Condition has occurred, they cannot choose to do so 
+after another Mage has resolved an Effect with the same 
+Trigger Condition. After each Mage, in Play Order, has 
+resolved their Effects or declared that they will not resolve 
+any Effect, the game continues.
+3
+
+=== PAGE 4 ===
+JINX AND EVENTS, TRAP/PROTECTIONS, 
+RESOLVE (page 18)
+Q. In what order are the Events, the Jinxes, and the Traps/
+Protections that would be resolved if the same condition 
+were to occur?
+A. Some game components such as Events, Jinxes, Traps/
+Protections or other game components have an Effect that 
+must be resolved when a specific condition occurs. For 
+what concerns Trap/Protection Spells, the resolution of 
+these Effects is explained in detail, and Effects generated 
+by other components follow the same rule.
+When a condition occurs, the game continues until the 
+period (.) of the current Effect; then, in Play Order, each 
+Mage has the opportunity to resolve one or more Effects 
+triggered by that condition and generated by any game 
+component.
+If a Mage needs to resolve more than one Effect they 
+choose the order in which they are resolved. If an Effect 
+must be resolved by the Black Rose, this takes precedence 
+over any Mage, it must be resolved before the Effects of 
+the First Mage.
+If a mage must resolve an Effect involving multiple 
+targets that Effect is considered resolved on all targets at 
+the same time.
+AVATAR, TRAP/PROTECTION (page 38)
+Q. Can an Avatar resolve a Command Card with Trap/
+Protection symbol if they have already reached the card 
+limit for the current Action Phase?
+A. No, if the card limit has already been reached the Avatar 
+cannot resolve other Trap/Protection Effects.
+PLACE / MOVE (page 38)
+Q. Is an effect that places a model in a Room considered a 
+movement? 
+Is the model considered to have entered that Room in 
+both cases?
+A. Place and Move are different keywords. This applies even 
+if the Place keyword resolves in a Room adjacent (or in 
+the same Room) to where the model was located.
+A model is considered to have entered a Room whether it 
+moves or places itself in that Room.
+ACTIVE SPELL, MOMENTUM (page 38)
+Q. A non revealed Spell with a Trap/Protection token is 
+called an Active Spell. 
+Is it still considered a Ready Spell?
+Can I discard an Active Spell to perform a Momentum 
+Action?
+A. No, an Active Spell is not considered a Ready Spell, 
+therefore it is not possible to discard an Active Spell to 
+perform a Momentum Action.
+FORGOTTEN EVOCATIONS, SUMMON (page 21)
+Q. If an Effect allows me to summon an Evocation of a 
+certain archetype, can I choose a Forgotten Evocation 
+with that archetype?
+A. No, Forgotten Evocations can only be summoned by 
+Forgotten Spells or Effects that specify to summon a 
+Forgotten Evocation.
+ARCHETYPE (page 21)
+Q. Are an Evocation and a Forgotten Evocation with the 
+same Archetype considered the same Archetype for the 
+purposes of Game Effects?
+A. Yes, They are the same archetype.
+For example, an Evocation Card that says Forgotten 
+Beast identifies a (Forgotten) Evocation with the Beast 
+Archetype.
+DEFEATED MAGE, ONLY ONE COLOR (page 
+28)
+Q. A Mage is defeated by a text Effect, without being 
+inflicted Damage equal to their Health value. If that Mage 
+only suffered Damage of one color, does the Mage who 
+inflicted that Damage gain 5?
+A. The Mage gains 5 when an opposing Mage is defeated 
+and that Mage is the only one to have inflicted Damage to 
+the defeated Mage.
+MAGE DEFEAT (page 28)
+Q. If a Mage is defeated while resolving an Effect, after the 
+defeat is resolved, that Mage continues resolving the 
+interrupted Effect.
+What happens if the defeated Mage had more Effects to 
+resolve?
+For example if they had performed an Explore Action 
+with multiple "Move 1" Effects to resolve.
+Are Effects not yet resolved lost or can they be resolved?
+A. After a Mage's defeat has been resolved that Mage 
+continues to resolve only the Effect that was interrupted.
+All other Effects produced by the same Action are lost.
+This rule is given on page 18 in the section Timing of 
+Resolution of Trap/Protection Spells, but it applies in any 
+case where a Mage is defeated while resolving an Effect.
+AVAILABLE EVOCATION, CLEAN-UP PHASE 
+(page 31)
+Q. At point 1 of the Cleanup Phase it is stated that the 
+Evocations are available again.
+Does this mean that the Evocations can be activated 
+again in the following Turn or does it mean that they are 
+removed from the Lodge and must be returned to the 
+Evocation deck?
+A. The sentence in this paragraph is not very clear. 
+It refers to the case when the optional "Crown of the 
+Summoner" rule is used and indicates the time when 
+Evocation Cards are rotated to their original position.
+Evocations are not removed because of this rule.
+EQUIPMENT LIMIT
+Q. Is there a limit to the number of Equipment a Mage can 
+own?
+Is it possible to sum the Effects of two or more Equipment 
+that provide a similar bonus or to the same characteristic?
+A. The Effects of Equipment with different names are 
+added together, however a Mage cannot have 2 or more 
+Equipment with the same name.
+4
+
+=== PAGE 5 ===
+DISCARD A QUEST
+Q. If an Effect indicates a Mage to discard 1 Quest (without 
+any other details), can they choose to discard only one of 
+their Active Quests or can they also choose one of their 
+Completed or Solved Quests?
+A. The mage targeted by this Effect must choose one of their 
+own Active Quests, Completed Quests or Solved Quests.
+EVOCATIONS AVAILABLE,
+COMPONENTS AVAILABLE
+Q. Which Evocations are defined as available to be 
+summoned?
+For example, if an Effect allows me to summon an 
+Evocation with a Health value of 3 or less, can I choose 
+an Evocation that is not summoned by any of the Schools 
+of Magic used in the current game?
+A. All Evocations in the game are considered available. 
+However, before starting a game, players could mutually 
+define which components and expansions to use for the 
+current game.
+This applies to Evocations but also to Upgrade Cards and 
+all other game components.
+MECHANICAL ARCHIVE, TECHNOMANCY
+Q. The Mechanical Archive card from the Technomancy 
+school tells you to reveal a Spell Card. 
+Is this considered as a Revealed Spell?
+A. The Effect of this card means that the chosen card must 
+be shown to the other players, then it is drawn by the 
+player. 
+This is not considered a Revealed Spell.
+STEAL, POWER POINTS
+Q. Can I steal Power Points from a Mage with 0 Power 
+Points?
+A. Stealing an amount of Power Points means that the target 
+loses that amount of Power Points and the Mage gains 
+that same amount of Power Points. If the target has fewer 
+Power Points than indicated they lose all the Power Points 
+they had, then the Mage gains Power Points equal to the 
+amount lost by the target.
+Stealing can also be applied to other game elements such 
+as Quests or Trophies, the same rule must be followed.
+PHYSICAL ATTACK
+Q. A Spell allows my Mage to perform a Physical Attack. Is 
+this Damage considered inflicted by the Spell?
+A. No, in this case the Damage is considered to be inflicted 
+by a Physical Attack.
+DISCARDED SPELL, PERSISTENT EFFECT
+Q. Does a Persistent Effect of a Spell remain active if that 
+Spell is discarded from the Mage Sheet? For example, if it 
+is moved to the Memories via the Armory Room.
+A. A Persistent Effect is no longer active if the Spell that 
+generated it is no longer in the corresponding Space of 
+the Mage Sheet. In this case the Persistent Token returns 
+to the Mage's personal reserve.
+SPELL DISCARDED, EFFECT INTERRUPTED
+Q. If a Spell is discarded from the Mage Sheet while its Effect 
+is being resolved, is the Effect interrupted or resolved 
+completely?
+A. In this case the Spell Effect is resolved up to the first 
+period (.) then the Card is discarded. The rest of the 
+Effect is ignored.
+COLOSSUS, DAMAGE
+Q. If a Colossus Evocation and a Mage are moved into 
+a Room due to an Effect, does that Colossus inflict 3 
+Damage to that Mage?
+A. No, because the Effect of the Colossus Evocation Card 
+applies to a Mage who enters a Room where the Colossus 
+is already present.
+QUEST, MASTER OF DEATH
+Q. If a Mage is in their Cell can they be chosen for the Effect 
+of the "Master of Death" Quest?
+(Rebirth Core Box, Third Moon Quest)
+A. No, a Mage in their Cell cannot be chosen by an Effect, 
+therefore not even by the Effect of this Quest.
+CELL
+Q. When a Mage is in the Cell, that Mage cannot be targeted 
+or influenced in any way. Does this refer only to the Mage's 
+Model or to all components and game values (e.g. Power 
+Points) of that Mage?
+For example, is it possible to target one of their Evocations 
+or one Instability Cube? Can that Mage lose Power Points?
+A. An Effect that removes 1 Instability from a target Room 
+can be applied even if the Mage owner of that Instability is 
+in the Cell. The same applies to any other Effect that affects 
+a component owned by that Mage and does not require 
+targeting the owning Mage.
+However, if, for example, an Effect requires you to choose a 
+target Mage, you cannot choose a Mage who is in the Cell.
+A Mage in the Cell plays normally with the following 
+exceptions:
+• During their Activation (or at the start of their 
+Activation), a Mage who is in a Cell must perform a 
+Physical Action or a Momentum Action to leave the 
+Cell. They can then choose to resolve other Effects. As 
+long as they are in the Cell, all phrases in their Physical/
+Momentum Action that do not allow them to leave the 
+Cell are ignored.
+• A Mage in the Cell cannot be targeted for Effects resolved 
+by other Mages. A Mage in the Cell ignores any Effects 
+(in any part of it) resolved by other Mages, except Effects 
+that specify that they apply to a Mage in the Cell.
+• The Effects of Event Cards also apply to Mages in the 
+Cell.
+The Cell cannot be chosen as a target for Effects that 
+require a , , , ,  target. The Cell ignores all 
+Effects that would apply to a Room, with the exception of 
+Effects that specify that they apply to a Cell.
+5
+
+=== PAGE 6 ===
+CELL
+Q. Can a Mage who is in the Cell be placed in a different 
+Room by resolving the Final Duel Trap Effect?
+A. Yes, when this spell is resolved, the Mage in the Cell may 
+leave the Cell.
+COMPATIBILITY
+Q. Some Effects in Black Rose Wars have phrases containing 
+multiple keywords such as ‘inflict’ or ‘summon’. How 
+should these Effects be resolved with the new Traps/
+Protections rules?
+A. In order to resolve Traps and Protections these Effects 
+should be understood as if the different keywords were 
+written in several sentences separated by a period (.).
+DEFEATED, REMOVED
+Q. What is the difference between a defeated or removed 
+model? There are Effects that refer to only one of these 
+terms.
+A. A Mage or Evocation is defeated when it takes a number 
+of Damage equal to its Health value. When the defeat of 
+an Evocation is resolved, its model is removed from the 
+Lodge and its Evocation Card is returned to the deck of 
+available Evocations. Some Effects allow you to remove 
+an Evocation without it being defeated, i.e. regardless of 
+how much Damage it has suffered. When an Evocation is 
+removed due to an Effect it is not considered defeated.
+PLACE INSTABILITY
+Q. A condition requires me to place 2 Instabilities, if I play 
+an Effect that places 2 or more Instabilities but the target 
+Room has only 1 free slot, is the condition considered as 
+fulfilled?
+A. No, the condition is not considered to be fulfilled.
+INFLICT DAMAGE (page 28)
+Q. Can I inflict more Damage to a Model than its Health 
+value?
+A. A Model can suffer a maximum amount of Damage equal 
+to its own Health value. When an Effect inflicts Damage 
+on a Model it can inflict a maximum amount of Damage 
+equal to the target's Health value minus any Damage that 
+target has already suffered before the Effect is resolved. 
+The amount of Damage inflicted on a target is always 
+equal to the amount of Damage suffered from that Effect.
+VULNERABILITY, JINX
+Q. Can a Mage inflict 1 Damage to the target Mage when the 
+Jinx card Vulnerability is assigned to the target?
+A. No. Vulnerability allows the Mage to inflict 1 Damage 
+on the target Mage each time a Jinx is assigned if 
+Vulnerability is already assigned to the target.
+JINX SPELL - SUFFOCATION
+Q. My Mage has the Weakness Jinx assigned, and another 
+Mage has the Suffocation Trap ready. In my Activation, I 
+activate a Green Room that allows me to place the third 
+Cube on the Jinx. The Jinx is discarded, but the Trap can 
+only target a Mage with a Jinx. In what order are these 
+Effects resolved?
+A. When a Condition occurs (in this case, Activating a 
+Room), each Mage in Play Order may resolve one or 
+more Effects that require that Condition. So once the 
+Room is Activated, the First Mage may choose to resolve 
+an Effect, and so on. If the Mage who activated the Room 
+is also the First Mage, they can discard the Jinx and the 
+other Mage cannot resolve their Trap.
+AVATAR COMMAND CARD (page 36)
+Q. When an Avatar Command Card is resolved, does it count 
+both as a Revealed Spell and as a Physical Action for the 
+purposes of trigger conditions of other components?
+A. A single Command Card can contain several different 
+Effects, it can contain both a Physical Action and a Spell.
+When a Command Card is revealed the Avatar is 
+considered to have revealed a Spell Card if that Command 
+Card has a Spell Effect. When a Physical Action Effect 
+is resolved the Avatar is considered to have performed a 
+Physical Action.
+CUBES ON QUEST AND JINX (page 12)
+Q. When I complete a Jinx/Quest, do the Cubes return to 
+the Mage's Pool?
+A. Yes, the cubes return to the Mage's Pool.
+LIQUID FIRE SPELL, SCHOOL OF ALCHEMY
+Q. The effect of Spell Liquid Fire (Dark Side) targets a Room. 
+Does the Enhancement part apply to my construct in the 
+targeted Room or to any of my constructs in the Lodge?
+A. The Card Effect applies in full to the Target Room unless 
+otherwise stated. In this case the construct must be in the 
+Target Room.
+6
+
+=== PAGE 7 ===
+EFFECT "EACH TIME"
+Q. Some Effects have the condition “each time” occurring in 
+the text. How can you distinguish something that occurs 
+at the same time from something that occurs at two 
+separate times?
+For example, the Forgotten Spell Cursed Bond: “Each 
+time the target places Instability, you place the same 
+amount of Instability in a . ”
+If I activate the Garden Room (Rebuilt) Effect, can I apply 
+the Cursed Bond Effect only once or twice?
+Garden Room (Rebuilt) : “ Place 1 Instability. 
+Place 1 Instability. “ .
+A. Two sentences separated by a period (.) are considered 
+different moments.
+The condition required by an Effect (in the same way 
+as the Trigger Condition of Traps and Protections) is 
+checked at the end of each period (.) of the Effect being 
+resolved.
+In the case where the Garden Room (Rebuilt) is triggered, 
+the Cursed Bond Effect is applied twice.
+Instead, an Effect: “Place 1 Instability in each .” is to be 
+considered resolved at a single time.
+CA' DARIO'S AMULET SPELL, SCHOOL OF 
+HEX
+Q. Does the Ca' Dario's Amulet Spell Card also deal 2 
+Damage to a target Mage who has no Jinx assigned?
+A. Yes, the number of Jinxes assigned only affects the 
+previous sentence concerning stealing PP. The Spell deals 
+2 Damage regardless of the Jinxes assigned to the target.
+EFFECTS "OR"
+Q. Some Effects contain the word "or", how should they be 
+read?
+For example, if I reveal the Slicing Spell from the War 
+School, can I move 1 and then choose one of the two 
+parts or can I only move if I choose the first part?
+A. The word "or" between two sentences is meant to divide 
+the text into two parts. The Mage chooses whether to 
+resolve the part before “or” or the part after “or.”
+TROPHY
+Q. Some Effects allow you to discard, gain, take or steal a 
+Trophy Token. 
+1.What is the difference between these words?
+2.Can I discard 1 Trophy of my color to perform an 
+Effect?
+3.Can I steal a Trophy of my color owned by another 
+Mage?
+A. At the end of the game a Mage gains Power Points for 
+the Trophies obtained. Trophies obtained through the 
+defeat of a Mage or thanks to other Effects that allow you 
+to obtain a Trophy from other Mages are counted. Trophy 
+tokens of your own color are not counted.
+1. For the purposes of this rank the words gain/obtain/
+take must be considered synonymous.
+2.When a Mage must discard 1 Trophy it refers to an 
+obtained Trophy, therefore a Mage cannot discard a 
+Trophy of their color.
+3.When a Mage steals 1 Trophy they must choose Mage, 
+so they obtain a Trophy Token obtained by that Mage. 
+In this case the Mage cannot choose a Trophy Token of 
+their color.
+NIGHTMARE IN THE CELL
+Q. According to the Nightmare School Reference Card, all 
+Nightmares in the Lodge are considered to be Black Rose 
+properties. However, it may happen that a Mage (with an 
+assigned Nightmare) is placed in the Cell without being 
+defeated. Is the Nightmare assigned to a Mage placed in 
+the Cell still considered to be Black Rose property?
+A. The Cell is not considered part of the Lodge, this means 
+that a Nightmare assigned to a Mage who is in the Cell 
+is not considered Black Rose property. It is not activated 
+during the Evocation Phase. When that Mage leaves the 
+Cell the Nightmare returns to being Black Rose property.
+BLACK ROSE ROOM
+Q. If I activate the Room of the Black Rose (not-Rebuilt) and 
+I only have 2 Spell Cards in my hand, do I discard all the 
+cards in my hand or none?
+A. In this case you have to discard 2 Spell Cards and you 
+cannot draw the Forgotten Spell.
+PERSISTENT EFFECT, MAGE IN THE CELL
+Q. If the condition of a Revealed Persistent Effect occurs 
+while my Mage is in the Cell, can I apply its Effect?
+A. Yes, a persistent Effect follows the same Timing as Traps/
+Protections so I can resolve a persistent Effect while 
+my Mage is in the Cell. However, Effects that apply 
+to the Room my Mage is in (i.e. the Cell) are ignored. 
+For example, it is not possible to place Instabilities or 
+Evocations in the Cell.
+7
+
+=== PAGE 8 ===
+TARGET HAS BEEN MOVED
+Q. Once I have chosen the target, if that target moves because 
+of a Trap/Protection and moves into a Room out of line of 
+sight, can I apply the effect of the Spell?
+A. After the target has been declared you can continue 
+to resolve Effects that apply to the target even if it has 
+moved. Only in case the target is in the Cell, ignore the 
+remaining part of the Effect.
+INSTABILITY ON SPELL CARD
+Q. If a Spell shows the Instability symbol in the center of 
+the card should I place that Instability before or after 
+declaring the target of the Spell Effect?
+A. The target of the Effect should be declared after placing 
+the Instability. The central Instability represents an Effect 
+separate from the textual Effect of the card.
+EVOCATION ABILITY, TIMING
+Q. When you activate an Evocation, does that Evocation's 
+Ability resolve before any Traps/Protections?
+For example, when the Nigredo inflicts Damage, can 
+its controller immediately place 1 Instability, or can the 
+Crown Holder resolve a Trap/Protection before placing 
+Instability?
+A. The Evocation Skill must be treated as an Effect that is 
+resolved by the Mage controlling that Evocation, so it 
+follows the same Timing as Traps/Protections. 
+In the case of the Nigredo, when it activates, the Crown 
+Holder might resolve a Trap/Protection Effect (which is 
+triggered when the Nigredo has inflicted Damage) before 
+the Nigredo's controller resolves the Nigredo's Skill.
+COMPATIBILITY BRW-REBIRTH, QUEST
+Q. How can I use BRW Quest Cards in a BRW-Rebirth 
+game?
+A. The Quests of BRW only provide  or  and an 
+alternate Effect for Quests that require a Room to be 
+activated. When a Quest of the first BRW is completed it 
+is also immediately solved.
+All Effects of BRW that refer to a Completed Quest are 
+understood to refer to a Solved Quest.
+EFFECTS "OR"
+Q. The Spell Card An Eye for an Eye contains the word or 
+within the same sentence, how should it be read?
+A. In this card the word "or" separates the two parts 
+contained within the same sentence. That "or" affects only 
+the sentence in which it appears; either the first part or 
+the second part of that sentence must be resolved.
+MARK OF PAIN, SCHOOL OF AGONY
+Q. The Permanent Effect of the Spell Card "Mark of Pain" 
+requires the target Mage to inflict Damage by a Spell or 
+Physical Action. 
+Is the condition considered fulfilled if that Mage performs 
+a Physical Attack due to a Spell Effect or a Room Effect?
+A. No, it is not fulfilled. Damage must be inflicted through a 
+Physical Action (Fight) or through the Effect of a Spell
+NIGHTMARE SCHOOL
+Q. The rulebook does not explain what it means for a 
+Nightmare to be attached to a Mage. In the Seal of Fire 
+rulebook a Familiar attached to a Mage is considered one 
+Model with that Mage, so it cannot be targeted.
+Does this also apply to a Nightmare?
+A. The term "attached" is not a school keyword, it refers to 
+putting the miniature with the half-moon base side by 
+side with the Mage's miniature.
+The correct word in reference to a Nightmare is assigned 
+to a Mage and the rules for a Nightmare assigned to a 
+Mage apply.
+Instead, a Familiar passing into a Guard Position attaches 
+to the Mage and follows the rules for a Familiar in a 
+Guard Position.
+A Nightmare assigned to a Mage is considered an 
+Evocation that is in the same Room as that Mage.
+FORGOTTEN, REFERENCE CARD
+Q. The Forgotten Reference Card indicates the cases in 
+which a Forgotten Spell must be removed. 
+For the purpose of removing a Forgotten Spell, is the 
+Memories slot considered part of the Mage Sheet?
+A. No, the Memories Slot is not considered part of the Mage 
+Sheet. When a Forgotten Spell must be placed in the 
+Memories, it is instead removed from the game.
+PERSISTENT EFFECT
+Q. Some Spells with a Persistent Effect show the  symbol 
+at the beginning of the text rather than within the text. In 
+this case, when the persistent condition occurs, do I have 
+to resolve the whole Effect or only part of it?
+A. In this case, phrases found before the  symbol are to be 
+resolved only when the Spell is revealed. 
+Sentences that are after the  symbol are to be resolved 
+only when the indicated condition is met.
+EVOCATION ACTIVATION
+Q. If an Effect allows one of my Evocations to perform a 
+Physical Attack is it considered as an Activation of that 
+Evocation? For example, when the Nocturnus Evocation 
+is in the Lodge, the other non-nightmare Evocations can 
+activate. If I resolve an Effect that allows a non-nightmare 
+Evocation to perform a Physical Attack (not to activate) 
+or move, is this Effect blocked by the Nocturnus?
+A. A Physical Attack (or movement) is not an activation. 
+In this case, the Nocturnus skill does not prevent 
+the Evocation from performing a Physical Attack or 
+movement.
+8
+
+=== PAGE 9 ===
+DEFEAT, TROPHY
+Q. In the case where a Mage converts the rightmost Damage 
+on the Mage Sheet of a defeated Mage, who gains the 
+Trophy Token? The Mage who inflicted the Damage or 
+the Mage who converted that Damage?
+A. The Trophy Token is gained by the Mage who resolved 
+the Effect that caused the Mage's defeat. In this case, 
+by the Mage who inflicted the Damage that caused the 
+Mage's defeat.
+SPELL SOURCE OF LIFE (SHAMANIC), GAIN 
+POWER POINT
+Q. The Spell targets a Room, and the last sentence says "gain 
+1". In this case, does the Mage who resolved the Effect 
+gain 1 Power Point or do all Mages in the target Room 
+gain 1 Power Point?
+A. The sentence "gain 1." means that the Mage who 
+resolves that Effect gains 1 Power Point, regardless of the 
+target of that Effect.
+SPELL (AGONY) INELUCTABLE PAIN
+Q. The Target of this card is a Model. If I have assigned 
+this Persistent to an Evocation, can I inflict 2 Damage 
+when that Evocation defeats a Mage and thus allows its 
+controller to gain Power Points for defeating a Mage?
+A. This is an inaccuracy in the target of the Spell, in fact an 
+Evocation cannot gain Power Points. It is useful to assign 
+this Persistent only to a Mage. When that Mage gains 
+Power Points you can inflict 2 Damage on that Mage.
+THIRD MOON
+Q. When a Power Token reaches or passes the End of Game 
+Moon Phase Cube, the Third Moon Phase ends. When 
+this happens, must the decks of Event Cards and Quest 
+Cards belonging to the Third Moon be removed or do 
+they remain in play?
+A. The decks of Event Cards and Third Moon Quest Cards 
+remain in play until the end of the game.
+TOTEM, ACTIVATION
+Q. When the Totem Evocation is activated, can it heal 1
+on a Model within distance 1 of itself or within distance 1 
+of its controller?
+A. The Totem can convert 1 or heal 1 to a Model (other 
+than itself) within distance 1 of that Totem.
+NIGREDO AND EXPLODING BONES
+Q. A Nigredo has the Explosive Bones Upgrade from the 
+Lex School. When that Nigredo is defeated/removed, it 
+inflicts Damage in the Room. In this case, can I apply 
+Nigredo's skill to place 1 Instability or can it not be 
+applied because the Nigredo is defeated and its skill is no 
+longer active?
+A. No game rule specifies that as soon as an Evocation is 
+defeated/removed its Evocation Card must be ignored. 
+Therefore, in this case, when the Nigredo inflicts Damage 
+you resolve its skill to place/convert Instability.
+JINX, HEX SCHOOL
+Q. At what exact time is it possible to discard a Jinx Card? 
+For example, I have been assigned the Slowness Jinx, can 
+I move only 1 the third time I perform the Explore Action 
+or can I consider that it has already been discarded and I 
+can move up to 2?
+A. The number of "Move 1" Effects provided by the Physical 
+Action Explore is determined at the time the Mage 
+declares that they want to perform that Action and the 
+Physical Action Token is exhausted; thus the Mage's 
+Speed value is 1 due to Slowness.
+Immediately thereafter, the Mage can discard that Jinx, 
+before performing the Effects “Move 1.” or “Activate a 
+Room.”
+TRAP/PROTECTION
+Q. At what point exactly can I choose to reveal a Trap Card if 
+the condition is verified while an Effect is being resolved? 
+Do I have to reveal the Trap as soon as the condition is 
+met? Or can I wait until the current Effect is resolved to 
+the (.) period?
+A. A Mage must declare that they intend to resolve a Trap 
+Card whose Trigger Condition is verified. They can do so 
+when the current Effect has reached the (.) period. 
+CAST A SPELL
+Q. What are all the procedures to be followed (and in what 
+order) to perform the Cast a Spell Action other than 
+Trap/Protection?
+Does the Trigger Condition present on some Traps, "A 
+Spell targets you or you are about to suffer its Effect" turn 
+out to be verified when the Mage is chosen as the target, 
+thus before the Effect is applied, or only after a phrase of 
+that Effect is applied to the Mage who has the active Trap/
+Protection?
+A. The procedure to be performed is:
+1. Reveal the Spell Card.
+2. If an Instability  symbol is in the center of the card, 
+place 1  in a .
+3. Choose target of the Spell Card Effect.
+4. Resolve the Spell Card Effect.
+The Trigger Condition "a Spell targets you or you are 
+about to suffer its Effects" is verified when: 
+• At the time of choosing the target if the target of the 
+Spell Card is  or  and if the Mage who has the active 
+Trap/Protection is chosen as the target.
+• Before a phrase is applied, if the Mage who has the 
+active Trap/Protection is not the target of this Spell, but 
+if that phrase affects them.
+NIGREDO, ABILITY
+Q. When a Nigredo activates and inflicts Damage, am I 
+obliged to Place/Convert 1 Instability, or can I choose 
+neither?
+A. You must choose one of two options: Convert 1 Instability 
+or Place 1 Instability. However, the choice is totally free, 
+for example you could choose to Convert 1 even if there 
+is no Instability in that Room.
+9
+
+=== PAGE 10 ===
+AVATAR DEFEAT, CELL
+Q. The Avatar usually does not perform the Physical Actions 
+Explore or Momentum. If the top Effect of the additional 
+Command Card shows a Physical Action, does it have to 
+be resolved even if the Avatar is in their Cell?
+A. Only Physical Actions that allow for a Move (or a 
+placement) or Momentum can be resolved while a Mage 
+is in the Cell, so the Avatar cannot leave the Cell if the 
+Command Card it revealed shows a Physical Action with 
+an Effect other than these.
+DRAWING SPELL CARDS
+Q. An effect says, “Draw 1 Spell Card.” Can I draw this card 
+from either my Grimoire or the Library of my choice?
+A. When a Mage resolves an Effect that allows them to 
+draw a Spell Card, it must always be drawn from their 
+Grimoire, unless otherwise specified by the Effect.
+WISE MOON QUEST
+Q. The Wise Moon Quest can be completed after a Mage 
+resolves the Bibliotheca Room Effect. Is it possible to 
+complete this Quest if it is drawn using the Bibliotheca 
+Effect?
+A. Yes, it may be completed after resolving the Bibliotheca 
+Effect.
+INFLICTING DAMAGE
+Q. When is damage considered inflicted? If it is ignored, is 
+it still considered inflicted? (see channeling energy spell 
+and regenerative ichor upgrade)
+A. Damage is considered inflicted when the Cube 
+representing that Damage is placed on the Mage Sheet 
+(Damage inflicted on a Mage) or on an Evocation Card 
+(Damage inflicted on an Evocation). Ignored Damage is 
+not considered inflicted. The defeated Mage may resolve 
+a Trap/Protection before resolving the defeat, which 
+ignores/heals some Damage. If healed from Damage, 
+they are no longer defeated, but the Damage is still 
+considered inflicted (and then healed). Ignored Damage 
+is not considered inflicted.
+ALCHEMY SPELL - PURIFY ALUDEL
+Q. The text reads “Heal three on your target evocation. The 
+target activates.” Can I only target one of my evocations?
+A. One of my Evocations must be chosen as the target.
+ERRATA
+E: Error — F: Fix
+PERSISTENT EFFECT (page 20)
+E. The text of the  "Persistent" paragraph on page 20 is 
+not comprehensive and does not indicate all cases where 
+these Effects apply.
+F. Persistent effects are a type of Spell Effects that remain 
+active for the duration of the Turn. Persistent Effects apply 
+whenever the condition required in their text is met.
+To show that one of these Effects is active, the Mage 
+who cast the Spell featuring it places on the target their 
+Persistent Token corresponding to the Spell Slot (, I, II 
+or III) in which that Spell is located. If the target is a Mage 
+(including themselves), they place the Persistent Token 
+on their Mage Sheet; if it is an Evocation, they place it on 
+their Evocation Card; if it is a Room, they place it in the 
+Room.
+The Persistent Effect ends when the Spell Card is removed 
+from the Mage Sheet for any reason; when that happens, 
+the Mage regains their Persistence Tokens.
+Resolution of a Persistent Effect uses the same rules as 
+those described in Timing and Resolution of Traps/
+Protections on page 18.
+A Mage who is in the Cell may also resolve a Persistent 
+Effect of a Revealed Card whenever the required 
+condition occurs.
+REPLACED EVOCATION (page 20)
+E. When a Mage performs an evocation and has all of their 
+Evocation Slots already occupied, the replaced Evocation 
+is considered Removed.
+F. The correct rule is as follows: " If a Mage summons an 
+Evocation when all of their Evocation Slots are occupied, 
+they may choose one of their Evocations already present 
+in the Lodge and replace it with the newly summoned 
+one. The replaced Evocation is not considered removed. 
+To do so, discard the Evocation Card of the replaced 
+Evocation and replace it with that of the newly 
+summoned Evocation; then place the Model of the 
+replaced Evocation in the reserve, and place the Model of 
+the newly summoned Evocation in the Room indicated 
+by the Effect that summoned it."
+DEFEATED MAGE, POINT 6, TIE (page 28)
+E. The sentence regarding the case of a tie for inflicted 
+Damage is not correct, because the tied mages should 
+always gain at least 1 Power Point.
+F. The correct version is as follows:
+"Tie: in the event that multiple Mages (or the ) have 
+inflicted the same number of Damage, those Mages gain 
+the corresponding amount of  reduced by 1. In the case 
+of 1  or less, this amount is not reduced.
+10
+
+=== PAGE 11 ===
+DAMAGE AND INSTABILITY (page 27-28)
+E. Some texts in the Rulebook incorrectly state that it is 
+possible to decide how many cubes to place/convert, or 
+even none at all, when resolving an inflict/place/convert 
+Effect.
+F. When a Mage resolves an Inflict/Place/Convert Effect, 
+they must do so using the number of Cubes indicated 
+by the Effect. Any limitations apply in cases where, for 
+example, the Instability slots available in a Room are full, 
+the Damage slots available on a Mage Card are full, the 
+Cubes in their reserve are full, or the opponent's Cubes 
+that can be converted are full.
+TURN ORDER (page 9)
+E. In the Rulebook Setup is stated that Cells are placed 
+covered randomly, and it may happen that a player does 
+not sit in front of their Cell. This causes a problem when 
+using Avatars.
+F. On page 10 in step 11, add the following sentence:
+"Players take their places around the table so that they are 
+facing the Cell of their own color."
+APPLY A PHRASE OF AN EFFECT (page 16)
+E. The following text in the gray box must be updated:
+“Each phrase that makes up an Effect must be applied, 
+starting with the first and proceeding in order. If a 
+sentence cannot be applied, it is skipped and continued 
+to be applied from the next sentence”
+F. "Each sentence that makes up an Effect must be applied in 
+full, beginning with the first and proceeding in order. If a 
+phrase cannot be applied in full, the parts that cannot be 
+applied (even all of them) are skipped and you continue 
+with the next phrase."
+HEALTH, EVOCATION (page 20)
+E. The description of the Health value indicates that when 
+an Evocation has suffered Damage equal to that value it is 
+removed, rather than defeated.
+Replace the incorrect sentence:
+“When an Evocation has a number of Damage Cubes on 
+its card equal to its Health value , it is removed from play. 
+Remove the Model from the Lodge, then return its card 
+to the proper Evocation Deck. Then return its base ring 
+to its owner.”
+F. Replace with:
+“When an Evocation has a number of Damage Cubes on 
+its card equal to its Health value, it is defeated. Remove 
+its Model from the Lodge, place its Evocation Card in 
+the Evocation Card Deck. The owner takes back the 
+Evocation Base attached to the defeated Model.”
+REMOVE EVOCATIONS (page 21)
+E. Effects that remove evocations need a general rule.
+F. Insert the following text:
+"Some game Effects allow you to remove an Evocation 
+from the Lodge. When a Mage resolves one of these 
+Effects they must comply with these points:
+• A non-Forgotten Spell cannot remove another Mage's 
+Forgotten Evocation.
+• A non-Forgotten Spell cannot remove another Mage's 
+Evocation with a Health value greater than 3. Note 
+that some Effects may change the Health value of an 
+Evocation from that printed on the Evocation Card.
+• An Effect that removes your own Evocation allows the 
+Mage to ignore the previous points; therefore you can 
+remove your Evocation with any Health value even if it 
+is a Forgotten Evocation.
+• A Forgotten Spell that removes an Evocation ignores 
+the previous points; therefore you can remove one of 
+your own (or another Mages's) Evocation with any 
+Health value even if it is a Forgotten Evocation.
+DAMAGE, EVOCATION (page 21)
+E. In the description of the Strength value the last sentence 
+specifies that damage inflicted by an Evocation is 
+considered to be inflict by both the Mage and the 
+Evocation. This sentence is wrong.
+F. The correct last sentence is: "When an Evocation inflicts 
+Damage, place Damage Cubes of its controller's Color on 
+the target Mage Sheet or Evocation Card; this Damage is 
+considered as dealt by the Evocation Model."
+CELL, MOVEMENT (page 25)
+E. The Rulebook states that it is not possible to enter the Cell 
+voluntarily. It must be specified that this applies both to 
+your own Mage and to other Mages.
+F. Replace the last point of the list with:
+"You cannot move your Mage or another Mage into a 
+Cell, however some Game Effects may place a Mage into 
+their Cell."
+11
+
+=== PAGE 12 ===
+CELL, PHYSICAL ACTION (page 25)
+E. In the Cells paragraph at point 4 it is indicated that if 
+a Mage begins their Activation in the Cell they must 
+perform an Explore or Dash Action to exit. This is 
+applied even if the Mage is placed in the Cell during their 
+Activation. Furthermore, the Physical Actions from the 
+Apocalypse expansion have been included which allow 
+you to exit the Cell.
+F. Replace point 4 of the paragraph Cells with the following 
+text:
+"A Mage in a Cell may exclusively perform the following:
+• Reveal and resolve Effects of their own Trap/Protection 
+Spells if triggered.
+• Resolve the Persistent Effect of a their own Revealed 
+Spell.
+• Activate their own Evocations during the Evocation 
+Phase.
+• Perform any Physical Action (or Momentum) that 
+allows them to move (or place) to exit the Cell.
+When a Mage begins their Activation in a Cell, or if they 
+are placed in the Cell during their Activation, they must 
+perform an Action of their own to exit the Cell if they can 
+do so. If they have no other Actions available they remain 
+in the Cell."
+DUMMY TARGET (page 26)
+E. The Dummy Target paragraph needs to be updated.
+F. Replace the text from “It is possible to choose a Dummy 
+Target” with the updated text:
+“It is possible to choose a Dummy Target as the target of 
+an Effect that targets Models --. The Dummy Target 
+counts as a Model, even if it is not physically in the Lodge; 
+the purpose of choosing it as a target is to allow Mages to 
+cast a Spell and resolve as much of its Effect as possible, 
+even when there are no Models available as targets. 
+The Dummy Target has the following characteristics:
+1.It has no archetype, so it cannot be chosen as the target 
+of Effects that require a specific archetype.
+2.It ignores Effects that inflict Damage, steal Power 
+Points or involve components owned by a Mage (such 
+as Trophies).
+3.It is not represented by a Model, so it cannot be moved 
+and is never considered to have entered a Room.
+4.It has no values; any Effect that refers to a Dummy 
+Target value is ignored.”
+CUBE ORDER (page 27)
+E. It is not specified that Instability cubes are placed in the 
+Room starting from the first leftmost Slot.
+F. Add the following sentence at the end of the Instability 
+paragraph:
+"When a Mage (or ) places Instability they must place 
+cubes on the vacant slots starting from the left."
+IMMUNITY, RULE (page 28)
+E. The Immunity rule has been updated.
+F. Here is the correct version:
+"Unless specified by the Effect, a Mage and the Evocations 
+they control ignore all Damage inflicted or converted by 
+any Effect resolved by that Mage.
+An Evocation does not inflict Damage on the Mage that 
+controls it or the Evocations controlled by that Mage (see 
+page 20 control an Evocation)."
+HEAL (page 28)
+E. It is not indicated in the Rulebook how to resolve a Heal 
+Effect.
+F. Insert the following text in the Damage and Defeat 
+paragraph:
+"Some Effects Heal the Damage that has been inflicted 
+on a model. When Healing Damage the Mage chooses 
+a number of Damage Cubes equal to or less than the 
+amount indicated by the Effect, among those inflicted 
+on the target Model (or Models). Healed Damage Cubes 
+must be returned to their owners. You can choose any 
+color combination of Damage Cubes to Heal from those 
+assigned to the target. When an Avatar Heals Damage 
+on themselves or another Mage they choose the Damage 
+cubes placed on the target's Mage Sheet starting from the 
+right."
+12
+
+=== PAGE 13 ===
+REBUILD ROOM, CLEAN UP-PHASE (page 31)
+E. Point 3 of the Clean-Up Phase contains some inaccuracies.
+At point 3.3 it is indicated that the Mage who has placed 
+the lowest number of Instability receives the lowest 
+amount of Power Points in the Rebuilt Room, instead 
+that value goes to all Mages who have placed at least 1 
+Instability. In case of a tie for the same amount, the Mages 
+always receive at least 1.
+F. Replace point 3 with the following text:
+Check if there are any Rooms in the Lodge that must be 
+Rebuilt (see page 27).
+1. For each Room that must be Rebuilt, count the 
+Instability Cubes of each color and assign Power Points 
+ as described below and based on the quantities 
+indicated by the banner of the Rebuilt Room:
+2.If there are only Instability Cubes of one color, the 
+Mage (or ) of that color gains  equal to the amount 
+indicated by the leftmost banner increased by 1.
+3.The Mage (or ) who has placed the greatest number 
+of Instability Cubes gains  equal to the quantity 
+indicated by the leftmost banner.
+4.The Mage (or ) who placed the second highest 
+number of Instability Cubes gains  equal to the 
+quantity indicated by the central banner.
+5. Every other Mage (or ) who has placed at least one 
+Instability cube gains  equal to the amount indicated 
+by the rightmost banner.
+Tie: in the event that multiple Mages (or ) have placed 
+the same number of Instability Cubes, those Mages gain 
+the corresponding amount of  reduced by 1. In the case 
+of 1 or less this amount is not reduced.
+EVENT CARD POWER INFUSION (THIRD 
+MOON)
+E. The Effect of this card is Instant but in the text it says "At 
+the beginning of the Action Phase".
+F. The Event applies as soon as it is revealed, the phrase "At 
+the start of the Action Phase" must be ignored.
+BLACK ROSE ROOM, LANGUAGE VERSION
+E. In some language version of the game the Black Rose 
+Room is missing the "If you do" text on its Effect.
+F. The correct Effect is: " discard 3. If you do, draw 2
+Forgotten, keep 1 and discard the other.
+END OF THE GAME, QUESTS (page 32)
+E. The sentence regarding the case of a tie in terms of 
+number of Solved Quests is not correct, because the tied 
+Mages should always gain at least 1.
+F. The correct version is:
+"Tie: in the case in which multiple Mages (or the ) have 
+the same number of Solved Quests, those Mages gain the 
+indicated amount of  reduced by 1. In the case of 1
+or less this amount is not reduced."
+END OF THE GAME, TROPHIES (page 32)
+E. The sentence regarding the case of a tie in terms of 
+number of Trophies obtained is not correct, because the 
+tied Mages should always gain at least 1.
+F. The correct version is:
+"Tie: in the case in which multiple Mages (or the ) have 
+the same number of Trophies obtained, those Mages gain 
+the indicated amount of  reduced by 1. In the case of 
+1 or less this amount is not reduced."
+NIGHTMARE, REFERENCE CARD
+E. The Nightmare School reference card does not say how a 
+Nightmare assigned to a Mage behaves when that Mage 
+moves (or places themselves) in a Room.
+F. The following text must be added to the bottom of the 
+Nightmare School reference card:
+“A Nightmare assigned to a Mage is considered an 
+Evocation that is in the same Room as that Mage.
+Whenever a Mage moves (or places themselves) in a 
+Room all Nightmares assigned to that Mage move (or 
+place themselves) in that same Room.
+The Nightmare's miniature remains attached to the 
+Mage's miniature.”
+END OF THE GAME, TROPHIES (page 32)
+E. The sentence regarding the case of a tie in terms of 
+number of Trophies obtained is not correct, because the 
+tied Mages should always gain at least 1.
+F. The correct version is:
+"Tie: in the case in which multiple Mages (or the ) have 
+the same number of Trophies obtained, those Mages gain 
+the indicated amount of  reduced by 1. In the case of 
+1 or less this amount is not reduced."
+DEFEAT, TROPHY (page 32)
+E. In the Defeat of Mage paragraph in step 5, it is stated that 
+the Trophy Token is gained by the Mage who inflicted the 
+last Damage, but this rule needs to be updated. 
+F. Replace Step 5 with the following:
+“The Mage (or the Black Rose) who inflicted the Damage 
+that caused the Mage to be defeated (or who resolved 
+the Effect that automatically defeated the Mage) gains 1 
+Trophy Token of the defeated Mage. 
+Gaining Trophy Tokens is important, because these grant 
+additional Power Points at the end of the game.”
+POSSESSED, COMMAND CARD
+E .The Command Card of the Third Moon of the Possessed 
+"Dark Blade (25/30)" indicates in its Priority  Effect 
+that it identifies a Room, but the target of the Spell Card 
+is a Mage.
+F. It must be Priority .
+13
+
+=== PAGE 14 ===
+JINX, HEX SCHOOL
+E. The Hex School Reference Card does not indicate at what 
+specific time a Jinx can be discarded.
+Replace the sentence “In order to discard a Jinx assigned 
+to them, a Mage needs to perform the specific Task 
+required by the Jinx”
+F. "Whenever a Mage fulfills the Task requirement of a Jinx 
+assigned to them, they place a  on the leftmost Slot of 
+that Jinx Card. When a Mage has placed a  on each 
+Cube Slot of a Jinx they assigned to them, they discard 
+that Jinx."
+SPELL (FORGOTTEN) - CURSED BOND 
+E. The Dark Side Effect allows you to gain Power Points 
+when the Target gains Power Points due to the Effect of a 
+Quest or Event. The Effect must be corrected, otherwise it 
+only allows Power Points to be gained from a Quest when 
+the Effect of that Quest allows Power Points to be gained.
+F. Replace with:
+": Each time the target gains  for solving a Quest or 
+Event Effect, you gain the same amount of . Each time 
+the target places , place the same amount of  in a 
+."
+SPELL (SHAMANIC) - ASTRAL PATH 
+E. The light side effect indicates "Complete the chosen 
+Quest".
+F. The correct version is "Solve the Chosen Quest"
+D ead ly Mask
+ERRATA
+E: Error — F: Fix
+PREPARATION FOR 5 OR 6 PLAYERS
+E. The Lodge's layout for 5 and 6 players is wrong.
+F. The following layout is correct:
+  
+: discard 3. Draw 1 Forgotten .
+ places 1 in a .
+ Black Rose Room
+   6 3 1
+: summon a Cadaver.
+ Crypt
+4 2 1
+  
+ Summoner Room
+: inflict 1.
+4 2 1
+  
+ Garden
+: place 1.
+2 1 0
+  
+: draw 1 random  from 
+your .
+ The Abyss
+4 2 1
+ Oracle Room
+  
+: draw 1 random  from 
+your .
+4 2 1
+  
+: summon a Cadaver.
+ Sacrificial Altar
+4 2 1
+  
+ Forge
+: place 1.
+2 1 0
+  
+: draw 1 Quest.
+ Observatory
+3 1 1
+  
+ Throne Room 
+: lose 1. If you do: get.
+6 3 1
+  
+ Alchemical Laboratory
+: inflict 1.
+   4 2 1
+: draw 1 random  from 
+your .
+ Mirrors Room
+4 2 1   
+: draw 1  from your .
+ Armory
+4 2 1
+  
+: draw 1  from your .
+ Pleasures Room
+4 2 1   
+: draw 1 Quest.
+ Bibliotheca
+3 1 1
+  
+ Treasure Room
+: place 1.
+2 1 0
+  
+ Arena
+: inflict 1.
+4 2 1
+  
+: summon a Cadaver.
+ Cemetery
+4 2 1   
+: draw 1 Quest.
+ Sanctuary
+3 1 1
+
+ 
+ 
+
+  
+: discard 3. Draw 1 Forgotten .  places 1 in a .
+ Black Rose Room
+   6 3 1
+: summon a Cadaver.
+ Crypt
+4 2 1
+  
+ Summoner Room
+: inflict 1.
+4 2 1
+  
+ Garden
+: place 1.
+2 1 0
+  
+: draw 1 random  from 
+your .
+ The Abyss
+4 2 1
+ Oracle Room
+  
+: draw 1 random  from 
+your .
+4 2 1
+  
+: summon a Cadaver.
+ Sacrificial Altar
+4 2 1
+  
+ Forge
+: place 1.
+2 1 0
+  
+: draw 1 Quest.
+ Observatory
+3 1 1
+  
+ Throne Room 
+: lose 1. If you do: get.
+6 3 1
+  
+ Alchemical Laboratory
+: inflict 1.
+   4 2 1
+: draw 1 random  from 
+your .
+ Mirrors Room
+4 2 1   
+: draw 1  from your .
+ Armory
+4 2 1
+  
+: draw 1  from your .
+ Pleasures Room
+4 2 1   
+: draw 1 Quest.
+ Bibliotheca
+3 1 1
+  
+ Treasure Room
+: place 1.
+2 1 0
+  
+ Arena
+: inflict 1.
+4 2 1
+  
+: summon a Cadaver.
+ Cemetery
+4 2 1   
+: draw 1 Quest.
+ Sanctuary
+3 1 1
+
+ 
+
+
+ 
+SEFU'S PERSONAL SPELL - MASK OF THE 
+WORLD.
+E. This card has been updated for better balance..
+F. On the Light Side, the Persistent Effect now allows you to 
+draw 1 Quest or gain 1 Power Point.
+14
+
+=== PAGE 15 ===
+Seal of Fire
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+FAMILIARS, UPGRADE
+Q. Is it possible to assign an Upgrade to a Familiar?
+A. According to the Rules, the Familiar is a special type 
+of Evocation, so it is possible to assign an Upgrade to 
+a Familiar. However, when the Familiar is in a Guard 
+Position, it is not considered a Model in the Lodge so it 
+cannot be targeted.
+R o ta s : 
+Madness
+ERRATA
+E: Error — F: Fix
+RUBEDO, COMMAND CARDS.
+E. Some Avatar Rubedo Command Cards show the 
+Protection symbol on the back, but indicate a Trap Effect 
+on the front.
+F. This is an error, all Rubedo Trap Effects should be 
+considered as Protection Effects.
+NOCTURNUS, FORGOTTEN EVOCATION
+E. The Nocturnus Forgotten Evocation has been updated 
+for better balance.
+F. Evocation Effect:
+“Other non-Nightmare Evocations cannot activate.
+Nocturnus has +1 for every other Nightmare in the 
+Lodge.”
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+CHAOS SCHOOL
+Q. If the optional Instinctive Spell rule is used in a game, am 
+I obliged to place a Spell in the Quick Spell slot if I have 
+already exhausted my Physical Actions and if I have cast 
+the remaining 3 Spells? 
+A. No, you don't have to. If a Mage has already exhausted 
+their 2 Physical Actions and has already cast/activated 
+the remaining 3 Spells placed in the other slots of their 
+Mage Sheet, they can choose to either place a Spell in the 
+Quick Spell slot or not perform any more Activations in 
+the current Action Phase.
+15
+
+=== PAGE 16 ===
+R o ta s : Antiquities
+ERRATA
+E: Error — F: Fix
+ORACLE, TAROT CARD
+E. In the paragraph about the Prophecy keyword, the last 
+sentence says to shuffle non-Instant cards into the deck, 
+but this is wrong.
+F. Replace the last sentence of the Prophecy paragraph with 
+the following: "Shuffle the revealed Instant cards into the 
+current Moon's Event deck." 
+R o ta s : O n c e u p o n a 
+Time
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+HASTUR AVATAR, SANA N
+Q. Is the Damage inflicted by the Black Rose equal to the 
+Cubes remaining on Hastur's Avatar Card after the Mend 
+Effect, or equal to the N value minus the number of 
+Cubes actually recovered?
+A. When a Mage is targeted by this Effect, if the number of 
+Cubes on Hastur's Avatar Card is less than N, the Avatar 
+inflicts Damage to that Mage equal to the number of 
+Cubes recovered through this Effect.
+VENTICELLO PERSONAL SPELL
+Q. The "The Eight Spells" Spell of the Mage Venticello allows 
+you to draw 1 Quest of the current Moon, even if it is not 
+indicated which Moon, or you can choose the Moon?
+A. The Mage who resolves that Spell draws 1 Quest of the 
+current Moon.
+ERRATA
+E: Error — F: Fix
+CHAIN QUESTS
+E. It is written that Chain Quests are resolved from left to 
+right. This is not correct, the Mage chooses the order of 
+resolution if they have more than 1 Effect to resolve.
+F. The first sentence in the Solving a Completed Chain 
+Quest paragraph must be replaced with the following 
+text: "When at least one Chain Quest is Completed, wait 
+until the current Effect is fully resolved, then proceed as 
+follows:"
+The third point of the Chain Quest Resolution must be 
+replaced with the following text:
+"In Play Order, each Mage who has placed at least one of 
+their  on a Chain Quest Card applies the Effect shown 
+on the Reward Side of that card. If a Mage has placed 
+cubes on multiple Chain Effects they choose in which 
+order to resolve the Effects". 
+BELLA, PERSONAL SPELL
+E. Mage Bella's Personal Spell Card "Elemental Spirits" has 
+an error in the Dark Side Effect.
+F. The Dark Side Effect of the card must be replaced with 
+the following:
+Target: ""
+Effect: ": Each time you inflict  on a target with an 
+Spell Effect, inflict 1 additional  on the target."
+16
+
+=== PAGE 17 ===
+Gaea Reborn
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+AVATAR GAEA
+Q. Does Gaea's Avatar Effect only apply to one single Room 
+where a Root is located or to all Rooms where 1 Root is 
+located?
+A. The effect applies in each Room in which there is at least 
+1 Instability and 1 Root.
+North Winds
+FREQUENTLY ASKED QUESTIONS
+Q: Questions — A: Answers
+DRUIDIC SCHOOL
+D. Some Spells of the Druidic School allow you to transform 
+into Bjorn or Loki. When I cast a Spell of this type, 
+can the new Physical Action described at the bottom 
+of the card be performed as part of my Action after I 
+have transformed? Or does my Action end after I have 
+transformed into Bjorn or Loki? 
+R. After the Mage has resolved an Effect that transform 
+themselves into Bjorn or Loki their Action ends. If this 
+was their second Action their Activation ends, otherwise 
+they can perform a second Action. As long as a card of 
+this type is near to the Mage Sheet the Mage gains a new 
+option to use the Physical Action Token.
+DRUIDIC SCHOOL, TRANSFORMATION
+D. In the first BRW when my Mage is transformed (for 
+example into Abomination) they are considered both a 
+Mage and an Evocation, does this also happen with the 
+Druidic School when my Mage is transformed into Loki 
+or Bjorn? 
+R. No, a Transformation is not an Evocation. Although it 
+uses the same word the Druidic School transformation 
+is a separate and distinct rule from the transformation 
+found in some BRW Schools, such as the transformation 
+to Abomination. In fact, the transformation used in the 
+Druidic School does not use any Evocation Card.
+DRUIDIC SCHOOL SPELL, PACT OF THE 
+CLAW
+D. The Effect of this card provides the new Charge Physical 
+Action if transformed into Bjorn. Must the effects “Move 
+1. Move 1. Physical Attack.” be performed in order from 
+top to bottom, or can they be performed in any order?
+R. If a Physical Action has multiple Effects, these can be 
+resolved in any order. The different Effects are written in 
+bullet point form. The Charge Physical Action consists 
+of a single Effect, so the instructions indicated must be 
+resolved in order from top to bottom.
+17
+
+=== PAGE 18 ===
+ERRATA
+E: Error — F: Fix
+DRUIDIC SCHOOL
+E. The Druidic School Reference Card has been updated for 
+better balance.
+F. A printable version of this card can be found in the 
+"Printed Material P&P ENG" Document. The North Wind 
+rulebook has been updated with the Transformation rule.
+R o ta s : Las t Dy n as t y
+ERRATA
+E: Error — F: Fix
+HEKA SCHOOL, REFERENCE CARD.
+E. The Heka School Reference Card indicates that a Jinx can 
+be removed, but the correct term is "discarded". Replace 
+the sentence: "When all the slots on the Jinx Card are 
+occupied by a , it is removed."
+F. "Inflict 3. Inflict 2 to a different  from yourself. 
+Inflict 1 to another different  from yourself."
+Dread Forge
+ERRATA
+E: Error — F: Fix
+SPELL CHAIN LIGHTING, FORGE SCHOOL.
+E. The last phrase on the dark side Effect says: "Inflict 2 to 
+a ." but it is wrong.
+F. "Inflict 3. Inflict 2 to a different  from yourself. 
+Inflict 1 to another different  from yourself.
+SUMMON AN EQUIPMENT
+E. The Reference Cards of the Schools that summon 
+Equipments (War and Forge) are missing a sentence that 
+specifies which Effects can summon an Equipment.
+F. Insert this point into the Equipment Evocation rules:
+"An Equipment can only be summoned by an Effect with 
+target . In fact, you cannot summon an Equipment 
+when resolving an Effect that summons any evocation if 
+the target of that Effect is a Room."
+A p oca ly ps e
+18
+
+=== PAGE 19 ===
+FREQUENTLY ASKED QUESTIONS
+D: Domande — R: Risposte
+DESTINY TOKEN AND INFECTIO TOKEN
+Q. Are Destiny or Infectio Tokens resolved even if the Mage 
+they are assigned to is placed in their Cell?
+A. Yes, they are resolved even if the Mage is placed in their Cell.
+DESTINY TOKEN AND INFECTIO TOKEN
+Q. Some Effects are resolved at step 2 of the Cleanup Phase. 
+In what order are they resolved if more than one such 
+Effects are resolved in the same phase?
+A. At step 2 of the Cleanup Phase, Effects are resolved in Play 
+Order. If a Mage has more than one Effect to resolve, they 
+choose in which order to resolve the Effects. All Infectio 
+Tokens from the same Mage assigned to multiple targets 
+are considered resolved at the same time. 
+All Destiny Tokens from the same Mage assigned to 
+multiple targets are considered resolved at the same time. 
+The Mage chooses in which order to resolve the different 
+types of tokens.
+HORDE FEAT
+Q. The Collective Sacrifice Quest (Third Moon) requires you 
+to Heal Damage to Evocations. Is the Horde Talent valid 
+for the purpose of this Quest Task? How many times is 
+the Task fulfilled?
+A. The Quest Task is considered fulfilled once when in the 
+Cleanup Phase the Mage heals all Damage on one or 
+more of their own Evocations.
+HEAL INFECTIO OR DESTINY
+Q. Is it possible to Heal an Infectio Token or a Destiny 
+Token?
+A. Unless otherwise specified, “Heal” applies only to 
+Damage, so it is not possible to Heal an Infectio or 
+Destiny Token.
+FIELD MANEUVRER SPELL
+Q. The Field Maneuvers Spell from the War School indicates 
+removing 1 Event. In this case should it be read as 
+synonymous as discard 1 Event?
+Does the  gain  from this removed/discarded Event?
+A. In this case the word remove should be understood as a 
+synonym for discard. 
+The Black Rose does not gain  for an Event discarded 
+in this way.
+TROPHY BELT, EQUIPMENT
+Q. I have the Trophy Belt Equipment and I activate the 
+Rebuilt Abyss Room which places all 4 Mages in play in 
+their Cell.
+How many Trophies are placed on the belt?
+Does the Gain 3  phrase only apply when I discard the 
+Trophies?
+A. In this case it is considered that the Mages are placed in 
+the Cell at the same time, so only 1 Trophy is placed on 
+the Trophy Belt.
+The phrase Gain 3 applies only when discarding 
+Trophies.
+TROPHY BELT, EQUIPMENT
+Q. If my Mage is placed in the Cell, when another Mage is 
+placed in the Cell should I place 1 Trophy on the Trophy 
+Belt?
+A. Yes.
+PESTIS ACTIVATION
+Q. In the Evocations Phase, how do I keep track of which 
+Pestis I have already activated? Do they activate one at a 
+time or all at once?
+A. The Mage chooses in what order to activate each of their 
+Evocations, including Pestis. There is no specific game 
+component to mark which Pestis has already activated 
+and which have not yet, however it is useful to remember 
+that when a Pestis performs a Physical Attack it is 
+removed. It is possible to use an unused Token (such as 
+a Trophy or Trap) and place it next to the Pestis that has 
+activated; remove this Token during Step 1 of the next 
+Cleanup Phase.
+FAMINE SCHOOL, STARVE
+Q. The keyword "Starve" indicates to place the target Mage's 
+Cubes on the Event Board. What happens if an Effect 
+of this type targets an Avatar? Are the Black Cubes that 
+are on the Event Board from the beginning of the game 
+and the Black Cubes that are placed here by this Effect 
+considered to be the same pool?
+A. An Avatar must be treated as if it were a Mage controlled 
+by a player. In this case, the two pools of Black Cubes 
+must be treated as two separate pools.
+INFECTIO / DESTINY TOKENS
+Q. When a Mage resolves more than 1 Infectio Token 
+assigned to another Mage, is each damage inflicted 
+considered a separate effect, or are all Infectio Tokens 
+considered a single effect? Does the same apply to Destiny 
+Tokens?
+A. A Mage who resolves one or more Infectio/Destiny 
+Tokens on one or more Mages is considered a single 
+Effect, consisting of a single sentence, which targets those 
+Mages. Yes, the rule applies in the same way to Destiny 
+Tokens.
+19
+
+=== PAGE 20 ===
+ERRATA
+E: Error — F: Fix
+PERSONAL LIBRARY
+E. The section Creating a Personal Library has been updated 
+in case a Spell Card has 2 different symbols on Light Side 
+and Dark Side.
+F. Add the following point to the list:
+• In case a Spell Card shows 2 different symbols on the 
+Light Side and Dark Side, both symbols of that card 
+must be accounted for.
+DEATH SCHOOL
+E. The Death School Reference Card has been updated for 
+better balance.
+F. A printable version of this card can be found in the 
+"Printed Material P&P ENG" Document
+Magister Box
+ERRATA
+E: Error — F: Fix
+FAMILIAR ERACLETO (page 8)
+E. The sentence in the Familiar Setup is wrong: 
+‘Place the Familiar Room instead of a Lodge Room that is 
+of the same color, chosen by mutual agreement between 
+the players. Place all other Familiar materials to form a 
+reserve accessible to all players.’
+F. Replace with the correct text:
+“Place all Familiar materials next to the board of the 
+player who chose the Agorix Mage. ”
+C o m pat i b i l i t y 
+Handbook
+ERRATA
+E: Error — F: Fix
+REMOVE EVOCATION (page 5)
+E. In the Compatibility Compendium between BRW and 
+Rebirth, the rule regarding Spell Cards that remove 
+Evocations must be included.
+F. Use the following new rules.
+"Some game Effects allow you to remove an Evocation 
+from the Lodge. When a Mage (or ) resolves one of 
+these Effects they must comply with these points:
+• A non-Forgotten Spell cannot remove another Mages's 
+Forgotten Evocation.
+• A non-Forgotten Spell cannot remove another Mage's 
+Evocation with a Health value greater than 3. Note 
+that some Effects may change the Health value of an 
+Evocation from that printed on the Evocation Card.
+• An Effect that removes your own Evocation allows the 
+Mage to ignore the previous points; therefore you can 
+remove your Evocation with any Health value even if it 
+is a Forgotten Evocation.
+• A Forgotten Spell that removes an Evocation ignores 
+the previous points; therefore you can remove one of 
+your own (or another Mages's) Evocation with any 
+Health value even if it is a Forgotten Evocation.
+20

@@ -274,6 +274,8 @@ func resolve_effect(
 			return _resolve_damage_rooms_in_range_from_target(effect, context)
 		"move_one_mage_in_target_room":
 			return _resolve_move_one_mage_in_target_room(effect, context)
+		"move_model_near_target_room":
+			return _resolve_move_model_near_target_room(effect, context)
 		"activate_room_from_owned_evocation":
 			return _resolve_activate_room_from_evocation(effect, context)
 
@@ -4822,6 +4824,7 @@ func _resolve_activation_effect(
 		"activate_target_evocation_under_control":
 			evocation = context.get("target_evocation")
 			controller_id = caster_id
+			bonus = int(effect.get("strength_bonus", 0))
 
 	if evocation == null:
 		return false
@@ -5549,6 +5552,48 @@ func _resolve_damage_rooms_in_range_from_target(
 	context["last_area_damage_amount"] = amount
 
 	return true
+
+
+func _resolve_move_model_near_target_room(effect: Dictionary, context: Dictionary) -> bool:
+	var game = _game(context)
+	var caster := _caster(context)
+	var origin := _target_room(context)
+	if game == null or origin.is_empty():
+		return false
+	var model_key := "_near_room_model"
+	var destination_key := "_near_room_destination"
+	var distance := int(effect.get("distance", 1))
+	if not context.has(model_key):
+		var options: Array = []
+		for option in game._quest_model_choice_options(caster, {"range":"*", "include_self":true}):
+			if game.get_hex_distance(game.room_id_to_coord(origin), game.room_id_to_coord(str(option.room_id))) > int(effect.get("model_range", 1)):
+				continue
+			if option.value.type == "mage" and DeathEffectResolver.ignores(context, int(option.value.player_index)):
+				continue
+			options.append(option)
+		if options.is_empty():
+			return true
+		game.request_effect_choice(caster, "model", context, model_key, options, 0, 1,
+			"Move up to 1: choose a Model within 1 Room of the target Room, or skip.")
+		return false
+	var model = context[model_key]
+	if model == null:
+		context.erase(model_key)
+		return true
+	var from_room: String = game.players[int(model.player_index)].mage.room_id if model.type == "mage" else model.evocation.room_id
+	if not context.has(destination_key):
+		var options: Array = game._quest_room_choice_options(caster, {"range":distance}, from_room)
+		game.request_effect_choice(caster, "secondary_room", context, destination_key, options, 1, 1,
+			"Move the selected Model up to 1 Room. Select its current Room to stay.")
+		return false
+	var destination: String = str(context[destination_key])
+	context.erase(model_key)
+	context.erase(destination_key)
+	if destination == from_room:
+		return true
+	if model.type == "mage":
+		return game.move_mage_to_room_id(int(model.player_index), destination, distance)
+	return game.move_evocation_to_room_id(model.evocation, destination, distance)
 
 
 func _resolve_move_one_mage_in_target_room(

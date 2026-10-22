@@ -1,0 +1,641 @@
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ludus Magnus Studio</title>
+    <!-- materialize icons, css & js -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link type="text/css" href="/css/materialize.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link type="text/css" href="/css/styles.css" rel="stylesheet" />
+    <link type="text/css" href="css/soloPlay.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/img/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/img/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/img/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/img/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/img/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/img/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/img/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/img/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/img/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/img/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/favicon-16x16.png"
+    />
+    
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <!-- ios support -->
+    <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LMS"> 
+    <link rel="manifest" href="/manifest.json" />
+  </head>  <body class="mainback">
+  <nav class="z-depth-1 black">
+    <div class="nav-wrapper container">
+      <a href="https://app.ludusmagnusstudio.com/index.php"><img src="/img/Logo_03.png" width="180"/></a>
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span>
+    </div>
+  </nav>    <!-- side nav -->
+    <ul id="side-menu" class="sidenav side-menu">
+      <li>
+        <a class="subheader"
+          ><h5 class="center grey-text text-darken-3">
+            Ludus Magnus Studio
+          </h5></a
+        >
+      </li>
+      <li><a href="/" class="waves-effect">Home</a></li>
+      <li><a href="/pages/about.php" class="waves-effect">About</a></li>
+      <li><div class="divider"></div></li>
+      <li>
+        <a href="/pages/contact.php" class="waves-effect">
+          <i class="material-icons">mail_outline</i>Contact</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://shop.ludusmagnusstudio.com/"
+          target="_new"
+          class="waves-effect"
+        >
+          <i class="material-icons">shopping_cart</i>Shop</a
+        >
+      </li>
+    </ul>  <!-- slider -->
+  <div class="w3-content w3-display-container" style="max-width:800px">
+    <img class="mySlides" src="/img/narSlider.jpg" style="width:100%">
+    <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+
+    </div>
+  </div>
+
+    <!-- games -->
+<main>
+    <div class="products  container grey-text text-darken-1">
+      <div style="
+      margin-left: auto;
+      margin-right: auto;margin-top:10px">
+        <label>Filter by language</label>
+        <select class="browser-default" id="multipleDie" style="margin-bottom: 15px;" onchange="language(this.value)">
+          <option value="" disabled selected>Choose your language</option>
+          <option value="eng">English</option>
+          <option value="ita">Italian</option>
+          <option value="ger">German</option>
+          <option value="fra">French</option>
+          <option value="spa">Spanish</option>
+        </select>
+      </div>
+
+
+    <!--CORE-->
+    <ul class="collection">
+          <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Core Rulebook ENG</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1_5nVCBPSnODmvhOjETpln-lcts5E6PUh/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1_5nVCBPSnODmvhOjETpln-lcts5E6PUh/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+           <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Core Rulebook ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1GjXK_Uo5PgwtG0HXP9OGfOSYd2MpbBsX/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1GjXK_Uo5PgwtG0HXP9OGfOSYd2MpbBsX/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Core Rulebook ESP</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/150bWxeFKGPLuwto7VOPk5PjOp9Q6PKlj/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/150bWxeFKGPLuwto7VOPk5PjOp9Q6PKlj/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Core Rulebook FRA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/10HZPE-z289GzaG025JU3HUpF2aHSxQ1O/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/10HZPE-z289GzaG025JU3HUpF2aHSxQ1O/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Core Rulebook GER</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1-UFebRu16UuQbwBeWlX-jYlFGU7jXvok/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1-UFebRu16UuQbwBeWlX-jYlFGU7jXvok/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+
+
+    <!--CORE TUTORIAL-->
+    <ul class="collection">
+          <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Core Tutorial ENG</span>    <span class="versioningRules">v 1.1 - November 24, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1R7tSkjWbD1hj4ufJezmVYEzJNLrahWjW/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1R7tSkjWbD1hj4ufJezmVYEzJNLrahWjW/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Core Tutorial ITA</span>    <span class="versioningRules">v 1.1 - Novembre 24, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1jLlNxNcrF8CMbKQ4BlMk3beolJ4jYCcm/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1jLlNxNcrF8CMbKQ4BlMk3beolJ4jYCcm/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Core Tutorial ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1v73wgWO9PAbsau3RLWGXvSHXYGrVINmc/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1v73wgWO9PAbsau3RLWGXvSHXYGrVINmc/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Core Tutorial FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1zuUvKiD82h4kEFYctubvKeU047XxbNkW/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1zuUvKiD82h4kEFYctubvKeU047XxbNkW/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Core Tutorial GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1Qykt7RmDfY-7zTuV_LOaHQT6X3qy53Vl/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1Qykt7RmDfY-7zTuV_LOaHQT6X3qy53Vl/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+      
+  
+
+    <!--CORE HANDBOOK-->
+    <ul class="collection">
+          <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Core Handbook ENG</span>    <span class="versioningRules">v 1.1 - November 17, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1KAEyj0WOS03aNKKMBRC21iDzO3yxVrA8/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1KAEyj0WOS03aNKKMBRC21iDzO3yxVrA8/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Core Handbook ITA</span>    <span class="versioningRules">v 1.1 - December 17, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1Y35QG_NdlLOU31RqEwYu__kxCFW7IEpw/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1Y35QG_NdlLOU31RqEwYu__kxCFW7IEpw/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Core Handbook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1uQGkl2wmjckBBHJa5xHk_qwOxh9bj67i/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1uQGkl2wmjckBBHJa5xHk_qwOxh9bj67i/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Core Handbook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1n3eH67gRVIo43KQgxCox5oBy4BFxyOm8/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1n3eH67gRVIo43KQgxCox5oBy4BFxyOm8/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Core Handbook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1ajRESc2KMLccuhL4Hp4qTuJjwQmd28Nu/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1ajRESc2KMLccuhL4Hp4qTuJjwQmd28Nu/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+        <!--UNDERSIEGE-->
+    <ul class="collection">
+          <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Under Siege ENG</span>    <span class="versioningRules"></span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1zjgDbDyuLGW3OwHWTL6W9--5Rgku3wQr/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1zjgDbDyuLGW3OwHWTL6W9--5Rgku3wQr/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Under Siege ITA</span>    <span class="versioningRules"></span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1Vw-5fiUUfYPMDVsCqAjMX2RM9cdzDqDs/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1Vw-5fiUUfYPMDVsCqAjMX2RM9cdzDqDs/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Under Siege ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1q-b2Xs8iHH_xnL2tSPyCr73r4jsiIIzz/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1q-b2Xs8iHH_xnL2tSPyCr73r4jsiIIzz/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Under Siege FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1kLGy38HcGzExHfhewp-6DDiEAbRHNEJ4/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1kLGy38HcGzExHfhewp-6DDiEAbRHNEJ4/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Under Siege GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1iFkUkXHDhqCbDljRNkxZ3uRwOEh9ONDM/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1iFkUkXHDhqCbDljRNkxZ3uRwOEh9ONDM/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+                <!--VESUVIO-->
+    <ul class="collection">
+          <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Vesuvio ENG</span>    <span class="versioningRules"></span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1s2aZwcGAvZ_GsgAfZfndpwsvqy-byKR5/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1s2aZwcGAvZ_GsgAfZfndpwsvqy-byKR5/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Vesuvio ITA</span>    <span class="versioningRules"></span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1dhyhNPhbUZgSTnQnMDFAHTfJGSGvt0Lm/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1dhyhNPhbUZgSTnQnMDFAHTfJGSGvt0Lm/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Vesuvio ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1B07T-O7onjsqlPsDmeX7w1CY3e7R4YaB/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1B07T-O7onjsqlPsDmeX7w1CY3e7R4YaB/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Vesuvio FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1VT2dcq3QN7mecYNSARTR4XgbQK6ByQxM/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1VT2dcq3QN7mecYNSARTR4XgbQK6ByQxM/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Vesuvio GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1CODyhCG0TxXIzeSOOKg68_xUaCA3Sd-1/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1CODyhCG0TxXIzeSOOKg68_xUaCA3Sd-1/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+
+    <!--STRETCH GOAL-->
+    <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Stretch Goal Rulebook ENG</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1gesYjWibTVlyAiLHWA0xc2vGK7MlTNfh/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1gesYjWibTVlyAiLHWA0xc2vGK7MlTNfh/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Stretch Goal Rulebook ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1fmO_VEcqA6dnXVu65cq-deTrGraLrvlQ/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1fmO_VEcqA6dnXVu65cq-deTrGraLrvlQ/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Stretch Goal Rulebook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1UZ3JEL34nHPfRKxpxzLnuvFLi8-8trWE/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1UZ3JEL34nHPfRKxpxzLnuvFLi8-8trWE/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Stretch Goal Rulebook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1r_hriBdW8SDPQIKvpytjtQu37-G6hUj1/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1r_hriBdW8SDPQIKvpytjtQu37-G6hUj1/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Stretch Goal Rulebook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1_D4v7XBQaNxE02UkL2H5vgWFHY2-KNrf/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1_D4v7XBQaNxE02UkL2H5vgWFHY2-KNrf/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+     <!--Hyperion-->
+    <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Hyperion Rulebook ENG</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1kaTO61mQq08WKl0eUqR9M9iPCMtL83Bi/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1kaTO61mQq08WKl0eUqR9M9iPCMtL83Bi/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Hyperion Rulebook ITA</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1j9b9GrYlmNoHtHRPRLUp16_qob24k4YJ/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1j9b9GrYlmNoHtHRPRLUp16_qob24k4YJ/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Hyperion Rulebook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1rV49gNtphsAqdIgdtJ7k3_dw4wQcQlof/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1rV49gNtphsAqdIgdtJ7k3_dw4wQcQlof/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Hyperion Rulebook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1IUOLpfsfGHnksOW6D0TfcOBLcF_ye3X0/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1IUOLpfsfGHnksOW6D0TfcOBLcF_ye3X0/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Hyperion Rulebook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/17y2qeEQxGcHOYWy9KOWduliEd-dKMShj/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/17y2qeEQxGcHOYWy9KOWduliEd-dKMShj/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+
+     <!--Minotaur-->
+     <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Minotaur Rulebook ENG</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1oXZ-d5IRjQhj83rb00Zw2Do1M5fAZYRG/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1oXZ-d5IRjQhj83rb00Zw2Do1M5fAZYRG/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Minotaur Rulebook ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1PxCroCj0kJ9H-i4dR0P5AmMMoG_-84aA/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1PxCroCj0kJ9H-i4dR0P5AmMMoG_-84aA/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Minotaur Rulebook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1b9SyArcc7bi9YQOFQEZFfEJi0lWgG4fX/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1b9SyArcc7bi9YQOFQEZFfEJi0lWgG4fX/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Minotaur Rulebook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1MdiT6264TDpiZL76dtFEdVdGY4FZMt_b/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1MdiT6264TDpiZL76dtFEdVdGY4FZMt_b/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Minotaur Rulebook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1TW_fiIXMV3XnvvUQ7cmngCaVzTo-jGZT/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1TW_fiIXMV3XnvvUQ7cmngCaVzTo-jGZT/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul> 
+    
+     <!--Mediceo-->
+     <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Mediceo Rulebook ENG</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/152UZML9dmmM6AWgMvKFsUi_vbmlEozu5/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/152UZML9dmmM6AWgMvKFsUi_vbmlEozu5/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Mediceo Rulebook ITA</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1TDecuayAjsSrUmliBHNdOQwOTRcMuJ50/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1TDecuayAjsSrUmliBHNdOQwOTRcMuJ50/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Mediceo Rulebook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1HucRXFeVWRHr-mNeedvu5GSIKCz9J-jH/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1HucRXFeVWRHr-mNeedvu5GSIKCz9J-jH/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Mediceo Rulebook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1gjG9zdoxkyb94UnTv7rmaujL0AO_s9g5/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1gjG9zdoxkyb94UnTv7rmaujL0AO_s9g5/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Mediceo Rulebook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1XP8sEoXDT5EXEuamhJteY2nAMYzXVPAp/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1XP8sEoXDT5EXEuamhJteY2nAMYzXVPAp/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul>        
+
+     <!--Draco-->
+     <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Draco Rulebook ENG</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1wXunGlqpvRRKKpjA7C7U6X51pfFZc6W4/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1wXunGlqpvRRKKpjA7C7U6X51pfFZc6W4/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Draco Rulebook ITA</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1Nvad8DJ_6kJ7K5j7gQ85vgt9lWt6bdZJ/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1Nvad8DJ_6kJ7K5j7gQ85vgt9lWt6bdZJ/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Draco Rulebook ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/14VDcz-8jCLds_CVpXpPK3PvawItS-mg6/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/14VDcz-8jCLds_CVpXpPK3PvawItS-mg6/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Draco Rulebook FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1WsFgocxzeXbgxGeLPz3HMrtskkVOsg6i/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1WsFgocxzeXbgxGeLPz3HMrtskkVOsg6i/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Draco Rulebook GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1D6u82WmF8VLzjrkhRwQl8hM_yGRLqcn3/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1D6u82WmF8VLzjrkhRwQl8hM_yGRLqcn3/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>
+        </ul>   
+
+    <!--CAMPAIGN SHEET-->
+    <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Campaign Sheet ENG</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1C1_b3Wv0VOFblOZkeXSZS0I4rK4Piyy5/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1C1_b3Wv0VOFblOZkeXSZS0I4rK4Piyy5/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Scheda di Campagna ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+          <!-- <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Sherwood Bandits ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Sherwood Bandits FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Sherwood Bandits GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>--> 
+        </ul> 
+
+    <!--Vesuvio-->
+    <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Vesuvio ENG</span>    <span class="versioningRules">v 0.94 - September 18, 2025</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1XoLjGef0UXXfHX4d3p8CFcVnKh8VEIKz/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1XoLjGef0UXXfHX4d3p8CFcVnKh8VEIKz/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <!-- <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Scheda di Campagna ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Sherwood Bandits ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Sherwood Bandits FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Sherwood Bandits GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>--> 
+        </ul> 
+
+            <!--Catacombs-->
+    <ul class="collection">
+         <li class="collection-item avatar eng">
+            <i class="material-icons circle gb" ></i>
+            <span class="title">Catacombs ENG</span>    <span class="versioningRules"></span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1-v3F5AXxEAn8meeKeNV-FuUahOUxBfWG/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1-v3F5AXxEAn8meeKeNV-FuUahOUxBfWG/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <!-- <li class="collection-item avatar ita" >
+            <i class="material-icons circle c-flag__ita" ></i>
+            <span class="title">Scheda di Campagna ITA</span>    <span class="versioningRules">v 1.1 - December 16, 2023</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/view", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick="pdfviewer('https://drive.google.com/file/d/1SIg53oxNuiHUFmWFLendsooNUeFynuzm/preview')"><i class="material-icons iconColor small">remove_red_eye</i></a>
+         </li>
+         <li class="collection-item avatar spa" >
+            <i class="material-icons circle es" ></i>
+            <span class="title">Sherwood Bandits ESP</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tDXRFdkctgz6rOqZSb6KktAaNroBRJwE/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar fra">
+            <i class="material-icons circle fr" ></i>
+            <span class="title">Sherwood Bandits FRA</span>
+            <a href="#!" class="secondary-content"  onclick='window.open("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1PFctTYTc9pGJNJEszo3z4n3ByatjHlSM/preview");'><i class="material-icons iconColor small">remove_red_eye</i></a>
+          </li>
+          <li class="collection-item avatar ger" >
+            <i class="material-icons circle de" ></i>
+            <span class="title">Sherwood Bandits GER</span>
+            <a href="#!" class="secondary-content" onclick='window.open("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview", "_blank");'><i class="material-icons iconColor small">file_download</i></a>
+            <a href="#!" class="secondary-content secondElem" onclick='pdfviewer("https://drive.google.com/file/d/1tPnEaQukT7UnqGhHmdeQUKRD0ynuXSKx/preview");'><i class="material-icons iconColor  small">remove_red_eye</i></a>
+          </li>--> 
+        </ul> 
+
+    </div>
+    <div id="modalPdfViewer" class="modalPdfViewer modal" style="width: 95%; height: 100%;">
+      <div class="modal-content" style="padding: 0; height: 100%;">
+        <iframe id="iframepdf" src="" width="100%" height="100%"></iframe> 
+      </div>
+    </div>
+  </main>
+ <!-- <footer class="page-footer black" id="footer">-->
+
+
+  </footer>
+  <script>
+    $(".collection li:not(."+localStorage.getItem("language")+")").css("display", "none");
+  </script>
+  <script>
+    $.ajax({
+     type: 'POST',
+     url: '/txt/footer.json',
+     data: { get_param: 'value' },
+     dataType: 'json',
+     success: function (data) {
+         $.each(data, function(index, element) {
+             $('#footer').append(element.NARFOOTER)
+         });
+     }
+   });
+  </script>
+  <script src="/js/app.js"></script>
+  <script src="/js/textReader.js"></script>
+  
+</body>
+</html>

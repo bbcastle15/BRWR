@@ -54,14 +54,14 @@ function Assert-GodotResult([string]$Log, [int]$Code) {
 }
 
 $importLog = Join-Path $logRoot 'import.log'
-& $Godot --headless --path $projectRoot --editor --import --quit *> $importLog
+& $Godot --headless --log-file (Join-Path $logRoot 'import-engine.log') --path $projectRoot --editor --import --quit *> $importLog
 Assert-GodotResult $importLog $LASTEXITCODE
-$cases = @('avatar_smoke', 'presentations')
-if ($Suite -eq 'all') { $cases += @('playtest', 'schools', 'alternative_rooms', 'alternative_rooms_ui') }
+$cases = @('avatar_art_hd', 'avatar_smoke', 'avatar_rules', 'avatar_flow', 'avatar_protections', 'avatar_movement', 'avatar_board_ui', 'avatar_playtest_fixes', 'avatar_publication', 'avatar_jinx_playtest', 'avatar_menu', 'presentations', 'avatar_fourth_playtest', 'mist_playtest')
+if ($Suite -eq 'all') { $cases += @('playtest', 'schools', 'alternative_rooms', 'alternative_rooms_ui', 'room_families') }
 foreach ($case in $cases) {
     $log = Join-Path $logRoot ($case + '.log')
     Write-Host "Eseguo $case..."
-    & $Godot --headless --path $projectRoot --script (Join-Path $PSScriptRoot "checks/$case.gd") *> $log
+    & $Godot --headless --log-file (Join-Path $logRoot ($case + '-engine.log')) --path $projectRoot --script (Join-Path $PSScriptRoot "checks/$case.gd") *> $log
     Assert-GodotResult $log $LASTEXITCODE
     Get-Content -LiteralPath $log -Tail 2 | Write-Host
 }

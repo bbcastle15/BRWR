@@ -128,6 +128,7 @@ static func assign_jinx(game, caster: int, target: int, context: Dictionary, eff
 		context["assigned_jinx"] = id
 		var item := definition("jinxes", id)
 		print("Player ", target + 1, " assigned Jinx: ", item.name)
+		game.queue_resolution({"type": "jinx_assignment", "id": id, "player_index": target})
 		if item.trigger in ["assigned_or_solve_quest", "assigned_or_cell"]:
 			game.deal_damage(-1, target, int(item.damage), "jinx")
 	var vulnerable: bool = bool(context.get("jinx_was_vulnerable", false))

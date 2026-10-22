@@ -1,0 +1,2263 @@
+Familiar - Cerberus
+© Ludus Magnus Studio - 2020
+All rights reserved
+www.ludusmagnusstudio.com
+Familiar; Cerberus
+Familiars are special Evocations that can be used in two different ways, called Modes:
+1. Guard Mode: when a Familiar is in the same Room as its Mage.
+2. Hunting Mode: when a Familiar is in a different Room than its Mage.
+A Familiar can be summoned through its Room using 
+these rules in the following order:
+1. Availability: It is not possible to summon a new 
+Familiar if they are not available in the reserve.
+2. Material: The Mage who summons a Familiar 
+chooses one of those still available, and takes the 
+Familiar’s Card they prefer, placing it under the 
+Mage sheet as usual, and its corresponding Action 
+marker. 
+3. Miniature: Place the Familiar miniature attached to 
+the base of your Mage as a combined, unique model. 
+A newly summoned Familiar is in Guard Mode.
+4. Limit: Each Mage can have a maximum of one Familiar at a 
+time among his Evocations.
+1. Replace a Lodge Room with a Familiar Summon Room of the same color.
+2. Place the Familiar Evocation cards and Familiar Action tokens where all players can access 
+them.
+A. Illustration and name of the Familiar with its 
+Archetype.
+B. Characteristics of the Familiar when it is in Hunting 
+Mode (movement, damage, and any additional 
+effects).
+C. Space for the Familiar Action (Physical Action) 
+that can be performed by the Mage when the 
+Familiar is in Guard Mode. The Action marker is 
+flipped each time it is used just like a normal 
+Physical Action token.
+D. Familiar Health with Wound slots.
+Summon a Familiar
+Preparation
+Familiar Card
+F
+ F
+  
+
+You can use the Polpetta
+ model as a starting point 
+for your  Spells.
+ 
+Cerberus
+1 - ENG
+A
+B
+C
+D
+Familiar; Cerberus
+The Familiar is considered in Guard 
+Mode if:
+• It has just been summoned.
+• At the end of its activation, the Familiar is in 
+the same Room as its Mage.
+• At the end of an Action, the Mage is in the 
+same room as his Familiar.
+• If the Mage enters the Room where his Familiar is located during movement, the Mage can 
+decide to immediately return it to Guard Mode and moves it with the Mage for the remainder 
+of that movement. Alternatively, the Mage may leave the Familiar in that Room in Hunting 
+Mode and continue movement without it.
+A Familiar in Guard Mode is not considered a model in its own right but becomes a unique 
+model with the Mage, both for movement and for resolving effects.
+When the Familiar is in this mode, the Mage can, with one of his Actions, use the Familiar 
+Action token to:
+• Activate the Familiar Action.
+• Turn the Familiar in a Hunting Mode and activate it immediately. In this case, if the Familiar 
+is still in his Mage’s Room after completing the Action, it will return to the Guard Mode.
+A Familiar is considered in 
+Hunting Mode if it is not in the 
+same Room as its Mage.
+In Hunting Mode, a Familiar is a normal 
+Evocation and follows all the Evocations rules, 
+except for Damage (see the box).
+In the Evocations Phase, a Mage who has a 
+Familiar in Guard Mode can, in his Turn, change 
+the Familiar Mode and activate it immediately.
+A Mage cannot be defeated as long as his Familiar is alive.
+When a Mage who owns a Familiar is 
+defeated, the Trophy goes to the opponent 
+who inflicted the last hit, regardless of 
+whether the target was the Mage or the 
+Familiar; only the Damage on the Mage Sheet is 
+calculated for the Points.
+When a Familiar is defeated, it returns to the newly 
+available supply, like a standard Evocation.
+Important: if you use Familiars, you cannot use the 
+optional Overkill rules.
+Guard Mode
+Hunting Mode
+Defeat of the Familiar and its Mage
+Damage: In this Mode, the Familiar 
+cannot be separately targeted. However, 
+when the Mage suffers Damage, all 
+damage may be distributed between the 
+Mage and/or the Familiar, as desired.
+Damage: In this Mode, the Familiar 
+suffers Damage and effects as a normal 
+Evocation. Also, if the Mage suffers 
+more Damage than can be endured while 
+his Familiar is in a Hunting Mode, the 
+Mage must assign the excess Damage to 
+the Familiar even if the Familiar is in a 
+different Room.
+ F
+F
+ENG
+F
+I Famigli sono delle Evocazioni speciali che possono essere utilizzati in due diverse modalità, 
+chiamati Stati: 
+1. Posizione di Guardia: quando un Famiglio è nella stessa stanza del Mago.
+2. Posizione di Caccia: quando un Famiglio si trova in una stanza diversa da quella del suo Mago.
+Un Famiglio può essere evocato tramite la sua Stanza 
+utilizzando le seguenti regole nell’ordine indicato:
+1. Disponibilità: Non è possibile evocare nuovi 
+Famigli se non ce ne sono disponibili nella riserva.
+2. Materiale: Il Mago che evoca un Famiglio ne 
+sceglie uno tra quelli ancora disponibili e prende la 
+sua Carta Famiglio, posizionandola sotto la scheda 
+del Mago come di consueto, e prende anche il suo 
+segnalino Azione corrispondente.
+3. Miniatura: Posizionare la miniatura del Famiglio 
+attaccata alla base del proprio Mago come a formare 
+un modello unico. Un Famiglio appena evocato si 
+trova in Posizione di Guardia.
+4. Limite: Ogni Mago può avere massimo un Famiglio 
+tra le proprie Evocazioni.
+1. Sostituire una Stanza della Loggia con una Stanza Evocazione Famiglio dello stesso colore.
+2. Posizionare le Carte Evocazioni Famiglio ed i segnalini Azione del Famiglio a portata di 
+mano.
+A. Illustrazione e nome del Famiglio con il suo archetipo
+B. Caratteristiche del Famiglio quando è in Caccia, 
+Movimento, Danni ed eventuali effetti aggiuntivi
+C. Spazio per l’Azione del Famiglio (Azione Fisica) che 
+può essere eseguita dal Mago quando il Famiglio è 
+in Guardia. Il segnalino Azione viene girato ogni 
+volta che viene usato come un normale segnalino 
+di Azione Fisica.
+D. Salute del Famiglio con gli alloggiamenti delle 
+Ferite
+Evocare un Famiglio
+Preparazione
+Carta Famiglio
+Cerberus
+F
+ F
+  
+
+Puoi utilizzare il modello di 
+Polpetta come punto di partenza 
+delle tue Magie di tipo .  
+1 - ITA
+A
+B
+C
+D
+Famiglio; Cerberus
+Il Famiglio è considerato in 
+Posizione di Guardia se:
+• E’ stato appena evocato.
+• Al termine di una sua attivazione, si trova nella 
+stessa Stanza del suo Mago.
+• Al termine di un’Azione, il suo Mago si trova 
+nella Stanza del Famiglio.
+• Se durante un movimento il suo Mago attraversa la Stanza in cui si trova il Famiglio può 
+decidere di farlo tornare in Posizione di Guardia. e muoverlo con il Mago per il resto di quel 
+movimento. In alternativa, il Mago può lasciare il Famiglio in quella Stanza in Posizione di 
+Caccia e continuare il movimento senza di lui.
+Un Famiglio in Posizione di Guardia non è considerato un modello a se stante, ma diventa un 
+modello unico con il Mago, sia per il movimento che per la risoluzione degli effetti.
+Quando il Famiglio è in questo stato il Mago può, con una delle sue Azioni, utilizzare il 
+segnalino Azione del Famiglio per:
+• Attivare l’Azione del Famiglio (vedi illustrazione).
+• Porre il Famiglio in Posizione di Caccia e attivarlo immediatamente. In questo caso, se subito 
+dopo aver compiuto l’Azione, il Famiglio si trova ancora nella Stanza del Mago tornerà in 
+Posizione di Guardia.
+Un Famiglio è considerato in 
+Posizione di Caccia se non si 
+trova nella stessa Stanza del suo 
+Mago.
+In Posizione di Caccia un Famiglio è una 
+normale Evocazione, e segue tutte le regole delle 
+Evocazioni, ad eccezione dei Danni (vedi sotto)
+Nella Fase delle Evocazioni un Mago che 
+possiede un Famiglio in Posizione di Guardia 
+può, nel suo turno, cambiare la Posizione del 
+Famiglio ed attivarlo immediatamente.
+Fino a quando un Famiglio è in vita il suo Mago non può essere sconfitto.
+Quando un Mago che possiede un Famiglio 
+viene sconfitto, il Trofeo va all’avversario 
+che ha inflitto l’ultimo colpo, a prescindere 
+che il bersaglio di esso fosse il Mago o il 
+Famiglio, per i punti si calcolano solo i Danni sul Mago.
+Quando un Famiglio viene sconfitto torna nella riserva 
+nuovamente disponibile, come una normale Evocazione.
+Importante: se utilizzate i Famigli non potete utilizzare 
+la regola opzionale “Infierire”.
+Posizione di Guardia
+Posizione di Caccia
+Sconfitta del Famiglio e del Mago
+Danni: Il Famiglio non può essere 
+bersagliato singolarmente. Quando il 
+Mago subisce Danni, può distribuire i 
+Danni subiti tra se stesso il Famiglio come 
+preferisce.
+Danni: In questa Posizione il Famiglio 
+subisce Danni ed effetti come una 
+Evocazione. Inoltre, se il Mago subisce 
+Danni oltre quelli che può sopportare 
+mentre il suo Famiglio si trova in 
+Posizione di Caccia, deve assegnare i 
+Danni in eccesso al Famiglio.
+ F
+F
+ITA
+F
+Les Familiers sont des Évocations spéciales qui peuvent être utilisées de deux manières différentes, 
+appelées Modes :
+1. Mode Gardien: Lorsqu’un Familier se trouve dans la même Salle que son Mage.
+2. Mode Chasseur: Lorsqu’un Familier se trouve dans une Salle différente de celle de son Mage.
+Un Familier peut être invoqué dans sa Salle en respectant 
+les règles suivantes:
+1. Disponibilité : Il n’est pas possible d’invoquer un 
+nouveau Familier s’il n’y en a plus de disponible dans 
+la réserve.
+2. Matériel : Le Mage qui invoque un Familier choisit 
+parmi les cartes encore disponibles celle qu’il préfère, 
+et la place sous sa feuille de Mage comme d’habitude. 
+Il prend également le Jeton d’Action correspondant.
+3. Figurine : Placez la Figurine du Familier attachée à 
+la base de votre Mage pour ne former qu’une seule et 
+unique Unité. Un Familier qui vient d’être invoqué se 
+retrouve donc automatiquement en Mode Gardien.
+4. Limite : Chaque Mage ne peut avoir au maximum 
+qu’un seul Familier à la fois parmi ses Évocations.
+1. Remplacez une Salle de la Loge par la Salle d’Invocation des Familiers de la même couleur.
+2. Placez les Cartes d’Évocation des Familiers ainsi que leurs Jetons d’Action à proximité du 
+plateau de jeu, accessibles à tous les joueurs.
+A. Illustration et nom du Familier avec son Archétype.
+B. Caractéristiques du Familier lorsqu’il est en Mode 
+Chasseur (Mouvement, Attaque et tout autre effet 
+supplémentaire).
+C. Emplacement pour l’Action du Familier (Action 
+Physique) qui peut être réalisée par le Mage lorsque 
+le Familier est en Mode Gardien. Le Jeton d’Action 
+est retourné chaque fois qu’il est utilisé comme 
+n’importe quel Jeton d’Action Physique normal.
+D. Santé du Familier avec ses emplacements de 
+Dégâts.
+Invoquer un Familier
+Mise en Place
+Carte de Familier
+Cerberus
+F
+ F
+  
+
+Vous pouvez utiliser la fi gurine de 
+Polpetta comme point de départ 
+de vos Sorts .  
+1 - FRA
+A
+B
+C
+D
+Familiers; Cerberus
+Le Familier est considéré en Mode 
+Gardien si :
+• Il vient d’être invoqué.
+• A la fin de son activation, le Familier se trouve 
+dans la même Salle que celle de son Mage.
+• À la fin d’une Action, le Mage se retrouve dans 
+la même Salle que celle de son Familier.
+• Si, lors de son déplacement, le Mage entre dans la Salle où se trouve son Familier, le Mage 
+peut décider de le replacer immédiatement en Mode Gardien et continue son déplacement 
+accompagné de son Familier. Réciproquement, le Mage peut laisser son Familier dans une 
+Salle et continuer son déplacement sans lui (le Familier passera alors en Mode Chasseur). Un 
+Familier en Mode Gardien n’est pas considéré comme une unité à part entière mais forme 
+avec son Mage une seule et même unité, que ce soit pour les déplacement comme pour la 
+résolution des effets. 
+Lorsque le Familier est dans ce Mode, le Mage peut, avec l’une de ses actions, utiliser le Jeton 
+d’Action du Familier pour :
+• Activer l’Action du Familier.
+• Mettre le Familier en Mode Chasseur et l’activer immédiatement. Dans ce cas, si le Familier 
+se trouve toujours dans la Salle de son Mage après avoir terminé son Action, il repassera en 
+Mode Gardien.
+Un Familier est considéré en 
+Mode Chasseur s’il ne se trouve 
+pas dans la même Salle que son 
+Mage.
+En Mode Chasseur, un Familier est une 
+Évocation normale et suit toutes les règles 
+d’Évocation, à l’exception des Dégâts (voir 
+encadré).
+Durant la phase d’Évocation, un Mage qui a 
+un Familier en Mode Gardien peut, durant 
+son tour, changer le Mode de son Familier et 
+l’activer immédiatement.
+Un Mage ne peut pas être vaincu tant que son Familier est toujours vivant.
+Lorsqu’un Mage qui possède un Familier 
+est vaincu, le Trophée revient à l’adversaire 
+qui a infligé le dernier coup, que la cible 
+soit le Mage ou le Familier; seuls les cubes 
+de Dégâts présents sur la feuille de Mage seront 
+comptabilisés pour attribuer les Points de Pouvoir.
+Lorsqu’un familier est vaincu, il retourne dans la réserve 
+et devient de nouveau disponible pour tous, comme pour 
+une Évocation normale.
+Important : Si vous utilisez des Familiers, vous ne pouvez 
+pas utiliser la règle optionnelle du Déchaînement.
+Mode Gardien
+Mode Chasseur
+Défaite d’un Familier et de son Mage
+Dégâts: Dans ce Mode, le Familier 
+ne peut pas être ciblé séparément. 
+Cependant, lorsque le Mage subit des 
+Dégâts, Les cubes de Dégâts peuvent 
+être répartis entre le Mage et le Familier, 
+comme vous le souhaitez.
+Dégâts : Dans ce Mode, le Familier 
+subit des Dégâts et des effets comme 
+une Évocation normale. De plus, si son 
+Mage subit plus de Dégâts qu’il ne peut 
+en subir alors que son Familier est en 
+Mode Chasse, le Mage doit attribuer ces 
+Dégâts excédentaires au Familier même 
+si ce dernier se trouve dans une Salle 
+différente.
+ F
+F
+FRA
+F
+Los Familiares son Evocaciones especiales que pueden ser utilizadas de dos formas distintas, 
+llamadas Modos:
+1. Modo Guardián: Cuando un Familiar está en la misma Sala que su Mago.
+2. Modo Cazador: Cuando un Familiar está en una Sala distinta a la de su Mago.
+Coloca las cartas de Evocación de Familiar y las fichas 
+de acción del Familiar al alcance de todos los jugadores.
+1. Disponibilidad: No es posible invocar un nuevo 
+Familiar si no está disponible en la reserva.
+2. Material: El Mago que invoque al Familiar elige uno 
+de los disponibles, y coge la Carta de Familiar que 
+prefiera, colocándola bajo su Tablero de Mago como 
+otras Evocaciones, junto con la ficha de acción 
+correspondiente. 
+3. Miniatura: Coloca la figura del Familiar anexada 
+a la base de tu Mago como una única miniatura 
+combinada. Un Familiar recién invocado está en 
+Modo Guardián..
+4. Límite: Cada Mago puede tener un máximo de un 
+Familiar a la vez entre sus Evocaciones.
+1. Reemplaza una Sala de la Logia con una Sala de Invocación de Familiar del mismo color.
+2. Coloca las cartas de Evocación de Familiar y las fichas de acción del Familiar al alcance de 
+todos los jugadores.
+A. Ilustración y nombre del Familiar junto a su 
+Arquetipo.
+B. Características del Familiar cuando está en Modo 
+Cazador (movimiento, daño y efectos adicionales).
+C. Espacio para la Acción del Familiar (acción física) 
+que puede ser realizada por el Mago cuando el 
+Familiar está en Modo Guardián. La ficha de 
+acción se gira cada vez que se utiliza como el 
+resto de fichas de acciones físicas.
+D. Salud del Familiar con espacio para las heridas.
+Invocar a un Familiar
+Preparativos
+Carta de Familiar
+Cerberus
+F
+ F
+  
+
+Puedes usar la miniatura de 
+Polpetta como punto de inicio de 
+tus Conjuros.  
+1 - ESP
+A
+B
+C
+D
+Familiar; Cerberus
+El Familiar se considera en Modo 
+Guardián si:
+• Acaba de ser invocado.
+• Al final de su activación, el Familiar se 
+encuentra en la misma Sala que su Mago.
+• Al final de una Acción, el Mago se encuentra 
+en la misma Sala que su Familiar.
+• El Mago entra en la Sala donde esté su Familiar durante el movimiento, puede decidir 
+inmediatamente cambiarlo a Modo Guardián y llevárselo con el Mago con el movimiento 
+restante. Alternativamente, el Mago puede dejar al Familiar en esa Sala en su Modo Cazador 
+y continuar el movimiento sin él.
+Un Familiar en Modo Guardián no se considera una miniatura como tal pero se fusiona con el 
+Mago, tanto para el movimiento como para la resolución de efectos.
+Cuando el Familiar está en este modo, el Mago puede usar una de sus Acciones para usar la 
+ficha de acción del Familiar y:
+• Activar la Acción del Familiar.
+• Cambiar al Familiar al Modo Cazador y activarlo inmediatamente. En este caso, si el Familiar 
+sigue en la misma Sala que su Mago tras completar la Acción, volverá al Modo Guardián.
+Un Familiar se considera en 
+Modo Cazador si no se encuentra 
+en la misma Sala que su Mago.
+En el Modo Cazador, el Familiar es una Evocación 
+normal y sigue las reglas de las Evocaciones salvo 
+por el daño (ver anexo).
+Durante la Fase de Evocación, un Mago que 
+tenga un Familiar en Modo Guardián puede 
+cambiar el modo de su Familiar en su turno y activarlo de forma inmediata.
+Un Mago no puede ser derrotado mientras su Familiar esté vivo.
+Cuando un Mago que posea un Familiar sea 
+derrotado, el Trofeo va al oponente que 
+asestó el último golpe, sin importar si el 
+objetivo fuera el Mago o el Familiar. Para el 
+cálculo de puntos se usa solo el Daño en el Tablero del 
+Mago.
+Cuando un Familiar es derrotado, vuelve nuevamente a la 
+reserva, como las Evocaciones básicas.
+Importante: Si estáis usando Familiares, no puede 
+usarse la regla opcional de Frenesí. (Reglamento básico, 
+pág. 30).
+Modo Guardián
+Modo Cazador
+Derrota del Familiar y su Mago
+Daño: En este modo, el Familiar no puede 
+ser hecho objetivo de forma separada. Sin 
+embargo, cuando el Mago sufre daño, 
+todo el daño puede ser distribuido entre 
+el Mago y su Familiar a su elección.
+Daño: En este modo, el Familiar sufre 
+daño y efectos como cualquier otra 
+Evocación. Además, si el Mago recibe 
+más daño del que pueda resistir mientras 
+su Familiar esté en Modo Cazador, deberá 
+asignar ese daño sobrante al Familiar 
+incluso si se encuentra en una Sala 
+distinta.
+ F
+F
+ESP
+F
+Der Vertraute ist in Schutzmodus 
+wenn: 
+• Gleich nach seiner Beschwörung.
+• Wenn der Vertraute am Ende seiner 
+Aktivierung im selben Saal seines Zauberers 
+ist.
+• Wenn ein Zauberer am ende seiner Aktion im 
+selben Saal seines Vertrauten ist.
+• Wenn ein Zauberer einen Saal betritt, kann er entscheiden seinen Vertrauten mit sich 
+mitzunehmen (und setzt ihn so in Schutzmodus). Der Zauberer kann aber auch entscheiden 
+den Vertrauten in seinen Saal zu lassen (der Vertraute bleibt in Jagdmodus) und sich ohne 
+ihn weiterzubewegen.
+Ein Vertrauter in Schutzmodus gilt nicht als freistehende Miniatur. Der Vertraute gehört in 
+diesem Modus zu seiner Zauberer Miniatur, sowohl was Bewegung als auch was Effekte angeht.
+Wenn ein Vertrauter in diesem Modus ist, kann der Zauberer mi einer seiner Aktion, die Aktion 
+des Vertrauten benützen um:
+• Die Aktion des Vertrauten zu aktivieren.
+• Den Vertrauten in Jagdmodus setzen. Sollte der Zauberer in diesem Falle nach seiner 
+Aktivierung noch im gleichen Saal seines Vertrauten sein, so wird dieser wider in Schutzmodus 
+gesetzt werden.
+Vertrauten sind spezielle Beschwörungen die zwei Modi besitzen:
+1. Schutzmodus: wenn ein Vertraute im selben Saal seines Zauberers ist.
+2. Jagdmodus: wenn ein Vertraute nicht im selben Saal seines Zauberers ist.
+Ein Vertrauter kann in seinem Saal beschwört werden 
+und untersteht diesen Regeln:
+1. Verfügbarkeit: Es ist nicht möglich einen neuen 
+Vertrauten zu beschwören wenn keine mehr in der 
+Reserve sind.
+2. Material: Der Zauberer der einen Vertrauten 
+beschwört, sucht sich einen noch verfügbaren 
+Vertrauten aus, nimmt sich die Karte, legt sie unter 
+seinem Charakterbogen wie gewohnt und nimmt 
+seine Aktionsspielstein. 
+3. Miniatur: Verbinde die Vertrauten Miniatur mit 
+deinem Zauberer. Diese gelten jetzt als eine einzelne 
+Miniatur. Der Vertraute ist nun in Schutzmodus.
+4. Limit: Jeder Zauberer kann höchstens einen 
+Vertrauten als Beschwörung haben.
+1. Tausche einen Saal mit del Vertrauten Beschwörungsaal der gleichen Farbe aus.
+2. Lege die Vertrauten Karten und die Vertrauten Spielsteine in Reichweite von allen Spielern.
+A. Bild des Vertrauten mit Name und Archetyp.
+B. Eigenschaften des Vertrauten im Jagdmodus 
+(Bewegung, Schadenspunkte und zusätzliche 
+Effekte).
+C. Vertrauten Aktion (Physischen Aktion) die ein 
+Zauberer ausführen kann wenn der Vertrauter 
+im Schutzmodus ist. Jedes Mal wenn die Aktion 
+ausgeführt wird, wird der Spielstein wie gewohnt 
+gewendet.
+D. Lebenspunkte des Vertrauten mit 
+Lebenspunkteleiste.
+Einen Vertrauten Beschwören
+Vorbereitung
+Vertrauten Karte
+Cerberus
+F
+ F
+  
+
+Du kannst Polpetta als 
+Ausgangspunkt von deinen  
+  Zaubersprüchen benützen.
+1 - DEU
+A
+B
+C
+D
+Vertrauten; Cerberus
+Ein Vertraute ist in Jagdmodus 
+wenn er nicht im selben Saal 
+seines Zauberers ist.
+Im Jagdmodus ist eine Vertrauter eine normale 
+Beschwörung und untersteht den gewöhnlichen 
+Beschwörungsregeln. (Konsultiere die Box 
+welche die Ausnahmen für die Schaden 
+anbelangt.)
+Ein Zauberer der einen Vertrauten im 
+Schutzmodus hat, kann wenn er am Zug ist, den 
+Vertrauten in Jagdmodus versetzen und ihn sofort 
+aktivieren.
+Solange sein Vertrauter noch am leben ist, kann ein Zauberer nicht 
+besiegt werden.
+Wenn ein Zauberer der einen Vertrauten 
+besitzt besiegt wird, bekommt der Gegner 
+der den letzten Schaden zugefügt hat die 
+Trophäe, egal ob der Zauberer oder der 
+Vertraute das Ziel des Angriffes war. Nur die Schaden 
+auf dem Charakterbogen zählen zu den Punkten.
+Wenn ein Vertrauter besiegt wird, wird er wider in den 
+Stapel verfügbaren Vertrauten zurückgelegt. (Wie eine 
+reguläre Beschwörung.)
+Wichtig: wenn du die Vertrauten Expansion benützt, 
+kannst du nicht die optionale Spielregel: Overkill 
+benützen.
+Schutzmodus
+Jagdmodus
+Einen Vertrauten und seinen Zauberer besiegen
+Schaden: In diesem Modus kann 
+der Vertraute nicht als einzelnes Ziel 
+angegriffen werden. Jedoch darf der 
+Zauberer dem Schaden zugefügt wird, die 
+Schaden nach Belieben zwischen sich und 
+seinem Vertrauten verteilen.
+Schaden: In diesem Modus erleidet 
+der Vertraute Schaden wie jede andere 
+Beschwörung. Außerdem muss der 
+Zauberer dem Vertrauten der sich im 
+Jagdmodus befindet Schaden zufügen 
+wenn ihm selbst mehrere Schaden 
+zugefügt werden als der den er erleiden 
+kann. Das gilt auch wenn sich der 
+Vertraute in einem anderen Saal befindet.
+ F
+F
+DE
+F
+Familiar - Draco
+© Ludus Magnus Studio - 2020
+All rights reserved
+www.ludusmagnusstudio.com
+Familiar; Draco
+Familiars are special Evocations that can be used in two different ways, called Modes:
+1. Guard Mode: when a Familiar is in the same Room as its Mage.
+2. Hunting Mode: when a Familiar is in a different Room than its Mage.
+A Familiar can be summoned through its Room using 
+these rules in the following order:
+1. Availability: It is not possible to summon a new 
+Familiar if they are not available in the reserve.
+2. Material: The Mage who summons a Familiar 
+chooses one of those still available, and takes the 
+Familiar’s Card they prefer, placing it under the 
+Mage sheet as usual, and its corresponding Action 
+marker. 
+3. Miniature: Place the Familiar miniature attached to 
+the base of your Mage as a combined, unique model. 
+A newly summoned Familiar is in Guard Mode.
+4. Limit: Each Mage can have a maximum of one Familiar at a 
+time among his Evocations.
+1. Replace a Lodge Room with a Familiar Summon Room of the same color.
+2. Place the Familiar Evocation cards and Familiar Action tokens where all players can access 
+them.
+A. Illustration and name of the Familiar with its 
+Archetype.
+B. Characteristics of the Familiar when it is in Hunting 
+Mode (movement, damage, and any additional 
+effects).
+C. Space for the Familiar Action (Physical Action) 
+that can be performed by the Mage when the 
+Familiar is in Guard Mode. The Action marker is 
+flipped each time it is used just like a normal 
+Physical Action token.
+D. Familiar Health with Wound slots.
+Summon a Familiar
+Preparation
+Familiar Card
+Draco
+F
+ F
+  
+Infl ict  to .
+Ignore .
+ 
+1 - ENG
+A
+B
+C
+D
+Familiar; Draco
+The Familiar is considered in Guard 
+Mode if:
+• It has just been summoned.
+• At the end of its activation, the Familiar is in 
+the same Room as its Mage.
+• At the end of an Action, the Mage is in the 
+same room as his Familiar.
+• If the Mage enters the Room where his Familiar is located during movement, the Mage can 
+decide to immediately return it to Guard Mode and moves it with the Mage for the remainder 
+of that movement. Alternatively, the Mage may leave the Familiar in that Room in Hunting 
+Mode and continue movement without it.
+A Familiar in Guard Mode is not considered a model in its own right but becomes a unique 
+model with the Mage, both for movement and for resolving effects.
+When the Familiar is in this mode, the Mage can, with one of his Actions, use the Familiar 
+Action token to:
+• Activate the Familiar Action.
+• Turn the Familiar in a Hunting Mode and activate it immediately. In this case, if the Familiar 
+is still in his Mage’s Room after completing the Action, it will return to the Guard Mode.
+A Familiar is considered in 
+Hunting Mode if it is not in the 
+same Room as its Mage.
+In Hunting Mode, a Familiar is a normal 
+Evocation and follows all the Evocations rules, 
+except for Damage (see the box).
+In the Evocations Phase, a Mage who has a 
+Familiar in Guard Mode can, in his Turn, change 
+the Familiar Mode and activate it immediately.
+A Mage cannot be defeated as long as his Familiar is alive.
+When a Mage who owns a Familiar is defeated, the 
+Trophy goes to the opponent who inflicted the 
+last hit, regardless of whether the target was the 
+Mage or the Familiar; only the Damage on the Mage Sheet is 
+calculated for the Points.
+When a Familiar is defeated, it returns to the newly available 
+supply, like a standard Evocation.
+Important: if you use Familiars, you cannot use 
+the optional Overkill rules.
+Guard Mode
+Hunting Mode
+Defeat of the Familiar and its Mage
+Damage: In this Mode, the Familiar 
+cannot be separately targeted. However, 
+when the Mage suffers Damage, all 
+damage may be distributed between the 
+Mage and/or the Familiar, as desired.
+Damage: In this Mode, the Familiar 
+suffers Damage and effects as a normal 
+Evocation. Also, if the Mage suffers 
+more Damage than can be endured while 
+his Familiar is in a Hunting Mode, the 
+Mage must assign the excess Damage to 
+the Familiar even if the Familiar is in a 
+different Room.
+ F
+F
+ENG
+F
+I Famigli sono delle Evocazioni speciali che possono essere utilizzati in due diverse modalità, 
+chiamati Stati: 
+1. Posizione di Guardia: quando un Famiglio è nella stessa stanza del Mago.
+2. Posizione di Caccia: quando un Famiglio si trova in una stanza diversa da quella del suo Mago.
+Un Famiglio può essere evocato tramite la sua Stanza 
+utilizzando le seguenti regole nell’ordine indicato:
+1. Disponibilità: Non è possibile evocare nuovi 
+Famigli se non ce ne sono disponibili nella riserva.
+2. Materiale: Il Mago che evoca un Famiglio ne 
+sceglie uno tra quelli ancora disponibili e prende la 
+sua Carta Famiglio, posizionandola sotto la scheda 
+del Mago come di consueto, e prende anche il suo 
+segnalino Azione corrispondente.
+3. Miniatura: Posizionare la miniatura del Famiglio 
+attaccata alla base del proprio Mago come a formare 
+un modello unico. Un Famiglio appena evocato si 
+trova in Posizione di Guardia.
+4. Limite: Ogni Mago può avere massimo un Famiglio 
+tra le proprie Evocazioni.
+1. Sostituire una Stanza della Loggia con una Stanza Evocazione Famiglio dello stesso colore.
+2. Posizionare le Carte Evocazioni Famiglio ed i segnalini Azione del Famiglio a portata di 
+mano.
+A. Illustrazione e nome del Famiglio con il suo archetipo
+B. Caratteristiche del Famiglio quando è in Caccia, 
+Movimento, Danni ed eventuali effetti aggiuntivi
+C. Spazio per l’Azione del Famiglio (Azione Fisica) che 
+può essere eseguita dal Mago quando il Famiglio è 
+in Guardia. Il segnalino Azione viene girato ogni 
+volta che viene usato come un normale segnalino 
+di Azione Fisica.
+D. Salute del Famiglio con gli alloggiamenti delle 
+Ferite
+Evocare un Famiglio
+Preparazione
+Carta Famiglio
+Draco
+F
+ F
+  
+Infl iggi  a .
+Ignora .
+ 
+1 - ITA
+A
+B
+C
+D
+Famiglio; Draco
+Il Famiglio è considerato in 
+Posizione di Guardia se:
+• E’ stato appena evocato.
+• Al termine di una sua attivazione, si trova nella 
+stessa Stanza del suo Mago.
+• Al termine di un’Azione, il suo Mago si trova 
+nella Stanza del Famiglio.
+• Se durante un movimento il suo Mago attraversa la Stanza in cui si trova il Famiglio può 
+decidere di farlo tornare in Posizione di Guardia. e muoverlo con il Mago per il resto di quel 
+movimento. In alternativa, il Mago può lasciare il Famiglio in quella Stanza in Posizione di 
+Caccia e continuare il movimento senza di lui.
+Un Famiglio in Posizione di Guardia non è considerato un modello a se stante, ma diventa un 
+modello unico con il Mago, sia per il movimento che per la risoluzione degli effetti.
+Quando il Famiglio è in questo stato il Mago può, con una delle sue Azioni, utilizzare il 
+segnalino Azione del Famiglio per:
+• Attivare l’Azione del Famiglio (vedi illustrazione).
+• Porre il Famiglio in Posizione di Caccia e attivarlo immediatamente. In questo caso, se subito 
+dopo aver compiuto l’Azione, il Famiglio si trova ancora nella Stanza del Mago tornerà in 
+Posizione di Guardia.
+Un Famiglio è considerato in 
+Posizione di Caccia se non si 
+trova nella stessa Stanza del suo 
+Mago.
+In Posizione di Caccia un Famiglio è una 
+normale Evocazione, e segue tutte le regole delle 
+Evocazioni, ad eccezione dei Danni (vedi sotto)
+Nella Fase delle Evocazioni un Mago che 
+possiede un Famiglio in Posizione di Guardia 
+può, nel suo turno, cambiare la Posizione del 
+Famiglio ed attivarlo immediatamente.
+Fino a quando un Famiglio è in vita il suo Mago non può 
+essere sconfitto.
+Quando un Mago che possiede un Famiglio viene 
+sconfitto, il Trofeo va all’avversario che ha inflitto 
+l’ultimo colpo, a prescindere che il bersaglio di esso 
+fosse il Mago o il Famiglio, per i punti si calcolano solo i 
+Danni sul Mago.
+Quando un Famiglio viene sconfitto torna nella 
+riserva nuovamente disponibile, come una normale 
+Evocazione.
+Importante: se utilizzate i Famigli non potete 
+utilizzare la regola opzionale “Infierire”.
+Posizione di Guardia
+Posizione di Caccia
+Sconfitta del Famiglio e del Mago
+Danni: Il Famiglio non può essere 
+bersagliato singolarmente. Quando il 
+Mago subisce Danni, può distribuire i 
+Danni subiti tra se stesso il Famiglio come 
+preferisce.
+Danni: In questa Posizione il Famiglio 
+subisce Danni ed effetti come una 
+Evocazione. Inoltre, se il Mago subisce 
+Danni oltre quelli che può sopportare 
+mentre il suo Famiglio si trova in 
+Posizione di Caccia, deve assegnare i 
+Danni in eccesso al Famiglio.
+ F
+F
+ITA
+F
+Les Familiers sont des Évocations spéciales qui peuvent être utilisées de deux manières différentes, 
+appelées Modes :
+1. Mode Gardien: Lorsqu’un Familier se trouve dans la même Salle que son Mage.
+2. Mode Chasseur: Lorsqu’un Familier se trouve dans une Salle différente de celle de son Mage.
+Un Familier peut être invoqué dans sa Salle en respectant 
+les règles suivantes:
+1. Disponibilité : Il n’est pas possible d’invoquer un 
+nouveau Familier s’il n’y en a plus de disponible dans 
+la réserve.
+2. Matériel : Le Mage qui invoque un Familier choisit 
+parmi les cartes encore disponibles celle qu’il préfère, 
+et la place sous sa feuille de Mage comme d’habitude. 
+Il prend également le Jeton d’Action correspondant.
+3. Figurine : Placez la Figurine du Familier attachée à 
+la base de votre Mage pour ne former qu’une seule et 
+unique Unité. Un Familier qui vient d’être invoqué se 
+retrouve donc automatiquement en Mode Gardien.
+4. Limite : Chaque Mage ne peut avoir au maximum 
+qu’un seul Familier à la fois parmi ses Évocations.
+1. Remplacez une Salle de la Loge par la Salle d’Invocation des Familiers de la même couleur.
+2. Placez les Cartes d’Évocation des Familiers ainsi que leurs Jetons d’Action à proximité du 
+plateau de jeu, accessibles à tous les joueurs.
+A. Illustration et nom du Familier avec son Archétype.
+B. Caractéristiques du Familier lorsqu’il est en Mode 
+Chasseur (Mouvement, Attaque et tout autre effet 
+supplémentaire).
+C. Emplacement pour l’Action du Familier (Action 
+Physique) qui peut être réalisée par le Mage lorsque 
+le Familier est en Mode Gardien. Le Jeton d’Action 
+est retourné chaque fois qu’il est utilisé comme 
+n’importe quel Jeton d’Action Physique normal.
+D. Santé du Familier avec ses emplacements de 
+Dégâts.
+Invoquer un Familier
+Mise en Place
+Carte de Familier
+Draco
+F
+ F
+  
+Infl igez  à .
+Ignorez les .
+ 
+1 - FRA
+A
+B
+C
+D
+Familiers; Draco
+Le Familier est considéré en Mode 
+Gardien si :
+• Il vient d’être invoqué.
+• A la fin de son activation, le Familier se trouve 
+dans la même Salle que celle de son Mage.
+• À la fin d’une Action, le Mage se retrouve dans 
+la même Salle que celle de son Familier.
+• Si, lors de son déplacement, le Mage entre dans la Salle où se trouve son Familier, le Mage 
+peut décider de le replacer immédiatement en Mode Gardien et continue son déplacement 
+accompagné de son Familier. Réciproquement, le Mage peut laisser son Familier dans une 
+Salle et continuer son déplacement sans lui (le Familier passera alors en Mode Chasseur). Un 
+Familier en Mode Gardien n’est pas considéré comme une unité à part entière mais forme 
+avec son Mage une seule et même unité, que ce soit pour les déplacement comme pour la 
+résolution des effets. 
+Lorsque le Familier est dans ce Mode, le Mage peut, avec l’une de ses actions, utiliser le Jeton 
+d’Action du Familier pour :
+• Activer l’Action du Familier.
+• Mettre le Familier en Mode Chasseur et l’activer immédiatement. Dans ce cas, si le Familier 
+se trouve toujours dans la Salle de son Mage après avoir terminé son Action, il repassera en 
+Mode Gardien.
+Un Familier est considéré en 
+Mode Chasseur s’il ne se trouve 
+pas dans la même Salle que son 
+Mage.
+En Mode Chasseur, un Familier est une 
+Évocation normale et suit toutes les règles 
+d’Évocation, à l’exception des Dégâts (voir 
+encadré).
+Durant la phase d’Évocation, un Mage qui a 
+un Familier en Mode Gardien peut, durant 
+son tour, changer le Mode de son Familier et 
+l’activer immédiatement.
+Un Mage ne peut pas être vaincu tant que son Familier est 
+toujours vivant.
+Lorsqu’un Mage qui possède un Familier est 
+vaincu, le Trophée revient à l’adversaire qui a 
+infligé le dernier coup, que la cible soit le Mage ou 
+le Familier; seuls les cubes de Dégâts présents sur la feuille 
+de Mage seront comptabilisés pour attribuer les Points de 
+Pouvoir.
+Lorsqu’un familier est vaincu, il retourne dans la 
+réserve et devient de nouveau disponible pour tous, 
+comme pour une Évocation normale.
+Important : Si vous utilisez des Familiers, 
+vous ne pouvez pas utiliser la règle optionnelle 
+du Déchaînement.
+Mode Gardien
+Mode Chasseur
+Défaite d’un Familier et de son Mage
+Dégâts: Dans ce Mode, le Familier 
+ne peut pas être ciblé séparément. 
+Cependant, lorsque le Mage subit des 
+Dégâts, Les cubes de Dégâts peuvent 
+être répartis entre le Mage et le Familier, 
+comme vous le souhaitez.
+Dégâts : Dans ce Mode, le Familier 
+subit des Dégâts et des effets comme 
+une Évocation normale. De plus, si son 
+Mage subit plus de Dégâts qu’il ne peut 
+en subir alors que son Familier est en 
+Mode Chasse, le Mage doit attribuer ces 
+Dégâts excédentaires au Familier même 
+si ce dernier se trouve dans une Salle 
+différente.
+ F
+F
+FRA
+F
+Los Familiares son Evocaciones especiales que pueden ser utilizadas de dos formas distintas, 
+llamadas Modos:
+1. Modo Guardián: Cuando un Familiar está en la misma Sala que su Mago.
+2. Modo Cazador: Cuando un Familiar está en una Sala distinta a la de su Mago.
+Coloca las cartas de Evocación de Familiar y las fichas 
+de acción del Familiar al alcance de todos los jugadores.
+1. Disponibilidad: No es posible invocar un nuevo 
+Familiar si no está disponible en la reserva.
+2. Material: El Mago que invoque al Familiar elige uno 
+de los disponibles, y coge la Carta de Familiar que 
+prefiera, colocándola bajo su Tablero de Mago como 
+otras Evocaciones, junto con la ficha de acción 
+correspondiente. 
+3. Miniatura: Coloca la figura del Familiar anexada 
+a la base de tu Mago como una única miniatura 
+combinada. Un Familiar recién invocado está en 
+Modo Guardián..
+4. Límite: Cada Mago puede tener un máximo de un 
+Familiar a la vez entre sus Evocaciones.
+1. Reemplaza una Sala de la Logia con una Sala de Invocación de Familiar del mismo color.
+2. Coloca las cartas de Evocación de Familiar y las fichas de acción del Familiar al alcance de 
+todos los jugadores.
+A. Ilustración y nombre del Familiar junto a su 
+Arquetipo.
+B. Características del Familiar cuando está en Modo 
+Cazador (movimiento, daño y efectos adicionales).
+C. Espacio para la Acción del Familiar (acción física) 
+que puede ser realizada por el Mago cuando el 
+Familiar está en Modo Guardián. La ficha de 
+acción se gira cada vez que se utiliza como el 
+resto de fichas de acciones físicas.
+D. Salud del Familiar con espacio para las heridas.
+Invocar a un Familiar
+Preparativos
+Carta de Familiar
+Draco
+F
+ F
+  
+Infl ige  a .
+Ignora .
+ 
+1 - ESP
+A
+B
+C
+D
+Familiar; Draco
+El Familiar se considera en Modo 
+Guardián si:
+• Acaba de ser invocado.
+• Al final de su activación, el Familiar se 
+encuentra en la misma Sala que su Mago.
+• Al final de una Acción, el Mago se encuentra 
+en la misma Sala que su Familiar.
+• El Mago entra en la Sala donde esté su Familiar durante el movimiento, puede decidir 
+inmediatamente cambiarlo a Modo Guardián y llevárselo con el Mago con el movimiento 
+restante. Alternativamente, el Mago puede dejar al Familiar en esa Sala en su Modo Cazador 
+y continuar el movimiento sin él.
+Un Familiar en Modo Guardián no se considera una miniatura como tal pero se fusiona con el 
+Mago, tanto para el movimiento como para la resolución de efectos.
+Cuando el Familiar está en este modo, el Mago puede usar una de sus Acciones para usar la 
+ficha de acción del Familiar y:
+• Activar la Acción del Familiar.
+• Cambiar al Familiar al Modo Cazador y activarlo inmediatamente. En este caso, si el Familiar 
+sigue en la misma Sala que su Mago tras completar la Acción, volverá al Modo Guardián.
+Un Familiar se considera en 
+Modo Cazador si no se encuentra 
+en la misma Sala que su Mago.
+En el Modo Cazador, el Familiar es una Evocación 
+normal y sigue las reglas de las Evocaciones salvo 
+por el daño (ver anexo).
+Durante la Fase de Evocación, un Mago que 
+tenga un Familiar en Modo Guardián puede 
+cambiar el modo de su Familiar en su turno y activarlo de forma inmediata.
+Un Mago no puede ser derrotado mientras su Familiar esté 
+vivo.
+Cuando un Mago que posea un Familiar sea 
+derrotado, el Trofeo va al oponente que asestó el 
+último golpe, sin importar si el objetivo fuera el 
+Mago o el Familiar. Para el cálculo de puntos se usa solo el 
+Daño en el Tablero del Mago.
+Cuando un Familiar es derrotado, vuelve nuevamente 
+a la reserva, como las Evocaciones básicas.
+Importante: Si estáis usando Familiares, no 
+puede usarse la regla opcional de Frenesí. 
+(Reglamento básico, pág. 30).
+Modo Guardián
+Modo Cazador
+Derrota del Familiar y su Mago
+Daño: En este modo, el Familiar no puede 
+ser hecho objetivo de forma separada. Sin 
+embargo, cuando el Mago sufre daño, 
+todo el daño puede ser distribuido entre 
+el Mago y su Familiar a su elección.
+Daño: En este modo, el Familiar sufre 
+daño y efectos como cualquier otra 
+Evocación. Además, si el Mago recibe 
+más daño del que pueda resistir mientras 
+su Familiar esté en Modo Cazador, deberá 
+asignar ese daño sobrante al Familiar 
+incluso si se encuentra en una Sala 
+distinta.
+ F
+F
+ESP
+F
+Der Vertraute ist in Schutzmodus 
+wenn: 
+• Gleich nach seiner Beschwörung.
+• Wenn der Vertraute am Ende seiner 
+Aktivierung im selben Saal seines Zauberers 
+ist.
+• Wenn ein Zauberer am ende seiner Aktion im 
+selben Saal seines Vertrauten ist.
+• Wenn ein Zauberer einen Saal betritt, kann er entscheiden seinen Vertrauten mit sich 
+mitzunehmen (und setzt ihn so in Schutzmodus). Der Zauberer kann aber auch entscheiden 
+den Vertrauten in seinen Saal zu lassen (der Vertraute bleibt in Jagdmodus) und sich ohne 
+ihn weiterzubewegen.
+Ein Vertrauter in Schutzmodus gilt nicht als freistehende Miniatur. Der Vertraute gehört in 
+diesem Modus zu seiner Zauberer Miniatur, sowohl was Bewegung als auch was Effekte angeht.
+Wenn ein Vertrauter in diesem Modus ist, kann der Zauberer mi einer seiner Aktion, die Aktion 
+des Vertrauten benützen um:
+• Die Aktion des Vertrauten zu aktivieren.
+• Den Vertrauten in Jagdmodus setzen. Sollte der Zauberer in diesem Falle nach seiner 
+Aktivierung noch im gleichen Saal seines Vertrauten sein, so wird dieser wider in Schutzmodus 
+gesetzt werden.
+Vertrauten sind spezielle Beschwörungen die zwei Modi besitzen:
+1. Schutzmodus: wenn ein Vertraute im selben Saal seines Zauberers ist.
+2. Jagdmodus: wenn ein Vertraute nicht im selben Saal seines Zauberers ist.
+Ein Vertrauter kann in seinem Saal beschwört werden 
+und untersteht diesen Regeln:
+1. Verfügbarkeit: Es ist nicht möglich einen neuen 
+Vertrauten zu beschwören wenn keine mehr in der 
+Reserve sind.
+2. Material: Der Zauberer der einen Vertrauten 
+beschwört, sucht sich einen noch verfügbaren 
+Vertrauten aus, nimmt sich die Karte, legt sie unter 
+seinem Charakterbogen wie gewohnt und nimmt 
+seine Aktionsspielstein. 
+3. Miniatur: Verbinde die Vertrauten Miniatur mit 
+deinem Zauberer. Diese gelten jetzt als eine einzelne 
+Miniatur. Der Vertraute ist nun in Schutzmodus.
+4. Limit: Jeder Zauberer kann höchstens einen 
+Vertrauten als Beschwörung haben.
+1. Tausche einen Saal mit del Vertrauten Beschwörungsaal der gleichen Farbe aus.
+2. Lege die Vertrauten Karten und die Vertrauten Spielsteine in Reichweite von allen Spielern.
+A. Bild des Vertrauten mit Name und Archetyp.
+B. Eigenschaften des Vertrauten im Jagdmodus 
+(Bewegung, Schadenspunkte und zusätzliche 
+Effekte).
+C. Vertrauten Aktion (Physischen Aktion) die ein 
+Zauberer ausführen kann wenn der Vertrauter 
+im Schutzmodus ist. Jedes Mal wenn die Aktion 
+ausgeführt wird, wird der Spielstein wie gewohnt 
+gewendet.
+D. Lebenspunkte des Vertrauten mit 
+Lebenspunkteleiste.
+Einen Vertrauten Beschwören
+Vorbereitung
+Vertrauten Karte
+Draco
+F
+ F
+  
+Füge  zu.
+Ignoriere .
+ 
+1 - DEU
+A
+B
+C
+D
+Vertrauten; Draco
+Ein Vertraute ist in Jagdmodus 
+wenn er nicht im selben Saal 
+seines Zauberers ist.
+Im Jagdmodus ist eine Vertrauter eine normale 
+Beschwörung und untersteht den gewöhnlichen 
+Beschwörungsregeln. (Konsultiere die Box 
+welche die Ausnahmen für die Schaden 
+anbelangt.)
+Ein Zauberer der einen Vertrauten im 
+Schutzmodus hat, kann wenn er am Zug ist, den 
+Vertrauten in Jagdmodus versetzen und ihn sofort 
+aktivieren.
+Solange sein Vertrauter noch am leben ist, kann ein 
+Zauberer nicht besiegt werden.
+Wenn ein Zauberer der einen Vertrauten besitzt 
+besiegt wird, bekommt der Gegner der den letzten 
+Schaden zugefügt hat die Trophäe, egal ob der 
+Zauberer oder der Vertraute das Ziel des Angriffes war. 
+Nur die Schaden auf dem Charakterbogen zählen zu den 
+Punkten.
+Wenn ein Vertrauter besiegt wird, wird er wider in 
+den Stapel verfügbaren Vertrauten zurückgelegt. 
+(Wie eine reguläre Beschwörung.)
+Wichtig: wenn du die Vertrauten Expansion 
+benützt, kannst du nicht die optionale 
+Spielregel: Overkill benützen.
+Schutzmodus
+Jagdmodus
+Einen Vertrauten und seinen Zauberer besiegen
+Schaden: In diesem Modus kann 
+der Vertraute nicht als einzelnes Ziel 
+angegriffen werden. Jedoch darf der 
+Zauberer dem Schaden zugefügt wird, die 
+Schaden nach Belieben zwischen sich und 
+seinem Vertrauten verteilen.
+Schaden: In diesem Modus erleidet 
+der Vertraute Schaden wie jede andere 
+Beschwörung. Außerdem muss der 
+Zauberer dem Vertrauten der sich im 
+Jagdmodus befindet Schaden zufügen 
+wenn ihm selbst mehrere Schaden 
+zugefügt werden als der den er erleiden 
+kann. Das gilt auch wenn sich der 
+Vertraute in einem anderen Saal befindet.
+ F
+F
+DE
+F
+Familiar - Griffin
+© Ludus Magnus Studio - 2020
+All rights reserved
+www.ludusmagnusstudio.com
+Familiar; Griffin
+Familiars are special Evocations that can be used in two different ways, called Modes:
+1. Guard Mode: when a Familiar is in the same Room as its Mage.
+2. Hunting Mode: when a Familiar is in a different Room than its Mage.
+A Familiar can be summoned through its Room using 
+these rules in the following order:
+1. Availability: It is not possible to summon a new 
+Familiar if they are not available in the reserve.
+2. Material: The Mage who summons a Familiar 
+chooses one of those still available, and takes the 
+Familiar’s Card they prefer, placing it under the 
+Mage sheet as usual, and its corresponding Action 
+marker. 
+3. Miniature: Place the Familiar miniature attached to 
+the base of your Mage as a combined, unique model. 
+A newly summoned Familiar is in Guard Mode.
+4. Limit: Each Mage can have a maximum of one Familiar at a 
+time among his Evocations.
+1. Replace a Lodge Room with a Familiar Summon Room of the same color.
+2. Place the Familiar Evocation cards and Familiar Action tokens where all players can access 
+them.
+A. Illustration and name of the Familiar with its 
+Archetype.
+B. Characteristics of the Familiar when it is in Hunting 
+Mode (movement, damage, and any additional 
+effects).
+C. Space for the Familiar Action (Physical Action) 
+that can be performed by the Mage when the 
+Familiar is in Guard Mode. The Action marker is 
+flipped each time it is used just like a normal 
+Physical Action token.
+D. Familiar Health with Wound slots.
+Summon a Familiar
+Preparation
+Familiar Card
+Griffin
+1 - ENG
+A
+B
+C
+D
+Familiar; Griffin
+The Familiar is considered in Guard 
+Mode if:
+• It has just been summoned.
+• At the end of its activation, the Familiar is in 
+the same Room as its Mage.
+• At the end of an Action, the Mage is in the 
+same room as his Familiar.
+• If the Mage enters the Room where his Familiar is located during movement, the Mage can 
+decide to immediately return it to Guard Mode and moves it with the Mage for the remainder 
+of that movement. Alternatively, the Mage may leave the Familiar in that Room in Hunting 
+Mode and continue movement without it.
+A Familiar in Guard Mode is not considered a model in its own right but becomes a unique 
+model with the Mage, both for movement and for resolving effects.
+When the Familiar is in this mode, the Mage can, with one of his Actions, use the Familiar 
+Action token to:
+• Activate the Familiar Action.
+• Turn the Familiar in a Hunting Mode and activate it immediately. In this case, if the Familiar 
+is still in his Mage’s Room after completing the Action, it will return to the Guard Mode.
+A Familiar is considered in 
+Hunting Mode if it is not in the 
+same Room as its Mage.
+In Hunting Mode, a Familiar is a normal 
+Evocation and follows all the Evocations rules, 
+except for Damage (see the box).
+In the Evocations Phase, a Mage who has a 
+Familiar in Guard Mode can, in his Turn, change 
+the Familiar Mode and activate it immediately.
+A Mage cannot be defeated as long as his Familiar is alive.
+When a Mage who owns a Familiar is defeated, the 
+Trophy goes to the opponent who inflicted the last hit, 
+regardless of whether the target was the Mage or the 
+Familiar; only the Damage on the Mage Sheet is calculated 
+for the Points.
+When a Familiar is defeated, it returns to the newly 
+available supply, like a standard Evocation.
+Important: if you use Familiars, you cannot use 
+the optional Overkill rules.
+Guard Mode
+Hunting Mode
+Defeat of the Familiar and its Mage
+Damage: In this Mode, the Familiar 
+cannot be separately targeted. However, 
+when the Mage suffers Damage, all 
+damage may be distributed between the 
+Mage and/or the Familiar, as desired.
+Damage: In this Mode, the Familiar 
+suffers Damage and effects as a normal 
+Evocation. Also, if the Mage suffers 
+more Damage than can be endured while 
+his Familiar is in a Hunting Mode, the 
+Mage must assign the excess Damage to 
+the Familiar even if the Familiar is in a 
+different Room.
+ F
+F
+ENG
+F
+I Famigli sono delle Evocazioni speciali che possono essere utilizzati in due diverse modalità, 
+chiamati Stati: 
+1. Posizione di Guardia: quando un Famiglio è nella stessa stanza del Mago.
+2. Posizione di Caccia: quando un Famiglio si trova in una stanza diversa da quella del suo Mago.
+Un Famiglio può essere evocato tramite la sua Stanza 
+utilizzando le seguenti regole nell’ordine indicato:
+1. Disponibilità: Non è possibile evocare nuovi 
+Famigli se non ce ne sono disponibili nella riserva.
+2. Materiale: Il Mago che evoca un Famiglio ne 
+sceglie uno tra quelli ancora disponibili e prende la 
+sua Carta Famiglio, posizionandola sotto la scheda 
+del Mago come di consueto, e prende anche il suo 
+segnalino Azione corrispondente.
+3. Miniatura: Posizionare la miniatura del Famiglio 
+attaccata alla base del proprio Mago come a formare 
+un modello unico. Un Famiglio appena evocato si 
+trova in Posizione di Guardia.
+4. Limite: Ogni Mago può avere massimo un Famiglio 
+tra le proprie Evocazioni.
+1. Sostituire una Stanza della Loggia con una Stanza Evocazione Famiglio dello stesso colore.
+2. Posizionare le Carte Evocazioni Famiglio ed i segnalini Azione del Famiglio a portata di 
+mano.
+A. Illustrazione e nome del Famiglio con il suo archetipo
+B. Caratteristiche del Famiglio quando è in Caccia, 
+Movimento, Danni ed eventuali effetti aggiuntivi
+C. Spazio per l’Azione del Famiglio (Azione Fisica) che 
+può essere eseguita dal Mago quando il Famiglio è 
+in Guardia. Il segnalino Azione viene girato ogni 
+volta che viene usato come un normale segnalino 
+di Azione Fisica.
+D. Salute del Famiglio con gli alloggiamenti delle 
+Ferite
+Evocare un Famiglio
+Preparazione
+Carta Famiglio
+Griffin
+F
+  
+ F
+ from this Familiar 
+or its Mage.
+At the end of its movement, 
+Fierobecco can remove 1 of your 
+ and place it in the Room as 
+ (this skill only works if a free 
+slot is available in the Room). 
+ 
+1 - ENG
+A
+B
+C
+D
+Famiglio; Griffin
+Il Famiglio è considerato in 
+Posizione di Guardia se:
+• E’ stato appena evocato.
+• Al termine di una sua attivazione, si trova nella 
+stessa Stanza del suo Mago.
+• Al termine di un’Azione, il suo Mago si trova 
+nella Stanza del Famiglio.
+• Se durante un movimento il suo Mago attraversa la Stanza in cui si trova il Famiglio può 
+decidere di farlo tornare in Posizione di Guardia. e muoverlo con il Mago per il resto di quel 
+movimento. In alternativa, il Mago può lasciare il Famiglio in quella Stanza in Posizione di 
+Caccia e continuare il movimento senza di lui.
+Un Famiglio in Posizione di Guardia non è considerato un modello a se stante, ma diventa un 
+modello unico con il Mago, sia per il movimento che per la risoluzione degli effetti.
+Quando il Famiglio è in questo stato il Mago può, con una delle sue Azioni, utilizzare il 
+segnalino Azione del Famiglio per:
+• Attivare l’Azione del Famiglio (vedi illustrazione).
+• Porre il Famiglio in Posizione di Caccia e attivarlo immediatamente. In questo caso, se subito 
+dopo aver compiuto l’Azione, il Famiglio si trova ancora nella Stanza del Mago tornerà in 
+Posizione di Guardia.
+Un Famiglio è considerato in 
+Posizione di Caccia se non si 
+trova nella stessa Stanza del suo 
+Mago.
+In Posizione di Caccia un Famiglio è una 
+normale Evocazione, e segue tutte le regole delle 
+Evocazioni, ad eccezione dei Danni (vedi sotto)
+Nella Fase delle Evocazioni un Mago che 
+possiede un Famiglio in Posizione di Guardia 
+può, nel suo turno, cambiare la Posizione del 
+Famiglio ed attivarlo immediatamente.
+Fino a quando un Famiglio è in vita il suo Mago non può 
+essere sconfitto.
+Quando un Mago che possiede un Famiglio viene 
+sconfitto, il Trofeo va all’avversario che ha inflitto 
+l’ultimo colpo, a prescindere che il bersaglio di esso 
+fosse il Mago o il Famiglio, per i punti si calcolano solo i 
+Danni sul Mago.
+Quando un Famiglio viene sconfitto torna nella 
+riserva nuovamente disponibile, come una normale 
+Evocazione.
+Importante: se utilizzate i Famigli non potete 
+utilizzare la regola opzionale “Infierire”.
+Posizione di Guardia
+Posizione di Caccia
+Sconfitta del Famiglio e del Mago
+Danni: Il Famiglio non può essere 
+bersagliato singolarmente. Quando il 
+Mago subisce Danni, può distribuire i 
+Danni subiti tra se stesso il Famiglio come 
+preferisce.
+Danni: In questa Posizione il Famiglio 
+subisce Danni ed effetti come una 
+Evocazione. Inoltre, se il Mago subisce 
+Danni oltre quelli che può sopportare 
+mentre il suo Famiglio si trova in 
+Posizione di Caccia, deve assegnare i 
+Danni in eccesso al Famiglio.
+ F
+F
+ITA
+F
+Les Familiers sont des Évocations spéciales qui peuvent être utilisées de deux manières différentes, 
+appelées Modes :
+1. Mode Gardien: Lorsqu’un Familier se trouve dans la même Salle que son Mage.
+2. Mode Chasseur: Lorsqu’un Familier se trouve dans une Salle différente de celle de son Mage.
+Un Familier peut être invoqué dans sa Salle en respectant 
+les règles suivantes:
+1. Disponibilité : Il n’est pas possible d’invoquer un 
+nouveau Familier s’il n’y en a plus de disponible dans 
+la réserve.
+2. Matériel : Le Mage qui invoque un Familier choisit 
+parmi les cartes encore disponibles celle qu’il préfère, 
+et la place sous sa feuille de Mage comme d’habitude. 
+Il prend également le Jeton d’Action correspondant.
+3. Figurine : Placez la Figurine du Familier attachée à 
+la base de votre Mage pour ne former qu’une seule et 
+unique Unité. Un Familier qui vient d’être invoqué se 
+retrouve donc automatiquement en Mode Gardien.
+4. Limite : Chaque Mage ne peut avoir au maximum 
+qu’un seul Familier à la fois parmi ses Évocations.
+1. Remplacez une Salle de la Loge par la Salle d’Invocation des Familiers de la même couleur.
+2. Placez les Cartes d’Évocation des Familiers ainsi que leurs Jetons d’Action à proximité du 
+plateau de jeu, accessibles à tous les joueurs.
+A. Illustration et nom du Familier avec son Archétype.
+B. Caractéristiques du Familier lorsqu’il est en Mode 
+Chasseur (Mouvement, Attaque et tout autre effet 
+supplémentaire).
+C. Emplacement pour l’Action du Familier (Action 
+Physique) qui peut être réalisée par le Mage lorsque 
+le Familier est en Mode Gardien. Le Jeton d’Action 
+est retourné chaque fois qu’il est utilisé comme 
+n’importe quel Jeton d’Action Physique normal.
+D. Santé du Familier avec ses emplacements de 
+Dégâts.
+Invoquer un Familier
+Mise en Place
+Carte de Familier Griffin
+F
+  
+ F
+ da questo Famiglio 
+o dal suo Mago.
+Alla fi ne del suo movimento, 
+Fierobecco può rimuovere 1 tuo 
+ e piazzarlo nella Stanza come 
+ (questa abilità può essere 
+usata solo se la Stanza non è già 
+piena).
+ 
+1 - ITA
+A
+B
+C
+D
+Familiers; Griffin
+Le Familier est considéré en Mode 
+Gardien si :
+• Il vient d’être invoqué.
+• A la fin de son activation, le Familier se trouve 
+dans la même Salle que celle de son Mage.
+• À la fin d’une Action, le Mage se retrouve dans 
+la même Salle que celle de son Familier.
+• Si, lors de son déplacement, le Mage entre dans la Salle où se trouve son Familier, le Mage 
+peut décider de le replacer immédiatement en Mode Gardien et continue son déplacement 
+accompagné de son Familier. Réciproquement, le Mage peut laisser son Familier dans une 
+Salle et continuer son déplacement sans lui (le Familier passera alors en Mode Chasseur). Un 
+Familier en Mode Gardien n’est pas considéré comme une unité à part entière mais forme 
+avec son Mage une seule et même unité, que ce soit pour les déplacement comme pour la 
+résolution des effets. 
+Lorsque le Familier est dans ce Mode, le Mage peut, avec l’une de ses actions, utiliser le Jeton 
+d’Action du Familier pour :
+• Activer l’Action du Familier.
+• Mettre le Familier en Mode Chasseur et l’activer immédiatement. Dans ce cas, si le Familier 
+se trouve toujours dans la Salle de son Mage après avoir terminé son Action, il repassera en 
+Mode Gardien.
+Un Familier est considéré en 
+Mode Chasseur s’il ne se trouve 
+pas dans la même Salle que son 
+Mage.
+En Mode Chasseur, un Familier est une 
+Évocation normale et suit toutes les règles 
+d’Évocation, à l’exception des Dégâts (voir 
+encadré).
+Durant la phase d’Évocation, un Mage qui a 
+un Familier en Mode Gardien peut, durant 
+son tour, changer le Mode de son Familier et 
+l’activer immédiatement.
+Un Mage ne peut pas être vaincu tant que son Familier est 
+toujours vivant.
+Lorsqu’un Mage qui possède un Familier est vaincu, le 
+Trophée revient à l’adversaire qui a infligé le dernier 
+coup, que la cible soit le Mage ou le Familier; seuls 
+les cubes de Dégâts présents sur la feuille de Mage seront 
+comptabilisés pour attribuer les Points de Pouvoir.
+Lorsqu’un familier est vaincu, il retourne dans la réserve 
+et devient de nouveau disponible pour tous, comme 
+pour une Évocation normale.
+Important : Si vous utilisez des Familiers, vous 
+ne pouvez pas utiliser la règle optionnelle du 
+Déchaînement.
+Mode Gardien
+Mode Chasseur
+Défaite d’un Familier et de son Mage
+Dégâts: Dans ce Mode, le Familier 
+ne peut pas être ciblé séparément. 
+Cependant, lorsque le Mage subit des 
+Dégâts, Les cubes de Dégâts peuvent 
+être répartis entre le Mage et le Familier, 
+comme vous le souhaitez.
+Dégâts : Dans ce Mode, le Familier 
+subit des Dégâts et des effets comme 
+une Évocation normale. De plus, si son 
+Mage subit plus de Dégâts qu’il ne peut 
+en subir alors que son Familier est en 
+Mode Chasse, le Mage doit attribuer ces 
+Dégâts excédentaires au Familier même 
+si ce dernier se trouve dans une Salle 
+différente.
+ F
+F
+FRA
+F
+Los Familiares son Evocaciones especiales que pueden ser utilizadas de dos formas distintas, 
+llamadas Modos:
+1. Modo Guardián: Cuando un Familiar está en la misma Sala que su Mago.
+2. Modo Cazador: Cuando un Familiar está en una Sala distinta a la de su Mago.
+Coloca las cartas de Evocación de Familiar y las fichas 
+de acción del Familiar al alcance de todos los jugadores.
+1. Disponibilidad: No es posible invocar un nuevo 
+Familiar si no está disponible en la reserva.
+2. Material: El Mago que invoque al Familiar elige uno 
+de los disponibles, y coge la Carta de Familiar que 
+prefiera, colocándola bajo su Tablero de Mago como 
+otras Evocaciones, junto con la ficha de acción 
+correspondiente. 
+3. Miniatura: Coloca la figura del Familiar anexada 
+a la base de tu Mago como una única miniatura 
+combinada. Un Familiar recién invocado está en 
+Modo Guardián..
+4. Límite: Cada Mago puede tener un máximo de un 
+Familiar a la vez entre sus Evocaciones.
+1. Reemplaza una Sala de la Logia con una Sala de Invocación de Familiar del mismo color.
+2. Coloca las cartas de Evocación de Familiar y las fichas de acción del Familiar al alcance de 
+todos los jugadores.
+A. Ilustración y nombre del Familiar junto a su 
+Arquetipo.
+B. Características del Familiar cuando está en Modo 
+Cazador (movimiento, daño y efectos adicionales).
+C. Espacio para la Acción del Familiar (acción física) 
+que puede ser realizada por el Mago cuando el 
+Familiar está en Modo Guardián. La ficha de 
+acción se gira cada vez que se utiliza como el 
+resto de fichas de acciones físicas.
+D. Salud del Familiar con espacio para las heridas.
+Invocar a un Familiar
+Preparativos
+Carta de Familiar
+Griffin
+F
+  
+ F
+ sur ce familier 
+ou sur son Mage.
+A la fi n de son déplacement, 
+Fierobecco peut retirer 1 de vos 
+ et le place dans la Salle en 
+tant que  (ne fonctionne 
+que si la Salle possède un 
+emplacement libre). 
+ 
+1 - FRA
+A
+B
+C
+D
+Familiar; Griffin
+El Familiar se considera en Modo 
+Guardián si:
+• Acaba de ser invocado.
+• Al final de su activación, el Familiar se 
+encuentra en la misma Sala que su Mago.
+• Al final de una Acción, el Mago se encuentra 
+en la misma Sala que su Familiar.
+• El Mago entra en la Sala donde esté su Familiar durante el movimiento, puede decidir 
+inmediatamente cambiarlo a Modo Guardián y llevárselo con el Mago con el movimiento 
+restante. Alternativamente, el Mago puede dejar al Familiar en esa Sala en su Modo Cazador 
+y continuar el movimiento sin él.
+Un Familiar en Modo Guardián no se considera una miniatura como tal pero se fusiona con el 
+Mago, tanto para el movimiento como para la resolución de efectos.
+Cuando el Familiar está en este modo, el Mago puede usar una de sus Acciones para usar la 
+ficha de acción del Familiar y:
+• Activar la Acción del Familiar.
+• Cambiar al Familiar al Modo Cazador y activarlo inmediatamente. En este caso, si el Familiar 
+sigue en la misma Sala que su Mago tras completar la Acción, volverá al Modo Guardián.
+Un Familiar se considera en 
+Modo Cazador si no se encuentra 
+en la misma Sala que su Mago.
+En el Modo Cazador, el Familiar es una Evocación 
+normal y sigue las reglas de las Evocaciones salvo 
+por el daño (ver anexo).
+Durante la Fase de Evocación, un Mago que 
+tenga un Familiar en Modo Guardián puede 
+cambiar el modo de su Familiar en su turno y activarlo de forma inmediata.
+Un Mago no puede ser derrotado mientras su Familiar esté 
+vivo.
+Cuando un Mago que posea un Familiar sea derrotado, 
+el Trofeo va al oponente que asestó el último golpe, 
+sin importar si el objetivo fuera el Mago o el 
+Familiar. Para el cálculo de puntos se usa solo el Daño en 
+el Tablero del Mago.
+Cuando un Familiar es derrotado, vuelve nuevamente 
+a la reserva, como las Evocaciones básicas.
+Importante: Si estáis usando Familiares, no 
+puede usarse la regla opcional de Frenesí. 
+(Reglamento básico, pág. 30).
+Modo Guardián
+Modo Cazador
+Derrota del Familiar y su Mago
+Daño: En este modo, el Familiar no puede 
+ser hecho objetivo de forma separada. Sin 
+embargo, cuando el Mago sufre daño, 
+todo el daño puede ser distribuido entre 
+el Mago y su Familiar a su elección.
+Daño: En este modo, el Familiar sufre 
+daño y efectos como cualquier otra 
+Evocación. Además, si el Mago recibe 
+más daño del que pueda resistir mientras 
+su Familiar esté en Modo Cazador, deberá 
+asignar ese daño sobrante al Familiar 
+incluso si se encuentra en una Sala 
+distinta.
+ F
+F
+ESP
+F
+Der Vertraute ist in Schutzmodus 
+wenn: 
+• Gleich nach seiner Beschwörung.
+• Wenn der Vertraute am Ende seiner 
+Aktivierung im selben Saal seines Zauberers 
+ist.
+• Wenn ein Zauberer am ende seiner Aktion im 
+selben Saal seines Vertrauten ist.
+• Wenn ein Zauberer einen Saal betritt, kann er entscheiden seinen Vertrauten mit sich 
+mitzunehmen (und setzt ihn so in Schutzmodus). Der Zauberer kann aber auch entscheiden 
+den Vertrauten in seinen Saal zu lassen (der Vertraute bleibt in Jagdmodus) und sich ohne 
+ihn weiterzubewegen.
+Ein Vertrauter in Schutzmodus gilt nicht als freistehende Miniatur. Der Vertraute gehört in 
+diesem Modus zu seiner Zauberer Miniatur, sowohl was Bewegung als auch was Effekte angeht.
+Wenn ein Vertrauter in diesem Modus ist, kann der Zauberer mi einer seiner Aktion, die Aktion 
+des Vertrauten benützen um:
+• Die Aktion des Vertrauten zu aktivieren.
+• Den Vertrauten in Jagdmodus setzen. Sollte der Zauberer in diesem Falle nach seiner 
+Aktivierung noch im gleichen Saal seines Vertrauten sein, so wird dieser wider in Schutzmodus 
+gesetzt werden.
+Vertrauten sind spezielle Beschwörungen die zwei Modi besitzen:
+1. Schutzmodus: wenn ein Vertraute im selben Saal seines Zauberers ist.
+2. Jagdmodus: wenn ein Vertraute nicht im selben Saal seines Zauberers ist.
+Ein Vertrauter kann in seinem Saal beschwört werden 
+und untersteht diesen Regeln:
+1. Verfügbarkeit: Es ist nicht möglich einen neuen 
+Vertrauten zu beschwören wenn keine mehr in der 
+Reserve sind.
+2. Material: Der Zauberer der einen Vertrauten 
+beschwört, sucht sich einen noch verfügbaren 
+Vertrauten aus, nimmt sich die Karte, legt sie unter 
+seinem Charakterbogen wie gewohnt und nimmt 
+seine Aktionsspielstein. 
+3. Miniatur: Verbinde die Vertrauten Miniatur mit 
+deinem Zauberer. Diese gelten jetzt als eine einzelne 
+Miniatur. Der Vertraute ist nun in Schutzmodus.
+4. Limit: Jeder Zauberer kann höchstens einen 
+Vertrauten als Beschwörung haben.
+1. Tausche einen Saal mit del Vertrauten Beschwörungsaal der gleichen Farbe aus.
+2. Lege die Vertrauten Karten und die Vertrauten Spielsteine in Reichweite von allen Spielern.
+A. Bild des Vertrauten mit Name und Archetyp.
+B. Eigenschaften des Vertrauten im Jagdmodus 
+(Bewegung, Schadenspunkte und zusätzliche 
+Effekte).
+C. Vertrauten Aktion (Physischen Aktion) die ein 
+Zauberer ausführen kann wenn der Vertrauter 
+im Schutzmodus ist. Jedes Mal wenn die Aktion 
+ausgeführt wird, wird der Spielstein wie gewohnt 
+gewendet.
+D. Lebenspunkte des Vertrauten mit 
+Lebenspunkteleiste.
+Einen Vertrauten Beschwören
+Vorbereitung
+Vertrauten Karte
+Griffin
+F
+  
+ F
+ de este Familiar o su Mago.
+Al fi nal de su movimiento, 
+Fierobecco puede retirar 1 de tus 
+ y colocarlo en la Sala como 
+ (esta habilidad solo funciona si  la Sala tiene espacio disponible). 
+
+1 - ESP
+A
+B
+C
+D
+Vertrauten; Griffin
+Ein Vertraute ist in Jagdmodus 
+wenn er nicht im selben Saal 
+seines Zauberers ist.
+Im Jagdmodus ist eine Vertrauter eine normale 
+Beschwörung und untersteht den gewöhnlichen 
+Beschwörungsregeln. (Konsultiere die Box 
+welche die Ausnahmen für die Schaden 
+anbelangt.)
+Ein Zauberer der einen Vertrauten im 
+Schutzmodus hat, kann wenn er am Zug ist, den 
+Vertrauten in Jagdmodus versetzen und ihn sofort 
+aktivieren.
+Solange sein Vertrauter noch am leben ist, kann ein Zauberer 
+nicht besiegt werden.
+Wenn ein Zauberer der einen Vertrauten besitzt 
+besiegt wird, bekommt der Gegner der den letzten 
+Schaden zugefügt hat die Trophäe, egal ob der 
+Zauberer oder der Vertraute das Ziel des Angriffes war. 
+Nur die Schaden auf dem Charakterbogen zählen zu den 
+Punkten.
+Wenn ein Vertrauter besiegt wird, wird er wider in 
+den Stapel verfügbaren Vertrauten zurückgelegt. 
+(Wie eine reguläre Beschwörung.)
+Wichtig: wenn du die Vertrauten Expansion 
+benützt, kannst du nicht die optionale 
+Spielregel: Overkill benützen.
+Schutzmodus
+Jagdmodus
+Einen Vertrauten und seinen Zauberer besiegen
+Schaden: In diesem Modus kann 
+der Vertraute nicht als einzelnes Ziel 
+angegriffen werden. Jedoch darf der 
+Zauberer dem Schaden zugefügt wird, die 
+Schaden nach Belieben zwischen sich und 
+seinem Vertrauten verteilen.
+Schaden: In diesem Modus erleidet 
+der Vertraute Schaden wie jede andere 
+Beschwörung. Außerdem muss der 
+Zauberer dem Vertrauten der sich im 
+Jagdmodus befindet Schaden zufügen 
+wenn ihm selbst mehrere Schaden 
+zugefügt werden als der den er erleiden 
+kann. Das gilt auch wenn sich der 
+Vertraute in einem anderen Saal befindet.
+ F
+F
+DE
+F
+Familiar - Hydra
+© Ludus Magnus Studio - 2020
+All rights reserved
+www.ludusmagnusstudio.com
+Familiar; Hydra
+Familiars are special Evocations that can be used in two different ways, called Modes:
+1. Guard Mode: when a Familiar is in the same Room as its Mage.
+2. Hunting Mode: when a Familiar is in a different Room than its Mage.
+A Familiar can be summoned through its Room using 
+these rules in the following order:
+1. Availability: It is not possible to summon a new 
+Familiar if they are not available in the reserve.
+2. Material: The Mage who summons a Familiar 
+chooses one of those still available, and takes the 
+Familiar’s Card they prefer, placing it under the 
+Mage sheet as usual, and its corresponding Action 
+marker. 
+3. Miniature: Place the Familiar miniature attached to 
+the base of your Mage as a combined, unique model. 
+A newly summoned Familiar is in Guard Mode.
+4. Limit: Each Mage can have a maximum of one Familiar at a 
+time among his Evocations.
+1. Replace a Lodge Room with a Familiar Summon Room of the same color.
+2. Place the Familiar Evocation cards and Familiar Action tokens where all players can access 
+them.
+A. Illustration and name of the Familiar with its 
+Archetype.
+B. Characteristics of the Familiar when it is in Hunting 
+Mode (movement, damage, and any additional 
+effects).
+C. Space for the Familiar Action (Physical Action) 
+that can be performed by the Mage when the 
+Familiar is in Guard Mode. The Action marker is 
+flipped each time it is used just like a normal 
+Physical Action token.
+D. Familiar Health with Wound slots.
+Summon a Familiar
+Preparation
+Familiar Card
+Hydra
+1 - ENG
+A
+B
+C
+D
+Familiar; Hydra
+The Familiar is considered in Guard 
+Mode if:
+• It has just been summoned.
+• At the end of its activation, the Familiar is in 
+the same Room as its Mage.
+• At the end of an Action, the Mage is in the 
+same room as his Familiar.
+• If the Mage enters the Room where his Familiar is located during movement, the Mage can 
+decide to immediately return it to Guard Mode and moves it with the Mage for the remainder 
+of that movement. Alternatively, the Mage may leave the Familiar in that Room in Hunting 
+Mode and continue movement without it.
+A Familiar in Guard Mode is not considered a model in its own right but becomes a unique 
+model with the Mage, both for movement and for resolving effects.
+When the Familiar is in this mode, the Mage can, with one of his Actions, use the Familiar 
+Action token to:
+• Activate the Familiar Action.
+• Turn the Familiar in a Hunting Mode and activate it immediately. In this case, if the Familiar 
+is still in his Mage’s Room after completing the Action, it will return to the Guard Mode.
+A Familiar is considered in 
+Hunting Mode if it is not in the 
+same Room as its Mage.
+In Hunting Mode, a Familiar is a normal 
+Evocation and follows all the Evocations rules, 
+except for Damage (see the box).
+In the Evocations Phase, a Mage who has a 
+Familiar in Guard Mode can, in his Turn, change 
+the Familiar Mode and activate it immediately.
+A Mage cannot be defeated as long as his Familiar is alive.
+When a Mage who owns a Familiar is defeated, 
+the Trophy goes to the opponent who inflicted the 
+last hit, regardless of whether the target was the 
+Mage or the Familiar; only the Damage on the Mage 
+Sheet is calculated for the Points.
+When a Familiar is defeated, it returns to the 
+newly available supply, like a standard 
+Evocation.
+Important: if you use Familiars, you 
+cannot use the optional Overkill 
+rules.
+Guard Mode
+Hunting Mode
+Defeat of the Familiar and its Mage
+Damage: In this Mode, the Familiar 
+cannot be separately targeted. However, 
+when the Mage suffers Damage, all 
+damage may be distributed between the 
+Mage and/or the Familiar, as desired.
+Damage: In this Mode, the Familiar 
+suffers Damage and effects as a normal 
+Evocation. Also, if the Mage suffers 
+more Damage than can be endured while 
+his Familiar is in a Hunting Mode, the 
+Mage must assign the excess Damage to 
+the Familiar even if the Familiar is in a 
+different Room.
+ F
+F
+ENG
+F
+I Famigli sono delle Evocazioni speciali che possono essere utilizzati in due diverse modalità, 
+chiamati Stati: 
+1. Posizione di Guardia: quando un Famiglio è nella stessa stanza del Mago.
+2. Posizione di Caccia: quando un Famiglio si trova in una stanza diversa da quella del suo Mago.
+Un Famiglio può essere evocato tramite la sua Stanza 
+utilizzando le seguenti regole nell’ordine indicato:
+1. Disponibilità: Non è possibile evocare nuovi 
+Famigli se non ce ne sono disponibili nella riserva.
+2. Materiale: Il Mago che evoca un Famiglio ne 
+sceglie uno tra quelli ancora disponibili e prende la 
+sua Carta Famiglio, posizionandola sotto la scheda 
+del Mago come di consueto, e prende anche il suo 
+segnalino Azione corrispondente.
+3. Miniatura: Posizionare la miniatura del Famiglio 
+attaccata alla base del proprio Mago come a formare 
+un modello unico. Un Famiglio appena evocato si 
+trova in Posizione di Guardia.
+4. Limite: Ogni Mago può avere massimo un Famiglio 
+tra le proprie Evocazioni.
+1. Sostituire una Stanza della Loggia con una Stanza Evocazione Famiglio dello stesso colore.
+2. Posizionare le Carte Evocazioni Famiglio ed i segnalini Azione del Famiglio a portata di 
+mano.
+A. Illustrazione e nome del Famiglio con il suo archetipo
+B. Caratteristiche del Famiglio quando è in Caccia, 
+Movimento, Danni ed eventuali effetti aggiuntivi
+C. Spazio per l’Azione del Famiglio (Azione Fisica) che 
+può essere eseguita dal Mago quando il Famiglio è 
+in Guardia. Il segnalino Azione viene girato ogni 
+volta che viene usato come un normale segnalino 
+di Azione Fisica.
+D. Salute del Famiglio con gli alloggiamenti delle 
+Ferite
+Evocare un Famiglio
+Preparazione
+Carta Famiglio
+Hydra
+F
+ F
+Place  in your Room.
+At the end of the movement, 
+move  from a Room where 
+Tiamat has passed through during 
+its movement and place it into 
+the Room where it stops, but only 
+if there is an available slot. 
+ 
+   
+1 - ENG
+A
+B
+C
+D
+Famiglio; Hydra
+Il Famiglio è considerato in 
+Posizione di Guardia se:
+• E’ stato appena evocato.
+• Al termine di una sua attivazione, si trova nella 
+stessa Stanza del suo Mago.
+• Al termine di un’Azione, il suo Mago si trova 
+nella Stanza del Famiglio.
+• Se durante un movimento il suo Mago attraversa la Stanza in cui si trova il Famiglio può 
+decidere di farlo tornare in Posizione di Guardia. e muoverlo con il Mago per il resto di quel 
+movimento. In alternativa, il Mago può lasciare il Famiglio in quella Stanza in Posizione di 
+Caccia e continuare il movimento senza di lui.
+Un Famiglio in Posizione di Guardia non è considerato un modello a se stante, ma diventa un 
+modello unico con il Mago, sia per il movimento che per la risoluzione degli effetti.
+Quando il Famiglio è in questo stato il Mago può, con una delle sue Azioni, utilizzare il 
+segnalino Azione del Famiglio per:
+• Attivare l’Azione del Famiglio (vedi illustrazione).
+• Porre il Famiglio in Posizione di Caccia e attivarlo immediatamente. In questo caso, se subito 
+dopo aver compiuto l’Azione, il Famiglio si trova ancora nella Stanza del Mago tornerà in 
+Posizione di Guardia.
+Un Famiglio è considerato in 
+Posizione di Caccia se non si 
+trova nella stessa Stanza del suo 
+Mago.
+In Posizione di Caccia un Famiglio è una 
+normale Evocazione, e segue tutte le regole delle 
+Evocazioni, ad eccezione dei Danni (vedi sotto)
+Nella Fase delle Evocazioni un Mago che 
+possiede un Famiglio in Posizione di Guardia 
+può, nel suo turno, cambiare la Posizione del 
+Famiglio ed attivarlo immediatamente.
+Fino a quando un Famiglio è in vita il suo Mago non può 
+essere sconfitto.
+Quando un Mago che possiede un Famiglio viene 
+sconfitto, il Trofeo va all’avversario che ha inflitto 
+l’ultimo colpo, a prescindere che il bersaglio 
+di esso fosse il Mago o il Famiglio, per i punti si 
+calcolano solo i Danni sul Mago.
+Quando un Famiglio viene sconfitto torna 
+nella riserva nuovamente disponibile, 
+come una normale Evocazione.
+Importante: se utilizzate i Famigli 
+non potete utilizzare la regola 
+opzionale “Infierire”.
+Posizione di Guardia
+Posizione di Caccia
+Sconfitta del Famiglio e del Mago
+Danni: Il Famiglio non può essere 
+bersagliato singolarmente. Quando il 
+Mago subisce Danni, può distribuire i 
+Danni subiti tra se stesso il Famiglio come 
+preferisce.
+Danni: In questa Posizione il Famiglio 
+subisce Danni ed effetti come una 
+Evocazione. Inoltre, se il Mago subisce 
+Danni oltre quelli che può sopportare 
+mentre il suo Famiglio si trova in 
+Posizione di Caccia, deve assegnare i 
+Danni in eccesso al Famiglio.
+ F
+F
+ITA
+F
+Les Familiers sont des Évocations spéciales qui peuvent être utilisées de deux manières différentes, 
+appelées Modes :
+1. Mode Gardien: Lorsqu’un Familier se trouve dans la même Salle que son Mage.
+2. Mode Chasseur: Lorsqu’un Familier se trouve dans une Salle différente de celle de son Mage.
+Un Familier peut être invoqué dans sa Salle en respectant 
+les règles suivantes:
+1. Disponibilité : Il n’est pas possible d’invoquer un 
+nouveau Familier s’il n’y en a plus de disponible dans 
+la réserve.
+2. Matériel : Le Mage qui invoque un Familier choisit 
+parmi les cartes encore disponibles celle qu’il préfère, 
+et la place sous sa feuille de Mage comme d’habitude. 
+Il prend également le Jeton d’Action correspondant.
+3. Figurine : Placez la Figurine du Familier attachée à 
+la base de votre Mage pour ne former qu’une seule et 
+unique Unité. Un Familier qui vient d’être invoqué se 
+retrouve donc automatiquement en Mode Gardien.
+4. Limite : Chaque Mage ne peut avoir au maximum 
+qu’un seul Familier à la fois parmi ses Évocations.
+1. Remplacez une Salle de la Loge par la Salle d’Invocation des Familiers de la même couleur.
+2. Placez les Cartes d’Évocation des Familiers ainsi que leurs Jetons d’Action à proximité du 
+plateau de jeu, accessibles à tous les joueurs.
+A. Illustration et nom du Familier avec son Archétype.
+B. Caractéristiques du Familier lorsqu’il est en Mode 
+Chasseur (Mouvement, Attaque et tout autre effet 
+supplémentaire).
+C. Emplacement pour l’Action du Familier (Action 
+Physique) qui peut être réalisée par le Mage lorsque 
+le Familier est en Mode Gardien. Le Jeton d’Action 
+est retourné chaque fois qu’il est utilisé comme 
+n’importe quel Jeton d’Action Physique normal.
+D. Santé du Familier avec ses emplacements de 
+Dégâts.
+Invoquer un Familier
+Mise en Place
+Carte de Familier Hydra
+F
+ F
+Piazza  nella tua Stanza.
+Al termine del movimento sposta 
+ da una Stanza in cui è 
+passata Tiamat nella Stanza in cui 
+si ferma, solo se c’è uno spazio 
+disponibile.
+ 
+   
+1 - ITA
+A
+B
+C
+D
+Familiers; Hydra
+Le Familier est considéré en Mode 
+Gardien si :
+• Il vient d’être invoqué.
+• A la fin de son activation, le Familier se trouve 
+dans la même Salle que celle de son Mage.
+• À la fin d’une Action, le Mage se retrouve dans 
+la même Salle que celle de son Familier.
+• Si, lors de son déplacement, le Mage entre dans la Salle où se trouve son Familier, le Mage 
+peut décider de le replacer immédiatement en Mode Gardien et continue son déplacement 
+accompagné de son Familier. Réciproquement, le Mage peut laisser son Familier dans une 
+Salle et continuer son déplacement sans lui (le Familier passera alors en Mode Chasseur). Un 
+Familier en Mode Gardien n’est pas considéré comme une unité à part entière mais forme 
+avec son Mage une seule et même unité, que ce soit pour les déplacement comme pour la 
+résolution des effets. 
+Lorsque le Familier est dans ce Mode, le Mage peut, avec l’une de ses actions, utiliser le Jeton 
+d’Action du Familier pour :
+• Activer l’Action du Familier.
+• Mettre le Familier en Mode Chasseur et l’activer immédiatement. Dans ce cas, si le Familier 
+se trouve toujours dans la Salle de son Mage après avoir terminé son Action, il repassera en 
+Mode Gardien.
+Un Familier est considéré en 
+Mode Chasseur s’il ne se trouve 
+pas dans la même Salle que son 
+Mage.
+En Mode Chasseur, un Familier est une 
+Évocation normale et suit toutes les règles 
+d’Évocation, à l’exception des Dégâts (voir 
+encadré).
+Durant la phase d’Évocation, un Mage qui a 
+un Familier en Mode Gardien peut, durant 
+son tour, changer le Mode de son Familier et 
+l’activer immédiatement.
+Un Mage ne peut pas être vaincu tant que son Familier est 
+toujours vivant.
+Lorsqu’un Mage qui possède un Familier est 
+vaincu, le Trophée revient à l’adversaire qui a 
+infligé le dernier coup, que la cible soit le Mage ou 
+le Familier; seuls les cubes de Dégâts présents 
+sur la feuille de Mage seront comptabilisés pour 
+attribuer les Points de Pouvoir.
+Lorsqu’un familier est vaincu, il retourne 
+dans la réserve et devient de nouveau 
+disponible pour tous, comme pour une 
+Évocation normale.
+Important : Si vous utilisez des 
+Familiers, vous ne pouvez pas 
+utiliser la règle optionnelle du 
+Déchaînement.
+Mode Gardien
+Mode Chasseur
+Défaite d’un Familier et de son Mage
+Dégâts: Dans ce Mode, le Familier 
+ne peut pas être ciblé séparément. 
+Cependant, lorsque le Mage subit des 
+Dégâts, Les cubes de Dégâts peuvent 
+être répartis entre le Mage et le Familier, 
+comme vous le souhaitez.
+Dégâts : Dans ce Mode, le Familier 
+subit des Dégâts et des effets comme 
+une Évocation normale. De plus, si son 
+Mage subit plus de Dégâts qu’il ne peut 
+en subir alors que son Familier est en 
+Mode Chasse, le Mage doit attribuer ces 
+Dégâts excédentaires au Familier même 
+si ce dernier se trouve dans une Salle 
+différente.
+ F
+F
+FRA
+F
+Los Familiares son Evocaciones especiales que pueden ser utilizadas de dos formas distintas, 
+llamadas Modos:
+1. Modo Guardián: Cuando un Familiar está en la misma Sala que su Mago.
+2. Modo Cazador: Cuando un Familiar está en una Sala distinta a la de su Mago.
+Coloca las cartas de Evocación de Familiar y las fichas 
+de acción del Familiar al alcance de todos los jugadores.
+1. Disponibilidad: No es posible invocar un nuevo 
+Familiar si no está disponible en la reserva.
+2. Material: El Mago que invoque al Familiar elige uno 
+de los disponibles, y coge la Carta de Familiar que 
+prefiera, colocándola bajo su Tablero de Mago como 
+otras Evocaciones, junto con la ficha de acción 
+correspondiente. 
+3. Miniatura: Coloca la figura del Familiar anexada 
+a la base de tu Mago como una única miniatura 
+combinada. Un Familiar recién invocado está en 
+Modo Guardián..
+4. Límite: Cada Mago puede tener un máximo de un 
+Familiar a la vez entre sus Evocaciones.
+1. Reemplaza una Sala de la Logia con una Sala de Invocación de Familiar del mismo color.
+2. Coloca las cartas de Evocación de Familiar y las fichas de acción del Familiar al alcance de 
+todos los jugadores.
+A. Ilustración y nombre del Familiar junto a su 
+Arquetipo.
+B. Características del Familiar cuando está en Modo 
+Cazador (movimiento, daño y efectos adicionales).
+C. Espacio para la Acción del Familiar (acción física) 
+que puede ser realizada por el Mago cuando el 
+Familiar está en Modo Guardián. La ficha de 
+acción se gira cada vez que se utiliza como el 
+resto de fichas de acciones físicas.
+D. Salud del Familiar con espacio para las heridas.
+Invocar a un Familiar
+Preparativos
+Carta de Familiar
+Hydra
+F
+ F
+Placez  dans votre Salle.
+A la fi n de son déplacement, 
+parcourue par Tiamat durant retirez  d'une Salle 
+son déplacement et placez le 
+dans la Salle où il s'est arrêté (ne 
+fonctionne que si la Salle possède un emplacement libre). 
+ 
+   
+1 - FRA
+A
+B
+C
+D
+Familiar; Hydra
+El Familiar se considera en Modo 
+Guardián si:
+• Acaba de ser invocado.
+• Al final de su activación, el Familiar se 
+encuentra en la misma Sala que su Mago.
+• Al final de una Acción, el Mago se encuentra 
+en la misma Sala que su Familiar.
+• El Mago entra en la Sala donde esté su Familiar durante el movimiento, puede decidir 
+inmediatamente cambiarlo a Modo Guardián y llevárselo con el Mago con el movimiento 
+restante. Alternativamente, el Mago puede dejar al Familiar en esa Sala en su Modo Cazador 
+y continuar el movimiento sin él.
+Un Familiar en Modo Guardián no se considera una miniatura como tal pero se fusiona con el 
+Mago, tanto para el movimiento como para la resolución de efectos.
+Cuando el Familiar está en este modo, el Mago puede usar una de sus Acciones para usar la 
+ficha de acción del Familiar y:
+• Activar la Acción del Familiar.
+• Cambiar al Familiar al Modo Cazador y activarlo inmediatamente. En este caso, si el Familiar 
+sigue en la misma Sala que su Mago tras completar la Acción, volverá al Modo Guardián.
+Un Familiar se considera en 
+Modo Cazador si no se encuentra 
+en la misma Sala que su Mago.
+En el Modo Cazador, el Familiar es una Evocación 
+normal y sigue las reglas de las Evocaciones salvo 
+por el daño (ver anexo).
+Durante la Fase de Evocación, un Mago que 
+tenga un Familiar en Modo Guardián puede 
+cambiar el modo de su Familiar en su turno y activarlo de forma inmediata.
+Un Mago no puede ser derrotado mientras su Familiar esté 
+vivo.
+Cuando un Mago que posea un Familiar sea 
+derrotado, el Trofeo va al oponente que asestó el 
+último golpe, sin importar si el objetivo fuera el 
+Mago o el Familiar. Para el cálculo de puntos se usa solo el 
+Daño en el Tablero del Mago.
+Cuando un Familiar es derrotado, vuelve 
+nuevamente a la reserva, como las 
+Evocaciones básicas.
+Importante: Si estáis usando 
+Familiares, no puede usarse la regla 
+opcional de Frenesí. (Reglamento 
+básico, pág. 30).
+Modo Guardián
+Modo Cazador
+Derrota del Familiar y su Mago
+Daño: En este modo, el Familiar no puede 
+ser hecho objetivo de forma separada. Sin 
+embargo, cuando el Mago sufre daño, 
+todo el daño puede ser distribuido entre 
+el Mago y su Familiar a su elección.
+Daño: En este modo, el Familiar sufre 
+daño y efectos como cualquier otra 
+Evocación. Además, si el Mago recibe 
+más daño del que pueda resistir mientras 
+su Familiar esté en Modo Cazador, deberá 
+asignar ese daño sobrante al Familiar 
+incluso si se encuentra en una Sala 
+distinta.
+ F
+F
+ESP
+F
+Der Vertraute ist in Schutzmodus 
+wenn: 
+• Gleich nach seiner Beschwörung.
+• Wenn der Vertraute am Ende seiner 
+Aktivierung im selben Saal seines Zauberers 
+ist.
+• Wenn ein Zauberer am ende seiner Aktion im 
+selben Saal seines Vertrauten ist.
+• Wenn ein Zauberer einen Saal betritt, kann er entscheiden seinen Vertrauten mit sich 
+mitzunehmen (und setzt ihn so in Schutzmodus). Der Zauberer kann aber auch entscheiden 
+den Vertrauten in seinen Saal zu lassen (der Vertraute bleibt in Jagdmodus) und sich ohne 
+ihn weiterzubewegen.
+Ein Vertrauter in Schutzmodus gilt nicht als freistehende Miniatur. Der Vertraute gehört in 
+diesem Modus zu seiner Zauberer Miniatur, sowohl was Bewegung als auch was Effekte angeht.
+Wenn ein Vertrauter in diesem Modus ist, kann der Zauberer mi einer seiner Aktion, die Aktion 
+des Vertrauten benützen um:
+• Die Aktion des Vertrauten zu aktivieren.
+• Den Vertrauten in Jagdmodus setzen. Sollte der Zauberer in diesem Falle nach seiner 
+Aktivierung noch im gleichen Saal seines Vertrauten sein, so wird dieser wider in Schutzmodus 
+gesetzt werden.
+Vertrauten sind spezielle Beschwörungen die zwei Modi besitzen:
+1. Schutzmodus: wenn ein Vertraute im selben Saal seines Zauberers ist.
+2. Jagdmodus: wenn ein Vertraute nicht im selben Saal seines Zauberers ist.
+Ein Vertrauter kann in seinem Saal beschwört werden 
+und untersteht diesen Regeln:
+1. Verfügbarkeit: Es ist nicht möglich einen neuen 
+Vertrauten zu beschwören wenn keine mehr in der 
+Reserve sind.
+2. Material: Der Zauberer der einen Vertrauten 
+beschwört, sucht sich einen noch verfügbaren 
+Vertrauten aus, nimmt sich die Karte, legt sie unter 
+seinem Charakterbogen wie gewohnt und nimmt 
+seine Aktionsspielstein. 
+3. Miniatur: Verbinde die Vertrauten Miniatur mit 
+deinem Zauberer. Diese gelten jetzt als eine einzelne 
+Miniatur. Der Vertraute ist nun in Schutzmodus.
+4. Limit: Jeder Zauberer kann höchstens einen 
+Vertrauten als Beschwörung haben.
+1. Tausche einen Saal mit del Vertrauten Beschwörungsaal der gleichen Farbe aus.
+2. Lege die Vertrauten Karten und die Vertrauten Spielsteine in Reichweite von allen Spielern.
+A. Bild des Vertrauten mit Name und Archetyp.
+B. Eigenschaften des Vertrauten im Jagdmodus 
+(Bewegung, Schadenspunkte und zusätzliche 
+Effekte).
+C. Vertrauten Aktion (Physischen Aktion) die ein 
+Zauberer ausführen kann wenn der Vertrauter 
+im Schutzmodus ist. Jedes Mal wenn die Aktion 
+ausgeführt wird, wird der Spielstein wie gewohnt 
+gewendet.
+D. Lebenspunkte des Vertrauten mit 
+Lebenspunkteleiste.
+Einen Vertrauten Beschwören
+Vorbereitung
+Vertrauten Karte
+Hydra
+F
+ F
+Asigna en tu Sala.
+Al fi nal del movimiento, mueve 
+ de una Sala por la que 
+Tiamat haya pasado durante su 
+movimiento y colócalo en la Sala 
+donde haya acabado, solamente 
+si hay espacio disponible.
+ 
+   
+1 - ESP
+A
+B
+C
+D
+Vertrauten; Hydra
+Ein Vertraute ist in Jagdmodus 
+wenn er nicht im selben Saal 
+seines Zauberers ist.
+Im Jagdmodus ist eine Vertrauter eine normale 
+Beschwörung und untersteht den gewöhnlichen 
+Beschwörungsregeln. (Konsultiere die Box 
+welche die Ausnahmen für die Schaden 
+anbelangt.)
+Ein Zauberer der einen Vertrauten im 
+Schutzmodus hat, kann wenn er am Zug ist, den 
+Vertrauten in Jagdmodus versetzen und ihn sofort 
+aktivieren.
+Solange sein Vertrauter noch am leben ist, kann ein 
+Zauberer nicht besiegt werden.
+Wenn ein Zauberer der einen Vertrauten besitzt 
+besiegt wird, bekommt der Gegner der den letzten 
+Schaden zugefügt hat die Trophäe, egal ob der 
+Zauberer oder der Vertraute das Ziel des Angriffes 
+war. Nur die Schaden auf dem Charakterbogen 
+zählen zu den Punkten.
+Wenn ein Vertrauter besiegt wird, wird 
+er wider in den Stapel verfügbaren 
+Vertrauten zurückgelegt. (Wie eine 
+reguläre Beschwörung.)
+Wichtig: wenn du die Vertrauten 
+Expansion benützt, kannst du 
+nicht die optionale Spielregel: 
+Overkill benützen.
+Schutzmodus
+Jagdmodus
+Einen Vertrauten und seinen Zauberer besiegen
+Schaden: In diesem Modus kann 
+der Vertraute nicht als einzelnes Ziel 
+angegriffen werden. Jedoch darf der 
+Zauberer dem Schaden zugefügt wird, die 
+Schaden nach Belieben zwischen sich und 
+seinem Vertrauten verteilen.
+Schaden: In diesem Modus erleidet 
+der Vertraute Schaden wie jede andere 
+Beschwörung. Außerdem muss der 
+Zauberer dem Vertrauten der sich im 
+Jagdmodus befindet Schaden zufügen 
+wenn ihm selbst mehrere Schaden 
+zugefügt werden als der den er erleiden 
+kann. Das gilt auch wenn sich der 
+Vertraute in einem anderen Saal befindet.
+ F
+F
+DE
+F

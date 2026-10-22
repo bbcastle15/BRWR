@@ -63,6 +63,7 @@ var resolution_visual_yield_requested: bool = false
 var resolution_visual_yield_active: bool = false
 var next_resolution_id: int = 1
 var active_effect_context: Dictionary = {}
+var current_effect_description: String = ""
 
 # CINIS_ENGINE_V1
 # Cubes physically stored on Evocation cards by card abilities.
@@ -667,7 +668,10 @@ func get_room(room_id: String):
 	return null
 
 
+var selected_lodge_variants: Dictionary = {}
+
 func create_lodge():
+	selected_lodge_variants.clear()
 	var black_rose = selected_room_definition(get_room("black_rose"))
 	var throne = selected_room_definition(get_room("throne"))
 
@@ -759,13 +763,17 @@ func selected_room_definition(base: Dictionary) -> Dictionary:
 		return base
 	var candidates: Array = [base]
 	for definition in room_database:
-		if str(definition.get("replaces", "")) != base_id or not bool(definition.get("playable", true)):
+		if not preload("res://room_variants.gd").allows(base, definition) or selected_lodge_variants.has(str(definition.id)):
 			continue
 		if selection == str(definition.get("id", "")):
-			return definition
+			selected_lodge_variants[str(definition.id)] = true
+			return preload("res://room_variants.gd").for_slot(base, definition)
 		candidates.append(definition)
 	if selection == "random":
-		return candidates[rng.randi_range(0, candidates.size() - 1)]
+		var chosen: Dictionary = candidates[rng.randi_range(0, candidates.size() - 1)]
+		if chosen.id == base_id: return base
+		selected_lodge_variants[str(chosen.id)] = true
+		return preload("res://room_variants.gd").for_slot(base, chosen)
 	# A mismatched ID can never replace a Room from another family.
 	return base
 
@@ -1622,6 +1630,8 @@ func deal_damage(
 	if attacker_id >= 0 and attacker_id != target_player_index \
 	and is_mage_in_cell(target_player_index) and action_type not in ["event", "infectio"]:
 		return 0
+	if action_type in ["physical_attack", "evocation_attack"]:
+		animate_model_attack(attacker_id, target_player_index, null, source_evocation)
 	var capacity: int = players[target_player_index].mage.get_remaining_health()
 	if capacity <= 0:
 		return 0
@@ -2209,6 +2219,9 @@ func create_player_boards():
 	player_boards.clear()
 
 	for i in range(players.size()):
+		if AvatarRules.is_avatar(self, i):
+			player_boards.append(avatar_board)
+			continue
 		var board = player_board_scene.instantiate()
 
 		board.setup(players[i], self, i)
@@ -2262,6 +2275,7 @@ func update_player_board_positions():
 		table_shell._layout()
 	else:
 		for board in player_boards:
+			if board is AvatarBoard: continue
 			board.hide()
 	if playmat != null:
 		var bounds := get_tabletop_bounds()
@@ -2737,6 +2751,26 @@ func deal_damage_to_model(
 
 			return 0
 			
+func animate_model_attack(attacker_id: int, target_player: int, target_evocation: EvocationState = null, source_evocation: EvocationState = null) -> void:
+	if run_tests_on_ready or not is_inside_tree(): return
+	var source: Node2D = evocation_tokens.get(source_evocation.get_instance_id()) if source_evocation != null else (mage_tokens[attacker_id] if attacker_id >= 0 and attacker_id < mage_tokens.size() else null)
+	var target: Node2D = evocation_tokens.get(target_evocation.get_instance_id()) if target_evocation != null else (mage_tokens[target_player] if target_player >= 0 and target_player < mage_tokens.size() else null)
+	if not is_instance_valid(source) or not is_instance_valid(target): return
+	var ghost: Node2D = source.duplicate(0)
+	ghost.set_script(null)
+	ghost.process_mode = Node.PROCESS_MODE_DISABLED
+	for child in ghost.find_children("*", "Control", true, false):
+		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(ghost)
+	ghost.global_transform = source.global_transform
+	ghost.z_index = 100
+	var origin := ghost.global_position
+	var destination := target.global_position
+	var motion := create_tween()
+	motion.tween_property(ghost, "global_position", destination, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	motion.tween_property(ghost, "global_position", origin, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	motion.tween_callback(ghost.queue_free)
+
 func deal_damage_to_evocation(
 	attacker_id: int,
 	evocation: EvocationState,
@@ -2756,6 +2790,8 @@ func deal_damage_to_evocation(
 	if evocation.is_defeated():
 		return 0
 
+	if action_type in ["physical_attack", "evocation_attack"]:
+		animate_model_attack(attacker_id, -1, evocation, source_evocation)
 	var requested: int = min(amount, evocation.get_remaining_health())
 	if requested <= 0:
 		return 0
@@ -3724,6 +3760,11 @@ func move_evocation_to_room_id(
 		return false
 
 	var previous_room_id: String = str(evocation.room_id)
+	if previous_room_id != destination_room_id and table_shell != null:
+		table_shell.close_board()
+		var camera = get_node_or_null("TableCamera")
+		if camera != null:
+			camera.ensure_movement_visible(hex_to_pixel(from_coord), hex_to_pixel(to_coord))
 	evocation.room_id = destination_room_id
 
 	print(
@@ -8604,6 +8645,9 @@ func resolve_evocation_phase(
 	print("==============================================")
 
 	current_phase_play_order = get_play_order()
+	if avatar != null:
+		current_phase_play_order.erase(avatar.player_index)
+		current_phase_play_order.push_front(avatar.player_index)
 	if current_phase_play_order.is_empty():
 		return false
 
@@ -8909,6 +8953,8 @@ func request_effect_choice(
 		public_option.erase("value")
 		# Public board addresses travel with choices, including remote clients.
 		var value = option.get("value")
+		if choice_kind == "evocation_activation_plan" and value is Dictionary:
+			public_option["path"] = value.get("evocation_move_room_ids", []).duplicate()
 		if token.begins_with("evocation_type:") or token.begins_with("evocation_deck:"):
 			public_option["card_kind"] = "evocations"
 		elif token.begins_with("school:") or option.has("school_id"):
@@ -8975,6 +9021,7 @@ func request_effect_choice(
 		"player_index": player_index,
 		"choice_kind": choice_kind,
 		"context_key": context_key,
+		"effect_description": prompt if not prompt.is_empty() else current_effect_description,
 		"movement_origin_room_id": movement_origin,
 		"prompt": prompt,
 		"min_select": min_select,
@@ -9112,7 +9159,9 @@ func submit_effect_choice(
 		print("submit_effect_choice: wrong player")
 		return false
 
-	if pending_effect_choice_context.is_empty():
+	# An empty Dictionary is a valid live context (e.g. Explore resumes after
+	# displacement). The runtime option map identifies an outstanding choice.
+	if pending_effect_choice_values.is_empty():
 		print("submit_effect_choice: missing live Effect context")
 		return false
 
@@ -9487,17 +9536,6 @@ func _quest_request_single_choice(
 		# sentence; the Quest rules will then skip the unapplicable part.
 		return true
 
-	var only_value = options[0].get("value")
-	var selects_quest: bool = only_value is QuestState or (only_value is Dictionary and only_value.get("quest") is QuestState)
-	var selects_evocation: bool = only_value is EvocationState
-	if options.size() == 1 and not confirm_single and not selects_quest and not selects_evocation:
-		var only_option: Dictionary = options[0]
-		_set_interactive_effect_choice(
-			context,
-			context_key,
-			only_option.get("value")
-		)
-		return true
 
 	request_effect_choice(
 		caster_id,
@@ -11341,16 +11379,6 @@ func _apply_or_request_secondary_choice(
 		# normal Effect rules decide whether it is skipped or fails.
 		return true
 
-	if options.size() == 1:
-		var only_option: Dictionary = options[0]
-
-		_set_interactive_effect_choice(
-			context,
-			context_key,
-			only_option.get("value")
-		)
-
-		return true
 
 	request_effect_choice(
 		caster_id,
@@ -14140,7 +14168,11 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	if table_shell == null or network_client or bool(frame.get("_card_presented", false)):
 		return false
 	var data: Dictionary = {}
-	if frame.get("type") == "avatar_command":
+	if frame.get("type") == "jinx_assignment":
+		var jinx: Dictionary = ForgottenAttachments.definition("jinxes", str(frame.id))
+		data = {"kind": "jinxs", "id": frame.id, "title": jinx.get("name", frame.id),
+			"player": int(frame.player_index), "single": true}
+	elif frame.get("type") == "avatar_command":
 		var command: SpellCardState = frame.card
 		data = {"kind": "spells", "id": command.id, "title": command.card_name,
 			"player": avatar.player_index, "single": true, "avatar": true}
@@ -14174,7 +14206,7 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	frame["_card_presented"] = true
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
-	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells"]
+	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells", "jinxs"]
 	data["acknowledge_player"] = int(data.get("player", get_turn_presentation().get("player_index", 0)))
 	if AvatarRules.is_avatar(self, int(data.acknowledge_player)):
 		data.acknowledge_player = crown_owner_id
@@ -14253,6 +14285,8 @@ func process_resolution_stack() -> bool:
 			return true
 
 		match resolution_type:
+			"jinx_assignment":
+				completed = true
 			"avatar_activation":
 				completed = AvatarRules.process_activation(self, frame)
 			"avatar_command":
@@ -14670,7 +14704,10 @@ func process_damage_resolution(
 				return true
 
 			resolution["was_defeated"] = target_mage.is_defeated()
+			var damage_before: int = target_mage.get_damage()
 			var damage_dealt: int = target_mage.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes_available)
+			if table_shell != null and damage_dealt > 0:
+				table_shell.queue_damage_placement(target_player_index, damage_before, target_mage.damage_cubes.duplicate())
 			resolution["actual_damage"] = damage_dealt
 			_sync_damage_result_context(resolution, damage_dealt)
 			_refresh_damage_boards(target_player_index, attacker_id)
@@ -15625,6 +15662,7 @@ func process_effect_sequence_resolution(
 
 
 	var effect: Dictionary = effects[index]
+	current_effect_description = preload("res://effect_description.gd").describe(effect)
 
 	resolution["index"] = index + 1
 
@@ -16510,6 +16548,8 @@ func process_trigger_spell_resolution(
 			}
 			for key in active_spell.context:
 				context[key] = active_spell.context[key]
+			context["spell_target_type"] = str(active_side.get("target", ""))
+			context["spell_range"] = active_side.get("range", "*")
 			context["caster_room_id"] = players[owner_id].mage.room_id
 			# Stored targets/choices of a permanent must not mask this trigger.
 			context.erase("_spell_guard_announced")
@@ -16946,6 +16986,7 @@ func process_explore_resolution(
 
 		"move":
 			var path: Array = resolution.get("destination_room_ids", [])
+			current_effect_description = "Explore · continue movement from your current Room."
 			var move_index: int = int(resolution.get("move_index", 0))
 			if move_index < path.size():
 				# A trap may displace this Mage between Explore steps. Resume
@@ -21417,7 +21458,7 @@ func clear_board_target_choices() -> void:
 
 
 func connect_card_choice(button: Button, option: Dictionary, callback: Callable) -> void:
-	if not bool(option.get("hidden", false)) and (str(option.get("card_kind", "")) == "spells" or option.has("spell_id") or str(option.get("slot_id", "")) != ""):
+	if not bool(option.get("hidden", false)) and (str(option.get("card_kind", "")) in ["spells", "upgrades"] or option.has("spell_id") or str(option.get("slot_id", "")) != ""):
 		button.tooltip_text += "\nClick to select · Shift-click to inspect"
 		# Read Shift while the signal is emitted, before deferring either action.
 		# Deferring only the action also keeps selection from freeing its emitter.
@@ -21438,7 +21479,7 @@ func _inspect_card_choice(option: Dictionary) -> void:
 	if slot_id != "":
 		open_player_board_spell(int(option.get("board_player_index", -1)), slot_id)
 	else:
-		_reference_card_preview().show_card("spells", str(option.get("id", option.get("spell_id", ""))), str(option.get("name", "Spell")), "")
+		_reference_card_preview().show_card(str(option.get("card_kind", "spells")), str(option.get("id", option.get("spell_id", ""))), str(option.get("name", "Card")), "")
 
 
 func _evocation_board_card(owner_index: int, evocation: EvocationState) -> Control:
@@ -21574,16 +21615,20 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 	var button: Button = target.create_target_button() if portrait_choice else Button.new()
 	var overlay_parent: Node = target
 	var overlay_position: Vector2 = position_in_target
+	var overlay_rotation := 0.0
+	var overlay_scale := Vector2.ONE
 	# Quest/Spell cards are themselves Buttons. Put the choice hitbox on the
 	# PlayerBoard root, above the card, so the inspection callback underneath
 	# cannot also fire (Pleasures Room discard, card-selection effects, etc.).
 	if board_index >= 0 and board_index < player_boards.size() and target is Control:
 		overlay_parent = player_boards[board_index]
-		overlay_position = (
-			player_boards[board_index].get_global_transform().affine_inverse()
-			* target.get_global_transform().origin
-		)
+		var relative: Transform2D = player_boards[board_index].get_global_transform().affine_inverse() * target.get_global_transform()
+		overlay_position = relative * position_in_target
+		overlay_rotation = relative.get_rotation()
+		overlay_scale = relative.get_scale()
 	button.position = overlay_position
+	button.rotation = overlay_rotation
+	button.scale = overlay_scale
 	button.size = hit_size
 	button.z_index = 1000
 	button.mouse_filter = Control.MOUSE_FILTER_STOP

@@ -1,0 +1,17 @@
+{
+  "mode": "builtin-imagegen-reference-material",
+  "materials": [
+    {
+      "id": "board_material",
+      "prompt": "Create a premium flat orthographic game-board MATERIAL TEXTURE matching the original Black Rose Wars Rebirth Avatar board in the reference, but completely freshly restored clean artwork. Wide landscape, high resolution at least 2048 pixels wide. Dark weathered walnut wood, near-black desaturated forest-green stained carving, subtle elegant gothic floral thorns and carved roses, delicate aged bronze accents along the edges, rich fine natural wood grain. Center must be quiet dark wood so cards and printed overlays remain legible. NO letters, NO numbers, NO symbols, NO grid, NO card slots, NO screen scan lines or moire, NO photographed object edges or tabletop, NO perspective or lighting glare. Image is an edge-to-edge rectangular material background, not a photograph of a board. Crisp detailed print-ready dark fantasy tabletop-game art.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-600cd3d9-fb24-49f6-8b17-fcaa5de83ef2.png",
+      "source": "board_reference.png"
+    },
+    {
+      "id": "parchment_material",
+      "prompt": "Create one seamless premium warm ivory vellum/parchment material texture for Black Rose Wars Rebirth original spell and event card faces. Flat orthographic high resolution portrait background, 1536x2304. Match the pale original parchment in the attached source cards: refined age patina at edges, subtle barely visible original style floral vine scrolls and compass circle watermarks, warm cream with light grey speckling, low contrast texture under text, center clean and very light. NO words, NO letters, NO numbers, NO symbols, NO frame, NO card mockup, NO prominent grunge stains, NO folds, NO captured screen pixel pattern. Pure production-quality print background, understated elegant detail, not smooth flat color.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-af44943a-af8c-4642-b53c-f53a0018fe81.png",
+      "source": "commands_1.png"
+    }
+  ]
+}

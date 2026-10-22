@@ -1,0 +1,1411 @@
+Vesuvius
+2
+CONTENTS
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Andrea Colletti, Luca Bernardini
+Development: Marco Presentino
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artist: Giovanni Pirrotta, Antonio de Luca, Simone Murgia
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Text and Editing: Edoardo Eibenstein (Fiammingo Games)
+Social Media: Beto Caprera, Emiliano Caretti
+Customer Care: Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Ful llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Andrea Vella, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele 
+Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, 
+Massimiliano Grotti, Pasquale Carotenuto, Carlo Caravaggio, Davide Caravaggio, Luca Coruzzi, Andrea lentano
+You have been contacted on behalf of King Ferdinand of 
+Aragon: word of your exploits has reached Naples.
+Recently, the Vesuvius region was struck by a violent 
+earthquake, causing havoc in the local communities. 
+As if that weren't enough, bandits are terrorizing the 
+citizens with constant raids, robberies, and violence.
+If it were a simple gang of criminals, there would be 
+no need to call for your intervention, but these bandits 
+are numerous and well-organized, able to evade and 
+in some cases even overpower the local militia. Th eir 
+presence has plunged the people into despair and has 
+undermined the role of the authorities, who have been 
+judged incapable of dealing with this disaster.
+Th is is why the king turns to you, hoping that someone 
+from outside the kingdom can look at the problem with 
+a fresh perspective and fi nd a solution. And who better 
+than a group of seasoned heroes like you?
+You decide to seize the opportunity to make another ally 
+on the peninsula, and set out with what little information 
+you have gathered about the bandits—your search must 
+be discreet to avoid backlash, and you must focus on the 
+slopes of Mount Somma, the mountain complex that is 
+home to Mount Vesuvius. Th e criminals operate under a 
+kind of banner, the emblem of a scarred eye...
+Components ............................................... 4
+How to use this expansion .................... 7
+Skipping the Past .......................................... 7
+New Rules ................................................... 8
+Asphyxiation ................................................ 8
+Goatskin ...................................................... 8
+New Skills and Traits ..................................... 8
+New Tokens ................................................. 9
+Neutrals ..................................................... 9
+New Cards ................................................... 9
+Landscape Cards ......................................... 9
+Viewpoint Tokens ..................................... 9
+New Equipment Cards .................................. 9
+Reagent Cards: Lava Lapis ........................... 10
+New Scenic Elements.................................. 10
+Destroyed Buildings ................................ 10
+4x2 Destroyed Building ........................... 10
+3x3 Destroyed Building ........................... 10
+Th e Giglio ............................................. 10
+Obelisk ................................................. 10
+Forge .................................................... 10
+New Tiles: Lava Ground/Forge ..................... 11
+Lava Terrain Tiles: Volcanic Fumes ........... 11
+Walls (Black Border) ............................... 11
+Master Peio ................................................ 12
+Equipment and Glyph Cards ..................... 12
+Graphic Design:
+Concept Artist: 
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Andrea Vella, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele 
+Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, 
+Massimiliano Grotti, Pasquale Carotenuto, Carlo Caravaggio, Davide Caravaggio, Luca Coruzzi, Andrea lentano
+3
+Components
+Forge
+Head Cultist 5 Scarred
+3 Hounds
+2 Cyclops Head of the Forge
+Head Cultist 5 Scarred
+3 Hounds
+4
+63 Mission Cards
+
+
+5
+1
+4
+You see a man with a thick beard, strong arms and a stern 
+gaze. Th e worn leather apron he wears identifi es him as a 
+blacksmith. He fi ercely defends his house against brigands.
+
+
+
+
+
+
+
+
+ 4
+2
+8
+Blacksmith
+You see a man with a thick beard, strong arms and a stern 
+gaze. Th e worn leather apron he wears identifi es him as a 
+V 0.1 
+Map
+1A 2A
+3A 4A
+Horologium
+Start: 10:00
+Capricorn: Heroes
+Aquarius: Scarred
+Pisces: Hound
+◆ Read  V 0.1-2.
+You see a man with a thick beard, strong arms and a stern 
+gaze. Th e worn leather apron he wears identifi es him as a 
+blacksmith. He fi ercely defends his house against brigands.
+
+Map
+2A
+4A
+ V 0.1 
+at the base of the 
+volcano
+
+
+10 Mission Envelopes
+2 Destroyed Buildings
+1 Forge
+V0.1
+5 Location Cards
+Ottajano 
+N
+Somma Vesuviana
+Somma Vesuviana  e territory of Somma Vesuviana dominates the 
+Campanian plain from a strategic position, o en 
+contested in ancient history between the military 
+powers of Nola and Naples. At the foot of a castle 
+of Norman origin, built in the 11th century, 
+the medieval town of Somma developed during 
+the Angevin domination,  osen by the rulers 
+themselves as a stable summer residence for the 
+healthiness of the air and the loyalty of their subjects, 
+rewarded with privileges and ar itectural works.
+Later rulers, the Aragonese, o en stayed in the town, 
+and during their rule the castle was replaced and the 
+walls were rebuilt.
+
+N
+N
+ e territory of Somma Vesuviana dominates the 
+Campanian plain from a strategic position, o en 
+contested in ancient history between the military 
+powers of Nola and Naples. At the foot of a castle 
+of Norman origin, built in the 11th century, 
+the medieval town of Somma developed during 
+the Angevin domination,  osen by the rulers 
+themselves as a stable summer residence for the 
+healthiness of the air and the loyalty of their subjects, 
+rewarded with privileges and ar itectural works.
+Later rulers, the Aragonese, o en stayed in the town, 
+and during their rule the castle was replaced and the 
+
+N
+ Nola 
+ e ri city of Nola has ancient origins and a history 
+that alternates between splendor and decadence. 
+Born under the in uence of Etruscan peoples, the 
+urban center was renamed Novla (new city) by the 
+Samnites and later conquered by the Romans, who 
+made it an important military base. It was here, in 
+AD 14, that Augustus, the  rst Roman emperor, died.
+A erwards, and throughout the Middle Ages, although 
+it became an episcopal seat, the city was the subject 
+of disputes, conquests and natural disasters that 
+condemned it to poverty. In 1256, the County of Nola was 
+incorporated into the Kingdom of Sicily and entrusted 
+ rst to the House of Montfort and then to the Orsini, 
+who restored the city to its splendor by renovating it 
+with monuments,  ur es and a solid city wall.
+N
+ Nola 
+ e ri city of Nola has ancient origins and a history 
+that alternates between splendor and decadence. 
+Born under the in uence of Etruscan peoples, the 
+urban center was renamed Novla (new city) by the 
+Samnites and later conquered by the Romans, who 
+made it an important military base. It was here, in 
+AD 14, that Augustus, the  rst Roman emperor, died.
+A erwards, and throughout the Middle Ages, although 
+it became an episcopal seat, the city was the subject 
+of disputes, conquests and natural disasters that 
+condemned it to poverty. In 1256, the County of Nola was 
+incorporated into the Kingdom of Sicily and entrusted 
+ rst to the House of Montfort and then to the Orsini, 
+who restored the city to its splendor by renovating it 
+with monuments,  ur es and a solid city wall.
+ Nola 
+N
+1 Giglio/Obelisk
+5
+10 Reagent Cards
+12 Asphyxiation
+Tokens
+Lava 4 Viewpoint Tokens 2 Tiles
+Blacksmith 
+Token
+13 Core Shards 12 Water Tokens
+Tokens
+5 Enemy 
+Activation 
+Tokens
+Lava Sliver
+1F
+2 Tiles
+3F
+5 Formulae
+Equipment Cards
+1 Faction
+Exploration Card
+5 Enemy Cards
+4 Master Peio's Creation
+Equipment Cards
+10 Master Peio's 
+Formulae Equipment 
+Cards
+—
+1 Philosopher's Stone
+2 Realgar
+1 Sulfur
+Maelstrom
+—
+ Philosopher's Stone
+Formulae
+ Realgar
+1 Sulfur
+11X
+Curniciello Master Peio’s Creation
+—
+1 Wood
+1 Sulfur
+2 Metal
+Hammer of Ashes
+—
+ Wood
+Hammer of Ashes
+Master Peio’s Formulae
+1 Philosopher's Stone
+Formulae
+2 Realgar
+
+1 Destruction Spell
+Maelstrom
+4  1-4 +0 3     
+ Burst Area, in ict 3 on the target. For each , in ict 1 on other Enemies in the Area.
+Destruction Spell
+Maelstrom
+1-4 +0    
+11
+Master Peio’s Creation
+
+Curniciello
+Artifact
+At the beginning of your Activation, if there is no Token 
+on this card, place a Lu y Token on it.
+1
+2 Metal
+Hammer of Ashes
+Master Peio’s Formulae
+
+Hammer of Ashes Hammer of Ashes Weapon 
+3  1 +0
+   
+ Stun
+5 Scenic Element Cards 
+Forge
+Whenever you have to perform an Enemy 
+Dra in an Exploration Mission (including 
+those required to deploy initial Enemies) you 
+can add the  Myths Faction Enemy Dra cards in your possession, ignoring the Rank 
+required by the Enemy Dra .
+3x3 Destroyed Building
+Placement: the Destroyed Building must always be placed so that the walls match the edges of 
+the Squares. It cannot be placed along the edges 
+of Squares already occupied by other Scenic 
+Elements, and it cannot be placed adjacent to a 
+Non-Zone or Bulky Scenic Elements.
+Blo ing, Impassable 3D
+Whenever you have to perform an Enemy 
+Dra in an Exploration Mission (including 
+those required to deploy initial Enemies) you 
+can add the  Myths Faction Enemy Dra cards in your possession, ignoring the Rank 
+required by the Enemy Dra .
+3x3 Destroyed Building
+ 8
+Placement: the Destroyed Building must always be placed so that the walls match the edges of 
+the Squares. It cannot be placed along the edges 
+of Squares already occupied by other Scenic 
+Elements, and it cannot be placed adjacent to a 
+Non-Zone or Bulky Scenic Elements.
+Blo ing, Impassable
+4 Focus Points
+5 Enemy Cards
+
+
+
+
+
+
+3
+ 7+
+ 1
+3
+ 
+Rea 
+  Stun, Bone Crusher
+
+Bastion - Trample
+
+
+Cyclops
+4
+3
+7
+5
+8
+1 1 2
+5 Enemy Draft 18 Gliph Cards
+Cards
+—
+1 Wood
+1 Mercury
+1 Sulfur
+1 Lava Sliver
+Fate Glyph
+—
+ Wood
+Formulae
+
+2
+Cyclops
+1
+1 Mercury
+1
+1 Lava Sliver
+Fate Glyph
+Formulae
+When you perform 
+any Test, if you obtain 
+, you gain a Lu y
+Token. 
+Fate Glyph
+Cyclops
+5 Achievement Cards
+2 Reward Cards
+Inventor’s Stop Key
+“I’ve never seen su a 
+thing.”
+Achievement  V2
+Blazing Blade Weapon
++0
+   
+ Burn, Ta le
+If you have at least 1 
+Asphyxiation Token, this A ack gains +1.
+Blazing Blade Weapon
+
+“I’ve never seen su a 
+Inventor’s Stop Key Achievement
+Inventor’s Stop Key Inventor’s Stop Key Inventor’s Stop Key
+ Achievement
+V1
+1 +0
+
+Burn, Ta le
+If you have at least 1 
+Asphyxiation Token, this A ack gains +1.
+Weapon
+1
+ 
+Blazing Blade
+ Reward Weapon
+V1
+ Reward
+6 Goatskin Cards
+Goatskin
+Formulae —
+2 Belladonna
+1 Leather
+1 Wood
+Goatskin
+Formulae
+2 Belladonna
+1 Leather
+
+1
+Goatskin Item
+1, +1: discard 1 Water Token from this card to discard 
+all Asphyxiation Tokens that 
+you or a Hero adjacent to you have.
+Item
+6
+How to use this expansion
+Th e Vesuvius expansion adds a new campaign that is best 
+played aft er completing the Core Nova Aetas Renaissance 
+Campaign. You can continue to use the Heroes you 
+completed the main Campaign with, or, if you wish, you 
+can create new Heroes to play the Campaign with (see the 
+Skipping the Past section below).
+To play the Vesuvius Campaign, you will need many 
+components of the Core Game in addition to the materials 
+included in this expansion. Th ese are listed as usual in the 
+Mission Cards and Plotbook sections.
+Th is rulebook list all of the new rules and components 
+introduced by this expansion.
+You can start a new campaign directly from the Vesuvius 
+Expansion with new Heroes, without having to play (or 
+replay) the League of Cambrais campaign from the Nova 
+Aetas Renaissance Core Game.
+If you choose to do so, follow these rules. Create four new 
+Heroes following the rules of the Core Game. Each Hero 
+can thus spend up to 13  Experience Points. You can 
+spend these  to purchase Skills and acquire an Advanced 
+Class, always keeping in mind any character development 
+restrictions such as Skills prerequisites or having to choose 
+at least 3 Basic Skills before you can choose an Advanced 
+Class for the character (see the Campaign section of the 
+Rulebook).
+Skipping the Past
+To equip the party, you have at your disposal a common 
+pool of 110  Florins to be used to purchase Reagents and 
+create Formulae Equipment Cards. In addition, 2 Heroes 
+of the players' choice may, provided they have acquired an 
+Advanced Class, read all of their Destiny Cards and related 
+paragraphs of the Plotbook, and receive both the Bound 
+Advanced Equipment Card and the Advanced Equipment 
+Card normally given as a reward for resolving the fourth 
+Destiny Card. Th e remaining Heroes, again only if they 
+have acquired an Advanced Class, may read the Destiny 
+Cards of their Basic Class and the fi rst Destiny Card of 
+the chosen Advanced Class, which must be resolved while 
+playing. As per the rules, these Heroes receive the Bound 
+Advanced Equipment of the chosen Advanced Class.
+7
+New Rules
+Asphyxiate X
+Upon completion of this Enemy's Activation, all Heroes 
+adjacent to them gain X Asphyxiation Tokens (see 
+Asphyxiation rules on the previous page).
+Sweep
+Aft er the target has performed the Defense Test and 
+resolved the eff ects of this Attack, all other Heroes adjacent 
+to the attacking Enemy suff er the Attack.
+Asphyxiation
+Goatskin
+New Skills and Traits
+During missions, some eff ects may cause Heroes to gain 
+Asphyxiation Tokens.
+Th ese Tokens have no immediate eff ect, but if a Hero 
+has 5 Asphyxiation Tokens at any time, they will become 
+Exhausted. A Hero cannot have more than 5 Asphyxiation 
+Tokens.
+As long as a Hero is Exhausted they can only spend  to 
+perform the Wait Action, and cannot perform any Tests. An 
+Exhausted Hero can be chosen as a target by Enemies and 
+suff er Attacks, but they cannot perform Defense Tests (they 
+thus suff er all the hits of the Attack), they can, however, 
+Th e Goatskin is a special Equipment card. It has a slot for 
+2 Water Tokens, one for each of its possible uses. At the 
+beginning of a Mission place a Water Token in each slot of 
+the Goatskins equipped by the Heroes. Whenever a Hero 
+uses the eff ect of an equipped Goatskin, they discard a Water 
+Token from it. At the end of the Mission, if no Water Tokens 
+are present on the Goatskin card, the card is discarded 
+and placed back in the Formulae Card Deck; it may be 
+reacquired during a Rest Phase. If, on the other hand, at 
+least one Water Token is still present, the Goatskin remains 
+in the Inventory and can be used in the next Missions (it will 
+revert to having 2 Water Tokens even if only one was left ).
+Note: As indicated on the card, a Hero who uses the eff ect 
+of a Goatskin increases their  by 1.
+distribute the  they suff er on their Equipment with the 
+Resistance X trait.
+When an eff ect allows an Exhausted Hero to discard 
+Asphyxiation Tokens, they cease to be Exhausted.
+When a Hero is KO'd they discard all the Asphyxiation 
+Tokens they have.
+Missions in which this rule is used show a new clue symbol 
+on the back of :
+
+Goatskin
+Formulae —
+2 Belladonna
+1 Leather
+1 Wood
+
+Goatskin Item
+Token from this card to discard 
+1, +1: discard 1 Water 
+all Asphyxiation Tokens that 
+you or a Hero adjacent to you have.
+Item
+8
+Neutrals
+Asphyxiation
+Heroes can gain and discard these Tokens 
+through certain game eff ects. Th ese tokens 
+are not considered either Status Tokens or 
+Tokens (see the rules on Asphyxiation above).
+New Tokens
+New Cards
+Landscape Cards
+Th e Vesuvius Expansion introduces a new type of Mission 
+Cards, called Landscape. Th ese cards function similarly 
+to the Location Cards of the Core Game, but are tied to a 
+specifi c Tile. When you reveal a Landscape card, place it 
+next to the indicated Tile.
+Landscape Cards depict the landscape a Hero has in front 
+of them and one or more Scenic Elements present on the 
+Tile it is linked to.
+Unlike with Location Cards, Heroes cannot be placed on 
+Landscape Cards—you can interact with a Landscape Card 
+from anywhere on the linked Tile.
+Th e Interactions of a Landscape Card normally cost 0
+since the Hero is simply looking at their surroundings. 
+Further explanation in the Plotbook will indicate how you 
+can interact with the illustrated Scenic Elements.
+Landscape Cards can provide useful clues to the mission 
+at hand, so we advise you to pay close attention to the 
+elements illustrated on them.
+Woods
+◆ 0,V 0.6-9.
+
+0.0
+V 0.6 
+Woods
+◆ 0,V 0.6-9.
+Woods
+◆ 0,V 0.6-9.
+
+0.0
+V 0.6
+
+Viewpoint Tokens
+Viewpoints are Tokens linked to Mission Actions that allow 
+the corresponding Landscape Card to be revealed.
+New Equipment Cards
+Th is Expansion introduces new Equipment Cards. You can 
+also add these cards to the "League of Cambrai" Campaign of 
+the Core Game and to the Campaigns of other Expansions.
+Th e 4 Master Peio's Creation Equipment Cards represent 
+valuable creations of the famous Blacksmith available in the 
+Italian markets—they cannot be craft ed in the Craft sman's 
+Shop, but must be purchased in the Market Shop. 
+Th e 10 Formulae Equipment Cards (including the 6 Goatskin 
+cards) are entirely similar to those in the Core Game and can 
+be craft ed by visiting the Artisan's Shop as usual.
+—
+2 Mercury
+1 Sulfur
+1 Silver
+1 Lava Sliver
+Volcano Embers
+Master Peio’s Formulae —
+ Mercury
+ Sulfur
+ Silver
+Volcano Embers
+Master Peio’s Formulae —
+Item 
+Volcano Embers
+1: An Enemy adjacent to you gains a Distracted Token.
+ Item 
+Volcano Embers
+Water
+At the beginning of the Mission, Heroes gain 
+1 Water Token for each slot of their Goatskin 
+Cards. Th ey are considered Neutral Tokens and 
+are not removed if the Hero is KO'd.
+1 Silver
+1 Lava Sliver
+1 Silver
+1: An Enemy adjacent to you gains a Distracted Token.
+9
+Reagent Cards: Lava Lapis
+Some Enemies in the Vesuvius Expansion add a Reagent 
+Card type to the loot—the  Lava Lapis cards. Th ese cards 
+work like regular Reagent Cards and can add Lava Slivers to 
+the Heroes' Treasury when revealed. Two of these Reagent 
+Cards represent Unstable Slivers—these slivers negatively 
+aff ect the Lava Slivers, draining their power. Whenever one 
+or more Unstable Slivers are revealed in the Loot, calculate 
+their total value and subtract as many Lava Slivers from 
+the Loot itself. Th e Unstable Slivers do not aff ect the Lavic 
+Slivers in the Treasury.
+Lava Sliver
+Rea 
+  Stun, Bone Crusher
+1 1 2
+New Scenic Elements
+Destroyed Buildings
+Destroyed Buildings are made up of two types of walls, 
+Complete and Crumbling walls.
+Complete walls are tall, also connected by a roof section. 
+It is not possible to cross them during movement and they 
+follow the Blocking rule.
+Crumbling walls have a medium height and follow the 
+Impassable rule. 
+Impassable: an Impassable Scenic Element does not 
+block the Line of Sight, if a Attack passes through an 
+Impassable Scenic Element and has as its target a Model 
+in a Square adjacent to that Scenic Element, apply the 
+following eff ects: 
+◆ Attack against an Enemy: the attacking Hero must roll 
+1 which resulted in a . 
+◆ Attack against a Hero: the target Hero gains 1 during 
+the Defense Test.
+4x2 Destroyed Building 
+Th is 3D Scenic Element 
+represents a destroyed 
+ancient building and 
+has the following special 
+rules:
+◆ Blocking (Complete 
+Walls)
+◆ Impassable (Crumbling Walls)
+3x3 Destroyed Building 
+Th is 3D Scenic Element 
+represents a destroyed 
+ancient building and 
+has the following special 
+rules:
+◆ Blocking (Complete 
+Walls
+◆ Impassable (Crumbling Walls)
+The Giglio
+Th is 3D Scenic Element has 
+the following Special Rules:
+◆ Blocking
+◆ Towering
+◆ Bulky
+In addition, it is possible 
+to go up the Giglio Board 
+which is located at a Height 
+Level 2. A Model on the 
+Giglio Board follows the 
+normal rules of the Height Levels, with the only exception 
+that when the Giglio moves, the Model moves with it, 
+staying in the square it is in.
+Obelisk
+Th is 3D Scenic Element has the following Special Rules:
+◆ Blocking
+◆ Bulky
+◆ Towering
+◆ Interactive
+Forge
+Th is Scenic Element has the following special rules:
+◆ Bulky
+◆ Blocking
+◆ Interactive
+Th is 3D Scenic Element has the following Special Rules:
+10
+New Tiles: Lava Ground/Forge
+Th e 2 new Tiles introduced by this Expansion show on one 
+side the Lava Terrain (1F and 2F) A and on the other the 
+inside of the Forge (3F and 4F) B . Both sides provide new 
+Special Rules 
+1F
+2F
+3F
+4F
+A
+B
+3F
+Th ese Tiles represent particular 
+environments in the Vesuvius's Forge 
+expansion. In the Mission cards these Tiles 
+show an arrow to indicate how they should 
+be oriented when building the Battlefi eld.
+Map
+3F
+4B 3B
+1B 2B
+Horologium
+Start: 8:30
+Cancer: Heroes
+Virgo: Scarred
+◆ Read V 0.9-2.
+Map
+3F
+1B 2B
+V 0.9 
+Lava Terrain Tiles: Volcanic Fumes 
+Volcanic fumes harmful to Heroes are present in some of 
+the Squares of these Tiles. A Hero who ends their Activation 
+in one of these Squares, highlighted by a red border, gains 
+an Asphyxiation Token. 
+Missions in which these Tiles are used show a new clue 
+symbol on the back of :
+
+Walls (Black Border)
+Forge Tiles represent the interior of certain areas of 
+Vesuvius's Forge campaign. Th ese Tiles introduce the 
+"walls".
+Th ese Squares have one or more sides occupied by Stone 
+Walls. Th e Walls are artistically represented and highlighted 
+by a black border. Walls block the Line of Sight and cannot 
+be crossed by any Model.
+4F
+11
+Master Peio
+No one knows his real name, but this particular character 
+calls himself Master Peio. 
+Only three things are known about him—he is a very 
+skilled forger, he always carries excellent equipment to sell, 
+and he is from Resina, although he loves to travel around 
+the Peninsula, frequenting the markets between Florence 
+and Naples in search of new ideas and opportunities. 
+Some Missions in this Expansion will give the opportunity 
+to "Access the services of Master Peio" during a Rest Phase. 
+Th is option is listed in the End of Mission directions.
+Accessing the services of Master Peio counts as visiting a 
+Shop. Master Peio can create Master Peio's Glyph Cards 
+and Formulae Equipment Cards. Th ese are also marked 
+with the symbol  on the front. Many of these cards also 
+require the new Lava Sliver Reagent to be created.
+Equipment and Glyph Cards
+Once created, Master Peio's Formulae Equipment Cards can be 
+upgraded by associating one or more Glyph Cards with them.
+Glyph Cards can be created by accessing the services of 
+Master Peio like a regular Formulae Card. Th e illustration 
+of Glyph Cards shows the symbol that represents them A .
+Resilience Glyph
+Resistance 1
+A
+Glyph Cards can be associated with a Master Peio Formulae 
+Equipment Card that shows the corresponding symbol at 
+its bottom B .
+Master Peio's Formulae Equipment Cards also carry a 
+number of slots available for Glyph Cards. C . 
+ Weapon 
+Black Sword
+3  1 +0
+   
+ Stun
+
+Weapon 
+
+Black Sword
+Weapon 
+C
+ Stun
+B
+For each of the slots indicated on a card, one of the Glyph 
+Cards indicated by the symbols at the bottom can be 
+associated with it. It is not possible to associate two identical 
+Glyph Cards with the same Equipment Card.
+11
+12
+Once associated with an Equipment Card, a Glyph is 
+permanently bound to it. You cannot move a Glyph to 
+another Equipment Card or replace one Glyph with 
+another. You will therefore have to choose carefully how 
+you use your Glyphs!
+Glyphs follow these rules:
+◆ An Equipment Card gains all the eff ects and skills 
+described by the Glyph Cards associated with it. 
+Additional eff ects are to be considered as if they were 
+written directly on the Equipment Card. 
+◆ For the order of resolution of the Eff ects aft er the 
+symbol, Eff ects given by a Glyph Card should always 
+be resolved aft er those on the Equipment Card. In case 
+several Eff ects given by Glyph Cards are to be resolved, 
+the player can decide the order of resolution (but always 
+aft er resolving the Eff ects on the Equipment Card).
+◆ Th e Critical 2 Trait provided by a Glyph card replaces 
+the normal Critical 1 included in all Physical Attacks.
+◆ Th e Resistance 1 Trait provided by a Glyph card is added 
+to the Resistance value the Equipment already has.
+◆ the Eff ect +1 provided by a Glyph Card increases by 
+1 the maximum distance at which the Attack can be 
+performed.
+ Critical 2
+Violence Glyph
+Fire Glyph
+ Burn
+Mastery 
+Glyph
+When you perform 
+any Test, if you obtain 
+, you gain an 
+Advantaged Token.
+When you perform 
+any Test, if you obtain 
++1
+Wind Glyph
+When you perform 
+any Test, if you obtain 
+, you gain a Lu y
+Token. 
+Fate Glyph
+When you perform 
+any Test, if you obtain , you gain a 
+Blessed Token.
+Sacred Glyph
+Burn
+When you perform 
+any Test, if you obtain 
+, you gain an 
+When you perform 
+any Test, if you 
+, you gain a Blessed Token.
+You cannot gain 
+Negative and Positive 
+Status Tokens.
+Immunity Glyph
+any Test, if you obtain 
+, you gain an Advantaged Token.
+any Test, if you obtain 
+, you gain an 
+ Token.
+You cannot gain 
+Negative and Positive Status Tokens.
+When you perform 
+any Test, if you obtain 
+, you gain an Astro
+Token.
+Heavens Glyph
+When you perform 
+any Test, if you obtain 
+
++1
+When you perform 
+any Test, if you obtain 
+, you gain an Astro
+Token.
+Resilience Glyph
+Resistance 1
+12
+◆ Th e Resistance 1 Trait provided by a Glyph card is added 
+to the Resistance value the Equipment already has.
+◆ the Eff ect +1 provided by a Glyph Card increases by 
+1 the maximum distance at which the Attack can be 
+performed.
+Resina
+Somma Vesuviana
+Ottajano
+Pompeii Nola
+Boscoreale
+Vesuvius
+1
+1
+2
+2
+3
+3
+1
+Vesuvius
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+ Treasury 
+buy
+3
+2
+1
+3
+2
+9
+4
+2
+5
+3
+6 
+-
+-
+owned
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+ Belladonna
+ Leather
+ Wood
+ Mandrake
+ Mercury
+ Philosopher's Stone
+ Raelgar
+ Sulfur
+ Silver
+ Metal
+ Gold
+ Florins
+ Lava Sliver
+sell
+2
+1
+1
+2
+1
+5
+2
+1
+3
+2
+3
+-
+-
+  Inventory  
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+Achievements
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________
+Campaign Missions
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+Hunt Name
+___________________________________
+___________________________________
+___________________________________
+Mission Title
+___________________________________
+___________________________________
+___________________________________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+Code
+_____________
+_____________
+_____________
+Code
+_____________
+_____________
+_____________
+  Available Hunt Missions
+Active Side Missions
+Vesuvio - Campaign Sheet 
+ Gained
+Hero
+Player
+Advanced Class
+ Bond
+Achievements
+Injury
+Injury
+Injury
+Equipment
+Vesuvio [Glyphs]
+Destiny
+Upgrade
+Skill
+Skill
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+ Spent
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+1
+11
+5
+15
+3
+13
+7
+17
+9
+19
+2
+12
+6
+16
+4
+14
+8
+18
+10
+20
+ Treasury 
+buy
+3
+2
+1
+3
+2
+9
+4
+2
+5
+3
+6 
+-
+-
+owned
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+______
+ Belladonna
+ Leather
+ Wood
+ Mandrake
+ Mercury
+ Philosopher's Stone
+ Raelgar
+ Sulfur
+ Silver
+ Metal
+ Gold
+ Florins
+ Lava Sliver
+sell
+2
+1
+1
+2
+1
+5
+2
+1
+3
+2
+3
+-
+-
+  Inventory  
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+____________________________________
+Achievements
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________ 
+N°______________
+Campaign Missions
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+☐ _________________________________
+Hunt Name
+___________________________________
+___________________________________
+___________________________________
+Mission Title
+___________________________________
+___________________________________
+___________________________________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+_____________
+Code
+_____________
+_____________
+_____________
+Code
+_____________
+_____________
+_____________
+  Available Hunt Missions
+Active Side Missions
+Vesuvio - Campaign Sheet 
+ Gained
+Hero
+Player
+Advanced Class
+ Bond
+Achievements
+Injury
+Injury
+Injury
+Equipment
+Vesuvio [Glyphs]
+Destiny
+Upgrade
+Skill
+Skill
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+Skill 
+ Spent
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+___________[___________ ]
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+_________________________ 
+_________________________ 
+_________________________ 
+_________________________ 
+___ ___ ___ ___ ___ ___ ___
+_________________ [____ ] 
+_________________ [____ ]
+_________________ [____ ] 
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+ EXPERIENCE 
+1☐ 2☐ 3☐ 4☐ 
+☐ ☐ ☐ ☐ ☐
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________ [____ ] 
+_________________________
+Vesuvius - Rulebook v1.0
+©2025 Ludus Magnus Studio
+All rights reserved 
+www.ludusmagnusstudio.com
+

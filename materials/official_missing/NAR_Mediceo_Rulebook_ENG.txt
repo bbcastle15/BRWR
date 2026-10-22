@@ -1,0 +1,654 @@
+Mediceo
+2
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Diego Fonseca
+Additional Game Design and Development: Andrea Colletti, Luca Bernardini
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Edoardo Eibenstein, Frank Calcagno
+Editor: Elettra Nuzzo
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini, Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfillment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca 
+Benedetti, Luca Francescangeli, Luca Perra, Pasquale Carotenuto
+3
+The most renowned Mercenary in Florence joined your 
+routier company! The Mediceo and his mysterious little 
+companion are fleeing from the forces of the Medici, the 
+powerful noble family, who used to hire the mercenary 
+for the most delicate and dangerous of tasks. The duo 
+will be a valuable addition to your group while you help 
+them unveil the secret behind the little Faun from who 
+the Medico refuses to abandon.
+CONTENTS
+COMPONENTS......................................................4
+HOW TO USE THIS EXPANSION........................6
+NEW RULES............................................................6
+Inspiration Card........................................................... 6
+Gadget Cards................................................................ 7
+Destiny Cards............................................................... 7
+PLOTBOOK............................................................8
+DESTINY - MEDICEO...........................................9
+4
+Mediceo
+Components
+3 Starting Equipment Cards 6 Advanced Equipment Cards
+1 Mediceo Activation 
+Token
+2 Hero Sheets 2 Skill Sheets
+0 1 2 3 4 5 6
+MEDICEO
+
+Focused Shot
+ Intimidate
+Shield of Force
+ Survival
+Survivor
+Gunsmith
+ Survival
+Relentless
+ Search
+Disengage
+ Intimidate
+5
+3
+3
+1
+5
+Requirements:
+GUARDIAN
+3 Hunter Skills
+-
+Da Vinci's 
+Armor
+Requirements:
+CUSTODIAN
+3 Hunter Skills
+-
+Training Ball
+MEDICEO Focused Shot 1
+Intimidate.
++1(Upgrade): this Attack gains:  Bleed.
+Inspired: you may  used for this Attack. 
+You must keep the new result.
+ Shield of Force 2
+Survival. 
+Reaction 1: when you perform a Defense Test 
+against any Attack, you gain 1 additional 
+for each  obtained.
+Inspired: you may  used for this Defense 
+Test. You must keep the new result.
+ Survivor 3
+Passive. When you perform a Defense Test 
+against a Attack of an Enemy adjacent to 
+you, roll 1 additional .
+Inspired: instead, the Enemies adjacent to you 
+suff er -1 on all Attacks that target you (up to 
+a minimum of 1).
+ Gunsmith 1
+Survival.
+1: place a Lucky Token on one of your 
+Weapons or on a Weapon of a Hero adjacent 
+to you.
+Relentless 1
+Search.
+Reaction 1: when you gain a Negative Status 
+Token, suff er 1 Unblockable  and discard 
+the newly gained Negative Status Token.
+Inspired: Instead, discard the newly gained 
+Negative Status Token.
+ Disengage 2
+Intimidate.
+2: gain 1 Dash; this movement does not 
+cause Reaction Attacks. You can use this Skill 
+maximum once per Activation.
+ Defensive Exploit 
+Passive.  +1: each time you become Inspired.
+3: discard all Negative Status Tokens; gain 
+a Shielded Token and an Advantaged Token 
+and place an Advantaged Token on one of your 
+Weapons.
+Armor
+Medicean Helmet
+
+At the beginning of the 
+Mission, place a Token on this card.
+Shielded
+
+Medicean Cape Armor
+ e  value of the 
+Enemies is considered 1 
+less against you.
+ Da Vinci's Armor Armor 
+Resistance 2.
+ 
+Medicean Armor  Armor
+Resistance 1. 
+
+The Little One  Artifact
+  e Inspiration card 
+begins the Mission on 
+the Sleeping side.
+Da Vinci's Rifl e
+
+Weapon
+Pierce
+Reload 2
+
+3  2-6 +0
+ 
+5
+1 Inspiration Card 5 Gadget Cards
+6 Destiny Cards
+1 Blessed Token 1 Shielded Token
+1 Companion Card
++
++
+5 5
+Survival - Intimidate - Search
+At the beginning of your Activation, if you do not 
+already have one, you gain a Shielded Token.
+Leather Bodice - Armor
+The Little One
+Da Vinci's Rifle - Weapon 
+Disengage
+2: gain 1 Dash, this movement does not 
+cause Reaction Attacks. You can use this Skill a 
+maximum of once per Activation.
+Relentless
+Reaction 2. When you gain a Negative Status 
+Token, you suff er 1 Unblockable  and discard 
+the newly gained Negative Status Token.
+Focused Shot
+1: until the end of this Activation, each 
+Enemy to whom you infl ict at least 1 gains a 
+Bleeding Token.
+3 3 2
+MEDICEO
+3  1-6 +0
+  Pierce,
+Reload 2
+As long as you have less than 2  Tokens, if your A ack Tests obtain  they gain: Critical 2.
+3
+Th e Little One's powers seem 
+to grow day by day, but aft er 
+using them he needs to rest. 
+As his Caretaker, you must 
+protect him just when he is 
+most helpless.
+Objective
+◆ If you ended a Mission with 
+the Inspiration Card with 
+the Inspired side facing up, 
+during the next Rest Phase 
+read  ME-5.
+2
+Th e Little One is revealing 
+his nature and you begin to 
+understand why so many fear 
+him.
+Objective
+◆ You have acquired at least 
+3 Skills from your Basic 
+Class. During a Rest Phase 
+read  ME-2.
+Being Florence's most famous 
+Mercenary brings more than 
+just advantages.
+Objective
+◆ If you ended a Mission with 
+the Inspiration Card with 
+the Sleeping side facing up,
+during the next Rest Phase 
+read  ME-1.
+1
+Sleeping
+Inspiration
+When you 
+obtain 
+in the result 
+of any Test, 
+turn this card 
+over to the 
+Inspired side.
+
+Arm Dragon Gadget
+2 1 +0   
+ Burn
+
+Light Metals Gadget
+ e Encumbrance of this 
+Weapon becomes .
+
+Steam Machine Gadget
+ Immunity: Hindered
+You do not su er 
+E ects that a ect your 
+Movement Actions.
+
+Mechanical Bayonet Gadget
+If the minimum  of this Weapon is 2, it becomes 1.
+If with this Weapon you 
+in ict at least 1 to a 
+target within 1, the 
+target gains a Bleeding Token.
+
+Spring Magazine Gadget
+Spend 1 less to discard a Reload Token placed on this Weapon.
+6
+This Expansion adds a new Hero to play any Campaign of Nova Aetas Renaissance. The 
+Mediceo can be chosen as a Hero at the beginning of a Campaign as described in the core 
+game Rulebook.
+Alternatively, you can use its Companion version using the card included in this Expansion 
+(see the Companion Cards entry in the core game Rulebook).
+This card represents the Little One’s 
+condition: Sleeping or Inspired.
+During Setup, place this card to the right of 
+the Equipment Card “The Little One” with 
+its Sleeping side visible, as shown in the 
+image.
+Every time the player controlling the 
+Mediceo gains 2 Astro  Symbols during a 
+Test, they flip the card to its Inspired side. 
+The player can discard Astro Tokens as 
+usual in order to obtain this combination 
+(see Astro Tokens in the Handbook).
+As long as the Inspired side of this card is 
+visible, the player controlling the Mediceo 
+can choose to use the Inspired effect of their 
+equipped Skills. After using a Skill’s Inspired
+effect, the Inspiration Card must be flipped 
+back to the Sleeping side.
+Inspiration Card
+How to use this Expansion
+New Rules
+Sleeping
+Inspiration
+When you 
+obtain 
+in the result 
+of any Test, 
+turn this card 
+over to the 
+Inspired side.
+The Little One
+ Artifact
+  e Inspiration card 
+begins the Mission on 
+the Sleeping side.
+Inspired
+Inspiration
+ When you 
+use the 
+Inspired 
+e ect of a 
+Skill, turn this 
+card over to 
+the Sleeping 
+side.
+7
+These cards can be created the same way as a 
+standard Formulae Equipment Card.
+Once created, a Gadget Card can be 
+associated with an Equipment Card showing 
+the same Gadget symbol A .
+Some of the Mediceo’s Equipment Cards 
+show 1 or more Gadget symbols. Each 
+symbol represents a slot available for a 
+specific type of Gadget. For example, Da 
+Vinci’s Armor shows 2  Armor Gadget 
+symbols—therefore, up to two Gadget Cards 
+of the  type can be associated with it.
+An Equipment Card gains any effects or 
+rules described on Gadget Cards associated 
+with it. Consider these additional effects as if they were written directly on the Equipment 
+Card.
+Gadget Cards can be associated with Equipment Cards during the Setup Phase.
+The association of a Gadget Card with an Equipment Card is not permanent; in each Setup 
+Phase a Gadget Card can be associated with a different Equipment, as long as it features the 
+correct Gadget Symbol.
+This Expansion features 3 types of Gadgets, identified by the following icons:
+B : this Gadget occupies a Weapon slot of an Equipment Card.
+C : this Gadget occupies a  Armor slot of an Equipment Card.
+Gadget Cards
+
+Steam Machine Gadget
+ Immunity: Hindered
+You do not su er 
+E ects that a ect your 
+Movement Actions.
+The Mediceo has 6 Destiny Cards like every 
+other Nova Aetas Renaissance Hero. These 
+cards work exactly the same as the other 
+Destiny Cards described in the core game 
+Rulebook, but the paragraphs they refer to 
+are found in this Rulebook (from ME-1 to 
+ME-6).
+Destiny Cards  1 — Mediceo - Hunter
+Destiny
+
+Light Metals Gadget
+ e Encumbrance of this 
+Weapon becomes .
+Arm Dragon  Gadget
+2 1  +0
+ 
+ Burn
+A
+B C
+Plotbook
+9
+Destiny - Mediceo
+me-1
+ The Medici—the Lords of Florence in exile—had entrusted you with another mission. 
+You were hired to eliminate a dangerous creature with strong mind powers, hiding in the 
+woods. Things didn’t go as smooth as always, though. Once you got face to face with your 
+target—after being through many ups and downs to track it down—you found out the 
+“dangerous creature” was but a Faun cub, an offspring of strange savage beings you already 
+met before. The little thing smiled at you, holding out its arms, and something within you 
+melted. Why did the Medici want you to commit such a despicable act? You decided not to 
+go any further until you learn more about it. You took the cub and brought it with you—an 
+act that your powerful employers wouldn't appreciate. For your safety and that of your new 
+little friend you opted for a change of scenery. While traveling, you met a small group of 
+young mercenaries. These mercenaries asked you to join them in their important mission. 
+They seem to be decent fellows and right now this looks like your best chance to earn some 
+Florins and get some extra protection.
+◆ Reveal 2 Mediceo - Hunter.
+me-2
+At night, while you and your companions recover after your latest battle, the Little One 
+disappears. Alarmed, you split up and look for him in the area’s surroundings. At one point, 
+his innocent laughter rings in your ears, off in the darkness. You follow the sound until you 
+stumble upon a cloaked figure holding the Little One, who laughs, carefree, playing with 
+the stranger’s fingers. At the sight of the uninjured baby, you breathe a sigh of relief—as 
+well as the impulse to strangle him for scaring you so much—and address the cloaked 
+individual.
+“Hand the cub back to me and you can walk out of here on your own legs,” you threaten.
+“Calm down, Florentine, I am not here to hurt either of you,” he answers in a guttural 
+voice. The figure lowers his hood, revealing a horned head. It is a Faun. You instinctively 
+put a hand on your rifle. “I said calm down, human. I am no threat to you. In fact, I owe 
+you. By saving him, you did my cause a great service.”
+“I don’t see what you’re talking about. Make yourself clear! Patience is not my greatest 
+virtue,” you answer menacingly. “This cub is an anomaly for our kind. Among us, females 
+are the only ones who develop magic powers. But him—he’s a male. You probably noticed 
+his… qualities.”
+“I did.”
+“Our tribe was planning his ritual sacrifice. A way to get rid of what Gaea’s priestesses 
+consider a threat to their caste.”
+“If you came to finish the work, I have bad news for you,” you say, shouldering the rifle,
+10
+“Don’t be a fool. Had I wanted to, you’d be both dead by now! No—my followers and I 
+wanted to save him. But then you came, and I thought of a better plan,” he tells you with 
+a mocking grin. “He chose you as his warden, and I believe he’ll be safer with you until his 
+time comes.” He draws near and hands you the Little One.
+You stow the rifle and take the smiling bundle.
+“We’ll meet again soon. Meanwhile, protect him at any cost. Many things depend on him.” 
+The Faun speaks these words staring intensely at the Little One, so that you are not sure 
+whether he is talking to you or to him.
+The Faun goes back to the woods, leaving you with hundreds of questions—first of all, what 
+is the best way to protect the Little One?
+◆ Choose which Advanced Class to undertake: Guardian or Custodian.
+◆ Upgrade to your chosen Advanced Class, then:
+▶ If you chose the Custodian Advanced Class, reveal 3 Mediceo - Custodian.
+▶ If you chose the Guardian Advanced Class, reveal 5 Mediceo - Guardian.
+me-3
+Your old friend and trusted inventor has helped you once again. The fantastic armor he 
+gave you really makes a difference on the battlefield, and once improved with some gadgets, 
+you will become a real war machine! However, it is still incomplete. Leonardo has written 
+to you, giving you an appointment at a nearby village inn to bring you the Helm which will 
+complete your new suit of armor.
+You leave the Little One in the hands of your friends and reach the meeting place, but 
+something in the inn seems off. It is scarcely populated, despite the evening hour, and all 
+the patrons eye you in a strange way as you enter.
+The instincts that saved your life countless times kick in once again and you quickly 
+unsheathe your weapons before five customers spring up and pounce on you—Medici’s 
+soldiers! The ensuing clash is swift and brutal—a minute later, the five of them are on the 
+floor, doubled over in pain. You shake your head, thinking Giovanni de’ Medici must be 
+really desperate if he sent these pipsqueaks after you.
+“Where’s Leonardo?” you ask one of them, holding the rifle to his cheek and a foot firmly 
+on his broken arm. The soldier screams.
+“Damn you, Mediceo! We only had to give you a message! Our lord, Giovanni, wants you 
+to know that you’re summoned to His presence. You’ll be told when and where—in the 
+meantime, Leonardo da Vinci will be his guest. In case you should think of disobeying his 
+commands once more!”
+“You do have a peculiar way of passing down messages. Or were you hoping to impress 
+your lord by bringing him the Mediceo in shackles?” you ask him in a mocking tone.
+The soldier lowers his gaze, writhing in pain. “Tell Giovanni if he lays a hand on Leonardo 
+he will be in serious trouble—he won’t be able to buy his way out of it with a bag of florins, 
+this time.” You leave the place, deeply concerned. It is clear that Giovanni wants to use 
+Leonardo to force you to hand him the Little One. But why does he care so much about 
+seeing him dead? What is in it for him? These are questions you cannot answer yet. Letting 
+others make the next move is not your style. It's time to find out where Giovanni is hiding, 
+confront him once and for all and free Leonardo.
+◆ Reveal 6 Mediceo - Guardian.
+11
+me-4
+Through your personal inquiries, you found out that cardinal Giovanni de’ Medici, 
+youngest son of Lorenzo the Magnificent, has left the comfort of his Roman residence and 
+is following your group at a distance with a handful of men. Their encampment is not 
+far—waiting for an invitation by the legate would mean walking straight into a trap. You 
+will not let him have it his way.
+In the deep of the night, while the others are asleep, you pack your things and say goodbye 
+to the Little One, who answers with a worried smile. You then set forth to the cardinal’s 
+camp.
+Getting there is not difficult. In complete silence, you knock out a couple of guards and 
+infiltrate the encampment. You reach a broad, flashy tent—Giovanni de’ Medici does not 
+give up commodities when traveling.
+Like a ghost, you get inside. Giovanni de’ Medici and Leonardo da Vinci sit near a lit 
+brazier. They both seem lost in thought; you sense a glimpse of concern in the cardinal’s 
+expression. Your friend seems to be in good health and you relax a bit, but you prefer not to 
+run any risk—you slide unseen behind Giovanni and put the barrel of your rifle to his back.
+“Good evening, ‘your lordship’. I’ve been told you were looking for me.”
+Giovanni gives a start but does not look too surprised. “I knew you would’ve come before 
+my invitation. You’re too smart to wait sitting on your hands,” he says.
+“And here I am. I got questions for you, ‘my lord’.”
+“I bet. Ask away, this matter dragged on too much and it’s time for you to know the truth.”
+“Why did you send me to kill that Faun cub? I didn’t think you capable of such a thing.”
+“You are right, and I am sorry. I was blinded by the possibility of avoiding a war and I 
+made a terrible mistake,” he says, regretfully.
+“Avoiding a war? By killing a helpless youngling?”
+“They came to me in Rome. Ominous individuals who got in the palace without alerting 
+the guards.
+They called themselves Magisters of the Black Rose—a powerful Lodge in Turin. My 
+father, may he rest in peace, told me of them long ago. He told me to fear their power, their 
+influence.”
+“Black Rose? What is it?”
+“Mystics, or phony sorcerers, maybe. Hard to tell. One thing’s for sure, though—they are 
+very powerful. Those who tried to learn more about them didn’t end up well. But many 
+think they secretly dictated the course of certain historical events.”
+“And what did they want from you?”
+“They came with an offer. I had to find and eliminate a Faun cub. In return, they would 
+have prevented a war between Rome and Venice. The Medici would have the credit for it, 
+and my family would be able to finally return to Florence.”
+“I didn’t think you so naive as to give credit to a pack of charlatans,” you mock him, but 
+Giovanni raises his head and locks eyes with you.
+“Believe me, my friend, had you been in front of them as I were, you would have believed 
+them as well… And yet it was no easy choice, I pondered over it for days before deciding 
+it was worth the trouble. The life of a young savage for that of uncountable men, and a 
+chance for Florence to rise as the sole winner in this struggle, once again under the rule of 
+the Medici.”
+The cardinal seems to be lost in his dreams of past glory. Leonardo breaks his silence to end 
+12
+the story, “So he thought it best to send his most formidable mercenary to solve the issue.”
+“You believe him?” you ask Leonardo.
+“I do, Mediceo, he hasn’t hurt me at all, he just wanted to make sure that you came—he 
+wanted a chance to explain things to you. Moreover, I too am aware of the existence of the 
+Lodge. Terribly powerful men and women.”
+“I see now that I was wrong,” Giovanni says. “And I hope you can forgive me. I shouldn’t 
+have made a pact with those devils… But there are forces much more terrible than Rome 
+or Florence behind this war.”
+“Alright. Enough of this, Leonardo and I are leaving now. Don’t try and follow us.”
+“You have nothing to fear from me. I’ll go back to Rome. You always served me well, 
+Mediceo. My door is always open for you.”
+“We’ll see…” you answer coldly, then grab Leonardo’s things and lead him out of the 
+encampment.
+Once you get back to your camp, Leonardo reassures you that he is fine and gives you the 
+last piece of your armor, as promised. You spend the rest of the night drinking and thinking 
+about unanswered questions—why did the Lodge’s Magisters plot to kill the Little One? 
+And why get Giovanni de’ Medici involved rather than settle the matter themselves?
+◆ Gain Advanced Equipment: Medicean Helmet.
+me-5
+You are worried for the Little One. Every time he uses his powers to help you, he faints and 
+it takes hours for him to recover.
+You tried to explain to him that you are perfectly capable of taking care of yourself and told 
+him not to use his powers, but the Little One doesn’t take it in.
+You friend Leonardo, intrigued by the creature, has studied him for a few days. He 
+supposes that due to his young age the Little One has not yet developed the strength and 
+skill necessary to master his powers.
+The inventor has gifted you a strange sphere that emits lights and sounds, as a training tool. 
+The Little One loves making it levitate and turning lights and sounds on and off. Leonardo 
+thinks it should help him learn how to control his powers.
+You are on watch while your comrades sleep when the Faun you met a few nights ago 
+reappears.
+He emerges from the shadows of the trees around the clearing where you made camp.
+“You’re doing quite a good job…” he says, then interrupts himself. “Funny—I never asked 
+you your name,” he goes on, amused.
+“They call me the Mediceo,” you answer.
+“Very well then, you’re doing quite a good job, Mediceo,” he replies in a playful tone.
+“I don’t know your name either, Faun.”
+“I’m Letorio, but enough pleasantries. I’m here to warn you.”
+“Warn me? Of what?”
+“The priestesses of my tribe are on your tracks, they will soon attempt to take back the cub.”
+“Let them try… They’ll find out that it isn’t wise to go against me.”
+“You’re bold, Mediceo, as many humans, but you mustn’t take lightly the danger you’re in. 
+The priestesses channel the power of the Mother and can be lethal indeed.”
+“You still haven’t told me why you—who are one of them—are exposing yourself so much 
+13
+to help us.”
+“Worry not, my friend, it’s not goodness that moves me. I’ll tell you everything at the right 
+time, just know I need the Little One to stay alive.”
+“You don’t make trusting you really easy,” you answer, slightly menacing.
+“I get it, but I’ll give you important information, thanks to which you’ll be able to be free of 
+the priestesses once and for all—will that work as a token of loyalty?”
+“Speak, and I’ll decide if it’s enough to trust you.”
+“When the time comes and my tribe gets to you, invoke the Force Embrace. It’s a sacred 
+ritual of our tribe. Even though you’re human, they’ll be compelled to abide by it.”
+“A ritual? Of what sort?”
+“A duel to the death against the tribe’s champion—he who brandishes the Force Blade, a 
+sacred weapon, symbol of command. If you win, you’ll be able to claim it for yourself and 
+as its new bearer you will be granted one single request, which no one in the tribe can 
+oppose.”
+“Let the Little One live,” you say decidedly.
+“You’re smart, Mediceo. That’s right, with this request you’ll get rid of the tribe and the 
+priestesses.”
+“And what about you? Will I get rid of you as well?”
+The Faun lets go another laugh, crystal clear, deep and mellow. “That’s not so simple, but 
+don’t worry about it now. You should get ready for the duel. It won’t be a walk in the 
+woods.” His silhouette silently goes back to the shadows and disappears.
+You are left in silence, pondering what Letorio just told you. It would seem to be a good 
+plan, but there is a high risk and many uncertainties.
+You gaze at the improvised cradle where the Little One is sleeping. You make a decision—
+no matter the risk, he will live.
+◆ Reveal 4 Mediceo - Custodian.
+ me-6
+Everything is going according to Letorio’s plan.
+You were passing through a dense forest when you were surrounded by a crowd of angry 
+Fauns.
+Trying to flee would be pointless.
+You warn your companions of this possibility and instruct them to surrender without 
+resisting. That would solve everything.
+A Faun in priestly robes comes forward and orders you to hand her the Little One. It is then 
+that you invoke the Force Embrace, arousing bewilderment among the warriors and a rash 
+gesture from the Priestess.
+When she declares that you had no right—being a human—to invoke their most sacred 
+ritual fight, you feared the worst. But her warriors disagree. Refusing the challenge of a 
+man would have cast shame on the tribe’s warrior caste. Eventually, she has to give in.
+“Be it, then! Your fate is sealed, human—we will offer your remains to the Mother after our 
+Champion slices you open like a lamb,” she says, laughing.
+You are now standing in a circle of Fauns, lined up at the edge of a clearing. They clash 
+their weapons on shields, shouting: “Hoo! Hoo! Hoo!”. You wait for your rival, testing the 
+balancing of the Primaeval sword they gave you for the duel.
+14
+Suddenly, the ring of warriors opens up and their Champion comes into view. Your heart 
+skips a beat when you realize your challenger is none other than Letorio!
+Your mind is crowded by confused thoughts. Has the Faun led you into a trap? What is 
+going on? Your survival instinct takes over. The only important thing now is defeating 
+Letorio. Once you are face-to-face with Letorio,, the priestess enters the clearing and starts 
+the fight with words you don’t understand.
+A deadly dance begins, and you quickly realize Letorio is as good a dancer as you are. Your 
+swords clash with both violence and grace.
+“You deceived me, but you won’t live to tell the tale!” You say, attempting a lunge.
+“Don’t speak, human! Try harder!” he replies, deflecting.
+Letorio is an extraordinary combatant, but just like everyone else, he eventually makes a 
+mistake—after a lateral thrust, his guard is open. You would not expect such a mistake 
+judging by how well he fought so far, but you seize the opportunity and plunge your sword 
+in his belly.
+He falls in your arms. “Well done, Mediceo… Well done. We made it,” he says in a faint 
+voice. You see now that Letorio’s deceit was of another kind. He planned everything so that 
+you could win the duel and save the Little One. The truth upsets you, in spite of your mettle.
+“Why?” You ask him, laying him down.
+“A necessary sacrifice to let the Little One live… He’s a male with Gaea’s powers—the proof 
+that our caste can hope to rise up. Take care of him, he’s of utmost importance.”
+Letorio draws his last breath and the clearing falls silent. The Priestess looks shocked and 
+irate. The warriors start singing a hymn, paying homage to the winner.
+The Priestess reluctantly draws near to declare your victory. She picks up the Force Sword 
+and hands it to you with hollow respect.
+“The Mother has chosen! This is yours by right, and you are allowed to make a request to 
+the tribe.”
+She speaks these words with ill-concealed disdain. You take the sword and raise it above 
+your head.
+“May the cub you wish dead come with me. Spare him and I will take care of him. Our 
+paths shall never cross again.”
+“Be it!” The Priestess answers, slightly relieved. All in all this seems to be a condition she 
+can accept—for now, at least. You, the Little One and your friends are freed and the tribe 
+disappears into the forest. You cast one last, admired glance at Letorio’s body while they 
+carry it away.
+He gave his life for his cause. The least you can do to honor him is protecting the Little One 
+while you have the strength to, until he can start the revolution Letorio dreamed of.
+◆ Gain Advanced Equipment: Sword of the Force.
+
+C o m p o n e n t s f o r B l a c k R o s e Wa r s and Rebirth
+1 MAGE CARD
+The Little One can be chosen as a Mage 
+during step 8 of the Setup described in the 
+core game rulebook (use the Mediceo model 
+to represent the Little One).
+3 PERSONAL SPELL CARDS
+With the following Material you can use the Mediceo Miniature to represent the Little One in 
+the Lodge for any Black Rose Wars or Rebirth game!
+
+MEDICEO
+ 11
+
+
+ 7
+2
+2
+2
+
+
+Inspiration
+
+: each time you suffer at 
+least 2 due to a single Effect, 
+gain 1. 
+Inspiration
+
+: each time you infl ict at 
+least 2 due to a single Effect, 
+place 1 in a . 
+
+Inspiration
+
+at suffer each time you : 
+ due to a single Effect, 2 least 
+.  gain 1
+Inspiration
+
+at infl ict each time you : 
+ due to a single Effect, 2 least 
+.  in a  place 1
+
+Mediceo - Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com

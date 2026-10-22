@@ -1,0 +1,564 @@
+
+=== PAGE 1 ===
+B lack Ros e Wa rs + R e b i rt h
+C om pat i b i l ity Ha nd b o ok
+This handbook contains all the rules and information needed to use the material from 
+Black Rose Wars and Black Rose Wars: Rebirth in the same game. 
+NOTE: REFERENCE RULEBOOK
+In this handbook we will use as a reference the rulebook provided with Black Rose 
+Wars: Rebirth. 
+All statements in this document, as well as any references to stages, points, and/or 
+paragraphs are intended inherently to the latest version of the Black Rose Wars: 
+Rebirth rulebook, unless otherwise noted.
+
+=== PAGE 2 ===
+Event Cards
+Quest Cards
+NOTE: QUESTS FOR 4/5/6 PLAYERS
+Some Quest cards included in Black Rose Wars feature the 
+ symbol and their use is limited to games with 4, 5 or 6 
+players. 
+When a Mage is placed in their 
+Cell, that Mage gains 1. 
+2 0
+Always
+Hidden Resources
+
+
+Shattered Illusion
+1
+: Place 1.
+: Place 1.
+After you resolve a  Effect, 
+place 1 on this card. 
+The fi rst time you do it, reveal 
+this card. 
+
+002 / 078
+Nothing happens. 
+Draw an additional Event Card.
+ 
+Instant Effect
+
+
+001 / 095
+  Instead of the normal 
+Room Effect, cast 1 Spell from 
+your hand.
+Activate
+the Room:
+
+Arena
+Magic Block
+Event Cards are fully compatible between 
+the two games. To include cards from 
+both games in a game, before performing 
+the setup, create the three Event Card 
+decks (First, Second, and Third Moon) 
+by shuffl ing the Event Cards from Black 
+Rose Wars with those from Black Rose 
+Wars: Rebirth.
+Quest Cards are fully compatible 
+between the two games. To include 
+cards from both games in a game, before 
+performing the setup, create the three 
+Mission Card decks (First, Second, and 
+Third Moon) by shuffl ing the Quest 
+Cards from Black Rose Wars with 
+those from Black Rose Wars: Rebirth.
+Black Rose Wars
+Black Rose Wars
+Black Rose Wars: 
+Rebirth
+Black Rose Wars: 
+Rebirth
+
+
+022 / 095
+
+Elusive
+Suffer no more than 
+in a single Game Turn.
+
+
+022 / 095
+
+
+
+
+022 / 095
+
+
+
+=== PAGE 3 ===
+Schools of Magic
+Schools of Magic are fully compatible between the two games. 
+To include Schools of Magic from both games to the game, 
+at step 9 of chapter 1 - Setup (page 8), form the Library by 
+including 6 Schools of Magic chosen randomly or by mutual 
+agreement by the players from all those available, whether they 
+come from Black Rose Wars or Black Rose Wars: Rebirth.
+ANATOMY DIFFERENCE
+Spell Cards in Black Rose Wars are anatomically diff erent 
+from those in Black Rose Wars: Rebirth in several ways. 
+Since it is necessary to refer to the rulebook included in 
+Black Rose Wars: Rebirth, these anatomical diff erences are 
+highlighted here, along with how each should be considered 
+in order to work with the newer rulebook.
+LIGHT SIDE AND DARK SIDE
+Spell Cards in Black Rose Wars do not have a distinction 
+between Light Side and Dark Side like the ones in Black 
+Rose Wars: Rebirth. They used to show one side called 
+the Straight Side, recognizable by the arrow in the upper left 
+corner of the card A , and one side called the Reverse Side. 
+For any indication of the rules and materials, the straight side 
+of Black Rose Wars Spell Cards is equivalent to the Light Side, 
+while the reverse side is equivalent to the Dark Side.
+TRAP SPELLS AND PROTECTION SPELLS
+ Trap and  Protection type Spell Cards of Black Rose 
+Wars do not feature a box showing the Trigger Condition 
+of the Eff ect B , instead this must be deduced from the fi rst 
+sentence of each of these Eff ects.
+For all these cards, the Trigger Condition is considered to be 
+all the text before the ":" of the Eff ect C .
+
+Target
+Infl ict
+You may move the target up to 
+  
+Draco's Skin 
+Summon 
+Assign 
+Reinforced Dermis 
+  
+defeated
+Draco's Skin
+removed
+
+ that Model. Target
+. 3 Infl ict
+. 1 the target up to move You may 
+
+
+ 
+A Model enters the Room you  are in:
+Draco's Skin
+Summon 
+Assign 
+Reinforced Dermis 
+  
+ removed defeated
+Draco's Skin
+003 / 226
+
+
+ 
+ 
+Dance of Death
+Black Rose Wars: Rebirth
+Trap Spell Card
+Black Rose Wars: Rebirth
+Black Rose Wars: Rebirth
+Black Rose Wars 
+Trap Spell Card
+Black Rose Wars
+Black Rose Wars
+ 
+Dance of Death
+003 / 226
+ 
+ 
+  
+Dance of Death
+  
+Dance of Death
+When a Mage completes a 
+Physical Action, you may:
+Infl ict
+Black Rose Wars 
+When a Mage completes a 
+Physical Action, you may:
+and move them Physical Action, you may:
+Dance of Death
+003 / 226
+When a Mage completes a 
+Physical Action, you may: Move 
+them, and another Model in the 
+same Room, together by, then 
+gain.
+ 
+  
+Dance of Death
+  
+Dance of Death
+all the text before the ":" of the Eff ect C .
+
+Summon or 
+removed Assign the 
+Reinforced Dermis Upgrade
+Draco's Skin
+Summon defeated
+  
+
+Target
+Infl ict
+You may move the target up to 
+  
+Draco's Skin 
+Summon defeated
+Assign 
+Reinforced Dermis 
+  
+One of your Evocations is 
+defeated
+Draco's Skin
+ or removed:
+
+ the target up to 
+Infl ict
+move
+Target You may 
+
+
+ 
+ Draco's Skin
+Summon 
+Assign 
+Reinforced Dermis 
+  
+ removed defeated
+Draco's Skin
+A
+C Summon defeated
+to it.
+Assign 
+Reinforced Dermis Upgrade
+Summon the defeated
+to it.
+Reinforced Dermis B
+School Spell Cards and Personal Spell Cards
+School Spell Cards featured in Black Rose Wars are 
+recognizable by the background color of the graphic layout 
+only A .
+School Spell Cards included in Black Rose Wars: Rebirth can 
+be recognized by the School logo in the upper right corner of 
+each Eff ect, in addition to the background color of the graphic 
+
+Grim Torment
+  
+
+Pain 1
+Infl ict
+Grim Torment
+  
+
+Infl ict 3.
+Pain 1.
+
+
+Grim Torment
+  
+
+) for each 
+.
+3
+Pain 1
+ (max 
+1 Infl ict
+ on your Mage Sheet. 2
+Grim Torment
+  
+
+Infl ict
+Pain 1
+Assembly Line
+  
+Summon a Cadaver and 
+assign an Upgrade of your 
+choice to it. 
+It activates.
+Assembly Line
+  
+Remove one of your Undead 
+with an assigned Upgrade. If you 
+do, summon a Colossus in a 
+ and assign an Upgrade of 
+your choice to it. 
+
+Assembly Line
+  
+ and Cadaver a Summon 
+an Upgrade of your assign 
+. choice to it
+. activates It 
+Assembly Line
+  
+Undead one of your Remove 
+with an assigned Upgrade. If you 
+in a Colossus a summon do, 
+an Upgrade of assign and 
+. your choice to it
+
+
+Assembly Line
+
+Undead one of your 
+with an assigned Upgrade. If you 
+in a Colossus
+an Upgrade of 
+. your choice to it
+Assembly Line
+
+Cadaver and 
+an Upgrade of your 
+choice to it. 
+activates.
+
+014 / 226
+Select a Target Model within, then 
+another Target withinfrom the fi rst, 
+and a fi nal one withinfrom the 
+second. Infl icton the fi rst, on 
+the second, andon the third.
+Infl icton each Model
+in the Target Room. 
+Flip the Target Room's Activation 
+Token, as if it had been Activated.
+  
+Destructive Bolt
+
+Destructive Bolt
+083 / 226
+Infl icton each Model in the Target 
+Room. If any affected Mage leaves the 
+Room with a Physical Action before 
+the end of the Game Turn, infl ict more on them.
+Infl icton each Model
+in adjacent Rooms.
+
+
+
+
+
+
+Ring of Fire
+Ring of Fire
+layout B .
+Personal Spell Cards in both games are to be considered as not 
+being part of any School, although those in Black Rose Wars 
+show the same background colors as the graphic layouts of some 
+Schools of Magic.
+each Eff ect, in addition to the background color of the graphic 
+
+Destructive Bolt
+014 / 226
+ 
+   
+
+  
+Destructive Bolt
+  
+Destructive Bolt
+
+
+Grim Torment
+  
+
+Pain 1
+Infl ict
+Grim Torment
+  
+
+Infl ict
+Pain 1
+
+Grim Torment
+  
+
+Pain 1 Infl ict
+Grim Torment
+  
+
+Infl ict
+Pain 1
+A
+ 
+B
+
+=== PAGE 4 ===
+Evocations
+Evocation Cards (and Evocations) are fully compatible 
+between the two games. To include Evocations from both 
+games in a game, create a Evocation Card deck by shuffl ing the 
+Evocation Cards from Black Rose Wars with those from Black 
+Rose Wars: Rebirth.
+Add the Evocation Models from both games to the game pool.
+Rose Pins and Evocation Bases
+Black Rose Wars Models have up to three slots on their bases, 
+into which the owner inserts one or more of their Rose Pins 
+in order to determine their ownership and placement of the 
+Evocation Card in the Evocation Slots of their Mage's Sheet. 
+In Black Rose Wars: Rebirth, the Rose Pins have been replaced 
+by Evocation Bases featuring one to three  symbols. As with 
+the number of Rose Pins placed in the base of an Evocation, the 
+number of  determines the placement of the Evocation Card 
+in the Evocation Slots of one's Mage Sheet.
+The following chart highlights the equivalence between  and 
+Rose Pins:
+A Mage cannot own two diff erent Evocation Models that have 
+the same number of pinned Rose Pins and  on the clipped 
+Evocation Base.
+2 2 4
+Each time the Nigredo infl icts 
+, its controller may place 
+1 or convert 1 in a 
+from it.
+Construct
+   Nigredo
+Malacoda
+007 / 009
+Black Rose Wars Black Rose Wars: Rebirth
+A Mage cannot own two diff erent Evocation Models that have 
+
+=== PAGE 5 ===
+Large Models
+In Black Rose Wars: Rebirth each Mage has at their disposal a 
+Large Evocation Base that features no  symbol.
+As stated on chapter 2 - Game Turn in the rulebook, Summon 
+Evocations paragraph (page 20), a Mage may only own one 
+Model clipped to the Large Evocation Base. This rule applies 
+only to Models featured in Black Rose Wars: Rebirth and 
+Models featured in later releases; put more simply, it means all 
+Evocation Models that do not have slots in their bases.
+Evocation Models that have slots in their bases follow the 
+normal rules explained in the previous paragraph, without some 
+limitations based on the size of their base. Some Black Rose 
+Wars Evocations can house a single Rose Pin; this indicates that 
+a Mage can own a single copy of such Evocations. Even if a 
+single Rose Pin is placed on the base of the Model, the Evocation 
+Card of these Models can be placed in any of the Evocation Slots 
+(, ,   ) of the Mage Sheet, chosen at the time the 
+Model is summoned.
+REMOVE EVOCATIONS
+Some game Eff ects allow you to remove an Evocation from the Lodge. When a Mage resolves one of these Eff ects they 
+must comply with these points:
+• A non-Forgotten Spell cannot remove another Mages's Forgotten Evocation.
+• A non-Forgotten Spell cannot remove another Mage's Evocation with a Health value greater than 3. Note that some 
+Eff ects may change the Health value of an Evocation from that printed on the Evocation Card.
+• An Eff ect that removes your own Evocation allows the Mage to ignore the previous points; therefore you can remove 
+your Evocation with any Health value even if it is a Forgotten Evocation.
+• A Forgotten Spell that removes an Evocation ignores the previous points; therefore you can remove one of your own 
+(or another Mages's) Evocation with any Health value even if it is a Forgotten Evocation.
+
+=== PAGE 6 ===
+Rooms
+To use the Rooms in Black Rose Wars and Black Rose Wars: 
+Rebirth, before performing the game setup, choose randomly 
+or by mutual agreement 19 Rooms with which to form the 
+Lodge, making sure that each of the Rooms listed below is 
+chosen in single copy, regardless of the game they come from.
+The Rooms from Black Rose Wars start the game with their 
+Front facing up and the corresponding Activation Token on 
+them. 
+Rooms from Black Rose Wars: Rebirth start the game with 
+the Destroyed side facing up. 
+Each Room used in the game will then follow the rules given in 
+the rulebook of its respective game.
+Black Rose Wars Black Rose Wars: Rebirth
+BLACK ROSE 
+ROOM
+  Black Rose Room
+6 3 1
+THRONE
+ROOM 
+  Throne Room 
+6 3 1
+ARMORY
+  Armory
+4 2 1
+PLEASURES 
+ROOM
+  Pleasures Room
+4 2 1
+
+=== PAGE 7 ===
+Black Rose Wars Black Rose Wars: Rebirth
+CEMETERY
+  Cemetery
+4 2 1
+CRYPT
+  Crypt
+4 2 1
+SACRIFICIAL 
+ALTAR
+  Sacrifi cial Altar
+4 2 1
+SUMMONER 
+ROOM
+  Summoner Room
+4 2 1
+ARENA
+  Arena
+4 2 1
+
+=== PAGE 8 ===
+Black Rose Wars Black Rose Wars: Rebirth
+ALCHEMICAL 
+LABORATORY
+ Alchemical Laboratory
+4 2 1
+FORGE
+  Forge
+2 1 0
+GARDEN
+  Garden
+2 1 0
+TREASURE 
+ROOM
+  Treasure Room
+2 1 0
+BIBLIOTHECA
+  Bibliotheca
+3 1 1
+
+=== PAGE 9 ===
+Black Rose Wars Black Rose Wars: Rebirth
+OBSERVATORY
+  Observatory
+3 1 1
+SANCTUARY
+  Sanctuary
+3 1 1
+MIRRORS ROOM
+  Mirrors Room
+4 2 1
+ORACLE ROOM
+  Oracle Room
+4 2 1
+THE ABYSS
+  The Abyss
+4 2 1
+
+=== PAGE 10 ===
+Sator Box Rooms
+To include Rooms from the Sator Box in a game, perform 
+game setup until you have a defi ned Lodge layout. Then select 
+the Rooms from the Sator Box that you want to include. For 
+each Room from the Sator Box selected, randomly choose a 
+Room from the Lodge that has the same color and swap them, 
+removing the Room just taken out of the Lodge from the game.
+If, during the game, a player draws a Quest Card that requires 
+to be resolved in a Room that is not in the Lodge, they may 
+publicly display the Quest Card, discard it, and draw another 
+one. 
+In the event that Rooms from both Black Rose Wars and 
+Black Rose Wars: Rebirth are used in the same game, 
+when calculating the End of the Game points on page 32, 
+assign the Mages who have one or more Activation Tokens 
+from a Room from Black Rose Wars the  Power Points 
+associated with each of those Tokens.
+FINAL SCORE
+
+=== PAGE 11 ===
+Black Rose Wars + Rebirth - Compatibility Handbook 
+Ver. 1.0

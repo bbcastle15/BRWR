@@ -1,0 +1,60 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 4
+GAME SEED: 0
+Spells loaded: 283
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - forge
+  - heka
+  - alchemy
+  - lex
+  - famine
+  - chaos
+Selected 6 / 10 available schools
+
+SCHOOL LIBRARIES:
+  forge: 36 cards
+  heka: 36 cards
+  alchemy: 36 cards
+  lex: 36 cards
+  famine: 36 cards
+  chaos: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 25
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Initial Crown assigned to Player 4
+Player 4 takes the Crown
+Player 1 Cell exits: ["mirrors_room", "pleasures_room"] | primary: mirrors_room | starts in Cell: true
+Player 2 Cell exits: ["treasure_room", "sacrificial_altar"] | primary: treasure_room | starts in Cell: true
+Player 3 Cell exits: ["alchemical_laboratory", "armory"] | primary: alchemical_laboratory | starts in Cell: true
+Player 4 Cell exits: ["forge", "crypt"] | primary: crypt | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+Waiting for Player 1 | input type: effect_choice
+Healed 1 damage from owner 1 on Player 1 | Target HP: 8/11
+Healed 1 damage from owner 2 on Player 1 | Target HP: 9/11
+Healed 1 damage from owner 3 on Player 1 | Target HP: 10/11
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=room_target | input=effect_choice | retry_index=1
+Waiting for Player 1 | input type: effect_choice
+Healed 1 damage from owner 2 on Player 2 | Target HP: 8/11
+Healed 1 damage from owner 2 on Player 2 | Target HP: 9/11
+Healed 1 damage from owner 3 on Player 2 | Target HP: 10/11
+Waiting for Player 1 | input type: effect_choice
+LATEST PLAYTEST: 14 checks, 0 failures

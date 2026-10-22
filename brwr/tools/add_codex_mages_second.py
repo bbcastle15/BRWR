@@ -1,0 +1,19 @@
+import json,pathlib
+D=pathlib.Path('data');sp=json.loads((D/'spells.json').read_text(encoding='utf-8'));mg=json.loads((D/'mages.json').read_text(encoding='utf-8'))
+def e(t,**kw):return dict(type=t,**kw)
+def side(t,el,target,r,effects,**kw):return dict(type=t,element=el,target=target,range=r,effects=effects,**kw)
+def mage(id,name,h,hand,card,title,school,L,R,inst=True,quests=2,speed=2):
+ assert id not in mg and not any(s['id']==card for s in sp)
+ mg[id]=dict(id=id,name=name,health=h,hand_limit=hand,strength=2,speed=speed,max_active_quests=quests,personal_spell_id=card)
+ sp.append(dict(id=card,name=title,school=school,personal=True,copies=3,instability=inst,light=L,dark=R,source=f'Codex Arcanum, Mages: {name}'))
+C='contingency';B='combat'
+
+mage('janara','Janara',10,8,'mystic_guide','Mystic Guide','personal',side(C,'water','self',0,[e('room_effect',range=0,effects=[e('place_instability',amount=1)],only_on_trigger=True)],trigger={'type':'caster_enters_room'},trigger_target='self'),side(C,'air','self',0,[e('mage_move',distance=1),e('mage_move',distance=1),e('mage_move',distance=1),e('room_effect',range=0,effects=[e('activate_target_room',allow_reactivate=True)])]),inst=False)
+mage('imhotep','Imhotep',11,7,'great_architect','Great Architect','shamanic',side(C,'profane','room',2,[e('place_instability',amount=1),e('activate_target_room',allow_reactivate=True)]),side(C,'profane','room','*',[e('activate_target_room',allow_reactivate=True),e('school_condition',condition='target_room_rebuilt',effects=[e('gain_power',amount=1)])]))
+mage('hogwarz','Hogwarz',11,7,'incanto_porkonus','Incanto Porkonus','druidic',side('trap','profane','self',0,[e('heal',amount=6)],trigger={'type':'mage_event','event_type':'damage_inflicted','target':'self','min_amount':1},trigger_target='self'),side(B,'profane','evocation','*',[e('heal',amount=3),e('activate_target_evocation_under_control',strength_bonus=2)]))
+mage('mediceo','Mediceo',11,7,'inspiration','Inspiration','agony',side(C,'sacred','self',0,[e('gain_power',amount=1,only_on_trigger=True)],trigger={'type':'mage_event','event_type':'damage_inflicted','target':'self','min_amount':2},trigger_target='self'),side(C,'sacred','self',0,[e('room_effect',range=0,effects=[e('place_instability',amount=1)],only_on_trigger=True)],trigger={'type':'mage_event','event_type':'damage_inflicted','source':'self','min_amount':2},trigger_target='self'))
+mage('bellum','Bellum',10,8,'carnage','Carnage','war',side(B,'fire','self',0,[e('summon_equipment'),e('mage_move',distance=1),e('mage_attack',optional=True)]),side(B,'fire','room',1,[e('place_instability',amount=1),e('damage',amount=2)],suppressed_trigger_types=['protection','trap']),inst=False)
+mage('pyotr','Pyotr',11,7,'dictat','Dictat','lex',side(C,'profane','evocation',3,[e('assign_upgrade',choice=True),e('activate_target_evocation_under_control')]),side(C,'profane','room',0,[e('lose_power',amount=1),e('choose_evocation_to_summon',max_health=3),e('if_effect_result',key='last_summoned_evocation',effects=[e('assign_upgrade',choice=True)])]))
+mage('onamor','Onamor',12,7,'necroflame','Necroflame','lex',side(C,'profane','room','*',[e('choose_evocation_to_summon',max_health=3,archetype='undead'),e('activate_summoned_evocation')]),side(B,'fire','room',1,[e('damage',amount=3),e('steal_power_from_up_to_mages',amount=1,max_targets=2)]),inst=False)
+mage('parcae','Parcae',11,7,'three_visions','Three Visions','oracle',side(C,'profane','self',0,[e('prophecy'),e('prophecy'),e('prophecy')]),side(B,'profane','room',1,[e('revelation',effects=[e('place_instability',amount=1)]),e('revelation',effects=[e('convert_instability',amount=1)]),e('revelation',effects=[e('damage',amount=1)])],revelation=True))
+(D/'spells.json').write_text(json.dumps(sp,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');(D/'mages.json').write_text(json.dumps(mg,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

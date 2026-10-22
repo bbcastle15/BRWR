@@ -1,0 +1,1832 @@
+
+=== PAGE 1 ===
+
+
+=== PAGE 2 ===
+2
+Ten years of chasing nothing more than a whisper. Ten years of wandering driven by the wind. Ten years of 
+searching for something that long ago ceased to exist.
+Ten years ago, Alessandro first heard the Voice of the Black Rose. Thorny twigs led him through the depths of 
+great cities and the thickets of the darkest forests in search of a book hidden from the eyes of the ignorant.
+Each library sealed shut and each of the temples forgotten for centuries was a chance to end his journey, but each 
+of them turned out to be just another stop on a never-ending road. Until now. 
+A single note written in faded ink mentions the name "Codex Arcanum". The thorned vines grow anew, 
+marking the next destination on his path.
+Ten years of chasing nothing more than a whisper. Ten years of wandering driven by the wind. Ten years of 
+searching for something that might still exist.
+C r e d i t s
+Project Manager and Production: Kornel Samociuk
+Mage Conversion Kit: MrSlurpy
+Based on a game by: Marco Montanaro
+English edition: Ludus Magnus Studio
+Black Rose Wars: Rebirth - Codex Arcanum version 2.0-EN
+A fan project created and shared with permission from Ludus Magnus Studio.
+
+=== PAGE 3 ===
+3
+T a b l e o f C o n t e n t s
+Credits ..........................................................................2
+Table of Contents .........................................................3
+Agony ..........................................................................4
+Alchemy.......................................................................7
+Chaos .........................................................................10
+Death .........................................................................13
+Druidic .......................................................................16
+Famine .......................................................................19
+Forge ..........................................................................22
+Geomancy..................................................................26
+Heka...........................................................................29
+Hex.............................................................................32
+Lex..............................................................................35
+Nightmare..................................................................38
+Oracle.........................................................................41
+Pestilence....................................................................44
+Shamanic....................................................................47
+Technomancy ............................................................50
+Void............................................................................54
+War.............................................................................57
+Forgotten....................................................................60
+Mages.........................................................................68
+The Lodge.................................................................. 84
+e - Black Rose rooms...................................................84
+h - Grey rooms ............................................................86
+k - Red rooms..............................................................89
+i - Yellow rooms.........................................................91
+j - Green rooms...........................................................93
+g - Blue rooms.............................................................96
+l - Purple rooms..........................................................98
+Lodge Layouts.......................................................... 100
+Evocations................................................................ 101
+Upgrade Cards ......................................................... 108
+Jinx Cards ................................................................ 109
+Marks of the Old Ones ............................................ 110
+Errata ....................................................................... 111
+$ - School Reference Cards........................................111
+L - Rooms...................................................................111
+Y - Mages.....................................................................111
+; - Spell Cards.............................................................112
+X - Evocations..............................................................113
+1 – Event Cards ........................................................113
+# – Avatars ..................................................................113
+USING THE CODEX
+Codex is divided into twenty-seven chapters , which are to be consulted as indicated below in order to understand the 
+game as simply and straightforwardly as possible.
+1. Schools of Magic: these chapters present all the Schools of Magic available in the game. Clicking on the elements 
+contained in the Y - Related Mages sections will take you to the corresponding entries in the Codex.
+2. Mages: this chapter presents all the Mages available in the game, along with their unique components. Clicking 
+on the elements in the Suggested School of Magic section will take you to the corresponding chapter of the 
+Codex.
+3. The Lodge: this chapter presents all the rooms available in the game.
+4. Lodge Layouts: this chapter describes how to prepare the Lodge for a game with a specific number of players.
+5. Evocations: this chapter presents all the Evocations available in the game.
+6. Upgrade Cards: this chapter presents all the Upgrade Cards available in the game.
+7. Jinx Cards: this chapter presents all the Jinx Cards available in the game.
+8. Marks of the Old Ones: this chapter presents all the Marks of the Old Ones Cards available in the game and the 
+rules that let you use them in Black Rose Wars games.
+9. Errata: this chapter is a collection of patches released for the game. Other sections of the Codex contain references 
+to this chapter, marked with the symbol 3 or subsections 3 - Errata. Clicking on the symbol 3 or on one of 
+the subsection elements will take you to the corresponding patch.
+
+=== PAGE 4 ===
+4
+A g o n y
+$ - T h e S c h o o l
+This School takes advantage of the : from the & on their Mage Sheet.
+Some Spells of this School have the Pain N keyword in their Effect.
+When Pain N is applied, the & inflicts N : to the caster of the Spell.
+F - E l e m e n t s
+4 A, 4 H, 6 C, 8 D, 2 F
+X - E v o c a t i o n s
+3x Succubus
+Y - R e l a t e d M a g e s
+Fenrir, Mediceo, Razvan, Rikkart
+
+=== PAGE 5 ===
+5
+S a d i s t i c F u r y
+SPELL TYPES
+10 =, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Unstable ;
+• Collaboration with &
+• Pain
+
+=== PAGE 6 ===
+6
+A l g o l a g n i a
+SPELL TYPES
+6 =, 2 >, 4 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Control over !
+• Persistents 0
+• Collaboration with &
+
+=== PAGE 7 ===
+7
+A l c h e m y
+$ - T h e S c h o o l
+Some Spells of this School have the Enhancement keyword in their Effect.
+When a player reveals a Spell with Enhancement, that Mage checks if the other revealed Spells on their Mage Sheet show, on the 
+previously resolved side of the Spell, the symbols required by the Enhancement of the Spell they are casting. If this condition is 
+met, the Enhancement is added to the Effect of the Spell, then it resolves. Otherwise, resolve the Effect without considering the 
+Enhancement part of it.
+F - E l e m e n t s
+5 A, 5 E, 5 H, 5 C, 4 F
+X - E v o c a t i o n s
+3x Nigredo
+Y - R e l a t e d M a g e s
+Angela, Ignis
+
+=== PAGE 8 ===
+8
+S c o u r g e
+SPELL TYPES
+10 =, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Enhancements
+
+=== PAGE 9 ===
+9
+A u r o m a n c e r
+SPELL TYPES
+4 =, 6 >, 2 @
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning X
+• Control over X
+• Removing X
+• Unstable ;
+• Enhancements
+
+=== PAGE 10 ===
+10
+C h a o s
+$ - T h e S c h o o l
+Some Spells of this School allow you to place a Vastum token in a Room. Each Room can have a maximum of one Vastum Token 
+inside it. If an Effect would place a Vastum Token in a Room that already has one in it, resolve the Effect without placing the 
+Vastum Token.
+Some Spells of this School have the Chaos keyword in their Effect. When a Mage resolves the Chaos keyword, they may shuffle 
+their Memories into their Grimoire, then they must choose a Q with a Vastum Token inside it and reveal the first ; of their own 
+Grimoire. If the Element of the revealed ; coincides with one of those listed below, the Mage resolves the associated Effect in the 
+chosen Room, then places the revealed ; at the bottom of their own Grimoire:
+• D: inflict 2:,
+• G: place 1I,
+• B: activate the Room even if it is used,
+• F: choose one of the above.
+F - E l e m e n t s
+8 G, 8 D, 8 B
+Y - R e l a t e d M a g e s
+Landolfo II, Rubedo, Shroudtech
+
+=== PAGE 11 ===
+11
+A f f l i c t i o n
+SPELL TYPES
+4 =, 8>
+KEY SPELL EFFECTS
+• Inflicting :
+• Placing Vastum Tokens
+• Chaos
+
+=== PAGE 12 ===
+12
+A u r o m a n c e r
+SPELL TYPES
+2 =, 10 >
+KEY SPELL EFFECTS
+• Control over Quests
+• Unstable ;
+• Obtaining the 1
+• Drawing Forgotten ;
+• Placing Vastum Tokens
+• Chaos
+
+=== PAGE 13 ===
+13
+D e a t h
+$ - T h e S c h o o l
+Spells from this School can cause opposing Mages to assign Destiny Tokens. A Mage can have a maximum of 3 Destiny Tokens
+assigned. Destiny Tokens cannot be assigned to Evocations. Each time a Mage assigns a Destiny Token they place 1* on it. 
+From that moment on, that Destiny Token is considered the property of that Mage. 
+A Mage may resolve the Destiny Tokens they have at Step 3 of the resolution of the defeat of the Mage to whom they are 
+assigned. The resolution of these tokens follows Play Order, for a number of Destiny Tokens ranging from 0 to 3 for each Mage 
+who has any assigned to the defeated Mage. When a Destiny Token is resolved, the owner converts 1: on the Mage to whom 
+that Destiny Token is assigned, then that Destiny Token is discarded (the * on it is returned to the owner). 
+Some Spell Effects of this School allow for the defeat of a Mage who is assigned 3 Destiny Tokens. When this happens because 
+of one of these Effects, at Step 5 of the resolution of that Mage's defeat, the Mage who defeated them gains 1 additional 7.
+F - E l e m e n t s
+8 G, 8 D, 6 B, 2 F
+Y - R e l a t e d M a g e s
+Jack, Mors
+
+=== PAGE 14 ===
+14
+O b l i v i o n
+SPELL TYPES
+3 =, 5 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Unstable ;
+• Assigning Destiny Tokens
+
+=== PAGE 15 ===
+15
+T h e E n d
+SPELL TYPES
+4 =, 2 >, 2 @, 4 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over !
+• Control over 7
+
+=== PAGE 16 ===
+16
+D r u i d i c
+$ - T h e S c h o o l
+TRANSFORMATION
+Some Spell Cards allow you to perform a Transformation as part of one of their Effects. A Transformation is identified by the 
+Transform keyword followed by the name of the Transformation. When a Mage performs Transform, they follow these steps:
+• They replace their Mage's Model with the Model of the indicated Transformation, if available; otherwise, they ignore 
+the Transformation.
+• They discard all their Equipment Evocations.
+• They place the ; that transformed them next to their Mage Sheet, rotated as indicated by the Transform Effect.
+As long as that ; remains next to their Mage Sheet, the Mage is considered Transformed and the Physical Actions listed on that 
+; are available to that Mage. When it is in that position, that ; is considered the ; that Transformed the Mage.
+The Mage discards the ; that transformed them when:
+• They are defeated.
+• They are about to perform Transform.
+When this happens, that Mage is no longer Transformed and must replace the Model of their Transformation with the Model of 
+their Mage.
+At the Beginning of the Evocations Phase, in play order, a Transformed Mage may perform one of the Physical Actions listed on
+the ; that transformed them without exhausting a <.
+SPIRITUAL PROPAGATION 
+Some Spells of this School have Effects with the Bjorn or Loki keyword. When a Mage resolves a Spell of this School, they apply 
+the Effect phrases after these keywords only if they are Transformed into the corresponding Transformation. 
+FERAL MAGIC 
+At Step 1 of the first Study Phase of the game, instead of drawing 2; from their Grimoire, each Mage may search their Grimoire 
+or Memories for 1; of this School that contains the Transformed keyword. If they do, they draw that card and shuffle the 
+Grimoire, then they draw 1; from their Grimoire. If they do not, they perform the Study Phase normally. 
+COMMUNION WITH NATURE 
+When a Mage discards a ; from this School that transformed them, that Mage can draw that ; from their Memories.
+F - E l e m e n t s
+2 A, 3 E, 7 C, 4 G, 4 B, 2 F
+X - E v o c a t i o n s
+3x Crocodilus 3x Ursa
+Y - R e l a t e d M a g e s
+Agorix, Hogwarz, Kormac
+
+=== PAGE 17 ===
+17
+G u i d i n g S p i r i t
+SPELL TYPES
+4 =, 3 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning X
+• Unstable ;
+• Performing a -
+• New <
+
+=== PAGE 18 ===
+18
+M y s t i f i c a t i o n
+SPELL TYPES
+11 >
+KEY SPELL EFFECTS
+• Control over I
+• Control over !
+• Control over Quests
+• Healing
+• New <
+
+=== PAGE 19 ===
+19
+F a m i n e
+$ - T h e S c h o o l
+Starve N: when a Mage resolves an Effect with the Starve N keyword, targeting a Room or a Mage, each Mage in the Room 
+(themself excluded) or the target Mage places N of their * from their reserve on the Event Board, in the slot for the * of the &. 
+Up to 10* of a single Mage can be placed in that slot. The * of a Mage placed on the Event Board cannot be used by the owner. 
+Feed N: the Effect indicated after this keyword is always an alternative to the normal Spell Effect, and can be resolved instead of 
+the normal Effect only if the target has at least N * on the Event Board. 
+Before the Effect preceded by the Feed N keyword is resolved, the target takes N of their * from the Event Board and places
+them in their reserve.
+F - E l e m e n t s
+5 E, 6 C, 4 G, 4 B, 2 F
+Y - R e l a t e d M a g e s
+Fames
+
+=== PAGE 20 ===
+20
+M a r a s m u s
+SPELL TYPES
+6 =, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over !
+• Control over Quests
+• Unstable ;
+• Starving and Feeding
+
+=== PAGE 21 ===
+21
+C a t a s t r o p h e
+SPELL TYPES
+5 =, 5 >, 1 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Starving and Feeding
+
+=== PAGE 22 ===
+22
+F o r g e
+$ - T h e S c h o o l
+Some Spells of this School allow you to summon special Evocations with the Equipment special Archetype. Equipments follow 
+these rules: 
+• An Equipment can be targeted as though as it was a T from the Mage who owns it. 
+• An Equipment with the n symbol ignores all : inflicted by Effects that target a L. 
+• An Equipment cannot have Upgrades assigned to it. 
+• A Mage cannot own more than one Equipment with the same name. 
+• An Equipment can only be summoned by an Effect with target Y. In fact, you cannot summon an Equipment when 
+resolving an Effect that summons any evocation if the target of that Effect is a Room `, L, Z.
+Some Spells of this School assign an Upgrade card to target Evocations. The Upgrade card must be taken from its deck and placed 
+next to the target's Evocation Card. Upgrades follow these rules: 
+• An Evocation can have a maximum of one Upgrade assigned to it. 
+• If an Upgrade is assigned to an Evocation that already has one assigned, that Evocation owner chooses one of those 
+Upgrades to keep and discards the other. 
+• If a Spell assigns a specific Upgrade but there are no more cards of that Upgrade left in the deck, that Upgrade is not 
+assigned.
+F - E l e m e n t s
+2 A, 4 E, 4 H, 8 G, 2 B, 4 F
+X - E v o c a t i o n s
+3x Eros’s Bow 3x Mars’s Claws 5x Pupa
+3x Talos’s Corset 3x Tartarus’s Axe 3x Winged Sandals
+
+=== PAGE 23 ===
+23
+@ - U p g r a d e C a r d s
+3x Grafted Crossbow 3x Hyperdermis 3x Pegasus’s Feathers
+3x Skinblade 3x Warscratch
+Y - R e l a t e d M a g e s
+Boogeyman, Etna, Hyperion, Odin, Minotaurus, Pyotr
+3 - E r r a t a
+Chain Lightning
+
+=== PAGE 24 ===
+24
+A u t o m a t i o n
+SPELL TYPES
+4 =, 6 >, 2 @
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning X
+• Control over X
+• Control over I
+
+=== PAGE 25 ===
+25
+D i v i n e ’ s F a v o r
+SPELL TYPES
+4 =, 6 >, 2 @
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning Equipment 
+• Control over X
+• Healing
+• Performing a -
+• Assigning Upgrades
+
+=== PAGE 26 ===
+26
+G e o m a n c y
+$ - T h e S c h o o l
+Some Spells of this School have the Geoform keyword in their Effect.
+This keyword is always followed by at least one Room color symbol (k, l, j,i, g,h, e). The part of the Effect indicated 
+after Geoform is resolved only if the target Room of that Effect is one of the colors indicated after the keyword.
+F - E l e m e n t s
+2 A, 2 E, 4 H, 8 C, 4 G, 2 D, 2 B
+Y - R e l a t e d M a g e s
+Gaea, Irene, Shroudtech, Talia
+
+=== PAGE 27 ===
+27
+G e o d e sy
+SPELL TYPES
+4 =, 2 >, 6 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Unstable ;
+• Geoform
+
+=== PAGE 28 ===
+28
+G e o m o r p h o l o g y
+SPELL TYPES
+2 =, 6 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Control over !
+• Control over ;
+• Unstable ;
+• Drawing Forgotten ;
+
+=== PAGE 29 ===
+29
+H e k a
+$ - T h e S c h o o l
+Some Spells of this school assign Jinx Cards to the target Mage. These cards are to be taken from the corresponding deck and 
+placed next to the target Mage's Sheet. Each Jinx Card inflicts a negative Effect on the Mage to whom it is assigned, and indicates 
+a Task that the Mage can complete (as with Quest Cards) in order to place one of their own * on one of the dedicated slots. When 
+all the slots on the Jinx Card are occupied by a *, it is discarded. 
+A Mage may be assigned any number of Jinx Cards but no more than one with the same name. If a second Jinx Card with the 
+same name is to be assigned to a Mage, it is not assigned instead. 
+If a Jinx whose corresponding card is not available in the deck is to be assigned, it is not assigned.
+F - E l e m e n t s
+6 H, 6 G, 6 D, 3 F
+X - E v o c a t i o n s
+3x Pharaoh
+& - J i n x C a r d s
+3x Bane of Baktiotha 3x Hourglass of Seth 3x Inverted Pyramid 3x Locusts
+Y - R e l a t e d M a g e s
+Alisha, Anubis, Maelice, Onamor, Saba
+
+=== PAGE 30 ===
+30
+R e v e n a n t s
+SPELL TYPES
+1 =, 5 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning X
+• Control over X
+• Control over I
+• Unstable ;
+• Assigning Jinx Cards
+
+=== PAGE 31 ===
+31
+S e n t e n c e
+SPELL TYPES
+4 =, 4 >, 2 @, 1 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over !
+• New <
+• Assigning Jinx Cards
+
+=== PAGE 32 ===
+32
+Hex
+$ - T h e S c h o o l
+Some Spells of this School assign Jinx Cards to a target Mage. When assigned, a Jinx card has to be taken from its deck and placed 
+next to the target's Mage Sheet. Each Jinx Card imposes a negative Effect on the Mage it is assigned to. Whenever a Mage fulfills 
+the Task requirement of a Jinx assigned to them, they place a * on the leftmost Slot of that Jinx Card. When a Mage has placed a 
+* on each Cube Slot of a Jinx he assigned to them, they discard that Jinx. 
+A Mage can have any number of Jinx Cards assigned to them, but no more than 1 Jinx Card with the same name can be 
+assigned to the same Mage. If an Effect would assign to a Mage a second Jinx with the same name, that Jinx is not assigned. 
+If an Effect assigns a specific Jinx but there are no more cards of that Jinx left in the deck, that Jinx is not assigned.
+F - E l e m e n t s
+6 A, 5 E, 5 G, 6 B
+& - J i n x C a r d s
+3x Oblivion 3x Slowness 3x Vulnerability 3x Weakness
+Y - R e l a t e d M a g e s
+Alisha, Gramigna, Maelice
+
+=== PAGE 33 ===
+33
+M a l e d i c t i o n
+SPELL TYPES
+6 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over !
+• Moving
+• Assigning Jinx Cards
+
+=== PAGE 34 ===
+34
+D o o m s a y e r
+SPELL TYPES
+4 =, 2 @, 6 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Converting :
+• Control over !
+• Unstable ;
+• Assigning Jinx Cards
+
+=== PAGE 35 ===
+35
+L e x
+$ - T h e S c h o o l
+Some Spells of this School can assign an Upgrade card to a target Evocation. These cards must be taken from the corresponding 
+deck and placed next to the target Evocation card. Upgrades follow these rules:
+• An Evocation can have a maximum of one Upgrade assigned to it.
+• If an Upgrade in addition to the first one is about to be assigned to an Evocation, the owner chooses which one to keep 
+and discards the other.
+• If an Card whose Upgrade corresponding card is not available in the deck is about to be assigned, it is not assigned.
+F - E l e m e n t s
+6 E, 8 H, 10 D
+X - E v o c a t i o n s
+3x Templarii
+@ - U p g r a d e C a r d s
+3x Bone Shield 3x Explosive Bones
+Y - R e l a t e d M a g e s
+Bartholomäus, Cosma, Onamor, Pyotr, Ulrich
+
+=== PAGE 36 ===
+36
+K n i g h t
+SPELL TYPES
+2 =, 10 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Control over !
+• Persistents 0
+• Collaboration with &
+
+=== PAGE 37 ===
+37
+C h a p l a i n
+SPELL TYPES
+4 =, 8 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over X
+• Control over I
+• Control over !
+• Unstable ;
+
+=== PAGE 38 ===
+38
+N i g h t m a r e
+$ - T h e S c h o o l
+Some Spells of this School assign special Evocations with the Nightmare archetype. Nightmares follow these rules:
+• The & is considered the owner of each Nightmare in the Lodge. 
+• Nightmares activates at the beginning of the Evocation Phase, in the order chosen by the owner of the 1.
+• A Nightmare is assigned to a Mage and is not considered summoned. A Nightmare Model attaches to the Mage 
+Model's base which it is assigned to until that Nightmare is defeated or removed.
+• A Mage that assigns a Nightmare chooses on which Evocation Slot of the target that Nightmare's Card has to be 
+placed.
+• A Nightmare's Evocation Card does not occupy an Evocation Card Slot. Any other non-Nightmare Evocation Card 
+can be placed on an Evocation Card Slot where a Nightmare is already placed.
+• Whenever a Mage is defeated, remove all Nightmares assigned to them.
+• A Nightmare assigned to a Mage is considered an Evocation that is in the same Room as that Mage. Whenever a Mage 
+moves (or places themselves) in a Room all Nightmares assigned to that Mage move (or place themselves) in that same 
+Room. The Nightmare's miniature remains attached to the Mage's miniature.
+F - E l e m e n t s
+4 A, 7 D, 6 B, 4 F
+X - E v o c a t i o n s
+9x Umbra
+Y - R e l a t e d M a g e s
+Alisha, Baron Doria, Maelice
+
+=== PAGE 39 ===
+39
+S c a r e c r o w
+SPELL TYPES
+4 >, 2 @, 3 ?
+KEY SPELL EFFECTS
+• Inflicting :
+• Assigning X
+• Control over X
+• Control over !
+• Control over ;
+• Obtaining the 1
+
+=== PAGE 40 ===
+40
+Inc u b u s
+SPELL TYPES
+4 =, 8 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Assigning X
+• Control over X
+• Control over Events
+• Unstable ;
+• Collaboration with &
+
+=== PAGE 41 ===
+41
+O r a c l e
+$ - T h e S c h o o l
+Some Spells of this school have the Prophecy keyword. When a Mage resolves an Effect with Prophecy, they reveal cards from 
+the top of the current Moon Event Deck until they reveal a non-Instant card. That Mage places that card on the Event Board as if 
+it had just been drawn, on the slot that they prefer (even if occupied). If they do, that Mage does not get the 1 and the & does 
+not gain ! due to that Event nor due to Events that are discarded in this way. 
+Shuffle the revealed Instant cards into the current Moon's Event deck.
+Some Spells of this school have the Revelation keyword. When a Mage reveals a Spell with the Revelation keyword (before 
+resolving its Effect) they can discard as many Events as they like from the Event Board. 
+If they do, Revelation is added to the Spell Effect a number of times equal to the number of Events discarded due to that Effect. 
+The & does not gain ! due to Events discarded in this way.
+F - E l e m e n t s
+5 A, 6 C, 4 D, 4 B, 2 F
+X - E v o c a t i o n s
+5x Aruspice
+Y - R e l a t e d M a g e s
+Cassandra, Griphon, Parcae
+
+=== PAGE 42 ===
+42
+D a r k P i t f a l l s
+SPELL TYPES
+2 =, 6 >, 2 ?
+KEY SPELL EFFECTS
+• Summoning X
+• Control over ;
+• Unstable ;
+• Healing
+• Prophecies and Revelations
+
+=== PAGE 43 ===
+43
+L i b e r a t i o n
+SPELL TYPES
+10 >, 1 ?
+KEY SPELL EFFECTS
+• Control over I
+• Control over !
+• Control over Quests
+• Persistents 0
+• Drawing Forgotten ;
+• Prophecies and Revelations
+
+=== PAGE 44 ===
+44
+P e s t i l e n c e
+$ - T h e S c h o o l
+Spells of this School can assign Infectio Tokens to opposing Mages. A Mage can have a maximum of 3 Infectio Tokens assigned. 
+Infectio Tokens cannot be assigned to Evocations. When an Infectio Token is assigned, the Mage who assigned it places one of 
+their own * on it.
+Infectio Tokens are resolved during Step 2 of the Clean-up Phase and after the defeat of the Mage they are assigned to is resolved. 
+When an Infectio Token is resolved, the owner of the * on it inflicts 1: to the Mage it is assigned to, then that Infectio Token 
+is discarded (the * on it returns to the owner).
+Spells of this School can summon Pestis. A Pestis follows these rules:
+• When it is summoned, one of the owner's * must be placed on its Model.
+• When it is defeated or removed, the * on its Model is placed in its owner's reserve.
+• No Upgrades can be assigned to a Pestis and the values of ,, - and 9 of a Pestis cannot be changed in any way.
+F - E l e m e n t s
+8 A, 6 E, 8 C, 2 F
+X - E v o c a t i o n s
+10x Pestis
+Y - R e l a t e d M a g e s
+Pestilentia
+
+=== PAGE 45 ===
+45
+C o r r u p t i o n
+SPELL TYPES
+6 =, 6 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning X
+• Unstable ;
+• Assigning Infectio Tokens 
+
+=== PAGE 46 ===
+46
+P l a g u e
+SPELL TYPES
+8 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Summoning X
+• Control over I
+• Assigning Infectio Tokens 
+
+=== PAGE 47 ===
+47
+S h a m a n i c
+$ - T h e S c h o o l
+This School focuses on summoning Totems and using them as a starting point for powerful Spells that allow you to place I 
+and/or solve Quests. 
+Shamanic magic is peaceful magic that is unwilling to inflict : to other Mages.
+F - E l e m e n t s
+2 A, 4 E, 4 H, 6 C, 4 G, 4 F
+X - E v o c a t i o n s
+5x Totem
+Y - R e l a t e d M a g e s
+Imhotep, Sefu
+
+=== PAGE 48 ===
+48
+S a c r e d G u i d e
+SPELL TYPES
+10 >, 2 @
+KEY SPELL EFFECTS
+• Summoning X
+• Control over !
+• Control over ;
+• Control over Quests
+
+=== PAGE 49 ===
+49
+S p i r i t S p e a k e r
+SPELL TYPES
+12 >
+KEY SPELL EFFECTS
+• Control over I
+• Control over !
+• Persistents 0
+• Healing
+
+=== PAGE 50 ===
+50
+T e c h n o m a n c y
+$ - T h e S c h o o l
+Some Spells of this School assign an Upgrade Card to target Evocation. The Upgrade card must be taken from its deck and placed 
+next to the target's Evocation Card. Upgrades follow these rules:
+• An Evocation can have a maximum of one Upgrade assigned to it.
+• If an Upgrade is assigned to an Evocation that already has one assigned to it, that Evocation owner chooses one of those 
+Upgrades and discards the other. 
+• If an Effect assigns a specific Upgrade but there are no more cards of that Upgrade left in the deck, that Upgrade is not 
+assigned.
+F - E l e m e n t s
+6 E, 6 H, 4 D, 6 B, 2 F
+X – E v o c a t i o n s
+8x Cadaver 3x Colossus
+@ - U p g r a d e C a r d s
+3x Cerebral Implant 3x Corrosive Plasma 3x Muscular Implant
+3x Regenerating Ichor 3x Reinforced Dermis 3x Tendon Implant
+
+=== PAGE 51 ===
+51
+Y - R e l a t e d M a g e s
+Arianna, Boogeyman, Cosma, Onamor, Pyotr, Ulrich
+
+=== PAGE 52 ===
+52
+C r e a t o r
+SPELL TYPES
+3 =, 9 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Healing
+• Assigning Upgrades
+
+=== PAGE 53 ===
+53
+T h a n a t o s
+SPELL TYPES
+8 >, 4 ?
+KEY SPELL EFFECTS
+• Summoning X
+• Control over X
+• Removing X
+• Control over ;
+• Unstable ;
+• Assigning Upgrades
+
+=== PAGE 54 ===
+54
+V o i d
+$ - T h e S c h o o l
+This School specializes in manipulating I, and in the summoning of Dagons, which amplify the influence of the Mage who 
+controls them on the I present in the Lodge. 
+The many Spells with Persistent Effects in this School allow for many unpredictable combinations.
+F - E l e m e n t s
+6 C, 10 D, 4 B, 4 F
+X - E v o c a t i o n s
+3x Dagon
+Y - R e l a t e d M a g e s
+Alhazred, Alice
+3 - E r r a t a
+Oniric Step
+
+=== PAGE 55 ===
+55
+D e s p o i l e r
+SPELL TYPES
+8 =, 4 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Control over I
+• Control over ;
+• Unstable ;
+• Persistents 0
+• New <
+
+=== PAGE 56 ===
+56
+We a v e r
+SPELL TYPES
+2 =, 10 >
+KEY SPELL EFFECTS
+• Summoning X
+• Control over X
+• Control over I
+• Control over !
+• Control over Quests
+• Unstable ;
+• Persistents 0
+
+=== PAGE 57 ===
+57
+War
+$ - T h e S c h o o l
+Some Spells of this School allow you to summon special Evocations with the Equipment special Archetype. Equipments follow 
+these rules:
+• An Equipment can be targeted as though as it was a T from the Mage who owns it. 
+• An Equipment with the n symbol ignores all : inflicted by Effects that target a L. 
+• An Equipment cannot have Upgrades assigned to it. 
+• A Mage cannot own more than one Equipment with the same name. 
+• An Equipment can only be summoned by an Effect with target Y. In fact, you cannot summon an Equipment when 
+resolving an Effect that summons any evocation if the target of that Effect is a Room `, L, Z.
+Some Spells of this School have Effects with the Restore < keyword. A Mage that resolves Restore < flips one of their Exhausted 
+Physical Action Tokens onto the Available side.
+F - E l e m e n t s
+8 A, 8 H, 6 D, 2 F
+X - E v o c a t i o n s
+3x Cloak of Rage 3x Crimson Whip 3x Destroyer
+3x Sanguine 3x Trophy Belt
+Y - R e l a t e d M a g e s
+Bellum, Hyperion, Odin, Minotaurus
+
+=== PAGE 58 ===
+58
+D o m i n a t i o n
+SPELL TYPES
+4 =, 8 >
+KEY SPELL EFFECTS
+• Inflicting :
+• Summoning Equipment 
+• Moving
+• Performing a -
+• Restoring <
+
+=== PAGE 59 ===
+59
+T y r a n n y
+SPELL TYPES
+2 =, 6 >, 2 @, 2 ?
+KEY SPELL EFFECTS
+• Summoning Equipment 
+• Control over I
+• Control over !
+• Unstable ;
+• Moving
+• Performing a -
+
+=== PAGE 60 ===
+60
+F o r g o t t e n
+$ - T h e S c h o o l
+Forgotten Spells are obtained exclusively by activating the Black Rose Room or by Effects that allows to draw them.
+This deck is not considered part of the Library.
+If a Forgotten Spell would be placed anywhere other than a Mage's Hand, Mage Sheet or the Forgotten Spell Deck, that Forgotten 
+Spell is removed from the game instead (place it in the game box).
+X - E v o c a t i o n s
+1x Albedo 1x Ancestral Totem 1x Anubis
+1x Bellum 1x Cacus 1x Chimera
+1x Cinis 1x Cthully 1x Devi
+1x Draco 1x Fames 1x Fenrir
+
+=== PAGE 61 ===
+61
+1x Gaea 1x Grypas 1x Hastur
+1x Hyperion 1x Ignis 1x Jack
+1x Janara 1x Minotaurus 1x Mors
+3x Myrmidones 1x Mystic Totem 1x Nucturnus 3
+1x Odin 1x Parcae 1x Pestilentia
+
+=== PAGE 62 ===
+62
+1x Putridum 1x Rubedo 1x Sphynx
+1x Sun Wukong
+3 - E r r a t a
+Cursed Bond, Nocturnus
+
+=== PAGE 63 ===
+63
+F o r g o t t e n
+
+=== PAGE 64 ===
+64
+
+=== PAGE 65 ===
+65
+
+=== PAGE 66 ===
+66
+
+=== PAGE 67 ===
+67
+
+=== PAGE 68 ===
+68
+M a g es
+A g o r i x
+STATISTICS
+9 11 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Druidic
+1x Eracleto
+A l b e d o A l h a z r e d
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Any
+SUGGESTED SCHOOL OF MAGIC
+Void
+3
+
+=== PAGE 69 ===
+69
+A l i c e A n g e l a
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Void
+SUGGESTED SCHOOL OF MAGIC
+Alchemy
+A l i s h a
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Heka. Hex, Nightmare
+3x Divine Dance
+
+=== PAGE 70 ===
+70
+A n u b i s A r c h i t e c t
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Heka
+SUGGESTED SCHOOL OF MAGIC
+Any
+A r i a n n a B a r o n D o r i a
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Technomancy
+SUGGESTED SCHOOL OF MAGIC
+Nightmare
+
+=== PAGE 71 ===
+71
+B a r t h o l o m ä u s B e l l a
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Lex
+SUGGESTED SCHOOL OF MAGIC
+Any
+3
+B e l l u m C a c u s
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+War
+SUGGESTED SCHOOL OF MAGIC
+Any
+
+=== PAGE 72 ===
+72
+B o o g e y m a n
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Forge, Technomancy
+3x Doll
+C a s s a n d r a C o s m a
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 9 / 6 - 2 , 3 5 3
+SUGGESTED SCHOOL OF MAGIC
+Oracle
+SUGGESTED SCHOOL OF MAGIC
+Lex, Technomancy
+
+=== PAGE 73 ===
+73
+D a i J i n E t n a
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 12 / 8 - 2 , 2 5 1
+SUGGESTED SCHOOL OF MAGIC
+Any
+SUGGESTED SCHOOL OF MAGIC
+Forge
+F a m e s F e n r i r
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Famine
+SUGGESTED SCHOOL OF MAGIC
+Agony
+
+=== PAGE 74 ===
+74
+G a e a G r a m i g n a
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Geomancy
+SUGGESTED SCHOOL OF MAGIC
+Hex
+Gri p h o n H a s t u r
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Oracle
+SUGGESTED SCHOOL OF MAGIC
+Any
+
+=== PAGE 75 ===
+75
+H e l b l i n d i H o g w a r z
+STATISTICS
+9 12 / 8 - 2 , 2 5 1
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Any
+SUGGESTED SCHOOL OF MAGIC
+Druidic
+H y p e r i o n
+STATISTICS - TITAN
+9 12 / 5 - 2 , 3 5 1
+STATISTICS - MYRMIDONES
+9 9 / 9 - 1 , 2 5 3
+SUGGESTED SCHOOL OF MAGIC
+Forge, War
+
+=== PAGE 76 ===
+76
+I g n i s I m h o t e p
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Alchemy
+SUGGESTED SCHOOL OF MAGIC
+Shamanic
+I r e n e J a c k
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 9 / 6 - 2 , 3 5 3
+SUGGESTED SCHOOL OF MAGIC
+Geomancy
+SUGGESTED SCHOOL OF MAGIC
+Death
+
+=== PAGE 77 ===
+77
+J a n a r a J u k a s
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Any
+SUGGESTED SCHOOL OF MAGIC
+Any
+K o r m a c L a n d o l f o I I
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Druidic
+SUGGESTED SCHOOL OF MAGIC
+Chaos
+
+=== PAGE 78 ===
+78
+M a e l i c e
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Heka, Hex, Nightmare
+3x Spinning Wheel Sting
+M e d i c e o M i n o t a u r us
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Agony
+SUGGESTED SCHOOL OF MAGIC
+Forge, War
+
+=== PAGE 79 ===
+79
+M o r s O d i n
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 12 / 6 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Death
+SUGGESTED SCHOOL OF MAGIC
+Forge, War
+O n a m o r P a r c a e
+STATISTICS
+9 12 / 7 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Heka, Lex, Technomancy
+SUGGESTED SCHOOL OF MAGIC
+Oracle
+
+=== PAGE 80 ===
+80
+P e s t i l e n t i a P r o s p e r o
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Pestilence
+SUGGESTED SCHOOL OF MAGIC
+Any
+P y o t r R a z v a n
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Forge, Lex, Technomancy
+SUGGESTED SCHOOL OF MAGIC
+Agony
+
+=== PAGE 81 ===
+81
+R i k k a r t R u b e d o
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Agony
+SUGGESTED SCHOOL OF MAGIC
+Chaos
+S a b a S e f u
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Heka
+SUGGESTED SCHOOL OF MAGIC
+Shamanic
+
+=== PAGE 82 ===
+82
+S h r o u d t e c h S l e n d e r m a n
+STATISTICS
+9 11 / 9 - 1 , 2 5 1
+STATISTICS
+9 9 / 8 - 2 , 2 5 3
+SUGGESTED SCHOOL OF MAGIC
+Chaos, Geomancy
+SUGGESTED SCHOOL OF MAGIC
+Any
+T a l i a U l r i c h
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+STATISTICS
+9 11 / 7 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Geomancy
+SUGGESTED SCHOOL OF MAGIC
+Lex, Technomancy
+
+=== PAGE 83 ===
+83
+V e n t i c e l l o
+STATISTICS
+9 10 / 8 - 2 , 2 5 2
+SUGGESTED SCHOOL OF MAGIC
+Any
+
+=== PAGE 84 ===
+84
+T h e L o d g e
+e - B l a c k R o s e r o o m s
+B l a c k R o s e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 3;. If you do draw 1 Forgotten ;. The & places 
+1I in a M.
+REBUILD ROOM EFFECT
+Y: discard 3;. If you do draw 2 Forgotten ; keep one of 
+them, discard the other.
+B l a c k R o s e R o o m - A p o c a l y p s e
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 3;. If you do search for 1; in your Personal 
+Library and add it to you Hand, then shuffle your Personal 
+Library.
+REBUILD ROOM EFFECT
+Y: discard 2;. If you do search for 1; in your Personal 
+Library and add it to you Hand, then shuffle your Personal 
+Library.
+
+=== PAGE 85 ===
+85
+D e e p B l a c k R o s e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard your Ready + and 1; from your Hand. If you 
+do, draw 1 Forgotten ;.
+REBUILD ROOM EFFECT
+Y: discard your Ready + and 3; from your Hand. If you 
+do, draw 2 Forgotten ;.
+E m e r a l d R o s e
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 2;. If you do: draw 1 Forgotten ;.
+REBUILD ROOM EFFECT
+Y: search for 1 Forgotten ; from the Forgotten Spells deck 
+and draw it, then shuffle the deck. You lose 1!.
+O c c u l t B l a c k R o s e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: discard 2 Ready ;. If you do: draw 1 Forgotten ;.
+REBUILD ROOM EFFECT
+Y: discard 1 Ready ;. If you do: draw 1 Forgotten ;.
+
+=== PAGE 86 ===
+86
+h - G r e y r o o m s
+C e m e t e r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+M: summon a Cadaver.
+REBUILD ROOM EFFECT
+Q: summon a Colossus.
+C r y p t
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+M: summon a Cadaver.
+REBUILD ROOM EFFECT
+N: summon a Cadaver.
+N: summon a Cadaver.
+C r y p t o f t h e S a i n t
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: the & inflicts 2: to you. Summon a Templarii in a M.
+REBUILD ROOM EFFECT
+M: summon a Templarii. It activates. Summon a
+Templarii in a Q.
+
+=== PAGE 87 ===
+87
+R o o m o f R e b i r t h
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 3/1/0 !
+ROOM EFFECT
+Summon a Phoenix Familiar of your choice.
+REBUILD ROOM EFFECT
+Summon a Phoenix Familiar of your choice. Gain 1!.
+S a c r i f i c i a l A l t a r
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+M: summon a Cadaver.
+REBUILD ROOM EFFECT
+d: inflict 2:.
+S a c r i f i c i a l A l t a r o f M a d n e s s
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+N: convert 1I. Convert 1:.
+REBUILD ROOM EFFECT
+Q: convert 2I. Convert 2:.
+
+=== PAGE 88 ===
+88
+Wh a l e s C e m e t e r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 5/3/2 !
+ROOM EFFECT
+M: summon a Dagon.
+REBUILD ROOM EFFECT
+M: summon a Dagon. It activates. It activates.
+
+=== PAGE 89 ===
+89
+k - R e d r o o m s
+A l c h e m i c a l L a b o r a t o r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+N: inflict 1:.
+REBUILD ROOM EFFECT
+Y: draw 3; from your $, discard 1; to your %.
+A r e n a
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+N: inflict 1:.
+REBUILD ROOM EFFECT
+Y: cast your next Ready ; (not the +).
+C r u s a d e r s ' S u m m o n e r R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+U: inflict 2:.
+REBUILD ROOM EFFECT
+U: inflict 10:.
+
+=== PAGE 90 ===
+90
+L o s t A l c h e m i c a l L a b o r a t o r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+\: inflict 2:.
+REBUILD ROOM EFFECT
+Y: draw 2 random ; from your %.
+L u d u s A r e n a
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+M: summon an Aruspice.
+REBUILD ROOM EFFECT
+Q: summon an Aruspice. It activates.
+S u m m o n e r R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+N: inflict 1:.
+REBUILD ROOM EFFECT
+M: summon a Nigredo. It activates.
+
+=== PAGE 91 ===
+91
+i - Y e l l o w r o o m s
+A b y s s a l O b s e r v a t o r y
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/2/1 !
+ROOM EFFECT
+Y: lose 1!. If you do, inflict 1: on each Evocation in the 
+Lodge.
+REBUILD ROOM EFFECT
+J: lose 1!. If you do, remove all Evocations from the Lodge 
+(yours included) in the order you prefer.
+B i b l i o t h e c a
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/1/1 !
+ROOM EFFECT
+Y: draw 1 Quest.
+REBUILD ROOM EFFECT
+Y: draw 2; from the Library.
+B i b l i o t h e c a o f t h e O r d e r
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/1/1 !
+ROOM EFFECT
+Y: discard 1 ready ; into your %. If you do: draw 2; from 
+your $.
+REBUILD ROOM EFFECT
+Y: draw 2; from your $.
+
+=== PAGE 92 ===
+92
+O b s e r v a t o r y
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/1/1 !
+ROOM EFFECT
+Y: draw 1 Quest.
+REBUILD ROOM EFFECT
+J: all the other _ lose 1!.
+S a n c t u a r y
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/1/1 !
+ROOM EFFECT
+Y: draw 1 Quest.
+REBUILD ROOM EFFECT
+Y: heal 3:. 
+d: heal 3:.
+S a n c t u a r y o f A n u b i s
+ROOM FEATURES
+Instability resistance: 5 I
+Power Points: 3/1/1 !
+ROOM EFFECT
+M: summon a Pharaoh.
+REBUILD ROOM EFFECT
+W: the target activates under your control.
+
+=== PAGE 93 ===
+93
+j - G r e e n r o o m s
+F o r g e
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+N: place 1I.
+REBUILD ROOM EFFECT
+Y: move 1. Move 1. -.
+Y: move 1. Move 1. -.
+F o r g e o f t h e V o i d
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 3/2/1 !
+ROOM EFFECT
+N: remove 1I.
+REBUILD ROOM EFFECT
+Q: remove or convert 2I.
+G a r d e n
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+N: place 1I.
+REBUILD ROOM EFFECT
+Q: place 1I.
+Q: place 1I.
+
+=== PAGE 94 ===
+94
+I n d o o r F o r e s t
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+W: target an Evocation with a 93 or less. It activates under 
+your control.
+REBUILD ROOM EFFECT
+W: target an Evocation with a 93 or less. It activates under 
+your control with -+2 and v+1.
+L i f e F o u n t a i n
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+Y: heal 3:.
+REBUILD ROOM EFFECT
+Y: heal 3:. You gain 1!.
+T e m p l a r s ’ T r e a s u r e R o o m
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+Y: heal 2:.
+REBUILD ROOM EFFECT
+Y: heal 6:.
+
+=== PAGE 95 ===
+95
+T h o r n y C l e a r i n g
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+d: inflict 2:. The & places 2I in a M.
+REBUILD ROOM EFFECT
+d: inflict 1:. 
+d: inflict 2:.
+T r e a s u r e R o o m
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+N: place 1I.
+REBUILD ROOM EFFECT
+Y: gain 2!. Draw 1 Event.
+Z e n G a r d e n
+ROOM FEATURES
+Instability resistance: 4 I
+Power Points: 2/1/0 !
+ROOM EFFECT
+d: move up to 1.
+REBUILD ROOM EFFECT
+d: move up to 1. Move up to 1. Move up to 1.
+
+=== PAGE 96 ===
+96
+g - B l u e r o o m s
+A b y s s o f F a i t h
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+U: it activates under your control.
+REBUILD ROOM EFFECT
+U: it activates under your control and has -+2.
+A b y s s o f H e l
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+M: summon a Crocodilus.
+REBUILD ROOM EFFECT
+M: summon an Ursa. It activates with v+2.
+B l a s p h e m o u s O r a c l e R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: lose 1!. If you do: search for 1; in your $ and draw it.
+REBUILD ROOM EFFECT
+Y: draw 1; from your $. Draw 1 random ; from your %.
+
+=== PAGE 97 ===
+97
+M i r r o r s R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: draw 1 random ; from your %.
+REBUILD ROOM EFFECT
+J: activate this Room as if it were a different Room, other 
+than the e or the f. This is still a g Room.
+O r a c l e R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: draw 1 random ; from your %.
+REBUILD ROOM EFFECT
+Y: search for 1; in your $ or % and draw it. Shuffle %
+into $.
+T h e A b y s s
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: draw 1 random ; from your %.
+REBUILD ROOM EFFECT
+J: place all Mages (including yourself) in their Cells.
+
+=== PAGE 98 ===
+98
+l - P u r p l e r o o m s
+A n c i e n t P l e a s u r e s R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT 3
+Y: draw 1; from a School in the Library.
+REBUILD ROOM EFFECT 3
+Y: Search 1; from a School in the Library. Shuffle the deck 
+of that School.
+A r m o r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: draw 1; from your $.
+REBUILD ROOM EFFECT
+Y: discard 1 of your Revealed ; and place 1; from your 
+Hand in its Slot, Ready. The & gains 1!.
+P l e a s u r e s R o o m
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: draw 1; from your $.
+REBUILD ROOM EFFECT
+Y: draw 3 Quests, discard 2 Quests.
+
+=== PAGE 99 ===
+99
+S k u l l s ' T h r o n e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: obtain the 1. The & inflicts 1: to you.
+REBUILD ROOM EFFECT
+Y: obtain the 1. 
+N: Inflict 3:.
+T e m p l a r s ' A r m o r y
+ROOM FEATURES
+Instability resistance: 6 I
+Power Points: 4/2/1 !
+ROOM EFFECT
+Y: move up to 1. You may perform a - against a a.
+REBUILD ROOM EFFECT
+Y: move up to 4. You may perform a - with -+2 against a
+a.
+T h r o n e R o o m
+ROOM FEATURES
+Instability resistance: 10 I
+Power Points: 6/3/1 !
+ROOM EFFECT
+Y: lose 1!. If you do, get the 1.
+REBUILD ROOM EFFECT
+Y: get the 1. Gain 1!.
+
+=== PAGE 100 ===
+100
+L o d g e L a y o u t s
+2 -P l a y e r G a m e L a y o u t 3 -P l a y e r G a m e L a y o u t
+4 -P l a y e r G a m e L a y o u t 5 -P l a y e r G a m e L a y o u t
+6 -P l a y e r G a m e L a y o u t
+
+=== PAGE 101 ===
+101
+E v o c a t i o n s
+A l t a r s
+5x Totem
+FORGOTTEN
+1x Ancestral Totem 1x Mystic Totem
+Be a sts
+5x Aruspice 3x Crocodilus 10x Pestis
+3x Ursa
+
+=== PAGE 102 ===
+102
+FORGOTTEN
+1x Chimera 1x Cinis 1x Draco
+1x Fenrir 1x Grypas 1x Minotaurus
+1x Sphynx 1x Sun Wukong
+C o n s t r u c t s
+3x Doll 3x Nigredo 5x Pupa
+FORGOTTEN
+1x Albedo 1x Ignis 1x Rubedo
+
+=== PAGE 103 ===
+103
+D e m o n s
+3x Dagon 3x Succubus
+FORGOTTEN
+1x Bellum 1x Fames 1x Jack
+1x Mors 3x Myrmidones 1x Nocturnus 3
+1x Parcae 1x Pestilentia
+D i v i n i t i e s
+FORGOTTEN
+1x Anubis 1x Devi 1x Hastur
+
+=== PAGE 104 ===
+104
+1x Odin
+E q u i p m e n t
+3x Cloak of Rage 3x Crimson Whip 3x Destroyer
+3x Eros’s Bow 3x Mars’s Claws 3x Sanguine
+3x Talos’s Corset 3x Tartarus’s Axe 3x Trophy Belt
+3x Winged Sandals
+
+=== PAGE 105 ===
+105
+L e g e n d s
+FORGOTTEN
+1x Cacus 1x Gaea 1x Hyperion
+1x Janara
+N i g h t m a r e s
+9x Umbra
+FORGOTTEN
+1x Cthully
+
+=== PAGE 106 ===
+106
+U n d e a d
+8x Cadaver 3x Colossus 3x Doll
+3x Pharaoh 3x Templarii
+FORGOTTEN
+1x Putridum
+
+=== PAGE 107 ===
+107
+F a m i l i a r s
+1x Brace 1x Cenere 1x Eracleto
+1x Pira
+
+=== PAGE 108 ===
+108
+U p g r a d e C a r d s
+3x Bone Shield 3x Cerebral Implant 3x Corrosive Plasma
+3x Explosive Bones 3x Grafted Crossbow 3x Hyperdermis
+3x Muscular Implant 3x Pegasus’s Feathers 3x Regenerating Ichor
+3x Reinforced Dermis 3x Skinblade 3x Tendon Implant
+3x Warscratch
+
+=== PAGE 109 ===
+109
+J i n x C a r d s
+3x Bane of Baktiotha 3x Divine Dance 3x Hourglass of Seth 3x Inverted Pyramid
+3x Locusts 3x Oblivion 3x Slowness 3x Spinning Wheel Sting
+3x Vulnerability 3x Weakness
+
+=== PAGE 110 ===
+110
+M a r k s o f t h e O l d O n e s
+R u l e s
+Each player draws 2 Marks of the Old Ones Cards and keeps one, revealing it in front of themselves and putting the other at the 
+bottom of the deck. 
+A Mage may use the Effect of their Mark of the Old Ones card throughout the game, unless otherwise stated on its text.
+M a r k o f t h e O l d O n e s C a r d s
+
+=== PAGE 111 ===
+111
+E r r a t a
+$ - S c h o o l R e f e r e n c e C a r d s
+The Library Card descriptions contain errata.
+L - R o o m s
+The Rooms descriptions contain errata.
+Y - M a g e s
+IS
+Target: J
+SHOULD BE
+Target: W
+IS
+Target: M
+SHOULD BE
+Target: Y
+
+=== PAGE 112 ===
+112
+; - S p e l l C a r d s
+IS
+Inflict 2: to another different `3 from yourself.
+SHOULD BE
+Inflict 1: to another different `3 from yourself.
+IS
+Disturb (Physical Action, <) Move up to 2.
+SHOULD BE
+Disturb (Physical Action, <) Move up to 1. Move up to 1.
+IS
+0: each time the target gains ! due to a Quest or Event Effect, you gain the 
+same ! amount.
+SHOULD BE
+0: each time the target gains ! for solving a Quest or Event Effect, you gain 
+the same amount of !.
+
+=== PAGE 113 ===
+113
+X - E v o c a t i o n s
+IS
+Nocturnus has -+1 for each other Model in the Lodge, not in the Cell.
+SHOULD BE
+Nocturnus has -+1 for every other Nightmare in the Lodge.
+1 – E v e n t C a r d s
+POWER INFUSION
+IS
+At the start of the Action Phase, in play order, each Mage may lose 2!. If they do, that Mage draws 1; from the Forgotten Spell 
+Deck.
+SHOULD BE
+In play order, each Mage may lose 2!. If they do, that Mage draws 1; from the Forgotten Spell Deck.
+# – A v a t a rs
+POSSESSED - DARK BLADE
+IS
+Priority: 3
+SHOULD BE
+Priority: 1
+
+=== PAGE 114 ===

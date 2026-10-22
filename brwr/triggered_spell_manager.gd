@@ -50,6 +50,22 @@ func trigger_matches(
 	)
 
 	match trigger_type:
+		"mage_event":
+			if event.event_type != str(trigger.event_type) or event.amount < int(trigger.get("min_amount", 0)): return false
+			if trigger.get("source") == "self" and event.source_player_index != active_spell.owner_id: return false
+			if trigger.get("source") == "other" and (event.source_player_index < 0 or event.source_player_index == active_spell.owner_id): return false
+			if trigger.get("target") == "self" and (event.target_model_type != "mage" or event.target_player_index != active_spell.owner_id): return false
+			return true
+		"caster_solves_quest":
+			return event.event_type == "quest_solved" and event.source_player_index == active_spell.owner_id
+		"caster_reveals_spell_type":
+			return event.event_type == "spell_revealed" and event.source_player_index == active_spell.owner_id and event.data.get("spell_type") == trigger.get("spell_type")
+		"any_of":
+			for candidate in trigger.get("triggers", []):
+				if trigger_matches(candidate, event, active_spell): return true
+			return false
+		"mage_resolves_summon":
+			return event.event_type == "forgotten_summon_effect" and event.source_player_index >= 0
 		"caster_casts_spell", "marked_mage_casts_spell":
 			return event.event_type == "spell_cast_started" and event.source_player_index == (active_spell.owner_id if trigger_type == "caster_casts_spell" else active_spell.target_player_index)
 		"mage_reveals_spell_type":
@@ -267,7 +283,7 @@ func trigger_matches(
 		"another_mage_places_last_instability":
 			return event.event_type == "last_instability_placed" and event.source_player_index >= 0 and event.source_player_index != active_spell.owner_id
 		"another_mage_inflicts_last_damage":
-			return event.event_type == "damage_inflicted" and event.source_model_type == "mage" and event.source_player_index != active_spell.owner_id and event.target_model_type == "mage" and bool(event.data.get("lethal", false))
+			return event.event_type == "damage_inflicted" and event.source_model_type == "mage" and event.source_player_index >= 0 and event.source_player_index != active_spell.owner_id and event.target_model_type == "mage" and event.target_player_index != active_spell.owner_id and event.target_player_index != event.source_player_index and bool(event.data.get("lethal", false))
 		"non_forgotten_spell_affects_caster":
 			return event.event_type == "spell_effect_about_to_resolve" and active_spell.owner_id in event.data.get("targets", [])
 		"another_mage_completes_or_solves_quest":

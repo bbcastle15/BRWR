@@ -1,0 +1,908 @@
+Hyperion
+Hyperion - Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+2
+A new Titan has awoken in the troubled 
+Italian lands. Hyperion, the Lord of the 
+Flame, has been summoned by a mysterious 
+cult for a sole purpose – to purify the 
+world with the power of fire. However, 
+by freeing the Titan’s immense 
+power, the cult set in motion a 
+series of events that will involve 
+the uncanny Lodge of the Black 
+Rose, which Hyperion has always 
+desired to rule. It will be up to you 
+to face this new menace!
+CREDITS
+CONTENTS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Andrea Colletti, Luca Bernardini
+Additional Game Design and Development: Diego Fonseca, Marco Presentino
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Edoardo Eibenstein, Frank Calcagno
+Editing: Elettra Nuzzo
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini, Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfillment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara Spagnoletto, Daniele Samele, Daniele 
+Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo 
+Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, Pasquale Carotenuto
+Components....................................... 3
+How to use this Expansion............ 5
+Quitting the Side Campaign....................... 5
+Hunt Mission............................................... 5
+Completing the Side Campaign.................. 5
+Hyperion Injuries........................................ 6
+Bounty ......................................................... 6
+Large Models............................................... 6
+Large Models and Area Effects.....................6
+Large Models and Line of Sight....................6
+Plotbook ............................................ 7
+3
+Hyperion 3 Myrmidons
+1 Event Card
+"A World in Flames"
+17 Hyperion 
+Action Cards
+4 Reward Cards
+4 Injury Cards 1 Myrmidon Enemy 
+Card
+1 Myrmidon 
+Draft Card
+17 Mission Cards 2 Mission Envelopes
+Components
+
+5
+3
+6
+5
+5
+Redeemer of the Flame
+
+
+ Burn
+
+
+
+
+Mutation: when this Model is defeated, roll 1 and compare 
+the result with the number indicated in the Slot occupied by 
+the Mutation Token on . If the result is equal to or less than 
+that number, read H1-10.
+If the result of the  is greater than the number indicated, 
+remove this Model and move the Mutation Token one Slot 
+forward.
+3
+ 6+ 1  
+3 
+1
+Map
+M
+11A
+1A
+5A
+HoRoloGium
+Start: 6:30
+Cancer: Heroes
+Leo: Stradiot
+Aquarius: Arquebusier
+◆ Read H1-2.
+H1 
+ H1 
+the ritual
+
+
+H1
+H1
+A World in Flames
+
+You meet a small line of refugees on the 
+road,  eeing their village.  ey tell you 
+that bandits with dis gured faces have 
+set their homes on  re… 
+◆You can mark Side Mission H1 
+“Th e Ritual”, in the Active Side 
+Missions.
+
+
+
+
+
+4
+3
+6
+6
+5
+Myrmidon
+ Burn
+2
+ 7+
+ 1
+3
+
+Phalanx, Runner, 
+Immunity: Burned 
+ 1 1 1 
+Replace the Tree marked with the 
+number 1 With a Burned Tree. If 
+there are fewer than 3 Myrmidons 
+on the Battlefi eld, place a 
+Myrmidon adjacent to the newly 
+placed Burned Tree so that he is as 
+close as possible to any Hero.
+If not present, place the Myrmidon 
+Activation Token in the Horologium 
+Sector next to the Active one.
+◆ If not revealed, read the back 
+of .
+4 3 Call of the 
+Legionnaires
+2
+ 7+
+ 2
+
+Hyperion Attacks All Heroes 
+within 2: the Attack gains +1
+against targets that have a Burned
+Token.
+Fiery Sweep 2 2
+Hyperion places himself adjacent 
+to the farthest Hero and performs 
+the following Attack on them:
+4
+ 6+
+ 1
+
+ Stun
+Dive 
+Attack
+2 1
+
+Myrmidon Armor Armor
+Resistance 2
+If you obtain at least a  when you perform a Defense 
+Test, an Enemy adjacent to you gains a Burned Token.
+Purulent Laceration
+Your A acks that use , 
+ and  must re-roll 1 
+obtained of your choice.
+
+Blazing Cloak
+Resistance 1
+3: discard 1
+your Equipment cards.  from one of 
+Armor
+Calf Injury
+If you move 3+ Squares 
+during your Activation, 
+su er 1.
+Myrmidon Helmet
+Resistance 1,
+Immunity: Burned
+ Armor
+ 
+3
+Myrmidon
+Gain a Burned Token at the beginning of each of your 
+activations.
+Branded by Fire
+3 1 0   
+ Critical 2.
+5: perform an A ack with this Weapon.  is A ack gains:  Lethal .
+The Twins
+
+Weapon
+Damage to Temple
+ e  Tests cost you 1 
+additional .
+4
+1 Hyperion 
+Activation Token
+1 Myrmidon
+Activation Token
+1 Mutation Token
+4 Burned Trees 
+3 Wound 
+Tokens
+5
+How to use this Expansion
+This Expansion adds a new Side Campaign to be included in any Nova 
+Aetas Renaissance Campaign of the Core Game or any Expansion.
+This Side Campaign comprises one Encounter Side Mission and a 
+Hunt Mission, to be played in order starting from Mission H1 - The 
+Ritual.
+If you decide to use Hyperion in your Campaign, add the Event Card 
+found in this box to the Campaign Event Card Deck.
+If you draw the Event Card “A World in Flames” during a Travel 
+Phase, you may decide to undertake it like a normal Side Mission.
+Once you begin this Side Campaign, you must play the 2 S Missions 
+it is made up of consecutively, starting from Mission H1 - The Ritual.
+At the end of the Encounter Mission, you might have to abandon the 
+Side Campaign.
+If this happens, put the Event Card “A World in Flames” back in the 
+Event Card deck and play the next Main Campaign Mission.
+You can undertake this Side Campaign again in the future, but if you 
+have never completed it before you must always begin from Mission 
+H1 - The Ritual.
+After playing Mission H2, no matter the result, follow the regular 
+rules to resume the Nova Aetas Renaissance Campaign. If you want 
+to face Hyperion again in the future, you must only play Mission H2, 
+without playing the whole Side Campaign again.
+Mark this Hunt among the available ones on the Campaign Sheet.
+Quitting the Side Campaign
+Completing the Side Campaign
+Mission H2 of this Side Campaign is a Hunt Mission and follows all 
+the rules for this type of Mission, described in the core Rulebook of 
+Nova Aetas Renaissance.
+Hunt Mission
+A World in Flames
+
+You meet a small line of refugees on the 
+road,  eeing their village.  ey tell you 
+that bandits with dis gured faces have 
+set their homes on  re… 
+◆You can mark Side Mission H1 
+“Th e Ritual”, in the Active Side 
+Missions.
+6
+Instead of waiting to draw the Event Card "A World in Flames" at 
+any point in the Main Campaign you can mark the title of this Side 
+Mission in the Active Side Mission Slot and play it as if you had 
+drawn the Event Card " A World in Flames."
+While playing Missions H1 and H2, these 4 Injury Cards must be 
+kept separated from the Core Game Injury Card deck.
+If you so wish, you can shuffle them with the Core Game Injury 
+Cards during every other Mission.
+Bounty
+Hyperion Injuries
+Some Models occupy more than a single Battlefield Square. These 
+Models are called Large Models. These Models occupy only a single 
+Square during movement. In other words, while moving, a Large 
+Model is considered as a normal Model, and then returns to occupying 
+more Squares the moment the movement ends. When players need 
+to determine the movement of a Large Model, they choose any of the 
+Squares occupied by the Model and count starting from the chosen 
+Square (a normal-sized Model can be used to simulate the movement 
+of the Large Model). When the Large Model finishes its movement, 
+the players place the Model so that the Squares occupied include the 
+Square where it finished its movement. If placement is not possible 
+because the required Squares (usually 4) are not all available, players 
+refer to the following rules:
+Large Models
+ A Large Model is considered to be targeted by an Attack with the 
+Area Trait if at least one of the Squares it occupies is within the Area 
+of the Attack.
+If a Large Model is the target of an Attack with the Area Trait, it 
+suffers only the Effect intended for the target, even if it occupies 
+multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area Trait 
+and occupies more than one Square within the Area, it suffers the 
+additional Effect only once.
+Large Models and Area Effects
+Purulent Laceration
+Your A acks that use , 
+ and  must re-roll 1 
+obtained of your choice.
+Calf Injury
+If you move 3+ Squares 
+during your Activation, 
+su er 1. Gain a Burned Token at the 
+beginning of each of your 
+activations.
+Branded by Fire Damage to Temple
+ e  Tests cost you 1 
+additional .
+◆ If there are Models occupying the Squares, the Large Model pushes 
+the Models occupying them into adjacent available Squares or the 
+nearest available Square.
+◆ If there are Scenic Elements occupying Squares, place the Large 
+Model in Squares that are available or occupied by other Models. 
+If this is not possible, the Large Model ends its Movement in a 
+Square that allows its placement.
+A Large Model always has a valid Line of Sight on all other Models 
+and vice versa.
+Large Models and Line of Sight
+7
+Plotbook
+8
+H1 - The Ritual
+H1-1
+You decide to dig deeper into the words of the poor people you have 
+met. You head to their village and discover that the population is 
+being harassed by a group of bandits who have found safe refuge in 
+the nearby forest at the base of a hill.
+The village chief, a certain Luca da Riace, tells you that this group 
+of criminals calls themselves "The Flaming Hand." They wear 
+predominantly red clothes and some of them proudly display burns 
+on their bodies or faces.
+The village chief offers to pay you a good sum of money if you can 
+drive them off their lands...
+... Then he leaves, muttering to himself about a quick change of jobs.
+◆ Reveal .
+H1-2
+In the heart of the forest, you come across a marshy clearing that 
+blocks your path. You are considering how to cross it without 
+becoming stiff terracotta soldiers when a figure appears from behind 
+a tree between you and the marsh.
+The man gives you a stunned look—it's clear he wasn't expecting 
+visitors—then he recovers, quickly fastens his pants and, putting 
+two fingers to his mouth, lets out a deafening whistle.
+Only now do you notice his clothing in shades of red and his 
+disfigured face. It seems that the surprise effect has faded. Three 
+individuals armed with long rifles rush from the woods beyond the 
+swamp.
+◆ Reveal , then continue reading.
+◆ The Stradiot Model represents the Redeemer of the Flame 
+in this Mission.
+◆ Reveal , then continue reading.
+◆ The Arquebusier Model represents the Judge of the Flame 
+in this Mission.
+◆ Reveal .
+H1-3
+Beyond the marsh, reddish glows are reflected on the vegetation, 
+similar to those produced by a large bonfire. However, there is 
+something unnatural about them.
+The same light seems to dance in the eyes of the man standing in 
+front of you.
+◆ Place an Event Token on the Gemini and Sagittarius Sectors 
+of the Horologium.
+◆ Reveal , then continue reading.
+◆ Reveal .
+9
+H1-4
+From the branches of the trees, other followers of the Flame throw 
+themselves on you, ready to give you battle. It seems that they don't 
+want you to find out what they are planning.
+◆ Place 2 Stradiot Models on Tile 1A in Squares adjacent to 
+the Tree or, if occupied, in Available Squares as close to the 
+Tree as possible.
+◆ If not present, place the Enemy Activation Token in the 
+Horologium Sector following the Active one.
+◆ Continue the Mission.
+H1-5
+In front of you, a recently burned portion of wood opens up. Several 
+individuals sing a low singsong inscribing symbols in the still 
+smoking ash.
+You are not facing ordinary bandits, but a sect, devoted to a deviant 
+cult, intent on celebrating an arcane ritual. A ritual you intend to 
+stop.
+Setup
+Take the following from the box:
+Tile 2A
+3x Burned Tree
+1x Stradiot (Redeemer of the Flame)
+◆ Reveal .
+H1-6
+Other enemies come out to protect their companions. They too bear 
+the marks of severe burns, as if they had been branded on the face 
+by a red-hot metal hand.
+◆ Place 2 Stradiot Models and 2 
+Arquebusier Models as shown on 
+the Map.
+◆ If not present, place Enemy Activation 
+Tokens in the Horologium Sector 
+following the Active one.
+◆ Reveal .
+H1-7
+The ritual reaches its climax. The occult forces it was trying to 
+harness become tangible and envelop three of the followers of 
+the Flame, consuming their flesh and bones in a whirlwind of 
+incandescent flames from which infernal creatures emerge.
+◆ Remove all Enemy Models in the 
+Game Area from the game, except for 
+the Myrmidon Models.
+◆ Place the Myrmidon Models in the 
+Squares indicated on the Map.
+◆ If not present, place the Myrmidon 
+Activation Token in the Horologium 
+Sector following the Active one.
+◆ Remove the Event Tokens from the 
+Horologium.
+◆ Discard .
+◆ Reveal .
+H1-8
+You routed all the followers who crossed your path and extinguished 
+the flames of the creatures some of them had turned into. 
+2A
+10
+You warily approach the pyre in the center of the scorched clearing, 
+with the flames continuing to burn with an unnatural brilliance 
+even now that there are no more followers of the Flaming Hand.
+Some tongues of fire appear to form a figure, but the light suddenly 
+becomes too strong for you to keep your eyes open. You are 
+enveloped in an intense but restorative heat, which a few moments 
+later vanishes as if it were sucked into the pyre.
+When you manage to open your eyes again, the pyre has disappeared 
+and a huge figure stands out in front of you, spreading its enormous 
+wings and lowering a fiery gaze upon you.
+You must face it if you want to get back to the village. 
+◆ Each Hero discards an Injury.
+◆ Start Mission H2 Titan Hunt, without performing a Rest 
+Phase.
+H1-9
+The adepts of the Flaming Hand prove to be very stubborn and 
+resolute. They won't let you get close to the heart of the ritual. You 
+are having the worst of it and decide that a tactical escape is your 
+best chance to recover and regroup.
+Unfortunately, some of you have suffered injuries caused by a 
+magical fire that needs more effective healing than the simple herbs 
+you have.
+◆ Each Hero that has at least 1 on their Hero Sheet rolls 
+1, if they do not obtain ; draw a Card from Hyperion's 
+Injuries deck. The Hero gains the Injury described on the 
+drawn Card.
+◆ You may choose to erase The Ritual from Active Side 
+Missions. If you do, place the "A World in Flames" Event 
+Card in the Event Card Deck.
+◆ You must quit this Side Campaign.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+H1-10
+High flames shroud the body of the defeated enemy. You shield your 
+eyes from the heat—sparks and tongues of fire dart all around.
+When the flames die out, a strange being arises from the charred 
+11
+remains—an armor of the ancient Greek Myrmidons, animated by 
+the power of the Flame, prepares to attack.
+◆ Replace the defeated Model with a Myrmidon Model.
+◆ If not present, place the Myrmidon Activation Token on the 
+Horologium Sector following the Active one.
+◆ Return the Mutation Token to Slot 1 on .
+P l ay i n g w i t h H y p e r i o n i n a g a m e 
+o f B l ac k Ros e Wa rs : R e b i rt h
+
+YPERION H
+
+12 
+
+
+5 
+2
+3
+1
+
+)  Phalanx (Physical Action, 
+. 1 up to Myrmidones a Move 
+.  performs Myrmidones That 
+ that did Myrmidones a 1 up to Move 
+not move with this Physical Action. .  performs Myrmidones That 
+ that did Myrmidones a 1 up to Move 
+not move with this Physical Action. .  performs Myrmidones That 
+YRMIDONES M
+
+9 
+
+
+9 
+1
+2
+3
+
+During the Setup described in the core game rulebook, apply the following 
+at the steps indicated: 
+: Hyperion can be chosen as a Mage. The player takes the Model 8 Step • 
+of Hyperion and the three Myrmidones. The player using Hyperion and 
+the Myrmidones does not have to clip any Mage Base to the Models. 
+: Place the Mage Card on the Mage Sheet so that it shows the 8 Step • 
+Hyperion side. 
+ card from the Forgotten Spells A Burning World : Remove the 9 Step • 
+Deck. 
+: after revealing the Cells, the player using Hyperion replaces the 11 Step • 
+, then places the other two on the Hyperion Cell of their color with a Cell
+perimeter of the Lodge in any position, so that they have 2 additional 
+Cells for Hyperion.
+ side, use the following rules: Hyperion When the Mage Card shows the 
+.  target  Your • 
+Once you are defeated, remove the Hyperion Model from the Lodge • 
+and place a Myrmidones in each of your Cells, then turn your Mage 
+ side. Myrmidones Card over to the 
+ side, use the following rules: Myrmidones When the Mage Card shows the 
+All Myrmidones are considered Models of your Mage. • 
+The 3 models of Myrmidones share the Health value indicated on the • 
+Mage Card. If a Myrmidones suff ers Damage, it is deducted from the 
+shared Health.
+When you need to perform an Action you fi rst choose which of your • 
+Models performs it.
+When you need to resolve/apply an Eff ect that takes your Mage into • 
+consideration without targeting a specifi c Myrmidones Model, choose 
+which of your Models resolves/applies the Eff ect.
+ Action, perform it with each of Momentum When you perform the • 
+your Models. 
+ Physical Action. Phalanx You can perform the • 
+, remove the Myrmidones Models from the defeated When you are • 
+Lodge and place the Hyperion Model in one of your Cells, then turn 
+ side. Hyperion your Mage Card over to the Hyperion Special Rules
+Myrmidones Special Rules
+P l ay i n g w i t h H y p e r i o n i n a g a m e 
+o f B l ac k Ros e Wa rs : R e b i rt h
+
+YPERION H
+
+12 
+
+
+5 
+2
+3
+1
+
+)  Phalanx (Physical Action, 
+. 1 up to Myrmidones a Move 
+.  performs Myrmidones That 
+ that did Myrmidones a 1 up to Move 
+not move with this Physical Action. .  performs Myrmidones That 
+ that did Myrmidones a 1 up to Move 
+not move with this Physical Action. .  performs Myrmidones That 
+YRMIDONES M
+
+9 
+
+
+9 
+1
+2
+3
+
+During the Setup described in the core game rulebook, apply the following 
+at the steps indicated: 
+: Hyperion can be chosen as a Mage. The player takes the Model 8 Step • 
+of Hyperion and the three Myrmidones. The player using Hyperion and 
+the Myrmidones does not have to clip any Mage Base to the Models. 
+: Place the Mage Card on the Mage Sheet so that it shows the 8 Step • 
+Hyperion side. 
+ card from the Forgotten Spells A Burning World : Remove the 9 Step • 
+Deck. 
+: after revealing the Cells, the player using Hyperion replaces the 11 Step • 
+, then places the other two on the Hyperion Cell of their color with a Cell
+perimeter of the Lodge in any position, so that they have 2 additional 
+Cells for Hyperion.
+ side, use the following rules: Hyperion When the Mage Card shows the 
+.  target  Your • 
+Once you are defeated, remove the Hyperion Model from the Lodge • 
+and place a Myrmidones in each of your Cells, then turn your Mage 
+ side. Myrmidones Card over to the 
+ side, use the following rules: Myrmidones When the Mage Card shows the 
+All Myrmidones are considered Models of your Mage. • 
+The 3 models of Myrmidones share the Health value indicated on the • 
+Mage Card. If a Myrmidones suff ers Damage, it is deducted from the 
+shared Health.
+When you need to perform an Action you fi rst choose which of your • 
+Models performs it.
+When you need to resolve/apply an Eff ect that takes your Mage into • 
+consideration without targeting a specifi c Myrmidones Model, choose 
+which of your Models resolves/applies the Eff ect.
+ Action, perform it with each of Momentum When you perform the • 
+your Models. 
+ Physical Action. Phalanx You can perform the • 
+, remove the Myrmidones Models from the defeated When you are • 
+Lodge and place the Hyperion Model in one of your Cells, then turn 
+ side. Hyperion your Mage Card over to the Hyperion Special Rules
+Myrmidones Special Rules
+Credits
+: Andrea Colletti Project Manager and Art Director
+: Marco Montanaro Game Designer
+Diego Fonseca, Leonardo Romano, Michele Additional Game Design and Development: 
+Morosini
+Paolo Scippo Graphic Director: 
+: Diana Maranzano, Diego Fonseca, Elisa Fiore Graphic Design
+Giovanni Pirrotta, Eleonora Lisi, Domenico Cava Concept Artists: 
+Cristian Casado Otazu Environment Artist: 
+Fernando Armentano Lead 3D Sculptor: 
+Tommaso Incecchi 3D Sculptor: 
+ Elettra Nuzzo Translation:
+ Fabio Braghettoni, Paolo Scippo Production:
+ Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara Playtest:
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto.
+Game Components
+Phalanx (Physical Action, ) 
+Move Myrmidones a up to . 1
+That Myrmidones performs . 
+Move up to Myrmidones a 1 that did not move with this Physical Action.
+That Myrmidones performs . 
+Move up to Myrmidones a 1 that did 
+not move with this Physical Action.
+That Myrmidones performs . 
+
+YRMIDONES M
+
+9 
+
+
+9 
+1
+2
+3
+
+1 MAGE CARD
+
+YPERION H
+
+12 
+
+
+5 
+2
+3
+1
+
+Hyperion can be chosen as a Mage during 
+ of the Setup described in the core 8 step
+game rulebook.
+3 PERSONAL SPELL 
+CARDS
+1 FORGOTTEN SPELL CARD
+If your Mage Card shows the 
+ yourself in place Hyperion side: 
+.  to each  Infl ict 2 . the
+If your Mage Card shows the 
+ activate a Myrmidones side: 
+ . Activate a Myrmidones from a 
+ other than Myrmidones from a 
+ the previous one. Activate a 
+ other than Myrmidones from a 
+the previous ones.
+Burning the Sky
+
+A Burning World
+   
+Infl ict 2 to each .
+Summon Hyperion in the . 
+A Burning World
+   
+Summon a Myrmidones in a. 
+Summon a Myrmidones in a
+other than the previous one. Summon 
+a Myrmidones in a other than 
+the previous ones. A Myrmidones
+activates. A Myrmidones other than 
+the previous one activates.
+A Burning World    
+.  to each  Infl ict 2
+.  in the Hyperion Summon 
+A Burning World    
+. in a Myrmidones a Summon 
+in a Myrmidones a Summon 
+ Summon other than the previous one.
+ other than in a Myrmidones a
+Myrmidones the previous ones. A 
+ other than Myrmidones . A activates
+. activates the previous one 
+Add this card to the Forgotten Spells Deck of the 
+core game.
+HYPERION
+Use the following rules when the Mage Card shows the 
+Hyperion side:
+ • Your  target .
+After you are • defeated remove , Hyperion the Model from 
+the Lodge and place Myrmidones a in each of your Cells, then turn your Mage Card over to the Myrmidones side.
+MYRMIDONES
+Use the following rules when the Mage Card shows the 
+Myrmidones side:
+• All Myrmidones are considered Models of your Mage. When you need to perform an Action, first choose which • 
+of your Models performs it.
+When you are to resolve/apply an Effect that considers • 
+your Mage without targeting a specific Myrmidones Model, choose which of your Models resolves/applies the 
+Effect.
+When you perform the • Momentum Action, perform it 
+with each of your Models.
+You can perform the • Phalanx Physical Action.
+When you are • defeated remove , the Myrmidones
+Models from the Lodge and place the Hyperion Model in one of your Cells, then turn your Mage Card over to Hyperion the side.
+SPECIAL RULES
+USING HYPERION IN A GAME
+During the Setup described in the core game rulebook, apply the following on the 
+Setup steps indicated:
+ and the three Hyperion can be chosen as a Mage. The player takes the Hyperion Step 8: 
+ does not have to Myrmidones and the Hyperion Models. The player using Myrmidones
+clip any Mage Base to the Models
+ place the Mage Sheet on the Mage Board so that it shows the Hyperion side. Step 8:
+card from the Forget Spells deck. A World in Flames remove the Step 9: 
+ replaces the Cell with a Hyperion after revealing the Cells, the player using Step 11:
+, then places the other two where they prefer on the perimeter of the Lodge. Hyperion Cell
+ and the Hyperion turn this card over and follow the additional rules for Step 12: 
+ during the game. Myrmidones
+SETUP
+1 REFERENCE CARD
+Legend - Forgotten
+Hyperion
+6  1 Legend
+Forgotten
+Hyperion
+3 
+,  When he performs a 
+.  he targets 
+ to each  infl icts 3 Hyperion
+Model that enters the Room he is in.
+Demon
+Myrmidones
+4  2 Demon
+Myrmidones
+1 
+ for every other 1  It has 
+.  in a Myrmidones
+1 FORGOTTEN 
+EVOCATION CARD
+3 EVOCATION 
+CARDS
+Add this card to the Evocation 
+Deck of the core game.
+Add these cards to the Evocation 
+Deck of the core game.
+3 HYPERION CELLS
+Credits
+: Andrea Colletti Project Manager and Art Director
+: Marco Montanaro Game Designer
+Diego Fonseca, Leonardo Romano, Michele Additional Game Design and Development: 
+Morosini
+Paolo Scippo Graphic Director: 
+: Diana Maranzano, Diego Fonseca, Elisa Fiore Graphic Design
+Giovanni Pirrotta, Eleonora Lisi, Domenico Cava Concept Artists: 
+Cristian Casado Otazu Environment Artist: 
+Fernando Armentano Lead 3D Sculptor: 
+Tommaso Incecchi 3D Sculptor: 
+ Elettra Nuzzo Translation:
+ Fabio Braghettoni, Paolo Scippo Production:
+ Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara Playtest:
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto.
+Game Components
+Phalanx (Physical Action, ) 
+Move Myrmidones a up to . 1
+That Myrmidones performs . 
+Move up to Myrmidones a 1 that did 
+not move with this Physical Action.
+That Myrmidones performs . 
+Move up to Myrmidones a 1 that did 
+not move with this Physical Action.
+That Myrmidones performs . 
+
+YRMIDONES M
+
+9 
+
+
+9 
+1
+2
+3
+
+1 MAGE CARD
+
+YPERION H
+
+12 
+
+
+5 
+2
+3
+1
+
+Hyperion can be chosen as a Mage during 
+ of the Setup described in the core 8 step
+game rulebook.
+3 PERSONAL SPELL 
+CARDS
+1 FORGOTTEN SPELL CARD
+If your Mage Card shows the 
+ yourself in place Hyperion side: 
+.  to each  Infl ict 2 . the
+If your Mage Card shows the 
+ activate a Myrmidones side: 
+ . Activate a Myrmidones from a 
+ other than Myrmidones from a 
+ the previous one. Activate a 
+ other than Myrmidones from a 
+the previous ones.
+Burning the Sky
+
+A Burning World
+   
+Infl ict 2 to each .
+Summon Hyperion in the . 
+A Burning World
+   
+Summon a Myrmidones in a. 
+Summon a Myrmidones in a
+other than the previous one. Summon 
+a Myrmidones in a other than 
+the previous ones. A Myrmidones
+activates. A Myrmidones other than 
+the previous one activates.
+A Burning World
+   
+.  to each  Infl ict 2
+.  in the Hyperion Summon 
+A Burning World
+   
+. in a Myrmidones a Summon 
+in a Myrmidones a Summon 
+ Summon other than the previous one.
+ other than in a Myrmidones a
+Myrmidones the previous ones. A 
+ other than Myrmidones . A activates
+. activates the previous one 
+Add this card to the Forgotten Spells Deck of the 
+core game.
+HYPERION
+Use the following rules when the Mage Card shows the 
+Hyperion side:
+ • Your  target .
+After you are • defeated remove , Hyperion the Model from 
+the Lodge and place Myrmidones a in each of your Cells, then turn your Mage Card over to the Myrmidones side.
+MYRMIDONES
+Use the following rules when the Mage Card shows the 
+Myrmidones side:
+• All Myrmidones are considered Models of your Mage. 
+When you need to perform an Action, first choose which • 
+of your Models performs it.
+When you are to resolve/apply an Effect that considers • 
+your Mage without targeting a specific Myrmidones
+Model, choose which of your Models resolves/applies the 
+Effect.
+When you perform the • Momentum Action, perform it 
+with each of your Models.
+You can perform the • Phalanx Physical Action.
+When you are • defeated remove , the Myrmidones
+Models from the Lodge and place the Hyperion Model 
+in one of your Cells, then turn your Mage Card over to 
+Hyperion the side.
+SPECIAL RULES
+USING HYPERION IN A GAME
+During the Setup described in the core game rulebook, apply the following on the 
+Setup steps indicated:
+ and the three Hyperion can be chosen as a Mage. The player takes the Hyperion Step 8: 
+ does not have to Myrmidones and the Hyperion Models. The player using Myrmidones
+clip any Mage Base to the Models
+ place the Mage Sheet on the Mage Board so that it shows the Hyperion side. Step 8:
+card from the Forget Spells deck. A World in Flames remove the Step 9: 
+ replaces the Cell with a Hyperion after revealing the Cells, the player using Step 11:
+, then places the other two where they prefer on the perimeter of the Lodge. Hyperion Cell
+ and the Hyperion turn this card over and follow the additional rules for Step 12: 
+ during the game. Myrmidones
+SETUP
+1 REFERENCE CARD
+Legend - Forgotten
+Hyperion
+6  1 Legend
+Forgotten
+Hyperion
+3 
+,  When he performs a 
+.  he targets 
+ to each  infl icts 3 Hyperion
+Model that enters the Room he is in.
+Demon
+Myrmidones
+4  2 Demon
+Myrmidones
+1 
+ for every other 1  It has 
+.  in a Myrmidones
+1 FORGOTTEN 
+EVOCATION CARD
+3 EVOCATION 
+CARDS
+Add this card to the Evocation 
+Deck of the core game.
+Add these cards to the Evocation 
+Deck of the core game.
+3 HYPERION CELLS
+Hyperion

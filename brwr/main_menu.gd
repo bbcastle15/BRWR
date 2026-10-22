@@ -78,8 +78,7 @@ func _ready() -> void:
 	solo_count = _count(solo_row)
 	solo_button = _button(solo_row, "Modalità solo-test", _solo)
 	room_setup_button = _button(box, "Stanze della Loggia · originali / alternative", _open_room_setup)
-	avatar_setup_button = _button(box, "Avatar · disattivato", _open_avatar_setup)
-	avatar_setup_button.disabled = AvatarRules.available().is_empty()
+	avatar_setup_button = _button(box, "Avatar · disattivato (playtest disponibile)", _open_avatar_setup)
 	box.add_child(HSeparator.new())
 
 	_label(box, "PvP online · Host e giocatori si collegano al server BRWR su Render.")
@@ -174,7 +173,7 @@ func _solo() -> void:
 		return
 	var game = load("res://game.tscn").instantiate()
 	game.avatar_selection = avatar_selection.duplicate(true)
-	game.player_count = int(solo_count.value) + (0 if avatar_selection.is_empty() else 1)
+	game.player_count = clampi(int(solo_count.value), 2, 6) if avatar_selection.is_empty() else clampi(int(solo_count.value), 1, 5) + 1
 	game.room_variants = room_selections.duplicate()
 	game.beta_force_fullscreen = not OS.has_feature("web")
 	add_child(game)
@@ -275,7 +274,7 @@ func _open_room_setup() -> void:
 	margin.add_child(column)
 	var title := _label(column, "STANZE DELLA LOGGIA")
 	title.add_theme_font_size_override("font_size", 26)
-	_label(column, "Ogni alternativa sostituisce solo la stanza corrispondente e conta come quella stanza per le Quest.")
+	_label(column, "Ogni variante sostituisce esclusivamente la stanza indicata. Le stanze delle modalità speciali non implementate sono escluse.")
 	var toolbar := HBoxContainer.new()
 	column.add_child(toolbar)
 	var controls: Dictionary = {}
@@ -294,7 +293,7 @@ func _open_room_setup() -> void:
 	for base in definitions:
 		if not bool(base.get("core", false)):
 			continue
-		var variants: Array = definitions.filter(func(d): return d.get("replaces", "") == base.id and bool(d.get("playable", true)))
+		var variants: Array = definitions.filter(func(d): return preload("res://room_variants.gd").allows(base, d))
 		if variants.is_empty():
 			continue
 		_label(rows, str(base.name))
@@ -321,11 +320,17 @@ func _open_room_setup() -> void:
 				button.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 				button.add_theme_constant_override("icon_max_width", 160)
 			button.button_pressed = str(room_selections.get(base_id, base_id)) == variant_id
-			button.pressed.connect(func(): room_selections[base_id] = variant_id)
+			button.pressed.connect(func():
+				if variant_id != "random":
+					for other in room_selections.keys():
+						if other != base_id and room_selections[other] == variant_id:
+							room_selections[other] = other
+							if controls.has(other): controls[other][other].button_pressed = true
+				room_selections[base_id] = variant_id)
 			choices.add_child(button)
 			controls[base_id][variant_id] = button
 		rows.add_child(HSeparator.new())
-	_label(rows, "Apocalypse e Room of Rebirth saranno disponibili con le rispettive modalità.")
+	_label(rows, "Apocalypse, Room of Rebirth e le quattro stanze dello scenario Gaea sono escluse finché le rispettive modalità non saranno implementate.")
 
 
 func _set_all_rooms(controls: Dictionary, randomize_variants: bool) -> void:
@@ -349,15 +354,18 @@ func _open_avatar_setup() -> void:
 	margin.add_child(column)
 	var title := _label(column, "MODALITÀ AVATAR")
 	title.add_theme_font_size_override("font_size", 30)
+	_label(column, "PLAYTEST SPERIMENTALE · Possessed è in sviluppo: plancia, interazioni e online sono ancora da collaudare.")
 	_label(column, "L’Avatar occupa un posto nella Loggia e controlla la Rosa Nera. Le parità e le scelte non determinate dalle priorità spettano al giocatore con la Corona.")
 	var selection := OptionButton.new()
 	selection.custom_minimum_size.y = 48
 	selection.add_item("Disattivato")
 	selection.set_item_metadata(0, "")
-	selection.add_item("Avatar casuale")
-	selection.set_item_metadata(1, "random")
-	for definition in AvatarRules.available():
-		selection.add_item(str(definition.name))
+	if not AvatarRules.available().is_empty():
+		selection.add_item("Avatar casuale")
+		selection.set_item_metadata(1, "random")
+	for definition in AvatarRules.definitions():
+		if not bool(definition.get("implemented", false)) and str(definition.id) != "possessed": continue
+		selection.add_item(str(definition.name) + (" · playtest sperimentale" if not bool(definition.get("implemented", false)) else ""))
 		selection.set_item_metadata(selection.item_count - 1, str(definition.id))
 	for i in selection.item_count:
 		if selection.get_item_metadata(i) == avatar_selection.get("id", ""): selection.select(i)
@@ -378,7 +386,7 @@ func _open_avatar_setup() -> void:
 	_button(column, "Conferma e torna al menu", func():
 		var id: String = str(selection.get_selected_metadata())
 		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
-		avatar_setup_button.text = "Avatar · " + ("disattivato" if id.is_empty() else ("casuale" if id == "random" else id.capitalize()))
+		avatar_setup_button.text = "Avatar · " + ("disattivato (playtest disponibile)" if id.is_empty() else ("casuale" if id == "random" else id.capitalize() + " · playtest"))
 		solo_count.min_value = 2 if id.is_empty() else 1
 		solo_count.max_value = 6 if id.is_empty() else 5
 		if online_count != null: online_count.max_value = 6 if id.is_empty() else 5

@@ -1,0 +1,1441 @@
+
+Porject Manager: Andrea Colletti
+Fulfillment: Michele Mirizio
+Game design: Marco Montanaro
+Additional Game design: Andrea Colletti, Diego Fonseca,Paolo 
+Scippo
+Development: Ludus Magnus Studio
+Editing and Translations Manager: Paolo Scippo
+Graphic Design: Paolo Scippo, Diego Fonseca
+Art director: Andrea Colletti
+Concept artists and Illustrations: Antonio De Luca, Giovanni 
+Pirrotta, Simone de Paolis
+Lead 3D sculptor: Fernando Armentano
+3D sculptors: Alberto Acquaviva, Tommaso Incecchi
+Editors: Christopher Nelson, Frank Calcagno, Louis Angelli
+Customer Care and Social Media: Luca Bernardini, Marco 
+Presentino
+Web editors: Marco Presentino, Luca Bernardini, Roberto 
+Piscitelli
+Kickstarter manager: Andrea Colletti
+Writer: Marco Olivieri
+Translations: Flavia Frauzel, Silvia Franci, Luisa Marzullo
+Advertising: Vincenzo Piscitelli
+Production: Andrea Colletti
+Playtest: Andrea Compiani, Andrea Fatigati, Andrea Gianfermo, 
+Andrea Pomelli, Antonio Gentile,Carlo Trifogli, Daniele Casali, 
+Daniele De Lorenzo, Daniele Longo, Daniele Pallozzi, David 
+Condemi, Davide Becciu, Demetrio D’Alessandro, Enrico Savioli, 
+Fabio Capelli, Florian D’Anna, Francesco Montanaro, Giovanni 
+Tomaselli, Giuseppe Verrengia, Ilaria Pisani, Luca Ricci, Mauro 
+Baranello, Michele Artusi, Michele Morosini, Pier Luigi, Roberta 
+D’Anna, Saverio Ronchese, Schedar Marchetti, Simone Scarpellini, 
+Stefano Castelli, Tiziano Leonardi, Tommaso Battista.
+Special thanks to our backers who made possible this amazing feat!
+Ludus Magnus Store: shop.ludusmagnusstudio.com
+Inferno
+Credits
+Luminaries and philosophers all agree that it is better to reign in Hell 
+than to serve in Heaven. Proud Mages, if you entertain this belief, 
+then prepare to fight for the Crown on the ultimate battlefield: 
+Inferno.
+The immense power of the Black Rose and the bloody destruction 
+of decennial clashes has forever caught the attention of the great 
+traitor: Lucifero, the fallen angel. 
+In their enduring quest for greater powers, the Masters of the 
+School of Destruction tried their luck against an adversary that far 
+exceeded their meager abilities, allowing Lucifero the opportunity to 
+penetrate our mortal plane.
+Humiliated by the Being he once called Father and forced to live in 
+an eternal prison of ice, Lucifero was looking for a new power with 
+which to free himself and exact revenge for the shame he suffered. 
+He has now found this power, discovered in the forgotten magic 
+guarded by the Black Rose.
+Crossing through passages opened by the foolish and destructive 
+Mages, dark forces at the service of Lucifero have infiltrated the 
+Lodge. The rooms once adorned with tapestries and precious wood 
+furnishings are now transformed into dark wet caves, icy grottos 
+full of sharp stalactites, or desolate forests of grotesquely contorted 
+trees. 
+The screams of tortured souls gushing from the infernal passages 
+tear through the air, deafening the Mages and muffling their words 
+before they can be spoken. The winding maze of Lodge rooms 
+swarm with ferocious otherworldly beasts, hideous winged demons 
+hungry to feed on mortal souls. The labyrinth itself seems a sentient 
+and malicious creature, roused to fulfill the will of its dark lord. 
+Despite its power, the Black Rose is trapped in a giant chrysalis 
+of ice rising from the 9th circle of the Underworld, awaiting help 
+from the Mages of the Lodge. Unfortunately, those few courageous 
+Mages who haven’t yet escaped are under the penetrating watch 
+of evil incarnate himself, Lucifero - an androgynous and beautiful 
+figure beyond all mortal conception. Half-hidden by powerful 
+wings, magnificent and terrible Lucifero came to the mortal world 
+burning with the uncontrollable desire to possess the power of the 
+Black Rose; a power so immense that it would allow him - finally - to 
+reign over the place that rightfully belongs to him: Heaven. 
+The powerful Mages of the Lodge seem nothing but mere pawns 
+in the great trickster’s plan; but perhaps there’s hope: to unite the 
+Mages for the first time in a millennium, working together to save 
+the Lodge and the knowledge it guards from this invincible enemy.
+Will the weak souls of the Mages be able to resist the temptation of 
+the great traitor? 
+Will they be able to set aside their lust for power and domination, or 
+will they betray their peers in the midst of the battle? 
+Will the Mages succeed in saving the Black Rose, or will its power 
+open the doors to a new dark age? 
+Attention! This expansion requires the Black Rose Wars core 
+box in order to be played.
+“Abandon hope, all ye who enter here” 
+2
+Table of Contents
+Inferno. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+2
+“Abandon hope, all ye who enter here” . . . . . . . . . . . . . . . . . .
+2
+Credits. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+Table of Contents. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+Game components. . . . . . . . . . . . . . . . . . . . . . . . . . . 
+4
+Rooms and Activation Tokens (19). . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+4
+Optional Rule: Fusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 
+4
+Lucifero Sheet and Token. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+Inferno Quests (30). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+5
+Exorcism Cards (13). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+5
+Note by the Game Designer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 
+5
+Lucifero Action Cards (30). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+5
+Inferno Events (18). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+6
+Inferno Evocation Cards (48). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+6
+Lucifero Evocations Deck: . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+6
+Lucifero Evocation Tokens (48). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+6
+Evocation Models (18). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+7
+Evocations (18). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+Perilium (6). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+8
+Reference Card (6). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+8
+Damage/Instability Tokens (10). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+8
+Infernal Activation Tokens (11). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+8
+Forgotten Spell Cards (2). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+8
+Game Setup. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Crown of Minos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 
+9
+Playing Inferno. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Black Rose Phase: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Study Phase: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Preparation Phase:. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Action Phase: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Evocation Phase:. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Clean-up Phase:. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+9
+Lucifero. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Using Lucifero: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Lucifero Model: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Example: Calculation of Threat Value . . . . . . . . . . . . . . . . . . . . .
+ 10
+Evocation Phase: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Demonic AI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 10
+Fallen Angel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 11
+Incapacitating Lucifero: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Incapacitated Lucifero: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Example: Incapacitated Lucifero . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 11
+Endgame. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Demons. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Demons summoned by Lucifero. . . . . . . . . . . . . . . . . . . . . . . . 12
+Demons summoned by Mages. . . . . . . . . . . . . . . . . . . . . . . . . 13
+Optional Rule: Alternative Evocations . . . . . . . . . . . . . . . . . . . . . .
+ 13
+Infernal Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14  Tartaro. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14  Blue Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14  Yellow Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15  Green Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15  Red Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16  Purple Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16  Gray Rooms. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Summoner Wars. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Game Setup. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+Optional Rule: Chaos Rooms . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 18
+Attention! . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ 18
+Optional Rule: Prodigious Summoners . . . . . . . . . . . . . . . . . . . . . .
+ 18
+Infernal Activation Tokens. . . . . . . . . . . . . . . . . . . . . 19
+The terrifying Barbariccia
+3
+Game Components
+Each room in this expansion is linked to the bolgia (trenches) and 
+circles of Dante’s Inferno. These 19 rooms will completely replace 
+the rooms from the core game.
+Just like the Black Rose Wars core game, there are three rooms for 
+each color, except for the black room, the Tartaro. Each room has 
+its own activation token, featuring new powers that can be used with 
+the same mechanics as the core game.
+Some of these rooms introduce new mechanics, allowing the Mages 
+to summon Demons or activate them the moment they enter the 
+game.
+During a game of Inferno, Lucifero is treated as if he is, for all 
+intents and purposes, an additional player controlling a Mage whose 
+model is in the Lodge.
+The position of the Lucifero Sheet on the table indicates when he 
+acts during the game turn.
+His sheet contains:
+(A) 17 Health Points: slots to keep track of any damage dealt to 
+Lucifero.
+(B) Action Cards: place the deck of Lucifero Action Cards here.
+(C) Discard Pile: place the discarded Lucifero Action Cards here.
+The Lucifero Token (D) replaces the Black Rose Token on the 
+Power Board; in this expansion rulebook, references to Lucifero 
+are equivalent to references to the Black Rose in the core game 
+rulebook and vice versa.
+(E) Incapacitated Lucifero Token
+(F) 4 Lucifero Trophy Tokens
+Rooms and Activation Tokens (19)
+Lucifero Sheet and Tokens
+Optional Rule: Fusion (for use only with the core game)
+The rooms in this expansion can be mixed with those of 
+the original Black Rose Wars rooms. Doing this allows you 
+to develop your preferred Lodge structure and to provide 
+Lodge variability. Once the Lodge has been created in your 
+preferred layout, create the three Quest Card decks using 
+both the cards in the core game and in this expansion, taking 
+care to insert three rooms per color and using only Quests 
+referring to rooms that will be used during the game.
+Exception - the following Infernal Rooms cannot be used 
+in the core game: Tartaro, Selva Oscura, Cerchio dei 
+Lussuriosi, Cerchio degli Eretici.
+A
+B
+C
+
+A
+B
+D
+E
+F
+C
+4
+
+Exorcism Cards (13)
+Inferno Quests (30)
+Lucifero Action Cards (30)
+The Quests in Inferno work exactly the same way as those in the core 
+game but are specific to the rooms or Evocations of this expansion. 
+These Quests completely replace those of the core game during 
+Inferno games.
+The Exorcism Cards contain the Quests the Mages will strive to 
+complete in order to conquer the power of the Black Rose. Of 
+course, they can only claim the Black Rose in the unlikely event they 
+are able to chase Lucifero out of the Lodge! These cards are drawn 
+at the start of the game. Each player draws two cards and chooses 
+one to keep (see Game Setup, page 9). The Exorcism Cards add 
+objectives which may change the final outcome of the game. Each 
+card has two specific objectives that, if achieved, grant the player a 
+certain number of Power Points.
+Lucifero has a deck of 10 Action Cards for each Moon Phase. These 
+cards are used to describe the actions Lucifero performs when he is 
+activated.
+Each time Lucifero’s Action Phase begins, the player with the Crown 
+of Minos draws a card from the current Moon Phase deck and 
+applies the effects in the listed order.
+A Lucifero Action Card contains:
+(A) The Awakening icon indicates his reactivation if he has been 
+Incapacitated (see page 11).
+(B) The number and type of Evocations immediately summoned by 
+Lucifero, based on the number of players. 
+If this condition cannot be completely satisfied, the special “Fallen 
+Angel” power will be activated for each missing Evocation (see page 
+11). The colored circle with two initials identifies which demonic 
+Evocation Lucifero will summon. (see page 6).
+(C) Lucifero’s main action.
+ 017 / 030
+
+At the end of the Action 
+Phase, your Threat Level 
+must be equal to or 
+greater than +3.
+015 / 030
+Move Lucifero to 
+Cerchio degli Avari.
+The Demon with the highest
+Aggressiveness Value acts (if there are 
+more than 1, all of them act).
+If there are no Black Rose Demons
+in play, draw an Event from the
+current Moon Phase deck and 
+another Lucifero Action.
+ 2-3 4+
+026 / 030
+Move Lucifero to 
+Porta dell’Inferno.
+Draw 1 Event from the current
+Moon Phase deck.
+If there are no active Events on the
+Events Board, draw 2 Events
+instead of 1.
+Draw another Lucifero Action.
+
+2-3 4+
+006 / 013
+
+
+Cerbero
+Centauro
+Malacoda
+3 Farfarello
+ 026 / 030
+
+  Instead of the normal 
+Room Effect, reduce your 
+Perilium by -3 and increase the 
+Perilium of an enemy by +3.
+Activate
+the room:
+
+Bolgia dei 
+Ladri
+010 / 030
+
+Move Lucifero 
+Infl ict  to  .
+ˈ to all enemy models in 
+the Highlighted Rooms; all hit Mages 
+lose a Physical Action. 
+L
+2-3 4+
+010 / 013
+
+Enemy Trophies
+1: 
+2: 
+3+: 
+5 Arpia
+
+001 / 030
+
+  Instead of the normal 
+Room Effect, your Perilium 
+goes down by -5.
+Activate
+the room:
+
+Selva Oscura
+001 / 030
+
+Move up to ˈ to reach the room 
+adjacent to the target Mage (the 
+Mage with the highest Threat Value).
+Infl ict ˈ to all models in the
+Highlighted Rooms. If there are no 
+enemy models in the Highlighted 
+Rooms, draw another Action.
+L
+2-3 4+
+A
+B
+C
+The objectives of the Exorcism Cards are difficult to 
+accomplish and have been designed to insert a potential twist 
+at the end of the game. Those unable to satisfy the Quests are 
+in no way penalized, so don’t worry if some of these seem 
+impossible the first few times you play Inferno.
+Note by the Game Designer
+5
+Demon
+3 MA 
+  
+Malacoda
+If Malacoda defeats a Mage,
+only the Black Rose earns  .
+2
+Inferno Events (18)
+Lucifero Evocation Tokens (48)
+Inferno Evocation Cards (48)
+Similar to the cards in the core game, these cards will be used by 
+Lucifero to trigger Inferno Events. During a game of Inferno, these 
+Events will completely replace the Event deck from the core game. 
+Inferno Events are subdivided into three decks, with 6 events for 
+each Moon Phase. If the events finish during one Moon Phase, 
+shuffle the pile of discarded events to create a new deck for the 
+corresponding Moon Phase.
+These numbered tokens are used to identify Lucifero’s Evocations. 
+Each time Lucifero summons a Demon, the token with the matching 
+progressive number and color indicated on the Demon’s card must 
+be inserted into the base of the Demon’s model.
+These double-sided cards contain the characteristics of the Inferno 
+Evocations. One side has the standard version, the other side the 
+Infernal version of the Evocation. When a Mage summons a 
+Demon, they use the standard side of the card. These characteristics 
+are similar to those of the Evocations in the Black Rose Wars core 
+game (figure 1). When Lucifero summons a Demon, he uses the side 
+with the Infernal version of the Evocation (figure 2). The Infernal 
+versions of the Evocations contain additional information needed to 
+guide their activation:
+(A) Aggressiveness: When it’s time to activate the Lucifero 
+Evocations, each one will only be activated if there is at least one 
+Mage with a Threat Value equal to or higher than its Aggressiveness 
+(see page 10).
+(B) Identification Code: Each Demon summonable by Lucifero 
+has an identification code formed by a colored icon containing 
+two letters of the Demon’s name and a progressive number. When 
+Lucifero summons a certain type of Demon (see Lucifero Action 
+Cards, page 5), he summons the type of Demon specified, with 
+the lowest progressive number among those still available. When 
+the model of the summoned Demon is placed on the game board, 
+the Lucifero Evocation Token with the corresponding code and 
+progressive number must be inserted in its base (see page 7). This 
+will allow for the Demon to be easily identified on the game board, 
+linking the model to the corresponding Evocation Card.
+(C) Power Points: Each time a Lucifero Demon is removed from 
+play by a Mage or one of its Evocations, each Mage gains this 
+number of Power Points.
+Lucifero Evocations Deck: 
+Lucifero has a limited number of Evocations available to him during 
+a single game. At the start of a game of Inferno, a deck is formed 
+with all the Evocations included in this expansion; the deck follows 
+these rules:
+• Each time Lucifero summons a Demon, he takes the relative 
+card with the lowest progressive number from among those 
+available. 
+• When a Lucifero Demon is defeated, the Mage that dealt the 
+final blow takes the relative card and keeps it until the end of 
+the game; these cards will be useful in deciding which Exorcism 
+Card objectives the Mage was able to satisfy (see page 11).
+• When a Mage summons one of the Demons in this expansion, 
+they must take the relative card from the Lucifero Evocations 
+Deck; if none of the summoned Demons’ cards are available 
+in the deck, the Evocation fails without producing any results.
+• When a Demon summoned by a Mage is removed or defeated, 
+the Evocation Card must be returned to the Lucifero Evocations 
+Deck.
+ 
+Black Rose
+Convert one Farfarello to a Malacoda 
+at full health. The player with the 
+Crown chooses which Farfarello will 
+be converted.
+007 / 018
+ 
+Instant
+All Rooms are activated; fl ip the
+Activation tokens that have not 
+already been fl ipped.
+016 / 018
+ 
+Action
+Each time a Mage activates a Room, 
+all Cerberos (even those normally 
+under Mage control) Act immediately 
+under Lucifero’s control.
+
+001 / 018
+  
+Malacoda
+When this Malacoda is removed from the game, its controller loses  .
+
+A
+1 2
+C
+Barbariccia Cerbero
+Malacoda Farfarello
+Centauro Arpia
+BA
+MA
+CN
+CR
+FA
+AR 
+B
+6
+Demon
+-3 FA 
+  
+Farfarello
+Each time Farfarello attacks a Mage, 
+Lucifero places  in the Farfarello's Room.
+1
+Evocation Models (18)
+These models are used by both Lucifero and Mages as Evocations; 
+they can be used in both Inferno games and Black Rose Wars core 
+games.
+When summoned by Mages, these Evocations are marked with Rose 
+Pins as usual. In a game of Inferno, when summoned by Lucifero, 
+the Lucifero Evocation Tokens are used to mark the model.
+3 Centauro
+8 Arpia
+Lucifero
+Barbariccia
+5 Farfarello
+Evocations (18)
+7
+Perilium (6)
+Forgotten Spell Cards (2)
+
+
+
+
+Contains an explanation of the various 
+effects of the 19 Inferno rooms.
+These cards can be added to the Forgotten Spells in a normal Black 
+Rose Wars core game to summon Lucifero and Barbariccia. They 
+cannot be used in a game of Inferno.
+002 / 002
+  
+Summon Barbariccia. 
+Barbariccia can act immediately.
+Take control of 3 Evocations owned 
+by other Mages (replace their rose 
+pins with yours).
+Gain .
+  
+001 / 002
+  
+Summon Lucifero. 
+Lucifero can act immediately.
+Summon 3 Demon Evocations 
+in 3 different rooms; they act 
+immediately. You cannot summon 
+Lucifero or Barbariccia.
+  
+Reference Card (6)
+The Perilium is a numbered disc 
+that can be set with a value 
+ranging from -5 to +5. At 
+the start of the game, the 
+Mage will take the Perilium 
+and set it to 0. During the 
+game, various elements may 
+increase or decrease the value 
+of the Perilium.
+Any effects that bring the 
+Perilium beyond +5 or below 
+-5 must be ignored.
+Lucifero is a very powerful enemy to take on. Through the use of his 
+Evocations, he is capable of inflicting more Damage and Instability 
+than even the Black Rose. For this reason, when you play Inferno, 
+you’ll need to add the 10 damage/instability cubes supplied with this 
+expansion to your stack.
+Damage/Instability Tokens (10)
+Cerchio
+dei Golosi
+Summon a Cerbero in the 
+Room. You can suffer 1 Wound 
+to activate him immediately.
+Girone dei
+Bestemmiatori Infl ict 1 Damage to each model 
+in a Room within range 1.
+Selva
+Oscura
+Lower your Perilium by -2.
+Raise the Perilium of another 
+Mage by +2.
+Bolgia
+dei Maghi
+You can copy the effect of 
+another Room, except for the 
+Tartaro Room. Lucifero gains 1 PP.
+Cerchio dei
+Traditori
+A Mage within 1 loses 1 PP, you 
+gain 1 PP and suffer a Wound.
+Bolgia dei
+Barattieri
+Summon a Farfarello in the 
+Room. You can suffer 1 Wound 
+to activate him immediately.
+Bolgia
+dei Ladri
+Gain the Crown. If you have 
+it already, suffer 1 Wound. 
+Whoever lost the crown suffers 
+1 Wound.
+Cerchio dei
+Lussuriosi
+Gain 1 PP. Heal 2 Wounds on 
+yourself. The evocation under 
+Lucifero's control with the 
+highest Aggressiveness acts 
+immediately.
+Bolgia dei
+Ruffiani
+Play a Spell from your Hand. 
+Draw an Event card.
+
+, Demon
+,
+
+Farfarello, =
+, -
+
+ 
+ 
+Perilium
+-2, +2
+
+Cerbero , =
+0
+Infernal Activation Tokens are 
+provided in Inferno which are 
+used specifically to play the 
+“Summoner Wars” expansion 
+included in Inferno (see page 
+18). They can also optionally 
+replace any normal Activation 
+Tokens of the core game to 
+create different configurations 
+of the Lodge, producing 
+unexpected combinations of 
+effects.
+Infernal Activation Tokens (11)
+8
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+Reference Card (6)
+Follow the normal game setup as described in the Black Rose 
+Wars core game rulebook except for the following:
+Point 1. Instead of the Black Rose room, take the Tartaro room (with 
+the color Black) and position it at the center of the table. Instead of 
+the Throne Room, take the Bolgia dei Ladri and position it next to 
+any side of the Tartaro room. 
+Points 2 and 3. Instead of using the rooms and Activation Tokens 
+supplied with the core game, use those supplied with this expansion.
+Points 4 and 5. As described in the core game rulebook.
+Point 6. Use the equivalent materials from this expansion instead 
+of those from the core game. Keep the core game Evocations Deck 
+close to the Power Board (excluding Malacoda and Cerbero); do not 
+mix it with the Evocations Deck supplied with this box.
+Point 7. Use the equivalent materials from this expansion instead of 
+those from the core game. The player that most recently committed 
+one of the seven deadly sins in real life takes the Crown of Minos 
+token for the first turn. If no one has, or no one is willing to admit 
+to it, choose the one who most recently wanted to commit one of 
+the seven deadly sins.
+Points 8, 9, 10 and 11. As described in the core game rulebook.
+Then follow these additional game setup steps:
+12. Place the Lucifero board between the cells of the last and first 
+player, then place the Lucifero Actions Deck corresponding to the 
+first Moon Phase on this board.
+13. Place Lucifero in the Tartaro room at the center of the play 
+area.
+The holder of the Crown deals each player a randomly selected 
+Lucifero Evocation card. In turn order, each player will place the 
+Evocation corresponding to the card they received in one of the 
+rooms adjacent to Tartaro, selecting a room that is not already 
+occupied by other Evocations. These Evocations belong to Lucifero.
+14. Deal 2 Exorcism cards to each player. Each player chooses one 
+and places the other back in the box without revealing either card.
+15. Each player takes a Perilium and sets it to 0.
+Game Setup Playing Inferno
+A game of Inferno follows the same rules as a normal game of Black 
+Rose Wars. Lucifero acts exactly like an additional player and will 
+control his Mage following the normal game turn. 
+To play a game of Inferno, most of the materials supplied with this 
+expansion will be used to replace those of the core box (see Game 
+Setup); specifically, the core game elements that will be replaced are: 
+Rooms, Activation Tokens, Quests, and Events.
+The rest of the materials in this expansion, except for the Forgotten 
+Spell Cards, are added to the remaining elements from the core game.
+The game phases work as they would in a core game of Black Rose 
+Wars, with the following exceptions: 
+Black Rose Phase: 
+Use the standard core game rules. Replace the standard Event cards 
+with the expansion Event cards.
+Study Phase: 
+The core game rules are followed.
+Preparation Phase:
+Use the standard core game rules.
+Action Phase: 
+The core game rules are followed, except when managing Lucifero’s 
+activation (see page 10). 
+Evocation Phase:
+The core game rules are followed, except when managing Lucifero’s 
+Evocations (see page 10).
+Clean-up Phase:
+The core game rules are followed. 
+The Crown of Minos
+The rule of the Crown of Minos replaces that of the Crown 
+when playing Inferno and not only grants the first turn, but 
+also the possibility to decide what happens if a decision 
+needs to be made that isn't covered by the rulebook (in the 
+case of ambiguity between all Inferno cases and the various 
+schools of magic).
+9
+Lucifero
+• The Lucifero model blocks Mages’ line of sight.
+• The Lucifero model is considered a Mage, therefore it can be 
+targeted by spells with target , which indicate a “Target mage” 
+in the description. Damage, damage conversion and instability 
+conversion work as normal against Lucifero, but nevertheless, 
+the Lucifero model cannot be moved in any way by other Mages’ 
+spells or by other game effects; therefore, ignore any effect that 
+would move it from its current position. 
+• The Lucifero model is considered the owning Mage of all his 
+Evocations.
+Evocation Phase: 
+When it is Lucifero’s turn to activate his Evocations, proceed 
+according to the following points:
+• Calculate the Threat Value of each Mage: this value can be 
+positive or negative and is equivalent to the number of Power 
+Points of the Mage Token on the Power Board in comparison 
+to Lucifero’s Power Point Token value. To this value, add or 
+subtract the value currently indicated on the Mage’s Perilium 
+(see page 8, and the example, above). If the Mage Token is 
+behind Lucifero’s Token on the Power Board, its Threat Value 
+(before including the Perilium value) will be a negative number 
+(-1, -2, -3...); if on the other hand the Mage Token is in front of 
+the Lucifero one, its Threat Value (before including the Perilium 
+value) will be positive (+1, +2, +3...). 
+• Check which of the Lucifero Evocations are activated based 
+on the Demonic AI rule. This check must be carried out in 
+the following order based on the Lucifero Evocations in play: 
+Barbariccia; Malacoda from 1 to 3; Centauro from 1 to 3; 
+Cerbero from 1 to 3; Farfarello from 1 to 5; Arpia from 1 to 8.
+Once the Demon that must act has been selected, check 
+whether there is at least one Mage within the value of the 
+Evocation’s Movement with a Threat Value equal to or higher 
+than its Aggressiveness as shown on its Inferno Evocations 
+Card (see page 6). If so, the Evocation is activated, otherwise 
+its activation is skipped.
+Activation: the Evocation moves and attacks the Mage 
+with the highest Threat Value among those within its own 
+movement. In the case of equal values, the Evocation attacks 
+the closest Mage. If the situation is still equal, the holder of 
+the Crown of Minos will decide which target is attacked.
+Demonic AI
+All your pomp has been brought down to the grave,
+along with the noise of your harps;
+maggots are spread out beneath you, and worms cover you.
+How have you fallen from heaven, morning star, son of the dawn!
+You have been cast down to the earth, you who once laid low the nations!
+You said in your heart:
+“I will ascend to the heavens, I will raise my throne above the stars of God;
+I will sit enthroned on the mount of assembly, on the utmost heights of Mount 
+Zaphon.
+I will ascend above the tops of the clouds; I will make myself like the Most 
+High.”
+But you are brought down to the realm of the dead, to the depths of the pit.
+“-Isaiah”
+Using Lucifero: 
+Lucifero is treated like a player, his board is placed between the first 
+and last player of the first game turn. Once this position is set it is 
+never moved once the game begins, regardless of changing the first 
+player. His model, placed in the Tartaro Room, is treated as if it were 
+his Mage model.
+Once the player on the right of Lucifero’s board has acted, Lucifero 
+must play his turn. The player holding the Crown draws and applies 
+the effects of one of the Lucifero Action Cards. They will play out 
+the effects to the best of their abilities; not all the effects of the 
+card will necessarily be applicable (for example, Evocations might 
+be missing).
+After having resolved the effects of the Lucifero Action Card, the 
+latter will be added to the pile of discarded Lucifero Actions on his 
+board. If there are no Lucifero Action Cards to draw, the discard 
+pile is mixed to form a new deck from which to draw. If there is a 
+conflict of choice for Lucifero’s action, the player with the Crown 
+decides what happens.
+Lucifero Model: 
+The Lucifero model and the room it occupies follows these rules: 
+• The room occupied by the Lucifero model cannot contain any 
+other models apart from the Lucifero one.
+• When the Lucifero model enters a room occupied by other 
+models, they must be moved out: starting from Lucifero, 
+the Mages will move the models under their control (Mage 
+and Evocations) into an adjacent room of their choice. The 
+movements of Evocations under Lucifero’s control will be 
+decided by the holder of the Crown, following a simple guideline: 
+the Evocations must be moved with the aim of occupying as 
+many rooms as possible.
+• The room occupied by the Lucifero model cannot be activated 
+in any way, not even through spells or room powers.
+• No Instability Tokens can be placed in the room occupied by the 
+Lucifero Model unless by Lucifero himself.
+• The Lucifero model can be attacked with physical attacks by 
+Mages in adjacent rooms to the Lucifero model. These attacks 
+are considered range 0.
+Nero’s Perilium is set to a value of 2. He has a total of 18 PP, 
+while Lucifero has a total of 15. Nero has 3 PP more than 
+Lucifero; by adding this to his Perilium of 2 we have Nero’s 
+Threat Value, that is, 5.
+Example: Calculation of Threat Value
+10
+Incapacitating Lucifero: 
+Lucifero cannot be defeated, however he can be 
+temporarily Incapacitated following these rules: 
+Lucifero has 17 Health Points as indicated on his 
+sheet. 
+When the Damage Tokens on Lucifero’s life bar 
+reach the maximum number of Lucifero’s Health 
+Points (17), he is considered Incapacitated. 
+As with a normal Mage, when Lucifero is 
+Incapacitated, the Mages that participated in his 
+defeat gain PP according to the logic below:
+Power Points for Damage:
+: 1st place (most damage dealt)
+: 2nd place
+: Participation (any others that 
+dealt any damage)
+If one Mage dealt all of the damage to Lucifero, they 
+alone gain 10 Power Points.
+The Mage who dealt the final blow takes a Trophy Token
+from Lucifero.
+After calculating the score, remove all the Damage Tokens 
+from the Lucifero board and place the Incapacitated 
+Token on the Lucifero model.
+Incapacitated Lucifero: 
+As long as the Incapacitated Token is placed on the Lucifero model, 
+he is considered Incapacitated and the following rules apply:
+• The Lucifero model remains in place and continues to follow its 
+normal rules.
+• Lucifero cannot be dealt any new Damage.
+• When it is Lucifero’s turn in the Action Phase, the player 
+with the Crown of Minos draws a Lucifero Action Card. If 
+the Awakening icon (A) is present on the card, remove the 
+Incapacitated Token from his model and apply the effects of 
+the drawn card; otherwise Lucifero skips the Action Phase.
+• At the start of the next Black Rose Phase, remove the 
+Incapacitated Token from Lucifero.
+Note that even if Lucifero is Incapacitated, his Evocations will act 
+normally during the Evocation Phase.
+Endgame
+4. Holder of the Crown: the holder of the Crown loses 
+1 Power Point.
+5. Exorcisms: Each Mage reveals their Exorcism Card 
+and gains the points indicated for each successfully 
+completed assignment on the card.
+The endgame follows the same rules as those in the Black Rose Wars 
+rulebook (page 35) until point 4.
+Replace point 4 with the following:
+As his Demon ranks are slowly worn down, Lucifero will use 
+his special power, Fallen Angel, to annihilate his enemies.
+After resolving a Lucifero Action Card, if it was not possible 
+to summon at least one of the indicated Demons (B), this 
+power will be activated. When this happens, Lucifero inflicts 
+one wound for each non-summoned Demon to each adversary 
+model in the rooms adjacent to his own.
+Fallen Angel
+015 / 030
+
+Move Lucifero 
+ to 
+Cerchio degli Avari.
+The Demon with the highest
+Aggressiveness Value acts (if there are 
+more than 1, all of them act).
+If there are no Black Rose Demons
+in play, draw an Event from the
+current Moon Phase deck and 
+another Lucifero Action.
+
+2-3 4+
+A
+B
+Tessa inflicts the last 3 wounds on Lucifero, which brings 
+him to a total of 17 wounds, thus defeating him. Tessa has 
+inflicted a total of 7 wounds on Lucifero and ends up in first 
+place
+Tessa 7 wounds: 1st place 6 points
+Nero 6 wounds: 2nd place 4 points
+Telmia 4 wounds: Participant 2 points
+Moreover, Tessa receives Lucifero’s Trophy Token.
+Tessa declares to have completed her turn.
+It is now Lucifero’s turn, a player near his board flips the first 
+Lucifero Action Card to determine whether or not he can act. 
+The flipped card reveals the Bearer of Souls, which doesn’t 
+contain the Awakening icon; the Lord of Hell, therefore 
+cannot act until the next round.
+In the next round, the player flips another Lucifero Action 
+Card, Humiliate, which this time does contain the Awakening 
+icon, so the player reads the effects and immediately applies 
+them. From this moment on, Lucifero is once more in play 
+until he is dealt 17 Damage again.
+“I’m sorry Mages, but this is Hell!”
+Example: Incapacitated Lucifero
+
+11
+Demons
+The Demons are spawned by following the effects of the Lucifero 
+Action Cards.
+Once summoned, the Demons are considered for all intents and 
+purposes normal Evocations and Lucifero is considered their 
+Owner.
+When a Lucifero Evocation is generated, it must be spawned in 
+a room adjacent to the one with Lucifero. Except for the initial 
+Evocations, it is always the player with the Crown who chooses 
+in which room to spawn the Lucifero Evocation. If 2 or more 
+Evocations are generated at the same time, they must be spawned 
+in different rooms for as long as possible. 
+When a Demon is eliminated by a Mage, all Mages immediately gain 
+a number of PP equal to the number indicated on the Evocation 
+Card.
+The Mage that inflicts the last wound on the Demon receives its 
+card as a Trophy (see Exorcism Cards, page 5).
+Demons summoned by Lucifero
+Barbariccia is immune to any damage caused by 
+the effects of Spell Cards but can be wounded 
+by the Physical Attacks of Mages and any other 
+Evocations.
+Each time Barbariccia ends her activation, a 
+Lucifero Activation Card must be drawn and its 
+main action (see “C” page 5) is resolved (the 
+Evocation action - “B” of page 5 - is not resolved 
+in this case).
+Barbariccia
+Demon
+5 BA 
+  
+Barbariccia
+Barbariccia cannot be damaged by Spells. After she acts, 
+Lucifero draws an Action card and acts without summoning.
+The Centauro’s attacks strike all adversary 
+models in the room and therefore do not affect 
+the Lucifero model and the Evocation models he 
+controls.
+Centauro
+Demon
+2 CN 
+  
+Centauro
+Centauro's Attack is considered  .
+An Arpia’s attack inflicts 2 Damage plus one 
+additional wound for every other Arpia model 
+present in the same room. 
+Note: Arpia has an Aggressiveness value of -5 
+(making it much more likely she will activate).
+Arpia
+When Farfarello attacks a Mage, a Lucifero 
+Instability Token is placed in the Farfarello 
+model’s room.
+Note: Farfarello has an Aggressiveness value of -3 
+(making it much more likely he will activate).
+Farfarello
+Demon
+-3 FA 
+  
+Farfarello
+Each time Farfarello attacks a Mage, 
+Lucifero places  in the Farfarello's Room.
+When Malacoda defeats a Mage, Lucifero obtains 
+5 Power Points and the Mages that would have 
+gained Power Points from the Mage’s defeat do 
+not gain any Power Points, regardless of the 
+Damage Tokens on its board.
+Malacoda
+When Cerbero attacks, remove a Damage Token 
+on its card. The Damage Token to be removed is 
+chosen by the holder of the Crown.
+Cerbero
+Demon
+2 CR 
+  
+Cerbero
+Each time Cerbero infl icts Damage,
+heal him . 
+Demon
+-5 AR 
+  
+Arpia
+An Arpia's Attack infl icts an additional  for each other Arpia in her Room.
+Demon
+3 MA 
+  
+Malacoda
+If Malacoda defeats a Mage,
+only the Black Rose earns  .
+12
+Demons can be summoned by Mages through the activation of 
+certain rooms, or, in the case of Barbariccia and Lucifero, using the 
+Forgotten Spells contained in this expansion. (Note: the Forgotten 
+Spells provided in this expansion may only be used in the core game.)
+These Evocations follow the rules presented in the Black Rose Wars 
+core box.
+Unlike Demons summoned by Lucifero, the elimination of a Demon 
+summoned by a Mage does not grant any Power Points and does not 
+count toward achieving the objectives of the Exorcism Cards (see 
+page 5).
+Demons summoned by Mages
+Attacks by the Centauro strike all adversary 
+models in the room and therefore do not affect 
+the Mage model controlling it and the Evocation 
+models they control.
+Centauro
+  
+Centauro
+Centauro's Attack is considered  .
+
+An Arpia’s attack inflicts 1 wound plus one 
+additional wound for every other Evocation 
+present in the same room, regardless of these 
+models’ controllers. 
+Arpia
+When Farfarello attacks, the Mage controlling it 
+places an Instability Token in the same room as 
+the Farfarello model.
+Straight Effect: summon Barbariccia in a 
+room of choice, Barbariccia acts immediately. 
+Barbariccia is immune to the effects that remove 
+Evocations and can only be wounded by other 
+Evocations. When using this Spell, you place her 
+on the board and then you may either activate her 
+immediately, or instead of using her model, you 
+may activate any other Evocation in the Lodge as 
+if temporarily under your control (damage and 
+instability placed by that Evocation will become 
+yours).
+Reverse Effect: 
+choose up to 3 
+Evocations in play 
+that are not under 
+your control. They 
+become yours, 
+change the Rose 
+Pin on their bases. 
+If by controlling 
+them you exceed 
+the limit of 3 
+Evocations, you 
+can decide to 
+remove some 
+(or all) of 
+your current 
+Evocations, 
+or some (or all) of the 3 
+newly controlled ones.
+Farfarello
+Barbariccia
+  
+Farfarello
+Each time Farfarello attacks,  in its Room.
+
+She cannot be Removed by Spells. She can suffer Damage 
+only from other Evocations. When activating Barbariccia, 
+instead of activating her, you may activate any other 
+Evocation in the Lodge as if under your control.
+  
+
+When Malacoda is removed from the game in any 
+way, its controller loses 1 Power Point.
+Malacoda
+When Cerbero attacks, its controller can remove 
+a Damage Token from their own sheet or from 
+Cerbero’s card.
+Straight Effect: summon Lucifero in a room of choice, Lucifero acts 
+immediately. When he appears, all the Models in the same room must 
+move to an adjacent room in turn order. The Lucifero model uses the rules 
+explained in the paragraph “Lucifero Model” (page 10). Lucifero can attack 
+Models found in rooms adjacent to his own and vice versa.
+Reverse Effect: summon 3 Demon Evocations from among those available in the Evocations deck of 
+the core game or Inferno. The Evocations must be placed in 3 different rooms and act immediately. Lucifero 
+and Barbariccia cannot be summoned using this effect.
+Cerbero
+Lucifero
+  
+Cerbero
+Each time Cerbero attacks: 
+choose to heal  to him or to you.
+
+Lucifero can't be targeted by effects, or suffer Damage.
+If the game ends and you still possess this card, gain .
+
+
+  8
+
+  
+Arpia
+An Arpia's attack infl icts an additional  for each other Evocation in her room.
+
+  
+Malacoda
+When this Malacoda is removed from the game,
+ its controller loses  .
+
+
+002 / 002
+  
+Summon Barbariccia. 
+Barbariccia can act immediately.
+Take control of 3 Evocations owned 
+by other Mages (replace their rose 
+pins with yours).
+Gain .
+  
+
+001 / 002
+  
+Summon Lucifero. 
+Lucifero can act immediately.
+Summon 3 Demon Evocations 
+in 3 different rooms; they act 
+immediately. You cannot summon 
+Lucifero or Barbariccia.
+  
+Optional Rule: Alternative Evocations
+When any game effect allows a Mage to summon Malacoda 
+or Cerbero, the Mage can choose whether to summon the 
+version in the Black Rose Wars core game or the one in this 
+expansion.
+Fading Evocation: The Lucifero Evocation Card contains two icon boxes  . When this card comes into play, 
+a Black Rose Damage / Instability Token is placed on each of these icons. During each Clean-up Phase, one of 
+these tokens is removed; when the last counter is removed, Lucifero leaves the game. 
+13
+Infernal Rooms
+Room characteristics
+Instabilities   Points 
+Room effect
+You must discard 3 spells from your hand to your 
+memories. Draw the first 3 cards of the Forgotten 
+Spells deck: choose 1 and add it to your hand. 
+Place the others at the bottom of the Forgotten 
+Spells deck in any order you like. 
+Draw a Lucifero Action Card, and resolve its 
+effects.
+Once played, the Forgotten Spells card must be 
+removed from play during the Clean-up Phase.
+ Tartaro
+Room characteristics
+Instabilities  Points 
+Room effect
+Summon 1 Farfarello under your control.
+You can suffer 1 damage inflicted by Lucifero (the 
+Black Rose) to make the Demon act immediately.
+Farfarello has the characteristics
+M:3 A:1 V:3
+When Farfarello attacks, moreover, “convert 1 
+Instability Token on its room.”
+Name translation: Dealers’ Bolgia.
+Room characteristics
+Instabilities  Points 
+Room effect
+Choose a target Mage within range 1, they lose 
+1 PP. 
+You gain 1 PP.
+Suffer 1 damage inflicted by Lucifero (Black Rose).
+Name translation: Traitors’ Circle.
+Room characteristics
+Instabilities  Points 
+Room effect
+Copy the effect of another room other than 
+Tartaro. Beware: this effect does not resolve the 
+Quests of the copied effect. The activated room is 
+always the Bolgia dei Maghi. Lucifero (the Black 
+Rose) gains 1PP.
+If you use this room with the core game rooms, 
+you cannot copy the effect of the Throne Room or 
+Black Rose Room.
+Name translation: Mages’ Bolgia.
+ Blue Rooms
+
+
+Barattieri  Traditori  dei Maghi 
+14
+Room characteristics
+Instabilities  Points 
+Room effect
+Look for any card from a discard pile of the 
+Library and draw it.
+Suffer 1 damage inflicted by Lucifero (the Black 
+Rose) to repeat this effect once.
+Name translation: Simoniacs’ Bolgia.
+Room characteristics
+Instabilities  Points 
+Room effect
+Lower your Perilium by -2.
+Choose an adversary Mage and increase their 
+Perilium by +2.
+Name translation: Dark Forest.
+Room characteristics
+Instabilities  Points 
+Room effect
+You can heal up to 3 of your own wounds: choose 
+3 Damage Tokens on your Mage’s board and 
+remove them.
+Choose a Demon under Lucifero’s control that 
+has Damage Tokens and remove 2 of your choice.
+Room characteristics
+Instabilities  Points 
+Room effect
+Inflict 1 damage on all models, either in this 
+room or a single adjacent room. You and your 
+Evocations do not suffer the wound.
+Name translation: Blasphemers’ Circle.
+Room characteristics
+Instabilities  Points 
+Room effect
+Draw the first two Quest cards of the current 
+Moon deck: if you have more than 2 Quests, 
+discard one.
+Draw and apply the effects of an Event Card.
+Name translation: Stingy Ones’ Circle.
+Room characteristics
+Instabilities  Points 
+Room effect
+Summon 1 Cerbero under your control.
+You can suffer 1 damage inflicted by Lucifero (the 
+Black Rose) to make the Demon act immediately.
+Cerbero has the characteristics 
+M:2 A:3 V:3
+Each time Cerbero attacks, you can remove a 
+Damage Token from your Mage’s sheet or from 
+Cerbero.
+Name translation: Greedy Ones’ Circle.
+ Yellow Rooms
+ Green Rooms
+Simoniaci 
+Selva Oscura
+ Limbo
+Bestemmiatori 
+degli Avari 
+dei Golosi 
+15
+Porta
+dell'Inferno 
+Lussuriosi 
+degli Omicidi 
+dei Ruffiani 
+degli Iracondi 
+dei Ladri 
+Room characteristics
+Instabilities  Points 
+Room effect
+Draw 3 Spell Cards from your Grimoire, then 
+discard one of them.
+Suffer 1 damage inflicted by Lucifero (the Black 
+Rose).
+Name translation: Hell’s Door.
+Room characteristics
+Instabilities  Points 
+Room effect
+Gain 1 PP.
+You can heal up to 2 of your own wounds: choose 
+2 Damage Tokens on your Mage’s sheet, and 
+remove them.
+The Demon under Lucifero’s control with 
+the highest Aggressiveness acts immediately 
+regardless of whether or not there is a Mage with 
+a Threat value to attack.
+Name translation: Luxurious Ones’ Circle.
+Room characteristics
+Instabilities  Points 
+Room effect
+Summon 1 Centauro under your control.
+You can suffer 1 damage inflicted by Lucifero (the 
+Black Rose) to make the Demon act immediately.
+Centauro has the characteristics 
+M:3 A:2 V:3
+Attacks by the Centauro are considered the Area 
+type, they strike all adversary models in the same 
+room.
+Name translation: Murderers’ Circle.
+Room characteristics
+Instabilities  Points 
+Room effect
+Choose 1 Spell on your Mage Sheet (Ready, 
+Activated, or Used), and discard it to your 
+Memories. Then, replace it with 1 Spell of your 
+choice from your hand, and immediately cast it.
+Then, draw and apply the effects of an Event Card.
+Name translation: Ruffians’ Bolgia.
+Room characteristics
+Instabilities  Points 
+Room effect
+You can move a maximum distance equal to 
+your current Movement value; you must end this 
+movement in a room occupied by an adversary 
+Mage.
+Make a Physical Attack against an adversary Mage 
+in the room where you stopped; if the Mage is not 
+defeated, he inflicts 1 damage on you.
+Name translation: Wrathful Ones’ Circle.
+Room characteristics
+Instabilities   Points 
+Room effect
+Obtain the Crown; if you already had it, suffer 1 
+damage inflicted by Lucifero (the Black Rose).
+The player that loses the Crown suffers 1 damage 
+inflicted by Lucifero (the Black Rose).
+Name translation: Thieves’ Bolgia.
+ Red Rooms
+ Purple Rooms
+16
+dei Suicidi 
+Room characteristics
+Instabilities  Points 
+Room effect
+Summon 1 Arpia under your control.
+You can suffer 1 damage inflicted by Lucifero (the 
+Black Rose) to make the Demon act immediately.
+Arpia has the characteristics 
+M:3 A:1 V:3
+Arpia’s attacks inflict additional damage equal 
+to the number of Evocation models (under your 
+control or otherwise) in the same room.
+Name translation: Suicidals’ Circle.
+ Gray Rooms
+degli Eretici 
+Room characteristics
+Instabilities  Points 
+Room effect
+Look at the first 3 Lucifero Action Cards; place 
+them back on top of the deck in any order you 
+choose.
+Suffer 1 damage inflicted by Lucifero (the Black 
+Rose).
+Name translation: Heretics’ Circle.
+ Antinferno
+Room characteristics
+Instabilities  Points 
+Room effect
+Inflict 2 damage on a model in range 1. You 
+cannot select Mages in their Cells.
+17
+Summoner Wars
+The “Return to Rest” Quest Card included in the core 
+game (Moon 1, card 014) doesn’t work during a game of 
+Summoner Wars; remove the card from the Quest Deck.
+Attention!
+Summoner Wars is an alternative way of playing Black Rose Wars 
+using the core box materials and some of the elements provided with 
+this expansion.
+In a game of Summoner Wars, the Evocations play a more significant 
+role with respect to the core game; it will be easier to summon them 
+and the Mages will activate them more frequently.
+Optional Rule: Prodigious Summoners
+This optional rule allows Mages to activate their Evocations 
+during the Action Phase, in addition to the Evocation Phase 
+as normal. This rule can be used during a game of Summoner 
+Wars or a standard game of Black Rose Wars.
+Using this rule, a Mage can spend one of their own Action 
+Tokens to activate one of their Evocations instead of 
+carrying out the standard actions it allows.
+Optional Rule: Chaos Rooms 
+(for use only with the core game)
+To create even more chaotic games, this rule can be used to
+allow players to modify the effects of rooms as the game
+unfolds.
+When the Moon changes, the Mage with the Crown can
+replace the Activation Tokens of non-destroyed rooms
+with the Infernal versions included in this expansion, or
+vice versa. The new Activation Tokens are always placed on
+the non-activated side, even if the room has already been
+activated (therefore, it can be activated a second time).
+To play a game of “Summoner Wars” the standard game setup 
+explained in the Black Rose Wars rulebook must be followed. Once 
+all the rooms have been positioned, some of the Activation Tokens 
+will be replaced by the Infernal Activation Tokens supplied with this 
+expansion.
+The Activation Tokens that need to be replaced are indicated on the 
+following page along with an explanation of their effects.
+During a game of Summoner Wars, the Forgotten Spells included 
+in this expansion can be added to the Forgotten Spells deck, thus 
+making it possible to see Barbariccia and Lucifero in action.
+The expansion Demon models and their Evocation Cards should 
+be kept close at hand. The rest of the material can be placed back 
+in the box.
+Game Setup
+18
+Room effect
+Summon 1 Farfarello under your control.
+You can lose 1 PP to make the Demon act 
+immediately.
+Farfarello has the characteristics 
+M:3 A:1 V:3
+When Farfarello attacks, also convert 1 instability 
+token on its room.
+Room effect
+Remove 4 Damage Tokens from the Evocations 
+under your control; you can remove them in any 
+combination.
+Room effect
+Summon 1 Arpia under your control.
+You can lose 1 PP to make the Demon act 
+immediately.
+Arpia has the characteristics 
+M:3 A:1 V:3
+Arpia’s attacks inflict additional wounds equal 
+to the number of Evocation models in the same 
+room.
+Room effect
+Remove one Cerbero or one Centauro under 
+your control from the game, and summon two 
+Farfarello or two Arpia within range 1.
+You can lose 2 PP to make the two Demons act 
+immediately.
+Room effect
+Activate a target Evocation as if it were under your 
+control
+Room effect
+Summon 1 Landsknecht under your control.
+You can lose 1 PP to make the undead act 
+immediately.
+The Landsknecht has the characteristics 
+M:2 A:2 V:3.
+Room effect
+Remove two Demon Evocations under your 
+control from the game, and summon a Malacoda 
+within range 1.
+You can lose 2 PP to make the Demon act 
+immediately.
+Room effect
+Summon 1 Centauro under your control.
+You can lose 1 PP to make the Demon act 
+immediately.
+Centauro has the characteristics 
+M:3 A:2 V:3
+Attacks by the Centauro are considered the Area 
+type, they strike all adversary models in the same 
+room.
+Room effect
+Place 1 Instability Token in each room where a 
+Demon Evocation or Undead under your control 
+is present.
+Room effect
+Summon 1 Cerbero under your control.
+You can lose 1 PP to make the Demon act 
+immediately.
+Cerbero has the characteristics 
+M:2 A:3 V:3
+Each time Cerbero attacks, you can remove a 
+Damage Token from your Mage’s sheet or from 
+Cerbero.
+Room effect
+Choose two Evocation models found in the same 
+room or within range 1 of each other. Each one 
+inflicts Damage equal to the value of its attack on 
+the other.
+Infernal Activation Tokens
+19
+Black Rose Wars - Inferno Rulebook v.1.0
+Ludus Magnus Studio - 2020 ©
+All rights reserved
+www.ludusmagnusstudio.com

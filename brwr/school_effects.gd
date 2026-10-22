@@ -3,7 +3,7 @@ extends RefCounted
 
 # Shared, data-driven sentences for the remaining Codex schools. All choices
 # suspend the existing Effect sequence; no second spell/attachment state exists.
-const TYPES := ["filtered_model_effect", "each_owned_evocation", "scaled_school_effect",
+const TYPES := ["trigger_event_branch", "optional_caster_room_effect", "filtered_model_effect", "each_owned_evocation", "scaled_school_effect",
 	"remove_evocation_then", "pay_room_instability", "if_effect_result", "summon_equipment",
 	"damage_selected_evocation", "trigger_target_effect", "chain_damage", "if_jinxed",
 	"discard_jinx", "for_school_mages", "place_target_colored_room", "pay_power_effect",
@@ -53,6 +53,16 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 	var ev: EvocationState = context.get("target_evocation")
 	var target: int = int(context.get("target_player_index", -1))
 	match str(effect.type):
+		"trigger_event_branch":
+			var event: GameEvent = context.get("trigger_event")
+			if event == null: return true
+			return ForgottenRules.queue(game, effect.get("effects", []) if event.event_type == str(effect.event_type) else effect.get("else_effects", []), context)
+		"optional_caster_room_effect":
+			if player.mage.in_cell: return true
+			if not DruidicRules.choose(game, caster, context, "personal_optional_room", [{"token": "apply", "value": true, "name": str(effect.get("prompt", "Apply the optional effect?"))}], str(effect.get("prompt", "Apply the optional effect?")), true): return false
+			var accepted: bool = context.get("personal_optional_room") == true
+			context.erase("personal_optional_room")
+			return ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, player.mage.room_id)) if accepted else true
 		"last_damaged_room_effect":
 			# Defeat has already moved the Mage to a Cell; use the damage receipt.
 			var room_id: String = str(context.get("last_damage_target_room_id", ""))
@@ -96,6 +106,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			var options: Array = []
 			for data in game.evocation_database.evocations.values():
 				if data.archetype in ["equipment", "nightmare"] or bool(data.get("forgotten", false)) or int(data.health) > int(effect.get("max_health", 999)) or game.get_available_evocation_copies(data.id) <= 0: continue
+				if effect.has("archetype") and data.archetype != effect.archetype: continue
 				options.append({"token": "summon:" + data.id, "value": data.id, "id": data.id, "name": data.name, "card_kind": "evocations"})
 			if not DruidicRules.choose(game, caster, context, "school_summon", options, "Choose an Evocation to summon."): return false
 			if not context.has("school_summon"): return true
@@ -210,6 +221,9 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 		"school_condition":
 			var valid := false
 			match str(effect.condition):
+				"target_room_rebuilt":
+					var room = game.get_room_by_id(FamineRules.target_room(game, context))
+					valid = room != null and room.flipped
 				"target_has_upgrade": valid = ev != null and not ev.upgrades.is_empty()
 				"target_survived": valid = game.is_evocation_in_play(ev) if ev != null else target >= 0 and not game.players[target].mage.in_cell
 				"caster_survived": valid = not player.mage.in_cell and not player.mage.is_defeated()
@@ -545,8 +559,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 				if options.is_empty():
 					context.erase("last_summoned_evocation")
 					return true
-				if options.size() == 1: context["school_equipment"] = options[0].value
-				elif not DruidicRules.choose(game, caster, context, "school_equipment", options, "Choose an Equipment to summon."): return false
+				if not DruidicRules.choose(game, caster, context, "school_equipment", options, "Choose an Equipment to summon."): return false
 			var summoned = game.summon_evocation_for_effect(caster, str(context.school_equipment), player.mage.room_id, context)
 			if summoned == null and not bool(context.get("summon_declined", false)): return false
 			context.erase("school_equipment")

@@ -1,0 +1,192 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 4
+GAME SEED: 0
+Spells loaded: 283
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - geomancy
+  - famine
+  - agony
+  - chaos
+  - alchemy
+  - lex
+Selected 6 / 10 available schools
+
+SCHOOL LIBRARIES:
+  geomancy: 36 cards
+  famine: 36 cards
+  agony: 36 cards
+  chaos: 36 cards
+  alchemy: 36 cards
+  lex: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 25
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Initial Crown assigned to Player 3
+Player 3 takes the Crown
+Player 1 Cell exits: ["mirrors_room", "arena"] | primary: mirrors_room | starts in Cell: true
+Player 2 Cell exits: ["sanctuary", "garden"] | primary: sanctuary | starts in Cell: true
+Player 3 Cell exits: ["pleasures_room", "armory"] | primary: pleasures_room | starts in Cell: true
+Player 4 Cell exits: ["forge", "summoner_room"] | primary: summoner_room | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=choose_one | input=effect_choice | retry_index=0
+Waiting for Player 1 | input type: effect_choice
+Convert damage: P1 converted 3 Damage on P2
+Player 1 cast Cruelty | side: Light
+Player 2 summoned Nigredo in room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=choose_one | input=effect_choice | retry_index=0
+Convert damage: P1 converted 3 Damage on Nigredo
+Player 1 cast Cruelty | side: Light
+Player 1 activates Persecution [protection]
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Spell Instability: Player 2 | Deadly Bolt | Room arena
+Waiting for Player 1 | input type: trigger_decision
+PROTECTION TRIGGERED: Persecution | Player 1
+Ignored 3 Damage | 3 -> 0
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Triggered spell resolved: Persecution
+Trigger window complete
+Player 2 cast Deadly Bolt | side: Light
+Player 2 summoned Pupa in room arena
+Player 3 summoned Nigredo in room arena
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Blacksmith's Chant | Room arena
+Damage: attacker 0 -> Player 4 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 3 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Player 1 cast Blacksmith's Chant | side: Light
+Player 2 summoned Nigredo in room arena
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Mars's Glory | Room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=relative_room_effect | input=effect_choice | retry_index=0
+Damage: attacker 0 -> Player 3 | 2 damage | Target HP: 9/11
+Player 1 cast Mars's Glory | side: Light
+GAME: Moon changed to 2
+Personal Spell distribution out of sequence for Player 1
+Personal Spell distribution out of sequence for Player 2
+Player 1 gained 1 Power
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=search_grimoire_cards | input=effect_choice | retry_index=1
+Player 1 cast Mechanical Archive | side: Dark
+Player 1 lost 1 Power
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=choose_evocation_to_summon | input=effect_choice | retry_index=1
+Player 1 summoned Succubus in room arena
+summon_evocation: summoned Succubus in arena
+Player 1 revealed Quest: Summoner Wizard
+Quest progress: Summoner Wizard | 1/3
+Player 1 cast Bloodline | side: Dark
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Branding | Room arena
+Player 2 assigned Jinx: Weakness
+Damage: attacker -1 -> Player 2 | 2 damage | Target HP: 9/11
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=arm_prepared_reactions | input=effect_choice | retry_index=1
+Player 1 activates Persecution [protection]
+Player 1 cast Branding | side: Light
+Arena received instability from owner 1 | 2/6
+Owner 1 placed 1 Instability in Arena
+Spell Instability: Player 2 | Deadly Bolt | Room arena
+Waiting for Player 1 | input type: trigger_decision
+PROTECTION TRIGGERED: Persecution | Player 1
+Ignored 3 Damage | 3 -> 0
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 6/11
+Triggered spell resolved: Persecution
+Trigger window complete
+Player 2 cast Deadly Bolt | side: Light
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=discard_events_for_effect | input=effect_choice | retry_index=0
+Event discarded: Hidden Resources
+Event discarded: Rebirth at Sunset
+Event discarded: Gift to Fools
+Black Rose gains 2 Power from Event discard
+Player 1 drew Forgotten Spell: Touch of the Old Ones
+Player 1 cast Thirst for Knowledge | side: Light
+Player 2 summoned Nigredo in room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=assign_nightmare | input=effect_choice | retry_index=0
+Damage: attacker 0 -> Evocation Nigredo | 1 damage | HP: 3/4
+Damage: attacker 0 -> Player 2 | 1 damage | Target HP: 10/11
+Player 1 summoned Eros's Bow in room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=filtered_model_effect | input=effect_choice | retry_index=0
+Damage: attacker 0 -> Player 2 | 1 damage | Target HP: 10/11
+Player 2 lost 1 Power
+Player 1 gained 1 Power
+Steal Power: Player 1 stole 1 Power from Player 2
+Pestis #200: stored 1 owner cube on its card
+Player 1 summoned Pestis in room arena
+Pestis #201: stored 1 owner cube on its card
+Player 1 summoned Pestis in room mirrors_room
+Player 1 summoned Tartarus's Axe in room arena
+PLAYER COUNT: 4
+GAME SEED: 0
+Spells loaded: 283
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - lex
+  - druidic
+  - agony
+  - death
+  - famine
+  - geomancy
+Selected 6 / 10 available schools
+
+SCHOOL LIBRARIES:
+  lex: 36 cards
+  druidic: 36 cards
+  agony: 36 cards
+  death: 36 cards
+  famine: 36 cards
+  geomancy: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 25
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Initial Crown assigned to Player 2
+Player 2 takes the Crown
+Player 1 Cell exits: ["observatory", "bibliotheca"] | primary: observatory | starts in Cell: true
+Player 2 Cell exits: ["alchemical_laboratory", "arena"] | primary: alchemical_laboratory | starts in Cell: true
+Player 3 Cell exits: ["garden", "mirrors_room"] | primary: garden | starts in Cell: true
+Player 4 Cell exits: ["oracle_room", "summoner_room"] | primary: summoner_room | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+SCHOOL INTEGRATION: 56 checks, 0 failures

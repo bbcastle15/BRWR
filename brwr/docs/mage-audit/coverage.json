@@ -1,0 +1,394 @@
+[
+  {
+    "id": "agorix",
+    "codex_page": 68,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "albedo",
+    "codex_page": 68,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "alhazred",
+    "codex_page": 68,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "alice",
+    "codex_page": 69,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "angela",
+    "codex_page": 69,
+    "database_present": true,
+    "personal_spell_id": "emet_met",
+    "mage_card_present": true
+  },
+  {
+    "id": "alisha",
+    "codex_page": 69,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "anubis",
+    "codex_page": 70,
+    "database_present": true,
+    "personal_spell_id": "eternal_curse",
+    "mage_card_present": true
+  },
+  {
+    "id": "architect",
+    "codex_page": 70,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "arianna",
+    "codex_page": 70,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "baron_doria",
+    "codex_page": 70,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "bartholomaus",
+    "codex_page": 71,
+    "database_present": true,
+    "personal_spell_id": "arcane_bond",
+    "mage_card_present": true
+  },
+  {
+    "id": "bella",
+    "codex_page": 71,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "bellum",
+    "codex_page": 71,
+    "database_present": true,
+    "personal_spell_id": "carnage",
+    "mage_card_present": false
+  },
+  {
+    "id": "cacus",
+    "codex_page": 71,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "boogeyman",
+    "codex_page": 72,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "cassandra",
+    "codex_page": 72,
+    "database_present": true,
+    "personal_spell_id": "pythia_of_delphi",
+    "mage_card_present": false
+  },
+  {
+    "id": "cosma",
+    "codex_page": 72,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "dai_jin",
+    "codex_page": 73,
+    "database_present": true,
+    "personal_spell_id": "fulu",
+    "mage_card_present": false
+  },
+  {
+    "id": "etna",
+    "codex_page": 73,
+    "database_present": true,
+    "personal_spell_id": "master_craftsman",
+    "mage_card_present": true
+  },
+  {
+    "id": "fames",
+    "codex_page": 73,
+    "database_present": true,
+    "personal_spell_id": "akharistia",
+    "mage_card_present": true
+  },
+  {
+    "id": "fenrir",
+    "codex_page": 73,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "gaea",
+    "codex_page": 74,
+    "database_present": true,
+    "personal_spell_id": "lifeline",
+    "mage_card_present": true
+  },
+  {
+    "id": "gramigna",
+    "codex_page": 74,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "griphon",
+    "codex_page": 74,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "hastur",
+    "codex_page": 74,
+    "database_present": true,
+    "personal_spell_id": "demonic_crown",
+    "mage_card_present": false
+  },
+  {
+    "id": "helblindi",
+    "codex_page": 75,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "hogwarz",
+    "codex_page": 75,
+    "database_present": true,
+    "personal_spell_id": "incanto_porkonus",
+    "mage_card_present": false
+  },
+  {
+    "id": "hyperion",
+    "codex_page": 75,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "ignis",
+    "codex_page": 76,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "imhotep",
+    "codex_page": 76,
+    "database_present": true,
+    "personal_spell_id": "great_architect",
+    "mage_card_present": false
+  },
+  {
+    "id": "irene",
+    "codex_page": 76,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "jack",
+    "codex_page": 76,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "janara",
+    "codex_page": 77,
+    "database_present": true,
+    "personal_spell_id": "mystic_guide",
+    "mage_card_present": false
+  },
+  {
+    "id": "jukas",
+    "codex_page": 77,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "kormac",
+    "codex_page": 77,
+    "database_present": true,
+    "personal_spell_id": "animal_affinity",
+    "mage_card_present": true
+  },
+  {
+    "id": "landolfo_ii",
+    "codex_page": 77,
+    "database_present": true,
+    "personal_spell_id": "ethereal_tentacles",
+    "mage_card_present": true
+  },
+  {
+    "id": "maelice",
+    "codex_page": 78,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "mediceo",
+    "codex_page": 78,
+    "database_present": true,
+    "personal_spell_id": "inspiration",
+    "mage_card_present": false
+  },
+  {
+    "id": "minotaurus",
+    "codex_page": 78,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "mors",
+    "codex_page": 79,
+    "database_present": true,
+    "personal_spell_id": "consuming_soul",
+    "mage_card_present": true
+  },
+  {
+    "id": "odin",
+    "codex_page": 79,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "onamor",
+    "codex_page": 79,
+    "database_present": true,
+    "personal_spell_id": "necroflame",
+    "mage_card_present": false
+  },
+  {
+    "id": "parcae",
+    "codex_page": 79,
+    "database_present": true,
+    "personal_spell_id": "three_visions",
+    "mage_card_present": false
+  },
+  {
+    "id": "pestilentia",
+    "codex_page": 80,
+    "database_present": true,
+    "personal_spell_id": "calamity",
+    "mage_card_present": false
+  },
+  {
+    "id": "prospero",
+    "codex_page": 80,
+    "database_present": true,
+    "personal_spell_id": "alchemical_fireball",
+    "mage_card_present": false
+  },
+  {
+    "id": "pyotr",
+    "codex_page": 80,
+    "database_present": true,
+    "personal_spell_id": "dictat",
+    "mage_card_present": false
+  },
+  {
+    "id": "razvan",
+    "codex_page": 80,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "rikkart",
+    "codex_page": 81,
+    "database_present": true,
+    "personal_spell_id": "cube_of_lamentations",
+    "mage_card_present": true
+  },
+  {
+    "id": "rubedo",
+    "codex_page": 81,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "saba",
+    "codex_page": 81,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "sefu",
+    "codex_page": 81,
+    "database_present": true,
+    "personal_spell_id": "mask_of_the_world",
+    "mage_card_present": false
+  },
+  {
+    "id": "shroudtech",
+    "codex_page": 82,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "slenderman",
+    "codex_page": 82,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "talia",
+    "codex_page": 82,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "ulrich",
+    "codex_page": 82,
+    "database_present": false,
+    "personal_spell_id": null,
+    "mage_card_present": false
+  },
+  {
+    "id": "venticello",
+    "codex_page": 83,
+    "database_present": true,
+    "personal_spell_id": "the_eight_spells",
+    "mage_card_present": false
+  }
+]

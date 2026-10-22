@@ -1,0 +1,4976 @@
+Stretch Goals
+© 2020 Ubisoft Entertainment. All rights reserved.
+Assassin’s Creed, Ubisoft and the Ubisoft logo are registered or unregistered 
+trademarks of Ubisoft Entertainment in the U.S. and/or other countries.
+2
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Andrea Colletti, Luca Bernardini
+Additional Game Design and Development: Diego Fonseca, Marco Presentino
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi, Fabio Por dia
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translator: Elettra Nuzzo, Edoardo Eibenstein
+Editing: Frank Calcagno
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini, Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Ful llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara Spagnoletto, Daniele 
+Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Gabriele Macchioro, Gianni 
+Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, Pasquale Carotenuto
+3
+CONTENTS
+ is rulebook contains all the rules of the Stretch Goals 
+unlocked during Nova Aetas Renaissance's Kickstarter 
+campaign.
+ e rulebook is divided into two sections:
+◆ Rules; where you can  nd all the rules of the new 
+material and the list of components related to it.
+◆ Plotbook; this section contains all the narrative 
+paragraphs (very much like the Core Game Plotbook) 
+of the 4 Encounter Missions and the 7 Exploration 
+Missions included in the Stretch Goals.
+3
+Heroes ......................................................... 4
+Fatima ......................................................... 4
+Components ............................................... 4
+New Rules: Fate Token .................................. 4
+Fate Die ..................................................... 5
+Altair .......................................................... 5
+Components ............................................... 5
+Gregorio ...................................................... 6
+Components ............................................... 6
+New Rule: Alchemical Exchange ..................... 6
+Agorix ......................................................... 7
+Components ............................................... 7
+New Rule: Geode Tokens .............................. 7
+Eracleto...................................................... 8
+Companions ................................................ 8
+New Equipment ......................................... 9
+Equipment Sets ......................................... 9
+New Trait: Y Set (X) ................................... 10
+New Enemies ............................................ 10
+ Primaevi .............................................. 11
+ Venice ................................................. 12
+ Mercenaries .......................................... 12
+ Mercenaries .......................................... 13
+ Rome .................................................. 14
+ Myths .................................................. 14
+Familiars ................................................... 15
+Location Cards ....................................... 16
+New Tiles .................................................. 17
+Zodiac Cards ........................................... 17
+Game for 5 or 6 Players ........................ 18
+Game for Fewer  an 4 Players .................... 18
+Nightmare and Divine Help Cards ................ 19
+Side Missions - Explorations ............... 20
+Components .............................................. 20
+Explorations .............................................. 20
+Exploration Setup ....................................... 21
+Scenic Element Cards .................................. 22
+Tower ...................................................... 22
+Side Missions - Encounters .................. 23
+Components .............................................. 23
+S1 - Back to Rocca Civetta ........................... 23
+S2 -  e Convoy of Riario ........................... 24
+S3 - Dear Jack... ......................................... 24
+S4 - In the Fox's Den .................................. 24
+Hunt Missions ......................................... 25
+Components .............................................. 25
+Aracne ..................................................... 25
+Chimera ................................................... 26
+Bounty ...................................................... 26
+Large Models and Area E ects ..................... 27
+Large Models and Line of Sight .................... 27
+Plotbook .................................................. 29
+E1 -  e Battle of the Oranges ..............................30
+E2 - Ambush! ..........................................................31
+E3 - Furious ............................................................32
+E4 - Roadblock .......................................................33
+E5 - Skirmish ..........................................................34
+E6 - Don't Steal from the  ieves' House ...........36
+E7 -  e Crossroads ...............................................38
+4
+Heroes
+Fatima
+Components
+New Rules: Fate Token
+Fatima 2 Hero Sheets
+Spectral Shot FATIMA  Survival
+Unpredictable 
+Attack
+ Survival
+Do Ut Des
+ Education
+Second Chance
+ Education
+Field Medicine
+ Search
+Lightning
+5
+3
+Spartan Kick
+ Survival
+Rain of Arrows
+ Survival
+Swift Refl exes
+ Education
+Take Aim
+Rush Shot
+ Search
+Climb
+ Search
+ Education 2  Education
+0 1 2 3 4 5 6
+FATIMA
+
+Spartan Kick
+ Survival
+Rain of Arrows
+ Survival
+Swift Refl exes
+ Education
+Take Aim
+Rush Shot
+ Search
+Climb
+ Search
+5
+3
+2
+2
+5
+
+
+Requirements:
+BARD
+3 Vagabond 
+Skills
+-
+Ancestral 
+Strings
+Requirements:
+SCOUT
+3 Vagabond 
+Skills
+-
+Long Bow
+2 Skill Sheets
+ Spectral Shot 2
+Survival.
++1(Upgrade): this Attack gains Sniper.
+ Unpredictable Attack 1
+Survival.
+Passive. Each time another Hero obtains a  
+with a Die of Fate in ict 1 Unblockable  to 
+an Enemy within 4 of you.
+ Do Ut Des 1
+Education.
+Passive. Every time you perform a Defense 
+Test against a Attack, if you obtain at least 
+a , perform an Attack against an adjacent 
+Enemy using only your  value.
+Second Chance 1
+Requirement: Take Aim
+Education.
+Passive. Each time another Hero obtains a 
+With a Die of Fate, you and that Hero gain a 
+Lucky Token.
+Field Medicine 2
+ Search.
+2: perform a  Test; for each 2 obtained 
+you may discard 1 or a Negative Status 
+Token.
+ Lightning 3
+Reaction 2: when an Enemy becomes 
+adjacent to you; gain 1 Dash,  is movement 
+does not cause Reaction Attacks.
+Long Bow
+ Mors Tua Vita Mea 
+Passive.  +1: Each time any Hero obtains 1.
+3 - +1(Upgrade): perform this Attack with 
+your Weapon, adding 3 Dice of Fate. For each 
+you obtain 2.
+FATIMA Spectral Shot 2
+Survival.
++1(Upgrade): this Attack gains Sniper.
+ Unpredictable Attack 1
+Survival.
+Passive. Each time another Hero obtains a  
+with a Die of Fate in ict 1 Unblockable  to 
+an Enemy within 4 of you.
+ Do Ut Des 1
+Education.
+Second Chance 1
+Requirement: Take Aim
+Education.
+Passive. Each time another Hero obtains a 
+With a Die of Fate, you and that Hero gain a 
+Lucky Token.
+Field Medicine 2
+ Search.
+2: perform a  Test; for each 2 obtained 
+you may discard 1 or a Negative Status 
+Token.
+ Lightning 3
+when an Enemy becomes 
+adjacent to you; gain 1 Dash,  is movement 
+
+Passive. Every time you perform a Defense 
+Test against a Attack, if you obtain at least Lightning 3
+when an Enemy becomes 
+adjacent to you; gain 1 Dash,  is movement 
+does not cause Reaction Attacks. Spartan Kick 1
+Survival.
+1: choose an Enemy adjacent to you.  at 
+Enemy performs a Forced Movement in a 
+direction of your choice.
+ Rain of Arrows 2
+Survival.
++1(Upgrade): this Attack gains:
+ Burst Area, for each  obtained in ict 1
+to Enemies in the Area of E ect other than 
+the target (the target su ers  based on the 
+ obtained from the Attack Test).
+ Swi Re exes 2
+Education.
+Passive. Each time you assign a Fate Token to 
+another Hero, you gain a Shielded Token.
+Take Aim 3
+2: gain an Advantaged Token.
+3: gain an Advantaged Token, and place 
+another Advantaged Token on one of your 
+Weapons.
+Rush Shot 1
+ Search.
+Passive. Each of your Attacks gains:
+ Gain 1 Dash.
+ Climb 1
+ Search.
+1: gain Climb 1 until the end of your 
+Activation.
+ Arrow of Destiny 
+Passive.  +1: each time you in ict at least 1 to 
+an Enemy not adjacent to you, with a Attack.
+4 - +1(Upgrade): perform this Attack twice 
+on the same target, rolling the 3 Dice of Fate 
+instead of using the Characteristic indicated in 
+the Attack (ignore any bonuses to Characteristic 
+provided by the Attack).
+ Spartan Kick 1
+Survival.
+1: choose an Enemy adjacent to you.  at 
+Enemy performs a Forced Movement in a 
+direction of your choice.
+ Rain of Arrows 2
+Survival.
++1(Upgrade): this Attack gains:
+ Burst Area, for each  obtained in ict 1
+to Enemies in the Area of E ect other than 
+the target (the target su ers  based on the 
+ obtained from the Attack Test).
+ Swi Re exes 2
+Education.
+Passive. Each time you assign a Fate Token to 
+another Hero, you gain a Shielded Token.
+Take Aim 3
+2: gain an Advantaged Token.
+3: gain an Advantaged Token, and place 
+another Advantaged Token on one of your 
+Weapons.
+Rush Shot 1
+ Search.
+Passive. Each of your Attacks gains:
+ Gain 1 Dash.
+ Climb 1
+ Search.
+1: gain Climb 1 until the end of your 
+Activation.
+ Arrow of Destiny 
+Passive.  +1: each time you in ict at least 1 to 
+an Enemy not adjacent to you, with a Attack.
+4 - +1(Upgrade): perform this Attack twice 
+on the same target, rolling the 3 Dice of Fate 
+instead of using the Characteristic indicated in 
+the Attack (ignore any bonuses to Characteristic 
+provided by the Attack).
+FATIMA
+3 Starting Equipment 
+Cards
+Resistance 1.
+Leather Bodice Armor Oud
+Item
+At the beginning of the 
+Mission place three Fate Tokens on this card.
+1: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+A er a Hero discards a Fate 
+Token, place it on this card again.
+3 Starting Equipment 
+Oud
+Item
+At the beginning of the 
+Mission place three Fate Tokens on this card.
+: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+A er a Hero discards a Fate 
+Token, place it on this card 
+Short Bow
+
+Weapon
+ Lethal 
+If you target an Enemy within 
+1 of you, this A ack gains  Weak.
+3 1-6 +0     
+6 Advanced Equipment 
+Cards
+Camoufl age Robe Armor
+Resistance 1.
+Consider your 
+A er performing a Defense Test, 
+ lower by 1.
+you can . You have to keep the 
+new result.
+Camoufl age Robe Armor
+A er performing a Defense Test, 
+ lower by 1.
+. You have to keep the 
+If you move 2 or fewer Squares, 
+at the end of your Activation 
+you may place an Advantaged Token on a Weapon you have equipped.
+Columbus Spyglass Item
+6 Advanced Equipment 
+If you move 2 or fewer Squares, 
+at the end of your Activation Advantaged Token on a Weapon you have equipped.
+If you move 2 or fewer Squares, 
+Columbus Spyglass Item
+3 1-6 +1     
+ Lethal 
+ If you target an Enemy within 
+1 of you, this A ack gains  Weak.
+Long Bow
+
+Long Bow
+Weapon
+6 Destiny Cards
+3
+Since you began studying the 
+Bardic Art, you have noticed 
+that the strings of your Oud are 
+permeating with supernatural 
+power.
+Objective
+◆ If you have equipped at least 
+2 Bardic Spell Equipment 
+Cards in a Mission, during 
+the next Rest Phase read  S3-8.
+Since you began studying the 
+Bardic Art, you have noticed 
+that the strings of your Oud are 
+permeating with supernatural 
+power.
+Objective
+If you have equipped at least 
+2 Bardic Spell Equipment 
+Cards in a Mission, during 
+the next Rest Phase read 
+2
+ e vagabond life is hard, but 
+you were born for this!
+Objective
+◆ If you have learned at least 
+3 Skills from your Basic 
+Class, during a Rest Phase 
+read  S2-10.
+ e vagabond life is hard, but 
+you were born for this!
+Objective
+If you have learned at least 
+3 Skills from your Basic 
+Class, during a Rest Phase 
+ S2-10.
+1
+You are a foreigner in a foreign 
+land. Will you be able to  nd 
+your way?
+Objective
+◆ If you end a Mission with 
+1 or fewer Fate Tokens on 
+the Oud Equipment card,
+during the next Rest Phase 
+read  S1-9.
+1 Activation Token 3 Fate Tokens 3 Fate Dice
+At the beginning of a Mission, place 3 Fate Tokens on 
+Fatima's Oud Equipment Card. During her Activation she 
+may spend 1 to give another Hero within 4 one of the 
+ is Expansion adds four new Heroes to play any Nova 
+Aetas Renaissance Campaign.  ese Heroes can be 
+chosen at the beginning of a Campaign as indicated in 
+the Core Game Rulebook, bringing the selectable Heroes 
+to eight. Alternatively, you may use their Companion 
+version using the card provided in this Expansion (see 
+Fate Tokens on the Oud Card.
+Before performing any Test, a Hero may discard a Fate 
+Token they have to add a Fate Dice to the Test roll. A Fate 
+the Companion entry in the Core Game Rulebook).
+ e Plot paragraphs referenced by the Destiny Cards of 
+these Heroes are found among the paragraphs of the four 
+Encounter Missions (S1, S2, S3, S4).
+5
+Altair
+Components
+Fate Die
+Altair 2 Hero Sheets
+Rapid Attack
+ Brutality
+Sword of the Eagle
+Superior 
+Refl exes
+ Search
+Diversive 
+Maneuvers
+ Search
+Rush
+ Stealth
+Rush Murder
+ Stealth
+5
+3
+Assassin's Strike ALTAIR
+Sudden Strike
+Evasion
+ Brutality
+Eye of the 
+Eagle
+Leap of Faith
+ Stealth
+Silent 
+Movement
+ Stealth
+ Search 3  Brutality
+0 1 2 3 4 5 6
+ALTAIR
+
+Assassin's Strike
+Sudden Strike
+ Brutality
+Evasion
+ Brutality
+Eye of the 
+Eagle
+ Intimidate
+Leap of Faith
+ Stealth
+Silent 
+Movement
+ Stealth
+5
+3
+3
+1
+5
+
+
+Requirements:
+MENTOR
+3 Assassin 
+Skills
+-
+Symbol of the 
+Creed
+Requirements:
+MASTER
+3 Assassin 
+Skills
+-
+Sword of the Creed
+2 Skill Sheets
+ Rapid Attack 2
+Requirement: Sudden Strike
+ Brutality.
+Reaction 2: When you become the target of a
+ Attack of an Enemy adjacent to you, before 
+you su er the Attack, you may perform an 
+Attack targeting that Enemy.
+ Sword of the Eagle 3
++2(Upgrade): you must choose an Enemy 
+adjacent to you as the target of this Attack; 
+roll 1 additional  for each Enemy adjacent 
+to you.
+ Superior Re exes 2
+ Search.
+Passive. When you perform a Defense Test 
+and obtain , you may discard any 
+Reaction Token in your possession.
+Diversive Maneuvers 1
+ Search.
+Reaction 2: gain 1 Shielded Token.
+Rush 2
+ Stealth.
+1: perform a  Test; gain 1 Dash for each 
+ obtained. You may use this Skill maximum 
+once per Activation.
+ Rush Murder 1
+ Stealth.
+Passive. During your Activation, if you 
+perform an Attack a er moving at least 2 
+Squares, roll 1 additional  for that Attack.
+ All is Fair 
+Passive.  +1: each time you use the Hidden 
+Blade.
+3 - 5: you may move up to 5 Squares without 
+causing Reaction Attacks. Perform an Attack 
+against each Enemy you become adjacent to 
+during this movement.
+Sword of the Creed
+ALTAIR Rapid Attack 2
+Requirement: Sudden Strike
+ Brutality.
+Reaction 2: When you become the target of a
+ Attack of an Enemy adjacent to you, before 
+you su er the Attack, you may perform an 
+Attack targeting that Enemy.
+ Sword of the Eagle 3
++2(Upgrade): you must choose an Enemy 
+adjacent to you as the target of this Attack; 
+roll 1 additional  for each Enemy adjacent 
+Diversive Maneuvers 1
+ Search.
+Reaction 2: gain 1 Shielded Token.
+Rush 2
+ Stealth.
+1: perform a  Test; gain 1 Dash for each 
+ obtained. You may use this Skill maximum 
+once per Activation.
+ Rush Murder 1
+ Stealth.
+During your Activation, if you 
+perform an Attack a er moving at least 2 
+ for that Attack.
+ for each Enemy adjacent 
+to you.
+ 
+Passive. During your Activation, if you 
+perform an Attack a er moving at least 2 
+ for that Attack.
+ Assassin's Strike 3
+2: during this Activation, the Hidden Blade 
+in icts 1 additional Unblockable .
+Sudden Strike 2
+ Brutality.
++1(Upgrade): this Attack gains: 
+ Gain 1 Dash.  is movement does not 
+cause Reaction Attacks.
+ Evasion 1
+ Brutality.
+Passive. A er peforming a Defense Test, you 
+may . You must keep the new result.
+Eye of the Eagle 1
+ Intimidate.
+Passive. Gain all the Keywords.
+Leap of Faith 2
+ Stealth.
+Jump 2 and Climb 2.
+You may drop down from any Height Level 
+without su ering any .
+ Silent Movement 1
+ Stealth.
+Passive.  e  value of Enemies is considered 
+lower by 2 against you.
+ Requiescat In Pace 
+Passive. +1: each time you use the Hidden 
+Blade.
+3: your next Attack gains +2 and the cost of 
+ becomes 0.
+ Assassin's Strike 3
+2: during this Activation, the Hidden Blade 
+in icts 1 additional Unblockable .
+Sudden Strike 2
+ Brutality.
++1(Upgrade): this Attack gains: 
+ Gain 1 Dash.  is movement does not 
+cause Reaction Attacks.
+ Evasion 1
+ Brutality.
+Passive. A er peforming a Defense Test, you 
+may . You must keep the new result.
+Eye of the Eagle 1
+ Intimidate.
+Passive. Gain all the Keywords.
+Leap of Faith 2
+ Stealth.
+Jump 2 and Climb 2.
+You may drop down from any Height Level 
+without su ering any .
+ Silent Movement 1
+ Stealth.
+Passive.  e  value of Enemies is considered 
+lower by 2 against you.
+ Requiescat In Pace 
+Passive. +1: each time you use the Hidden 
+Blade.
+3: your next Attack gains +2 and the cost of 
+ becomes 0.
+ALTAIR
+3 Starting Equipment 
+Cards
+Robe of the Creed Armor
+1: Reduce your  by 
+1. You can use this e ect 
+maximum once per Activation. 
+Robe of the Creed Armor
+ by 1. You can use this e ect 
+maximum once per 
+Hidden Blade Item
+Once per Activation, in ict 1 
+Unblockable  to an adjacent Enemy spending  based on the Rank of the target Enemy:
+: 1
+: 2
+ or no Rank: 3
+3 Starting Equipment 
+Hidden Blade Item
+Once per Activation, in ict 1 to an adjacent 
+ based on the Rank of the target Enemy:
+or no Rank: 3
+Sword
+
+Weapon
+ Ta le
+3 1 +0     
+6 Advanced Equipment 
+Cards
+At the beginning of your 
+Activation, if there are no 
+Lu y Tokens on this card, 
+place one on it.
+Symbol of the Creed Artifact
+At the beginning of your 
+Activation, if there are no 
+ Tokens on this card, 
+Symbol of the Creed Artifact
+Pierce, Reload 2  Bleed
+Phantom Blade
+3  1-5 +0
+   
+Weapon
+6 Advanced Equipment 
+Pierce, Reload 2 Bleed
+Phantom Blade
++0
+ 
+Weapon Piece of Eden
+
+Artifact
+5: Activates another 
+Hero under your control. 
+ e Activation Token of 
+the Hero activated in this 
+way does not advance on 
+the Horologium.
+6 Destiny Cards
+3
+ e eagle  ies away. You 
+approach the spot where it 
+was resting. Hidden among the 
+rocks you  nd a sword with the 
+emblem of the Assassins inlaid 
+in the hilt, the elected weapon 
+of the Masters of the Order.
+Objective
+◆ If you have defeated at least 
+4 Enemies by the end of a 
+Mission, during the next 
+Rest Phase read  S1-11.
+ e eagle  ies away. You 
+approach the spot where it 
+was resting. Hidden among the 
+rocks you  nd a sword with the 
+emblem of the Assassins inlaid 
+in the hilt, the elected weapon 
+of the Masters of the Order.
+Objective
+If you have defeated at least 
+4 Enemies by the end of a 
+Mission, during the next 
+Rest Phase read 
+2
+You are waiting for a sign to 
+show you the way home. In 
+the meantime, you put your 
+incredible skills at the service of 
+your companions.
+Objective
+◆ If you have learned at least 
+3 Skills from your Base 
+Class, during a Rest Phase 
+read  S2-8.
+You are waiting for a sign to 
+show you the way home. In 
+the meantime, you put your 
+incredible skills at the service of 
+your companions.
+If you have learned at least 
+3 Skills from your Base 
+Class, during a Rest Phase 
+ S2-8.
+You have to make your way in 
+a time and place that are not 
+your own.
+Objective
+◆ If you have defeated at least 
+2 Enemies by the end of a 
+Mission, during the next 
+Rest Phase read  S1-7.
+1
+1 Activation Token
+ is unique die has sides with better results than a regular 
+Nova Aetas die, but it should be treated exactly the same 
+as all other dice when applying the results, except for the 
+side showing the icon.  is icon does not provide any 
+result to the Test of the Hero who used the Fate Dice (it is 
+Oud
+Item
+At the beginning of the 
+Mission place three Fate Tokens on this card.
+1: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+A er a Hero discards a Fate 
+Token, place it on this card again.
+
+At the beginning of the 
+Mission place three 
+Tokens on this card.
+: Assigns a Fate Token to another Hero on the Ba le eld 
+At the beginning of the 
+Mission place three 
+Tokens on this card.
+who has none.
+A er a Hero discards a Fate 
+Token, place it on this card again.
+: Assigns a Fate Token to another Hero on the Ba le eld 
+At the beginning of the Fate Mission place three 
+Tokens on this card.
+: Assigns a Fate Token to 
+Mission place three Fate Tokens on this card.
+: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+Tokens on this card.
+At the beginning of the 
+Mission place three 
+Tokens on this card.
+Token, place it on this card again.
+Tokens on this card.
+Mission place three Fate
+A er a Hero discards a Fate 
+Token, place it on this card again.
+: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+A er a Hero discards a Fate 
+Token, place it on this card again.
+: Assigns a Fate Token to another Hero on the Ba le eld who has none.
+Tokens on this card.
+At the beginning of the 
+Mission place three Fate Tokens on this card.
+another Hero on the Ba le eld 
+considered to have failed to meet the Success  reshold of 
+the Test), but it could trigger some e ects of Fatima's Skills.
+Token discarded in this way must be placed back on the 
+Oud Card.
+If there are no Fate Tokens on the Oud Card, the Action 
+described on it cannot be used until at least one Fate Token 
+is discarded and placed on the card.
+A Hero may have only one Fate Token at a time.
+6
+Gregorio
+Components
+Gregorio 2 Hero Sheets
+GREGORIO Pestilential 
+Strike
+ Diplomacy
+Explosive 
+Materials
+ Diplomacy
+Fear
+ Education
+Skin to Stone
+Coup de Grace
+ Medicine
+Step of Pain
+ Medicine
+5
+2
+Mow
+ Diplomacy
+Offensive 
+Bastion
+ Education
+Studying the 
+Stars
+ Education
+Watch for the Stars
+ Medicine
+Alchemy
+ Medicine
+Jinx Step
+ Education 3  Education
+0 1 2 3 4 5 6
+GREGORIO
+
+Mow
+ Diplomacy
+Offensive 
+Bastion
+ Education
+Studying the 
+Stars
+ Education
+Watch for the 
+Stars
+ Medicine
+Alchemy
+ Medicine
+Jinx Step
+5
+2
+3
+2
+5
+
+
+Requirements:
+CHYRURGEON
+3 Alchemist Skills
+-
+Doctor's 
+Clothes
+Requirements:
+SCOURGE
+3 Alchemist 
+Skills
+-
+Lymphatic 
+Mask
+2 Skill Sheets
+ Pestilential Strike 2
+Requirement: Mow
+Diplomacy.
++1 (Upgrade): roll 1 additional  for this 
+Attack.  is Attack gains:
+ Distract.
+ Explosive Materials 1
+Diplomacy.
+Passive.  e Firecracker E ect of the 
+Alchemical Exchange card gains:  Burn.
+ Fear 1
+Education.
+1: choose an Enemy within 3 of you; that 
+Enemy gains a Distracted Token. If they already 
+have a Distracted Token they must perform 3 
+Dashes to get as far away from you as possible.
+Skin to Stone 3
+1: gain a Lucky Token.
+2: gain a Lucky Token and an Advantaged
+Token.
+Coup de Grace 1
+Requirement: Jinx Step
+Medicine.
+Reaction 2: when an Enemy within 2 of 
+you su ers at least 1, you may perform an 
+Attack against them without spending .
+ Step of Pain 2
+Medicine.
+Passive. When a Hero su ers at least 1, 
+gain 1 Dash; you can use this movement 
+exclusively to get closer to that Hero.
+Lymphatic Mask
+ Rubedo 
+Passive.  +1: each time you use the Alchemical 
+Exchange.
+3 - 2: Each Hero in the Battle eld discards all 
+their Negative Status Tokens. You may assign the 
+Negative Status Tokens thus discarded by dividing 
+them among the Enemies on the Battle eld.
+GREGORIO Pestilential Strike 2
+Requirement: Mow
+Diplomacy.
++1 (Upgrade): roll 1 additional  for this 
+Attack.  is Attack gains:
+ Distract.
+ Explosive Materials 1
+Diplomacy.
+Passive.  e Firecracker E ect of the 
+Alchemical Exchange card gains:  Burn.
+Skin to Stone 3
+1: gain a Lucky Token.
+2: gain a Lucky Token and an Advantaged
+Token.
+Coup de Grace 1
+Requirement: Jinx Step
+Medicine.
+Reaction 2: when an Enemy within 2 of 
+you su ers at least 1, you may perform an 
+Attack against them without spending .
+ Step of Pain 2
+When a Hero su ers at least 1, 
+gain 1 Dash; you can use this movement 
+exclusively to get closer to that Hero.
+ Fear 1
+Education.
+ Step of Pain 2
+Medicine.
+When a Hero su ers at least 1
+gain 1 Dash; you can use this movement 
+exclusively to get closer to that Hero. Mow 1
+Diplomacy.
++1(Upgrade): roll 1 additional  for this 
+Attack.
+ O ensive Bastion 2
+Education.
++1(Upgrade): if this Attack in icts at least 
+1 , gain a Shielded Token.
+ Studying the Stars 2
+Education.
+Passive. When you perform a Defense Test 
+against a Attack, based on the symbols 
+obtained, you gain the Tokens indicated:
+: Cursed
+: Astro
+: Lucky
+Watch for the Stars 1
+Medicine.
+1: perform a  Test. For each  obtained 
+a Hero (you included) within 3 of you gains 
+an Astro Token. You can discard a Reagent 
+Card from the Loot to roll 2 additional .
+Alchemy 1
+Medicine.
+2: choose a Hero (you included) within 
+1. Perform a  Test; for each  that Hero 
+discards 1. You may discard 1 Astro Token 
+to roll 1 additional .
+ Jinx Step 3
+Passive. When an Enemy within 3 of you 
+su ers at least 1, gain 1 Dash. You can use 
+this movement exclusively to approach that 
+Enemy.
+ Nigredo 
+Passive.  +1: each time you use the Alchemical 
+Exchange.
+6 - 2: up to 3 Enemies within 4 of you gain 
+a Poisoned Token.
+ Mow 1
+Diplomacy.
++1(Upgrade): roll 1 additional  for this 
+Attack.
+ O ensive Bastion 2
+Education.
++1(Upgrade): if this Attack in icts at least 
+1 , gain a Shielded Token.
+ Studying the Stars 2
+Education.
+Passive. When you perform a Defense Test 
+against a Attack, based on the symbols 
+obtained, you gain the Tokens indicated:
+: Cursed
+: Astro
+: Lucky
+Watch for the Stars 1
+Medicine.
+1: perform a  Test. For each  obtained 
+a Hero (you included) within 3 of you gains 
+an Astro Token. You can discard a Reagent 
+Card from the Loot to roll 2 additional .
+Alchemy 1
+Medicine.
+2: choose a Hero (you included) within 
+1. Perform a  Test; for each  that Hero 
+discards 1. You may discard 1 Astro Token 
+to roll 1 additional .
+ Jinx Step 3
+Passive. When an Enemy within 3 of you 
+su ers at least 1, gain 1 Dash. You can use 
+this movement exclusively to approach that 
+Enemy.
+ Nigredo 
+Passive.  +1: each time you use the Alchemical 
+Exchange.
+6 - 2: up to 3 Enemies within 4 of you gain 
+a Poisoned Token.
+GREGORIO
+3 Starting Equipment 
+Cards
+You may use the E ects of the 
+Alchemical Exchange card.
+Discard the Loot Reagent cards 
+indicated by the E ect you 
+want to use. Cards discarded in 
+this way must be shu ed back 
+into their respective decks.
+You may use the E ects of the 
+Alchemical Exchange card.
+Alchemical Tools Item
+Alchemical Exchange card.
+Discard the Loot Reagent cards 
+indicated by the E ect you 
+want to use. Cards discarded in 
+this way must be shu ed back 
+into their respective decks.
+You may use the E ects of the 
+Alchemical Exchange card.
+Alchemical Tools Item
+When an Enemy within 2 of you is defeated, add a Reagent 
+card of your choice to the Loot without revealing it.
+Alchemical Censer Item
+3 Starting Equipment 
+When an Enemy within  you is defeated, add a Reagent 
+card of your choice to the Loot without revealing it.
+Alchemical Censer Item Scythe
+
+Scythe
+Weapon
+3 1-2 +0     
+6 Advanced Equipment 
+Cards
+2: Discard a Status Token from one of your Equipment cards.
+Doctor's Mask Armor
+ Discard a Status Token from one of your Equipment 
+Doctor's Mask Armor
+Experimental Serum Item
+Once per Mission, a er you 
+are KO'd, you immediately discard 1.
+6 Advanced Equipment 
+Experimental Serum Item
+Once per Mission, a er you 
+are KO'd, you immediately .
+Doctor's Clothes
+
+Doctor's Clothes Armor
+Resistance 1.
+Up to 3 times, when you gain a 
+Status Token, you may place it on this card.
+ e E ects of the Status Tokens on this card do not apply 
+and they cannot be removed normally.
+6 Destiny Cards
+1 Alchemical 
+Exchange Card
+3
+You have realized that the 
+"good" side of alchemy is the 
+one you want to follow, and you 
+have become a Chyrurgeon. 
+What new medical secrets 
+will you discover through your 
+skills?
+Objective
+◆ If you used Soothing Cloud 
+4 times by the end of a 
+Mission, during the next 
+Rest Phase read S3-7.
+You have realized that the 
+"good" side of alchemy is the 
+one you want to follow, and you 
+have become a Chyrurgeon. 
+What new medical secrets 
+will you discover through your 
+skills?
+Objective
+If you used Soothing Cloud 
+4 times by the end of a 
+Mission, during the next 
+Rest Phase read 
+2
+Battles are forging your 
+determination and honing 
+your skills! 
+Objective
+◆ If you have learned at least 3 
+Skills from your Basic Class,
+during the next Rest Phase 
+read S2-9.
+Soothing Cloud Discard a  and a  from the 
+Loot to use this e ect.
+1: choose a Hero within 3 (you included). Roll 2. For 
+each  the target discards 1.
+Vapors of Vigor Potion 
+1:once per Activation, 
+discard a  and a  from the Loot, then draw 3 Reagent 
+cards of your choice and add 
+them to the Loot without revealing them.
+Alchemical Exchange
+Battles are forging your 
+determination and honing 
+your skills! 
+If you have learned at least 3 
+Skills from your Basic Class,
+during the next Rest Phase S2-9.
+1
+A er years of studying the 
+science called alchemy, you 
+decide to get out of your 
+laboratory and put what you 
+have learned into practice.
+Objective
+◆ If you use two di erent 
+Alchemy Bag E ects by the 
+end of a Mission, during 
+the next Rest Phase read 
+ S1-8.
+1 Activation Token
+New Rule: Alchemical Exchange
+If during a Mission Gregorio has the Alchemical Tools 
+Equipment Card equipped, he may use the e ects described 
+on the Alchemical Exchange Card.
+To be used, each of these e ects needs, in addition to an 
+expense of , a certain number of Reagent Cards of a given 
+type to be discarded from the loot of the current Mission: 
+Elementum , Alchemia  or Pecunia .
+It is only possible to discard Reagent cards that form the 
+Loot, not the Reagents marked in the Campaign Sheet 
+Treasury.
+Please keep in mind that Loot cards should never be 
+revealed during a Mission, so when selecting cards to 
+activate an e ect of the Alchemical Exchange, rely only on 
+the symbol on the back of the Reagent Cards (  ).
+Reagent Cards used for an Alchemical 
+Exchange e ect must be shu ed 
+back into their respective decks 
+a er applying the e ect they 
+were used for.
+7
+New Rule: Geode Tokens
+ e Advanced Class of the Geomancer uses these Tokens. 
+At the beginning of a Mission where Agorix has the 
+Geomantic Die equipped, a er the Heroes' Models are 
+placed on the Battle eld, the controlling player places each 
+of these Tokens in a Square within 3 of the Square where 
+Agorix's Model is.
+A Geode does not occupy the Square it is in, but each 
+Square can contain up to one Geode Token.
+When Agorix uses a Spell, he may choose his location or 
+alternatively he may choose the location of a Geode Token 
+as the starting point for the e ect of the Spell as if his Model 
+Agorix
+Components
+Agorix 2 Hero Sheets
+Eracleto
+Peck AGORIX  Survival
+Nosedive
+ Survival
+Ancient 
+Strength
+ Mysticism
+Vigor
+ Education
+Bond with 
+Nature
+Animal Step
+ Mysticism
+5
+1
+Mighty Strike
+ Survival
+Aid
+ Survival
+Petrifi ed
+ Education
+Stardust
+ Mysticism
+Life Owl
+Step of Gaea
+ Mysticism
+ Mysticism 3  Education
+0 1 2 3 4 5 6
+AGORIX
+
+Mighty Strike
+ Survival
+Aid
+ Survival
+Petrifi ed
+ Education
+Stardust
+ Mysticism
+Life Owl
+Step of Gaea
+ Mysticism
+5
+1
+3
+3
+5
+
+
+Requirements:
+ANIMIST
+3 Druid Skills
+-
+Mask of Souls
+Requirements:
+GEOMANCER
+3 Druid Skills
+-
+Geomantic 
+Dice
+2 Skill Sheets
+Animism
+You can equip Spells from the School of 
+Animism.
+ Peck 2
+Requirement: Mighty Strike
+ Survival.
+Feral, +2(Upgrade): for each  you may 
+ that has not produced a ; You must keep 
+the new result.  is Attack gains:  Bleed.
+ Nosedive 2
+ Survival.
+ Stun.
+5  1 +2
+   
+You can use this Attack only if Eracleto is 
+within 4 of you. Place your Model adjacent 
+to an Enemy in the same square as Eracleto, 
+then perform this Attack against that Enemy. 
+Gain a Stunned Token.
+ Ancient Strength 1
+Mysticism.
+Feral, Passive. Each of your Spells gains: 
+ Place a Lucky Token on one of your Spells.
+ Vigor 1
+Requirement: Petri ed
+ Education.
+Feral, Reaction 2: when you perform a 
+Defense Test against a Attack, you can re￾roll up to 2 that have not produced a ; 
+you must keep the new result. 
+ Bond with Nature 3
+Feral, 1: discard a Negative Status Token in 
+your possession.
+ Animal Step 1
+ Mysticism.
+Feral, Passive.  e  rst Movement Action 
+of your Activation costs 1 less (up to a 
+minimum of 1).
+ Owlbear 
+Passive.  +1: each time you in ict at least 1. 0: remove Eracleto from the Battle eld. 
+You become an Owlbear. As long as you are an 
+Owlbear, you consider your  and  values increased by 1, you can only use Equipment 
+E ects and Skills with the Feral trait, and your
+Attacks gain  Stun. 
+At the end of your Activation you have to choose 
+whether to spend 2 otherwise, you cease to be 
+an Owlbear. When you cease to be an Owlbear, 
+place the Model of Eracleto in your Square.
+Mask of Souls
+AGORIX Animism
+You can equip Spells from the School of 
+Animism.
+ Peck 2
+Requirement: Mighty Strike
+ Survival.
+Feral, +2(Upgrade): for each  you may 
+ that has not produced a ; You must keep 
+the new result.  is Attack gains:  Bleed.
+ Ancient Strength 1
+Mysticism.
+Feral, Passive. Each of your Spells gains: 
+ Place a Lucky Token on one of your Spells.
+ Vigor 1
+Requirement: Petri ed
+ Education.
+Feral, Reaction 2: when you perform a 
+Defense Test against a Attack, you can re￾roll up to 2 that have not produced a ; 
+you must keep the new result. 
+ Bond with Nature 3
+discard a Negative Status Token in 
+ Animal Step 1
+  e  rst Movement Action 
+ less (up to a 
++1 / +1 Nosedive 2
+ Survival.
+you must keep the new result. 
+ Bond with Nature 3
+discard a Negative Status Token in 
+ Animal Step 1
+  e  rst Movement Action 
+of your Activation costs 1 less (up to a 
++1 / +1
+Transmutation 
+You can equip Spells from the school of 
+Transmutation.
+ Mighty Strike 2
+Survival.
+Feral. +1(Upgrade): for each  you may 
+ that has not produced a ; you must keep 
+the new result.
+ Aid 2
+Survival.
++1(Upgrade): If Eracleto is in the same 
+Square as you, roll 1 additional . 
+ Petri ed 1
+Education, Feral.
+Reaction 2: when you face a Defense Test 
+against a Attack roll 1 additional  .
+Stardust 1
+Mysticism.
+Passive. Each of your Spells gains 
+ Eracleto gains 2 Dashes.
+Life Owl 3
+2: perform a  Test. Choose a KO Hero 
+adjacent to Eracleto.  at Hero discards 1
+for each  obtained.
+ Step of Gaea 1
+Mysticism.
+2 : if Eracleto is in an Available Square 
+within 4 of you and on the same Height 
+Level as you, swap the position of its Model 
+with that of your Model.
+ Wind Force 
+Passive.  +1: each time Eracleto moves at least 
+one Square.
+3: each Hero not KO gains 2 Dashes; this 
+movement does not cause Reaction Attacks.
+Transmutation AGORIX You can equip Spells from the school of 
+Transmutation.
+ Mighty Strike 2
+Survival.
+Feral. +1(Upgrade): for each  you may 
+ that has not produced a ; you must keep 
+the new result.
+ Aid 2
+Survival.
++1(Upgrade): If Eracleto is in the same 
+Square as you, roll 1 additional . 
+ Petri ed 1
+Education, Feral.
+Reaction 2: when you face a Defense Test 
+against a Attack roll 1 additional  .
+Stardust 1
+Mysticism.
+Passive. Each of your Spells gains 
+ Eracleto gains 2 Dashes.
+Life Owl 3
+2: perform a  Test. Choose a KO Hero 
+adjacent to Eracleto.  at Hero discards 1
+for each  obtained.
+ Step of Gaea 1
+Mysticism.
+2 : if Eracleto is in an Available Square 
+within 4 of you and on the same Height 
+Level as you, swap the position of its Model 
+with that of your Model.
+ Wind Force 
+Passive.  +1: each time Eracleto moves at least 
+one Square.
+3: each Hero not KO gains 2 Dashes; this 
+movement does not cause Reaction Attacks.
+3 Starting Equipment 
+Cards
+Eracleto
+An Enemy in the same Square 
+as Eracleto is considered to have 
+the Distracted
+1
+ Negative Status.
+: Move Eracleto a maximum of 3 Squares.
+Familiar
+Eracleto
+An Enemy in the same Square 
+as Eracleto is considered to have Negative Status.
+: Move Eracleto a maximum of 
+Familiar
+3  1 +0
+   
+  gain an Advantaged Token.
+Staff of the Wilderness Weapon
+3 Starting Equipment 
++0
+ 
+Advantaged
+Staff of the Wilderness Weapon
+
+Magic Trick
+Blizzard 
+ 1.  e target performs a Forced Movement of 2 
+Squares to move away 
+from your Model.
+2 1-6 +0 2      
+Magic Trick
+    
+6 Advanced Equipment 
+Cards
+At the beginning of the Mission 
+Feral
+place the Soul Token on this card. At the beginning of each 
+of your Activations you may 
+turn over the Soul Token:
+At the beginning of the Mission 
+Mask of Souls Artifact
+-1 +1
+At the beginning of the Mission Token on this card. At the beginning of each 
+of your Activations you may Token:
+Mask of Souls Artifact
++1
+Resistance 1, Feral
+When you perform a 
+ A ack, if you obtain 
+at least 1 discard 1
+from this card.
+Bark Skin Armor
+6 Advanced Equipment 
+Resistance 1, 
+When you perform a 
+ A ack, if you obtain discard 1
+from this card.
+Resistance 1, Feral
+When you perform a 
+Bark Skin Armor Moon Globe
+
+Artifact
+Feral
+ A acks with Target 
+ gain:
+ Lethal .
+6 Destiny Cards
+3
+ e most primal part of your 
+soul has pushed you toward 
+the path of the Animist. You 
+will have to prove to the animal 
+spirits that you are worthy.
+Objective
+◆ If at the end of a Mission you 
+are not KO and your  is 
+the highest or lowest of the 
+non-KO Heroes, during the 
+next Rest Phase read 
+S3-9.
+ e most primal part of your 
+soul has pushed you toward 
+the path of the Animist. You 
+will have to prove to the animal 
+spirits that you are worthy.
+Objective
+If at the end of a Mission you 
+are not KO and your 
+the highest or lowest of the 
+non-KO Heroes, during the 
+next Rest Phase read 
+2
+Your power grows with each 
+ ght. You know that soon 
+you will have to decide how 
+to continue your training, but 
+that does not scare you.
+Objective
+◆ If you have learned at least 
+3 Skills from your Basic 
+Class, during a Rest Phase read  S2-11.
+Your power grows with each 
+ ght. You know that soon 
+you will have to decide how 
+to continue your training, but 
+that does not scare you.
+If you have learned at least 
+3 Skills from your Basic 
+during a Rest Phase 
+ S2-11.
+You have reached the  nal 
+stage of your Druidic training. 
+Now you must prove that you 
+have learned what you have 
+been taught.
+Objective
+◆ If you have successfully cast 3 
+Spells by the end of a Mission,
+during the next Rest Phase 
+read  S1-10.
+1
+1 Activation 
+Token
+3 Geode Tokens 1 Soul Token
+were in the selected Geode Token's Square to establish Line 
+of Sight.
+Some E ects allow Agorix to remove and replace a 
+Geode Token. When a Geode Token is removed from the 
+Battle eld, place it next to Agorix's Hero Sheet.
+In Agorix's End of Activation Phase, the controlling player 
+must place all Geode Tokens on the Battle eld so that each 
+of them is in a Square within 3 of the Square occupied 
+by Agorix.
+8
+Eracleto
+One of the Starting Equipment cards of Agorix is the 
+Eracleto Familiar Card.
+Agorix may spend 1 to move the Model of Eracleto up 
+to 3 Squares.
+Agorix must always equip Eracleto's Card and cannot equip 
+other Familiar cards.
+For the complete rules on Familiars refer to the Familiars 
+paragraph in this rulebook.
+ ese cards represent the Companion version of the four 
+new Heroes, in addition to Sacripante.
+ e latter exists only in a Companion version.
+ ese new Companions are used as described in the 
+Rulebook, and can be hired when selecting Companions 
+for a Mission.
+Eracleto
+An Enemy in the same Square 
+as Eracleto is considered to have 
+the Distracted Negative Status.
+1: Move Eracleto a maximum of 3 Squares.
+Familiar
+Companions
+Sacripante
+1 Sacripante 
+Activation
+Token
+5 Companion Cards
+8
+ ese cards represent the Companion version of the four 
+ e latter exists only in a Companion version.
+ ese new Companions are used as described in the 
+Rulebook, and can be hired when selecting Companions 
+1 Sacripante 
+Activation
+Token
+Companion
+ Gregorio 
+ 
++
++
+4: choose a  or  Rank Enemy adjacent to you. If by su ering 2 that Enemy would be defeated, in ict 2 Unblockable  to that Enemy.
+ Ta le
+Hidden Blade - Weapon
+Robe of the Creed - Armor
+Sword - Weapon
+ Stealth - Intimidate - Brutality
+Silent Movement 
+Passive. Do not cause Reaction Attacks.
+Assassin's Strike
++2(Upgrade): if the target of this Attack does 
+not have , this Attack gains:  For Each 
+obtained, in ict 1.
+Leap of Faith
+Passive. Gain Jump 2 and Climb 1. Once per Activation, if you go down or up at least one 
+Height Level you gain an Advantaged Token.
+3 2
+ALTAIR
+2
+3  1 +0
+   
+1: reduce your  by 1. You can use this e ect a maximum of once per Activation.
+5 5
+9
+Each of these 4 sets adds 3 New Formulae Equipment Cards 
+to those in the core game.
+You can add these 9 Formulae Equipment cards among those available to be cra ed.
+New Equipment
+Equipment Sets
+9 Formulae Equipment Cards
+Bardic Spell
+Toss a Coin
+
+ In ict 1 to the target Enemy and add a Reagent 
+card from those shown on 
+that Enemy's card to the Loot.
+2 1-5 +0 2      
+
+Bardic Spell
+Toss a Coin
+ In ict 1 to the target Enemy and add a Reagent 
+card from those shown on 
+that Enemy's card to the Loot.
+2  1-5
+   
+Bardic Spell
+O Sole Mio
+
+ Place a Fate Token on this card. 
+You may discard this Token 
+before performing a Defense Test to use 3 Dice of Fate instead of your  value.
+2 0 +0 3      
+Bardic Spell
+
+2 
+O Sole Mio
+Bardic Spell
+  
+O Sole Mio
+Place a Fate Token on this card. 
+You may discard this Token 
+before performing a Defense Test to use 3 Dice of Fate instead of your  value.
+
+Place a Fate Token on this 
+0 +0   
+Ancestral Song Bardic Spell
+
+  e target Hero gains a Lu y Token.  e target Hero can choose to increase or 
+decrease their  by 1. 
+2 0 +0 3       2 1-5 +0 2       2 1-5 +0 2      
+
+Ancestral Song Bardic Spell
+
+ e target Hero gains a 
+ Token.  e target Hero can choose to increase or 
+decrease their  by 1. 
+0 3 1-5 +0   32
+
+Transmutation
+Lightning
+
+ Cross Area, in ict 3 to the target. All other Models in the 
+Area of E ect gain a Stunned 
+Token. 
+4 2-5 +0 2      
+Transmutation
+Lightning
+ Cross Area, in ict 3 target. All other Models in the 
+Area of E ect gain a Token. 
+4  2-5
+   
+Transmutation
+Lightning
+Transmutation
+Vines
+
+ Cross Area, all Enemies in the Area of E ect gain a Hindered
+Token. 
+3 2-5 +0 2      
+ Transmutation
+Cross Area, all Enemies in the Area of E ect gain a Hindered
+Token. 
+2-5 +0    
+Transmutation
+Serpent Bite
+
+Feral
+  e target gains a Poisoned 
+Token.
+3 1 +0 2      
+ Transmutation
+Serpent Bite
+Feral
+ e target gains a Poisoned 
+Token.
+1 +0    
+Geomancy
+Laetitia
+
+ Choose a Geode, all Heroes 
+adjacent to it or in the same 
+Square as it gain a Lu y Token and can discard a Negative Status Token. Remove the chosen Geode.
+2 - +0 2 -     
+
+Geomancy
+Laetitia
+Choose a Geode, all Heroes 
+adjacent to it or in the same 
+Square as it gain a Lu y and can discard a Negative Status Token. Remove the chosen Geode.
+- -
+ 
+Geomancy
+Burning Soul Animism
+
+Feral
+ In ict 1 to all Enemies adjacent to you. All Models 
+adjacent to you must perform a Dash.
+2 - +0 2      
+Burning Soul Animism
+Feral
+ In ict 1 to all Enemies adjacent to you. All Models 
+adjacent to you must perform a Dash.
+- +0    
+Animism
+
+Feral Resistance
+2 1-5 +0 2      
+
+Animism
+   
+Feral
+  e target gains a Blinded 
+Token.
+3 Sacred Set Equipment 
+Cards
+3 Arcane Set Equipment 
+Cards
+3 Wild Set Equipment Cards
+3 Alchemic Set Equipment 
+Cards
+Finger of San Biagio
+ If at the beginning of 
+your Activation you 
+have at least 1 
+Lu y
+, gain a Token.
+Finger of San Biagio Artifact 
+Sacred
+ If at the beginning of 
+your Activation you 
+, gain a 
+Finger of San Biagio Artifact Finger of San Biagio Sacred
+Helmet of San Michele
+Sacred Set (3): a er performing a Defense Test, gain a Blessed Token.
+Armor 
+Sacred
+3 Sacred Set Equipment 
+Helmet of San Michele
+a er performing a Defense Test, gain a Blessed
+Helmet of San Michele Helmet of San Michele Armor 
+Sacred Crosier
+Sacred Set (2):  e A ack of this Weapon gains +1 and
+ Distract.
+Rea 
+3 1 +0     
+Crosier
+Weapon 
+Sacred
+
+Weapon 
+3 1 +0     
+Sacred
+
+   
+Deep Blue
+Arcane Set (2)
+in icts : when an Enemy  to you they gain a Marked Token.
+Immunity: Stunned.
+Artifact
+Arcane
+Deep Blue
+: when an Enemy to you they gain a 
+Deep Blue
+Stunned.
+Deep Blue
+Artifact
+Arcane Fire and Ice
+ 1: place a Hindered Token on one of your 
+Weapons.
+2: place a Burned 
+Token on one of your 
+Weapons.
+Artifact
+Arcane
+3 Arcane Set Equipment 
+Fire and Ice
+Hindered
+Token on one of your Weapons.
+Burned on one of your 
+Weapons.
+Fire and Ice Artifact
+Arcane Ghost Rifl e
+
+Weapon 
+Arcane
+3 2-6 +0     
+Reload 2, Sniper
+Arcane Set (3): this A ack gains 
++1.
+Pathfi nder Compass
+1: perform 2 Dashes immediately. Once per Activation. 
+Pathfi nder Compass Artifact Wild
+Wild Set (3):
+Reaction A acks when you you do not su er 
+perform the 2 Dashes.
+Pathfi nder Compass
+: perform 2 Dashes immediately. Once per 
+Artifact Pathfi nder Compass Wild
+Reaction A acks when you you do not su er 
+perform the 2 Dashes.
+Oculus
+Helmet
+Wild
+Wild Set (2): to use Oculus you spend 1 instead of 2.
+2: an Enemy in your Line of Sight gains a Marked Token.
+3 Wild Set Equipment Cards
+Oculus
+Helmet
+Wild
+to use Oculus you 
+ instead of 2
+: an Enemy in your Line of Marked Token.
+Fury Mace
+
+ Su er 1  for each  obtained.
+3 1 +2     
+Fury Mace Weapon 
+Wild
+Purity Bracelet
+Immunity: Cursed.
+Immunity:
+Disadvantaged.
+Purity Bracelet Artifact
+Alchemic
+Cursed.
+Disadvantaged.
+Purity Bracelet Artifact Purity Bracelet Alchemic
+The Clement Weapon 
+Alchemic
+3  1-4 +0
+   
+Harmless  For eachthe target discards 
+1 .
+Al	 emic Set (2): the A ack of this Weapon gains +1.
+3 Alchemic Set Equipment 
+The Clement Weapon 
+Alchemic
+1-4 +0
+ 
+Harmless the target discards 
+: the A ack of this Weapon gains +1
+Alchemic Bomb
+
+Weapon 
+Alchemic
+3 1-4 +0     
+Alchemic Bomb Weapon 
+Alchemic
+ Burn
+Al	 emic Set (3): the A ack of this Weapon gains
+ Critical 2.
+Add all of these cards to those available for Cra ing when 
+you visit the Artisan's Shop during a Rest Phase.
+10
+New Trait: Y Set (X)
+An Equipment Card gains the indicated special rule if the 
+Hero equips X Equipment cards of a given set.
+For example, the Crosier is part of the Sacred Set and has 
+the Sacred Set (2) Trait. So it gains the rule indicated if the 
+Hero equipping it has at least one other Equipment of the 
+Sacred Set equipped.
+Crosier
+Sacred Set (2):  e A ack of this Weapon gains +1 and
+ Distract.
+Rea 
+3  1 +0
+   
+Crosier
+Weapon  Sacred
+Weapon 
+3  1 +0
+   
+ Sacred
+   
+Fire and Ice
+
+ 1: place a Hindered
+Token on one of your 
+Weapons.
+2: place a Burned 
+Token on one of your 
+Weapons.
+Fire and Ice Artifact
+Arcane
+Sacred Set (2):  e A ack of this Weapon gains +1 and
+ Distract.
+Rea 
+ ese new Enemies can be added to their respective 
+Factions during an Enemy Dra . When performing an 
+Enemy Dra of a Faction, if the Rank restrictions allow 
+it, add the Dra Card of these Enemies to those of their 
+Faction.
+Mercenaries: You can add the Enemy Cards of the  
+Mercenary Faction to any Enemy Dra of the Rome and 
+Venice Factions, always respecting the limitations of the 
+Dra Rank. A Mercenary Model is considered in all aspects 
+a Model of the Faction for which they have been deployed.
+New Enemies
+Myths: You can add the Enemy Cards of the  Myths 
+Faction to any Enemy Dra of the Primaevi Faction, always 
+respecting the limitations of the Dra Rank. A Myth Model 
+is considered in all aspects a Model of the Primaevi.
+11
+ Primaevi
+1 Huntsman 
+Activation Token
+1 Butcher 
+Activation Token
+1 Cult Guard 
+Activation Token
+1 Explorer 
+Activation token
+1 Huntsman
+Enemy Card
+1 Butcher
+Enemy Card
+1 Cult Guard
+Enemy Card
+1 Explorer
+Enemy Card
+1 Huntsman 
+Draft Card
+1 Butcher 
+Draft Card
+1 Cult Guard 
+Draft Card
+1 Explorer 
+Draft Card
+ 
+1
+Huntsman
+ 
+1
+Butcher
+ 
+3
+Cult Guard
+ 
+3
+Explorer
+
+
+
+
+2
+6
+ 5
+
+ 5
+Huntsman
+ 7
+Spear Area 2
+ Poison
+4
+ 5+
+ 1
+4
+ 
+Immunity: Poisoned, 
+Immunity: Distracted
+Immunity: Poisoned, 
+ 1 1 
+
+
+
+
+
+3
+6
+6
+ 5
+Butcher
+ 6
+Pierce
+  Devastating
+1
+ 7+
+ 1
+3
+ 
+Bastion
+ 2 
+
+
+
+
+
+4
+6
+6
+ 5
+Cult Guard
+ 5
+ Poison
+3
+ 5+
+ 1
+3
+ 
+Climb 2, Phalanx, 
+Immunity: Poisoned
+ 1 
+
+
+
+
+8
+6
+ 5
+
+ 4
+Explorer
+ 5
+ Bleed  Stun
+3
+ 5+
+ 1-4
+3
+  3
+ 5+
+ 1
+3
+ 
+Runner, Eclectic, Heavy
+ 1 
+Huntsman
+Butcher
+Cult Guard
+Explorer
+12
+ Venice
+ Mercenaries
+Spy
+Clockmaker's 
+Golem
+Succubus
+1 Spy 
+Activation Token
+1 Clockmaker's 
+Golem
+Activation Token
+1 Succubus 
+Activation Token
+1 Spy
+Enemy Card
+1 Clockmaker's 
+Golem 
+Enemy Card
+1 Succubus
+Enemy Card
+1 Spy 
+Draft Card
+1 Clockmaker's 
+Golem
+Draft Card
+1 Succubus 
+Draft Card
+ 
+1
+Spy
+ 
+1
+Clockmaker's Golem
+ 
+1
+Succubus
+
+
+
+
+7
+6
+5
+6
+
+
+ 5
+Spy
+ 6
+Burst Area
+ Poison, Weak Pierce
+3
+ 7+
+ 2-5
+3
+  1
+ 8+
+ 1
+3
+ 
+ 
+Eclectic, Sniper
+1 2
+
+
+
+
+
+
+5
+4
+6
+7
+ 5
+Clockmaker's Golem
+ 8
+4
+ 6+
+ 1-3
+3
+ 
+Fate, Immunity: Negative Status
+ 2 
+
+
+
+
+6
+5
+6
+5
+
+
+ 5
+Succubus
+ 5
+Cross Area 
+1, Curse,Stun
+2
+ 6+
+ 2-5
+4
+
+ 
+Sniper, Fly
+1 2
+ Mercenaries
+13
+ Mercenaries
+Scarecrow
+Dark Magician
+Technomancer
+3 Doll
+1 Scarecrow 
+Activation Token
+1 Dark Magician 
+Activation Token
+1 Technomancer 
+Activation Token
+1 Doll 
+Activation Token
+1 Scarecrow
+Enemy Card
+1 Dark Magician
+Enemy Card
+1 Technomancer
+Enemy Card
+1 Doll
+Enemy Card
+1 Scarecrow 
+Draft Card
+1 Dark Magician 
+Draft Card
+1 Technomancer 
+Draft Card
+1 Doll 
+Draft Card
+ 
+1
+Scarecrow
+ 
+1
+Dark Magician
+ 
+1
+Technomancer
+ 
+3
+Doll
+
+
+
+
+
+
+5
+5
+7
+5
+ 5
+Scarecrow
+ 7
+Breath Area
+ Disadvantage, Bleed
+3
+ 6+
+ 1
+2
+ 
+Sniper, Fate
+ 1 1 1 
+
+
+
+
+
+
+5
+7
+5
+6
+ 5
+Dark Magician
+ 6
+ Eviscerate, Curse 
+2
+ 6+
+ 2-5
+3
+
+Immunity: Stunned
+Immunity: Distracted
+Immunity: Stunned
+ 2 1 
+
+
+
+
+
+
+5
+7
+5
+6
+ 5
+Technomancer
+ 8
+Cross Area  2, Burn, Blind
+2
+ 7+
+ 2-5
+3
+
+Barrier 4
+ 2 1 
+
+
+
+
+
+
+5
+8
+5
+5
+ 5
+Doll
+ 4
+2
+ 5+
+ 2-7
+3
+  2
+ 5+
+ 1
+2
+ 
+ Burn  Bleed
+Eclectic, Phalanx, Trample
+ 1 1 
+Dark Magician
+14
+ Myths
+Chimera
+Aracne
+1 Chimera 
+Activation Token
+1 Aracne 
+Activation Token
+1 Chimera
+Enemy Card
+1 Aracne
+Enemy Card
+1 Chimera 
+Draft Card
+1 Aracne 
+Draft Card
+ 
+1
+Chimera
+ 
+1
+Aracne
+
+
+
+
+
+
+5
+7
+7
+4
+ 5
+Chimera
+ 12
+Burst Area
+Poison
+Breath Area
+Bleed
+2
+ 5+
+ 2-5
+3
+  2
+ 6+
+ 1
+2
+ 
+Eclectic, Fate 
+ 2 1 
+
+
+
+
+
+
+5
+7
+6
+7
+ 5
+Aracne
+ 9
+Burst Area
+Hinder, Stun
+Breath Area
+Poison
+2
+ 6+
+ 2-5
+3
+  2
+ 6+
+ 1
+2
+ 
+Eclectic, Fate
+ 2 1 
+ Rome
+Knight
+Inquisitor
+1 Knight 
+Activation Token
+1 Inquisitor 
+Activation Token
+1 Knight
+Enemy Card
+1 Inquisitor
+Enemy Card
+1 Knight
+Draft Card
+1 Inquisitor
+Draft Card
+ 
+1
+Knight
+ 
+1
+Inquisitor
+
+
+
+
+6
+6
+ 5
+
+ 4
+Knight
+ 6
+Pierce
+ Bleed 
+3
+ 5+
+ 1-2
+3
+ 
+ 
+Charge, Runner, 
+Bastion, Heavy
+2 1
+
+
+
+
+7
+6
+ 7
+
+ 5
+Inquisitor
+ 6
+Burst Area
+ 1, Curse, Mark
+Spear Area 2
+ Curse, Mark
+2
+ 6+
+ 1
+3
+  2
+ 6+
+ 2-5
+3
+
+ 
+Eclectic, Barrier 4
+1 2
+Inquisitor
+15
+Familiars
+A Familiar is a small animal companion that Heroes can 
+purchase at the Market during a Rest Phase, by paying the 
+cost in Florins indicated on its card.
+Familiars follow these rules:
+◆ A Hero may equip a Familiar for a Mission exactly as if it 
+were an Equipment Card that takes up no Encumbrance 
+Slots.
+◆ Each Hero can equip only one Familiar. 
+◆ At the beginning of a Mission, place the Familiar's 
+Model in the same Square as the Hero who equipped it, 
+with their bases in contact. 
+◆ A Hero may spend 1 to move their Familiar's Model 
+up to 3 Squares, ignoring any Terrain e ects (e.g., 
+Water).  is Movement cannot move a Familiar to a 
+di erent Height Level than it was on when it was placed 
+at the beginning of  e Mission, unless the Familiar has 
+the Fly Trait. 
+◆ A Familiar never occupies the Square it is in and can 
+never be attacked by an Enemy. 
+Frattaglia
+Miele
+Romolo
+1Frattaglia
+Familiar Card
+1 Miele
+Familiar Card
+1 Romolo
+Familiar Card
+Frattaglia
+Familiar
+If Fra aglia ends the movement in 
+a Square occupied by an Enemy, 
+roll 1. If you obtain  that Enemy gains a Stunned Token.
+1: move Fra aglia a maximum of 3 Squares.
+Miele
+Familiar
+An Enemy that begins their 
+Activation in the same square as 
+Miele gains a Bleeding Token.
+1: move Miele a maximum of 3 Squares.
+Romolo
+Each A ack against an Enemy in the same Square as Romolo 
+gains:  Lethal .
+1: move Romolo a maximum of 3 Squares.
+Familiar
+◆ If a Hero is KO'd, their Familiar remains on the 
+Battle eld, but performs no Action until the Hero ceases 
+to be KO.
+◆ If a Hero is removed from the Battle eld (for example, 
+because they are placed on a Mission Card) their 
+Familiar's Model is also removed. When the Hero 
+returns to the Battle eld, place the Model of the Familiar 
+in the same Square as the Hero.
+16
+If you wish, you may use these cards in your campaign to 
+add more variety to the Rest Phase.
+Each of these cards adds more customization to the Towns 
+and Villages where you perform the Rest Phase.
+Before performing the Rest Phase, take the Card 
+corresponding to the Town or Village you are to perform 
+this Phase in and place it in the upper le slot on the Rest 
+Board.
+A Location Card implements changes to the use of Shops in 
+a particular Town or Village:
+ e Shop is una ected and is used as 
+described in the Rest Board.
+ e expense in Florins to use the Shop 
+increases (+) or decreases (-) by X (it 
+cannot, however, go below 0). In the 
+case of the Artisan, the modi cation 
+applies to the amount of Florins indicated on the Formulae 
+Card you have to Cra . In the case of the Market, the change 
+applies to both the sale and purchase of each Reagent.
+ e Shop is not available in this Town 
+or Village, so no Hero can visit it.
+In addition, if the 
+lower part of the 
+card shows the 
+symbol, it means 
+that Catacombs and their Size (Large, Medium or Small) are 
+available in the Town or Village.  e Faction symbols a er 
+the  icon indicate which Factions can be encountered in 
+the Catacomb. If no Faction symbol is present, it means 
+that you may encounter any of the available Factions.
+(for complete rules on Catacombs see the Catacombs 
+expansion.)
+Chyrurgeon
+ 
+Mentor
+-1
+Church
+ X
+Catacombs (medium / large)
+
+Location Cards
+15 Location Cards
+San Marino   is small Republic originated from a Christian 
+community founded in the 4th century AD on Monte 
+Titano – a territory gi ed by Donna Felicissima, a ri 
+woman from Rimini. Since 1000 AD the government 
+is in the hands of an assembly of heads of the families 
+– called “arengo” – whi elects Regent Captains as 
+representatives. At  rst the bishop of Montefeltro 
+would oversees the Republic’s administration, but 
+during the 13th and 14th centuries it increasing gains 
+autonomy. In 1463 San Marino joins an alliance 
+that overturns the rule of the Lord of Rimini – as 
+a compensation, Pope Pio II gives to the Republic 
+territories that span beyond just Monte Titano.
+N
+ is small Republic originated from a Christian 
+community founded in the 4th century AD on Monte 
+Titano – a territory gi ed by Donna Felicissima, a ri 
+woman from Rimini. Since 1000 AD the government 
+is in the hands of an assembly of heads of the families 
+N
+Perugia  Perugia’s medieval landscape – do ed by seventy 
+towers built by the local noble families – testi es its 
+history of harsh inner feuds. In these days the city 
+bears the title of “Ci à Turrena” – towered city. 
+A er taking advantage of the Avignon Papacy to 
+expand its territories and rise as a cultural center 
+with the founding of the University, in 1370 Perugia 
+reluctantly submits to the Chur once again. Only 
+the diplomatic e ort of Lorenzo the Magni cent 
+and Charles VIII of France’s invasion of Italy prevent 
+the relationship between Perugia and Rome from 
+spiralling, and the city continues to be the birthplace 
+and educational destination of su Renaissance art 
+protagonists as Perugino, Ra aello Sanzio and Piero 
+della Francesca.
+N
+  is small Republic originated from a Christian 
+community founded in the 4th century AD on Monte 
+Titano – a territory gi ed by Donna Felicissima, a ri 
+woman from Rimini. Since 1000 AD the government 
+is in the hands of an assembly of heads of the families 
+– called “arengo” – whi elects Regent Captains as 
+representatives. At  rst the bishop of Montefeltro 
+would oversees the Republic’s administration, but 
+during the 13th and 14th centuries it increasing gains 
+autonomy. In 1463 San Marino joins an alliance 
+that overturns the rule of the Lord of Rimini – as 
+a compensation, Pope Pio II gives to the Republic 
+territories that span beyond just Monte Titano.
+N
+Perugia’s medieval landscape – do ed by seventy 
+towers built by the local noble families – testi es its 
+history of harsh inner feuds. In these days the city 
+bears the title of “Ci à Turrena” – towered city. 
+A er taking advantage of the Avignon Papacy to 
+expand its territories and rise as a cultural center 
+with the founding of the University, in 1370 Perugia 
+reluctantly submits to the Chur once again. Only 
+the diplomatic e ort of Lorenzo the Magni cent 
+and Charles VIII of France’s invasion of Italy prevent 
+the relationship between Perugia and Rome from 
+spiralling, and the city continues to be the birthplace 
+and educational destination of su Renaissance art 
+protagonists as Perugino, Ra aello Sanzio and Piero 
+N
+Orvieto  Orvieto owes its name – from the Latin for “old city” 
+– to its Etruscan origin.  e city is per ed on a tu 
+plateau, rising in steep cli s up to   y meters above 
+the surrounding countryside. Previously ruled by the 
+Goths, the Byzantines and the Lombards, Orvieto 
+ nally established itself as a municipality and rea es 
+its peak during the 14t th century, when it hosts more 
+people than Rome and boasts an impressive army. 
+Wondrous palaces and monuments embellish the 
+city, su as the Maurizio – the  rst ever clo tower 
+equipped with me anical automatons. During the 
+Renaissance it represents one of the most important 
+provinces of the Papal State and it o en welcomes 
+popes, bishops and cardinals. 
+N
+Orvieto owes its name – from the Latin for “old city” 
+– to its Etruscan origin.  e city is per ed on a tu 
+and Charles VIII of France’s invasion of Italy prevent 
+the relationship between Perugia and Rome from 
+spiralling, and the city continues to be the birthplace 
+and educational destination of su Renaissance art 
+protagonists as Perugino, Ra aello Sanzio and Piero 
+Orvieto owes its name – from the Latin for “old city” 
+– to its Etruscan origin.  e city is per ed on a tu 
+plateau, rising in steep cli s up to   y meters above 
+the surrounding countryside. Previously ruled by the 
+Goths, the Byzantines and the Lombards, Orvieto 
+ nally established itself as a municipality and rea es 
+its peak during the 14t th century, when it hosts more 
+people than Rome and boasts an impressive army. 
+Wondrous palaces and monuments embellish the 
+city, su as the Maurizio – the  rst ever clo tower 
+equipped with me anical automatons. During the 
+Renaissance it represents one of the most important 
+provinces of the Papal State and it o en welcomes 
+N
+ Venice   e origins of the  een of the Adriatic date ba 
+to refugees  eeing from the Hun invasion in the 
+5th century.  anks to its political and geographic 
+position – between the Holy Roman Empire and the 
+Byzantine Empire – the Republic of Venice acquires 
+power through thriving commercial relationships in the 
+Mediterranean Sea.  rough the 9th and 10th centuries, 
+Venice established control over the Adriatic; during 
+the Crusades, it expanded its dominion to the coasts of 
+Greece, Egypt and Syria. On the mainland, Venetian 
+territories cover half of the Northern Italy, from the Alps 
+to the sea. During the Renaissance, Venice rea es its 
+peak in the military, economic and cultural  elds – it 
+is one of the most populated cities in Europe and is 
+probably the most powerful state of the the Boot.
+N
+  e origins of the  een of the Adriatic date ba 
+to refugees  eeing from the Hun invasion in the 
+5th century.  anks to its political and geographic 
+position – between the Holy Roman Empire and the 
+Byzantine Empire – the Republic of Venice acquires 
+power through thriving commercial relationships in the 
+Mediterranean Sea.  rough the 9th and 10th centuries, 
+Venice established control over the Adriatic; during 
+the Crusades, it expanded its dominion to the coasts of 
+Greece, Egypt and Syria. On the mainland, Venetian 
+territories cover half of the Northern Italy, from the Alps 
+to the sea. During the Renaissance, Venice rea es its 
+peak in the military, economic and cultural  elds – it 
+is one of the most populated cities in Europe and is 
+probably the most powerful state of the the Boot.
+N
+ Rome  Tradition has it that Rome was founded in 753 BC 
+by Romolo.  e so-called Capital of the World – 
+beating heart of the Roman Empire – boasts a key 
+role in human history. Society, the Arts, Science, 
+Philosophy – the Empire’s legacy in uences every 
+life facet of its peoples and of those to come. During 
+the Middle Ages, the Eternal City becomes the 
+capital of the Papal State.  e Vatican’s ruinous 
+a empts at establishing its power brings to the 
+well-known Avignon Papacy, whi threw Rome 
+into a period of deep contraction. From the second 
+half of the Fourteenth century the city – ba in 
+the hands of the Chur – undergoes a period of 
+restoration and claims its prominence on the 
+international stage once again.
+N
+ Rome  Tradition has it that Rome was founded in 753 BC 
+by Romolo.  e so-called Capital of the World – 
+beating heart of the Roman Empire – boasts a key 
+role in human history. Society, the Arts, Science, 
+Philosophy – the Empire’s legacy in uences every 
+life facet of its peoples and of those to come. During 
+the Middle Ages, the Eternal City becomes the 
+capital of the Papal State.  e Vatican’s ruinous 
+a empts at establishing its power brings to the 
+well-known Avignon Papacy, whi threw Rome 
+into a period of deep contraction. From the second 
+half of the Fourteenth century the city – ba in 
+the hands of the Chur – undergoes a period of 
+restoration and claims its prominence on the 
+international stage once again.
+N
+Rest Phase
+Chyrurgeon
+Follow the steps given in order:
+1.  e last played Mission will tell you 
+where you can perform the Rest Phase, 
+2. 
+3. 
+Chyrurgeon
+Mentor
+Chyrurgeon
+Inn
+Church
+Artisan
+Market
+Barracks
+Baths
+Modena  
+Catacombs (medium / Small)
+
+
+
+
+
+
+
+
+
+
+ 
++1
+
+-1 
+X
+4
+Mentor
+Chyrurgeon
+Inn
+Artisan
+Market
+Barracks
+Church Baths
+Modena  
+Catacombs (medium / Small)
+
+
+
+
+
+
+
+
+
+
+ 
++1
+
+-1 
+X
+4
+17
+If you wish, you may include Zodiac Cards in your 
+Campaign.
+If you decide to use these cards, each Hero randomly draws 
+a Zodiac Card in the order decided by the players during 
+the Setup Phase of Mission "0.0 - Prologue".
+Instead of drawing them randomly, each Player may assign 
+to their Hero the Zodiac Card corresponding to their own 
+zodiac sign. If two or more Players have the same zodiac 
+sign, amicably decide who will take the card of their sign; 
+the other Players will randomly draw theirs. 
+It is not possible to assign 2 or more Heroes the same 
+Zodiac Cards
+Zodiac Card.
+Once a Hero has been assigned a Zodiac Card, it cannot be 
+changed until the end of the current Campaign.
+Zodiac Cards provide an additional Skill to the Hero, which 
+functions exactly like the Skills indicated on the Hero's Skill 
+Sheet, and can be an Active, Passive, or Reaction Skill.
+ e Skill on a Zodiac Card is always considered Equipped 
+by the Hero.
+12 Zodiac Cards
+0: gain Climb 1 and Jump 2 until the end of your Activation.
+ARIES
+0: gain Climb 1
+Jump 2 until the end of your Activation.
+0: discard a Stunned
+Token, or, spend 1 and place a Stunned Token on one of your Weapons.
+TAURUS
+discard a Stunned
+Token, or, spend 1 and Stunned Token on one of your Weapons.
+GEMINI
+Reaction 1: when you have to perform a Defense 
+Test against a A ack, roll 1. If you obtain , the  value of the A ack 
+becomes 0.
+GEMINI
+when you have to perform a Defense 
+Test against a A ack, . If you obtain  value of the A ack 
+becomes 0. 1: roll 1. If you obtain  or , discard 1 from one of your Equipment cards.
+CANCER
+roll 1. If you obtain or , discard 1 one of your Equipment cards. +0(Upgrade): if this A ack targets an Enemy 
+adjacent to you, you gain 1.
+LEO
+(Upgrade): if this A ack targets an Enemy 
+adjacent to you, you gain 1.
+LIBRA
+Reaction 2: when you su er a maximum of 2 due to an Enemy’s A ack, 
+you in ict on that Enemy the same number of 
+Unblockable .
+LIBRA
+Reaction 2: when you su er a maximum of 
+due to an Enemy’s A ack, 
+you in ict on that Enemy the same number of 
+Unblockable  +0(Upgrade): if this A ack targets an Enemy 
+not adjacent to you, you gain 1.
+SAGITTARIUS
+(Upgrade): A ack targets an Enemy 
+not adjacent to you, you gain 1.
+PISCES
+1: discard a Bleeding Token, or, spend 1 and place a Bleeding Token on one of your Weapons.
+PISCES
+discard a Bleeding Token, or, spend 1 and Bleeding Token on one of your Weapons.
+ACQUARIUS
+1: roll 1. If you obtain  or , discard 1 from your Hero Sheet.
+ACQUARIUS
+roll 1. If you obtain , discard 1 your Hero Sheet.
+SCORPIO
+2: choose a Hero within 3 (you included).  at Hero discards a Poisoned
+Token.
+SCORPIO
+choose a Hero within
+3 (you included).  at Hero discards a Poisoned
+Token.
+CAPRICORN
+1: you gain 1 Dash.  is movement does not cause Reaction A acks.
+CAPRICORN
+VIRGO
+Reaction 1: when you have to perform a Defense 
+Test against a A ack, roll 1 additional .
+2 Mountain Swamp Tiles 
+(Double-Sided)
+New Tiles
+ ese two double-sided Tiles show two new types of 
+terrain, the Poisonous Swamp and the Mountain Pass.
+ ey can be used as you wish in place of regular Tiles, 
+to increase the variability of Exploration Missions, or for 
+Missions you create. 
+Both Tiles feature a new type of Square:
+Poisonous Square (green border): 
+a Hero who ends their Activation 
+on this Square must roll 2 . If 
+they obtain at least 1  with a 
+Success  reshold of 5 or more, 
+nothing happens, otherwise they gain a Poisoned Token.
+Blocked Square (black border): 
+no Model can enter a Blocked 
+Square.
+5B
+5A 2 Mountain Swamp Tiles 
+5A
+5B
+18
+Game for 5 or 6 Players
+2 Hero Boards 2 Perilium
+10 Nightmare Cards 10 Divine Help Cards
+12 Hero Cubes
+Relentless
++ 1
++ 1
++1 
++1 
+Unlucky
+- 1
+Commander Relentless
++ 1
++3 
++ 2
++1
+/
+Unlucky
+- 1
+Commander Chosen One
++ 1
++ 3
++2 
++1 
+Novice
+Recruit
+- 1
+ ese components allow you to increase the number of 
+players in a Nova Aetas Renaissance Campaign up to 6.
+If you decide to play with more than 4 players follow these 
+rules:
+◆ All Missions show 4 deployment Squares for Heroes. 
+Each Hero beyond the fourth must be placed in an 
+Available Square adjacent to a Square indicated with . 
+If this is not possible, each Hero beyond the fourth must 
+be placed in the closest Available Square to one marked 
+with .
+It is possible to Play Nova Aetas Renaissance with fewer 
+than 4 Players but the number of Heroes in the game must 
+still always be 4.
+To make it easier to run the game with fewer than 4 players, 
+each Hero in excess of the number of players can be 
+replaced by a Companion, following the rules described in 
+the Nova Aetas Renaissance Rulebook.
+In addition, follow these rules:
+◆ At the beginning of the Campaign, de ne which and 
+how many Heroes will be played. As with the normal 
+rules these Heroes cannot be replaced until the end of 
+the Campaign.
+◆ If you have selected fewer than 4 Heroes, you must hire a 
+Companion for each Hero not selected in each Mission, 
+◆ For each Enemy Card in play, randomly draw a 
+Nightmare Card (see below) and place it under the 
+Enemy Card it was assigned to.
+◆ Whenever a new Enemy enters the Battle eld (i.e., 
+through an Enemy Dra ), randomly draw a new 
+Nightmare Card and place it under their Card.
+◆ Nightmare Cards remain associated with the same 
+Enemy Card for the duration of  e Mission, even if 
+there are no more Enemies of that particular type.
+◆ Nightmare Cards a ect all Models of that Enemy present 
+on the Battle eld.
+Game for Fewer Than 4 Players
+so that the sum of Heroes and Companions is 4.
+◆ For each Enemy Card in play, randomly draw a Divine 
+Help Card (see above) and place it under the Enemy 
+Card it was assigned to.
+◆ Each time a new Enemy enters the Battle eld (i.e., 
+through an Enemy Dra ), randomly draw a new Divine 
+Help Card and place it under their card.
+◆ Divine Help Cards remain associated with the same 
+Enemy Card for the duration of  e Mission, even if 
+there are no more Enemies of that particular type
+◆ Divine Help Cards a ect all Models of that Enemy 
+present on the Battle eld.
+19
+Nightmare and Divine Help Cards Relentless
+1
+1
+
+
+ ese cards are to be used if you are playing with a number 
+of players greater than or fewer than 4.
+Nightmare Cards are designed for campaigns with more 
+than 4 players and are used to upgrade Enemies, to keep a 
+high level of challenge.
+Divine Help Cards, on the other hand, are used to weaken 
+Enemies when you are playing with fewer than 4 Heroes 
+and Companions in place of the missing Heroes.
+Both types of cards function in the same way:
+◆  ey must be placed under an Enemy Card so that 
+the symbols of the Enemies' characteristics match (see 
+ gure).
+◆  e Nightmare/Divine Help Card applies its modi ers 
+to the characteristics of Enemies. All Enemies 
+represented by the card modify their characteristics as 
+indicated by the Nightmare/Divine Help Card A .
+◆ Other modi ers may a ect the characteristics of 
+Enemy Attacks B .
+◆ No modi er can bring a value down to less than 1. All 
+modi ers that would bring any characteristic below 1 
+must be ignored.
+◆ In some cases a Nightmare/Divine Help Card can add 
+Traits or Generic Skills to the Enemy C .
+◆ Even the Loot given by an Enemy can be modi ed by a 
+Nightmare Card/Divine Help D .
+Relentless
++
++
++1 
++1 
+
+
+
+
+6
+6
+ 5
+
+ 4
+Knight
+ 6
+Pierce
+3
+
+5+
+ 1-2
+3
+ 
+
+1
+1
+A
+Pierce
+ Bleed 
+Charge, Runner, 
+Bastion, Heavy
+
+Cursed
+-1
+/
+Minimum 1
+Cursed
+-1 /
+Minimum 1
+
+
+
+
+7
+6
+5
+6
+
+
+ 5
+Spy
+ 6
+Burst Area
+ Poison, Weak Pierce
+3
+ 7+
+ 2-5
+3
+  1
+ 8+
+ 1
+3
+ 
+
+Eclectic, Sniper
+1
+
+B
+19
+1
++ 1
+Eclectic, Sniper
+ 2  Shy
+-
++2 
++1  
+
+Curse
++
+
+
+
+
+
+3
+6
+6
+ 5
+Butcher
+ 6
+Pierce
+  Devastating
+1
+
+7+
+
+3 
+1 
+Bastion
+2 
+
+C
+ D
+20
+4 Event Cards
+7 Exploration Cards
+3 Faction Cards
+25 Scenic Element Cards
+A Letter from the Past
+A boy wearing a familiar green robe 
+
+rea es you. Tired and sweaty, he begs 
+you to get to your old s ool in Rocca 
+Cive a. “ e whole university is in 
+danger, an old acquaintance of yours 
+is on the warpath,” he tells you, before 
+passing out… .
+◆You can mark the S1 Secondary 
+Mission - “Back to Rocca 
+Civetta” in the Active 
+Side Missions.
+Furious
+ ere are rumors that a dangerous band 
+of criminals are attacking the unfortunate 
+caravans that  nd themselves spending the 
+evening in the area, on the edge of the wood. 
+ e bounty on the head of their boss is very 
+tempting and you think a little detour to 
+line your pockets can't hurt. You disguise 
+yourself as merchants and reach the area 
+indicated by the village guards. You don't 
+have to wait long before shady individuals 
+surround you.
+◆ Read E3-1.
+Venice
+Each time you have to perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies) you can add 
+the Draft cards of the Mercenary  Faction Enemies in your possession, ignoring the Rank 
+required by the Enemy Dra .
+Apple Tree
+Bulky, Blo ing, 
+Towering
+Placement: 
+cannot be placed on a Square adjacent to a Non-Zone the Apple Tree occupies 1 Square and 
+or a Bulky Scenic Element.
+An apple a day: once per Mission, a Hero adjacent to an Apple Tree can spend 1 to roll 1, if they gain  discard 1. A Hero can spend a maximum of 3 to perform this Action.
+3D
+A Letter from the Past
+A boy wearing a familiar green robe 
+
+rea es you. Tired and sweaty, he begs 
+you to get to your old s ool in Rocca 
+Cive a. “ e whole university is in 
+danger, an old acquaintance of yours 
+is on the warpath,” he tells you, before 
+You can mark the S1 Secondary 
+Mission - “Back to Rocca 
+Civetta” in the Active 
+The Watchmaker
+
+Lorenzo della Volpaia, a famous Florentine 
+wat maker, is in the habit of throwing 
+grand parties. A er several e orts to be 
+able to a end,  nally a messenger tra s 
+you down and delivers the invitation… 
+◆You can mark the S4 Side Mission 
+- “In the Fox’s Den” in the Active 
+Side Missions.
+ ere are rumors that a dangerous band 
+of criminals are attacking the unfortunate 
+caravans that  nd themselves spending the 
+evening in the area, on the edge of the wood. 
+ e bounty on the head of their boss is very 
+tempting and you think a little detour to 
+line your pockets can't hurt. You disguise 
+yourself as merchants and reach the area 
+indicated by the village guards. You don't 
+have to wait long before shady individuals 
+Ambush!
+While traversing a small mountain pass, 
+you hear noises from the trees around you. 
+You watch out, slow down, and bring your 
+hands to your weapons, trying to  gure out 
+if it's just an animal. Unfortunately this 
+is not the case... you have fallen into an 
+ambush. Draw your weapons and prepare 
+to defend your possessions and your lives.
+◆ Read E2-1.
+Venice
+Each time you have to perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies) you can add t cards of the Mercenary Enemies in your possession, ignoring the Rank 
+required by the Enemy Dra .
+Each time you have to perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies) you can add 
+the Draft cards of the Mercenary  Faction Enemies in your possession, ignoring the Rank 
+required by the Enemy Dra .
+Apple Tree
+Bulky, Blo ing, 
+Towering
+cannot be placed on a Square adjacent to a Non-Zone the Apple Tree occupies 1 Square and 
+ once per Mission, a Hero adjacent to an Apple Tree can spend 1 . A Hero can spend a to perform this Action.
+Bulky, Blo ing, 
+Towering, Interactive 3D
+Placement: the 4x2 House occupies 8 Squares. Maximum one Building per Tile.
+ = 0 
+Collapse: occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building must perform a  Test. For each  which does not produce a  the Hero su ers 1 Unblockable .
+The Watchmaker
+
+Lorenzo della Volpaia, a famous Florentine 
+wat maker, is in the habit of throwing 
+grand parties. A er several e orts to be 
+able to a end,  nally a messenger tra s 
+you down and delivers the invitation… 
+You can mark the S4 Side Mission 
+- “In the Fox’s Den” in the Active 
+
+Amateur Astrologist
+In a tent erected near the side of the 
+road, a mischievous-looking woman 
+o ers to read your fortune: “Come! I 
+will read your stars in the cards!”
+◆Each Hero, in turn, may roll 3 
+dice:
+3: you can change your Zodiac Sign to one of those available for 
+the next Mission.
+2: nothing happens. 0-1: you cannot use your Zodiac Sign for the next Mission.
+While traversing a small mountain pass, 
+you hear noises from the trees around you. 
+You watch out, slow down, and bring your 
+hands to your weapons, trying to  gure out 
+if it's just an animal. Unfortunately this 
+is not the case... you have fallen into an 
+ambush. Draw your weapons and prepare 
+to defend your possessions and your lives.
+The Battle of the Oranges
+You enter a small town decorated for the 
+holidays.  e smiling inhabitants who  ll 
+the streets welcome you and invite you to 
+participate in the village festival.  e main 
+event of the celebration is the traditional 
+"Battle of the Oranges," and you will be the 
+guests of honor! What is this festival about? 
+It takes little time to realize it is a classic 
+race, hindered however by the continuous 
+throwing of oranges by the population. You 
+will be allowed to defend yourself in order 
+to reach the  nish line. But now enough 
+with the delays, the people are getting 
+anxious,. Let the battle begin!
+◆ Read E1-1.
+Rome
+Each time you have to perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies) you can add t cards of the Mercenary Enemies in your possession, ignoring the Rank 
+required by the Enemy Dra .
+Primaevi
+Each time you have to perform an Enemy Dra 
+in an Exploration Mission (including those 
+required to deploy initial Enemies) you can add 
+the Draft cards of the Myth  Faction Enemies in your possession, ignoring the Rank required 
+by the Enemy Dra .
+4x2 House
+Bulky, Blo ing, 
+Towering, Interactive
+the 4x2 House occupies 8 Squares. Maximum one Building per Tile.
+ = 0 
+ occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building Test. For each  which does not the Hero su ers 1 Unblockable 
+3x3 House
+ 12 3D Bulky, Blo ing, 
+Towering, Interactive
+Placement: the 3x3 House occupies 9 Squares. Maximum one Building per Tile.
+ = 0 
+Collapse: occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building must perform a  Test. For each  which does not 
+produce a  the Hero su ers 1 Unblockable .
+Side Missions - Explorations
+Components
+Explorations
+Explorations are a new type of Side Mission that can be 
+added to your Campaign.
+Add the 4 Event Cards that start an Exploration to the 
+Event Card Deck.
+If one of these 4 Event Cards is drawn during a Travel Phase 
+you may decide to undertake an Exploration as a normal 
+Side Mission, but you will not mark any titles in the Active 
+Side Missions section of the Campaign Sheet. If you decide 
+to undertake an Exploration, this will compulsorily be the 
+next Mission you play.
+Otherwise, if you decide not to undertake an Exploration, 
+discard the Event Card.
+21
+Exploration Setup
+Explorations are Missions that are randomly generated 
+using 3 types of cards.
+Follow these steps to set up an Exploration.
+1. Shu e the Exploration Cards and draw one randomly. 
+ is card provides the following information: A
+Mission Title, B a narrative text that introduces  e 
+Mission, C Paragraph to be read in the Plotbook 
+section in this rulebook .  e 7 Explorations available 
+with this rulebook are numbered E1 through E7.
+The Battle of the Oranges
+You enter a small town decorated for the 
+holidays.  e smiling inhabitants who  ll 
+the streets welcome you and invite you to 
+participate in the village festival.  e main 
+event of the celebration is the traditional 
+"Battle of the Oranges," and you will be the 
+guests of honor! What is this festival about? 
+It takes little time to realize it is a classic 
+race, hindered however by the continuous 
+throwing of oranges by the population. You 
+will be allowed to defend yourself in order 
+to reach the  nish line. But now enough 
+with the delays, the people are getting 
+anxious,. Let the battle begin!
+◆ Read E1-1.
+You enter a small town decorated for the 
+A
+B
+to reach the  nish line. But now enough 
+with the delays, the people are getting 
+anxious,. Let the battle begin! C
+2. Shu e the Faction Cards and randomly draw one. 
+ is card indicates the Faction of Enemies you will 
+face in  e Mission.
+3. Read the paragraph indicated on the Exploration Card 
+which will provide you with a small introduction and 
+the Map. You may use any Tile available to you as long 
+as it is of the indicated size. Place the Tiles, Heroes and 
+Scenic Elements indicated as shown on the map.
+4.  e number of Random Scenic Elements you will 
+need to place is indicated for each Tile.  e Tiles must 
+be set up one at a time. Choose one of the Tiles that 
+form the Map. Shu e the Scenic Element Cards and 
+randomly draw a number of them equal to the number 
+indicated for the chosen Tile. A er this, reveal them 
+one at a time and place the Scenic Element represented 
+on the Card, following its Placement rules. If a Scenic 
+Element cannot be placed (for any reason) discard the 
+card and do not place any Scenic Elements. Continue 
+placing Scenic Elements until you reveal all the Cards 
+drawn for the chosen Tile, then repeat this process 
+for all the other Tiles that make up the Map (always 
+setting them up one at a time). If a Map shows Scenic 
+Elements already placed, the random ones are in 
+addition. Unless they are indicated with a speci c icon, 
+Scenic Elements already placed on the Map have no 
+special rule.
+5. Perform the Enemy Dra s indicated to place all 
+Enemies present at the beginning of  e Mission. If 
+there are not enough Models for the Drawn Enemy to 
+occupy all the Squares with their Rank symbol marked 
+on the Battle eld, repeat the Dra until all Enemies of 
+a given Rank have been placed on the Map.
+6. Once the Map is set up, follow the directions for setting 
+up the Horologium and read the rules in the box titled 
+" e Mission."
+21
+Shu e the Faction Cards and randomly draw one. 
+ is card indicates the Faction of Enemies you will 
+Read the paragraph indicated on the Exploration Card 
+which will provide you with a small introduction and 
+the Map. You may use any Tile available to you as long 
+as it is of the indicated size. Place the Tiles, Heroes and 
+ e number of Random Scenic Elements you will 
+need to place is indicated for each Tile.  e Tiles must 
+be set up one at a time. Choose one of the Tiles that 
+form the Map. Shu e the Scenic Element Cards and 
+randomly draw a number of them equal to the number 
+indicated for the chosen Tile. A er this, reveal them 
+one at a time and place the Scenic Element represented 
+22
+ is 3D Scenic Element can be used in all Missions that 
+include a Tower, instead of using the 2 stacked 3x3 Houses
+1 3D Tower
+Tower
+Scenic Element Cards
+◆  ese 25 cards are mainly used in Exploration Side 
+Missions.
+◆  ey feature the  Health of each Scenic Element that 
+can be attacked by the Heroes A .
+◆ A Hero may attack a Scenic Element within the  of 
+one of their Attacks. A  Attack Test in icts 1  to 
+a Scenic Element for each die that obtains a  with a 
+result of 5 or more.
+◆ Some Scenic Elements also have a   reat Level, and 
+can therefore also be attacked by Enemies B .
+◆ An Enemy attacks a Scenic Element that is in their  if 
+there are no Heroes with a  equal to or greater than 
+that of the Scenic Element or if it prevents them from 
+reaching the Hero they are to target.
+◆ An Enemy may attack a Scenic Element within the 
+of one of their Attacks and automatically in icts a 
+number of  to it equal to the value of  of the Attack 
+used.
+◆ Scenic Elements cannot be attacked with Attacks.
+◆ When a Scenic Element su ers the last  it is removed 
+from the Battle eld. Some Scenic Elements may have an 
+e ect that activates when they are removed.
+◆  e Card of a Scenic Element contains the Placement 
+rule, which indicates how it is to be placed on the Tile in 
+which it is drawn C .
+◆ Each card shows one or more special rules that the 
+Scenic Element has D .
+-
+Placement: 
+Squares, within 5 Squares of one another, anywhere place the two Trapdoors in 2 di erent 
+on the Battle eld.
+Secret Passage: If a Hero is in a Square with a Trapdoor, they can spend 3 to place their Model in the Square with the other Trapdoor.
+Trapdoor
+Squares, within 5 Squares of one another, anywhere place the two Trapdoors in 2 di erent 
+ If a Hero is in a Square with a to place their Model 
+3D
+Placement: the Bush occupies 1 Square and cannot be placed on a Square adjacent to a Non-Zone or a 
+Bulky Scenic Element.
+Hideout: If a Hero adjacent to a Bush is the target of a Attack performed by an Enemy not adjacent to them, they gain 1 automatic  when performing the Defense Test.
+Bush
+the Bush occupies 1 Square and cannot be placed on a Square adjacent to a Non-Zone or a 
+ If a Hero adjacent to a Bush is the Attack performed by an Enemy not adjacent to them, they gain 1 automatic 
+Apple Tree
+Bulky, Blo ing, 
+Placement: the Apple Tree occupies 1 Square and cannot be placed on a Square adjacent to a Non-Zone 
+or a Bulky Scenic Element.
+An apple a day: once per Mission, a Hero adjacent to an Apple Tree can spend 1 to roll 1, if they gain  discard 1. A Hero can spend a maximum of 3 to perform this Action.
+3D
+Apple Tree
+Bulky, Blo ing, 
+Towering
+the Apple Tree occupies 1 Square and cannot be placed on a Square adjacent to a Non-Zone 
+ once per Mission, a Hero adjacent to an Apple Tree can spend 1 to roll 1 . A Hero can spend a to an Apple Tree can spend 1
+ to perform this Action.
+3D
+Placement: the 4x2 House occupies 8 Squares. Maximum one Building per Tile.
+ = 0 
+Collapse: occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building must perform a  Test. For each  which does not produce a  the Hero su ers 1 Unblockable .
+Apple Tree 4x2 House
+Bulky, Blo ing, 
+Towering, Interactive 3
+the 4x2 House occupies 8 Squares. 
+ occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building which does not the Hero su ers 1 Unblockable 
+3x3 House
+ 12 3D Bulky, Blo ing, 
+Towering, Interactive
+Placement: the 3x3 House occupies 9 Squares. Maximum one Building per Tile.
+ = 0 
+Collapse: occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building must perform a  Test. For each  which does not 
+produce a  the Hero su ers 1 Unblockable .
+25 Scenic Element Cards
+3x3 House
+ 12 3D Bulky, Blo ing, 
+Towering, Interactive
+Placement: the 3x3 House occupies 9 Squares. Maximum one Building per Tile.
+ = 0 
+Collapse: occurs when the Building su ers its  nal , each Hero adjacent to or on top of this Building must perform a  Test. For each  which does not produce a  the Hero su ers 1 Unblockable .
+
+A
+Maximum one Building per Tile.
+
+ occurs when the Building su ers its  nal 
+B
+D
+Placement: C Maximum one Building per Tile.
+23
+Side Missions - Encounters
+Components
+9 Mission Cards
+
+
+
+
+
+ e Butcher of Rocca Civetta: each time Laetus in icts the 
+last 
+ en, if the sum of the Mystery Tokens on this Card and on 
+ to a Student, place a Mystery Token on this Card. 
+ is 4, read S1-3.
+5
+14
+7
+7
+12
+
+
+
+
+
+
+
+Fate, Trample
+ each time Laetus in icts the 
+ en, if the sum of the Mystery Tokens on this Card and on 
+ to a Student, place a Mystery Token on this Card. 
+12
+Laetus
+S1 
+Map
+4B
+8B 7B
+2A
+Horologium
+Horologium
+Start: 3.00
+Capricorn: 
+Acquarius: 
+Heroes
+Student
+Pisces: Laetus, Warrior
+Aries: Alabastro, Lancer
+Taurus: Event Token
+Scorpio: Event Token
+◆ Read  S1-2.
+9 Mission Cards
+
+Map
+7B
+ S1 
+back to rocca 
+civetta
+
+
+2 S1 and S2 
+Reward Cards
+1 Rocca Civetta 
+3D Element
+1“A Letter From the Past”
+Event Card
+The Butcher Weapon
+3 1 +1     
+ Lethal , Distract.
+The Butcher Weapon
++1
+
+Distract.
+The Butcher Weapon
+Honorary Degree  Artifact
+When you perform a  Test indicated by an instruction on 
+the Plotbook, you may roll 1 additional .
+Honorary Degree  Artifact
+1“A Letter From the Past”
+A Letter from the Past
+
+A boy wearing a familiar green robe 
+rea es you. Tired and sweaty, he begs 
+you to get to your old s ool in Rocca 
+Cive a. “ e whole university is in 
+danger, an old acquaintance of yours 
+is on the warpath,” he tells you, before 
+passing out… .
+◆You can mark the S1 Secondary 
+Mission - “Back to Rocca 
+Civetta” in the Active 
+Side Missions.
+S1 - Back to Rocca Civetta
+1 Mission Envelope
+S1
+Some Event Cards may allow you to play these types of Side 
+Missions.
+Encounters are in all respects similar to Campaign Missions 
+except that their plot is disconnected from the main plot.
+To play an Encounter, take the Encounter Mission Envelope 
+indicated in the Event Card you kept aside during the last 
+Travel Phase. Follow the instructions given in  e Mission 
+Cards inside, exactly as if it were a Campaign Mission.
+You may add the 4 Encounter Side Missions contained in 
+this expansion to your Campaign. Add the Event Card of 
+ e Mission you want to add to the Campaign to the Events 
+deck.
+ ese 4 Missions follow the rules for Side Missions - 
+Encounters described in the Nova Aetas Renaissance 
+Rulebook.
+24
+11 Mission Cards
+The Mission
+Heroes' Goals
+Open the Stone Door.
+Heroes' Defeat Conditions 
+◆  e Horologium strikes 10:00 and the Hero's 
+Goals have not been met: read S4-57.
+Mission's Actions
+3 - Interact with the Stone Door: if a Hero is in 
+the Stone Door Square, read S4-31.
+3 - Inspect the Refectory (Red Room): if a 
+Hero is on a Red Room Square, read S4-46.
+3 - Inspect the Gear Room (Blue Room): if a 
+Hero is on a Blue Room Square, read S4-2.
+3 - Inspect the Hall of Treasures (Green 
+Room): 
+
+if a Hero is on a Green Room Square, read 
+S4-17.
+3 - Inspect the Warehouse (Yellow Room): if a 
+Hero is on a Red Room Square, read S4-32.
+◆ Start the Mission.
+ e Horologium strikes 10:00 and the Hero's 
+if a Hero is in 
+S4 
+Goals have not been met: read S4-57.
+ - Interact with the Stone Door: if a Hero is in 
+S4-31.
+ - Inspect the Refectory (Red Room): if a 
+Hero is on a Red Room Square, read S4-46.
+ - Inspect the Gear Room (Blue Room): if a 
+Hero is on a Blue Room Square, read S4-2.
+ - Inspect the Hall of Treasures (Green 
+if a Hero is on a Green Room Square, read 
+ - Inspect the Warehouse (Yellow Room): 
+S4-32.
+if a 
+
+Map
+Horologium
+Start: 8:00
+Capricorn: Heroes
+◆ Read  S4-16.
+S4 
+7A
+1V
+Map
+The Mission
+ S4 
+in the fox's den
+
+1 S5
+Reward Card
+1 “The Watchmaker”
+Event Card
+Arm Watch  Artifact
+You can Activate before the 
+Enemies with the same  value as you.
+Arm Watch  Artifact
+The Watchmaker
+
+Lorenzo della Volpaia, a famous Florentine 
+wat maker, is in the habit of throwing 
+grand parties. A er several e orts to be 
+able to a end,  nally a messenger tra s 
+you down and delivers the invitation… 
+◆You can mark the S4 Side Mission 
+- “In the Fox’s Den” in the Active 
+Side Missions.
+1 Fox Tile 
+(Double-Sided)
+4 Achievement Cards
+Achievement  36
+Clue
+I am legless but I travel, I 
+can be light or heavy.
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+that contains the object 
+corresponding to your 
+answer (see ).
+ Achievement
+I am legless but I travel, I 
+can be light or heavy.
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+Achievement
+Clue
+Achievement  35
+Clue
+If you look at me, I look at you. If you don't look at me, I 
+keep on looking at you.
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+that contains the object 
+corresponding to your 
+answer (see ).
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+).
+ 35 Achievement
+If you look at me, I look at 
+If you don't look at me, I 
+keep on looking at you.
+If you think you know the 
+Achievement
+Clue
+Achievement  34
+Clue
+I can tell you many things 
+even without uttering a word.
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+that contains the object 
+corresponding to your 
+answer (see ).
+ 34 Achievement
+I can tell you many things 
+even without uttering a word.
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+that contains the object 
+corresponding to your 
+answer (see ).
+Achievement
+Clue Clue  Achievement  33
+If you think you know the 
+correct answer, interact 
+with a Square in the room 
+that contains the object 
+corresponding to your 
+answer (see ).
+I am not a king but I own a 
+crown, I am not a clock but the hours I chime.
+
+Clue  Achievement
+S4 - In the Fox's Den
+1 Mission Envelope 
+S4
+1V
+6 Mission Cards
+
+
+
+
+
+
+
+
+
+4
+6
+7
+6
+12
+Girolamo Riario
+ e Stubborn Captain: if Girolamo Riario is defeated, 
+read  S2-7.
+
+
+Girolamo Riario
+
+Fate, Runner, 
+Trample
+if Girolamo Riario is defeated, 
+Map
+Horologium
+Start: 6.30
+Cancer: Heroes
+Leo: Swiss Keeper, Papal Guard
+Virgo: Gian Pietro Carafa 
+Sagittarius: 
+Gemini: Event Token
+Girolamo Riario, Event Token
+◆ Read  S2-2.
+1B
+11B
+7B
+2B 8B
+5B
+6B
+10B
+9B
+W
+10B
+9B
+W
+S2 
+Map
+Girolamo Riario, Event Token
+11B
+7B
+8B
+5B
+6B
+
+ S2 
+the convoy of 
+riario
+
+
+1 S3
+Reward Card
+1 “For a Piece of Bread”
+Event Card
+Flower of Riario
+ Weapon
+2  1 +0
+   
+Weak
+ Bleed. If the target of the A ack already has a Bleeding Token, they gain an Eviscerated Token.
+ Weapon
+Flower of Riario
+ Weapon
+1 “For a Piece of Bread”
+For a Piece of Bread
+
+ In a nearby village, tempers are running 
+high, the people are tired of the tributes 
+demanded by the Vatican. Nerves are 
+about to fray, and perhaps you could take 
+advantage of it.
+◆You can mark the S2 Side Mission 
+- “ e Convoy of Riario” in the 
+Active Side Missions.
+S2 - The Convoy of Riario
+1 Mission Envelope 
+S2
+8 Mission Cards
+Map
+Horologium
+Start: 
+Capricorn: 
+10:00
+Heroes
+Aquarius: Arquebusier
+Pisces: 
+Aries: 
+Technomancer, Doll 
+Virgo: 
+Dark Magician
+Event Token
+◆ Read  S3-2.
+1A
+2A
+11A
+S3 
+Map
+Horologium
+Start: 10:00
+Capricorn: 
+Aquarius: 
+Heroes
+Arquebusier
+Pisces: Technomancer, Doll 
+Aries: Dark Magician
+Virgo: Event Token
+◆ Read  S3-2.
+1A
+2A
+11A
+S3 
+Map
+Map
+1A
+2A
+ S3 
+dear jack… 
+
+
+1 S4
+Reward Card
+1 “The Marquis's 
+Business”
+Event Card
+Rotten Head
+ Armor
+Resistance 1
+Once per Mission, you may 
+choose to gain a Cursed Token. If you do, you can 
+discard 1 on this card.
+Rotten Head
+ Armor
+1 “The Marquis's 
+The Marquis’s Business
+
+A nice-looking old man introduces 
+himself to you, “Aronne. How do you 
+do, gentlemen.”  en he adds, “A local 
+nobleman is behaving strangely,  rst he 
+tells me “Aronne, you work well… ”  en 
+when it’s time for the bill, he was like a 
+di erent person. Please make him pay me, 
+I don’t have any money.”
+◆You can mark the S3 Side 
+Mission - “Dear 
+Jack...” in the 
+Active Side 
+Missions.
+S3 - Dear Jack...
+1 Mission 
+Envelope
+S4
+25
+7 Mission Cards
+The Mission
+Heroes' Goals
+◆ Aracne is Defeated: reveal .
+Heroes Defeat Condition
+◆ If at least three Heroes are KO: reveal . ◆ If a card is to be drawn from the Aracne deck, but 
+it is not possible to do so: reveal .
+Special Rules
+Spider Web Squares: a Square with a Spider Web is 
+considered occupied by an Enemy Model. If a Hero 
+is adjacent to a Spider Web, they cannot perform 
+Actions other than Drive Away the Spiders and 
+Burn the Webs.
+◆ Read the back of .
+. If a card is to be drawn from the Aracne deck, but 
+ a Square with a Spider Web is 
+considered occupied by an Enemy Model. If a Hero 
+is adjacent to a Spider Web, they cannot perform 
+ and 
+AR 
+Aracne is Defeated: reveal .
+If at least three Heroes are KO: reveal  If a card is to be drawn from the Aracne deck, but 
+it is not possible to do so: reveal .
+ a Square with a Spider Web is 
+considered occupied by an Enemy Model. If a Hero 
+is adjacent to a Spider Web, they cannot perform 
+Drive Away the Spiders and 
+
+2A
+Map 1A
+3A 4A
+Horologium
+Start: 9:00
+Capricorn: Heroes
+Aquarius: Aracne
+◆ Read the back of .
+1A
+4A
+AR 
+The Mission
+Map
+ AR 
+aracne hunt
+1 “The Mother of Spiders”
+Event Card
+The Mother of Spiders
+
+Suddenly, a  gure covered in a strange 
+white hairy fuzz emerges from the trees 
+and plummets into the street, falling 
+down in front of you. You help him to 
+his feet and with disgust discover that 
+the sort of snow-white armor is made of 
+sticky spider webs.  e man thanks you 
+and, trembling, tells you that he managed 
+to escape from a monstrous talking spider. 
+He tells you that he was on the trail of this 
+monster because he knows that it guards 
+precious treasures...
+◆ You can mark the AR Side 
+Mission - “Aracne Hunt” 
+in the Active Side 
+Missions.
+4 Reward Cards
+Carapace
+Shield
+Immunity: Poisoned
+Shield
+Tiara of the Jinx
+Your Spells with Target 
+ gain: 
+  Distract
+Artifact
+Tiara of the Jinx
+Weapon Artifact Artifact Sting
+Pierce
+At the beginning of the 
+Mission place a Poisoned Token on this card.
+3  1 0
+   
+Weapon
+At the beginning of the Poisoned Token on this card.
+1 0
+ 
+Weapon
+Sting
+3 1 +1   
+ 
+Rea 
+  discard 1.
+Black Widow
+
+Weapon
+
+Weapon
+Hunt Missions
+ is expansion adds two new Hunt Missions to be included 
+in any Nova Aetas Renaissance Campaign from the Core 
+Game or any Expansion.
+If you decide to use these Hunts in your Campaign, add 
+the Event Cards found in this box to the Core Game Event 
+Cards deck.
+Aracne and Chimera are Hunt Missions and follow all the 
+rules of these types of Missions, described in the Nova 
+Aetas Renaissance Core Rulebook.
+Aracne
+Components
+Aracne
+1 Aracne
+Activation
+Token
+6 Infested/Cocoon
+Tokens
+6 Spider Web 
+Tokens
+16 Prey Action 
+Cards
+1 Mission Envelope
+Aracne places a Spider Web Token 
+as close as possible to herself and 
+adjacent to the farthest Hero.
+Aracne places a Spider Web Token 
+as close as possible to herself and 
+adjacent to the nearest Hero.
+She then performs the following 
+Attack on both Heroes.
+1 3 Infesting 
+Aracne places a Spider Web Token 
+as close as possible to herself and 
+adjacent to the farthest Hero.
+Aracne places a Spider Web Token 
+as close as possible to herself and 
+adjacent to the nearest Hero.
+She then performs the following 
+Attack on both Heroes.
+, Poison
+Infesting Webs
+Aracne places herself adjacent to 
+the target Hero and performs the 
+following Attack on them. If the 
+target Hero has an Infested Token 
+or Cocoon Token, this Attack 
+gains +1.
+2 2
+16 Prey Action 
+7+
+
+Aracne places herself adjacent to 
+the target Hero and performs the 
+following Attack on them. If the 
+target Hero has an Infested Token 
+ Token, this Attack 
+Pierce
+Ravenous 
+Claws 
+Aracne places herself in the center 
+of the Battle eld.
+All Heroes in the  of Aracne gain 
+an Infested Token. If they already 
+have the Infested Token, they turn 
+it over to the Cocoon side.
+Swarm of 
+Spiders
+3 1
+AR
+6 Spider Web 
+26
+Bounty
+Instead of waiting to draw the Event Card “ e Mother of 
+Spiders” and “ e Beast of Ages”, at any point in the Main 
+Campaign, you can mark “AR - Aracne Hunt” and “C1 
+- Chimera Hunt” in the slot dedicated to the Active Side 
+Missions, and play them as if you had drawn the respective 
+Event Card. If you decide to use this rule for one or both 
+of these Hunt Missions, do not shu e the corresponding 
+Event Card into the Event Card deck until a Mission Card 
+tells you to do so.
+The Mother of Spiders
+
+Suddenly, a  gure covered in a strange 
+white hairy fuzz emerges from the trees 
+and plummets into the street, falling 
+down in front of you. You help him to 
+his feet and with disgust discover that 
+the sort of snow-white armor is made of 
+sticky spider webs.  e man thanks you 
+and, trembling, tells you that he managed 
+to escape from a monstrous talking spider. 
+He tells you that he was on the trail of this 
+monster because he knows that it guards 
+precious treasures...
+◆ You can mark the AR Side 
+Mission - “Aracne Hunt” 
+in the Active Side 
+Missions.
+Suddenly, a  gure covered in a strange 
+white hairy fuzz emerges from the trees 
+and plummets into the street, falling 
+down in front of you. You help him to 
+his feet and with disgust discover that 
+the sort of snow-white armor is made of 
+sticky spider webs.  e man thanks you 
+and, trembling, tells you that he managed 
+to escape from a monstrous talking spider. 
+He tells you that he was on the trail of this 
+monster because he knows that it guards 
+The Beast of Ages
+
+Word has rea ed you that the nearby 
+mountains are the hunting grounds of a 
+monstrous beast that a a s and devours 
+anyone who ventures into the wilderness.
+◆You can mark the C1 Side Mission 
+- “Chimera Hunt” in the Active 
+Side Missions.
+6 Mission Cards
+ e Chimera places itself adjacent 
+to the target Hero and performs 
+the following Attack on them.
+2 3 Head Butt
+ Stun, Chimerical
+ e Chimera places itself adjacent 
+to the target Hero and performs 
+the following Attack on them.
+Head Butt
+ e Chimera places itself adjacent 
+to the farthest Hero and performs 
+the following Attack on them.
+1 2 3
+ e Chimera places itself adjacent 
+to the farthest Hero and performs 
+the following Attack on them.
+
+ Poison, Chimerical
+Sudden 
+Attack 2
+Chimera
+HUNT
+1 “The Beast of Ages”
+Event Card
+The Beast of Ages
+
+Word has rea ed you that the nearby 
+mountains are the hunting grounds of a 
+monstrous beast that a a s and devours 
+anyone who ventures into the wilderness.
+◆You can mark the C1 Side Mission 
+- “Chimera Hunt” in the Active 
+Side Missions.
+4 Reward Cards
+Lion Bow
+Weapon
+4 2-6 +1     
+ Distract; If you obtain  place a Bleeding Token on this card.
+Lion Bow
+Weapon
+
+Weapon
+Snake Hood
+Your A acks gain:
+ Poison 
+Armor
+ Token on 
+Snake Hood
+Armor of Vengeance Armor Armor
+Resistance 1
+Each time you gain a Negative 
+Status Token, you can place an 
+identical one on one of your Weapons.
+Armor
+Armor of Vengeance
+Resistance 1
+Each time you gain a Negative 
+Status Token, you can place an 
+identical one on one of your Weapons.
+Armor
+Armor of Vengeance
+3 1 0     
+  Poison,
+ Bleed, 
+ Stun
+Mace of the Ages
+3     
+
+Mace of the Ages Weapon
+
+Weapon
+Chimera
+Chimera
+1 Chimera
+Activation 
+Token
+18 Prey Action 
+Cards
+1 Mission Envelope
+ e Chimera places itself adjacent 
+to the target Hero and performs 
+the following Attack on them.
+2 3 Head Butt
+ Stun, Chimerical
+ e Chimera places itself adjacent 
+to the target Hero and performs 
+the following Attack on them.
+Head Butt
+ e Chimera places itself adjacent 
+to the farthest Hero and performs 
+the following Attack on them.
+ Poison, Chimerical
+1 2
+18 Prey Action 
+ e Chimera places itself adjacent 
+to the farthest Hero and performs 
+the following Attack on them.
+8+
+
+ Poison, Chimerical
+Sudden 
+Attack 
+ e Chimera places itself adjacent 
+to the nearest Hero and performs 
+the following Attack on them.
+1
+ 8+
+ 1
+ 
+Pierce,  Poison, Chimerical
+Bite
+2 1
+C1
+27
+Large Models and Area Effects
+Large Models and Line of Sight
+A Large Model is considered to be targeted by an Attack 
+with the Area Trait if at least one of the Squares it occupies 
+is within the Area of the Attack.
+If a Large Model is the target of an Attack with the Area 
+Trait, it su ers only the E ect intended for the target, even 
+if it occupies multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area 
+Trait and occupies more than one Square within the Area, 
+it su ers the additional E ect only once.
+A Large Model always has a valid Line of Sight on all other 
+Models and vice versa
+Large Models
+Some Models occupy more than a single Battle eld 
+Square.  ese Models are called Large Models.  ese 
+Models occupy only a single Square during movement. In 
+other words, while moving, a Large Model is considered 
+as a normal Model, and then returns to occupying more 
+Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they 
+choose any of the Squares occupied by the Model and count 
+starting from the chosen Square (a normal-sized Model 
+can be used to simulate the movement of the Large Model). 
+When the Large Model  nishes its movement, the players 
+place the Model so that the Squares occupied include the 
+Square where it  nished its movement. If placement is not 
+possible because the required Squares (usually 4) are not all 
+available, players refer to the following rules:
+◆ If there are Models occupying the Squares, the Large 
+Model pushes the Models occupying them into adjacent 
+available Squares or the nearest available Square.
+◆ If there are Scenic Elements occupying Squares, place 
+the Large Model in Squares that are available or occupied 
+by other Models. If this is not possible, the Large Model 
+ends its Movement in a Square that allows its placement.
+27
+Large Models and Line of Sight
+A Large Model is considered to be targeted by an Attack 
+with the Area Trait if at least one of the Squares it occupies 
+is within the Area of the Attack.
+If a Large Model is the target of an Attack with the Area 
+Trait, it su ers only the E ect intended for the target, even 
+if it occupies multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area 
+Trait and occupies more than one Square within the Area, 
+it su ers the additional E ect only once.
+A Large Model always has a valid Line of Sight on all other 
+Models and vice versa
+Spoleto 
+Tre Pietre
+Assisi
+Gualdo Tadino
+Città di Castello
+San Marino
+Venice
+Perugia
+Orvieto
+Siena
+Arezzo
+Lucca
+Modena
+Greccio
+3
+3 2
+2
+2
+2
+2
+2
+2
+3
+1
+1
+1
+2
+1
+1
+3
+1
+1
+1
+Rome
+ Village
+ Town
+Stretch Goals
+Side Missions - Explorations
+Plotbook
+Spoleto 
+Tre Pietre
+Assisi
+Gualdo Tadino
+Città di Castello
+San Marino
+Venice
+Perugia
+Orvieto
+Siena
+Arezzo
+Lucca
+Modena
+Greccio
+3
+3 2
+2
+2
+2
+2
+2
+2
+3
+1
+1
+1
+2
+1
+1
+3
+1
+1
+1
+Rome
+ Village
+ Town
+30
+Horologium
+Start: 6:30
+Cancer: Heroes 
+Leo:  Enemies
+Virgo:  Enemies
+E1-2
+You are the winners of this year’s Battle!  e townsfolks acclaim 
+their new heroes and celebrations goes on until dawn, with food 
+and wine at will. When you leave, the villagers give you a basket 
+full of gi s to thank you for playing with them!
+◆ Loot: none. Gain 12 and discard all Injuries gained 
+during this Mission.
+◆ Put the Event Card that started this Exploration Mission 
+back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E1-3
+You do your best, but there are too many of those damned oranges 
+and the aim of the villagers is deadly! You are knocked unconscious 
+and covered in oranges. When you wake up, the townsfolks are 
+still celebrating, mocking you for your poor performance.  ey 
+o er you a room to let you recover, but your hurt pride forces you 
+into a hurried depart.
+◆ Loot: none. Gain 8.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E1-4
+You are up against some professionals, and you  gure you better 
+save your pride–pretending to go recover some oranges out of the 
+game  eld, you dive in the woods and disappear.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission
+
+
+E1-1
+8A
+ x1 Random Scenic Element
+x2 Random Scenic Element
+2A
+
+
+
+
+
+
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+The Mission
+Heroes' Goals
+◆ At least two Heroes are in the Orange Area: read E1-2.
+Heroes' Defeat Condition
+◆ At least 3 Heroes are KO: read E1-3.
+◆  e Horologium strikes 9:10: read E1-3.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+retreats from  e Mission. If you do, read E1-4.
+Special Rules
+Rain of Oranges: all the Enemies on the Battle eld replace their 
+Attacks with the following Attack::
+ Hinder
+3 4 3 4+
+   
+If the target of this Attack has a Hindered Token, the  characteristic 
+of this Attack becomes 5+.
+◆ Start  e Mission.
+E1 
+The Battle of 
+the Oranges
+31
+Horologium
+Start: 6:00
+Cancer: Heroes 
+Leo:  Enemies
+Virgo:  Enemies
+E2-2
+Appealing to your strength and a stroke of luck, you repelled the 
+enemies.  e ambush was a failure, and it earned you quite a bit 
+of loot! It was a good day, a er all…
+◆ Loot: none. Draw 3 random Reagent Cards from each 
+deck.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck. 
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E2-3
+You miraculously escape a perfectly devised ambush alive–though 
+badly beaten. If you hope to survive in these lands you must be 
+more careful and sleep with one eye open.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E2-4
+Resisting such an assault is not feasible, and you learned by 
+experience that sometimes a strategic retreat is the best choice.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+
+
+E2-1
+8A
+x1 Random Scenic Element
+1A x1 Random Scenic Element 2A
+8A
+
+
+
+ 
+
+
+
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+The Mission
+Heroes' Goals
+◆  e Horologium strikes 9:00 and no Hero is KO: read E2-2.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E2-3.
+◆  e Horologium strikes 9:00 and at least one Hero is KO: read E2-
+3.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E2-4.
+◆ Start  e Mission.
+E2 
+Ambush!
+32
+Horologium
+Start: 6:40
+Cancer: Heroes 
+Leo:  Enemies
+Virgo:  Enemies
+Aquarius: Leader 
+E3-2
+You manage to beat the enemy band, their leader is dead and the 
+surviving bandits have  ed.
+◆ Loot: none. Draw 3 random Reagent Cards from each 
+deck.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E3-3
+Your enemies are a larger bite than you can chew.
+Maybe undertaking this mission for but a few coins was not a 
+good idea. You  ee before it’s too late.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E3-4
+ e unrelenting fury of your opponent makes your legs tremble. 
+You understand you can’t win – luckily, you know well how to 
+make yourself scarce.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+
+
+E3-1
+The Mission
+Heroes' Goals
+◆ At least two Heroes are in the Green Area, read E3-2.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E3-3.
+◆  e Horologium strikes 10:00: read E3-3.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E3-4.
+Special Rules
+Ignore step 2 of the Exploration Mission setup. Perform a Dra using 
+the Cardinal, Noble and Bully cards – the card you draw represents the 
+Mission Leader and indicates the Faction to use for this Mission.
+Unstoppable Fury: when the Leader Model ends its Activation 
+adjacent to one or more Heroes, adjacent Heroes su er 1 Unblockable 
+ .  e Leader Is Here!: when the Horologium minute hand reaches the Aquarius Sector, place the Leader Model in the Red Area and its 
+Activation Token in the Sector following the Active one.
+You Shall Not Pass: Enemies on Tile 2A are Waiting until a Hero enters their .
+ e Furious’ Leader has the following stats:
+◆
+5 8 7 7 18
+ : farthest Hero - standard
+Start  e Mission.
+1A
+2A
+7A
+6A
+8A
+
+
+
+
+
+
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+E3 
+Furious
+33
+
+
+!
+E4-1
+1A 2A
+6A
+5A
+x2 Random Scenic Element
+x1 Random Scenic Element
+
+
+
+
+
+
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Focus Points
+The Mission
+Heroes' Goals
+◆  e Horologium strikes 9:30 and there is at least one Hero in each 
+Green Area, read E4-2.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E4-3.
+◆  e Horologium strikes 9:30: read E4-3.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E4-4.
+Special Rules
+Unblocking the Block: while a Hero is within a Green Area, their 
+is considered to be 4 points higher.
+Special Rules
+Reinforcements!: Each time the Horologium minute hand reaches the 
+Sector with the Event Token, perform the following Enemy Dra for 
+each Focus Point:
+Dra : , Ignore Horde.
+Place the generated Models in the Point of Interest for which you 
+performed the Dra . If necessary, place these Enemies’ Activation 
+Tokens in the Aquarius Sector of the Horologium.
+◆ Place an Event Token on Capricorn.
+◆ Start  e Mission.
+Horologium
+Start: 6:30
+Cancer: Heroes 
+Leo:  Enemies
+Virgo:  Enemies
+Capricorn: Event Token
+E4-2
+You routed these rogues and cleared the street.  e inhabitants of 
+the area would be really grateful… if only anyone had witnessed 
+your endeavors. Still, you feel you carried out your daily good 
+deed!
+◆ Loot: none. Draw 3 random Reagent Cards from each 
+deck.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E4-3
+ ere are too many enemies to break the roadblock. At least 
+you manage to  ee without paying the toll. Who knows if the 
+inhabitants of the area will be so lucky…
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E4-4
+You don’t think you could ever break the roadblock. and see no 
+way to get through. Your only chance is withdrawing. You could 
+come back another time and hope for a weaker resistance.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E4 
+Roadblock
+34
+The Mission
+Heroes' Goals
+◆ Rinaldo came back to his senses and the Gipsy is defeated: read 
+E5-2.
+Enemies’ Goals
+◆ Perform Patrol.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E5-3.
+◆  e Horologium strikes 1.00: read E5-7.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E5-4.
+Special Rules:
+Stealthy Movement: place the Stealth Token in the empty slot below. 
+ e Stealth rule is active until the Stealth Token reaches .
+ ey found us!: if the Stealth Token reaches , read E5-5.
+  7 5 6
+5
+My Noble Rinaldo: while the Noble (Rinaldo) and the Gipsy are 
+within 5 of each other, they gain the following bonuses: 
+And the following Skills: 
+Bastion, Shield, Fate, Immunity: Negative Status.
+Rinaldo Came Back to His Senses!: when Rinaldo gains the last , 
+read E5-6.
+Antidote: A Hero that gains a Reagent Card through a Mission’s 
+Action must place it near the Battle eld, face up. When all 3 Reagent 
+Cards are placed this way, it is possible to use the Mission’s Action 
+Drink the Antidote (only if adjacent to Rinaldo). Discard the Reagent 
+Cards used for the Antidote.
+Mission’s Actions
+2 - Mandrake’s Root: when adjacent to the Red Focus Point, the 
+Hero gains the Mandrake Elementum Card.
+2 - Distilled Belladonna: when adjacent to the Green Focus Point, 
+the Hero gains the Belladonna Elementum Card.
+2 - Silver Filings: when adjacent to the Blue Focus Point, the Hero 
+gains the Silver Pecunia Card.
+3 - Drink the Antidote: if the Heroes have the following Reagents: 
+Mandrake, Belladonna and Silver they can use this Action while 
+adjacent to Rinaldo. If every condition has been met, read E5-6.
+◆ Start  e Mission.
++1 +1 +1 / +10
+E5-1
+ anks to the woman’s directions, you reach a nearby wood. You 
+locate the noblewoman’s estate.  e nobleman you are looking for, 
+Rinaldo, is tirelessly following the obnoxious orders of an unkempt 
+woman.  e poor man is not the only one passively enduring the 
+woman’s vexation–many other men work in the area, moving 
+in an unnatural, almost mechanical way.  ey are probably all 
+under the in uence of a powerful love potion, so you must hurry 
+and  nd the ingredients to concoct an antidote. Discretion is of 
+the utmost importance, however, if you don’t want the witch to 
+send her victims a er you.
+
+
+ 
+
+1A
+2A
+3A
+11A
+x1 Random Scenic Element
+x1 Random Scenic Element
+x1 Random Scenic Element
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Focus Points
+ Gipsy
+ Noble (Rinaldo)
+E5 
+Skirmish
+35
+Horologium
+Start: 6:40
+Cancer: Heroes 
+Leo:  Enemies
+Virgo:  Enemies
+Aquarius: Rinaldo , Gipsy 
+E5-2
+You successfully thwarted the witch’s plans, freeing all the men 
+she subdued.
+◆ Loot: none. Draw 3 random Reagent Cards from each 
+deck.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E5-3
+Your enemies are a larger bite than you can chew. 
+You  ee before it’s too late.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E5-4
+You don’t like how things are going – you leave things as they are 
+and run away. 
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+
+
+E5-5
+Your research is interrupted by a yell – one of the subdued men 
+has found you!  e shouts quickly multiply and soon the whole 
+estate is teeming with hostile men. You are forced to unsheathe 
+your weapons.
+◆  e Enemies’ Goal becomes “Attack the Heroes.”
+◆ Continue your Activation.
+E5-6
+Rinaldo blinks and it’s like he wakes from a long sleep. You quickly 
+explain you were sent by his loved one to free him from the witch. 
+Once he gets things straight, Rinaldo joins you to get vengeance 
+over his captor.
+◆ Discard all of Rinaldo’s  and Negative Statuses.
+◆ From now on, Rinaldo is considered to be an Ally of the 
+Heroes with the following pro le:
+E5-7
+ e subjugated men block your way – reaching Rinaldo to make 
+him come back to his senses seems impossible. You’d better make 
+yourselves scarce.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+
+
+1
+3
+3
+6
+1
+5
+Rinaldo
+ 6
+
++0
+
+1
+
+2
+  Ally, Sturdy
+Pierce
+
+: pari al  più alto tra gli Heroes -1.
+36
+E6 
+Don't Steal 
+from the 
+Thieves' House
+E6-1
+Setup
+3x Mystery Token (Any)
+1x Mystery Token 
+◆ Shu e the Mystery Tokens face down, being careful not 
+to reveal them.  en stack them in a pile and place them 
+near the Battle eld.
+x1 Random Scenic Element
+
+
+
+
+1A
+6A 7A
+x2 Random Scenic Element 2A
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Focus Point
+Horologium
+Start: 8:30
+Cancer: Heroes 
+Leo:  Enemies
+Libra:  Enemies
+Sagittarius: Event Token
+
+
+!
+The Mission
+Heroes' Goals
+◆ If at least two Heroes are in the Green Area and there are no Focus 
+Points on the Battle eld: read E6-2.
+Enemies’ Goals:
+◆ Attack the Heroes.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E6-3.
+◆  e Horologium strikes 11:30: read E6-3.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E6-4.
+Special Rules
+Blocked Road: the Red Area represents a locked gate. If the Heroes 
+do not have  4,they cannot move or Attack Enemy Models through 
+the Red Area.
+Where’s the Key?: when an Enemy Model is defeated, reveal the 
+topmost Mystery Token of the pile. If you  nd  the group gains  
+4. Otherwise, nothing happens.
+Reinforcements!: each time the Horologium minute hand reaches the 
+Sector with the Event Token, perform the following Enemy Dra for 
+each Blue Area: Dra , Ignore Horde.
+Enemies placed during these Dra s cannot leave Tile 1A.
+2 - Recover Stolen Goods: a Hero adjacent to a Focus Point can use 
+this Action to remove it from the Battle eld.
+◆ Start  e Mission.
+E6-2
+You manage to recover the stolen goods and teach a hard lesson to 
+the bandits. You go back to the village to give everything back and 
+you are welcomed with joy and celebrations – the biggest reward, 
+however, is knowing that you didn’t let the children down.
+◆ Loot: none. Gain 15.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E6-3
+You recover a small part of the goods and return to the village 
+almost emptyhanded. You know you disappointed the townsfolks 
+and let the children down.
+◆ Loot: none. Gain 10.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E6-4
+ e bandits are fearsome opponents, you prefer not to risk your 
+lives. Maybe you will try again in the future, using di erent 
+tactics.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+37
+38
+The Mission
+Heroes' Goals
+◆ Find the way out of the marsh.
+Enemies’ Goals
+◆ Attack the Heroes.
+Heroes' Defeat Condition
+◆ If at least 3 Heroes are KO: read E7-6.
+◆  e last Focus Point is removed from the Battle eld; read E7-6.
+◆  e Horologium strikes 9:00: read E7-6.
+Retreat
+◆ During the Activation of any Hero you may decide that the party 
+withdraws from  e Mission. If you do, read E7-7.
+Special Rules
+Hey,  ey’re Running Away!: while a Hero is within 3 of a Focus 
+Point, their  increases by 5.
+Mission’s Actions
+2 - North-Western Trail: if adjacent to the Green Focus Point, read 
+E7-3.
+2 - South-Eastern Steep Slope: if adjacent to the Red Focus Point, 
+read E7-4.
+2 - South-Western Rocky Wall: if adjacent to the Blue Focus Point, 
+read E7-5.
+◆ Start  e Mission.
+E7 
+The Crossroads
+E7-2
+You have chosen well!  e way you have explored turns out to be 
+the way to salvation. Treasure the resources you have found while 
+scouring this terrible marsh.
+◆ Loot: none. Draw 3 random Reagent Cards from each 
+deck.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E7-3
+You  nd a trail you think you could use to reach a safe area, but 
+is it really the right way? You must check if your party can safely 
+use it.
+◆ Choose one:
+▶  Test with a varying di culty threshold:
+If there are three Focus Points on the Battle eld, the 
+threshold is 8+.
+If there are two Focus Points on the Battle eld, the 
+threshold is 6+.
+If there is only one Focus Point on the Battle eld, the 
+threshold is 4+.
+ 3+: read E7-2.
+ 1-2 : you realize the trail is not accessible.
+ 0: you slip, gain 1 Unblockable .
+◆ Remove the Green Focus Point from the Battle eld.
+◆ Continue your Activation.
+▶ Continue your Activation.
+E7-1
+1A
+2A 3A
+11A
+W
+x1 Random Scenic Element
+x1 Random Scenic Element
+x1 Random Scenic Element
+
+ 
+ 
+
+11A
+
+
+
+
+Key
+ Heroes
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Enemy Dra : one Model for each . Ignore the Horde 
+Skill for this Dra .
+ Focus Point
+ Fig Tree
+ Apple Tree
+Horologium
+Start: 6:00
+Capricorn: Heroes 
+Aquarius: 
+Pisces: 
+
+
+39
+E7-4
+You  nd a trail you think you could use to reach a safe area, but 
+is it really the right way? You must check if your group can safely 
+use it.
+◆ Choose one:
+▶  Test with a varying di culty threshold:
+If there are three Focus Points on the Battle eld, the 
+threshold is 8+.
+If there are two Focus Points on the Battle eld, the 
+threshold is 6+.
+If there is only one Focus Point on the Battle eld, the 
+threshold is 4+.
+ 3+: read E7-2
+ 1-2 : you realize the trail is not accessible. 
+ 0: you slip, gain 1 Unblockable .
+◆ Remove the Red Focus Point from the Battle eld.
+◆ Continue your Activation.
+▶ Continue your Activation.
+E7-5
+You  nd a trail you think you could use to reach a safe area, but 
+is it really the right way? You must check if your group can safely 
+use it.
+◆ Choose one:
+▶  Test with a varying di culty threshold:
+If there are three Focus Points on the Battle eld, the 
+threshold is 8+.
+If there are two Focus Points on the Battle eld, the 
+threshold is 6+.
+If there is only one Focus Point on the Battle eld, the 
+threshold is 4+.
+ 3+: read E7-2.
+ 1-2 : you realize the trail is not accessible.
+ 0: you slip, gain 1 Unblockable .
+◆ Remove the Blue Focus Point from the Battle eld.
+◆ Continue your Activation.
+▶ Continue your Activation.
+E7-6
+You get lost in the intricate woods. A er a few days you manage 
+to get back on the main road and head for the nearest village, but 
+such long wandering forced you to lose some resources along the 
+way.
+◆ Loot: none. Draw 2 random Reagent Cards from two 
+decks of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+E7-7
+ e situation is dire – you withdraw into the deep woods, risking 
+becoming lost, rather than having to face your  erce opponents.
+◆ Loot: none. Draw 2 random Reagent Cards from a deck 
+of your choice.
+◆ Shu e the Event Card that started this Exploration 
+Mission back into the Event Deck.
+◆ Perform a Rest Phase in the Town or Village where you are 
+to play the next Campaign Mission.
+Nova Aetas Renaissance - Stretch Goals v.1.1
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+

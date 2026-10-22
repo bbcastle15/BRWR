@@ -4,6 +4,7 @@ var dragging := false
 var fitted_zoom := 0.0
 var fitted_center := Vector2.ZERO
 var power_focus: Tween
+var movement_focus: Tween
 var power_return_position := Vector2.ZERO
 var power_return_zoom := Vector2.ONE
 
@@ -58,6 +59,22 @@ func reset_view() -> void:
 func focus_lodge() -> void:
 	# Personal boards are screen overlays; all table space belongs to the Lodge.
 	reset_view()
+
+func ensure_movement_visible(origin: Vector2, destination: Vector2) -> void:
+	var area: Rect2 = get_parent().get_table_view_rect()
+	var bounds := Rect2(origin, Vector2.ZERO).expand(destination).grow(get_parent().HEX_RADIUS * 1.2)
+	var view_center := position + (area.get_center() - get_viewport_rect().size * 0.5) / zoom.x
+	var visible := Rect2(view_center - area.size / zoom.x * 0.5, area.size / zoom.x)
+	if visible.encloses(bounds): return
+	_cancel_power_focus()
+	if movement_focus != null and movement_focus.is_valid(): movement_focus.kill()
+	var target_zoom := maxf(minimum_zoom(), minf(zoom.x, minf(area.size.x / bounds.size.x, area.size.y / bounds.size.y)))
+	var target_position := _view_center(bounds, target_zoom)
+	var start_position := position
+	var start_zoom := zoom
+	movement_focus = create_tween()
+	movement_focus.tween_method(func(weight: float):
+		_set_focus_view(start_position.lerp(target_position, weight), start_zoom.lerp(Vector2.ONE * target_zoom, weight)), 0.0, 1.0, 0.18).set_trans(Tween.TRANS_SINE)
 
 func _view_center(bounds: Rect2, scale_value: float) -> Vector2:
 	var area: Rect2 = get_parent().get_table_view_rect()

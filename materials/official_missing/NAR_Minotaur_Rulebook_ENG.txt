@@ -1,0 +1,225 @@
+Minotaur
+2
+CREDITS
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Presentino
+Additional Game Design and Development: Andrea Colletti, Luca Bernardini
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Elisa Fiore, Diana Maranzano
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Edoardo Eibenstein
+Editing: Elettra Nuzzo
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini, Francesco Granitto
+Kickstarter Manager: Andrea Colletti
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfillment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro 
+Brogi, Chiara Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico 
+Morara, Flavio Galmacci, Francesco Pica, Gabriele Macchioro, Gianni Punzo, 
+Giovanni Milani, Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca 
+Perra, Pasquale Carotenuto
+3
+A mighty beast came out of the depth of the forest. A fearsome bull-headed 
+giant assaults both humans and fauns, out of control, charging them furiously 
+using two huge tree trunks as weapons. Are you brave enough to face it and 
+free the people of this scourge?
+CONTENTS
+HOW TO USE THIS EXPANSION........................3
+Optional Rule: Bounty.............................................. 3
+COMPONENTS......................................................4
+NEW RULES............................................................6
+Large Models................................................................ 6
+Large Models and Area Effects................................ 7
+Large Models and Line of Sight............................... 7
+Optional Rule: Bounty
+Instead of waiting to draw the Event Card "Savage Fury," at any point in the 
+Main Campaign you can mark the title of this Side Mission in the Active Side 
+Mission Slot and play it as if you had drawn the Event Card "Savage Fury."
+This expansion adds a new Hunt Mission to be included in any Nova Aetas 
+Renaissance Campaign of the Core Game or any Expansion.
+If you decide to use the Minotaur in your Campaign, add the Event Card found in 
+this box to the Core Game Event Card Deck.
+The Minotaur is a Hunt Mission and follows all the rules for this type of Mission, 
+described in the Core Rulebook of Nova Aetas Renaissance.
+How to use this 
+Expansion
+4
+Minotaur
+Components
+5 Mission 
+Cards
+The Mission
+Heroes' Goals
+◆ Th e Minotaur is Defeated: reveal .
+Heroes' Defeat Condition
+◆ If at least three Heroes are KO: revealed .
+◆ A card is to be drawn from the Minotaur Deck, 
+but this is not possible: reveal .
+Special Rules
+Hunt: 
+under
+this Mission follows the rules described 
+ Hunt Mission in the Rulebook.
+◆ Start the Mission.
+M1 
+Map
+2A
+1A
+5A
+HoRoloGium
+Start: 12:00
+Capricorn: 
+Aquarius: 
+Heroes
+Minotaur
+◆ Read the back of .
+M1 
+ M1 
+minotaur
+1 Mission Envelope
+M1
+1 "Savage Fury"
+Event Card
+Savage Fury
+
+ e Fauns deployed their deadliest 
+weapon! A giant with the head of a 
+Taurus wiped out any opponent that 
+stood before it. It’s up to you to deal with 
+it!
+◆You can mark the M1 Side Mission 
+“Minotaur” in the Active Side 
+Missions.
+5
+16 Prey Action Cards
+3
+ 6+ 1  
+ Stun
+All Heroes adjacent to the Minotaur 
+suff er this Attack:
+2 Vortex of 
+Blows 3
+4
+ 6+
+ 1
+
+Pierce
+Th e Minotaur performs the attack 
+indicated on this card on any 
+Hero who is within  as if it were 
+adjacent to each of them, then 
+moves until it becomes adjacent to 
+the farthest Hero within .
+Horn Attack 3 2
+All Heroes within 5 gain a 
+Disadvantaged Token.
+Furious Roar 1 1
+4 Reward Cards
+
+Bull's Blood Potion
+Tokens: 3: Gain the following 
+Lu y, Advantaged and Blessed.  en discard this item (put it back among the 
+Minotaur's available Rewards).
+
+Bull's Blood Potion
+
+Hero's Cape
+4: immediately gain 2
+Once per Mission. . 
+Hero's Cape Armor
+4: immediately gain 2
+Once per Mission. 
+Hero's Cape
+Armor  Armor Bull Spaulder 
+Resistance 1
+Immunity: Stunned
+Bull Spaulder  Gaea's Mallet Weapon
+
+3 1 +1   
+ Devastating,  Stun
+ e Enemy targeted by 
+this a ack gains +1.
+Gaea's Mallet Weapon
+
+1 Minotaur Activation Token
+6
+Large Models
+Some Models occupy more than a single Battlefield Square. These Models are 
+called Large Models. These Models occupy only a single Square during movement. 
+In other words, while moving, a Large Model is considered as a normal Model, 
+and then returns to occupying more Squares the moment the movement ends. 
+When players need to determine the movement of a Large Model, they choose 
+any of the Squares occupied by the Model and count starting from the chosen 
+Square (a normal-sized Model can be used to simulate the movement of the Large 
+Model). When the Large Model finishes its movement, the players place the Model 
+so that the Squares occupied include the Square where it finished its movement. 
+If placement is not possible because the required Squares (usually 4) are not all 
+available, players refer to the following rules:
+◆ If there are Models occupying the Squares, the Large Model pushes the Models 
+occupying them into adjacent available Squares or the nearest available Square.
+◆ If there are Scenic Elements occupying Squares, place the Large Model in 
+Squares that are available or occupied by other Models. If this is not possible, 
+the Large Model ends its Movement in a Square that allows its placement.
+Minotaur is a Large Model which occupies 4 Squares.
+New Rules
+ A Large Model is considered to be targeted by an Attack with the Area Trait if at 
+least one of the Squares it occupies is within the Area of the Attack.
+If a Large Model is the target of an Attack with the Area Trait, it suffers only the 
+Effect intended for the target, even if it occupies multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area Trait and occupies 
+more than one Square within the Area, it suffers the additional Effect only once.
+Large Models and Area Effects
+A Large Model always has a valid Line of Sight on all other Models and vice versa.
+Large Models and Line of Sight
+7
+C o m p o n e n t s f o r B l a c k R o s e Wa rs a n d R e b i rt h
+1 FORGOTTEN 
+SPELL CARD
+Add this card to the Forgotten Spells 
+Deck of the core game.
+Add this card to the Evocation Cards 
+Deck of the core game.
+1 FORGOTTEN 
+EVOCATION CARD
+You may use the materials listed above and the Minotaur Miniature to add a new 
+Forgotten Spell to your Black Rose Wars and Rebirth games.
+When you prepare the Forgotten Spells Deck, add the "Savage Fury" card and put 
+the Minotaur Evocation cards among those available for the game.
+Minotaur - Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+
+
+Savage Fury
+   
+Summon Minotaurus.
+It activates.
+Savage Fury
+   
+Move up to 1. Move up to 1.
+Perform a  with +2.
+Move up to 1. Move up to 1.
+Perform a  with +2.
+
+Savage Fury    
+. Minotaurus Summon 
+. activates It 
+Savage Fury    
+. 1 up to Move . 1 up to Move
+. +2  with  Perform a 
+. 1 up to Move . 1 up to Move
+. +2  with  Perform a 
+
+Beast — Forgotten
+Minotaurus
+Beast Forgotten 3 3 6
+When Minotaurus performs a 
+for the fi rst time during its activation, 
+if its target is not defeated, performs 
+a .
+Minotaurus

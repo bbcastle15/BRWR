@@ -118,7 +118,7 @@ func _process(_delta: float) -> void:
 func host(count: int = 2, _bind_address: String = "*", _tls_server_options = null) -> Error:
 	if hosting or connected or connection_started > 0:
 		return ERR_ALREADY_IN_USE
-	if count < 2 or count > 6:
+	if count < 2 or count > (6 if avatar_selection.is_empty() else 5):
 		return ERR_INVALID_PARAMETER
 
 	var endpoint := Invite.websocket_address()
@@ -333,6 +333,9 @@ func can_start() -> bool:
 	return hosting and connected and not started and peer_players.size() == player_count - 1
 
 func start_match() -> bool:
+	if not avatar_selection.is_empty() and player_count > 5:
+		status_changed.emit("Avatar richiede al massimo 5 giocatori umani (6 partecipanti totali).")
+		return false
 	if not can_start():
 		return false
 	started = true

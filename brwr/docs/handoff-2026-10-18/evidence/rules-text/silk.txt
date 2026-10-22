@@ -1,0 +1,801 @@
+
+=== PAGE 1 ===
+Silk Road
+
+=== PAGE 2 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+Contents
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+2
+
+=== PAGE 3 ===
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Devi Setup ...........................................................................................................8
+Avatar Special Rules — Devi ..............................................9
+Avatar Skills — Devi ..........................................................10
+Devi Priority .................................................................................................... 10
+Legendary Scenario: Nirvana .............................11
+Additional Setup .................................................................11
+Scenario Rules .....................................................................11
+Honorable Mention ...........................................................11
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Devi Setup ...........................................................................................................8
+Avatar Special Rules — Devi ..............................................9
+Avatar Skills — Devi ..........................................................10
+Devi Priority .................................................................................................... 10
+Legendary Scenario: Nirvana .............................11
+Additional Setup .................................................................11
+Scenario Rules .....................................................................11
+Honorable Mention ...........................................................11
+3
+
+=== PAGE 4 ===
+
+Fulu
+  
+
+Gain 1.
+: when you reveal
+draw 1
+ a  Spell, 
+ from your Grimoire.
+Fulu
+  
+
+Gain 1.
+: when you reveal
+draw 1
+ a  Spell, 
+ Quest of the current 
+Moon.
+
+Fulu
+  
+ Gain 1 .
+: when you  reveal  a Spell, 
+ draw 1 from your Grimoire.
+Fulu
+  
+ Gain 1 .
+: when you  reveal  a Spell, 
+draw 1 Quest of the current 
+Moon.
+
+Game Components
+
+3 MAGE CARDS
+
+2 FORGOTTEN 
+SPELL CARDS
+Place yourself in any Room.
+You may perform a on a  
+ with . 4
+Place yourself in any Room.
+Summon Sun Wukong.
+activates It .
+Place yourself in any Room.
+You may perform a  on a 
+with 4.
+Place yourself in any Room.
+Summon Sun Wukong.
+It activates.
+Alisha, Dai Jin and Pyotr can be chosen as
+Mages during step 8 of the Setup described 
+in the core game rulebook.
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+9 PERSONAL SPELL 
+CARDS
+Bharatanatyam
+  
+Assign the Divine Dance Jinx 
+to the target.
+Move the target up to 1.
+Move the target up to 1.
+Move the target up to 1.
+Bharatanatyam
+  
+: when another Mage is 
+placed in their Cell, gain 2.
+
+Bharatanatyam
+  
+Assign the Divine Dance Jinx 
+to the target.
+Move the target up to . 1
+Move the target up to . 1
+Move the target up to . 1
+Bharatanatyam
+  
+: when another Mage is 
+placed in their Cell,  gain 2 .
+
+Dictat
+  
+Dictat
+  
+Beast — Forgotten
+Sun Wukong
+ 3  3  6 Divinity
+Forgotten
+Devi
+EVO - 4 / 6 - BRW-R
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+P YOTR
+
+ 11
+
+7 
+2
+2
+
+Fulu
+ 
+.
+reveal a  Spell, 
+Game Components
+YOTR
+ 2
+YOTR
+
+
+ 2
+
+D AI J IN
+2
+ 10
+
+
+ 8
+2
+2
+2
+
+3 MAGE CARDS
+D AI J 
+3 MAGE CARDS
+
+A LISHA
+
+ 10
+
+
+ 8
+2
+2
+2
+
+2 FORGOTTEN 
+SPELL CARDS
+
+
+
+ yourself in any Room.
+ on a  
+. 4
+ yourself in any Room.
+
+Summon
+Sun Wukong.
+It activates.
+  
+Awareness
+
+
+ yourself in any Room.
+You may perform a 
+4
+ yourself in any Room.
+Awareness
+ yourself in any Room.
+ 
+Awareness
+
+Place yourself in any Room.
+You may perform a 
+ with 
+Place yourself in any Room.
+
+Place
+You may perform a You may perform a You may perform a You may perform a Place
+
+
+, you  infl ict : when you 
+. 3   that infl ict instead 
+  
+Manifestation
+Manifestation
+Summon Devi.
+She PlaceShe activates activates activates activates.
+   
+Alisha, Dai Jin and Pyotr can be chosen as
+Mages during step 8 of the Setup described 
+in the core game rulebook.
+SPELL CARDS
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+9 PERSONAL SPELL 
+CARDS
+Fulu
+ 
+: when you 
+Gain 1
+reveal
+draw 1 from your Grimoire.
+: when you 
+Bharatanatyam
+  
+Assign the Divine Dance Jinx 
+to the target.
+Move the target up to 1.
+Move the target up to 1.
+Move the target up to 1.
+
+
+ gain 2
+: when another Mage is 
+.
+Bharatanatyam
+ 
+
+ Spell, 
+ from your Grimoire.
+
+draw 1
+
+gain 2
+: when another Mage is 
+Bharatanatyam
+
+draw 1 from your Grimoire.
+ Spell, 
+: when another Mage is 
+placed in their Cell, gain 2
+Fulu
+
+ Spell, 
+ from your Grimoire.
+
+ 
+ Gain 1 .
+: when you  reveal  a Spell, 
+draw 1 Quest of the current 
+Moon.
+ from your Grimoire.
+ Spell, 
+Bharatanatyam
+
+Dictat
+  
+Assign an Upgrade of your Spell, 
+ Quest of the current 
+ Spell, 
+ Quest of the current 
+choice to the target. placed in their Cell, Spell, 
+It placed in their Cell, activates under your control. : when another Mage is : when another Mage is 
+placed in their Cell, 
+ 
+ 
+Dictat
+  
+.  Lose 1
+ an Evocation that has Choose
+ or less from the 3 value of a 
+summon it Evocation Deck, 
+an Upgrade of your assign and Fulu
+choice to it. Fulu
+Beast — Forgotten
+Sun Wukong
+ 3  3  6
+When a Model inflicts  to 
+Devi, Devi inflicts the same 
+amount of  suffered 2
+to that Model.
+At the end of each activation 
+of Devi, the  inflicts 1
+on her.
+Divinity
+Forgotten
+Devi
+EVO - 4 / 6 - BRW-R
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+4
+
+=== PAGE 5 ===
+Game Components
+Divine Dance
+3 JINX CARDS
+Add these cards to the Jinx Deck of 
+the core game.
+1 ZEN
+GARDEN ROOM
+1 ROOM ACTIVATION 
+TOKEN
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the Garden Room in the core game.
+
+Divine Dance
+When you enter a Room, 
+the  infl icts 1 to you.
+Discard this card.
+When you are placed in your 
+Cell, place 1 on this card. 
+
+3 JINX CARDS
+Add these cards to the Jinx Deck of 
+the core game.
+1 ZEN
+GARDEN ROOM
+1 ROOM ACTIVATION 
+TOKEN
+ Zen Garden
+2 1 0
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the Garden Room in the core game.
+5
+
+=== PAGE 6 ===
+1 AVATAR CARD
+Devi
+Sacrifice,
+Worship, Dominion.
+30 COMMAND 
+CARDS
+Devi
+
+   
+Lesser Pledge
+ . Places herself in the 
+target Room.
+Avatar Components
+12 DUALITY TOKENS
+1 AVATAR CARD
+: assigns 1 to each .
+Devi
+ 10
+ 3
+ 1
+:    
+    
+     Devi
+
+
+Sacrifice,
+Worship, Dominion.
+30 COMMAND 
+CARDS
+Devi
+
+   
+.
+Each Mage who has at least 
+1 assigned loses
+
+1.
+Lesser Pledge
+ . Places herself in the 
+target Room.
+Avatar Components
+12 DUALITY TOKENS
+6
+
+=== PAGE 7 ===
+Alisha Dai Jin
+Devi
+Pyotr Sun Wukong
+Models
+6 DEFEAT TOKENS
+These tokens can be used to keep track 
+of the maximum amount of  that a 
+Mage or Avatar can suff er before being 
+defeated. Place a token on the Mage 
+Sheet/Avatar Board in the slot following 
+the one indicated by the  value of the 
+Mage/Avatar.
+Alisha Dai Jin
+Devi
+Pyotr Sun Wukong
+Models
+6 DEFEAT TOKENS
+These tokens can be used to keep track 
+of the maximum amount of  that a 
+Mage or Avatar can suff er before being 
+defeated. Place a token on the Mage 
+Sheet/Avatar Board in the slot following 
+the one indicated by the  value of the 
+Mage/Avatar.
+7
+
+=== PAGE 8 ===
+DEVI SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Place the Devi Model in the Black Rose Room.
+• Remove the Manifestation Card from the Forgotten Spells Deck.
+Avata r
+A frenzied music announces the arrival of Devi in the Lodge, and she demands that the 
+Mages bow before her, worshipping her and off ering her their lives as gifts. 
+Who will be brave enough to face her without surrendering to her dreadful power?
+Devi
+Sacrifice,
+Worship, Dominion.
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the . 
+symbol. Devi's Tool is the Duality 
+Token.
+C Avatar Skills:
+ Devi has the Avatar Skills explained 
+in detail on page 10.
+AVATAR CARD ANATOMY
+Devi
+Sacrifice,
+Worship, Dominion.
+Devi
+Sacrifice,
+Worship, Dominion.
+A
+B
+C
+B
+DEVI SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Place the Devi Model in the Black Rose Room.
+• Remove the Manifestation Card from the Forgotten Spells Deck.
+Avata r
+A frenzied music announces the arrival of Devi in the Lodge, and she demands that the 
+Mages bow before her, worshipping her and off ering her their lives as gifts. 
+Who will be brave enough to face her without surrendering to her dreadful power?
+ to each .
+Devi
+ 10
+ 3
+ 1
+Devi
+Worship, Dominion.
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the . 
+symbol. Devi's Tool is the Duality 
+Token.
+C Avatar Skills:
+ Devi has the Avatar Skills explained 
+in detail on page 10.
+AVATAR CARD ANATOMY
+assigns : assigns 1
+ 
+ 
+  
+
+
+ 
+ 
+    
+
+
+A
+
+B
+Sacrifice,
+Worship, Dominion.
+C
+B
+8
+
+=== PAGE 9 ===
+Avatar Special Rules — Devi 
+DUALITY TOKENS 
+Some Eff ects related to Devi assign a Duality
+Token to the target Mage.
+Duality Tokens follow these rules:
+• Assignment: When a Mage is assigned a 
+Duality Token they place it on their Mage 
+Sheet. A Mage can have a maximum of 
+two Duality Tokens assigned. A Duality 
+Token assigned to a Mage is considered to 
+be in the Lodge and counts as being in the 
+same Room as the Mage. When a Mage 
+is defeated, they discard all the Duality 
+Tokens they have. When a Duality Token 
+is discarded, it immediately returns to the 
+shared pool.
+• Actions: a Mage who is assigned two 
+Duality Tokens can use the Physical 
+Actions Punishment and Absolution
+(see box).
+Punishment (Physical Action, )
+• Move 1. You can perform this Eff ect 
+a number of times equal to your 
+Speed value . Each individual Move, 
+separated by a dot (.), is considered a 
+separate Eff ect; you can use all or some 
+of these Move Eff ects, but you cannot 
+perform Eff ects other than Moves 
+between them. Unused Moves are lost. 
+• Perform a Physical Attack () on a 
+ (a Physical Attack infl icts Damage 
+ on the target equal to the Strength 
+value  of your Mage). 
+• Convert 1 on a .
+Absolution (Physical Action, ) 
+• Move 1. You can perform this Eff ect 
+a number of times equal to your 
+Speed value . Each individual Move, 
+separated by a dot (.), is considered a 
+separate Eff ect; you can use all or some 
+of these Move Eff ects, but you cannot 
+perform Eff ects other than Moves 
+between them. Unused Moves are lost. 
+• Place 1 in a .
+• Convert 1 in a .
+Avatar Special Rules — Devi 
+DUALITY TOKENS 
+Some Eff ects related to Devi assign a Duality
+Token to the target Mage.
+Duality Tokens follow these rules:
+• Assignment: When a Mage is assigned a 
+Duality Token they place it on their Mage 
+Sheet. A Mage can have a maximum of 
+two Duality Tokens assigned. A Duality 
+Token assigned to a Mage is considered to 
+be in the Lodge and counts as being in the 
+same Room as the Mage. When a Mage 
+is defeated, they discard all the Duality 
+Tokens they have. When a Duality Token 
+is discarded, it immediately returns to the 
+shared pool.
+• Actions: a Mage who is assigned two 
+Duality Tokens can use the Physical 
+Actions Punishment and Absolution
+(see box).
+Punishment (Physical Action, )
+• Move 1. You can perform this Eff ect 
+a number of times equal to your 
+Speed value . Each individual Move, 
+separated by a dot (.), is considered a 
+separate Eff ect; you can use all or some 
+of these Move Eff ects, but you cannot 
+perform Eff ects other than Moves 
+between them. Unused Moves are lost. 
+• Perform a Physical Attack () on a 
+ (a Physical Attack infl icts Damage 
+ on the target equal to the Strength 
+value  of your Mage). 
+• Convert 1 on a .
+Absolution (Physical Action, ) 
+• Move 1. You can perform this Eff ect 
+a number of times equal to your 
+Speed value . Each individual Move, 
+separated by a dot (.), is considered a 
+separate Eff ect; you can use all or some 
+of these Move Eff ects, but you cannot 
+perform Eff ects other than Moves 
+between them. Unused Moves are lost. 
+• Place 1 in a .
+• Convert 1 in a .
+9
+
+=== PAGE 10 ===
+Sacri ce
+During step 2 of the Clean-up Phase Devi 
+gains 1 for each Mage of whom she has at 
+least 1.
+Worship
+When a Room with Devi in it is rebuilt, 
+Devi gains 2.
+Avatar Skills — Devi 
+Dominion
+If Devi is to activate when she is in her Cell, 
+she does not activate and places herself in the 
+Black Rose Room.
+DEVI PRIORITY
+     
+Devi chooses as a target:
+: the Room with the most Mages, if tied...
+: the Room with the most Models, if tied...
+ : the Room with the most , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Models, if tied...
+: the Room with the least , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Mage with the least , if tied...
+: the Mage with the least , if tied...
+: the Mage with the most , if tied, the Choice of the Crown applies.
+Sacri ce
+During step 2 of the Clean-up Phase Devi 
+gains 1 for each Mage of whom she has at 
+least 1.
+Worship
+When a Room with Devi in it is rebuilt, 
+Devi gains 2.
+Avatar Skills — Devi 
+Dominion
+If Devi is to activate when she is in her Cell, 
+she does not activate and places herself in the 
+Black Rose Room.
+DEVI PRIORITY
+     
+Devi chooses as a target:
+: the Room with the most Mages, if tied...
+: the Room with the most Models, if tied...
+ : the Room with the most , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Models, if tied...
+: the Room with the least , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Mage with the least , if tied...
+: the Mage with the least , if tied...
+: the Mage with the most , if tied, the Choice of the Crown applies.
+10
+
+=== PAGE 11 ===
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : replace the Garden Room with the Zen Garden Room.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+33 of the Power Board.
+2. Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. 
+Devi is the Avatar for this Legendary Scenario.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Free Will: when a Mage defeats Devi, they can choose to gain or discard up to 2
+Duality Tokens.
+• Death and Rebirth: When a Mage defeats Devi, they place one of their  on the Devi 
+Avatar Card.
+Honorable Mention
+At the end of the game, each Mage gains 1 for each Duality Token assigned to them.
+At the end of the game, the Mage with the most  on the Devi Avatar Card gains 3. If tied, 
+no Mage gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Nirvana the goddess Devi tests the Mages of the Lodge by judging their actions and 
+searching among them for an individual capable of achieving spiritual enlightenment.
+Le g e n d a ry S c e n a r i o : 
+N i rva n a 
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : replace the Garden Room with the Zen Garden Room.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+33 of the Power Board.
+2. Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. 
+Devi is the Avatar for this Legendary Scenario.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Free Will: when a Mage defeats Devi, they can choose to gain or discard up to 2
+Duality Tokens.
+• Death and Rebirth: When a Mage defeats Devi, they place one of their  on the Devi 
+Avatar Card.
+Honorable Mention
+At the end of the game, each Mage gains 1 for each Duality Token assigned to them.
+At the end of the game, the Mage with the most  on the Devi Avatar Card gains 3. If tied, 
+no Mage gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Nirvana the goddess Devi tests the Mages of the Lodge by judging their actions and 
+searching among them for an individual capable of achieving spiritual enlightenment.
+Le g e n d a ry S c e n a r i o : 
+N i rva n a 
+11
+
+=== PAGE 12 ===
+Sacri ce
+During step 2 of the Clean-up Phase Devi 
+gains 1 for each Mage of whom she has at 
+least 1.
+Worship
+When a Room with Devi in it is rebuilt, Devi 
+gains 2.
+Dominion
+If Devi is to activate when she is in her Cell, 
+she does not activate and places herself in the 
+Black Rose Room.
+DEVI PRIORITY
+     
+Devi chooses as a target:
+: the Room with the most Mages, if tied...
+: the Room with the most Models, if tied...
+ : the Room with the most , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Models, if tied...
+: the Room with the least , if tied, the Choice of the Crown applies.
+     
+Devi chooses as a target:
+: the Mage with the least , if tied...
+: the Mage with the least , if tied...
+: the Mage with the most , if tied, the Choice of the Crown applies.
+ Devi 
+ for each Mage of whom she has at 
+When a Room with Devi in it is rebuilt, Devi 
+If Devi is to activate when she is in her Cell, 
+she does not activate and places herself in the 
+Silk Road Rulebook v.1.0 
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com

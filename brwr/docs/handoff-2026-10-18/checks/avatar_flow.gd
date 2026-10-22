@@ -1,6 +1,6 @@
 extends "res://docs/handoff-2026-10-18/checks/avatar_rules.gd"
 
-const Projection = preload("res://network_projection.gd")
+const NetworkSnapshot = preload("res://network_projection.gd")
 
 func create_game(client: bool = false):
 	var instance = load("res://game.tscn").instantiate()
@@ -68,6 +68,8 @@ func run():
 	expect(game.avatar.commands_used == 1 and game.avatar.active_deck().is_empty(), "Next activation executes normal Command")
 
 	reset_case()
+	# Keep this case in Moon 1; Moon changes are exercised separately below.
+	for p in game.players: p.power = 0
 	arm("release_energy")
 	game.avatar.active_deck().append(cards.possessed_energy_of_the_rose)
 	AvatarRules.begin_activation(game, false, false)
@@ -171,12 +173,12 @@ func run():
 	damage(AVATAR, [0,1])
 	game.summon_evocation(AVATAR, "cadaver", "garden")
 	await drive()
-	var state: Dictionary = Projection.build(game, 0)
+	var state: Dictionary = NetworkSnapshot.build(game, 0)
 	expect(not state.players[AVATAR].has("hand"), "Online snapshot never reveals Avatar deck identities")
 	expect(not state.avatar.has("decks") and state.avatar.deck_counts[1] == 9, "Online snapshot contains counts, not deck order")
 	var wire = Marshalls.base64_to_variant(Marshalls.variant_to_base64(state, false), false)
 	var client = await create_game(true)
-	Projection.apply(client, wire)
+	NetworkSnapshot.apply(client, wire)
 	expect(client.players[AVATAR].mage.damage_cubes == [0,1], "Client receives Avatar damage")
 	expect(client.avatar.commands_used == 1 and client.avatar.decks[1].size() == 9 and client.avatar.decks[2].size() == 10, "Client receives Command counts across all Moons")
 	expect(client.players[AVATAR].memories.size() == 1 and client.players[AVATAR].memories[0].id == game.players[AVATAR].memories[0].id, "Client receives revealed Memories")

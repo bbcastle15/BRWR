@@ -1,0 +1,542 @@
+[
+  {
+    "id": "possessed_tomb_reinforcements",
+    "name": "Tomb Reinforcements",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      19,
+      14,
+      258,
+      407
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_tomb_reinforcements.png"
+  },
+  {
+    "id": "possessed_revenge_of_the_thorn",
+    "name": "Revenge of the Thorn",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      317,
+      15,
+      251,
+      411
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_revenge_of_the_thorn.png"
+  },
+  {
+    "id": "possessed_frost_spear",
+    "name": "Frost Spear",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      595,
+      14,
+      251,
+      404
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_frost_spear.png"
+  },
+  {
+    "id": "possessed_unstable_thorns",
+    "name": "Unstable Thorns",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      885,
+      12,
+      267,
+      408
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_unstable_thorns.png"
+  },
+  {
+    "id": "possessed_tales_of_destruction",
+    "name": "Tales of Destruction",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      1181,
+      5,
+      256,
+      412
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_tales_of_destruction.png"
+  },
+  {
+    "id": "possessed_book_of_nature",
+    "name": "Book of Nature",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      16,
+      434,
+      263,
+      397
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_book_of_nature.png"
+  },
+  {
+    "id": "possessed_corrupted_ray",
+    "name": "Corrupted Ray",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      597,
+      430,
+      252,
+      415
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_corrupted_ray.png"
+  },
+  {
+    "id": "possessed_incendiary_ball",
+    "name": "Incendiary Ball",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      888,
+      427,
+      258,
+      414
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_incendiary_ball.png"
+  },
+  {
+    "id": "possessed_release_energy",
+    "name": "Release Energy",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_1.png",
+    "rect": [
+      1181,
+      423,
+      253,
+      407
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_release_energy.png"
+  },
+  {
+    "id": "possessed_sap_of_the_black_rose",
+    "name": "Sap of the Black Rose",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      20,
+      26,
+      260,
+      412
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_sap_of_the_black_rose.png"
+  },
+  {
+    "id": "possessed_corrupted_spear",
+    "name": "Corrupted Spear",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      314,
+      25,
+      258,
+      413
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_corrupted_spear.png"
+  },
+  {
+    "id": "possessed_release_force",
+    "name": "Release Force",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      602,
+      21,
+      270,
+      417
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_release_force.png"
+  },
+  {
+    "id": "possessed_blaze",
+    "name": "Blaze",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      897,
+      13,
+      269,
+      418
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_blaze.png"
+  },
+  {
+    "id": "possessed_freeze_soil",
+    "name": "Freeze Soil",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      1204,
+      19,
+      264,
+      415
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\faithful\\possessed_freeze_soil.png"
+  },
+  {
+    "id": "possessed_conspirators_study",
+    "name": "Conspirator's Study",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      36,
+      445,
+      259,
+      414
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_explosion_of_thorns",
+    "name": "Explosion of Thorns",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      331,
+      437,
+      253,
+      413
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_revenge_embodied",
+    "name": "Revenge Embodied",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      618,
+      438,
+      250,
+      414
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_infernal_reinforcements",
+    "name": "Infernal Reinforcements",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      902,
+      432,
+      262,
+      420
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_technomancy_book",
+    "name": "Technomancy Book",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_2.png",
+    "rect": [
+      1204,
+      437,
+      261,
+      416
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_tap_into_the_black_rose",
+    "name": "Tap into the Black Rose",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      74,
+      20,
+      257,
+      386
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_abyssal_reinforcements",
+    "name": "Abyssal Reinforcements",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      359,
+      22,
+      253,
+      382
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_poisoned_thorns",
+    "name": "Poisoned Thorns",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      627,
+      22,
+      256,
+      391
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_thorns_of_frost",
+    "name": "Thorns of Frost",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      931,
+      29,
+      255,
+      387
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_dark_hammer",
+    "name": "Dark Hammer",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      1206,
+      34,
+      259,
+      391
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_research_on_fire",
+    "name": "Research on Fire",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      46,
+      425,
+      259,
+      384
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_manuscript_on_deceptions",
+    "name": "Manuscript on Deceptions",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      331,
+      424,
+      253,
+      390
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_explosion_of_dark_petals",
+    "name": "Explosion of Dark Petals",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      601,
+      422,
+      259,
+      397
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_dark_blade",
+    "name": "Dark Blade",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      915,
+      424,
+      263,
+      394
+    ],
+    "target": null
+  },
+  {
+    "id": "possessed_dark_fire",
+    "name": "Dark Fire",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\commands_3.png",
+    "rect": [
+      1200,
+      432,
+      260,
+      393
+    ],
+    "target": null
+  },
+  {
+    "id": "avatar_traces_of_texture",
+    "name": "Traces of Texture",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_1.png",
+    "rect": [
+      14,
+      39,
+      270,
+      407
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_traces_of_texture.png"
+  },
+  {
+    "id": "avatar_remnants_of_magic",
+    "name": "Remnants of Magic",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_1.png",
+    "rect": [
+      319,
+      33,
+      271,
+      412
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_remnants_of_magic.png"
+  },
+  {
+    "id": "avatar_divinatory_secrets",
+    "name": "Divinatory Secrets",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_1.png",
+    "rect": [
+      619,
+      29,
+      270,
+      408
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_divinatory_secrets.png"
+  },
+  {
+    "id": "avatar_thorny_corruption",
+    "name": "Thorny Corruption",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_1.png",
+    "rect": [
+      926,
+      0,
+      267,
+      414
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_thorny_corruption.png"
+  },
+  {
+    "id": "avatar_crown_of_thorns",
+    "name": "Crown of Thorns",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_1.png",
+    "rect": [
+      1234,
+      0,
+      269,
+      408
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_crown_of_thorns.png"
+  },
+  {
+    "id": "avatar_illness",
+    "name": "Illness",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_2.png",
+    "rect": [
+      9,
+      18,
+      302,
+      432
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_illness.png"
+  },
+  {
+    "id": "avatar_letters_of_destruction",
+    "name": "Letters of Destruction",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_2.png",
+    "rect": [
+      334,
+      0,
+      303,
+      451
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_letters_of_destruction.png"
+  },
+  {
+    "id": "avatar_singing_victory_again",
+    "name": "Singing Victory Again",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_2.png",
+    "rect": [
+      680,
+      15,
+      298,
+      437
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_singing_victory_again.png"
+  },
+  {
+    "id": "avatar_magic_of_the_rose",
+    "name": "Magic of the Rose",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_2.png",
+    "rect": [
+      1009,
+      0,
+      298,
+      448
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_magic_of_the_rose.png"
+  },
+  {
+    "id": "avatar_revolt_of_the_servants",
+    "name": "Revolt of the Servants",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_2.png",
+    "rect": [
+      1383,
+      0,
+      298,
+      445
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_revolt_of_the_servants.png"
+  },
+  {
+    "id": "avatar_cursed_trophy",
+    "name": "Cursed Trophy",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_3.png",
+    "rect": [
+      16,
+      10,
+      310,
+      421
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_cursed_trophy.png"
+  },
+  {
+    "id": "avatar_manipulating_the_past",
+    "name": "Manipulating the Past",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_3.png",
+    "rect": [
+      377,
+      0,
+      293,
+      431
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_manipulating_the_past.png"
+  },
+  {
+    "id": "avatar_sorrow",
+    "name": "Sorrow",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_3.png",
+    "rect": [
+      703,
+      0,
+      295,
+      430
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_sorrow.png"
+  },
+  {
+    "id": "avatar_pledge",
+    "name": "Pledge",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_3.png",
+    "rect": [
+      1055,
+      0,
+      288,
+      422
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_pledge.png"
+  },
+  {
+    "id": "avatar_conspiracy_book",
+    "name": "Conspiracy Book",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\events_3.png",
+    "rect": [
+      1377,
+      0,
+      292,
+      431
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\avatar_conspiracy_book.png"
+  },
+  {
+    "id": "possessed",
+    "name": "Possessed",
+    "source": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\sheet.png",
+    "rect": [
+      15,
+      18,
+      557,
+      404
+    ],
+    "target": "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\assets\\avatars\\possessed\\restored\\possessed.png"
+  }
+]

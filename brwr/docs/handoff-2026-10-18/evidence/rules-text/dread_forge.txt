@@ -1,0 +1,1220 @@
+
+=== PAGE 1 ===
+Dread Forge
+
+=== PAGE 2 ===
+Dread Forge - Rulebook v.1.1
+©2024 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, 
+Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller, Frank Calcagno
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto.
+Contents
+Dread Forge - Rulebook v.1.1
+©2024 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, 
+Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller, Frank Calcagno
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto.
+2
+
+=== PAGE 3 ===
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Legendary Scenario Components ......................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Etna Setup ...........................................................................................................8
+Avatar Special Rules — Etna ..............................................9
+Etna Priority .................................................................................................... 10
+Servant — Magma ..............................................................11
+Magma Priority ............................................................................................. 11
+Legendary Scenario: Catastrophe ........................12
+Additional Setup .................................................................12
+Scenario Rules .....................................................................12
+Honorable Mention ...........................................................12
+Lodge Layouts ....................................................................13
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Legendary Scenario Components ......................................6
+Models ..................................................................................7
+Avatar ..................................................................8
+Avatar Card Anatomy .................................................................................8
+Etna Setup ...........................................................................................................8
+Avatar Special Rules — Etna ..............................................9
+Etna Priority .................................................................................................... 10
+Servant — Magma ..............................................................11
+Magma Priority ............................................................................................. 11
+Legendary Scenario: Catastrophe ........................12
+Additional Setup .................................................................12
+Scenario Rules .....................................................................12
+Honorable Mention ...........................................................12
+Lodge Layouts ....................................................................13
+3
+
+=== PAGE 4 ===
+During Step 9 of the Setup, it is possible to 
+replace one of the Schools of Magic present 
+in the core game with the School of Forge.
+Game Components
+1 MAGE CARD
+
+36 FORGE SPELL 
+CARDS
+   
+   
+Shiny Automaton
+Shiny Automaton
+   
+   
+Shiny Automaton
+Shiny Automaton
+001 / 158 - BRW-R
+1 SCHOOL REFERENCE 
+CARD
+Etna can be chosen as a Mage during Step 
+8 of the Setup described in the core game 
+rulebook. The player who uses Etna as a 
+Mage must choose the color red.
+
+2
+
+4
+
+4
+
+4
+
+2
+
+8
+
+2
+
+4
+
+4
+
+4
+
+2
+
+8
+3 PERSONAL SPELL 
+CARDS
+Master Craftsman
+  
+Master Craftsman
+013 / 158 - BRW-R
+  
+During Step 9 of the Setup, it is possible to 
+replace one of the Schools of Magic present 
+in the core game with the School of Forge.
+Game Components
+1 MAGE CARD
+
+E TNA
+ 12
+
+
+ 8
+2
+2
+1
+
+
+36 FORGE SPELL 
+CARDS
+
+
+Target a Construct Construct. It 
+under your control. under your control.
+or
+Summon a Pupa 
+ 
+Shiny Automaton
+ Remove 1
+summon If you do, 
+of your Remove 2 
+summon If you do, 
+ 
+Shiny Automaton
+. It activates 
+under your control. under your control.
+in a .
+Shiny Automaton
+ 
+. 
+. Pupa a summon 
+.  of your 
+. Pupa a summon 
+ 
+Shiny Automaton
+001 / 158 - BRW-R
+1 SCHOOL REFERENCE 
+CARD
+Etna can be chosen as a Mage during Step 
+8 of the Setup described in the core game 
+rulebook. The player who uses Etna as a 
+Mage must choose the color red.
+
+Some Spells of this School allow you to summon special 
+Evocations with the Equipment special Archetype. 
+Equipments follow these rules:
+• An Equipment can be targeted as though as it was a 
+from the Mage who owns it.
+
+from the Mage who owns it.
+• An Equipment with the An Equipment with the  symbol ignores all 
+infl icted infl icted by Effects that target a .
+• An Equipment cannot have An Equipment cannot have Upgrades assigned to it
+• A Mage cannot own more than one Equipment with A Mage cannot own more than one Equipment with 
+the same name. the same name.
+Some Spells of this School assign an Upgrade card to Some Spells of this School assign an Upgrade card to 
+target Evocations. The Upgrade card must be taken from target Evocations. The Upgrade card must be taken from 
+its deck and placed next to the target's Evocation Card. its deck and placed next to the target's Evocation Card. 
+Upgrades follow these rules: Upgrades follow these rules:
+• An Evocation can have a maximum of one Upgrade An Evocation can have a maximum of one Upgrade 
+assigned to it. assigned to it.
+• If an Upgrade is assigned to an Evocation that already If an Upgrade is assigned to an Evocation that already 
+has one assigned, that Evocation owner chooses one has one assigned, that Evocation owner chooses one 
+of those Upgrades to keep and discards the other. of those Upgrades to keep and discards the other.
+• If a Spell assigns a specifi c Upgrade but there are 
+no more cards of that Upgrade left in the deck, that 
+Upgrade is not assigned.
+Forge
+
+2
+
+4
+
+
+An Equipment can be targeted as though as it was a 
+ symbol ignores all 
+ assigned to it
+A Mage cannot own more than one Equipment with 
+Some Spells of this School assign an Upgrade card to 
+target Evocations. The Upgrade card must be taken from 
+its deck and placed next to the target's Evocation Card. 
+An Evocation can have a maximum of one Upgrade 
+If an Upgrade is assigned to an Evocation that already 
+has one assigned, that Evocation owner chooses one 
+of those Upgrades to keep and discards the other. of those Upgrades to keep and discards the other.
+If a Spell assigns a specifi c Upgrade but there are 
+no more cards of that Upgrade left in the deck, that 
+Forge
+
+4
+
+
+An Equipment can be targeted as though as it was a 
+ symbol ignores all 
+
+ symbol ignores all 
+ assigned to it assigned to it
+A Mage cannot own more than one Equipment with A Mage cannot own more than one Equipment with 
+Some Spells of this School assign an Upgrade card to 
+target Evocations. The Upgrade card must be taken from target Evocations. The Upgrade card must be taken from 
+its deck and placed next to the target's Evocation Card. its deck and placed next to the target's Evocation Card. 
+An Evocation can have a maximum of one Upgrade 
+If an Upgrade is assigned to an Evocation that already 
+has one assigned, that Evocation owner chooses one 
+of those Upgrades to keep and discards the other. of those Upgrades to keep and discards the other.
+If a Spell assigns a specifi c Upgrade but there are 
+no more cards of that Upgrade left in the deck, that 
+Forge
+
+4
+target Evocations. The Upgrade card must be taken from target Evocations. The Upgrade card must be taken from 
+its deck and placed next to the target's Evocation Card. its deck and placed next to the target's Evocation Card. 
+An Evocation can have a maximum of one Upgrade An Evocation can have a maximum of one Upgrade 
+If an Upgrade is assigned to an Evocation that already If an Upgrade is assigned to an Evocation that already 
+has one assigned, that Evocation owner chooses one has one assigned, that Evocation owner chooses one 
+of those Upgrades to keep and discards the other. of those Upgrades to keep and discards the other.
+If a Spell assigns a specifi c Upgrade but there are 
+no more cards of that Upgrade left in the deck, that 
+Forge
+
+4
+
+4
+
+2
+
+8
+Forge Automation Automation An Evocation can have a maximum of one Upgrade 
+Automation An Evocation can have a maximum of one Upgrade Automation An Evocation can have a maximum of one Upgrade 
+ 
+Shiny Automaton Shiny Automaton If an Upgrade is assigned to an Evocation that already 
+Shiny Automaton If an Upgrade is assigned to an Evocation that already Shiny Automaton If an Upgrade is assigned to an Evocation that already 
+has one assigned, that Evocation owner chooses one 
+Shiny Automaton       Hammer and Anvil Hammer and Anvil has one assigned, that Evocation owner chooses one 
+Hammer and Anvil has one assigned, that Evocation owner chooses one Hammer and Anvil has one assigned, that Evocation owner chooses one 
+      
+Cyclopean Command of those Upgrades to keep and discards the other. of those Upgrades to keep and discards the other. Cyclopean Command of those Upgrades to keep and discards the other.
+If a Spell assigns a specifi c Upgrade but there are Cyclopean Command      
+Blacksmith's Chant If a Spell assigns a specifi c Upgrade but there are 
+no more cards of that Upgrade left in the deck, that 
+      
+Mass Production no more cards of that Upgrade left in the deck, that 
+      
+Hammerfall      
+ForgeDivine's Favor Divine's Favor 
+
+Divine's Favor  
+Chain Lightning 
+8       Hardened Blades 4 2 8      
+Mars's Glory 4 2 Mars's Glory      
+Bewitching Garments      
+Talos's Intervention      
+Divine Wings      
+
+2
+
+4
+
+4
+
+4
+
+2
+  8
+
+
+ assigned to it
+.
+A Mage cannot own more than one Equipment with 
+Some Spells of this School assign an Upgrade card to Some Spells of this School assign an Upgrade card to 
+ Some Spells of this School assign an Upgrade card to 
+ Some Spells of this School assign an Upgrade card to 
+ Some Spells of this School assign an Upgrade card to 
+target Evocations. The Upgrade card must be taken from 
+
+3 PERSONAL SPELL 
+CARDS
+Master Craftsman
+  
+Summon a Pupa. 
+Assign an Upgrade of your 
+choice to it.
+One of your Pupa activates.
+
+Master Craftsman
+  
+Summon an Equipment of your 
+choice.
+. You may 1 up to Move 
+.  against a a perform 
+013 / 158 - BRW-R
+4
+
+=== PAGE 5 ===
+Game Components
+1 FORGOTTEN 
+SPELL CARD
+BRW-R -  - 014 / 085
+Equipment
+Mars's Claws
+Equipment 3 Mars's Claws
+Add this card to the Forgotten Spell Cards 
+Deck of the core game.
+15 EQUIPMENT 
+EVOCATION CARDS
+Construct
+Pupa
+Construct 2 1 2 Pupa
+5 EVOCATION 
+CARDS
+Warscratch
+Add these cards to the 
+Upgrades Deck of the core 
+game.
+Add these cards to the 
+Evocation Cards Deck of the 
+core game.
+15 UPGRADE 
+CARDS
+Ignis
+Construct — Forgotten 
+Construct 
+Forgotten
+Ignis
+2 2 5
+1 FORGOTTEN 
+EVOCATION CARD
+Add this card to the 
+Evocation Cards deck of the 
+core game.
+Add these cards to the 
+Evocation Cards Deck of the 
+core game.
+1 FORGOTTEN 
+SPELL CARD
+Lava Flow
+  
+. Ignis Summon
+. activates It 
+Lava Flow
+  
+Summon Ignis.
+Convert 2 on a .
+Convert 2 on a .
+Convert 2 on a .
+
+
+BRW-R -  - 014 / 085
+Equipment
+Mars's Claws
+3
+When you infl ict  while 
+performing a  , you may 
+convert 2 on the target.
+Equipment
+Mars's Claws
+Add this card to the Forgotten Spell Cards 
+Deck of the core game.
+15 EQUIPMENT 
+EVOCATION CARDS
+Construct
+Pupa
+2 1 2
+This Model has +1 if there 
+is at least 1 in a  from it.
+Construct
+Pupa
+5 EVOCATION 
+CARDS
+At the end of its activation during the Evocation Phase, this Model may activate one additional time. 
+If it does, at the end of the additional activation, 
+remove it.
+Warscratch
+Add these cards to the 
+Upgrades Deck of the core 
+game.
+Add these cards to the 
+Evocation Cards Deck of the 
+core game.
+15 UPGRADE 
+CARDS
+Construct — Forgotten 
+Ignis
+Construct 
+Forgotten
+Ignis
+Has +1 for each  on this 
+card. 
+Each time Ignis' owner suffers , 
+Ignis can suffer 1  of those 
+in their place.
+When Ignis suffers , it suffers 
+1 of those  and ignores the rest.
+2 2 5
+1 FORGOTTEN 
+EVOCATION CARD
+Add this card to the 
+Evocation Cards deck of the 
+core game.
+CARDS
+Add these cards to the 
+Upgrades Deck of the core 
+Add these cards to the 
+Evocation Cards Deck of the 
+core game.
+5
+
+=== PAGE 6 ===
+1 AVATAR CARD
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+1 MAGMA EVOCATION 
+CARD
+30 COMMAND 
+CARDS
+Etna
+
+   
+Hatred
+If he has at least 
+moves
+1,
+ toward Magma
+Otherwise 
+. 
+. .
+DF - AV-C 01/30
+Magma
+Construct — Servant
+Magma
+Construct 2 2 5 Servant
+Avatar Components
+3 LEGENDARY SCENARIO 
+CARDS
+
+EVN - 2 / 30 - BRW-R
+Legendary Scenario Components
+1 AVATAR CARD 6 GLYPH TOKENS ()
+: moves toward target Room.
+ Performs  targeting a .
+Obtains 1 not owned by a 
+Mage from a .
+Etna
+ 12
+ 3
+ 2
+ .
+ .
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+1 MAGMA EVOCATION 
+CARD
+30 COMMAND 
+CARDS
+Etna
+
+   
+.
+Summons a Pupa
+Assigns
+.
+ a random Upgrade to 
+it. It activates.
+
+Hatred
+If he has at least 
+moves
+1,
+ toward Magma
+Otherwise 
+. 
+. .
+DF - AV-C 01/30
+Magma
+Construct — Servant
+Magma
+2 2 5
+Priority, Comeback.
+Magma has +1 for each on 
+the Event Board. When it performs a 
+, it targets a .
+After it performs a , it inflicts
+1 to each  from the target.
+   
+Construct 
+Servant
+Avatar Components
+3 LEGENDARY SCENARIO 
+CARDS
+
+The  places 2 in each 
+.
+1 1
+Black Rose Phase
+Fault CATASTROPHE
+EVN - 2 / 30 - BRW-R
+Legendary Scenario Components
+6 GLYPH TOKENS ()
+6
+
+=== PAGE 7 ===
+Etna Magma / Ignis
+5 Pupa
+Models
+1 Large Avatar Base
+1 Large Mage Base
+Magma / Ignis
+5 Pupa
+Etna
+Models
+1 Large Avatar Base
+1 Large Mage Base
+7
+
+=== PAGE 8 ===
+ETNA SETUP
+When used as an Avatar, Etna cannot be chosen as a Mage during Step 8 of the Setup.
+Apply the following steps during Step 3 of the Avatar Setup:
+• Place the Forge Room so that it is adjacent to the Black Rose Room.
+• Clip the Large Avatar Base to the Etna Model.
+• Place the Etna Model in the Forge Room.
+• Clip the Avatar’s Large Evocation Base to the Magma Model.
+• Place the Magma Model in the Black Rose Room.
+• Place the Magma Evocation Card on the  Slot of the Avatar Board.
+• Place a Glyph Token  in each Room adjacent to the Black Rose Room.
+• Remove the Lava Flow card from the Forgotten Spells deck.
+Avata r
+Etna is the right-hand man of Vesuvio, the king of the cyclopes. Appointed as the Great 
+Blacksmith of the Forge by his lord, he now lives by devoting himself to the creation of 
+magnifi cent tools. Etna has found in Magma a faithful servant who, as such, follows him 
+in all his endeavors.
+Vesuvio has given Etna the task of becoming Grand Magister of the Lodge. He also wants 
+to control the magical aspects that whisper to the world, giving more power to his people.
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+A Avatar Eff ect: The Eff ect indicated 
+by the  symbol on the Avatar Card 
+must be resolved whenever the Eff ect 
+of a Command Card shows the 
+symbol.
+B Avatar Tool : 
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. Etna’s Tool is the Glyph 
+Token.
+C Avatar Skills:
+ Etna has the Avatar Skills explained 
+in detail on page 10.
+AVATAR CARD ANATOMY
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+A
+C
+B
+ETNA SETUP
+When used as an Avatar, Etna cannot be chosen as a Mage during Step 8 of the Setup.
+Apply the following steps during Step 3 of the Avatar Setup:
+• Place the Forge Room so that it is adjacent to the Black Rose Room.
+• Clip the Large Avatar Base to the Etna Model.
+• Place the Etna Model in the Forge Room.
+• Clip the Avatar’s Large Evocation Base to the Magma Model.
+• Place the Magma Model in the Black Rose Room.
+• Place the Magma Evocation Card on the  Slot of the Avatar Board.
+• Place a Glyph Token  in each Room adjacent to the Black Rose Room.
+• Remove the Lava Flow card from the Forgotten Spells deck.
+Avata r
+Etna is the right-hand man of Vesuvio, the king of the cyclopes. Appointed as the Great 
+Blacksmith of the Forge by his lord, he now lives by devoting himself to the creation of 
+magnifi cent tools. Etna has found in Magma a faithful servant who, as such, follows him 
+in all his endeavors.
+Vesuvio has given Etna the task of becoming Grand Magister of the Lodge. He also wants 
+to control the magical aspects that whisper to the world, giving more power to his people.
+ toward target Room.
+ targeting a .
+ not owned by a 
+Mage from a .
+Etna
+ 12
+ 3
+ 2
+.
+.
+Etna
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+A Avatar Eff ect: The Eff ect indicated 
+by the  symbol on the Avatar Card 
+must be resolved whenever the Eff ect 
+of a Command Card shows the 
+symbol.
+B Avatar Tool : 
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. Etna’s Tool is the Glyph 
+Token.
+C Avatar Skills:
+ Etna has the Avatar Skills explained 
+in detail on page 10.
+AVATAR CARD ANATOMY
+ toward target Room.
+ targeting a 
+ not owned by a 
+Mage from a 
+ toward target Room.
+erforms 
+Obtains 1
+Mage from a 
+: moves
+
+
+
+
+
+A
+Engrave Glyphs, Divine Fatigue, 
+Forgeborn
+C
+
+
+B
+8
+
+=== PAGE 9 ===
+GLYPH TOKENS 
+The Glyph Tokens in the Lodge can 
+be collected by Mages to exploit their 
+devastating energy.
+During the game, Etna will try to collect and 
+engrave Glyphs to enhance his Evocation, 
+Magma.
+Glyph Tokens follow these rules:
+• Collect: when a Mage activates a Room in 
+which there is at least one Glyph Token, 
+if that Mage is in that Room, they obtain
+a Glyph Token from that Room (and not 
+from a Mage Card) and place it on their 
+Mage Card (Avatar Card for Etna) showing 
+its Active side (see image). A Glyph Token 
+that is on a Mage Card is considered to be 
+in the same Room as that Mage.
+• Defeat: when a Mage (including Etna) 
+defeats another Mage who has at least 
+one Glyph Token on their Mage Card 
+(Avatar Card for Etna), they must take 
+one of those tokens and place it on their 
+Mage Card (Avatar Card for Etna) while 
+keeping the side currently visible (Active 
+or Exhausted, see image). If the defeated 
+Mage still has Glyph Tokens on their 
+Mage Card, they must be placed in the 
+Room in which they were defeated.
+• Attack: a Mage who possesses at least one 
+Avatar Special Rules — Etna 
+Active Glyph Token on their Mage Card 
+can use the Mystic Strike Physical Action 
+(see box). 
+• Clean-up Phase: during Step 2 of the 
+Clean-up Phase, starting with the player 
+who has the Crown () and proceeding 
+clockwise, each Mage places all the Glyph 
+Tokens they have in the Room in which 
+they are. The Mage gains 2 for each Glyph 
+Token placed this way.
+Mystic Strike (Physical Action, ) 
+• Exhaust all Active Glyph Tokens 
+on your Mage Card and perform a 
+Physical Attack () on a ; you have 
++1 for each Glyph Token you just 
+Exhausted.
+• Move your Mage up to 1.
+Active Glyph Token Exhausted Glyph Token
+GLYPH TOKENS 
+The Glyph Tokens in the Lodge can 
+be collected by Mages to exploit their 
+devastating energy.
+During the game, Etna will try to collect and 
+engrave Glyphs to enhance his Evocation, 
+Magma.
+Glyph Tokens follow these rules:
+• Collect: when a Mage activates a Room in 
+which there is at least one Glyph Token, 
+if that Mage is in that Room, they obtain
+a Glyph Token from that Room (and not 
+from a Mage Card) and place it on their 
+Mage Card (Avatar Card for Etna) showing 
+its Active side (see image). A Glyph Token 
+that is on a Mage Card is considered to be 
+in the same Room as that Mage.
+• Defeat: when a Mage (including Etna) 
+defeats another Mage who has at least 
+one Glyph Token on their Mage Card 
+(Avatar Card for Etna), they must take 
+one of those tokens and place it on their 
+Mage Card (Avatar Card for Etna) while 
+keeping the side currently visible (Active 
+or Exhausted, see image). If the defeated 
+Mage still has Glyph Tokens on their 
+Mage Card, they must be placed in the 
+Room in which they were defeated.
+• Attack: a Mage who possesses at least one 
+Avatar Special Rules — Etna 
+Active Glyph Token on their Mage Card 
+can use the Mystic Strike Physical Action 
+(see box). 
+• Clean-up Phase: during Step 2 of the 
+Clean-up Phase, starting with the player 
+who has the Crown () and proceeding 
+clockwise, each Mage places all the Glyph 
+Tokens they have in the Room in which 
+they are. The Mage gains 2 for each Glyph 
+Token placed this way.
+Mystic Strike (Physical Action, ) 
+• Exhaust all Active Glyph Tokens 
+on your Mage Card and perform a 
+Physical Attack () on a ; you have 
++1 for each Glyph Token you just 
+Exhausted.
+Active Glyph Token Exhausted Glyph Token
+• Move your Mage up to 1.
+9
+
+=== PAGE 10 ===
+Avatar Skills — Etna
+Forgeborn
+If Etna begins his activation in his Cell, 
+before revealing the Command Card, he 
+places himself in the Forge Room.
+Engrave Glyphs
+If at the end of his own activation Etna is 
+in the same Room as Magma, all Glyph 
+Tokens on his Mage Card must be placed on 
+the Event Board, in the Black Rose Trophy 
+Slot. These Glyph Tokens are no longer 
+considered to be in the Lodge.
+Divine Fatigue
+If there are six Glyph Tokens on the Event 
+Board, the  immediately wins the game. If 
+this does not happen, at the end of the game 
+Etna gains 1 for each Glyph Token on the 
+Event Board.
+ETNA PRIORITY
+:   
+Etna chooses as a target:
+: the Room with the most  , if tied...
+: the closest Room, if tied...
+: the Room with the least , if tied, the Choice of the Crown applies.
+ 
+Etna chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most , if tied...
+: the Room with the most , if tied, the Choice of the Crown applies.
+Avatar Skills — Etna
+Forgeborn
+If Etna begins his activation in his Cell, 
+before revealing the Command Card, he 
+places himself in the Forge Room.
+Engrave Glyphs
+If at the end of his own activation Etna is 
+in the same Room as Magma, all Glyph 
+Tokens on his Mage Card must be placed on 
+the Event Board, in the Black Rose Trophy 
+Slot. These Glyph Tokens are no longer 
+considered to be in the Lodge.
+Divine Fatigue
+If there are six Glyph Tokens on the Event 
+Board, the  immediately wins the game. If 
+this does not happen, at the end of the game 
+Etna gains 1 for each Glyph Token on the 
+Event Board.
+ETNA PRIORITY
+:   
+Etna chooses as a target:
+: the Room with the most  , if tied...
+: the closest Room, if tied...
+: the Room with the least , if tied, the Choice of the Crown applies.
+ 
+Etna chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most , if tied...
+: the Room with the most , if tied, the Choice of the Crown applies.
+10
+
+=== PAGE 11 ===
+Servant — Magma
+A Servant is an Evocation that has a special 
+bond with the Avatar. 
+Magma is the Servant of Etna and is 
+represented in the Lodge by the corresponding 
+Model and its Servant Evocation Card. The 
+Servant Evocation Card is never discarded 
+from the  Slot of the Avatar Board, even if 
+Magma is defeated or removed.
+SPECIAL RULES
+Priority
+Magma follows the Priority on its Servant 
+Evocation Card (also see box) to choose a 
+target, move closer to it and attack it.
+Comeback
+If Magma has to activate when its Model is 
+not in the Lodge (it was previously defeated 
+or removed), Magma does not activate, and 
+the  places its Model in the Black Rose 
+Room.
+  
+Magma chooses as a target:
+ The Mage that has the most , if tied...
+ The Mage with the most , if tied...
+ The Mage with the most , if tied, the Choice of the Crown applies.
+If Magma cannot reach its target, it moves as close to it as possible.
+If there are no Mages in the Lodge when Magma activates, it does not move and ends 
+its activation.
+MAGMA PRIORITY
+Magma
+Construct 2 2 5
+Servant
+Servant — Magma
+A Servant is an Evocation that has a special 
+bond with the Avatar. 
+Magma is the Servant of Etna and is 
+represented in the Lodge by the corresponding 
+Model and its Servant Evocation Card. The 
+Servant Evocation Card is never discarded 
+from the  Slot of the Avatar Board, even if 
+Magma is defeated or removed.
+SPECIAL RULES
+Priority
+Magma follows the Priority on its Servant 
+Evocation Card (also see box) to choose a 
+target, move closer to it and attack it.
+Comeback
+If Magma has to activate when its Model is 
+not in the Lodge (it was previously defeated 
+or removed), Magma does not activate, and 
+the  places its Model in the Black Rose 
+Room.
+  
+Magma chooses as a target:
+ The Mage that has the most , if tied...
+ The Mage with the most , if tied...
+ The Mage with the most , if tied, the Choice of the Crown applies.
+If Magma cannot reach its target, it moves as close to it as possible.
+If there are no Mages in the Lodge when Magma activates, it does not move and ends 
+its activation.
+MAGMA PRIORITY
+A Servant is an Evocation that has a special 
+and is 
+ corresponding 
+The 
+Servant Evocation Card is never discarded 
+ Slot of the Avatar Board, even if 
+Magma
+2 2 5
+Priority, Comeback.
+Magma has +1 for each on 
+the Event Board. When it performs a 
+, it targets a .
+After it performs a , it inflicts
+1 to each  from the target.
+   
+Construct 
+Servant
+11
+
+=== PAGE 12 ===
+Additional Setup
+Apply the following during the regular Game Setup:
+• Steps 1 and 2: instead of what is indicated in these points, arrange the Rooms and Cells 
+as shown in the image in relation to the number of players participating in the game. The 
+ Room adjacent to the Black Rose Room must be the Forge Room. 
+• Before step 4: Turn the Forge, Garden and Treasure Rooms so as to show the Rebuilt side. 
+Place the corresponding Room Activation Tokens on these Rooms.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+32 of the Power Board.
+2. Follow the steps of Etna’s 
+Avatar Setup.
+3. Place the Legendary 
+Scenario Card Catastrophe of the relevant Moon Phase on top of each of the three Event 
+decks. These cards will be the fi rst Event to be resolved in each of the Moon Phases.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Unquenchable Forge: when the Forge Room is activated, its Room Activation Token 
+is not turned to the Exhausted side.
+• Magmatic Passages: a Mage who would exit a  Room with a “Move 1.” Eff ect of a 
+Physical Action, may instead give up that Eff ect and place itself in another  Room.
+Honorable Mention
+At the end of the game, the Mage with the most  of the  gains 3; if tied, no Mage gains 
+these .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules and using Legendary Scenario 
+Cards dedicated to it.
+In Catastrophe, the Mages will have to stop the cyclops blacksmith Etna who, by infusing 
+power glyphs into his golem Magma, wants to conquer the Black Rose.
+Le g e n d a ry S c e n a r i o : 
+Catastrophe
+Additional Setup
+Apply the following during the regular Game Setup:
+• Steps 1 and 2: instead of what is indicated in these points, arrange the Rooms and Cells 
+as shown in the image in relation to the number of players participating in the game. The 
+ Room adjacent to the Black Rose Room must be the Forge Room. 
+• Before step 4: Turn the Forge, Garden and Treasure Rooms so as to show the Rebuilt side. 
+Place the corresponding Room Activation Tokens on these Rooms.
+Once the Setup is complete: 
+1. Place the Second Moon 
+Cube on Slot 7, the Third 
+Moon Cube on Slot 19, and 
+the Black Rose Cube on Slot 
+32 of the Power Board.
+2. Follow the steps of Etna’s 
+Avatar Setup.
+3. Place the Legendary 
+Scenario Card Catastrophe of the relevant Moon Phase on top of each of the three Event 
+decks. These cards will be the fi rst Event to be resolved in each of the Moon Phases.
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Unquenchable Forge: when the Forge Room is activated, its Room Activation Token 
+is not turned to the Exhausted side.
+• Magmatic Passages: a Mage who would exit a  Room with a “Move 1.” Eff ect of a 
+Physical Action, may instead give up that Eff ect and place itself in another  Room.
+Honorable Mention
+At the end of the game, the Mage with the most  of the  gains 3; if tied, no Mage gains 
+these .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules and using Legendary Scenario 
+Cards dedicated to it.
+In Catastrophe, the Mages will have to stop the cyclops blacksmith Etna who, by infusing 
+power glyphs into his golem Magma, wants to conquer the Black Rose.
+Le g e n d a ry S c e n a r i o : 
+Catastrophe
+12
+
+=== PAGE 13 ===
+FIVE PLAYERS
+FOUR PLAYERS SIX PLAYERS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ONE PLAYER TWO PLAYERS THREE PLAYERS
+
+
+
+
+
+  
+
+
+Lodge Layouts
+FIVE PLAYERS
+FOUR PLAYERS SIX PLAYERS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ONE PLAYER TWO PLAYERS THREE PLAYERS
+
+
+
+
+
+  
+
+
+Lodge Layouts
+13
+
+=== PAGE 14 ===
+
+
+=== PAGE 15 ===
+
+
+=== PAGE 16 ===
+How to use this Expansion
+ is expansion adds a new Hunt Mission to be included in any Nova Aetas Renaissance 
+Campaign of the Core Game or any Expansion.
+If you decide to use Gaea in your Campaign, add the Event Card found in this box to 
+the Core Game Event Card Deck. 
+Gaea is a Hunt Mission and follows all the rules for this type of Mission, described in 
+the core Rulebook of Nova Aetas Renaissance.
+Instead of waiting to draw the Event Card " e Hill that does not Sleep," at any point 
+in the Main Campaign you can mark the title of this Side Mission in the Active Side 
+Mission Slot and play it as if you had drawn the Event Card " e Hill that does not 
+Sleep."
+Bounty
+Some Models occupy more than a single Battle eld Square.  ese Models are called 
+Large Models.  ese Models occupy only a single Square during movement. In other 
+words, while moving, a Large Model is considered as a normal Model, and then 
+returns to occupying more Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they choose any of the Squares 
+occupied by the Model and count starting from the chosen Square (a normal-sized 
+Model can be used to simulate the movement of the Large Model). When the Large 
+Model  nishes its movement, the players place the Model so that the Squares occupied 
+include the Square where it  nished its movement. If placement is not possible because 
+the required Squares (usually 4) are not all available, players refer to the following 
+rules:
+If there are Models occupying the Squares, the Large Model pushes the Models ◆
+occupying them into adjacent available Squares or the nearest available Square.
+If there are Scenic Elements occupying Squares, place the Large Model in Squares ◆
+that are available or occupied by other Models. If this is not possible, the Large 
+Model ends its Movement in a Square that allows its placement.
+Large Models
+A Large Model is considered to be targeted by an Attack with the Area Trait 
+if at least one of the Squares it occupies is within the Area of the Attack.
+If a Large Model is the target of an Attack with the Area Trait, it su ers only the 
+E ect intended for the target, even if it occupies multiple Squares within the Area. 
+If a Large Model is not the target of an Attack with the Area Trait and occupies more 
+than one Square within the Area, it su ers the additional E ect only once.
+Large Models and Area Effects
+A Large Model always has a valid Line of Sight on all other Models and vice versa
+Large Models and Line of Sight
+
+=== PAGE 17 ===
+How to use this Expansion
+ is expansion adds a new Hunt Mission to be included in any Nova Aetas Renaissance 
+Campaign of the Core Game or any Expansion.
+If you decide to use Gaea in your Campaign, add the Event Card found in this box to 
+the Core Game Event Card Deck. 
+Gaea is a Hunt Mission and follows all the rules for this type of Mission, described in 
+the core Rulebook of Nova Aetas Renaissance.
+Instead of waiting to draw the Event Card " e Hill that does not Sleep," at any point 
+in the Main Campaign you can mark the title of this Side Mission in the Active Side 
+Mission Slot and play it as if you had drawn the Event Card " e Hill that does not 
+Sleep."
+Bounty
+Some Models occupy more than a single Battle eld Square.  ese Models are called 
+Large Models.  ese Models occupy only a single Square during movement. In other 
+words, while moving, a Large Model is considered as a normal Model, and then 
+returns to occupying more Squares the moment the movement ends. When players 
+need to determine the movement of a Large Model, they choose any of the Squares 
+occupied by the Model and count starting from the chosen Square (a normal-sized 
+Model can be used to simulate the movement of the Large Model). When the Large 
+Model  nishes its movement, the players place the Model so that the Squares occupied 
+include the Square where it  nished its movement. If placement is not possible because 
+the required Squares (usually 4) are not all available, players refer to the following 
+rules:
+If there are Models occupying the Squares, the Large Model pushes the Models ◆
+occupying them into adjacent available Squares or the nearest available Square.
+If there are Scenic Elements occupying Squares, place the Large Model in Squares ◆
+that are available or occupied by other Models. If this is not possible, the Large 
+Model ends its Movement in a Square that allows its placement.
+Large Models
+
+=== PAGE 18 ===
+1 Event Mission Card 6 Mission Cards
+18 Magma Action Cards 4 Reward Cards
+1x Lava Tile
+The Hill that does not Sleep
+ “It looks like the big hill is transforming, 
+perhaps concealing a dormant 
+volcano that is awakening,” Bartolo, a 
+mapping scout in the area, tells you.
+“Its rumblings are becoming something 
+far stranger,” he adds. “My group may 
+well reward you if you investigate the 
+event. I’d go myself but I’m too ... um ... 
+busy with maps.”
+You can mark the ◆
+F1 “ e Forge 
+of Terror” Side 
+Mission in the 
+Active Side 
+Missions.
+busy with maps.”
+You can mark the 
+F1 “ e Forge 
+of Terror” Side 
+Mission in the 
+Active Side 
+Missions.
+4 Reward Cards
+Reward 
+F1
+
+18 Magma Action Cards
+Magma
+ACCIA C
+4 Reward Cards
+Last Word
+weapon 
++1 2-5  3
+   
+ If you obtain a Critical, instead of in icting 1 to the target,  additional to all  in ict 1 Unblockable Models adjacent to it.
+Last Word
+weapon 
+18 Magma Action Cards
+Magma
+1  1
+ Bruciare 
+Magma si piazza adiacente all'Eroe 
+più vicino ed e ettua il seguente 
+Attacco su di esso.
+1
+ +8
+ 1
+
+Costrutto 
+Inarrestabile
+ F1  
+the forge of terror
+Components
+Key
+.  Read the back of ◆
+Components
+1x Magma • 
+1x Magma Action Cards Deck (do not shu e or • 
+reveal this deck) 
+4x Bush • 
+4x Tree • 
+2x Stone • 
+Tiles: 1A, 2A, 3A, 4A • 
+1x Lava Tile • 
+: F1, F2, F3, F4 (do not reveal these cards)  • 
+Key
+ Heroes
+ Magma
+.  Read the back of ◆
+F1
+
+=== PAGE 19 ===
+Components
+Magma
+1 Mission Envelope
+F1
+1 Activation Token 
+
+=== PAGE 20 ===
+Magma

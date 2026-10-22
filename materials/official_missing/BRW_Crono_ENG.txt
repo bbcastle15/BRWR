@@ -1,0 +1,593 @@
+Prague, Duke of Luxembourg - Crono, death has no time
+“He observed the mages from the heights of his grandeur.
+They could never have imagined that the wrath of the Black Rose, incarnated by 
+that cold colossus, would soon reduce them to nothing but empty shells, a miserable 
+simulacrum of their former selves.”
+Crono Medusa
+Crono, the guardian of the deepest part of the lodge, 
+is forced into the large central room by way of his 
+enormous build.
+Medusa, custodian of Crono, his first slave and now 
+arch enemy.
+These 5 hexagons make up the Lodge 
+Revenge Room. The four side hexagons 
+(Purple, Red, Yellow and Green 
+respectively), together with the central 
+hexagon (Black), form a single room, the 
+fulcrum of the battle, where Crono will 
+be positioned. The Lodge Revenge Room 
+is considered to be one, undivided.
+Similarly to the base game, these grant powers to the rooms. 
+The activation tokens are positioned on the matching-coloured 
+hexagon to indicate which power has already been activated. 
+A sheet with Crono’s characteristics, a space in which to place 
+Crono’s action cards, to help manage Crono during games 
+where he is involved.
+( A ) 20 Health Points
+( B ) Action cards
+( C ) Action cards discard pile
+Front
+Back
+A
+B C
+Hexagons of the Lodge Revenge Room (5)
+Room activation tokens (4)
+Crono Sheet
+Game Components
+2
+These have the same function as in 
+the base game. They are dedicated 
+to this expansion, but depending 
+on their scope can also be used in 
+the base game in addition to those 
+already included.
+An evocation card to summon 
+Crono during a game outside this 
+expansion, and another one to 
+summon the Disgrace of Crete.
+These have the same function as in 
+the base game. They are dedicated 
+to this expansion, but depending 
+on their scope can also be used in 
+the base game in addition to those 
+already included.
+The equipment cards are a type 
+of evocation needed to empower 
+the mages that summon them.
+These cards are used to 
+describe Crono’s actions 
+when he is activated. There 
+are 10 for each Moon. 
+Each time a model enters 
+and disturbs Crono’s sleep, 
+he will act in accordance 
+with the description on 
+these cards, which become more and more powerful as the 
+moon grows. Each time a model enters the room, the player 
+managing the model draws a Crono action card and applies its 
+effects.
+Special Quests (12)
+Evocation cards (2)
+Special Events (12)
+Equipment cards (4)
+Crono action cards (30)
+
+
+
+ 
+
+A set of 12 spells (3 
+copies each, 36 cards) 
+forming the Myth 
+School of Magic. 
+There is also 1 Custom 
+Spell (3 copies) 
+belonging to Medusa.
+This powerful Forgotten 
+Spell can be integrated with 
+the Forgotten Spells deck of 
+the core game, to summon 
+Crono under your control.
+The colossus will be a mighty 
+ally and he will help you to 
+reach victory.
+ 
+
+Myth School of Magic
+Spell Cards (39)
+Medusa’s Mage Sheet Forgotten Spell
+This Token is used when the Disgrace of 
+Crete is summoned by the corresponding 
+Myth spell.
+Disgrace of Crete Token
+3
+To play with this expansion, the following changes need to be 
+made to the base game:
+1. First of all, remove the following rooms, which must be 
+replaced by the Revenge rooms: 
+• Black Rose room
+• Throne room
+• Forge
+• Sanctuary
+• Alchemic Laboratory
+2. Position the Revenge Room at the centre of the play area, 
+line up the other 4 hexagons of the Lodge Revenge Room so 
+that the room illustration matches, and all the others randomly.
+3. Position the Activation Tokens on the matching-coloured 
+hexagons.
+Place Crono at the centre of the Lodge Revenge Room. Crono 
+will occupy the entire space.
+4. Mix the Event decks specific to this scenario into one, and 
+place it in its space on the Event board.
+Mix the Quest decks specific to this scenariointo one, integrating 
+it with the Quest cards from the base game (excluding all the 
+Quests that refers to a specific room), and place it in its space 
+on the Power board.
+5. Place the Crono Sheet on the play table, in a space between 
+two players: you cannot move it during the game because its position will influence the Action Phase (see page 7).
+Place the Crono Actions deck corresponding to the 1st Moon on top, and the other 2 decks within arm’s reach.
+6. Create the Library, choosing 6 schools of magic from among those available, including the School of Myth in this expansion.
+Continue the set-up phase following the normal rules to select the mages and distribute the rest of the game materials (see page 16 
+of the Rulebook).
+Game Setup
+2
+3
+4
+How to play
+The Lodge Revenge Room is made of 5 different hexagons, but is considered as one large room for the instability. Each hexagon 
+is nonetheless differentiated by its corresponding colour.
+When a mage or evocation moves into the Lodge Revenge Room, the model is considered to have entered the matching-coloured 
+room (for any traps, missions or other effects tied to the colour of the room). 
+It is impossible to enter the central room insofar as it is completely occupied by Crono.
+Depending on the hexagon where a mage is positioned, he/she can activate the corresponding Activation token.
+ The Revenge room has an Instability resistance of 28.
+Remember that the Lodge Revenge Room is considered one large room, just for the instability, this means that it is not possibile to 
+destroy a single hexagon.
+The Lodge Revenge Room
+5
+Each of these 4 hexagons has an alternative effect that can be selected instead of those listed above (however the colour remains 
+that of the activated room):
+ Revenge Room - discard 3 cards from your hand, draw 3 Forgotten Magic cards and keep one, reposition the others as you 
+like, face down, at the top of the Forgotten Magic deck.
+This effect is available starting from the Second Moon.
+One of the end-of-game conditions of this Legendary scenario is the destruction of the Lodge Revenge Room (see page xxx).
+Below are listed the 5 effects of the Room activation tokens:
+ Room of Corrupt Power, 
+allowing players that activate its 
+effect to cause the player holding 
+the Crown to lose 1 Power Point 
+(if they have any) and to steal the 
+first player token off him. 
+Mirrors Room can't copy the 
+effect of this room.
+ Hell's Door, which calls 
+up a Bone Knight directly from 
+the depths of hell, at the cost of 1 
+Power Point.
+ Sanctuary of Flames, 
+allowing mages that activate 
+its effect to draw 2 cards from 
+their own Grimoire and inflict 1 
+damage for each Combat spell on 
+a target within a range of 1 from 
+the Sanctuary.
+ Training Room, where 
+a mage that activates the room 
+can immediately move and attack, 
+healing one of their wounds for 
+each damage inflicted.
+The Lodge Revenge Room, as mentioned above, is considered 
+a single room. However, when calculating the range of effect of 
+your actions/spells, follow the normal rules, the line of sight rule 
+still applies. The only exception is the Revenge hexagon hosting 
+Crono. This hexagon is considered blocked and obstructs lines 
+of sight. Refer to the diagram for all doubts on the range of 
+spells.
+Spell range diagram
+Rooms' effects
+Starting room
+ of the Spell.
+
+ 
+ 
+
+ 
+ 
+
+
+
+
+ 
+ 
+6
+Crono is an immortal being. The only way to get rid of him is to bury him, making the room explode.
+In spite of this, Crono is considered a model (it is neither a mage nor evocation). It can therefore be the target of spells and 
+effects that don’t target only mages or evocations. It is therefore possible to place him temporarily out of play.
+Crono has 20 Health Points before being considered out of play.
+If Crono ends up out of play, he will not draw any cards from the Crono Actions deck until the end of the turn, given that he is 
+occupied regenerating himself. Crono cannot suffer damages when out of play.
+When Crono ends up out of play, assign players:
+ and  in the room, to the player that will have inflicted the most damages on Crono.  to all other players.
+If Crono is out of play, reactivate him with all his Health Points at the beginning of the Black Rose Phase.
+When a model enters the Lodge Revenge Room, Crono acts by drawing a card from the Actions deck, which describes the effect. 
+Each action card contains not only the effect, but also indicates the rooms influenced by the effect, striking every model inside each 
+of those rooms and the orientation of Crono to perform the attack.
+If the mage symbol appears inside the diagram of the affected rooms, the player that drew the action card must do his/
+her utmost to have the following targets in that schema (if possible) in order of priority:
+1. If a mage: the one that positioned the most instability tokens in the Lodge Revenge Room
+2. The model that activated Crono by entering the Lodge Revenge Room
+It may be the case that in order to strike the mage that positioned the most instability, the model that activated Crono 
+remains outside his range of action, or that other models are involved in Crono’s attacks. If two or more mages have positioned the 
+same number of instability tokens in the Lodge Revenge Room, Crono turns towards the model that entered the Room. 
+If the action card shows an area of effect: the mage that forced Crono to activate can choose the orientation of the effect, facing 
+Crono in that direction, according to the target mage rules. In case of any ambiguity, the player that drew the Action card can chose 
+Crono's direction; see the example in the next page.
+Crono starts the game facing the room between the Room of Corrupt power and the Sanctuary of Flames.
+Crono's characteristics
+Crono Action cards
+Crono's activation
+Time has no mercy
+At the beginning of the Black Rose Phase, turn Crono clockwise 
+one hexagon, starting from the last orientation, , then Crono 
+will inflict  to each model present in each room in front 
+of him.
+During the Action Phase, Crono will activate again during "his 
+round".
+Crono's round
+His order of activation, compared to the players, is determined 
+by the position of his Sheet on the table.
+Turn Crono clockwise one hexagon, starting from the last 
+orientation, , then Crono will inflict  to each model present 
+in each room in front of him, exactly in the same way of the 
+Black Rose Phase.
+Please note that the orientation of Crono is not regular, 
+and changes according to the Crono action cards effects.
+7
+The equipment cards are a type of evocation needed to empower 
+the mages that summon them.
+Just like normal evocations, they occupy one of the three 
+dedicated spaces on the mage sheet.
+Each equipment card shows the name of the object on the front, 
+its Health Points and the game effect.
+Equipment items do not use a token or miniature for 
+identification; they are considered equipped by the mage and 
+are identified by their card alone. Equipment is destroyed when 
+it suffers an amount of damage equal to its Health Points.
+Front
+Back
+Equipment
+Unlike normal Black Rose Wars games, in order to end the battle: the Crono room must be made unstable or the Black Rose 
+must reach 30 Power Points. 
+If the Black Rose wins, all mages lose. If a mage or the Black Rose reaches 30 Power Points before the Lodge Revenge Room is 
+destroyed, the Black Rose earns another 15 .
+Rendering the Revenge room unstable will be helpful to achieve victory.
+If the Lodge Revenge Room is destroyed by reaching 28 Instabilities, the mages will earn the following Power Points depending on 
+their contribution to its destruction:
+1st ranked  2nd ranked Participants 
+In the case of equal points for 1st and/or 2nd place, the tied mages will each earn the Power Points of their ranking -1.
+Scenario point scoring
+When an equipment item is struck by an enemy effect, the owner assigns damage in the attacker’s colour, just like a normal 
+evocation.
+When the damage tokens on an object reach the number of Health Points, the object breaks and its mage removes the corresponding 
+card from his/her sheet. A mage can never be equipped with two equal equimpent at the same time.
+Tessa moves into the Sanctuary of Flames, this immediately 
+triggers Crono and an action card is drawn. The action card 
+has en effect that involves 4 rooms. Looking at the instability 
+of the Revenge of the Lodge Room, Nero  and Rebecca 
+ have the same amount, therefore the mage with the most 
+instability cannot be determined and Crono turns toward the 
+model that entered the Room (Tessa ) and resolves the 
+effect in the area described by the action card. 
+T
+T
+R
+N N
+R
+Example
+8
+Myth
+The School
+Spell cards
+Straight effect
+Summon the Ade's Helm then you can draw 
+1 card from the library. The Ade's Helm has 
+characteristics: 
+   
+Until you have the helm as your evocation you 
+cannot be the target of Single spells. Your helm 
+can still be the target.
+Reverse effect
+Place your model in any room on the board. 
+After that you can attack.
+Ade's Helm
+Straight effect
+Summon the Golden Bow of Artemis. After that you 
+can inflict 2 damages to a target within a range of 2.
+The Bow has characteristics:
+   and it cannot suffer Area Damage. 
+Until you have the Bow as an evocation you can deal 
+1 damage at range 2 instead of moving.
+Reverse effect
+Inflict 4 damage to the target model. 
+Artemis' Golden Bow
+
+Straight effect
+Inflict 2 damages to the target model, then 
+move him/her in an adjacent room.
+Reverse effect
+Inflict 1 damage to the target model. One 
+of your evocations can act but only if its 
+movement can reach the target model; 
+otherwise it cannot act.
+Chains of Minos
+Straight effect
+Place the target model in the room you are in 
+and then inflict him/her 2 damage.
+Reverse effect
+Inflict 3 damages to the target model and move 
+him in an adjacent room. If you move the 
+model in a room with another model, inflict 1 
+damage to both.
+Crono's Rage
+
+The school of Mythology originates from the Hellenic civilisation and was created thanks to the close ties of the Greeks with 
+their deities, who in addition to knowledge and power, also gifted them several powerful artefacts. Much of this knowledge 
+failed to survive the passing of the centuries, but a few excerpts of text concerning this warlike school managed to reach us. 
+This school calls upon an immense force invested in battle and destruction, worthy only of the gods who created it.
+The Gorgons harnessed this energy into powerful spells to call upon the force and impetuosity of Poseidon, the guile of Hades 
+and the artefacts of Perseus who fell in the battle against Medusa herself, the first descendant of this dangerous species and 
+ancestor of the mage still tied to Crono.
+The magnificence of the lost generation can once again take to the stage in the Black Rose arena. Slimy snakes will gnaw 
+at your enemies’ feet as you magically crawl behind their backs, Crono’s rage will lure them before your powerful trident, 
+stabbing them to death.
+You choose to arm yourself with the magical artefacts, moving swiftly around the arena until none of your enemies are left 
+standing.
+The symbol of this school is a tribute to art, but also the power and immortality of the proud Hellenic people.
+Mages of the school of Mythology can choose to destroy the arena, using the mighty revenge of Poseidon, god of the sea, while 
+evoking the powerful Minotaur of Crete to trap their adversaries in mental labyrinths. 
+Choosing this school of magic means choosing a close combat strategy or relying on the destruction of the Lodge.
+Ways to make Power Points: Defeat other mages, Instability positioning
+Key elements of spells: Close combat wounds, Physical wound combo, Equipments summon, Instability positioning, 
+Movement with spells
+Affinity with other schools:: Transmutation, Destruction 
+Difficulty: Medium
+Magister of the School: Medusa
+9
+Straight effect
+Look at the first 5 cards of a school of magic. 
+Out of these 5 you may keep a maximum of 
+2 cards that have at least 1 instability symbol 
+on it. Re-shuffle the others back into the deck.
+Reverse effect
+Until the end of the turn, every time a model 
+enters the room you are in or you enter 
+in a room with at least one model, place 1 
+instability in that room.
+Graie's Counsel
+Straight effect
+Remove 3 cubes of instability of your color 
+from the target room to summon in that room 
+Disgrace of Crete, the minotaur. Take the 
+token/miniature from the reserve. Digrace of 
+Crete has characteristic   , 
+every time it attacks place 1 of your instability 
+in that room.
+Reverse effect
+The target mage skips it's next activation 
+phase. This means he/she will not play for an 
+entire round. You then gain 1 Power Point.
+Labyrinth
+Straight effect
+Summon the Lucent Shield, you can do 1 step 
+and attack. The Lucent Shield has characteristics:
+   until you have the shield 
+you reduce all your damages by 1 and add this 
+damage to the shield.
+Reverse effect
+Next time you suffer damage, you can trigger 
+this protection: reduce the next damage you 
+suffered by 2 damage and inflict 2 damages to 
+your attacker.
+Lucent Shield
+ 
+
+Straight effect
+Place 2 instability in the target room then all 
+the mages in the target room lose all their 
+Physical Actions unless they pay you 1 power 
+point.
+Reverse effect
+Lose one of your Physical Actions: until the 
+end of the turn, decrease by 1 damage all the 
+damages you suffer. You cannot use this effect 
+if you don't lose the Physical Action.
+Petrify
+
+Straight effect
+Convert 1 instability in the target room. After 
+this you can move all the instability in that 
+room into an adjacent room (if there is enough 
+space to move the instability). Unmoved 
+instability remains in the room. 
+Reverse effect
+Place 3 instability in the target room.
+Poseidon Vengeance
+Straight effect
+Inflict 2 damages to all models in the target 
+room. Then 1 damage to all targets in adjacent 
+rooms. After the damage is inflicted, place your 
+mage in a room of one the targets hit by the 
+spell. 
+Reverse effect
+Place 2 Instability in the target room, then 
+convert 1 instability in all rooms with at least 
+one mage. You can elect instability of a color 
+different from yours.
+Snake's Blood
+Straight effect
+Summon the trident of the seas that you can 
+attack a model in range 1. The Trident has 
+characteristics:   , since you 
+have this Trident equipped every time a mage 
+enters the room you are in or you enter a room 
+with a mage you can inflict 1 damage to him/her.
+Reverse effect
+Inflict 3 damages to the target model ignoring 
+his/her protection that cannot trigger with this 
+effect.
+Straight effect
+A mage enters into a room with your instability 
+you can trigger the trap: You can place your 
+mage in that room and attack the target.
+Reverse effect
+When a mage places instability, you can trigger 
+the trap: you can place 2 instability in the same 
+room where the mage places his/hers.
+Tears of Perseus Trident of the seas
+
+10
+Straight effect
+Inflict 2 damages to the target. If the target is 
+a mage you inflict 1 damage for each quest he/
+she already resolved.
+Reverse effect
+Inflict 2 damages to the target. If the target is a 
+mage you inflict 1 damage for each quest you 
+have already resolved.
+Characteristics
+  
+Crono has  multiplied by the number of 
+players.
+Effect
+Each time Crono activates, the mage can assign 
+up to 1 instability to each room adjacent to 
+Crono.
+He cannot be moved or removed by any effect.
+Gorgon Poison
+
+ 
+
+Straight effect
+Lose 3 Power Points to play up to 4 
+spells, from your hand. You can do it 
+by replacing ready or revealed spells.
+You can replace spells only if present on the mage 
+sheet (e.g. you can play only 2 spells from your 
+hand, if you prepared just 1 quick spell and 1 
+standard spell).
+Reverse effect
+Summon Crono, (see evocation card) 
+  
+His skill allows him, when activated, to assign up 
+to 1 instability to each adjacent room.
+Cannot be moved or removed by any effect.
+Forgotten Spell Crono evocation card
+Medusa's Custom Spell
+Crono the Eternal
+Totally confused as to what was happening, the two soldiers frantically 
+began to panic, staring terrified at their own bodies as they slowly turned 
+to stone. Once the two figures had been completely petrified, assuming the 
+appearance of two statues in a somewhat awkward pose, the slow slithering 
+of Medusa’s enormous snail tail could be heard echoing through the small 
+corridor leading to the gate where the two soldiers had previously been on 
+guard. The moment the sorceress entered, without so much as a glance at 
+her victims, the nest of vipers squirming on her head began to utter a strange 
+hissing sound, as if something about that room had stirred their fear. A gloomy 
+semi-darkness enveloped the entire space, interrupted only by the sporadic 
+glare of a few random torches hanging off the walls. Strange, musty-smelling 
+fumes emitted by a network of thick pipes, winding all throughout the room, 
+saturated the air, making it almost impossible to breathe. Well-accustomed 
+to such inhospitable environments, Medusa ventured inside without batting 
+an eyelid, side-stepping through the fragments of bone strewn across the 
+floor until reaching the centre of the large room, where a gigantic circular 
+effigy, almost three metres wide, portrayed an elaborate rose with black petals 
+surrounded by four huge expressionless faces carved into the stone.
+“Did you really believe I didn’t know the truth?” the sorceress asked, speaking 
+to the empty space. “For centuries I was forced to suppress an almost 
+uncontrollable rage, hiding behind the servile face of a devoted priestess,” 
+she hissed as her tail deviously slithered through the intricate details of the 
+black rose depicted on the floor, “but that time has finally come to an end, 
+just as yours will, very soon, ‘Supreme Lord of Time’”. She tilted her head 
+tauntingly. “But I warn you not to underestimate my words, because though I 
+may have acquired great power, I am all too aware that confronting you here 
+and now would be the end of me, just like it was for the reckless adventurers 
+whose bones adorn this floor. No, I will return to this room alongside the 
+most powerful mages of the Black Rose Lodge, and together with them, I 
+will annihilate you.” A reflective silence suddenly fell over her thoughts. “And 
+then, after I tear your head from your body and spear it with my staff, I will 
+have finally granted vengeance to my beloved mother, about whose similar 
+macabre fate you had never spoken!”, bellowed the sorceress with a surge of 
+rage, before slowly making her way toward the exit. As the vipers began to 
+writhe nervously on her head, from the corner of her eye Medusa saw a faint, 
+reddish light in the eyes of the four stone faces surrounding the enormous 
+black rose. Once outside, a sadistic grin came over her face. She knew she had 
+just succeeded in obtaining the first result of her ambitious plan: Crono was 
+waking up from his long slumber.
+Medusa
+11
+Black Rose wars - Crono Rulebook v.1.2
+Ludus Magnus Studio - 2018 ©
+All rights reserved
+www.ludusmagnustudio.com
+Game Components . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Hexagons of the Lodge Revenge Room (5) . . . . . . . . . . . . . . . . 2
+Room activation tokens (4) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Crono Sheet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Special Quests (12) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Evocation cards (2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Crono action cards (30) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Medusa’s Mage Sheet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Special Events (12) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Equipment cards (4) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Spell Cards (39) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Disgrace of Crete Token . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Forgotten Spell . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Game Setup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+How to play . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+The Lodge Revenge Room . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Rooms' effects........................................ 6
+Spell range schema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Crono's characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Crono's activation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Crono Action cards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Equipment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Scenario point scoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Myth . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+The School . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Spell cards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Medusa . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Crono the Eternal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Medusa's Custom Spell . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Table of Contents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Credits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Table of Contents
+Project manager: Andrea Colletti
+Production, Advertising and Fulfillment: Vincenzo 
+Piscitelli
+Game design: Marco Montanaro, Andrea Colletti, 
+Paolo Scippo
+Development: Ludus Magnus Studio
+Graphic Design: Paolo Scippo
+Art director: Andrea Colletti
+Concept artist: Giovanni Pirrotta
+Illustrations: Giovanni Pirrotta
+Lead 3D sculptor: Fernando Armentano
+3D sculptor: Tommaso Incecchi
+Editor: Louis Angelli
+Customer Care and Social Media: Roberto Piscitelli
+Web editors: Marco Presentino, Luca Bernardini, Roberto 
+Piscitelli
+Kickstarter manager: Andrea Colletti
+Writer: Marco Olivieri
+Translations: Flavia Frauzel, Silvia Franci, Luisa Marzullo
+Playtesters: Ilaria Pisani, Antonio Gentile, Enrico Savioli, 
+Demetrio D’Alessandro, Mauro Baranello,
+Giuseppe Verrengia, Fabio Capelli, Andrea Compiani, 
+Francesco Montanaro, Andrea Pomelli
+Special thanks to Collins Spanerger for helping us manage 
+our web community.
+Thanks also to Oscar Andrés Schwerdt, David Martin, Paul 
+Scrimo, Eddie Bianco, Alessandro Berutti and Frank Calcagno.
+Ludus Magnus Store: shop.ludusmagnusstudio.com
+Credits

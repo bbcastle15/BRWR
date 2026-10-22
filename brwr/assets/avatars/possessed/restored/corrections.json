@@ -1,0 +1,47 @@
+{
+  "mode": "builtin-imagegen-localized-restoration-corrections",
+  "fixes": [
+    {
+      "id": "avatar_traces_of_texture",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. Replace the broken-heart icon after 'places 2' in the BODY with one plain solid BLACK CIRCLE (Instability). Keep the footer hourglasses: ONLY the leftmost of its THREE central slots is active with a bright pale background, middle and right muted dark backgrounds. Everything else identical.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-8e922ef6-be1a-4ab5-ab46-abff68645f32.png",
+      "source": "events_1.png"
+    },
+    {
+      "id": "avatar_remnants_of_magic",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. In BODY ONLY: replace purple room hexagon with BLUE room hexagon bearing an eye; replace yellow sun room icon with original yellow triangle symbol from reference; replace rose coin after 'places 2' with a plain SOLID BLACK CIRCLE; replace circled upward-arrow after 'in a' with OUTLINED HEXAGON containing numeral 0. Footer leftmost central slot active, other two dim. Preserve everything else.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-2bbb4a2b-d54b-4f4d-93db-174ae72c68d9.png",
+      "source": "events_1.png"
+    },
+    {
+      "id": "avatar_thorny_corruption",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. Remove the crown medallion from the upper divider: this card has NO crown flag, divider must run continuously. In BODY replace BOTH circular rose-coins (after 'least 2' and after 'those') with PLAIN SOLID BLACK CIRCLES. Keep stemmed Black Rose icon as-is. Bottom small code must read BRW-REB M-033. Preserve all other typography and artwork.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-2e163d6a-9d77-46a7-a894-d9a1d9bf9566.png",
+      "source": "events_1.png"
+    },
+    {
+      "id": "avatar_crown_of_thorns",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. In BODY replace the single hourglass inside a coin after 'gains 1' with the POWER coin (concentric ornamental rose token, matching the coins already present at the bottom footer). Do NOT change any hourglasses in footer. Preserve all other pixels/content.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-8bd7fc4c-3b60-4655-b08e-734d7de1cde7.png",
+      "source": "events_1.png"
+    },
+    {
+      "id": "avatar_magic_of_the_rose",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. In BODY the outlined range hexagon after 'in a' must contain numeral 1 instead of an hourglass. The dark hexagon after 'places 2' must instead be a plain solid BLACK CIRCLE, no outline. Preserve the other two Black Rose Room hexagons. Preserve everything else.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-70fcfc97-c2fa-4ed1-a936-889fc7fe8c0d.png",
+      "source": "events_2.png"
+    },
+    {
+      "id": "avatar_cursed_trophy",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. In BODY replace the broken HEART after 'at least 1' with a TROPHY icon: solid black round token containing a contrasting skull silhouette matching original reference. All wording and stemmed rose and Power coin unchanged. Small bottom code BRW-REB M-042. Preserve everything else.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-be572d72-e946-4452-b66a-323e57a9b3e8.png",
+      "source": "events_3.png"
+    },
+    {
+      "id": "avatar_pledge",
+      "prompt": "Precise localized correction of an existing restored board-game card. Image 1 is the EDIT TARGET. Image 2 is the original blurry sheet, supporting fidelity reference ONLY. Return just the single card from image 1 at full resolution. This is restoration, not redesign. Edit ONLY the specified defects, keep all other text, layout, colors, background, border and ornaments identical. In BODY replace the hourglass before 'from the Avatar' with the original MAGE IN RANGE ONE icon: black upright hooded human silhouette, tiny numeral 1 alongside it (shown on reference fourth card). There is NO hourglass in the body. Keep footer hourglasses unchanged. Bottom code BRW-REB M-043. Preserve everything else.",
+      "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-0bbf9f4a-7833-401f-89b9-7e6c387d78d8.png",
+      "source": "events_3.png"
+    }
+  ]
+}

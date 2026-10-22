@@ -1,0 +1,233 @@
+Hidden Thorns
+5-6 Players Expansion for Black Rose Wars
+These are the Lodge configurations for 5 and 6 players. Note that in the 5 player configuration, the position of the Throne Room is fixed.
+With the Hidden Thorns expansion, you can now expand the battles 
+fought within the Black Rose Lodge. In fact, this expansion brings 
+the maximum number of participants to 6.
+Two new colors, white and magenta, are now available to the 
+players.
+Two new mages, Marco and Geneve, broaden the choice of your 
+alter egos. The first, of Molisan origin, is specialized in the School 
+of Illusion. The second, from Paris, masters Spells pertaining to 
+the School of Conspiracy. 
+This expansion includes all of the materials necessary for the 
+playing of these new Mages.
+5 Players 6 Players
+Setup
+Project manager: Andrea Colletti
+Production, Advertising, and Fulfillment: Vincenzo Piscitelli
+Game design: Marco Montanaro
+Development: Ludus Magnus Studio
+Graphic design: Paolo Scippo
+Art director: Andrea Colletti
+Concept artist: Macs Gallo, Daniel Comerci
+Illustrations: Henning Ludvigsen
+Lead 3D sculptor: Fernando Armentano
+3D sculptors: Alberto Bevilacqua, Krisztián Hartman,
+Tommaso Incecchi
+Editor: Louis Angelli
+Customer care and Social media: Roberto Piscitelli
+Web editors: Marco Presentino, Luca Bernardini, Roberto 
+Piscitelli
+Kickstarter manager: Andrea Colletti
+Writer: Marco Olivieri
+Translations: Flavia Frauzel, Silvia Franci, Luisa Marzullo
+Playtesters: Ilaria Pisani, Antonio Gentile, Enrico Savioli, 
+Demetrio D’Alessandro, Mauro Baranello,
+Giuseppe Verrengia, Fabio Capelli, Andrea Compiani, Francesco 
+Montanaro, Andrea Pomelli
+Special thanks to Collins Spanerger for helping us manage our 
+web community.
+Thanks also to Oscar Andrés Schwerdt, David Martin, Paul 
+Scrimo, Eddie Bianco, Alessandro Berutti, and Frank Calcagno.
+Ludus Magnus Store: shop.ludusmagnusstudio.com
+Credits
+1
+Straight Effect
+When you are the Target of a Spell, you may 
+trigger this Protection: Ignore the Effects of 
+the Spell, then gain 1 Power Point.
+Reverse Effect
+When you are the Target of a Combat Spell, you 
+may trigger this Protection: Ignore the Effects of 
+the Spell, and choose 1 of the following Effects:
+Happy: Gain 1 Power Point.
+Sad: Shift to the current Room of the caster of the 
+Spell, and inflict 1 Damage on them.
+Invisibility
+002 / 002
+When you are the Target of a Spell, 
+you may: Ignore the Spell, then choose:
+Gain.
+Shift to the caster's current Room 
+and infl icton them.
+When you are the Target of a Spell, 
+you may: Ignore the Spell, then 
+gain.
+  
+  
+Invisibility
+Invisibility
+Illusion
+Marco
+The tip of the staff tapped grimly on the ground as Marco began to slowly 
+spin it. Gathered around a clearing along the western bank of the Grand 
+Canal, a crowd of onlookers stared at the scene, eagerly awaiting the next twist. 
+Just when it seemed like nothing else would happen apart from that hypnotic 
+movement, two individuals identical to the artist suddenly appeared behind 
+him, perfectly emulating his every move. The onlookers’ sense of amazement 
+heightened when the copies multiplied to become five, before returning back 
+to one. Anticipating yet more applause, Marco spread his cloak as a means of 
+demanding silence before taking a large step forward. His body plunged deep 
+into the shadow before him, leaving the crowd of fifty or so people astonished, 
+staring bewildered at the vacant ground. A few seconds later, from a gondola 
+berthed on the pier, emerged the figure of Marco, who loudly exclaimed “And 
+Voilà!”, prompting a thundering ovation from the crowd. 
+“Spectacular... Magnificent... Superb... Divine!!” exclaimed a ruddy nobleman, 
+dressed in flashy, high-end clothing. “You are without a doubt the best artist I 
+have ever seen. I’d like you to perform at the celebrations for my wife’s birthday, 
+in exchange for a sizeable fee, of course.” Marco fixed his eyes on the jewels 
+adorning the man, who was making his way closer, quite pleased with himself 
+for having found yet another sucker to fleece, before catching the glance of the 
+beautiful woman behind him. “Sir, it would be an honor for me to perform for 
+your enchanting wife,” Marco smiled, causing the woman to blush, hiding shyly 
+behind a lavishly embroidered fan. “Excellent!” exclaimed the well-to-do man, 
+filled with excitement, completely unaware of what was going on, “I’ll have a 
+servant come and provide you with all the details.” Then he turned on his heels 
+and walked away with his wife, who gave one last mischievous glance to Marco 
+before climbing into the carriage. 
+“I don’t believe our master taught us the secrets of magic to enter the homes of 
+noblemen for the sole purpose of stealing their money and their wives’ virtue,” 
+said a sinister voice behind Marco, who smiled weakly, having recognised his 
+old friend, Davide Schiavon. “What brings you out of your lab, you crazy old 
+alchemist?” he replied, spinning around. The figure he found himself staring 
+at was cloaked from head to toe in a midnight blue cape, his face hidden by a 
+disturbing white mask. “You know how much I adore Carnival, and anyway, I 
+came to give you this,” Davide promptly replied, pulling out a roll of parchment 
+with a wax seal depicting a black rose. The image alone was enough for Marco 
+to know what the message contained. “So we’ll meet again in Turin,” he said, 
+his voice challenging. “There’s only one way to find out,” replied his friend, with 
+a similar tone, before throwing the parchment to his companion and walking 
+away. 
+The scroll floated in the air, slowly finding its way into Marco’s bag, as he 
+continued to watch the masked figure of Davide meandering through the 
+crowds of people congesting the square. The opportunity to compete for the 
+title of Grand Master of the Black Rose Lodge was certainly tempting, but the 
+opportunity to finally test his worth in a genuinely arcane battle with his eternal 
+rival, even more so.
+One, No One
+Custom Spell Favorite School of Magic
+2
+Geneve
+“So, milady, how do your respond to the accusations brought against you by 
+Father Jean-Jaques regarding the use of dark magic?” The King of France’s 
+authoritarian tone caused a worrying silence to fall upon the entire room. The 
+entire court had been summoned for that hearing, and in all the pompous faces 
+surrounding Geneve, there was only one verdict: guilty. “I wish I could say that 
+evil is not hiding among us in disguise, but alas, I would be lying,” responded 
+the woman, somewhat contritely, causing a murmur of disapproval among the 
+bystanders. “And unfortunately, I must point to my own accuser as the Devil’s 
+herald, who hides the Devil’s symbol on his left arm!” she concluded with 
+great emphasis, taking advantage of the commotion that followed to mutter 
+an incomprehensible arcane word. Father Jean-Jaques was stunned. “You 
+treacherous witch, how dare you make such defamatory accusations toward a 
+priest of the Church?!” he exclaimed furiously, moving toward the center of 
+the room. “Look, your Majesty, all of you, look! My left arm is immaculate, just 
+like my soul...” but his words stuck in his throat, because as the priest lifted his 
+sleeve, he revealed the effigy of a black rose outlined in red, impressed on his 
+wrist. 
+“The profane symbol!” yelled somebody in the crowd, triggering a succession of 
+horrified comments toward the priest, still dumbfounded. “Guards!” bellowed 
+the King, rising from his throne, “Arrest that imposter!” A group of soldiers 
+armed with muskets strode towards him, but Father Jean-Jaques suddenly 
+awoke from his stupor, railing against his assailants. “Stop! You cannot... I am an 
+emissary of God...”, but both he and his protests were forcefully dragged away, 
+out of the throne room. 
+Everyone was shocked, everyone except Geneve, who was quickly confronted 
+by the King. “Forgive me for doubting you, milady. You have demonstrated 
+courage and determination, qualities wasted on a simple lady-in-waiting. For this 
+reason, starting today I would like for you to assist the Queen as her personal 
+advisor.” Geneve expressed amazement, “I am honored, your Majesty.” She 
+nodded her head as a sign of acceptance and took her leave with slight reverence, 
+holding back a grin of satisfaction. 
+Once outside the gardens of the royal palace, her personal messenger 
+approached her with a letter bearing a rose symbol impressed on the seal. The 
+contents of the letter were nothing more than a trivial invitation to a party, 
+but as soon as Geneve muttered an incomprehensible phrase, the lines in the 
+letter were slowly rearranged to compose a very different text. As she read 
+those words, the woman couldn’t help but smile openly. “Tell my coachman 
+to prepare my carriage and luggage,” she commanded her messenger, who had 
+been left waiting, “Tomorrow we must leave for Turin.” The Lodge had finally 
+acknowledged the merits of her work, offering her the opportunity to become 
+the Grand Master.
+Straight Effect
+Shift to the Target Model’s current Room, then 
+move both your Mage and the Target Model 
+up to 2 Rooms. Inflict 1 Damage on the Target 
+Model for each Room moved. Any effect that 
+forbids movement also prevents this Spell 
+from moving the Target Model.
+Reverse Effect
+Shift to the Target Mage’s current Room, then 
+move both your Mage and the Target Mage 
+to an adjacent Room (any effect that forbids 
+movement also prevents this Spell from 
+moving the Target Mage). Then, steal 1 Power 
+Point from the Target Mage.
+Danse Macabre
+001 / 002
+Shift to the Target Mage's Room, then 
+move both your Mage and the Target 
+Mage to an adjacent Room. Steal 
+from the Target Mage.
+Shift to the Target Model's Room, 
+then move both your Mage and the 
+Target Model up to 2 Rooms. Infl ict 
+on the Target Model for each 
+Room moved.
+  
+Danse Macabre
+  
+Danse Macabre
+Conspiracy
+Favorite School of Magic Custom Spell
+On Trial
+3
+Action Tokens (4)
+Damage/Instability Tokens (50)
+Element Tokens (14)
+Trap/Protection Tokens (12)
+Inhibition Tokens (2)
+Mages’ Cells (2)
+Rose Pins (12)
+Each of the two Mages has: 1 Model, 1 Mage Sheet, 3 Custom Spell Cards, 1 Power Point Token, and 10 Trophy Tokens.
+Mages (2)
+Marco Geneve
+002 / 002
+When you are the Target of a Spell, 
+you may: Ignore the Spell, then choose:
+Gain.
+Shift to the caster's current Room 
+and infl icton them.
+When you are the Target of a Spell, 
+you may: Ignore the Spell, then 
+gain.
+  
+  
+Invisibility
+Invisibility
+001 / 002
+Shift to the Target Mage's Room, then 
+move both your Mage and the Target 
+Mage to an adjacent Room. Steal 
+from the Target Mage.
+Shift to the Target Model's Room, 
+then move both your Mage and the 
+Target Model up to 2 Rooms. Infl ict 
+on the Target Model for each 
+Room moved.
+  
+Danse Macabre
+  
+Danse Macabre
+4

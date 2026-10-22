@@ -1,0 +1,1031 @@
+
+=== PAGE 1 ===
+North Winds
+
+=== PAGE 2 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+Contents
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+2
+
+=== PAGE 3 ===
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar Card Anatomy .................................................................................8
+Odin Setup ..........................................................................................................8
+Avatar ..................................................................8
+Avatar Special Rules — Odin .............................................9
+Avatar Skills — Odin ..........................................................9
+Odin Priority .....................................................................................................9
+Servant — Vitnir, Irate Vitnir, Hunted Vitnir ..................10
+Vitnir / Irate Vitnir / Hunted Vitnir Priority ............................10
+Legendary Scenario: Abyss of Hel .......................11
+Additional Setup .................................................................11
+Scenario Rules .....................................................................11
+Honorable Mention ...........................................................11
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar Card Anatomy .................................................................................8
+Odin Setup ..........................................................................................................8
+Avatar ..................................................................8
+Avatar Special Rules — Odin .............................................9
+Avatar Skills — Odin ..........................................................9
+Odin Priority .....................................................................................................9
+Servant — Vitnir, Irate Vitnir, Hunted Vitnir ..................10
+Vitnir / Irate Vitnir / Hunted Vitnir Priority ............................10
+Legendary Scenario: Abyss of Hel .......................11
+Additional Setup .................................................................11
+Scenario Rules .....................................................................11
+Honorable Mention ...........................................................11
+3
+
+=== PAGE 4 ===
+During step 9 of the Setup you can replace 
+one of the Schools of Magic present in the 
+core game with the Druidic School.
+Game Components
+1 MAGE CARD
+
+36 DRUIDIC SPELL 
+CARDS 
+    Pact of the Claw
+   
+Pact of the Claw
+1 SCHOOL REFERENCE 
+CARD
+Kormac can be chosen as a Mage during step
+8 of the Setup described in the core game 
+rulebook.
+
+3
+
+2
+
+4
+
+4
+
+7
+
+2
+
+3
+
+2
+
+4
+
+4
+
+7
+
+2
+3 PERSONAL SPELL 
+CARDS
+Animal Affi nity
+  
+Animal Affi nity
+  
+During step 9 of the Setup you can replace 
+one of the Schools of Magic present in the 
+core game with the Druidic School.
+Game Components
+1 MAGE CARD
+
+K ORMAC
+
+ 10
+
+
+ 8
+2
+2
+2
+
+36 DRUIDIC SPELL 
+CARDS 
+
+
+Summon an Ursa in a . or
+Transform into Transform into Transform into Transform into Bjorn (rotate this card). this card). this card).
+ 
+Pact of the Claw
+Bjorn
+---
+. 1  You have
+You can perform the following 
+You can perform the following You can perform the following You can perform the following You can perform the following 
+Action: Action:
+) , Physical Action Physical Action Physical Action Physical Action ( Charge
+1. up to Move 
+1. up to Move 
+ a perform You can 
+.  against a 
+  Pact of the Claw
+1 SCHOOL REFERENCE 
+CARD
+Kormac can be chosen as a Mage during step
+8 of the Setup described in the core game 
+rulebook.
+
+Druidic
+
+3
+
+4
+Transformation
+Some Spells in this School have Effects with the 
+Transform keyword. For more information, see the 
+Transformation section of the North Winds rulebook.
+Spiritual Propagation
+Some Spells of this School have Effects with the 
+
+Some Spells of this School have Effects with the 
+or Loki keyword. When a Mage resolves a Spell of this 
+School, they apply the Effect phrases after these keywords School, they apply the Effect phrases after these keywords 
+only if they are only if they are Transformed into the corresponding 
+Transformation. Transformation.
+Feral Magic Feral Magic
+At Step At Step 1 of the fi rst Study Phase of the game, instead of 
+drawing drawing 2 from their Grimoire, each Mage may search 
+their Grimoire or Memories for their Grimoire or Memories for 1 of this School that 
+contains the contains the Transformed keyword. If they do, they Transformed keyword. If they do, they Transformed
+draw that card and shuffl e the Grimoire, then they draw that card and shuffl e the Grimoire, then they draw
+1
+ from their Grimoire. If they do not, they perform the from their Grimoire. If they do not, they perform the 
+Study Phase normally. Study Phase normally.
+Communion with Nature
+When a Mage discards a  from this School that 
+transformed them, that Mage can draw that 
+Memories.
+
+Druidic
+
+4
+
+Some Spells of this School have Effects with the Bjorn
+keyword. When a Mage resolves a Spell of this 
+School, they apply the Effect phrases after these keywords 
+into the corresponding 
+ of the fi rst Study Phase of the game, instead of 
+ from their Grimoire, each Mage may search 
+ of this School that 
+ keyword. If they do, they 
+ that card and shuffl e the Grimoire, then they 
+ from their Grimoire. If they do not, they perform the 
+ from this School that 
+transformed them, that Mage can draw that 
+Druidic
+
+2
+
+Bjorn
+Bjorn
+keyword. When a Mage resolves a Spell of this keyword. When a Mage resolves a Spell of this 
+School, they apply the Effect phrases after these keywords School, they apply the Effect phrases after these keywords 
+into the corresponding into the corresponding 
+ of the fi rst Study Phase of the game, instead of of the fi rst Study Phase of the game, instead of 
+ from their Grimoire, each Mage may search 
+ of this School that 
+ keyword. If they do, they 
+ that card and shuffl e the Grimoire, then they 
+ from their Grimoire. If they do not, they perform the 
+ from this School that 
+transformed them, that Mage can draw that 
+Druidic
+
+4
+
+7
+
+2
+ of the fi rst Study Phase of the game, instead of of the fi rst Study Phase of the game, instead of 
+ from their Grimoire, each Mage may search from their Grimoire, each Mage may search 
+ of this School that of this School that 
+ keyword. If they do, they keyword. If they do, they 
+ that card and shuffl e the Grimoire, then they draw 
+ from their Grimoire. If they do not, they perform the from their Grimoire. If they do not, they perform the 
+ from this School that 
+transformed them, that Mage can draw that  from their 
+Guiding Spirit Guiding Spirit  of this School that Guiding Spirit of this School that Guiding Spirit of this School that 
+ keyword. If they do, they 
+Guiding Spirit keyword. If they do, they Guiding Spirit keyword. If they do, they Guiding Spirit Pact of the Claw Pact of the Claw that card and shuffl e the Grimoire, then they Pact of the Claw that card and shuffl e the Grimoire, then they draw Pact of the Claw draw Pact of the Claw draw 
+ from their Grimoire. If they do not, they perform the 
+Pact of the Claw from their Grimoire. If they do not, they perform the Pact of the Claw from their Grimoire. If they do not, they perform the Pact of the Claw    Frenzy from their Grimoire. If they do not, they perform the 
+Frenzy from their Grimoire. If they do not, they perform the Frenzy from their Grimoire. If they do not, they perform the Frenzy       Raging Lash Raging Lash Raging Lash      
+Empathy from this School that 
+Empathy      
+Fur of Thorns from this School that 
+ from their       Quick Refl exes from their 
+      
+DruidicMystifi cation Mystifi cation 
+
+Mystifi cation  
+Lifeblood        Thriving Growth 4 7 2      
+Reinforcements 4 7      
+Solstice      
+Pact of the Jaws   
+Star Tears      
+Druidic
+
+3
+
+2
+
+4
+
+4
+
+7
+
+2
+keyword. When a Mage resolves a Spell of this 
+School, they apply the Effect phrases after these keywords 
+into the corresponding 
+3 PERSONAL SPELL 
+CARDS
+Animal Affi nity
+  
+Summon an Ursa.
+or
+Summon a Crocodilus.
+
+Animal Affi nity
+  
+.  Infl ict 1
+.  Convert 1
+or
+ value  with a  a Choose
+under activates or less. It 3 of 
+your control.
+4
+
+=== PAGE 5 ===
+Game Components
+2 FORGOTTEN 
+SPELL CARDS
+Beast
+Crocodilus
+3 1 3 Beast
+Crocodilus
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+6 EVOCATION 
+CARDS
+Add these cards to the 
+Evocation Deck of the 
+core game.
+This Room (and its associated 
+Activation Token) can be used 
+in any game to replace The 
+Abyss Room in the core game.
+Beast — Forgotten
+Fenrir
+Beast 4 5 5 Forgotten
+Fenrir
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+1 ABYSS OF HEL 
+ROOM
+1 ROOM 
+ACTIVATION 
+TOKEN
+2 FORGOTTEN 
+SPELL CARDS
+
+
+Ragnarok
+ 
+Summon Fenrir
+It activates activates
+Ragnarok    
+: you have 
+ . 3  and 3 
+, you 
+When you perform a When you perform a 
+.  on each 
+convert 1 may 
+, you  When you perform a 
+.  on each  convert 1 may 
+
+Ragnarok
+ 
+Fenrir.
+activates activates.
+Crocodilus
+Beast
+3 3
+When Crocodilus performs a , if 
+you are not the Mage with the most 
+, gain 1.
+1 Beast
+Crocodilus
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+6 EVOCATION 
+CARDS
+Add these cards to the 
+Evocation Deck of the 
+core game.
+This Room (and its associated 
+Activation Token) can be used 
+in any game to replace The 
+Abyss Room in the core game.
+Beast — Forgotten
+Fenrir
+4 5 5
+When Fenrir is defeated or 
+removed, it infl icts 3 in a 
+from himself.
+Beast
+Forgotten
+Fenrir
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+This Room (and its associated 
+1 ABYSS OF HEL 
+ROOM
+ Abyss of Hel
+4 2 1
+1 ROOM 
+ACTIVATION 
+TOKEN
+5
+
+=== PAGE 6 ===
+1 AVATAR CARD
+Odin
+Eternal Glory, Dominion
+30 COMMAND 
+CARDS
+Odin
+
+   
+Night Run
+Moves towards the . Avatar Components
+Vitnir
+Beast — Servant
+Beast 2 3 Servant
+Vitnir
+2
+1 VITNIR 
+EVOCATION CARD
+Beast — Servant
+Irate Vitnir
+Beast 3 3 Servant
+Irate 
+Vitnir
+3
+1 IRATE VITNIR 
+EVOCATION CARD
+Beast — Servant
+Hunted Vitnir
+Beast 2 3 Servant
+Hunted
+Vitnir
+3
+1 HUNTED VITNIR 
+EVOCATION CARD
+12 CHAMPION TOKENS
+1 AVATAR CARD
+: places 2. If fewer than 
+2 were placed due to this 
+Effects Vitnir activates.
+Odin
+ 11
+ 2
+ 2
+:    
+   
+Odin 
+Eternal Glory, Dominion
+30 COMMAND 
+CARDS
+Odin
+
+   
+.
+.
+
+Night Run
+Moves towards the . Avatar Components
+Vitnir
+Beast — Servant
+Beast 2 3 Servant
+Vitnir
+2
+Subdued.
+This Model cannot be removed.
+When a Mage defeats Vitnir, 
+they gain 1 and 1.
+    
+1 VITNIR 
+EVOCATION CARD
+Beast — Servant
+Irate Vitnir
+Beast 3 3 Servant
+Irate 
+Vitnir
+3
+Comeback.
+This Model cannot be removed.
+When a Mage defeats Vitnir, 
+they gain 1 and 1.
+    
+1 IRATE VITNIR 
+EVOCATION CARD
+Beast — Servant
+Hunted Vitnir
+Beast 2 3 Servant
+Hunted
+Vitnir
+Hunted
+3
+Subdued.
+This Model cannot be removed.
+When a Mage defeats Vitnir, 
+they gain 1 and 1.
+    
+1 HUNTED VITNIR 
+EVOCATION CARD
+12 CHAMPION TOKENS
+6
+
+=== PAGE 7 ===
+Kormac Odin
+Fenrir / Vitnir 3 Bjorn / Ursa
+3 Loki / Crocodilus
+Models
+Kormac Odin
+Fenrir / Vitnir 3 Bjorn / Ursa
+3 Loki / Crocodilus
+Kormac Odin
+Fenrir / Vitnir 3 Bjorn / Ursa
+3 Loki / Crocodilus
+Models
+7
+
+=== PAGE 8 ===
+ODIN SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Clip the Avatar Base to the Odin Model. 
+• Place the Odin Model in the Black Rose Room.
+• Place the Vitnir Model in the Throne Room.
+• Place the Vitnir Evocation Card in Slot   of the Avatar Board. Place 2 of the 
+ on it.
+• Place the Hunted Vitnir and Irate Vitnir Evocation Cards so that they are within 
+easy reach of each player.
+• Remove the Gungnir and Ragnarok cards from the Forgotten Spells Deck.
+Avata r
+The Black Rose has called upon one of her best heralds, Odin, who is to select the next 
+champion from among the mages of the Lodge. 
+Vitnir is the one who will end Odin's life; will the Mages be able to tame it to gain the 
+favor of the Norse God?
+Odin
+Eternal Glory, Dominion
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. Odin's Tool is the Champion 
+Token.
+C Avatar Skill:
+ Odin has the Avatar Skills explained 
+in detail on page 9.
+AVATAR CARD ANATOMY
+Odin
+Eternal Glory, Dominion
+Odin
+Eternal Glory, Dominion
+A
+B
+C
+B
+ODIN SETUP
+Apply the following steps during step 3 of the Avatar Setup:
+• Clip the Avatar Base to the Odin Model. 
+• Place the Odin Model in the Black Rose Room.
+• Place the Vitnir Model in the Throne Room.
+• Place the Vitnir Evocation Card in Slot   of the Avatar Board. Place 2 of the 
+ on it.
+• Place the Hunted Vitnir and Irate Vitnir Evocation Cards so that they are within 
+easy reach of each player.
+• Remove the Gungnir and Ragnarok cards from the Forgotten Spells Deck.
+Avata r
+The Black Rose has called upon one of her best heralds, Odin, who is to select the next 
+champion from among the mages of the Lodge. 
+Vitnir is the one who will end Odin's life; will the Mages be able to tame it to gain the 
+favor of the Norse God?
+. If fewer than 
+placed due to this 
+Odin
+ 11
+ 2
+ 2
+: 
+ 
+Odin
+Eternal Glory, Dominion
+A Avatar Eff ect : The Eff ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool :
+ The Avatar uses a Tool, which is 
+indicated in the Eff ects with the 
+symbol. Odin's Tool is the Champion 
+Token.
+C Avatar Skill:
+ Odin has the Avatar Skills explained 
+in detail on page 9.
+AVATAR CARD ANATOMY
+2
+2 placed
+Effects Vitnir
+: places 2
+2 were placed
+: places
+ Vitnir activates.
+ 
+  
+placed
+Vitnir
+ 
+  
+Vitnir
+
+: places
+A
+
+B
+Eternal Glory, Dominion
+C
+B
+8
+
+=== PAGE 9 ===
+CHAMPION TOKENS
+In games where Odin is used as an Avatar, 
+the Mage who has the most  Champion 
+Tokens is considered the Champion; if tied, 
+no Mage is considered the Champion.
+Some Odin Command Cards indicate to 
+apply or not apply part of their Eff ect to the 
+Champion.
+TAMING THE WOLF
+The Avatar Card and some Odin Command 
+Cards refer to the Servant as Vitnir. These 
+Cards also refer to Hunted Vitnir or Irate 
+Vitnir.
+Eternal Glory
+On step 1 of each Cleanup Phase, the Mage 
+considered the Champion gains 2.
+Dominion
+If Odin has to activate when he is in a Cell, 
+he does not activate and places himself in the 
+Black Rose Room.
+Avatar Special Rules — Odin 
+Avatar Skills — Odin 
+ODIN PRIORITY
+:    
+Odin chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if 
+tied...
+: the Mage with the least , if 
+tied...
+ : the closest Mage, if tied, the 
+Choice of the Crown applies.
+   
+Odin chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if 
+tied...
+: the Room with the most Models, if 
+tied, the Choice of the Crown applies.
+CHAMPION TOKENS
+In games where Odin is used as an Avatar, 
+the Mage who has the most  Champion 
+Tokens is considered the Champion; if tied, 
+no Mage is considered the Champion.
+Some Odin Command Cards indicate to 
+apply or not apply part of their Eff ect to the 
+Champion.
+TAMING THE WOLF
+The Avatar Card and some Odin Command 
+Cards refer to the Servant as Vitnir. These 
+Cards also refer to Hunted Vitnir or Irate 
+Vitnir.
+Eternal Glory
+On step 1 of each Cleanup Phase, the Mage 
+considered the Champion gains 2
+Dominion
+If Odin has to activate when he is in a Cell, 
+he does not activate and places himself in the 
+Black Rose Room.
+Avatar Special Rules — Odin 
+Avatar Skills — Odin 
+ODIN PRIORITY
+:    
+Odin chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if 
+tied...
+: the Mage with the least , if 
+tied...
+ : the closest Mage, if tied, the 
+Choice of the Crown applies.
+   
+Odin chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if 
+tied...
+: the Room with the most Models, if 
+tied, the Choice of the Crown applies.
+ of each Cleanup Phase, the Mage 
+Champion gains 2.
+If Odin has to activate when he is in a Cell, 
+he does not activate and places himself in the 
+Avatar Skills — Odin 
+9
+
+=== PAGE 10 ===
+Servant — Vitnir, Irate Vitnir, Hunted Vitnir
+A Servant is an Evocation that has a special 
+bond with the Avatar. 
+Vitnir is the Servant of Odin and is 
+represented in the Lodge by the dedicated 
+Model and by its own Vitnir, Irate Vitnir, 
+and Hunted Vitnir Servant Evocation Cards. 
+The Servant Evocation Card is never discarded 
+from the   slot of the Avatar Board when it 
+is defeated or removed, except as specifi ed in 
+the Subdued rule (see below).
+SPECIAL RULES
+Subdued
+The Vitnir Servant Card starts the game 
+with 2 of the  on it (see setup). When 
+Vitnir is defeated, ignore the defeat and 
+discard 1 and all the  from its card. 
+When the last  on the Vitnir Servant Card 
+is discarded, discard the card and place the
+Hunted Vitnir Servant Card in its place, 
+placing 2 of the  on it.
+When Hunted Vitnir is defeated, ignore the 
+defeat and discard 1 and all the  from 
+its Card. 
+When the last  on the Hunted Vitnir
+Servant Card is discarded, discard the card 
+and place the Irate Vitnir Servant Card in 
+its place.
+Comeback
+If Irate Vitnir is to activate when its Model 
+is not in the Lodge (it has been previously 
+defeated or removed), it does not activate, and 
+the  places its Model in the Throne Room.
+VITNIR / IRATE 
+VITNIR / HUNTED 
+VITNIR PRIORITY
+    
+It chooses as a target:
+: the Mage with the most , if 
+tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if 
+tied...
+ : the closest Mage, if tied, the 
+Choice of the Crown applies.
+If it cannot reach its target, it moves as 
+close to it as possible. If there are no Mages 
+in the Lodge when it activates, it does not 
+move and ends its activation.
+Beast 2 3 Servant
+Vitnir
+2
+Servant — Vitnir, Irate Vitnir, Hunted Vitnir
+A Servant is an Evocation that has a special 
+bond with the Avatar. 
+Vitnir is the Servant of Odin and is 
+represented in the Lodge by the dedicated 
+Model and by its own Vitnir, Irate Vitnir, 
+and Hunted Vitnir Servant Evocation Cards. 
+The Servant Evocation Card is never discarded 
+from the   slot of the Avatar Board when it 
+is defeated or removed, except as specifi ed in 
+the Subdued rule (see below).
+SPECIAL RULES
+Subdued
+The Vitnir Servant Card starts the game 
+with 2 of the  on it (see setup). When 
+Vitnir is defeated, ignore the defeat and 
+discard 1 and all the  from its card. 
+When the last  on the Vitnir Servant Card 
+is discarded, discard the card and place the
+Hunted Vitnir Servant Card in its place, 
+placing 2 of the  on it.
+When Hunted Vitnir is defeated, ignore the 
+defeat and discard 1 and all the  from 
+its Card. 
+When the last  on the Hunted Vitnir
+Servant Card is discarded, discard the card 
+and place the Irate Vitnir Servant Card in 
+its place.
+Comeback
+If Irate Vitnir is to activate when its Model 
+is not in the Lodge (it has been previously 
+defeated or removed), it does not activate, and 
+the  places its Model in the Throne Room.
+VITNIR / IRATE 
+VITNIR / HUNTED 
+VITNIR PRIORITY
+    
+It chooses as a target:
+: the Mage with the most , if 
+tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if 
+tied...
+ : the closest Mage, if tied, the 
+Choice of the Crown applies.
+If it cannot reach its target, it moves as 
+close to it as possible. If there are no Mages 
+in the Lodge when it activates, it does not 
+move and ends its activation.
+Beast 2 3 Servant
+Vitnir
+2
+Subdued.
+This Model cannot be removed.
+When a Mage defeats Vitnir, 
+they gain 1 and 1.
+    
+10
+
+=== PAGE 11 ===
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : Replace The Abyss Room with the Abyss of Hel Room.
+Once the Setup is complete: 
+1. Place the Second Moon Cube on 
+Slot 5, the Third Moon Cube on 
+Slot 20, and the Black Rose Cube 
+on Slot 33 of the Power Board.
+2. Carry out the steps of the Avatar 
+Setup indicated in the core rulebook 
+of the game. Odin is the Avatar for 
+this Legendary Scenario. 
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Animal Instinct: After a Mage resolves an Eff ect that summons a Beast, they resolve 
+this Eff ect: : gain 1. Heal 3.
+• Hunter: When a Mage defeats or removes a Beast, they place one of their  on Odin's 
+Avatar Card.
+Honorable Mention
+At the end of the game, the Mage with the most  on Odin's Avatar Card gains 5. If tied, 
+no Mage gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Abyss of Hel, the passage separating our world from the world of the dead has appeared 
+in the Lodge.
+Le g e n d a ry S c e n a r i o : 
+Abyss of Hel
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : Replace The Abyss Room with the Abyss of Hel Room.
+Once the Setup is complete: 
+1. Place the Second Moon Cube on 
+Slot 5, the Third Moon Cube on 
+Slot 20, and the Black Rose Cube 
+on Slot 33 of the Power Board.
+2. Carry out the steps of the Avatar 
+Setup indicated in the core rulebook 
+of the game. Odin is the Avatar for 
+this Legendary Scenario. 
+Scenario Rules
+The following rules apply while playing this Legendary Scenario:
+• Animal Instinct: After a Mage resolves an Eff ect that summons a Beast, they resolve 
+this Eff ect: : gain 1. Heal 3.
+• Hunter: When a Mage defeats or removes a Beast, they place one of their  on Odin's 
+Avatar Card.
+Honorable Mention
+At the end of the game, the Mage with the most  on Odin's Avatar Card gains 5. If tied, 
+no Mage gains additional .
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose Wars: Rebirth by applying a specifi c set of new rules.
+In Abyss of Hel, the passage separating our world from the world of the dead has appeared 
+in the Lodge.
+Le g e n d a ry S c e n a r i o : 
+Abyss of Hel
+11
+
+=== PAGE 12 ===
+Mechanics rules: Transformation
+Some Spell Cards allow you to perform a Transformation as part of one of their Eff ects. 
+A Transformation is identifi ed by the Transform keyword followed by the name of the 
+Transformation.
+When a Mage performs Transform, they follow these steps:
+• They replace their Mage's Model with the Model of the indicated Transformation, if 
+available; otherwise, they ignore the Transformation.
+• They discard all their Equipment Evocations.
+• They place the  that transformed them next to their Mage Sheet, rotated as indicated 
+by the Transform Eff ect.
+As long as that  remains next to their Mage Sheet, the Mage is considered Transformed and the 
+Physical Actions listed on that  are available to that Mage. When it is in that position, that  is 
+considered the  that Transformed the Mage.
+The Mage discards the  that transformed them when:
+• They are defeated.
+• They are about to perform Transform.
+When this happens, that Mage is no longer Transformed and must replace the Model of 
+their Transformation with the Model of their Mage.
+At the Beginning of the Evocations Phase, in play order, a Transformed Mage may perform one 
+of the Physical Actions listed on the  that transformed them without exhausting a .
+The North Winds expansion features the new Transformation mechanic. 
+Mages of the Druidic School of Magic have the ability to change their physical appearance 
+into that of a spirit animal, endowed with extraordinary powers.
+New Mechanics:
+Trans formation
+Mechanics rules: Transformation
+Some Spell Cards allow you to perform a Transformation as part of one of their Eff ects. 
+A Transformation is identifi ed by the Transform keyword followed by the name of the 
+Transformation.
+When a Mage performs Transform, they follow these steps:
+• They replace their Mage's Model with the Model of the indicated Transformation, if 
+available; otherwise, they ignore the Transformation.
+• They discard all their Equipment Evocations.
+• They place the  that transformed them next to their Mage Sheet, rotated as indicated 
+by the Transform Eff ect.
+As long as that  remains next to their Mage Sheet, the Mage is considered Transformed and the 
+Physical Actions listed on that  are available to that Mage. When it is in that position, that  is 
+considered the  that Transformed the Mage.
+The Mage discards the  that transformed them when:
+• They are defeated.
+• They are about to perform Transform.
+When this happens, that Mage is no longer Transformed and must replace the Model of 
+their Transformation with the Model of their Mage.
+At the Beginning of the Evocations Phase, in play order, a Transformed Mage may perform one 
+of the Physical Actions listed on the  that transformed them without exhausting a .
+The North Winds expansion features the new Transformation mechanic. 
+Mages of the Druidic School of Magic have the ability to change their physical appearance 
+into that of a spirit animal, endowed with extraordinary powers.
+New Mechanics:
+Trans formation
+12
+
+=== PAGE 13 ===
+North Winds Rulebook v.1.0
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+ODIN PRIORITY
+:    
+Odin chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the least , if tied...
+ : the closest Mage, if tied, the Choice 
+of the Crown applies.
+   
+Odin chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if 
+tied...
+: the Room with the most Models, if 
+tied, the Choice of the Crown applies.
+VITNIR / IRATE 
+VITNIR / HUNTED 
+VITNIR PRIORITY
+    
+It chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+ : the closest Mage, if tied, the Choice 
+of the Crown applies.
+If it cannot reach its target, it moves as close 
+to it as possible. If there are no Mages in the 
+Lodge when it activates, it does not move 
+and ends its activation.
+Eternal Glory
+On step 1 of each Cleanup Phase, the Mage 
+considered the Champion gains 2.
+Dominion
+If Odin has to activate when he is in a Cell, he 
+does not activate and places himself in the Black 
+Rose Room.
+Subdued
+The Vitnir Servant Card starts the game with 
+2 of the  on it (see setup). When Vitnir
+is defeated, ignore the defeat and discard 1
+from its card. 
+When the last  on the Vitnir Servant Card is 
+discarded, see page 10.
+Comeback
+If Irate Vitnir is to activate when its Model 
+is not in the Lodge (it has been previously 
+defeated or removed), it does not activate, and 
+the  places its Model in the Throne Room.
+North Winds Rulebook v.1.0
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+ODIN PRIORITY
+:    
+Odin chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the least , if tied...
+ : the closest Mage, if tied, the Choice 
+of the Crown applies.
+   
+Odin chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if 
+tied...
+: the Room with the most Models, if 
+tied, the Choice of the Crown applies.
+VITNIR / IRATE 
+VITNIR / HUNTED 
+VITNIR PRIORITY
+    
+It chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+ : the closest Mage, if tied, the Choice 
+of the Crown applies.
+If it cannot reach its target, it moves as close 
+to it as possible. If there are no Mages in the 
+Lodge when it activates, it does not move 
+and ends its activation.
+Eternal Glory
+On step 1 of each Cleanup Phase, the Mage 
+considered the Champion gains 2.
+Dominion
+If Odin has to activate when he is in a Cell, he 
+does not activate and places himself in the Black 
+Rose Room.
+Subdued
+The Vitnir Servant Card starts the game with 
+2 of the  on it (see setup). When Vitnir
+is defeated, ignore the defeat and discard 1
+from its card. 
+When the last  on the Vitnir Servant Card is 
+discarded, see page 10.
+Comeback
+If Irate Vitnir is to activate when its Model 
+is not in the Lodge (it has been previously 
+defeated or removed), it does not activate, and 
+the  places its Model in the Throne Room.

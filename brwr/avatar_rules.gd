@@ -83,9 +83,6 @@ static func choose(game, frame: Dictionary, key: String, options: Array, prompt:
 	if options.is_empty():
 		frame[key] = null
 		return true
-	if options.size() == 1:
-		frame[key] = options[0].value
-		return true
 	game.request_effect_choice(game.crown_owner_id, kind, frame, key, options, 1, 1, "Choice of the Crown · " + prompt)
 	return false
 
@@ -278,6 +275,7 @@ static func prepare_evocation(game, frame: Dictionary) -> bool:
 	var choices: Array = []
 	for plan in plans:
 		choices.append({"token": "activation_plan:%d" % choices.size(), "value": plan.context,
+			"path": plan.path.duplicate(),
 			"name": str(plan.label) + (" · " + " → ".join(plan.path) if not plan.path.is_empty() else "")})
 	if not choose(game, frame, "ai_plan", choices, "Choose the path for " + ev.get_display_name(), "evocation_activation_plan"): return false
 	if not frame.has("context"): frame["context"] = {}

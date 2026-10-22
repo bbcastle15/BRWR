@@ -161,7 +161,14 @@ func show_card(kind: String, id: String, title: String, text: String) -> void:
 	art.visible = art.texture != null
 	description.text = text
 	description.visible = not text.is_empty()
-	if kind == "evocations":
+	if art.texture != null and (kind == "avatars" or (kind == "spells" and id.begins_with("possessed_"))):
+		var view := get_viewport().get_visible_rect().size
+		var ratio: float = art.texture.get_size().aspect()
+		var height := minf(view.y - (320 if description.visible else 230), (view.x - 120) / ratio)
+		art.custom_minimum_size = Vector2(height * ratio, height)
+		description.custom_minimum_size = Vector2(height * ratio, 80)
+		panel.custom_minimum_size = Vector2.ZERO
+	elif kind in ["evocations", "upgrades"]:
 		var view := get_viewport().get_visible_rect().size
 		var width := minf(view.x - 96.0, 1100.0)
 		var height := maxf(180.0, view.y - 330.0)

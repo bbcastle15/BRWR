@@ -285,9 +285,27 @@
     ],
     "rebuilt_effects": [
       {
-        "type": "heal",
-        "amount": 3,
-        "target": "activating_mage"
+        "type": "room_target",
+        "target": "self",
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 3,
+            "shared": true
+          }
+        ]
+      },
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": "*",
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 3,
+            "shared": true
+          }
+        ]
       }
     ]
   },
@@ -659,7 +677,7 @@
     "core": false,
     "fixed": true,
     "replaces": "black_rose",
-    "playable": true,
+    "playable": false,
     "instability_resistance": 10,
     "completion_rewards": [
       6,
@@ -1291,8 +1309,8 @@
     "color": "green",
     "core": false,
     "fixed": false,
-    "replaces": "garden",
-    "playable": true,
+    "replaces": "treasure_room",
+    "playable": false,
     "instability_resistance": 4,
     "completion_rewards": [
       2,
@@ -1340,8 +1358,8 @@
     "color": "green",
     "core": false,
     "fixed": false,
-    "replaces": "treasure_room",
-    "playable": true,
+    "replaces": "garden",
+    "playable": false,
     "instability_resistance": 4,
     "completion_rewards": [
       2,
@@ -1443,7 +1461,7 @@
     "core": false,
     "fixed": false,
     "replaces": "forge",
-    "playable": true,
+    "playable": false,
     "instability_resistance": 4,
     "completion_rewards": [
       2,

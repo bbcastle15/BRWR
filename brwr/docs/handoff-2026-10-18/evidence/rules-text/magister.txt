@@ -1,0 +1,304 @@
+
+=== PAGE 1 ===
+Magister
+
+=== PAGE 2 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Andrea Colletti, Diego Fonseca, Marco 
+Presentino, Leonardo Romano, Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore, Jonata Benvenuti
+Concept Artists: Giovanni Pirrotta, Simone de Paolis, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Michele Mirizio, Elettra Nuzzo
+Editor: Myles Schaller
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini
+Kickstarter Manager: Andrea Colletti
+Writer: Marco Olivieri
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfillment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, 
+Chiara Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio 
+Galmacci, Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, 
+FrankZappa, Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, 
+Luca Benedetti, Luca Francescangeli, Luca Perra, Marco G. defiar, Maurizio Salvi, Paolo 
+guerrieronuvola, Paolo Bianchi, Pasquale Carotenuto
+
+=== PAGE 3 ===
+Index
+Components.........................................................4
+Models..................................................................................5
+Familiars’ Components .......................................................6
+Familiars Rules.....................................................7
+Familiars...............................................................................8
+Setup.....................................................................................8
+Familiar Card Anatomy.............................................................................8
+Summoning a Familiar .......................................................9
+Familiar’s Actions ................................................................9
+Familiar’s Positions.............................................................10
+Guard Position Rules  ..............................................10
+Hunt Position Rules  ..............................................10
+Damage and Defeat of the Familiar ..................................10
+
+=== PAGE 4 ===
+4
+Components
+3 MAGE CARDS
+
+A GORIX
+
+ 11
+
+
+ 8
+2
+2
+2
+
+9 PERSONAL SPELL 
+CARDS
+Natural Invocation
+  
+Place your Mage in a .
+Summon Eracleto.
+Natural Invocation
+  
+Target a .
+Activate the target Room even 
+if used. Place 2.
+Heal 1 on yourself for each 
+ not placed due to this Effect.
+Natural Invocation
+  
+.  your Mage in a Place 
+. Eracleto Summon
+Natural Invocation
+  
+. a Target 
+even Room the target Activate 
+.  Place 2 if used.
+ on yourself for each  Heal 1
+ not placed due to this Effect. 
+2 FORGOTTEN 
+SPELL CARD
+Cursed Lantern    
+. Jack Summon
+each non-Forgotten Remove 
+Evocation of the other Mages in 
+the target Room.
+Cursed Lantern    
+. Jack Summon
+Place all other Mages in the 
+target Room in their Cell.
+
+Cursed Lantern
+   
+Summon Jack.
+Remove each non-Forgotten 
+Evocation of the other Mages in 
+the target Room.
+Cursed Lantern
+   
+Summon Jack.
+Place all other Mages in the 
+target Room in their Cell.
+
+5 EVOCATION 
+CARDS
+Demon — Forgotten
+Jack
+2 2 3
+When Jack is summoned, each opposing 
+Mage places on this card one of their own 
+. Jack has +1 for each  on 
+this card (max +3). When a Mage is 
+defeated, remove 1 from this card.
+As long as there is at least 1 on this card, 
+Jack cannot be defeated or removed.
+Demon 
+Forgotten
+Jack
+Agorix, Boogeyman and Onamor can be 
+chosen as a Mage during Step 8 of the 
+Setup described in the core game manual.
+Add this card to the Evocation Cards Deck of 
+the core game.
+Add this card to the Forgotten Spell Cards 
+Deck of the core game.
+
+=== PAGE 5 ===
+5
+Models
+Agorix Boogeyman
+Onamor Jack
+
+=== PAGE 6 ===
+6
+Chimera
+Eracleto
+3 Bambola
+1 FAMILIAR ACTION 
+TOKEN
+1 FAMILIAR CARDS
+1 - ENG
+  
+2
+
+
+2
+When it performs , if the target has no , Eracleto has +1.
+: remove 1. 
+: place 1.
+or
+Eracleto switches to  and activates.
+1 - ENG
+Familiars’ Components
+
+=== PAGE 7 ===
+7
+Familiars Rules
+
+=== PAGE 8 ===
+8
+Familiars
+A Familiar is a special Evocation that a Mage can summon using the Room Effect associated with it. 
+The Familiar has a special bond with the Mage who summoned it, serving them with its powers and 
+protecting them at the same time.
+To use Familiars in a Black Rose Wars game, follow the directions below.
+Setup
+Place the Familiar Room in the Lodge, replacing a Room of the same color chosen by 
+common agreement among the players. Place all other Familiar materials to form a reserve 
+accessible to all players.
+FAMILIAR CARD ANATOMY
+A Illustration, Name and Archetype
+B Familiar Action Token
+C Hunting Skill
+D Guarding Skill
+E Speed and Strength Value
+F Health Slots
+G Familiar Action Token Slot
+  
+2
+
+
+2
+When it performs , if the 
+target has no ,
+Eracleto has +1.
+
+
+: remove 1. 
+: place 1.
+or
+Eracleto
+and 
+ switches to 
+activates
+.
+1 - ENG
+A
+E
+G
+C
+D
+F
+B
+
+=== PAGE 9 ===
+9
+Summoning a Familiar 
+A Familiar can be summoned only if one of its Models is available in the reserve. When a 
+Mage summons a Familiar, they place the Model of that Familiar in the Room they are in, 
+attached to their own Model (Guard Position). They then take the Familiar Card and place 
+it in one of their own available Evocation Slots, and then place the Familiar Action Token 
+on the Familiar Action Token Slot, showing the active side.
+A Mage can have a maximum of one Familiar among their Evocations.
+Available side
+Exhausted side
+Familiar’s Actions
+The Mage who owns a Familiar has access to 
+new Actions, which can be used by flipping 
+the Familiar Action Token on its Exhausted 
+side. These Actions are:
+• Assault: only if the Familiar is in Guard 
+Position, the Familiar switches to Hunt 
+Position and its Model releases from that 
+of the owning Mage, then the Familiar 
+activates. 
+• Flanking: only if the Familiar is in Hunt 
+Position and is in the same Room as the 
+Model of the owning Mage, the Familiar 
+switches to Guard Position (the two Models 
+attach).
+• Concentration: only if the Familiar is 
+in Guard Position, apply the Effect of the 
+Familiar’s Guarding Skill.
+An Exhausted Familiar Action Token 
+becomes Available again at the end of step 1
+of the next Clean-up Phase.
+
+=== PAGE 10 ===
+10
+Familiar’s Positions
+A Familiar is always in one Position of the two available; these are:
+ Guard Position: in this Position the Model of the Familiar and the Model of the 
+owning Mage are attached and are considered as one Model.
+ Hunt Position: in this Position the Model of the Familiar and the Model of the 
+owning Mage are released, and are considered two separate Models. 
+Each Familiar’s Position has specific rules: 
+GUARD POSITION RULES 
+In this position, these rules apply to the Familiar:
+• It is not considered in the Lodge.
+• Its Hunting Skill is not active.
+• It can sustain an amount of  instead of its owning Mage, up to the number of 
+free Health Slots on its Familiar Card. The owning Mage can freely choose how to 
+distribute this .
+• The owning Mage can use the Concentration Action.
+• The owning Mage can use the Assault Action.
+• When the owning Mage is defeated, if the Familiar doesn’t have all its Health Slots 
+occupied by , the Familiar remains in the Room in Hunt Position.
+HUNT POSITION RULES 
+In this position, these rules apply to the Familiar:
+• Is considered an Evocation of the owning Mage.
+• Its Hunting Skill is active.
+• If at the end of the Clean-up Phase the Familiar is within a  from the owning Mage 
+Model, it can move to a Guard Position without spending the Familiar Action 
+Token.
+Damage and Defeat of the 
+Familiar
+When a Familiar sustains , place that many 
+Cubes on its Health Slots. A Familiar can never 
+sustain more  than its available Health Slots.
+When all the Health Slots of a Familiar are 
+occupied by , the Familiar is defeated; remove its 
+Model from the Lodge and put all its materials back 
+into the reserve.
+  
+2
+
+
+2
+When it performs , if the 
+target has no ,
+Eracleto has +1.
+: remove 1. 
+: place 1.
+or
+Eracleto switches to 
+and activates.
+1 - ENG
+
+=== PAGE 11 ===
+11
+
+=== PAGE 12 ===
+Magister - Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com

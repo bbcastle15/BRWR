@@ -67,7 +67,7 @@ func is_playable_side(use_dark_side: bool) -> bool:
 func has_single_effect() -> bool:
 	# Full-height cards such as Rotten keep two equivalent definitions for
 	# compatibility with existing saves; they have no Light/Dark decision.
-	return light_side == dark_side
+	return light_side == dark_side or not is_playable_side(false) or not is_playable_side(true)
 
 
 func get_effects(use_dark_side: bool) -> Array:

@@ -1,0 +1,76 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Inizializzazione del progetto (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scansione della struttura dei file...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Caricamento dei nomi delle classi globali…[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifica dei GDExtension...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creazione degli script autoload...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Inizializzazione delle estensioni...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Avvio della scansione dei file...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registrazione delle classi globali… (8 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | AvatarArt[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | AvatarBoard[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scansione delle azioni... (11 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | avatar_crown_of_thorns.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | avatar_cursed_trophy.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | avatar_divinatory_secrets.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | avatar_illness.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | avatar_letters_of_destruction.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | avatar_manipulating_the_past.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | avatar_singing_victory_again.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | avatar_thorny_corruption.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | possessed.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | avatar-portrait-fixed.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | upgrade-grid-fixed.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (11 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparazione dei file da reimportare...[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di pre-reimportazione...[39m[0m
+[   0% ] [90m[1mreimport[22m | avatar_crown_of_thorns.png[39m[0m
+[   8% ] [90m[1mreimport[22m | avatar_cursed_trophy.png[39m[0m
+[  16% ] [90m[1mreimport[22m | avatar_divinatory_secrets.png[39m[0m
+[  25% ] [90m[1mreimport[22m | avatar_illness.png[39m[0m
+[  33% ] [90m[1mreimport[22m | avatar_letters_of_destruction.png[39m[0m
+[  41% ] [90m[1mreimport[22m | avatar_manipulating_the_past.png[39m[0m
+[  50% ] [90m[1mreimport[22m | avatar_singing_victory_again.png[39m[0m
+[  58% ] [90m[1mreimport[22m | avatar_thorny_corruption.png[39m[0m
+[  66% ] [90m[1mreimport[22m | possessed.png[39m[0m
+[  75% ] [90m[1mreimport[22m | avatar-portrait-fixed.png[39m[0m
+[  83% ] [90m[1mreimport[22m | upgrade-grid-fixed.png[39m[0m
+[  91% ] [90m[1mreimport[22m | Finalizzazione dell'importazione delle risorse...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Reimportando i contenuti (11 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Esecuzione delle operazioni di post-reimportazione...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Caricamento dell'editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Caricamento dei pannelli…[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Riapertura delle scene...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione dell'editor centrale...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Caricamento della disposizione della finestra delle estensioni...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Disposizione dell'editor preparata.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

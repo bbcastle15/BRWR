@@ -1,0 +1,437 @@
+
+=== PAGE 1 ===
+D ead ly Mask
+
+=== PAGE 2 ===
+8 E V O C A T I O N 
+BASES
+4 for each color (2 colors)
+ 2 MAGE BASES
+1 for each color (2 colors)
+Mages from the schools of Alchemy and Shamanism join the war for control of the ruins of the Black Rose Lodge! With the Deadly Mask expansion, you 
+can play Rebirth with up to 5 or 6 players!
+Components
+2 MAGE CELLS 2 MAGE CARDS
+
+S EFU
+
+ 10
+
+
+ 8
+2
+2
+2
+
+2 MAGE SHEETS
+
+
+
+ 
+ I
+  
+ II  III
+
+     
+
+
+
+
+
+
+50 DAMAGE/
+INSTABILITY CUBES
+Black Rose Phase
+1. Move revealed Events on the Event Board one space to the right. 
+2. The Mage on the right of the First Player draws an Event Card. 
+Apply the change of Crown  Effect, if present.
+3. Starting from the leftmost card, apply the Effects of each Event 
+Card that must be resolved during the Black Rose Phase.
+4. Optional: each Mage, in play order, may discard one of their 
+Quest Cards. The  gains  based on the Moon of that Quests 
+(First Moon 1, Second Moon 2, Third Moon 3).
+5. In play order, each Mage with no Active Quest Cards must draw 
+one from the current Moon deck.
+6. Each Mage with a number of Active Quest Cards () higher than 
+their Quest Limit value (), discards them down to that value. 
+Then, each Mage does the same for their Completed Quest Cards 
+(). 
+Study Phase
+1. Starting from the leftmost card, apply the Effects of each Event 
+Card that must be resolved during the Study Phase. 
+2. Each Mage Draws 2
+3. Each Mage Draws 4
+discard 2 of those cards in the corresponding school discard pile.
+4. Discard  from your Hand that exceeds your 
+Optional: you may discard 1
+Preparation Phase
+Each Mage places 2-4 from their Hand on their Mage Sheet. Those 
+cards are considered Ready Spells.
+Action Phase
+1. Starting from the leftmost card, apply the Effects of each Event Card 
+that must be resolved during the Action Phase.
+2. In play order, each Mage performs their Activation.
+3. When all Mages cannot perform any more Actions, the Phase ends.
+Evocation Phase
+1. All the Evocations owned by the  activates.
+2. In play order, each Evocation activates, one at time, in the order their 
+owner prefer.
+Clean-up Phase
+1. Each Mage may choose to return any Active  and  Spells to their 
+Hand, then discards all 
+Each Mage may choose to return any Active 
+ Mage Sheet to their Memories and take 
+back all their  tokens.
+In play order, each Mage performs their Effects that trigger in the 
+Clean-Up Phase.
+Check if there are any Rooms that must been Rebuilt and assign  
+All Room Activation Tokens on Rebuilt Rooms must be flipped to 
+GAME TURN
+2 REFERENCE CARDS
+their Quest Limit value (
+Then, each Mage does the same for their Completed Quest Cards 
+Starting from the leftmost card, apply the Effects of each Event 
+Card that must be resolved during the Study Phase. 
+Each Mage Draws 2 from their Grimoire.
+Each Mage Draws 4 from any School of Magic in the Library, then 
+discard 2 of those cards in the corresponding school discard pile.
+ from your Hand that exceeds your 
+ you may discard 1
+2. In play order, each Mage performs their Effects that trigger in the 
+Clean-Up Phase.
+Check if there are any Rooms that must been Rebuilt and assign 
+All Room Activation Tokens on Rebuilt Rooms must be flipped to 
+Starting from the leftmost card, apply the Effects of each Event 
+Card that must be resolved during the Study Phase. 
+ from their Grimoire.
+ from any School of Magic in the Library, then 
+discard 2 of those cards in the corresponding school discard pile.
+ from your Hand that exceeds your 
+ you may discard 1 from your Hand to the Library.
+2. In play order, each Mage performs their Effects that trigger in the 
+Clean-Up Phase.
+3. Check if there are any Rooms that must been Rebuilt and assign 
+due to that.
+4. All Room Activation Tokens on Rebuilt Rooms must be flipped to 
+show the Available side.
+5. If any Power Token have reached or passed the Black Rose Cube on 
+the Power Board, the game ends immediately.
+ Physical Action
+ the Black Rose
+ Power Points
+ Speed value
+ Strength value/Physical Attack
+ Hand value
+ Health value
+ Memories
+ Active Quest
+ Completed Quest
+ Solved Quest
+ Trophy
+ Carta Magia
+ Combat
+ Contingency
+ Trap
+ Protection
+ Persistent
+ Crown
+ Model within 0
+ Mage within 0
+ Evocation within 0
+ Room within 0
+ Anywhere in the Lodge
+During the Activation a mage must perform one or two Actions. from their Grimoire.
+ from any School of Magic in the Library, then 
+discard 2 of those cards in the corresponding school discard pile.
+5. If any Power Token have reached or passed the Black Rose Cube on 
+A Physical Action is considered a group of separate and different the Power Board, the game ends immediately.
+ from any School of Magic in the Library, then 
+discard 2 of those cards in the corresponding school discard pile.
+ 5. If any Power Token have reached or passed the Black Rose Cube on 
+the Power Board, the game ends immediately.
+Effects, which are resolved in whichever order the Mage prefers. from any School of Magic in the Library, then 
+discard 2 of those cards in the corresponding school discard pile.
+ from your Hand that exceeds your .
+ from your Hand to the Library.
+the Power Board, the game ends immediately.  from your Hand that exceeds your 
+ from your Hand to the Library. Explore (Physical Action): from your Hand that exceeds your 
+ from your Hand to the Library. • Move 1. You can perform this Effect a number of times equal to your Speed value . Each single Move, separated by a period (.), is a different Effect, and you can use all or part of them, but 
+you cannot use different Effects between them. Unused Move 
+Effects are lost. 
+• Activate a .
+ Fighting (Physical Action): • Perform a Physical Attack () on a  (a Physical Attack infl icts Damage  Perform a Physical Attack ( equal to your Mage's Strength value  (a Physical Attack infl icts to the target). 
+• Activate a .
+ Command (Physical Action): Choose one of your , it activates.
+Cast a Spell: reveal one of your Ready Spells (or activate it if its a 
+Cast a Spell: / ). You are considered the caster of that Spell. If the Spell shows 
+). You are considered the caster of that Spell. If the Spell 
+ at the card's center, place 1 in a  before resolving that Spell's Effect.
+Starting from the leftmost card, apply the Effects of each Event 
+Card that must be resolved during the Study Phase. 3. Check if there are any Rooms that must been Rebuilt and assign 
+due to that.
+All Room Activation Tokens on Rebuilt Rooms must be flipped to 
+show the Available side.
+ACTIONS
+ICONS
+You may cast the Quick Spell ( If any Power Token have reached or passed the Black Rose Cube on 
+) or the Spell placed in the lowest numbered Spell Slot (I, II, III). If any Power Token have reached or passed the Black Rose Cube on 
+the Power Board, the game ends immediately. 
+Momentum: choose one of your Ready Spells and discard it to your Memories, then, Move 1.
+CASTING A SPELL: LIMITATIONS In the same Activation, using both of his Actions, a Mage can perform the Cast a Spell Action twice only if one of the two Actions reveals the Quick Spell.
+4 PHYSICAL ACTION 
+TOKENS
+2 POWER TOKENS 8 TRAP/PROTECTION 
+TOKENS
+8 PERSISTENCE 
+TOKENS
+1 4 T R O P H Y 
+TOKENS
+6 PERSONAL SPELLS
+Emet–Met
+  
+Emet–Met
+  
+one of your Target 
+ Infl ict 2
+Place 3 target. 
+the target.
+the target Remove 
+002 / 002 - DDLM
+Emet–Met
+one of your 
+
+Place 3
+the target.
+the target 
+Emet–Met
+Summon
+Enhancement
+your Constructs 
+has 
+
+Emet–Met
+ 
+. Constructs one of your 
+ from the  in a 
+ from  in a  Place 3
+the target.
+. Construct the target 
+Emet–Met
+Summon a Nigredo.
+Enhancement : one of 
+Constructs activates and 
+1 and 1.
+ 
+002 / 002 - DDLM
+Mask of the WorldEmet–Met
+: each time you solve Summon a 
+Quest, gain 1. Each time you Enhancement
+solve a Quest, draw Enhancement
+your 1 Quest 
+Constructs from the current Moon Deck. your Constructs 
+has 
+Mask of the World
+  
+  
+Mask of the World
+  
+ Place 2 from .
+.  Gain 1
+001 / 002 - DDLM
+
+=== PAGE 3 ===
+Models
+Sefu Angela
+Setup
+ Forgotten 
+ places 1 in a 
+ Forgotten 
+.
+: discard 3. Draw 1 Forgotten .
+  
+ 
+ Black Rose Room
+6 3 1
+: summon a Cadaver.
+ Crypt
+4 2 1
+ Summoner Room
+: inflict 1.
+4 2 1
+ Garden
+: place 1.
+2 1 0
+  from 
+your .
+: draw 1 random  from 
+ The Abyss
+4 
+your 
+2 1
+ Oracle Room : draw 1 random  from 
+your .
+4 
+your 
+2 1
+: summon a Cadaver Cadaver.
+ Sacrificial Altar
+4 2 1
+ Forge
+: place 1.
+2 1 0
+: draw 1 Quest.
+ Observatory
+3 1 1
+ Throne Room 
+: lose 1. If you do: get.
+6 3 1
+ Alchemical Laboratory
+: inflict 1.
+4 2 1
+your .
+: draw 1 random  from 
+ Mirrors Room
+4 
+your 
+2 1
+: draw 1  from your from your .
+ Armory
+4 2 1
+: draw 1  from your from your .
+ Pleasures Room
+4 2 1
+: draw 1 Quest.
+ Bibliotheca
+3 1 1
+ Treasure Room
+: place 1.
+2 1 0
+ Arena
+: inflict 1.
+4 2 1
+: summon a Cadaver Cadaver.
+ Cemetery
+4 2 1
+: draw 1 Quest.
+ Sanctuary
+3 1 1
+6 3 1
+
+ 
+ 
+
+ Forgotten 
+ places 1 in a 
+ Forgotten 
+.
+: discard 3. Draw 1 Forgotten .
+  
+ 
+ Black Rose Room
+6 3 1
+: summon a Cadaver.
+ Crypt
+4 2 1
+ Summoner Room
+: inflict 1.
+4 2 1
+ Garden
+: place 1.
+2 1 0
+  from 
+your .
+: draw 1 random  from 
+ The Abyss
+4 
+your 
+2 1
+ Oracle Room : draw 1 random  from 
+your .
+4 
+your 
+2 1
+: summon a Cadaver Cadaver.
+ Sacrificial Altar
+4 2 1
+ Forge
+: place 1.
+2 1 0
+: draw 1 Quest.
+ Observatory
+3 1 1
+ Throne Room 
+: lose 1. If you do: get.
+6 3 1
+ Alchemical Laboratory
+: inflict 1.
+4 2 1
+your .
+: draw 1 random  from 
+ Mirrors Room
+4 
+your 
+2 1
+: draw 1  from your from your .
+ Armory
+4 2 1
+: draw 1  from your from your .
+ Pleasures Room
+4 2 1
+: draw 1 Quest.
+ Bibliotheca
+3 1 1
+ Treasure Room
+: place 1.
+2 1 0
+ Arena
+: inflict 1.
+4 2 1
+: summon a Cadaver Cadaver.
+ Cemetery
+4 2 1
+: draw 1 Quest.
+ Sanctuary
+3 1 1
+6 3 1
+
+
+
+
+ 
+
+G A M E W I T H U P TO 4 P L AY E R S
+This expansion adds the Mages Sefu and Angela to the game; they can be chosen as Mages during Step 8 of the Setup described in the 
+base game.
+G A M E W I T H 5 O R 6 P L AY E R S
+In Step 2 of the Setup, prepare the Lodge following these diagrams:
+5 PLAYERS 6 PLAYERS
+
+=== PAGE 4 ===
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Andrea Colletti, Diego Fonseca, Marco Presentino, Leonardo Romano, Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore, Jonata Benvenuti
+Concept Artists: Simone de Paolis
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Michele Mirizio, Elettra Nuzzo
+Editing: Myles Schaller
+Editor: Frank Calcagno, Louis Angelli, Christopher Nelson
+Social Media: Luca Bernardini, Emiliano Caretti
+Customer Care: Marco Presentino, Michele Morosini
+Kickstarter Manager: Andrea Colletti
+Writer: Marco Olivieri
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Fulfi llment: Michele Mirizio
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara Spagnoletto, Daniele Samele, Daniele 
+Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, Marco G. defi ar, 
+Maurizio Salvi, Paolo guerrieronuvola, Paolo Bianchi, Pasquale Carotenuto
+Deadly Mask - Rules v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com

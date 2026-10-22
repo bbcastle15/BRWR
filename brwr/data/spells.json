@@ -3362,7 +3362,8 @@
           "type": "set_target_room_from_triggering_mage"
         },
         {
-          "type": "move_one_mage_in_target_room",
+          "type": "move_model_near_target_room",
+          "model_range": 1,
           "distance": 1,
           "optional": true
         },
@@ -14774,5 +14775,824 @@
       ],
       "text": "Inflict 1 Damage +1 Damage for each Jinx assigned to the target. If the target is defeated due to this Effect, summon a Pharaoh in its Room."
     }
+  },
+  {
+    "id": "arcane_bond",
+    "name": "Arcane Bond",
+    "school": "lex",
+    "copies": 3,
+    "personal": true,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "trigger_event_branch",
+          "only_on_trigger": true,
+          "event_type": "forgotten_summon_effect",
+          "effects": [
+            {
+              "type": "gain_power",
+              "amount": 1
+            }
+          ],
+          "else_effects": [
+            {
+              "type": "lose_power",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "any_of",
+        "triggers": [
+          {
+            "type": "mage_resolves_summon"
+          },
+          {
+            "type": "your_evocation_defeated_or_removed"
+          }
+        ]
+      },
+      "trigger_target": "self",
+      "text": "Persistent: after a Mage has resolved an Effect with the summon keyword, gain 1 Power. When one of your Evocations is defeated or removed, lose 1 Power."
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "optional_caster_room_effect",
+          "only_on_trigger": true,
+          "prompt": "Arcane Bond: place 1 Instability in your Room?",
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "another_mage_places_instability"
+      },
+      "trigger_target": "self",
+      "text": "Persistent: after another Mage placed Instability, you may place 1 Instability in your Room."
+    }
+  },
+  {
+    "id": "pythia_of_delphi",
+    "name": "Pythia of Delphi",
+    "school": "oracle",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 4
+        },
+        {
+          "type": "prophecy"
+        },
+        {
+          "type": "prophecy"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "all",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "aruspice"
+        },
+        {
+          "type": "activate_summoned_evocation"
+        },
+        {
+          "type": "summon_evocation",
+          "evocation_id": "aruspice"
+        },
+        {
+          "type": "activate_summoned_evocation"
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Cassandra"
+  },
+  {
+    "id": "the_eight_spells",
+    "name": "The Eight Spells",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "light",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 4
+        },
+        {
+          "type": "gain_power",
+          "amount": 1
+        },
+        {
+          "type": "draw_quest",
+          "amount": 1
+        },
+        {
+          "type": "draw_grimoire",
+          "amount": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "light",
+      "target": "model",
+      "range": "*",
+      "effects": [
+        {
+          "type": "convert_damage",
+          "amount": 1
+        },
+        {
+          "type": "relative_room_effect",
+          "range": 0,
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 1
+            },
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "type": "damage",
+          "amount": 1
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Venticello"
+  },
+  {
+    "id": "calamity",
+    "name": "Calamity",
+    "school": "pestilence",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "air",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "pestis"
+        },
+        {
+          "type": "summon_evocation",
+          "evocation_id": "pestis"
+        },
+        {
+          "type": "filtered_model_effect",
+          "evocation_id": "pestis",
+          "range": "*",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "model",
+      "range": 1,
+      "effects": [
+        {
+          "type": "assign_infectio",
+          "amount": 2
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Pestilentia"
+  },
+  {
+    "id": "mask_of_the_world",
+    "name": "Mask of the World",
+    "school": "shamanic",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1,
+          "only_on_trigger": true
+        },
+        {
+          "type": "draw_quest",
+          "amount": 1,
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "caster_solves_quest"
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "place_instability",
+          "amount": 2
+        },
+        {
+          "type": "gain_power",
+          "amount": 1
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Sefu"
+  },
+  {
+    "id": "demonic_crown",
+    "name": "Demonic Crown",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [],
+      "passives": {
+        "damage_reduction": 1
+      }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "lose_power",
+          "amount": 1
+        },
+        {
+          "type": "take_crown"
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Hastur"
+  },
+  {
+    "id": "alchemical_fireball",
+    "name": "Alchemical Fireball",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        }
+      ],
+      "suppressed_trigger_types": [
+        "protection"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "place_instability_per_damaged_model",
+          "amount_per_model": 1
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Prospero"
+  },
+  {
+    "id": "fulu",
+    "name": "Fulu",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "light",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1,
+          "only_on_initial_cast": true
+        },
+        {
+          "type": "draw_grimoire",
+          "amount": 1,
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "caster_reveals_spell_type",
+        "spell_type": "combat"
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "light",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1,
+          "only_on_initial_cast": true
+        },
+        {
+          "type": "draw_quest",
+          "amount": 1,
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "caster_reveals_spell_type",
+        "spell_type": "contingency"
+      },
+      "trigger_target": "self"
+    },
+    "source": "Codex Arcanum, Mages: Dai Jin"
+  },
+  {
+    "id": "mystic_guide",
+    "name": "Mystic Guide",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "water",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "room_effect",
+          "range": 0,
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "caster_enters_room"
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "air",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "room_effect",
+          "range": 0,
+          "effects": [
+            {
+              "type": "activate_target_room",
+              "allow_reactivate": true
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Janara"
+  },
+  {
+    "id": "great_architect",
+    "name": "Great Architect",
+    "school": "shamanic",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "place_instability",
+          "amount": 1
+        },
+        {
+          "type": "activate_target_room",
+          "allow_reactivate": true
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "activate_target_room",
+          "allow_reactivate": true
+        },
+        {
+          "type": "school_condition",
+          "condition": "target_room_rebuilt",
+          "effects": [
+            {
+              "type": "gain_power",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Imhotep"
+  },
+  {
+    "id": "incanto_porkonus",
+    "name": "Incanto Porkonus",
+    "school": "druidic",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "trap",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 6
+        }
+      ],
+      "trigger": {
+        "type": "mage_event",
+        "event_type": "damage_inflicted",
+        "target": "self",
+        "min_amount": 1
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3
+        },
+        {
+          "type": "activate_target_evocation_under_control",
+          "strength_bonus": 2
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Hogwarz"
+  },
+  {
+    "id": "inspiration",
+    "name": "Inspiration",
+    "school": "agony",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1,
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "mage_event",
+        "event_type": "damage_inflicted",
+        "target": "self",
+        "min_amount": 2
+      },
+      "trigger_target": "self"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "room_effect",
+          "range": 0,
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "trigger": {
+        "type": "mage_event",
+        "event_type": "damage_inflicted",
+        "source": "self",
+        "min_amount": 2
+      },
+      "trigger_target": "self"
+    },
+    "source": "Codex Arcanum, Mages: Mediceo"
+  },
+  {
+    "id": "carnage",
+    "name": "Carnage",
+    "school": "war",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_equipment"
+        },
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "mage_attack",
+          "optional": true
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "place_instability",
+          "amount": 1
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ],
+      "suppressed_trigger_types": [
+        "protection",
+        "trap"
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Bellum"
+  },
+  {
+    "id": "dictat",
+    "name": "Dictat",
+    "school": "lex",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "evocation",
+      "range": 3,
+      "effects": [
+        {
+          "type": "assign_upgrade",
+          "choice": true
+        },
+        {
+          "type": "activate_target_evocation_under_control"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "lose_power",
+          "amount": 1
+        },
+        {
+          "type": "choose_evocation_to_summon",
+          "max_health": 3
+        },
+        {
+          "type": "if_effect_result",
+          "key": "last_summoned_evocation",
+          "effects": [
+            {
+              "type": "assign_upgrade",
+              "choice": true
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Pyotr"
+  },
+  {
+    "id": "necroflame",
+    "name": "Necroflame",
+    "school": "lex",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "choose_evocation_to_summon",
+          "max_health": 3,
+          "archetype": "undead"
+        },
+        {
+          "type": "activate_summoned_evocation"
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "steal_power_from_up_to_mages",
+          "amount": 1,
+          "max_targets": 2
+        }
+      ]
+    },
+    "source": "Codex Arcanum, Mages: Onamor"
+  },
+  {
+    "id": "three_visions",
+    "name": "Three Visions",
+    "school": "oracle",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "prophecy"
+        },
+        {
+          "type": "prophecy"
+        },
+        {
+          "type": "prophecy"
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "revelation",
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "type": "revelation",
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "type": "revelation",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "revelation": true
+    },
+    "source": "Codex Arcanum, Mages: Parcae"
   }
 ]

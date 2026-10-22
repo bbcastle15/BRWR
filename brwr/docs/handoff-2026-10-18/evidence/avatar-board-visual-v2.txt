@@ -1,0 +1,55 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 - Build 32.0.101.7085 - Compatibility - Using Device: Intel - Intel(R) Iris(R) Xe Graphics
+
+PLAYER COUNT: 4
+GAME SEED: 182026
+Spells loaded: 267
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - alchemy
+  - heka
+  - death
+  - famine
+  - chaos
+  - forge
+Selected 6 / 9 available schools
+
+SCHOOL LIBRARIES:
+  alchemy: 36 cards
+  heka: 36 cards
+  death: 36 cards
+  famine: 36 cards
+  chaos: 36 cards
+  forge: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 9
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Events DB: 15
+Event Deck Moon 1: 5
+Event Deck Moon 2: 5
+Event Deck Moon 3: 5
+Initial Crown assigned to Player 2
+Player 2 takes the Crown
+Player 1 Cell exits: ["the_abyss", "arena"] | primary: the_abyss | starts in Cell: true
+Player 2 Cell exits: ["cemetery", "oracle_room"] | primary: cemetery | starts in Cell: true
+Player 3 Cell exits: ["armory", "observatory"] | primary: armory | starts in Cell: true
+Player 4 Cell exits: ["crypt", "mirrors_room"] | primary: mirrors_room | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+Player 4 summoned Cadaver in room black_rose
+AVATAR BOARD UI: 9 assertions; failures: []

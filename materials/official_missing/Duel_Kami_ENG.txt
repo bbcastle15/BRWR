@@ -1,0 +1,3866 @@
+kami
+Project Manager and Art Director: Andrea Colletti
+Based on a game by: Marco Montanaro
+Game Designer: Diego Fonseca
+Graphic Director: Paolo Scippo
+Graphic Design: Jonata Benvenuti, Diana Maranzano, Elisa Fiore
+Concept Artists: Giovanni Pirrotta
+Environment Artist: Giovanni Pirrotta
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Proofreading for The Geeky Pen: Alexander Eckhardt
+Social Media: Luca Bernardini, Emiliano Caretti, Beto Caprera, Massimiliano Grotti
+Customer Care: Francesco Granitto
+Advertising: Fabio Braghettoni, Emiliano Caretti
+Production: Fabio Braghettoni, Paolo Scippo
+Distribution and Fulfi llment: Michele Mirizio, Francesco Granitto
+Playtest: Sabrina Abbatini, Stefano Colica, Andrea Colletti, Angelo Fracassi, Armando Fraschetti, Massimiliano 
+Grotti, Amir Hajar, Michele Morosini, Yuri Nicastro, Daniele Nigro, Elettra Nuzzo, Marco Presentino, Leonardo 
+Romano, Andrea Vella.
+Credits
+HOW TO READ THIS RULEBOOK
+This rulebook is divided into eight chapters, which are to be consulted as indicated below to understand the game in the simplest 
+and most straightforward way possible.
+1. Components: All the game components included in the box are displayed visually in this chapter.
+2. Basic Concepts: This chapter introduces the game without going into detail about the rules, instead it provides a basis for 
+a better understanding of the following chapters.
+3. Setup: This chapter contains all the instructions for setting up the playing area.
+4. Game Turn: This chapter explains in detail the rules to follow during the fi ve phases that make up a Game Turn. It clarifi es 
+the fl ow of actions that each player must perform, but without going into rules that are not strictly related to a single Game 
+Phase. Instead, these are all mentioned with cross-references and indications pointing to the chapter that covers each one.
+5. End of game Tally: This chapter lists the rules for declaring the winner at the end of the game.
+6. Rules Compendium: This chapter explains in detail all the in-depth rules of the game or that require the temporary 
+interruption of the game fl ow in order to be applied.
+7. Duel Avatar: This chapter explains how to insert the Avatar into a game, a third player guided by the Black Rose and 
+controlled by an A.I.
+8. Beyond the Duel: This chapter provides practical information on how to use the contents of this box with the other 
+products in the Black Rose Wars line.
+Hidden among the sacred mists of a sanctuary in the hills of Edo, the Lodge of the Sun preserves the ancient 
+mystical art of Shugendō. Its monks, led by the legendary En no Gyōja, weave together prayers and spells, 
+summoning the power of the Kami, the protective spirits of the people of the East. For centuries, they have watched 
+over the fragile balance between the world of the living and that of the spirits, holding back the dark forces that 
+threaten their land.
+But now a shadow is cast over the Lodge. Abe no Seimei, the most brilliant of the disciples, harbors a forbidden 
+ambition—to lead the mages into a new era, where arcane power is no longer used to protect, but to dominate. 
+His plots, woven in the shadows to undermine his master, have awakened a forgotten horror—a Mononoke, a 
+vengeful spirit thirsty for magic and blood.
+Now, the Lodge of the Sun must choose—appease the wrath of the Specter, or perish under the weight of its own 
+destiny.
+The Lodge of the Sun
+2
+Components .......................................................................4
+Basic Concepts ...................................................................6
+The Lodge and the Rooms ................................................ 6
+ - The Mage ...................................................................... 6
+Mage Card ...............................................................................6
+ - Evocations and Equipment ......................................... 7
+Mononoke Evocation Card ...................................................7
+ - Power Points ............................................................... 8
+ - Spell Cards ................................................................... 8
+School Spells ............................................................................8
+Personal Spells .........................................................................8
+Forgotten Spells ......................................................................8
+Cells ...................................................................................... 8
+Events Card and Quests Cards .......................................... 8
+ - Damage/Instability Cubes ......................................... 8
+Eff ects and Targets ............................................................. 9
+Eff ects .......................................................................................9
+Targets ......................................................................................9
+Setup ..................................................................................10
+Game Turn ........................................................................12
+1. Black Rose Phase ...........................................................12
+2. Study Phase ....................................................................13
+2.1 Draw .................................................................................13
+2.2 Hand Limit ......................................................................13
+2.3 Planning ...........................................................................13
+3. Action Phase ..................................................................14
+4. Evocation Phase .............................................................15
+Mononoke Activation ...........................................................15
+5. Clean-up Phase ..............................................................16
+End of Game Tally ............................................................17
+Rules Compendium .........................................................17
+Infl icting/Converting Damage, 
+Defeat and Immunity ........................................................17
+Infl icting Damage ..................................................................17
+Converting Damage ..............................................................17
+Immunity ...............................................................................17
+Defeat of a Mage ....................................................................18
+Defeat of an Evocation ..........................................................18
+Removing an Evocation ........................................................18
+Placing/Converting Instability ..................................19
+Placing Instability ..................................................................19
+Converting Instability ...........................................................19
+Cells .....................................................................................19
+Rooms and Room Activation Tokens .............................20
+Activating a Room ................................................................20
+Range, Line of Sight, Dummy Target .............................21
+Range ......................................................................................21
+Line of Sight ..........................................................................21
+Dummy Target .......................................................................21
+Portals .................................................................................22
+Quests .............................................................................22
+Drawing/Discarding Spell Cards ................................23
+Persistent Eff ects ...........................................................23
+ Persistents ........................................................................23
+Keywords ............................................................................23
+Repeat N.................................................................................23
+Restore  ..............................................................................23
+Duel Avatar .......................................................................24
+Mononoke ...........................................................................24
+Avatar Setup .......................................................................24
+Avatar AI Rules ..................................................................25
+Choice of the Crown.............................................................25
+Avatar and Black Rose Cubes ..............................................25
+Assigning Damage to Multiple Models ..............................25
+Damage/Instability Conversion ..........................................25
+Defeat of the Avatar and its Cell ..........................................25
+Avatar and Event Cards ........................................................25
+Avatar and Quest Cards ........................................................25
+Avatar and Black Rose Damage ...........................................25
+Avatar and Power Points .......................................................25
+Avatar Activation .............................................................26
+1. Black Rose Phase ..........................................................26
+2. Study Phase ....................................................................26
+5. Evocation Phase .............................................................26
+3. Action phase ...................................................................26
++ Additional Command Card .........................................26
+Persistent Eff ects ...............................................................26
+4. Clean-up Phase ..............................................................26
+Beyond the Duel ...............................................................27
+Table of contents
+For updated versions of our game rulebooks, scan the QR code and visit our web app.
+3
+Mononoke, 
+the spirit of vengeance. 
+Its black armor shines like the 
+void among the stars, the masked 
+face conceals a timeless hatred. 
+A monstrous maw opens wide 
+on its torso, thirsty for magic.
+With its gigantic ebony katana, 
+it tears the fate of the Mages, 
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+ 9
+ 2
+ 0
+ 3
+Mononoke
+Appearance - Corruption Purification
+
+A BE NO S EIMEI
+
+ 10
+
+
+ 8
+2
+2
+2
+
+1. Black Rose Phase (p. 12)
+Apply the Effect of the current Turn's Event. Also affects 
+Mages in Cells.
+2. Study Phase (p. 13)
+1. Each Mage draws 2 from their Grimoire and 2
+from the deck of the School of the  Library.
+2. Each Mage discards  from their Hand to their 
+Memories until they have as many as their  value.
+3. Each Mage places 2 to 4  from their Hand onto the 
+Mage Board. These  Spell Cards are considered 
+Ready Spells.
+3. Action Phase (p. 14)
+In play order, each Mage performs their Activation
+(up to 2 Actions per Activation). When no Mage can 
+perform any more Actions, the Phase ends.
+4. Evocation Phase (p. 15)
+In play order, each Mage chooses one of their Evocations 
+that has not yet been activated in this Phase: that 
+Evocation activates. This continues until each Evocation 
+in the Lodge has been activated.
+5. Clean-up Phase (p. 17)
+1. Each Mage discards their Revealed  in their 
+Memories (Forgotten  are removed from the game), 
+recovers their  Tokens and flips their Physical Action 
+Tokens to the available side. The Room Activation 
+Tokens are turned to the Available side.
+2. Check if there are any Rooms that need to be Wrecked 
+and assign the corresponding .
+3. The Crown Holder moves the cube on the Turn 
+Track one space and passes the Crown Token to the 
+opponent; then start a new Turn starting from the 
+Black Rose Phase. If the fourth Turn has ended, the 
+game ends and you proceed to the End of Game Tally 
+(p. 16).
+GAME TURN
+ Quests  
+Medium At least two of your  are assigned.
+: The  infl icts 1 on you.
+Gain 1.
+Vandal You defeated or removed an Equipment 
+other than your own. 
+: The  infl icts 2 on you. 
+Gain 2.
+Armed You own two Equipment. 
+: The  infl icts 2 on you.
+Gain 2.
+1
+2
+2
+ Quests  
+Medium are assigned.
+infl icts 1 on you.
+.
+Vandal You defeated or removed an Equipment 
+other than your own. 
+infl icts 2 on you. 
+Gain 2.
+Armed You own two Equipment. 
+ infl icts 2
+Gain
+ Quests  
+Incarnation You cast a Forgotten .
+: The 
+Gain 2
+infl icts 2 on you.
+.
+Illumination At least three of your 
+assigned.
+ are 
+: The 
+Gain 3
+infl icts 3 on you.
+.
+Equipped You own three Equipment. 
+: The 
+Gain
+infl icts 3 on you.
+ 3.
+2
+3
+3
+Turn 1: Dead of Night : Each Mage draws 1. The  gains 1 and places 4 in the .
+Turn 2: Moonlight : Each Mage draws 1. The  gains 2 and places 1 in each Room.
+Turn 3: Crimson Dawn : Each Mage draws 1. The  gains 2 and converts 1 in each Room.
+Turn 4: Sunlight : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  gains 1 for each  drawn by the Mages in this way.
+Components
+2 M AG E 
+CARDS
+2 Q U E S T 
+CARDS
+1 E V E N T S 
+CARD
+2 R E F E R E N C E 
+CARDS
+4 P H Y S I C A L 
+ACTION TOKENS
+1 2 P E R S I S T E N C E 
+TOKENS
+4 P O RTA L S
+75 DAMAGE/
+INSTABILITY CUBES
+7 ROOMS 36 SHUGENDŌ
+SPELL CARDS
+6 PERSONAL
+SPELL CARDS
+1 7 E VO C AT I O N 
+CARDS
+1 GAME BOARD
+it tears the fate of the Mages, 
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+Mononoke, 
+the spirit of vengeance. 
+Its black armor shines like the 
+void among the stars, the masked 
+face conceals a timeless hatred. 
+A monstrous maw opens wide 
+on its torso, thirsty for magic.
+With its gigantic ebony katana, 
+it tears the fate of the Mages, 
+1 S C H O O L R E F E R E N C E 
+CARD
+AVATA R 
+COMPONENTS
+
+The Shugend The Shugendō mystical doctrine School mystical doctrine School 
+strengthens the Mage who dominates it strengthens the Mage who dominates it 
+by enhancing their body, improving their by enhancing their body, improving their 
+actions, and protecting them. actions, and protecting them.
+It allows you to summon combat and It allows you to summon combat and 
+actions, and protecting them. actions, and protecting them. actions, and protecting them.
+It allows you to summon combat and It allows you to summon combat and It allows you to summon combat and It allows you to summon combat and It allows you to summon combat and 
+defense defense defense defense 
+Equipment, and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms Equipment Kami, divine spirits who guard the Rooms Equipment, and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the 
+of the Lodge. of the Lodge.
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms 
+of the Lodge. of the Lodge.
+Repeat N
+Restore 
+Shugend
+
+6
+
+6
+
+4
+
+6
+
+2
+
+ mystical doctrine School mystical doctrine School 
+strengthens the Mage who dominates it 
+by enhancing their body, improving their 
+It allows you to summon combat and , and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms , and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the 
+Shugend
+
+6
+
+ mystical doctrine School mystical doctrine School 
+strengthens the Mage who dominates it strengthens the Mage who dominates it 
+by enhancing their body, improving their by enhancing their body, improving their 
+It allows you to summon combat and It allows you to summon combat and , and to call upon the , and to call upon the It allows you to summon combat and 
+, and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms , and to call upon the Kami, divine spirits who guard the Rooms 
+, and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the 
+Shugend
+
+6
+
+4
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms 
+
+Shugendō
+
+4
+
+6
+
+2
+Shugendō
+Onmyoji Onmyoji 
+Spiritual Dance Spiritual Dance       Summoning the Kami Summoning the Kami      
+Fortune Talisman Fortune Talisman      
+Ebisu's Intervention      
+Susanoo's Presence      
+Sarutahiko's Guidance      
+Shoei ShugendShoei ō Shoei 
+
+Shoei  
+Channeling the Spirit         Spiritual Perfection 6 2      
+Occult Tolls 6      
+Hachiman's Essence      
+Tenjin's Teaching      
+Inari's Infl uence      
+
+6
+
+6
+
+4
+
+6
+
+2 strengthens the Mage who dominates it 
+by enhancing their body, improving their 
+It allows you to summon combat and , and to call upon the 
+   
+Draw 2.
+Convert 1 in a .
+Repeat 1: Discard 3.
+   
+Tenjin's Teaching
+Tenjin's Teaching
+
+ on the target  2 : Infl ict 
+.  convert when they 
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+4 FORGOTTEN
+SPELL CARDS
+Image of Amaterasu    
+.  Infl ict 4
+.  Convert 4
+Image of Amaterasu
+   
+Summon
+Kusanagi-no-Tsurugi.
+Restore .
+Onmyōji's Plot
+  
+Onmyōji's Plot
+  
+: Your  cannot be 
+converted in 
+Room.
+Onmy ji's Plot ō
+  
+ cannot be 
+ of the target 
+Room.
+
+Onmy ji's Plot ō
+ 
+ Gain 1 Draw 1 . . 
+Choose one of your assigned 
+ to a . Place it in another , 
+if you do, activate that Room 
+even if already used.
+Choose one of your 
+ji's Plot
+ 
+Draw 1
+Shoei's Courage
+  
+Shoei's Courage
+ of the target 
+  
+Heal 3 even if already used. . Gain 1. 
+:
+even if already used. If you have at least two  to a 
+if you do, activate
+even if already used. Equipment, you have . Place it in another 
+if you do, activate that Room 
+even if already used.
+ Choose one of your 
+. Place it in another 
+1
+to a . Choose one of your 
+Shoei's Courage
+  
+a non Forgotten Summon 
+Equipment of your choice. Onmyō . Onmy  Restore 
+1 7 E VO C AT I O N 
+Equipment
+Omamori
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+Mononoke
+Appearance - Corruption
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+Mononoke
+Appearance - Corruption Purification
+Mononoke
+fl esh, judgment that advances 
+without mercy nor face.
+Mononoke
+
+   
+Places 2.
+: When another Mage 
+enters the target Room they 
+may discard 1. If they don't, 
+Mononoke places 2 in the 
+target Room.
+Invading the Domain
+Performs  with 1
+against each  of the .
+ 4
+Each time you suffer , this 
+Evocation suffers 1 of those 
+ in your place.
+Equipment
+Omamori
+
+E N NO G YŌJA
+
+ 11
+
+
+ 7
+2
+2
+2
+
+6 P OW E R 
+TOKENS
+1 C R OW N 
+TOKEN
+7 R O O M AC T I VAT I O N 
+TOKENS
+ Physical Action
+ Black Rose
+ Power Points
+ Speed Value
+ Strength/Physical Attack Value
+ Hand Value
+ Health Value
+ Memories
+ Spell Card
+ Combat
+ Contingency
+ Persistent
+ Model within 0
+ Mage within 1
+ Evocation within 3
+ Room within 0
+ Anywhere in the Lodge
+ Personal
+ Special
+ Crown
+ Quest
+ Trophy Track
+ Room/Rooms Track
+ Forgotten Spells
+ Quick Spell
+Library
+During an Activation, a Mage must perform one or two Actions. 
+A Physical Action is considered a group of separate and distinct 
+Effects, which are resolved in the order the Mage prefers (p. 14).
+ Explore (Physical Action): • Move 1. You can perform this Effect a number of times equal to your  Speed Value. Each individual “Move 1.” separated by a period (.) is a different Effect, and all or only some of them 
+may be used. However, you cannot use other Effects between 
+one “Move 1.” and another. Unused “Move 1” effects are lost. 
+• Activate a .
+ Fight (Physical Action): • Perform a Physical Attack() on a  (A Physical Attack infl icts 
+Perform a Physical Attack( Damage equal to your 
+) on a 
+Strength Value on the target). • Activate a  Damage equal to your 
+.
+ Command (Physical Action): Choose one of your , it activates.
+Cast a Spell: Reveal a Ready Spell. You are considered its caster. If the Spell shows  in the center of the card, place 1 in a 
+If the Spell shows before resolving its Effect. You may cast the  Quick Spell or one placed in Spell Slots I, II, or III with the lowest number. 
+Actions
+ICONS
+Momentum: Choose one of your Ready Spells and discard it into your  Memories, then Move up to 1.
+SPELL CASTING LIMITATION In the same Activation, using both of their Actions, a Mage can 
+perform the Cast a Spell Action twice only if one of the two Actions reveals the  Quick Spell (p. 14).
+ Oni 
+ Wabi-Sabi 
+Shinto Sanctuary
+Cherry Blossom Garden Kami Throne Room 
+ Satori Arena
+ Spiritual Black Rose Room
+4 2 1
+
+Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+
+Mirrors Room
+even if used, without fl ipping its Activation Token.
+
+3 2 1
+the Room, 
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+
+Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+4
+Activate the Room, 
+even if used, without fl ipping its Activation Token.
+4 Sanctuary
+even if used, without fl ipping its Activation Token.
+: Heal
+assigned 
+2 1 0
+even if used, without fl ipping its Activation Token.
+ on yourself, you may discard an 
+ Cherry Blossom Garden
+: Draw 1.
+You cannot target the 
+even if used, without fl ipping its Activation Token.
+
+2 
+ 2
+
+even if used, without fl ipping its Activation Token.
+ Shinto 2Sanctuary 
+even if used, without fl ipping its Activation Token.
+Heal 2 on yourself, you may discard an 2 1
+assigned 
+
+ that is not assigned with a Forgotten  on yourself, you may discard an 1
+ that is not assigned with a Forgotten 
+ Cherry Blossom 3
+Garden
+ that is not assigned with a Forgotten 
+
+4 2 1
+
+ that is not assigned with a Forgotten 
+Garden
+ Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+Sanctuary on yourself, you may discard an 
+
+ that is not assigned with a Forgotten 
+2
+1
+2
+ on yourself, you may discard an 1
+ that is not assigned with a Forgotten 
+Spell.
+Cherry Blossom 2 Cherry Blossom Spell.
+Garden
+ that is not assigned with a Forgotten 
+: Draw
+
+1 
+
+1
+Garden
+: Draw 1
+2 Satori Arena
+
+: Infl ict 1 . You may 
+1
+6 3 1
+
+ 
+
+target up to 
+4Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+
+1
+Garden
+1
+1
+
+Arena. 
+ 
+
+. You may 
+1
+ 4
+0
+
+ 4 2
+ . You may 
+
+Move 0 the 
+
+target up to 
+4Kami Throne Room 2
+ . You may Move
+target up to 1.
+0Move the 0Move
+: Discard
+   4 2 1
+  6 3
+2
+
+ 2
+
+ the 
+ 6 3
+Throne Room  the 
+: Discard2 up to 2
+
+Gain  equal to the 
+ 
+  4 2
+ up to 2
+1
+ equal to the 
+ Oni Sacrifi cial Altar
+: Convert 1.
+
+ the 
+
+
+Sacrifi cial Altar 2
+1
+Sacrifi cial Altar . 
+Sacrifi cial Altar  discarded.
+
+ Sacrifi cial Altar
+
+6 3 1
+1
+1
+ discarded.
+
+1
+1
+Sacrifi cial Altar 1 2
+1
+Sacrifi cial Altar Sacrifi cial Altar 1
+Sacrifi cial Altar Sacrifi cial Altar 1
+Sacrifi cial Altar Sacrifi cial Altar 
+
+Sacrifi cial Altar discarded.
+1
+Sacrifi cial Altar discarded. Sacrifi cial Altar Sacrifi cial Altar 
+.
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+4
+Models and Bases
+Abe no Seimei
+Mononoke
+En no Gyōja, the legendary founder of the Lodge of the Sun, is 
+a warrior mage who defi es the laws of time with his unshakable 
+mastery.
+He honors the Kami through ancient rites that call upon the spirits' 
+power, channeling ancestral forces in every gesture. 
+His occult arts intertwine with martial discipline, transforming 
+mystical tools into magical weapons of unparalleled eff ectiveness. 
+Although now elderly, his strict ascetic practices give him the 
+strength and agility of a young man, allowing him to lead the 
+Lodge of the Sun with wisdom and vigor, inspiring respect and 
+fear in anyone who dares to challenge him.
+Abe no Seimei, a brilliant onmyōji and disciple of En no Gyōja, 
+embodies the perfect balance between cunning and arcane power. 
+His magic, based on tactics and manipulation, feeds on his 
+oratorical skills and his immense knowledge, which enable him to 
+turn any situation to his advantage. 
+A high-ranking member of the Lodge of the Sun, he aspires to 
+overthrow his master and take his place at the head of the Lodge. 
+With his mind set on infi ltrating the Japanese courts, he intends 
+to use the powers of the Lodge and its mages to conquer the nation, 
+turning each move into a step towards absolute power.
+Mononoke, a vengeful spirit awakened in the Lodge, embodies the 
+dark wrath of an ancient curse.
+With the appearance of a giant samurai, his torso has transformed 
+into an enormous maw, ready to swallow up all magical energy.
+It assaults the mages with unstoppable fury, feeding on their magic 
+and transforming each spell into a lethal weapon of destruction and 
+death.
+Mononoke is the living manifestation of vengeance, a wandering 
+nightmare that turns light into darkness and energy into despair, 
+bringing doom to every corner of the Lodge. En no GyŌja
+5
+Basic Concepts
+Black Rose Wars Duel: Kami is a game of duels between Mages taking 
+place in the Lodge of the Sun, a sentient place where a powerful 
+supernatural entity, the Black Rose, dwells. 
+This is the place where the Mages of the land of Edo gather to learn the 
+arcane arts and challenge each other to improve their skills and make 
+contact with the benevolent spirits called Kami.
+This game allows two players to challenge each other in a fearsome 
+magical battle, teaching the fundamentals of its sister game: Black Rose 
+Wars. 
+This is a stand-alone game, but most of the material in this box can be 
+used to expand Black Rose Wars as well. The reverse, however, is not 
+always possible (see page 27).
+MAGE CARD ANATOMY
+ - The Mage
+The Lodge and the Rooms
+The Mage represents the player during the game. Each Mage has 
+their own Model that represents them in the Lodge, and a Mage 
+Card that describes their characteristics.
+Please note: Across all game components, players are identifi ed 
+with the term “Mage”.
+The Lodge is the battlefi eld on which the Mages duel during the 
+game. The Lodge is made up of 7 Rooms placed on the game board 
+during game setup. When referring to the set of seven Rooms, the 
+game uses the term Lodge.
+A Room is Intact if it shows the side with the slots (called Instability 
+Slots, see page 19), or Wrecked if it shows the side without the slots. 
+The specifi c rules for Rooms and their eff ects are detailed on page 
+20.
+C
+D
+E
+G
+A
+MAGE CARD
+A Name.
+B  Health Value: The maximum amount of  Damage
+that can be infl icted on the Mage before they are defeated 
+(see page 18). The  arrow makes it easier to visualize after 
+how much infl icted  is the Mage defeated. 
+C  Hand Value: The maximum number of Spell Cards the 
+Mage can have in their Hand (see page 13).
+D  Strength Value: The amount of  Damage the Mage 
+infl icts on the target when performing a  Physical Attack 
+(see page 14).
+E  Speed Value: The number of “Move 1” Eff ects that the 
+Mage can perform with a single Explore Physical Action (see 
+page 14).
+F  Maximum Quest Value: This value is not taken into 
+account in a game of Black Rose Wars Duel. However, it is 
+used in other products in the Black Rose Wars line.
+G Trophy Token Slot: This slot is not taken into account 
+in a game of Black Rose Wars Duel. However, it is used in 
+other products in the Black Rose Wars line.
+H  Physical Action Token Slots: These slots 
+accommodate the player's two  Physical Action Tokens. 
+F
+
+B
+H
+Mage Model
+Available 
+Physical Action 
+Token
+Exhausted 
+Physical Action 
+Token
+Intact Room Wrecked Room 
+C
+D
+E
+G
+F
+Mage Model
+Exhausted 
+Physical Action 
+ Wabi-Sabi Mirrors Room  Wabi-Sabi Mirrors Room
+6
+ - Evocations and Equipment
+An Evocation is a Model summoned by a Mage to help and support 
+them during the game. Usually an Evocation has a corresponding 
+Model that represents it in the Lodge and an Evocation Card that 
+describes its characteristics. In this box, the only Evocation that has 
+a Model is Mononoke.
+SUMMONING MONONOKE
+A Mage may Summon Mononoke by casting the Forgotten Spell 
+Mononoke's Fury and resolving the Eff ect on its light side (see 
+Spell Card Anatomy on page 13).
+When they do, they take the Model of Mononoke and place it in 
+the Lodge following the instructions of the Eff ect that summons it. 
+Then they take their Evocation Card and place it in one of the three 
+Evocation slots on their side of the board. 
+EQUIPMENT EVOCATIONS
+In this box you will fi nd Evocations with the Equipment archetype, 
+a subtype of Evocations that don't have a Model representing them 
+in the Lodge, and follow specifi c rules:
+• An Equipment can be targeted as if it were an Evocation located 
+in the Room where the Mage who owns it is (), but it can't 
+be moved in any way from the Room where the Mage who 
+summoned it is.
+• If an Equipment card displays the  Room Invulnerability 
+symbol, that Equipment ignores any  Damage infl icted by 
+Eff ects that target  Rooms.
+EVOCATION CARD AND
+EQUIPMENT EVOCATION CARD A N ATOM Y
+EVOCATION CARD
+A Name.
+B Archetype: Evocations have one or more Archetypes that 
+infl uence them through specifi c Eff ects.
+C Skills: These represent one or more unique Eff ects available 
+to the Evocation.
+D  Speed Value: The number of Rooms the Evocation can 
+move when activated. Mononoke has a speed of 0, therefore 
+it can't leave the Room it's in unless an Eff ect moves it.
+E  Strength Value: The  Damage infl icted by the 
+Evocation when performing a  Physical Attack. Mononoke
+infl icts 3 when attacking a target with a  Physical 
+Attack. 
+F  Health Value: How much  the Evocation can suff er 
+before being defeated. When Mononoke has suff ered 6 it 
+is defeated (see Evocation's Defeat on page 18).
+G  Room Invulnerability: This equipment does not 
+suff er any  Damage infl icted by Eff ects targeting 
+Rooms.
+Mononoke
+Demon
+Forgotten
+The other Mages and their 
+Evocations may target Mononoke
+only if they are in the .
+When Mononoke performs , 
+choose a  as a target. If you 
+choose , it has 2.
+0 3 6
+B
+A
+D
+The other Mages and their 
+C
+
+E
+F
+
+ 4
+Each time you suffer , this 
+Evocation suffers 1 of those 
+ in your place.
+Equipment
+Omamori
+
+G
+• It is not possible to assign Upgrades (found in other products in 
+the Black Rose Wars line) to an Equipment.
+• A Mage cannot own more than one Equipment with the same 
+name.
+• An Equipment item can only be Summoned by an Eff ect with a 
+target . 
+• An Equipment, despite being considered an Evocation, doesn't 
+activate, but provides an Eff ect that can be used by the owner. This 
+means that an Equipment can't be activated by another Eff ect or 
+by the Physical Action Command, and doesn't activate during the 
+Evocations Phase (see page 15).
+ - Evocations and Equipment
+.  Target the 
+Mononoke Summon .
+. activates It 
+Mononoke's Fury    
+an Effect: Choose  on a  convert 1 or Infl ict • of yourself.  convert 1 or Place • of  in a yourself. on yourself.  Heal 1 • . You cannot choose the Repeat 5 same Effect more than three times.
+Mononoke's Fury
+  
+Target the .
+Summon Mononoke.
+It activates.
+Choose an Effect: • Infl ict or convert 1 on a  of yourself.
+• Place or convert 1 in a  of yourself.
+• Heal 1 on yourself. Repeat 5. You cannot choose the same Effect more than three times.
+
+Mononoke
+Demon
+Forgotten
+The other Mages and their Evocations may target Mononoke
+only if they are in the .
+When Mononoke performs , 
+choose a  as a target. If you choose , it has 2.
+0 3 6
+7
+Shoei's Courage
+  
+Shoei's Courage
+  
+
+Heal 3
+: If you have at least two 
+. Gain 1. 
+Equipment, you have 1.
+Shoei's Courage
+  
+Equipment of your choice.
+ Restore .
+Shoei's Courage
+  
+Summon a non Forgotten 
+Equipment of your choice.
+
+Image of Tsukuyomi
+   
+Infl ict 2  in a  .
+Convert 2  in a  .
+Draw 2 . 
+Repeat 1: Discard 1 . 
+Image of Tsukuyomi Summon a non Forgotten 
+Equipment of your choice.
+   
+: Whenever you infl ict 
+Shoei's Courage , 
+infl ict 1
+Shoei's Courage
+.
+Mages use  Spell Cards to unleash powerful Eff ects within the 
+Lodge.
+There are three types of Spell Cards: School Spell Cards, Personal Spell 
+Cards and Forgotten Spell Cards (see Spell Card Anatomy on page 
+13).
+SCHOOL SPELLS
+The School of Magic (Shugendō in this box) consists of a Deck of 36 
+School Spell Cards (12 diff erent Spell Cards, 3 copies each). This deck 
+makes up the Library.
+Each Mage has 25 cubes of their own color available to them. The 25 
+black cubes are used to track eff ects related to the  Black Rose, the 
+entity that dwells in the Lodge and participates in the game as a third 
+player..
+The Game Eff ects indicate whether to use a  Cube to infl ict
+ Damage, the wounds that the Mage causes to their opponents, or 
+to place  Instability, magical energy that the Mage releases in the 
+Rooms of the Lodge.
+The Damage/Instability Cubes are also used during the game for other 
+purposes besides those just described, such as keeping track on the 
+board of which Turn is in progress, or of a Mage's progress along the 
+diff erent Tracks on the board.
+Players must use their cubes wisely, because once they run out, 
+they won't be able to perform Eff ects that require the use of cubes. 
+These two spaces on the board are where the Mages' Models are placed 
+at the beginning of the game. Each Mage is paired with the Cell on the 
+side of the board that belongs to their player (as indicated by the color).
+When a Mage is defeated, place them in their Cell.
+For the complete rules on Cells, see page 19. 
+The Event Card indicates the Eff ects that the Black Rose applies at 
+the beginning of each game Turn to infl uence the game and try to win 
+(see page 12).
+Quest Cards show six Quests available to players to gain additional 
+points during the game. For the complete rules on Quests see page 
+22.
+ - Damage/Instability Cubes
+Cells
+Events Card and Quests Cards
+ - Spell Cards
+ - Power Points
+To win the game, the Mages must accumulate  Power Points. 
+When this happens, the Mage (or the  Black Rose) who gained 
+ moves their Power Token on the Power Track on the board by 
+a number of spaces equal to the  gained. Whoever has the most 
+at the end of the game is the winner (see End of Game Tally on 
+page 17).  Power Points can be gained in various ways, such as 
+Whenever an Eff ect requires a player to place 
+more cubes than they have left, the Eff ect is 
+resolved using all the available cubes. The 
+missing cubes are not used, and therefore the 
+Eff ect is only partially resolved.
+If an Eff ect requires a player to use more 
+cubes than the number of cubes available 
+to them, they can use the available cubes as 
+they wish (for example, if a Spell infl icts 3
+each on two Models and the player only has four 
+cubes available, they can distribute those four 
+cubes as they wish among the two Models).
+PERSONAL SPELLS
+Each Mage is given three copies of their Personal 
+Spell Card. The illustration shows the Mage 
+with whom the cards are associated.
+FORGOTTEN SPELLS
+Forgotten Spells allow you to unleash 
+extremely powerful Eff ects from ancient 
+times. These Spell Cards have unique graphics 
+that distinguish them, and can only be drawn 
+by Eff ects such as the Spiritual Black Rose 
+Room.
+ Quests  
+Medium At least two of your 
+
+ are assigned.
+: The  infl icts 1 on you.
+Gain 1.
+Vandal You defeated or removed an Equipment 
+other than your own. 
+: The  infl icts 2 on you. 
+Gain 2.
+Armed You own two Equipment. 
+: The  infl icts 2 on you.
+Gain 2.
+1
+2
+2
+At least two of your 
+
+You defeated or removed an Equipment 
+: 
+You own two Equipment. 
+: The 
+Turn 1: Dead of Night : Each Mage draws 1. The  gains 1 and places 4 in the .
+Turn 2: Moonlight : Each Mage draws 1. The  gains 2 and places 1 in each Room.
+Turn 3: Crimson Dawn : Each Mage draws 1. The  gains 2 and converts 1 in each Room.
+Turn 4: Sunlight : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  gains 1 for each  drawn by the Mages in this way.
+Whenever an Eff ect requires a player to place 
+more cubes than they have left, the Eff ect is 
+resolved using all the available cubes. The 
+missing cubes are not used, and therefore the 
+Models and the player only has four 
+cubes available, they can distribute those four 
+cubes as they wish among the two Models).
+If an Eff ect requires a player to use more 
+cubes than the number of cubes available 
+to them, they can use the available cubes as 
+3
+Infl icting  Damage on opposing Mages, placing  Instability
+in Rooms or Completing Quests.
+8
+EFFECTS
+The game often refers to Eff ects. Most of the game components 
+and each Physical Action (see page 14) have Eff ects, which are 
+composed of one or more phrases and/or symbols that allow you 
+to infl uence the game. Each phrase that makes up an Eff ect must 
+be applied, starting with the fi rst one and proceeding in order. If a 
+phrase can't be applied in its entirety, the parts that can't be applied 
+(even all of them) are applied as far as possible or skipped, and you 
+move on to the next phrase. An Eff ect is considered resolved when 
+you have attempted to apply all the phrases that comprise it, even if 
+it wasn't possible to apply any of them.
+Eff ects can be found on the following game components:
+A Events Card
+B Quests Cards
+C Room or Room Activation Token
+D Spell Cards: see page 13.
+E Unstable Spell: see Cast a Spell on 
+page 14.
+F Light Side Eff ect: See page 13.
+G Dark Side Eff ect: See page 13.
+Physical Actions
+Physical Actions () allow you to perform 
+a series of diff erent Eff ects (see page 14).
+ Wabi-Sabi Mirrors Room C
+
+   
+  
+Inari's Infl uence
+Inari's Infl uence
+
+   
+  
+Inari's Infl uence
+Inari's Infl uence
+ on 
+Place 1
+Repeat 1: Discard
+ 
+Inari's Infl uence
+   
+Restore .
+Repeat 1: Discard 
+   
+Spiritual Perfection
+Spiritual Perfection
+   
+   
+Spiritual Perfection
+Spiritual Perfection
+
+When a Model enters the : 
+target Room, infl ict 
+  
+Inari's Infl uence
+   
+   
+Spiritual Perfection
+Spiritual Perfection
+ of  
+ Convert 2
+yourself. 
+or
+Discard 1 When a Model enters the : 
+target Room, infl ict yourself. If you do, that Model and 
+   
+   
+Spiritual Perfection
+Spiritual Perfection
+Infl ict 2.
+Place 1 
+Repeat 1: Discard
+Repeat 1: Discard Infl ict 2 2.
+Place 1
+Repeat 1: Discard
+When a Model enters the 
+ on 2 target Room, infl ict 
+or
+Discard 1 When a Model enters the  target Room, infl ict assigned to on 2 yourself. If you do, target Room, infl ict 
+that Model and 
+Place 1 in a .
+Repeat 1: Discard 2
+ on 2 target Room, infl ict 
+ on heal 1
+yourself.
+yourself. If you do, target Room, infl ict draw heal 1 that Model and 
+ 2 on 
+Repeat 1: Discard 2
+   
+   
+Spiritual Perfection
+Spiritual Perfection
+yourself.
+
+. 2 draw yourself.
+   
+   
+Spiritual Perfection
+Spiritual Perfection
+. 
+E
+
+Inari's Infl uenceF
+ 
+Inari's Infl uence
+ of  in a 
+Inari's Infl uence
+ of  in a 
+G Inari's Infl uence
+TARGETS
+The Eff ects of Spells and other game 
+components always have a specifi c target that 
+must be chosen from among those available 
+by whoever resolves the Eff ect. 
+The target of an Eff ect is always indicated 
+before the text of the Eff ect itself, followed 
+by a colon (:) H , except for the Targets 
+of Spell Card Eff ects, which are shown in the 
+third banner below the Spell name I .
+ 
+Targets can be:
+•  Model: The eff ect can target a Model other than the Model 
+that resolves the Eff ect. The number next to the icon (, , ) 
+indicates the range, i.e., the maximum number of rooms that the 
+target of the Eff ect can be away from the Model that resolves the 
+Eff ect. To choose a target it must be possible to draw a straight 
+line between the Room the target is in and the Room the Model 
+that resolves the Eff ect is in, without the line being blocked by 
+Room walls. If the icon is followed by an asterisk (), the eff ect 
+may target a model anywhere in the Lodge regardless of distance, 
+and even if it's not possible to draw a straight uninterrupted line 
+as indicated above.
+•  Mage Model: As for  Model, however, only the Model of a 
+Mage other than themselves can be targeted.
+•  Evocation Model: As for  Model, however, only the Model 
+of an Evocation can be targeted.
+•  Room: The Eff ect targets a Room and aff ects all opposing 
+Models (Mages and their Evocations) inside that Room, or the 
+Room itself. The number inside the icon (, , ) indicates 
+the range, i.e., the maximum number of rooms that the target 
+Room of the Eff ect can be away from the Model that resolves the 
+Eff ect. To choose the target Room, it must be possible to draw 
+a straight line between the target Room and the Room where the 
+Model that resolves the Eff ect is located, without this line being 
+blocked by Room walls. If the icon contains an asterisk (), 
+the Eff ect may target a Room anywhere in the Lodge regardless 
+of the distance and even if it's not possible to draw a straight 
+uninterrupted line as indicated above.
+•  Personal: These Eff ects target the mage who resolves them.
+•  Special: This Eff ect has no target. The Eff ect's text indicates 
+how to apply it and which game elements are infl uenced by it.
+For examples and in-depth rules on Targets, Range and Line 
+of Sight see page 21.
+   
+Convert 1
+Repeat 1: Discard
+   
+Tenjin's Teaching
+Tenjin's Teaching
+
+ on the target  2 : Infl ict 
+.  convert when they 
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+Draw
+Convert 1
+Repeat 1: Discard 3.
+  Tenjin's Teaching
+Draw 2
+Convert 1 in a 
+Repeat 1: Discard 3
+ Tenjin's Teaching
+
+
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+Mirrors Room
+ Quests  
+Incarnation You cast a
+
+Forgotten .
+: The  infl icts 2 on you.
+Gain 2.
+Illumination At least three of your  are 
+assigned.
+: The  infl icts 3 on you.
+Gain 3.
+Equipped You own three Equipment. 
+: The  infl icts 3 on you.
+Gain 3.
+2
+3
+3
+B 
+Illumination At least three of your 
+assigned.
+infl icts 3
+Gain 3
+Equipped You own three Equipment. 
+infl icts 3
+ 3
+Illumination At least three of your 
+assigned.
+infl icts 3
+Gain 3
+Equipped You own three Equipment. 
+infl icts 3
+ 3
+Turn 1: Morning Glow : Each Mage draws 1. The  gains 2 and infl icts 2 on each Mage.
+Turn 2: Warmth of the Day : Starting with the fi rst Mage, each Mage may draw 1. The places 1 in each , then in 
+each , and then in each  for each  drawn by the Mages in this way.
+Turn 3: Evening Breeze : Starting with the fi rst Mage, each Mage may draw 1. The places 2 in each , then in 
+each , and then in each  for each  drawn by the Mages in this way.
+Turn 4: Cold of the Night : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  infl icts 1 on each Mage for each  drawn by the Mages in this way.
+A
+RESOLVING MULTIPLE EFFECTS
+During the game, it may happen that more than one Eff ect has 
+to be resolved when a certain condition occurs or while another 
+Eff ect is being resolved. When this happens, the Eff ect being 
+resolved is resolved up to the period (.). Then it stops and each 
+Mage (or the ) may resolve one or more interrupting Eff ects 
+in Play Order. When all the Eff ects have been resolved, the 
+interrupted one is resolved starting from the period (.) where 
+it was interrupted.
+Effects and Targets
+6 3 1
+Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+
+Throne Room 
+ up to 
+ equal to the 
+ 3
+Throne Room 
+Discard up to 
+Gain equal to the 
+Kami 
+6 3 1
+Throne Room 
+: Discard
+ equal to the 
+
+
+Gain  equal to the 
+6
+ Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, C even if used, without fl ipping its Activation Token.
+
+D
+Gain 
+Kami 
+
+
+
+Gain 
+
+Gain 
+
+ H
+
+
+Tenjin's Teaching
+I
+
+9
+Shugend
+Onmyoji 
+Spiritual Dance      
+Summoning the Kami
+Fortune Talisman
+      
+Ebisu's Intervention
+      
+Susanoo's Presence
+      
+Sarutahiko's Guidance
+      
+      
+Shoei 
+Channeling the Spirit 
+Spiritual Perfection
+      
+Occult Tolls
+      
+      
+Hachiman's Essence
+Tenjin's Teaching
+      
+Inari's Infl uence
+      
+      
+
+6
+
+6
+
+4
+
+6
+
+2
+Shugendō
+
+A
+ C
+Sarutahiko's Guidance
+Shoei 
+E
+      
+F
+D
+Setup
+Follow the steps below to set up the game:
+1 Open the game board A and place it in the center of the table.
+2 Place the Spiritual Black Rose Room B in the center of 
+the board with the Intact side face up, i.e. the side showing the 
+Instability Slots (the holes).
+ Shuffl e the six remaining Rooms and place them randomly 
+around the Spiritual Black Rose Room according to the board 
+layout and with their Intact side face up. 
+3 Place the Events Card C on the corresponding space on the 
+board, so that one of the two sides is visible, chosen randomly or by 
+mutual agreement. For each of the two Quests Cards D , choose 
+which side will be turned face up by mutual agreement, or choose 
+randomly. Then place them in the corresponding spaces on the 
+board.
+4 Place the Room Activation Tokens E on each Room with 
+the same name, with the Available side face up. Place the Black 
+Rose Damage/Instability Cubes (black cubes) F next to the 
+Game Board, so that they are within easy reach of both players.
+5 The player who last received a rose (or a randomly selected 
+player) obtains the Crown Token () G , becoming the 
+Crown Holder.
+6 Starting with the Crown Holder, each player chooses a color 
+and sits on the side of the board that corresponds to that color. 
+Then they take the Damage/Instability Cubes, the Physical 
+Action Tokens, the Persistence Tokens and the Power 
+Token corresponding to that color H . 
+ The player then chooses a Mage, takes the corresponding Model 
+and places it in the Cell I of their color. They take their Mage 
+Card and place it on the corresponding space on their side of the 
+board and place their Physical Action Tokens J on it with the 
+Available side face up. They then take their three Personal Spell 
+Cards belonging to their Mage K and keep them face up in 
+front of themselves.
+7 Take the Shugendō School of Magic deck and place it next to 
+the game board so that it is within reach of all players. Place the 
+School Reference Card L under the School of Magic deck as 
+shown in the image. This deck is referred to as the Library M .
+ Shuffl e the available Forgotten Spells and form a deck, place it 
+next to the game board in the space provided N .
+Place the deck of Evocation Cards within reach O .
+8 The Crown Holder takes the School Reference Card
+L from the Library and selects one of the two Starting
+ Grimoires E listed on it. The player looks through the School 
+of Magic deck and takes a copy of each of the six cards listed, 
+then adds one of their Mage's Personal Spell Cards to them 
+and shuffl es them together. This deck of seven cards is their 
+Grimoire; they place it in the space provided on their side of the
+ board () P , then takes their other two Personal Spells and 
+places them face up in the Memories slot () on their side 
+of the game board Q . The other player does the same, but 
+chooses the Starting Grimoire that the Crown Holder didn't 
+choose.
+ Once this process is fi nished, shuffl e the remaining School of 
+Magic cards in the Library and place the deck back on the side 
+of the board above the School Reference Card. 
+9 Each player places one of their Damage/Instability Cubes on 
+space 0 of the Trophy Track () and one on space 0 of the 
+Rooms Track () on their side of the game board R ; then 
+they place their Power Token on space 0 of the Power Track S .
+ The Crown Holder places a Black Rose Damage/Instability 
+Cube on space 0 of the Trophy Track, the Rooms Track T
+and the Turn Track of the Black Rose U ; then they place the 
+Black Rose Power Token on space 0 of the Power Track V .
+10 Place the two Portals of the same color on the entrances 
+indicated in the image W . If both players agree, place the other 
+two Portals on the entrances indicated in the image X to have a 
+Lodge with more connected Rooms.
+Now the game can begin!
+A School of Magic Name
+B Special Rules and Keywords
+C Elements present on Spell Cards
+D School of Magic Symbol
+E Starting Grimoires
+F Type, Element and Target of each Spell Card in the 
+corresponding starting Grimoire (Dark Side and Light 
+Side).
+
+The Shugend The Shugendō mystical doctrine School mystical doctrine School 
+strengthens the Mage who dominates it strengthens the Mage who dominates it 
+by enhancing their body, improving their by enhancing their body, improving their 
+actions, and protecting them. actions, and protecting them.
+It allows you to summon combat and It allows you to summon combat and 
+actions, and protecting them.
+It allows you to summon combat and 
+
+actions, and protecting them.
+It allows you to summon combat and 
+actions, and protecting them.
+defense defense 
+It allows you to summon combat and It allows you to summon combat and It allows you to summon combat and 
+defense defense 
+Equipment, and to call upon the , and to call upon the It allows you to summon combat and 
+, and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms Equipment Kami, divine spirits who guard the Rooms Equipment, and to call upon the Kami, divine spirits who guard the Rooms 
+, and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the 
+of the Lodge. of the Lodge.
+Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms Kami, divine spirits who guard the Rooms 
+of the Lodge. of the Lodge.
+Repeat N
+Restore 
+Shugendō
+
+6
+
+6
+
+4
+
+6
+
+2
+ō
+
+A
+
+2 C
+It allows you to summon combat and 
+Equipment, and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms Equipment Kami, divine spirits who guard the Rooms Equipment, and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the It allows you to summon combat and Equipment, and to call upon the It allows you to summon combat and , and to call upon the It allows you to summon combat and 
+Kami, divine spirits who guard the Rooms Equipment Kami, divine spirits who guard the Rooms Equipment, and to call upon the Kami, divine spirits who guard the Rooms , and to call upon the 
+B
+D
+S C H O O L R E F E R E N C E 
+CARD ANATOMY L
+10
+Turn 1: Dead of Night : Each Mage draws 1. The  gains 1 and places 4 in the .
+Turn 2: Moonlight : Each Mage draws 1. The  gains 2 and places 1 in each Room.
+Turn 3: Crimson Dawn
+: Each Mage draws 1. The  gains 2 and converts 1 in each Room.
+Turn 4: Sunlight : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  gains 1 for each  drawn by the Mages in this way.
+ Quests 
+
+
+Medium At least two of your  are assigned. : The  infl icts 1 on you.
+Gain 1
+
+.
+Vandal You defeated or removed an Equipment 
+other than your own. 
+: The 
+ infl icts 2
+ on you. 
+Gain 2
+
+.
+Armed You own two Equipment. 
+: The 
+ infl icts 2
+ on you.
+Gain 2
+
+.
+1
+
+2
+
+2
+
+ Quests 
+
+Expansion You placed  in two different 
+Rooms in a single activation. : The  infl icts 1 on you.
+Gain 1
+
+.
+Infl uence You have at least 2 placed in a 
+single Room.
+: The 
+ infl icts 1
+ on you.
+Gain 1
+
+.
+Monk You infl icted at least 1 with a single  on another Mage. : The  infl icts 2 on you.
+Gain 2
+
+.
+112
+
+E N NO G YŌJA
+
+11
+
+
+
+7 
+2
+2
+2 
+
+A BE NO S EIMEI
+
+10 
+
+
+8 
+2
+2
+2
+
+Shoei's Courage  
+
+Shoei's Courage
+Heal 3
+: If you have at least two Equipment, you have 
+Shoei's Courage  
+Shoei's Courage
+
+Heal 3 If you have at least two Equipment, you have 
+Shoei's Courage
+
+. Gain 1 If you have at least two Equipment, you have 
+Shoei's Courage  
+Shoei's Courage  
+Onmyōji's Plot
+  
+Onmyōji's Plot
+  
+Onmyōji's Plot
+ 
+
+
+: Your  cannot be 
+converted in  of the target 
+Room.
+
+Onmyōji's Plot
+ 
+Gain 1. Draw 1.
+Choose one of your  assigned 
+to a . Place it in another , 
+if you do, activate that Room 
+Onmy
+even if already used.
+ōji's Plot
+
+Shoei's Courage
+  
+Onmy Shoei's Courage ōji's Plot
+ 
+Heal 3
+
+Your . cannot be Gain 1. converted : If you have at least two : Your  cannot be converted in  of the target Equipment, you have converted in  of the target Room.  of the target 1.
+Shoei's Courage
+  
+Summon Choose one of your a non Forgotten  assigned . Place it in another  Equipment of your choice. to a . Place it in another  that Room Restore if you do, activate that Room .
+Onmyōji's Plot
+  
+Onmy
+
+: converted
+Onmyōji's Plot
+  
+Onmy
+: Your 
+converted in Room.
+Onmyō
+
+
+in 
+Room.
+Onmyōji's Plot
+  
+Onmyōji's Plot
+  
+Onmyōji's Plot
+  
+Onmyōji's Plot
+  
+Gain 1
+Onmy
+ Choose one of your 
+to a . Place it in another if you do, even if already used.
+Onmy
+
+ Your converted in 
+Onmyōji's Plot
+ 
+Your  cannot be 
+in  of the target 
+Room.
+Onmyōji's Plot
+
+
+
+Draw 1
+Choose one of your  assigned . Place it in another , 
+activate that Room even if already used.
+ji's Plot
+ 
+Onmyōji's Plot
+  
+Onmy Onmyōji's Plot ōji's Plot
+  
+: Your : Your  cannot be  of the target cannot be cannot be convertedin in  of the target Room. of the target Room.
+
+even if already used. 
+Onmyōji's Plot
+  
+Gain 1. Draw 1. Choose one of your Gain 1. Draw 1  assigned assigned . assigned to a Choose one of your Gain 1. Place it in another  assigned , if you do, Choose one of your to a . Place it in another activate that Room , that Room even if already used. if you do, activate that Room even if already used.
+ō Shugend 6 6 4 6 2
+Shugend
+ōji's Plot
+
+ cannot be  of the target 
+Room.
+ assigned , 
+ that Room 
+Onmy ji's Plot
+
+ cannot be of the target converted Room.
+ji's Plot
+
+ cannot be of the target 
+
+
+ cannot be of the target 
+ji's Plot
+
+Draw 1.
+ assigned . Place it in another  that Room 
+even if already used.
+Onmy ji's Plot ōji's Plot
+
+ cannot be of the target : Your cannot be  converted in Room.
+even if already used.
+Onmyōji's Plot
+ 
+ of the target cannot be  of the target 
+Room.
+
+
+ cannot be of the target 
+Onmyō
+
+ji's Plot
+
+Gain 1 Draw 1 Choose one of your 
+to a . Place it in another if you do, activate that Room even if already used.
+Onmyōji's Plot Onmy
+  
+Gain 1 Draw 1Gain 1 . Choose one of your Choose one of your Gain 1 assigned Gain 1. Draw 1 Choose one of your 
+to a . Place it in another Choose one of your . Place it in another  Choose one of your , if you do, activate to a if you do, that Room to a . Place it in another if you do, activate even if already used. even if already used.
+Onmyōji's Plot
+  
+Onmy ji's Plot ōji's Plot
+  
+ of the target : Your  cannot be converted Room. in  of the target Room.
+if you do, even if already used. if you do, even if already used. if you do, even if already used.
+
+Onmyōji's Plot
+  
+Gain 1. Draw 1. Choose one of your Gain 1 assigned .
+to a . Place it in another Choose one of your , if you do, activate to a that Room . Place it in another even if already used. if you do, 
+Shoei's Courage
+
+Gain 1 If you have at least two Equipment, you have 
+Shoei's Courage Shoei's Courage 
+Gain 1 If you have at least two Equipment, you have Equipment, you have 
+Shoei's Courage
+Gain 1. If you have at least two Equipment, you have 1.
+Shoei's Courage
+a non Forgotten Equipment of your choice. .
+Shoei's Courage Shoei's Courage  
+Heal 3 Gain 1  Gain 1 If you have at least two : If you have at least two Gain 1. If you have at least two Equipment, you have Equipment, you have 1
+Shoei's Courage Shoei's Courage
+Shoei's Courage
+
+
+. Gain 1 If you have at least two Equipment, you have 1.
+Shoei's Courage
+ 
+Summon a non Forgotten Equipment of your choice. Restore 
+Shoei's Courage
+ 
+Summon a non Forgotten Equipment of your choice. Restore 
+Shoei's Courage
+
+
+Shoei's Courage Shoei's Courage  
+a non Forgotten Summon Equipment of your choice. Equipment of your choice. Restore Restore 
+Shoei's Courage
+.
+  
+Shoei's Courage Shoei's Courage   
+Heal 3. Gain 1. Gain 1 If you have at least two : If you have at least two . If you have at least two Equipment, you have Equipment, you have 1 1.
+Shoei's Courage  
+Summon a non Forgotten Equipment of your choice. Equipment of your choice. Restore Restore .
+A
+T
+Each Mage 
+: Starting with the fi rst Mage, each Mage may 
+The 
+: Each Mage 
+: 
+The 
+C
+You have at least placed in a 
+single Room.  on you.
+Infl uence You have at least 2 placed in a 
+single Room.  infl icts 1 on you.
+Gain 1
+
+. D You defeated or removed an Equipment 
+other than your own.  on you. 
+Vandal
+infl icts 2
+ on you. 
+Gain 2
+
+.
+D
+F
+G
+ōji's Plot
+
+Onmy
+ 
+ji's Plot Onmyōji's Plot
+ 
+Q
+H
+N NO G
+J
+K
+2
+6
+4
+6
+L
+M
+N
+H
+S
+V
+U
+ji's Plot
+ 
+Shoei's Courage
+
+ji's Plot
+ 
+Shoei's CourageQ
+
+K
+P
+P
+A
+J
+R
+R
+ Spiritual Black Rose Room B
+X
+W
+W
+
+4
+2
+1
+Wabi-Sabi Mirrors Room  
+1
+ Wabi-Sabi Mirrors Room  Wabi-Sabi Mirrors Room : You cannot target the . Activate the Room, even if used, without fl ipping its Activation Token.
+
+
+3
+2
+1  Shinto Sanctuary
+
+
+3
+2
+Sanctuary Shinto  Shinto Sanctuary
+: Heal 2 on yourself, you may discard an assigned  that is not assigned with a Forgotten Spell.
+
+
+2
+1
+0
+Garden Cherry Blossom 
+
+1
+0
+Cherry Blossom  Cherry Blossom Garden : Draw 1. 
+
+4
+2
+1
+Satori Arena 
+
+2
+1
+Satori Satori Arena : Infl ict 1 . You may Move the target up to 1.
+
+
+6
+3
+1
+
+Throne Room 
+
+
+6
+3
+Throne Room  Throne Room Kami Throne Room  : Discard up to 2. 
+Gain  equal to the  discarded.   4 2 1  Oni Sacrifi cial Altar   4 2 Sacrifi cial Altar  Oni Sacrifi cial Altar : Convert 1.
+6
+3
+1
+ Spiritual Black Rose Room 6 3
+Black Rose Room
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten
+
+.
+X
+2 Cherry Blossom 2Cherry Blossom Cherry Blossom   2 Cherry Blossom  2Cherry Blossom Cherry Blossom  E
+
+Wabi-Sabi 
+
+ Wabi-Sabi Wabi-Sabi You cannot target the even if used, without fl ipping its Activation Token.   4 2  Wabi-Sabi   4 2 Wabi-Sabi  Wabi-Sabi Wabi-Sabi : You cannot target the Wabi-Sabi even if used, without fl ipping its Activation Token. EInfl ict 1 Infl ict 1 Infl ict 1Satori Infl ict 1target up to 4 :Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1target up to E
+1
+Black Rose Room
+Black Rose Room Discard 2
+Forgotten1
+Black Rose Room
+Black Rose Room
+Black Rose Room Discard 2. 
+Forgotten
+E.
+2
+Sacrifi cial Altar
+
+Sacrifi cial Altar 1
+
+1 Sacrifi cial Altar 1 Sacrifi cial Altar Sacrifi cial Altar 1. ESanctuary Sanctuary on yourself, you may discard an that is not assigned with a Forgotten  Sanctuary on yourself, you may discard an that is not assigned with a Forgotten E discarded. 1 discarded. .  E
+Equipment
+Omamori
+Equipment
+Omamori
+Equipment
+Omamori
+Equipment
+Omamori
+Equipment
+Omamori Omamori
+Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment Equipment
+Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori Omamori
+Equipment Equipment
+Omamori
+Equipment Equipment Equipment Equipment
+Equipment
+Equipment Equipment
+Omamori
+Equipment Equipment
+Omamori
+Equipment Equipment
+Omamori
+Equipment Omamori O
+Cherry Blossom Garden Cherry Blossom Garden Garden Draw 1 Cherry Blossom . Garden Cherry Blossom Garden Garden
+Kami Throne Room Kami Kami Throne Room Throne Room Kami : Discard Throne Room up to  equal to the Kami Throne Room Kami Kami Throne Room Kami Throne Room Discard
+I
+I
+11
+A Game Turn consists of fi ve Phases to be played in the order 
+indicated below.
+1. Black Rose Phase 
+2. Study Phase
+3. Action Phase
+4. Evocation Phase
+5. Clean-up Phase
+1. Black Rose Phase
+Consult the Event Card and apply the corresponding Eff ect to the current Turn (indicated by the  Black Rose Cube on the corresponding 
+track). These Eff ects always aff ect the Mages, even if they are in their Cell (see page 19).
+C R OW N H O L D E R 
+AND PLAY ORDER
+The Mage who owns the Crown Token is called the Crown 
+Holder. At the beginning of each Phase, the Crown Holder 
+is considered the First Mage until the end of that phase. The 
+Crown Holder has the fi nal say on any ambiguous situations that 
+may arise during the game.
+Play Order: On many occasions, you will be instructed to resolve 
+an Eff ect in “play order.” This means resolving the Eff ect starting 
+with the fi rst Mage, then proceeding to their opponent.
+Crown 
+GOLDEN RULE
+A specifi c rule indicated on a game component takes 
+precedence over the general rules in this rulebook.
+Turn 1: Morning Glow : Each Mage draws 1. The  gains 2 and infl icts 2 on each Mage.
+Turn 2: Warmth of the Day : Starting with the fi rst Mage, each Mage may draw 1. The places 1 in each , then in 
+each , and then in each  for each  drawn by the Mages in this way.
+Turn 3: Evening Breeze : Starting with the fi rst Mage, each Mage may draw 1. The places 2 in each , then in 
+each , and then in each  for each  drawn by the Mages in this way.
+Turn 4: Cold of the Night : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  infl icts 1 on each Mage for each  drawn by the Mages in this way.
+Game Turn
+Turn 1: Dead of Night
+: Each Mage draws 1. The  gains 1 and places 4 in the .
+Turn 2: Moonlight : Each Mage draws 1. The  gains 2 and places 1 in each Room.
+Turn 3: Crimson Dawn
+: Each Mage draws 1. The  gains 2 and converts 1 in each Room.
+Turn 4: Sunlight : Starting with the fi rst Mage, each Mage may draw up to 2.
+The  gains 1 for each  drawn by the Mages in this way.
+12
+SPELL CARD STATUS
+A Spell Card may have diff erent statuses:
+Ready Spell: This is a Spell Card that is face down in a Spell 
+Slot on the board.
+Revealed Spell: This is a Spell Card that is face up in a Spell 
+Slot on the board, is no longer considered a Ready Spell.
+GAME TURN
+Evocation activates. This continues until each Evocation 
+
+ are removed from the game), 
+ Tokens and flips their Physical Action 
+Room Activation 
+Check if there are any Rooms that need to be Wrecked 
+ moves the cube on the Turn 
+ to the 
+opponent; then start a new Turn starting from the 
+. If the fourth Turn has ended, the 
+End of Game Tally 
+Evocation activates. This continues until each Evocation 
+
+ are removed from the game), 
+ Tokens and flips their Physical Action 
+Room Activation 
+Check if there are any Rooms that need to be Wrecked 
+ moves the cube on the Turn 
+ to the 
+opponent; then start a new Turn starting from the 
+. If the fourth Turn has ended, the 
+4. Evocation Phase (p. 15) GAME TURN
+Evocation activates. This continues until each Evocation 
+
+ are removed from the game), 
+ Tokens and flips their Physical Action 
+Room Activation 
+Check if there are any Rooms that need to be Wrecked 
+1. Black Rose Phase 
+2. Study Phase
+In this Phase, resolve the following steps in order:
+2 . 1 D R AW
+Starting with the First Mage, each Mage draws 2 Spell Cards 
+from their  Grimoire A and 2 Spell Cards from the 
+Library B . 
+If a Mage must draw from the  Grimoire but there aren't 
+enough cards in it, the Mage shuffl es their  Memories C (their 
+discard pile) and uses those to form the  Grimoire again. After 
+doing so, they continue drawing.
+2.2 HAND LIMIT
+If, after drawing the  Spell Cards, a Mage has more cards in their 
+Hand than the  Hand Value D indicated on their Mage Card, 
+they must discard (into their  Memories) until they are equal to 
+that value.
+2.3 PLANNING
+After carefully reading the two Eff ects of the Spell Cards in their 
+Hand (Light Side Eff ect, indicated by an arrow to the left of the 
+Spell name, and Dark Side Eff ect, indicated by a crescent moon to 
+the left of the Spell name), each Mage places 2 to 4 of the  Spell 
+Cards from their Hand on the Spell Slots E on their side of the 
+board (Quick Spell Slot , Slot I, Slot II, and Slot III). 
+These cards are placed face down with the chosen side (Light or 
+Dark) facing the Mage who placed them. This side is called the 
+Active Side, and its Eff ect will be the only one used during the 
+next Action Phase (see below).
+Spell Cards positioned in this way are considered Ready Spells.
+Please Note: To decide which of the two card eff ects to use later in 
+the Turn and the order in which to place the  Spell Cards, please 
+refer to the Targets paragraph (on page 11) and the detailed rules in 
+the Rules Compendium (on page 17),
+SPELL CARD ANATOMY
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+
+   
+   
+Tenjin's Teaching
+Tenjin's Teaching
+Draw 2.
+Convert 1 in a .
+Repeat 1: Discard 3.
+    Tenjin's Teaching
+ on the target  2 : Infl ict 
+.  convert when they 
+   
+Tenjin's Teaching
+
+D
+F
+C
+C on the target 
+Draw 2
+E
+
+E
+F
+
+D
+G
+B
+B
+
+ATenjin's Teaching
+Tenjin's Teaching A
+Light Side
+Dark Side
+A Name.
+B School of Magic Symbol.
+C Eff ects, one on the Light Side and one on the Dark Side. 
+D Spell Type:  Combat,  Contingency. Some eff ects 
+may refer to the type of Spell to be resolved.
+E Elements: A Spell's Element is used in specifi c situations 
+that may occur during the game. The Elements are:
+ Air,  Earth,  Fire,  Water,  Sacred,
+ Profane,  Arcane,  any Element (when necessary, 
+the Mage who owns this Spell chooses an Element that 
+this symbol represents, and it will represent that Element 
+until the end of the current Activation).
+F Target: The type of Target and the range of the Eff ect (see 
+page 9).
+G Unstable Spell: See Cast a Spell on page 14.
+A C
+
+E N NO G YŌJA
+
+ 11
+
+
+ 7
+2
+2
+2
+
+11
+7
+2
+11
+D
+E E E E
+In play order, each Mage chooses one of their Evocations 
+that has not yet been activated in this Phase: that 
+Evocation activates. This continues until each Evocation 
+B
+13
+3. Action Phase
+The First Mage (the Crown Holder) performs their Activation: they 
+are considered the active Mage and can resolve up to two Actions
+from those indicated in the Actions box on the right. When the First 
+Mage has resolved up to two Actions, the other Mage performs their 
+Activation and does the same. This continues until both Mages have 
+no more Actions to perform, at which point the Action Phase ends.
+Please Note: If a Mage is in their Cell, they have a limited number 
+of options available to them. See the Cells paragraph on page 19.
+During their Activation, a Mage must perform one or two of 
+the Actions described in this box. 
+To perform a Physical Action, the Mage must Exhaust (see 
+box on the left) one of their Available Physical Action Tokens 
+(). A Physical Action is considered a group of separate 
+and distinct Eff ects, and they are resolved in the order 
+the Mage prefers; a Mage may also choose to ignore some or 
+all of these Eff ects.
+Explore (Physical Action,  ) 
+• Move 1. You can perform this Eff ect a number of times 
+equal to your  Speed Value. Each individual “Move 1.” 
+separated by a period (.) is a diff erent Eff ect, and all or only 
+some of them may be used. You cannot use other Eff ects 
+between one “Move 1.” and another. Unused “Move 1” 
+eff ects are lost. 
+• Activate a  (see page 20, Activate a Room).
+Example: You can move to an adjacent Room, then move to 
+another adjacent Room, and then activate the Room you are 
+in. Or, you can move to an adjacent Room and activate the 
+Room you are in. Or, you can activate the Room you are in and 
+then move, but you can't move to an adjacent Room, activate it, 
+and then move to another adjacent Room.
+Fight (Physical Action, )
+• Perform a  Physical Attack on a  (A Physical Attack 
+infl icts  Damage equal to your  Strength Value). 
+• Activate a  (see page 20, Activate a Room).
+Example: You can perform a Physical Attack and then activate 
+the Room you are in, or you can activate the Room you are in 
+and then perform a Physical Attack.
+Command (Physical Action, )
+If you summoned Mononoke, target it and perform the 
+Evocation's Activation Eff ect (see page 15).
+Cast a Spell
+Choose one of your Ready Spells (face down) that is in the 
+Spell Slot with the lowest number (I, II, III), or the one in the 
+Quick Spell Slot ().
+Reveal that Ready Spell by fl ipping it over so that its 
+short sides are reversed (see example). You are considered 
+the Mage casting that Spell. 
+If you reveal a Spell that features the Instability symbol () 
+in the center of the card, resolve the Unstable Spell Eff ect 
+(see page 19), then resolve the Active Side Eff ect of the 
+Spell Card (the one you can read, with its text right side up) 
+choosing a target for it if necessary. 
+Momentum
+Choose one of your Ready Spells and discard it to your 
+Memories. When you do, you may perform “Move 1.”
+LIMIT ON ACTIONS
+A Mage may perform the same Action multiple times during 
+the same Activation. However, they may only perform the 
+Cast a Spell Action twice if one of the two Actions is used 
+to cast a Spell which is in the  Quick Spell Slot.
+ENTERING A ROOM
+Regardless of how a Model is placed in a Room (moved, 
+summoned, placed, or other), it is considered to have entered 
+the Room.
+ACTIONS
+PHYSICAL ACTION TOKENS
+To perform a Physical Action (see box on the right), you must 
+fl ip an Available Physical Action Token so that it shows the 
+Exhausted side.
+A Available Physical Action Token.
+B Exhausted Physical Action Token.
+
+E N NO G YŌJA
+
+ 11
+
+
+ 7
+2
+2
+2
+
+A B
+Shoei's Courage
+  
+Shoei's Courage
+  
+a non Forgotten Summon 
+Equipment of your choice.
+Restore 
+Shoei's Courage
+  
+Shoei's Courage
+  
+.  Gain 1 .  Heal 3
+ If you have at least two : 
+Shoei's Courage
+  
+ If you have at least two : 
+. 1  Equipment, you have 
+Summon a non Forgotten 
+Equipment of your choice.
+Restore .
+Equipment, you have 
+Shoei's Courage
+
+a non Forgotten 
+Equipment of your choice.
+Restore 
+Shoei's Courage
+  
+Heal 3. Gain 1. 
+: If you have at least two 
+Equipment, you have 1.
+Shoei's Courage
+ 
+a non Forgotten 
+Equipment of your choice.
+.  Restore 
+EXAMPLE:
+REVEALING A SPELL CARD
+When a Mage reveals a Ready Spell, 
+they must fl ip it upwards in a manner 
+that swaps the positions of the two short 
+sides of the  Spell Card.
+The Eff ect that is now legible is the 
+Eff ect that will be applied. This should 
+be the Eff ect that the Mage chose during 
+the Study Phase.
+Flip upwards
+Do not fl ip 
+sideways
+14
+During this phase, all Evocations in the Lodge that are not of the 
+Equipment Archetype activate. Among those in this box, the only 
+Evocation that can activate is Mononoke, unless it is in play as an 
+Avatar (see page 24); in this case, nothing happens during this phase.
+During this phase, the Mage who summoned Mononoke may 
+activate it. If there are no Evocations in the Lodge, or if Mononoke
+has already been activated in this phase, the phase ends.
+This box contains Evocations with the Equipment Archetype, a 
+subtype of Evocations that don't have a corresponding model in 
+the Lodge and follow specifi c rules described on page 7.
+M O N O N O K E AC T I VAT I O N
+When Mononoke activates, its controller must resolve the 
+Evocation's Activation Eff ect (see box).
+Mononoke uses its controller's damage cubes to indicate the 
+damage it infl icts. This damage is considered to be infl icted by the 
+Evocation, not by the Mage controlling it.
+4. Evocation Phase
+EVOCATION'S ACTIVATION
+Target:The target of the Evocation's Activation is specifi ed in 
+the Eff ect that causes it to be resolved.
+Resolve each of the following points once in the order you 
+prefer:
+• Move the Evocation 1. You can perform this a number of 
+times equal to its  Speed Value. Each individual “Move 
+1” is considered to be separated by a period (.); unused 
+“Move 1” Eff ects are lost.
+• The Evocation performs a  Physical Attack against a 
+.
+OTHER EVOCATIONS IN DUEL
+By using Evocations from other 
+products in the Black Rose Wars
+line, you can include new Evocations 
+in a game of Black Rose Wars: Duel 
+- Kami. For complete rules on how 
+to use Evocations, please refer to the 
+online rulebook, accessible via the QR 
+code.
+15
+ Shinto Sanctuary
+ Shinto Sanctuary
+EXAMPLE: WRECKED ROOM
+Sanctuary
+FLIP
+3 1
+Available Room 
+Activation Token
+Used Room 
+Activation Token
+
+
+ 3 2 1 
+
+ 3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+3 2 1
+ Shinto Sanctuary
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+5. Clean-up Phase
+This is the fi nal Phase of the Game Turn. Perform the three steps 
+below in order:
+1 Game Board Clean-up: All Mages discard the  Spell Cards 
+on their Spell Slots into their Memories. 
+ All Revealed Forgotten Spells are removed from the game 
+(they are not returned to the Forgotten Spells deck).
+ All  Persistent Tokens are returned to their respective 
+owners.
+ Each Mage turns their Physical Action Tokens to the 
+Available side.
+All Room Activation Tokens showing the Used side are 
+turned to the Available side.
+2 Majority and Wreckage: Check if there are any Rooms in the 
+Lodge with all Instability Slots occupied; these Rooms must be 
+Wrecked one at a time in any order. 
+ For each Room that is Wrecked, assign the Power Points () 
+indicated on the three banners in the room to the Mages and/
+or the Black Rose based on the number of  Instability they 
+have placed in the Room:
+1. The greatest amount of  (the leftmost number) to the 
+Mage (or to the ) who placed the most Instability. If 
+all Instability Cubes in the Room belong to a single Mage 
+(or to the ), they gain 1 additional . Whoever gains 
+these points moves their cube one space forward on 
+the Room Track on their side of the Game Board. In 
+the case of a tie between Mages or between a Mage and the 
+, the  advances the cube on her own Room Track.
+2. The intermediate amount of  (the middle number) to 
+the Mage (or to the ) who placed the second highest 
+number of  Instability.
+3. The smallest amount of  (the rightmost number) to the 
+Mage (or to the ) who placed the fewest  Instability.
+ In case of a tie, all Mages (and the ) who tied gain 1 less 
+than indicated on the banner, down to a minimum of 1.
+ Once the  have been assigned, the cubes in the Instability 
+slots in the Room return to their respective owners and the 
+Room is fl ipped to the Wrecked side; remove the corresponding 
+Room Activation Token from the game.
+ When a Room is Wrecked, nothing happens to the Mages and 
+Evocations inside it, simply return the Models to the Room 
+once it has been fl ipped. A Wrecked Room is not fl ipped again 
+for the rest of the game and cannot be activated.
+3 End of Turn: If the cube on the Turn Track is on slot 4, the 
+game ends and you move on to the End of Game Tally (see 
+page 16). Otherwise, the Crown Holder moves the cube on the 
+Turn Track one slot forward to the next number, then passes 
+the  Crown Token to the other player, who becomes the 
+new Crown Holder. In this case, the new Game Turn begins 
+again from Phase 1. Black Rose Phase.
+16
+At the end of the game, the End of Game Tally is performed to 
+determine who is the winning Mage, or if the  Black Rose has 
+defeated all the Mages.
+The Mages and the  Black Rose advance their 
+respective Power Tokens on the Power Track 
+on the board according to the points indicated 
+below (remember to fl ip the Power Token so 
+that it shows the value +20 and place it at the 
+beginning of the Power Track if you exceed 
+19, and to replace it with the Power Token 
+showing the value +40 if you exceed 39).
+• Trophies : +3 to whoever has their cube in the most 
+advanced position on the Trophy Track (). In case of a 
+tie, +2 to everyone who has the cube in the most advanced 
+position on the track.
+•  Majority: Check who has the most  Instability in 
+each of the Intact Rooms. For each Intact Room in which a 
+End o f Gam e Ta l ly
+Mage (or the  Black Rose) has the most Instability, they 
+advance their cube on their Room Track by one space. In case 
+of a tie, the  Black Rose advances the cube on her own 
+Room Track (provided she has at least 1 in the Room). 
+After all Intact Rooms have been checked, the Mage who has 
+their cube on the most advanced position on the Room Track
+()gains 3. In case of a tie, +2 to all players who have their 
+cube on the most advanced position of the Room Track.
+• Quests : The  Black Rose gains the  indicated on 
+each Quest Slot of the Quest Cards not covered by a Cube.
+Once all the  Power Points have been added up, the player with 
+the highest score wins. In the case of a tie between two Mages, or 
+between a Mage and the  Black Rose, the  Black Rose wins.
+The winning Mage becomes the new Grand Magister of the 
+Lodge of the Sun. If the  Black Rose wins, no participating 
+Mage is worthy of this title!
+Rules Compendium
+This chapter contains all the rules that are not tied to a specifi c phase of the game, but that must be followed when the situation requires it. 
+You'll also fi nd several examples of how to apply the rules in diff erent situations.
+INFLICTING DAMAGE
+When a Mage or the  Black Rose infl icts  Damage to a 
+Model, they must place the corresponding number of their own 
+ Cubes on the free Damage Slots to the left of the Mage's Health 
+Bar, or in the case of an Evocation, place them on its card; those 
+cubes are considered  Damage. 
+CONVERTING DAMAGE
+When a Mage or the  Black Rose converts  Damage on 
+a Model, they must replace Damage cubes on it belonging to 
+the other Mage or the Black Rose with their own cubes, up to a 
+number of  Damage equal to that indicated by the Eff ect that 
+allows conversion.
+The  Black Rose converts  Damage starting from the 
+rightmost cubes in the Health Bar, while a Mage can freely choose 
+which cubes to convert.
+A Mage cannot convert Damage on themselves and/or on 
+Evocations they own or control in any way, and vice versa.
+IMMUNITY
+Unless specifi ed by the Eff ect, a Mage (or the ) and its Evocations 
+ignore any Eff ect resolved by that Mage (or the ) that infl icts or 
+converts Damage on themselves and their Evocations. 
+An Evocation cannot infl ict Damage on the Mage who summoned 
+it or on another Evocation under that Mage's control.
+Inflicting/Converting  Damage, Defeat and Immunity
+A BE NO S EIMEI
+
+ 10
+ 8
+ 2
+A BE NO S EIMEI
+
+ 10
+ 8
+ 2
+A BE NO S EIMEI
+
+ 10
+ 8
+ 2
+E N NO G YŌJA
+
+ 11
+ 7
+ 2
+EIMEI
+
+Abe no Seimei 
+suff ered  equal to 
+his  value, 
+so he's Defeated.
+The white Mage 
+infl icted 3 on En no 
+Gyōja.
+The purple Mage 
+converted 2 on Abe 
+no Seimei.
+Infl icts 3
+Converts 2
+Infl icts 2
+EXAMPLE: INFLICTING AND CONVERTING 
+17
+DEFEAT OF A MAGE
+When a Mage has suff ered  Damage equal to their Health value 
+(), or when an Eff ect declares their defeat, the Eff ect currently 
+being resolved is resolved up to the next period (.), then its 
+resolution is interrupted and that Mage must resolve the Mage's 
+Defeat Eff ect (see below). 
+The Mage is considered defeated when they resolve the Mage's 
+Defeat Eff ect phrase that declares them defeated. Once the Mage's 
+Defeat is resolved, the previously interrupted Eff ect resumes 
+resolving from the period (.) where it was interrupted.
+MAGE'S DEFEAT
+: You are defeated. Place yourself in your Cell. The Mage 
+(or the ) who infl icted the last  on you (even if it was 
+infl icted by one of their Evocations) advances their cube on 
+the Trophy Track () by one space.
+The opponent who infl icted the most  on you gains 4, 
+the other gains 1. If both opponents infl icted the same 
+number of , on you, each of them gains 3. If all 
+that you suff ered were infl icted by the same opponent, they 
+gain 5.
+Return all  on your Health Track to their respective 
+owners.
+If multiple Mages are defeated at the same time, the Mage's Defeat
+Eff ects are resolved in play order.
+DEFEAT OF AN EVOCATION
+When an Evocation suff ers Damage equal to its Health value 
+(), or when an Eff ect declares it defeated, the Eff ect currently 
+being resolved is resolved up to the next period (.), then its 
+resolution is interrupted and the owner of that Evocation must 
+resolve the Evocation's Defeat Eff ect (see below) targeting the 
+defeated Evocation.
+The Evocation is considered defeated when the Evocation's Defeat
+Eff ect phrase resolves and declares it defeated. Once the Evocation's 
+Defeat Eff ect is resolved, the previously interrupted eff ect resumes 
+resolving from the period (.) where it was interrupted.
+EVOCATION'S DEFEAT
+: The Evocation is defeated. Take the Evocation Model out 
+of the Lodge. Return all  on its Evocation Card to their 
+respective owners, and discard that card, returning it to the 
+Evocation Card deck.
+If multiple Evocations are defeated at the same time, the Evocation's 
+Defeat Eff ects are resolved in play order.
+A BE NO S EIMEI
+
+ 10
+ 8
+
+1 4, 1
+OBTAINING AND DISCARDING TROPHIES 
+If an Eff ect indicates that a Mage discards Trophies, that 
+Mage must move the cube on their Trophy Track back a 
+number of spaces equal to the Trophies they would discard, 
+returning to a minimum value of 0. 
+If an Eff ect indicates that a Mage gains Trophies, that Mage 
+must advance the cube on their Trophy Track by a number 
+of spaces equal to the Trophies they would gain.
+REMOVING AN EVOCATION
+Some eff ects indicate that you remove an Evocation: when 
+this happens, the eff ect that is currently being resolved resolves 
+up to the next period (.), then its resolution is interrupted 
+and the owner of that Evocation must resolve the Evocation 
+Removal Eff ect (see below) targeting the removed Evocation. 
+Note that a removed Evocation is not considered defeated.
+EVOCATION REMOVAL
+: Remove the Evocation from the Lodge. Return all  on 
+its Evocation Card to their respective owners, and discard that 
+card, returning it to the Evocation Card deck.
+If multiple Evocations are removed at the same time, the 
+Evocation's Removal Eff ects are resolved in play order.
+: The Evocation is defeated. Take the Evocation Model out 
+ on its Evocation Card to their 
+respective owners, and discard that card, returning it to the 
+If multiple Evocations are defeated at the same time, the Evocation's 
+ Eff ects are resolved in play order.
+: Remove the Evocation from the Lodge. Return all 
+its Evocation Card to their respective owners, and discard that 
+card, returning it to the Evocation Card deck.
+If multiple Evocations are removed at the same time, the 
+Evocation's Removal Eff ects are resolved in play order.
+18
+PLACING INSTABILITY
+When a Mage or the  Black Rose places  Instability in a 
+Room, they must place the corresponding number of their 
+Damage/Instability Cubes on the free Instability Slots furthest 
+to the left of the target Room. Cubes can only be placed in this way 
+on free Instability Slots. If there are not enough, the excess cubes 
+are not placed.
+Some Spell Cards feature the symbol  in the 
+center of the card. 
+When a Mage reveals one of these Spells, they must 
+immediately resolve the Unstable Spell Eff ect (see 
+below) before resolving any other Eff ects of that Card:
+UNSTABLE SPELL
+: Place 1.
+ A Room in which all Instability Slots are occupied by Instability 
+Cubes will be fl ipped during the Clean-up Phase. (see page 16).
+CONVERTING INSTABILITY
+When a Mage or the  Black Rose converts  Instability in a 
+Room, they must replace the Instability of the other Mage or Black 
+Rose with their own cubes, up to a maximum of  Instability
+equal to those indicated by the Eff ect that allows you to convert. 
+The  Black Rose converts  Instability starting from the 
+cubes furthest to the right in the Room, while a Mage can freely 
+choose which cubes to convert.
+Placing/Converting  Instability
+ in the 
+When a Mage reveals one of these Spells, they must 
+Eff ect (see 
+below) before resolving any other Eff ects of that Card:
+   
+Repeat 1: Discard 
+   
+Hachiman's Essence
+Hachiman's Essence
+
+   
+   
+Hachiman's Essence
+Hachiman's Essence
+ Shinto Sanctuary
+ Sanctuary
+Places 3
+Converts 1
+E X A M P L E : P L AC I N G A N D C O N V E RT I N G 
+The White Mage Places 
+3 in Shinto Sanctuary.
+The Purple Mage Converts 
+1 in Shinto Sanctuary.
+Shinto Sanctuary Sanctuary
+These two spaces on the board hold the Mage Models at the start of 
+the game. Each Mage is matched to the Cell on their player's side of the 
+board (identifi ed by color).
+Cells and the Mages inside them use the following rules:
+• No Model may move, be moved, or be placed in a Cell; only the 
+resolution of the Mage's Defeat Eff ect (see page 18), or an Eff ect 
+that specifi cally indicates to do so allows a Mage Model to be 
+placed in their Cell.
+• A Mage in a Cell may only perform the following Actions:
+▶ Activate their Evocations during the Evocation Phase.
+▶ Perform the Momentum Action.
+▶ Perform a Physical Action that allows them to exit the Cell.
+▶ Resolve  Persistent Eff ects of their Revealed Spells.
+• When a Mage begins their Activation in a Cell, or is placed 
+in a Cell during their Activation, and has the opportunity to 
+perform an Action, they must perform a Physical Action that 
+allows them to leave the Cell or a Momentum Action. If they 
+cannot do so, they remain in the Cell.
+• The Cell is not considered a Room of the Lodge and cannot be 
+targeted.
+• A Mage in a Cell is not considered part of the Lodge and cannot 
+be targeted by Eff ects other than Event Card Eff ects, Quest 
+Cells
+Card Eff ects (see page 22), and Eff ects that specify that they apply 
+to a Mage in their Cell. 
+19
+A Name, symbol, color (      ) and 
+Eff ect of the Room. The Lodge consists of 7 Rooms of 
+diff erent colors.
+B  Power Points Banners: These indicate the  gained 
+if the Room is Wrecked (see page 16) and the Room's 
+Eff ect. Once their Eff ect has been used, Room Activation 
+Tokens are fl ipped to their Used side.
+C Instability Slots: These determine how much 
+Instability can be placed in the Room (see page 19).
+D Wrecked Room: Displays the name, symbol, and color of 
+the Room. Cannot produce any eff ects.
+Each Room in the Lodge is represented by a hexagonal tile. 
+At the beginning of the game, each Room shows its Intact side, 
+which allows Mages who activate the Room (see below) to use its 
+Eff ect.
+During the game, a Room can be Wrecked (see page 16, Clean-up 
+Phase). A Wrecked Room has no Room Activation Eff ect or 
+Token: the Room no longer produces Eff ects for the rest of the 
+game.
+AC T I VAT I N G A RO O M
+When a Mage activates a Room (for example, by resolving the 
+“Activate a " Eff ect with an Explore or Fight action), they must 
+resolve the Eff ect indicated on its Room Activation Token. They 
+can do so as long as the token shows its Available side. The Mage 
+then resolves the Eff ect indicated on it and then fl ips it over to show 
+the Used side.
+When this happens, the Eff ect of that Room Activation Token 
+cannot be used for the rest of the Turn. A Mage who activates a 
+Room with a Room Activation Token showing the Used side 
+resolves no Eff ects.
+Rooms and Room Activation Tokens
+ Wabi-Sabi Mirrors Room
+ROOM ANATOMY
+B
+
+A
+C
+D
+Available Room 
+Activation Token
+Used Room Activation 
+Token
+Intact Room Wrecked Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+4 2 1
+ Wabi-Sabi Mirrors Room
+
+A
+B
+D
+20
+ Wabi-Sabi Mirrors Room
+C
+D
+Activation Token
+Used Room Activation 
+Token
+Intact Room Wrecked Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+D
+ Spiritual Black Rose Room
+6 3 1
+Kami Throne Room 
+6 3 1
+ Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+3 2 1
+ Shinto Sanctuary
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+2 1 0
+ Cherry Blossom Garden
+: Draw 1.
+4 2 1
+ Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+4 2 1
+ Oni Sacrifi cial Altar
+4 2 1
+ Oni Sacrifi cial Altar
+: Convert 1.
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+ Spiritual Black Rose Room
+6 3 1
+Kami Throne Room 
+6 3 1
+ Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+3 2 1
+ Shinto Sanctuary
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+2 1 0
+ Cherry Blossom Garden
+: Draw 1.
+4 2 1
+ Satori Arena
+4 2 1
+ Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+4 2 1
+ Oni Sacrifi cial Altar
+4 2 1
+ Oni Sacrifi cial Altar
+: Convert 1.
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+ Spiritual Black Rose Room
+6 3 1
+Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+2 1 0
+Cherry Blossom Cherry Blossom Garden Cherry Blossom Garden
+: Draw 1.
+4 2 1
+ Satori Arena  Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+4 2 1
+ Oni Sacrifi cial Altar
+: Convert 1.
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+RANGE
+The numerical value of the targets is called range, and indicates the 
+distance in rooms within which the target chosen for the Eff ect 
+can be located. Ranges with a value greater than 0 (   ) 
+require line of sight between the caster and the target.
+A range  ( ) or with a value of 0 ( ) does not require 
+any line of sight.
+L I N E O F S I G H T 
+The line of sight is an imaginary straight line between the center 
+of the Room where the Model resolving the Eff ect is located and 
+the center of the Room where the target of the Eff ect or the target 
+Room of the Eff ect is located. This line must always run through 
+the centers of a row of Rooms, and can never run along the edge 
+of a Room. The line goes through a maximum number of Rooms 
+(excluding the starting Room) equal to the range indicated on the 
+Eff ect target.
+DUMMY TARGET
+You may choose a Dummy Target as the target of an Effect that 
+targets Models (). The Dummy Target counts as a Model, 
+even if it isn't physically in the Lodge; the purpose of choosing it as 
+a target is to allow Mages to cast a Spell and resolve as much of its 
+Eff ect as possible, even when there are no Models available to target. 
+A Dummy Target doesn't take damage and has no characteristics. 
+You cannot choose a Dummy Target as the target of a Physical 
+Attack () of a Physical Action () (see page 14).
+E X A M P L E : L I N E O F 
+S I G H T A N D D U M M Y 
+TARGET
+E X A M P L E : R E A D I N G 
+SYMBOLS 1
+A : A Model in a Room 
+within range 1.
+E X A M P L E : 
+READING SYMBOLS 2
+All the : All Models in a Room 
+within range 1. The Eff ect resolved 
+by En no Gyōja applies to all Models 
+within range 0 and 1 of him.
+Range, Line of Sight, Dummy Target
+ Satori Arena
+4 2 1
+: Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1  Satori Infl ict 1 . You may Arena . You may Move the 
+target up to 1.
+4 2 1
+6 3 1
+ Spiritual Black Rose Room
+6 3 1
+ Spiritual Spiritual Black Rose Room
+Black Rose Room Spiritual : Lose 2Black Rose Room , Discard 2. 
+If you do: draw 1 Forgotten .
+Gain  discarded.
+ Throne Room  Throne Room Kami Throne Room Kami Throne Room Kami 
+
+Gain  equal to the 
+Sanctuary Shinto Sanctuary  Shinto Shinto  Shinto 
+assigned 
+Sanctuary
+
+Shinto Sanctuary on yourself, you may discard an 
+ that is not assigned with a Forgotten 
+Spell.
+Shinto Shinto 
+ on yourself, you may discard an 
+ that is not assigned with a Forgotten 
+ Shinto 
+
+Shinto Shinto : HealShinto 2
+assigned  that is not assigned with a Forgotten 
+3 2
+Sanctuary on yourself, you may discard an Sanctuary
+
+Sanctuary on yourself, you may discard an 
+ that is not assigned with a Forgotten 
+ 
+Sanctuary on yourself, you may discard an 
+ that is not assigned with a Forgotten 
+Spell.
+ 1
+Throne Room Throne Room Throne Room Throne Room Throne Room Throne Room Throne Room 
+. Throne Room Throne Room Throne Room Throne Room Throne Room Throne Room  up to 2 Throne Room 
+
+
+Throne Room Throne Room Throne Room  up to Throne Room 2
+
+4 2 1
+ Oni Sacrifi cial Altar
+4 2 1
+Oni Oni Sacrifi cial Altar Oni Sacrifi cial Altar
+: Convert 1.
+
+
+
+
+
+DUMMY
+TARGET
+1
+Gain discarded.
+ 1
+ equal to the  discarded.
+6
+Gain 
+ 3
+Gain  equal to the 
+  
+Cherry Blossom Cherry Blossom Cherry Blossom Garden Cherry Blossom Garden Cherry Blossom Garden
+ Draw 1
+2 1 0
+: Draw 1.
+DUMMY
+TARGET
+ Satori Arena
+Spiritual Black Rose Room
+ Spiritual Black Rose Room
+Spiritual : Lose 2Black Rose Room , Discard 2. 
+If you do: draw 1 Forgotten 
+Black Rose Room
+6 3 1
+If you do: draw 1 Forgotten .
+
+ Spiritual 
+
+
+
+ ArenaMove the 
+Arena
+. You may Move
+target up to 1
+ Satori 
+
+: Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1  Satori  
+target up to 
+Arena 
+ Satori Arena
+Infl ict 1Satori  . You may . You may Arena target up to 
+
+4 2 1
+target up to 1.
+ 2
+ Cherry Blossom Garden  Cherry Blossom Cherry Blossom 
+ Cherry Blossom Garden Cherry Blossom Garden
+
+0
+ Cherry Blossom Garden
+2 0
+ Cherry Blossom : Draw 1.
+ 
+
+
+
+Spiritual 
+Spiritual Black Rose Room
+Spiritual : Lose 2
+If you do: 
+
+Spiritual Black Rose Room
+Black Rose Room Discard 2. 
+draw 1 Forgotten .
+ Cherry Blossom Garden 
+ Cherry Blossom 
+Cherry Blossom Garden
+
+2 0
+ Cherry Blossom Garden
+2 0
+ Cherry Blossom : Draw 1.
+
+6
+If you do: 
+3 1
+Forgotten 
+
+21
+6 3 1
+Kami Throne Room 
+6 3 1
+ Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+ Spiritual Black Rose Room
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+2 1 0
+ Cherry Blossom Garden
+2 1 0
+ Cherry Blossom Garden
+: Draw 1.
+4 2 1
+ Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+4 2 1
+ Oni Sacrifi cial Altar
+: Convert 1.
+6 3 1
+ Spiritual Black Rose Room
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+6 3 1
+Kami Throne Room 
+: Discard up to 2. 
+Gain  equal to the  discarded.
+4 2 1
+ Wabi-Sabi Mirrors Room
+: You cannot target the . Activate the Room, 
+even if used, without fl ipping its Activation Token.
+The two Quest Cards on the board feature six diff erent  Quests 
+A .
+Each  Quest is composed of these elements:
+A Name. 
+B Condition.
+C Eff ect.
+D Quest Slot.
+Before or after a Mage's Action (even if it is an opposing Mage 
+performing the Action), or at the end of an Evocation's Activation, 
+if a Mage fulfi lls or has previously fulfi lled the Condition of a
+ Quest during the current Turn, they may declare that they 
+have completed it. When this happens, the Mage places one of their 
+cubes on the Quest Slot of the Quest they have completed and 
+immediately applies its Eff ect.
+If two Mages declare completion of the same Quest at the same 
+time, the Quest is completed by the active Mage. (see page 14, 
+Action Phase).
+If a Mage forgets to declare that they have completed a  Quest, 
+or doesn't want to complete it even though they have fulfi lled the 
+Condition, the  Quest will remain available.
+A  Quest with the Quest Slot occupied by a cube is considered 
+completed and resolved, and is no longer available to any of the 
+Mages for the rest of the game.
+In the End of Game Tally, the  Black Rose gains  from all 
+ Quests still available (see page 17).
+ Quests
+ Quests  
+Incarnation You cast a
+
+Forgotten .
+: The  infl icts 2 on you.
+Gain 2.
+Illumination At least three of your  are 
+assigned.
+: The  infl icts 3 on you.
+Gain 3.
+Equipped You own three Equipment. 
+: The  infl icts 3 on you.
+Gain 3.
+2
+3
+3
+ Quests 
+Incarnation You cast a Forgotten
+infl icts 2
+Gain 2
+Illumination At least three of your 
+assigned.
+infl icts 3
+Gain 3
+Equipped You own three Equipment. 
+infl icts 3
+.
+ Quests 
+Incarnation You cast a
+infl icts 2
+Gain 2
+Illumination At least three of your 
+assigned.
+infl icts 3
+Gain 3
+Equipped You own three Equipment. 
+infl icts 3
+
+ Quests  
+Medium
+At least two of your  are assigned.
+: The  infl icts 1 on you.
+Gain 1.
+Vandal
+You defeated or removed an Equipment 
+other than your own. 
+: The  infl icts 2 on you. 
+Gain 2.
+Armed
+You own two Equipment. 
+: The  infl icts 2 on you.
+Gain 2.
+1
+2
+2
+Medium
+At least two of your 
+A
+B
+
+C D
+Portals
+Portals are magical passageways that connect the rooms of the 
+Lodge. Two Rooms that have a Portal of the same color in one 
+of their entrances are considered adjacent and connected by that 
+entrance, and all the normal rules for two adjacent Rooms apply to 
+them (Line of Sight, Movement, etc.).
+E X A M P L E : L I N E O F 
+S I G H T F R O M P O RTA L S
+E X A M P L E : M OV E M E N T 
+T H R O U G H P O RTA L S
+ Spiritual Black Rose Room
+ Sacrifi cial Altar 
+4  1
+ Oni Sacrifi cial Altar
+4  1
+
+ Oni Oni Sacrifi cial Altar
+: Convert 1
+Sacrifi cial Altar .
+
+
+ discarded.
+
+
+Gain 
+6 3 1
+Kami Throne Room 
+6 3 1
+
+Kami Kami Throne Room Throne Room 
+
+
+Kami : Discard Throne Room Discard up to 2. 
+Gain  equal to the  discarded.
+
+
+Abe no Seimei targets a . By using the White Portal, he can target En no Gyōja.
+Abe no Seimei moves 2 spaces through the Red Portal, reaching the Shinto Sanctuary.
+ Satori Arena 
+
+ Satori Arena
+: Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1 Infl ict 1   Satori . You may . You may Arena Move the 
+target up to 1
+
+4 2 1
+target up to 1.
+
+
+ Sanctuary : Heal on yourself, you may discard an 
+assigned assigned assigned that is not assigned with a Forgotten Sanctuary
+Sanctuary on yourself, you may discard an  that is not assigned with a Forgotten 
+Shinto Heal 2Shinto  on yourself, you may discard an 
+assigned assigned Shinto  that is not assigned with a Forgotten 
+
+Shinto Sanctuary  Shinto Sanctuary Shinto  Sanctuary on yourself, you may discard an Sanctuary on yourself, you may discard an 
+ that is not assigned with a Forgotten 
+3 2 1
+assigned that is not assigned with a Forgotten 
+  
+assigned  that is not assigned with a Forgotten 
+Spell.
+Mirrors Room Mirrors Room  the Room, 
+
+
+: You cannot target the Mirrors Room Mirrors Room  the Room, 
+Wabi-Sabi 
+ You cannot target the You cannot target the You cannot target the Mirrors Room Mirrors Room
+. Activate the Room, Wabi-Sabi Wabi-Sabi 
+ You cannot target the  the Room, 
+even if used, without fl ipping its Activation Token.
+4
+ You cannot target the 
+even if used, without fl ipping its Activation Token.
+4 1
+the Room, 
+even if used, without fl ipping its Activation Token. You cannot target the 
+1
+ the Room, 
+even if used, without fl ipping its Activation Token.
+2
+You cannot target the 
+even if used, without fl ipping its Activation Token.
+
+This box contains two pairs of Portals. The Setup section (see page 
+11) indicates how to place them in the Lodge. The instructions 
+under Setup optimize the connections between the Rooms that 
+form the Lodge. By experimenting with diff erent Portal placements, 
+you can create diff erent Lodge confi gurations. 
+3 2 1
+ Shinto Sanctuary
+3 2 1
+ Shinto Sanctuary : Heal 2 on yourself, you may discard an 
+assigned  that is not assigned with a Forgotten 
+Spell.
+2 1 0
+ Cherry Blossom Garden
+2 1 0
+ Cherry Blossom Garden
+: Draw 1.
+4 2 1
+ Satori Arena
+4 2 1
+ Satori Arena
+: Infl ict 1 . You may Move the 
+target up to 1.
+4 2 1
+ Oni Sacrifi cial Altar
+4 2 1
+ Oni Sacrifi cial Altar
+: Convert 1.
+6 3 1
+ Spiritual Black Rose Room
+6 3 1
+ Spiritual Black Rose Room : Lose 2, Discard 2. 
+If you do: draw 1 Forgotten .
+22
+When an Eff ect indicates to Draw one or more  Spell Cards, 
+unless otherwise specifi ed, these cards must be drawn from your 
+ Grimoire.
+Drawing/Discarding Spell Cards
+ P E R S I S T E N T S 
+A Persistent Eff ect infl uences the game for the duration of the Turn 
+in which it is resolved. The player who resolved it can apply it each 
+time the condition required in its text is met.
+To show that one of these Eff ects is active, the Mage who resolved 
+it takes the Persistent Token of their color that corresponds to 
+the Spell Slot (, I, II or III) where the revealed  Spell Card
+showing the Persistent Eff ect is located, and applies it to the target 
+of the Eff ect. They place the Token on the Mage Card of the target    
+Infl ict 1.
+Convert 1.
+Repeat 1: Discard 1.
+   
+Susanoo's Presence
+Susanoo's Presence
+When a Model enters the : 
+target Room, infl ict on that 3
+Model.
+   
+   
+Susanoo's Presence
+Susanoo's Presence
+ Persistent Effects
+if the target is a Mage, on the Evocation Card 
+of the target if the target is an Evocation, or 
+on the Room if the target is a Room.
+The Persistent Eff ect ends when its  Spell 
+Card is no longer in play, after step 1 of the 
+Clean-up Phase, or if the Persistent Token 
+is discarded due to a game eff ect.
+An Eff ect may contain one or more of the following Keywords. 
+When an Eff ect is resolved and a Keyword must be resolved, all 
+rules described below that apply to that word must be applied.
+REPEAT N
+A Mage that resolves the keyword Repeat N can repeat the Eff ect 
+it is part of as long as the value of N is greater than 0. Each time the 
+Mage repeats the Eff ect, the value of N of that Eff ect's Repeat is 
+lowered by 1 until the end of the current Activation.
+Coming of the Kodama
+    This eff ect can be repeated 5 
+times. Each time it is repeated, the 
+value of the keyword Repeat N is 
+considered to be 1 less (Repeat 4 after 
+one repetition, Repeat 3 after two 
+repetitions, etc.).
+  
+. or convert 1
+Repeat 5.
+The Mage may choose the same or a new valid target for the Repeat. 
+This doesn't count as casting a new spell, and all repeats count as 
+part of the Spell's Eff ect.
+Coming of the Kodama
+  
+Place or convert 1.
+Repeat 5.
+A diff erent  may be selected 
+as the target of the Eff ect for each 
+repetition. All repetitions count as a 
+single resolved Eff ect.
+Coming of the Kodama
+ 
+ convert 1
+Coming of the Kodama
+
+If the keyword is followed by a cost after a colon (for example,
+Repeat 2: discard 2), each time the Mage Repeats the Eff ect, 
+they must pay the cost, or they cannot repeat it. 
+Keywords
+   
+   
+Channeling the Spirit
+Channeling the Spirit
+   
+   
+Channeling the Spirit
+Channeling the Spirit
+Each repetition of this Eff ect requires 
+discarding 1 from your hand. If 
+the Mage cannot do so, they cannot 
+repeat the Eff ect.
+Channeling the Spirit
+  
+   
+   
+Channeling the Spirit
+Channeling the Spirit
+Infl ict 1.
+Move the target up to 1
+Repeat 2: Discard 1
+   
+   
+Channeling the Spirit
+Channeling the Spirit
+RESTORE 
+A Mage that resolves the keyword Restore  turns one of their 
+exhausted Physical Action Tokens to the available side.
+When an Eff ect indicates to Discard one or more  Spell Cards, 
+unless otherwise specifi ed, these cards must be discarded into your 
+own  Memories from your own Hand.
+23
+D u e l Avata r
+The Avatar is the embodiment of the Black Rose's will in a physical 
+body. It roams the Lodge carrying out the Rose's schemes and acting 
+as her hand, granting power to those she deems worthy and punishing 
+those who oppose her will.
+Over time, many entities have served as Avatars for the Black Rose—
+mechanical knights born of alchemical powers, divine entities, or 
+beings from the most remote lands. Even spirits from the world's most 
+ancient legends have been servants of the Black Rose, and when she 
+deems it necessary, she can summon them to her service.
+In the Lodge of the Sun, a terrible Yokai, a nefarious spirit, has been 
+chosen as an Avatar...
+The Avatar is an Artifi cial Intelligence (AI) that can be used in any 
+Black Rose Wars: Duel game, replacing a human player in a solo 
+game or joining a two-player game as a third participant, making 
+the Black Rose an even more challenging opponent.
+The Avatar behaves similarly to a Mage, following most of the 
+standard rules.
+Mononoke
+Mononoke is the Avatar provided in this box. This vengeful spirit 
+has infi ltrated the Lodge of the Sun to assassinate and devour the 
+magical power of unworthy Mages who dare to challenge it.
+Mononoke has three Skills described on the back of its Avatar Card.
+Read the Skills carefully before starting the game, as each one must 
+be applied each time it is possible to do so.
+Avatar Setup
+The Avatar is considered an additional virtual player.
+The Avatar is a Mage (), just like those controlled by players. They 
+participate in the game exactly like an additional Mage, but are also 
+considered an extension of the Black Rose, and all  symbols in 
+the game also refer to it. The Avatar uses the Black Rose Power 
+Token to indicate its Power Points. To use the Avatar in a game of 
+Black Rose Wars: Duel, apply the following rules and modifi cations:
+1 Once you have completed the normal Game Setup, take all the 
+Avatar components: the Model, the Avatar Activation Tokens, 
+the Avatar Card, and the Avatar Command Cards (divided 
+into decks for the First Moon, Second Moon, and Third 
+Moon, see box below).
+2 Place the Avatar Model in the Black Rose Room. 
+3 Place the Avatar Card on the table next to the board so that its 
+back is facing up. Take a number of Avatar Activation Tokens 
+equal to the  value indicated on the Avatar Card and place 
+them in the corresponding slots on the game board F with 
+the Available side face up. 
+4 Shuffl e the Command Card Deck showing the First Moon 
+symbol (see below) and place it next to the board in the
+ Grimoire/Hand space B . 
+The Second Moon and Third Moon Command Card Decks 
+won't be used in the game, so set them aside. 
+Now the game may begin!
+Mononoke, 
+the spirit of vengeance. 
+Its black armor shines like the 
+void among the stars, the masked 
+face conceals a timeless hatred. 
+A monstrous maw opens wide 
+on its torso, thirsty for magic.
+With its gigantic ebony katana, 
+it tears the fate of the Mages, 
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+without mercy nor face.
+ 9
+ 2
+ 0
+ 3
+Mononoke
+Appearance - Corruption Purification
+Appearance
+If Mononoke activates while in 
+its Cell, it reveals no Command 
+Cards, it Places itself in the Room 
+with the fewest free Instability 
+Slots (not counting Rooms that 
+show the side with no Instability 
+Slots) and applies this Eff ect:
+: Convert 2.
+Corruption
+When there are no  of the  in the pool and Mononoke must 
+place or convert at least 
+in the pool and 
+1, it 
+instead gains 
+place or convert at least 
+1.
+Puri cation
+When a Mage defeats Mononoke,
+apply this Eff ect:
+: Convert 1 of the . Repeat a number of times equal  
+to the total amount of 
+Repeat a number of times equal 
+ you 
+infl icted on Mononoke.
+Then, in play order, the other 
+Mages who infl icted at least 1
+on Mononoke
+Mages who infl icted at least 
+Mononoke do the same.
+Mononoke  9  2  0  3
+Mononoke
+Avatar Card, front Avatar Card, back
+Avatar play areas
+A Avatar Card 
+B Grimoire/Hand 
+C Avatar Cell 
+D Avatar Health Track
+E Memories
+F Avatar Activation 
+Token Space
+Exhausted Avatar 
+Activation Token
+Mononoke Mononoke
+AVATA R D I F F I C U LT Y
+During step 4 of Avatar Setup, you may use a diff erent 
+Command Card Deck than the First Moon deck to make your 
+Avatar more challenging.
+Using the Second Moon Command Card Deck will make 
+your Avatar moderately challenging, while using the Third 
+Moon Command Card Deck will make your Avatar extremely 
+challenging.
+If all players agree, you can also increase or decrease the 
+Avatar's power by increasing or decreasing the number of 
+Avatar Activation Tokens available to it throughout the 
+game. Giving it one less Avatar Activation Token, the Avatar 
+will be much less eff ective, and with one more it will become 
+more formidable.
+Mononoke
+Mononoke First Moon
+Mononoke
+Mononoke Second Moon
+Mononoke
+Mononoke Third Moon
+
+ A
+B
+E
+C
+F
+D
+24
+A Name and Skill. 
+B  Health Value: The maximum number of Damage
+Cubes the Avatar can have on its Health Track before 
+being defeated.
+C  Strength Value: The amount of  Damage Cubes
+that the Avatar assigns to the target when performing a 
+Physical Attack ().
+D  Speed Value: Mononoke has a Speed Value of 0, it 
+never leaves the Room it is in, but it can be moved by 
+other Eff ects.
+E  Activation Tokens Number: The number of Avatar 
+Activation Tokens available to the Avatar during the 
+game.
+F Lore Text.
+Mononoke, 
+the spirit of vengeance. 
+Its black armor shines like the 
+void among the stars, the masked 
+face conceals a timeless hatred. 
+A monstrous maw opens wide 
+on its torso, thirsty for magic.
+With its gigantic ebony katana, 
+it tears the fate of the Mages, 
+cutting through the past and the 
+future in a single, inescapable 
+blow. It knows no peace, it seeks 
+no truce—it is vengeance made 
+fl esh, judgment that advances 
+without mercy nor face.
+ 9
+ 2
+ 0
+ 3
+Mononoke
+Appearance - Corruption Purification A
+B 
+void among the stars, the masked F
+C 
+D
+E 
+Appearance If Mononoke activates while in 
+its Cell, it reveals no Command 
+Cards, it Places itself in the Room 
+with the fewest free Instability 
+Slots (not counting Rooms that 
+show the side with no Instability 
+Slots) and applies this Eff ect:
+: Convert 2.
+Corruption
+When there are no  of the 
+in the pool and Mononoke must 
+place or convert at least 
+in the pool and 
+1, it 
+instead gains 
+place or convert at least 
+1.
+Puri cation
+When a Mage defeats Mononoke,
+apply this Eff ect:
+: Convert 1 of the .
+Repeat a number of times equal 
+ 
+to the total amount of 
+Repeat a number of times equal 
+ you 
+infl icted on Mononoke.
+Then, in play order, the other 
+Mages who infl icted at least 1
+on Mononoke
+Mages who infl icted at least 
+Mononoke do the same.
+A Mononoke  9  2  0  3
+B C D E
+AVATA R C A R D A N ATO M Y
+The Avatar acts in the game according to the rules of its Artifi cial 
+Intelligence, summarized below:
+CHOICE OF THE CROWN
+The Crown Holder chooses on behalf of the AI from among the 
+available options and in cases of doubt or a tie.
+AVATA R A N D B L AC K RO S E C U B E S
+The Avatar uses the Damage/Instability Cubes of the  (black 
+cubes).
+When the  infl icts, places, or converts cubes, for example through 
+Event Card or Quest Card eff ects, it counts as if the Avatar did so. 
+When the cubes of the  are converted, it counts as if they were 
+converted on the Avatar.
+A S S I G N I N G DA M A G E T O M U LT I P L E 
+M O D E L S 
+Apply the following points in order when the Avatar must assign 
+ Damage to multiple targets:
+• The Avatar assigns the Damage to the Mage who has the most 
+ of the  assigned.
+• The Avatar assigns the Damage to the Mage with the most 
+assigned.
+• If it must still assign , it assigns them to the other Mages.
+• If it must still assign , it assigns them to Evocations.
+• In all other cases, the Choice of the Crown applies.
+DAMAGE/INSTABILITY CONVERSION
+The Avatar converts Damage starting from the rightmost cube 
+on the Mage Board, and converts Instability starting from the 
+rightmost cube on the Room.
+D E F E AT O F T H E AVATA R A N D I T S C E L L
+The Avatar is defeated like a normal Mage, however, when this 
+happens, the player controlling the Avatar must resolve the Avatar's 
+Defeat Eff ect (see below).
+Please note that the Avatar doesn't have a Cell connected to the Lodge 
+like the other Mages; its Cell is represented on the game board C . 
+AVATAR'S DEFEAT
+: The Avatar is defeated. Place it in its cell. The Mage who 
+infl icted the last  (even if it was infl icted by one of their 
+Evocations) advances their cube on the Trophy Track () 
+by one space. 
+The opponent who infl icted the most  gains 4, the 
+other gains 1. If both opponents infl icted the same 
+number of , each gains 3. If all  were infl icted by the 
+same opponent, they gain 5.
+Return all  on the Avatar's Health Track to their respective 
+owners' reserves.
+If the Avatar has at least one Exhausted Avatar Activation 
+Token, fl ip one of them to the Available side.
+The  symbol on the Cell serves as a reminder for the last sentence 
+of the Avatar's Defeat Eff ect.
+When the Avatar begins its Activation in its Cell, it follows the rules 
+described in one of its Skills (Appearance for Mononoke) to return 
+to the Lodge.
+AVATA R A N D E V E N T C A R D S 
+The Avatar ignores all Event Card Eff ects that refer to or target 
+Mages.
+AVATA R A N D Q U E S T C A R D S
+The Avatar does not resolve Quests.
+AVATA R A N D B L AC K RO S E DA M AG E
+The Avatar never suff ers damage from the .
+AVATA R A N D P OW E R P O I N T S
+When the  gains or loses  Power Points, it counts as if the 
+Avatar gained or lost those .
+Avatar AI Rules
+25
+The Avatar behaves as described below during the various Phases 
+of the Game Turn. 
+1 . B l a c k R o s e P h a s e 
+2. Study Phase
+5. Evocation Phase
+These Phases are resolved normally and the Avatar doesn't perform 
+any Actions, unless otherwise indicated in its components or in 
+specifi c rules. Remember, especially during the Black Rose Phase, 
+what is indicated in the Avatar and Black Rose Cubes sections and 
+in Avatar and Power Points on page 25.
+3. Action phase
+During the Action Phase, players activate their Mages as usual. 
+After each of them has performed an Activation, if it 
+still has at least one Available Avatar Activation Token, 
+the Avatar turns one to the Exhausted side and activates, 
+performing its Activation exactly as if it were the third 
+Mage in the play order.
+This means that in a game with two player-controlled Mages, the 
+Activation order will always be: 
+Crown Holder Mage ▶ other Mage ▶ Avatar 
+The Avatar performs its Activation even if one or both of the other 
+Mages have no more Actions to perform and skip their Activation. 
+If, when it is time for the Avatar to activate, all of its Avatar 
+Activation Tokens are exhausted, the Avatar doesn't activate until 
+the next Action Phase.
+When the Avatar activates, the Crown Holder reveals the top card 
+of the Command Deck placed under the Avatar's  Grimoire/
+Hand space and places it under the  Memories space next to it. 
+Then, resolve the card's eff ects one at a time, from top to bottom.
+A Command Card can have one or two Eff ects, usually a 
+ Physical Action and a  Spell.
+ Physical Actions resolve as regular Physical Actions, however 
+applying the Eff ect as described on the card in order from top to 
+bottom.
+ Spells resolve as regular Spell Eff ects.
+When all Command Card Eff ects have been resolved, the Avatar 
+Activation ends.
++ ADDITIONAL COMMAND CARD
+Some Command Card eff ects contain the symbol +, which 
+indicates that, once the Eff ect has been resolved, another 
+Command Card must be revealed and resolved during the same 
+Avatar Activation. If the second card revealed also has an Eff ect 
+containing the +, symbol, once the Eff ect has been resolved, 
+another Command Card must be revealed and resolved, with no 
+limit to how many times this can happen.
+PERSISTENT EFFECTS
+Some Command Card Eff ects may contain Persistent Eff ects. 
+(see page 23). The Eff ect indicates which of the four  Persistent 
+Tokens (, I, II, III) must be assigned to the target to represent the 
+presence of the Eff ect in play.
+When one of these Eff ects is resolved, do not place the Command 
+Card showing it in the Avatar's  Memories but keep it aside so 
+that all players can consult it and always be clear about the Eff ect 
+linked to the  Persistent Token that the Avatar has assigned to 
+the target of the Eff ect. 
+4. Clean-up Phase
+During Step 1 of the Clean-up Phase, all Command Cards revealed 
+during the current Turn are shuffl ed and placed back under the 
+Command Card Deck, and all Avatar Activation Tokens are turned 
+to the Available side.
+COMMAND CARD ANATOMY
+A Name. 
+B  Physical Action: The Eff ects of 
+Physical Actions Performed by the 
+Avatar.
+C  Spell: Eff ect of the Spell cast by the 
+Avatar.
+D  Persistent Eff ect.
+E + Additional Command Card.
+
+   
+
+Places 2.
+: When another Mage 
+enters the target Room they 
+may discard 1. If they don't, 
+Mononoke places 2 in the 
+target Room.
+Invading the Domain
+Performs  with 1
+against each  of the .
+Invading the Domain
+A
+C 
+
+enters the target Room they 
+may 
+D
+   
+Black Blade Strike
+Targets the Room with the 
+highest number of free Instability 
+slots other than the .
+Places 2.
+I: When another Mage 
+enters the target Room they 
+may discard 1. If they don't, 
+Mononoke places 2 in the 
+target Room.
+
+A Black Blade Strike
+enters the target Room they 
+may 
+D
+target Room.
+E 
+C 
+B 
+READING A COMMAND CARD
+Even if not specifi ed, the subject of every Eff ect on a Command 
+Card is always the name of the Avatar. The cases highlighted in 
+the image should be interpreted as:
+: "Mononoke performs a  agains each  of each ."
+: "Mononoke targets the closest  with at least one..."
+
+   
+Targets the closest  with at 
+least one free Instability slot.
+Places 1. If it did not place 
+any  due to this Effect, 
+infl icts 1 on each  of 
+each . 
+War Slash
+Performs  against each 
+of each .
+Mononoke
+
+
+Avata r Ac t i vat i o n
+26
+Beyond the Duel
+D U E L I N B L AC K RO S E WA R S
+The contents of this box can be used to expand Black Rose Wars and 
+Black Rose Wars: Rebirth by including them in games as indicated 
+below.
+Shugendō School of Magic: During step 9 of the Setup you 
+may replace one of the Schools of Magic in the core game with the 
+Shugendō School.
+Forgotten Spells: you may add these cards to the Forgotten Spells 
+deck in the core game. 
+Mages: These two Mages can be chosen as Mages during step 8 of 
+the Setup described in the core game rulebook.
+Rooms: The Rooms in this box (and their corresponding Activation 
+Tokens) can replace the Rooms in Black Rose Wars that have the same 
+name, ignoring the part of the name in italics, to have a Lodge with 
+more varied eff ects. For example, you can replace the Black Rose Room 
+from the core game with the Spiritual Black Rose Room, or the 
+Sacrifi cial Altar from the core game with the Oni
+Sacrifi cial Altar.
+To use the Rooms from this expansion in Black Rose 
+Wars: Rebirth, please refer to the compatibility rules 
+accessible via the QR Code.
+Avatar: The Avatar in this box is compatible and usable in a game 
+of Black Rose Wars using the rules included in the Black Rose Wars: 
+Rebirth rulebook and subsequent products.
+Portals: Portals can be used in Black Rose Wars and Black Rose Wars: 
+Rebirth games by placing them at Room exits on the edge of the 
+Lodge as shown in the example, or by experimenting with alternative 
+placements to create new Lodge layouts.
+B L A C K R O S E WA R S I N D U E L 
+The components of other products in the Black Rose Wars line can 
+be used to expand this game by including them in games as indicated 
+below.
+School of Magic: You may replace the School of Magic in this 
+box with any School of Magic from other products, taking care to 
+include all the materials necessary for that School to function (such 
+as Evocations). Due to the head-to-head nature of this game, some of 
+the Schools of Magic that develop complex tactics may not be eff ective 
+in a duel. Please also note that if a School of Magic involves the use 
+of additional rules, these must be consulted in the Black Rose Wars/
+Rebirth core game rulebook or in the rulebook of the expansion from 
+which the chosen School of Magic originates. 
+Forgotten Spells: you may add all Forgotten Spells from other Black 
+Rose Wars products to the games of this game, adding them to the deck 
+or replacing cards in the deck during Setup. 
+Mages: In games played with this box you can use all Mages from other 
+Black Rose Wars products.
+Rooms: In games played with this box the seven Rooms can be 
+replaced with Rooms from other Black Rose Wars products.
+Avatar: The Avatars designed for Black Rose Wars: Rebirth are not 
+compatible with Black Rose Wars: Duel, so they cannot be included 
+in the game.
+Non-compatible materials: Black Rose Wars Quest Cards and Event 
+Cards are not used in Duel games. Materials that generate eff ects 
+(usually Spells and Rooms) that call these types of cards into play must 
+never be included in the game.
+E X A M P L E : P O S I T I O N I N G P O RTA L S I N T H E B L AC K R O S E WA R S L O D G E
+ Cell  Throne Room  Black Rose Room Portals
+
+
+
+
+
+ 
+
+ 
+
+
+ 
+
+27
+Black Rose Wars: Duel - Kami v1.0
+©2025 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+Kami
+MAGE'S DEFEAT
+: You are defeated. Place yourself in your Cell. The Mage 
+(or the ) who infl icted the last  on you (even if it was 
+infl icted by one of their Evocations) advances their cube on 
+the Trophy Track () by one space.
+The opponent who infl icted the most  on you gains 4, 
+the other gains 1. If both opponents infl icted the same 
+number of , on you, each of them gains 3. If all 
+that you suff ered were infl icted by the same opponent, they 
+gain 5.
+Return all  on your Health Track to their respective 
+owners.
+EVOCATION'S ACTIVATION
+Target:The target of the Evocation's Activation is specifi ed in 
+the Eff ect that causes it to be resolved.
+Resolve each of the following points once in the order you 
+prefer:
+• Move the Evocation 1. You can perform this a number of 
+times equal to its  Speed Value. Each individual “Move 
+1” is considered to be separated by a period (.); unused 
+“Move 1” Eff ects are lost.
+• The Evocation performs a  Physical Attack against a 
+.
+EVOCATION'S DEFEAT
+: The Evocation is defeated. Take the Evocation Model out 
+of the Lodge. Return all  on its Evocation Card to their 
+respective owners, and discard that card, returning it to the 
+Evocation Card deck.
+EVOCATION REMOVAL
+: Remove the Evocation from the Lodge. Return all  on 
+its Evocation Card to their respective owners, and discard that 
+card, returning it to the Evocation Card deck.
+UNSTABLE SPELL
+: Place 1.
+AVATAR'S DEFEAT
+: The Avatar is defeated. Place it in its cell. The Mage who 
+infl icted the last  (even if it was infl icted by one of their 
+Evocations) advances their cube on the Trophy Track () 
+by one space. 
+The opponent who infl icted the most  gains 4, the 
+other gains 1. If both opponents infl icted the same 
+number of , each gains 3. If all  were infl icted by the 
+same opponent, they gain 5.
+Return all  on the Avatar's Health Track to their respective 
+owners' reserves.
+If the Avatar has at least one Exhausted Avatar Activation 
+Token, fl ip one of them to the Available side.

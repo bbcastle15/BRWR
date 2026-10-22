@@ -1,0 +1,266 @@
+
+=== PAGE 1 ===
+Jukas
+
+=== PAGE 2 ===
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, 
+Leonardo Romano, Michele Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Elisa Fiore
+Concept Artist: Simone de Paolis
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, 
+Alessandro Brogi, Chiara Spagnoletto, Daniele Samele, Daniele 
+Vendittozzi, Federico Morara, Flavio Galmacci, Francesco Pica, 
+Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, 
+FrankZappa, Gabriele Macchioro, Gianni Punzo, Giovanni Milani, 
+Lorenzo Meucci, Luca Benedetti, Luca Francescangeli, Luca Perra, 
+Marco G. defi ar, Maurizio Salvi, Paolo guerrieronuvola, Paolo 
+Bianchi, Pasquale Carotenuto
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, 
+Leonardo Romano, Michele Morosini
+Credits
+2
+
+=== PAGE 3 ===
+Contents
+Credits ..................................................................2
+Contents ...............................................................3
+Game Components ..............................................4
+Model ...................................................................................4
+Avatar ..................................................................5
+Avatar Card Anatomy .................................................................................5
+Jukas Setup .........................................................................................................6
+Avatar Special Rules — Jukas ..............................................6
+Vortex Token () ................................................................6
+Avatar Skills — Jukas ...........................................................8
+Jukas Priority.....................................................................................................8
+Jukas is an iconic character from the Nova Aetas 
+Chronicles universe, known as a skilled spellcaster 
+capable of traveling through time and practicing 
+teleportation. By choosing Jukas as the Avatar, 
+players will be confronted by this character's subtle 
+art of manipulating space and time, combined 
+with the power of the Black Rose. 
+3
+
+=== PAGE 4 ===
+Game Components
+1 AVATAR 
+CARD
+3 EVOCATION 
+CARDS
+12 VORTEX 
+TOKENS ()
+: places 1. 
+Places 1 in each 
+with 1 in it.
+Each  with all its Instability 
+Slots occupied is immediately 
+rebuilt.
+Teleportation
+Vortices of Power
+Jukas
+ 11 
+ 2
+ 1
+:    .
+    .
+   .
+30 COMMAND 
+CARDS
+Jukas
+
+   
+Each Mage loses
+
+1 for each 
+ on their Mage Card.
+. .
+Back in Time
+. Teleportation
+Places
+.
+1 in a .
+3 AVATAR EVENT 
+CARDS
+When a Mage solves
+they may draw up to 
+the Library.
+0
+Action Phase
+Future Past
+AVATAR—JUKAS
+solves a Quest, 
+they may draw up to 2 from 
+the Library.
+2
+Action Phase
+Future Past
+AVATAR—JUKAS
+Model
+Jukas
+Add these cards to the Avatar 
+Event Card Decks of the 
+core game.
+4
+Construct
+Arcane Nigredo  2  2  4
+When the Arcane Nigredo
+performs a , it has +1
+for each  owned by the 
+target.
+Arcane Nigredo Construct
+Arcane
+Nigredo
+
+=== PAGE 5 ===
+Avata r
+A Avatar Eff ect : 
+ The Eff ect indicated by the  symbol on the Avatar Card 
+must be resolved whenever the Eff ect of a Command 
+Card shows the  symbol.
+B Avatar Tool : 
+ The Avatar uses a Tool, which is indicated in Eff ects with 
+the  symbol. Jukas' Tool is the Vortex Token.
+C Avatar Skills:
+ Jukas has the Avatar Skills explained in detail on the 
+back cover of this manual.
+AVATAR CARD ANATOMY
+. 
+ in each 
+ in it.
+ with all its Instability 
+Slots occupied is immediately 
+Teleportation
+Vortices of Power
+Jukas
+ 11 
+ 2
+ 1
+
+.
+: places 1
+ in each 
+ in it.
+ with all its Instability 
+Slots occupied is immediately 
+rebuilt
+: places
+ in each 
+
+ with all its Instability 
+Slots occupied is immediately 
+rebuilt
+: places
+Places 1
+Teleportation
+Vortices of Power
+Jukas
+ 
+ 
+   .
+rebuilt.
+ 
+  
+   
+Teleportation
+Vortices of Power
+Jukas
+  
+: places
+
+
+A
+ .
+
+B
+Jukas
+Teleportation C Vortices of Power 
+Jukas 
+
+Jukas
+Teleportation
+Vortices of Power
+
+
+5
+
+=== PAGE 6 ===
+Avatar Special Rules — Jukas
+VORTEX TOKEN () 
+Some of the Eff ects related to Jukas place a Vortex 
+Token in a Room. A Room may contain a single 
+Vortex Token. If an Eff ect indicates to place a Vortex 
+Token in a Room that already has one, or indicates 
+to place one but no Vortex Tokens are present in the 
+game pool, no Vortex Token is placed. 
+Vortex Tokens follow these rules:
+• Resolved Spell: after a Mage (other than Jukas) has resolved 
+the Eff ect of one of their Spells while in a Room that contains 
+a Vortex Token, they must take that token and place it on their 
+Mage Card. A Vortex Token that is on a Mage Card is not 
+considered to be in the Lodge. 
+• Clean-up Phase: at the end of Step 2 of the Clean-up Phase, in 
+play order, Mages must discard all the Vortex Tokens they have 
+from their Mage Card. If a Mage discards two or more Vortex 
+Tokens in this way, they draw a Forgotten Spell.
+Apply the following steps during Step 3 of the Avatar 
+Setup:
+• Clip the Avatar Base to the Jukas Model.
+• Place the Model of Jukas in the Throne Room.
+• Place a  Vortex Token in the Throne Room and in 
+each Room adjacent to it.
+JUKAS SETUP
+6
+
+=== PAGE 7 ===
+7
+
+=== PAGE 8 ===
+JUKAS PRIORITY
+: 
+Jukas chooses as a target:
+: the Room with the most , if tied...
+: the Room with no , if tied...
+: the Room with the most , if tied, the Choice of the
+Crown applies.
+ 
+Jukas chooses as a target:
+: the Room with the most  not placed by the Black 
+Rose, if tied... 
+: the Room with the most , if tied...
+: the Room with the most , if tied, the Choice of the
+Crown applies.
+ 
+Jukas chooses as a target:
+: the Mage who has the most  on their Mage Card, if tied... 
+: the Mage who has the most , if tied...
+: the Mage who has the most , if tied, the Choice of the
+Crown applies.
+Jukas Rulebook v.1.0
+©2022 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+Teleportation
+When Jukas has to resolve an Eff ect 
+which indicates the Teleportation
+Skill, even though he is in his Cell, 
+his Model is placed in the target 
+Room (Priority ) or the 
+Room the target is in (Priority ).
+Vortices of Power
+When a Room containing a 
+Vortex Token is Rebuilt, Jukas 
+gains 2. (The Token remains in 
+the Room.)
+Avatar Skills — Jukas

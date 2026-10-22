@@ -1,0 +1,473 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 4
+GAME SEED: 0
+Spells loaded: 283
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - lex
+  - druidic
+  - chaos
+  - famine
+  - alchemy
+  - agony
+Selected 6 / 10 available schools
+
+SCHOOL LIBRARIES:
+  lex: 36 cards
+  druidic: 36 cards
+  chaos: 36 cards
+  famine: 36 cards
+  alchemy: 36 cards
+  agony: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 25
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Initial Crown assigned to Player 4
+Player 4 takes the Crown
+Player 1 Cell exits: ["cemetery", "arena"] | primary: cemetery | starts in Cell: true
+Player 2 Cell exits: ["oracle_room", "armory"] | primary: oracle_room | starts in Cell: true
+Player 3 Cell exits: ["forge", "bibliotheca"] | primary: forge | starts in Cell: true
+Player 4 Cell exits: ["pleasures_room", "garden"] | primary: garden | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+Player 1 assigned Mage: Bartholomäus | HP 10 | Hand 8 | STR 2 | SPD 2
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Arcane Bond | Room arena
+Player 1 keeps ongoing Effect active: Arcane Bond
+Player 1 cast Arcane Bond | side: Light
+GAME: Moon changed to 2
+Personal Spell distribution out of sequence for Player 1
+Personal Spell distribution out of sequence for Player 2
+Player 2 lost 1 Power
+Player 2 summoned Templarii in room arena
+summon_evocation: summoned Templarii in arena
+CONTINGENCY TRIGGERED: Arcane Bond | Player 1
+Player 1 gained 1 Power
+Triggered spell resolved: Arcane Bond
+Trigger window complete
+Player 2 cast Macabre Order | side: Light
+Player 1 summoned Templarii in room arena
+CONTINGENCY TRIGGERED: Arcane Bond | Player 1
+Player 1 lost 1 Power
+Triggered spell resolved: Arcane Bond
+Trigger window complete
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Arcane Bond | Room arena
+Player 1 keeps ongoing Effect active: Arcane Bond
+Player 1 cast Arcane Bond | side: Dark
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+CONTINGENCY TRIGGERED: Arcane Bond | Player 1
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=optional_caster_room_effect | input=effect_choice | retry_index=0
+Arena received instability from owner 0 | 2/6
+Owner 0 placed 1 Instability in Arena
+Player 1 placed 1 instability | Cubes left: 23
+Triggered spell resolved: Arcane Bond
+Trigger window complete
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Deadly Bolt | Room arena
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Player 1 cast Deadly Bolt | side: Light
+Arena received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Deadly Bolt | Room arena
+Damage: attacker 0 -> Player 4 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 3 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Player 1 cast Deadly Bolt | side: Dark
+Arena received instability from owner 0 | 1/6
+Arena received instability from owner 0 | 2/6
+Owner 0 placed 2 Instability in Arena
+Player 1 placed 2 instability | Cubes left: 23
+Player 1 cast Tremor | side: Light
+Arena received instability from owner -1 | 1/6
+Arena received instability from owner -1 | 2/6
+Owner -1 placed 2 Instability in Arena
+Black Rose placed 2 instability in arena
+Player 1 gained 2 Power
+Player 1 cast Tremor | side: Dark
+Player 2 summoned Ursa in room arena
+Damage: attacker 0 -> Evocation Ursa | 2 damage | HP: 0/2
+Damage: attacker 1 -> Player 1 | 1 damage | Target HP: 10/11
+Damage: attacker 1 -> Player 3 | 1 damage | Target HP: 10/11
+Damage: attacker 1 -> Player 4 | 1 damage | Target HP: 10/11
+Player 1 cast Duress | side: Dark
+Player 2 summoned Ursa in room arena
+Damage: attacker 0 -> Evocation Ursa | 1 damage | HP: 1/2
+Waiting for Player 1 | input type: effect_choice
+Evocation activated: Ursa | controller P1 | Strength 3
+Player 1 cast Duress | side: Dark
+Owner 0 placed 0 Instability in Arena
+Spell Instability: Player 1 | Deadly Bolt | Room arena
+Player 1 cast Deadly Bolt | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 lost 1 Power
+Player 1 summoned Templarii in room arena
+summon_evocation: summoned Templarii in arena
+Player 1 cast Macabre Order | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=remove_payment_evocation | input=effect_choice | retry_index=0
+Arena received instability from owner 0 | 4/6
+Arena received instability from owner 0 | 5/6
+Owner 0 placed 2 Instability in Arena
+Player 1 placed 2 instability | Cubes left: 23
+Player 1 cast Macabre Order | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Obscure Power | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 gained 1 Power
+Player 1 cast Obscure Power | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Deadly Bolt | Room arena
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Player 1 cast Deadly Bolt | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Deadly Bolt | Room arena
+Damage: attacker 0 -> Evocation Templarii | 2 damage | HP: 1/3
+Damage: attacker 0 -> Player 4 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 3 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Player 1 cast Deadly Bolt | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Arena received instability from owner 0 | 5/6
+Owner 0 placed 2 Instability in Arena
+Player 1 placed 2 instability | Cubes left: 23
+Player 1 cast Tremor | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner -1 | 4/6
+Arena received instability from owner -1 | 5/6
+Owner -1 placed 2 Instability in Arena
+Black Rose placed 2 instability in arena
+Player 1 gained 2 Power
+Player 1 cast Tremor | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Lurk in the Shadows | Room arena
+Arena received instability from owner -1 | 5/6
+Owner -1 placed 1 Instability in Arena
+Black Rose placed 1 instability in arena
+Player 1 summoned Templarii in room arena
+summon_evocation: summoned Templarii in arena
+Player 1 cast Lurk in the Shadows | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Lurk in the Shadows | Room arena
+Player 1 keeps ongoing Effect active: Lurk in the Shadows
+Player 1 cast Lurk in the Shadows | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 keeps ongoing Effect active: Invisible Strike
+Player 1 cast Invisible Strike | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 keeps ongoing Effect active: Invisible Strike
+Player 1 cast Invisible Strike | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Waiting for Player 1 | input type: effect_choice
+Player 1 converted 2 Instability in arena
+Player 1 cast Assumption | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 converted 3 Instability in arena
+Player 2 gained 1 Power
+Player 3 gained 1 Power
+Player 1 cast Assumption | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Give and Take | Room arena
+Arena received instability from owner 1 | 5/6
+Owner 1 placed 1 Instability in Arena
+Player 2 placed 1 instability | Cubes left: 23
+Player 1 cast Give and Take | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Give and Take | Room arena
+Player 1 summoned Templarii in room arena
+summon_evocation: summoned Templarii in arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=instability_cost | input=effect_choice | retry_index=0
+Removed 1 instability of Player 1 from Arena | Cubes available: 25
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Give and Take | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Fusion | Room arena
+Damage: attacker 0 -> Evocation Templarii | 2 damage | HP: 1/3
+Damage: attacker 0 -> Player 4 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 3 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Player 1 gained 1 Power
+Player 1 cast Fusion | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Fusion | Room arena
+Damage: attacker 1 -> Player 1 | 2 damage | Target HP: 9/11
+Damage: attacker 0 -> Player 2 | 4 damage | Target HP: 7/11
+Player 1 cast Fusion | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Obscure Shift | Room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=instability_cost | input=effect_choice | retry_index=0
+Removed 1 instability of Player 1 from Arena | Cubes available: 25
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Obscure Shift | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Obscure Shift | Room arena
+Player 1 cast Obscure Shift | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Minor Control | Room arena
+Player 2 gained 1 Power
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=activate_mage_evocation | input=effect_choice | retry_index=1
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=instability_cost | input=effect_choice | retry_index=0
+Removed 1 instability of Player 1 from Arena | Cubes available: 25
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Minor Control | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Arena received instability from owner 0 | 4/6
+Owner 0 placed 1 Instability in Arena
+Spell Instability: Player 1 | Minor Control | Room arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=other_owner_instability | input=effect_choice | retry_index=0
+Arena received instability from owner 1 | 5/6
+Owner 1 placed 1 Instability in Arena
+Player 2 placed 1 instability | Cubes left: 23
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=activate_mage_evocation | input=effect_choice | retry_index=0
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=instability_cost | input=effect_choice | retry_index=0
+Removed 1 instability of Player 1 from Arena | Cubes available: 25
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Minor Control | side: Dark
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Player 1 lost 1 Power
+Damage: attacker 0 -> Player 2 | 3 damage | Target HP: 8/11
+Player 1 cast Duress | side: Light
+Player 2 summoned Templarii in room arena
+Player 1 summoned Templarii in room arena
+Arena received instability from owner 1 | 1/6
+Owner 1 placed 1 Instability in Arena
+Arena received instability from owner 2 | 2/6
+Owner 2 placed 1 Instability in Arena
+Arena received instability from owner -1 | 3/6
+Owner -1 placed 1 Instability in Arena
+Damage: attacker 0 -> Evocation Templarii | 2 damage | HP: 1/3
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Waiting for Player 1 | input type: effect_choice
+Player 1 cast Duress | side: Dark
+LEX REGRESSION: 102 checks, 0 failures

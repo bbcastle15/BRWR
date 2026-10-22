@@ -1,0 +1,100 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 4
+GAME SEED: 182026
+Spells loaded: 283
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 55
+
+ACTIVE SCHOOLS:
+  - agony
+  - forge
+  - death
+  - famine
+  - druidic
+  - chaos
+Selected 6 / 10 available schools
+
+SCHOOL LIBRARIES:
+  agony: 36 cards
+  forge: 36 cards
+  death: 36 cards
+  famine: 36 cards
+  druidic: 36 cards
+  chaos: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 25
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 4
+Events DB: 15
+Event Deck Moon 1: 5
+Event Deck Moon 2: 5
+Event Deck Moon 3: 5
+Initial Crown assigned to Player 2
+Player 2 takes the Crown
+Player 1 Cell exits: ["garden", "summoner_room"] | primary: garden | starts in Cell: true
+Player 2 Cell exits: ["arena", "cemetery"] | primary: arena | starts in Cell: true
+Player 3 Cell exits: ["observatory", "bibliotheca"] | primary: observatory | starts in Cell: true
+Player 4 Cell exits: ["the_abyss", "sanctuary"] | primary: sanctuary | starts in Cell: true
+Cells created: 4
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 4 players
+Waiting for Player 1 | input type: effect_choice
+Black Rose Room received instability from owner 0 | 1/10
+Owner 0 placed 1 Instability in Black Rose Room
+Player 1 placed 1 instability | Cubes left: 24
+GAME: Moon changed to 2
+Personal Spell distribution out of sequence for Player 1
+Personal Spell distribution out of sequence for Player 2
+Player 1 gained 2 Power
+Player 1 solved Quest: Acquire Wealth | Reward: 2 Power
+Damage: attacker -1 -> Player 1 | 2 damage | Target HP: 9/11
+Player 4 gained 2 Power
+Player 4 solved Quest: Acquire Wealth | Reward: 2 Power
+Player 1 Mage placed in Cell | entrance garden
+Damage: attacker -1 -> Player 1 | 2 damage | Target HP: 9/11
+Player 4 Mage placed in Cell | entrance sanctuary
+Waiting for Player 1 | input type: effect_choice
+Black Rose Room received instability from owner 0 | 1/10
+Owner 0 placed 1 Instability in Black Rose Room
+Player 1 placed 1 instability | Cubes left: 24
+GAME: Moon changed to 2
+Personal Spell distribution out of sequence for Player 1
+Personal Spell distribution out of sequence for Player 2
+Player 1 gained 2 Power
+Player 1 solved Quest: Acquire Wealth | Reward: 2 Power
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 9/11
+Player 1 placed 0 instability | Cubes left: 23
+Player 1 placed 0 instability | Cubes left: 23
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 7/11
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 5/11
+Player 1 placed 0 instability | Cubes left: 19
+Player 1 placed 0 instability | Cubes left: 19
+Damage: attacker 0 -> Player 2 | 2 damage | Target HP: 3/11
+Damage: attacker 0 -> Player 2 | 1 damage | Target HP: 10/11
+Player 1 placed 0 instability | Cubes left: 0
+Player 1 placed 0 instability | Cubes left: 0
+Player 1 placed 0 instability | Cubes left: 0
+Player 1 placed 0 instability | Cubes left: 0
+Player 4 summoned Colossus in room black_rose
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 3 -> Player 1 | 3 damage | Target HP: 8/11
+Evocation activated: Colossus | controller P4 | Strength 3
+
+==============================================
+           EVOCATION PHASE COMPLETE
+==============================================
+
+AVATAR FOURTH PLAYTEST: 22 assertions; failures: []

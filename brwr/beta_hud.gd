@@ -26,6 +26,18 @@ var decision_actions: HBoxContainer
 var reserved_width: float = 340.0
 var hand_button: Button
 var hand_overlay = null
+var effect_box: PanelContainer
+var effect_text: RichTextLabel
+
+func _process(_delta: float) -> void:
+	if game == null or effect_box == null:
+		return
+	var resolving: bool = not game.resolution_stack.is_empty() or str(game.pending_input.get("type", "")) == "effect_choice"
+	if game.network_client:
+		resolving = str(game.pending_input.get("type", "")) == "effect_choice"
+	var description: String = str(game.pending_input.get("effect_description", game.current_effect_description))
+	effect_box.visible = resolving and not description.is_empty() and game.card_presentation.is_empty()
+	effect_text.text = "[center]" + description + "[/center]"
 
 var generic_selection: Array = []
 var school_draft: Array[String] = []
@@ -276,6 +288,23 @@ func _build_ui() -> void:
 	hand_overlay.study_confirmed.connect(func(indices): _submit({"keep_indices": indices}))
 	hand_overlay.quest_selection_confirmed.connect(_on_hand_overlay_quest_selection_confirmed)
 	_build_decision_bar()
+	effect_box = PanelContainer.new()
+	effect_box.name = "CurrentEffect"
+	effect_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	effect_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	effect_box.offset_left = -280
+	effect_box.offset_right = 280
+	effect_box.add_theme_stylebox_override("panel", TabletopStyle.panel(Color("8f7952"), Color("111a1beF")))
+	effect_box.offset_top = 16
+	effect_box.offset_bottom = 68
+	overlay.add_child(effect_box)
+	effect_text = RichTextLabel.new()
+	effect_text.bbcode_enabled = true
+	effect_text.fit_content = true
+	effect_text.scroll_active = false
+	effect_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	effect_text.add_theme_font_size_override("normal_font_size", 20)
+	effect_box.add_child(effect_text)
 	hand_overlay.confirmation_changed.connect(_sync_hand_confirmation)
 	panel.hide()
 
@@ -409,7 +438,8 @@ func open_public_memories(player_index: int) -> void:
 		return
 	if game.table_shell != null:
 		game.table_shell.close_board()
-	hand_overlay.open_memories(player_index)
+	# Public browsing must not replace the live Preparation overlay/draft.
+	game._reference_card_preview().show_spell_pile(game.players[player_index].memories, "Player %d · Memories" % (player_index + 1))
 
 
 func _on_hand_overlay_preparation_confirmed(payload: Dictionary) -> void:
@@ -674,11 +704,22 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 		var scroll := ScrollContainer.new()
 		scroll.name = "ObjectChoices"
 		scroll.custom_minimum_size.y = 350
-		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO if kind == "upgrades" else ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if kind == "upgrades" else ScrollContainer.SCROLL_MODE_AUTO
 		content.add_child(scroll)
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 12)
-		scroll.add_child(row)
+		if kind == "upgrades":
+			scroll.custom_minimum_size.y = maxf(300, half_height * 2 - 170)
+			var grid := GridContainer.new()
+			grid.name = "UpgradeGrid"
+			grid.columns = maxi(1, int((half_width * 2 - 60) / 460))
+			grid.add_theme_constant_override("h_separation", 18)
+			grid.add_theme_constant_override("v_separation", 18)
+			scroll.set_meta("upgrade_width", (half_width * 2 - 80 - 18 * (grid.columns - 1)) / grid.columns)
+			scroll.add_child(grid)
+		else:
+			var row := HBoxContainer.new()
+			row.add_theme_constant_override("separation", 12)
+			scroll.add_child(row)
 		gallery = scroll
 	var id: String = str(option.get("id", option.get("spell_id", option.get("evocation_id", ""))))
 	var texture: Texture2D = hand_overlay._resolve_card_texture({"id": id}) if kind == "spells" else game.ReferenceCardPreview.card_texture(kind, id)
@@ -686,6 +727,10 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 		texture = preload("res://assets/tabletop/card_back.png")
 	var button := Button.new()
 	button.custom_minimum_size = Vector2(235, 335) if kind != "mages" else Vector2(450, 260)
+	if kind == "upgrades":
+		var width: float = gallery.get_meta("upgrade_width", 460.0)
+		var aspect: float = texture.get_size().aspect() if texture != null else 1.5
+		button.custom_minimum_size = Vector2(width, width / aspect)
 	if kind == "schools":
 		button.custom_minimum_size = Vector2(300, 450)
 	button.tooltip_text = _option_label(option)
@@ -1395,6 +1440,11 @@ func _render_action_root(category: String = "") -> void:
 			continue
 
 		if mode == "direct":
+			if str(option.get("action", {}).get("type", "")) == "command":
+				var target := {"token":"command", "owner_id":current_player_index, "evocation_index":int(option.get("action", {}).get("evocation_index", -1))}
+				if game.show_board_target_choice(target, _submit_action_token.bind(str(option.get("token", "")))):
+					_add_info("Command: click a highlighted Evocation.")
+					continue
 			if str(option.get("kind", "")) == "quest":
 				_add_object_choice(option, _submit_action_token.bind(str(option.get("token", ""))), false, "quests")
 				continue
@@ -2355,6 +2405,10 @@ func _render_evocation_phase() -> void:
 			_add_button(str(evocation.get("name", "Evocation")), _render_evocation_movement.bind(evocation))
 
 func _render_evocation_movement(evocation: Dictionary) -> void:
+	var plans: Array = evocation.get("activation_plans", [])
+	if plans.size() == 1 and bool(plans[0].get("context", {}).get("extended_activation", false)):
+		_choose_evocation_plan.call_deferred(int(evocation.evocation_index), plans[0].context.duplicate(true))
+		return
 	var choices: Array = []
 	for plan in evocation.get("activation_plans", []):
 		choices.append({"path": plan.get("path", []), "label": _evocation_phase_plan_label(plan), "board_target": _attack_target_option(plan.get("context", {}), "evocation_"), "callback": _choose_evocation_plan.bind(int(evocation.get("evocation_index", -1)), plan.get("context", {}).duplicate(true))})
@@ -2499,6 +2553,13 @@ func _center_choice_panel() -> void:
 
 
 func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: String = "") -> void:
+	if choices.is_empty():
+		panel.show()
+		_add_info("No legal activation path is available.")
+		return
+	if prefix.is_empty() and choices.all(func(choice): return choice.get("path", []).is_empty()):
+		_finish_lodge_path(choices)
+		return
 	if origin_room_id.is_empty() and current_player_index >= 0 and current_player_index < game.players.size():
 		origin_room_id = str(game.players[current_player_index].mage.room_id)
 	# Leave the middle of the Lodge visible while selecting rooms.
@@ -2532,6 +2593,13 @@ func _render_lodge_paths(choices: Array, prefix: Array = [], origin_room_id: Str
 		var stop_room: String = origin_room_id if prefix.is_empty() else str(prefix.back())
 		if game.is_lodge_room_id(stop_room):
 			next_rooms[stop_room] = _finish_lodge_path.bind(complete)
+	if not next_rooms.keys().any(func(room_id): return game.is_lodge_room_id(str(room_id))):
+		_center_choice_panel()
+		panel.show()
+		_add_section("Choose activation")
+		for choice in choices:
+			_add_button(str(choice.get("label", "Activate")), choice.callback)
+		return
 	game.show_lodge_room_choices(next_rooms)
 	if not prefix.is_empty() and panel.visible:
 		var reset := _render_lodge_paths.bind(choices, [], origin_room_id)
