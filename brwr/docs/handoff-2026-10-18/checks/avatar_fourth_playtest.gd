@@ -99,6 +99,8 @@ func run():
 	expect(game.players[0].mage.get_damage() > 0, "Avatar Colossus attacks legal target")
 
 	reset_case()
+	# Finish the preceding damage presentation before testing manual board opening.
+	game.table_shell.close_board()
 	game.avatar_board.refresh()
 	game.table_shell.open_board(AVATAR)
 	expect(is_equal_approx(game.avatar_board.rotation, -PI/2), "Fullscreen Avatar Board is exactly upright")

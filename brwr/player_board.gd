@@ -635,6 +635,9 @@ func refresh_damage_track():
 	var damage_cubes = (
 		player_state.mage.damage_cubes
 	)
+	if game != null and game.table_shell != null:
+		damage_cubes = game.table_shell.displayed_damage(player_state.player_index, damage_cubes)
+	$HealthLabel.text = "HP: %d/%d" % [maxi(0, player_state.mage.health - damage_cubes.size()), player_state.mage.health]
 	# Keep occupied slots' nodes: pending conversion/healing choices are attached
 	# to those cubes and must survive unrelated Quest/board refreshes.
 	for i in range(track.get_child_count()):

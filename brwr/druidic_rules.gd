@@ -24,6 +24,9 @@ static func choose(game, player: int, context: Dictionary, key: String, options:
 		prompt: String, optional: bool = false, kind: String = "druidic_choice") -> bool:
 	if context.has(key) or options.is_empty():
 		return true
+	if AvatarRules.is_avatar(game, player) and options.size() == 1 and not optional:
+		context[key] = options[0].value
+		return true
 	context["game"] = game
 	if not context.has("caster_id"):
 		context["caster_id"] = player

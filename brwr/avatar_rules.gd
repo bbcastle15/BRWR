@@ -83,6 +83,9 @@ static func choose(game, frame: Dictionary, key: String, options: Array, prompt:
 	if options.is_empty():
 		frame[key] = null
 		return true
+	if options.size() == 1:
+		frame[key] = options[0].value
+		return true
 	game.request_effect_choice(game.crown_owner_id, kind, frame, key, options, 1, 1, "Choice of the Crown · " + prompt)
 	return false
 

@@ -151,12 +151,10 @@ static func _damage_targets(game, frame: Dictionary, options: Array, amount: int
 	var candidates: Array = frame.targets.filter(func(o): return o.value.has("player_index"))
 	if candidates.is_empty(): candidates = frame.targets.duplicate()
 	candidates = AvatarRules.rank(game, candidates, ["most_black_rose_damage", "most_damage"])
-	for i in candidates.size():
-		if not candidates[i].has("token"): candidates[i]["token"] = "damage_target:%d" % i
-		if not candidates[i].has("name"): candidates[i]["name"] = game.players[int(candidates[i].value.player_index)].player_name
-	if not AvatarRules.choose(game, frame, "next_target", candidates, "Choose the order of damage."): return false
-	var target: Dictionary = frame.next_target
-	frame.erase("next_target")
+	# The Room is already the target. Resolve its affected Models without
+	# requesting one click per Model; keep the established damage priorities.
+	# Equivalent recipients use their stable enumeration order.
+	var target: Dictionary = candidates[0].value
 	frame.targets = frame.targets.filter(func(o): return o.value != target)
 	var context: Dictionary = frame.context
 	var actor: int = game.avatar.player_index

@@ -8920,6 +8920,9 @@ func request_effect_choice(
 	prompt: String = ""
 ) -> bool:
 	if AvatarRules.is_avatar(self, player_index):
+		if options.size() == 1 and min_select == 1 and max_select == 1 and not waiting_for_player_input:
+			_set_interactive_effect_choice(context, context_key, options[0].get("value"))
+			return false
 		player_index = crown_owner_id
 		prompt = "Choice of the Crown · " + prompt
 	if waiting_for_player_input:
@@ -9536,6 +9539,10 @@ func _quest_request_single_choice(
 		# sentence; the Quest rules will then skip the unapplicable part.
 		return true
 
+
+	if AvatarRules.is_avatar(self, caster_id) and options.size() == 1:
+		_set_interactive_effect_choice(context, context_key, options[0].get("value"))
+		return true
 
 	request_effect_choice(
 		caster_id,
@@ -11379,6 +11386,10 @@ func _apply_or_request_secondary_choice(
 		# normal Effect rules decide whether it is skipped or fails.
 		return true
 
+
+	if AvatarRules.is_avatar(self, caster_id) and options.size() == 1:
+		_set_interactive_effect_choice(context, context_key, options[0].get("value"))
+		return true
 
 	request_effect_choice(
 		caster_id,

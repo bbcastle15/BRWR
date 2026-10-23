@@ -263,6 +263,8 @@ func create_damage_track() -> void:
 		damage_track.remove_child(slot)
 		slot.queue_free()
 	var owners: Array = game.players[game.avatar.player_index].mage.damage_cubes
+	if game.table_shell != null:
+		owners = game.table_shell.displayed_damage(game.avatar.player_index, owners)
 	for i in owners.size():
 		var slot := Node2D.new()
 		slot.position = _health_position(i)

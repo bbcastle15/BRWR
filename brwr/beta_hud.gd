@@ -1395,7 +1395,7 @@ func _open_owned_quest_selection(options: Array, minimum: int, maximum: int, pro
 		or int(option.get("board_player_index", -1)) != current_player_index:
 			return false
 	panel.hide()
-	if game.table_shell != null:
+	if game.table_shell != null and not game.table_shell._has_damage_presentation():
 		game.table_shell.close_board()
 	hand_overlay.open_quest_selection({
 		"player_index": current_player_index, "prompt": prompt,
