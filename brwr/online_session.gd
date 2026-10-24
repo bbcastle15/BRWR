@@ -271,7 +271,7 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 				if connected and receiving.has(peer_id) and peer_players.has(peer_id) and game != null \
 				and game.can_acknowledge_card_presentation(int(peer_players[peer_id])) \
 				and int(payload.get("serial", -2)) == int(game.card_presentation.get("serial", -1)):
-					game.dismiss_card_presentation(int(payload.get("serial", -2)))
+					game.dismiss_card_presentation(int(payload.get("serial", -2)), int(peer_players[peer_id]))
 		return
 
 	match op:
@@ -425,7 +425,7 @@ func acknowledge_presentation(serial: int) -> bool:
 		return false
 	if game.network_client:
 		return _send_game_to_host({"op": "ack_presentation", "serial": serial}) == OK
-	return game.dismiss_card_presentation(serial)
+	return game.dismiss_card_presentation(serial, local_player)
 
 
 func submit_local(player: int, payload: Dictionary) -> bool:

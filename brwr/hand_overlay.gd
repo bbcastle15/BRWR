@@ -1036,16 +1036,16 @@ func _create_card_widget(
 		fallback.height = int(display_size.y)
 		card_button.texture_normal = fallback
 
-	card_button.pressed.connect(
-		Callable(
-			self,
-			"_select_card"
-		).bind(
-			hand_index
-		)
-	)
+	game.connect_card_choice(card_button, {"card_kind": "spells", "id": str(card.get("id", "")), "name": name_label.text}, _select_card.bind(hand_index))
 
 	column.add_child(card_button)
+	if mode == MODE_PREPARATION and not _single_effect_card(hand_index) and (selected or _is_assigned(hand_index)):
+		var side := preload("res://tabletop_style.gd").spell_side_frame()
+		card_button.add_child(side)
+		var dark := selected_dark if selected else _assigned_dark_side(hand_index)
+		var fit := func(): preload("res://tabletop_style.gd").fit_spell_side(side, card_button.size, texture, dark)
+		card_button.resized.connect(fit)
+		fit.call_deferred()
 
 	var hint := Label.new()
 	var assignment := _assignment_badge(hand_index)

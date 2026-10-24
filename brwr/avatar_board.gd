@@ -85,7 +85,11 @@ func refresh() -> void:
 		card.queue_free()
 	var preview = game._reference_card_preview()
 	_add_card("avatars", "possessed", "Possessed · Dominion", SHEET,
-		func(): preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
+		func():
+			if not expanded and game.table_shell != null:
+				game.table_shell.open_board(game.avatar.player_index)
+			else:
+				preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
 	var back_id := "command_back_%d" % clampi(game.current_moon, 1, 3)
 	_add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
 		func(): preview.show_card("avatars", back_id, "Command deck · Moon %d" % game.current_moon,

@@ -181,7 +181,7 @@ func show_card(kind: String, id: String, title: String, text: String) -> void:
 	elif kind == "schools" and art.texture != null:
 		# The rules are printed on the School card: give the image the available
 		# height instead of reserving an empty description box below it.
-		var height := clampf(get_viewport().get_visible_rect().size.y - 140.0, 240.0, 1000.0)
+		var height := clampf(get_viewport().get_visible_rect().size.y - 230.0, 240.0, 1000.0)
 		art.custom_minimum_size = Vector2(height * art.texture.get_size().aspect(), height)
 		description.custom_minimum_size = Vector2(480, 150)
 		panel.custom_minimum_size = Vector2.ZERO
@@ -208,6 +208,16 @@ func show_reference_pile(kind: String, cards: Array, title: String, describe: Ca
 	pile_index = 0
 	_browse_pile(0)
 
+
+func show_school_library(school_id: String) -> void:
+	var game = get_parent()
+	var spells: Array = game.spell_database.get_school_spells(school_id).filter(func(spell): return not spell.personal and not spell.forgotten and spell.avatar_command.is_empty())
+	spells.sort_custom(func(a, b): return str(a.card_name).naturalnocasecmp_to(str(b.card_name)) < 0)
+	var cards: Array = [{"id": school_id, "name": game.get_school_display_name(school_id), "card_kind": "schools"}]
+	for spell in spells:
+		cards.append({"id": spell.id, "name": spell.card_name, "card_kind": "spells"})
+	show_reference_pile("schools", cards, "Available " + game.get_school_display_name(school_id) + " spells")
+
 func _browse_pile(direction: int) -> void:
 	if pile_cards.is_empty():
 		show_card(pile_kind, "", pile_title, "No discarded Spells." if pile_kind == "spells" else "No cards.")
@@ -220,7 +230,7 @@ func _browse_pile(direction: int) -> void:
 		art.texture = SpellArtResolver.get_texture(card.id, card.school_id)
 	else:
 		var text: String = str(pile_description.call(card)) if pile_description.is_valid() else ""
-		show_card(pile_kind, str(card.id), str(card.get("name", card.id)) + " · " + title, text)
+		show_card(str(card.get("card_kind", pile_kind)), str(card.id), str(card.get("name", card.id)) + " · " + title, text)
 	pile_controls.show()
 	pile_controls.get_child(0).disabled = pile_index == 0
 	pile_controls.get_child(1).disabled = pile_index == pile_cards.size() - 1

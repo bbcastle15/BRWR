@@ -6,7 +6,9 @@ static func build(game, viewer: int) -> Dictionary:
 	var state: Dictionary = game.get_beta_game_state(viewer)
 	state["revision"] = game.input_revision
 	state["turn_presentation"] = game.get_turn_presentation()
-	state["card_presentation"] = game.card_presentation.duplicate()
+	state["card_presentation"] = game.card_presentation.duplicate(true)
+	state["feedback_serial"] = game.table_feedback_serial
+	state["feedback_events"] = game.table_feedback_events.duplicate(true)
 	state["avatar"] = game.avatar.public_data() if game.avatar != null else {}
 	state["active_schools"] = game.active_school_ids.duplicate()
 	state["school_discards"] = {}
@@ -61,6 +63,8 @@ static func apply(game, state: Dictionary) -> void:
 	# Joining a running table positions markers directly; subsequent score
 	# changes use the same animations as local games.
 	power_board.instant_updates = not game.has_meta("received_network_snapshot")
+	var initial_snapshot: bool = power_board.instant_updates
+	game.suppress_placement_feedback = initial_snapshot
 	game.set_meta("received_network_snapshot", true)
 	var previous_revision: int = game.input_revision
 	var previous_pending: Dictionary = game.pending_input.duplicate(true)
@@ -89,6 +93,13 @@ static func apply(game, state: Dictionary) -> void:
 	game.pending_input = state.pending_input
 	game.network_slot_views = state.slots
 	game.network_cast_tokens = state.cast_tokens
+	# A lethal hit can be healed/cleared before the next snapshot. Replay the
+	# public placement record, not a damage-count difference, exactly once.
+	if not initial_snapshot and game.table_shell != null:
+		for event in state.get("feedback_events", []):
+			if int(event.get("serial", 0)) > game.table_feedback_serial:
+				game.table_shell.receive_feedback(event)
+	game.table_feedback_serial = int(state.get("feedback_serial", game.table_feedback_serial))
 	game.player_board_spell_slots.clear()
 	game.black_rose_trophies.assign(state.get("black_rose_trophies", []))
 	game.quest_discard.clear()
@@ -202,9 +213,15 @@ static func apply(game, state: Dictionary) -> void:
 		if bool(data.get("vastum", false)):
 			game.vastum_room_state[str(data.id)] = true
 		if room.instability_cubes != data.cubes:
+			var previous_count: int = room.instability_cubes.size()
+			var prefix_unchanged: bool = data.cubes.size() >= previous_count and data.cubes.slice(0, previous_count) == room.instability_cubes
+			if prefix_unchanged:
+				for i in range(previous_count, data.cubes.size()):
+					room.add_instability_cube(int(data.cubes[i]), not initial_snapshot)
+				continue
 			room.clear_instability()
-			for owner in data.cubes:
-				room.add_instability_cube(owner)
+			for i in data.cubes.size():
+				room.add_instability_cube(int(data.cubes[i]), not initial_snapshot and i >= previous_count)
 	for data in state.cells:
 		game.player_cell_coords[data.owner] = data.coord
 		for child in game.get_children():
@@ -226,10 +243,12 @@ static func apply(game, state: Dictionary) -> void:
 	power_board.instant_updates = false
 	game.update_table_layout()
 	game.refresh_model_tokens()
+	game.suppress_placement_feedback = false
 	game.refresh_vastum_tokens()
 	game.refresh_all_player_boards()
 	game._refresh_permanent_room_markers()
 	if game.table_shell != null:
+		if initial_snapshot: game.table_shell._observe(false)
 		game.table_shell.sync_card_presentation()
 	var pending_changed: bool = previous_pending != game.pending_input
 	if previous_revision != game.input_revision or pending_changed or not game.waiting_for_player_input:

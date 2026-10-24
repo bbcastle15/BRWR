@@ -104,7 +104,7 @@ func _inspect_evocation(id: String) -> void:
 	game._reference_card_preview().show_card("evocations", id, str(data.name), "Available copies: %d / %d" % [game.get_available_evocation_copies(id), int(data.get("copies", 0))])
 
 func _inspect_school(id: String) -> void:
-	game._reference_card_preview().show_card("schools", id, id.capitalize(), "")
+	game._reference_card_preview().show_school_library(id)
 
 func _inspect_discard(id: String) -> void:
 	game._reference_card_preview().show_spell_pile(game.get_school_discard(id), id.capitalize() + " — Discards")

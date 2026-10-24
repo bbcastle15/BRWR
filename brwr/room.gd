@@ -293,7 +293,8 @@ func reset_activation():
 # =========================================================
 
 func add_instability_cube(
-	owner_id: int
+	owner_id: int,
+	animate: bool = true
 ) -> bool:
 
 	if flipped:
@@ -347,6 +348,9 @@ func add_instability_cube(
 	)
 
 	update_instability_cube_positions()
+	var game = get_parent()
+	if animate and game.get("table_shell") != null:
+		game.table_shell.queue_world_placement(cube)
 
 	print(
 		room_name,

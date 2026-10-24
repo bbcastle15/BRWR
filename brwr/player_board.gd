@@ -296,6 +296,10 @@ func _configure_spell_slot(slot: Control, slot_id: String) -> void:
 		button.pressed.connect(
 			Callable(self, "_on_spell_slot_pressed").bind(slot_id)
 		)
+		button.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				button.accept_event()
+				game.activate_player_board_spell.call_deferred(player_index, slot_id, true))
 		slot.add_child(button)
 
 
@@ -342,16 +346,8 @@ func _render_spell_slot(
 		slot.add_child(marker)
 	var active_side = slot.get_node_or_null("ActiveSide")
 	if active_side == null:
-		active_side = Panel.new()
-		active_side.name = "ActiveSide"
+		active_side = preload("res://tabletop_style.gd").spell_side_frame()
 		active_side.size = Vector2(SPELL_SIZE.x, SPELL_SIZE.y * 0.5)
-		active_side.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var edge := StyleBoxFlat.new()
-		edge.bg_color = Color(1, 0.86, 0.55, 0.035)
-		edge.border_color = Color(0.91, 0.78, 0.48, 0.75)
-		edge.set_border_width_all(2)
-		edge.set_corner_radius_all(3)
-		active_side.add_theme_stylebox_override("panel", edge)
 		slot.add_child(active_side)
 	active_side.visible = data.get("public", false)
 	# Source PNGs print both halves upright. Highlight the selected half without
@@ -393,7 +389,7 @@ func _render_spell_slot(
 
 		button.disabled = false
 		button.tooltip_text = (
-			str(data.get("name", "Spell")) + " — click to inspect"
+			str(data.get("name", "Spell")) + " — right-click to inspect"
 		)
 		return
 
@@ -409,7 +405,7 @@ func _render_spell_slot(
 	var can_inspect: bool = bool(data.get("can_inspect", false))
 	button.disabled = not can_inspect
 	button.tooltip_text = (
-		"Click to inspect your prepared Spell"
+		"Left-click to cast · Right-click to inspect your prepared Spell"
 		if can_inspect
 		else "Prepared Spell — hidden"
 	)

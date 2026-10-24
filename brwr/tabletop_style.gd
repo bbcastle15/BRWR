@@ -98,3 +98,24 @@ static func marker(kind: String, player_color: Color, extent: Vector2 = Vector2(
 			number.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			art.add_child(number)
 	return art
+
+
+static func spell_side_frame() -> Panel:
+	var frame := Panel.new()
+	frame.name = "ActiveSide"
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var edge := StyleBoxFlat.new()
+	edge.bg_color = Color(1, 0.86, 0.55, 0.035)
+	edge.border_color = Color(0.91, 0.78, 0.48, 0.75)
+	edge.set_border_width_all(2)
+	edge.set_corner_radius_all(3)
+	frame.add_theme_stylebox_override("panel", edge)
+	return frame
+
+
+static func fit_spell_side(frame: Control, area: Vector2, texture: Texture2D, dark: bool) -> void:
+	var extent := area
+	if texture != null:
+		extent = texture.get_size() * minf(area.x / texture.get_width(), area.y / texture.get_height())
+	frame.size = Vector2(extent.x, extent.y * 0.5)
+	frame.position = (area - extent) * 0.5 + Vector2(0, extent.y * 0.5 if dark else 0.0)

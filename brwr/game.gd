@@ -20,6 +20,10 @@ var network_turn_presentation: Dictionary = {}
 # Public presentation metadata only; effects stay in the existing resolution frames.
 var card_presentation: Dictionary = {}
 var card_presentation_serial := 0
+# Public, transient visual history. Never used to resolve rules or reveal private cards.
+var table_feedback_serial := 0
+var table_feedback_events: Array[Dictionary] = []
+var suppress_placement_feedback := false
 var avatar_selection: Dictionary = {}
 var avatar: AvatarState = null
 var avatar_board: Node2D = null
@@ -1159,6 +1163,8 @@ func _sync_evocation_tokens() -> void:
 			token.inspect_requested.connect(open_evocation_inspection.bind(evocation))
 			add_child(token)
 			evocation_tokens[instance_id] = token
+			if table_shell != null:
+				table_shell.queue_world_placement(token)
 
 	var stale_ids: Array = []
 
@@ -2048,11 +2054,17 @@ func open_player_board_action(player_index: int, category: String) -> void:
 func activate_player_board_spell(player_index: int, slot_id: String, inspect_only: bool = false) -> void:
 	var token := get_player_board_cast_token(player_index, slot_id)
 	if not inspect_only and token != "":
-		if table_shell != null:
-			table_shell.close_board()
-		submit_beta_input(player_index, {"token": token})
+		var data := get_player_board_spell_slot_data(player_index, slot_id)
+		if beta_hud != null:
+			beta_hud.confirm_choice("Vuoi lanciare %s?" % str(data.get("name", "questa spell")), _confirm_player_board_cast.bind(player_index, slot_id, token))
 	else:
 		open_player_board_spell(player_index, slot_id)
+
+
+func _confirm_player_board_cast(player_index: int, slot_id: String, token: String) -> void:
+	if token != get_player_board_cast_token(player_index, slot_id): return
+	if table_shell != null: table_shell.close_board()
+	submit_beta_input(player_index, {"token": token})
 
 
 func open_player_board_spell(
@@ -14218,6 +14230,8 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
 	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells", "jinxs"]
+	if network_session != null and str(data.get("kind", "")) == "spells":
+		data["awaiting_players"] = AvatarRules.human_order(self).duplicate()
 	data["acknowledge_player"] = int(data.get("player", get_turn_presentation().get("player_index", 0)))
 	if AvatarRules.is_avatar(self, int(data.acknowledge_player)):
 		data.acknowledge_player = crown_owner_id
@@ -14235,18 +14249,38 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 
 
 func can_acknowledge_card_presentation(player_index: int) -> bool:
+	if card_presentation.has("awaiting_players"):
+		return card_presentation.awaiting_players.has(player_index)
 	return not card_presentation.is_empty() and (
 		network_session == null or player_index == int(card_presentation.get("acknowledge_player", 0)))
 
 
-func dismiss_card_presentation(serial: int = -1) -> bool:
+func dismiss_card_presentation(serial: int = -1, player_index: int = -1) -> bool:
 	if network_client or card_presentation.is_empty():
 		return false
 	var active_serial: int = int(card_presentation.get("serial", -1))
 	if serial >= 0 and serial != active_serial:
 		return false
+	if card_presentation.has("awaiting_players"):
+		if not can_acknowledge_card_presentation(player_index): return false
+		card_presentation.awaiting_players.erase(player_index)
+		if not card_presentation.awaiting_players.is_empty():
+			if table_shell != null: table_shell.sync_card_presentation()
+			if network_session != null: network_session.publish()
+			return true
 	_finish_card_presentation(active_serial)
 	return true
+
+
+func record_damage_feedback(player_index: int, previous_damage: int, owners: Array) -> void:
+	if network_client: return
+	table_feedback_serial += 1
+	var event := {"serial": table_feedback_serial, "kind": "damage", "player": player_index,
+		"previous": previous_damage, "owners": owners.duplicate(), "health": players[player_index].mage.health}
+	table_feedback_events.append(event)
+	if table_feedback_events.size() > 128: table_feedback_events.pop_front()
+	if table_shell != null: table_shell.receive_feedback(event)
+	if network_session != null: network_session.call_deferred("publish")
 
 
 func _finish_card_presentation(serial: int) -> void:
@@ -14717,8 +14751,8 @@ func process_damage_resolution(
 			resolution["was_defeated"] = target_mage.is_defeated()
 			var damage_before: int = target_mage.get_damage()
 			var damage_dealt: int = target_mage.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes_available)
-			if table_shell != null and damage_dealt > 0:
-				table_shell.queue_damage_placement(target_player_index, damage_before, target_mage.damage_cubes.duplicate())
+			if damage_dealt > 0:
+				record_damage_feedback(target_player_index, damage_before, target_mage.damage_cubes)
 			resolution["actual_damage"] = damage_dealt
 			_sync_damage_result_context(resolution, damage_dealt)
 			_refresh_damage_boards(target_player_index, attacker_id)
@@ -21468,14 +21502,21 @@ func clear_board_target_choices() -> void:
 		node.queue_free()
 
 
-func connect_card_choice(button: Button, option: Dictionary, callback: Callable) -> void:
+func connect_card_choice(button: BaseButton, option: Dictionary, callback: Callable) -> void:
 	if not bool(option.get("hidden", false)) and (str(option.get("card_kind", "")) in ["spells", "upgrades"] or option.has("spell_id") or str(option.get("slot_id", "")) != ""):
-		button.tooltip_text += "\nClick to select · Shift-click to inspect"
+		button.tooltip_text += "\nLeft-click to select · Right-click to inspect"
+		button.gui_input.connect(_on_card_choice_gui_input.bind(button, option))
 		# Read Shift while the signal is emitted, before deferring either action.
 		# Deferring only the action also keeps selection from freeing its emitter.
 		button.pressed.connect(_on_card_choice_pressed.bind(option, callback))
 	else:
 		button.pressed.connect(callback, CONNECT_DEFERRED)
+
+
+func _on_card_choice_gui_input(event: InputEvent, button: BaseButton, option: Dictionary) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		button.accept_event()
+		_inspect_card_choice.call_deferred(option)
 
 
 func _on_card_choice_pressed(option: Dictionary, callback: Callable) -> void:

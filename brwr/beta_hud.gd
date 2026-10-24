@@ -28,6 +28,9 @@ var hand_button: Button
 var hand_overlay = null
 var effect_box: PanelContainer
 var effect_text: RichTextLabel
+var choice_confirmation: ConfirmationDialog
+var confirmation_action: Callable
+var confirmation_revision := -1
 
 func _process(_delta: float) -> void:
 	if game == null or effect_box == null:
@@ -285,7 +288,7 @@ func _build_ui() -> void:
 	overlay.add_child(hand_overlay)
 	hand_overlay.setup(game)
 	hand_overlay.preparation_confirmed.connect(_on_hand_overlay_preparation_confirmed)
-	hand_overlay.study_confirmed.connect(func(indices): _submit({"keep_indices": indices}))
+	hand_overlay.study_confirmed.connect(_confirm_study_keep)
 	hand_overlay.quest_selection_confirmed.connect(_on_hand_overlay_quest_selection_confirmed)
 	_build_decision_bar()
 	effect_box = PanelContainer.new()
@@ -483,6 +486,8 @@ func _on_game_over(winner_data: Dictionary) -> void:
 func _on_player_input_resolved(
 	_request: Dictionary
 ) -> void:
+	if choice_confirmation != null: choice_confirmation.hide()
+	confirmation_action = Callable()
 	panel.hide()
 	game._clear_direct_lodge_effect_choice()
 	game._hide_chaos_reveal_overlay()
@@ -652,6 +657,10 @@ func _refresh_header() -> void:
 
 
 func _clear_content() -> void:
+	var specialization_header = prompt_label.get_parent().get_node_or_null("SpecializationChoice")
+	if specialization_header != null:
+		specialization_header.get_parent().remove_child(specialization_header)
+		specialization_header.queue_free()
 	if decision_actions != null:
 		for child in decision_actions.get_children():
 			decision_actions.remove_child(child)
@@ -778,7 +787,7 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 
 func _inspect_school(id: String, title: String) -> void:
 	game._close_reference_card_preview()
-	game._reference_card_preview().show_card("schools", id, title, "")
+	game._reference_card_preview().show_school_library(id)
 
 
 func _add_section(title_text: String) -> void:
@@ -1001,6 +1010,40 @@ func _submit(payload: Dictionary) -> void:
 		feedback_label.text = "Choice accepted."
 
 
+func confirm_choice(message: String, callback: Callable) -> void:
+	if choice_confirmation == null:
+		choice_confirmation = ConfirmationDialog.new()
+		choice_confirmation.name = "ChoiceConfirmation"
+		choice_confirmation.title = "Confirm choice"
+		choice_confirmation.ok_button_text = "Confirm"
+		choice_confirmation.cancel_button_text = "Cancel"
+		choice_confirmation.exclusive = true
+		choice_confirmation.theme = TabletopStyle.make_theme()
+		add_child(choice_confirmation)
+		choice_confirmation.confirmed.connect(_accept_confirmation)
+		choice_confirmation.canceled.connect(func(): confirmation_action = Callable())
+	confirmation_revision = game.input_revision
+	confirmation_action = callback
+	choice_confirmation.dialog_text = message
+	choice_confirmation.popup_centered_clamped(Vector2i(560, 180), 0.9)
+
+
+func _accept_confirmation() -> void:
+	var action := confirmation_action
+	confirmation_action = Callable()
+	if choice_confirmation != null: choice_confirmation.hide()
+	if confirmation_revision == game.input_revision and action.is_valid():
+		action.call_deferred()
+
+
+func _confirm_study_keep(indices: Array) -> void:
+	var discarded: PackedStringArray = []
+	for card in current_request.get("cards", []):
+		if not indices.has(int(card.get("draw_index", -1))):
+			discarded.append(str(card.get("name", card.get("id", "Spell"))))
+	confirm_choice("Discard these Spells?\n\n" + "\n".join(discarded), _submit.bind({"keep_indices": indices.duplicate()}))
+
+
 # =============================================================================
 # STARTING SETUP
 # =============================================================================
@@ -1070,9 +1113,7 @@ func _resize_mage_choices() -> void:
 func _submit_starting_mage(
 	mage_id: String
 ) -> void:
-	_submit({
-		"mage_id": mage_id
-	})
+	confirm_choice("Choose %s as your Mage?" % str(game.mage_database.get_mage_data(mage_id).get("name", mage_id.capitalize())), _submit.bind({"mage_id": mage_id}))
 
 func _render_starting_school_choice() -> void:
 	_add_info("Click a School to choose it. Inspect opens its rules.")
@@ -1083,20 +1124,54 @@ func _render_starting_school_choice() -> void:
 func _submit_starting_school(
 	school_id: String
 ) -> void:
-	_submit({
-		"school_id": school_id
-	})
+	confirm_choice("Choose %s as your School?" % game.get_school_display_name(school_id), _submit.bind({"school_id": school_id}))
 
 
 func _render_starting_grimoire_choice() -> void:
-	_add_info("Choose a specialization by clicking one of its six cards.")
+	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	panel.offset_left = 24
+	panel.offset_right = -24
+	panel.offset_top = 16
+	panel.offset_bottom = -16
+	prompt_label.text = "Choose your specialization"
+	var header := PanelContainer.new()
+	header.name = "SpecializationChoice"
+	header.add_theme_stylebox_override("panel", TabletopStyle.panel(TabletopStyle.GOLD, TabletopStyle.INK, 2))
+	var parent := prompt_label.get_parent()
+	parent.add_child(header)
+	parent.move_child(header, prompt_label.get_index() + 1)
+	var box := VBoxContainer.new()
+	header.add_child(box)
+	var question := Label.new()
+	question.text = "Which specialization do you want? Inspect the six Spells in each group, then choose below."
+	question.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(question)
+	var buttons := HBoxContainer.new()
+	box.add_child(buttons)
+	# Reserve panel margins, scrollbar and the five gaps between six cards.
+	var card_width := clampf((get_viewport().get_visible_rect().size.x - 210) / 6.0, 130, 260)
 	for option in current_request.get("options", []):
-		_add_section(str(option.get("name", option.get("id", ""))))
+		var specialization := str(option.get("name", option.get("id", "")))
+		var choose := Button.new()
+		choose.text = specialization
+		choose.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		choose.pressed.connect(_submit_starting_grimoire.bind(str(option.id)), CONNECT_DEFERRED)
+		buttons.add_child(choose)
+		_add_section(specialization)
+		var row := HBoxContainer.new()
+		row.name = "Grimoire_" + str(option.id)
+		row.add_theme_constant_override("separation", 12)
+		content.add_child(row)
 		for spell in option.get("spells", []):
-			_add_object_choice(spell, _submit_starting_grimoire.bind(str(option.get("id", ""))), false, "spells")
-		var gallery = content.get_node_or_null("ObjectChoices")
-		if gallery != null:
-			gallery.name = "Grimoire_" + str(option.get("id", ""))
+			var column := VBoxContainer.new()
+			row.add_child(column)
+			var label := Label.new()
+			label.text = str(spell.get("name", spell.id))
+			label.custom_minimum_size.x = card_width
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			column.add_child(label)
+			column.add_child(game.ReferenceCardPreview.make_card("spells", str(spell.id), label.text, Vector2(card_width, card_width * 1.5), _inspect_personal_spell.bind(str(spell.id))))
 
 
 func _submit_starting_grimoire(
@@ -1418,7 +1493,7 @@ func _render_action_root(category: String = "") -> void:
 		if _open_owned_quest_selection(quest_options, 1, 1, "Choose a completed Quest to resolve."):
 			return
 	if category == "":
-		_add_info("Open your banner, then choose a physical token or a prepared Spell. Shift-click a Spell to inspect.")
+		_add_info("Open your banner, then choose a physical token or a prepared Spell. Right-click a Spell to inspect; left-click to cast.")
 		panel.hide()
 		return
 	for entry_value in get_action_root_entries_for_request(
@@ -1871,6 +1946,11 @@ func _render_command_variants() -> void:
 
 
 func _submit_action_token(token: String) -> void:
+	for option in current_request.get("options", []):
+		if str(option.get("token", "")) == token and str(option.get("action", {}).get("type", "")) in ["spell", "quick"]:
+			var spell_name := str(option.get("spell", {}).get("name", option.get("name", "questa spell")))
+			confirm_choice("Vuoi lanciare %s?" % spell_name, _submit.bind({"token": token}))
+			return
 	_submit({
 		"token": token
 	})
@@ -2201,9 +2281,7 @@ func _submit_study_schools() -> void:
 
 
 func _submit_study_keep() -> void:
-	_submit({
-		"keep_indices": generic_selection.duplicate()
-	})
+	_confirm_study_keep(generic_selection.duplicate())
 
 
 func _show_study_cards() -> void:
@@ -2223,15 +2301,16 @@ func _render_optional_hand_discard() -> void:
 func _submit_optional_hand_discard(
 	hand_index: int
 ) -> void:
-	_submit({
-		"hand_index": hand_index
-	})
+	if hand_index < 0:
+		_submit({"hand_index": hand_index})
+	else:
+		confirm_choice("Discard %s?" % _prep_hand_card_label(hand_index), _submit.bind({"hand_index": hand_index}))
 
 
 func _submit_study_hand_limit() -> void:
-	_submit({
-		"hand_indices": generic_selection.duplicate()
-	})
+	var names: PackedStringArray = []
+	for index in generic_selection: names.append(_prep_hand_card_label(int(index)))
+	confirm_choice("Discard these Spells?\n\n" + "\n".join(names), _submit.bind({"hand_indices": generic_selection.duplicate()}))
 
 
 # =============================================================================

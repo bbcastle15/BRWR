@@ -1,3 +1,65 @@
+# Interfaccia e animazioni — 23–24 ottobre 2026 (completate)
+
+Nuova richiesta utente dopo le carte Mago: completare questi 13 punti, anche online.
+1. Specializzazione: carte con nomi, domanda evidente e due pulsanti per scegliere.
+2. Preparazione: evidenziare il lato come nella playerboard delle spell giocate.
+3. Conferma prima di scartare dopo la pesca e prima di scegliere mago/scuola iniziali.
+4. Mazzi Quest/Jinx/Upgrade con retro nella Power Board; consultazione alfabetica
+   di tutte le definizioni (anche già pescate), titolo Available X; Quest della luna corrente.
+5. Carta scuola consultabile come galleria di tutte le spell della scuola.
+6. Spell: destro consulta, sinistro lancia; conferma con nome della spell prima del lancio.
+7. Animazione danni sulla playerboard anche per i client online.
+8. Animazione di piazzamento trap/protection più lenta.
+9. Spell lanciata presentata a tutti i giocatori online.
+10. Animare piazzamento delle instabilità.
+11. Click carta Avatar apre l'Avatar Board.
+12. Correggere pausa tra animazione danni Avatar e successivo effetto della spell.
+13. Animare il piazzamento delle evocazioni.
+
+Tutti i 13 punti implementati e verificati in Godot 4.7.2.
+UI: conferme centralizzate in BetaHUD, destro per ispezione, specializzazioni con
+due pulsanti; cornice lato condivisa in TabletopStyle; cataloghi da definizioni
+in PowerBoard/ReferenceCardPreview. Avatar card apre la board.
+Rete: feedback pubblico dei danni serializzato e deduplicato; le spell online
+attendono il click di ogni umano. Piazzamenti world animati nella TabletopShell;
+marker più lenti, ricostruzione delle scelte dopo la presentazione dei danni.
+Verifiche: nuova suite `ui_online_2026_10_23.gd` 88 controlli passati anche
+con rendering OpenGL; `damage_presentation_v2` 15, `avatar_fourth_playtest` 23,
+`presentations` 156, `latest_playtest` 14, tutti passati (296 controlli).
+Screenshot reali in `docs/handoff-2026-10-18/evidence/ui23-*.png`.
+Coperti: scarti confermati, lato Light/Dark, cataloghi completi, click Avatar,
+danni letali ricevuti dal client e deduplicati, conferma spell di ogni umano,
+conversione dei cubi Avatar subito dopo i danni, piazzamenti locali/remoti.
+Export Web definitivo in `output/web`, impostazioni Web 1024/0.68; originali
+intatti. PCK 99.589.704 byte, gzip 96.970.470 byte, entrambi sotto 100 MB.
+Parità sorgente/export passata: 169 texture Spell disponibili, 57 carte Mago
+(incluse le 47 nuove), 13 script interessati identici, cataloghi inizializzati.
+Il controllo storico `tools/check_web_export.gd` si ferma sulla PNG personale
+`the_eight_spells`, già assente nel sorgente. La suite di parità registra tutte
+le 114 Spell senza immagine (incluse scuole future), senza nasconderle né
+aggiungerne all'export. Baseline in `evidence/ui24-export-baseline.json`.
+Avvio Web e conferme maghi/scuola provati nel browser integrato; nessun errore console.
+Dettagli in `docs/UI-ONLINE-2026-10-24.md`. Nessuna pubblicazione o commit.
+Non ancora effettuata una partita con amici su PC distinti. Riavviare l'host
+con i nuovi script e ricaricare il browser dopo aver aggiornato il Web distribuito.
+L'asset utente `assets/evocations/gaea.png` è stato preservato.
+
+# Carte Mago — 23 ottobre 2026 (completate)
+
+Richiesta corrente: produrre le carte PNG dei maghi mancanti, stile `assets/mages`,
+statistiche e personaggi dalle Personal Spell nel Codex Arcanum pp. 68–83.
+46 maghi senza immagine, più la seconda forma di Hyperion. Nessuna nuova meccanica
+o abilitazione dei 31 maghi ancora assenti dal database è parte di questo lavoro.
+Fonti estratte dal PDF e prompt/provenienza in `docs/mage-art-2026-10-23/manifest.json`.
+47/47 carte verificate e salvate: tutti i 25 maghi nel database hanno ora una PNG.
+Elenco, statistiche, prompt e provenienza esatti nel manifest; galleria locale in
+`docs/mage-art-2026-10-23/galleria.html`. Import Godot 4.7.2 riuscito senza errori.
+Controllo effettivo di `ReferenceCardPreview.card_texture`: 47 nuove texture e 25
+maghi del database caricati, zero mancanti. Statistiche delle 15 nuove carte già
+nel database coerenti con `mages.json`. Le 10 carte precedenti rimangono intatte.
+Immagini incluse nel nuovo export Web. Nessun commit. Non abilitano i 31 maghi
+non implementati.
+
 # Aggiornamento 22 ottobre 2026
 
 Leggere `docs/PLAYTEST-2026-10-22.md`: correzioni ultimo playtest, test, asset scuola integrati e stato ancora incompleto della copertura maghi Codex Arcanum.

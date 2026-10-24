@@ -39,6 +39,7 @@ var presentation_rules: RichTextLabel
 var card_tween: Tween
 var shown_card_serial := -1
 var evocation_names_visible := false
+var world_placements: Array[CanvasItem] = []
 
 func setup(game_node) -> void:
 	game = game_node
@@ -290,11 +291,16 @@ func sync_card_presentation() -> void:
 	var data: Dictionary = game.card_presentation
 	var serial: int = int(data.get("serial", -1))
 	if serial == shown_card_serial:
+		if data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
+			card_overlay.hide()
 		return
 	shown_card_serial = serial
 	if card_tween != null:
 		card_tween.kill()
 	if data.is_empty():
+		card_overlay.hide()
+		return
+	if data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
 		card_overlay.hide()
 		return
 	# A reaction/card reveal must not discard damage already dealt.
@@ -324,7 +330,9 @@ func sync_card_presentation() -> void:
 		presentation_title.text += " · " + ("Dark" if bool(data.get("dark", false)) else "Light")
 	if presentation_hint != null:
 		presentation_hint.text = "Click to continue" if bool(data.get("requires_click", false)) else "Click to continue · closes automatically"
-		if game.network_session != null and not game.can_acknowledge_card_presentation(game.local_viewer_index):
+		if data.has("awaiting_players"):
+			presentation_hint.text = "Click to continue · each player confirms"
+		elif game.network_session != null and not game.can_acknowledge_card_presentation(game.local_viewer_index):
 			presentation_hint.text = "Click to close · waiting for Player %d" % (int(data.get("acknowledge_player", 0)) + 1)
 	_layout_card_presentation()
 	card_overlay.modulate.a = 0.0
@@ -461,6 +469,7 @@ func _process(_delta: float) -> void:
 	var evocation_resolving: bool = game.resolution_stack.any(func(frame): return frame.get("type") == "evocation_activation")
 	if not evocation_resolving and not game.resolution_visual_yield_active and not card_overlay.visible and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
 		_play_next_animation()
+	_play_world_placements()
 
 func _refresh_banners() -> void:
 	var turn: Dictionary = game.get_turn_presentation()
@@ -520,14 +529,20 @@ func _refresh_damage_display(index: int) -> void:
 			board_title.text = "Possessed · HP %d/%d" % [maxi(0, game.players[index].mage.health - displayed_damage(index, game.players[index].mage.damage_cubes).size()), game.players[index].mage.health]
 	else: board.refresh_damage_track()
 
-func queue_damage_placement(player_index: int, previous_damage: int, owners: Array) -> void:
+func receive_feedback(event: Dictionary) -> void:
+	if event.get("kind") == "damage":
+		queue_damage_placement(int(event.player), int(event.previous), event.owners, int(event.health))
+
+
+func queue_damage_placement(player_index: int, previous_damage: int, owners: Array, health: int = -1) -> void:
+	if health < 0: health = game.players[player_index].mage.health
 	if not damage_display.has(player_index):
 		damage_display[player_index] = owners.slice(0, previous_damage)
 	for index in range(previous_damage, owners.size()):
 		animation_queue.append({"player": player_index, "node": "DamageTrack/DamageSlot_%d" % index,
 			"kind": "damage", "owner": int(owners[index]), "cube_index": index,
 			"owners": owners.slice(0, index + 1),
-			"defeated": index + 1 >= game.players[player_index].mage.health})
+			"defeated": index + 1 >= health})
 
 func _play_next_animation() -> void:
 	# Pure visual feedback: no rule waits on a Tween, and Close always skips it.
@@ -584,13 +599,20 @@ func _play_next_animation() -> void:
 		animation.tween_property(animated_node, "modulate:a", 1.0, 0.10)
 		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.22).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.22).set_trans(Tween.TRANS_SINE)
-		animation.tween_interval(0.10 if not animation_queue.is_empty() and animation_queue[0].kind == "damage" and animation_queue[0].player == index else 0.45)
+		animation.tween_interval(0.10 if not animation_queue.is_empty() and animation_queue[0].kind == "damage" and animation_queue[0].player == index else 0.18)
 	else:
-		animation.tween_property(animated_node, "modulate:a", 1.0, 0.25)
+		animated_node.modulate.a = 0.0
+		animated_node.position -= Vector2(0, 20)
+		animated_node.scale = animated_rest_scale * 1.35
 		animation.tween_interval(0.3)
+		animation.tween_property(animated_node, "modulate:a", 1.0, 0.45)
+		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.65).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.65).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		animation.tween_interval(0.85)
 	animation.tween_callback(_finish_animation)
 
 func _finish_animation() -> void:
+	var finished_damage := animated_damage_ghost
 	if animated_damage_ghost and not damage_event.is_empty():
 		damage_display[animated_player] = damage_event.owners.duplicate()
 		_refresh_damage_display(animated_player)
@@ -640,6 +662,38 @@ func _finish_animation() -> void:
 		if prior_player >= 0:
 			_show_board(prior_player)
 	transient_board = false
+	# Damage-track refreshes replace cube nodes. Rebuild the next actual choice
+	# now so an Avatar conversion/heal never points to the discarded nodes.
+	if finished_damage and game.waiting_for_player_input and game.card_presentation.is_empty() and game.beta_hud != null:
+		game.beta_hud.present_pending_request.call_deferred(game.get_beta_pending_input(game.get_ui_viewer_player_index()))
+
+
+func queue_world_placement(node: CanvasItem) -> void:
+	if not is_instance_valid(node) or game.suppress_placement_feedback: return
+	if world_placements.has(node): return
+	node.modulate.a = 0.0
+	world_placements.append(node)
+
+
+func _play_world_placements() -> void:
+	if world_placements.is_empty() or board_overlay.visible or card_overlay.visible: return
+	if game.beta_hud != null and (game.beta_hud.hand_overlay.visible or game.beta_hud.panel.visible): return
+	var preview = game.get_node_or_null("ReferenceCardPreview")
+	if preview != null and preview.root.visible: return
+	var nodes := world_placements.duplicate()
+	world_placements.clear()
+	var delay := 0.0
+	for node in nodes:
+		if not is_instance_valid(node) or node.is_queued_for_deletion(): continue
+		var rest_scale: Vector2 = node.scale
+		node.scale = rest_scale * 1.65
+		var placement: Tween = node.create_tween()
+		placement.tween_interval(delay)
+		placement.tween_property(node, "modulate:a", 1.0, 0.22)
+		placement.parallel().tween_property(node, "scale", rest_scale, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		placement.tween_property(node, "modulate", Color(1.45, 1.35, 1.05), 0.15)
+		placement.tween_property(node, "modulate", Color.WHITE, 0.3)
+		delay += 0.12
 
 func _cancel_animation() -> void:
 	if animation != null:

@@ -1,0 +1,906 @@
+{
+  "scope": "46 missing Codex mages plus the second Hyperion form: 47 new PNGs",
+  "stats_order": [
+    "health",
+    "hand_limit",
+    "strength",
+    "speed",
+    "max_active_quests"
+  ],
+  "source": "Codex Arcanum, pages 68-83",
+  "style_reference": "assets/mages/bartholomaus.png",
+  "common_prompt": "Create one finished landscape Black Rose Wars: Rebirth MAGE CARD, 1672 x 941 pixels / approximately 16:9, matching the first reference card's existing UI and art style precisely. This is a game asset, flat frontal artwork filling the entire canvas, not a photograph, mockup, collage, or spell card.\nReference 1 is the layout/style template ONLY: keep its dark near-black textured background, subtle smoke, thin antique metal framing, large ivory serif mage name in the upper-left nameplate, TWO empty square action-token recesses with four-point outlined star symbols in the lower left, the fixed vertical stat column at far right, and the circular skull trophy cup emblem at bottom right. Keep all recesses and icons in the same normalized positions and sizes. Do not copy the old mage portrait or old name.\nReference 2 is the authoritative CHARACTER design from this mage's Personal Spell. Use only that portrait to faithfully reconstruct the same identifiable character, face/species, headgear, costume, colors and accessories in a detailed polished dark-fantasy illustration. Enlarge it into the center-right portrait area of the mage-card layout. No unrelated new character or redesign. Do not copy the spell title, text, spell symbols, white panels or duplicate portrait from reference 2.\nRight column must have exactly FIVE ivory icons copied faithfully from reference 1, top to bottom: solid HEART; HAND HOLDING THREE CARDS; FIST IN SUNBURST; WALKING WIZARD; SCROLL WITH QUILL. Put exactly one large clear ivory numeral beside each. The bottom trophy has NO numeral. All five rows must stay unobstructed. No additional labels, abilities, lore, watermarks or text. Entire name, stats, action squares and trophy must be visible and uncropped.\nPreserve the portrait identity from reference 2 closely. Do not transfer the template's orb staff, book, elderly face or blue robes unless present in this character's source. Match the fixed UI geometry of reference 1, but allow the individual portrait pose and anatomy to fit naturally.",
+  "prompt_suffix_template": "Mage name (verbatim): \"{NAME}\". Exact stat numerals from Codex, top to bottom: {STATS} (Health, Hand limit, Strength, Speed, Quest limit). Character identification: {DESCRIPTION}.",
+  "cards": [
+    {
+      "id": "bellum",
+      "name": "Bellum",
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p71-Image1298.png",
+      "description": "hooded heavily armored war mage with concealed black face, red ridged faceplate, crimson engraved plate armor with circular swirl motifs, skull talismans, chains; keep the face concealed",
+      "status": "generated_checked",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-14764572-9073-4141-aa49-ecb0472e5fea.png",
+      "output": "assets/mages/bellum.png",
+      "generator": "built-in image_gen",
+      "codex_page": 71
+    },
+    {
+      "id": "cassandra",
+      "name": "Cassandra",
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p72-Image1320.png",
+      "description": "young red-haired female oracle wearing a green hood shaped with branching leaf-like antlers, olive fitted tunic and green cloak, crescent-shaped gold belt ornaments; keep the original red hair and leaf hood",
+      "status": "generated_checked",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-49230663-6114-4dd9-9d04-908821850ca1.png",
+      "output": "assets/mages/cassandra.png",
+      "generator": "built-in image_gen",
+      "codex_page": 72
+    },
+    {
+      "id": "dai_jin",
+      "name": "Dai Jin",
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p73-Image1330.png",
+      "description": "elderly East Asian male sage, long thin white moustache and beard, tall red ceremonial hat with blue yin-yang circular emblem and long horizontal side ornaments, red and gold dragon-embroidered robes",
+      "status": "generated_checked",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7f163cf5-51bb-4ce4-98d2-6d5f80378669.png",
+      "output": "assets/mages/dai_jin.png",
+      "generator": "built-in image_gen",
+      "codex_page": 73
+    },
+    {
+      "id": "agorix",
+      "name": "Agorix",
+      "codex_page": 68,
+      "stats": [
+        11,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p68-Image1234.png",
+      "personal_spell": "Natural Invocation",
+      "description": "young male woodland mage in green and teal hooded clothing, short dark hair, leather straps; human mage, not familiar",
+      "status": "generated_checked",
+      "output": "assets/mages/agorix.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-60781af1-359e-48ee-ace8-68ace4a663fe.png"
+    },
+    {
+      "id": "albedo",
+      "name": "Albedo",
+      "codex_page": 68,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p68-Image1242.png",
+      "personal_spell": "Divine Judgement",
+      "description": "crusader in silver/gold plate armor and blue tabard; gold halo behind closed helmet",
+      "status": "generated_checked",
+      "output": "assets/mages/albedo.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-9f753af1-7f28-4892-984b-d3dc8bddf179.png"
+    },
+    {
+      "id": "alhazred",
+      "name": "Alhazred",
+      "codex_page": 68,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p68-Image1246.png",
+      "personal_spell": "Symbiosis",
+      "description": "purple-hooded eldritch mage with enormous monstrous eye in torso, dark obscured face and purple robes",
+      "status": "generated_checked",
+      "output": "assets/mages/alhazred.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-cf7d5fd5-82ea-4f00-add8-9f1895ee09b4.png"
+    },
+    {
+      "id": "alice",
+      "name": "Alice",
+      "codex_page": 69,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p69-Image1256.png",
+      "personal_spell": "Dark Passenger",
+      "description": "blond girl, hair across one eye, red scarf, pale green dress, turquoise necklace, ornate book; human light-side appearance",
+      "status": "generated_checked",
+      "output": "assets/mages/alice.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-cc9bae1a-db9c-4d2e-b118-35f965e70cc3.png"
+    },
+    {
+      "id": "alisha",
+      "name": "Alisha",
+      "codex_page": 69,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p69-Image1264.png",
+      "personal_spell": "Bharatanatyam",
+      "description": "Indian female dancer, teal blouse, purple/teal fabrics and gold jewelry, white floral head ornaments, raised arm dance pose",
+      "status": "generated_checked",
+      "output": "assets/mages/alisha.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-005aef96-8feb-4625-bf67-fb36b89d820e.png"
+    },
+    {
+      "id": "architect",
+      "name": "Architect",
+      "codex_page": 70,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p70-Image1280.png",
+      "personal_spell": "Magic Tunnel",
+      "description": "stern man, green feathered Renaissance cap, dark brown high-collar buttoned coat, red book and green flask",
+      "status": "generated_checked",
+      "output": "assets/mages/architect.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-c2f40c16-31f0-4291-a0d3-68978bbf5381.png"
+    },
+    {
+      "id": "arianna",
+      "name": "Arianna",
+      "codex_page": 70,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p70-Image1284.png",
+      "personal_spell": "Assembly Line",
+      "description": "pale woman, short reddish wavy hair, goggles on forehead, ochre scarf, brown leather steampunk armor",
+      "status": "generated_checked",
+      "output": "assets/mages/arianna.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-62341304-f858-4bbf-8c66-9c8580f2c7e1.png"
+    },
+    {
+      "id": "baron_doria",
+      "name": "Baron Doria",
+      "codex_page": 70,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p70-Image1288.png",
+      "personal_spell": "Wanderer's Dream",
+      "description": "older grey-haired man, trimmed white goatee, silver-blue half-face mask, violet noble coat and fur shoulders",
+      "status": "generated_checked",
+      "output": "assets/mages/baron_doria.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-0dc92ae1-e609-41e7-ac51-df9356209efb.png"
+    },
+    {
+      "id": "bella",
+      "name": "Bella",
+      "codex_page": 71,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p71-Image1296.png",
+      "personal_spell": "Elemental Spirits",
+      "description": "young female wizard with auburn braids, indigo pointed hat and cloak, dark corset, white sleeves",
+      "status": "generated_checked",
+      "output": "assets/mages/bella.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-64da2c99-9b78-4f56-9e28-0b18d075f3d5.png"
+    },
+    {
+      "id": "cacus",
+      "name": "Cacus",
+      "codex_page": 71,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p71-Image1302.png",
+      "personal_spell": "Giant Stampede",
+      "description": "muscular grey-haired bearded male giant, bare weathered chest, orange eyes and mouth, dark shoulder plates",
+      "status": "generated_checked",
+      "output": "assets/mages/cacus.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8be80490-845c-4c47-bd8d-defb400b24bd.png"
+    },
+    {
+      "id": "boogeyman",
+      "name": "Boogeyman",
+      "codex_page": 72,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p72-Image1312.png",
+      "personal_spell": "Technodomain",
+      "description": "skeletal hooded mage with skull-like face, cloth hood and robes, bones and trinkets; mage, not Doll",
+      "status": "generated_checked",
+      "output": "assets/mages/boogeyman.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-ab380582-16d9-4eba-aa0c-600a97eb3467.png"
+    },
+    {
+      "id": "cosma",
+      "name": "Cosma",
+      "codex_page": 72,
+      "stats": [
+        9,
+        6,
+        2,
+        3,
+        3
+      ],
+      "source": "p72-Image1324.png",
+      "personal_spell": "Gifts of Death",
+      "description": "elderly wrinkled male wizard, crooked brown pointed hat, brown and burgundy clothes, skull amulet",
+      "status": "generated_checked",
+      "output": "assets/mages/cosma.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-50165c64-8b68-412c-8dda-e4d798465a7f.png"
+    },
+    {
+      "id": "fenrir",
+      "name": "Fenrir",
+      "codex_page": 73,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p73-Image1338.png",
+      "personal_spell": "Blood Rage",
+      "description": "massive black wolf with teal markings, chains, blades along its back; quadruped wolf, no human face or robe",
+      "status": "generated_checked",
+      "output": "assets/mages/fenrir.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5370607a-9324-4a02-a9cb-17acfb5dfb5e.png"
+    },
+    {
+      "id": "gramigna",
+      "name": "Gramigna",
+      "codex_page": 74,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p74-Image1348.png",
+      "personal_spell": "Evil Eye",
+      "description": "old wrinkled witch, long grey hair, deep burgundy hood, drab layered robes",
+      "status": "generated_checked",
+      "output": "assets/mages/gramigna.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-8d6eff06-708a-4f65-8e6a-534569f8d9b9.png"
+    },
+    {
+      "id": "griphon",
+      "name": "Griphon",
+      "codex_page": 74,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p74-Image1352.png",
+      "personal_spell": "Foretold Flight",
+      "description": "brown gryphon, eagle head and beak, feathered wings, animal body and talons; no human face or robes",
+      "status": "generated_checked",
+      "output": "assets/mages/griphon.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3a985525-2ff8-4bfe-bd4f-44512b592225.png"
+    },
+    {
+      "id": "hastur",
+      "name": "Hastur",
+      "codex_page": 74,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p74-Image1356.png",
+      "personal_spell": "Demonic Crown",
+      "description": "monstrous dark-faced figure, ragged yellow robes, horned gold crown, swollen exposed grey abdomen",
+      "status": "generated_checked",
+      "output": "assets/mages/hastur.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b3747153-dfa4-46d1-9332-8f3fa768daef.png"
+    },
+    {
+      "id": "helblindi",
+      "name": "Helblindi",
+      "codex_page": 75,
+      "stats": [
+        12,
+        8,
+        2,
+        2,
+        1
+      ],
+      "source": "p75-Image1362.png",
+      "personal_spell": "Jotuns Vindar",
+      "description": "large blue-skinned frost giant with a distinctive ivory bird-skull-like face mask, a very long straight pink-red beard with gold rings, ivory braids, gold/blue armor and pink-wrapped weapon shaft; preserve mask, no ordinary human face",
+      "status": "generated_checked",
+      "output": "assets/mages/helblindi.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7f2f1c4e-00c8-4ad0-96fd-929c9bf557e8.png"
+    },
+    {
+      "id": "hogwarz",
+      "name": "Hogwarz",
+      "codex_page": 75,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p75-Image1364.png",
+      "personal_spell": "Incanto Porkonus",
+      "description": "anthropomorphic pink pig wizard, large round snout, small eyes, brown floppy pointed hat; preserve pig identity",
+      "status": "generated_checked",
+      "output": "assets/mages/hogwarz.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-914785e9-d3c3-440a-b0fd-d318960d1158.png"
+    },
+    {
+      "id": "hyperion",
+      "name": "Hyperion - Titan",
+      "codex_page": 75,
+      "stats": [
+        12,
+        5,
+        2,
+        3,
+        1
+      ],
+      "source": "p75-Image1368.png",
+      "personal_spell": "Burning the Sky",
+      "description": "armored fire titan, black metal helmet and plates, orange fire face without human features; title on two lines HYPERION / TITAN",
+      "status": "generated_checked",
+      "output": "assets/mages/hyperion.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-12fa5f9d-9b90-47e1-a661-dace8c98477a.png"
+    },
+    {
+      "id": "hyperion_myrmidones",
+      "name": "Hyperion - Myrmidones",
+      "codex_page": 75,
+      "stats": [
+        9,
+        9,
+        1,
+        2,
+        3
+      ],
+      "source": "p75-Image1368.png",
+      "personal_spell": "Burning the Sky",
+      "description": "same black armored fiery character design, alternate MYRMIDONES form, no invented faces or powers; title on two lines HYPERION / MYRMIDONES",
+      "status": "generated_checked",
+      "output": "assets/mages/hyperion_myrmidones.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-853f7154-e9b1-4224-99e7-befa74c90334.png"
+    },
+    {
+      "id": "ignis",
+      "name": "Ignis",
+      "codex_page": 76,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p76-Image1375.png",
+      "personal_spell": "Molten Core",
+      "description": "jagged black volcanic rock elemental, orange lava through chest and cracks, no human face or clothes",
+      "status": "generated_checked",
+      "output": "assets/mages/ignis.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-fab6b42f-d4e1-476e-a5da-850474be0329.png"
+    },
+    {
+      "id": "imhotep",
+      "name": "Imhotep",
+      "codex_page": 76,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p76-Image1377.png",
+      "personal_spell": "Great Architect",
+      "description": "mummified green-black faced Egyptian mage, gold disk and cobra headdress, cream/brown robes, dark beard strips and gold ornaments",
+      "status": "generated_checked",
+      "output": "assets/mages/imhotep.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5c5de05b-f977-41eb-8655-9b845cc28499.png"
+    },
+    {
+      "id": "irene",
+      "name": "Irene",
+      "codex_page": 76,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p76-Image1379.png",
+      "personal_spell": "Notes of the Magister",
+      "description": "blonde woman with side braid, black feathered headdress, teal/gold shoulder armor, dark corset, red sash",
+      "status": "generated_checked",
+      "output": "assets/mages/irene.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7f426684-bdf8-4ed4-b8cc-5691a730db93.png"
+    },
+    {
+      "id": "jack",
+      "name": "Jack",
+      "codex_page": 76,
+      "stats": [
+        9,
+        6,
+        2,
+        3,
+        3
+      ],
+      "source": "p76-Image1381.png",
+      "personal_spell": "Extinguishing Light",
+      "description": "scarecrow with stitched burlap face and crooked hat, shabby green/brown clothes, red-brown cloak, lit yellow lantern",
+      "status": "generated_checked",
+      "output": "assets/mages/jack.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b35a1941-6758-4a10-a829-9fc20d8b56eb.png"
+    },
+    {
+      "id": "janara",
+      "name": "Janara",
+      "codex_page": 77,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p77-Image1388.png",
+      "personal_spell": "Mystic Guide",
+      "description": "dark-haired female druid in navy hood and feathered cloak riding a pale mint-white stag with antlers; preserve rider and stag",
+      "status": "generated_checked",
+      "output": "assets/mages/janara.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7332b15f-2106-4c4c-a2de-b773abc0f026.png"
+    },
+    {
+      "id": "jukas",
+      "name": "Jukas",
+      "codex_page": 77,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p77-Image1392.png",
+      "personal_spell": "Time Twister",
+      "description": "old white-haired man in burgundy hood, weathered face, bronze shoulder armor and leather coat, green magic in hand",
+      "status": "generated_checked",
+      "output": "assets/mages/jukas.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-82a75d18-9316-4b43-9c7e-b60ac4cdfa76.png"
+    },
+    {
+      "id": "maelice",
+      "name": "Maelice",
+      "codex_page": 78,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p78-Image1409.png",
+      "personal_spell": "Malia",
+      "description": "pale female witch, black/green horned headdress, raised black collar and gown with green trim",
+      "status": "generated_checked",
+      "output": "assets/mages/maelice.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-c36cbcac-665c-4909-9d18-d3ecd69d7b55.png"
+    },
+    {
+      "id": "mediceo",
+      "name": "Mediceo",
+      "codex_page": 78,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p78-Image1415.png",
+      "personal_spell": "Inspiration",
+      "description": "gold-armored knight with closed cylindrical visor and green marks on helmet, holding small green-clad companion shown in source; both together",
+      "status": "generated_checked",
+      "output": "assets/mages/mediceo.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5b1f6be9-d18d-41ce-86d4-c0eead130b7d.png"
+    },
+    {
+      "id": "minotaurus",
+      "name": "Minotaurus",
+      "codex_page": 78,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p78-Image1419.png",
+      "personal_spell": "Drums of War",
+      "description": "muscular black-maned bull-headed minotaur, grey horns, bronze/red plate armor and blue details",
+      "status": "generated_checked",
+      "output": "assets/mages/minotaurus.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-9adb3a40-46f1-415d-af3b-3a39e989cf4a.png"
+    },
+    {
+      "id": "odin",
+      "name": "Odin",
+      "codex_page": 79,
+      "stats": [
+        12,
+        6,
+        2,
+        2,
+        2
+      ],
+      "source": "p79-Image1431.png",
+      "personal_spell": "Asgardian Winds",
+      "description": "Norse rider on dark brown horse, spiked helmet, grey beard, red cape and blue spear; preserve mounted character",
+      "status": "generated_checked",
+      "output": "assets/mages/odin.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6d58f8bd-500d-4d65-acb8-e2d596a4639b.png"
+    },
+    {
+      "id": "onamor",
+      "name": "Onamor",
+      "codex_page": 79,
+      "stats": [
+        12,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p79-Image1433.png",
+      "personal_spell": "Necroflame",
+      "description": "skull-faced necromancer, green skeletal features, purple robe and pointed gold/green collar, green fire",
+      "status": "generated_checked",
+      "output": "assets/mages/onamor.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7e9a7e29-adc4-447a-b884-e6d6f70bc7a6.png"
+    },
+    {
+      "id": "parcae",
+      "name": "Parcae",
+      "codex_page": 79,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p79-Image1437.png",
+      "personal_spell": "Three Visions",
+      "description": "three dark-robed female fates, covered eyes, veiled spiked headdresses and gold thread between hands; all three make up this mage",
+      "status": "generated_checked",
+      "output": "assets/mages/parcae.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d608136c-7e45-4b98-998f-d808808d9cb1.png"
+    },
+    {
+      "id": "pestilentia",
+      "name": "Pestilentia",
+      "codex_page": 80,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p80-Image1445.png",
+      "personal_spell": "Calamity",
+      "description": "plague knight, skeletal green face, antler-like bronze crown, corroded brown armor, skull shoulder",
+      "status": "generated_checked",
+      "output": "assets/mages/pestilentia.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-074a3b0d-8119-415d-8b69-c70520d8a12d.png"
+    },
+    {
+      "id": "prospero",
+      "name": "Prospero",
+      "codex_page": 80,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p80-Image1447.png",
+      "personal_spell": "Alchemical Fireball",
+      "description": "young silver-white-haired man, maroon/grey Renaissance clothes, olive ruff, gold fastenings, orange flame in hand",
+      "status": "generated_checked",
+      "output": "assets/mages/prospero.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b8747cd8-4436-4ae9-b3eb-23a9a203ec27.png"
+    },
+    {
+      "id": "pyotr",
+      "name": "Pyotr",
+      "codex_page": 80,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p80-Image1449.png",
+      "personal_spell": "Dictat",
+      "description": "bearded dark-haired man, tall black fur cap and round gold badge, dark teal coat and cloak, military buttons and belt",
+      "status": "generated_checked",
+      "output": "assets/mages/pyotr.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5a24d186-d13f-4d84-a943-c5fa8d143ef5.png"
+    },
+    {
+      "id": "razvan",
+      "name": "Razvan",
+      "codex_page": 80,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p80-Image1453.png",
+      "personal_spell": "Blood Pact",
+      "description": "pale muscular vampire, elongated pointed ears, skeletal face, black hair, bare white chest, black arm armor, red waist",
+      "status": "generated_checked",
+      "output": "assets/mages/razvan.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-d4e5d752-4a21-47e4-a53c-9cd32e8a3ee9.png"
+    },
+    {
+      "id": "rubedo",
+      "name": "Rubedo",
+      "codex_page": 81,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p81-Image1462.png",
+      "personal_spell": "Chaos Strike",
+      "description": "red/gold spiked chaos knight, dark helmet, gold runic shield, large axe, black-blue plume",
+      "status": "generated_checked",
+      "output": "assets/mages/rubedo.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1d09a388-76d4-4231-9aa4-1f1417ff09b4.png"
+    },
+    {
+      "id": "saba",
+      "name": "Saba",
+      "codex_page": 81,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p81-Image1464.png",
+      "personal_spell": "Light and Shadow",
+      "description": "brown-haired Egyptian priestess, large ivory/gold crescent headdress, blue jewel, cream clothes, tattoos, staff",
+      "status": "generated_checked",
+      "output": "assets/mages/saba.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6bf1eb29-35d1-4898-b0be-984611b9c031.png"
+    },
+    {
+      "id": "sefu",
+      "name": "Sefu",
+      "codex_page": 81,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p81-Image1466.png",
+      "personal_spell": "Mask of the World",
+      "description": "bald dark-skinned male shaman, white ritual face marks, large gold earrings, blue/red drapery, gold necklaces",
+      "status": "generated_checked",
+      "output": "assets/mages/sefu.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b3bf8079-9004-4d41-bede-7965cc2c173b.png"
+    },
+    {
+      "id": "shroudtech",
+      "name": "Shroudtech",
+      "codex_page": 82,
+      "stats": [
+        11,
+        9,
+        1,
+        2,
+        1
+      ],
+      "source": "p82-Image1474.png",
+      "personal_spell": "Contagium",
+      "description": "dark hooded mage with faceless purple glowing mask, hanging rectangular metal strips, purple-black robe",
+      "status": "generated_checked",
+      "output": "assets/mages/shroudtech.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-6e6230b9-e5fc-4231-b201-dc7b715e62f7.png"
+    },
+    {
+      "id": "slenderman",
+      "name": "Slenderman",
+      "codex_page": 82,
+      "stats": [
+        9,
+        8,
+        2,
+        2,
+        3
+      ],
+      "source": "p82-Image1476.png",
+      "personal_spell": "Unio Perpetua",
+      "description": "gaunt hunched long-limbed male figure, dark green-black robes, twig-like appendages, pale tilted head; source game design, not internet redesign",
+      "status": "generated_checked",
+      "output": "assets/mages/slenderman.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-436aeb96-dbaf-4703-a74b-c99181e62666.png"
+    },
+    {
+      "id": "talia",
+      "name": "Talia",
+      "codex_page": 82,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p82-Image1478.png",
+      "personal_spell": "Mastery",
+      "description": "female mage with horned owl-like jeweled mask, blue/black robes, gold ornaments, violet orb in hands",
+      "status": "generated_checked",
+      "output": "assets/mages/talia.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-9293d30a-ce26-4fe8-bcf3-7f5d47d31f23.png"
+    },
+    {
+      "id": "ulrich",
+      "name": "Ulrich",
+      "codex_page": 82,
+      "stats": [
+        11,
+        7,
+        2,
+        2,
+        2
+      ],
+      "source": "p82-Image1480.png",
+      "personal_spell": "Imperishable Fate",
+      "description": "skeletal king, angular black/gold crown and helmet, high armored collar, black/ivory diamond-patterned tabard",
+      "status": "generated_checked",
+      "output": "assets/mages/ulrich.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-3e8c46c7-b86a-4055-a2a1-cc01abb578c8.png"
+    },
+    {
+      "id": "venticello",
+      "name": "Venticello",
+      "codex_page": 83,
+      "stats": [
+        10,
+        8,
+        2,
+        2,
+        2
+      ],
+      "source": "p83-Image1485.png",
+      "personal_spell": "The Eight Spells",
+      "description": "elderly thin male wizard, red floppy pointed hat with gold wing ornaments, red/gold robes, open blue book",
+      "status": "generated_checked",
+      "output": "assets/mages/venticello.png",
+      "generator": "built-in image_gen",
+      "generated_path": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-eca28cd3-0852-44e6-99b0-944f4e813b56.png"
+    }
+  ]
+}

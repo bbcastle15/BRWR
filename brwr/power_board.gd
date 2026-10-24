@@ -302,24 +302,32 @@ func setup_card_slots():
 	for i in range(slots.size()):
 		setup_card_slot(slots[i], ART_ORIGIN + Vector2(0.162, y_positions[i]) * ART_SIZE, ["QUEST", "EVOCATION", "JINX", "UPGRADE"][i])
 	setup_forgotten_evocation_deck()
+	_setup_public_deck($QuestSlot, "quests", 0.136)
+	_setup_public_deck($JinxSlot, "jinxs", 0.504)
+	_setup_public_deck($UpgradeSlot, "upgrades", 0.690)
 
 
 func setup_forgotten_evocation_deck() -> void:
-	if $EvocationSlot.has_node("ForgottenEvocationDeck"):
+	_setup_public_deck($EvocationSlot, "evocations", 0.315)
+
+
+func _setup_public_deck(slot: Control, kind: String, back_y: float) -> void:
+	var deck_name := "ForgottenEvocationDeck" if kind == "evocations" else "AvailableDeck"
+	if slot.has_node(deck_name):
 		return
-	# Reuse the red Evocation back printed on the supplied board artwork.
+	# Reuse each deck's own back printed on the supplied board artwork.
 	# Normalized UVs also work with the smaller texture imported for Web.
 	var back := AtlasTexture.new()
 	back.atlas = preload("res://assets/boards/power_board_reference.png")
-	back.region = Rect2(Vector2(0.163, 0.315) * back.atlas.get_size(), Vector2(0.300, 0.158) * back.atlas.get_size())
+	back.region = Rect2(Vector2(0.163, back_y) * back.atlas.get_size(), Vector2(0.300, 0.158) * back.atlas.get_size())
 	back.filter_clip = true
 	var deck := Button.new()
-	deck.name = "ForgottenEvocationDeck"
+	deck.name = deck_name
 	deck.size = SMALL_CARD_SIZE
 	deck.custom_minimum_size = SMALL_CARD_SIZE
-	deck.tooltip_text = "Forgotten Evocations · Browse cards and available copies"
+	deck.tooltip_text = "Available " + ("jinx" if kind == "jinxs" else kind)
 	deck.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	deck.pressed.connect(_inspect_forgotten_evocations, CONNECT_DEFERRED)
+	deck.pressed.connect(_inspect_available.bind(kind), CONNECT_DEFERRED)
 	for style_name in ["normal", "hover", "pressed", "focus"]:
 		var edge := StyleBoxFlat.new()
 		edge.bg_color = Color(0, 0, 0, 0.3)
@@ -328,7 +336,7 @@ func setup_forgotten_evocation_deck() -> void:
 			edge.set_border_width_all(1)
 			edge.border_color = Color("e4c884")
 		deck.add_theme_stylebox_override(style_name, edge)
-	$EvocationSlot.add_child(deck)
+	slot.add_child(deck)
 	for layer_index in range(3, -1, -1):
 		var card := TextureRect.new()
 		card.name = "CardBack" if layer_index == 0 else "Stack%d" % layer_index
@@ -348,7 +356,26 @@ func _inspect_forgotten_evocations() -> void:
 	game.inspected_quest = null
 	var cards: Array = game.evocation_database.get_all_evocations().filter(func(data): return bool(data.get("forgotten", false)))
 	cards.sort_custom(func(a, b): return str(a.name).naturalnocasecmp_to(str(b.name)) < 0)
-	game._reference_card_preview().show_reference_pile("evocations", cards, "Forgotten Evocations", _describe_evocation)
+	game._reference_card_preview().show_reference_pile("evocations", cards, "Available forgotten evocations", _describe_evocation)
+
+
+func _inspect_available(kind: String) -> void:
+	if kind == "evocations":
+		_inspect_forgotten_evocations()
+		return
+	var game = get_parent()
+	game.inspected_quest = null
+	var cards: Array = []
+	if kind == "quests":
+		for quest in game.quest_database.quests.values():
+			if quest.moon == game.current_moon:
+				cards.append({"id": quest.id, "name": quest.card_name, "task": quest.task, "effects": quest.effects})
+	else:
+		cards = ForgottenAttachments.database().get("jinxes" if kind == "jinxs" else kind, []).duplicate(true)
+	cards.sort_custom(func(a, b): return str(a.name).naturalnocasecmp_to(str(b.name)) < 0)
+	game._reference_card_preview().show_reference_pile(kind, cards, "Available " + ("jinx" if kind == "jinxs" else kind), func(card):
+		if game.ReferenceCardPreview.card_texture(kind, str(card.id)) != null: return ""
+		return game.ReferenceCardPreview.describe_rules(card))
 
 
 func _describe_evocation(data: Dictionary) -> String:
