@@ -6484,6 +6484,8 @@ func _resolve_place_vastum(
 					effect,
 					context
 				)
+				if bool(effect.get("optional", false)):
+					options.append({"token":"vastum_skip", "value":"", "name":"Do not place the second Vastum"})
 				if options.is_empty():
 					return true
 				game.request_effect_choice(
@@ -6494,11 +6496,12 @@ func _resolve_place_vastum(
 					options,
 					1,
 					1,
-					"Choose the Room for the Vastum."
+					"Place the second Vastum: choose an adjacent Room, or skip." if effect.get("optional", false) else "Choose the Room for the Vastum."
 				)
 				return false
 			room_id = str(context.get(choice_key, ""))
 			context.erase(choice_key)
+			if room_id.is_empty() and effect.get("optional", false): return true
 		_:
 			return false
 

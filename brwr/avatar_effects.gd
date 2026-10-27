@@ -333,7 +333,7 @@ static func _move(game, frame: Dictionary) -> bool:
 	else:
 		options = AvatarRules.room_options(game).filter(func(o): return o.room_id != "throne" and str(game.get_room_by_id(o.room_id).room_data.get("color", "")) == str(effect.color))
 		options = AvatarRules.rank(game, options, ["nearest"])
-	if not AvatarRules.choose(game, frame, "destination", options, "Choose the destination for the Avatar.", "room_target"): return false
+	if not AvatarRules.choose(game, frame, "destination", options, "Avatar movement · choose the nearest %s Room." % str(effect.color) if not str(effect.color).is_empty() else "Avatar movement · choose destination.", "room_target"): return false
 	if frame.destination == null: return _done(frame)
 	var destination: String = str(frame.destination) if frame.destination is String else game.players[int(frame.destination.player_index)].mage.room_id
 	var from: String = mage.room_id
@@ -343,7 +343,7 @@ static func _move(game, frame: Dictionary) -> bool:
 	for room_id in exits:
 		moves.append({"token": "room:" + room_id, "value": room_id, "room_id": room_id, "name": game.get_room_by_id(room_id).room_name})
 	moves = AvatarRules.rank(game, moves, ["nearest"], destination)
-	if not AvatarRules.choose(game, frame, "next_room", moves, "Choose the path toward " + game.get_room_by_id(destination).room_name, "movement_destination"): return false
+	if not AvatarRules.choose(game, frame, "next_room", moves, "Avatar movement · choose the next step toward " + game.get_room_by_id(destination).room_name, "movement_destination"): return false
 	if frame.next_room == null: return _done(frame)
 	var next: String = str(frame.next_room)
 	frame.erase("next_room")

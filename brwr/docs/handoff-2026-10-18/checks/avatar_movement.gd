@@ -41,5 +41,18 @@ func run():
 		expect(request.player_index == game.crown_owner_id and "Choice of the Crown" in request.prompt, "Movement choice explicitly belongs to Crown")
 		expect(request.context_key == "destination", "Unique shortest step needs no extra choice")
 	expect(game.players[AVATAR].mage.room_id in [adjacent[0],adjacent[1]], "Movement stops upon reaching chosen grey Room")
+	reset_case()
+	for id in game.room_id_by_coord.values(): game.get_room_by_id(id).room_data["color"] = "red"
+	var yellow: String = game._beta_adjacent_room_ids("black_rose")[0]
+	game.get_room_by_id(yellow).room_data["color"] = "yellow"
+	locate(1, "garden")
+	locate(2, "garden")
+	damage(0, [1])
+	await command("corrupted_ray")
+	expect(game.players[0].mage.get_damage() == 3, "Corrupted Ray deals two damage to selected Mage")
+	expect(game.players[0].mage.damage_cubes == [-1,-1,-1], "Corrupted Ray converts damage, not Instability")
+	expect(game.players[AVATAR].mage.room_id == yellow, "Corrupted Ray physical section moves toward yellow Room")
+	for request in choices:
+		expect(request.get("context_key", "") != "target_room_id", "Corrupted Ray spell does not target an unrelated Room")
 	print("AVATAR MOVEMENT: ", checks, " assertions; failures: ", failures)
 	quit(0 if failures.is_empty() else 1)

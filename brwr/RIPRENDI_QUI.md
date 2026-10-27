@@ -1,3 +1,11 @@
+# Playtest — 27 ottobre 2026
+
+Ultima richiesta: 11 correzioni UI, animazioni, Log, Vastum e Corrupted Ray.
+Implementate e verificate con 39 controlli mirati; dettagli e limiti in [docs/PLAYTEST-2026-10-27.md](docs/PLAYTEST-2026-10-27.md).
+Questa sezione supera le indicazioni storiche sul click della carta Avatar: ora apre la carta per consultazione.
+
+---
+
 # Interfaccia e animazioni — 23–24 ottobre 2026 (completate)
 
 Nuova richiesta utente dopo le carte Mago: completare questi 13 punti, anche online.

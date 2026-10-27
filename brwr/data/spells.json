@@ -2609,30 +2609,13 @@
                   "room_source": "target"
                 },
                 {
-                  "type": "choose_one",
-                  "choice_key": "fumbling_dark_adjacent_optional",
-                  "prompt": "You may place a second Vastum in a Room at range 1 from you, other than the target.",
-                  "options": [
-                    {
-                      "id": "skip",
-                      "label": "Do not place the second Vastum",
-                      "effects": []
-                    },
-                    {
-                      "id": "place_adjacent",
-                      "label": "Place the second Vastum in an adjacent Room",
-                      "effects": [
-                        {
-                          "type": "place_vastum",
-                          "room_source": "choose",
-                          "origin": "caster",
-                          "range": 1,
-                          "exclude_target_room": true,
-                          "choice_key": "fumbling_dark_adjacent_room"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "place_vastum",
+                  "room_source": "choose",
+                  "origin": "caster",
+                  "range": 1,
+                  "exclude_target_room": true,
+                  "choice_key": "fumbling_dark_adjacent_room",
+                  "optional": true
                 }
               ]
             },

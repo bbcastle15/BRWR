@@ -38,6 +38,11 @@ var presentation_side: Panel
 var presentation_rules: RichTextLabel
 var card_tween: Tween
 var shown_card_serial := -1
+var damage_waiting := false
+var damage_receipt: PanelContainer
+var receipt_buttons: HBoxContainer
+var log_window: Control
+var log_text: RichTextLabel
 var evocation_names_visible := false
 var world_placements: Array[CanvasItem] = []
 
@@ -161,14 +166,11 @@ func _build_sidebar() -> void:
 		button.add_theme_font_size_override("font_size", 13)
 		button.pressed.connect(entry[1])
 		column.add_child(button)
-	var names_button := Button.new()
-	names_button.name = "EvocationNames"
-	names_button.text = "Evocation names"
-	names_button.toggle_mode = true
-	names_button.tooltip_text = "Show Evocation names beside their tokens on the Lodge"
-	names_button.add_theme_font_size_override("font_size", 13)
-	names_button.toggled.connect(_set_evocation_names_visible)
-	column.add_child(names_button)
+	var log_button := Button.new()
+	log_button.name = "Log"
+	log_button.text = "Log"
+	log_button.pressed.connect(_open_log)
+	column.add_child(log_button)
 	var exit_button := Button.new()
 	exit_button.text = "Main menu" if OS.has_feature("web") else "Exit game"
 	exit_button.add_theme_font_size_override("font_size", 13)
@@ -432,6 +434,7 @@ func _show_board(index: int) -> void:
 	_layout()
 
 func close_board() -> void:
+	if damage_waiting: return
 	_cancel_animation()
 	if game.avatar_board != null and game.avatar_board.expanded:
 		game.avatar_board.set_expanded(false, game)
@@ -464,6 +467,8 @@ func _process(_delta: float) -> void:
 		if not _has_damage_presentation(): close_board()
 		game._close_player_board_spell_preview()
 	_refresh_banners()
+	if damage_waiting:
+		_refresh_damage_receipt()
 	if not animated_damage_ghost: sync_card_presentation()
 	_observe(true)
 	var evocation_resolving: bool = game.resolution_stack.any(func(frame): return frame.get("type") == "evocation_activation")
@@ -531,10 +536,10 @@ func _refresh_damage_display(index: int) -> void:
 
 func receive_feedback(event: Dictionary) -> void:
 	if event.get("kind") == "damage":
-		queue_damage_placement(int(event.player), int(event.previous), event.owners, int(event.health))
+		queue_damage_placement(int(event.player), int(event.previous), event.owners, int(event.health), int(event.get("serial", -1)), int(event.get("attacker", -1)))
 
 
-func queue_damage_placement(player_index: int, previous_damage: int, owners: Array, health: int = -1) -> void:
+func queue_damage_placement(player_index: int, previous_damage: int, owners: Array, health: int = -1, serial: int = -1, attacker: int = -1) -> void:
 	if health < 0: health = game.players[player_index].mage.health
 	if not damage_display.has(player_index):
 		damage_display[player_index] = owners.slice(0, previous_damage)
@@ -542,7 +547,8 @@ func queue_damage_placement(player_index: int, previous_damage: int, owners: Arr
 		animation_queue.append({"player": player_index, "node": "DamageTrack/DamageSlot_%d" % index,
 			"kind": "damage", "owner": int(owners[index]), "cube_index": index,
 			"owners": owners.slice(0, index + 1),
-			"defeated": index + 1 >= health})
+			"defeated": index + 1 >= health, "last": index == owners.size()-1,
+			"serial": serial, "attacker": attacker, "amount": owners.size() - previous_damage})
 
 func _play_next_animation() -> void:
 	# Pure visual feedback: no rule waits on a Tween, and Close always skips it.
@@ -595,10 +601,10 @@ func _play_next_animation() -> void:
 		animated_node.position -= Vector2(-10, 0) if AvatarRules.is_avatar(game, index) else Vector2(0, 10)
 		animated_node.scale = animated_rest_scale * 1.08
 		animated_node.modulate.a = 0.0
-		if opening: animation.tween_interval(0.32)
-		animation.tween_property(animated_node, "modulate:a", 1.0, 0.10)
-		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.22).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.22).set_trans(Tween.TRANS_SINE)
+		if opening: animation.tween_interval(0.55)
+		animation.tween_property(animated_node, "modulate:a", 1.0, 0.25)
+		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.45).set_trans(Tween.TRANS_SINE)
 		animation.tween_interval(0.10 if not animation_queue.is_empty() and animation_queue[0].kind == "damage" and animation_queue[0].player == index else 0.18)
 	else:
 		animated_node.modulate.a = 0.0
@@ -636,6 +642,12 @@ func _finish_animation() -> void:
 			animation.tween_interval(0.8)
 			animation.tween_callback(_finish_animation)
 			return
+	if animated_damage_ghost and damage_event.get("last", false) and int(damage_event.get("serial", -1)) >= 0 and not damage_event.get("acknowledged", false):
+		animation = null
+		if is_instance_valid(animated_node): animated_node.hide()
+		damage_waiting = true
+		_show_damage_receipt()
+		return
 	animation = null
 	layer = 10
 	_refresh_animated_board()
@@ -689,11 +701,11 @@ func _play_world_placements() -> void:
 		node.scale = rest_scale * 1.65
 		var placement: Tween = node.create_tween()
 		placement.tween_interval(delay)
-		placement.tween_property(node, "modulate:a", 1.0, 0.22)
-		placement.parallel().tween_property(node, "scale", rest_scale, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		placement.tween_property(node, "modulate:a", 1.0, 0.45)
+		placement.parallel().tween_property(node, "scale", rest_scale, 0.9).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		placement.tween_property(node, "modulate", Color(1.45, 1.35, 1.05), 0.15)
-		placement.tween_property(node, "modulate", Color.WHITE, 0.3)
-		delay += 0.12
+		placement.tween_property(node, "modulate", Color.WHITE, 0.65)
+		delay += 0.32
 
 func _cancel_animation() -> void:
 	if animation != null:
@@ -765,3 +777,92 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		elif board_overlay.visible:
 			close_board()
 			get_viewport().set_input_as_handled()
+
+func _open_log() -> void:
+	if log_window == null:
+		var log_layer := CanvasLayer.new()
+		log_layer.layer = 165
+		add_child(log_layer)
+		log_window = Control.new()
+		log_window.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		log_window.theme = Style.make_theme()
+		log_layer.add_child(log_window)
+		var shade := ColorRect.new()
+		shade.color = Color(0, 0, 0, 0.65)
+		shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		log_window.add_child(shade)
+		var panel := PanelContainer.new()
+		panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		panel.offset_left = 220
+		panel.offset_right = -80
+		panel.offset_top = 80
+		panel.offset_bottom = -80
+		panel.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Style.INK, 2))
+		log_window.add_child(panel)
+		var column := VBoxContainer.new()
+		column.add_theme_constant_override("separation", 18)
+		panel.add_child(column)
+		var heading := Label.new()
+		heading.text = "LOG · Cronologia della partita"
+		heading.add_theme_font_size_override("font_size", 24)
+		heading.add_theme_color_override("font_color", Style.GOLD)
+		column.add_child(heading)
+		column.add_child(HSeparator.new())
+		log_text = RichTextLabel.new()
+		log_text.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		log_text.add_theme_font_size_override("normal_font_size", 18)
+		column.add_child(log_text)
+		var close := Button.new()
+		close.text = "Torna alla partita"
+		close.custom_minimum_size.y = 52
+		close.pressed.connect(log_window.hide)
+		column.add_child(close)
+	log_text.text = "\n\n".join(game.public_action_log) if not game.public_action_log.is_empty() else "Nessuna azione registrata."
+	log_window.show()
+
+func _show_damage_receipt() -> void:
+	if is_instance_valid(damage_receipt): damage_receipt.queue_free()
+	damage_receipt = PanelContainer.new()
+	damage_receipt.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Style.INK, 2))
+	board_overlay.add_child(damage_receipt)
+	damage_receipt.position = Vector2((board_overlay.size.x-640)/2, board_overlay.size.y-145)
+	damage_receipt.size = Vector2(640, 130)
+	var column := VBoxContainer.new()
+	damage_receipt.add_child(column)
+	var text := Label.new()
+	var attacker: int = damage_event.attacker
+	text.text = "%s ha inflitto %d danni a Player %d" % ["Player %d" % (attacker+1) if attacker >= 0 else "Black Rose", damage_event.amount, damage_event.player+1]
+	if damage_event.defeated: text.text += "\nPlayer %d defeated" % (damage_event.player+1)
+	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	text.add_theme_font_size_override("font_size", 22)
+	column.add_child(text)
+	if is_instance_valid(defeat_notice): defeat_notice.hide()
+	receipt_buttons = HBoxContainer.new()
+	receipt_buttons.alignment = BoxContainer.ALIGNMENT_CENTER
+	column.add_child(receipt_buttons)
+	_refresh_damage_receipt()
+
+func _refresh_damage_receipt() -> void:
+	var serial: int = damage_event.get("serial", -1)
+	var awaiting: Array = game.damage_acknowledgements.get(str(serial), [])
+	if awaiting.is_empty():
+		damage_waiting = false
+		damage_event["acknowledged"] = true
+		if is_instance_valid(damage_receipt): damage_receipt.queue_free()
+		_finish_animation()
+		return
+	if receipt_buttons.get_meta("awaiting", []) == awaiting: return
+	receipt_buttons.set_meta("awaiting", awaiting.duplicate())
+	for child in receipt_buttons.get_children():
+		receipt_buttons.remove_child(child)
+		child.queue_free()
+	for player in awaiting:
+		var button := Button.new()
+		button.text = "Player %d · Continua" % (int(player)+1)
+		Style.primary_button(button)
+		button.disabled = game.network_session != null and game.local_viewer_index != int(player)
+		button.pressed.connect(func():
+			if game.network_session != null: game.network_session.acknowledge_damage(serial)
+			else: game.acknowledge_damage(serial, int(player))
+			_refresh_damage_receipt())
+		receipt_buttons.add_child(button)

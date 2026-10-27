@@ -21,6 +21,8 @@ var network_turn_presentation: Dictionary = {}
 var card_presentation: Dictionary = {}
 var card_presentation_serial := 0
 # Public, transient visual history. Never used to resolve rules or reveal private cards.
+var public_action_log: Array[String] = []
+var damage_acknowledgements: Dictionary = {}
 var table_feedback_serial := 0
 var table_feedback_events: Array[Dictionary] = []
 var suppress_placement_feedback := false
@@ -2044,7 +2046,7 @@ func open_player_board_action(player_index: int, category: String) -> void:
 	if options.is_empty():
 		return
 	if table_shell != null:
-		table_shell.close_board()
+		if not table_shell._has_damage_presentation(): table_shell.close_board()
 	if category == "finish":
 		submit_beta_input(player_index, {"token": str(options[0].token)})
 	elif beta_hud != null:
@@ -2684,6 +2686,7 @@ func summon_evocation(
 	if not player.add_evocation(evocation):
 		return null
 
+	append_public_log("Player %d summoned %s in %s" % [owner_id+1, evocation.evocation_name, room_id])
 	_store_owner_cubes_on_evocation_summon(evocation)
 	ForgottenEvocations.on_summon(self, evocation)
 
@@ -3136,6 +3139,10 @@ func process_game_event(
 ) -> bool:
 	if event == null:
 		return true
+	if event.event_type == "mage_defeated":
+		append_public_log("Player %d defeated" % (event.target_player_index+1))
+	if event.event_type == "instability_placed":
+		append_public_log("%s placed %d Instability in %s" % ["Player %d" % (event.source_player_index+1) if event.source_player_index >= 0 else "Black Rose", event.amount, event.source_room_id])
 	EquipmentRules.on_event(self, event)
 	PestilenceRules.on_event(self, event)
 	ForgottenPassives.on_event(self, event)
@@ -3727,6 +3734,7 @@ func move_mage_to_room_id(
 	mage.room_id = destination_room_id
 	mage.room_coord = destination_coord
 	mage.in_cell = false
+	append_public_log("Player %d moved to %s" % [player_index + 1, destination_room_id.replace("_", " ")])
 	print("Player ", player_index + 1, " moved to ", destination_room_id)
 	refresh_model_tokens()
 	_request_resolution_visual_yield()
@@ -3773,10 +3781,11 @@ func move_evocation_to_room_id(
 
 	var previous_room_id: String = str(evocation.room_id)
 	if previous_room_id != destination_room_id and table_shell != null:
-		table_shell.close_board()
+		if not table_shell._has_damage_presentation(): table_shell.close_board()
 		var camera = get_node_or_null("TableCamera")
 		if camera != null:
 			camera.ensure_movement_visible(hex_to_pixel(from_coord), hex_to_pixel(to_coord))
+	append_public_log("%s moved to %s" % [evocation.evocation_name, destination_room_id])
 	evocation.room_id = destination_room_id
 
 	print(
@@ -4987,6 +4996,7 @@ func place_vastum(room_id: String) -> bool:
 
 	vastum_room_state[room_id] = true
 	_refresh_vastum_token(room_id)
+	append_public_log("Vastum placed in " + room_id)
 	print("Vastum placed in ", room_id)
 	return true
 
@@ -14272,11 +14282,26 @@ func dismiss_card_presentation(serial: int = -1, player_index: int = -1) -> bool
 	return true
 
 
-func record_damage_feedback(player_index: int, previous_damage: int, owners: Array) -> void:
+func append_public_log(message: String) -> void:
+	if network_client: return
+	public_action_log.append("%04d · Round %d · %s" % [public_action_log.size()+1, current_round, message])
+
+func acknowledge_damage(serial: int, player_index: int) -> bool:
+	if network_client or not damage_acknowledgements.get(str(serial), []).has(player_index): return false
+	damage_acknowledgements[str(serial)].erase(player_index)
+	if network_session != null: network_session.publish()
+	return true
+
+func record_damage_feedback(player_index: int, previous_damage: int, owners: Array, attacker: int = -1) -> void:
 	if network_client: return
 	table_feedback_serial += 1
 	var event := {"serial": table_feedback_serial, "kind": "damage", "player": player_index,
-		"previous": previous_damage, "owners": owners.duplicate(), "health": players[player_index].mage.health}
+		"previous": previous_damage, "owners": owners.duplicate(), "health": players[player_index].mage.health, "attacker": attacker}
+	damage_acknowledgements[str(table_feedback_serial)] = []
+	for player in players:
+		if player.avatar == null and player.player_index != attacker:
+			damage_acknowledgements[str(table_feedback_serial)].append(player.player_index)
+	append_public_log("%s dealt %d damage to Player %d" % ["Player %d" % (attacker + 1) if attacker >= 0 else "Black Rose", owners.size() - previous_damage, player_index + 1])
 	table_feedback_events.append(event)
 	if table_feedback_events.size() > 128: table_feedback_events.pop_front()
 	if table_shell != null: table_shell.receive_feedback(event)
@@ -14752,7 +14777,7 @@ func process_damage_resolution(
 			var damage_before: int = target_mage.get_damage()
 			var damage_dealt: int = target_mage.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes_available)
 			if damage_dealt > 0:
-				record_damage_feedback(target_player_index, damage_before, target_mage.damage_cubes)
+				record_damage_feedback(target_player_index, damage_before, target_mage.damage_cubes, attacker_id)
 			resolution["actual_damage"] = damage_dealt
 			_sync_damage_result_context(resolution, damage_dealt)
 			_refresh_damage_boards(target_player_index, attacker_id)
@@ -16529,6 +16554,7 @@ func process_spell_cast_resolution(
 			return false
 
 		"after_spell":
+			append_public_log("Player %d cast %s" % [player_index + 1, spell.card_name])
 			print(
 				"Player ", player_index + 1,
 				" cast ", spell.card_name,
@@ -16747,6 +16773,7 @@ func process_room_activation_resolution(
 				"event": room_effect_event
 			})
 
+			append_public_log("Player %d activated %s" % [player_index+1,room.room_name])
 			print(
 				"Player ", player_index + 1,
 				" activated ", room.room_name,
@@ -17071,6 +17098,7 @@ func process_explore_resolution(
 			if not bool(resolution.get("jinx_checked", false)):
 				resolution["jinx_checked"] = true
 				ForgottenAttachments.physical_action_finished(self, player_index)
+			append_public_log("Player %d performed Explore" % (player_index+1))
 			print("Player ", player_index + 1, " performed Explore")
 			return true
 
@@ -17200,6 +17228,7 @@ func process_fight_resolution(
 			return false
 
 		"done":
+			append_public_log("Player %d performed Fight" % (player_index+1))
 			print("Player ", player_index + 1, " performed Fight")
 			return true
 
@@ -17255,6 +17284,7 @@ func process_command_resolution(
 			return false
 
 		"done":
+			append_public_log("Player %d performed Command" % (player_index+1))
 			print("Player ", player_index + 1, " performed Command")
 			return true
 
@@ -20312,6 +20342,7 @@ func build_starting_grimoire(
 	and player_boards[player_index] != null:
 		player_boards[player_index].refresh()
 
+	append_public_log("Player %d chose %s / %s" % [player_index+1, get_school_display_name(school_id), player.starting_grimoire_name])
 	print(
 		"Player ",
 		player_index + 1,
@@ -20796,6 +20827,7 @@ func assign_mage_to_player(
 	if player_index < player_boards.size() 	and player_boards[player_index] != null:
 		player_boards[player_index].refresh()
 
+	append_public_log("Player %d chose Mage %s" % [player_index+1, data.get("name",mage_id)])
 	print(
 		"Player ",
 		player_index + 1,
@@ -21656,13 +21688,13 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 		elif token.begins_with("instability:") or str(option.get("cube_room_id", "")) != "":
 			# Instability cubes live on the Lodge. Never open a PlayerBoard just
 			# because the public choice also carries a player index.
-			table_shell.close_board()
+			if not table_shell._has_damage_presentation(): table_shell.close_board()
 		elif option.has("cube_evocation_owner"):
-			table_shell.close_board()
+			if not table_shell._has_damage_presentation(): table_shell.close_board()
 		elif option.has("cube_player_index"):
 			table_shell.reveal_board_choice(int(option.cube_player_index))
 		else:
-			table_shell.close_board()
+			if not table_shell._has_damage_presentation(): table_shell.close_board()
 	var portrait_choice: bool = target.has_method("has_portrait") and target.has_portrait()
 	var button: Button = target.create_target_button() if portrait_choice else Button.new()
 	var overlay_parent: Node = target
@@ -21717,7 +21749,7 @@ func clear_lodge_room_choices() -> void:
 
 func show_lodge_room_choices(callbacks: Dictionary, selected_rooms: Array[String] = []) -> void:
 	if table_shell != null:
-		table_shell.close_board()
+		if not table_shell._has_damage_presentation(): table_shell.close_board()
 	clear_lodge_room_choices()
 	for room_id in callbacks:
 		var room = get_room_by_id(str(room_id))

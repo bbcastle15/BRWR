@@ -59,7 +59,7 @@ func set_expanded(value: bool, parent: Node) -> void:
 func _update_hitboxes() -> void:
 	for card in cards_root.get_children():
 		if card is Control:
-			card.mouse_filter = Control.MOUSE_FILTER_STOP if expanded else Control.MOUSE_FILTER_IGNORE
+			card.mouse_filter = Control.MOUSE_FILTER_STOP if expanded or card.get_meta("avatar_reference", false) else Control.MOUSE_FILTER_IGNORE
 			if card.name == "AvatarJinxes":
 				card.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_ENABLED if expanded else Control.MOUSE_BEHAVIOR_DISABLED
 			if card.has_meta("upright_in_portrait"):
@@ -85,11 +85,7 @@ func refresh() -> void:
 		card.queue_free()
 	var preview = game._reference_card_preview()
 	_add_card("avatars", "possessed", "Possessed · Dominion", SHEET,
-		func():
-			if not expanded and game.table_shell != null:
-				game.table_shell.open_board(game.avatar.player_index)
-			else:
-				preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
+		func(): preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
 	var back_id := "command_back_%d" % clampi(game.current_moon, 1, 3)
 	_add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
 		func(): preview.show_card("avatars", back_id, "Command deck · Moon %d" % game.current_moon,
@@ -243,6 +239,7 @@ func _add_mage_tokens(player: PlayerState) -> void:
 
 func _add_card(kind: String, id: String, title: String, rect: Rect2, callback: Callable) -> Button:
 	var card: Button = game.ReferenceCardPreview.make_card(kind, id, title, rect.size, callback, kind != "evocations")
+	card.set_meta("avatar_reference", kind == "avatars" and id == "possessed")
 	card.flat = true
 	card.position = rect.position
 	cards_root.add_child(card)

@@ -28,7 +28,7 @@ var hand_button: Button
 var hand_overlay = null
 var effect_box: PanelContainer
 var effect_text: RichTextLabel
-var choice_confirmation: ConfirmationDialog
+var choice_confirmation
 var confirmation_action: Callable
 var confirmation_revision := -1
 
@@ -365,7 +365,8 @@ func _add_confirmation(text_value: String, callback: Callable, disabled: bool = 
 	var button := Button.new()
 	button.text = text_value
 	button.disabled = disabled
-	button.custom_minimum_size = Vector2(108, 40)
+	button.custom_minimum_size = Vector2(180, 54)
+	TabletopStyle.primary_button(button)
 	button.pressed.connect(callback, CONNECT_DEFERRED)
 	decision_actions.add_child(button)
 	decision_bar.show()
@@ -1012,20 +1013,19 @@ func _submit(payload: Dictionary) -> void:
 
 func confirm_choice(message: String, callback: Callable) -> void:
 	if choice_confirmation == null:
-		choice_confirmation = ConfirmationDialog.new()
+		var confirmation_layer := CanvasLayer.new()
+		confirmation_layer.layer = 170
+		add_child(confirmation_layer)
+		choice_confirmation = load("res://choice_confirmation.gd").new()
 		choice_confirmation.name = "ChoiceConfirmation"
-		choice_confirmation.title = "Confirm choice"
-		choice_confirmation.ok_button_text = "Confirm"
-		choice_confirmation.cancel_button_text = "Cancel"
-		choice_confirmation.exclusive = true
 		choice_confirmation.theme = TabletopStyle.make_theme()
-		add_child(choice_confirmation)
+		confirmation_layer.add_child(choice_confirmation)
 		choice_confirmation.confirmed.connect(_accept_confirmation)
 		choice_confirmation.canceled.connect(func(): confirmation_action = Callable())
 	confirmation_revision = game.input_revision
 	confirmation_action = callback
 	choice_confirmation.dialog_text = message
-	choice_confirmation.popup_centered_clamped(Vector2i(560, 180), 0.9)
+	choice_confirmation.popup_centered_clamped(Vector2i(640, 270), 0.9)
 
 
 func _accept_confirmation() -> void:

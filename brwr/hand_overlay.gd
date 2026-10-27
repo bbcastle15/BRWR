@@ -265,12 +265,12 @@ func _build_ui() -> void:
 
 	selection_label = Label.new()
 	selection_label.add_theme_font_size_override("font_size", 17)
-	selection_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	selection_label.clip_text = true
 	selection_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	preparation_summary.add_child(selection_label)
 
 	slots_label = Label.new()
-	slots_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	slots_label.clip_text = true
 	slots_label.add_theme_font_size_override("font_size", 15)
 	slots_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slots_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -333,7 +333,8 @@ func _build_ui() -> void:
 
 	feedback_label = Label.new()
 	feedback_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	feedback_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	feedback_label.custom_minimum_size.y = 28
+	feedback_label.clip_text = true
 	feedback_label.modulate = Color(0.90, 0.82, 0.55)
 	prep_controls.add_child(feedback_label)
 
@@ -347,7 +348,8 @@ func _build_ui() -> void:
 
 	confirm_button = Button.new()
 	confirm_button.text = "Confirm"
-	confirm_button.custom_minimum_size = Vector2(130, 42)
+	confirm_button.custom_minimum_size = Vector2(190, 54)
+	preload("res://tabletop_style.gd").primary_button(confirm_button)
 	confirm_button.pressed.connect(
 		_confirm_preparation
 	)
@@ -1390,7 +1392,7 @@ func _update_controls() -> void:
 	study_confirm_button.hide()
 	if mode != MODE_PREPARATION:
 		return
-	feedback_label.visible = not feedback_label.text.is_empty()
+	feedback_label.visible = true
 
 	var has_selection: bool = (
 		selected_hand_index != -1

@@ -7,6 +7,8 @@ static func build(game, viewer: int) -> Dictionary:
 	state["revision"] = game.input_revision
 	state["turn_presentation"] = game.get_turn_presentation()
 	state["card_presentation"] = game.card_presentation.duplicate(true)
+	state["public_action_log"] = game.public_action_log.duplicate()
+	state["damage_acknowledgements"] = game.damage_acknowledgements.duplicate(true)
 	state["feedback_serial"] = game.table_feedback_serial
 	state["feedback_events"] = game.table_feedback_events.duplicate(true)
 	state["avatar"] = game.avatar.public_data() if game.avatar != null else {}
@@ -83,6 +85,8 @@ static func apply(game, state: Dictionary) -> void:
 	game.current_phase = state.phase
 	game.input_revision = state.revision
 	game.network_turn_presentation = state.get("turn_presentation", {})
+	game.public_action_log.assign(state.get("public_action_log", []))
+	game.damage_acknowledgements = state.get("damage_acknowledgements", {}).duplicate(true)
 	game.card_presentation = state.get("card_presentation", {}).duplicate()
 	game.active_school_ids.assign(state.get("active_schools", game.active_school_ids))
 	game.school_discards.clear()

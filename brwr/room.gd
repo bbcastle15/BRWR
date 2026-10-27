@@ -481,12 +481,14 @@ func get_art_instability_slots() -> PackedVector2Array:
 	var count := get_instability_resistance()
 	var slots := PackedVector2Array()
 	var bottom_count := mini(count, 4) if count != 5 else 5
-	var size := Vector2(radius * 2.0, radius * sqrt(3.0)) * preload("res://room_art.gd").ART_BLEED
+	var bounds := Vector2(radius * 2.0, radius * sqrt(3.0))
+	var texture_size: Vector2 = $Background.texture.get_size()
+	var size := texture_size * maxf(bounds.x / texture_size.x, bounds.y / texture_size.y) * preload("res://room_art.gd").ART_BLEED
 	for i in range(bottom_count):
-		slots.append((Vector2(0.5 + (i - (bottom_count - 1) * 0.5) * 0.10, 0.91) - Vector2.ONE * 0.5) * size)
+		slots.append((Vector2(0.5 + (i - (bottom_count - 1) * 0.5) * 0.10, 0.903) - Vector2.ONE * 0.5) * size)
 	var side_count := int((count - bottom_count) / 2)
 	for i in range(side_count):
-		var offset := Vector2(0.25 - i * 0.05, 0.81 - i * 0.10)
+		var offset := Vector2(0.245 - i * 0.05, 0.818 - i * 0.10)
 		slots.append((offset - Vector2.ONE * 0.5) * size)
 		slots.append((Vector2(1.0 - offset.x, offset.y) - Vector2.ONE * 0.5) * size)
 	# The slanted left edge precedes the bottom row; the right edge follows it.

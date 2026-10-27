@@ -119,3 +119,11 @@ static func fit_spell_side(frame: Control, area: Vector2, texture: Texture2D, da
 		extent = texture.get_size() * minf(area.x / texture.get_width(), area.y / texture.get_height())
 	frame.size = Vector2(extent.x, extent.y * 0.5)
 	frame.position = (area - extent) * 0.5 + Vector2(0, extent.y * 0.5 if dark else 0.0)
+
+static func primary_button(button: Button) -> void:
+	button.add_theme_font_size_override("font_size", 20)
+	button.add_theme_stylebox_override("normal", panel(Color("edce86"), Color("705a2c"), 2))
+	button.add_theme_stylebox_override("hover", panel(Color("fff0c3"), Color("92753a"), 2))
+	button.add_theme_stylebox_override("focus", panel(Color("fff0c3"), Color("92753a"), 3))
+	button.add_theme_stylebox_override("disabled", panel(Color("786c52"), Color("34322b"), 1))
+	button.add_theme_color_override("font_disabled_color", Color("b5ad9a"))

@@ -267,6 +267,9 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 				_ready_for_state(peer_id)
 			"choose":
 				_choose(peer_id, int(payload.get("revision", -1)), payload.get("payload", {}))
+			"ack_damage":
+				if connected and receiving.has(peer_id) and peer_players.has(peer_id) and game != null:
+					game.acknowledge_damage(int(payload.get("serial", -1)), int(peer_players[peer_id]))
 			"ack_presentation":
 				if connected and receiving.has(peer_id) and peer_players.has(peer_id) and game != null \
 				and game.can_acknowledge_card_presentation(int(peer_players[peer_id])) \
@@ -546,3 +549,9 @@ func _close_transport() -> void:
 func return_to_menu() -> void:
 	_close_transport()
 	get_tree().reload_current_scene()
+
+func acknowledge_damage(serial: int) -> bool:
+	if not connected or game == null: return false
+	if game.network_client:
+		return _send_game_to_host({"op":"ack_damage", "serial":serial}) == OK
+	return game.acknowledge_damage(serial, local_player)

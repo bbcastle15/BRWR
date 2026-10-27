@@ -45,7 +45,7 @@ func run():
 	var script_hashes := {}
 	for file in ["game.gd", "beta_hud.gd", "hand_overlay.gd", "player_board.gd",
 		"tabletop_shell.gd", "tabletop_style.gd", "power_board.gd", "avatar_board.gd",
-		"reference_card_preview.gd", "table_reserves.gd", "room.gd", "network_projection.gd", "online_session.gd"]:
+		"reference_card_preview.gd", "table_reserves.gd", "room.gd", "network_projection.gd", "online_session.gd", "choice_confirmation.gd", "avatar_effects.gd", "effect_resolver.gd", "data/spells.json"]:
 		script_hashes[file] = FileAccess.get_sha256("res://" + file)
 	if writing:
 		var manifest = JSON.parse_string(FileAccess.get_file_as_string("res://docs/mage-art-2026-10-23/manifest.json"))
