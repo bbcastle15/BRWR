@@ -76,14 +76,14 @@ func _ready() -> void:
 	var solo_row := HBoxContainer.new()
 	box.add_child(solo_row)
 	solo_count = _count(solo_row)
-	solo_button = _button(solo_row, "Modalità solo-test", _solo)
-	room_setup_button = _button(box, "Stanze della Loggia · originali / alternative", _open_room_setup)
-	avatar_setup_button = _button(box, "Avatar · disattivato (playtest disponibile)", _open_avatar_setup)
+	solo_button = _button(solo_row, "Solo playtest", _solo)
+	room_setup_button = _button(box, "Lodge Rooms · original / alternative", _open_room_setup)
+	avatar_setup_button = _button(box, "Avatar · disabled (playtest available)", _open_avatar_setup)
 	box.add_child(HSeparator.new())
 
-	_label(box, "PvP online · Host e giocatori si collegano al server BRWR su Render.")
+	_label(box, "Online PvP · Host and players connect to the BRWR server on Render.")
 	if OS.has_feature("web"):
-		_label(box, "Apri il link ricevuto dall'host e premi Entra nella partita.")
+		_label(box, "Open the host’s invite link and press Join game.")
 	else:
 		var host_row := HBoxContainer.new()
 		box.add_child(host_row)
@@ -91,51 +91,51 @@ func _ready() -> void:
 		var mages := MageDatabase.new()
 		mages.load_database()
 		online_count.max_value = mini(6, mages.get_mage_ids().size())
-		host_button = _button(host_row, "Crea sala PvP", _host)
+		host_button = _button(host_row, "Create PvP room", _host)
 
 		public_address = LineEdit.new()
-		public_address.placeholder_text = "Server BRWR su Render"
+		public_address.placeholder_text = "BRWR server on Render"
 		public_address.text = Invite.configured_web_base()
 		public_address.editable = false
 		box.add_child(public_address)
-		_label(box, "Internet: nessun port forwarding. Tutti i PC aprono solo connessioni WSS in uscita verso Render.")
+		_label(box, "Internet: no port forwarding required. Players connect to Render using WSS.")
 
 		invite_link = LineEdit.new()
 		invite_link.editable = false
-		invite_link.placeholder_text = "Il link Render apparirà dopo Crea sala"
+		invite_link.placeholder_text = "The invite link appears after creating a room"
 		box.add_child(invite_link)
 
-		_button(box, "Copia link d'invito", func():
+		_button(box, "Copy invite link", func():
 			if not invite_link.text.is_empty():
 				DisplayServer.clipboard_set(invite_link.text))
 
-		start_button = _button(box, "Avvia partita", func(): session.start_match())
+		start_button = _button(box, "Start game", func(): session.start_match())
 		start_button.disabled = true
 
 	roster = _label(box, "")
 	address = LineEdit.new()
-	address.placeholder_text = "Incolla il link d'invito BRWR"
+	address.placeholder_text = "Paste BRWR invite link"
 	box.add_child(address)
 
 	code = LineEdit.new()
-	code.placeholder_text = "Codice sala · compilato automaticamente dal link"
+	code.placeholder_text = "Room code · filled from invite link"
 	code.max_length = 128
 	box.add_child(code)
 
-	join_button = _button(box, "Entra nella partita", _join)
+	join_button = _button(box, "Join game", _join)
 	message = _label(box, "")
 	message.custom_minimum_size.y = 50
 
-	_button(box, "Torna al menu / Annulla connessione", _reset)
+	_button(box, "Return to menu / Cancel connection", _reset)
 	if not OS.has_feature("web"):
-		_button(box, "Chiudi gioco", func(): get_tree().quit())
+		_button(box, "Exit game", func(): get_tree().quit())
 	else:
 		var link: String = str(JavaScriptBridge.eval("window.location.href", true))
 		var invitation := Invite.parse(link)
 		if not invitation.is_empty():
 			address.text = invitation.address
 			code.text = invitation.code
-			_status("Invito pronto. Premi Entra nella partita.")
+			_status("Invite ready. Press Join game.")
 		JavaScriptBridge.eval(
 			"document.addEventListener('contextmenu', function(e) { e.preventDefault(); });",
 			true
@@ -155,7 +155,7 @@ func _count(box: Control) -> SpinBox:
 	count.min_value = 2
 	count.max_value = 6
 	count.value = 2
-	count.prefix = "Giocatori: "
+	count.prefix = "Players: "
 	count.custom_minimum_size = Vector2(190, 40)
 	box.add_child(count)
 	return count
@@ -188,14 +188,14 @@ func _web_directory() -> String:
 func _host() -> void:
 	var endpoint := Invite.websocket_address()
 	if endpoint.is_empty():
-		_status("Server Render non configurato. Inserisci l'URL reale in online_server_url.txt.")
+		_status("Render server not configured. Set its URL in online_server_url.txt.")
 		return
 
 	session.room_variants = room_selections.duplicate()
 	session.avatar_selection = avatar_selection.duplicate(true)
 	var error: Error = session.host(int(online_count.value))
 	if error != OK:
-		_status("Impossibile collegarsi al server online: " + error_string(error))
+		_status("Unable to connect to online server: " + error_string(error))
 		return
 
 	_refresh_lobby()
@@ -207,7 +207,7 @@ func _refresh_invite() -> void:
 	invite_link.text = Invite.create(session.room_code)
 	invite_link.tooltip_text = "BRWR online · Render relay"
 	if invite_link.text.is_empty():
-		_status("Server Render non configurato. Controlla online_server_url.txt.")
+		_status("Render server not configured. Check online_server_url.txt.")
 
 func _join() -> void:
 	var target := address.text.strip_edges()
@@ -216,7 +216,7 @@ func _join() -> void:
 		target = invitation.address
 		code.text = invitation.code
 	if target.is_empty() or code.text.is_empty():
-		_status("Inserisci il link d'invito oppure il codice della sala.")
+		_status("Enter an invite link or room code.")
 		return
 	var error: Error = session.join(target, code.text)
 	if error != OK:
@@ -240,7 +240,7 @@ func _refresh_lobby() -> void:
 		for seat in session.seats:
 			names.append(
 				"Player %d%s"
-				% [seat + 1, " (tu)" if seat == session.local_player else ""]
+				% [seat + 1, " (you)" if seat == session.local_player else ""]
 			)
 	roster.text = " · ".join(names)
 	if host_button != null and session.hosting and not session.room_code.is_empty():
@@ -272,15 +272,15 @@ func _open_room_setup() -> void:
 	overlay.add_child(margin)
 	var column := VBoxContainer.new()
 	margin.add_child(column)
-	var title := _label(column, "STANZE DELLA LOGGIA")
+	var title := _label(column, "LODGE ROOMS")
 	title.add_theme_font_size_override("font_size", 26)
-	_label(column, "Ogni variante sostituisce esclusivamente la stanza indicata. Le stanze delle modalità speciali non implementate sono escluse.")
+	_label(column, "Each variant replaces only its listed Room. Rooms from unimplemented special modes are excluded.")
 	var toolbar := HBoxContainer.new()
 	column.add_child(toolbar)
 	var controls: Dictionary = {}
-	_button(toolbar, "Tutte originali", func(): _set_all_rooms(controls, false))
-	_button(toolbar, "Varianti casuali", func(): _set_all_rooms(controls, true))
-	var close := _button(toolbar, "Conferma e torna al menu", func():
+	_button(toolbar, "All original", func(): _set_all_rooms(controls, false))
+	_button(toolbar, "Random variants", func(): _set_all_rooms(controls, true))
+	var close := _button(toolbar, "Confirm and return to menu", func():
 		menu.show()
 		overlay.queue_free())
 	close.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -302,7 +302,7 @@ func _open_room_setup() -> void:
 		choices.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		rows.add_child(choices)
 		variants.push_front(base)
-		variants.append({"id": "random", "name": "Casuale"})
+		variants.append({"id": "random", "name": "Random"})
 		controls[str(base.id)] = {}
 		for definition in variants:
 			var base_id: String = str(base.id)
@@ -330,7 +330,7 @@ func _open_room_setup() -> void:
 			choices.add_child(button)
 			controls[base_id][variant_id] = button
 		rows.add_child(HSeparator.new())
-	_label(rows, "Apocalypse, Room of Rebirth e le quattro stanze dello scenario Gaea sono escluse finché le rispettive modalità non saranno implementate.")
+	_label(rows, "Apocalypse, Room of Rebirth and the four Gaea scenario Rooms are excluded until their modes are implemented.")
 
 
 func _set_all_rooms(controls: Dictionary, randomize_variants: bool) -> void:
@@ -352,20 +352,20 @@ func _open_avatar_setup() -> void:
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 18)
 	margin.add_child(column)
-	var title := _label(column, "MODALITÀ AVATAR")
+	var title := _label(column, "AVATAR MODE")
 	title.add_theme_font_size_override("font_size", 30)
-	_label(column, "PLAYTEST SPERIMENTALE · Possessed è in sviluppo: plancia, interazioni e online sono ancora da collaudare.")
-	_label(column, "L’Avatar occupa un posto nella Loggia e controlla la Rosa Nera. Le parità e le scelte non determinate dalle priorità spettano al giocatore con la Corona.")
+	_label(column, "EXPERIMENTAL PLAYTEST · Possessed is in development; board interactions and online play are still being tested.")
+	_label(column, "The Avatar occupies a seat in the Lodge and controls the Black Rose. Ties and choices not resolved by priorities belong to the Crown holder.")
 	var selection := OptionButton.new()
 	selection.custom_minimum_size.y = 48
-	selection.add_item("Disattivato")
+	selection.add_item("Disabled")
 	selection.set_item_metadata(0, "")
 	if not AvatarRules.available().is_empty():
-		selection.add_item("Avatar casuale")
+		selection.add_item("Random Avatar")
 		selection.set_item_metadata(1, "random")
 	for definition in AvatarRules.definitions():
 		if not bool(definition.get("implemented", false)) and str(definition.id) != "possessed": continue
-		selection.add_item(str(definition.name) + (" · playtest sperimentale" if not bool(definition.get("implemented", false)) else ""))
+		selection.add_item(str(definition.name) + (" · experimental playtest" if not bool(definition.get("implemented", false)) else ""))
 		selection.set_item_metadata(selection.item_count - 1, str(definition.id))
 	for i in selection.item_count:
 		if selection.get_item_metadata(i) == avatar_selection.get("id", ""): selection.select(i)
@@ -382,11 +382,11 @@ func _open_avatar_setup() -> void:
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	art.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(art)
-	_label(column, "Possessed · 12 Salute · 2 Forza · 2 Velocità\nDominion: se inizia la propria attivazione in Cella, si piazza nella Black Rose Room senza rivelare un Comando.")
-	_button(column, "Conferma e torna al menu", func():
+	_label(column, "Possessed · 12 Health · 2 Strength · 2 Speed\nDominion: if it starts its activation in its Cell, place it in the Black Rose Room without revealing a Command.")
+	_button(column, "Confirm and return to menu", func():
 		var id: String = str(selection.get_selected_metadata())
 		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
-		avatar_setup_button.text = "Avatar · " + ("disattivato (playtest disponibile)" if id.is_empty() else ("casuale" if id == "random" else id.capitalize() + " · playtest"))
+		avatar_setup_button.text = "Avatar · " + ("disabled (playtest available)" if id.is_empty() else ("random" if id == "random" else id.capitalize() + " · playtest"))
 		solo_count.min_value = 2 if id.is_empty() else 1
 		solo_count.max_value = 6 if id.is_empty() else 5
 		if online_count != null: online_count.max_value = 6 if id.is_empty() else 5

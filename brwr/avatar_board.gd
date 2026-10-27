@@ -90,6 +90,12 @@ func refresh() -> void:
 	_add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
 		func(): preview.show_card("avatars", back_id, "Command deck · Moon %d" % game.current_moon,
 			"%d cards. Hidden faces and order. Reaction: %s" % [player.grimoire.size(), str(game.avatar.public_data().reaction)]))
+	if not str(game.avatar.public_data().reaction).is_empty():
+		var marker = preload("res://tabletop_style.gd").marker("protection", player.color, Vector2(75, 75))
+		marker.name = "AvatarProtection"
+		marker.position = COMMANDS.position + Vector2(20, 20)
+		marker.set_meta("upright_in_portrait", true)
+		cards_root.add_child(marker)
 	if not player.memories.is_empty():
 		var discard = _add_card("spells", player.memories.back().id, "Memories", MEMORIES, open_memories)
 		discard.name = "AvatarMemories"

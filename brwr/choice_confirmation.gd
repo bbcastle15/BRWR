@@ -25,7 +25,7 @@ func _ready():
  column.add_theme_constant_override("separation",22)
  frame.add_child(column)
  var title=Label.new()
- title.text="CONFERMA SCELTA"
+ title.text="CONFIRM CHOICE"
  title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
  title.add_theme_font_size_override("font_size",16)
  title.add_theme_color_override("font_color",Color("b69a63"))
@@ -44,12 +44,12 @@ func _ready():
  buttons.add_theme_constant_override("separation",20)
  column.add_child(buttons)
  var cancel=Button.new()
- cancel.text="Indietro"
+ cancel.text="Back"
  cancel.custom_minimum_size=Vector2(190,52)
  cancel.pressed.connect(func(): hide(); canceled.emit())
  buttons.add_child(cancel)
  var accept=Button.new()
- accept.text="Conferma"
+ accept.text="Confirm"
  accept.custom_minimum_size=Vector2(190,52)
  preload("res://tabletop_style.gd").primary_button(accept)
  accept.pressed.connect(func(): confirmed.emit())

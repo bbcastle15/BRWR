@@ -111,7 +111,7 @@ func _process(_delta: float) -> void:
 		_transport_lost()
 
 	if connection_started > 0 and not connected and now - connection_started > CONNECT_TIMEOUT_MS:
-		_connection_failed("Timeout di connessione al server online.")
+		_connection_failed("Connection to the online server timed out.")
 
 # Signature intentionally stays compatible with the previous local-host version.
 # bind/TLS arguments are ignored: the host now opens an outbound WSS connection.
@@ -123,7 +123,7 @@ func host(count: int = 2, _bind_address: String = "*", _tls_server_options = nul
 
 	var endpoint := Invite.websocket_address()
 	if endpoint.is_empty():
-		status_changed.emit("Server online non configurato. Imposta online_server_url.txt con l'URL Render.")
+		status_changed.emit("Online server not configured. Set the Render URL in online_server_url.txt.")
 		return ERR_INVALID_PARAMETER
 
 	player_count = count
@@ -172,7 +172,7 @@ func _connect_relay(endpoint: String, mode: String, code: String) -> Error:
 	_closing_transport = false
 	connection_started = Time.get_ticks_msec()
 	_last_keepalive = connection_started
-	status_changed.emit("Connessione al server online in corso…")
+	status_changed.emit("Connecting to online server…")
 	lobby_changed.emit()
 	return OK
 
@@ -211,7 +211,7 @@ func _handle_relay_message(message: Dictionary) -> void:
 			hosting = true
 			connected = true
 			connection_started = 0
-			status_changed.emit("Sala creata sul server online · 1/%d giocatori." % player_count)
+			status_changed.emit("Room created · 1/%d players." % player_count)
 			lobby_changed.emit()
 
 		"joined":
@@ -225,7 +225,7 @@ func _handle_relay_message(message: Dictionary) -> void:
 			connected = true
 			hosting = false
 			connection_started = 0
-			status_changed.emit("Sei Player %d · In attesa dell'host." % [local_player + 1])
+			status_changed.emit("You are Player %d · Waiting for host." % [local_player + 1])
 			lobby_changed.emit()
 
 		"peer_joined":
@@ -251,10 +251,10 @@ func _handle_relay_message(message: Dictionary) -> void:
 				_handle_game_message(str(message.get("peer_id", "")), payload)
 
 		"room_closed":
-			_disconnected("La sala è stata chiusa dall'host.")
+			_disconnected("The host closed the room.")
 
 		"error":
-			_connection_failed(str(message.get("message", "Errore del server online.")))
+			_connection_failed(str(message.get("message", "Online server error.")))
 
 		"pong":
 			pass
@@ -288,7 +288,7 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 		"choice_rejected":
 			_choice_rejected()
 		"match_paused":
-			_disconnected("Connessione interrotta. Partita sospesa: torna al menu per iniziarne una nuova.")
+			_disconnected("Connection lost. Match paused: return to the menu to start a new game.")
 
 func _send_game_to_peer(peer_id: String, payload: Dictionary) -> Error:
 	if not hosting or peer_id.is_empty():
@@ -319,7 +319,7 @@ func _update_lobby() -> void:
 			"joined": seats,
 		})
 	lobby_changed.emit()
-	status_changed.emit("Sala: %d/%d giocatori. Avvia quando sono tutti collegati." % [seats.size(), player_count])
+	status_changed.emit("Room: %d/%d players. Start when everyone has connected." % [seats.size(), player_count])
 
 func _lobby(count: int, seat: int, joined: Array) -> void:
 	player_count = count
@@ -330,14 +330,14 @@ func _lobby(count: int, seat: int, joined: Array) -> void:
 	connected = true
 	connection_started = 0
 	lobby_changed.emit()
-	status_changed.emit("Sei Player %d · %d/%d collegati · In attesa dell'host." % [seat + 1, seats.size(), count])
+	status_changed.emit("You are Player %d · %d/%d connected · Waiting for host." % [seat + 1, seats.size(), count])
 
 func can_start() -> bool:
 	return hosting and connected and not started and peer_players.size() == player_count - 1
 
 func start_match() -> bool:
 	if not avatar_selection.is_empty() and player_count > 5:
-		status_changed.emit("Avatar richiede al massimo 5 giocatori umani (6 partecipanti totali).")
+		status_changed.emit("Avatar supports up to 5 human players (6 participants total).")
 		return false
 	if not can_start():
 		return false
@@ -488,7 +488,7 @@ func _choice_rejected() -> void:
 		var active_request: Dictionary = game.get_beta_pending_input(viewer)
 		if not active_request.is_empty() and not bool(active_request.get("private", false)):
 			game.beta_hud.present_pending_request(active_request)
-		game.beta_hud.feedback_label.text = "Scelta non valida o superata. Seleziona di nuovo."
+		game.beta_hud.feedback_label.text = "Invalid or outdated choice. Please select again."
 
 func _peer_left(peer_id: String) -> void:
 	if peer_id.is_empty() or not peer_players.has(peer_id):
@@ -500,14 +500,14 @@ func _peer_left(peer_id: String) -> void:
 		busy = true
 		for remaining in peer_players:
 			_send_game_to_peer(str(remaining), {"op": "match_paused"})
-		_disconnected("Un giocatore si è disconnesso. Partita sospesa: torna al menu per iniziarne una nuova.")
+		_disconnected("A player disconnected. Match paused: return to the menu to start a new game.")
 	else:
 		_update_lobby()
 
 func _connection_failed(message: String = "") -> void:
 	var reason := message
 	if reason.is_empty():
-		reason = "Connessione fallita: verifica il server online e riprova."
+		reason = "Connection failed: check the online server and try again."
 	_close_transport()
 	connection_started = 0
 	connected = false
@@ -521,11 +521,11 @@ func _transport_lost() -> void:
 	_socket = null
 	connection_started = 0
 	if was_active:
-		_disconnected("Connessione al server online interrotta. Partita sospesa.")
+		_disconnected("Online server connection lost. Match paused.")
 	else:
 		_connection_failed()
 
-func _disconnected(message: String = "Connessione interrotta. Partita sospesa: torna al menu per iniziarne una nuova.") -> void:
+func _disconnected(message: String = "Connection lost. Match paused: return to the menu to start a new game.") -> void:
 	connection_started = 0
 	connected = false
 	busy = true

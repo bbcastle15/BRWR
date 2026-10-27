@@ -45,6 +45,8 @@ var log_window: Control
 var log_text: RichTextLabel
 var evocation_names_visible := false
 var world_placements: Array[CanvasItem] = []
+var world_tweens: Array[Tween] = []
+var attack_queue: Array = []
 
 func setup(game_node) -> void:
 	game = game_node
@@ -257,7 +259,9 @@ func _build_card_overlay() -> void:
 	var highlight := StyleBoxFlat.new()
 	highlight.bg_color = Color(1, 0.86, 0.55, 0.025)
 	highlight.border_color = Color("ecc779")
-	highlight.set_border_width_all(3)
+	highlight.set_border_width_all(7)
+	highlight.shadow_color = Color(1.0, 0.72, 0.12, 0.8)
+	highlight.shadow_size = 14
 	highlight.set_corner_radius_all(6)
 	presentation_side.add_theme_stylebox_override("panel", highlight)
 	presentation_art.add_child(presentation_side)
@@ -293,7 +297,7 @@ func sync_card_presentation() -> void:
 	var data: Dictionary = game.card_presentation
 	var serial: int = int(data.get("serial", -1))
 	if serial == shown_card_serial:
-		if data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
+		if game.network_session != null and data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
 			card_overlay.hide()
 		return
 	shown_card_serial = serial
@@ -302,7 +306,7 @@ func sync_card_presentation() -> void:
 	if data.is_empty():
 		card_overlay.hide()
 		return
-	if data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
+	if game.network_session != null and data.has("awaiting_players") and not game.can_acknowledge_card_presentation(game.local_viewer_index):
 		card_overlay.hide()
 		return
 	# A reaction/card reveal must not discard damage already dealt.
@@ -352,7 +356,7 @@ func _dismiss_card_presentation() -> void:
 		else:
 			card_overlay.hide()
 		return
-	game.dismiss_card_presentation(shown_card_serial)
+	game.dismiss_card_presentation(shown_card_serial, int(game.card_presentation.get("awaiting_players", [game.local_viewer_index])[0]) if game.card_presentation.has("awaiting_players") and not game.card_presentation.awaiting_players.is_empty() else game.local_viewer_index)
 
 
 func _layout_card_presentation() -> void:
@@ -472,9 +476,11 @@ func _process(_delta: float) -> void:
 	if not animated_damage_ghost: sync_card_presentation()
 	_observe(true)
 	var evocation_resolving: bool = game.resolution_stack.any(func(frame): return frame.get("type") == "evocation_activation")
-	if not evocation_resolving and not game.resolution_visual_yield_active and not card_overlay.visible and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
+	if attack_queue.is_empty() and Time.get_ticks_msec() >= game.visual_motion_until and not card_overlay.visible and not damage_waiting and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
 		_play_next_animation()
 	_play_world_placements()
+	if not attack_queue.is_empty() and world_placements.is_empty() and not world_tweens.any(func(t):return t.is_valid() and t.is_running()) and Time.get_ticks_msec()>=game.visual_motion_until:
+		game.replay_attack_feedback(attack_queue.pop_front())
 
 func _refresh_banners() -> void:
 	var turn: Dictionary = game.get_turn_presentation()
@@ -520,6 +526,10 @@ func _observe(animate: bool) -> void:
 					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id) + "/SpellMarker", "kind": "marker", "slot": slot_id})
 		observed[i] = snapshot
 
+func visuals_busy() -> bool:
+	world_tweens = world_tweens.filter(func(t): return t != null and t.is_valid() and t.is_running())
+	return not attack_queue.is_empty() or damage_waiting or animation != null or not animation_queue.is_empty() or not world_placements.is_empty() or not world_tweens.is_empty()
+
 func _has_damage_presentation() -> bool:
 	return animated_damage_ghost or animation_queue.any(func(event): return event.kind == "damage")
 
@@ -535,6 +545,16 @@ func _refresh_damage_display(index: int) -> void:
 	else: board.refresh_damage_track()
 
 func receive_feedback(event: Dictionary) -> void:
+	if event.get("kind") == "attack":
+		attack_queue.append(event.duplicate())
+	if event.get("kind") == "damage_conversion":
+		var owner_list: Array = event.before.duplicate()
+		damage_display[int(event.player)] = owner_list.duplicate()
+		for i in owner_list.size():
+			if owner_list[i] == event.owners[i]: continue
+			var old_owner: int = owner_list[i]
+			owner_list[i] = event.owners[i]
+			animation_queue.append({"player":event.player,"node":"DamageTrack/DamageSlot_%d" % i,"kind":"damage","owner":event.owners[i],"cube_index":i,"owners":owner_list.duplicate(),"defeated":false,"last":false,"serial":-1,"old_owner":old_owner})
 	if event.get("kind") == "damage":
 		queue_damage_placement(int(event.player), int(event.previous), event.owners, int(event.health), int(event.get("serial", -1)), int(event.get("attacker", -1)))
 
@@ -602,6 +622,24 @@ func _play_next_animation() -> void:
 		animated_node.scale = animated_rest_scale * 1.08
 		animated_node.modulate.a = 0.0
 		if opening: animation.tween_interval(0.55)
+		if event.has("old_owner"):
+			var board = game.player_boards[index]
+			if board is AvatarBoard:
+				if int(event.cube_index) < board.damage_track.get_child_count():
+					hidden_damage_cube = board.damage_track.get_child(int(event.cube_index)).get_node_or_null("DamageCube")
+			else:
+				hidden_damage_cube = board.get_node_or_null(str(event.node) + "/DamageCube")
+			if is_instance_valid(hidden_damage_cube): hidden_damage_cube.hide()
+			animated_node.cube_color = Color.BLACK if int(event.old_owner)<0 else game.players[int(event.old_owner)].color
+			animated_node.queue_redraw()
+			animated_node.position = animated_rest_position
+			animated_node.modulate.a = 1.0
+			animation.tween_property(animated_node,"position",animated_rest_position-Vector2(0,65),0.45)
+			animation.parallel().tween_property(animated_node,"modulate:a",0.0,0.45)
+			animation.tween_callback(func():
+				animated_node.cube_color = Color.BLACK if int(event.owner)<0 else game.players[int(event.owner)].color
+				animated_node.queue_redraw()
+				animated_node.position=animated_rest_position-Vector2(0,65))
 		animation.tween_property(animated_node, "modulate:a", 1.0, 0.25)
 		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.45).set_trans(Tween.TRANS_SINE)
@@ -689,7 +727,7 @@ func queue_world_placement(node: CanvasItem) -> void:
 
 func _play_world_placements() -> void:
 	if world_placements.is_empty() or board_overlay.visible or card_overlay.visible: return
-	if game.beta_hud != null and (game.beta_hud.hand_overlay.visible or game.beta_hud.panel.visible): return
+	if game.beta_hud != null and game.beta_hud.hand_overlay.visible: return
 	var preview = game.get_node_or_null("ReferenceCardPreview")
 	if preview != null and preview.root.visible: return
 	var nodes := world_placements.duplicate()
@@ -700,11 +738,23 @@ func _play_world_placements() -> void:
 		var rest_scale: Vector2 = node.scale
 		node.scale = rest_scale * 1.65
 		var placement: Tween = node.create_tween()
+		world_tweens.append(placement)
+		var summon := node is Node2D
 		placement.tween_interval(delay)
+		if node.has_meta("conversion_from"):
+			var final_color: Color = node.cube_color
+			node.cube_color = node.get_meta("conversion_from")
+			node.remove_meta("conversion_from")
+			node.queue_redraw()
+			node.modulate.a=1.0
+			node.scale=rest_scale
+			placement.tween_property(node,"scale",Vector2.ZERO,0.45)
+			placement.parallel().tween_property(node,"modulate:a",0.0,0.45)
+			placement.tween_callback(func(): node.cube_color=final_color;node.queue_redraw())
 		placement.tween_property(node, "modulate:a", 1.0, 0.45)
-		placement.parallel().tween_property(node, "scale", rest_scale, 0.9).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		placement.parallel().tween_property(node, "scale", rest_scale, 0.6 if summon else 0.9).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		placement.tween_property(node, "modulate", Color(1.45, 1.35, 1.05), 0.15)
-		placement.tween_property(node, "modulate", Color.WHITE, 0.65)
+		placement.tween_property(node, "modulate", Color.WHITE, 0.35 if summon else 0.65)
 		delay += 0.32
 
 func _cancel_animation() -> void:
@@ -779,46 +829,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 func _open_log() -> void:
-	if log_window == null:
-		var log_layer := CanvasLayer.new()
-		log_layer.layer = 165
-		add_child(log_layer)
-		log_window = Control.new()
-		log_window.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		log_window.theme = Style.make_theme()
-		log_layer.add_child(log_window)
-		var shade := ColorRect.new()
-		shade.color = Color(0, 0, 0, 0.65)
-		shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		log_window.add_child(shade)
-		var panel := PanelContainer.new()
-		panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		panel.offset_left = 220
-		panel.offset_right = -80
-		panel.offset_top = 80
-		panel.offset_bottom = -80
-		panel.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Style.INK, 2))
-		log_window.add_child(panel)
-		var column := VBoxContainer.new()
-		column.add_theme_constant_override("separation", 18)
-		panel.add_child(column)
-		var heading := Label.new()
-		heading.text = "LOG · Cronologia della partita"
-		heading.add_theme_font_size_override("font_size", 24)
-		heading.add_theme_color_override("font_color", Style.GOLD)
-		column.add_child(heading)
-		column.add_child(HSeparator.new())
-		log_text = RichTextLabel.new()
-		log_text.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		log_text.add_theme_font_size_override("normal_font_size", 18)
-		column.add_child(log_text)
-		var close := Button.new()
-		close.text = "Torna alla partita"
-		close.custom_minimum_size.y = 52
-		close.pressed.connect(log_window.hide)
-		column.add_child(close)
-	log_text.text = "\n\n".join(game.public_action_log) if not game.public_action_log.is_empty() else "Nessuna azione registrata."
-	log_window.show()
+	var gallery = preload("res://action_history.gd").new()
+	gallery.game = game
+	add_child(gallery)
+	return
 
 func _show_damage_receipt() -> void:
 	if is_instance_valid(damage_receipt): damage_receipt.queue_free()
@@ -831,7 +845,7 @@ func _show_damage_receipt() -> void:
 	damage_receipt.add_child(column)
 	var text := Label.new()
 	var attacker: int = damage_event.attacker
-	text.text = "%s ha inflitto %d danni a Player %d" % ["Player %d" % (attacker+1) if attacker >= 0 else "Black Rose", damage_event.amount, damage_event.player+1]
+	text.text = "%s dealt %d damage to Player %d" % ["Player %d" % (attacker+1) if attacker >= 0 else "Black Rose", damage_event.amount, damage_event.player+1]
 	if damage_event.defeated: text.text += "\nPlayer %d defeated" % (damage_event.player+1)
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.add_theme_font_size_override("font_size", 22)
@@ -856,13 +870,17 @@ func _refresh_damage_receipt() -> void:
 	for child in receipt_buttons.get_children():
 		receipt_buttons.remove_child(child)
 		child.queue_free()
-	for player in awaiting:
-		var button := Button.new()
-		button.text = "Player %d · Continua" % (int(player)+1)
-		Style.primary_button(button)
-		button.disabled = game.network_session != null and game.local_viewer_index != int(player)
-		button.pressed.connect(func():
-			if game.network_session != null: game.network_session.acknowledge_damage(serial)
-			else: game.acknowledge_damage(serial, int(player))
-			_refresh_damage_receipt())
-		receipt_buttons.add_child(button)
+	var local_player: int = game.local_viewer_index
+	if game.network_session == null: local_player = int(awaiting[0])
+	if not awaiting.has(local_player):
+		# The local user has acknowledged; other clients' progress is private.
+		damage_receipt.hide()
+		return
+	var button := Button.new()
+	button.text = "Continue"
+	Style.primary_button(button)
+	button.pressed.connect(func():
+		if game.network_session != null: game.network_session.acknowledge_damage(serial)
+		else: game.acknowledge_damage(serial, local_player)
+		_refresh_damage_receipt())
+	receipt_buttons.add_child(button)

@@ -370,12 +370,17 @@ func convert_instability_cube(owner_id: int, new_owner_id: int, index: int = -1)
 		index = instability_cubes.find(owner_id)
 	if index < 0 or index >= instability_cubes.size() or instability_cubes[index] != owner_id:
 		return false
+	var old_color: Color = instability_cube_nodes[index].cube_color
 	instability_cubes[index] = new_owner_id
 	var cube = instability_cube_nodes[index]
 	cube.owner_type = cube.OwnerType.BLACK_ROSE if new_owner_id == -1 else cube.OwnerType.PLAYER
 	cube.player_index = new_owner_id
 	cube.cube_color = Color.BLACK if new_owner_id == -1 else get_player_color(new_owner_id)
 	cube.queue_redraw()
+	var game = get_parent()
+	if game.get("table_shell") != null and not game.suppress_placement_feedback:
+		cube.set_meta("conversion_from", old_color)
+		game.table_shell.queue_world_placement(cube)
 	return true
 
 
@@ -477,6 +482,8 @@ func get_art_instability_slot_rotation(slot_center: Vector2) -> float:
 	return deg_to_rad(-30.0 if slot_center.x < 0.0 else 30.0)
 
 
+static var art_sockets: Dictionary = {}
+
 func get_art_instability_slots() -> PackedVector2Array:
 	var count := get_instability_resistance()
 	var slots := PackedVector2Array()
@@ -484,6 +491,11 @@ func get_art_instability_slots() -> PackedVector2Array:
 	var bounds := Vector2(radius * 2.0, radius * sqrt(3.0))
 	var texture_size: Vector2 = $Background.texture.get_size()
 	var size := texture_size * maxf(bounds.x / texture_size.x, bounds.y / texture_size.y) * preload("res://room_art.gd").ART_BLEED
+	if art_sockets.is_empty(): art_sockets = JSON.parse_string(FileAccess.get_file_as_string("res://data/room_art_sockets.json"))
+	if art_sockets.has(get_art_id()):
+		for point in art_sockets[get_art_id()]:
+			slots.append((Vector2(point[0], point[1]) - Vector2.ONE * 0.5) * size)
+		return slots
 	for i in range(bottom_count):
 		slots.append((Vector2(0.5 + (i - (bottom_count - 1) * 0.5) * 0.10, 0.903) - Vector2.ONE * 0.5) * size)
 	var side_count := int((count - bottom_count) / 2)

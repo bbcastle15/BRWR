@@ -887,6 +887,7 @@ func convert_damage_cubes(
 	game = null
 ) -> int:
 
+	var before := damage_cubes.duplicate()
 	var converted = 0
 	var remaining := selected_owners.duplicate()
 
@@ -918,6 +919,11 @@ func convert_damage_cubes(
 		damage_cubes[i] = new_owner_id
 		converted += 1
 
+	if converted > 0 and game != null:
+		for player in game.players:
+			if is_same(player.mage.damage_cubes, damage_cubes):
+				game.record_conversion_feedback(player.player_index, before, damage_cubes, new_owner_id)
+				break
 	return converted
 
 

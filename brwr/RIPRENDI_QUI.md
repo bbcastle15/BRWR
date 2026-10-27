@@ -1,3 +1,13 @@
+# Playtest — 27 ottobre 2026, seconda revisione
+
+Ultima richiesta: 25 punti su inglese, Bartholomäus, Study, conferme, animazioni, bersagli, log e Nigredo.
+Implementazione e limiti: [docs/PLAYTEST-2026-10-27-B.md](docs/PLAYTEST-2026-10-27-B.md).
+66 controlli mirati superati. Build Web locale aggiornata, nessuna pubblicazione.
+Le conferme danno ora includono tutti gli umani (anche l'attaccante), con il solo Continue locale; Spell/Room hanno timeout di 10 secondi.
+Nigredo verificato con snapshot host/client: conversione completata; corretto il messaggio obsoleto dello spettatore, non riprodotto un blocco del motore.
+
+---
+
 # Playtest — 27 ottobre 2026
 
 Ultima richiesta: 11 correzioni UI, animazioni, Log, Vastum e Corrupted Ray.

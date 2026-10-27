@@ -22,6 +22,9 @@ var card_presentation: Dictionary = {}
 var card_presentation_serial := 0
 # Public, transient visual history. Never used to resolve rules or reveal private cards.
 var public_action_log: Array[String] = []
+var public_history: Array = []
+var visual_motion_until: int = 0
+var visual_poll_pending := false
 var damage_acknowledgements: Dictionary = {}
 var table_feedback_serial := 0
 var table_feedback_events: Array[Dictionary] = []
@@ -1228,10 +1231,18 @@ func open_evocation_inspection(evocation: EvocationState, from_player_board: boo
 		art.custom_minimum_size = Vector2(650, 430)
 		art.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		content.add_child(art)
+		var cards := HBoxContainer.new()
+		cards.name = "Cards"
+		content.add_child(cards)
+		cards.add_child(art)
+		art.custom_minimum_size = Vector2(520, 350)
+		var upgrades := VBoxContainer.new()
+		upgrades.name = "Upgrades"
+		cards.add_child(upgrades)
 	inspected_evocation = evocation
 	_update_evocation_inspection()
-	evocation_inspection.popup_centered(Vector2i(760, 680))
+	evocation_inspection.theme = preload("res://tabletop_style.gd").make_theme()
+	evocation_inspection.popup_centered_clamped(Vector2i(1000 if not evocation.upgrades.is_empty() else 760, 720), 0.92)
 
 
 func _process(_delta: float) -> void:
@@ -1259,7 +1270,7 @@ func _update_evocation_inspection() -> void:
 		inspected_evocation = null
 		return
 	var evocation := inspected_evocation
-	evocation_inspection.get_node("Content/CardArt").texture = ReferenceCardPreview.card_texture("evocations", evocation.evocation_id)
+	evocation_inspection.get_node("Content/Cards/CardArt").texture = ReferenceCardPreview.card_texture("evocations", evocation.evocation_id)
 	evocation_inspection.title = evocation.get_display_name() + " · P" + str(evocation.owner_id + 1)
 	evocation_inspection.dialog_text = (
 		"Health: %d / %d\nDamage: %d\nMovement speed: %d\nAttack: %d\nRoom: %s\nController: P%d"
@@ -1275,6 +1286,19 @@ func _update_evocation_inspection() -> void:
 		evocation_inspection.dialog_text += "\nAssigned to %s · slot %d" % [players[evocation.assigned_mage].player_name, evocation.assigned_slot]
 	if not evocation.stored_trophies.is_empty():
 		evocation_inspection.dialog_text += "\nTrophies: %d" % evocation.stored_trophies.size()
+	var upgrades = evocation_inspection.get_node("Content/Cards/Upgrades")
+	if upgrades.get_meta("ids", []) != evocation.upgrades:
+		upgrades.set_meta("ids", evocation.upgrades.duplicate())
+		for child in upgrades.get_children():
+			upgrades.remove_child(child)
+			child.queue_free()
+		for id in evocation.upgrades:
+			var card := TextureRect.new()
+			card.texture = ReferenceCardPreview.card_texture("upgrades", id)
+			card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			card.custom_minimum_size = Vector2(380, 245)
+			upgrades.add_child(card)
 	evocation_inspection.get_label().hide()
 	evocation_inspection.get_node("Content/Stats").text = evocation_inspection.dialog_text
 
@@ -1454,9 +1478,10 @@ func _position_model_token(node: Node2D, destination: Vector2, location_key: Str
 	if previous_location.is_empty() or previous_location == location_key or table_shell == null:
 		node.position = destination
 		return
+	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 750)
 	var tween := node.create_tween()
 	node.set_meta("movement_tween", tween)
-	tween.tween_property(node, "position", destination, 0.34).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(node, "position", destination, 0.7).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func _model_token_offsets(
@@ -2743,6 +2768,7 @@ func deal_damage_to_model(
 				amount
 			)
 
+			append_public_log("Player %d dealt %d damage to %s in %s" % [attacker_id+1,damage_dealt,evocation.get_display_name(),evocation.room_id])
 			print(
 				"Damage: attacker ",
 				attacker_id,
@@ -2771,6 +2797,26 @@ func animate_model_attack(attacker_id: int, target_player: int, target_evocation
 	var source: Node2D = evocation_tokens.get(source_evocation.get_instance_id()) if source_evocation != null else (mage_tokens[attacker_id] if attacker_id >= 0 and attacker_id < mage_tokens.size() else null)
 	var target: Node2D = evocation_tokens.get(target_evocation.get_instance_id()) if target_evocation != null else (mage_tokens[target_player] if target_player >= 0 and target_player < mage_tokens.size() else null)
 	if not is_instance_valid(source) or not is_instance_valid(target): return
+	if not network_client:
+		table_feedback_serial += 1
+		var feedback := {"serial":table_feedback_serial,"kind":"attack","attacker":attacker_id,"evocation_id":source_evocation.evocation_id if source_evocation != null else "","board_number":source_evocation.board_number if source_evocation != null else -1,"origin":source.global_position,"destination":target.global_position}
+		table_feedback_events.append(feedback)
+		if table_feedback_events.size()>128:table_feedback_events.pop_front()
+		if network_session != null:network_session.call_deferred("publish")
+	_play_attack_ghost(source,source.global_position,target.global_position)
+
+func replay_attack_feedback(event: Dictionary) -> void:
+	var source: Node2D = null
+	if str(event.evocation_id).is_empty():
+		if int(event.attacker)>=0 and int(event.attacker)<mage_tokens.size():source=mage_tokens[int(event.attacker)]
+	else:
+		for player in players:
+			for ev in player.evocations:
+				if ev.evocation_id==event.evocation_id and ev.board_number==int(event.board_number) and get_evocation_controller_id(ev)==int(event.attacker):
+					source=evocation_tokens.get(ev.get_instance_id())
+	if is_instance_valid(source):_play_attack_ghost(source,event.origin,event.destination)
+
+func _play_attack_ghost(source: Node2D, origin: Vector2, destination: Vector2) -> void:
 	var ghost: Node2D = source.duplicate(0)
 	ghost.set_script(null)
 	ghost.process_mode = Node.PROCESS_MODE_DISABLED
@@ -2779,11 +2825,11 @@ func animate_model_attack(attacker_id: int, target_player: int, target_evocation
 	add_child(ghost)
 	ghost.global_transform = source.global_transform
 	ghost.z_index = 100
-	var origin := ghost.global_position
-	var destination := target.global_position
+	ghost.global_position = origin
+	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 1100)
 	var motion := create_tween()
-	motion.tween_property(ghost, "global_position", destination, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	motion.tween_property(ghost, "global_position", origin, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	motion.tween_property(ghost, "global_position", destination, 0.48).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	motion.tween_property(ghost, "global_position", origin, 0.55).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	motion.tween_callback(ghost.queue_free)
 
 func deal_damage_to_evocation(
@@ -3786,6 +3832,11 @@ func move_evocation_to_room_id(
 		if camera != null:
 			camera.ensure_movement_visible(hex_to_pixel(from_coord), hex_to_pixel(to_coord))
 	append_public_log("%s moved to %s" % [evocation.evocation_name, destination_room_id])
+	for frame in resolution_stack:
+		if frame.get("type") == "evocation_activation" and frame.has("_history_index"):
+			var entry: Dictionary = public_history[int(frame._history_index)]
+			entry["related"] = [{"kind":"rooms","id":get_room_by_id(destination_room_id).get_art_id()}]
+			break
 	evocation.room_id = destination_room_id
 
 	print(
@@ -10913,6 +10964,14 @@ func _spell_mage_target_options(
 	return result
 
 
+func _effects_inflict_damage(effects: Array) -> bool:
+	for effect in effects:
+		if not effect is Dictionary: continue
+		if str(effect.get("type", "")).begins_with("damage"): return true
+		for key in ["effects", "choices", "then", "else"]:
+			if effect.get(key) is Array and _effects_inflict_damage(effect[key]): return true
+	return false
+
 func _spell_evocation_target_options(
 	caster_id: int,
 	side: Dictionary,
@@ -10927,6 +10986,8 @@ func _spell_evocation_target_options(
 		var option: Dictionary = option_value
 		var evocation = option.get("value", null)
 		if evocation == null:
+			continue
+		if get_evocation_controller_id(evocation) == caster_id and _effects_inflict_damage(side.get("effects", [])) and not bool(side.get("allow_friendly_damage", false)):
 			continue
 		if evocation.archetype == "equipment" and evocation.owner_id != caster_id:
 			continue
@@ -14221,7 +14282,7 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 		# permanents do not announce a new cast every time their passive fires.
 		if active != null and active.get_spell_type() in ["trap", "protection"]:
 			data = {"kind": "spells", "id": active.spell.id, "title": active.spell.card_name,
-				"player": active.owner_id, "dark": active.use_dark_side, "single": active.spell.has_single_effect()}
+				"player": active.owner_id, "dark": active.use_dark_side, "single": active.spell.has_single_effect(), "triggered": true, "previous": {"kind":public_history.back().kind,"id":public_history.back().id} if not public_history.is_empty() else {}}
 	elif frame.get("type") == "event_sequence":
 		var event: EventCardState = frame.get("event")
 		if event != null:
@@ -14236,11 +14297,12 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 			data = {"kind": "rooms", "id": room.get_art_id(), "title": room.room_name, "flipped": room.flipped}
 	if data.is_empty():
 		return false
+	frame["_history_index"] = add_history_entry(data)
 	frame["_card_presented"] = true
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
 	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells", "jinxs"]
-	if network_session != null and str(data.get("kind", "")) == "spells":
+	if str(data.get("kind", "")) in ["spells", "rooms"]:
 		data["awaiting_players"] = AvatarRules.human_order(self).duplicate()
 	data["acknowledge_player"] = int(data.get("player", get_turn_presentation().get("player_index", 0)))
 	if AvatarRules.is_avatar(self, int(data.acknowledge_player)):
@@ -14251,8 +14313,8 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	table_shell.sync_card_presentation()
 	if network_session != null:
 		network_session.call_deferred("publish")
-	if not bool(data.get("requires_click", false)):
-		get_tree().create_timer(CARD_PRESENTATION_SECONDS).timeout.connect(
+	if true:
+		get_tree().create_timer(10.0 if data.has("awaiting_players") else (10.0 if bool(data.get("requires_click", false)) else CARD_PRESENTATION_SECONDS)).timeout.connect(
 			_finish_card_presentation.bind(card_presentation_serial)
 		)
 	return true
@@ -14282,8 +14344,40 @@ func dismiss_card_presentation(serial: int = -1, player_index: int = -1) -> bool
 	return true
 
 
+func log_resolved_effect(effect: Dictionary, context: Dictionary) -> void:
+	var description: String = preload("res://effect_description.gd").describe(effect)
+	var target: String = str(context.get("target_room_id", ""))
+	var ev: EvocationState = context.get("target_evocation")
+	if ev != null: target = ev.get_display_name() + " in " + ev.room_id
+	elif context.has("target_player_index"): target = "Player %d" % (int(context.target_player_index)+1)
+	var receipts := {"convert_instability":"effect_instability_converted","convert_damage":"effect_damage_converted","heal":"effect_damage_healed","place_instability":"effect_instability_placed"}
+	if receipts.has(str(effect.get("type", ""))) and context.has(receipts[str(effect.type)]):
+		description += " Applied: %d." % int(context.get(receipts[str(effect.type)],0))
+	if not target.is_empty(): description += " Target: " + target.replace("_", " ") + "."
+	append_public_log(description)
+
+func add_history_entry(data: Dictionary) -> int:
+	var entry := data.duplicate(true)
+	entry["round"] = current_round
+	entry["messages"] = []
+	if data.get("kind") == "rooms":
+		for frame in resolution_stack:
+			if frame.get("type") == "explore" and frame.has("_history_index"):
+				var action: Dictionary = public_history[int(frame._history_index)]
+				if not action.has("related"): action["related"] = []
+				action.related.append({"kind":"rooms","id":data.id})
+				break
+	public_history.append(entry)
+	return public_history.size() - 1
+
 func append_public_log(message: String) -> void:
 	if network_client: return
+	var index := public_history.size() - 1
+	for frame in resolution_stack:
+		if frame.has("_history_index"):
+			index = int(frame._history_index)
+			break
+	if index >= 0: public_history[index].messages.append(message)
 	public_action_log.append("%04d · Round %d · %s" % [public_action_log.size()+1, current_round, message])
 
 func acknowledge_damage(serial: int, player_index: int) -> bool:
@@ -14292,6 +14386,16 @@ func acknowledge_damage(serial: int, player_index: int) -> bool:
 	if network_session != null: network_session.publish()
 	return true
 
+func record_conversion_feedback(player: int, before: Array, after: Array, converter: int) -> void:
+	if network_client: return
+	table_feedback_serial += 1
+	var event := {"serial":table_feedback_serial,"kind":"damage_conversion","player":player,"before":before.duplicate(),"owners":after.duplicate(),"attacker":converter}
+	table_feedback_events.append(event)
+	if table_feedback_events.size()>128: table_feedback_events.pop_front()
+	if table_shell != null: table_shell.receive_feedback(event)
+	append_public_log("Player %d converted damage on Player %d" % [converter+1,player+1])
+	if network_session != null: network_session.call_deferred("publish")
+
 func record_damage_feedback(player_index: int, previous_damage: int, owners: Array, attacker: int = -1) -> void:
 	if network_client: return
 	table_feedback_serial += 1
@@ -14299,7 +14403,7 @@ func record_damage_feedback(player_index: int, previous_damage: int, owners: Arr
 		"previous": previous_damage, "owners": owners.duplicate(), "health": players[player_index].mage.health, "attacker": attacker}
 	damage_acknowledgements[str(table_feedback_serial)] = []
 	for player in players:
-		if player.avatar == null and player.player_index != attacker:
+		if player.avatar == null:
 			damage_acknowledgements[str(table_feedback_serial)].append(player.player_index)
 	append_public_log("%s dealt %d damage to Player %d" % ["Player %d" % (attacker + 1) if attacker >= 0 else "Black Rose", owners.size() - previous_damage, player_index + 1])
 	table_feedback_events.append(event)
@@ -14319,6 +14423,16 @@ func _finish_card_presentation(serial: int) -> void:
 		network_session.call_deferred("publish")
 
 
+func _visuals_busy() -> bool:
+	if table_shell == null: return false
+	var power = get_node_or_null("PowerBoard")
+	var power_busy: bool = power != null and (not power.marker_tweens.is_empty() or (power.markers_dirty and not power._presentation_covered()))
+	return power_busy or Time.get_ticks_msec() < visual_motion_until or table_shell.visuals_busy()
+
+func _poll_visual_resolution() -> void:
+	visual_poll_pending = false
+	process_resolution_stack()
+
 func process_resolution_stack() -> bool:
 	if processing_resolution_stack or resolution_visual_yield_active:
 		return true
@@ -14326,6 +14440,12 @@ func process_resolution_stack() -> bool:
 	processing_resolution_stack = true
 
 	while true:
+		if _visuals_busy():
+			processing_resolution_stack = false
+			if not visual_poll_pending:
+				visual_poll_pending = true
+				get_tree().create_timer(0.05).timeout.connect(_poll_visual_resolution)
+			return true
 		if not card_presentation.is_empty():
 			processing_resolution_stack = false
 			return true
@@ -14350,10 +14470,19 @@ func process_resolution_stack() -> bool:
 		var frame_id: int = int(frame.get("_rid", -1))
 		var resolution_type: String = str(frame.get("type", ""))
 		var completed: bool = false
+		if resolution_type == "avatar_activation" and not frame.get("additional", false) and not frame.get("visual_delay_done", false) and table_shell != null:
+			frame["visual_delay_done"] = true
+			visual_motion_until = Time.get_ticks_msec() + 2000
+			continue
 		if _present_resolution_card(frame):
 			processing_resolution_stack = false
 			return true
 
+		if resolution_type in ["explore", "fight", "command", "evocation_activation"] and not frame.has("_history_index"):
+			var ev: EvocationState = frame.get("evocation")
+			frame["_history_index"] = add_history_entry({"kind": "evocations" if ev != null else "physical", "id": ev.evocation_id if ev != null else resolution_type, "title": ev.get_display_name() if ev != null else resolution_type.capitalize(), "player": frame.get("controller_id", frame.get("player_index", -1))})
+			if ev != null and not ev.room_id.is_empty():
+				public_history[int(frame._history_index)]["related"] = [{"kind":"rooms", "id":ev.room_id}]
 		match resolution_type:
 			"jinx_assignment":
 				completed = true
@@ -14458,7 +14587,7 @@ func process_resolution_stack() -> bool:
 			resolution_visual_yield_active = true
 			processing_resolution_stack = false
 			if table_shell != null:
-				get_tree().create_timer(0.36).timeout.connect(_resume_resolution_after_visual_yield)
+				get_tree().create_timer(1.1).timeout.connect(_resume_resolution_after_visual_yield)
 			else:
 				get_tree().process_frame.connect(_resume_resolution_after_visual_yield, CONNECT_ONE_SHOT)
 			return true
@@ -15259,6 +15388,7 @@ func process_evocation_damage_resolution(
 				attacker_id
 			)
 
+			append_public_log("Player %d dealt %d damage to %s in %s" % [attacker_id+1,damage_dealt,evocation.get_display_name(),evocation.room_id])
 			print(
 				"Damage: attacker ",
 				attacker_id,
@@ -15936,6 +16066,7 @@ func process_effect_sequence_resolution(
 		return true
 
 
+	log_resolved_effect(effect, context)
 	# Stable sentence receipts survive the next sentence's transient counters.
 	var receipts := {"place_instability": "instability_placed", "convert_instability": "instability_converted", "convert_damage": "damage_converted", "heal": "damage_healed"}
 	if receipts.has(str(effect.get("type", ""))):

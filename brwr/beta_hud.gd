@@ -35,11 +35,13 @@ var confirmation_revision := -1
 func _process(_delta: float) -> void:
 	if game == null or effect_box == null:
 		return
-	var resolving: bool = not game.resolution_stack.is_empty() or str(game.pending_input.get("type", "")) == "effect_choice"
+	var resolving: bool = game.waiting_for_player_input and str(game.pending_input.get("type", "")) == "effect_choice"
 	if game.network_client:
 		resolving = str(game.pending_input.get("type", "")) == "effect_choice"
 	var description: String = str(game.pending_input.get("effect_description", game.current_effect_description))
 	effect_box.visible = resolving and not description.is_empty() and game.card_presentation.is_empty()
+	if game.local_viewer_index >= 0 and int(game.pending_input.get("player_index", -1)) != game.local_viewer_index:
+		description = "Waiting for Player %d to resolve their choice." % (int(game.pending_input.get("player_index", 0))+1)
 	effect_text.text = "[center]" + description + "[/center]"
 
 var generic_selection: Array = []
@@ -238,13 +240,13 @@ func _build_ui() -> void:
 	overlay.add_child(window_toolbar)
 	var window_button := Button.new()
 	window_button.name = "WindowModeButton"
-	window_button.text = "Finestra / fullscreen"
-	window_button.tooltip_text = "Passa tra finestra e schermo intero"
+	window_button.text = "Window / Fullscreen"
+	window_button.tooltip_text = "Switch between windowed and fullscreen mode"
 	window_button.pressed.connect(_toggle_window_mode)
 	window_toolbar.add_child(window_button)
 	var quit_button := Button.new()
 	quit_button.name = "QuitGameButton"
-	quit_button.text = "Torna al menu" if OS.has_feature("web") else "Chiudi gioco"
+	quit_button.text = "Return to menu" if OS.has_feature("web") else "Exit game"
 	quit_button.pressed.connect(func():
 		if OS.has_feature("web"):
 			multiplayer.multiplayer_peer = null
@@ -293,6 +295,7 @@ func _build_ui() -> void:
 	_build_decision_bar()
 	effect_box = PanelContainer.new()
 	effect_box.name = "CurrentEffect"
+	effect_box.hide()
 	effect_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	effect_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	effect_box.offset_left = -280
@@ -366,7 +369,8 @@ func _add_confirmation(text_value: String, callback: Callable, disabled: bool = 
 	button.text = text_value
 	button.disabled = disabled
 	button.custom_minimum_size = Vector2(180, 54)
-	TabletopStyle.primary_button(button)
+	if text_value.begins_with("Confirm"):
+		TabletopStyle.primary_button(button)
 	button.pressed.connect(callback, CONNECT_DEFERRED)
 	decision_actions.add_child(button)
 	decision_bar.show()
@@ -477,7 +481,7 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	_clear_content()
 	_center_choice_panel()
 	panel.show()
-	prompt_label.text = "Fine partita"
+	prompt_label.text = "Game over"
 	var winner: int = int(winner_data.get("winner", -999))
 	_add_info("Vincitore: " + ("Rosa Nera" if winner == -1 else "Player " + str(winner + 1)))
 	for row in winner_data.get("scores", []):
@@ -498,6 +502,7 @@ func _on_player_input_resolved(
 		hand_overlay.close_overlay(true)
 
 	current_request.clear()
+	prompt_label.text = ""
 	current_player_index = game.get_ui_viewer_player_index()
 	_refresh_header()
 
@@ -742,7 +747,8 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 		var aspect: float = texture.get_size().aspect() if texture != null else 1.5
 		button.custom_minimum_size = Vector2(width, width / aspect)
 	if kind == "schools":
-		button.custom_minimum_size = Vector2(300, 450)
+		var card_height := minf(410, maxf(220, half_height * 2 - 325))
+		button.custom_minimum_size = Vector2(card_height * 2 / 3, card_height)
 	button.tooltip_text = _option_label(option)
 	if kind == "mages":
 		button.tooltip_text += "\nHP %s · Hand %s · STR %s · SPD %s\n%s" % [option.get("health", ""), option.get("hand_limit", ""), option.get("strength", ""), option.get("speed", ""), option.get("personal_spell_name", "")]
@@ -810,7 +816,7 @@ func _add_button(
 	callback: Callable,
 	disabled: bool = false
 ) -> Button:
-	if text_value.begins_with("Confirm"):
+	if text_value.begins_with("Confirm") and str(current_request.get("type", "")) != "study_choose_schools":
 		return _add_confirmation(text_value, callback, disabled)
 	var button := Button.new()
 	button.text = text_value
@@ -827,7 +833,7 @@ func _add_small_button(
 	callback: Callable,
 	disabled: bool = false
 ) -> Button:
-	if text_value.begins_with("Confirm"):
+	if text_value.begins_with("Confirm") and str(current_request.get("type", "")) != "study_choose_schools":
 		return _add_confirmation(text_value, callback, disabled)
 	var button := Button.new()
 	button.text = text_value
@@ -853,7 +859,7 @@ func _render_current_request() -> void:
 
 	match input_type:
 		"final_winner_choice":
-			_add_info("Parità dopo quest e trofei: il Primo Mago sceglie il vincitore.")
+			_add_info("Tie after Quests and Trophies: the First Mage chooses the winner.")
 			for row in current_request.get("contenders", []):
 				_add_object_choice(row, _submit.bind({"winner": row.player_index}))
 		"starting_mage_choice":
@@ -2211,6 +2217,7 @@ func _render_study_schools() -> void:
 
 	var controls := HBoxContainer.new()
 	content.add_child(controls)
+	content.move_child(controls, 0)
 
 	_add_small_button(
 		controls,

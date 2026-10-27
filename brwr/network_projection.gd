@@ -8,6 +8,7 @@ static func build(game, viewer: int) -> Dictionary:
 	state["turn_presentation"] = game.get_turn_presentation()
 	state["card_presentation"] = game.card_presentation.duplicate(true)
 	state["public_action_log"] = game.public_action_log.duplicate()
+	state["public_history"] = game.public_history.duplicate(true)
 	state["damage_acknowledgements"] = game.damage_acknowledgements.duplicate(true)
 	state["feedback_serial"] = game.table_feedback_serial
 	state["feedback_events"] = game.table_feedback_events.duplicate(true)
@@ -86,6 +87,7 @@ static func apply(game, state: Dictionary) -> void:
 	game.input_revision = state.revision
 	game.network_turn_presentation = state.get("turn_presentation", {})
 	game.public_action_log.assign(state.get("public_action_log", []))
+	game.public_history.assign(state.get("public_history", []))
 	game.damage_acknowledgements = state.get("damage_acknowledgements", {}).duplicate(true)
 	game.card_presentation = state.get("card_presentation", {}).duplicate()
 	game.active_school_ids.assign(state.get("active_schools", game.active_school_ids))
@@ -222,6 +224,11 @@ static func apply(game, state: Dictionary) -> void:
 			if prefix_unchanged:
 				for i in range(previous_count, data.cubes.size()):
 					room.add_instability_cube(int(data.cubes[i]), not initial_snapshot)
+				continue
+			if data.cubes.size() == previous_count and not initial_snapshot:
+				for i in previous_count:
+					if room.instability_cubes[i] != data.cubes[i]:
+						room.convert_instability_cube(int(room.instability_cubes[i]),int(data.cubes[i]),i)
 				continue
 			room.clear_instability()
 			for i in data.cubes.size():

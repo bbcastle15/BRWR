@@ -62,6 +62,7 @@ static func process_section(game, frame: Dictionary) -> bool:
 				announce_effect(game, effect, context)
 				return false
 			if not resolve(game, frame.effect_frame): return false
+			game.log_resolved_effect(effect, context)
 			frame.erase("effect_frame")
 			frame["index"] = index + 1
 			return false

@@ -208,7 +208,7 @@ func _move_marker(marker: Control, score: int, offset: Vector2) -> void:
 	var tween := create_tween()
 	marker_tweens[marker] = tween
 	var distance := absi(total - previous)
-	if marker == black_rose_marker and total > previous:
+	if total > previous:
 		var camera = get_parent().get_node_or_null("TableCamera")
 		if camera != null:
 			camera.focus_power_board()

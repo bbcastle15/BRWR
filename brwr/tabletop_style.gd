@@ -107,7 +107,9 @@ static func spell_side_frame() -> Panel:
 	var edge := StyleBoxFlat.new()
 	edge.bg_color = Color(1, 0.86, 0.55, 0.035)
 	edge.border_color = Color(0.91, 0.78, 0.48, 0.75)
-	edge.set_border_width_all(2)
+	edge.set_border_width_all(6)
+	edge.shadow_color = Color(1.0, 0.72, 0.12, 0.75)
+	edge.shadow_size = 10
 	edge.set_corner_radius_all(3)
 	frame.add_theme_stylebox_override("panel", edge)
 	return frame
