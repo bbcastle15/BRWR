@@ -11,6 +11,7 @@ var sidebar: VBoxContainer
 var sidebar_phase: Label
 var banners: Array[Button] = []
 var board_overlay: Control
+var board_layer: CanvasLayer
 var board_stage: Control
 var board_title: Label
 var shown_player := -1
@@ -23,6 +24,8 @@ var animated_player := -1
 var animated_rest_position := Vector2.ZERO
 var animated_rest_scale := Vector2.ONE
 var animated_damage_ghost: bool = false
+var animated_trophy_ghost: bool = false
+var hidden_trophy: Control
 var hidden_damage_cube: Control = null
 var damage_display: Dictionary = {}
 var damage_event: Dictionary = {}
@@ -186,6 +189,12 @@ func _set_evocation_names_visible(value: bool) -> void:
 			token.set_names_visible(value)
 
 func _build_board_overlay() -> void:
+	# Only the enlarged board rises for public animations. The player rail
+	# stays below Hand even while another peer still owes a confirmation.
+	board_layer = CanvasLayer.new()
+	board_layer.name = "PlayerBoardLayer"
+	board_layer.layer = 10
+	add_child(board_layer)
 	board_overlay = Control.new()
 	board_overlay.name = "PlayerBoardOverlay"
 	board_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -200,7 +209,8 @@ func _build_board_overlay() -> void:
 	# When a PlayerBoard is open, the overlay must own the entire table input
 	# region so clicks can never fall through to Lodge models underneath.
 	board_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	root.add_child(board_overlay)
+	board_layer.add_child(board_overlay)
+	board_overlay.theme = root.theme
 	var background := Panel.new()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -253,17 +263,7 @@ func _build_card_overlay() -> void:
 	presentation_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	presentation_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(presentation_art)
-	presentation_side = Panel.new()
-	presentation_side.name = "ActiveSide"
-	presentation_side.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var highlight := StyleBoxFlat.new()
-	highlight.bg_color = Color(1, 0.86, 0.55, 0.025)
-	highlight.border_color = Color("ecc779")
-	highlight.set_border_width_all(7)
-	highlight.shadow_color = Color(1.0, 0.72, 0.12, 0.8)
-	highlight.shadow_size = 14
-	highlight.set_corner_radius_all(6)
-	presentation_side.add_theme_stylebox_override("panel", highlight)
+	presentation_side = Style.spell_side_frame()
 	presentation_art.add_child(presentation_side)
 	presentation_rules = RichTextLabel.new()
 	presentation_rules.name = "MissingArtRules"
@@ -438,7 +438,12 @@ func _show_board(index: int) -> void:
 	_layout()
 
 func close_board() -> void:
-	if damage_waiting: return
+	if damage_waiting:
+		_acknowledge_damage_and_close()
+		return
+	# Browsing/phase UI must not cancel public damage received in a snapshot,
+	# including damage queued behind an Evocation attack or room animation.
+	if _has_damage_presentation(): return
 	_cancel_animation()
 	if game.avatar_board != null and game.avatar_board.expanded:
 		game.avatar_board.set_expanded(false, game)
@@ -476,7 +481,7 @@ func _process(_delta: float) -> void:
 	if not animated_damage_ghost: sync_card_presentation()
 	_observe(true)
 	var evocation_resolving: bool = game.resolution_stack.any(func(frame): return frame.get("type") == "evocation_activation")
-	if attack_queue.is_empty() and Time.get_ticks_msec() >= game.visual_motion_until and not card_overlay.visible and not damage_waiting and animation == null and not animation_queue.is_empty() and (game.beta_hud == null or not game.beta_hud.hand_overlay.visible):
+	if attack_queue.is_empty() and Time.get_ticks_msec() >= game.visual_motion_until and not card_overlay.visible and not damage_waiting and animation == null and not animation_queue.is_empty():
 		_play_next_animation()
 	_play_world_placements()
 	if not attack_queue.is_empty() and world_placements.is_empty() and not world_tweens.any(func(t):return t.is_valid() and t.is_running()) and Time.get_ticks_msec()>=game.visual_motion_until:
@@ -509,13 +514,15 @@ func _refresh_banners() -> void:
 
 func _observe(animate: bool) -> void:
 	for i in game.players.size():
-		var snapshot := {"physical": game.players[i].available_physical_actions, "damage": game.players[i].mage.get_damage(), "slots": {}}
+		var snapshot := {"physical": game.players[i].available_physical_actions, "damage": game.players[i].mage.get_damage(), "trophies": game.players[i].trophies.size(), "slots": {}}
 		for slot_id in ["Q", "I", "II", "III"]:
 			var data: Dictionary = game.get_player_board_spell_slot_data(i, slot_id)
 			# This signature deliberately contains no private identity or active side.
 			snapshot.slots[slot_id] = [not data.is_empty(), data.get("public", false), data.get("marker", "")]
 		if animate and observed.has(i):
 			var old: Dictionary = observed[i]
+			for trophy_index in range(int(old.get("trophies", snapshot.trophies)), snapshot.trophies):
+				animation_queue.append({"player":i,"node":"", "kind":"trophy", "index":trophy_index})
 			if snapshot.physical < old.physical:
 				animation_queue.append({"player": i, "node": "PhysicalAction" + str(snapshot.physical), "kind": "physical"})
 			for slot_id in snapshot.slots:
@@ -573,15 +580,33 @@ func queue_damage_placement(player_index: int, previous_damage: int, owners: Arr
 func _play_next_animation() -> void:
 	# Pure visual feedback: no rule waits on a Tween, and Close always skips it.
 	var event: Dictionary = animation_queue.pop_front()
+	if game.beta_hud != null:
+		game.beta_hud.hand_overlay.hide()
+		game.beta_hud.panel.hide()
 	var index: int = event.player
 	if not transient_board: prior_player = shown_player
 	transient_board = true
-	layer = 80
+	board_layer.layer = 80
 	var opening := not board_overlay.visible or shown_player != index
 	if opening: _show_board(index)
 	animated_node = game.player_boards[index].get_node_or_null(event.node)
 	animated_player = index
 	animated_damage_ghost = false
+	animated_trophy_ghost = false
+	if event.kind == "trophy":
+		animated_node = null
+		var board = game.player_boards[index]
+		if board is AvatarBoard: board.refresh()
+		else: board.refresh_trophies()
+		var stack = board.get_node_or_null("EvocationCards/AvatarTrophies" if board is AvatarBoard else "MageCardSlot/TrophyStack")
+		if stack != null and int(event.index) < stack.get_child_count():
+			hidden_trophy = stack.get_child(int(event.index))
+			animated_node = hidden_trophy.duplicate()
+			board_stage.add_child(animated_node)
+			animated_node.global_position = hidden_trophy.global_position
+			animated_node.scale = hidden_trophy.get_global_transform().get_scale() / board_stage.get_global_transform().get_scale()
+			hidden_trophy.hide()
+			animated_trophy_ghost = true
 	hidden_damage_cube = null
 	if event.kind == "damage":
 		var board = game.player_boards[index]
@@ -613,9 +638,11 @@ func _play_next_animation() -> void:
 	animation = create_tween()
 	if event.kind == "physical":
 		animated_node.text = "+"
+		animation.tween_interval(0.7)
 		animation.tween_property(animated_node, "scale:x", 0.03, 0.15).set_trans(Tween.TRANS_SINE)
 		animation.tween_callback(_refresh_animated_board)
 		animation.tween_property(animated_node, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE)
+		animation.tween_interval(0.9)
 	elif event.kind == "damage":
 		# A short placement into the recess, never a falling/bouncing cube.
 		animated_node.position -= Vector2(-10, 0) if AvatarRules.is_avatar(game, index) else Vector2(0, 10)
@@ -687,13 +714,17 @@ func _finish_animation() -> void:
 		_show_damage_receipt()
 		return
 	animation = null
-	layer = 10
+	board_layer.layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.position = animated_rest_position
 		animated_node.scale = animated_rest_scale
 		animated_node.modulate = Color.WHITE
 	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if animated_trophy_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_trophy): hidden_trophy.show()
+	animated_trophy_ghost = false
+	hidden_trophy = null
 	if is_instance_valid(hidden_damage_cube): hidden_damage_cube.show()
 	animated_damage_ghost = false
 	hidden_damage_cube = null
@@ -709,9 +740,10 @@ func _finish_animation() -> void:
 			game.avatar_board.set_expanded(false, game)
 		board_overlay.hide()
 		shown_player = -1
-		if prior_player >= 0:
+		if prior_player >= 0 and not finished_damage:
 			_show_board(prior_player)
 	transient_board = false
+	game.visual_motion_until = maxi(game.visual_motion_until, Time.get_ticks_msec() + 900)
 	# Damage-track refreshes replace cube nodes. Rebuild the next actual choice
 	# now so an Avatar conversion/heal never points to the discarded nodes.
 	if finished_damage and game.waiting_for_player_input and game.card_presentation.is_empty() and game.beta_hud != null:
@@ -726,8 +758,10 @@ func queue_world_placement(node: CanvasItem) -> void:
 
 
 func _play_world_placements() -> void:
-	if world_placements.is_empty() or board_overlay.visible or card_overlay.visible: return
-	if game.beta_hud != null and game.beta_hud.hand_overlay.visible: return
+	if world_placements.is_empty() or card_overlay.visible or animation != null or damage_waiting: return
+	# An inspection must not starve queued public effects and their resolution barrier.
+	if board_overlay.visible: close_board()
+	if game.beta_hud != null: game.beta_hud.hand_overlay.hide()
 	var preview = game.get_node_or_null("ReferenceCardPreview")
 	if preview != null and preview.root.visible: return
 	var nodes := world_placements.duplicate()
@@ -755,19 +789,26 @@ func _play_world_placements() -> void:
 		placement.parallel().tween_property(node, "scale", rest_scale, 0.6 if summon else 0.9).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		placement.tween_property(node, "modulate", Color(1.45, 1.35, 1.05), 0.15)
 		placement.tween_property(node, "modulate", Color.WHITE, 0.35 if summon else 0.65)
+		placement.tween_interval(0.9)
 		delay += 0.32
 
 func _cancel_animation() -> void:
 	if animation != null:
 		animation.kill()
 	animation = null
-	layer = 10
+	board_layer.layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.position = animated_rest_position
 		animated_node.scale = animated_rest_scale
 		animated_node.modulate = Color.WHITE
 	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if animated_trophy_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_trophy): hidden_trophy.show()
+	animated_trophy_ghost = false
+	hidden_trophy = null
+	damage_waiting = false
+	if is_instance_valid(damage_receipt): damage_receipt.hide()
 	if is_instance_valid(hidden_damage_cube): hidden_damage_cube.show()
 	animated_damage_ghost = false
 	hidden_damage_cube = null
@@ -835,6 +876,7 @@ func _open_log() -> void:
 	return
 
 func _show_damage_receipt() -> void:
+	game.begin_damage_confirmation(int(damage_event.get("serial", -1)))
 	if is_instance_valid(damage_receipt): damage_receipt.queue_free()
 	damage_receipt = PanelContainer.new()
 	damage_receipt.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Style.INK, 2))
@@ -875,12 +917,21 @@ func _refresh_damage_receipt() -> void:
 	if not awaiting.has(local_player):
 		# The local user has acknowledged; other clients' progress is private.
 		damage_receipt.hide()
+		board_overlay.hide()
 		return
+	damage_receipt.show()
 	var button := Button.new()
 	button.text = "Continue"
 	Style.primary_button(button)
-	button.pressed.connect(func():
-		if game.network_session != null: game.network_session.acknowledge_damage(serial)
-		else: game.acknowledge_damage(serial, local_player)
-		_refresh_damage_receipt())
+	button.pressed.connect(_acknowledge_damage_and_close)
 	receipt_buttons.add_child(button)
+
+func _acknowledge_damage_and_close() -> void:
+	var serial: int = damage_event.get("serial", -1)
+	var awaiting: Array = game.damage_acknowledgements.get(str(serial), [])
+	if game.network_session != null:
+		if awaiting.has(game.local_viewer_index) and not game.network_session.acknowledge_damage(serial): return
+		board_overlay.hide()
+	else:
+		if not awaiting.is_empty(): game.acknowledge_damage(serial, int(awaiting[0]))
+	_refresh_damage_receipt()

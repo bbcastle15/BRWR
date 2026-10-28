@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy4jplapeyh7c"
-path="res://.godot/imported/index.png-045c654311b6b84ead086cf23c602c1c.ctex"
+uid="uid://s8lifps85lmn"
+path="res://.godot/imported/feverish_dream.png-df12df173951ed322d6d8d7e15dfaaca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://output/web/index.png"
-dest_files=["res://.godot/imported/index.png-045c654311b6b84ead086cf23c602c1c.ctex"]
+source_file="res://assets/spells/feverish_dream.png"
+dest_files=["res://.godot/imported/feverish_dream.png-df12df173951ed322d6d8d7e15dfaaca.ctex"]
 
 [params]
 

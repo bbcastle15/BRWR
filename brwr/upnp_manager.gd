@@ -12,7 +12,7 @@ var last_message := ""
 
 func open_brwr_ports() -> Dictionary:
 	if OS.has_feature("web"):
-		return _result(false, "", "UPnP non disponibile nel client Web.")
+		return _result(false, "", "UPnP is unavailable in the Web client.")
 
 	close_brwr_ports()
 
@@ -27,7 +27,7 @@ func open_brwr_ports() -> Dictionary:
 		return _result(
 			false,
 			"",
-			"UPnP: router non trovato. La sala resta disponibile solo in LAN."
+			"UPnP: router not found. The lobby is only available on the LAN."
 		)
 
 	_gateway = _upnp.get_gateway()
@@ -41,8 +41,8 @@ func open_brwr_ports() -> Dictionary:
 		return _result(
 			false,
 			"",
-			"UPnP: dispositivo trovato ma nessun endpoint IGD utilizzabile. "
-			+ "La sala resta disponibile solo in LAN."
+			"UPnP: device found, but no usable IGD endpoint. "
+			+ "The lobby is only available on the LAN."
 		)
 
 	print(
@@ -79,9 +79,9 @@ func open_brwr_ports() -> Dictionary:
 			return _result(
 				false,
 				external_address,
-				"UPnP: FASTGate rilevato (status DISCONNECTED), ma apertura TCP %d rifiutata: codice %d. "
+				"UPnP: FASTGate detected (DISCONNECTED), but opening TCP %d was rejected: code %d. "
 				% [port, mapping_result]
-				+ "Serve accesso al port mapping del router oppure IPv4 pubblico configurabile."
+				+ "Router port mapping access or a configurable public IPv4 address is required."
 			)
 
 		_mapped_ports.append(port)
@@ -93,21 +93,21 @@ func open_brwr_ports() -> Dictionary:
 		return _result(
 			true,
 			"",
-			"UPnP: TCP 8080 e 27847 aperte forzando il FASTGate, ma non è stato restituito l'IP WAN."
+			"UPnP: TCP 8080 and 27847 opened using the FASTGate fallback, but no WAN IP was returned."
 		)
 
 	if _is_private_or_cgnat_ipv4(external_address):
 		return _result(
 			true,
 			external_address,
-			"UPnP: porte aperte, ma WAN IP %s è privato/CGNAT; l'accesso Internet diretto può non funzionare."
+			"UPnP: ports opened, but WAN IP %s is private/CGNAT; direct Internet access may not work."
 			% external_address
 		)
 
 	return _result(
 		true,
 		external_address,
-		"UPnP OK (fallback FASTGate) · TCP 8080 e 27847 aperte · IP pubblico router: %s"
+		"UPnP OK (FASTGate fallback) · TCP 8080 and 27847 open · Router public IP: %s"
 		% external_address
 	)
 

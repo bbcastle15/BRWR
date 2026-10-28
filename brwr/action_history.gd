@@ -60,5 +60,22 @@ func refresh():
 		if not entry.get("previous",{}).is_empty():add_art(entry.previous)
 	add_art(entry)
 	for related in entry.get("related",[]):add_art(related)
-	details.text="\n\n".join(entry.get("messages",[]))
+	var readable := PackedStringArray()
+	for message in entry.get("messages", []):
+		var text := humanize(str(message))
+		if not text.is_empty(): readable.append(text)
+	details.text="\n\n".join(readable)
 	if details.text.is_empty():details.text="Revealed; awaiting resolution."
+
+func humanize(message: String) -> String:
+	if message.begins_with("Waiting for ") or message.begins_with("EFFECT PAUSED"):
+		return ""
+	var pattern := RegEx.new()
+	pattern.compile("\\b[a-z][a-z0-9]*_[a-z0-9_]+\\b")
+	for found in pattern.search_all(message):
+		var token := found.get_string()
+		# Symbol image resource paths are presentation markup, not prose.
+		if message.contains("/" + token): continue
+		var room = game.get_room_by_id(token)
+		message = message.replace(token, room.room_name if room != null else token.replace("_", " ").capitalize())
+	return message.replace(" | ", " · ").replace("attacker -1", "Black Rose").replace("owner -1", "Black Rose")

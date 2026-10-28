@@ -476,10 +476,16 @@ func update_instability_cube_positions():
 # =========================================================
 
 func get_art_instability_slot_rotation(slot_center: Vector2) -> float:
-	# Bottom sockets are horizontal; side sockets follow the two sloping edges.
-	if slot_center.y >= radius * sqrt(3.0) * 0.40:
-		return 0.0
-	return deg_to_rad(-30.0 if slot_center.x < 0.0 else 30.0)
+	# Slot order is left edge, bottom row, right edge, grouped by resistance.
+	# Do not infer orientation from absolute height: artwork bleed changes it.
+	var slots := get_art_instability_slots()
+	var index := slots.find(slot_center)
+	var count := slots.size()
+	var bottom_count := count if count <= 5 else 4
+	var side_count := (count - bottom_count) / 2
+	if index < side_count: return deg_to_rad(-30.0)
+	if index >= count - side_count: return deg_to_rad(30.0)
+	return 0.0
 
 
 static var art_sockets: Dictionary = {}

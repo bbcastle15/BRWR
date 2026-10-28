@@ -106,12 +106,26 @@ static func spell_side_frame() -> Panel:
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var edge := StyleBoxFlat.new()
 	edge.bg_color = Color(1, 0.86, 0.55, 0.035)
+	edge.draw_center = false
 	edge.border_color = Color(0.91, 0.78, 0.48, 0.75)
 	edge.set_border_width_all(6)
 	edge.shadow_color = Color(1.0, 0.72, 0.12, 0.75)
-	edge.shadow_size = 10
+	edge.shadow_size = 0
 	edge.set_corner_radius_all(3)
 	frame.add_theme_stylebox_override("panel", edge)
+	for spread in [3, 6]:
+		var glow := Panel.new()
+		glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var outline := edge.duplicate() as StyleBoxFlat
+		outline.border_color = Color(1.0, 0.72, 0.12, 0.22 if spread == 3 else 0.10)
+		outline.set_border_width_all(3)
+		glow.add_theme_stylebox_override("panel", outline)
+		frame.add_child(glow)
+		glow.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		glow.offset_left = -spread
+		glow.offset_top = -spread
+		glow.offset_right = spread
+		glow.offset_bottom = spread
 	return frame
 
 

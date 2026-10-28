@@ -155,7 +155,7 @@ func focus_power_board() -> void:
 	power_focus = create_tween()
 	power_focus.tween_method(func(weight: float):
 		_set_focus_view(start_position.lerp(target_position, weight), start_zoom.lerp(Vector2.ONE * target_zoom, weight)), 0.0, 1.0, 0.3).set_trans(Tween.TRANS_SINE)
-	power_focus.tween_interval(0.95)
+	power_focus.tween_interval(1.8)
 	power_focus.tween_method(func(weight: float):
 		_set_focus_view(target_position.lerp(power_return_position, weight), (Vector2.ONE * target_zoom).lerp(power_return_zoom, weight)), 0.0, 1.0, 0.3).set_trans(Tween.TRANS_SINE)
 	power_focus.tween_callback(func(): power_focus = null)

@@ -213,16 +213,17 @@ func _move_marker(marker: Control, score: int, offset: Vector2) -> void:
 		if camera != null:
 			camera.focus_power_board()
 		# Let the camera approach before the Rose starts sliding.
-		tween.tween_interval(0.25)
+		tween.tween_interval(0.7)
 	if distance > 0 and distance <= TRACK_MAX_POWER:
 		var direction := 1 if total > previous else -1
 		for step in range(1, distance + 1):
 			var value := previous + step * direction
 			var cell := value % TRACK_MAX_POWER if value > TRACK_MAX_POWER else value
 			var target := destination if step == distance else get_power_position(cell)
-			tween.tween_property(marker, "position", target, clampf(0.65 / distance, 0.025, 0.18))
+			tween.tween_property(marker, "position", target, clampf(1.2 / distance, 0.10, 0.60))
 	else:
 		tween.tween_property(marker, "position", destination, 0.25).set_trans(Tween.TRANS_SINE)
+	tween.tween_interval(0.9)
 	tween.tween_callback(func(): marker_tweens.erase(marker))
 	
 func update_black_rose_marker():

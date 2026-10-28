@@ -1478,7 +1478,7 @@ func _position_model_token(node: Node2D, destination: Vector2, location_key: Str
 	if previous_location.is_empty() or previous_location == location_key or table_shell == null:
 		node.position = destination
 		return
-	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 750)
+	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 1600)
 	var tween := node.create_tween()
 	node.set_meta("movement_tween", tween)
 	tween.tween_property(node, "position", destination, 0.7).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -2803,7 +2803,7 @@ func animate_model_attack(attacker_id: int, target_player: int, target_evocation
 		table_feedback_events.append(feedback)
 		if table_feedback_events.size()>128:table_feedback_events.pop_front()
 		if network_session != null:network_session.call_deferred("publish")
-	_play_attack_ghost(source,source.global_position,target.global_position)
+	_play_attack_ghost(source,source.global_position,target.global_position, target)
 
 func replay_attack_feedback(event: Dictionary) -> void:
 	var source: Node2D = null
@@ -2814,9 +2814,15 @@ func replay_attack_feedback(event: Dictionary) -> void:
 			for ev in player.evocations:
 				if ev.evocation_id==event.evocation_id and ev.board_number==int(event.board_number) and get_evocation_controller_id(ev)==int(event.attacker):
 					source=evocation_tokens.get(ev.get_instance_id())
-	if is_instance_valid(source):_play_attack_ghost(source,event.origin,event.destination)
+	var target: Node2D = null
+	# The target can have moved to its Cell in the newest snapshot. Use the recorded impact point.
+	for candidate in mage_tokens + evocation_tokens.values():
+		if is_instance_valid(candidate) and candidate != source and candidate.global_position.distance_to(event.destination) < 1.0:
+			target = candidate
+			break
+	if is_instance_valid(source):_play_attack_ghost(source,event.origin,event.destination,target)
 
-func _play_attack_ghost(source: Node2D, origin: Vector2, destination: Vector2) -> void:
+func _play_attack_ghost(source: Node2D, origin: Vector2, destination: Vector2, target: Node2D = null) -> void:
 	var ghost: Node2D = source.duplicate(0)
 	ghost.set_script(null)
 	ghost.process_mode = Node.PROCESS_MODE_DISABLED
@@ -2826,11 +2832,28 @@ func _play_attack_ghost(source: Node2D, origin: Vector2, destination: Vector2) -
 	ghost.global_transform = source.global_transform
 	ghost.z_index = 100
 	ghost.global_position = origin
-	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 1100)
+	var source_was_visible := source.visible
+	source.hide()
+	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 2040)
 	var motion := create_tween()
-	motion.tween_property(ghost, "global_position", destination, 0.48).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	motion.tween_property(ghost, "global_position", origin, 0.55).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	motion.tween_callback(ghost.queue_free)
+	var direction := origin.direction_to(destination)
+	var unit := absf(source.global_scale.x)
+	var contact := destination - direction * 23.0 * unit
+	motion.tween_property(ghost, "global_position", origin - direction * 7.0 * unit, 0.14).set_trans(Tween.TRANS_SINE)
+	motion.tween_property(ghost, "global_position", contact, 0.36).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	motion.tween_callback(func(): _animate_attack_recoil(target, direction * 7.0 * unit))
+	motion.tween_interval(0.14)
+	motion.tween_property(ghost, "global_position", origin, 0.50).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	motion.tween_callback(func():
+		if is_instance_valid(source): source.visible = source_was_visible
+		ghost.queue_free())
+
+func _animate_attack_recoil(target: Node2D, offset: Vector2) -> void:
+	if not is_instance_valid(target): return
+	var rest := target.position
+	var recoil := target.create_tween()
+	recoil.tween_property(target, "position", rest + offset, 0.13).set_trans(Tween.TRANS_SINE)
+	recoil.tween_property(target, "position", rest, 0.22).set_trans(Tween.TRANS_SINE)
 
 func deal_damage_to_evocation(
 	attacker_id: int,
@@ -9097,7 +9120,7 @@ func request_effect_choice(
 		"player_index": player_index,
 		"choice_kind": choice_kind,
 		"context_key": context_key,
-		"effect_description": prompt if not prompt.is_empty() else current_effect_description,
+		"effect_description": current_effect_description + (" · " + prompt if not prompt.is_empty() and prompt != current_effect_description else ""),
 		"movement_origin_room_id": movement_origin,
 		"prompt": prompt,
 		"min_select": min_select,
@@ -9303,6 +9326,12 @@ func submit_effect_choice(
 			runtime_selection
 		)
 
+	var choice_names := PackedStringArray()
+	for option in pending_input.get("options", []) + pending_input.get("board_options", []):
+		if not tokens.has(str(option.get("token", ""))): continue
+		# Private card identities never enter the shared match history.
+		choice_names.append("a card" if str(option.get("card_kind", "")) in ["spells", "quests"] else str(option.get("label", option.get("name", "an option"))))
+	append_public_log("Player %d chose %s. %s" % [player_index+1, ", ".join(choice_names) if not choice_names.is_empty() else "to skip", str(pending_input.get("effect_description", ""))])
 	pending_effect_choice_context = {}
 	pending_effect_choice_values = {}
 
@@ -14302,7 +14331,7 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	card_presentation_serial += 1
 	data["serial"] = card_presentation_serial
 	data["requires_click"] = str(data.get("kind", "")) in ["events", "spells", "jinxs"]
-	if str(data.get("kind", "")) in ["spells", "rooms"]:
+	if str(data.get("kind", "")) in ["spells", "rooms", "quests"]:
 		data["awaiting_players"] = AvatarRules.human_order(self).duplicate()
 	data["acknowledge_player"] = int(data.get("player", get_turn_presentation().get("player_index", 0)))
 	if AvatarRules.is_avatar(self, int(data.acknowledge_player)):
@@ -14386,6 +14415,17 @@ func acknowledge_damage(serial: int, player_index: int) -> bool:
 	if network_session != null: network_session.publish()
 	return true
 
+func begin_damage_confirmation(serial: int) -> void:
+	if network_client or serial < 0: return
+	var key := "damage_confirmation_%d" % serial
+	if has_meta(key): return
+	set_meta(key,true)
+	# Start the deadline after the animation, never when the hit is first recorded.
+	get_tree().create_timer(10.0).timeout.connect(func():
+		if damage_acknowledgements.get(str(serial), []).is_empty(): return
+		damage_acknowledgements[str(serial)] = []
+		if network_session != null: network_session.publish())
+
 func record_conversion_feedback(player: int, before: Array, after: Array, converter: int) -> void:
 	if network_client: return
 	table_feedback_serial += 1
@@ -14425,6 +14465,8 @@ func _finish_card_presentation(serial: int) -> void:
 
 func _visuals_busy() -> bool:
 	if table_shell == null: return false
+	# Observe token exhaustion before a synchronous resolution loop advances to movement.
+	table_shell._observe(true)
 	var power = get_node_or_null("PowerBoard")
 	var power_busy: bool = power != null and (not power.marker_tweens.is_empty() or (power.markers_dirty and not power._presentation_covered()))
 	return power_busy or Time.get_ticks_msec() < visual_motion_until or table_shell.visuals_busy()
@@ -20028,6 +20070,32 @@ func submit_beta_input(
 	return _submit_beta_input_authoritative(player_index, payload)
 
 func _submit_beta_input_authoritative(player_index: int, payload: Dictionary) -> bool:
+	var request: Dictionary = pending_input
+	if study_parallel_active: request = study_parallel_requests.get(player_index, {})
+	var kind := str(request.get("type", ""))
+	if preparation_parallel_active: kind = "preparation"
+	var accepted := _dispatch_beta_input(player_index, payload)
+	if accepted: _log_phase_choice(player_index, kind, payload)
+	return accepted
+
+func _log_phase_choice(player_index: int, kind: String, payload: Dictionary) -> void:
+	var message := ""
+	match kind:
+		"study_choose_schools":
+			var names := PackedStringArray()
+			for id in payload.get("school_ids", []): names.append(get_school_display_name(str(id)))
+			message = "Chose Library draws: " + ", ".join(names) + "."
+		"study_keep_cards": message = "Chose to keep %d drawn Spells." % payload.get("keep_indices", []).size()
+		"study_optional_discard": message = "Chose to discard one Spell." if int(payload.get("hand_index", -1)) >= 0 else "Chose to keep the current Hand."
+		"study_hand_limit": message = "Chose %d Spells to discard to the Hand limit." % payload.get("hand_indices", []).size()
+		"preparation": message = "Prepared %d Spells." % (payload.get("ready_hand_indices", []).size() + (1 if int(payload.get("quick_hand_index", -1)) >= 0 else 0))
+	if message.is_empty(): return
+	# Phase choices get their own entry, without exposing private card identities.
+	var index := add_history_entry({"kind":"choice", "title":"Preparation choice" if kind == "preparation" else "Study choice", "player":player_index})
+	public_history[index].messages.append(message)
+	public_action_log.append("Player %d: %s" % [player_index + 1, message])
+
+func _dispatch_beta_input(player_index: int, payload: Dictionary) -> bool:
 	if not waiting_for_player_input:
 		print("submit_beta_input: no pending input")
 		return false

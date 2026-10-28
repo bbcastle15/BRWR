@@ -7,6 +7,10 @@ static func icon(code: String) -> String:
 static func describe(effect: Dictionary) -> String:
 	var amount := str(effect.get("amount", 1))
 	match str(effect.get("type", "")):
+		"room_effect", "if_transformed":
+			var parts := PackedStringArray()
+			for child in effect.get("effects", []): parts.append(describe(child))
+			return " ".join(parts)
 		"move_model_near_target_room":
 			return "Move up to %s a %s." % [str(effect.get("distance", 1)), icon("e934")]
 		"damage": return "Inflict %s %s." % [amount, icon("e902")]

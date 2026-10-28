@@ -1,3 +1,36 @@
+# RIPRENDERE DA QUI — 28 ottobre 2026, revisione C / cambio computer
+
+Ultima richiesta: danni di evocazione all’Avatar invisibili sull’altro client e Hand Web coperta dalla colonna sinistra. Corretti in `tabletop_shell.gd`: preservazione dei danni in attesa quando si apre Hand; CanvasLayer separato per la plancia ingrandita, colonna sempre sotto Hand.
+
+**Passaggio dettagliato:** [docs/HANDOFF-2026-10-28-C.md](docs/HANDOFF-2026-10-28-C.md).
+
+Il test di regressione riproduceva la perdita dei danni prima della correzione e passa dopo. I test sono nativi con snapshot host/client; la verifica finale in due browser resta da fare seguendo i passi del documento.
+43 controlli mirati superati: 8 nel nuovo scenario con rendering, 12 su conferme/sconfitta remota, 23 su Study/log/attacco/trofei. Corretta anche una callback del bordo Hand su nodi già sostituiti; ultimo test visivo senza errori di script.
+Build Web definitiva in `output/web`, rigenerata e verificata: 178 texture Spell, 57 Mage card, 21 hash sorgenti corrispondenti (PASS). Nessuna pubblicazione online.
+
+**Trasferire anche modifiche non committate e file non tracciati.** Nessun commit/push o pubblicazione online effettuato. Un semplice pull non porta questi cambiamenti sull’altro computer. Preservare tutti gli asset aggiunti dall’utente.
+
+---
+
+# Playtest — 28 ottobre 2026, seconda revisione
+
+Ultima richiesta: glitch Study, scelte nel log, attacco con rincorsa/rinculo, pause -10%, blocco Web dopo sconfitta e animazione trofeo.
+Dettagli: [docs/PLAYTEST-2026-10-28-B.md](docs/PLAYTEST-2026-10-28-B.md).
+80 controlli mirati superati, inclusi 23 con rendering attivo. Il blocco della specifica sessione Web non è stato riprodotto: verificati motore locale e due client simulati tramite snapshot.
+Continue/Close chiude la ricevuta locale; conferme danno con limite di 10 secondi dopo l’animazione.
+Export Web locale rigenerato e verificato: 178 texture Spell, 57 Mage card, 21 hash corrispondenti. Nessuna pubblicazione online.
+
+---
+
+# Playtest — 28 ottobre 2026
+
+Ultima richiesta: Study Web, conferma carte tenute, bordo senza riempimento, pause animazioni, descrizioni effetti, orientamento cubi, Quest, log e blocco dopo sconfitta.
+Dettagli: [docs/PLAYTEST-2026-10-28.md](docs/PLAYTEST-2026-10-28.md).
+81 controlli mirati superati. Rigenerato export Web locale; nessuna pubblicazione.
+Il danno ora interrompe una mano rimasta aperta: entrambi i client ricevono la conferma, e dopo la sconfitta non viene ripristinata la vecchia board ispezionata.
+
+---
+
 # Playtest — 27 ottobre 2026, seconda revisione
 
 Ultima richiesta: 25 punti su inglese, Bartholomäus, Study, conferme, animazioni, bersagli, log e Nigredo.

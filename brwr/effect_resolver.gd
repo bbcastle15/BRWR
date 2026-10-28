@@ -24,6 +24,7 @@ func resolve_effect(
 	var effect_type = str(effect.get("type", ""))
 	var game = context.get("game")
 	if game != null:
+		game.current_effect_description = preload("res://effect_description.gd").describe(effect)
 		ForgottenPassives.prepare_context(game, context)
 		var target_ev: EvocationState = context.get("target_evocation")
 		if target_ev != null and str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, target_ev, "ignore_spell_effects").is_empty():

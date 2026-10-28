@@ -1043,11 +1043,11 @@ func _accept_confirmation() -> void:
 
 
 func _confirm_study_keep(indices: Array) -> void:
-	var discarded: PackedStringArray = []
+	var kept: PackedStringArray = []
 	for card in current_request.get("cards", []):
-		if not indices.has(int(card.get("draw_index", -1))):
-			discarded.append(str(card.get("name", card.get("id", "Spell"))))
-	confirm_choice("Discard these Spells?\n\n" + "\n".join(discarded), _submit.bind({"keep_indices": indices.duplicate()}))
+		if indices.has(int(card.get("draw_index", -1))):
+			kept.append(str(card.get("name", card.get("id", "Spell"))))
+	confirm_choice("Keep these Spells?\n\n" + "\n".join(kept), _submit.bind({"keep_indices": indices.duplicate()}))
 
 
 # =============================================================================
@@ -2199,7 +2199,7 @@ func _render_study_schools() -> void:
 		+ str(school_draft.size())
 		+ "/4\n"
 		+ (
-			" → ".join(school_draft)
+			" / ".join(school_draft)
 			if not school_draft.is_empty()
 			else "Choose the School for each of the four draws."
 		)
@@ -2215,9 +2215,19 @@ func _render_study_schools() -> void:
 
 		_add_object_choice({"id": school_id, "name": school_id.capitalize()}, _add_study_school.bind(school_id), school_draft.has(school_id), "schools")
 
-	var controls := HBoxContainer.new()
-	content.add_child(controls)
-	content.move_child(controls, 0)
+	var gallery := content.get_node("ObjectChoices") as ScrollContainer
+	content.remove_child(gallery)
+	var study_row := HBoxContainer.new()
+	study_row.name = "StudyRow"
+	content.add_child(study_row)
+	study_row.add_child(gallery)
+	gallery.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	gallery.custom_minimum_size.y = 0
+	var controls := VBoxContainer.new()
+	controls.custom_minimum_size.x = 120
+	study_row.add_child(controls)
+	# Use actual available panel height, including the Web canvas, not cached desktop dimensions.
+	_fit_study_cards.call_deferred()
 
 	_add_small_button(
 		controls,
@@ -2251,6 +2261,17 @@ func _render_study_schools() -> void:
 
 
 
+func _fit_study_cards() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var row = content.get_node_or_null("StudyRow")
+	if row == null: return
+	var gallery = row.get_child(0)
+	var available := maxf(120, content.get_parent().size.y - 85)
+	for column in gallery.get_child(0).get_children():
+		column.get_child(0).custom_minimum_size = Vector2(available * 2.0 / 3.0, available)
+	content.get_parent().scroll_vertical = 0
+
 func _add_study_school(school_id: String) -> void:
 	if school_draft.size() >= 4:
 		return
@@ -2272,13 +2293,23 @@ func _clear_study_schools() -> void:
 
 
 func _refresh_study_schools() -> void:
-	# Preserve the inspected end of the Library when rebuilding the draw draft.
-	var gallery := content.get_node_or_null("ObjectChoices") as ScrollContainer
-	var scroll_position: int = gallery.scroll_horizontal if gallery != null else 0
-	_render_current_request()
-	var rebuilt := content.get_node_or_null("ObjectChoices") as ScrollContainer
-	if rebuilt != null:
-		rebuilt.set_deferred("scroll_horizontal", scroll_position)
+	# Update the draft in place: rebuilding produced two frames of resized cards.
+	var row = content.get_node_or_null("StudyRow")
+	if row == null: return
+	decision_info.text = "Click a School for each draw. Inspect opens its rules without choosing a draw.\nLibrary draws: %d/4\n%s" % [school_draft.size(), " / ".join(school_draft) if not school_draft.is_empty() else "Choose the School for each of the four draws."]
+	for column in row.get_child(0).get_child(0).get_children():
+		var button = column.get_child(0)
+		var selected := school_draft.has(str(button.get_meta("choice_option").id))
+		var style = button.get_theme_stylebox("normal").duplicate()
+		for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+			style.set_content_margin(side, style.get_content_margin(side))
+		style.border_color = Color.GOLD if selected else Color(0.4,0.4,0.4)
+		style.set_border_width_all(4 if selected else 1)
+		button.add_theme_stylebox_override("normal",style)
+	var controls = row.get_child(1)
+	controls.get_child(0).disabled = school_draft.is_empty()
+	controls.get_child(1).disabled = school_draft.is_empty()
+	controls.get_child(2).disabled = school_draft.size() != 4
 
 
 func _submit_study_schools() -> void:

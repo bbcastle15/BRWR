@@ -10,19 +10,19 @@ static func load_server_options() -> Dictionary:
 	if cert_path.is_empty() or key_path.is_empty():
 		return {
 			"ok": false,
-			"message": "TLS non configurato. Avvia tools/setup_tls.ps1 e poi Ospita-Online.cmd."
+			"message": "TLS is not configured. Run tools/setup_tls.ps1, then Ospita-Online.cmd."
 		}
 	if not FileAccess.file_exists(cert_path):
-		return {"ok": false, "message": "Certificato TLS non trovato: " + cert_path}
+		return {"ok": false, "message": "TLS certificate not found: " + cert_path}
 	if not FileAccess.file_exists(key_path):
-		return {"ok": false, "message": "Chiave TLS non trovata: " + key_path}
+		return {"ok": false, "message": "TLS key not found: " + key_path}
 
 	var certificate := X509Certificate.new()
 	var error := certificate.load(cert_path)
 	if error != OK:
 		return {
 			"ok": false,
-			"message": "Impossibile caricare il certificato TLS: %s (%s)" % [cert_path, error_string(error)]
+			"message": "Could not load TLS certificate: %s (%s)" % [cert_path, error_string(error)]
 		}
 
 	var key := CryptoKey.new()
@@ -30,7 +30,7 @@ static func load_server_options() -> Dictionary:
 	if error != OK:
 		return {
 			"ok": false,
-			"message": "Impossibile caricare la chiave TLS: %s (%s)" % [key_path, error_string(error)]
+			"message": "Could not load TLS key: %s (%s)" % [key_path, error_string(error)]
 		}
 
 	return {

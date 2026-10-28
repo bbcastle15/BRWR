@@ -349,7 +349,6 @@ func _build_ui() -> void:
 	confirm_button = Button.new()
 	confirm_button.text = "Confirm"
 	confirm_button.custom_minimum_size = Vector2(190, 54)
-	preload("res://tabletop_style.gd").primary_button(confirm_button)
 	confirm_button.pressed.connect(
 		_confirm_preparation
 	)
@@ -1045,7 +1044,14 @@ func _create_card_widget(
 		var side := preload("res://tabletop_style.gd").spell_side_frame()
 		card_button.add_child(side)
 		var dark := selected_dark if selected else _assigned_dark_side(hand_index)
-		var fit := func(): preload("res://tabletop_style.gd").fit_spell_side(side, card_button.size, texture, dark)
+		# A quick selection/assignment can replace the card before this deferred fit.
+		var side_ref: WeakRef = weakref(side)
+		var button_ref: WeakRef = weakref(card_button)
+		var fit := func():
+			var live_side = side_ref.get_ref()
+			var live_button = button_ref.get_ref()
+			if live_side == null or live_button == null: return
+			preload("res://tabletop_style.gd").fit_spell_side(live_side, live_button.size, texture, dark)
 		card_button.resized.connect(fit)
 		fit.call_deferred()
 
