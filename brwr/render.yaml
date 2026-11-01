@@ -1,10 +1,10 @@
-﻿services:
+services:
   - type: web
     name: brwr-rebirth-bbcastle15
     runtime: node
     plan: free
     rootDir: brwr
-    buildCommand: bash tools/render_build.sh
+    buildCommand: bash tools/render_unpack.sh
     startCommand: node relay/server.js
     healthCheckPath: /health
     autoDeployTrigger: commit
