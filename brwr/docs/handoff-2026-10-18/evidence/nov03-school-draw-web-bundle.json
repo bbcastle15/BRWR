@@ -1,0 +1,14 @@
+[
+  {
+    "bytes": 102777452,
+    "parts": 5,
+    "sha256": "68E1E8AB06557AA00443F92AC8CA73CE672A96B04B1989B8DFDB0B01036B211B",
+    "name": "index.pck"
+  },
+  {
+    "bytes": 99947501,
+    "parts": 4,
+    "sha256": "FA87280CDF359A7EA792152C613EFD1C42726F7025B60CEAA7D9DB988E49F2F0",
+    "name": "index.pck.gz"
+  }
+]

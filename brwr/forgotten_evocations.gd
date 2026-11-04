@@ -17,7 +17,7 @@ static func extended(game, ev: EvocationState) -> bool:
 	return bool(game.evocation_database.get_evocation(ev.evocation_id).get("forgotten", false)) or ev.archetype == "nightmare" or not ev.upgrades.is_empty() or not ability(game, ev, "on_activation_start").is_empty() or not ability(game, ev, "optional_attack_replacement").is_empty() or not ability(game, ev, "replace_attack").is_empty()
 
 static func can_activate(game, ev: EvocationState) -> bool:
-	if ev == null or ev.archetype == "equipment" or ev.is_defeated() or not game.is_evocation_in_play(ev):
+	if ev == null or ev.archetype == "equipment" or FamiliarRules.guarded(ev) or ev.is_defeated() or not game.is_evocation_in_play(ev):
 		return false
 	if ev.assigned_mage >= 0 and game.players[ev.assigned_mage].mage.in_cell:
 		return false
@@ -260,10 +260,10 @@ static func attack_damage(game, ev: EvocationState, controller: int, amount: int
 	for target in targets:
 		if target.target_type == "mage":
 			if game._valid_evocation_attack_mage(ev, controller, int(target.player_index)):
-				game.deal_damage_from_evocation(ev, int(target.player_index), amount, controller)
+				game.deal_damage_from_evocation(ev, int(target.player_index), amount + FamiliarRules.attack_bonus(game,ev,game.players[int(target.player_index)].mage.get_damage()), controller)
 		else:
 			if game._valid_evocation_attack_evocation(ev, controller, target.evocation):
-				game.deal_damage_to_evocation(controller, target.evocation, amount, [], "evocation_attack", "evocation", ev)
+				game.deal_damage_to_evocation(controller, target.evocation, amount + FamiliarRules.attack_bonus(game,ev,target.evocation.get_damage()), [], "evocation_attack", "evocation", ev)
 
 static func resolve_assignment(game, effect: Dictionary, context: Dictionary) -> bool:
 	var caster: int = int(context.caster_id)
@@ -285,8 +285,16 @@ static func resolve_assignment(game, effect: Dictionary, context: Dictionary) ->
 		return true
 	var slots: Array = []
 	for i in range(1, 4):
+		if game.players[target].evocations.any(func(existing): return existing.assigned_mage == target and existing.assigned_slot == i): continue
 		slots.append({"token": "slot:%d" % i, "value": i, "name": "Evocation slot %d" % i})
+	if slots.is_empty():
+		context.erase("nightmare_mage")
+		context.erase("nightmare_slot")
+		return true
 	if not DruidicRules.choose(game, caster, context, "nightmare_slot", slots, "Choose the slot for the assigned Nightmare."):
+		return false
+	if not slots.any(func(slot): return int(slot.value) == int(context.get("nightmare_slot",0))):
+		context.erase("nightmare_slot")
 		return false
 	var data: Dictionary = game.evocation_database.get_evocation(str(effect.evocation_id))
 	var ev := EvocationState.new(data.id, data.name, data.archetype, int(data.health), int(data.strength), int(data.speed), -1)
@@ -343,6 +351,12 @@ static func on_summon(game, ev: EvocationState) -> void:
 		ForgottenRules.queue(game, effects, context)
 
 static func on_event(game, event: GameEvent) -> void:
+	if event.event_type == "evocation_defeated_or_removed" and event.action_type == "defeated" and event.target_evocation != null:
+		var ev: EvocationState = event.target_evocation
+		var last_effect := ability(game,ev,"before_defeat_effect")
+		if not last_effect.is_empty() and ev.owner_id >= 0:
+			var context := {"game":game,"caster_id":ev.owner_id,"source_evocation":ev,"resolver_kind":"evocation","caster_room_id":ev.room_id}
+			ForgottenRules.queue(game,[{"type":"optional_effect","prompt":ev.evocation_name+": inflict Damage before resolving its defeat?","effects":[{"type":"independent_target","target":"room","range":last_effect.get("range",2),"effects":[{"type":"damage","amount":game.get_evocation_effective_strength(ev)}]}]}],context)
 	if event.event_type == "evocation_defeated_or_removed" and event.action_type in ["defeated", "removed"] and event.target_evocation != null:
 		var loss := ability(game, event.target_evocation, "convert_instability_on_defeat_or_removal")
 		var controller: int = game.get_evocation_controller_id(event.target_evocation)

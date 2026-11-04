@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4lapq5bmpxsa"
-path="res://.godot/imported/suffococation.png-a90e628bc8913d2e6155f76dec3bb078.ctex"
+uid="uid://dtv4aloq5txfx"
+path="res://.godot/imported/field_test.png-5af6ae1e9d1a8addc12ddddec37c95d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/suffococation.png"
-dest_files=["res://.godot/imported/suffococation.png-a90e628bc8913d2e6155f76dec3bb078.ctex"]
+source_file="res://assets/quests/symbols/field_test.png"
+dest_files=["res://.godot/imported/field_test.png-5af6ae1e9d1a8addc12ddddec37c95d8.ctex"]
 
 [params]
 

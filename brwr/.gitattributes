@@ -1,2 +1,5 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Export segments are binary even when their first bytes happen to look like text.
+deploy/web_bundle/*.part* binary

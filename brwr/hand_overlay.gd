@@ -373,7 +373,7 @@ func open_study(request: Dictionary) -> void:
 	ready_hand_indices.clear()
 	quick_hand_index = -1
 	selected_hand_index = -1
-	title_label.text = "PLAYER %d — STUDY" % (owner_player_index + 1)
+	title_label.text = game.player_display_name(owner_player_index) + " — STUDY"
 	instruction_label.text = "Choose two cards to keep. Click a selected card to deselect it."
 	close_button.disabled = false
 	close_button.text = "Hide"
@@ -409,7 +409,7 @@ func open_quest_selection(request: Dictionary) -> void:
 	quest_selection_max = int(request.get("max_select", 1))
 	cards.clear()
 	selected_hand_index = -1
-	title_label.text = "PLAYER %d — QUESTS" % (owner_player_index + 1)
+	title_label.text = game.player_display_name(owner_player_index) + " — QUESTS"
 	instruction_label.text = str(request.get("prompt", "Choose Quest cards."))
 	close_button.visible = true
 	close_button.disabled = false
@@ -450,11 +450,7 @@ func open_preparation(
 	quick_hand_index = -1
 	quick_dark_side = false
 
-	title_label.text = (
-		"PLAYER "
-		+ str(owner_player_index + 1)
-		+ " — PREPARATION"
-	)
+	title_label.text = game.player_display_name(owner_player_index) + " — PREPARATION"
 
 	instruction_label.text = (
 		"Choose Light or Dark, then prepare 2–4 Spells in I–III or Quick. Scroll to see more cards."
@@ -494,7 +490,7 @@ func open_memories(player_index: int) -> void:
 			"school_id": spell.school_id
 		})
 	selected_hand_index = -1
-	title_label.text = "PLAYER %d — MEMORIES" % (player_index + 1)
+	title_label.text = game.player_display_name(player_index) + " — MEMORIES"
 	instruction_label.text = "Public Spell discard pile."
 	close_button.visible = true
 	close_button.disabled = false
@@ -563,11 +559,7 @@ func open_browse(
 	selected_hand_index = -1
 	selected_dark = false
 
-	title_label.text = (
-		"PLAYER "
-		+ str(player_index + 1)
-		+ " — HAND"
-	)
+	title_label.text = game.player_display_name(player_index) + " — HAND"
 
 	instruction_label.text = (
 		"Browse your Hand. Press H, Esc, or Close to return to the Lodge."
@@ -604,7 +596,7 @@ func _change_tab(index: int) -> void:
 	jinx_scroll.visible = index == 2
 	prep_controls.visible = index == 0 and mode == MODE_PREPARATION
 	if index == 1:
-		title_label.text = "PLAYER %d — QUESTS" % (owner_player_index + 1)
+		title_label.text = game.player_display_name(owner_player_index) + " — QUESTS"
 		if mode == MODE_QUEST_SELECTION:
 			instruction_label.text = str(current_request.get("prompt", "Choose Quest cards."))
 		else:
@@ -612,7 +604,7 @@ func _change_tab(index: int) -> void:
 		count_label.text = ""
 		_render_quests()
 	elif index == 2:
-		title_label.text = "PLAYER %d — JINX" % (owner_player_index + 1)
+		title_label.text = game.player_display_name(owner_player_index) + " — JINX"
 		instruction_label.text = "Assigned Jinxes. Complete each card's Task to discard it. Click a card to inspect."
 		_render_jinxes()
 	else:
@@ -722,11 +714,14 @@ func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: V
 	var total_width: float = placed * cube_visual + maxi(0, placed - 1) * gap
 	var start_x: float = (card_size.x - total_width) * 0.5
 	var slot_y: float = card_size.y * 0.555 - cube_visual * 0.5
+	var printed_centers := preload("res://reference_card_preview.gd").quest_progress_centers(quest.get_id(), card_size)
 	for i in range(placed):
 		var cube = preload("res://cube.tscn").instantiate()
 		cube.cube_color = game.players[owner_player_index].color
 		cube.scale = Vector2.ONE * cube_scale
 		cube.position = Vector2(start_x + i * (cube_visual + gap), slot_y)
+		if i < printed_centers.size():
+			cube.position = printed_centers[i] - Vector2.ONE * cube_visual * 0.5
 		overlay.add_child(cube)
 
 
@@ -764,7 +759,7 @@ func _render_quests() -> void:
 			var callback: Callable = game.open_quest_card.bind(quest)
 			if mode == MODE_QUEST_SELECTION and selection_token != "":
 				callback = _toggle_quest_selection.bind(selection_token)
-			var card: Button = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", card_size, callback) if section == "solved" else game.ReferenceCardPreview.make_card("quests", quest.get_id(), quest.get_name(), card_size, callback)
+			var card: Button = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", card_size, callback, game.ReferenceCardPreview.quest_back_texture(quest.get_moon())) if section == "solved" else game.ReferenceCardPreview.make_card("quests", quest.get_id(), quest.get_name(), card_size, callback)
 			card.set_meta("choice_quest", quest)
 			center.add_child(card)
 			if mode == MODE_QUEST_SELECTION:
@@ -1639,87 +1634,8 @@ func _roman_slot(
 			return str(slot_index + 1)
 
 
-func _resolve_card_texture(
-	card: Dictionary
-) -> Texture2D:
-	var spell_id: String = str(
-		card.get(
-			"id",
-			""
-		)
-	)
-
-	if spell_id == "":
-		return null
-
-	if texture_cache.has(spell_id):
-		return texture_cache[
-			spell_id
-		]
-
-	var school_id: String = str(
-		card.get(
-			"school_id",
-			""
-		)
-	)
-
-	var candidates: Array[String] = []
-	candidates.append(VisualAssets.spell_texture_path(spell_id))
-
-	for root in CARD_ART_ROOTS:
-		if school_id != "":
-			candidates.append(
-				root.path_join(
-					school_id
-				).path_join(
-					spell_id + ".png"
-				)
-			)
-
-		candidates.append(
-			root.path_join(
-				spell_id + ".png"
-			)
-		)
-
-	for path in candidates:
-		if not ResourceLoader.exists(path):
-			continue
-
-		var texture = load(path)
-
-		if texture is Texture2D:
-			texture_cache[
-				spell_id
-			] = texture
-			return texture
-
-	var recursive_path: String = (
-		_find_resource_file_recursive(
-			"res://",
-			spell_id + ".png",
-			0
-		)
-	)
-
-	if recursive_path != "" \
-	and ResourceLoader.exists(recursive_path):
-		var texture = load(
-			recursive_path
-		)
-
-		if texture is Texture2D:
-			texture_cache[
-				spell_id
-			] = texture
-			return texture
-
-	texture_cache[
-		spell_id
-	] = null
-
-	return null
+func _resolve_card_texture(card: Dictionary) -> Texture2D:
+	return SpellArtResolver.get_texture(str(card.get("id", "")), str(card.get("school_id", "")))
 
 
 func _find_resource_file_recursive(

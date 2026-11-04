@@ -22,6 +22,11 @@ var room_variants: Dictionary = {}
 var avatar_selection: Dictionary = {}
 var local_player := 0
 var seats: Array[int] = []
+var display_name := ""
+var seat_names: Dictionary = {}
+
+static func clean_display_name(value: String) -> String:
+	return value.replace("\n", " ").replace("\r", " ").replace("\t", " ").replace("[", "").replace("]", "").strip_edges().left(24)
 
 # Host-side map: relay peer id -> BRWR player seat.
 var peer_players: Dictionary = {}
@@ -37,6 +42,8 @@ var _pending_join_code := ""
 var _hello_sent := false
 var _last_keepalive := 0
 var _closing_transport := false
+var _sync_elapsed := 0.0
+var _sent_snapshots: Dictionary = {}
 
 func _ready() -> void:
 	# Text-script exports produce the same fingerprint on Windows and Web.
@@ -48,6 +55,8 @@ func _ready() -> void:
 		"effect_resolver.gd",
 		"death_effect_resolver.gd",
 		"druidic_rules.gd",
+		"mage_effects.gd",
+		"familiar_rules.gd",
 		"famine_rules.gd",
 		"school_effects.gd",
 		"oracle_rules.gd",
@@ -81,7 +90,13 @@ func _ready() -> void:
 		hashes.append(FileAccess.get_sha256("res://" + file))
 	version = "|".join(hashes).sha256_text()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Resolution can resume after a Tween, without a new input request. Send
+	# changed authoritative projections at a bounded cadence as well as at choices.
+	_sync_elapsed += delta
+	if _sync_elapsed >= 0.25:
+		_sync_elapsed = 0.0
+		publish()
 	if _socket == null:
 		return
 
@@ -132,6 +147,8 @@ func host(count: int = 2, _bind_address: String = "*", _tls_server_options = nul
 	seats.clear()
 	peer_players.clear()
 	receiving.clear()
+	seat_names.clear()
+	_sent_snapshots.clear()
 	started = false
 	busy = false
 	return _connect_relay(endpoint, "host", "")
@@ -150,6 +167,8 @@ func join(address: String, code: String) -> Error:
 	seats.clear()
 	peer_players.clear()
 	receiving.clear()
+	seat_names.clear()
+	_sent_snapshots.clear()
 	started = false
 	busy = false
 	return _connect_relay(endpoint, "join", clean_code)
@@ -210,6 +229,7 @@ func _handle_relay_message(message: Dictionary) -> void:
 			seats.assign([0])
 			hosting = true
 			connected = true
+			seat_names[0] = clean_display_name(display_name)
 			connection_started = 0
 			status_changed.emit("Room created · 1/%d players." % player_count)
 			lobby_changed.emit()
@@ -225,7 +245,7 @@ func _handle_relay_message(message: Dictionary) -> void:
 			connected = true
 			hosting = false
 			connection_started = 0
-			status_changed.emit("You are Player %d · Waiting for host." % [local_player + 1])
+			status_changed.emit("%s · Waiting for host." % display_name)
 			lobby_changed.emit()
 
 		"peer_joined":
@@ -263,6 +283,12 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 	var op := str(payload.get("op", ""))
 	if hosting:
 		match op:
+			"profile":
+				if not started and peer_players.has(peer_id):
+					var value := clean_display_name(str(payload.get("name", "")))
+					if not value.is_empty():
+						seat_names[int(peer_players[peer_id])] = value
+						_update_lobby()
 			"ready":
 				_ready_for_state(peer_id)
 			"choose":
@@ -279,7 +305,10 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 
 	match op:
 		"lobby":
+			seat_names = payload.get("names", {}).duplicate()
 			_lobby(int(payload.get("count", 2)), int(payload.get("seat", local_player)), payload.get("joined", []))
+			if not seat_names.has(local_player):
+				_send_game_to_host({"op": "profile", "name": display_name})
 		"begin":
 			avatar_selection = payload.get("avatar", {}).duplicate(true)
 			_begin(int(payload.get("count", 2)), int(payload.get("seat", local_player)))
@@ -317,6 +346,7 @@ func _update_lobby() -> void:
 			"count": player_count,
 			"seat": int(peer_players[id]),
 			"joined": seats,
+			"names": seat_names,
 		})
 	lobby_changed.emit()
 	status_changed.emit("Room: %d/%d players. Start when everyone has connected." % [seats.size(), player_count])
@@ -330,10 +360,10 @@ func _lobby(count: int, seat: int, joined: Array) -> void:
 	connected = true
 	connection_started = 0
 	lobby_changed.emit()
-	status_changed.emit("You are Player %d · %d/%d connected · Waiting for host." % [seat + 1, seats.size(), count])
+	status_changed.emit("%s · %d/%d connected · Waiting for host." % [display_name, seats.size(), count])
 
 func can_start() -> bool:
-	return hosting and connected and not started and peer_players.size() == player_count - 1
+	return hosting and connected and not started and peer_players.size() == player_count - 1 and seat_names.size() == player_count
 
 func start_match() -> bool:
 	if not avatar_selection.is_empty() and player_count > 5:
@@ -375,6 +405,7 @@ func _create_game(client: bool) -> void:
 	game.name = "Game"
 	game.network_session = self
 	game.network_client = client
+	game.player_names = seat_names.duplicate()
 	game.local_viewer_index = local_player
 	game.avatar_selection = avatar_selection.duplicate(true)
 	game.player_count = player_count + (0 if avatar_selection.is_empty() else 1)
@@ -408,8 +439,12 @@ func publish() -> void:
 	state_sequence += 1
 	for id in receiving:
 		var state: Dictionary = BoardProjection.build(game, int(peer_players[id]))
+		var fingerprint := Marshalls.variant_to_base64(state, false)
+		if _sent_snapshots.get(id, "") == fingerprint:
+			continue
 		state["sequence"] = state_sequence
-		_send_game_to_peer(str(id), {"op": "snapshot", "state": state})
+		if _send_game_to_peer(str(id), {"op": "snapshot", "state": state}) == OK:
+			_sent_snapshots[id] = fingerprint
 
 func _snapshot(state: Dictionary) -> void:
 	if game == null or not game.network_client:
@@ -493,7 +528,9 @@ func _choice_rejected() -> void:
 func _peer_left(peer_id: String) -> void:
 	if peer_id.is_empty() or not peer_players.has(peer_id):
 		return
+	seat_names.erase(int(peer_players[peer_id]))
 	peer_players.erase(peer_id)
+	_sent_snapshots.erase(peer_id)
 	receiving.erase(peer_id)
 	if started:
 		connected = false

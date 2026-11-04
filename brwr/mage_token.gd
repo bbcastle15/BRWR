@@ -1,9 +1,22 @@
 extends Node2D
+signal action_requested
+
+class TokenButton extends Button:
+	func _has_point(point: Vector2) -> bool:
+		return point.distance_to(size * 0.5) <= 23.0
 
 
 var player_index: int = -1
 var token_color: Color = Color.WHITE
 var transformation_id: String = ""
+
+func _process(_delta: float) -> void:
+	var button := get_node_or_null("ActionButton") as Button
+	var game = get_parent()
+	if button == null or game == null or not game.has_method("get_player_board_action_options"): return
+	var available: bool = game.beta_hud != null and game.beta_hud.action_menu_mode == "root" and not game.get_player_board_action_options(player_index, "physical").is_empty()
+	button.mouse_filter = Control.MOUSE_FILTER_STOP if available else Control.MOUSE_FILTER_IGNORE
+	button.tooltip_text = game.player_display_name(player_index) + " · Physical Actions"
 
 
 func setup(index: int, color: Color):
@@ -12,6 +25,17 @@ func setup(index: int, color: Color):
 	z_index = 80
 
 	create_shape()
+	var button := TokenButton.new()
+	button.name = "ActionButton"
+	button.position = Vector2(-23, -23)
+	button.size = Vector2(46, 46)
+	button.flat = true
+	button.focus_mode = Control.FOCUS_NONE
+	button.tooltip_text = "Physical Actions"
+	for style in ["normal", "hover", "pressed", "focus"]:
+		button.add_theme_stylebox_override(style, StyleBoxEmpty.new())
+	button.pressed.connect(func(): action_requested.emit())
+	add_child(button)
 
 	var label: Label = $Label
 	label.text = "P" + str(index + 1)
@@ -24,6 +48,11 @@ func setup(index: int, color: Color):
 	label.add_theme_color_override("font_color", Color.WHITE)
 	label.add_theme_color_override("font_outline_color", Color.BLACK)
 	label.add_theme_constant_override("outline_size", 5)
+
+
+func set_nightmare_attached(attached: bool) -> void:
+	# Keep the player identity outside the three-piece Nightmare ring.
+	$Label.position.y = 34 if attached else 15
 
 
 func create_shape():

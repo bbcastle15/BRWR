@@ -8,6 +8,29 @@ const BetaHUDScript = preload("res://beta_hud.gd")
 
 var beta_hud = null
 var network_session = null
+var player_names: Dictionary = {}
+
+func player_display_name(index: int) -> String:
+	return players[index].player_name if index >= 0 and index < players.size() else "Black Rose"
+
+func player_reference_text(message: String) -> String:
+	# Older effect labels store seat references. Render those using the same
+	# authoritative names as the rail, without changing their target IDs.
+	var pattern := RegEx.new()
+	pattern.compile("\\bPlayer ([1-6])\\b")
+	var matches := pattern.search_all(message)
+	matches.reverse()
+	for found in matches:
+		var index := int(found.get_string(1)) - 1
+		if index < players.size():
+			message = message.substr(0, found.get_start()) + player_display_name(index) + message.substr(found.get_end())
+	return message
+
+func mage_school_label(index: int) -> String:
+	var player = players[index]
+	if player.avatar != null: return str(player.avatar.definition.get("name", "Avatar"))
+	var mage_name := str(mage_database.get_mage_data(player.mage_id).get("name", str(player.mage_id).capitalize())) if player.mage_id != "" else "Choose a Mage"
+	return mage_name + (" ◇ " + get_school_display_name(player.school_id) if player.school_id != "" else "")
 var network_client := false
 var local_viewer_index := -1
 var network_slot_views: Dictionary = {}
@@ -16,6 +39,7 @@ var input_revision := 0
 var table_shell = null
 var playmat: TextureRect
 var table_reserves = null
+var school_draw_presentation = null
 var network_turn_presentation: Dictionary = {}
 # Public presentation metadata only; effects stay in the existing resolution frames.
 var card_presentation: Dictionary = {}
@@ -191,7 +215,7 @@ var mage_token_scene = preload("res://mage_token.tscn")
 var mage_tokens: Array = []
 var evocation_token_scene = preload("res://evocation_token.tscn")
 var evocation_tokens: Dictionary = {}
-var evocation_inspection: AcceptDialog
+var evocation_inspection: CanvasLayer
 var inspected_evocation: EvocationState
 const ReferenceCardPreview = preload("res://reference_card_preview.gd")
 var inspected_quest: QuestState
@@ -1077,7 +1101,7 @@ func create_players():
 
 		var player = PlayerState.new(
 			i,
-			"Player " + str(i + 1),
+			str(player_names.get(i, "Player " + str(i + 1))),
 			colors[i]
 		)
 
@@ -1125,8 +1149,15 @@ func create_model_tokens() -> void:
 		)
 		add_child(token)
 		mage_tokens.append(token)
+		token.action_requested.connect(_on_mage_token_action.bind(player_index))
 
 	refresh_model_tokens()
+
+func _on_mage_token_action(player_index: int) -> void:
+	if player_index != get_ui_viewer_player_index(): return
+	if get_player_board_action_request(player_index).is_empty(): return
+	if table_shell != null and (table_shell.board_overlay.visible or table_shell.card_overlay.visible): return
+	open_player_board_action(player_index, "physical")
 
 
 func _sync_evocation_tokens() -> void:
@@ -1149,7 +1180,7 @@ func _sync_evocation_tokens() -> void:
 					Color.DIM_GRAY if evocation.assigned_mage >= 0 else owner.color)
 				continue
 
-			var token = evocation_token_scene.instantiate()
+			var token = preload("res://umbra_token.gd").new() if evocation.evocation_id == "umbra" and evocation.assigned_mage >= 0 else evocation_token_scene.instantiate()
 			token.name = (
 				"EvocationToken_"
 				+ evocation.evocation_id
@@ -1184,7 +1215,10 @@ func _sync_evocation_tokens() -> void:
 		]
 
 		if is_instance_valid(old_token):
-			old_token.queue_free()
+			if table_shell != null and not suppress_placement_feedback:
+				table_shell.queue_world_removal(old_token)
+			else:
+				old_token.queue_free()
 
 		stale_ids.append(instance_id)
 
@@ -1213,36 +1247,13 @@ func open_evocation_inspection(evocation: EvocationState, from_player_board: boo
 	if not is_evocation_in_play(evocation):
 		return
 	if evocation_inspection == null:
-		evocation_inspection = AcceptDialog.new()
+		evocation_inspection = preload("res://evocation_inspection.gd").new()
 		evocation_inspection.name = "EvocationInspection"
-		evocation_inspection.ok_button_text = "Close"
+		evocation_inspection.game = self
 		add_child(evocation_inspection)
-		var content := VBoxContainer.new()
-		content.name = "Content"
-		content.add_theme_constant_override("separation", 12)
-		evocation_inspection.add_child(content)
-		var stats := Label.new()
-		stats.name = "Stats"
-		content.add_child(stats)
-		var art := TextureRect.new()
-		art.name = "CardArt"
-		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		art.custom_minimum_size = Vector2(650, 430)
-		art.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var cards := HBoxContainer.new()
-		cards.name = "Cards"
-		content.add_child(cards)
-		cards.add_child(art)
-		art.custom_minimum_size = Vector2(520, 350)
-		var upgrades := VBoxContainer.new()
-		upgrades.name = "Upgrades"
-		cards.add_child(upgrades)
 	inspected_evocation = evocation
 	_update_evocation_inspection()
-	evocation_inspection.theme = preload("res://tabletop_style.gd").make_theme()
-	evocation_inspection.popup_centered_clamped(Vector2i(1000 if not evocation.upgrades.is_empty() else 760, 720), 0.92)
+	evocation_inspection.show()
 
 
 func _process(_delta: float) -> void:
@@ -1252,6 +1263,7 @@ func _process(_delta: float) -> void:
 		_close_reference_card_preview()
 	var signature := ""
 	for player in players:
+		signature += str(player.mage.jinxes)
 		for quest in player.active_quests + player.completed_quests:
 			signature += str([quest.get_instance_id(), quest.revealed, quest.completed, quest.solved, quest.progress])
 		for active in player.active_spells:
@@ -1269,41 +1281,11 @@ func _update_evocation_inspection() -> void:
 		evocation_inspection.hide()
 		inspected_evocation = null
 		return
-	var evocation := inspected_evocation
-	evocation_inspection.get_node("Content/Cards/CardArt").texture = ReferenceCardPreview.card_texture("evocations", evocation.evocation_id)
-	evocation_inspection.title = evocation.get_display_name() + " · P" + str(evocation.owner_id + 1)
-	evocation_inspection.dialog_text = (
-		"Health: %d / %d\nDamage: %d\nMovement speed: %d\nAttack: %d\nRoom: %s\nController: P%d"
-		% [evocation.get_remaining_health(), evocation.health, evocation.get_damage(),
-			evocation.speed, get_evocation_effective_strength(evocation), evocation.room_id, get_evocation_controller_id(evocation) + 1]
-	)
-	if not evocation.upgrades.is_empty():
-		var names: Array = []
-		for id in evocation.upgrades:
-			names.append(ForgottenAttachments.definition("upgrades", id).get("name", id))
-		evocation_inspection.dialog_text += "\nUpgrades: " + ", ".join(names)
-	if evocation.assigned_mage >= 0:
-		evocation_inspection.dialog_text += "\nAssigned to %s · slot %d" % [players[evocation.assigned_mage].player_name, evocation.assigned_slot]
-	if not evocation.stored_trophies.is_empty():
-		evocation_inspection.dialog_text += "\nTrophies: %d" % evocation.stored_trophies.size()
-	var upgrades = evocation_inspection.get_node("Content/Cards/Upgrades")
-	if upgrades.get_meta("ids", []) != evocation.upgrades:
-		upgrades.set_meta("ids", evocation.upgrades.duplicate())
-		for child in upgrades.get_children():
-			upgrades.remove_child(child)
-			child.queue_free()
-		for id in evocation.upgrades:
-			var card := TextureRect.new()
-			card.texture = ReferenceCardPreview.card_texture("upgrades", id)
-			card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			card.custom_minimum_size = Vector2(380, 245)
-			upgrades.add_child(card)
-	evocation_inspection.get_label().hide()
-	evocation_inspection.get_node("Content/Stats").text = evocation_inspection.dialog_text
+	evocation_inspection.refresh(inspected_evocation)
 
 
 func refresh_model_tokens() -> void:
+	FamiliarRules.sync(self)
 	EquipmentRules.sync(self)
 	ForgottenEvocations.sync_assigned(self)
 	if players.is_empty():
@@ -1328,6 +1310,7 @@ func refresh_model_tokens() -> void:
 			continue
 
 		token.set_transformation(players[player_index].get_transformation_id())
+		token.set_nightmare_attached(false)
 		var location_key: String = ""
 		var center: Vector2 = Vector2.ZERO
 
@@ -1396,6 +1379,31 @@ func refresh_model_tokens() -> void:
 			]
 
 			if not is_instance_valid(token):
+				continue
+
+			if FamiliarRules.guarded(evocation):
+				var mage_token: Node2D = mage_tokens[owner_index]
+				if token.get_parent() != mage_token: token.reparent(mage_token, false)
+				token.position = Vector2(0, 28)
+				token.scale = Vector2.ONE * 0.60
+				token.z_index = 2
+				token.visible = true
+				continue
+			if FamiliarRules.is_familiar(evocation) and token.get_parent() != self:
+				token.reparent(self, true)
+				token.z_index = 79
+
+			if evocation.evocation_id == "umbra" and evocation.assigned_mage >= 0 and evocation.assigned_mage < mage_tokens.size():
+				var mage_token: Node2D = mage_tokens[evocation.assigned_mage]
+				if token.get_parent() != mage_token:
+					token.reparent(mage_token, false)
+				token.position = Vector2.ZERO
+				token.z_index = 1
+				token.visible = true
+				var umbras: Array = players[owner_index].evocations.filter(func(ev): return ev.evocation_id == "umbra" and ev.assigned_mage == evocation.assigned_mage)
+				umbras.sort_custom(func(a, b): return a.board_number < b.board_number)
+				token.set_sector(umbras.find(evocation))
+				mage_token.set_nightmare_attached(true)
 				continue
 
 			var room_coord: Vector2i = room_id_to_coord(
@@ -1478,7 +1486,8 @@ func _position_model_token(node: Node2D, destination: Vector2, location_key: Str
 	if previous_location.is_empty() or previous_location == location_key or table_shell == null:
 		node.position = destination
 		return
-	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 1600)
+	# Allow the next step just after the 0.7 s slide, without the former 0.9 s pause.
+	visual_motion_until = maxi(visual_motion_until, Time.get_ticks_msec() + 780)
 	var tween := node.create_tween()
 	node.set_meta("movement_tween", tween)
 	tween.tween_property(node, "position", destination, 0.7).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -1666,6 +1675,8 @@ func deal_damage(
 	if action_type in ["physical_attack", "evocation_attack"]:
 		animate_model_attack(attacker_id, target_player_index, null, source_evocation)
 	var capacity: int = players[target_player_index].mage.get_remaining_health()
+	var familiar := FamiliarRules.guard(self,target_player_index)
+	if familiar != null: capacity += familiar.get_remaining_health()
 	if capacity <= 0:
 		return 0
 
@@ -2059,6 +2070,7 @@ func get_player_board_action_options(player_index: int, category: String) -> Arr
 	for option in get_player_board_action_request(player_index).get("options", []):
 		var type: String = str(option.get("action", {}).get("type", ""))
 		if (category == "physical" and type in ["explore", "fight", "command", "transformation", "equipment", "spell_physical"]) \
+		or (category == "familiar" and type == "familiar") \
 		or (category == "momentum" and type == "momentum") \
 		or (category == "quests" and option.get("kind") == "quest") \
 		or (category == "finish" and option.get("kind") == "finish"):
@@ -2083,7 +2095,7 @@ func activate_player_board_spell(player_index: int, slot_id: String, inspect_onl
 	if not inspect_only and token != "":
 		var data := get_player_board_spell_slot_data(player_index, slot_id)
 		if beta_hud != null:
-			beta_hud.confirm_choice("Vuoi lanciare %s?" % str(data.get("name", "questa spell")), _confirm_player_board_cast.bind(player_index, slot_id, token))
+			beta_hud.confirm_choice("Cast %s?" % str(data.get("name", "this Spell")), _confirm_player_board_cast.bind(player_index, slot_id, token))
 	else:
 		open_player_board_spell(player_index, slot_id)
 
@@ -2593,6 +2605,7 @@ func check_moon_phase():
 		new_moon + 1
 	):
 		current_moon = moon
+		record_table_feedback({"kind": "moon", "moon": moon})
 
 		print(
 			"GAME: Moon changed to ",
@@ -2626,6 +2639,9 @@ func summon_evocation_for_effect(owner_id: int, evocation_id: String, room_id: S
 		context["summon_declined"] = true
 		return null
 	var player = players[owner_id]
+	if bool(evocation_database.get_evocation(evocation_id).get("familiar",false)) and (player.mage.in_cell or player.evocations.any(func(ev): return FamiliarRules.is_familiar(ev))):
+		context["summon_declined"] = true
+		return null
 	if str(evocation_database.get_evocation(evocation_id).get("archetype", "")) == "equipment" and player.evocations.any(func(e): return e.evocation_id == evocation_id):
 		context["summon_declined"] = true
 		return null
@@ -2661,6 +2677,7 @@ func summon_evocation(
 	var player = players[owner_id]
 
 	var definition: Dictionary = evocation_database.get_evocation(evocation_id)
+	if bool(definition.get("familiar",false)) and (player.mage.in_cell or player.evocations.any(func(ev): return FamiliarRules.is_familiar(ev))): return null
 	if definition.get("archetype") == "equipment" and player.evocations.any(func(e): return e.evocation_id == evocation_id): return null
 	if bool(definition.get("requires_owner_cube", false)) and player.available_cubes <= 0: return null
 
@@ -2707,6 +2724,9 @@ func summon_evocation(
 
 	evocation.definition = data
 	evocation.room_id = room_id
+	if FamiliarRules.is_familiar(evocation):
+		evocation.familiar_guard = true
+		evocation.room_id = player.mage.room_id
 
 	if not player.add_evocation(evocation):
 		return null
@@ -2726,6 +2746,7 @@ func summon_evocation(
 
 	refresh_model_tokens()
 	_request_resolution_visual_yield()
+	if FamiliarRules.guarded(evocation): return evocation
 	queue_model_room_entry(
 		"evocation",
 		room_id,
@@ -2823,8 +2844,10 @@ func replay_attack_feedback(event: Dictionary) -> void:
 	if is_instance_valid(source):_play_attack_ghost(source,event.origin,event.destination,target)
 
 func _play_attack_ghost(source: Node2D, origin: Vector2, destination: Vector2, target: Node2D = null) -> void:
-	var ghost: Node2D = source.duplicate(0)
-	ghost.set_script(null)
+	# Evocation borders are drawn by their script, not by the portrait Sprite.
+	var ghost: Node2D = source.create_visual_copy() if source.has_method("create_visual_copy") else source.duplicate(0)
+	if not source.has_method("create_visual_copy"): ghost.set_script(null)
+	ghost.name = "AttackGhost"
 	ghost.process_mode = Node.PROCESS_MODE_DISABLED
 	for child in ghost.find_children("*", "Control", true, false):
 		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -2864,7 +2887,7 @@ func deal_damage_to_evocation(
 	source_model_type: String = "",
 	source_evocation: EvocationState = null
 ) -> int:
-	if evocation == null or amount <= 0 or is_event_active("immortals"):
+	if evocation == null or FamiliarRules.guarded(evocation) or amount <= 0 or is_event_active("immortals"):
 		return 0
 	amount = _event_spell_damage_amount(attacker_id, amount, action_type)
 	# Rebirth, Immunity: controlled Evocations ignore their Mage's damage.
@@ -3371,6 +3394,8 @@ func deal_damage_from_evocation(
 		return 0
 
 	var capacity: int = players[target_player_index].mage.get_remaining_health()
+	var familiar := FamiliarRules.guard(self,target_player_index)
+	if familiar != null: capacity += familiar.get_remaining_health()
 	if capacity <= 0:
 		return 0
 
@@ -3812,7 +3837,8 @@ func move_mage_to_room_id(
 			"mage",
 			destination_room_id,
 			player_index,
-			null
+			null,
+			previous_room_id
 		)
 	return true
 
@@ -3875,7 +3901,8 @@ func move_evocation_to_room_id(
 			"evocation",
 			destination_room_id,
 			-1,
-			evocation
+			evocation,
+			previous_room_id
 		)
 	return true
 
@@ -3898,6 +3925,7 @@ func place_mage_in_room_direct(
 	if mage == null:
 		return false
 
+	var previous_room_id: String = "" if mage.in_cell else mage.room_id
 	mage.room_id = room_id
 	mage.room_coord = coord
 	mage.in_cell = false
@@ -3909,7 +3937,8 @@ func place_mage_in_room_direct(
 		"mage",
 		room_id,
 		player_index,
-		null
+		null,
+		previous_room_id
 	)
 
 	return true
@@ -3928,6 +3957,7 @@ func place_evocation_in_room_direct(
 	if not is_lodge_room_id(room_id):
 		return false
 
+	var previous_room_id: String = evocation.room_id
 	evocation.room_id = room_id
 
 	refresh_model_tokens()
@@ -3937,18 +3967,33 @@ func place_evocation_in_room_direct(
 		"evocation",
 		room_id,
 		-1,
-		evocation
+		evocation,
+		previous_room_id
 	)
 
 	return true
+
+
+func queue_model_room_exit(model_type: String, from_room: String, to_room: String, player_index: int = -1, evocation: EvocationState = null) -> void:
+	if from_room == to_room or not is_lodge_room_id(from_room): return
+	var event := GameEvent.new("model_leaves_room")
+	event.source_model_type = model_type
+	event.source_player_index = player_index if evocation == null else evocation.owner_id
+	event.source_evocation = evocation
+	event.source_room_id = from_room
+	event.target_room_id = to_room
+	event.suppressed_trigger_types.assign(active_effect_context.get("suppressed_trigger_types",[]))
+	queue_resolution({"type":"game_event","event":event})
 
 
 func queue_model_room_entry(
 	model_type: String,
 	room_id: String,
 	player_index: int = -1,
-	evocation: EvocationState = null
+	evocation: EvocationState = null,
+	from_room: String = ""
 ) -> bool:
+	if from_room == room_id: return true
 	if model_type != "mage" and model_type != "evocation":
 		return false
 
@@ -3964,12 +4009,14 @@ func queue_model_room_entry(
 
 	return queue_resolution({
 		"type": "model_room_entry",
-		"step": "start",
+		"step": "exit" if not from_room.is_empty() else "start",
+		"from_room": from_room,
 		"model_type": model_type,
 		"room_id": room_id,
 		"player_index": player_index,
 		"evocation": evocation,
 		"event_index": 0,
+		"suppressed_trigger_types": active_effect_context.get("suppressed_trigger_types",[]).duplicate(),
 		"ability_index": 0
 	})
 
@@ -3992,6 +4039,18 @@ func process_model_room_entry_resolution(
 	)
 
 	match str(resolution.get("step", "start")):
+		"exit":
+			# Movement is already committed. Finish leaving-Room reactions before
+			# entering-Room triggers, even when a reaction causes another movement.
+			resolution["step"] = "after_exit"
+			queue_model_room_exit(model_type, str(resolution.from_room), room_id, player_index, entering_evocation)
+			return false
+		"after_exit":
+			if model_type == "mage":
+				if players[player_index].mage.in_cell or players[player_index].mage.room_id != room_id: return true
+			elif not is_evocation_in_play(entering_evocation) or entering_evocation.room_id != room_id: return true
+			resolution["step"] = "start"
+			return false
 		"start":
 			var event_types: Array[String] = [
 				"model_enters_room"
@@ -4080,6 +4139,7 @@ func process_model_room_entry_resolution(
 			event.source_room_id = room_id
 			event.target_room_id = room_id
 			event.action_type = "enter_room"
+			event.suppressed_trigger_types.assign(resolution.get("suppressed_trigger_types",[]))
 
 			if model_type == "mage":
 				event.source_player_index = player_index
@@ -4633,6 +4693,7 @@ func _valid_mage_physical_attack_evocation(
 	evocation: EvocationState,
 	attack_range: int = 0
 ) -> bool:
+	if FamiliarRules.guarded(evocation): return false
 	if evocation != null and not ForgottenEvocations.ability(self, evocation, "cannot_be_physically_attacked").is_empty():
 		return false
 	if attacker_id < 0 or attacker_id >= players.size():
@@ -6165,6 +6226,7 @@ func draw_forgotten_spell(
 	var spell: SpellCardState = (
 		forgotten_deck.pop_back()
 	)
+	announce_forgotten_draw(player_index)
 
 	if str(spell.light_side.get("type", "")) == "on_draw":
 		resolve_drawn_forgotten(player_index, spell)
@@ -6182,6 +6244,13 @@ func draw_forgotten_spell(
 	)
 
 	return spell
+
+
+func announce_forgotten_draw(player_index: int) -> void:
+	var event := GameEvent.new("forgotten_spell_drawn")
+	event.source_player_index = player_index
+	event.source_model_type = "mage"
+	queue_resolution({"type":"game_event","event":event})
 
 
 func resolve_drawn_forgotten(player_index: int, spell: SpellCardState, companions: Array = []) -> void:
@@ -7179,7 +7248,8 @@ func is_event_active(
 	) != null
 	
 func place_mage_in_cell(
-	player_index: int
+	player_index: int,
+	defeated: bool = false
 ) -> bool:
 	if player_index < 0 \
 	or player_index >= players.size():
@@ -7189,6 +7259,7 @@ func place_mage_in_cell(
 	if mage == null:
 		return false
 	var was_in_cell: bool = mage.in_cell
+	FamiliarRules.before_mage_cell(self,player_index,defeated)
 
 	# A defeated Mage returns to THEIR Cell. room_id/room_coord while in
 	# Cell therefore point to the entrance associated with that Cell.
@@ -7230,7 +7301,13 @@ func place_instability(
 	amount: int = 1
 ) -> int:
 
+	var requested_instability := amount
 	amount = ForgottenAttachments.reduce_instability(self, owner_id, room_id, amount)
+	if amount < requested_instability:
+		var source_name := "Black Rose" if owner_id < 0 else players[owner_id].player_name
+		var message := "%s · %d Instability prevented by an Upgrade or Jinx in %s." % [source_name, requested_instability - amount, get_room_by_id(room_id).room_name if get_room_by_id(room_id) != null else room_id]
+		append_public_log(message)
+		print(message)
 	if amount <= 0:
 		return 0
 
@@ -7470,6 +7547,8 @@ func start_phase(
 
 
 	current_phase = phase
+	if not network_client and table_shell != null:
+		record_table_feedback({"kind": "phase", "phase": phase, "round": current_round})
 
 
 	print(
@@ -8622,6 +8701,8 @@ func perform_player_action(
 			return EquipmentRules.perform(self, player_index, str(action.get("evocation_id", "")), str(action.get("action_id", "")))
 		"spell_physical":
 			return EquipmentRules.perform_spell_action(self, player_index, str(action.get("spell_id", "")), str(action.get("action_id", "")))
+		"familiar":
+			return FamiliarRules.perform(self,player_index,str(action.get("evocation_id","")),str(action.get("action_id","")))
 		"transformation":
 			return DruidicRules.perform_action(self, player_index, str(action.get("action_id", "")))
 		"momentum":
@@ -9120,7 +9201,8 @@ func request_effect_choice(
 		"player_index": player_index,
 		"choice_kind": choice_kind,
 		"context_key": context_key,
-		"effect_description": current_effect_description + (" · " + prompt if not prompt.is_empty() and prompt != current_effect_description else ""),
+		"public_description": _public_effect_choice_description(choice_kind, context, prompt, context_key),
+		"effect_description": prompt if not prompt.is_empty() else _public_effect_choice_description(choice_kind, context, prompt, context_key),
 		"movement_origin_room_id": movement_origin,
 		"prompt": prompt,
 		"min_select": min_select,
@@ -9461,13 +9543,14 @@ func _quest_evocation_choice_options(
 				continue
 
 			if archetype_filter != "" \
-			and evocation.archetype != archetype_filter:
+			and not evocation.has_archetype(archetype_filter):
 				continue
 
 			if max_health >= 0 and evocation.health > max_health:
 				continue
 			if effect.has("target_evocation_id") and evocation.evocation_id != str(effect.target_evocation_id):
 				continue
+			if bool(effect.get("target_has_upgrade",false)) and evocation.upgrades.is_empty(): continue
 
 			var in_range: bool = ForgottenPassives.spell_room_in_range(self, caster_id, evocation.room_id, range_value) if bool(effect.get("_spell_range", false)) else _quest_effect_room_in_range(caster_id, evocation.room_id, range_value)
 			if not in_range:
@@ -10914,7 +10997,7 @@ func _spell_room_target_allowed(caster_id: int, side: Dictionary, room_id: Strin
 		for evocation in candidates:
 			if evocation == null or evocation.is_defeated() or not is_lodge_room_id(evocation.room_id):
 				continue
-			if evocation.archetype != str(effect.get("evocation_archetype", "")):
+			if not evocation.has_archetype(str(effect.get("evocation_archetype", ""))):
 				continue
 			if get_hex_distance(room_id_to_coord(evocation.room_id), room_id_to_coord(room_id)) <= int(effect.get("distance", 0)):
 				found = true
@@ -11248,7 +11331,7 @@ func _spell_secondary_evocation_options(
 			if evocation == null or evocation.is_defeated():
 				continue
 
-			if archetype != "" and evocation.archetype != archetype:
+			if archetype != "" and not evocation.has_archetype(archetype):
 				continue
 
 			if room_id != "" and evocation.room_id != room_id:
@@ -12076,6 +12159,7 @@ func _start_stepwise_action_activation(
 
 	action_activation_active = true
 	action_activation_player_index = player_index
+	record_table_feedback({"kind": "turn", "player": player_index})
 	return queue_resolution({"type": "forgotten_activation_start", "player_index": player_index,
 		"on_complete": "continue_action_activation"})
 
@@ -14401,6 +14485,7 @@ func add_history_entry(data: Dictionary) -> int:
 
 func append_public_log(message: String) -> void:
 	if network_client: return
+	message = player_reference_text(message)
 	var index := public_history.size() - 1
 	for frame in resolution_stack:
 		if frame.has("_history_index"):
@@ -14425,6 +14510,21 @@ func begin_damage_confirmation(serial: int) -> void:
 		if damage_acknowledgements.get(str(serial), []).is_empty(): return
 		damage_acknowledgements[str(serial)] = []
 		if network_session != null: network_session.publish())
+
+func record_table_feedback(event: Dictionary) -> void:
+	if network_client: return
+	table_feedback_serial += 1
+	event["serial"] = table_feedback_serial
+	table_feedback_events.append(event)
+	if table_feedback_events.size() > 128: table_feedback_events.pop_front()
+	if table_shell != null: table_shell.receive_feedback(event)
+	if network_session != null: network_session.call_deferred("publish")
+
+
+func record_physical_action_feedback(player_index: int, action: String) -> void:
+	record_table_feedback({"kind": "physical_action", "player": player_index,
+		"action": action, "token_index": players[player_index].available_physical_actions})
+
 
 func record_conversion_feedback(player: int, before: Array, after: Array, converter: int) -> void:
 	if network_client: return
@@ -14512,10 +14612,6 @@ func process_resolution_stack() -> bool:
 		var frame_id: int = int(frame.get("_rid", -1))
 		var resolution_type: String = str(frame.get("type", ""))
 		var completed: bool = false
-		if resolution_type == "avatar_activation" and not frame.get("additional", false) and not frame.get("visual_delay_done", false) and table_shell != null:
-			frame["visual_delay_done"] = true
-			visual_motion_until = Time.get_ticks_msec() + 2000
-			continue
 		if _present_resolution_card(frame):
 			processing_resolution_stack = false
 			return true
@@ -14580,6 +14676,8 @@ func process_resolution_stack() -> bool:
 				completed = process_damage_resolution(frame)
 			"evocation_damage":
 				completed = process_evocation_damage_resolution(frame)
+			"familiar_cleanup":
+				completed = FamiliarRules.cleanup(self,frame)
 			"evocation_damage_ability":
 				completed = process_evocation_damage_ability(frame)
 			"model_room_entry":
@@ -14763,9 +14861,10 @@ func process_damage_resolution(
 				return true
 
 			var target_mage = players[target_player_index].mage
+			var familiar := FamiliarRules.guard(self,target_player_index)
 			var requested: int = min(
 				int(resolution.get("amount", 0)),
-				target_mage.get_remaining_health()
+				target_mage.get_remaining_health() + (familiar.get_remaining_health() if familiar != null else 0)
 			)
 			if requested <= 0:
 				_sync_damage_result_context(resolution, 0)
@@ -14807,6 +14906,7 @@ func process_damage_resolution(
 				resolution["redirected_evocation"] = event.redirected_evocation
 				resolution["step"] = "apply_redirect"
 				return false
+			if not FamiliarRules.distribute_damage(self,resolution): return false
 
 			# Succubus: when its owner is about to suffer Damage, they may assign
 			# exactly one of those Damage cubes to one of their Succubi instead.
@@ -15029,7 +15129,7 @@ func process_damage_resolution(
 			# Codex p.13: Destiny resolves at step 3, before Cell placement.
 			# Only assigned Evocations are removed; owned summons remain.
 			queue_resolution({"type": "forgotten_nightmare_defeat", "victim": victim, "source_evocation": resolution.get("source_evocation"), "context": {}})
-			place_mage_in_cell(victim)
+			place_mage_in_cell(victim,true)
 			DruidicRules.end_transformation(self, victim)
 			return false
 
@@ -15128,6 +15228,7 @@ func _fill_damage_event_source(
 	resolution: Dictionary
 ):
 	var attacker_id: int = int(resolution.get("attacker_id", -1))
+	event.data["spell_type"] = str(resolution.get("result_context",{}).get("spell_type",""))
 	var source_model_type: String = str(
 		resolution.get(
 			"source_model_type",
@@ -15810,6 +15911,7 @@ func _prepare_room_effect_choice(
 					forgotten_deck.erase(drawn)
 				context["_skip_room_effect"] = true
 				resolve_drawn_forgotten(caster_id, candidate, candidates)
+				announce_forgotten_draw(caster_id)
 				return true
 		return _apply_or_request_secondary_choice(caster_id, "room_forgotten_keep", context,
 			"selected_forgotten_spell", options, "Choose the Forgotten Spell to keep.")
@@ -16138,6 +16240,7 @@ func process_effect_sequence_resolution(
 		if "summon" in keywords:
 			var summon_event := GameEvent.new("forgotten_summon_effect")
 			summon_event.source_player_index = caster_id
+			summon_event.data["spell_id"] = str(context.get("spell_id", ""))
 			queue_resolution({"type": "game_event", "event": summon_event})
 
 		for keyword in effect.get("keywords", []):
@@ -16772,6 +16875,7 @@ func process_trigger_spell_resolution(
 			var context: Dictionary = {
 				"game": self,
 				"caster_id": owner_id,
+				"active_spell": active_spell,
 				"caster_room_id": players[owner_id].mage.room_id,
 				"spell_id": active_spell.spell.id,
 				"spell_type": spell_type,
@@ -16823,7 +16927,7 @@ func process_trigger_spell_resolution(
 		"after_effects":
 			var context: Dictionary = resolution.get("context", {})
 			for key in context:
-				if key != "game" and key != "trigger_event":
+				if key not in ["game", "trigger_event", "active_spell"]:
 					active_spell.context[key] = context[key]
 
 			var spell_type: String = active_spell.get_spell_type()
@@ -17217,6 +17321,7 @@ func process_explore_resolution(
 			if not player.exhaust_physical_action():
 				return true
 
+			record_physical_action_feedback(player_index, "Explore")
 			resolution["expected_room_id"] = player.mage.room_id
 			refresh_player_board(player_index)
 			if bool(resolution.get("activate_before", false)):
@@ -17300,6 +17405,7 @@ func process_fight_resolution(
 			if not player.exhaust_physical_action():
 				return true
 
+			record_physical_action_feedback(player_index, "Fight")
 			refresh_player_board(player_index)
 			if bool(resolution.get("perform_room_activation", true)) \
 			and bool(resolution.get("activate_room_first", false)):
@@ -17433,6 +17539,7 @@ func process_command_resolution(
 
 			refresh_player_board(player_index)
 			var evocation: EvocationState = player.evocations[evocation_index]
+			record_physical_action_feedback(player_index, "Activate Evocation · " + evocation.evocation_name)
 			var controller_id: int = get_evocation_controller_id(
 				evocation
 			)
@@ -18101,6 +18208,7 @@ func _cleanup_player_mage_sheet(
 	_clear_player_board_spell_slots(player_index)
 
 	player.refresh_physical_actions()
+	FamiliarRules.refresh_token(player)
 
 	if player_index < player_boards.size():
 		player_boards[player_index].refresh()
@@ -18134,8 +18242,12 @@ func process_cleanup_finish_resolution(frame: Dictionary) -> bool:
 				if room.has_meta("room_id") and not room.flipped and room.is_instability_complete():
 					resolve_room_completion(room)
 					return false
-			frame["step"] = "end_check"
+			frame["step"] = "familiars"
 			reset_room_activations()
+			return false
+		"familiars":
+			frame["step"] = "end_check"
+			queue_resolution({"type":"familiar_cleanup"})
 			return false
 		"end_check":
 			frame["step"] = "done"
@@ -18216,7 +18328,7 @@ func check_end_game() -> bool:
 		var trophy_bonus: int = int(trophy_rewards.get(owner, 0))
 		var crown_bonus: int = 1 if owner >= 0 and owner == crown_owner_id else 0
 		var total: int = base + quest_bonus + trophy_bonus + crown_bonus
-		scores.append({"player_index": owner, "name": (str(avatar.definition.name) if avatar != null else "Black Rose") if owner == -1 else "Player " + str(owner + 1), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
+		scores.append({"player_index": owner, "name": (str(avatar.definition.name) if avatar != null else "Black Rose") if owner == -1 else player_display_name(owner), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
 		# Final bonuses do not open gameplay trigger windows.
 		if owner == -1:
 			set_black_rose_power(total)
@@ -18345,6 +18457,7 @@ func _beta_evocation_data(
 		"owner_id": evocation.owner_id,
 		"controller_id": evocation.controller_id,
 		"assigned_mage": evocation.assigned_mage, "assigned_slot": evocation.assigned_slot,
+		"familiar_guard": evocation.familiar_guard, "familiar_action_available": evocation.familiar_action_available,
 		"upgrades": evocation.upgrades.duplicate(), "stored_trophies": evocation.stored_trophies.duplicate(),
 		"health": evocation.health,
 		"damage": evocation.get_damage(),
@@ -18494,6 +18607,69 @@ func _beta_player_state(
 	return result
 
 
+func _public_effect_choice_description(kind: String, _context: Dictionary, prompt: String, _context_key: String = "") -> String:
+	# Public progress only. Never send option lists, Hand cards or unrevealed
+	# Spell names to observers, including the host observing a remote player.
+	var descriptions := {
+		"target_evocation": "Choose a target Evocation.",
+		"evocation_target": "Choose a target Evocation.",
+		"owned_evocation_to_activate": "Choose an Evocation to activate.",
+		"evocation_activation_plan": "Choose movement and attack for an Evocation.",
+		"evocation_damage_ability": "Choose an Instability effect.",
+		"evocation_optional_ability": "Choose whether to use the Evocation's ability.",
+		"choose_one": "Choose an effect.", "movement_destination": "Choose the next Room.",
+		"room_target": "Choose a target Room.", "model_target": "Choose a target Model.",
+		"convert_damage_cubes": "Choose Damage cubes to convert."
+	}
+	var detail: String = descriptions.get(kind, "Choose how to resolve the effect.")
+	# Shared helpers serve many Schools. Expose the operation, never private identities.
+	# Storage keys such as school_remove_models describe a resolver, not a draw.
+	# Use the current operation; a previous effect description can be stale.
+	var subject := (prompt + " " + kind).to_lower()
+	if not descriptions.has(kind):
+		for entry in [["upgrade", "Choose an Upgrade."], ["jinx", "Choose a Jinx."], ["discard", "Choose cards to discard."], ["quest", "Choose a Quest."], ["school", "Choose a School to draw from."], ["heal", "Choose Damage to heal."], ["convert", "Choose cubes to convert."], ["instability", "Choose Instability cubes."], ["damage", "Choose how to assign Damage."], ["evocation", "Choose an Evocation."], ["room", "Choose a Room."], ["memory", "Choose a Spell from Memories."], ["memories", "Choose a Spell from Memories."], ["transformation", "Choose a transformation."], ["mage", "Choose a Mage."], ["optional", "Choose whether to use the optional effect."]]:
+			if subject.contains(entry[0]):
+				detail = entry[1]
+				break
+	if kind in ["target_evocation", "evocation_target"]:
+		if prompt.to_lower().contains("activat"): detail = "Choose an Evocation to activate."
+		elif prompt.to_lower().contains("remove"): detail = "Choose an Evocation to remove."
+	if kind in ["evocation_activation_plan", "evocation_damage_ability", "evocation_optional_ability"] and not prompt.is_empty():
+		detail = prompt
+	if kind in ["evocation_activation_plan", "evocation_damage_ability", "evocation_optional_ability"]:
+		for i in range(resolution_stack.size() - 1, -1, -1):
+			var frame: Dictionary = resolution_stack[i]
+			if frame.get("type") != "evocation_activation": continue
+			var ev = frame.get("evocation", frame.get("context", {}).get("source_evocation"))
+			if ev is EvocationState:
+				if not detail.contains(ev.evocation_name): detail = ev.get_display_name() + " · " + detail
+				break
+	return detail
+
+
+func public_choice_description(request: Dictionary) -> String:
+	if request.has("public_description"): return str(request.public_description)
+	return {
+		"action_activation_step": "Choose an Action.",
+		"evocation_phase_activations": "Choose an Evocation to activate.",
+		"trigger_decision": "Choose whether to use a triggered Spell.",
+		"preparation": "Prepare Spells.", "preparation_waiting": "Prepare Spells.",
+		"study_choose_schools": "Choose Schools to draw from.",
+		"study_keep_cards": "Choose which drawn Spells to keep.",
+		"study_optional_discard": "Choose whether to discard a Spell.",
+		"study_hand_limit": "Discard down to the Hand limit.",
+		"study_waiting": "Finish Study.", "starting_grimoire_choice": "Choose a specialization.",
+		"preparation_parallel": "Prepare Spells.", "study_parallel": "Finish Study.",
+		"final_winner_choice": "Choose the winner among tied Mages.",
+		"cleanup_active_spells": "Choose which active Spells to keep.",
+		"cleanup_rebuild": "Choose a Room to rebuild.",
+		"black_rose_optional_quest_discard": "Choose whether to discard a Quest.",
+		"black_rose_active_quest_limit": "Choose Active Quests to discard.",
+		"black_rose_completed_quest_limit": "Choose Completed Quests to discard.",
+		"starting_mage_choice": "Choose a Mage.", "starting_school_choice": "Choose a School."
+	}.get(str(request.get("type", "")), "Resolve the current choice.")
+
+
 func get_beta_pending_input(
 	viewer_player_index: int = -1
 ) -> Dictionary:
@@ -18538,6 +18714,7 @@ func get_beta_pending_input(
 		"type": str(pending_input.get("type", "")),
 		"phase": str(pending_input.get("phase", current_phase)),
 		"player_index": owner_id,
+		"public_description": public_choice_description(pending_input),
 		"private": true
 	}
 
@@ -19093,6 +19270,7 @@ func _valid_evocation_attack_evocation(
 	target_evocation: EvocationState,
 	expected_room_id: String = ""
 ) -> bool:
+	if FamiliarRules.guarded(evocation) or FamiliarRules.guarded(target_evocation): return false
 	if target_evocation != null and not ForgottenEvocations.ability(self, target_evocation, "cannot_be_physically_attacked").is_empty():
 		return false
 	if evocation == null \
@@ -19482,7 +19660,7 @@ func _perform_evocation_physical_attack(
 		deal_damage_from_evocation(
 			evocation,
 			target_player_index,
-			activation_strength,
+			activation_strength + FamiliarRules.attack_bonus(self,evocation,players[target_player_index].mage.get_damage()),
 			controller_id
 		)
 
@@ -19506,7 +19684,7 @@ func _perform_evocation_physical_attack(
 		deal_damage_to_evocation(
 			controller_id,
 			target_evocation,
-			activation_strength,
+			activation_strength + FamiliarRules.attack_bonus(self,evocation,target_evocation.get_damage()),
 			[],
 			"evocation_attack",
 			"evocation",
@@ -19883,6 +20061,7 @@ func get_beta_legal_actions(
 	actions.append_array(momentum_actions)
 	actions.append_array(DruidicRules.action_options(self, player_index))
 	actions.append_array(EquipmentRules.actions(self, player_index))
+	actions.append_array(FamiliarRules.actions(self, player_index))
 
 	return {
 		"player_index": player_index,
@@ -20093,7 +20272,7 @@ func _log_phase_choice(player_index: int, kind: String, payload: Dictionary) -> 
 	# Phase choices get their own entry, without exposing private card identities.
 	var index := add_history_entry({"kind":"choice", "title":"Preparation choice" if kind == "preparation" else "Study choice", "player":player_index})
 	public_history[index].messages.append(message)
-	public_action_log.append("Player %d: %s" % [player_index + 1, message])
+	public_action_log.append("%s: %s" % [player_display_name(player_index), player_reference_text(message)])
 
 func _dispatch_beta_input(player_index: int, payload: Dictionary) -> bool:
 	if not waiting_for_player_input:
@@ -20913,6 +21092,8 @@ func start_game_flow() -> bool:
 
 	if not starting_setup_complete:
 		var setup_started: bool = begin_starting_school_setup()
+		if setup_started and not network_client:
+			present_school_draw_once()
 
 		if not setup_started \
 		and not waiting_for_player_input:
@@ -20927,6 +21108,19 @@ func start_game_flow() -> bool:
 		game_flow_active = false
 
 	return phase_started
+
+
+func present_school_draw_once() -> void:
+	if school_draw_presentation != null or beta_hud == null or active_school_ids.is_empty():
+		return
+	school_draw_presentation = preload("res://school_draw_presentation.gd").new()
+	school_draw_presentation.name = "SchoolDrawPresentation"
+	add_child(school_draw_presentation)
+	school_draw_presentation.present(self)
+
+
+func is_school_draw_playing() -> bool:
+	return school_draw_presentation != null and school_draw_presentation.playing
 
 
 func stop_game_flow():
@@ -20978,7 +21172,7 @@ func assign_mage_to_player(
 		mage_database.get_mage_data(mage_id)
 	)
 
-	if data.is_empty():
+	if data.is_empty() or not bool(data.get("implemented",true)):
 		return false
 
 	var player: PlayerState = players[player_index]

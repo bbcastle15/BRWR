@@ -158,6 +158,18 @@ func has_portrait() -> bool:
 	return _portrait != null
 
 
+func create_visual_copy() -> Node2D:
+	# Only presentation data: no model state, signals to Game or input handlers.
+	# Retaining the drawing script preserves the owner ring during a lunge.
+	var copy = get_script().new()
+	copy.setup(evocation_id, evocation_name, owner_id, owner_color, board_number)
+	copy._compact = _compact
+	copy.set_names_visible(_names_visible)
+	copy._refresh_details()
+	copy.process_mode = Node.PROCESS_MODE_DISABLED
+	return copy
+
+
 func sync_state(state: EvocationState, owner_index: int, color: Color) -> void:
 	# Keep a reference to the authoritative instance; never copy its health/location.
 	_state = state

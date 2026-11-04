@@ -6,6 +6,8 @@ var title_label: Label
 var side_label: Label
 var image: TextureRect
 var fallback_label: Label
+var active_side: Panel
+var selected_dark := false
 
 func _ready() -> void:
 	layer = 150
@@ -84,6 +86,9 @@ func _build_ui() -> void:
 	image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(image)
+	active_side = preload("res://tabletop_style.gd").spell_side_frame()
+	image.add_child(active_side)
+	image.resized.connect(_layout_active_side)
 
 	fallback_label = Label.new()
 	fallback_label.custom_minimum_size = Vector2(440, 615)
@@ -110,6 +115,8 @@ func show_spell(
 	)
 	var card_database = get_parent().get("spell_database")
 	var definition: SpellCardState = card_database.get_spell(spell_id) if card_database != null else null
+	selected_dark = use_dark_side
+	active_side.visible = texture != null and (definition == null or not definition.has_single_effect())
 	if definition != null and definition.has_single_effect():
 		side_label.text = ("Played" if public_card else "Prepared") + " • Single effect"
 
@@ -135,6 +142,15 @@ func show_spell(
 				fallback_label.text = "%s · %s\nTarget: %s %s\n\n%s" % [str(side.type).capitalize(), str(side.element).capitalize(), str(side.target).capitalize(), str(side.get("range", "")).trim_suffix(".0"), str(side.text)]
 
 	root.visible = true
+	_layout_active_side.call_deferred()
+
+
+func _layout_active_side() -> void:
+	if image.texture == null or active_side == null: return
+	var card_size := image.texture.get_size()
+	card_size *= minf(image.size.x / card_size.x, image.size.y / card_size.y)
+	active_side.size = Vector2(card_size.x, card_size.y * 0.5)
+	active_side.position = (image.size - card_size) * 0.5 + Vector2(0, card_size.y * 0.5 if selected_dark else 0)
 
 
 func hide_preview() -> void:

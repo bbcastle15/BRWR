@@ -50,6 +50,16 @@ func trigger_matches(
 	)
 
 	match trigger_type:
+		"caster_defeated_by_mage":
+			return event.event_type == "mage_defeated" and event.target_player_index == active_spell.owner_id and event.source_model_type == "mage" and event.source_player_index >= 0 and event.source_player_index != active_spell.owner_id
+		"caster_resolves_summon":
+			return event.event_type == "forgotten_summon_effect" and event.source_player_index == active_spell.owner_id and str(event.data.get("spell_id", "")) != active_spell.spell.id
+		"black_rose_damages_another_mage":
+			return event.event_type == "damage_inflicted" and event.amount > 0 and event.source_model_type == "black_rose" and event.target_model_type == "mage" and event.target_player_index != active_spell.owner_id
+		"marked_model_leaves_room":
+			if event.event_type != "model_leaves_room": return false
+			var marked: EvocationState = active_spell.context.get("target_evocation")
+			return event.source_evocation == marked if marked != null else event.source_model_type == "mage" and event.source_player_index == active_spell.target_player_index
 		"mage_event":
 			if event.event_type != str(trigger.event_type) or event.amount < int(trigger.get("min_amount", 0)): return false
 			if trigger.get("source") == "self" and event.source_player_index != active_spell.owner_id: return false

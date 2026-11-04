@@ -24,6 +24,7 @@ var black_rose_power: int = 0
 var marker_tweens: Dictionary = {}
 var markers_dirty := false
 var instant_updates := false
+var quest_back_moon: int = -1
 
 
 func _ready():
@@ -187,6 +188,7 @@ func _presentation_covered() -> bool:
 func _process(_delta: float) -> void:
 	if markers_dirty and not _presentation_covered():
 		_layout_power_markers()
+	_refresh_quest_deck_back()
 
 
 func _move_marker(marker: Control, score: int, offset: Vector2) -> void:
@@ -306,6 +308,7 @@ func setup_card_slots():
 	_setup_public_deck($QuestSlot, "quests", 0.136)
 	_setup_public_deck($JinxSlot, "jinxs", 0.504)
 	_setup_public_deck($UpgradeSlot, "upgrades", 0.690)
+	_refresh_quest_deck_back()
 
 
 func setup_forgotten_evocation_deck() -> void:
@@ -327,6 +330,7 @@ func _setup_public_deck(slot: Control, kind: String, back_y: float) -> void:
 	deck.size = SMALL_CARD_SIZE
 	deck.custom_minimum_size = SMALL_CARD_SIZE
 	deck.tooltip_text = "Available " + ("jinx" if kind == "jinxs" else kind)
+	deck.set_meta("printed_back", back)
 	deck.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	deck.pressed.connect(_inspect_available.bind(kind), CONNECT_DEFERRED)
 	for style_name in ["normal", "hover", "pressed", "focus"]:
@@ -342,14 +346,45 @@ func _setup_public_deck(slot: Control, kind: String, back_y: float) -> void:
 		var card := TextureRect.new()
 		card.name = "CardBack" if layer_index == 0 else "Stack%d" % layer_index
 		card.texture = back
+		if kind in ["jinxs", "upgrades"]:
+			card.texture = load("res://assets/" + kind + "/back.png")
 		card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		card.position = Vector2.ONE * (1.0 + layer_index * 1.2)
 		card.size = SMALL_CARD_SIZE - Vector2(6, 6)
+		if kind in ["jinxs", "upgrades"]:
+			# These supplied backs are portrait; the printed board slot is landscape.
+			card.size = Vector2(SMALL_CARD_SIZE.y - 6, SMALL_CARD_SIZE.x - 6)
+			card.position.x += SMALL_CARD_SIZE.x - 6
+			card.rotation = PI / 2.0
 		card.modulate = Color.WHITE * (1.0 - layer_index * 0.12)
 		card.modulate.a = 1.0
 		card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		deck.add_child(card)
+
+
+func _refresh_quest_deck_back() -> void:
+	var deck := get_node_or_null("QuestSlot/AvailableDeck")
+	if deck == null:
+		return
+	var moon: int = int(get_parent().get("current_moon"))
+	if moon == quest_back_moon:
+		return
+	var texture := preload("res://reference_card_preview.gd").quest_back_texture(moon)
+	var portrait := texture != null
+	if texture == null:
+		texture = deck.get_meta("printed_back")
+	for layer_index in range(4):
+		var card: TextureRect = deck.get_node("CardBack" if layer_index == 0 else "Stack%d" % layer_index)
+		card.texture = texture
+		card.position = Vector2.ONE * (1.0 + layer_index * 1.2)
+		card.size = SMALL_CARD_SIZE - Vector2(6, 6)
+		card.rotation = 0.0
+		if portrait:
+			card.size = Vector2(SMALL_CARD_SIZE.y - 6, SMALL_CARD_SIZE.x - 6)
+			card.position.x += SMALL_CARD_SIZE.x - 6
+			card.rotation = PI / 2.0
+	quest_back_moon = moon
 
 
 func _inspect_forgotten_evocations() -> void:

@@ -345,12 +345,12 @@
       "room_color": "red",
       "progress": 1
     },
-    "cube_slots": 3,
+    "cube_slots": 2,
     "effects": [
       {
         "type": "damage",
         "amount": 2,
-        "target": "mage",
+        "target": "model",
         "range": 2
       },
       {

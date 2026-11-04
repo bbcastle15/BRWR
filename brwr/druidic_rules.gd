@@ -10,6 +10,8 @@ const EFFECT_TYPES := ["transform", "if_transformed", "self_effect", "room_effec
 
 static func scoped_context(context: Dictionary) -> Dictionary:
 	var result: Dictionary = context.duplicate(true)
+	# One shared receipt for a sequential, multi-Mage optional attack Effect.
+	if context.has("mage_attack_counter"): result["mage_attack_counter"] = context.mage_attack_counter
 	for key in ["target_player_index", "target_evocation", "target_model_type", "target_room_id",
 		"selected_damage_owner_ids", "selected_instability_owner_ids", "spell_primary_target",
 		"effect_target_room_id", "selected_evocation_to_activate", "target_is_dummy"]:
@@ -53,6 +55,8 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return sequence(game, effect.effects, own)
 		"room_effect":
 			var options: Array = game._quest_room_choice_options(caster, effect, player.mage.room_id)
+			if effect.has("room_colors"):
+				options = options.filter(func(o): return str(game.get_room(o.room_id).get("color", "")) in effect.room_colors)
 			if not choose(game, caster, context, "druidic_room", options, "Choose a Room.", false, "secondary_room"):
 				return false
 			if not context.has("druidic_room"):
@@ -209,6 +213,7 @@ static func mage_attack(game, caster: int, effect: Dictionary, context: Dictiona
 	context.erase("druidic_attack")
 	if not target is Dictionary or target.is_empty():
 		return true
+	var suppression: Array = effect.get("suppressed_trigger_types",context.get("suppressed_trigger_types",[]))
 	if int(effect.get("followup_damage", 0)) > 0:
 		sequence(game, [{"type": "damage", "amount": int(effect.followup_damage)}], ForgottenRules.target_context(context, target), "physical")
 	if target.get("target_type") == "mage":
@@ -219,12 +224,14 @@ static func mage_attack(game, caster: int, effect: Dictionary, context: Dictiona
 		if int(effect.get("target_mage_lose_power", 0)) > 0:
 			game.queue_resolution({"type": "druidic_attack_power", "target": victim, "amount": int(effect.target_mage_lose_power)})
 		ForgottenPassives.physical_attack(game, caster)
-		game.deal_damage(caster, victim, player.get_mage_strength() + int(effect.get("strength_bonus", 0)), "physical_attack")
+		if effect.has("effects"): sequence(game,effect.effects,ForgottenRules.target_context(context,target))
+		game.deal_damage(caster, victim, player.get_mage_strength() + int(effect.get("strength_bonus", 0)), "physical_attack", suppression)
 	elif target.get("target_type") == "evocation":
 		var evocation = target.get("evocation")
 		if game._valid_mage_physical_attack_evocation(caster, evocation, int(effect.get("range", 0))):
 			ForgottenPassives.physical_attack(game, caster)
-			game.deal_damage_to_evocation(caster, evocation, player.get_mage_strength() + int(effect.get("strength_bonus", 0)), [], "physical_attack", "mage", null)
+			if effect.has("effects"): sequence(game,effect.effects,ForgottenRules.target_context(context,target))
+			game.deal_damage_to_evocation(caster, evocation, player.get_mage_strength() + int(effect.get("strength_bonus", 0)), suppression, "physical_attack", "mage", null)
 	return true
 
 static func action_options(game, player_index: int) -> Array:
@@ -246,6 +253,7 @@ static func perform_action(game, player_index: int, action_id: String, free: boo
 			continue
 		if not free:
 			player.exhaust_physical_action()
+			game.record_physical_action_feedback(player_index, str(action.name))
 		game.refresh_player_board(player_index)
 		return game.queue_resolution({"type": "druidic_action", "player_index": player_index, "index": 0,
 			"effects": action.effects, "context": {"game": game, "caster_id": player_index,

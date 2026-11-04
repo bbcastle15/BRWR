@@ -94,6 +94,7 @@ func clamp_to_playmat() -> void:
 
 func _table_covered() -> bool:
 	var game = get_parent()
+	if game.is_school_draw_playing(): return true
 	var preview = game.get_node_or_null("ReferenceCardPreview")
 	if preview != null and preview.root.visible:
 		return true

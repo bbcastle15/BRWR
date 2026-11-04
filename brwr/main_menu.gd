@@ -22,6 +22,7 @@ var room_selections: Dictionary = {}
 var room_setup_button: Button
 var avatar_selection: Dictionary = {}
 var avatar_setup_button: Button
+var username: LineEdit
 
 func _ready() -> void:
 	theme = preload("res://tabletop_style.gd").make_theme()
@@ -72,6 +73,12 @@ func _ready() -> void:
 
 	var title := _label(box, "BLACK ROSE WARS · REBIRTH")
 	title.add_theme_font_size_override("font_size", 26)
+	_label(box, "Your name")
+	username = LineEdit.new()
+	username.name = "Username"
+	username.placeholder_text = "Enter your player name"
+	username.max_length = 24
+	box.add_child(username)
 
 	var solo_row := HBoxContainer.new()
 	box.add_child(solo_row)
@@ -169,9 +176,11 @@ func _button(box: Control, title: String, callback: Callable) -> Button:
 	return button
 
 func _solo() -> void:
+	if not _accept_username(): return
 	if session.started or session.connected or session.connection_started > 0:
 		return
 	var game = load("res://game.tscn").instantiate()
+	game.player_names = {0: session.display_name}
 	game.avatar_selection = avatar_selection.duplicate(true)
 	game.player_count = clampi(int(solo_count.value), 2, 6) if avatar_selection.is_empty() else clampi(int(solo_count.value), 1, 5) + 1
 	game.room_variants = room_selections.duplicate()
@@ -186,6 +195,7 @@ func _web_directory() -> String:
 	return ProjectSettings.globalize_path("res://output/web")
 
 func _host() -> void:
+	if not _accept_username(): return
 	var endpoint := Invite.websocket_address()
 	if endpoint.is_empty():
 		_status("Render server not configured. Set its URL in online_server_url.txt.")
@@ -210,6 +220,7 @@ func _refresh_invite() -> void:
 		_status("Render server not configured. Check online_server_url.txt.")
 
 func _join() -> void:
+	if not _accept_username(): return
 	var target := address.text.strip_edges()
 	var invitation := Invite.parse(target)
 	if not invitation.is_empty():
@@ -225,6 +236,7 @@ func _join() -> void:
 
 func _refresh_lobby() -> void:
 	var in_session: bool = session.connected or session.connection_started > 0 or session.started
+	username.editable = not in_session
 	solo_button.disabled = in_session
 	room_setup_button.disabled = in_session
 	join_button.disabled = in_session
@@ -239,12 +251,22 @@ func _refresh_lobby() -> void:
 	if session.connected:
 		for seat in session.seats:
 			names.append(
-				"Player %d%s"
-				% [seat + 1, " (you)" if seat == session.local_player else ""]
+				"%s%s"
+				% [session.seat_names.get(seat, "Connecting…"), " (you)" if seat == session.local_player else ""]
 			)
 	roster.text = " · ".join(names)
 	if host_button != null and session.hosting and not session.room_code.is_empty():
 		_refresh_invite()
+
+func _accept_username() -> bool:
+	var value: String = session.clean_display_name(username.text)
+	if value.is_empty():
+		_status("Enter your name before joining a game.")
+		username.grab_focus()
+		return false
+	username.text = value
+	session.display_name = value
+	return true
 
 func _status(text: String) -> void:
 	message.text = text

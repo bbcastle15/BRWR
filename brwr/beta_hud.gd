@@ -35,14 +35,15 @@ var confirmation_revision := -1
 func _process(_delta: float) -> void:
 	if game == null or effect_box == null:
 		return
-	var resolving: bool = game.waiting_for_player_input and str(game.pending_input.get("type", "")) == "effect_choice"
-	if game.network_client:
-		resolving = str(game.pending_input.get("type", "")) == "effect_choice"
-	var description: String = str(game.pending_input.get("effect_description", game.current_effect_description))
+	var request: Dictionary = game.pending_input
+	var input_type := str(request.get("type", ""))
+	var other_player: bool = game.local_viewer_index >= 0 and int(request.get("player_index", -1)) != game.local_viewer_index
+	var resolving: bool = game.waiting_for_player_input and input_type in ["effect_choice", "evocation_phase_activations", "trigger_decision"]
+	var description: String = str(request.get("effect_description", request.get("prompt", game.public_choice_description(request))))
+	if other_player:
+		description = "Waiting for %s · %s" % [game.player_display_name(int(request.get("player_index", -1))), game.public_choice_description(request)]
 	effect_box.visible = resolving and not description.is_empty() and game.card_presentation.is_empty()
-	if game.local_viewer_index >= 0 and int(game.pending_input.get("player_index", -1)) != game.local_viewer_index:
-		description = "Waiting for Player %d to resolve their choice." % (int(game.pending_input.get("player_index", 0))+1)
-	effect_text.text = "[center]" + description + "[/center]"
+	effect_text.text = "[center]" + game.player_reference_text(description) + "[/center]"
 
 var generic_selection: Array = []
 var school_draft: Array[String] = []
@@ -327,7 +328,7 @@ func _sync_hand_confirmation(source: Button) -> void:
 		decision_bar.hide()
 		return
 	source.hide()
-	_add_confirmation("Show cards", _open_hand_overlay)
+	decision_bar.hide()
 
 
 func _build_decision_bar() -> void:
@@ -447,7 +448,7 @@ func open_public_memories(player_index: int) -> void:
 	if game.table_shell != null:
 		game.table_shell.close_board()
 	# Public browsing must not replace the live Preparation overlay/draft.
-	game._reference_card_preview().show_spell_pile(game.players[player_index].memories, "Player %d · Memories" % (player_index + 1))
+	game._reference_card_preview().show_spell_pile(game.players[player_index].memories, game.player_display_name(player_index) + " · Memories")
 
 
 func _on_hand_overlay_preparation_confirmed(payload: Dictionary) -> void:
@@ -465,6 +466,14 @@ func _toggle_window_mode() -> void:
 
 
 func _toggle_panel() -> void:
+	# Recover the actual pending decision after an animation or inspection
+	# closed its controls; a stale/empty local HUD is never the authority.
+	if game.waiting_for_player_input and str(game.pending_input.get("type", "")) == "action_activation_step":
+		var request: Dictionary = game.get_beta_pending_input(game.get_ui_viewer_player_index())
+		if not request.get("private", false):
+			present_pending_request(request)
+			game.table_shell.open_board(int(request.player_index))
+			return
 	if str(current_request.get("type", "")) == "study_keep_cards":
 		_show_study_cards()
 		return
@@ -483,9 +492,9 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	panel.show()
 	prompt_label.text = "Game over"
 	var winner: int = int(winner_data.get("winner", -999))
-	_add_info("Vincitore: " + ("Rosa Nera" if winner == -1 else "Player " + str(winner + 1)))
+	_add_info("Winner: " + game.player_display_name(winner))
 	for row in winner_data.get("scores", []):
-		_add_section("%s: %d PP = %d base + %d quest + %d trofei + %d corona" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
+		_add_section("%s: %d Power = %d base + %d Quests + %d Trophies + %d Crown" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
 
 
 func _on_player_input_resolved(
@@ -551,12 +560,7 @@ func _refresh_header() -> void:
 
 	if current_player_index >= 0 \
 	and current_player_index < game.players.size():
-		player_label.text = (
-			"Decision: Player "
-			+ str(current_player_index + 1)
-			+ " — "
-			+ game.players[current_player_index].player_name
-		)
+		player_label.text = "Decision: " + game.player_display_name(current_player_index)
 	else:
 		player_label.text = "Decision: -"
 
@@ -799,7 +803,7 @@ func _inspect_school(id: String, title: String) -> void:
 
 func _add_section(title_text: String) -> void:
 	var label := Label.new()
-	label.text = title_text
+	label.text = game.player_reference_text(title_text)
 	label.add_theme_font_size_override(
 		"font_size",
 		16
@@ -808,7 +812,7 @@ func _add_section(title_text: String) -> void:
 
 
 func _add_info(text_value: String) -> void:
-	decision_info.text += ("\n" if decision_info.text != "" else "") + text_value
+	decision_info.text += ("\n" if decision_info.text != "" else "") + game.player_reference_text(text_value)
 
 
 func _add_button(
@@ -855,7 +859,7 @@ func _render_current_request() -> void:
 		)
 	)
 
-	prompt_label.text = str(current_request.get("prompt", _request_title(input_type)))
+	prompt_label.text = game.player_reference_text(str(current_request.get("prompt", _request_title(input_type))))
 
 	match input_type:
 		"final_winner_choice":
@@ -1442,7 +1446,7 @@ func _render_action_step() -> void:
 	match action_menu_mode:
 		"root":
 			_render_action_root()
-		"physical", "momentum", "quests":
+		"physical", "momentum", "quests", "familiar":
 			_render_action_root(action_menu_mode)
 		"explore_paths":
 			_render_explore_paths()
@@ -1501,6 +1505,8 @@ func _render_action_root(category: String = "") -> void:
 	if category == "":
 		_add_info("Open your banner, then choose a physical token or a prepared Spell. Right-click a Spell to inspect; left-click to cast.")
 		panel.hide()
+		# The banner and own Mage token expose Actions. Opening a new turn
+		# must not replace the player's current view with a PlayerBoard.
 		return
 	for entry_value in get_action_root_entries_for_request(
 		current_request
@@ -1736,6 +1742,11 @@ func _render_momentum_destinations() -> void:
 		var destination: String = str(action.get("destination_room_id", ""))
 		choices.append({"path": [] if destination.is_empty() else [destination], "callback": _submit_action_token.bind(str(option.get("token", "")))})
 	_render_lodge_paths(choices)
+	if current_player_index >= 0 and not game.players[current_player_index].mage.in_cell:
+		for choice in choices:
+			if choice.path.is_empty():
+				_add_confirmation("Stay in this Room", choice.callback)
+				break
 
 
 func _attack_target_option(action: Dictionary, prefix: String = "") -> Dictionary:
@@ -2170,7 +2181,7 @@ func _option_label(option: Dictionary) -> String:
 		"token"
 	]:
 		if option.has(key):
-			return str(option[key])
+			return game.player_reference_text(str(option[key]))
 
 	return JSON.stringify(option)
 

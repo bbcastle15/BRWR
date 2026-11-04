@@ -4,6 +4,25 @@ extends RefCounted
 static var atlas: Dictionary = {}
 static var textures: Dictionary = {}
 
+static func command_back_id(moon: int, public_state: Dictionary) -> String:
+	var id := "command_back_%d" % clampi(moon, 1, 3)
+	var symbol := str(public_state.get("reaction", ""))
+	if symbol in ["damage", "suffered_damage", "combat_spell"]:
+		var kind := str(public_state.get("reaction_type", "protection"))
+		var suffix := "combat" if symbol == "combat_spell" else "damage"
+		var candidate := id + "_" + kind + "_" + suffix
+		if ResourceLoader.exists("res://assets/avatars/possessed/approved/" + candidate + ".png"):
+			return candidate
+	return id
+
+static func reaction_description(public_state: Dictionary) -> String:
+	var symbol := str(public_state.get("reaction", ""))
+	if symbol.is_empty(): return "No active Trap or Protection."
+	var trigger := "is targeted by a Combat Spell" if symbol == "combat_spell" else "takes at least 1 Damage"
+	var text := "%s · triggers when the Avatar %s." % [str(public_state.get("reaction_type", "protection")).capitalize(), trigger]
+	if not public_state.get("reaction_available", false): text += " Unavailable: Command limit reached."
+	return text
+
 static func texture(id: String) -> Texture2D:
 	if id == "command_back": id = "command_back_1"
 	# The restored PNGs use the Energy of the Rose treatment approved by the user.

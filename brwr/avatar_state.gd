@@ -47,13 +47,19 @@ func recycle_memories() -> void:
 	active_command = null
 
 func public_data() -> Dictionary:
-	if game.network_client and not network_public.is_empty(): return network_public
+	if game.network_client: return network_public
 	var counts: Dictionary = {}
 	for moon in decks:
 		counts[moon] = decks[moon].size()
 	var top: SpellCardState = active_deck().back() if not active_deck().is_empty() else null
+	var reaction: Dictionary = top.avatar_command.get("reaction", {}) if top != null else {}
+	# The back exposes the trigger SYMBOL, never the hidden card identity or
+	# whether the damage reaction prevents damage or reacts after it (p.38).
+	var symbol := str(reaction.get("trigger", ""))
+	if symbol == "suffered_damage": symbol = "damage"
 	return {"id": definition.get("id", ""), "player_index": player_index,
 		"difficulty": difficulty, "commands_used": commands_used, "command_limit": command_limit(),
 		"deck_counts": counts, "active_command": active_command.id if active_command != null else "",
-		"reaction": top.avatar_command.get("reaction", {}).get("trigger", "") if top != null else "",
+		"reaction": symbol, "reaction_type": reaction.get("type", ""),
+		"reaction_available": not reaction.is_empty() and can_activate(),
 		"memories": game.players[player_index].memories.map(func(card): return card.id)}

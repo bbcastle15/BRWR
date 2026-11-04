@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-03",
+  "images": [
+    {
+      "path": "assets/jinxs/back.png",
+      "reference": "codex-clipboard-b5a9caa7-2d25-4814-a75a-deb321c9df4b.png",
+      "prompt": [
+        "jinx",
+        "C:/Users/bigba/AppData/Local/Temp/codex-clipboard-b5a9caa7-2d25-4814-a75a-deb321c9df4b.png",
+        "Faithfully restore and redraw this exact board-game Jinx card back at high resolution, 1024 by 1536 portrait. Flat front-on production card, filling the image edge to edge, no surrounding tabletop, no perspective, no text. Preserve the charcoal sculpted ornate rectangular border and rounded corners, the purple violet misty background, the central single purple eye embedded in a reddish bronze flesh medallion, and the radial arrangement of black feathers. Sharpen fine feather barbs, the iris and dark embossed floral frame, smooth painterly detail instead of pixelated screenshot texture. Same composition and recognizable subject, restrained gothic fantasy colors, no new symbols or lettering."
+      ],
+      "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-f6f3c81d-22d1-4044-b018-6cafadefaac9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "path": "assets/upgrades/back.png",
+      "reference": "codex-clipboard-7a908dce-aefa-4aef-8386-5024ee19a7cd.png",
+      "prompt": "Create a high-quality 1024x1536 portrait board-game Upgrade card back using the attached image as the composition and palette reference. A fictional inanimate alchemical armor mannequin, fully covered in pale stitched leather armor panels, with an ornamental mechanical heart emblem inside a bronze diamond on its chest. This is an equipment object, not a person. Copper chain at top, bronze machinery at lower right. Dark charcoal embossed floral frame around all four edges. Restrained gothic fantasy painting, crisp metal, leather seams and carved border. Flat card face filling frame edge to edge, no text, no perspective, no surrounding table. No bare skin, no wound, no blood or biological internal organs. Keep the recognizable equipment-heart silhouette and reference's overall layout.",
+      "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-0d30df14-4e7c-424a-9e2b-cfe20856aabd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "path": "assets/quests/production/template.png",
+      "reference": "assets/quests/cinder_star.png",
+      "prompt": "Edit this fantasy quest card into a clean reusable blank card template for precise programmatic typography. Preserve the carved copper and dark brown ornamental rose border, cream parchment texture, upper dark brown title ribbon, centered divider with small treasure chest, and the lower right reward plaque. Remove ALL text, numbers, power rose printed on reward plaque, and any quest progress squares; replace the removed contents with the matching blank parchment or blank ribbon surface. Keep the original layout, with title ribbon from approximately 8% to 19% height, task area 21% to 50%, treasure divider at 54%, effect area 59% to 84%, empty reward plaque at 88%-97%. High quality, portrait 1024x1536, flat card edge to edge. No new text, lettering or symbols. This is just the reusable background; we will typeset exact rules and original official symbols in code.",
+      "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-2c1b3321-409d-4e92-ab74-52bf99ba2555.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ],
+  "quest_faces": "tools/build_quest_faces.py produces 49 PNGs with exact original PDF glyphs and current Quest JSON; originals preserved."
+}

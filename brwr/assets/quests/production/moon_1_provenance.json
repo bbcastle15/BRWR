@@ -1,0 +1,256 @@
+{
+  "task": "Quest artwork, Moon I",
+  "date": "2026-11-04",
+  "source": {
+    "file": "references/moon_1_original.png",
+    "runtime": "res://assets/quests/originals/moon_1.png",
+    "width": 973,
+    "height": 831,
+    "sha256": "D637498A2AB51E190B5C34019AC61EDFA448912111E5C3DDB2263A9ECF913AB5"
+  },
+  "method": "Unmodified source image, declarative Godot AtlasTexture crops. No super-resolution or rewritten symbols. Source resolution approximately 176x265 per card.",
+  "originals": {
+    "holy_corruption": [
+      3,
+      2,
+      176,
+      265
+    ],
+    "contingent_mage": [
+      184,
+      4,
+      176,
+      265
+    ],
+    "shattered_illusion": [
+      374,
+      14,
+      173,
+      265
+    ],
+    "warrior_wizard": [
+      552,
+      2,
+      175,
+      264
+    ],
+    "guarding_wisdom": [
+      744,
+      10,
+      175,
+      265
+    ],
+    "magic_stem": [
+      4,
+      278,
+      176,
+      265
+    ],
+    "dominate_fear": [
+      191,
+      290,
+      173,
+      264
+    ],
+    "earth_tempest": [
+      372,
+      287,
+      176,
+      265
+    ],
+    "channeling_instability": [
+      553,
+      281,
+      176,
+      266
+    ],
+    "summoner_wizard": [
+      748,
+      281,
+      176,
+      266
+    ],
+    "guardian_mage": [
+      3,
+      560,
+      176,
+      266
+    ],
+    "rest_the_limbs": [
+      202,
+      560,
+      176,
+      265
+    ],
+    "field_test": [
+      399,
+      559,
+      176,
+      265
+    ],
+    "acquire_wealth": [
+      595,
+      555,
+      180,
+      266
+    ]
+  },
+  "progress_centers": {
+    "contingent_mage": [
+      [
+        54,
+        127
+      ],
+      [
+        89,
+        127
+      ],
+      [
+        123,
+        127
+      ]
+    ],
+    "shattered_illusion": [
+      [
+        68,
+        132
+      ],
+      [
+        105,
+        132
+      ]
+    ],
+    "warrior_wizard": [
+      [
+        52,
+        128
+      ],
+      [
+        86,
+        128
+      ],
+      [
+        121,
+        128
+      ]
+    ],
+    "guarding_wisdom": [
+      [
+        72,
+        132
+      ],
+      [
+        106,
+        132
+      ]
+    ],
+    "dominate_fear": [
+      [
+        66,
+        135
+      ],
+      [
+        100,
+        135
+      ]
+    ],
+    "channeling_instability": [
+      [
+        34,
+        133
+      ],
+      [
+        67,
+        133
+      ],
+      [
+        102,
+        133
+      ],
+      [
+        137,
+        133
+      ]
+    ],
+    "summoner_wizard": [
+      [
+        53,
+        133
+      ],
+      [
+        86,
+        133
+      ],
+      [
+        120,
+        133
+      ]
+    ],
+    "rest_the_limbs": [
+      [
+        68,
+        131
+      ],
+      [
+        104,
+        131
+      ]
+    ],
+    "field_test": [
+      [
+        72,
+        130
+      ],
+      [
+        107,
+        130
+      ]
+    ],
+    "acquire_wealth": [
+      [
+        68,
+        130
+      ],
+      [
+        104,
+        130
+      ]
+    ]
+  },
+  "back": {
+    "moon": 1,
+    "rect": [
+      787,
+      562,
+      176,
+      266
+    ],
+    "resource": "res://assets/quests/backs/moon_1.tres"
+  },
+  "reconstruction": {
+    "id": "conspirator_mage",
+    "resource": "res://assets/quests/reconstructed/conspirator_mage.png",
+    "status": "Authorized reconstruction from existing Quest data and supplied Guardian Mage style; exact original not available.",
+    "prompt": "Use case: precise-object-edit. Reconstruct the ONE missing Quest \"Conspirator Mage\" to match the provided original Quest sheet. Image 1 is the original design; use ONLY the Guardian Mage card in the bottom-left (x3..180, y561..826) as the exact template. Image 2 is the official Trap glyph to use in place of its large shield drawing. Output one flat portrait card 1024x1536.\nKeep the original Guardian Mage proportions, narrow brown carved border, straight pale parchment scroll, small orange-brown title banner, typography, generous blank spaces, small chest separator and small pointed 1-Power reward tab. This is a matching variant, not a new style.\nChange its title to \"Conspirator Mage\". Task at left of the large Trap illustration, exactly: \"After you\\nresolve the\\nEffect of one of\\nyour [Trap glyph] Spells.\" Use the provided official Trap glyph, not a shield or a rune. No progress cube slots. Keep the small chest divider at about 55 percent of card height.\nAt about 67 percent height put a Mage Model symbol (small bust with pointed wizard hat, as pictured in Field Test) followed by an asterisk for unlimited range: \"inflict 2\" followed by the exact pictured broken-heart Damage glyph. Next line: a hexagon containing 0, \": place 1\", and a filled black circle Instability glyph. Bottom-right reward exactly 1 and the original white Power rose, small as in the source. Keep body and title lettering English. Do not invent a serial card code. No frame redesign, no torn parchment edges, no oversized lettering, no extra glyphs. ",
+    "tool": "built-in image_gen",
+    "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-22ef68ac-1e7d-492f-b962-e937c32521d7.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "rejected": [
+    {
+      "id": "holy_corruption_v1",
+      "reason": "Changed frame, text proportions and glyphs",
+      "prompt": "Use case: precise-object-edit. This is a CONSERVATIVE RESTORATION / HIGH RESOLUTION UPSCALE of an existing board-game card, NOT a redesign.\nThe input is the user's original sheet of Quest cards. EDIT TARGET: ONLY the very first card in the top-left corner, titled \"Holy Corruption\", rectangle approximately x=3..179, y=0..268 of the 973x831 sheet. Extract that exact card and restore it as a standalone flat card front, full bleed, portrait aspect ratio 2:3, high resolution 1024x1536. Do not include other cards or the tabletop.\nPreserve its original narrow dark brown carved frame, orange-brown title strip at the same relative height, pale parchment, thin separator and small treasure chest at the original position, lower scroll and pointed 2 Power reward tab, fine bottom card code. Keep ALL original proportions, spacing, line breaks, typography and glyphs; improve clarity and remove screenshot pixelation only. Do not invent new ornamental roses, enlarge the border, move or reflow the text, or use the previous recreated Quest style.\nRead the actual visible source carefully. There are precisely TWO elemental symbols (Sacred = winged halo in circle; Profane = horned demonic skull in circle). NO asterisk / wild-card / all-elements symbol anywhere.\nText in the task: \"After you resolve an Effect of one of your Spells and you have 3 [the pictured Sacred circle] and/or [the pictured Profane circle] symbols on the Active Side of your Revealed Spells.\"\nReward text: \"[the pictured Self mage-head symbol]: choose one of your Revealed Spells with the [Sacred circle] or [Profane circle] symbol on its Active Side. Add it to your Hand.\" Then \"[hexagon 2]: convert 2 [the pictured broken-heart Damage symbol].\"\nUse the exact pictured symbols instead of bracketed words. Never replace one symbol with another. The bottom reward is exactly 2 and the pictured Power rose. No progress cube boxes on this card. Title is exactly \"Holy Corruption\". The supplied image remains authoritative, including the card's visual design and relative geometry.",
+      "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-c4473360-861b-4f00-be93-50b62ae2092d.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "id": "holy_corruption_v2",
+      "reason": "Substituted wrong symbols, changed original artwork",
+      "prompt": "Conservative scan restoration, not recreation. Edit the original attached screenshot. Isolate exactly the first rectangular card at the TOP LEFT, named Holy Corruption (x3 to179, y0 to267 in the 973x831 image); omit all other cards and brown table around it. Increase resolution to a 1024x1536 portrait image while preserving the source card pixel geometry. Treat it as a scanned document: remove raster jaggies and improve legibility only, like super-resolution. Every original printed line, glyph, font, text size, line break, title, border and scroll must stay at its exact relative position and size. Keep parchment edges straight exactly as original; do not tear them, thicken the border, enlarge the reward tab, change the chest or draw new symbols. The supplied image is the actual edit target, not stylistic inspiration. NO redesign, no alternative layout, no text rewriting, no substituted pictograms. Faithfully upscale what is already printed.",
+      "output": "Generated images are saved to C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470 as C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-cdc1792e-4fee-481f-97c4-d4857d7bd596.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ],
+  "remaining": "Higher-resolution original images are needed for faithful HD quality. Original Conspirator Mage screenshot remains welcome. Moon II/III untouched.",
+  "data_corrections": [
+    "Field Test: two progress slots and Model target, as visibly printed on the supplied original."
+  ]
+}

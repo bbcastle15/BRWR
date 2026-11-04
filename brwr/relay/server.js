@@ -54,7 +54,7 @@ function nextSeat(room) {
   return -1;
 }
 
-function closeRoom(room, reason = "La sala è stata chiusa dall'host.") {
+function closeRoom(room, reason = 'The host closed the lobby.') {
   if (!room) return;
   rooms.delete(room.code);
   for (const client of room.clients.values()) {
@@ -65,13 +65,13 @@ function closeRoom(room, reason = "La sala è stata chiusa dall'host.") {
 }
 
 function handleCreate(ws, message) {
-  if (ws.room) return error(ws, 'Connessione già associata a una sala.');
+  if (ws.room) return error(ws, 'This connection already belongs to a lobby.');
   const count = Number(message.count);
   const version = String(message.version || '');
   const protocol = String(message.protocol || '');
-  if (!Number.isInteger(count) || count < 2 || count > 6) return error(ws, 'Numero giocatori non valido.');
-  if (!version || version.length > 128) return error(ws, 'Versione client non valida.');
-  if (!protocol || protocol.length > 64) return error(ws, 'Protocollo client non valido.');
+  if (!Number.isInteger(count) || count < 2 || count > 6) return error(ws, 'Invalid player count.');
+  if (!version || version.length > 128) return error(ws, 'Invalid client version.');
+  if (!protocol || protocol.length > 64) return error(ws, 'Invalid client protocol.');
 
   const code = makeCode();
   const room = {
@@ -93,21 +93,21 @@ function handleCreate(ws, message) {
 }
 
 function handleJoin(ws, message) {
-  if (ws.room) return error(ws, 'Connessione già associata a una sala.');
+  if (ws.room) return error(ws, 'This connection already belongs to a lobby.');
   const code = String(message.code || '').trim().toUpperCase();
   const version = String(message.version || '');
   const protocol = String(message.protocol || '');
   const room = rooms.get(code);
 
-  if (!room) return error(ws, 'Sala non trovata o già chiusa.');
-  if (room.started) return error(ws, 'Partita già iniziata.');
+  if (!room) return error(ws, 'Lobby not found or already closed.');
+  if (room.started) return error(ws, 'The match has already started.');
   if (version !== room.version || protocol !== room.protocol) {
-    return error(ws, "Versioni diverse: l'host deve ricreare la versione browser dopo le modifiche.");
+    return error(ws, 'Version mismatch: the host needs to rebuild the browser version after changing the game.');
   }
-  if (room.clients.size >= room.count - 1) return error(ws, 'Sala completa.');
+  if (room.clients.size >= room.count - 1) return error(ws, 'The lobby is full.');
 
   const seat = nextSeat(room);
-  if (seat < 0) return error(ws, 'Sala completa.');
+  if (seat < 0) return error(ws, 'The lobby is full.');
 
   const peerId = String(room.nextPeerId++);
   const client = { ws, peerId, seat };
@@ -123,9 +123,9 @@ function handleJoin(ws, message) {
 
 function handleGame(ws, message) {
   const room = ws.room;
-  if (!room) return error(ws, 'Nessuna sala attiva.');
+  if (!room) return error(ws, 'No active lobby.');
   const payload = String(message.payload || '');
-  if (!payload || payload.length > MAX_PAYLOAD * 2) return error(ws, 'Pacchetto di gioco non valido.');
+  if (!payload || payload.length > MAX_PAYLOAD * 2) return error(ws, 'Invalid game packet.');
 
   if (ws.role === 'host') {
     const peerId = String(message.to || '');
@@ -137,14 +137,14 @@ function handleGame(ws, message) {
 }
 
 function handleMessage(ws, raw, isBinary) {
-  if (isBinary) return error(ws, 'Il relay BRWR accetta solo envelope JSON testuali.');
+  if (isBinary) return error(ws, 'The BRWR relay accepts text JSON messages only.');
   let message;
   try {
     message = JSON.parse(raw.toString('utf8'));
   } catch (_) {
-    return error(ws, 'Messaggio JSON non valido.');
+    return error(ws, 'Invalid JSON message.');
   }
-  if (!message || typeof message !== 'object') return error(ws, 'Messaggio non valido.');
+  if (!message || typeof message !== 'object') return error(ws, 'Invalid message.');
 
   switch (String(message.type || '')) {
     case 'create': return handleCreate(ws, message);
@@ -156,7 +156,7 @@ function handleMessage(ws, raw, isBinary) {
     case 'ping':
       return json(ws, { type: 'pong', now: Date.now() });
     default:
-      return error(ws, 'Tipo di messaggio sconosciuto.');
+      return error(ws, 'Unknown message type.');
   }
 }
 

@@ -4,6 +4,7 @@ extends RefCounted
 static func can_target_as(evocation: EvocationState, caster: int, target_kind: String) -> bool:
 	# Codex p.22: Equipment has no Lodge model. Only its owner can target
 	# the card as an Evocation; a generic Model target does not include it.
+	if FamiliarRules.guarded(evocation): return false
 	return evocation.archetype != "equipment" or (evocation.owner_id == caster and target_kind == "evocation")
 
 static func stat_bonus(player: PlayerState, stat: String) -> int:
@@ -49,6 +50,7 @@ static func perform_spell_action(game, player_index: int, id: String, action_id:
 		for action in active.get_side().get("passives", {}).get("physical_actions", []):
 			if str(action.id) != action_id: continue
 			player.exhaust_physical_action()
+			game.record_physical_action_feedback(player_index, str(action.name))
 			game.refresh_player_board(player_index)
 			return game.queue_resolution({"type": "druidic_action", "player_index": player_index, "index": 0,
 				"effects": action.effects, "context": {"game": game, "caster_id": player_index, "caster_room_id": player.mage.room_id, "action_type": "physical"}})
@@ -62,6 +64,7 @@ static func perform(game, player_index: int, id: String, action: String) -> bool
 		for ability in game.get_evocation_abilities(ev):
 			if ability.type != "equipment_action" or ability.id != action: continue
 			player.exhaust_physical_action()
+			game.record_physical_action_feedback(player_index, ev.evocation_name + " · " + str(ability.name))
 			game.refresh_player_board(player_index)
 			return game.queue_resolution({"type": "druidic_action", "player_index": player_index, "index": 0,
 				"effects": ability.effects, "context": {"game": game, "caster_id": player_index,

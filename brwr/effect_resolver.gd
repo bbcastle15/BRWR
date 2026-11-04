@@ -47,6 +47,10 @@ func resolve_effect(
 		return OracleRules.resolve(effect, context)
 	if effect_type in SchoolEffects.TYPES:
 		return SchoolEffects.resolve(effect, context)
+	if effect_type in MageEffects.TYPES:
+		return MageEffects.resolve(effect, context)
+	if effect_type in ["summon_familiar","familiar_guard_summoned","familiar_assault"]:
+		return FamiliarRules.resolve(effect,context)
 	if effect_type in FamineRules.EFFECT_TYPES:
 		return FamineRules.resolve(effect, context)
 
@@ -455,7 +459,7 @@ func _damage_evocation(
 	suppressed: Array[String] = []
 ) -> int:
 
-	if game == null or evocation == null:
+	if game == null or evocation == null or FamiliarRules.guarded(evocation):
 		return 0
 
 	if str(game.active_effect_context.get("spell_target_type", "")) in ["room", "area"] and not ForgottenEvocations.ability(game, evocation, "immune_room_damage").is_empty():
@@ -733,7 +737,7 @@ func _evocation_matches(
 
 	var archetype = str(filters.get("archetype", ""))
 	if archetype != "" \
-	and str(evocation.archetype) != archetype:
+	and not evocation.has_archetype(archetype):
 		return false
 
 	var room_id = str(filters.get("room_id", ""))
@@ -1346,7 +1350,7 @@ func _resolve_power(
 	if _is_dummy_target(context):
 		return true
 
-	var target = int(context.get("target_player_index", -1))
+	var target: int = _caster(context) if _target_type(context) == "self" else int(context.get("target_player_index", -1))
 	if target < 0:
 		return false
 	if DeathEffectResolver.ignores(context, target):
@@ -3111,6 +3115,7 @@ func _resolve_draw_three_forgotten_keep_one(
 			for drawn in candidates:
 				game.forgotten_deck.erase(drawn)
 			game.resolve_drawn_forgotten(caster_id, candidate, candidates)
+			game.announce_forgotten_draw(caster_id)
 			return true
 
 	for candidate in candidates:
@@ -3129,6 +3134,7 @@ func _resolve_draw_three_forgotten_keep_one(
 				candidate
 			)
 
+	game.announce_forgotten_draw(caster_id)
 	return true
 
 
@@ -4739,7 +4745,7 @@ func _resolve_remove_evocation_effect(
 
 		var archetype = str(effect.get("evocation_archetype", ""))
 		if archetype != "" \
-		and str(evocation.archetype) != archetype:
+		and not evocation.has_archetype(archetype):
 			print("Soul Transfer: selected Evocation has wrong archetype")
 			return false
 
@@ -4837,6 +4843,7 @@ func _resolve_activation_effect(
 		return false
 
 	var activation_context: Dictionary = context
+	context.erase("last_activated_evocation")
 	if effect.has("speed_bonus"):
 		activation_context = context.duplicate(true)
 		activation_context["evocation_activation_speed_bonus"] = int(effect["speed_bonus"])
@@ -6132,6 +6139,8 @@ func _resolve_steal_power(
 	var target_player_index: int = int(
 		context.get("target_player_index", -1)
 	)
+	if target_player_index < 0 and str(context.get("spell_target_type", "")) == "room":
+		return SchoolEffects.resolve({"type":"for_school_mages","range":0,"effects":[effect]},context)
 	if not _valid_player(game, target_player_index):
 		print("steal_power: target Mage missing")
 		return false
@@ -6201,12 +6210,14 @@ func _resolve_activate_target_room(
 		effect.get("allow_reactivate", false)
 	)
 
-	return game.activate_room(
+	var activated: bool = game.activate_room(
 		caster_id,
 		room_id,
 		allow_reactivate,
 		context
 	)
+	context["mage_room_activation_succeeded"] = activated
+	return activated
 
 
 func resolve_set_target_room_from_triggering_mage(

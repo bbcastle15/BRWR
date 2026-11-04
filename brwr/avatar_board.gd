@@ -50,7 +50,7 @@ func set_expanded(value: bool, parent: Node) -> void:
 	expanded = value
 	reparent(parent)
 	if value:
-		position = Vector2(280, 1500)
+		position = expanded_position()
 		rotation = -PI / 2
 		scale = Vector2.ONE
 	else: reposition()
@@ -59,6 +59,8 @@ func set_expanded(value: bool, parent: Node) -> void:
 func _update_hitboxes() -> void:
 	for card in cards_root.get_children():
 		if card is Control:
+			if card.has_meta("evocation_slot"):
+				_layout_evocation_card(card)
 			card.mouse_filter = Control.MOUSE_FILTER_STOP if expanded or card.get_meta("avatar_reference", false) else Control.MOUSE_FILTER_IGNORE
 			if card.name == "AvatarJinxes":
 				card.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_ENABLED if expanded else Control.MOUSE_BEHAVIOR_DISABLED
@@ -76,7 +78,7 @@ func refresh() -> void:
 	if game == null or cards_root == null: return
 	var player: PlayerState = game.players[game.avatar.player_index]
 	var evocations: Array = []
-	for ev in player.evocations: evocations.append([ev.get_instance_id(), ev.board_number, ev.damage_cubes, ev.room_id])
+	for ev in player.evocations: evocations.append([ev.get_instance_id(), ev.board_number, ev.assigned_mage, ev.assigned_slot, ev.damage_cubes, ev.room_id])
 	var updated := str([player.mage.damage_cubes, player.mage.destiny_tokens, player.mage.infectio_tokens, player.get_mage_speed(), game.current_moon, game.avatar.public_data(), player.completed_quests.map(func(q): return q.get_id()), evocations, player.mage.jinxes, player.trophies])
 	if signature == updated: return
 	signature = updated
@@ -86,79 +88,121 @@ func refresh() -> void:
 	var preview = game._reference_card_preview()
 	_add_card("avatars", "possessed", "Possessed · Dominion", SHEET,
 		func(): preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
-	var back_id := "command_back_%d" % clampi(game.current_moon, 1, 3)
-	_add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
+	var public_state: Dictionary = game.avatar.public_data()
+	var back_id := AvatarArt.command_back_id(game.current_moon, public_state)
+	var hand = _add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
 		func(): preview.show_card("avatars", back_id, "Command deck · Moon %d" % game.current_moon,
-			"%d cards. Hidden faces and order. Reaction: %s" % [player.grimoire.size(), str(game.avatar.public_data().reaction)]))
-	if not str(game.avatar.public_data().reaction).is_empty():
-		var marker = preload("res://tabletop_style.gd").marker("protection", player.color, Vector2(75, 75))
-		marker.name = "AvatarProtection"
-		marker.position = COMMANDS.position + Vector2(20, 20)
-		marker.set_meta("upright_in_portrait", true)
+			"%d cards. Hidden faces and order.\n%s" % [player.grimoire.size(), AvatarArt.reaction_description(public_state)]))
+	hand.name = "AvatarHand"
+	hand.set_meta("back_id", back_id)
+	if bool(public_state.get("reaction_available", false)):
+		var marker = make_reaction_marker(public_state)
 		cards_root.add_child(marker)
 	if not player.memories.is_empty():
 		var discard = _add_card("spells", player.memories.back().id, "Memories", MEMORIES, open_memories)
 		discard.name = "AvatarMemories"
 	for slot in 3:
 		var evocation: EvocationState = null
+		var assigned: EvocationState = null
 		for ev in player.evocations:
+			if not game.is_evocation_in_play(ev): continue
 			if ev.board_number == slot + 1 and ev.assigned_mage < 0: evocation = ev
-		var rect := Rect2(280 + 380 * slot, -260, 350, 235)
-		if evocation == null:
-			var empty := Button.new()
-			empty.flat = true
-			empty.position = rect.position
-			empty.size = rect.size
-			empty.set_meta("upright_in_portrait", true)
-			cards_root.add_child(empty)
-		else:
-			var current = evocation
-			var card = _add_card("evocations", current.evocation_id, current.get_display_name(), rect,
-				func(): game.open_evocation_inspection(current, true))
-			card.set_meta("evocation", current)
-			card.set_meta("upright_in_portrait", true)
-			var status := Label.new()
-			status.text = "%s · %d/%d HP" % [["I", "II", "III"][slot], current.health - current.get_damage(), current.health]
-			status.position = Vector2(8, 6)
-			status.add_theme_font_size_override("font_size", 27)
-			status.add_theme_color_override("font_outline_color", Color.BLACK)
-			status.add_theme_constant_override("outline_size", 6)
-			status.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			card.add_child(status)
-			var damage := Control.new()
-			damage.name = "EvocationDamage"
-			damage.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			damage.position = Vector2(12, rect.size.y - 34)
-			card.add_child(damage)
-			for i in current.damage_cubes.size():
-				var cube = preload("res://cube.tscn").instantiate()
-				var owner: int = current.damage_cubes[i]
-				cube.cube_color = Color.BLACK if owner < 0 else game.players[owner].color
-				damage.add_child(cube)
-				cube.position = Vector2((i % 12) * 25, -(i / 12) * 25)
-				cube.scale = Vector2.ONE * 1.6
+			if ev.assigned_mage == player.player_index and ev.assigned_slot == slot + 1: assigned = ev
+		_add_evocation_card(evocation, slot, false)
+		if assigned != null: _add_evocation_card(assigned, slot, true)
 	var quests: Button = game.ReferenceCardPreview.make_back("Solved Quests", Vector2(350,180))
 	quests.name = "AvatarSolvedQuests"
 	quests.set_meta("upright_in_portrait", true)
 	quests.position = Vector2(280, 780)
 	cards_root.add_child(quests)
 	quests.visible = not player.completed_quests.is_empty()
-	var assigned := Button.new()
-	assigned.text = "Assigned Evocations"
-	assigned.visible = player.evocations.any(func(ev): return ev.assigned_mage >= 0)
-	assigned.set_meta("upright_in_portrait", true)
-	assigned.position = Vector2(680, 780)
-	assigned.size = Vector2(350, 180)
-	assigned.pressed.connect(func():
-		var pile: Array = player.evocations.filter(func(ev): return ev.assigned_mage >= 0).map(func(ev): return {"id":ev.evocation_id, "name":ev.get_display_name()})
-		preview.show_reference_pile("evocations", pile, "Assigned Evocations", Callable()))
-	cards_root.add_child(assigned)
 	_add_trophies(player)
 	_add_jinx_cards(player)
 	_add_mage_tokens(player)
 	create_damage_track()
 	_update_hitboxes()
 	queue_redraw()
+
+func _has_assigned_evocations() -> bool:
+	return game.players[game.avatar.player_index].evocations.any(func(ev): return ev.assigned_mage >= 0 and game.is_evocation_in_play(ev))
+
+func get_display_size() -> Vector2:
+	return Vector2(1580 if _has_assigned_evocations() else 1300, 1500)
+
+func expanded_position() -> Vector2:
+	return Vector2(560 if _has_assigned_evocations() else 280, 1500)
+
+func _evocation_rect(slot: int, assigned: bool) -> Rect2:
+	if expanded and _has_assigned_evocations():
+		# Two readable cards beside one another when the board is upright.
+		return Rect2(330 + 380 * slot, -227 if assigned else -497, 250, 154)
+	var paired: bool = game.players[game.avatar.player_index].evocations.any(func(ev): return ev.assigned_mage >= 0 and ev.assigned_slot == slot + 1 and game.is_evocation_in_play(ev))
+	return Rect2(280 + 380 * slot + (180 if assigned else 0), -260, 170 if paired else 350, 114 if paired else 235)
+
+func _layout_evocation_card(card: Control) -> void:
+	var rect := _evocation_rect(int(card.get_meta("evocation_slot")), bool(card.get_meta("assigned_evocation")))
+	card.position = rect.position
+	card.custom_minimum_size = rect.size
+	card.size = rect.size
+	var status := card.get_node_or_null("Status") as Label
+	if status != null:
+		status.add_theme_font_size_override("font_size", 27 if rect.size.x > 300 else (20 if rect.size.x > 200 else 14))
+	var damage := card.get_node_or_null("EvocationDamage") as Control
+	if damage != null:
+		damage.scale = Vector2.ONE * rect.size.y / 235.0
+		damage.position = Vector2(12, rect.size.y - 34 * damage.scale.y)
+
+func _add_evocation_card(ev: EvocationState, slot: int, assigned: bool) -> void:
+	var card: Button
+	if ev == null:
+		card = Button.new()
+		card.flat = true
+		cards_root.add_child(card)
+	else:
+		card = _add_card("evocations", ev.evocation_id, ev.get_display_name(), _evocation_rect(slot, assigned),
+			func(): game.open_evocation_inspection(ev, true))
+		card.set_meta("evocation", ev)
+		var status := Label.new()
+		status.name = "Status"
+		status.text = "%s · %d/%d HP" % [["I", "II", "III"][slot], ev.get_remaining_health(), ev.health]
+		status.position = Vector2(8, 6)
+		status.add_theme_color_override("font_outline_color", Color.BLACK)
+		status.add_theme_constant_override("outline_size", 6)
+		status.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(status)
+		var damage := Control.new()
+		damage.name = "EvocationDamage"
+		damage.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(damage)
+		for i in ev.damage_cubes.size():
+			var cube = preload("res://cube.tscn").instantiate()
+			var owner: int = ev.damage_cubes[i]
+			cube.cube_color = Color.BLACK if owner < 0 else game.players[owner].color
+			damage.add_child(cube)
+			cube.position = Vector2((i % 12) * 25, -(i / 12) * 25)
+			cube.scale = Vector2.ONE * 1.6
+	card.name = ("AssignedEvocationSlot" if assigned else "EvocationSlot") + str(slot + 1)
+	card.set_meta("evocation_slot", slot)
+	card.set_meta("assigned_evocation", assigned)
+	card.set_meta("upright_in_portrait", true)
+	_layout_evocation_card(card)
+
+func make_reaction_marker(public_state: Dictionary) -> TextureRect:
+	var kind := str(public_state.get("reaction_type", "protection"))
+	var symbol := "combat" if public_state.get("reaction") == "combat_spell" else "damage"
+	var asset := "avatar_" + kind + "_" + symbol
+	if not ResourceLoader.exists("res://assets/tokens/" + asset + ".png"): asset = kind
+	var marker = preload("res://tabletop_style.gd").marker(asset, game.players[game.avatar.player_index].color, Vector2(94, 94))
+	marker.name = "AvatarProtection" if kind == "protection" else "AvatarTrap"
+	# The Command texture is rotated in this landscape slot; this point covers
+	# its printed shield, leaving the Moon badge and title readable in portrait.
+	marker.position = COMMANDS.position + Vector2(158, 154)
+	marker.pivot_offset = marker.size * 0.5
+	marker.rotation = PI / 2 if expanded else 0.0
+	marker.set_meta("upright_in_portrait", true)
+	marker.set_meta("reaction", public_state.get("reaction", ""))
+	marker.tooltip_text = AvatarArt.reaction_description(public_state)
+	return marker
 
 func _add_trophies(player: PlayerState) -> void:
 	if player.trophies.is_empty(): return
@@ -223,10 +267,10 @@ func _add_mage_tokens(player: PlayerState) -> void:
 		for i in owners.size():
 			var token := Button.new()
 			token.name = "%sToken%d" % [kind.capitalize(), i]
-			token.position = Vector2(900 + (i % 3) * 58, 180 + (0 if kind == "destiny" else 64) + (i / 3) * 58)
-			token.size = Vector2(52,52)
+			token.position = Vector2(900 + (i % 3) * 70, 180 + (0 if kind == "destiny" else 76) + (i / 3) * 70)
+			token.size = Vector2(64,64) if kind == "destiny" else Vector2(52,52)
 			token.set_meta("upright_in_portrait", true)
-			token.tooltip_text = "%s · Player %d" % [kind.capitalize(), int(owners[i]) + 1]
+			token.tooltip_text = "%s · %s" % [kind.capitalize(), game.player_display_name(int(owners[i]))]
 			var texture: Texture2D = game.ReferenceCardPreview.card_texture("tokens", kind)
 			if texture != null:
 				var art := TextureRect.new()

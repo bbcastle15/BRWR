@@ -1,0 +1,68 @@
+{
+  "status": "Review copies only. No production images overwritten or runtime paths changed.",
+  "generator": "built-in image_gen",
+  "prompt": "Edit the first reference image: the existing Litany game card. The second reference is the Codex original palette/style reference ONLY. Make ONLY the upper LIGHT half visually much paler, matching the Codex's silver-white header, pale lavender decorative panels, and brighter character illustration. Keep rich purple accents subtle. Preserve the ENTIRE lower DARK half EXACTLY unchanged, including all pixels of lettering, glyphs, art, borders and orientation. In the upper half preserve EVERY word, every symbol, every number, all icon shapes and positions, composition, character identity, frame, card size and aspect ratio. Do not replace the illustration, do not redraw any glyphs, do not add/remove text or details. This is a selective tonal/palette correction of existing graphics, not a redesign. Keep black rules text crisp, white symbols legible via darker purple flag interiors if necessary. Full uncropped portrait card, same resolution, no caption or mockup. Preserve existing background and transparency.",
+  "single_side_override": "Ca' Dario's Amulet and Cerebral Worm have one unified Light face; brighten entire card.",
+  "records": [
+    {
+      "id": "litany",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-7cd023b5-7a3d-4a24-b336-b4fbd9fbdc2f.png",
+      "output": "assets/spells/hex_light_review/litany_light_review.png"
+    },
+    {
+      "id": "crypt_fever",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-234b4475-0df1-4304-8ae2-27d8005442c8.png",
+      "output": "assets/spells/hex_light_review/crypt_fever_light_review.png"
+    },
+    {
+      "id": "black_feather",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-2408b3b9-b81c-43ec-a217-184e863fe1c2.png",
+      "output": "assets/spells/hex_light_review/black_feather_light_review.png"
+    },
+    {
+      "id": "baleful_curse",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-17e4c6ca-0970-4c19-87e3-f50a8e3dc1e0.png",
+      "output": "assets/spells/hex_light_review/baleful_curse_light_review.png"
+    },
+    {
+      "id": "ca_darios_amulet",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-b5376fc5-d251-42df-aa2f-0c995b1e7543.png",
+      "output": "assets/spells/hex_light_review/ca_darios_amulet_light_review.png"
+    },
+    {
+      "id": "cerebral_worm",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-467f89c2-76f3-4635-97d7-cbbb8134af06.png",
+      "output": "assets/spells/hex_light_review/cerebral_worm_light_review.png"
+    },
+    {
+      "id": "feverish_dreams",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-5f6da743-9310-413c-8ba1-1d86b561f688.png",
+      "output": "assets/spells/hex_light_review/feverish_dreams_light_review.png"
+    },
+    {
+      "id": "an_eye_for_an_eye",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-68f60562-7bc1-4865-b2be-f567cc5e96a0.png",
+      "output": "assets/spells/hex_light_review/an_eye_for_an_eye_light_review.png"
+    },
+    {
+      "id": "suffocation",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-078c6fa5-1c02-4208-81bd-7e5a6a78e388.png",
+      "output": "assets/spells/hex_light_review/suffocation_light_review.png"
+    },
+    {
+      "id": "curse",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-fada7bc2-65b1-4ca1-a2b9-a3b8352e523a.png",
+      "output": "assets/spells/hex_light_review/curse_light_review.png"
+    },
+    {
+      "id": "bad_luck",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-247c5259-168d-44fe-86ce-881c58dc6e36.png",
+      "output": "assets/spells/hex_light_review/bad_luck_light_review.png"
+    },
+    {
+      "id": "cursed_oracle",
+      "source": "C:\\Users\\bigba\\.codex\\generated_images\\01a0e25e-e965-76c3-af9d-987ce7e4e470\\exec-1f21904e-2525-49aa-9829-3315d3833469.png",
+      "output": "assets/spells/hex_light_review/cursed_oracle_light_review.png"
+    }
+  ]
+}

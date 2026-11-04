@@ -152,6 +152,7 @@ static func begin_activation(game, additional: bool = false, resume_phase: bool 
 	if game.avatar == null: return false
 	var state: AvatarState = game.avatar
 	if not additional and not state.can_activate(): return false
+	if not additional: game.record_table_feedback({"kind": "turn", "player": state.player_index})
 	return game.queue_resolution({"type": "avatar_activation", "additional": additional,
 		"on_complete": "advance_action_phase" if resume_phase else ""})
 
@@ -180,7 +181,7 @@ static func process_command(game, frame: Dictionary) -> bool:
 			event.source_model_type = "mage"
 			event.source_player_index = game.avatar.player_index
 			event.source_room_id = game.players[game.avatar.player_index].mage.room_id
-			event.data["spell_type"] = card.light_side.get("type", "")
+			event.data["spell_type"] = card.avatar_command.get("reaction", {}).get("type", "protection") if frame.get("reaction", false) else card.light_side.get("type", "")
 			game.queue_resolution({"type": "game_event", "event": event})
 		return false
 	var index: int = int(frame.get("index", 0))
@@ -198,26 +199,42 @@ static func append_reaction(game, event: GameEvent, triggered: Array) -> void:
 	if game.avatar == null or not game.avatar.can_activate(): return
 	var state: AvatarState = game.avatar
 	var card: SpellCardState = state.active_deck().back()
-	var reaction: Dictionary = card.avatar_command.get("reaction", {})
-	if reaction.is_empty() or "protection" in event.suppressed_trigger_types: return
-	var matches := false
-	var target: bool = event.target_model_type == "mage" and event.target_player_index == state.player_index
-	match str(reaction.trigger):
-		"damage": matches = event.event_type == "damage_about_to_be_inflicted" and target and event.amount > 0
-		"suffered_damage": matches = event.event_type == "damage_inflicted" and target and event.amount > 0
-		"combat_spell":
-			matches = event.event_type == "spell_effect_about_to_resolve" and str(event.get_meta("source_spell_type", "")) == "combat" and state.player_index in event.get_meta("affected_player_indices", [])
-	if not matches or cube_owner(game, event.source_player_index) == -1: return
+	if not _reaction_matches(game, card, event): return
 	# The ordinary trigger window supplies play order and handles nesting. The
 	# face is not added to active_spells: only the current top card is armed.
-	var proxy := SpellCardState.new(card.id, card.card_name, "", {"type": "protection"}, {})
+	var kind := str(card.avatar_command.reaction.get("type", "protection"))
+	var proxy := SpellCardState.new(card.id, card.card_name, "", {"type": kind}, {})
 	var active := ActiveSpellState.new(proxy, state.player_index, false)
 	active.context["avatar_command"] = card
 	triggered.append({"active_spell": active, "event": event})
 
+static func _reaction_matches(game, card: SpellCardState, event: GameEvent) -> bool:
+	var reaction: Dictionary = card.avatar_command.get("reaction", {})
+	if reaction.is_empty() or str(reaction.get("type", "protection")) in event.suppressed_trigger_types: return false
+	if cube_owner(game, event.source_player_index) == -1: return false
+	var avatar_index: int = game.avatar.player_index
+	var matches := false
+	var target: bool = event.target_model_type == "mage" and event.target_player_index == avatar_index
+	match str(reaction.trigger):
+		"damage": matches = event.event_type == "damage_about_to_be_inflicted" and target and event.amount > 0
+		"suffered_damage": matches = event.event_type == "damage_inflicted" and target and event.amount > 0
+		"combat_spell":
+			if event.event_type != "spell_effect_about_to_resolve": return false
+			var context: Dictionary = event.get_meta("source_spell_context", event.data.get("spell_context", {}))
+			var spell_type := str(event.get_meta("source_spell_type", context.get("spell_type", "")))
+			# Rulebook p.38 / FAQ 'Target of a Spell': affecting an Avatar via
+			# a Room is not targeting its Mage Model. Support both announcement paths.
+			var target_type := str(context.get("spell_target_type", ""))
+			if target_type in ["room", "area", "special", "self", "evocation"]: return false
+			if context.get("target_evocation") != null or context.get("target_model_type", "") in ["evocation", "dummy"]: return false
+			matches = spell_type == "combat" and int(context.get("target_player_index", event.target_player_index)) == avatar_index
+	return matches
+
 static func trigger_reaction(game, active: ActiveSpellState, event: GameEvent) -> bool:
 	var card: SpellCardState = active.context.get("avatar_command")
 	if card == null or not game.avatar.can_activate() or game.avatar.active_deck().back() != card: return true
+	# Another reaction in the same window may already have prevented all damage.
+	if not _reaction_matches(game, card, event): return true
 	game.avatar.draw_command()
 	var reaction: Dictionary = card.avatar_command.reaction.duplicate(true)
 	reaction["kind"] = "reaction"

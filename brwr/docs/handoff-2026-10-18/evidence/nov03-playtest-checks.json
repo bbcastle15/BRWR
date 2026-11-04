@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-03",
+  "engine": "Godot 4.7.2",
+  "assertions": 462,
+  "checks": [
+    {
+      "script": "nov03_online_playtest.gd",
+      "assertions": 21,
+      "mode": "headless",
+      "result": "PASS",
+      "log": "brwr-nov03-final-online.log"
+    },
+    {
+      "script": "nov03_online_animation.gd",
+      "assertions": 18,
+      "mode": "OpenGL",
+      "result": "PASS",
+      "log": "brwr-nov03-animation-click.log"
+    },
+    {
+      "script": "nov03_school_draw.gd",
+      "assertions": 36,
+      "mode": "OpenGL",
+      "result": "PASS",
+      "log": "brwr-nov03-school-confirm.log"
+    },
+    {
+      "script": "nov03_playtest_ui.gd",
+      "assertions": 72,
+      "mode": "OpenGL",
+      "result": "PASS",
+      "log": "brwr-nov03-playtest-ui-complete.log"
+    },
+    {
+      "script": "avatar_rules.gd",
+      "assertions": 135,
+      "mode": "headless",
+      "result": "PASS",
+      "log": "brwr-nov03-final-avatar.log"
+    },
+    {
+      "script": "oct29_avatar_reactions.gd",
+      "assertions": 99,
+      "mode": "headless",
+      "result": "PASS",
+      "log": "brwr-nov03-final-reactions.log"
+    },
+    {
+      "script": "oct28c_remote_avatar.gd",
+      "assertions": 8,
+      "mode": "headless",
+      "result": "PASS",
+      "log": "brwr-nov03-final-remote.log"
+    },
+    {
+      "script": "nov01_playtest.gd",
+      "assertions": 73,
+      "mode": "headless",
+      "result": "PASS",
+      "log": "brwr-nov03-playtest-regression2.log"
+    }
+  ],
+  "json_documents_validated": 16,
+  "quest_png_hashes_verified": 49,
+  "export_parity": "239 Spell textures; 57 Mage cards; 49 Quest faces; 49 matching code/data hashes; native/Web protocol version identical",
+  "host_pack_check": "PASS",
+  "relay_syntax": "node --check: PASS",
+  "online_scope": "Two Game instances; actual projection, codec and input protocol; simulated transport. Not a full browser/Internet match on two PCs.",
+  "public_deployment": false
+}

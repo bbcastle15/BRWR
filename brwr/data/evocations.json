@@ -1389,5 +1389,43 @@
         "power": 3
       }
     ]
+  },
+  {
+    "id": "doll",
+    "name": "Doll",
+    "archetype": "undead",
+    "additional_archetypes": [
+      "construct"
+    ],
+    "health": 2,
+    "strength": 2,
+    "speed": 2,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "before_defeat_effect",
+        "optional": true,
+        "range": 2,
+        "damage_equal_strength": true
+      }
+    ],
+    "source": "Codex Arcanum p.72"
+  },
+  {
+    "id": "eracleto",
+    "name": "Eracleto",
+    "archetype": "beast",
+    "familiar": true,
+    "health": 3,
+    "strength": 2,
+    "speed": 2,
+    "copies": 1,
+    "abilities": [
+      {
+        "type": "attack_bonus_against_undamaged",
+        "amount": 1
+      }
+    ],
+    "source": "Codex Arcanum p.68; Magister pp.8–10; FAQ Eracleto setup"
   }
 ]

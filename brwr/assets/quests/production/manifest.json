@@ -1,0 +1,677 @@
+{
+  "source": "data/quests.json",
+  "template": "assets/quests/production/template.png",
+  "glyph_source": "BRWR_CORE_rulebook_ENG_v1.2.pdf",
+  "cards": {
+    "holy_corruption": {
+      "name": "Holy Corruption",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e96a} / {e969} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Return 1 of your Revealed Spells with {e96a} or {e969} or {e965} on its Active Side to your Hand.",
+        "{e93b}: Convert 2 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "58944873d7f533bd92dc0a58b70ad9274a113ab26505c20db5fa14bdc944e04f"
+    },
+    "contingent_mage": {
+      "name": "Contingent Mage",
+      "task": "Reveal this card.<br/>After you resolve a {e951} Spell, place 1 {e913} on this card.",
+      "effects": [
+        "{e93e}: Search your Grimoire for 1 Spell and add it to your Hand.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "c66ebed6e1ea0b0f792ec7cd6683cd77c2e58387164e33a5c65d18e49f042fbd"
+    },
+    "shattered_illusion": {
+      "name": "Shattered Illusion",
+      "task": "After you resolve the {e916} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e93a}: Place 1 {e904}.",
+        "{e93a}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "d3402f7c301d46c5c9c745c80b46496fd688196484179ff8bd8cefa7cdae80dd"
+    },
+    "warrior_wizard": {
+      "name": "Warrior Wizard",
+      "task": "Reveal this card.<br/>After you resolve a {e950} Spell, place 1 {e913} on this card.",
+      "effects": [
+        "{e94b}: Remove the target if its {e91f} value is 3 or less.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "c12ffee6f7bf99f4f5d2abf21a2e7736e1fba5c6408242835ba964617ab5ce55"
+    },
+    "magic_stem": {
+      "name": "Magic Steam",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e967} / {e96b} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Return 1 of your Revealed Spells with {e967} or {e96b} or {e965} on its Active Side to your Hand.",
+        "{e93d}: Convert 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "8b2b6c8e86cfee43434ef7ff5cb7b46655377a74f7d28343f6fde6f30149c9b6"
+    },
+    "guarding_wisdom": {
+      "name": "Guarding Wisdom",
+      "task": "After you resolve the {e918} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e93e}: Draw 2 Spells from your Grimoire, or heal 3 {e902}.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "6524b33f060e9247a9faf82f4482ff9c71ad3b728c3932c793bdd996f44e8d4f"
+    },
+    "dominate_fear": {
+      "name": "Dominate Fear",
+      "task": "After you resolve the {e917} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e94b}: Activate an <i>Undead</i> under your control.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "7a1562c7cb2941b71aa8bf11f1a1343a48bad17b75493dd8d1bba9b464f818c9"
+    },
+    "earth_tempest": {
+      "name": "Earth Tempest",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e964} / {e966} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Return 1 of your Revealed Spells with {e964} or {e966} or {e965} on its Active Side to your Hand.",
+        "{e93b}: Inflict 2 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "ceca7f665f91b4f1d6874cee12cf1518c804c0ffd100005e9ea89c91a6897b4e"
+    },
+    "channeling_instability": {
+      "name": "Channeling Instability",
+      "task": "Reveal this card.<br/>After you resolve an Effect that places at least 1 {e904}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93b}: Convert 2 {e904}.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "b4aca6f3c5cdecc180d59276b7a5c5c8cf41408aa7d9460a551022cf3197f43c"
+    },
+    "summoner_wizard": {
+      "name": "Summoner Wizard",
+      "task": "Reveal this card.<br/>After you resolve a Summon Effect, place 1 {e913} on this card.",
+      "effects": [
+        "{e94b}: Activate one of your Evocations.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "6813d0cc58a51cf26aaa02f83b7d622479ba200f7fd79ac1dafd7fee2a31f0f1"
+    },
+    "guardian_mage": {
+      "name": "Guardian Mage",
+      "task": "After you resolve a {e953} Spell.",
+      "effects": [
+        "{e93e}: Draw 1 Spell from the Library.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "1eb075000b07ef1f742adb13dc008c70d69fe51bf97ea54ce9268ba0ecd2df38"
+    },
+    "conspirator_mage": {
+      "name": "Conspirator Mage",
+      "task": "After you resolve a {e952} Spell.",
+      "effects": [
+        "{e945}: Inflict 2 {e902}.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "a578282da9c9feb896bdec98605d643d2d36b5ce7c1eb2bf36431aa3fda09ff0"
+    },
+    "rest_the_limbs": {
+      "name": "Rest the Limbs",
+      "task": "After you resolve the {e91b} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e93e}: Take the {e903}.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "a38f992ce3c696f0e8a55bf47ad07922ad5c55b41b508c5438302c47886822cc"
+    },
+    "field_test": {
+      "name": "Field Test",
+      "task": "After you resolve the {e91a} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e943}: Inflict 2 {e902}.",
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "4e0a10250b4a1a840239696f222be7f3f72b522259d807ea32f3d53740f3330d"
+    },
+    "acquire_wealth": {
+      "name": "Acquire Wealth",
+      "task": "After you resolve the {e919} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e939}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "12a8fbddc6693ae580e02b92c2e3829fe93bb35f82f2aa35c6ed3f2149050202"
+    },
+    "cinder_and_gold": {
+      "name": "Cinder and Gold",
+      "task": "After you resolve the {e918} or {e917} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e93a}: Convert 2 {e902}.",
+        "{e93a}: Convert 2 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "0839204fe80340d79eb621de99675e913416070c2d5d761317753c5ac0e9f3b8"
+    },
+    "enigmatic_sun": {
+      "name": "Enigmatic Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e91b}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93a}: Convert 1 {e904}.",
+        "{e93a}: Convert 1 {e904}.",
+        "{e93a}: Convert 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "ce49acab4c61fc0c330259c811baa3b7d30ed9d3bcfd1e118ba33bb73c5abe1a"
+    },
+    "cinder_star": {
+      "name": "Cinder Star",
+      "task": "After you resolve a {e950} or {e951} Spell while you are in the Crypt.",
+      "effects": [
+        "{e939}: Summon a <i>Colossus</i>.",
+        "It activates."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "94d7477ca750d9b5b6a0e3d89a03e5b4d5a4ec2ebd6830b9f7e0a089e0f2fcb0"
+    },
+    "illusory_moon": {
+      "name": "Illusory Moon",
+      "task": "After you resolve the Mirrors Room Effect.",
+      "effects": [
+        "{e945}: You may place your Mage in the target Mage's Room. If you do, place the target in a Room of your choice."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "15d5571b95c59e5071a5ecf51131bdd9bd40c8d0c424b565d44060eb58c76908"
+    },
+    "purple_star": {
+      "name": "Purple Star",
+      "task": "After you resolve a {e969} or {e968} Spell while you are in the Pleasures Room.",
+      "effects": [
+        "{e93e}: You may draw 1 Event. If you do, gain 2 {e901}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "3b96b91e56ba24cf1d110a9bdca3b48f158cb19952a4d286507dba2ede40464a"
+    },
+    "mortal_moon": {
+      "name": "Mortal Moon",
+      "task": "After you resolve the Cemetery Effect.",
+      "effects": [
+        "{e93e}: If you have no {e902} on your Mage Sheet, gain 1 {e901}.",
+        "{e93e}: Heal all {e902} on your Mage Sheet."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "e6747d6e6daeb85919fe0879bcbe648eab1667ce686e76a3cf46a42e348a7acb"
+    },
+    "generous_moon": {
+      "name": "Generous Moon",
+      "task": "After you resolve the Garden Effect.",
+      "effects": [
+        "{e93a}: Convert 1 {e902}.",
+        "{e93a}: Convert 2 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "c151cd6b671aaafe6abc4579c05304b3bd244b7ce439df318659bcb442ab1082"
+    },
+    "wise_moon": {
+      "name": "Wise Moon",
+      "task": "After you resolve the Bibliotheca Effect.",
+      "effects": [
+        "{e93e}: Draw 2 Spells from the Library."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "501e1c22a128c69d78f76ec8c7913ea5a4217d23d57ff34d60a095fdd3f904f8"
+    },
+    "crimson_star": {
+      "name": "Crimson Star",
+      "task": "After you resolve a {e950} or {e951} Spell while you are in the Alchemical Laboratory.",
+      "effects": [
+        "{e93e}: You may draw 1 Event. If you do, inflict 3 {e902} to a {e944}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "632cc6eef509fcebfc965ef2a0ac8c75710509a21871a415856a1bba2b643570"
+    },
+    "persuasive_moon": {
+      "name": "Persuasive Moon",
+      "task": "After you resolve the Armory Effect.",
+      "effects": [
+        "Inflict 1 {e902} to each Model in the Lodge."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "a2fbcc6567e3afb69949ac726a45916d25e55230577480fdcba68c6fc36d4c4f"
+    },
+    "emerald_star": {
+      "name": "Emerald Star",
+      "task": "After you resolve a {e966} or {e967} Spell while you are in the Forge.",
+      "effects": [
+        "{e93e}: Draw 1 Quest."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "faca30e3e40afb10a7c895f4ec3e74046cc6fd2036610947d3aafda2d59c1577"
+    },
+    "powerful_moon": {
+      "name": "Powerful Moon",
+      "task": "After you resolve the Arena Effect.",
+      "effects": [
+        "{e945}: Place the target in the Arena. Inflict 2 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "08b7e68f202c2b303328829b7f45ed2950c570da349b1ed60a1efb53b58d3f52"
+    },
+    "citrine_star": {
+      "name": "Citrine Star",
+      "task": "After you resolve a {e964} or {e966} Spell while you are in the Observatory.",
+      "effects": [
+        "{e93e}: Draw 2 Spells from your Grimoire."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "50ed88aea299eba670142413de8cfae6af23a03255081312bbeab6c936039846"
+    },
+    "indigo_star": {
+      "name": "Indigo Star",
+      "task": "After you resolve a {e964} or {e96b} Spell while you are in the Oracle Room.",
+      "effects": [
+        "{e93e}: Shuffle your Memories into your Grimoire, then draw 3 Spells from your Grimoire."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "ae5da89897ffe8b3aff969df29a1c955e86d5a1041822ff353a9cee90e0c8789"
+    },
+    "emerald_amethyst": {
+      "name": "Emerald Amethyst",
+      "task": "After you resolve the {e919} or {e91b} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e939}: Summon a non-Forgotten Evocation of your choice.",
+        "It activates."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "7f6d07503b18cbf9da1babe1e82adcfdcbc30bc51a30440ec48851de6759464c"
+    },
+    "bloody_sun": {
+      "name": "Bloody Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e91a}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93a}: Convert 3 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "a2063dde68ffd5eb150bb79c75419fc05363d2f8147548f6941c8ba694228009"
+    },
+    "vial_sun": {
+      "name": "Vial Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e919}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93a}: Inflict 2 {e902}.",
+        "{e93a}: Place 2 {e904}.",
+        "{e93a}: Convert 2 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "5153e5b7e9f846db49f6bd90decef8cd9fef876a42da780acc0f0c029415eaaa"
+    },
+    "electric_ruby": {
+      "name": "Electric Ruby",
+      "task": "After you resolve the {e91a} or {e916} Effect, place 1 {e913} on this card.<br/>The first time you do it, reveal this card.",
+      "effects": [
+        "{e93a}: Choose one: inflict 2 {e902}; or place 2 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "06f12b27b4eead0d1caadc2c4fd6ebe2d7684fb39b8bf5090330ab22e9384802"
+    },
+    "golden_sun": {
+      "name": "Golden Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e918}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93e}: Complete one of your Quests."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "3e3b8cd16c81338fc4417c75926df83f863072f3d142eae034f9f992200e5ea9"
+    },
+    "extinct_sun": {
+      "name": "Extinct Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e917}, place 1 {e913} on this card.",
+      "effects": [
+        "{e939}: Summon a <i>Cadaver</i>.",
+        "It activates.",
+        "{e939}: Summon a <i>Cadaver</i>.",
+        "It activates."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "6ecbcba78ab729da1aaef890d0f60abe97215653463fa87b822d15939c201eb7"
+    },
+    "invisible_sun": {
+      "name": "Invisible Sun",
+      "task": "Reveal this card.<br/>After you resolve an Effect that converts or places at least 1 {e904} in a {e916}, place 1 {e913} on this card.",
+      "effects": [
+        "{e93e}: Draw 2 Spells from the Library."
+      ],
+      "font_sizes": [
+        74,
+        61,
+        59
+      ],
+      "sha256": "472c3537eab5de95aceedb97c848df9895af1b02cd536bc2a43e048d76735809"
+    },
+    "collective_sacrifice": {
+      "name": "Collective Sacrifice",
+      "task": "Reveal this card.<br/>After you inflict or heal at least 1 {e902} to an Evocation, place 1 {e913} on this card.",
+      "effects": [
+        "Choose an Effect: the {e9a0} loses 3 {e901}; or a {e945} loses 2 {e901}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "db78313dc83cf0ad6a7eaf15d4a3c659a15a49dd4c841c9cbd1a0252a38bf386"
+    },
+    "aeromancer": {
+      "name": "Aeromancer",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e964} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: One of your exhausted {e911} tokens becomes available."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "806edc46742b1c03d3ddb1262332073d8b9f9c75a4aed125b523746a015292e9"
+    },
+    "hydromancer": {
+      "name": "Hydromancer",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e96b} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Heal 1 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "c28ca44a171961927d1c5f32cf04fcca8bba96b611556c5d3cd7d336f9201d65"
+    },
+    "geomancer": {
+      "name": "Geomancer",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e966} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93a}: Place 1 {e904}.",
+        "{e93a}: Place 1 {e904}.",
+        "{e93a}: Place 1 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "4e8e42155a6ce7afeb870661b0de66b2ad04428186e5c360bb36e6dc51290549"
+    },
+    "pyromancer": {
+      "name": "Pyromancer",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e967} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Draw 1 Spell from the Forgotten Spell Deck."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "8226391bee2ef1b2309a8c80e24d7fb70088429edb369d258a61d7a19ba09169"
+    },
+    "elementalist": {
+      "name": "Elementalist",
+      "task": "Reveal this card.<br/>After you resolve a {e96a} or {e969} or {e968} Spell, place 1 {e913} on this card.",
+      "effects": [
+        "{e939}: Place 4 {e904}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "2f9d997fae7d9e144b639550d5cddf2bf0020cfe03c44d5a8cbda3ab88f3548d"
+    },
+    "surrender_of_power": {
+      "name": "Surrender of Power",
+      "task": "After you resolve the Black Rose Room Effect.",
+      "effects": [
+        "{e945}: Give a Forgotten Spell in your Hand to the target; they add it to their Hand. If you do, solve this Quest."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "3cfeb9e687a77f3b864770552b8eedcee6eceb7dd07a456ecc60d546d82bcbc5"
+    },
+    "deep_knowledge": {
+      "name": "Deep Knowledge",
+      "task": "Reveal this card.<br/>After you resolve a Spell Effect while you are in the Black Rose Room, place 1 {e913} on this card.",
+      "effects": [
+        "{e93e}: Draw 3 Forgotten Spells; keep 1, then discard the others."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "6756b7edf68b4800a184564ae8bb1c833948a1157e1f036f46a13735f453519d"
+    },
+    "magus": {
+      "name": "Magus",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e968} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e93e}: Draw 3 Spells from your Grimoire."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "f0f4714ae747f360acd7a127ed4d18d236f8454aff1b8333a75e4b31b38f8227"
+    },
+    "power_catalyst": {
+      "name": "Power Catalyst",
+      "task": "Reveal this card.<br/>After you inflict at least 1 {e902}, place 1 {e913} on this card.",
+      "effects": [
+        "{e945}: Inflict 4 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "dd436c0f5aa65ea1b570faa71ea2783122002952dd3a3f9a855c72d607b2aa38"
+    },
+    "summoner": {
+      "name": "Summoner",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e969} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e94b}: The target activates under your control. If there are no Evocations in the Lodge, summon a <i>Nigredo</i> in a {e93a}. It activates."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "244bd73260f15b2a37119b19c591726f6a6c83a837189d9b22f964db5bf93120"
+    },
+    "master_of_death": {
+      "name": "Master of Death",
+      "task": "Reveal this card.<br/>After a Mage with at least 1 of your {e902} on their Mage Sheet is defeated, place 1 {e913} on this card.",
+      "effects": [
+        "Choose up to 3 {e945} and gain 1 {e901} from each of them."
+      ],
+      "font_sizes": [
+        74,
+        60,
+        59
+      ],
+      "sha256": "428b82a30d8c7bb98da25b710b913c4050aada807dc618b20e46ecb9d188aafa"
+    },
+    "theurge": {
+      "name": "Theurge",
+      "task": "After you resolve an Effect of one of your Spells and you have 3 {e96a} / {e969} / {e965} symbols on the Active Side of your Revealed Spells.",
+      "effects": [
+        "{e937} or {e93e}: Heal 5 {e902}."
+      ],
+      "font_sizes": [
+        74,
+        62,
+        59
+      ],
+      "sha256": "9d292a07a6cac2fb28b39881ed748e3383d8ce58d9c48f1b5bc796859fd6cad2"
+    }
+  },
+  "notes": [
+    "Existing Crimson Star art and runtime both use range 3; stale raw_effect range 1 is not used.",
+    "Summoner elements use authoritative Profane/all, not the stale raw_task word Summon.",
+    "Original PNGs are preserved; only the card-art resolver prefers these faces."
+  ]
+}

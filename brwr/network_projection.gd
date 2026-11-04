@@ -37,6 +37,7 @@ static func build(game, viewer: int) -> Dictionary:
 			for j in player.get(field).size():
 				state.players[i][field][j]["instance"] = player.get(field)[j].get_instance_id()
 		for j in player.evocations.size():
+			state.players[i].evocations[j]["instance"] = player.evocations[j].get_instance_id()
 			state.players[i].evocations[j]["name"] = player.evocations[j].evocation_name
 			state.players[i].evocations[j]["board_number"] = player.evocations[j].board_number
 			state.players[i].evocations[j]["damage_cubes"] = player.evocations[j].damage_cubes.duplicate()
@@ -173,13 +174,14 @@ static func apply(game, state: Dictionary) -> void:
 				player.get(field).append(quest)
 		var old_evocations: Dictionary = {}
 		for evocation in player.evocations:
-			old_evocations[evocation.board_number] = evocation
+			old_evocations[evocation.get_meta("network_instance", -1)] = evocation
 		player.evocations.clear()
 		for card in data.evocations:
-			var evocation = old_evocations.get(card.board_number)
+			var evocation = old_evocations.get(card.get("instance", -1))
 			if evocation == null or evocation.evocation_id != card.id:
 				evocation = EvocationState.new(card.id, card.name, card.archetype, card.health, card.strength, card.speed, card.owner_id)
 				evocation.definition = game.evocation_database.get_evocation(card.id)
+			evocation.set_meta("network_instance", card.get("instance", -1))
 			for field in ["controller_id", "board_number", "room_id", "health", "strength", "speed"]:
 				evocation.set(field, card[field])
 			evocation.strength = int(card.get("base_strength", card.strength))
@@ -187,6 +189,8 @@ static func apply(game, state: Dictionary) -> void:
 			evocation.owner_id = int(card.owner_id)
 			evocation.assigned_mage = int(card.get("assigned_mage", -1))
 			evocation.assigned_slot = int(card.get("assigned_slot", 0))
+			evocation.familiar_guard = bool(card.get("familiar_guard",false))
+			evocation.familiar_action_available = bool(card.get("familiar_action_available",true))
 			evocation.upgrades.assign(card.get("upgrades", []))
 			evocation.stored_trophies.assign(card.get("stored_trophies", []))
 			game.stored_evocation_owner_cubes[game._evocation_storage_key(evocation)] = int(card.get("stored_owner_cubes", 0))
@@ -259,7 +263,11 @@ static func apply(game, state: Dictionary) -> void:
 	game.refresh_all_player_boards()
 	game._refresh_permanent_room_markers()
 	if game.table_shell != null:
-		if initial_snapshot: game.table_shell._observe(false)
+		if initial_snapshot:
+			game.table_shell._observe(false)
+			# Show the current public reaction token on entry, just as on the
+			# host. Only this placement is new; do not replay historical damage.
+			game.table_shell.observed_avatar_reaction = ""
 		game.table_shell.sync_card_presentation()
 	var pending_changed: bool = previous_pending != game.pending_input
 	if previous_revision != game.input_revision or pending_changed or not game.waiting_for_player_input:
@@ -268,3 +276,7 @@ static func apply(game, state: Dictionary) -> void:
 			game.player_input_requested.emit(game.pending_input)
 	if not game.final_result.is_empty() and int(game.final_result.get("winner", -999)) != -999 and (previous_result != game.final_result or not game.waiting_for_player_input):
 		game.game_over.emit(game.final_result)
+	# Only reveal the host's public selection, once per client and during setup.
+	# Later snapshots/reconnections into a running match never restart the intro.
+	if game.current_phase == game.PHASE_SETUP:
+		game.present_school_draw_once()

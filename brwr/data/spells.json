@@ -15577,5 +15577,1963 @@
       "revelation": true
     },
     "source": "Codex Arcanum, Mages: Parcae"
+  },
+  {
+    "id": "natural_invocation",
+    "name": "Natural Invocation",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "place_target_colored_room",
+          "colors": [
+            "green"
+          ]
+        },
+        {
+          "type": "summon_familiar",
+          "id": "eracleto"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "room_effect",
+          "range": "*",
+          "effects": [
+            {
+              "type": "activate_target_room",
+              "allow_reactivate": true
+            },
+            {
+              "type": "place_instability",
+              "amount": 2
+            },
+            {
+              "type": "scaled_school_effect",
+              "value": "instability_shortfall",
+              "effect": {
+                "type": "heal_caster"
+              },
+              "total": 2
+            }
+          ],
+          "room_colors": [
+            "green"
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 68, Agorix"
+  },
+  {
+    "id": "divine_judgement",
+    "name": "Divine Judgement",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "trap",
+      "element": "sacred",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "choose_one",
+          "options": [
+            {
+              "id": "0",
+              "label": "Inflict Damage based on the target's Trophies",
+              "effects": [
+                {
+                  "type": "scaled_school_effect",
+                  "value": "target_trophies",
+                  "effect": {
+                    "type": "damage",
+                    "amount": 0
+                  },
+                  "base": 2,
+                  "max": 4
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Steal Power based on the target's Solved Quests",
+              "effects": [
+                {
+                  "type": "scaled_school_effect",
+                  "value": "target_solved_quests",
+                  "effect": {
+                    "type": "steal_power"
+                  },
+                  "max": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "caster_defeated_by_mage"
+      },
+      "trigger_target": "source_mage"
+    },
+    "dark": {
+      "type": "trap",
+      "element": "sacred",
+      "target": "mage",
+      "range": 1,
+      "effects": [
+        {
+          "type": "choose_one",
+          "options": [
+            {
+              "id": "0",
+              "label": "Inflict Damage based on the target's Trophies",
+              "effects": [
+                {
+                  "type": "scaled_school_effect",
+                  "value": "target_trophies",
+                  "effect": {
+                    "type": "damage",
+                    "amount": 0
+                  },
+                  "base": 2,
+                  "max": 4
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Steal Power based on the target's Solved Quests",
+              "effects": [
+                {
+                  "type": "scaled_school_effect",
+                  "value": "target_solved_quests",
+                  "effect": {
+                    "type": "steal_power"
+                  },
+                  "max": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "caster_defeated_by_mage"
+      },
+      "trigger_target": "source_mage"
+    },
+    "source": "Codex Arcanum p. 68, Albedo"
+  },
+  {
+    "id": "symbiosis",
+    "name": "Symbiosis",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "self_room_effect",
+          "effects": [
+            {
+              "type": "summon_evocation",
+              "evocation_id": "dagon"
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "caster_resolves_summon"
+      }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            }
+          ],
+          "owner": "self",
+          "distinct_key": "symbiosis_evocations"
+        },
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control",
+              "strength_bonus": 1
+            }
+          ],
+          "owner": "self",
+          "distinct_key": "symbiosis_evocations"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 68, Alhazred"
+  },
+  {
+    "id": "dark_passenger",
+    "name": "Dark Passenger",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "spell_damage_to_other_mage_bonus": 1,
+        "instability_after_spell_damage_to_mage": 1
+      }
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "evocation",
+      "range": 2,
+      "effects": [
+        {
+          "type": "remove_evocation_then",
+          "max_health": 3,
+          "effects": [
+            {
+              "type": "self_room_effect",
+              "effects": [
+                {
+                  "type": "summon_removed_evocation"
+                }
+              ]
+            },
+            {
+              "type": "removed_owner_power",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 69, Alice"
+  },
+  {
+    "id": "bharatanatyam",
+    "name": "Bharatanatyam",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "air",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "assign_jinx",
+          "id": "divine_dance"
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "air",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 2,
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "another_mage_placed_in_cell"
+      }
+    },
+    "source": "Codex Arcanum p. 69, Alisha"
+  },
+  {
+    "id": "magic_tunnel",
+    "name": "Magic Tunnel",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "place_self_in_room",
+          "room_id": "black_rose"
+        },
+        {
+          "type": "room_effect",
+          "range": 1,
+          "effects": [
+            {
+              "type": "activate_target_room",
+              "allow_reactivate": true
+            },
+            {
+              "type": "black_rose_power_if_room_activated",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "remove_instability",
+          "amount": 2,
+          "up_to": true
+        },
+        {
+          "type": "fixed_room_effect",
+          "room_id": "black_rose",
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 70, Architect"
+  },
+  {
+    "id": "assembly_line",
+    "name": "Assembly Line",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "cadaver"
+        },
+        {
+          "type": "if_effect_result",
+          "key": "last_summoned_evocation",
+          "effects": [
+            {
+              "type": "assign_upgrade",
+              "choice": true
+            },
+            {
+              "type": "activate_summoned_evocation"
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "remove_evocation_then",
+              "owned": true,
+              "effects": [
+                {
+                  "type": "room_effect",
+                  "range": "*",
+                  "effects": [
+                    {
+                      "type": "summon_evocation",
+                      "evocation_id": "colossus"
+                    },
+                    {
+                      "type": "if_effect_result",
+                      "key": "last_summoned_evocation",
+                      "effects": [
+                        {
+                          "type": "assign_upgrade",
+                          "choice": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "use_primary": true,
+          "owner": "self",
+          "archetype": "undead",
+          "has_upgrade": true
+        }
+      ],
+      "target_owner": "self",
+      "target_archetype": "undead",
+      "target_has_upgrade": true
+    },
+    "source": "Codex Arcanum p. 70, Arianna"
+  },
+  {
+    "id": "wanderers_dream",
+    "name": "Wanderer's Dream",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "school_condition",
+          "condition": "target_nightmares",
+          "minimum": 1,
+          "effects": [],
+          "otherwise": [
+            {
+              "type": "assign_nightmare",
+              "evocation_id": "umbra"
+            }
+          ]
+        },
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control",
+              "strength_bonus": 2
+            }
+          ],
+          "archetype": "nightmare",
+          "assigned_to_target": true
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "remove_many_evocations",
+          "archetype": "nightmare",
+          "amount": 2,
+          "effects": [
+            {
+              "type": "repeat_counted_effect",
+              "key": "school_removed_count",
+              "effects": [
+                {
+                  "type": "filtered_model_effect",
+                  "effects": [
+                    {
+                      "type": "assign_nightmare",
+                      "evocation_id": "umbra"
+                    },
+                    {
+                      "type": "activate_last_nightmare"
+                    }
+                  ],
+                  "target": "mage"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 70, Baron Doria"
+  },
+  {
+    "id": "elemental_spirits",
+    "name": "Elemental Spirits",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "damage_reduction": 1
+      }
+    },
+    "dark": {
+      "type": "combat",
+      "element": "all",
+      "target": "room",
+      "range": 0,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "combat_spell_damage_bonus": 1
+      }
+    },
+    "source": "Codex Arcanum p. 71, Bella"
+  },
+  {
+    "id": "giant_stampede",
+    "name": "Giant Stampede",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "move_then_effect",
+          "effects": [
+            {
+              "type": "self_room_effect",
+              "effects": [
+                {
+                  "type": "damage",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "move_then_effect",
+          "effects": [
+            {
+              "type": "self_room_effect",
+              "effects": [
+                {
+                  "type": "damage",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "place_instability",
+          "amount": 2
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 71, Cacus"
+  },
+  {
+    "id": "technodomain",
+    "name": "Technodomain",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_in_unoccupied_type_room",
+          "evocation_id": "doll",
+          "range": 1
+        },
+        {
+          "type": "summon_in_unoccupied_type_room",
+          "evocation_id": "doll",
+          "range": 1
+        },
+        {
+          "type": "summon_in_unoccupied_type_room",
+          "evocation_id": "doll",
+          "range": 1
+        },
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            }
+          ],
+          "owner": "self",
+          "evocation_id": "doll"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "for_school_mages",
+              "range": 0,
+              "include_self": true,
+              "effects": [
+                {
+                  "type": "convert_damage",
+                  "amount": 2
+                }
+              ]
+            }
+          ],
+          "owner": "self"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 72, Boogeyman"
+  },
+  {
+    "id": "gifts_of_death",
+    "name": "Gifts of Death",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "evocation",
+      "range": "*",
+      "effects": [
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            },
+            {
+              "type": "if_effect_result",
+              "key": "last_activated_evocation",
+              "effects": [
+                {
+                  "type": "gain_power",
+                  "amount": 1
+                }
+              ]
+            }
+          ],
+          "use_primary": true,
+          "archetype": "undead",
+          "distinct_key": "gifts_undead"
+        },
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            },
+            {
+              "type": "if_effect_result",
+              "key": "last_activated_evocation",
+              "effects": [
+                {
+                  "type": "gain_power",
+                  "amount": 1
+                }
+              ]
+            }
+          ],
+          "archetype": "undead",
+          "distinct_key": "gifts_undead"
+        }
+      ],
+      "target_archetype": "undead"
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "draw_random_memories_up_to",
+          "amount": 3,
+          "cost": "power"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 72, Cosma"
+  },
+  {
+    "id": "blood_rage",
+    "name": "Blood Rage",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "mage_attack",
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "mage_event",
+        "event_type": "damage_inflicted",
+        "target": "self",
+        "min_amount": 1
+      }
+    },
+    "dark": {
+      "type": "combat",
+      "element": "magic",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "scaled_school_effect",
+          "value": "caster_damage",
+          "effect": {
+            "type": "damage",
+            "amount": 0
+          },
+          "divisor": 2,
+          "max": 4
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 73, Fenrir"
+  },
+  {
+    "id": "evil_eye",
+    "name": "Evil Eye",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "gain_power",
+          "amount": 1
+        },
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "assign_jinx",
+          "choice": true
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "discard_quest_or_jinx",
+          "effects": [
+            {
+              "type": "gain_power",
+              "amount": 1
+            },
+            {
+              "type": "draw_quest",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 74, Gramigna"
+  },
+  {
+    "id": "foretold_flight",
+    "name": "Foretold Flight",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "air",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "prophecy"
+        },
+        {
+          "type": "move_per_board_event",
+          "suppressed_trigger_types": [
+            "trap"
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "model",
+      "range": 0,
+      "effects": [
+        {
+          "type": "prophecy"
+        },
+        {
+          "type": "attack_selected_target",
+          "ignore_protection_if_events": 3
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 74, Griphon"
+  },
+  {
+    "id": "jotuns_vindar",
+    "name": "Jotuns Vindar",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "fire",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2,
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "marked_model_leaves_room"
+      }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "fire",
+      "target": "room",
+      "range": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "place_caster_in_target_room"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 75, Helblindi"
+  },
+  {
+    "id": "burning_the_sky",
+    "name": "Burning the Sky",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "all",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "hyperion_personal"
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "all",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "hyperion_personal"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 75, Hyperion - Titan"
+  },
+  {
+    "id": "molten_core",
+    "name": "Molten Core",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "place_instability",
+          "amount": 1
+        }
+      ],
+      "enhancement": {
+        "requires": [
+          "fire",
+          "fire"
+        ],
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "place_instability",
+            "amount": 1
+          }
+        ]
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage_per_target_room_instability",
+          "max_amount": 4
+        }
+      ],
+      "enhancement": {
+        "requires": [
+          "fire"
+        ],
+        "effects": [
+          {
+            "type": "place_instability",
+            "amount": 2
+          }
+        ]
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ],
+      "suppressed_trigger_types": [
+        "protection",
+        "trap"
+      ]
+    },
+    "source": "Codex Arcanum p. 76, Ignis"
+  },
+  {
+    "id": "notes_of_the_magister",
+    "name": "Notes of the Magister",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "choose_one",
+          "options": [
+            {
+              "id": "0",
+              "label": "Draw 2 Spells and gain 1 Power",
+              "effects": [
+                {
+                  "type": "draw_grimoire",
+                  "amount": 2
+                },
+                {
+                  "type": "gain_power",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Discard 4 Spells to draw a Forgotten Spell",
+              "effects": [
+                {
+                  "type": "conditional_payment",
+                  "cost": {
+                    "type": "discard_spell",
+                    "amount": 4,
+                    "from": "hand",
+                    "destination": "memories"
+                  },
+                  "effects": [
+                    {
+                      "type": "draw_forgotten",
+                      "amount": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "trap",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "peek_forgotten_keep_bottom",
+          "amount": 2
+        }
+      ],
+      "trigger": {
+        "type": "mage_event",
+        "event_type": "forgotten_spell_drawn",
+        "source": "other"
+      },
+      "trigger_target": "self"
+    },
+    "source": "Codex Arcanum p. 76, Irene"
+  },
+  {
+    "id": "extinguishing_light",
+    "name": "Extinguishing Light",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "optional_effect",
+          "prompt": "Use this optional Effect?",
+          "effects": [
+            {
+              "type": "filtered_model_effect",
+              "effects": [
+                {
+                  "type": "assign_destiny"
+                }
+              ],
+              "target": "mage"
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "mage_placed_in_cell"
+      }
+    },
+    "dark": {
+      "type": "combat",
+      "element": "profane",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "assign_destiny"
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "school_condition",
+          "condition": "target_survived",
+          "effects": [
+            {
+              "type": "gain_target_trophy"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 76, Jack"
+  },
+  {
+    "id": "time_twister",
+    "name": "Time Twister",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "draw_random_memories_up_to",
+          "amount": 3,
+          "cost": "damage"
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "all",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "discard_hand_for_effect",
+          "amount": 2,
+          "effects": [
+            {
+              "type": "scaled_school_effect",
+              "value": "discarded_spells",
+              "effect": {
+                "type": "damage",
+                "amount": 0
+              },
+              "multiplier": 2
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 77, Jukas"
+  },
+  {
+    "id": "malia",
+    "name": "Malia",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "steal_power",
+          "amount": 1
+        },
+        {
+          "type": "assign_jinx",
+          "id": "spinning_wheel_sting"
+        },
+        {
+          "type": "mage_move",
+          "distance": 1
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "trigger_target_effect",
+          "effects": [
+            {
+              "type": "convert_damage",
+              "amount": 1
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "black_rose_damages_another_mage"
+      }
+    },
+    "source": "Codex Arcanum p. 78, Maelice"
+  },
+  {
+    "id": "drums_of_war",
+    "name": "Drums of War",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "earth",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "each_mage_move_attack",
+          "power_per_attack": 1,
+          "max": 3
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "self_room_effect",
+          "effects": [
+            {
+              "type": "scaled_school_effect",
+              "value": "mage_strength",
+              "effect": {
+                "type": "damage",
+                "amount": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 78, Minotaurus"
+  },
+  {
+    "id": "asgardian_winds",
+    "name": "Asgardian Winds",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "air",
+      "target": "model",
+      "range": 1,
+      "effects": [
+        {
+          "type": "scaled_school_effect",
+          "value": "owned_evocations",
+          "effect": {
+            "type": "damage",
+            "amount": 0
+          },
+          "archetype": "equipment",
+          "base": 1,
+          "max": 4
+        },
+        {
+          "type": "school_condition",
+          "condition": "target_survived",
+          "effects": [
+            {
+              "type": "summon_equipment"
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "air",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        },
+        {
+          "type": "target_discard_hand",
+          "amount": 1
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 79, Odin"
+  },
+  {
+    "id": "blood_pact",
+    "name": "Blood Pact",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 0,
+      "effects": [
+        {
+          "type": "pain",
+          "amount": 3
+        },
+        {
+          "type": "choose_evocation_to_summon",
+          "max_health": 3
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "evocation",
+      "range": 2,
+      "effects": [
+        {
+          "type": "remove_evocation_then",
+          "max_health": 3,
+          "effects": [
+            {
+              "type": "self_effect",
+              "effects": [
+                {
+                  "type": "heal",
+                  "amount": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 80, Razvan"
+  },
+  {
+    "id": "chaos_strike",
+    "name": "Chaos Strike",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "combat",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "optional_effect",
+          "prompt": "Use this optional Effect?",
+          "effects": [
+            {
+              "type": "place_caster_in_vastum_room"
+            }
+          ]
+        },
+        {
+          "type": "mage_attack",
+          "optional": true,
+          "effects": [
+            {
+              "type": "chaos"
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "mage_attack",
+          "optional": true,
+          "effects": [
+            {
+              "type": "place_vastum",
+              "room_source": "target_model"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 81, Rubedo"
+  },
+  {
+    "id": "light_and_shadow",
+    "name": "Light and Shadow",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "options": [
+            {
+              "id": "0",
+              "label": "Solve an Active Quest",
+              "effects": [
+                {
+                  "type": "solve_active_quest"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Assign 2 random Jinxes",
+              "effects": [
+                {
+                  "type": "filtered_model_effect",
+                  "effects": [
+                    {
+                      "type": "assign_jinx"
+                    }
+                  ],
+                  "target": "mage",
+                  "range": 1
+                },
+                {
+                  "type": "filtered_model_effect",
+                  "effects": [
+                    {
+                      "type": "assign_jinx"
+                    }
+                  ],
+                  "target": "mage",
+                  "range": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "mage",
+      "range": "*",
+      "effects": [
+        {
+          "type": "assign_jinx"
+        },
+        {
+          "type": "target_mage_room_effect",
+          "effects": [
+            {
+              "type": "summon_evocation",
+              "evocation_id": "pharaoh"
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 81, Saba"
+  },
+  {
+    "id": "contagium",
+    "name": "Contagium",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "repeat_paid_effect",
+          "repeats": 2,
+          "effects": [
+            {
+              "type": "choose_one",
+              "options": [
+                {
+                  "id": "0",
+                  "label": "Convert 1 Instability",
+                  "effects": [
+                    {
+                      "type": "convert_instability",
+                      "amount": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "1",
+                  "label": "Place 1 Instability",
+                  "effects": [
+                    {
+                      "type": "place_instability",
+                      "amount": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "magic",
+      "target": "mage",
+      "range": 2,
+      "effects": [
+        {
+          "type": "target_discard_hand",
+          "amount": 3,
+          "up_to": true
+        },
+        {
+          "type": "scaled_school_effect",
+          "value": "discard_shortfall",
+          "effect": {
+            "type": "convert_damage"
+          },
+          "total": 3
+        },
+        {
+          "type": "scaled_school_effect",
+          "value": "discard_shortfall",
+          "effect": {
+            "type": "draw_grimoire"
+          },
+          "total": 3
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 82, Shroudtech"
+  },
+  {
+    "id": "unio_perpetua",
+    "name": "Unio Perpetua",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "room",
+      "range": 2,
+      "effects": [
+        {
+          "type": "place_caster_in_target_room"
+        },
+        {
+          "type": "pay_power_or_effect",
+          "amount": 1,
+          "effects": [
+            {
+              "type": "self_room_effect",
+              "effects": [
+                {
+                  "type": "convert_instability",
+                  "amount": 2
+                }
+              ]
+            }
+          ],
+          "otherwise": [
+            {
+              "type": "optional_effect",
+              "prompt": "Use this optional Effect?",
+              "effects": [
+                {
+                  "type": "self_room_effect",
+                  "effects": [
+                    {
+                      "type": "place_instability",
+                      "amount": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "optional_effect",
+          "prompt": "Discard Unio Perpetua to ignore this Damage?",
+          "effects": [
+            {
+              "type": "discard_triggering_persistent"
+            },
+            {
+              "type": "ignore_trigger_damage",
+              "amount": 999
+            }
+          ],
+          "only_on_trigger": true
+        }
+      ],
+      "persistent": true,
+      "trigger": {
+        "type": "you_suffer_damage"
+      }
+    },
+    "source": "Codex Arcanum p. 82, Slenderman"
+  },
+  {
+    "id": "mastery",
+    "name": "Mastery",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "combat",
+      "element": "all",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "geoform",
+          "room_colors": [
+            "red",
+            "purple"
+          ],
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "green",
+            "yellow"
+          ],
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "blue",
+            "grey",
+            "gray"
+          ],
+          "effects": [
+            {
+              "type": "draw_grimoire",
+              "amount": 2
+            },
+            {
+              "type": "self_effect",
+              "effects": [
+                {
+                  "type": "heal",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "type": "optional_effect",
+              "prompt": "Use this optional Effect?",
+              "effects": [
+                {
+                  "type": "place_caster_in_target_room"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "black"
+          ],
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 2
+            },
+            {
+              "type": "steal_power",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "type": "combat",
+      "element": "all",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "geoform",
+          "room_colors": [
+            "red",
+            "purple"
+          ],
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "green",
+            "yellow"
+          ],
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "blue",
+            "grey",
+            "gray"
+          ],
+          "effects": [
+            {
+              "type": "draw_grimoire",
+              "amount": 2
+            },
+            {
+              "type": "self_effect",
+              "effects": [
+                {
+                  "type": "heal",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "type": "optional_effect",
+              "prompt": "Use this optional Effect?",
+              "effects": [
+                {
+                  "type": "place_caster_in_target_room"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "geoform",
+          "room_colors": [
+            "black"
+          ],
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 2
+            },
+            {
+              "type": "steal_power",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 82, Talia"
+  },
+  {
+    "id": "imperishable_fate",
+    "name": "Imperishable Fate",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "each_owned_evocation",
+          "effects": [
+            {
+              "type": "damage_selected_evocation",
+              "amount": 1,
+              "black_rose": true
+            }
+          ],
+          "only_on_initial_cast": true
+        }
+      ],
+      "persistent": true,
+      "passives": {
+        "evocation_strength_bonus": 1
+      }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            }
+          ],
+          "archetype": "undead",
+          "distinct_key": "imperishable_undead"
+        },
+        {
+          "type": "filtered_model_effect",
+          "effects": [
+            {
+              "type": "activate_target_evocation_under_control"
+            }
+          ],
+          "archetype": "undead",
+          "distinct_key": "imperishable_undead"
+        }
+      ]
+    },
+    "source": "Codex Arcanum p. 82, Ulrich"
   }
 ]

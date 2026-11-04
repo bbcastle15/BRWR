@@ -29,12 +29,16 @@ static func get_texture(spell_id: String, school_id: String = "") -> Texture2D:
 	# Preserve the supplied asset filename while retaining the printed card ID.
 	if spell_id == "lurk_in_the_shadows":
 		candidates.append("res://assets/spells/lurk_in_the_shadow.png")
+	var supplied_names := {"feverish_dreams": "feverish_dream", "suffocation": "suffococation", "throne_of_thorns": "throne_of_torns"}
+	if supplied_names.has(spell_id):
+		candidates.append("res://assets/spells/" + str(supplied_names[spell_id]) + ".png")
 	candidates.append(VisualAssets.spell_texture_path(spell_id))
 
 	for root in CARD_ART_ROOTS:
 		if school_id != "":
 			candidates.append(root.path_join(school_id).path_join(spell_id + ".png"))
 		candidates.append(root.path_join(spell_id + ".png"))
+	candidates.append("res://assets/spells/personal_codex/" + spell_id + ".png")
 
 	for path in candidates:
 		if not ResourceLoader.exists(path):

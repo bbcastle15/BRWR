@@ -1,0 +1,28 @@
+ 
+ 
+32 
+ 
+Hex  
+ 
+$  -  T h e  S c h o o l 
+Some Spells of this School assign Jinx Cards to a target Mage. When assigned, a Jinx card has to be taken from its deck and placed 
+next to the target's Mage Sheet. Each Jinx Card imposes a negative Effect on the Mage it is assigned to. Whenever a Mage fulfills 
+the Task requirement of a Jinx assigned to them, they place a * on the leftmost Slot of that Jinx Card. When a Mage has placed a 
+* on each Cube Slot of a Jinx he assigned to them, they discard that Jinx.  
+A Mage can have any number of Jinx Cards assigned to them, but no more than 1 Jinx Card with the same name can be 
+assigned to the same Mage. If an Effect would assign to a Mage a second Jinx with the same name, that Jinx is not assigned.  
+If an Effect assigns a specific Jinx but there are no more cards of that Jinx left in the deck, that Jinx is not assigned. 
+F  -  E l e m e n t s 
+6 A, 5 E, 5 G, 6 B  
+&  -  J i n x  C a r d s 
+    
+3x Oblivion 3x Slowness 3x Vulnerability 3x Weakness 
+Y  -  R e l a t e d  M a g e s 
+Alisha, Gramigna, Maelice 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

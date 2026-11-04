@@ -53,7 +53,7 @@ func refresh():
 	index=clampi(index,0,game.public_history.size()-1)
 	var entry:Dictionary=game.public_history[index]
 	title.text="%d / %d · Round %d · %s" % [index+1,game.public_history.size(),entry.round,entry.title]
-	if int(entry.get("player",-1))>=0:title.text += " · " + ("Avatar" if AvatarRules.is_avatar(game,int(entry.player)) else "Player %d" % (int(entry.player)+1))
+	if int(entry.get("player",-1))>=0:title.text += " · " + game.player_display_name(int(entry.player))
 	older.disabled=index==0;newer.disabled=index==game.public_history.size()-1
 	if entry.get("triggered",false):
 		title.text+=" · TRIGGERED"

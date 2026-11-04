@@ -17,6 +17,7 @@ var board_title: Label
 var shown_player := -1
 var observed_viewer := -2
 var observed: Dictionary = {}
+var observed_avatar_reaction := ""
 var animation_queue: Array[Dictionary] = []
 var animation: Tween
 var animated_node: Control
@@ -26,6 +27,9 @@ var animated_rest_scale := Vector2.ONE
 var animated_damage_ghost: bool = false
 var animated_trophy_ghost: bool = false
 var hidden_trophy: Control
+var animated_avatar_marker := false
+var avatar_marker_event: Dictionary = {}
+var hidden_avatar_marker: Control
 var hidden_damage_cube: Control = null
 var damage_display: Dictionary = {}
 var damage_event: Dictionary = {}
@@ -50,6 +54,12 @@ var evocation_names_visible := false
 var world_placements: Array[CanvasItem] = []
 var world_tweens: Array[Tween] = []
 var attack_queue: Array = []
+var world_removals: Array[Node2D] = []
+var action_notice: PanelContainer
+var phase_notice: PanelContainer
+var phase_tween: Tween
+var phase_queue: Array[Dictionary] = []
+var notice_layer: CanvasLayer
 
 func setup(game_node) -> void:
 	game = game_node
@@ -63,6 +73,9 @@ func setup(game_node) -> void:
 	_build_sidebar()
 	_build_board_overlay()
 	_build_card_overlay()
+	notice_layer = CanvasLayer.new()
+	notice_layer.layer = 110
+	add_child(notice_layer)
 	for board in game.player_boards:
 		if board is AvatarBoard: continue
 		board.reparent(board_stage)
@@ -74,6 +87,8 @@ func setup(game_node) -> void:
 	game.player_input_resolved.connect(func(_request): board_choices.clear())
 	observed_viewer = game.get_ui_viewer_player_index()
 	_observe(false)
+	# Show the first available Avatar token as well as later top-card changes.
+	observed_avatar_reaction = ""
 	_refresh_banners()
 
 func _build_sidebar() -> void:
@@ -181,6 +196,10 @@ func _build_sidebar() -> void:
 	exit_button.add_theme_font_size_override("font_size", 13)
 	exit_button.pressed.connect(_exit_game)
 	column.add_child(exit_button)
+	for control in column.get_children():
+		if control is Button:
+			control.custom_minimum_size = Vector2(0, 44)
+			control.add_theme_font_size_override("font_size", 14)
 
 func _set_evocation_names_visible(value: bool) -> void:
 	evocation_names_visible = value
@@ -219,6 +238,9 @@ func _build_board_overlay() -> void:
 	board_title = Label.new()
 	board_title.position = Vector2(22, 12)
 	board_title.add_theme_font_size_override("font_size", 21)
+	board_title.add_theme_stylebox_override("normal", Style.panel(Style.GOLD, Style.INK, 1))
+	board_title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	board_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	board_overlay.add_child(board_title)
 	var close := Button.new()
 	close.text = "Lodge  ×"
@@ -227,12 +249,13 @@ func _build_board_overlay() -> void:
 	close.offset_right = -12
 	close.offset_top = 8
 	close.offset_bottom = 48
-	close.pressed.connect(close_board)
+	close.pressed.connect(func(): close_board(true))
 	board_overlay.add_child(close)
 	board_stage = Control.new()
 	board_stage.name = "BoardStage"
 	board_stage.mouse_filter = Control.MOUSE_FILTER_PASS
 	board_overlay.add_child(board_stage)
+	board_overlay.move_child(board_stage, 1) # Header and Close remain above zoomed boards.
 	board_overlay.hide()
 
 func _build_card_overlay() -> void:
@@ -323,7 +346,7 @@ func sync_card_presentation() -> void:
 	var category: String = {"events": "EVENT", "quests": "QUEST", "rooms": "ROOM", "spells": "SPELL", "jinxs": "JINX"}.get(str(data.kind), "")
 	presentation_title.text = category + " · " + str(data.title)
 	if data.kind == "jinxs":
-		presentation_title.text += " · Player %d" % (int(data.player) + 1)
+		presentation_title.text += " · " + game.player_display_name(int(data.player))
 	presentation_side.visible = data.kind == "spells" and not bool(data.get("single", false))
 	presentation_rules.visible = presentation_art.texture == null
 	presentation_rules.text = ""
@@ -339,7 +362,7 @@ func sync_card_presentation() -> void:
 		if data.has("awaiting_players"):
 			presentation_hint.text = "Click to continue · each player confirms"
 		elif game.network_session != null and not game.can_acknowledge_card_presentation(game.local_viewer_index):
-			presentation_hint.text = "Click to close · waiting for Player %d" % (int(data.get("acknowledge_player", 0)) + 1)
+			presentation_hint.text = "Click to close · waiting for " + game.player_display_name(int(data.get("acknowledge_player", 0)))
 	_layout_card_presentation()
 	card_overlay.modulate.a = 0.0
 	card_overlay.show()
@@ -380,19 +403,18 @@ func _layout() -> void:
 		if not child is ScrollContainer:
 			fixed_height += child.get_combined_minimum_size().y
 	var available_rail_height := get_viewport().get_visible_rect().size.y - 24 - fixed_height
-	var banner_height := clampf(floorf((available_rail_height - (banners.size() - 1) * 10) / maxf(1, banners.size())) - 2, 42, 102)
+	var banner_height := clampf(floorf((available_rail_height - (banners.size() - 1) * 10) / maxf(1, banners.size())) - 2, 90, 110)
 	for banner in banners:
 		banner.custom_minimum_size.y = banner_height
 		banner.get_node("Detail").position.y = 31
 		banner.get_node("Detail").size.y = banner_height - 33
-		banner.get_node("Detail").visible = banner_height >= 60
+		banner.get_node("Detail").visible = true
 		banner.get_node("Crown").position.y = maxf(8, banner_height - 34)
 	var available := board_overlay.size - Vector2(28, 64)
+	board_title.size = Vector2(maxf(0, board_overlay.size.x - 194), 36)
 	var board_size := Vector2(900, 730)
-	if shown_player >= 0 and AvatarRules.is_avatar(game, shown_player):
-		board_size = Vector2(1300, 1500)
-	if shown_player >= 0 and game.players[shown_player].transformation != null:
-		board_size.x = 1180
+	if shown_player >= 0:
+		board_size = game.player_boards[shown_player].get_display_size()
 	var ratio := maxf(0.1, minf(available.x / board_size.x, available.y / board_size.y))
 	board_stage.position = Vector2((board_overlay.size.x - board_size.x * ratio) * 0.5, 54)
 	board_stage.size = board_size
@@ -400,7 +422,7 @@ func _layout() -> void:
 	for board in game.player_boards:
 		if board is AvatarBoard:
 			if board.expanded:
-				board.position = Vector2(280, 1500)
+				board.position = board.expanded_position()
 				board.rotation = -PI / 2
 				board.scale = Vector2.ONE
 			continue
@@ -410,7 +432,7 @@ func _layout() -> void:
 
 func open_board(index: int) -> void:
 	if _has_damage_presentation(): return
-	_cancel_animation()
+	_cancel_animation(true)
 	_show_board(index)
 
 func _show_board(index: int) -> void:
@@ -433,18 +455,18 @@ func _show_board(index: int) -> void:
 	game.player_boards[index].refresh_spell_slots()
 	game.player_boards[index].refresh_action_tokens()
 	game.player_boards[index].refresh_transformation()
-	board_title.text = game.players[index].player_name + " · " + str(game.players[index].mage_id).capitalize()
+	board_title.text = game.player_display_name(index) + " · " + game.mage_school_label(index)
 	board_overlay.show()
 	_layout()
 
-func close_board() -> void:
+func close_board(skip_avatar_placement: bool = false) -> void:
 	if damage_waiting:
 		_acknowledge_damage_and_close()
 		return
 	# Browsing/phase UI must not cancel public damage received in a snapshot,
 	# including damage queued behind an Evocation attack or room animation.
 	if _has_damage_presentation(): return
-	_cancel_animation()
+	_cancel_animation(not skip_avatar_placement)
 	if game.avatar_board != null and game.avatar_board.expanded:
 		game.avatar_board.set_expanded(false, game)
 	board_overlay.hide()
@@ -465,15 +487,19 @@ func _on_request(_request: Dictionary) -> void:
 func _process(_delta: float) -> void:
 	if game == null or root == null:
 		return
+	if game.is_school_draw_playing():
+		return # Keep the initial Avatar/phase feedback queued until the Library reveal ends.
 	if board_overlay.visible and shown_player >= 0:
-		var board_width := 1180.0 if game.players[shown_player].transformation != null else 900.0
-		if AvatarRules.is_avatar(game, shown_player): board_width = 1300.0
-		if not is_equal_approx(board_stage.size.x, board_width):
+		var board_size: Vector2 = game.player_boards[shown_player].get_display_size()
+		if not board_stage.size.is_equal_approx(board_size):
 			_layout()
 	var viewer: int = game.get_ui_viewer_player_index()
 	if viewer != observed_viewer:
 		observed_viewer = viewer
-		if not _has_damage_presentation(): close_board()
+		# A click or target request can open the incoming viewer's own board
+		# before this frame observes the seat change. Preserve that opening.
+		var showing_new_viewer := shown_player == viewer
+		if not _has_damage_presentation() and not showing_new_viewer: close_board()
 		game._close_player_board_spell_preview()
 	_refresh_banners()
 	if damage_waiting:
@@ -484,6 +510,8 @@ func _process(_delta: float) -> void:
 	if attack_queue.is_empty() and Time.get_ticks_msec() >= game.visual_motion_until and not card_overlay.visible and not damage_waiting and animation == null and not animation_queue.is_empty():
 		_play_next_animation()
 	_play_world_placements()
+	_play_world_removals()
+	_play_phase_notice()
 	if not attack_queue.is_empty() and world_placements.is_empty() and not world_tweens.any(func(t):return t.is_valid() and t.is_running()) and Time.get_ticks_msec()>=game.visual_motion_until:
 		game.replay_attack_feedback(attack_queue.pop_front())
 
@@ -494,14 +522,20 @@ func _refresh_banners() -> void:
 		var player = game.players[i]
 		var active := i == int(turn.get("player_index", -1))
 		var has_crown: bool = i == game.crown_owner_id
-		var signature := str([active, player.mage_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i), has_crown, banners[i].custom_minimum_size.y])
+		var signature := str([active, player.mage_id, player.school_id, player.player_name, player.power, player.mage.get_remaining_health(), turn.get("actions_used", 0), board_choices.has(i), has_crown, banners[i].custom_minimum_size.y])
 		if banners[i].get_meta("signature", "") == signature:
 			continue
 		banners[i].set_meta("signature", signature)
 		banners[i].get_node("Name").text = player.player_name
 		banners[i].get_node("Count").text = "%d/%d" % [int(turn.get("actions_used", 0)), int(turn.get("action_limit", 2))] if active and game.current_phase == game.PHASE_ACTION else ""
 		banners[i].get_node("Crown").visible = has_crown
-		banners[i].get_node("Detail").text = "%s\nHP %d/%d · Power %d" % [str(player.mage_id).capitalize() if player.mage_id != "" else "Choose a Mage", player.mage.get_remaining_health(), player.mage.health, player.power] if banners[i].custom_minimum_size.y >= 78 else "HP %d · %d PP" % [player.mage.get_remaining_health(), player.power]
+		var detail: Label = banners[i].get_node("Detail")
+		detail.text = "%s\nHP %d/%d · Power %d" % [game.mage_school_label(i), player.mage.get_remaining_health(), player.mage.health, player.power]
+		detail.size.x = 146
+		detail.add_theme_font_size_override("font_size", 12)
+		detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		detail.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		detail.tooltip_text = game.mage_school_label(i)
 		var edge: Color = player.color.lerp(Color.WHITE, 0.22)
 		var normal := Style.panel(edge if active or board_choices.has(i) else edge.darkened(0.5), Color("252925") if active else Style.INK, 3 if active else 1)
 		normal.border_width_left = 6
@@ -510,7 +544,7 @@ func _refresh_banners() -> void:
 			normal.shadow_size = 12
 		banners[i].add_theme_stylebox_override("normal", normal)
 		banners[i].add_theme_stylebox_override("hover", Style.panel(edge, Color("2a3031"), 2))
-		banners[i].tooltip_text = "Open PlayerBoard" + (" · available targets" if board_choices.has(i) else "")
+		banners[i].tooltip_text = player.player_name + "\n" + game.mage_school_label(i) + "\nOpen PlayerBoard" + (" · available targets" if board_choices.has(i) else "")
 
 func _observe(animate: bool) -> void:
 	for i in game.players.size():
@@ -523,8 +557,6 @@ func _observe(animate: bool) -> void:
 			var old: Dictionary = observed[i]
 			for trophy_index in range(int(old.get("trophies", snapshot.trophies)), snapshot.trophies):
 				animation_queue.append({"player":i,"node":"", "kind":"trophy", "index":trophy_index})
-			if snapshot.physical < old.physical:
-				animation_queue.append({"player": i, "node": "PhysicalAction" + str(snapshot.physical), "kind": "physical"})
 			for slot_id in snapshot.slots:
 				var value: Array = snapshot.slots[slot_id]
 				# Markers are public, even on a face-down Trap/Protection. Revealed
@@ -532,10 +564,24 @@ func _observe(animate: bool) -> void:
 				if value[0] and str(value[2]) != "" and old.slots[slot_id][2] != value[2]:
 					animation_queue.append({"player": i, "node": "SpellSlots/" + ("QuickSpellSlot" if slot_id == "Q" else "SpellSlot" + slot_id) + "/SpellMarker", "kind": "marker", "slot": slot_id})
 		observed[i] = snapshot
+	_observe_avatar_reaction(animate)
+
+func _observe_avatar_reaction(animate: bool) -> void:
+	if game.avatar == null or game.avatar_board == null: return
+	var state: Dictionary = game.avatar.public_data()
+	# Public information only: both Moon-I damage backs remain indistinguishable.
+	# Include the deck count so two successive identical symbols still get placed.
+	var key := str([game.current_moon, state.get("deck_counts", {}).get(game.current_moon, 0), state.get("commands_used", 0), state.get("reaction", ""), state.get("reaction_type", ""), state.get("reaction_available", false)])
+	if key == observed_avatar_reaction: return
+	observed_avatar_reaction = key
+	game.avatar_board.refresh()
+	if animate and not game.suppress_placement_feedback and state.get("reaction_available", false):
+		animation_queue.append({"player": game.avatar.player_index, "node": "", "kind": "avatar_marker", "reaction_state": {"reaction": state.reaction, "reaction_type": state.reaction_type, "reaction_available": true}})
 
 func visuals_busy() -> bool:
 	world_tweens = world_tweens.filter(func(t): return t != null and t.is_valid() and t.is_running())
-	return not attack_queue.is_empty() or damage_waiting or animation != null or not animation_queue.is_empty() or not world_placements.is_empty() or not world_tweens.is_empty()
+	if is_processing() and (not phase_queue.is_empty() or (phase_tween != null and phase_tween.is_running())): return true
+	return not attack_queue.is_empty() or damage_waiting or animation != null or not animation_queue.is_empty() or not world_placements.is_empty() or not world_removals.is_empty() or not world_tweens.is_empty()
 
 func _has_damage_presentation() -> bool:
 	return animated_damage_ghost or animation_queue.any(func(event): return event.kind == "damage")
@@ -552,6 +598,12 @@ func _refresh_damage_display(index: int) -> void:
 	else: board.refresh_damage_track()
 
 func receive_feedback(event: Dictionary) -> void:
+	if event.get("kind") in ["phase", "turn", "moon"]:
+		phase_queue.append(event.duplicate())
+	if event.get("kind") == "physical_action":
+		animation_queue.append({"player": event.player, "node": "PhysicalAction" + str(event.token_index), "kind": "physical", "action": event.action})
+	if event.get("kind") == "destiny":
+		animation_queue.append({"player": event.player, "node": "", "kind": "destiny", "index": event.index})
 	if event.get("kind") == "attack":
 		attack_queue.append(event.duplicate())
 	if event.get("kind") == "damage_conversion":
@@ -593,14 +645,29 @@ func _play_next_animation() -> void:
 	animated_player = index
 	animated_damage_ghost = false
 	animated_trophy_ghost = false
-	if event.kind == "trophy":
+	animated_avatar_marker = false
+	if event.kind == "avatar_marker":
+		avatar_marker_event = event.duplicate(true)
+		var board: AvatarBoard = game.avatar_board
+		board.refresh()
+		animated_node = board.make_reaction_marker(event.reaction_state)
+		hidden_avatar_marker = board.cards_root.get_node_or_null(NodePath(str(animated_node.name)))
+		if is_instance_valid(hidden_avatar_marker): hidden_avatar_marker.hide()
+		# A separate presentation node survives an authoritative board refresh.
+		board.add_child(animated_node)
+		animated_avatar_marker = true
+	if event.kind in ["trophy", "destiny"]:
 		animated_node = null
 		var board = game.player_boards[index]
 		if board is AvatarBoard: board.refresh()
+		elif event.kind == "destiny": board.refresh_destiny_tokens()
 		else: board.refresh_trophies()
-		var stack = board.get_node_or_null("EvocationCards/AvatarTrophies" if board is AvatarBoard else "MageCardSlot/TrophyStack")
-		if stack != null and int(event.index) < stack.get_child_count():
+		var stack = board.get_node_or_null("DestinyTokens" if event.kind == "destiny" else ("EvocationCards/AvatarTrophies" if board is AvatarBoard else "MageCardSlot/TrophyStack"))
+		if event.kind == "destiny" and board is AvatarBoard:
+			hidden_trophy = board.cards_root.get_node_or_null("DestinyToken%d" % int(event.index))
+		elif stack != null and int(event.index) < stack.get_child_count():
 			hidden_trophy = stack.get_child(int(event.index))
+		if is_instance_valid(hidden_trophy):
 			animated_node = hidden_trophy.duplicate()
 			board_stage.add_child(animated_node)
 			animated_node.global_position = hidden_trophy.global_position
@@ -622,8 +689,10 @@ func _play_next_animation() -> void:
 			animated_node.position = board._health_position(int(event.cube_index)) - Vector2(14,14)
 			animated_node.scale = Vector2.ONE * 2.0
 		elif slot != null:
-			slot.add_child(animated_node)
-			animated_node.position = Vector2.ZERO
+			# Snapshot refreshes may rebuild the track. The animation must
+			# survive on the stable board, not inside an authoritative cube slot.
+			board.add_child(animated_node)
+			animated_node.position = board.get_global_transform().affine_inverse() * slot.global_position
 			animated_node.scale = Vector2.ONE * board.DAMAGE_CUBE_SCALE
 		else:
 			animated_node.free()
@@ -637,6 +706,10 @@ func _play_next_animation() -> void:
 	animated_node.pivot_offset = animated_node.size * 0.5
 	animation = create_tween()
 	if event.kind == "physical":
+		if is_instance_valid(action_notice): action_notice.queue_free()
+		action_notice = _make_notice("PHYSICAL ACTION", "%s · %s" % [game.player_display_name(index), str(event.get("action", "Physical Action"))])
+		board_overlay.add_child(action_notice)
+		action_notice.position = Vector2((board_overlay.size.x - action_notice.size.x) * 0.5, 10)
 		animated_node.text = "+"
 		animation.tween_interval(0.7)
 		animation.tween_property(animated_node, "scale:x", 0.03, 0.15).set_trans(Tween.TRANS_SINE)
@@ -671,6 +744,25 @@ func _play_next_animation() -> void:
 		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.45).set_trans(Tween.TRANS_SINE)
 		animation.tween_interval(0.10 if not animation_queue.is_empty() and animation_queue[0].kind == "damage" and animation_queue[0].player == index else 0.18)
+	elif event.kind == "avatar_marker":
+		# Focus the actual Hand slot, then place its reaction marker in close-up.
+		# The zoom affects presentation only and is restored on finish or skip.
+		var stage_position := board_stage.position
+		var stage_scale := board_stage.scale
+		var focus := board_stage.get_global_transform().affine_inverse() * (animated_node.get_global_transform() * (animated_node.size * 0.5))
+		var zoom_scale := stage_scale * 2.4
+		var zoom_position := board_overlay.size * Vector2(0.5, 0.52) - focus * zoom_scale
+		animated_node.modulate.a = 0.0
+		animated_node.position -= Vector2(0, 22)
+		animated_node.scale = animated_rest_scale * 1.4
+		animation.tween_property(board_stage, "scale", zoom_scale, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		animation.parallel().tween_property(board_stage, "position", zoom_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		animation.tween_property(animated_node, "modulate:a", 1.0, 0.35)
+		animation.parallel().tween_property(animated_node, "position", animated_rest_position, 0.65).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		animation.parallel().tween_property(animated_node, "scale", animated_rest_scale, 0.65).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		animation.tween_interval(1.1)
+		animation.tween_property(board_stage, "scale", stage_scale, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		animation.parallel().tween_property(board_stage, "position", stage_position, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	else:
 		animated_node.modulate.a = 0.0
 		animated_node.position -= Vector2(0, 20)
@@ -684,6 +776,7 @@ func _play_next_animation() -> void:
 
 func _finish_animation() -> void:
 	var finished_damage := animated_damage_ghost
+	var finished_avatar_marker := animated_avatar_marker
 	if animated_damage_ghost and not damage_event.is_empty():
 		damage_display[animated_player] = damage_event.owners.duplicate()
 		_refresh_damage_display(animated_player)
@@ -692,7 +785,7 @@ func _finish_animation() -> void:
 			if is_instance_valid(animated_node): animated_node.hide()
 			var track = game.player_boards[animated_player].get_node("DamageTrack")
 			defeat_notice = Label.new()
-			defeat_notice.text = "Player %d defeated" % (animated_player + 1)
+			defeat_notice.text = "%s defeated" % game.player_display_name(animated_player)
 			defeat_notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			defeat_notice.add_theme_font_size_override("font_size", 32)
 			defeat_notice.add_theme_stylebox_override("normal", Style.panel(Style.GOLD, Style.INK, 2))
@@ -715,6 +808,7 @@ func _finish_animation() -> void:
 		return
 	animation = null
 	board_layer.layer = 10
+	if is_instance_valid(action_notice): action_notice.queue_free()
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
 		animated_node.position = animated_rest_position
@@ -722,6 +816,11 @@ func _finish_animation() -> void:
 		animated_node.modulate = Color.WHITE
 	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
 	if animated_trophy_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if animated_avatar_marker and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_avatar_marker): hidden_avatar_marker.show()
+	animated_avatar_marker = false
+	avatar_marker_event.clear()
+	hidden_avatar_marker = null
 	if is_instance_valid(hidden_trophy): hidden_trophy.show()
 	animated_trophy_ghost = false
 	hidden_trophy = null
@@ -730,6 +829,7 @@ func _finish_animation() -> void:
 	hidden_damage_cube = null
 	animated_node = null
 	animated_player = -1
+	if finished_avatar_marker: _layout()
 	if not animation_queue.is_empty() and animation_queue[0].kind == "damage":
 		_play_next_animation()
 		return
@@ -746,7 +846,7 @@ func _finish_animation() -> void:
 	game.visual_motion_until = maxi(game.visual_motion_until, Time.get_ticks_msec() + 900)
 	# Damage-track refreshes replace cube nodes. Rebuild the next actual choice
 	# now so an Avatar conversion/heal never points to the discarded nodes.
-	if finished_damage and game.waiting_for_player_input and game.card_presentation.is_empty() and game.beta_hud != null:
+	if (finished_damage or finished_avatar_marker) and game.waiting_for_player_input and game.card_presentation.is_empty() and game.beta_hud != null:
 		game.beta_hud.present_pending_request.call_deferred(game.get_beta_pending_input(game.get_ui_viewer_player_index()))
 
 
@@ -792,10 +892,18 @@ func _play_world_placements() -> void:
 		placement.tween_interval(0.9)
 		delay += 0.32
 
-func _cancel_animation() -> void:
+func _cancel_animation(preserve_avatar_placement: bool = false) -> void:
+	# Closing an inspection or changing requests is not an acknowledgement of
+	# a public token placement. Keep queued feedback; resume an interrupted
+	# placement after the new card/choice. The explicit Close button may skip it.
+	var pending_avatar: Array[Dictionary] = animation_queue.filter(func(event): return event.kind == "avatar_marker")
+	if preserve_avatar_placement and animated_avatar_marker and not avatar_marker_event.is_empty():
+		pending_avatar.push_front(avatar_marker_event.duplicate(true))
+	if is_instance_valid(action_notice): action_notice.queue_free()
 	if animation != null:
 		animation.kill()
 	animation = null
+	if animated_avatar_marker: _layout()
 	board_layer.layer = 10
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
@@ -804,6 +912,11 @@ func _cancel_animation() -> void:
 		animated_node.modulate = Color.WHITE
 	if animated_damage_ghost and is_instance_valid(animated_node): animated_node.queue_free()
 	if animated_trophy_ghost and is_instance_valid(animated_node): animated_node.queue_free()
+	if animated_avatar_marker and is_instance_valid(animated_node): animated_node.queue_free()
+	if is_instance_valid(hidden_avatar_marker): hidden_avatar_marker.show()
+	animated_avatar_marker = false
+	avatar_marker_event.clear()
+	hidden_avatar_marker = null
 	if is_instance_valid(hidden_trophy): hidden_trophy.show()
 	animated_trophy_ghost = false
 	hidden_trophy = null
@@ -815,7 +928,7 @@ func _cancel_animation() -> void:
 	animated_node = null
 	animated_player = -1
 	transient_board = false
-	animation_queue.clear()
+	animation_queue.assign(pending_avatar)
 	_release_damage_display()
 
 func _release_damage_display() -> void:
@@ -841,8 +954,78 @@ func _show_choices() -> void:
 	if game.beta_hud != null:
 		game.beta_hud._toggle_panel()
 
+
+func _make_notice(kicker: String, message: String) -> PanelContainer:
+	var box := PanelContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.z_index = 100 # Above the PlayerBoard's stat labels and raised markers.
+	box.size = Vector2(640, 104)
+	box.add_theme_stylebox_override("panel", Style.panel(Style.GOLD, Style.INK, 2))
+	var ornament := Panel.new()
+	ornament.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ornament.add_theme_stylebox_override("panel", Style.fabric_panel())
+	ornament.modulate.a = 0.25
+	box.add_child(ornament)
+	var column := VBoxContainer.new()
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(column)
+	for row in [[kicker, 14, Style.GOLD], [message, 28, Style.PAPER]]:
+		var label := Label.new()
+		label.text = str(row[0])
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.add_theme_font_size_override("font_size", int(row[1]))
+		label.add_theme_color_override("font_color", row[2])
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		column.add_child(label)
+	return box
+
+
+func _play_phase_notice() -> void:
+	if phase_queue.is_empty() or (phase_tween != null and phase_tween.is_running()): return
+	if card_overlay.visible: return
+	var event: Dictionary = phase_queue.pop_front()
+	if is_instance_valid(phase_notice): phase_notice.queue_free()
+	match event.get("kind"):
+		"turn": phase_notice = _make_notice("", game.player_display_name(int(event.player)))
+		"moon": phase_notice = _make_notice("NEW MOON PHASE", "Moon " + ["I", "II", "III"][int(event.moon) - 1])
+		_: phase_notice = _make_notice("ROUND %d" % int(event.round), str(event.phase).replace("_", " ").capitalize() + " Phase")
+	notice_layer.add_child(phase_notice)
+	var center := (get_viewport().get_visible_rect().size - phase_notice.size) * 0.5
+	phase_notice.position = Vector2(-phase_notice.size.x, center.y)
+	phase_tween = create_tween()
+	phase_tween.tween_property(phase_notice, "position", center, 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	phase_tween.tween_interval(0.9 if event.get("kind") == "turn" else 1.5)
+	phase_tween.tween_property(phase_notice, "modulate:a", 0.0, 0.35)
+	phase_tween.parallel().tween_property(phase_notice, "position:x", center.x + 90, 0.35)
+	phase_tween.tween_callback(phase_notice.queue_free)
+
+
+func queue_world_removal(token: Node2D) -> void:
+	if world_removals.has(token): return
+	world_placements.erase(token)
+	token.process_mode = Node.PROCESS_MODE_DISABLED
+	for control in token.find_children("*", "Control", true, false):
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	world_removals.append(token)
+
+
+func _play_world_removals() -> void:
+	if world_removals.is_empty() or not attack_queue.is_empty() or Time.get_ticks_msec() < game.visual_motion_until: return
+	if card_overlay.visible or animation != null or damage_waiting: return
+	if board_overlay.visible: close_board()
+	for token in world_removals:
+		if not is_instance_valid(token): continue
+		var movement: Tween = token.get_meta("movement_tween") if token.has_meta("movement_tween") else null
+		if movement != null and movement.is_valid(): movement.kill()
+		var fade := create_tween()
+		world_tweens.append(fade)
+		fade.tween_property(token, "modulate:a", 0.0, 0.85).set_trans(Tween.TRANS_SINE)
+		fade.parallel().tween_property(token, "scale", token.scale * 0.82, 0.85)
+		fade.tween_callback(token.queue_free)
+	world_removals.clear()
+
 func _show_lodge() -> void:
-	close_board()
+	close_board(true)
 	if game.beta_hud != null:
 		game.beta_hud.hand_overlay.close_overlay()
 	var camera = game.get_node_or_null("TableCamera")
@@ -866,7 +1049,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_dismiss_card_presentation()
 			get_viewport().set_input_as_handled()
 		elif board_overlay.visible:
-			close_board()
+			close_board(true)
 			get_viewport().set_input_as_handled()
 
 func _open_log() -> void:
@@ -887,8 +1070,8 @@ func _show_damage_receipt() -> void:
 	damage_receipt.add_child(column)
 	var text := Label.new()
 	var attacker: int = damage_event.attacker
-	text.text = "%s dealt %d damage to Player %d" % ["Player %d" % (attacker+1) if attacker >= 0 else "Black Rose", damage_event.amount, damage_event.player+1]
-	if damage_event.defeated: text.text += "\nPlayer %d defeated" % (damage_event.player+1)
+	text.text = "%s dealt %d damage to %s" % [game.player_display_name(attacker), damage_event.amount, game.player_display_name(damage_event.player)]
+	if damage_event.defeated: text.text += "\n%s defeated" % game.player_display_name(damage_event.player)
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.add_theme_font_size_override("font_size", 22)
 	column.add_child(text)
@@ -915,9 +1098,15 @@ func _refresh_damage_receipt() -> void:
 	var local_player: int = game.local_viewer_index
 	if game.network_session == null: local_player = int(awaiting[0])
 	if not awaiting.has(local_player):
-		# The local user has acknowledged; other clients' progress is private.
-		damage_receipt.hide()
-		board_overlay.hide()
+		# Keep the shared board visible until every reader has acknowledged.
+		# AvatarBoard is reparented into this overlay, so hiding it removes the
+		# actual table board as well as the receipt.
+		var waiting := Label.new()
+		waiting.text = "Waiting for the other players to continue."
+		waiting.add_theme_font_size_override("font_size", 19)
+		receipt_buttons.add_child(waiting)
+		damage_receipt.show()
+		board_overlay.show()
 		return
 	damage_receipt.show()
 	var button := Button.new()
@@ -931,7 +1120,6 @@ func _acknowledge_damage_and_close() -> void:
 	var awaiting: Array = game.damage_acknowledgements.get(str(serial), [])
 	if game.network_session != null:
 		if awaiting.has(game.local_viewer_index) and not game.network_session.acknowledge_damage(serial): return
-		board_overlay.hide()
 	else:
 		if not awaiting.is_empty(): game.acknowledge_damage(serial, int(awaiting[0]))
 	_refresh_damage_receipt()

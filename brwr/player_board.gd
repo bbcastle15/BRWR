@@ -85,7 +85,7 @@ func refresh():
 	if player_state.mage.mage_id == "":
 		$MageName.text = "Mage: -"
 	else:
-		$MageName.text = "Mage: " + player_state.mage.mage_id
+		$MageName.text = game.mage_school_label(player_index)
 
 	$HealthLabel.text = (
 		"HP: "
@@ -509,9 +509,9 @@ func refresh_quests() -> void:
 			var card: Button
 			var quest: QuestState = data.get("quest")
 			if not data.get("can_inspect", false):
-				card = game.ReferenceCardPreview.make_back("Private Quest", Vector2(112, 154))
+				card = game.ReferenceCardPreview.make_back("Private Quest", Vector2(112, 154), Callable(), game.ReferenceCardPreview.quest_back_texture(quest.get_moon()) if quest != null else null)
 			elif quest != null and quest.solved:
-				card = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", Vector2(112, 154), game.open_quest_card.bind(quest))
+				card = game.ReferenceCardPreview.make_back("Solved Quest · Inspect", Vector2(112, 154), game.open_quest_card.bind(quest), game.ReferenceCardPreview.quest_back_texture(quest.get_moon()))
 			else:
 				card = game.ReferenceCardPreview.make_card("quests", data.id, data.name,
 					Vector2(112, 154), game.open_quest_card.bind(data.quest))
@@ -532,6 +532,61 @@ func refresh_quests() -> void:
 		if quest.solved:
 			solved += 1
 	counter.text = "Solved Quests: " + str(solved)
+	refresh_jinxes()
+
+
+func get_display_size() -> Vector2:
+	var width := 1180.0 if player_state.transformation != null else 900.0
+	if not player_state.mage.jinxes.is_empty(): width += 144.0
+	var paired := player_state.evocations.any(func(ev): return ev.assigned_mage >= 0 and game.is_evocation_in_play(ev))
+	return Vector2(width, 770 if paired else 730)
+
+
+func refresh_jinxes() -> void:
+	# Assigned Jinxes are public, regardless of the hand/Quest viewer.
+	var panel := get_node_or_null("JinxCards") as Control
+	if panel == null:
+		panel = Control.new()
+		panel.name = "JinxCards"
+		panel.position = Vector2(906, 40)
+		panel.size = Vector2(126, 644)
+		panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(panel)
+	for child in panel.get_children():
+		panel.remove_child(child)
+		child.queue_free()
+	panel.visible = not player_state.mage.jinxes.is_empty()
+	if not panel.visible: return
+	var heading := Label.new()
+	heading.text = "JINXES"
+	heading.add_theme_font_size_override("font_size", 12)
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(heading)
+	var scroll := ScrollContainer.new()
+	scroll.name = "Cards"
+	scroll.position = Vector2(0, 25)
+	scroll.size = Vector2(126, 619)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	panel.add_child(scroll)
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 10)
+	scroll.add_child(column)
+	for jinx in player_state.mage.jinxes:
+		var id: String = str(jinx.id)
+		var definition := ForgottenAttachments.definition("jinxes", id)
+		var item := VBoxContainer.new()
+		item.name = id
+		column.add_child(item)
+		var card: Button = game.ReferenceCardPreview.make_card("jinxs", id, str(definition.get("name", id)),
+			Vector2(112, 154), game.open_jinx_card.bind(player_index, id))
+		card.set_meta("jinx_id", id)
+		item.add_child(card)
+		var progress := Label.new()
+		progress.text = "Task: %d / %d" % [int(jinx.progress), int(definition.get("slots", 0))]
+		progress.add_theme_font_size_override("font_size", 13)
+		progress.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		progress.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		item.add_child(progress)
 
 
 func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: Vector2) -> void:
@@ -554,11 +609,14 @@ func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: V
 	# Keeping this as a proportion makes the overlay line up in both compact and
 	# enlarged Hand views without drawing synthetic empty slots over the art.
 	var slot_y: float = card_size.y * 0.555 - cube_visual * 0.5
+	var printed_centers := preload("res://reference_card_preview.gd").quest_progress_centers(quest.get_id(), card_size)
 	for i in range(placed):
 		var cube = cube_scene.instantiate()
 		cube.cube_color = get_damage_cube_color(player_index)
 		cube.scale = Vector2.ONE * cube_scale
 		cube.position = Vector2(start_x + i * (cube_visual + gap), slot_y)
+		if i < printed_centers.size():
+			cube.position = printed_centers[i] - Vector2.ONE * cube_visual * 0.5
 		overlay.add_child(cube)
 
 
@@ -752,6 +810,7 @@ func refresh_transformation() -> void:
 		button.pressed.connect(_inspect_transformation, CONNECT_DEFERRED)
 		panel.add_child(button)
 	panel.visible = player_state != null and player_state.transformation != null
+	panel.position.x = 916 + (144 if player_state != null and not player_state.mage.jinxes.is_empty() else 0)
 	if not panel.visible:
 		return
 	var card: SpellCardState = player_state.transformation.spell
@@ -770,7 +829,7 @@ func _inspect_transformation() -> void:
 func _make_trophy_token(owner_id: int, total_count: int) -> Control:
 	var token := preload("res://tabletop_style.gd").marker("trophy_token", get_damage_cube_color(owner_id), TROPHY_TOKEN_SIZE)
 	token.mouse_filter = Control.MOUSE_FILTER_PASS
-	token.tooltip_text = "Trophies: %d\nTrophy of Player %d" % [total_count, owner_id + 1]
+	token.tooltip_text = "Trophies: %d\nTrophy of %s" % [total_count, game.player_display_name(owner_id)]
 	return token
 
 
@@ -856,21 +915,21 @@ func refresh_destiny_tokens() -> void:
 		token.texture = game.ReferenceCardPreview.card_texture("tokens", "destiny")
 		token.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		token.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		token.position = Vector2(i * 34, 0)
-		token.size = Vector2(32, 32)
-		token.tooltip_text = "Destiny — assigned by Player %d" % (owner + 1)
+		token.position = Vector2(i * 44, 0)
+		token.size = Vector2(42, 42)
+		token.tooltip_text = "Destiny — assigned by " + game.player_display_name(owner)
 		row.add_child(token)
 		var cube = cube_scene.instantiate()
 		cube.cube_color = get_damage_cube_color(owner)
 		token.add_child(cube)
 		cube.scale = Vector2(0.7, 0.7)
-		cube.position = Vector2(20, 19)
+		cube.position = Vector2(28, 27)
 	for i in player_state.mage.infectio_tokens.size():
 		var owner: int = player_state.mage.infectio_tokens[i]
 		var token := Panel.new()
-		token.position = Vector2(i * 34, 34)
+		token.position = Vector2(i * 34, 46)
 		token.size = Vector2(30, 30)
-		token.tooltip_text = "Infectio — assigned by Player %d" % (owner + 1)
+		token.tooltip_text = "Infectio — assigned by " + game.player_display_name(owner)
 		row.add_child(token)
 		var cube = cube_scene.instantiate()
 		cube.cube_color = get_damage_cube_color(owner)
@@ -899,20 +958,10 @@ func refresh_evocations() -> void:
 	var attached_list := VBoxContainer.new()
 	attached_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	attachments.add_child(attached_list)
-	for jinx in player_state.mage.jinxes:
-		var definition := ForgottenAttachments.definition("jinxes", str(jinx.id))
-		var label := Button.new()
-		label.text = "%s\n%d / %d" % [definition.get("name", jinx.id), int(jinx.progress), int(definition.get("slots", 0))]
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.custom_minimum_size = Vector2(110, 42)
-		label.add_theme_font_size_override("font_size", 15)
-		label.tooltip_text = label.text
-		label.pressed.connect(game.open_jinx_card.bind(player_index, str(jinx.id)))
-		attached_list.add_child(label)
 	for evocation in player_state.evocations:
 		if not game.is_evocation_in_play(evocation):
 			continue
-		if evocation.assigned_mage >= 0 or bool(evocation.definition.get("no_slot", false)):
+		if bool(evocation.definition.get("no_slot", false)):
 			var nightmare := Button.new()
 			nightmare.text = "%s\nSlot %d · HP %s" % [evocation.evocation_name, evocation.assigned_slot,
 				"∞" if not ForgottenEvocations.ability(game, evocation, "immune_damage").is_empty() else str(evocation.get_remaining_health())]
@@ -926,10 +975,25 @@ func refresh_evocations() -> void:
 			continue
 		var card = game.ReferenceCardPreview.make_card("evocations", evocation.evocation_id,
 			evocation.get_display_name(), Vector2(164, 110), game.open_evocation_inspection.bind(evocation, true))
-		card.name = "EvocationSlot" + str(evocation.board_number)
-		card.position = Vector2(196 + (evocation.board_number - 1) * 169, 552)
+		var assigned: bool = evocation.assigned_mage >= 0
+		var slot: int = evocation.assigned_slot if assigned else evocation.board_number
+		var paired := player_state.evocations.any(func(ev): return ev.assigned_mage >= 0 and ev.assigned_slot == slot and game.is_evocation_in_play(ev))
+		card.name = ("AssignedEvocationSlot" if assigned else "EvocationSlot") + str(slot)
+		# The Nightmare shares the numbered slot; it never occupies a fourth slot.
+		card.position = Vector2(196 + (slot - 1) * 169, 636 if assigned else (508 if paired else 552))
 		card.set_meta("evocation", evocation)
 		row.add_child(card)
+		if FamiliarRules.is_familiar(evocation):
+			var action := Button.new()
+			action.name = "FamiliarAction"
+			action.position = Vector2(100, 67)
+			action.size = Vector2(60, 38)
+			action.text = "+" if evocation.familiar_action_available else "×"
+			action.add_theme_font_size_override("font_size", 24)
+			action.tooltip_text = "%s · Familiar Action · %s" % [evocation.evocation_name,"Guard" if evocation.familiar_guard else "Hunt"]
+			action.disabled = not evocation.familiar_action_available or game.get_player_board_action_options(player_index,"familiar").is_empty()
+			action.pressed.connect(game.open_player_board_action.bind(player_index,"familiar"))
+			card.add_child(action)
 		var damage := HBoxContainer.new()
 		damage.name = "EvocationDamage"
 		damage.position = Vector2(4, 4)
@@ -943,6 +1007,7 @@ func refresh_evocations() -> void:
 		var label := Label.new()
 		label.position = Vector2(4, 111)
 		label.text = "#%d · HP %d/%d · P%d" % [evocation.board_number, evocation.get_remaining_health(), evocation.health, game.get_evocation_controller_id(evocation) + 1]
+		if assigned: label.text = "Slot %s · Umbra · HP %d/%d" % [["I", "II", "III"][slot - 1], evocation.get_remaining_health(), evocation.health]
 		label.add_theme_font_size_override("font_size", 12)
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card.add_child(label)
@@ -955,6 +1020,7 @@ func refresh_evocations() -> void:
 			upgrade.position = Vector2(92 - index * 25, 62)
 			upgrade.tooltip_text = str(data.get("name", id)) + " → " + evocation.get_display_name()
 			card.add_child(upgrade)
+	attachments.visible = attached_list.get_child_count() > 0
 
 
 func _inspect_upgrade(evocation: EvocationState, id: String) -> void:
@@ -962,4 +1028,4 @@ func _inspect_upgrade(evocation: EvocationState, id: String) -> void:
 		return
 	var data := ForgottenAttachments.definition("upgrades", id)
 	game._reference_card_preview().show_card("upgrades", id, str(data.get("name", id)),
-		"Assigned to " + evocation.get_display_name() + " · Player %d" % (evocation.owner_id + 1))
+		"Assigned to " + evocation.get_display_name() + " · " + game.player_display_name(evocation.owner_id))

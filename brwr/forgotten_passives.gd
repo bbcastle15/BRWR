@@ -41,7 +41,7 @@ static func source_kind(game) -> String:
 
 static func context_for(game, active: ActiveSpellState) -> Dictionary:
 	return {"game": game, "caster_id": active.owner_id, "target_player_index": active.target_player_index,
-		"target_model_type": "mage", "spell_target_type": "mage", "spell_forgotten": true,
+		"target_model_type": "mage", "spell_target_type": "mage", "spell_forgotten": active.spell.forgotten,
 		"resolver_kind": "spell", "spell_id": active.spell.id, "caster_room_id": game.players[active.owner_id].mage.room_id}
 
 static func on_event(game, event: GameEvent) -> void:
@@ -49,6 +49,10 @@ static func on_event(game, event: GameEvent) -> void:
 		if event.source_model_type == "mage" and event.source_player_index >= 0:
 			event.amount += value(game.players[event.source_player_index], "damage_bonus")
 			if event.action_type == "spell": event.amount += value(game.players[event.source_player_index], "spell_damage_bonus")
+			if event.action_type == "spell":
+				var source: PlayerState = game.players[event.source_player_index]
+				if str(event.data.get("spell_type", "")) == "combat": event.amount += value(source,"combat_spell_damage_bonus")
+				if event.target_model_type == "mage" and event.target_player_index != event.source_player_index: event.amount += value(source,"spell_damage_to_other_mage_bonus")
 		if event.target_model_type == "mage" and event.target_player_index >= 0:
 			event.amount = maxi(0, event.amount - value(game.players[event.target_player_index], "damage_reduction"))
 			if event.action_type == "spell": event.amount = maxi(0, event.amount - value(game.players[event.target_player_index], "spell_damage_reduction"))
@@ -73,6 +77,8 @@ static func on_event(game, event: GameEvent) -> void:
 			var context := context_for(game, active)
 			var owner: int = active.owner_id
 			var marked: int = active.target_player_index
+			if event.event_type == "damage_inflicted" and event.amount > 0 and event.source_player_index == owner and event.source_model_type == "mage" and event.action_type == "spell" and event.target_model_type == "mage" and event.target_player_index != owner and int(data.get("instability_after_spell_damage_to_mage",0)) > 0:
+				ForgottenRules.queue(game,[{"type":"place_instability","amount":int(data.instability_after_spell_damage_to_mage)}],ForgottenRules.target_context(context,event.target_room_id))
 			if event.event_type == "power_gained" and event.source_player_index == marked and str(event.data.get("source_kind", "")) in data.get("bond_power_sources", []):
 				ForgottenRules.queue(game, [{"type": "gain_power", "amount": event.amount}], context)
 			if event.event_type == "damage_inflicted" and event.source_model_type == "mage" and event.source_player_index == marked and bool(data.get("reflect_marked_damage", false)):

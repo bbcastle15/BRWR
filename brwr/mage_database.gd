@@ -77,6 +77,7 @@ func get_mage_ids() -> Array[String]:
 	var result: Array[String] = []
 
 	for mage_id in mages.keys():
+		if not bool(mages[mage_id].get("implemented",true)): continue
 		result.append(str(mage_id))
 
 	return result

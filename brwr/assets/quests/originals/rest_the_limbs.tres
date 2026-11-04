@@ -1,0 +1,10 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/quests/originals/moon_1.png" id="1_source"]
+
+[resource]
+atlas = ExtResource("1_source")
+region = Rect2(202, 560, 176, 265)
+filter_clip = true
+metadata/progress_centers = PackedVector2Array(68, 131, 104, 131)
+

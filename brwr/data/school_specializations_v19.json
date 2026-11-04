@@ -277,7 +277,7 @@
   "hex": {
     "name": "Hex",
     "description": "Assign Jinx cards to opposing Mages. Each completed Jinx task places one of that Mage's Cubes on its slots; discard a filled Jinx and return the Cubes. Duplicate Jinx names cannot be assigned. Hex also removes Jinxes to power additional Effects.",
-    "art_pending": true,
+    "art_pending": false,
     "starting_grimoires": [
       {
         "id": "malediction",
@@ -341,7 +341,7 @@
   "nightmare": {
     "name": "Nightmare",
     "description": "Nightmares belong to the Black Rose and are assigned to Mages without consuming Evocation slots. They follow their assigned Mage and activate at the beginning of the Evocation Phase in the order chosen by the Crown holder. They are removed when the assigned Mage is defeated.",
-    "art_pending": true,
+    "art_pending": false,
     "starting_grimoires": [
       {
         "id": "scarecrow",

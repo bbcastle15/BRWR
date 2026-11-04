@@ -138,6 +138,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			var assigned: int = game.take_owner_cubes(caster, mini(int(effect.get("amount", 1)), 3 - mage.destiny_tokens.size()))
 			for i in range(assigned):
 				mage.destiny_tokens.append(caster)
+				game.record_table_feedback({"kind": "destiny", "player": target, "index": mage.destiny_tokens.size() - 1})
 			var counter: Dictionary = context.get("destiny_assignment_total", {})
 			counter["count"] = int(counter.get("count", 0)) + assigned
 			context["destiny_assignment_total"] = counter

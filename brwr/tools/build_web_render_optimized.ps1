@@ -162,6 +162,17 @@ foreach ($img in $sourceImages) {
 
     $content = [IO.File]::ReadAllText($importPath)
 
+    # Original Quest scans use pixel-coordinate AtlasTextures. Keep both the
+    # original resolution and lossless pixels, including tiny printed symbols.
+    $questOriginalsRoot = Join-Path $assetsRoot 'quests\originals'
+    if ($img.FullName.StartsWith($questOriginalsRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
+        $content = Set-ImportOption $content 'compress/mode' '0'
+        $content = Set-ImportOption $content 'process/size_limit' '0'
+        [IO.File]::WriteAllText($importPath, $content, (New-Object Text.UTF8Encoding($false)))
+        $edited++
+        continue
+    }
+
     # Web-only copy: large 2D artwork is imported as lossy WebP, which Godot
     # explicitly recommends for large 2D assets when file size matters.
     $content = Set-ImportOption $content 'compress/mode' '1'

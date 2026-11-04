@@ -32,8 +32,10 @@ static func model_options(game, effect: Dictionary, context: Dictionary) -> Arra
 			if ev == null and ForgottenPassives.value(game.players[int(o.value.player_index)], "cannot_be_evocation_attack_target") > 0: return false
 		if bool(effect.get("jinxed", false)) and (ev != null or game.players[int(o.value.player_index)].mage.jinxes.is_empty()): return false
 		if effect.has("owner") and (ev == null or (ev.owner_id == caster) != (effect.owner == "self")): return false
-		if effect.has("archetype") and (ev == null or ev.archetype != effect.archetype): return false
+		if effect.has("archetype") and (ev == null or not ev.has_archetype(str(effect.archetype))): return false
 		if effect.has("evocation_id") and (ev == null or ev.evocation_id != effect.evocation_id): return false
+		if bool(effect.get("has_upgrade", false)) and (ev == null or ev.upgrades.is_empty()): return false
+		if bool(effect.get("assigned_to_target", false)) and (ev == null or ev.assigned_mage != int(context.get("target_player_index", -1))): return false
 		if effect.has("max_health") and (ev == null or ev.health > int(effect.max_health)): return false
 		if int(effect.get("min_nightmares", 0)) > 0 and (ev != null or nightmare_count(game, int(o.value.player_index)) < int(effect.min_nightmares)): return false
 		if bool(effect.get("different_room", false)) and o.room_id == center: return false
@@ -106,7 +108,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			var options: Array = []
 			for data in game.evocation_database.evocations.values():
 				if data.archetype in ["equipment", "nightmare"] or bool(data.get("forgotten", false)) or int(data.health) > int(effect.get("max_health", 999)) or game.get_available_evocation_copies(data.id) <= 0: continue
-				if effect.has("archetype") and data.archetype != effect.archetype: continue
+				if effect.has("archetype") and data.archetype != effect.archetype and not str(effect.archetype) in data.get("additional_archetypes",[]): continue
 				options.append({"token": "summon:" + data.id, "value": data.id, "id": data.id, "name": data.name, "card_kind": "evocations"})
 			if not DruidicRules.choose(game, caster, context, "school_summon", options, "Choose an Evocation to summon."): return false
 			if not context.has("school_summon"): return true
@@ -324,7 +326,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 				for i in game.players[target].hand.size():
 					var card: SpellCardState = game.players[target].hand[i]
 					options.append({"token": "hand:%d" % i, "value": card, "id": card.id, "name": card.card_name})
-				game.request_effect_choice(target, "spell_discard", context, "school_hand_discard", options, amount, amount, "Choose Spells to discard.")
+				game.request_effect_choice(target, "spell_discard", context, "school_hand_discard", options, 0 if bool(effect.get("up_to", false)) else amount, amount, "Choose Spells to discard.")
 				return false
 			var selected = context.get("school_hand_discard", [])
 			var cards: Array = selected if selected is Array else [selected]
@@ -335,6 +337,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 					game.players[target].hand.erase(card)
 					game.move_spell_to_memories_or_remove(target, card)
 					removed += 1
+			context["mage_discard_count"] = removed
 			if bool(effect.get("steal_shortfall", false)): return ForgottenRules.queue(game, [{"type": "steal_power", "amount": int(effect.amount) - removed}], context)
 			return true
 		"convert_instability_reward_owners":
@@ -370,7 +373,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return ForgottenRules.queue(game, effect.effects, context) if target >= 0 and not game.players[target].mage.jinxes.is_empty() else true
 		"for_school_mages":
 			for id in game.get_play_order():
-				if id == caster or game.players[id].mage.in_cell or DeathEffectResolver.ignores(context, id): continue
+				if (id == caster and not bool(effect.get("include_self", false))) or game.players[id].mage.in_cell or DeathEffectResolver.ignores(context, id): continue
 				if bool(effect.get("jinxed", false)) and game.players[id].mage.jinxes.is_empty(): continue
 				if effect.has("range") and not game.is_room_within_effect_range(FamineRules.target_room(game, context), game.players[id].mage.room_id, effect.range): continue
 				ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, {"target_type": "mage", "player_index": id}))
@@ -471,6 +474,10 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return true
 		"filtered_model_effect":
 			var options := model_options(game, effect, context)
+			if bool(effect.get("use_primary",false)):
+				var primary: Array = options.filter(func(o): return o.value.get("evocation") == context.get("target_evocation") and context.get("target_evocation") != null)
+				if primary.is_empty(): return true
+				context["school_model"] = primary[0].value
 			if not DruidicRules.choose(game, caster, context, "school_model", options, str(effect.get("prompt", "Choose a Model.")), bool(effect.get("optional", false)), "model_target"):
 				return false
 			var selected = context.get("school_model")
@@ -483,7 +490,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 		"each_owned_evocation":
 			var seen: Array = []
 			for model in player.evocations:
-				if model.assigned_mage >= 0 or (effect.has("archetype") and model.archetype != effect.archetype): continue
+				if model.assigned_mage >= 0 or (effect.has("archetype") and not model.has_archetype(str(effect.archetype))): continue
 				if bool(effect.get("distinct_rooms", false)) and seen.has(model.room_id): continue
 				seen.append(model.room_id)
 				ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, {"target_type": "evocation", "evocation": model}))
@@ -493,12 +500,17 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			match str(effect.get("value", "")):
 				"owned_evocations":
 					for model in player.evocations:
-						if model.assigned_mage < 0 and (not effect.has("archetype") or model.archetype == effect.archetype): amount += 1
+						if model.assigned_mage < 0 and (not effect.has("archetype") or model.has_archetype(str(effect.archetype))): amount += 1
 				"target_strength": amount += game.get_evocation_effective_strength(ev) if ev != null else 0
 				"stored_target_strength": amount += int(context.get("stored_target_strength", 0))
 				"target_upgrades": amount += ev.upgrades.size() if ev != null else int(context.get("removed_upgrade_count", 0))
 				"mage_strength": amount += player.get_mage_strength()
 				"target_jinxes": amount += game.players[target].mage.jinxes.size() if target >= 0 else 0
+				"target_trophies": amount += game.players[target].trophies.size() if target >= 0 else 0
+				"target_solved_quests": amount += game.players[target].completed_quests.filter(func(q): return q.is_solved()).size() if target >= 0 else 0
+				"caster_damage": amount += player.mage.get_damage()
+				"discarded_spells": amount += int(context.get("mage_discard_count", 0))
+				"discard_shortfall": amount += maxi(0, int(effect.total) - int(context.get("mage_discard_count", 0)))
 				"instability_shortfall": amount += maxi(0, int(effect.total) - int(context.get("last_instability_placed", 0)))
 				"conversion_shortfall": amount += maxi(0, int(effect.total) - int(context.get("last_damage_converted", 0)))
 				"target_nightmares": amount += nightmare_count(game, target) if target >= 0 else 0
@@ -514,7 +526,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 					for model in ForgottenEvocations.all_models(game):
 						if model.archetype == "altar": amount += 1
 				"last_healed": amount += int(context.get("last_damage_healed", 0))
-			amount = mini(int(effect.get("max", 999)), amount * int(effect.get("multiplier", 1)))
+			amount = mini(int(effect.get("max", 999)), floori(float(amount * int(effect.get("multiplier", 1))) / maxi(1,int(effect.get("divisor",1)))))
 			var nested: Dictionary = effect.effect.duplicate(true)
 			nested["amount"] = amount
 			return ForgottenRules.queue(game, [nested], context)
@@ -522,6 +534,8 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			if ev == null or not game.is_evocation_in_play(ev) or (effect.has("max_health") and ev.health > int(effect.max_health)): return true
 			if bool(effect.get("owned", false)) and ev.owner_id != caster: return true
 			var nested := ForgottenRules.target_context(context, ev.room_id)
+			nested["removed_evocation_id"] = ev.evocation_id
+			nested["removed_evocation_owner"] = ev.owner_id
 			nested["stored_target_strength"] = game.get_evocation_effective_strength(ev)
 			nested["removed_archetype"] = ev.archetype
 			if bool(effect.get("owner_effect", false)): nested["caster_id"] = ev.owner_id

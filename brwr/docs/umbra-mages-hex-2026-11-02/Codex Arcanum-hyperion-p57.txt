@@ -1,0 +1,30 @@
+ 
+ 
+57 
+ 
+W ar  
+ 
+$  -  T h e  S c h o o l 
+Some Spells of this School allow you to summon special Evocations with the Equipment special Archetype. Equipments follow 
+these rules: 
+• An Equipment can be targeted as though as it was a T from the Mage who owns it.  
+• An Equipment with the n symbol ignores all : inflicted by Effects that target a L.  
+• An Equipment cannot have Upgrades assigned to it.  
+• A Mage cannot own more than one Equipment with the same name.  
+• An Equipment can only be summoned by an Effect with target Y. In fact, you cannot summon an Equipment when 
+resolving an Effect that summons any evocation if the target of that Effect is a Room `, L, Z. 
+Some Spells of this School have Effects with the Restore < keyword. A Mage that resolves Restore < flips one of their Exhausted 
+Physical Action Tokens onto the Available side. 
+F  -  E l e m e n t s 
+8 A, 8 H, 6 D, 2 F 
+X  -  E v o c a t i o n s 
+   
+3x Cloak of Rage 3x Crimson Whip 3x Destroyer 
+  
+ 
+3x Sanguine 3x Trophy Belt  
+Y  -  R e l a t e d  M a g e s 
+Bellum, Hyperion, Odin, Minotaurus 
+ 
+ 
+ 

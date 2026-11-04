@@ -251,5 +251,319 @@
     "speed": 2,
     "max_active_quests": 2,
     "personal_spell_id": "three_visions"
+  },
+  "agorix": {
+    "id": "agorix",
+    "name": "Agorix",
+    "health": 11,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "natural_invocation"
+  },
+  "albedo": {
+    "id": "albedo",
+    "name": "Albedo",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "divine_judgement"
+  },
+  "alhazred": {
+    "id": "alhazred",
+    "name": "Alhazred",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "symbiosis"
+  },
+  "alice": {
+    "id": "alice",
+    "name": "Alice",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "dark_passenger"
+  },
+  "alisha": {
+    "id": "alisha",
+    "name": "Alisha",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "bharatanatyam"
+  },
+  "architect": {
+    "id": "architect",
+    "name": "Architect",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "magic_tunnel"
+  },
+  "arianna": {
+    "id": "arianna",
+    "name": "Arianna",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "assembly_line"
+  },
+  "baron_doria": {
+    "id": "baron_doria",
+    "name": "Baron Doria",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "wanderers_dream"
+  },
+  "bella": {
+    "id": "bella",
+    "name": "Bella",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "elemental_spirits"
+  },
+  "cacus": {
+    "id": "cacus",
+    "name": "Cacus",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "giant_stampede"
+  },
+  "boogeyman": {
+    "id": "boogeyman",
+    "name": "Boogeyman",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "technodomain"
+  },
+  "cosma": {
+    "id": "cosma",
+    "name": "Cosma",
+    "health": 9,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 3,
+    "max_active_quests": 3,
+    "personal_spell_id": "gifts_of_death"
+  },
+  "fenrir": {
+    "id": "fenrir",
+    "name": "Fenrir",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "blood_rage"
+  },
+  "gramigna": {
+    "id": "gramigna",
+    "name": "Gramigna",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "evil_eye"
+  },
+  "griphon": {
+    "id": "griphon",
+    "name": "Griphon",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "foretold_flight"
+  },
+  "helblindi": {
+    "id": "helblindi",
+    "name": "Helblindi",
+    "health": 12,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 1,
+    "personal_spell_id": "jotuns_vindar"
+  },
+  "hyperion": {
+    "id": "hyperion",
+    "name": "Hyperion - Titan",
+    "health": 12,
+    "hand_limit": 5,
+    "strength": 2,
+    "speed": 3,
+    "max_active_quests": 1,
+    "personal_spell_id": "burning_the_sky",
+    "implemented": false,
+    "excluded_forgotten_spell_ids": [
+      "a_burning_world"
+    ]
+  },
+  "ignis": {
+    "id": "ignis",
+    "name": "Ignis",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "molten_core"
+  },
+  "irene": {
+    "id": "irene",
+    "name": "Irene",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "notes_of_the_magister"
+  },
+  "jack": {
+    "id": "jack",
+    "name": "Jack",
+    "health": 9,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 3,
+    "max_active_quests": 3,
+    "personal_spell_id": "extinguishing_light"
+  },
+  "jukas": {
+    "id": "jukas",
+    "name": "Jukas",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "time_twister"
+  },
+  "maelice": {
+    "id": "maelice",
+    "name": "Maelice",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "malia"
+  },
+  "minotaurus": {
+    "id": "minotaurus",
+    "name": "Minotaurus",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "drums_of_war"
+  },
+  "odin": {
+    "id": "odin",
+    "name": "Odin",
+    "health": 12,
+    "hand_limit": 6,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "asgardian_winds"
+  },
+  "razvan": {
+    "id": "razvan",
+    "name": "Razvan",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "blood_pact"
+  },
+  "rubedo": {
+    "id": "rubedo",
+    "name": "Rubedo",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "chaos_strike"
+  },
+  "saba": {
+    "id": "saba",
+    "name": "Saba",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "light_and_shadow"
+  },
+  "shroudtech": {
+    "id": "shroudtech",
+    "name": "Shroudtech",
+    "health": 11,
+    "hand_limit": 9,
+    "strength": 1,
+    "speed": 2,
+    "max_active_quests": 1,
+    "personal_spell_id": "contagium"
+  },
+  "slenderman": {
+    "id": "slenderman",
+    "name": "Slenderman",
+    "health": 9,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 3,
+    "personal_spell_id": "unio_perpetua"
+  },
+  "talia": {
+    "id": "talia",
+    "name": "Talia",
+    "health": 10,
+    "hand_limit": 8,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "mastery"
+  },
+  "ulrich": {
+    "id": "ulrich",
+    "name": "Ulrich",
+    "health": 11,
+    "hand_limit": 7,
+    "strength": 2,
+    "speed": 2,
+    "max_active_quests": 2,
+    "personal_spell_id": "imperishable_fate"
   }
 }

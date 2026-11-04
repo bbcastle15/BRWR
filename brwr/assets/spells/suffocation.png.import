@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s8lifps85lmn"
-path="res://.godot/imported/feverish_dream.png-df12df173951ed322d6d8d7e15dfaaca.ctex"
+uid="uid://k51hvuwym8sy"
+path="res://.godot/imported/suffocation.png-0b78ee2c6c293dce8e875055f9c2e478.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spells/feverish_dream.png"
-dest_files=["res://.godot/imported/feverish_dream.png-df12df173951ed322d6d8d7e15dfaaca.ctex"]
+source_file="res://assets/spells/suffocation.png"
+dest_files=["res://.godot/imported/suffocation.png-0b78ee2c6c293dce8e875055f9c2e478.ctex"]
 
 [params]
 

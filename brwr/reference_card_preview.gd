@@ -31,6 +31,14 @@ static func card_texture(kind: String, id: String) -> Texture2D:
 	if avatar_texture != null: return avatar_texture
 	if kind == "spells":
 		return SpellArtResolver.get_texture(id)
+	if kind == "quests":
+		# User-supplied scans take priority. Atlas resources preserve their exact
+		# proportions, lettering and glyphs; reconstructed art is kept separate.
+		for path in ["res://assets/quests/originals/" + id + ".tres",
+			"res://assets/quests/reconstructed/" + id + ".png",
+			"res://assets/quests/symbols/" + id + ".png"]:
+			if ResourceLoader.exists(path):
+				return load(path) as Texture2D
 	# Keep the supplied filename; resource paths are case-sensitive in Web exports.
 	if kind == "mages" and id == "landolfo_ii":
 		id = "landolfo_II"
@@ -74,7 +82,24 @@ static func make_card(kind: String, id: String, title: String, card_size: Vector
 		button.add_child(image)
 	return button
 
-static func make_back(title: String, card_size: Vector2, callback: Callable = Callable()) -> Button:
+static func quest_back_texture(moon: int) -> Texture2D:
+	var path := "res://assets/quests/backs/moon_%d.tres" % moon
+	return load(path) as Texture2D if ResourceLoader.exists(path) else null
+
+static func quest_progress_centers(id: String, card_size: Vector2) -> PackedVector2Array:
+	var texture := card_texture("quests", id)
+	if texture == null or not texture.has_meta("progress_centers"):
+		return PackedVector2Array()
+	# Match TextureRect.STRETCH_KEEP_ASPECT_CENTERED, including its empty margins.
+	var art_size := texture.get_size()
+	var art_scale := minf(card_size.x / art_size.x, card_size.y / art_size.y)
+	var origin := (card_size - art_size * art_scale) * 0.5
+	var result := PackedVector2Array()
+	for center in texture.get_meta("progress_centers"):
+		result.append(origin + center * art_scale)
+	return result
+
+static func make_back(title: String, card_size: Vector2, callback: Callable = Callable(), back_texture: Texture2D = null) -> Button:
 	var button := Button.new()
 	button.custom_minimum_size = card_size
 	button.size = card_size
@@ -85,7 +110,7 @@ static func make_back(title: String, card_size: Vector2, callback: Callable = Ca
 		button.pressed.connect(callback, CONNECT_DEFERRED)
 	var image := TextureRect.new()
 	image.name = "CardBack"
-	image.texture = preload("res://assets/tabletop/card_back.png")
+	image.texture = back_texture if back_texture != null else preload("res://assets/tabletop/card_back.png")
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE

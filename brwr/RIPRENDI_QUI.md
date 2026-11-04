@@ -1,3 +1,332 @@
+# Quest artwork — 4 novembre 2026, originali Moon I collegati; HD da completare
+
+Arrivata tavola originale 973x831 con 14 fronti Moon I e relativo retro.
+Fonte conservata integralmente in assets/quests/production/references/moon_1_original.png.
+Manca solo Conspirator Mage (non due carte). I due tentativi ImageGen su
+Holy Corruption hanno alterato simboli/cornice: RIFIUTATI, NON usarli nel gioco.
+Per rispettare la richiesta, usare AtlasTexture degli originali in
+assets/quests/originals: ritagli dichiarativi, pixel invariati, niente riscrittura.
+Non chiamarli HD: ogni carta nella fonte misura circa 176x265 pixel. Servono
+fonti più grandi per maggiore dettaglio fedele. Retro Moon I in assets/quests/backs.
+Conspirator Mage è una ricostruzione autorizzata separata in
+assets/quests/reconstructed/conspirator_mage.png, contenuto verificato col JSON,
+da sostituire quando arriva lo screenshot. Le altre Lune restano invariate.
+Collegati originali e retro Moon I a preview/mazzo/Quest risolte; cubi
+posizionati sulle caselle misurate nella fonte. Verificati tutti i ritagli
+con screenshot OpenGL in assets/quests/production/review. Field Test aveva
+nel JSON tre caselle e target Mage; l'originale mostra due e Model: corretti
+i due valori, passati nove controlli runtime (progressione e danno Evocation).
+Parser e baseline sorgente passati. Export Web e bundle locale aggiornati:
+parità PASS per 239 Spell, 57 Mage, 49 Quest e 65 hash codice/risorse; pixel
+dell'atlante originale identici fra nativo e Web. EXPORTED PACK CHECK PASS.
+PCK 109266724 byte, gzip 106406430 byte, quattro segmenti da max 32 MiB
+ciascuno, SHA-256 concatenati verificati. Manifest nov04-quest-web-bundle.json.
+Segmenti *.part* marcati binary in .gitattributes per evitare normalizzazioni Git.
+tools/build_web_render_optimized.ps1 preserva lossless e dimensioni delle
+Quest originali. Report docs/QUEST-ART-2026-11-04.md. Rimane il limite della
+fonte: richiedere screenshot più grandi per un reale restauro HD fedele,
+e l'originale Conspirator Mage per sostituire la ricostruzione provvisoria.
+Preservare ogni modifica precedente; nessun commit/push/deploy.
+
+## Verifica precedente
+
+Nuova istruzione esplicita: le Quest devono essere restauri delle immagini
+originali, preservando proporzioni, grafica, impaginazione, testo e simboli.
+NON ricomporre le carte da data/quests.json, NON reinterpretare i glifi,
+NON usare tools/build_quest_faces.py per produrre le nuove versioni.
+L'utente ha rifiutato le ricostruzioni attualmente mostrate nel gioco.
+
+Verificati assets/quests, assets/quests/symbols, materials, riferimenti docs,
+20 clipboard PNG ancora presenti in Temp e cronologia Git delle Quest.
+Le PNG in assets/quests sono già ricostruzioni, non gli screenshot originali;
+symbols contiene la ricomposizione dal JSON del 3 novembre. Non sono fonti
+valide per il restauro richiesto. La ricerca testuale nel Codex non ha
+identificato le carte cercate.
+Gli screenshot originali delle Quest non sono stati ritrovati. Richiedere
+all'utente di allegare nuovamente i fronti, anche a gruppi, prima di generare.
+Questa verifica non ha modificato runtime, immagini, JSON o build Web.
+Quando arrivano i riferimenti, conservarli integralmente nel progetto e
+produrre versioni HD da ciascuna immagine, confrontando tutti i simboli.
+
+---
+
+# Playtest — 4 novembre 2026, cinque correzioni concluse
+
+Richiesta corrente: Waiting errato durante rimozione Evocation; Umbra sotto
+la carta dello slot assegnato (affiancata su Possessed); banner cambio Moon;
+AvatarBoard visibile mentre altri confermano Damage; anello proprietario
+preservato nell'animazione di attacco Evocation. Conservare il lavoro precedente.
+
+Correzioni applicate a game.gd, tabletop_shell.gd, player_board.gd,
+avatar_board.gd, evocation_token.gd e umbra_token.gd. Cause individuate:
+school_remove_models interpretato come pesca School nel Waiting; overlay
+nascosto alla conferma locale con AvatarBoard ancora reparentata dentro;
+ghost attacco privato dello script che disegna l'anello. Banner Moon usa il
+feedback autorevole già trasmesso ai client, non una nuova sorgente di stato.
+Umbra usa assigned_slot, non board_number; nessun cambiamento alle regole.
+
+Codice concluso e 428 asserzioni passate: nov04_playtest 103 (OpenGL,
+host/client, click reali Continue, Umbra e campione pixel dell'anello),
+avatar_rules 135, oct29_avatar_reactions 99, nov03_online_animation 18,
+nov01_playtest 73. Screenshot nov04-* verificati. Nessun errore di script;
+il nuovo test segnala risorse/texture residue allo shutdown: non confonderle
+con fallimenti delle asserzioni. Parser Godot valido; diff --check pulito.
+Baseline export nov04-export-baseline.json creata, include evocation_token.gd.
+Export Web 1024/0.67 e deploy/web_bundle aggiornati. Parità PASS: 239 Spell,
+57 Mage Card, 49 Quest, 50 hash codice/dati e versione multiplayer uguali.
+tools/check_web_export.gd passato. PCK 107948244 byte, gzip 105100816 byte;
+quattro segmenti da massimo 32 MiB ciascuno, concatenazioni SHA-256 verificate.
+Il controllo automatico ha bloccato la cancellazione di due vecchi segmenti;
+risolto mantenendo quattro segmenti e rigenerandoli tutti, senza cancellazioni.
+Manifest nov04-web-bundle.json; dettagli in docs/PLAYTEST-2026-11-04.md.
+Nessun lavoro di questi cinque punti lasciato da implementare. Rimane da
+verificare una partita completa fra PC reali via Internet. Bundle locale
+pronto, NON pubblicato: nessun commit/push/deploy eseguito.
+Log parser: %TEMP%/brwr-nov04-parser.log. Log originali del playtest conservati
+in %TEMP%/BRWR-playtest-nov04-preserved. Nessun commit/push/deploy richiesto.
+
+---
+
+# Playtest online — 3 novembre 2026, modifiche concluse e bundle verificato
+
+Applicata la lista di 19 punti. Priorità gestite: sincronizzazione dopo la
+sconfitta/Cell, Cadaver spostato, ultima Instability e Damage Avatar. Aggiunta
+pubblicazione delle proiezioni cambiate ogni 250 ms, deduplicata per peer;
+Evocations remote identificate dall'istanza autorevole anziché dallo slot.
+Ghost Damage sotto la plancia stabile; PB del nuovo viewer appena aperta
+manualmente preservata durante il cambio turno. Log originali conservati in
+%TEMP%/BRWR-playtest-nov03-preserved. Preservare tutte le modifiche precedenti.
+
+Completati anche: intro Scuole più lenta con Continue obbligatorio, rimozione
+Show cards, pulsanti laterali uguali, Momentum Stay fuori Cell, click sul token
+Mage per azioni fisiche, retro Jinx/Upgrade HD, banner ogni Activation anche
+consecutiva/Avatar, username obbligatorio e School accanto al Mage, niente
+apertura automatica PB, Waiting espliciti, Destiny più grande e animato,
+fallback Natural Invocation in Hand. Tutti i testi nuovi sono in inglese.
+
+49 fronti Quest con glifi originali in assets/quests/symbols; vecchie PNG
+preservate. Tool tools/build_quest_faces.py, manifest assets/quests/production.
+Nuovi retro in assets/jinxs/back.png e assets/upgrades/back.png.
+
+462 asserzioni passate: 21 online base, 18 animazioni host/client (incluso
+Explore remoto dalla Cell dopo danno letale e click reale sul Cadaver spostato),
+36 intro Scuole OpenGL, 72 UI/lobby OpenGL, 135 Avatar Rules, 99 Reactions,
+8 Remote Avatar e 73 regressioni UI. Verificati 16 JSON, 49 hash Quest PNG,
+parser/import Godot e sintassi del relay. Dettagli e limiti nel report sotto.
+Controlli sorgente conclusi; output/web e deploy/web_bundle aggiornati,
+ottimizzazione 1024/0.67. Parità PCK passata: 239 Spell, 57 Mage Card,
+49 fronti Quest, 49 hash codice/dati e stessa versione multiplayer. Passato
+anche tools/check_web_export.gd. PCK 107944532 byte, gzip 105099563 byte;
+5 parti da massimo 24 MiB ciascuno, concatenazioni SHA-256 verificate.
+Baseline, manifest bundle e controlli in docs/handoff-2026-10-18/evidence,
+prefisso nov03-playtest-. Dettagli in docs/PLAYTEST-ONLINE-2026-11-03.md.
+Nessun commit/push/deploy: il pubblico resta sulla versione precedente finché
+il bundle non viene pubblicato. NON usare tools/publish_render.ps1 senza
+istruzione esplicita: fa commit e push. Ultimo log build:
+%TEMP%/brwr-nov03-playtest-build.log.
+Non dichiarare l'esatto blocco del playtest riprodotto né una partita completa
+su due PC: i test usano due Game e protocollo/codec reali nella stessa istanza.
+
+---
+
+# Estrazione iniziale scuole — 3 novembre 2026, completata
+
+Nuova richiesta: animare l'estrazione delle sei scuole all'avvio partita.
+Scelta una mescolata del mazzo con sei rivelazioni a cascata, circa 5.6 secondi,
+con Skip animation / Esc / Space. `school_draw_presentation.gd` usa solo
+active_school_ids già estratti: nessuna modifica a selezione, ordine o RNG.
+Hook locale/host in start_game_flow; client da snapshot durante Setup, una
+sola volta. Input Loggia coperto, feedback Avatar/fasi in coda fino alla fine.
+Stile playmat e font titolo già presente nel progetto, copiato in assets/fonts
+per renderlo esportabile (la cartella originale production è esclusa).
+Test visivo `nov03_school_draw.gd`: 33 asserzioni passate (OpenGL), incluso
+resize 720p, Skip reale e snapshot ripetuti. Regressioni: 18 Avatar marker,
+8 Remote Avatar e 73 UI passate. Parser valido; artefatti e dettaglio in
+docs/SCHOOL-DRAW-2026-11-03.md. Export e deploy/web_bundle aggiornati; parità
+passata per 239 Spell texture, 57 Mage Card, 46 hash, versione multiplayer e
+font titolo esportato. Passato anche tools/check_web_export.gd. Parti bundle
+da massimo 24 MiB (PCK 5 / gzip 4), concatenazioni verificate SHA-256.
+Evidenze: nov03-school-draw-export-baseline.json e nov03-school-draw-web-bundle.json
+in docs/handoff-2026-10-18/evidence. Nessun commit/push/deploy pubblico; online
+verificato tramite snapshot reali, non una partita completa su due PC.
+Preservare il lavoro precedente, inclusi il limite Hyperion e le anteprime Hex.
+
+---
+
+# Ultime richieste completate — 3 novembre 2026
+
+Nuove richieste: zoom sul piazzamento Protection/Trap Avatar; Pharaoh deve
+contare i maghi con Jinx, non il numero di Jinx; Jinx pubbliche sulla PlayerBoard
+accanto alle Completed Quests; abilitare Nightmare dopo verifica materiale.
+Pharaoh ha già il conteggio corretto in ForgottenEvocations.bonus_strength:
+verificato +1 per Mage, rimozione dell'ultima Jinx e parità host/client.
+Nightmare ora supera is_school_complete, con alias throne_of_torns per
+throne_of_thorns. Jinx in colonna pubblica accanto alle Completed Quests, con
+Task e ispezione; la plancia si allarga senza sovrapporre la trasformazione.
+Animazione Avatar: zoom 2.4x sullo slot Hand, piazzamento, pausa e ritorno;
+Close resta davanti alla plancia ingrandita. Test visivo finale passato:
+22 asserzioni Avatar marker e 32 Jinx/Nightmare/Umbra/Familiar con snapshot
+host/client. Numero del giocatore spostato sotto l'anello Umbra per leggibilità.
+
+Nel lavoro precedente aggiunti 31 maghi e le Personal tramite
+tools/add_remaining_codex_mages.py. Smoke test nov02_mages.gd: 70 lati,
+222 asserzioni, zero fallimenti; non equivale a convalida delle singole regole.
+Hyperion/Burning the Sky è ANCORA INCOMPLETO e non selezionabile
+(implemented:false, controllato da MageDatabase e assign_mage_to_player): serve il vero stato multi-modello
+Myrmidones e il doppio profilo. Le regole BRWR sono nelle ultime pagine di
+../materials/NAR_Hyperion_Rulebook_ENG.pdf. Agorix/Eracleto ha FamiliarRules,
+con Guardia agganciata al token Mage, azione Familiar separata, danni ripartiti,
+bonus di Caccia contro bersaglio senza danni e ritorno opzionale in cleanup.
+Carta Eracleto estratta dal Codex p.68, senza alterazioni; ritaglio ritratto
+dichiarato in portraits.json. Test nov03_mage_rules: 52 asserzioni passate,
+inclusi Guardia/Caccia, sconfitta, Doll, Jotuns Vindar, Alice e limite condiviso
+di Drums of War. Corretto l'ordine uscita/entrata stanza: la posizione è già
+aggiornata quando parte la reazione di uscita. School integration: 56 passate.
+Regressioni: 135 Avatar Rules, 99 Avatar Reactions, 73 UI, 8 Remote Avatar,
+zero fallimenti. Parser Godot e JSON validi. Non dichiarare Hyperion finito.
+
+Export finale e bundle aggiornati: 239 Spell texture, 57 Mage Card, 45 hash
+di sorgenti/dati identici. Verificata anche l'uguaglianza della versione
+multiplayer fra host nativo e pack esportato; il fingerprint include ora
+mage_effects.gd e familiar_rules.gd. Passato anche tools/check_web_export.gd,
+il controllo usato dall'avvio host. Aggiunti gli estratti originali del Codex
+per le Personal di 15 maghi già esistenti: fallback, precedenza alle PNG utente.
+PCK 97.99 MiB e gzip 95.30 MiB; bundle in parti da massimo 24 MiB (5 e 4),
+hash SHA-256 della concatenazione verificati. Baseline e hash finali:
+docs/handoff-2026-10-18/evidence/nov03-export-baseline.json e nov03-web-bundle.json.
+Nessun commit/push/deploy pubblico. Nessuna partita completa su due PC;
+test online effettuati con snapshot host/client reali.
+Dettagli: docs/PLAYTEST-2026-11-03.md.
+Restano Hyperion/Myrmidones e l'approvazione delle copie grafiche Hex;
+non sovrascrivere le PNG originali con quelle in hex_light_review.
+
+---
+
+# Umbra, maghi mancanti e Hex — 2 novembre 2026, in corso
+
+Richiesta corrente: Umbra a settori incastrati intorno al Mage; rendere giocabili
+i maghi con Mage Card già presente; schiarire solo la grafica Light di Hex,
+salvando copie da approvare. Preservare tutti i cambiamenti precedenti.
+
+- Create 12 anteprime con ImageGen in `assets/spells/hex_light_review/`, escluse
+  dall'import con `.gdignore`. `gallery.html` confronta originali e copie;
+  `manifest.json` registra prompt e provenienza. Originali non sovrascritti,
+  nessun riferimento runtime alle anteprime.
+- Aggiunto `umbra_token.gd`: settore anulare 120 gradi, hitbox separata dal Mage;
+  `game.gd` aggancia i token Umbra assegnati al token Mage per seguirne lo slide.
+  Import/parser Godot passato; verifica runtime e snapshot online ancora da fare.
+- Censiti 31 maghi mancanti e la seconda forma di Hyperion. Dati/Personal Spell
+  verificati visivamente sul Codex pp. 68–82; implementazione ancora in corso.
+  Le Mage Card sono già in assets/mages, manifest `docs/mage-art-2026-10-23/`.
+  Le immagini sorgenti delle Personal sono nello stesso archivio `sources/`.
+  Agorix richiede il Famiglio Eracleto (regole aggiornate `../materials/magister.pdf`);
+  Hyperion richiede le regole BRWR nelle ultime pagine del NAR_Hyperion_Rulebook.
+- Evidenze e pagine in `docs/umbra-mages-hex-2026-11-02/`. Web e bundle non ancora
+  ricostruiti per questa richiesta. Nessun commit/push/deploy.
+
+---
+
+# Token Avatar — 2 novembre 2026, completato
+
+Ultima richiesta: manca l'animazione del token Protection/Trap Avatar.
+Riprodotte tre perdite del feedback in `nov02_avatar_marker_playtest.gd`:
+il cambio viewer e le nuove richieste svuotavano la coda prima del piazzamento;
+il primo snapshot client considerava il token già mostrato. Correzione in
+`tabletop_shell.gd` e `network_projection.gd`: conserva/riprende il piazzamento
+nelle transizioni automatiche; Close/Esc esplicito può saltarlo. Inoltre il
+`player_token.gdshader` ignorava l'opacità della sfumatura: ora la rispetta.
+Nessuna modifica a carte/regole/limiti Comandi; test Trap usa solo una proiezione
+grafica sintetica, Possessed continua ad avere le sue Protection originali.
+
+Superati 19 controlli mirati con rendering OpenGL (inclusi pixel dello shader),
+99 Avatar Reactions, 73 UI del 1 novembre e 8 Remote Avatar: 199 asserzioni.
+Aggiornati `output/web` e `deploy/web_bundle`, usato da `tools/render_unpack.sh`.
+Bundle con quattro parti per PCK/gzip, massimo 24 MiB ciascuna; concatenazione
+verificata SHA-256. Pacchetto Web verificato: 184 Spell, 57 Mage, 32 hash uguali.
+PCK 95.16 MiB / gzip 92.60 MiB; originali preservati. Nessun commit/push/deploy.
+Dettagli: `docs/AVATAR-TOKEN-ANIMATION-2026-11-02.md`. La versione pubblica
+richiede ancora la pubblicazione del bundle aggiornato; test online tramite
+snapshot host/client in Godot, non una partita completa su due PC.
+Preservare tutti gli asset e le modifiche esistenti.
+
+---
+
+# Playtest e Hex — 1 novembre 2026, completato
+
+Richiesta: abilitare Hex; ridurre pausa fra movimenti; svanimento evocazioni
+rimosse; descrizioni scelte pubbliche simmetriche host/client; bordo lato Spell
+preparata in consultazione; nome azione fisica durante flip; annuncio fasi;
+finestra evocazioni curata; verificare Instabilità Tomb Reinforcements e blocco
+Player 2 in Cell. Le modifiche sono applicate. Superati 73 controlli mirati
+sia headless sia con rendering OpenGL, 135 Avatar Rules, 99 Avatar Reactions
+e 8 Remote Avatar: 315 asserzioni distinte. Incluse prove del passaggio del
+viewer, annuncio fase remoto senza duplicati e svanimento sul client.
+
+Riprodotta e corretta una chiusura indebita: `_process` di TabletopShell
+chiudeva la plancia appena aperta dal nuovo input quando cambiava il viewer.
+Ora preserva la plancia della nuova decisione. L'esatto blocco della partita
+segnalata rimane non riprodotto; Choices/F10 ricostruisce l'input autorevole.
+
+Build Web finale aggiornata in `output/web` (94.74 MiB / gzip 92.18 MiB).
+Parità riuscita con `evidence/nov01-export-baseline.json`: 181 Spell, 57 Mage,
+31 hash identici, Hex giocabile e retro/token Avatar caricabili. Esportazione
+ottimizzata 1024 / 0.67; PNG originali intatte. Nessun deploy pubblico.
+Test principale: `docs/handoff-2026-10-18/checks/nov01_playtest.gd`.
+Dettagli, file interessati e limiti: `docs/PLAYTEST-2026-11-01.md`.
+
+Hex: nuove PNG presenti, incluse `cerebral_worm.png`; alias senza rinominare
+`feverish_dream.png` e `suffococation.png`. Catalogo mantiene il controllo
+condiviso di completezza. Il log reale è stato preservato in
+`%TEMP%/brwr-nov01-user-session.log`: nessun errore di script, ultima richiesta
+`action_activation_step` per P2. Tomb ha già `instability: true`; nel log il
+Templarii era nella stessa stanza dell'Avatar e Bone Shield può prevenire il
+cubo. Aggiunto messaggio pubblico per Instabilità prevenuta da Upgrade/Jinx.
+Non dichiarare riprodotto il blocco originale senza evidenza: si verificano
+turno in Cell, Momentum, riapertura delle scelte e snapshot host/client.
+
+Preservare tutte le modifiche e gli asset dell'utente, oltre al lavoro Avatar
+del 29 ottobre. Nessun commit/push/deploy.
+
+Durante l'ultimo controllo Git sono comparse altre PNG dell'utente in
+`assets/spells`: `hysterical_escape.png`, `persecution.png`,
+`shifting_nightmare.png`, `throne_of_torns.png`. Preservate senza modificarle;
+arrivate dopo l'esportazione finale, quindi non fanno parte della build Web
+verificata sopra. Per il prossimo lavoro su Nightmare controllare anche
+l'alias di `throne_of_torns` rispetto all'ID `throne_of_thorns`.
+
+---
+
+# Avatar: retro reattivi e token — 29 ottobre 2026, completato
+
+Richiesta corrente: cinque retro HD Possessed (due carte condividono il retro di
+Luna I), token Protection con cuore spezzato o fulmine, animazione di piazzamento,
+verifica delle condizioni di pagina 38. Sette PNG generati con ImageGen e salvati
+in `assets/avatars/possessed/approved/command_back_*_protection_*.png` e
+`assets/tokens/avatar_protection_*.png`; prompt e provenienza nel manifest
+`docs/handoff-2026-10-18/evidence/avatar-reaction-art-2026-10-29.json`.
+
+Sorgenti aggiornati: `avatar_state.gd`, `avatar_art.gd`, `avatar_board.gd`,
+`avatar_rules.gd`, `tabletop_shell.gd`. Proiezione pubblica del solo simbolo,
+limite Comandi per il token, animazione sulla vera Avatar Board. Corretto il
+trigger Combat che considerava anche gli effetti su una Room (FAQ Target of a
+Spell); ricontrollo danni prima della reazione. Il token si posa sullo scudo
+stampato, lasciando leggibili Luna e nome, e rispetta il limite dei Comandi.
+
+**Dettagli:** [docs/AVATAR-REACTIONS-2026-10-29.md](docs/AVATAR-REACTIONS-2026-10-29.md).
+242 controlli distinti superati: 99 sui nuovi retro/token e trigger (anche con
+rendering), 135 sulle regole Avatar, 8 sulla regressione danni remoti/Hand.
+Godot 4.7.2: import/parser e controllo del pacchetto Web superati. Build in
+`output/web`: 178 texture Spell, 57 Mage card, 24 hash sorgenti corrispondenti,
+cinque nuovi retro e due token caricabili. PCK 94,6 MiB / gzip 92,1 MiB;
+export ottimizzato a 1024 px, qualità 0,67, originali HD preservati.
+
+La verifica online usa snapshot host/client reali in Godot; non è stata
+giocata una partita completa su due PC. Trasferire anche i file non tracciati
+e `output/web`. Preservare `assets/spells/pact_of_the_jaws.png`, modificata
+dall'utente prima di questo lavoro. Nessun commit/push/deploy.
+
+---
+
 # RIPRENDERE DA QUI — 28 ottobre 2026, revisione C / cambio computer
 
 Ultima richiesta: danni di evocazione all’Avatar invisibili sull’altro client e Hand Web coperta dalla colonna sinistra. Corretti in `tabletop_shell.gd`: preservazione dei danni in attesa quando si apre Hand; CanvasLayer separato per la plancia ingrandita, colonna sempre sotto Hand.

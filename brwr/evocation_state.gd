@@ -13,6 +13,8 @@ var controller_id: int = -1
 var board_number: int = 0
 var assigned_mage: int = -1
 var assigned_slot: int = 0
+var familiar_guard: bool = false
+var familiar_action_available: bool = true
 var upgrades: Array[String] = []
 var stored_trophies: Array[int] = []
 
@@ -48,6 +50,10 @@ func _init(
 
 func get_damage() -> int:
 	return damage_cubes.size()
+
+
+func has_archetype(kind: String) -> bool:
+	return archetype == kind or kind in definition.get("additional_archetypes",[])
 
 
 func get_display_name() -> String:
