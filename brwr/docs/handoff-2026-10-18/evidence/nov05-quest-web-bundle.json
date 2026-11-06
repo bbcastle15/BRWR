@@ -1,0 +1,16 @@
+[
+  {
+    "name": "index.pck",
+    "bytes": 225327936,
+    "parts": 7,
+    "chunk_bytes": 33554432,
+    "sha256": "C9EE00CD882AA31D5777EAD5AD0203F7DDB41D0972DD6C600EEA1585DC060AE9"
+  },
+  {
+    "name": "index.pck.gz",
+    "bytes": 222461741,
+    "parts": 7,
+    "chunk_bytes": 33554432,
+    "sha256": "195A92E0E39508AE37DCB66C2FC274AB8A2B72821708EFAC290E4212435F0947"
+  }
+]

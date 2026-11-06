@@ -261,7 +261,11 @@ func trigger_matches(
 		"caster_suffers_black_rose_damage":
 			return (
 				event.event_type == "damage_inflicted"
-				and event.source_model_type == "black_rose"
+				# Uncontrolled Nightmares retain an Evocation source, but their
+				# damage belongs to the Black Rose (core p.39, assigned Evocations).
+				and event.source_player_index == -1
+				and event.source_model_type in ["black_rose", "evocation"]
+				and event.amount > 0
 				and event.target_model_type == "mage"
 				and event.target_player_index
 					== active_spell.owner_id

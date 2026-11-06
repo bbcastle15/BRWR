@@ -398,13 +398,13 @@
         "type": "convert_damage",
         "amount": 2,
         "target": "room",
-        "range": 1
+        "range": "*"
       },
       {
         "type": "convert_instability",
         "amount": 2,
         "target": "room",
-        "range": 1
+        "range": "*"
       }
     ],
     "power_reward": 2,
@@ -548,21 +548,21 @@
     "cube_slots": 0,
     "effects": [
       {
-        "type": "convert_damage",
+        "type": "convert_instability",
         "amount": 1,
         "target": "room",
-        "range": 1
+        "range": "*"
       },
       {
         "type": "convert_instability",
         "amount": 2,
         "target": "room",
-        "range": 1
+        "range": "*"
       }
     ],
     "power_reward": 2,
     "raw_task": "After you resolve the Garden Effect.",
-    "raw_effect": "Convert 1 Damage. Convert 2 Instability."
+    "raw_effect": "Convert 1 Instability. Convert 2 Instability."
   },
   "wise_moon": {
     "name": "Wise Moon",
@@ -762,7 +762,7 @@
     "raw_effect": "Convert 3 Damage."
   },
   "vial_sun": {
-    "name": "Vial Sun",
+    "name": "Vital Sun",
     "moon": 2,
     "task": {
       "trigger": "effect_resolved",
@@ -775,27 +775,21 @@
     "cube_slots": 3,
     "effects": [
       {
-        "type": "damage",
-        "amount": 2,
-        "target": "room",
-        "range": 1
-      },
-      {
         "type": "place_instability",
         "amount": 2,
         "target": "room",
-        "range": 1
+        "range": "*"
       },
       {
         "type": "convert_instability",
         "amount": 2,
         "target": "room",
-        "range": 1
+        "range": "*"
       }
     ],
     "power_reward": 3,
     "raw_task": "Reveal this card. After you resolve an Effect that converts or places at least 1 Instability in a green Room, place 1 cube on this card.",
-    "raw_effect": "Inflict 2 Damage. Place 2 Instability. Convert 2 Instability."
+    "raw_effect": "Place 2 Instability. Convert 2 Instability."
   },
   "electric_ruby": {
     "name": "Electric Ruby",
@@ -977,6 +971,7 @@
       "source_kind": "spell",
       "condition": "revealed_spell_elements",
       "elements": [
+        "fire",
         "earth"
       ],
       "required": 3
@@ -987,23 +982,23 @@
         "type": "place_instability",
         "amount": 1,
         "target": "room",
-        "range": 1
+        "range": "*"
       },
       {
         "type": "place_instability",
         "amount": 1,
         "target": "room",
-        "range": 1
+        "range": "*"
       },
       {
         "type": "place_instability",
         "amount": 1,
         "target": "room",
-        "range": 1
+        "range": "*"
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Earth and/or All-Elements symbols on the Active Side of your Revealed Spells.",
+    "raw_task": "After resolving one of your Spell Effects, have 3 Fire and/or Earth symbols on the Active Side of your Revealed Spells.",
     "raw_effect": "Place 1 Instability. Place 1 Instability. Place 1 Instability."
   },
   "pyromancer": {
@@ -1033,17 +1028,18 @@
     "name": "Elementalist",
     "moon": 3,
     "task": {
-      "trigger": "effect_resolved",
+      "trigger": "spell_resolved",
       "source_kind": "spell",
       "elements": [
-        "sacred",
-        "profane",
-        "magic"
+        "fire",
+        "earth",
+        "water",
+        "air"
       ],
       "progress": 1,
       "reveal_immediately": true
     },
-    "cube_slots": 3,
+    "cube_slots": 4,
     "effects": [
       {
         "type": "place_instability",
@@ -1053,7 +1049,7 @@
       }
     ],
     "power_reward": 3,
-    "raw_task": "Reveal this card. After you resolve a Sacred, Profane, or Magic Spell Effect, place 1 cube on this card.",
+    "raw_task": "Reveal this card. After you resolve a Fire, Earth, Water or Air Spell Effect, place 1 cube on this card.",
     "raw_effect": "Place 4 Instability."
   },
   "surrender_of_power": {
@@ -1079,13 +1075,14 @@
     "name": "Deep Knowledge",
     "moon": 3,
     "task": {
-      "trigger": "effect_resolved",
+      "trigger": "spell_resolved",
+      "spell_type": "contingency",
       "source_kind": "spell",
       "in_room_id": "black_rose",
       "progress": 1,
       "reveal_immediately": true
     },
-    "cube_slots": 3,
+    "cube_slots": 4,
     "effects": [
       {
         "type": "draw_three_forgotten_keep_one",
@@ -1129,7 +1126,7 @@
       "progress": 1,
       "reveal_immediately": true
     },
-    "cube_slots": 3,
+    "cube_slots": 4,
     "effects": [
       {
         "type": "damage",
@@ -1150,6 +1147,7 @@
       "source_kind": "spell",
       "condition": "revealed_spell_elements",
       "elements": [
+        "water",
         "profane"
       ],
       "required": 3
@@ -1158,12 +1156,12 @@
     "effects": [
       {
         "type": "activate_evocation_or_summon_nigredo",
-        "range": 1
+        "range": "*"
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve an Effect of one of your Spells and you have 3 Summon and/or matching symbols on the Active Side of your Revealed Spells.",
-    "raw_effect": "The target activates under your control. If there are no Evocations in the Lodge, summon a Nigredo in a Room within 1. It activates."
+    "raw_task": "After resolving one of your Spell Effects, have 3 Water and/or Profane symbols on the Active Side of your Revealed Spells.",
+    "raw_effect": "The target activates under your control. If there are no Evocations in the Lodge, summon a Nigredo in a Room at any distance. It activates."
   },
   "master_of_death": {
     "name": "Master of Death",
@@ -1178,14 +1176,13 @@
     "cube_slots": 3,
     "effects": [
       {
-        "type": "steal_power_from_up_to_mages",
-        "max_targets": 3,
-        "amount_each": 1
+        "type": "obtain_trophy_from_up_to_mages",
+        "max_targets": 3
       }
     ],
     "power_reward": 2,
     "raw_task": "Reveal this card. After a Mage who has at least one of your Damage cubes on their Mage Sheet is defeated, place 1 cube on this card.",
-    "raw_effect": "Choose up to 3 Mages and gain 1 Power from each of them."
+    "raw_effect": "Choose up to 3 Mages and gain 1 Trophy from each of them."
   },
   "theurge": {
     "name": "Theurge",

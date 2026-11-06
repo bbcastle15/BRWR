@@ -23,6 +23,14 @@ func check(ok: bool, label: String):
 		failed = true
 		push_error(label)
 
+func pixel_hash(texture: Texture2D) -> String:
+	var pixels := texture.get_image()
+	pixels.convert(Image.FORMAT_RGBA8)
+	var context := HashingContext.new()
+	context.start(HashingContext.HASH_SHA256)
+	context.update(pixels.get_data())
+	return context.finish().hex_encode()
+
 func run():
 	check(not baseline_path.is_empty(), "Provide baseline path")
 	if failed: quit(1); return
@@ -56,22 +64,23 @@ func run():
 	var quest_ids: Array = game.quest_database.quests.keys()
 	quest_ids.sort()
 	var quest_art: Dictionary = {}
-	var original_count := 0
 	for id in quest_ids:
 		var face = game.ReferenceCardPreview.card_texture("quests", str(id))
 		var expected_path := "res://assets/quests/symbols/" + str(id) + ".png"
 		if game.quest_database.quests[id].moon == 1:
 			expected_path = "res://assets/quests/reconstructed/conspirator_mage.png" if id == "conspirator_mage" else "res://assets/quests/originals/" + str(id) + ".tres"
+		var restored_path := "res://assets/quests/restored/" + str(id) + ".png"
+		if ResourceLoader.exists(restored_path): expected_path = restored_path
 		check(face != null and face.resource_path == expected_path, "Quest must use its current approved source: " + str(id))
 		if face == null: continue
 		quest_art[id] = face.resource_path
+		if face.resource_path == restored_path:
+			script_hashes[restored_path] = pixel_hash(face)
 		if face is AtlasTexture:
-			original_count += 1
 			script_hashes[face.resource_path] = FileAccess.get_sha256(face.resource_path)
 			check(Rect2(Vector2.ZERO, face.atlas.get_size()).encloses(face.region), "Quest crop must remain inside the original scan: " + str(id))
 			var centers: PackedVector2Array = game.ReferenceCardPreview.quest_progress_centers(str(id), Vector2(260, 390))
 			check(centers.size() == game.quest_database.quests[id].cube_slots, "Printed progress slots must match Quest: " + str(id))
-	check(original_count == 14, "All fourteen supplied Moon I fronts must use unchanged original pixels")
 	var quest_back = game.ReferenceCardPreview.quest_back_texture(1)
 	check(quest_back is AtlasTexture, "Moon I Quest back must use the original scan")
 	var original_hash := ""
@@ -86,12 +95,20 @@ func run():
 	for moon in [1, 2, 3, 1]:
 		game.current_moon = moon
 		board._refresh_quest_deck_back()
-		check(deck_back.texture == quest_back if moon == 1 else deck_back.texture != quest_back, "Quest deck back follows Moon %d" % moon)
-		check(is_equal_approx(deck_back.rotation, PI / 2.0 if moon == 1 else 0.0), "Quest deck orientation follows its source")
+		var expected_back = game.ReferenceCardPreview.quest_back_texture(moon)
+		check(expected_back != null and deck_back.texture == expected_back, "Quest deck back follows Moon %d" % moon)
+		if moon > 1 and expected_back != null:
+			script_hashes[expected_back.resource_path] = pixel_hash(expected_back)
+		check(is_equal_approx(deck_back.rotation, PI / 2.0), "Printed Quest deck backs use portrait art")
 	for kind in ["jinxs", "upgrades"]:
 		var back = game.ReferenceCardPreview.card_texture(kind, "back")
 		check(back != null and back.get_width() >= 512, "High quality deck back must be exported: " + kind)
 	check(game.is_school_complete("hex"), "Hex must be playable in source and Web export")
+	for spell in game.spell_database.spells.values():
+		if spell.school_id == "hex":
+			var hex_face := SpellArtResolver.get_texture(spell.id, "hex")
+			check(hex_face != null and hex_face.resource_path.begins_with("res://assets/spells/hex_reviewed/"), "Reviewed Hex face: " + str(spell.id))
+			if hex_face != null: script_hashes[hex_face.resource_path] = pixel_hash(hex_face)
 	check(game.is_school_complete("nightmare"), "Nightmare must be playable in source and Web export")
 	check(load("res://assets/fonts/library_title.ttf") is FontFile, "School reveal title font must be exported")
 	check(not game.mage_database.get_mage_ids().has("hyperion"), "Incomplete three-Model Mage stays outside setup")

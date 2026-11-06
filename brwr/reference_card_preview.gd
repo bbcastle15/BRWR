@@ -32,9 +32,9 @@ static func card_texture(kind: String, id: String) -> Texture2D:
 	if kind == "spells":
 		return SpellArtResolver.get_texture(id)
 	if kind == "quests":
-		# User-supplied scans take priority. Atlas resources preserve their exact
-		# proportions, lettering and glyphs; reconstructed art is kept separate.
-		for path in ["res://assets/quests/originals/" + id + ".tres",
+		# Verified restorations supersede scans; retain originals as fallback.
+		for path in ["res://assets/quests/restored/" + id + ".png",
+			"res://assets/quests/originals/" + id + ".tres",
 			"res://assets/quests/reconstructed/" + id + ".png",
 			"res://assets/quests/symbols/" + id + ".png"]:
 			if ResourceLoader.exists(path):
@@ -83,19 +83,86 @@ static func make_card(kind: String, id: String, title: String, card_size: Vector
 	return button
 
 static func quest_back_texture(moon: int) -> Texture2D:
+	var restored := "res://assets/quests/backs/moon_%d.png" % moon
+	if ResourceLoader.exists(restored):
+		return load(restored) as Texture2D
 	var path := "res://assets/quests/backs/moon_%d.tres" % moon
 	return load(path) as Texture2D if ResourceLoader.exists(path) else null
 
+static func add_jinx_progress(card: Control, id: String, amount: int, color: Color) -> void:
+	var positions := {
+		"bane_of_baktiotha": [0.307, 0.510, 0.702, 0.652],
+		"divine_dance": [0.406, 0.620, 0.652],
+		"hourglass_of_seth": [0.401, 0.613, 0.660],
+		"inverted_pyramid": [0.302, 0.502, 0.701, 0.646],
+		"locusts": [0.323, 0.505, 0.692, 0.660],
+		"oblivion": [0.301, 0.501, 0.698, 0.648],
+		"slowness": [0.323, 0.503, 0.684, 0.639],
+		"spinning_wheel_sting": [0.404, 0.599, 0.644],
+		"vulnerability": [0.333, 0.501, 0.671, 0.665],
+		"weakness": [0.302, 0.500, 0.699, 0.648]
+	}
+	var texture := card_texture("jinxs", id)
+	if texture == null or not positions.has(id): return
+	var values: Array = positions[id]
+	var overlay := Control.new()
+	overlay.name = "JinxProgress"
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(overlay)
+	for i in mini(amount, values.size() - 1):
+		var cube = preload("res://cube.tscn").instantiate()
+		cube.cube_color = color
+		cube.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		overlay.add_child(cube)
+	var fit := func():
+		var extent := texture.get_size() * minf(card.size.x / texture.get_width(), card.size.y / texture.get_height())
+		var origin := (card.size - extent) * 0.5
+		var edge := extent.x * 0.095
+		for i in overlay.get_child_count():
+			var cube = overlay.get_child(i)
+			cube.scale = Vector2.ONE * edge / 14.0
+			cube.position = origin + Vector2(float(values[i]), float(values.back())) * extent - Vector2.ONE * edge * 0.5
+	card.resized.connect(fit)
+	fit.call()
+
 static func quest_progress_centers(id: String, card_size: Vector2) -> PackedVector2Array:
 	var texture := card_texture("quests", id)
-	if texture == null or not texture.has_meta("progress_centers"):
+	if texture == null:
 		return PackedVector2Array()
+	# Measured centers in the restored faces, normalized to the printed card.
+	# Each row gives the shared y coordinate followed by the slot x coordinates.
+	var restored_rows := {
+		"channeling_instability": [.48, .22, .41, .60, .78],
+		"power_catalyst": [.513, .206, .403, .599, .794],
+		"elementalist": [.507, .223, .407, .592, .780],
+		"deep_knowledge": [.458, .24, .413, .586, .759],
+		"collective_sacrifice": [.504, .306, .5, .693],
+		"emerald_amethyst": [.462, .30, .50, .70],
+		"guarding_wisdom": [.457, .398, .598],
+		"contingent_mage": [.46, .305, .50, .695],
+		"warrior_wizard": [.478, .304, .50, .696],
+		"shattered_illusion": [.48, .40, .60],
+		"summoner_wizard": [.487, .31, .50, .69],
+		"rest_the_limbs": [.474, .405, .597],
+		"acquire_wealth": [.493, .407, .60],
+		"field_test": [.493, .41, .60],
+		"dominate_fear": [.480, .405, .60],
+		"cinder_and_gold": [.474, .30, .50, .70],
+		"bloody_sun": [.548, .30, .50, .70],
+		"vial_sun": [.544, .30, .50, .70],
+		"master_of_death": [.565, .31, .50, .69]
+	}
 	# Match TextureRect.STRETCH_KEEP_ASPECT_CENTERED, including its empty margins.
 	var art_size := texture.get_size()
 	var art_scale := minf(card_size.x / art_size.x, card_size.y / art_size.y)
 	var origin := (card_size - art_size * art_scale) * 0.5
 	var result := PackedVector2Array()
-	for center in texture.get_meta("progress_centers"):
+	if restored_rows.has(id) and texture.resource_path.begins_with("res://assets/quests/restored/"):
+		var row: Array = restored_rows[id]
+		for x in row.slice(1):
+			result.append(origin + Vector2(float(x), float(row[0])) * art_size * art_scale)
+		return result
+	for center in texture.get_meta("progress_centers", []):
 		result.append(origin + center * art_scale)
 	return result
 

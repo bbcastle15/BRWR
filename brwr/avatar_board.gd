@@ -248,18 +248,7 @@ func _add_jinx_cards(player: PlayerState) -> void:
 		var card: Button = game.ReferenceCardPreview.make_card("jinxs", id, str(data.get("name", id)), Vector2(155, 237), game.open_jinx_card.bind(game.avatar.player_index, id))
 		card.flat = true
 		column.add_child(card)
-		var progress := HBoxContainer.new()
-		progress.name = "Progress"
-		column.add_child(progress)
-		for i in int(data.get("slots", 0)):
-			var slot := Panel.new()
-			slot.custom_minimum_size = Vector2(24, 24)
-			progress.add_child(slot)
-			if i < int(assigned.progress):
-				var cube = preload("res://cube.tscn").instantiate()
-				cube.cube_color = Color.BLACK
-				cube.position = Vector2(5, 5)
-				slot.add_child(cube)
+		game.ReferenceCardPreview.add_jinx_progress(card, id, int(assigned.progress), Color.BLACK)
 
 func _add_mage_tokens(player: PlayerState) -> void:
 	for kind in ["destiny", "infectio"]:

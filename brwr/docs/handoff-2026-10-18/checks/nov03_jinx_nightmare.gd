@@ -9,6 +9,7 @@ func run():
 	expect(game.get_playable_school_ids().has("nightmare"), "Nightmare is in the shared setup catalogue")
 	expect(SpellArtResolver.get_texture("throne_of_thorns") == load("res://assets/spells/throne_of_torns.png"), "Throne of Thorns uses the supplied filename")
 	var definitions: Array = ForgottenAttachments.database().jinxes
+	var occupied_sectors: Array[int] = []
 	for i in 3:
 		game.players[1].mage.jinxes.append({"id":definitions[i].id,"progress":i,"owner_id":0})
 	game.players[2].mage.jinxes.append({"id":definitions[3].id,"progress":0,"owner_id":0})
@@ -38,10 +39,17 @@ func run():
 	for i in 3:
 		var ev: EvocationState = game.players[1].evocations[i]
 		var token = game.evocation_tokens[ev.get_instance_id()]
-		expect(token.get_parent() == game.mage_tokens[1] and token.sector == i, "Umbra sector follows its Mage: %d" % i)
+		expect(token.portrait_sprite.material.get_shader_parameter("rim_color") == Color.BLACK, "Umbra has a black rim in its assigned sector")
+		var ghost = token.create_visual_copy()
+		expect(ghost.portrait_sprite.material.get_shader_parameter("rim_color") == Color.BLACK, "Animated Umbra keeps its black rim")
+		ghost.free()
+		expect(token.get_parent() == game.mage_tokens[1] and not occupied_sectors.has(token.sector), "Attached Umbra has a distinct sector: %d" % i)
+		occupied_sectors.append(token.sector)
+		token._compact = not (token.get_global_transform_with_canvas().x.length() * 42.0 < 30.0)
+		token._process(1.0)
 		var button = token.get_node("InspectButton")
 		expect(not button._has_point(button.size * 0.5), "Umbra hitbox leaves the Mage clickable")
-		var point: Vector2 = Vector2.from_angle(-PI * 0.5 + (i + 0.5) * TAU / 3) * 29 + button.size * 0.5
+		var point: Vector2 = button.center_offset() + button.size * 0.5
 		expect(button._has_point(point), "Each Umbra ring segment can be inspected/targeted")
 	ForgottenEvocations.resolve_assignment(game,{"type":"assign_nightmare","evocation_id":"umbra"},{"game":game,"caster_id":0,"target_player_index":1,"nightmare_slot":1})
 	expect(game.players[1].evocations.size() == 3, "A fourth assignment does not overlap an occupied Nightmare slot")

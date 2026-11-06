@@ -291,7 +291,7 @@ static func resolve_assignment(game, effect: Dictionary, context: Dictionary) ->
 		context.erase("nightmare_mage")
 		context.erase("nightmare_slot")
 		return true
-	if not DruidicRules.choose(game, caster, context, "nightmare_slot", slots, "Choose the slot for the assigned Nightmare."):
+	if not DruidicRules.choose(game, caster, context, "nightmare_slot", slots, "Choose the slot on Player %d's board for the assigned Nightmare." % (target + 1)):
 		return false
 	if not slots.any(func(slot): return int(slot.value) == int(context.get("nightmare_slot",0))):
 		context.erase("nightmare_slot")

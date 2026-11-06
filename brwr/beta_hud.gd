@@ -42,7 +42,8 @@ func _process(_delta: float) -> void:
 	var description: String = str(request.get("effect_description", request.get("prompt", game.public_choice_description(request))))
 	if other_player:
 		description = "Waiting for %s · %s" % [game.player_display_name(int(request.get("player_index", -1))), game.public_choice_description(request)]
-	effect_box.visible = resolving and not description.is_empty() and game.card_presentation.is_empty()
+	var dialog_visible: bool = (is_instance_valid(panel) and panel.visible) or (is_instance_valid(choice_confirmation) and choice_confirmation.visible) or is_instance_valid(game.chaos_wildcard_choice_layer)
+	effect_box.visible = resolving and not dialog_visible and not description.is_empty() and game.card_presentation.is_empty()
 	effect_text.text = "[center]" + game.player_reference_text(description) + "[/center]"
 
 var generic_selection: Array = []
@@ -466,6 +467,9 @@ func _toggle_window_mode() -> void:
 
 
 func _toggle_panel() -> void:
+	if panel != null and panel.visible:
+		panel.hide()
+		return
 	# Recover the actual pending decision after an animation or inspection
 	# closed its controls; a stale/empty local HUD is never the authority.
 	if game.waiting_for_player_input and str(game.pending_input.get("type", "")) == "action_activation_step":
@@ -492,9 +496,38 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	panel.show()
 	prompt_label.text = "Game over"
 	var winner: int = int(winner_data.get("winner", -999))
-	_add_info("Winner: " + game.player_display_name(winner))
-	for row in winner_data.get("scores", []):
-		_add_section("%s: %d Power = %d base + %d Quests + %d Trophies + %d Crown" % [row.name, row.total, row.base, row.quests, row.trophies, row.crown])
+	var rows: Array = winner_data.get("scores", [])
+	var winner_name := ""
+	for row in rows:
+		if int(row.player_index) == winner: winner_name = str(row.name)
+	var title := Label.new()
+	title.text = winner_name + " wins"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 30)
+	title.add_theme_color_override("font_color", TabletopStyle.GOLD)
+	content.add_child(title)
+	var table := GridContainer.new()
+	table.name = "FinalStandings"
+	table.columns = 7
+	table.add_theme_constant_override("h_separation", 12)
+	table.add_theme_constant_override("v_separation", 8)
+	content.add_child(table)
+	for heading in ["Rank", "Mage", "Power", "Quests", "Trophies", "Crown", "Total"]:
+		var label := Label.new()
+		label.text = heading
+		label.add_theme_color_override("font_color", TabletopStyle.GOLD)
+		table.add_child(label)
+	for index in rows.size():
+		var row: Dictionary = rows[index]
+		var champion := int(row.player_index) == winner
+		for value in [str(index + 1), row.name, str(row.base), "+%d" % row.quests, "+%d" % row.trophies, "+%d" % row.crown, str(row.total)]:
+			var cell := PanelContainer.new()
+			cell.add_theme_stylebox_override("panel", TabletopStyle.panel(TabletopStyle.GOLD if champion else Color("3b4143"), Color("303028") if champion else TabletopStyle.INK))
+			var label := Label.new()
+			label.text = str(value)
+			label.add_theme_color_override("font_color", TabletopStyle.PAPER)
+			cell.add_child(label)
+			table.add_child(cell)
 
 
 func _on_player_input_resolved(
@@ -1400,7 +1433,7 @@ func get_action_root_entries_for_request(
 					)
 				)
 
-				label = "Command " + evocation_name
+				label = "Activate Evocation · " + evocation_name
 				mode = "direct" if bool(action.get("context", {}).get("extended_activation", false)) else "command_plans"
 
 			"spell", "quick":
@@ -1529,9 +1562,10 @@ func _render_action_root(category: String = "") -> void:
 		if mode == "direct":
 			if str(option.get("action", {}).get("type", "")) == "command":
 				var target := {"token":"command", "owner_id":current_player_index, "evocation_index":int(option.get("action", {}).get("evocation_index", -1))}
-				if game.show_board_target_choice(target, _submit_action_token.bind(str(option.get("token", "")))):
-					_add_info("Command: click a highlighted Evocation.")
-					continue
+				var activate := _submit_action_token.bind(str(option.get("token", "")))
+				game.show_board_target_choice(target, activate)
+				_add_button(str(entry.label), activate)
+				continue
 			if str(option.get("kind", "")) == "quest":
 				_add_object_choice(option, _submit_action_token.bind(str(option.get("token", ""))), false, "quests")
 				continue
@@ -1607,9 +1641,7 @@ func _render_action_root(category: String = "") -> void:
 			continue
 		if mode == "command_plans":
 			var target := {"token": "command", "owner_id": current_player_index, "evocation_index": int(filter_data.evocation_index)}
-			if game.show_board_target_choice(target, _set_action_menu.bind(mode, filter_data)):
-				_add_info("Command: click a highlighted Evocation.")
-				continue
+			game.show_board_target_choice(target, _set_action_menu.bind(mode, filter_data))
 
 		_add_button(
 			str(
@@ -1978,6 +2010,10 @@ func _submit_action_token(token: String) -> void:
 # =============================================================================
 
 func _render_effect_choice() -> void:
+	var damage_board := int(current_request.get("focus_damage_board", -1))
+	if damage_board >= 0 and game.table_shell != null:
+		game.table_shell.reveal_board_choice(damage_board)
+		game.table_shell._refresh_damage_display(damage_board)
 	# The same serializable board choices drive the host and remote clients.
 	# These requests deliberately have no text-menu options.
 	if bool(current_request.get("board_only", false)):
@@ -2047,6 +2083,10 @@ func _render_effect_choice() -> void:
 	for option in options:
 		var token: String = str(option.get("token", ""))
 		var callback: Callable = _submit_effect_single.bind(token) if max_select <= 1 else _toggle_generic_value.bind(token)
+		# Keep alternative models selectable in the menu without switching
+		# away from the first damage track while its hitboxes are built.
+		if damage_board >= 0 and (option.has("cube_evocation_owner") or int(option.get("cube_player_index", damage_board)) != damage_board):
+			continue
 		if game.show_board_target_choice(option, callback, generic_selection.has(token)):
 			board_tokens.append(token)
 	if not board_tokens.is_empty():

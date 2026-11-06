@@ -1,3 +1,102 @@
+# Ripresa 5 novembre 2026 — comparsa delle carte e bordo Umbra
+
+Quando l'host rivela una carta pubblica, invia subito il messaggio WebSocket `card_reveal` prima del caricamento locale dell'immagine e della sincronizzazione completa. Il client mostra la carta alla ricezione, a piena opacità. La conferma continua a usare il numero di presentazione dell'host. Il bordo dell'Umbra è nero sia sulla mappa sia nelle copie usate per le animazioni.
+
+Controlli Godot con trasporto simulato e serializzazione del protocollo esistente: 23 verifiche online passate, inclusa la comparsa sul client prima dello snapshot. Altre 38 verifiche Jinx/Nightmare passate, compreso il colore del bordo nelle tre posizioni. Per misurare la latenza della connessione reale occorre una partita su due browser. Il nuovo pacchetto richiede host e client della stessa versione.
+
+# Umbra, Destino e versione Web
+
+Ridotto il raggio del ritratto Umbra da 28,71 a 17. Il ritaglio lascia cliccabile il mago. Il settore considera i token presenti nella stanza. La logica di zoom ora gestisce anche i token con ritratto che non hanno un badge numerico. La stessa geometria è condivisa dal Famiglio agganciato.
+
+Il menu fisico offre Activate Evocation con il nome. Hide chiude il pannello aperto. La scelta Destino apre la plancia della vittima e identifica il proprietario dell'ultimo cubo. Per una conversione di danno viene aperta la plancia del bersaglio e le alternative su altri modelli restano nel menu. Il retro Avatar semplice di Luna II è stato corretto con la mezza luna argentata. Emet-Met Dark consente di selezionare il proprio Nigredo. Explore costruisce i percorsi dalla velocità effettiva, inclusa Slowness in cella.
+
+Verifica Godot 4.7.2: 30 controlli Quest/trigger e regressioni di questo passaggio, 32 controlli Jinx/Nightmare, tutti superati. Riprodotti la selezione di Nigredo, i percorsi da una cella a velocità 1, la destinazione delle richieste Destino/conversione e il cambio zoom senza badge.
+
+Rigenerati `output/web` e `deploy/web_bundle`. Verifica del pacchetto superata, compreso il confronto dei pixel di 43 Quest, due retro e 12 Hex fra sorgente ed export. Manifest SHA-256 dei due file divisi in sette parti ciascuno in `docs/handoff-2026-10-18/evidence/nov05-quest-web-bundle.json`. Nessuna pubblicazione online. Per il prossimo playtest verificare a due browser la sequenza attacco letale, Destino, conversione e chiusura, oltre alla leggibilità dell'Umbra in una stanza affollata.
+
+# Quest delle tre lune
+
+Il gioco carica i 43 fronti restaurati corrispondenti agli screenshot da `assets/quests/restored/`. I retro della seconda e terza luna sono in `assets/quests/backs/`. La prima luna usa la scansione originale. Le sei Quest del catalogo prive di nuovi screenshot continuano a usare le rispettive fonti precedenti.
+
+Confrontate le 18 Quest fornite che riportano Instabilità. Il disco Instabilità (e904) e il simbolo Contingency hanno funzioni distinte. Su Channeling Instability il disco compare una volta nel requisito e due volte nella ricompensa. Contingent Mage usa Contingency nel requisito e Instabilità nella ricompensa. Corrette anche Elementalist e Power Catalyst. Per risalire ai riferimenti e alle correzioni consultare `assets/quests/production/`, in particolare `nov05_instability_review.json` e `nov05_other_glyphs.json`. Le 12 Hex approvate passano da `assets/spells/hex_reviewed/`.
+
+Allineati i centri dei cubi ai nuovi fronti. Elementalist, Deep Knowledge e Power Catalyst mostrano quattro spazi stampati. Master of Death assegna un trofeo per ciascun mago scelto. Vital Sun mantiene l'ID preesistente `vial_sun`.
+
+Test Godot `docs/handoff-2026-10-18/checks/nov04_quest_triggers.gd` superato, 26 controlli. Nella riproduzione di Bad Luck due copie consumano due e poi un cubo nella Forge, lasciando intatta l'instabilità nell'altra stanza. Rimangono da riprodurre in una partita a più client la catena storica completa con Weighing of Souls, Sarcophagus e Torment e da controllare a schermo Jinx, trofei e classifica finale.
+
+---
+
+# Storico del 4 novembre 2026 — correzioni glifi, batch Quest da verificare
+
+Ultime annotazioni corrette con image_gen e salvate in assets/quests/restored:
+Pyromancer: dopo draw 1 sostituita la sfera con il simbolo Spell Card e905;
+Master of Death: trofeo nel premio, danno nel requisito, BRW nel codice;
+Wise Moon: bersaglio Self; Warrior Wizard: Evocation *;
+Summoner: Evocation *, Nigredo, Room *, BRW nel codice;
+Earth Tempest: rimosso 2 aggiunto fra and/or e Air.
+Anche Contingent Mage, Shattered Illusion e Magic Steam hanno versioni
+corrette salvate. Prompt e sorgenti: production/nov04_glyph_corrections.json.
+Il resolver Quest gia privilegia restored. NON dichiarare l'intero mazzo pronto.
+
+Batch di 41 immagini conservato in assets/quests/production/candidates,
+con prompt/sorgenti in nov04_generated_manifest.json. Queste sono CANDIDATE
+NON verificate: molti simboli generati erano sbagliati. Confrontare ogni
+carta con gli screenshot production/references prima di promuoverla.
+I due retro sono fra le candidate, ancora non collegati. Vital Sun usa nel
+database lo stable ID vial_sun; verificare anche i suoi premi con la fonte.
+Allineare progress_centers dei nuovi PNG (attualmente solo metadata Atlas).
+
+Hex: copiate le 12 review approvate in assets/spells/hex_reviewed;
+An Eye for an Eye sostituita con versione Power corretta. SpellArtResolver
+ora privilegia questa cartella rispetto agli alias precedenti.
+
+Codice modificato in corso: Elementalist conta spell_resolved con elementi
+Fire/Earth/Water/Air; Ineluctable Pain riconosce Evocation della Rosa Nera;
+attacco Evocation->Mage passa dall'animazione; Jinx progress overlay nei
+riquadri stampati; Chaos theme; banner nascosto con scelta aperta;
+trofeo z_index 200; tabella finale; token Umbra/Familiar con ritratto
+circolare e taglio concavo (shader attached_portrait).
+Test gia eseguiti: nov04_quest_triggers 17 controlli PASS;
+nov03_jinx_nightmare 32 assertion PASS. Questi NON provano parita Web
+o correttezza completa delle catene annidate. Restano da verificare:
+conversione Bad Luck end-to-end e catene trigger; visual QA token/Jinx/
+tabella finale; tutte le candidate Quest; preservazione lossless nell'export;
+parity test (ha conteggio originali hardcoded 13 da aggiornare); export Web.
+Web NON rigenerato dopo questi cambiamenti. Nessun commit/push/deploy.
+
+---
+
+# Ripresa precedente — Holy Corruption e contesto trigger
+
+Nuove fonti Quest ad alto zoom ricevute (43 fronti, retro Moon II e III).
+Richiesta attuale: restaurare fedelmente tutte queste carte, conservando i
+simboli. NON usare build_quest_faces.py o ricomposizioni dal JSON.
+Holy Corruption restaurata tramite image_gen; dopo la segnalazione dei due
+simboli sbagliati, sostituiti Sacred/Profane e le ripetizioni inferiori con
+i glifi ufficiali e96a/e969 come riferimenti. PNG in
+assets/quests/restored/holy_corruption.png (1024x1536); resolver privilegia
+restored, poi originali. Le altre Quest NON sono ancora restaurate.
+
+Bad Luck: instability_placed valorizzava solo source_room_id, mentre il
+trigger event_room leggeva target_room_id vuoto. Aggiunta destinazione
+all'evento e fallback source per eventi preesistenti. Inoltre i valori
+identificativi del trigger corrente prevalgono sul contesto salvato della
+spell (evita riuso di triggering_player/room/amount precedenti).
+Nightmare: richiesta slot ora specifica Player N della plancia destinataria.
+Test nov04_quest_triggers.gd: 9 controlli, 0 errori; import senza errori
+GDScript (solo errore ambiente salvataggio editor settings a path vuoto).
+Export Web NON rigenerato in questo passaggio; nessun commit/push/deploy.
+
+Restano aperti dalla richiesta corrente: altre Quest e due retro; sostituire
+Hex light_review dopo correzione An Eye for an Eye dark Air -> Power;
+token Umbra/Heracleto circolari con taglio concavo; Chaos box; verifica FAQ
+Ineluctable Pain/Umbra; cubi progresso Jinx; audit completo catene trigger;
+Elementalist (anche elementi JSON divergono dalla fonte Fire/Earth/Water/Air);
+attacco Evocation->Mage; sovrapposizione box; livello animazione trofei;
+tabella vittoria. Non dichiarare questi punti completati.
+
+---
+
 # Quest artwork — 4 novembre 2026, originali Moon I collegati; HD da completare
 
 Arrivata tavola originale 973x831 con 14 fronti Moon I e relativo retro.

@@ -162,6 +162,17 @@ func resolve_effect(
 			return _resolve_activate_evocation_or_summon_nigredo(effect, context)
 		"steal_power_from_up_to_mages":
 			return _resolve_steal_power_from_up_to_mages(effect, context)
+		"obtain_trophy_from_up_to_mages":
+			var caster_id := _caster(context)
+			if not _valid_player(game, caster_id): return false
+			var awarded: Array[int] = []
+			for chosen in _choice_as_array(context.get("selected_mage_indices", [])):
+				var victim := int(chosen)
+				if victim == caster_id or victim in awarded or not _valid_player(game, victim): continue
+				game.gain_player_trophy(caster_id, victim)
+				awarded.append(victim)
+				if awarded.size() >= int(effect.get("max_targets", 3)): break
+			return true
 
 		# Effects whose amount is derived from another game value.
 		"damage_per_black_rose_damage", \

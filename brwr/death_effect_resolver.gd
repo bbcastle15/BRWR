@@ -242,8 +242,13 @@ static func process_destiny(game, frame: Dictionary) -> bool:
 			elif n == count:
 				label = "Resolve all %d Destiny" % count
 			options.append({"token": "destiny:%d" % n, "value": n, "label": label})
+		var last_damage := ""
+		if not mage.damage_cubes.is_empty():
+			var cube_owner: int = mage.damage_cubes.back()
+			var source: String = game.player_display_name(cube_owner) if cube_owner >= 0 else "Black Rose"
+			last_damage = " Last Damage cube: %s." % source
 		game.request_effect_choice(owner, "destiny_resolution", frame, "destiny_count", options, 1, 1,
-			"Optional Destiny resolution — Player %d is defeated. Choose how many of your %d Destiny to resolve." % [victim + 1, count])
+			"Player %d is defeated.%s Choose how many of your %d Destiny to resolve." % [victim + 1, last_damage, count])
 		return false
 	var chosen: int = mini(int(frame.destiny_count), count)
 	if chosen > 0:
@@ -288,7 +293,11 @@ static func apply_trigger_target(side: Dictionary, context: Dictionary, event: G
 			context["target_evocation"] = event.source_evocation
 			context["target_model_type"] = "evocation"
 			context["spell_target_type"] = "evocation"
-		"event_room", "victim_room":
+		"event_room":
+			# Placement events identify the affected Room as their source.
+			context["target_room_id"] = event.target_room_id if not event.target_room_id.is_empty() else event.source_room_id
+			context["spell_target_type"] = "room"
+		"victim_room":
 			context["target_room_id"] = event.target_room_id
 			context["spell_target_type"] = "room"
 		"caster_room":

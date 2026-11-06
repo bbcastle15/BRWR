@@ -1,0 +1,52 @@
+[
+  {
+    "id": "master_of_death",
+    "prompt": "Use case: precise-object-edit. Edit target image 1: Master of Death quest card. Supporting official glyph references: image 2 = trophy, white skull trophy within solid black circle; image 3 = damage, black broken heart. Correct exactly the two erroneous crystal-ball symbols: in upper requirement 'one of your [icon] on their Mage Sheet' replace crystal ball with DAMAGE glyph from image 3. In lower reward 'gain 1 [icon] from each of them' replace crystal ball with TROPHY glyph from image 2, reproduce its exact silhouette, circle and negative space. Also correct footer typo BKW-REB to BRW-REB M-139. Preserve all other text, numbers, layout, colors, high resolution, texture, borders and progress slots. Do not reinterpret the glyphs. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-913599a7-3d12-47c0-8c0a-892bb1c623b3.png"
+  },
+  {
+    "id": "wise_moon",
+    "prompt": "Use case: precise-object-edit. Image 1 is the edit target Wise Moon card. Image 2 is the exact official SELF target glyph, a bearded mage head wearing crooked hat, no torso. Replace ONLY the incorrect crystal-ball symbol before the colon in ': draw 2 [card] from the Library.' with exact black silhouette of image 2. Preserve all other pixels as closely as possible: layout, text, yellow room hexagon, illustration, borders, colors, card icons, numbers and footer BRW-REB M-113. Single full high resolution card. No new symbols.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-bf6bd2b6-6fb0-4cfd-bb5f-5f0dd9dd2ec6.png"
+  },
+  {
+    "id": "contingent_mage",
+    "prompt": "See prior restoration session; official glyph correction.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-e709d104-f5a4-49d1-b688-5ff79c7c7536.png"
+  },
+  {
+    "id": "shattered_illusion",
+    "prompt": "See prior restoration session; official glyph correction.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-a8c001fa-c1da-4dc8-8da5-4c00f7465286.png"
+  },
+  {
+    "id": "magic_stem",
+    "prompt": "See prior restoration session; official glyph correction.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-8f1cc4ac-a866-4d09-bb3e-1ed3a0b82c5b.png"
+  },
+  {
+    "id": "an_eye_for_an_eye",
+    "prompt": "See prior restoration session; official glyph correction.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-12f7c5c2-608d-4b7c-b3cb-09cea88dec6c.png"
+  },
+  {
+    "id": "warrior_wizard",
+    "prompt": "Use case: precise-object-edit. Image 1 is edit target Warrior Wizard quest. Image 2 is exact official Evocation at any distance target glyph, black horned head over torso with asterisk at its right. Replace ONLY the malformed star/hat symbol before ': remove a target' in lower reward with exact glyph image 2, maintaining its horned head, torso and single asterisk at right. Preserve all text and other art, lightning symbol, health heart, range 0 hex, instability disc, progress slots, numbers, footer M-107, layout and high resolution. Do not change any other symbols.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-15cd3d77-f289-4eeb-b347-48a5f9bbeee4.png"
+  },
+  {
+    "id": "summoner",
+    "prompt": "Use case: precise-object-edit. Image 1 edit target Summoner quest. Image 2 exact official evocation at any distance target glyph: horned head torso and asterisk on right. Image 3 exact room-any-range glyph: outlined hexagon containing six-point asterisk. Corrections ONLY: replace crystal ball before ': the target activates' with image 2 glyph; replace the wrong word 'Wigredo' with 'Nigredo' (N i g r e d o), italic style same; replace stick-person hexagon after 'in a' with exact image 3 glyph; correct footer BKW-REB to BRW-REB M-135. Preserve all other text, Water and Profane icons in requirement, reward 2 rose, textures, colors, borders, layout. Full single high resolution card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b80a71f5-810e-4039-b590-1016d6ba7fea.png"
+  },
+  {
+    "id": "earth_tempest",
+    "prompt": "Use case: precise-object-edit. Edit this Earth Tempest card with ONE correction: remove the extra numeral 2 between 'and/or' and the Air circle glyph in the upper requirement. Correct line is 'have 3 [Earth icon] and/or [Air icon] symbols'. Keep initial 3. Keep bottom range 2 hexagon and inflict 2 Damage unchanged. Preserve absolutely all other wording, symbols, layout, illustration, border and colors. High resolution full card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b6c54d3e-52b6-4b88-a37b-e5be43f55884.png"
+  },
+  {
+    "id": "pyromancer",
+    "prompt": "Use case: precise-object-edit. Image 1 edit target Pyromancer quest card. Image 2 is the exact official SPELL CARD symbol: vertical black rounded rectangle containing a white outlined rose. Replace ONLY the crystal-ball symbol after 'draw 1' in the lower reward with image 2 glyph. It must read '[Self]: draw 1 [Spell Card] from the Forgotten Spell Deck.' Reproduce the black card rectangle and white rose faithfully, NOT a crystal ball or element circle. Preserve all other lettering, numbers, Fire and Profane icons, Self icon, textures, colors, borders, layout, footer BRW-REB M-130 and resolution. Full uncropped single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-e095460e-2a69-4e4d-8f7f-6ca502ab4e74.png"
+  }
+]

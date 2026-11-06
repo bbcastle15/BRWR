@@ -43,7 +43,6 @@ var presentation_title: Label
 var presentation_hint: Label
 var presentation_side: Panel
 var presentation_rules: RichTextLabel
-var card_tween: Tween
 var shown_card_serial := -1
 var damage_waiting := false
 var damage_receipt: PanelContainer
@@ -324,8 +323,6 @@ func sync_card_presentation() -> void:
 			card_overlay.hide()
 		return
 	shown_card_serial = serial
-	if card_tween != null:
-		card_tween.kill()
 	if data.is_empty():
 		card_overlay.hide()
 		return
@@ -364,10 +361,7 @@ func sync_card_presentation() -> void:
 		elif game.network_session != null and not game.can_acknowledge_card_presentation(game.local_viewer_index):
 			presentation_hint.text = "Click to close · waiting for " + game.player_display_name(int(data.get("acknowledge_player", 0)))
 	_layout_card_presentation()
-	card_overlay.modulate.a = 0.0
 	card_overlay.show()
-	card_tween = create_tween()
-	card_tween.tween_property(card_overlay, "modulate:a", 1.0, 0.18)
 
 func _dismiss_card_presentation() -> void:
 	if card_overlay == null or not card_overlay.visible or game == null:
@@ -670,6 +664,7 @@ func _play_next_animation() -> void:
 		if is_instance_valid(hidden_trophy):
 			animated_node = hidden_trophy.duplicate()
 			board_stage.add_child(animated_node)
+			animated_node.z_index = 200
 			animated_node.global_position = hidden_trophy.global_position
 			animated_node.scale = hidden_trophy.get_global_transform().get_scale() / board_stage.get_global_transform().get_scale()
 			hidden_trophy.hide()

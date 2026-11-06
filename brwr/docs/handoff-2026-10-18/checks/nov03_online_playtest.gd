@@ -7,8 +7,8 @@ class Transport extends "res://online_session.gd":
 		# The real wire codec, including typed Arrays and Vector2i coordinates.
 		var packet = Marshalls.base64_to_variant(Marshalls.variant_to_base64(payload, false), false)
 		packets.append(packet)
-		if remote != null and packet.get("op") == "snapshot":
-			remote._snapshot(packet.state)
+		if remote != null:
+			remote._handle_game_message("host", packet)
 		return OK
 
 func run():
@@ -41,6 +41,12 @@ func run():
 	var packet_count := sender.packets.size()
 	sender.publish()
 	expect(sender.packets.size() == packet_count, "Identical projections do not flood the relay")
+	var spell = game.spell_database.get_spell("emet_met")
+	game._present_resolution_card({"type":"spell_resolution","spell":spell,"use_dark_side":true,"context":{"caster_id":0}})
+	expect(sender.packets.back().op == "card_reveal" and client.card_presentation.id == spell.id, "Public face reaches guest before the next snapshot")
+	expect(client.table_shell.card_overlay.visible and client.table_shell.card_overlay.modulate.a == 1.0 and client.card_presentation.dark, "Guest sees the active side at full opacity immediately")
+	game._finish_card_presentation(game.card_presentation_serial)
+	sender.publish()
 	expect(client.players[1].player_name == "Friend", "Username reaches the remote authoritative PlayerState")
 	expect(game.player_reference_text("Player 1 chose Player 2; Player 20 stays literal.") == "Host chose Friend; Player 20 stays literal.", "Legacy UI labels use names without altering longer identifiers")
 	# No input request/feedback between these mutations and the scheduled sync.

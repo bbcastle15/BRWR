@@ -581,12 +581,7 @@ func refresh_jinxes() -> void:
 			Vector2(112, 154), game.open_jinx_card.bind(player_index, id))
 		card.set_meta("jinx_id", id)
 		item.add_child(card)
-		var progress := Label.new()
-		progress.text = "Task: %d / %d" % [int(jinx.progress), int(definition.get("slots", 0))]
-		progress.add_theme_font_size_override("font_size", 13)
-		progress.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		progress.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		item.add_child(progress)
+		game.ReferenceCardPreview.add_jinx_progress(card, id, int(jinx.progress), get_damage_cube_color(player_index))
 
 
 func _render_quest_progress_cubes(card: Control, quest: QuestState, card_size: Vector2) -> void:

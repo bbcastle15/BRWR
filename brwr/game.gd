@@ -1180,7 +1180,7 @@ func _sync_evocation_tokens() -> void:
 					Color.DIM_GRAY if evocation.assigned_mage >= 0 else owner.color)
 				continue
 
-			var token = preload("res://umbra_token.gd").new() if evocation.evocation_id == "umbra" and evocation.assigned_mage >= 0 else evocation_token_scene.instantiate()
+			var token = preload("res://umbra_token.gd").new() if (evocation.evocation_id == "umbra" and evocation.assigned_mage >= 0) or FamiliarRules.is_familiar(evocation) else evocation_token_scene.instantiate()
 			token.name = (
 				"EvocationToken_"
 				+ evocation.evocation_id
@@ -1384,8 +1384,10 @@ func refresh_model_tokens() -> void:
 			if FamiliarRules.guarded(evocation):
 				var mage_token: Node2D = mage_tokens[owner_index]
 				if token.get_parent() != mage_token: token.reparent(mage_token, false)
-				token.position = Vector2(0, 28)
-				token.scale = Vector2.ONE * 0.60
+				token.position = Vector2.ZERO
+				token.scale = Vector2.ONE
+				token.set_attached(true)
+				token.set_sector(1)
 				token.z_index = 2
 				token.visible = true
 				continue
@@ -1469,6 +1471,31 @@ func refresh_model_tokens() -> void:
 			var rows := ceili(entries.size() / 3.0)
 			node.scale = Vector2.ONE * (minf(0.72, 48.0 / maxf(1.0, rows - 1) / 48.0) if with_portraits and entries.size() > 3 else 1.0)
 			_position_model_token(node, center + offsets[i], location_key)
+		_layout_attached_tokens(entries, offsets)
+
+
+func _layout_attached_tokens(entries: Array, offsets: Array[Vector2]) -> void:
+	var occupied := offsets.duplicate()
+	for i in entries.size():
+		var host: Node2D = entries[i].node
+		var used: Array[int] = []
+		for token in host.get_children():
+			if not token.has_method("set_sector") or not token.attached: continue
+			var best := 0
+			var clearance := -1.0
+			for sector in 3:
+				if sector in used: continue
+				var angle := -PI * 0.5 + (sector + 0.5) * TAU / 3.0
+				var candidate := offsets[i] + Vector2.from_angle(angle) * 26.0 * host.scale.x
+				var nearest := INF
+				for point in occupied:
+					if point != offsets[i]: nearest = minf(nearest, candidate.distance_squared_to(point))
+				if nearest > clearance:
+					clearance = nearest
+					best = sector
+			token.set_sector(best)
+			used.append(best)
+			occupied.append(offsets[i] + token.portrait_sprite.position * host.scale)
 
 
 func _position_model_token(node: Node2D, destination: Vector2, location_key: String) -> void:
@@ -3392,6 +3419,7 @@ func deal_damage_from_evocation(
 
 	if amount <= 0:
 		return 0
+	animate_model_attack(controller_id if controller_id >= 0 else get_evocation_controller_id(evocation), target_player_index, null, evocation)
 
 	var capacity: int = players[target_player_index].mage.get_remaining_health()
 	var familiar := FamiliarRules.guard(self,target_player_index)
@@ -7400,6 +7428,7 @@ func place_instability(
 		var placement := GameEvent.new("instability_placed")
 		placement.source_player_index = owner_id
 		placement.source_room_id = room_id
+		placement.target_room_id = room_id
 		placement.amount = placed
 		placement.data["no_instability_echo"] = bool(active_effect_context.get("no_instability_echo", false))
 		queue_resolution({"type": "game_event", "event": placement})
@@ -9214,6 +9243,13 @@ func request_effect_choice(
 		"options": request_options
 	}
 
+	if choice_kind == "destiny_resolution":
+		request["focus_damage_board"] = int(context.victim)
+	elif choice_kind == "convert_damage_cubes":
+		for option in public_options:
+			if not option.has("cube_evocation_owner") and option.has("cube_player_index"):
+				request["focus_damage_board"] = int(option.cube_player_index)
+				break
 	var requested: bool = request_player_input(request)
 	if requested and direct_lodge:
 		_show_direct_lodge_effect_choice(
@@ -9267,6 +9303,7 @@ func _show_chaos_wildcard_overlay(
 
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(560.0, 310.0)
+	panel.theme = preload("res://tabletop_style.gd").make_theme()
 	panel.position = (
 		get_viewport_rect().size * 0.5
 		- panel.custom_minimum_size * 0.5
@@ -10543,18 +10580,13 @@ func _prepare_quest_special_choice(
 				_quest_room_choice_options(
 					caster_id,
 					{
-						"range": int(
-							effect.get(
-								"range",
-								1
-							)
-						)
+						"range": effect.get("range", 1)
 					}
 				),
 				"Choose where to summon the Nigredo."
 			)
 
-		"steal_power_from_up_to_mages":
+		"steal_power_from_up_to_mages", "obtain_trophy_from_up_to_mages":
 			if context.has(
 				"selected_mage_indices"
 			):
@@ -11099,7 +11131,7 @@ func _spell_evocation_target_options(
 		var evocation = option.get("value", null)
 		if evocation == null:
 			continue
-		if get_evocation_controller_id(evocation) == caster_id and _effects_inflict_damage(side.get("effects", [])) and not bool(side.get("allow_friendly_damage", false)):
+		if get_evocation_controller_id(evocation) == caster_id and str(side.get("target_owner", "")) != "self" and _effects_inflict_damage(side.get("effects", [])) and not bool(side.get("allow_friendly_damage", false)):
 			continue
 		if evocation.archetype == "equipment" and evocation.owner_id != caster_id:
 			continue
@@ -14423,6 +14455,8 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 	if int(data.acknowledge_player) < 0:
 		data.acknowledge_player = 0
 	card_presentation = data
+	if network_session != null:
+		network_session.publish_card_reveal(data)
 	table_shell.sync_card_presentation()
 	if network_session != null:
 		network_session.call_deferred("publish")
@@ -16895,7 +16929,9 @@ func process_trigger_spell_resolution(
 				"trigger_evocation_reason": event.action_type
 			}
 			for key in active_spell.context:
-				context[key] = active_spell.context[key]
+				# Current trigger identity takes precedence over saved permanent state.
+				if not context.has(key):
+					context[key] = active_spell.context[key]
 			context["spell_target_type"] = str(active_side.get("target", ""))
 			context["spell_range"] = active_side.get("range", "*")
 			context["caster_room_id"] = players[owner_id].mage.room_id
@@ -18816,7 +18852,10 @@ func _beta_explore_paths(
 	var player = players[player_index]
 	var mage = player.mage
 
-	if mage == null or mage.speed <= 0:
+	if mage == null:
+		return result
+	var speed: int = player.get_mage_speed()
+	if speed <= 0:
 		return result
 
 	var frontier: Array = []
@@ -18863,7 +18902,7 @@ func _beta_explore_paths(
 			node.get("moves_used", 0)
 		)
 
-		if moves_used >= mage.speed:
+		if moves_used >= speed:
 			continue
 
 		var current_room_id: String = str(

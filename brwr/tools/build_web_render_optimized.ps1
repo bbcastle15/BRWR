@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Stop'
 
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $sourceWebRoot = Join-Path $sourceRoot 'output\web'
-$tempRoot = Join-Path $env:TEMP 'BRWR_web_render_optimized'
+$tempRoot = Join-Path $env:TEMP ('BRWR_web_render_optimized_' + [guid]::NewGuid())
 $tempWebRoot = Join-Path $tempRoot 'output\web'
 
 function Find-Godot {
@@ -126,14 +126,11 @@ Write-Host "Copia temporanea: $tempRoot"
 Write-Host "Texture Web: Lossy, quality=$LossyQuality, max dimension=$SizeLimit"
 Write-Host ''
 
-if (Test-Path -LiteralPath $tempRoot) {
-    Remove-Item -LiteralPath $tempRoot -Recurse -Force
-}
 New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
 
 # Copy the project, but never copy build/cache/local-network artefacts.
 $null = & robocopy $sourceRoot $tempRoot /MIR /NFL /NDL /NJH /NJS /NP `
-    /XD '.git' '.godot' 'output' '.tls' '.multiplayer_relay_backup' `
+    /XD '.git' '.godot' 'output' '.tls' '.multiplayer_relay_backup' 'docs' 'deploy' `
     /XF 'BRWR_UPNP_*.zip' '*.bak' '*.backup' '*.tmp'
 
 if ($LASTEXITCODE -gt 7) {
@@ -164,8 +161,8 @@ foreach ($img in $sourceImages) {
 
     # Original Quest scans use pixel-coordinate AtlasTextures. Keep both the
     # original resolution and lossless pixels, including tiny printed symbols.
-    $questOriginalsRoot = Join-Path $assetsRoot 'quests\originals'
-    if ($img.FullName.StartsWith($questOriginalsRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
+    $artPath = $img.FullName.Substring($assetsRoot.Length + 1)
+    if ($artPath -match '^(quests\\(originals|restored|backs)|spells\\hex_reviewed)\\') {
         $content = Set-ImportOption $content 'compress/mode' '0'
         $content = Set-ImportOption $content 'process/size_limit' '0'
         [IO.File]::WriteAllText($importPath, $content, (New-Object Text.UTF8Encoding($false)))
@@ -192,6 +189,8 @@ if ($missingImport -gt 0) {
 New-Item -ItemType Directory -Path $tempWebRoot -Force | Out-Null
 
 $buildLog = Join-Path $tempRoot 'web-render-export.log'
+$metadata = & (Join-Path $PSScriptRoot 'write_web_build_metadata.ps1') $tempRoot $engineVersion
+[IO.File]::WriteAllText((Join-Path $tempWebRoot 'build.json'), $metadata)
 Write-Host ''
 Write-Host 'Importo ed esporto la copia Web...'
 
@@ -256,3 +255,9 @@ if ((Get-Item -LiteralPath (Join-Path $sourceWebRoot 'index.pck')).Length -gt 95
 Write-Host ''
 Write-Host "Build Web finale: $sourceWebRoot"
 Write-Host 'Il progetto e gli asset originali NON sono stati modificati.'
+
+$finishedTemp = (Resolve-Path -LiteralPath $tempRoot).Path
+if ([IO.Path]::GetDirectoryName($finishedTemp) -eq (Resolve-Path -LiteralPath $env:TEMP).Path -and
+    [IO.Path]::GetFileName($finishedTemp) -match '^BRWR_web_render_optimized_[a-fA-F0-9-]{36}$') {
+    Remove-Item -LiteralPath $finishedTemp -Recurse -Force
+}

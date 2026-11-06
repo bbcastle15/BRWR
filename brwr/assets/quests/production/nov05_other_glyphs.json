@@ -1,0 +1,42 @@
+[
+  {
+    "id": "collective_sacrifice",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace BOTH crystal balls after 'loses 3' and 'loses 2' with exact official Power rose (image 2). The split heart in requirement is Damage (image 3). Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-800d2e66-474d-4a37-9801-64343d2a2c9f.png"
+  },
+  {
+    "id": "deep_knowledge",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Exactly FOUR centered cube slots total: three empty slots then a fourth containing the chest. Replace both card symbols in reward with Spell Card (image 2). Black Rose Room symbol must match image 3 (dark hex with internal glyph). Keep actual crystal ball after 'resolve a' for Contingency. Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b338adf0-49a4-4def-b448-52e96c52b8b2.png"
+  },
+  {
+    "id": "illusory_moon",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace crystal ball before ': you may place' with official Mage at any range (image 2). Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-ae71e6bb-d432-42c1-bb32-782688472f2f.png"
+  },
+  {
+    "id": "mortal_moon",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace crystal ball before ': if you do not have' with exact Self (image 2). The gray Cemetery hex is image 3, gray hex containing skull. Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-4e8631e0-7165-4e1d-b4eb-d346005d42d6.png"
+  },
+  {
+    "id": "magus",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace globe before ': draw 3' with exact Self (image 2); use spell card after 3 (image 3). Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-39041e5f-47bc-4302-93ba-a91001d45727.png"
+  },
+  {
+    "id": "citrine_star",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace prefix before ': draw 2' with exact Self image 2. Keep real Contingency globe in upper requirement. Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-fb5444e4-ade5-4846-8998-c079cbba141c.png"
+  },
+  {
+    "id": "indigo_star",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Replace last crystal ball after 'draw 3' with exact spell card (image 2). Self before ': shuffle' is image 3. Keep actual crystal ball in upper requirement. Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-781e4bae-5bb3-454a-a715-d1c502f21ea1.png"
+  },
+  {
+    "id": "surrender_of_power",
+    "prompt": "Precisely edit image 1, preserving all printing and style except the following corrections. Correct room after 'resolve the' to Black Rose Room hex from image 2, dark filled hex with its internal symbol. Reward target prefix is generic Model at any distance image 3. Keep all words, numbers, footer, other graphics and wood borders. Output full single card.",
+    "path": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-7aaf230f-368a-415f-b2b7-c1041dbcaef0.png"
+  }
+]

@@ -314,6 +314,10 @@ func _handle_game_message(peer_id: String, payload: Dictionary) -> void:
 			_begin(int(payload.get("count", 2)), int(payload.get("seat", local_player)))
 		"snapshot":
 			_snapshot(payload.get("state", {}))
+		"card_reveal":
+			if game != null and game.network_client and game.table_shell != null:
+				game.card_presentation = payload.card
+				game.table_shell.sync_card_presentation()
 		"choice_rejected":
 			_choice_rejected()
 		"match_paused":
@@ -432,6 +436,13 @@ func _ready_for_state(peer_id: String) -> void:
 	if hosting and started and peer_players.has(peer_id):
 		receiving[peer_id] = true
 		publish()
+
+func publish_card_reveal(card: Dictionary) -> void:
+	# Send only the already public face before loading the host texture or
+	# serializing the full per-seat state. Snapshots still cover late joins.
+	if hosting and connected:
+		for id in receiving:
+			_send_game_to_peer(str(id), {"op": "card_reveal", "card": card})
 
 func publish() -> void:
 	if not hosting or not connected or game == null or game.beta_hud == null:

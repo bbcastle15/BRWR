@@ -203,7 +203,8 @@ func _process(delta: float) -> void:
 		var compact := get_global_transform_with_canvas().x.length() * 42.0 < 30.0
 		if compact != _compact:
 			_compact = compact
-			_copy_badge.visible = not compact and board_number > 0
+			if is_instance_valid(_copy_badge):
+				_copy_badge.visible = not compact and board_number > 0
 			queue_redraw()
 
 
