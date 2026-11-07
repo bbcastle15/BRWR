@@ -1,3 +1,41 @@
+# Ripresa 7 novembre 2026 — Agony, Entropy e Cursed Hieroglyphics
+
+Il playtest segnalato comprende Cross and Delight Light, Peak of Agony Dark, due copie di Entropy Dark e una Cursed Hieroglyphics scattata durante Explore. Il controllo dedicato è `docs/handoff-2026-10-18/checks/nov07_spell_reactions.gd`. Riutilizza i lanci, le finestre delle trappole, i danni e gli spostamenti effettivi del motore.
+
+- **Pain.** Il Codex specifica che la Rosa Nera infligge il danno al lanciatore. Il pannello deve permettere al proprietario di scegliere esplicitamente il proprio mago o una delle proprie evocazioni idonee. Il log deve nominare il mago. Per Cross and Delight la stanza selezionata determina dove compare il Succubus e il Succubus appena evocato si attiva dopo Pain.
+- **Peak of Agony Dark.** Il secondo simbolo nel testo è Model a distanza 1 dal primo bersaglio. Vanno esclusi il lanciatore e il modello già scelto. L'effetto usa il selettore dei modelli e il danno proporzionale esistenti. Verificare sia due maghi distinti sia un'evocazione.
+- **Entropy Dark.** La copia passata resta armata per i successivi colpi letali idonei. Nota sulle fonti: la FAQ inglese del 28 gennaio 2026, errata a pagina 21 del regolamento, attribuisce il danno di un'evocazione al modello evocazione anche quando i cubi hanno il colore del controllore. Lo stato del mago al momento della risoluzione può differire da quello al piazzamento dell'ultimo cubo.
+- **Cursed Hieroglyphics.** Entrambi i lati colpiscono la stanza rossa o verde e pescano una Jinx per ogni altro mago che vi si trova dopo i danni. Il Codex a pagina 32 specifica il trattamento dell'omonima già assegnata. Il log condiviso deve distinguere l'assegnazione dalla pesca di un duplicato o dal mazzo esaurito.
+
+# Ripresa 6 novembre 2026 — Fountain of the Three Dark e cubi coperti dalle Umbre
+
+Il commit del laptop è `418b4ad` (`updates laptop`). Comprende la rivelazione anticipata delle carte pubbliche via WebSocket, i ritratti Umbra più piccoli con bordo nero, l'apertura della plancia per Destino e conversioni sui maghi, 43 fronti Quest restaurati e le 12 Hex approvate. I dettagli del 5 novembre sono nella sezione successiva. La versione di **Conspirator Mage** approvata dall'utente è `assets/quests/reconstructed/conspirator_mage.png`.
+
+**Fountain of the Three, Dark.** Il riferimento è il testo stampato in `assets/spells/fountain_of_the_three.png`. Il lato Dark indica per primo l'Enhancement Aria. In `data/spells.json` ora usa l'ordine già supportato dal motore, `enhancement` seguito da `base`. Se il mago soddisfa il requisito, piazza 1 Instabilità nella stanza bersaglio prima della domanda «Activate a Construct / Summon a Nigredo». Senza Aria si arriva direttamente alla scelta. La verifica osserva i cubi **nell'istante in cui il motore richiede la scelta**, oltre a controllare lo stato finale di entrambe le alternative.
+
+**Conversione del Danno.** Le Umbre assegnate condividono l'origine grafica del token del mago. I vecchi cubi creati accanto ai token si sovrapponevano nella Loggia.
+
+- Per le evocazioni, `game.gd` collega la scelta al cubo raffigurato sulla carta nello slot corretto della PlayerBoard o sulla plancia di Possessed. Per il mago usa la traccia Danno. Le opzioni pubbliche identificano la plancia e l'evocazione e l'host convalida ogni cubo.
+- Se una conversione di stanza comprende più plance, il pulsante **View … ›** passa alla successiva. I cubi scelti restano selezionati fino alla conferma.
+- Per l'Instabilità si clicca direttamente la casella della stanza. Durante la scelta il cubo e la sua area cliccabile hanno la precedenza sui token dei modelli. Il gioco rimuove l'evidenziazione quando il giocatore ha finito.
+
+**Come verificare sul laptop.** Dalla cartella di `project.godot`, avviare l'eseguibile console di Godot 4.7.2 con gli argomenti seguenti.
+
+- `--headless --path . --script res://docs/handoff-2026-10-18/checks/nov04_quest_triggers.gd` verifica la sequenza di Fountain.
+- `--headless --path . --script res://docs/handoff-2026-10-18/checks/nov04_playtest.gd` verifica i click su plance giocatore e Avatar usando due istanze e il protocollo host–client serializzato.
+- Per il playtest su due PC, preparare una stanza con due Umbre ferite assegnate allo stesso mago e un altro bersaglio ferito. Convertire il cubo della seconda Umbra e verificare il suo colore su entrambi gli schermi.
+
+**Esito del 6 novembre con Godot 4.7.2.** Sono passati 48 controlli Quest/trigger/Fountain, 119 controlli di playtest host–client, 25 di interazione con le stanze e gli Equipment, 10 della plancia Avatar e 38 Jinx/Nightmare. Fra i casi esercitati ci sono tre Umbre dello stesso mago, uno snapshot ricevuto durante una selezione multipla, il secondo di due cubi dello stesso colore su Colossus e una casella della Black Rose Room coperta fisicamente dal ritratto Umbra. Alla chiusura del test host–client headless Godot segnala risorse del renderer di test ancora in uso. Anche eseguendo la versione precedente dello stesso test si ottiene lo stesso avviso.
+
+**Versione Web locale.** Rigenerati `output/web` e `deploy/web_bundle`. Il pacchetto ha passato il test di avvio e il confronto sorgente/export su 239 texture Spell, 57 carte Mago, 49 Quest e 108 impronte di codice o risorse. Per gli atlanti il confronto usa i pixel del ritaglio effettivo, le coordinate e le impostazioni di campionamento, anche quando Godot compila il file di testo `.tres`. Chrome ha caricato WebAssembly e PCK fino al menu principale. Entrambi gli archivi sono stati ricomposti da sette parti e verificati.
+
+| Archivio | Byte | SHA-256 |
+| --- | ---: | --- |
+| `index.pck` | 225346928 | `d5c33461923452783da6ab02167a48094f14c309b25a1e7f6630f9f8302c7e4d` |
+| `index.pck.gz` | 222462342 | `eaf4196e19bada14e29f00f478d96f7f0dd2d29676324faf19cb319ab71af225` |
+
+Il bundle è pronto per la prossima pubblicazione. Resta da provare la partita su Internet con due PC.
+
 # Ripresa 5 novembre 2026 — comparsa delle carte e bordo Umbra
 
 Quando l'host rivela una carta pubblica, invia subito il messaggio WebSocket `card_reveal` prima del caricamento locale dell'immagine e della sincronizzazione completa. Il client mostra la carta alla ricezione, a piena opacità. La conferma continua a usare il numero di presentazione dell'host. Il bordo dell'Umbra è nero sia sulla mappa sia nelle copie usate per le animazioni.
@@ -109,7 +147,7 @@ Non chiamarli HD: ogni carta nella fonte misura circa 176x265 pixel. Servono
 fonti più grandi per maggiore dettaglio fedele. Retro Moon I in assets/quests/backs.
 Conspirator Mage è una ricostruzione autorizzata separata in
 assets/quests/reconstructed/conspirator_mage.png, contenuto verificato col JSON,
-da sostituire quando arriva lo screenshot. Le altre Lune restano invariate.
+approvata dall'utente per il gioco. Le altre Lune in quel passaggio erano invariate.
 Collegati originali e retro Moon I a preview/mazzo/Quest risolte; cubi
 posizionati sulle caselle misurate nella fonte. Verificati tutti i ritagli
 con screenshot OpenGL in assets/quests/production/review. Field Test aveva
@@ -123,8 +161,7 @@ ciascuno, SHA-256 concatenati verificati. Manifest nov04-quest-web-bundle.json.
 Segmenti *.part* marcati binary in .gitattributes per evitare normalizzazioni Git.
 tools/build_web_render_optimized.ps1 preserva lossless e dimensioni delle
 Quest originali. Report docs/QUEST-ART-2026-11-04.md. Rimane il limite della
-fonte: richiedere screenshot più grandi per un reale restauro HD fedele,
-e l'originale Conspirator Mage per sostituire la ricostruzione provvisoria.
+fonte: richiedere screenshot più grandi per restauri più dettagliati delle carte fornite.
 Preservare ogni modifica precedente; nessun commit/push/deploy.
 
 ## Verifica precedente

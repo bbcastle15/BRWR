@@ -23,9 +23,21 @@ const TYPES := ["trigger_event_branch", "optional_caster_room_effect", "filtered
 static func model_options(game, effect: Dictionary, context: Dictionary) -> Array:
 	var caster: int = int(context.caster_id)
 	var center: String = FamineRules.target_room(game, context) if bool(effect.get("from_target", false)) else ""
+	var primary_ev: EvocationState = context.get("target_evocation")
+	var primary_mage: int = int(context.get("target_player_index", -1))
+	if bool(effect.get("exclude_primary", false)):
+		if bool(context.get("target_is_dummy", false)) or not game.is_lodge_room_id(center):
+			return []
+		if primary_ev != null and not game.is_evocation_in_play(primary_ev):
+			return []
+		if primary_ev == null and (primary_mage < 0 or game.is_mage_in_cell(primary_mage)):
+			return []
 	var options := ForgottenRules.models(game, context, str(effect.get("target", "evocation")), effect.get("range", "*"), center)
 	return options.filter(func(o):
 		var ev: EvocationState = o.value.get("evocation")
+		if bool(effect.get("exclude_primary", false)):
+			if ev != null and ev == primary_ev: return false
+			if ev == null and primary_ev == null and int(o.value.player_index) == primary_mage: return false
 		if bool(effect.get("movable", false)) and ev != null and ev.archetype == "equipment": return false
 		if bool(effect.get("physical_attack_target", false)):
 			if ev != null and (ev == context.get("source_evocation") or game.get_evocation_controller_id(ev) == caster or not ForgottenEvocations.ability(game, ev, "cannot_be_physically_attacked").is_empty()): return false

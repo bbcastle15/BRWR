@@ -490,10 +490,10 @@ func _process(_delta: float) -> void:
 	var viewer: int = game.get_ui_viewer_player_index()
 	if viewer != observed_viewer:
 		observed_viewer = viewer
-		# A click or target request can open the incoming viewer's own board
-		# before this frame observes the seat change. Preserve that opening.
+		# The incoming viewer may already be choosing cubes on another Mage's board.
 		var showing_new_viewer := shown_player == viewer
-		if not _has_damage_presentation() and not showing_new_viewer: close_board()
+		if not _has_damage_presentation() and not showing_new_viewer and not board_choices.has(shown_player):
+			close_board()
 		game._close_player_board_spell_preview()
 	_refresh_banners()
 	if damage_waiting:
@@ -855,7 +855,10 @@ func queue_world_placement(node: CanvasItem) -> void:
 func _play_world_placements() -> void:
 	if world_placements.is_empty() or card_overlay.visible or animation != null or damage_waiting: return
 	# An inspection must not starve queued public effects and their resolution barrier.
-	if board_overlay.visible: close_board()
+	# A placement from the preceding effect may arrive in the same snapshot
+	# as a conversion. Keep its damage cubes available to the choosing player.
+	if board_overlay.visible and not (board_choices.has(shown_player) and game.pending_input.get("choice_kind") == "convert_damage_cubes"):
+		close_board()
 	if game.beta_hud != null: game.beta_hud.hand_overlay.hide()
 	var preview = game.get_node_or_null("ReferenceCardPreview")
 	if preview != null and preview.root.visible: return

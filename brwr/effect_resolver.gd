@@ -1,6 +1,8 @@
 class_name EffectResolver
 extends RefCounted
 
+const PAIN_EFFECTS := ["pain", "pain_from_trigger_damage"]
+
 # =============================================================================
 # EFFECT RESOLVER - CONSOLIDATED VERSION
 # =============================================================================
@@ -26,12 +28,16 @@ func resolve_effect(
 	if game != null:
 		game.current_effect_description = preload("res://effect_description.gd").describe(effect)
 		ForgottenPassives.prepare_context(game, context)
-		var target_ev: EvocationState = context.get("target_evocation")
-		if target_ev != null and str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, target_ev, "ignore_spell_effects").is_empty():
-			return true
 	if bool(effect.get("only_on_trigger", false)) and context.get("trigger_event") == null:
 		return true
 	if bool(effect.get("only_on_initial_cast", false)) and context.get("trigger_event") != null:
+		return true
+	# Pain is inflicted by the Black Rose on the caster, even when another
+	# Model ignores the printed target's Effect. Keep the original damage receipt.
+	if effect_type in PAIN_EFFECTS:
+		return _resolve_pain(effect, context)
+	var target_ev: EvocationState = context.get("target_evocation")
+	if game != null and target_ev != null and str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, target_ev, "ignore_spell_effects").is_empty():
 		return true
 	if _caput_direct_target_is_ignored(context):
 		return true
@@ -68,8 +74,6 @@ func resolve_effect(
 			return _resolve_remove_instability(effect, context)
 		"place_instability_from_context":
 			return _resolve_place_instability_from_context(effect, context)
-		"pain":
-			return _resolve_pain(effect, context)
 		"convert_damage", "convert_damage_on_caster":
 			return _resolve_convert_damage(effect, context, effect_type)
 		"convert_instability":
@@ -177,7 +181,6 @@ func resolve_effect(
 		# Effects whose amount is derived from another game value.
 		"damage_per_black_rose_damage", \
 		"damage_per_self_damage", \
-		"damage_secondary_mage_per_self_damage", \
 		"gain_power_per_black_rose_damage", \
 		"place_instability_at_defeated_mage_room_per_self_damage", \
 		"place_instability_per_black_rose_damage_on_effect_damaged_models", \
@@ -217,7 +220,6 @@ func resolve_effect(
 		"damage_from_evocation", \
 		"damage_all_target_owner_evocations", \
 		"damage_marked_mage", \
-		"pain_from_trigger_damage", \
 		"damage_all_models_of_type", \
 		"damage_models_damaged_by_effect":
 			return _resolve_damage_variant(effect, context, effect_type)
@@ -1708,7 +1710,7 @@ func _resolve_pain(
 
 	var game = _game(context)
 	var caster_id = _caster(context)
-	var amount = int(effect.get("amount", 0))
+	var amount := int(context.get("trigger_damage_amount", 0)) if effect.type == "pain_from_trigger_damage" else int(effect.get("amount", 0))
 
 	if not _valid_player(game, caster_id):
 		return false
@@ -1716,7 +1718,9 @@ func _resolve_pain(
 	if amount <= 0:
 		return true
 
-	game.deal_damage(-1, caster_id, amount)
+	context["effect_target_model_type"] = "mage"
+	context["effect_target_room_id"] = game.players[caster_id].mage.room_id
+	game.deal_damage(-1, caster_id, amount, "pain")
 
 	print(
 		"Pain ",
@@ -4094,46 +4098,6 @@ func _resolve_scaled_effect(
 				context
 			)
 
-		"damage_secondary_mage_per_self_damage":
-			var primary = int(context.get("target_player_index", -1))
-			var target = int(
-				context.get("secondary_target_player_index", -1)
-			)
-
-			if not _valid_player(game, caster_id) \
-			or not _valid_player(game, target):
-				print("Peak of Agony: secondary target missing")
-				return false
-
-			if target == primary:
-				print(
-					"Peak of Agony: secondary target must be different from primary target"
-				)
-				return false
-
-			var source = game.players[caster_id].mage.get_damage()
-			var amount = _scaled_amount(
-				source,
-				effect,
-				"damage_per_step"
-			)
-			if amount < 0:
-				return false
-			if amount > 0:
-				_damage_mage(
-					game,
-					caster_id,
-					target,
-					amount
-				)
-
-			print(
-				"Peak of Agony secondary damage: ", source,
-				" self Damage -> ", max(amount, 0),
-				" Damage to Player ", target + 1
-			)
-			return true
-
 		"gain_power_per_black_rose_damage":
 			if not _valid_player(game, caster_id):
 				return false
@@ -4977,14 +4941,6 @@ func _resolve_damage_variant(
 				int(effect.get("amount", 0)),
 				"spell"
 			)
-			return true
-
-		"pain_from_trigger_damage":
-			if not _valid_player(game, caster_id):
-				return false
-			var amount = int(context.get("trigger_damage_amount", 0))
-			if amount > 0:
-				game.deal_damage(-1, caster_id, amount, "spell")
 			return true
 
 		"damage_all_models_of_type":

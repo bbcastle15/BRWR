@@ -815,7 +815,15 @@ func _add_object_choice(option: Dictionary, callback: Callable, selected: bool =
 		art.offset_right = -6
 		art.offset_top = 6
 		art.offset_bottom = -6
-	if kind == "schools":
+	if option.has("queue_index") and not str(option.get("slot_id", "")).is_empty():
+		var reaction_card := VBoxContainer.new()
+		reaction_card.add_child(button)
+		var caption := Label.new()
+		caption.text = "Slot %s · %s" % [option.slot_id, "Dark" if option.use_dark_side else "Light"]
+		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		reaction_card.add_child(caption)
+		gallery.get_child(0).add_child(reaction_card)
+	elif kind == "schools":
 		var school_card := VBoxContainer.new()
 		school_card.add_child(button)
 		var inspect := Button.new()
@@ -2011,6 +2019,19 @@ func _submit_action_token(token: String) -> void:
 
 func _render_effect_choice() -> void:
 	var damage_board := int(current_request.get("focus_damage_board", -1))
+	var damage_boards: Array[int] = []
+	if current_request.get("choice_kind") == "convert_damage_cubes" and game.table_shell != null:
+		for option in current_request.get("options", []):
+			var index: int = game.damage_cube_board_index(option)
+			if index >= 0 and not damage_boards.has(index):
+				damage_boards.append(index)
+		if damage_boards.has(game.table_shell.shown_player):
+			damage_board = game.table_shell.shown_player
+		elif not damage_boards.is_empty() and not damage_boards.has(damage_board):
+			damage_board = damage_boards.front()
+		if damage_boards.size() > 1:
+			var next_board := damage_boards[(damage_boards.find(damage_board) + 1) % damage_boards.size()]
+			_add_confirmation("View %s ›" % game.player_display_name(next_board), _switch_damage_board.bind(next_board))
 	if damage_board >= 0 and game.table_shell != null:
 		game.table_shell.reveal_board_choice(damage_board)
 		game.table_shell._refresh_damage_display(damage_board)
@@ -2064,6 +2085,13 @@ func _render_effect_choice() -> void:
 		[]
 	)
 
+	if current_request.get("choice_kind") == "succubus_redirect":
+		for option in options:
+			var choose := _submit_effect_single.bind(str(option.token))
+			game.show_board_target_choice(option, choose)
+			_add_button(_option_label(option), choose)
+		return
+
 	# Route all owned Quest choices before creating any PlayerBoard hitboxes.
 	if _open_owned_quest_selection(options, min_select, max_select,
 		str(current_request.get("prompt", "Choose a Quest."))):
@@ -2083,9 +2111,10 @@ func _render_effect_choice() -> void:
 	for option in options:
 		var token: String = str(option.get("token", ""))
 		var callback: Callable = _submit_effect_single.bind(token) if max_select <= 1 else _toggle_generic_value.bind(token)
-		# Keep alternative models selectable in the menu without switching
-		# away from the first damage track while its hitboxes are built.
-		if damage_board >= 0 and (option.has("cube_evocation_owner") or int(option.get("cube_player_index", damage_board)) != damage_board):
+		if not damage_boards.is_empty() and game.damage_cube_board_index(option) != damage_board:
+			# The switch above opens these targets on their own board. Do not
+			# let the generic menu build their hitboxes and change boards here.
+			board_tokens.append(token)
 			continue
 		if game.show_board_target_choice(option, callback, generic_selection.has(token)):
 			board_tokens.append(token)
@@ -2192,6 +2221,11 @@ func _render_effect_choice() -> void:
 		generic_selection.size() < min_select \
 		or generic_selection.size() > max_select
 	)
+
+
+func _switch_damage_board(index: int) -> void:
+	game.table_shell.reveal_board_choice(index)
+	_render_current_request()
 
 
 func _submit_effect_single(token: String) -> void:
@@ -2501,12 +2535,16 @@ func _submit_preparation() -> void:
 # =============================================================================
 
 func _render_trigger_decision() -> void:
-	_add_button("Pass", _submit_trigger.bind(-1))
+	var revision: int = game.input_revision
+	_add_button("Pass on this trigger", _submit_trigger.bind(-1, revision))
 	for option in current_request.get("options", []):
-		_add_object_choice(option, _submit_trigger.bind(int(option.get("queue_index", -1))), false, "spells")
+		_add_object_choice(option, _submit_trigger.bind(int(option.queue_index), revision), false, "spells")
 
 
-func _submit_trigger(queue_index: int) -> void:
+func _submit_trigger(queue_index: int, revision: int) -> void:
+	# Board clicks can be delivered after the next, visually identical, offer.
+	if game.input_revision != revision or current_request.get("type") != "trigger_decision":
+		return
 	_submit({
 		"queue_index": queue_index
 	})

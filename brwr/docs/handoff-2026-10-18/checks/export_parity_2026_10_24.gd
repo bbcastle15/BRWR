@@ -31,6 +31,12 @@ func pixel_hash(texture: Texture2D) -> String:
 	context.update(pixels.get_data())
 	return context.finish().hex_encode()
 
+func atlas_hash(texture: AtlasTexture) -> String:
+	# Export may compile a .tres into a remapped binary. Compare the actual
+	# crop, its sampling settings and pixels through the runtime resource.
+	return str([texture.atlas.resource_path, texture.region, texture.margin,
+		texture.filter_clip, pixel_hash(texture)]).sha256_text()
+
 func run():
 	check(not baseline_path.is_empty(), "Provide baseline path")
 	if failed: quit(1); return
@@ -77,7 +83,7 @@ func run():
 		if face.resource_path == restored_path:
 			script_hashes[restored_path] = pixel_hash(face)
 		if face is AtlasTexture:
-			script_hashes[face.resource_path] = FileAccess.get_sha256(face.resource_path)
+			script_hashes[face.resource_path] = atlas_hash(face)
 			check(Rect2(Vector2.ZERO, face.atlas.get_size()).encloses(face.region), "Quest crop must remain inside the original scan: " + str(id))
 			var centers: PackedVector2Array = game.ReferenceCardPreview.quest_progress_centers(str(id), Vector2(260, 390))
 			check(centers.size() == game.quest_database.quests[id].cube_slots, "Printed progress slots must match Quest: " + str(id))
@@ -89,7 +95,7 @@ func run():
 		context.start(HashingContext.HASH_SHA256)
 		context.update(quest_back.atlas.get_image().get_data())
 		original_hash = context.finish().hex_encode()
-		script_hashes[quest_back.resource_path] = FileAccess.get_sha256(quest_back.resource_path)
+		script_hashes[quest_back.resource_path] = atlas_hash(quest_back)
 	var board = game.get_node("PowerBoard")
 	var deck_back = board.get_node("QuestSlot/AvailableDeck/CardBack")
 	for moon in [1, 2, 3, 1]:

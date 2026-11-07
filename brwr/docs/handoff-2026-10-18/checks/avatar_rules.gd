@@ -82,8 +82,14 @@ func reset_case():
 	preferred.clear()
 
 func drive():
-	for i in 700:
-		if not game.card_presentation.is_empty(): game.dismiss_card_presentation()
+	var deadline := Time.get_ticks_msec() + 30000
+	while Time.get_ticks_msec() < deadline:
+		if not game.card_presentation.is_empty():
+			var presentation: Dictionary = game.card_presentation
+			for reader in presentation.get("awaiting_players", [presentation.get("acknowledge_player", 0)]).duplicate():
+				game.dismiss_card_presentation(int(presentation.serial), int(reader))
+		if game.table_shell != null and game.table_shell.damage_waiting:
+			game.table_shell._acknowledge_damage_and_close()
 		if game.waiting_for_player_input:
 			var request: Dictionary = game.pending_input.duplicate()
 			choices.append(request)

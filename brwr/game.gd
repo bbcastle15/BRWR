@@ -9199,15 +9199,16 @@ func request_effect_choice(
 			public_option["board_target"] = target
 		if value is Dictionary and value.has("player_index"):
 			public_option["player_index"] = value.player_index
-		if token.begins_with("damage:") or token.begins_with("instability:"):
-			if token.begins_with("instability:"):
-				public_option["cube_room_id"] = str(context.get("target_room_id", ""))
-			public_option["cube_player_index"] = int(option.get("cube_player_index", context.get("target_player_index", player_index)))
+		if token.begins_with("instability:"):
+			public_option["cube_room_id"] = str(context.get("target_room_id", ""))
+		elif token.begins_with("damage:") and not option.has("cube_evocation_owner") and not option.has("cube_player_index"):
 			var target_evocation = context.get("target_evocation")
 			if target_evocation is EvocationState:
 				var address_owner: int = target_evocation.assigned_mage if target_evocation.assigned_mage >= 0 else target_evocation.owner_id
 				public_option["cube_evocation_owner"] = address_owner
 				public_option["cube_evocation_index"] = players[address_owner].evocations.find(target_evocation)
+			else:
+				public_option["cube_player_index"] = int(context.get("target_player_index", player_index))
 		public_options.append(public_option)
 
 	if public_options.is_empty():
@@ -9246,8 +9247,9 @@ func request_effect_choice(
 	if choice_kind == "destiny_resolution":
 		request["focus_damage_board"] = int(context.victim)
 	elif choice_kind == "convert_damage_cubes":
+		request["focus_damage_board"] = damage_cube_board_index(public_options[0])
 		for option in public_options:
-			if not option.has("cube_evocation_owner") and option.has("cube_player_index"):
+			if option.has("cube_player_index"):
 				request["focus_damage_board"] = int(option.cube_player_index)
 				break
 	var requested: bool = request_player_input(request)
@@ -11390,30 +11392,6 @@ func _spell_secondary_evocation_options(
 	return options
 
 
-func _spell_secondary_mage_options(
-	excluded_players: Array
-) -> Array:
-	var options: Array = []
-
-	for player_index in range(players.size()):
-		if player_index in excluded_players:
-			continue
-
-		var mage = players[player_index].mage
-		if mage == null or mage.in_cell:
-			continue
-
-		options.append({
-			"token": "secondary_mage:" + str(player_index),
-			"value": player_index,
-			"player_index": player_index,
-			"name": players[player_index].player_name,
-			"room_id": mage.room_id
-		})
-
-	return options
-
-
 func _damaged_model_choice_options(
 	context: Dictionary
 ) -> Array:
@@ -11814,25 +11792,6 @@ func _prepare_spell_secondary_effect_choice(
 			# and the subsequent Room-effect target are visibly separate choices.
 			return _quest_request_single_choice(caster_id, "construct_room", context,
 				"target_room_id", options, "Choose the Room to activate from a Construct.", true)
-		"damage_secondary_mage_per_self_damage":
-			if context.has("secondary_target_player_index"):
-				return true
-
-			var primary_player: int = int(
-				context.get("target_player_index", -1)
-			)
-
-			return _apply_or_request_secondary_choice(
-				caster_id,
-				"secondary_mage",
-				context,
-				"secondary_target_player_index",
-				_spell_secondary_mage_options(
-					[primary_player]
-				),
-				"Choose the secondary Mage."
-			)
-
 		"move_one_model_damaged_by_effect":
 			var models: Array = context.get(
 				"models_damaged_by_effect",
@@ -12122,11 +12081,6 @@ func _clear_spell_secondary_effect_choices(
 			keys_to_clear = ["selected_instability_owner_ids"]
 		"complete_owned_quest_choice":
 			keys_to_clear = ["selected_active_quest"]
-		"damage_secondary_mage_per_self_damage":
-			keys_to_clear = [
-				"secondary_target_player_index"
-			]
-
 		"move_one_model_damaged_by_effect":
 			keys_to_clear = [
 				"damaged_model_to_move_index",
@@ -14293,6 +14247,7 @@ func request_next_trigger_decision() -> bool:
 				"queue_index": i,
 				"board_player_index": player_index,
 				"slot_id": _find_player_board_slot_for_spell(player_index, active_spell.spell),
+				"use_dark_side": active_spell.use_dark_side,
 				"spell_id": active_spell.spell.id,
 				"spell_name": active_spell.spell.card_name,
 				"spell_type": candidate_type
@@ -14302,10 +14257,19 @@ func request_next_trigger_decision() -> bool:
 			trigger_window_queue.remove_at(trigger_window_cursor)
 			continue
 
+		var prompt := "Choose a triggered Spell, or pass on this trigger."
+		if trigger_window_event.event_type == "damage_inflicted" and trigger_window_event.data.get("lethal", false) and trigger_window_event.target_model_type == "mage":
+			var source_name := "the Black Rose"
+			if trigger_window_event.source_evocation != null:
+				source_name = trigger_window_event.source_evocation.get_display_name()
+			elif trigger_window_event.source_player_index >= 0:
+				source_name = player_display_name(trigger_window_event.source_player_index)
+			prompt = "%s suffered the last Damage from %s. %s" % [player_display_name(trigger_window_event.target_player_index), source_name, prompt]
 		return request_player_input({
 			"type": "trigger_decision",
 			"phase": current_phase,
 			"player_index": player_index,
+			"prompt": prompt,
 			"optional": true,
 			"options": options
 		})
@@ -14492,10 +14456,14 @@ func dismiss_card_presentation(serial: int = -1, player_index: int = -1) -> bool
 
 
 func log_resolved_effect(effect: Dictionary, context: Dictionary) -> void:
+	# The Jinx draw records its actual result, including a duplicate or an empty deck.
+	if effect.type == "assign_jinx":
+		return
 	var description: String = preload("res://effect_description.gd").describe(effect)
 	var target: String = str(context.get("target_room_id", ""))
 	var ev: EvocationState = context.get("target_evocation")
-	if ev != null: target = ev.get_display_name() + " in " + ev.room_id
+	if effect.type in EffectResolver.PAIN_EFFECTS: target = player_display_name(int(context.caster_id))
+	elif ev != null: target = ev.get_display_name() + " in " + ev.room_id
 	elif context.has("target_player_index"): target = "Player %d" % (int(context.target_player_index)+1)
 	var receipts := {"convert_instability":"effect_instability_converted","convert_damage":"effect_damage_converted","heal":"effect_damage_healed","place_instability":"effect_instability_placed"}
 	if receipts.has(str(effect.get("type", ""))) and context.has(receipts[str(effect.type)]):
@@ -14953,14 +14921,20 @@ func process_damage_resolution(
 					resolution["succubus_redirect_choice"] = mandatory[0].value
 					succubus_options.clear()
 				if not succubus_options.is_empty():
+					var owner: int = int(resolution.target_player_index)
+					succubus_options.push_front({"token": "keep_damage", "value": null,
+						"player_index": owner, "name": "Keep the Damage on " + player_display_name(owner)})
+					var prompt := "Choose who takes 1 Damage."
+					if resolution.get("action_type") == "pain":
+						prompt = "Pain: keep 1 Black Rose Damage on your Mage or assign it to one of your eligible Evocations."
 					if request_effect_choice(
-						int(resolution["target_player_index"]),
+						owner,
 						"succubus_redirect",
 						resolution,
 						"succubus_redirect_choice",
 						succubus_options,
-						0, 1,
-						"You may assign 1 of this Damage to an eligible Evocation instead."
+						1, 1,
+						prompt
 					):
 						return false
 
@@ -15078,9 +15052,11 @@ func process_damage_resolution(
 				_sync_damage_result_context(resolution, 0)
 				return true
 
-			resolution["was_defeated"] = target_mage.is_defeated()
 			var damage_before: int = target_mage.get_damage()
 			var damage_dealt: int = target_mage.add_damage(AvatarRules.cube_owner(self, attacker_id), cubes_available)
+			# A sentence may defer several damage events. Only the hit which fills
+			# the track can trigger last-Damage reactions or cause this defeat.
+			resolution["dealt_last_damage"] = damage_dealt > 0 and target_mage.is_defeated()
 			if damage_dealt > 0:
 				record_damage_feedback(target_player_index, damage_before, target_mage.damage_cubes, attacker_id)
 			resolution["actual_damage"] = damage_dealt
@@ -15111,7 +15087,7 @@ func process_damage_resolution(
 			post_event.target_player_index = target_player_index
 			post_event.target_room_id = players[target_player_index].mage.room_id
 			post_event.amount = int(resolution.get("actual_damage", 0))
-			post_event.data["lethal"] = players[target_player_index].mage.is_defeated()
+			post_event.data["lethal"] = resolution.get("dealt_last_damage", false)
 			post_event.action_type = str(resolution.get("action_type", ""))
 			post_event.suppressed_trigger_types = _to_string_array(
 				resolution.get("suppressed_trigger_types", [])
@@ -15124,9 +15100,7 @@ func process_damage_resolution(
 		"after_post_event":
 			var target_player_index: int = int(resolution.get("target_player_index", -1))
 			var target_mage = players[target_player_index].mage
-			var was_defeated: bool = bool(resolution.get("was_defeated", false))
-
-			if bool(resolution.get("forced_defeat", false)) or (not was_defeated and target_mage.is_defeated()):
+			if bool(resolution.get("forced_defeat", false)) or (bool(resolution.get("dealt_last_damage", false)) and target_mage.is_defeated()):
 				var defeat_event := GameEvent.new("mage_defeated")
 				_fill_damage_event_source(defeat_event, resolution)
 				defeat_event.target_model_type = "mage"
@@ -16065,7 +16039,7 @@ func process_effect_sequence_resolution(
 		return int(resolution.index) >= effects.size()
 	if bool(effect.get("only_on_trigger", false)) and context.get("trigger_event") == null:
 		return int(resolution.index) >= effects.size()
-	if resolver_kind == "spell":
+	if resolver_kind == "spell" and effect.type not in EffectResolver.PAIN_EFFECTS:
 		var announced: bool = DeathEffectResolver.announce_spell(self, context, [effect])
 		if announced and (waiting_for_player_input or trigger_window_active):
 			resolution["index"] = index
@@ -18653,6 +18627,7 @@ func _public_effect_choice_description(kind: String, _context: Dictionary, promp
 		"evocation_activation_plan": "Choose movement and attack for an Evocation.",
 		"evocation_damage_ability": "Choose an Instability effect.",
 		"evocation_optional_ability": "Choose whether to use the Evocation's ability.",
+		"succubus_redirect": "Choose whether the Mage or an Evocation takes Damage.",
 		"choose_one": "Choose an effect.", "movement_destination": "Choose the next Room.",
 		"room_target": "Choose a target Room.", "model_target": "Choose a target Model.",
 		"convert_damage_cubes": "Choose Damage cubes to convert."
@@ -21960,6 +21935,8 @@ func _finish_black_rose_phase_after_upgrades() -> bool:
 
 func clear_board_target_choices() -> void:
 	for node in get_tree().get_nodes_in_group("board_target_choices"):
+		if not is_ancestor_of(node):
+			continue
 		node.hide()
 		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		node.get_parent().remove_child(node)
@@ -22009,6 +21986,10 @@ func _evocation_board_card(owner_index: int, evocation: EvocationState) -> Contr
 	return null
 
 
+func damage_cube_board_index(option: Dictionary) -> int:
+	return int(option.get("cube_evocation_owner", option.get("cube_player_index", -1)))
+
+
 func show_board_target_choice(option: Dictionary, callback: Callable, selected: bool = false) -> bool:
 	var token: String = str(option.get("token", ""))
 	var target: Node = null
@@ -22053,37 +22034,21 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 			owners = room.instability_cubes
 			nodes = room.instability_cube_nodes
 		else:
-			var player_index: int = int(option.get("cube_player_index", -1))
+			board_index = damage_cube_board_index(option)
+			if board_index < 0 or board_index >= player_boards.size():
+				return false
 			if option.has("cube_evocation_owner"):
-				var evocation = get_evocation_by_owner_index(int(option.cube_evocation_owner), int(option.cube_evocation_index))
+				var evocation = get_evocation_by_owner_index(board_index, int(option.cube_evocation_index))
 				if evocation == null:
 					return false
+				var card := _evocation_board_card(board_index, evocation)
+				if card == null or card.get_node_or_null("EvocationDamage") == null:
+					return false
 				owners = evocation.damage_cubes
-				if evocation.archetype == "equipment":
-					board_index = int(option.cube_evocation_owner)
-					var card := _evocation_board_card(board_index, evocation)
-					if card == null or card.get_node_or_null("EvocationDamage") == null:
-						return false
-					nodes = card.get_node("EvocationDamage").get_children()
-				else:
-					if not evocation_tokens.has(evocation.get_instance_id()):
-						return false
-					var model_token: Node = evocation_tokens[evocation.get_instance_id()]
-					# Damage cubes are projected next to the Evocation while choosing.
-					for i in range(owners.size()):
-						var name_value := "ChoiceDamage%d" % i
-						var cube = model_token.get_node_or_null(name_value)
-						if cube == null or cube.is_queued_for_deletion():
-							cube = preload("res://cube.tscn").instantiate()
-							cube.name = name_value
-							cube.cube_color = Color.BLACK if int(owners[i]) < 0 else players[int(owners[i])].color
-							cube.position = Vector2(i * 18 - owners.size() * 9, 30)
-							cube.add_to_group("board_target_choices")
-							model_token.add_child(cube)
-						nodes.append(cube)
-			elif player_index >= 0 and player_index < player_boards.size():
-				owners = players[player_index].mage.damage_cubes
-				for slot in player_boards[player_index].get_node("DamageTrack").get_children():
+				nodes = card.get_node("EvocationDamage").get_children()
+			else:
+				owners = players[board_index].mage.damage_cubes
+				for slot in player_boards[board_index].get_node("DamageTrack").get_children():
 					var cube = slot.get_node_or_null("DamageCube")
 					if cube != null:
 						nodes.append(cube)
@@ -22098,6 +22063,10 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 		# readable; selected cubes also receive the explicit checkmark below.
 		position_in_target = Vector2(-7, -7)
 		hit_size = Vector2(28, 28)
+		if option.has("cube_evocation_owner") or token.begins_with("instability:"):
+			# Adjacent cubes each need their own clickable centre.
+			position_in_target = Vector2(-2, -2)
+			hit_size = Vector2(18, 18)
 	elif int(option.get("evocation_index", -1)) >= 0:
 		var evocation = get_evocation_by_owner_index(int(option.get("owner_id", -1)), int(option.evocation_index))
 		if evocation != null:
@@ -22117,14 +22086,6 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 	if table_shell != null:
 		if board_index >= 0:
 			table_shell.reveal_board_choice(board_index)
-		elif token.begins_with("instability:") or str(option.get("cube_room_id", "")) != "":
-			# Instability cubes live on the Lodge. Never open a PlayerBoard just
-			# because the public choice also carries a player index.
-			if not table_shell._has_damage_presentation(): table_shell.close_board()
-		elif option.has("cube_evocation_owner"):
-			if not table_shell._has_damage_presentation(): table_shell.close_board()
-		elif option.has("cube_player_index"):
-			table_shell.reveal_board_choice(int(option.cube_player_index))
 		else:
 			if not table_shell._has_damage_presentation(): table_shell.close_board()
 	var portrait_choice: bool = target.has_method("has_portrait") and target.has_portrait()
@@ -22138,7 +22099,12 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 	# cannot also fire (Pleasures Room discard, card-selection effects, etc.).
 	if board_index >= 0 and board_index < player_boards.size() and target is Control:
 		overlay_parent = player_boards[board_index]
-		var relative: Transform2D = player_boards[board_index].get_global_transform().affine_inverse() * target.get_global_transform()
+	elif token.begins_with("instability:"):
+		# A Mage and its attached Umbrae can cover even a printed Room socket.
+		# Put this temporary choice above the model controls for drawing and input.
+		overlay_parent = self
+	if overlay_parent != target:
+		var relative: Transform2D = overlay_parent.get_global_transform().affine_inverse() * target.get_global_transform()
 		overlay_position = relative * position_in_target
 		overlay_rotation = relative.get_rotation()
 		overlay_scale = relative.get_scale()
@@ -22170,6 +22136,12 @@ func show_board_target_choice(option: Dictionary, callback: Callable, selected: 
 	button.set_meta("choice_token", token)
 	connect_card_choice(button, option, callback)
 	overlay_parent.add_child(button)
+	if token.begins_with("instability:"):
+		var face = preload("res://cube.tscn").instantiate()
+		face.cube_color = target.cube_color
+		face.position = -position_in_target
+		button.add_child(face)
+		face.z_index = -1 # Above the map, behind the selection outline and checkmark.
 	return true
 
 

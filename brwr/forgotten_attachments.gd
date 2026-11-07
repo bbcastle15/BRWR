@@ -105,6 +105,10 @@ static func assign_jinx(game, caster: int, target: int, context: Dictionary, eff
 		var deck := available(game, "jinxes")
 		if effect.has("id"): deck = deck.filter(func(id): return id == effect.id)
 		if deck.is_empty():
+			var unavailable := str(definition("jinxes", str(effect.id)).get("name", effect.id)) if effect.has("id") else "Jinx"
+			var message := "%s receives no Jinx. No %s cards remain in the deck." % [game.player_display_name(target), unavailable]
+			game.append_public_log(message)
+			print(message)
 			return true
 		var id: String = ""
 		if bool(effect.get("choice", false)):
@@ -112,7 +116,9 @@ static func assign_jinx(game, caster: int, target: int, context: Dictionary, eff
 			for candidate in deck:
 				if not mage.jinxes.any(func(j): return j.id == candidate) and not options.any(func(o): return o.value == candidate):
 					options.append({"token": "jinx:" + candidate, "value": candidate, "id": candidate, "card_kind": "jinxs", "name": definition("jinxes", candidate).name})
-			if options.is_empty(): return true
+			if options.is_empty():
+				game.append_public_log("%s already has every available Jinx." % game.player_display_name(target))
+				return true
 			if not DruidicRules.choose(game, caster, context, "school_jinx", options, "Choose a Jinx to assign."): return false
 			id = str(context.school_jinx)
 			context.erase("school_jinx")
@@ -122,12 +128,17 @@ static func assign_jinx(game, caster: int, target: int, context: Dictionary, eff
 		# A duplicate name cannot be assigned (Codex p.109); it goes back.
 		for assigned in mage.jinxes:
 			if assigned.id == id:
+				var duplicate_message := "%s already has %s. The drawn Jinx returns to the deck." % [game.player_display_name(target), definition("jinxes", id).name]
+				game.append_public_log(duplicate_message)
+				print(duplicate_message)
 				return true
 		context["jinx_was_vulnerable"] = mage.jinxes.any(func(j): return j.id == "vulnerability")
 		mage.jinxes.append({"id": id, "progress": 0})
 		context["assigned_jinx"] = id
 		var item := definition("jinxes", id)
-		print("Player ", target + 1, " assigned Jinx: ", item.name)
+		var assignment := "%s receives the Jinx %s." % [game.player_display_name(target), item.name]
+		game.append_public_log(assignment)
+		print(assignment)
 		game.queue_resolution({"type": "jinx_assignment", "id": id, "player_index": target})
 		if item.trigger in ["assigned_or_solve_quest", "assigned_or_cell"]:
 			game.deal_damage(-1, target, int(item.damage), "jinx")

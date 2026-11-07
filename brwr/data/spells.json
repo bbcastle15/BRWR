@@ -252,10 +252,20 @@
           "amount": 3
         },
         {
-          "type": "damage_secondary_mage_per_self_damage",
-          "step": 2,
-          "damage_per_step": 1,
-          "max": 3
+          "type": "filtered_model_effect",
+          "target": "model",
+          "range": 1,
+          "from_target": true,
+          "exclude_primary": true,
+          "prompt": "Choose a different Model within 1 Room of the first target.",
+          "effects": [
+            {
+              "type": "damage_per_self_damage",
+              "step": 2,
+              "damage_per_step": 1,
+              "max": 3
+            }
+          ]
         }
       ]
     }
@@ -1033,7 +1043,11 @@
           }
         ],
         "element": "air"
-      }
+      },
+      "resolution_order": [
+        "enhancement",
+        "base"
+      ]
     }
   },
   {

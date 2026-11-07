@@ -2,6 +2,7 @@ extends "res://docs/handoff-2026-10-18/checks/playtest.gd"
 
 func run():
 	game = await make_game(4)
+	await check_fountain_order()
 	reset_case()
 	locate(0, "arena")
 	var nigredo = game.summon_evocation(0, "nigredo", "arena")
@@ -95,4 +96,28 @@ func run():
 	game.queue_free()
 	await process_frame
 	quit(0 if failures.is_empty() else 1)
+
+func check_fountain_order() -> void:
+	var arena = game.get_room_by_id("arena")
+	var at_branch: Array = []
+	var observe := func(request: Dictionary):
+		if request.get("context_key") == "fountain_choice":
+			at_branch.append(arena.get_instability_by_owner(0))
+	game.player_input_requested.connect(observe)
+	for branch in ["summon_nigredo", "activate_construct", "without_air"]:
+		reset_case()
+		at_branch.clear()
+		if branch != "without_air":
+			game.players[0].add_revealed_spell(RevealedSpellState.new(game.spell_database.get_spell("purifying_aludel"), false))
+		if branch == "activate_construct":
+			game.summon_evocation(0, "nigredo", "arena")
+		preferred["fountain_choice"] = "fountain:" + ("summon_nigredo" if branch == "without_air" else branch)
+		await cast("fountain_of_the_three", true)
+		var expected := 0 if branch == "without_air" else 1
+		expect(at_branch == [expected], "Fountain Dark places eligible Air Instability before offering " + branch)
+		expect(arena.get_instability_by_owner(0) == expected, "Fountain Dark places its Enhancement exactly once when eligible")
+		expect(game.players[0].evocations.size() == 1 and game.players[0].evocations[0].evocation_id == "nigredo", "Fountain Dark completes the chosen branch")
+		if branch == "activate_construct":
+			expect(decisions.any(func(request): return request.get("choice_kind") == "construct_to_activate"), "Existing Construct can be activated after the Enhancement")
+	game.player_input_requested.disconnect(observe)
 

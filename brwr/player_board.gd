@@ -989,15 +989,17 @@ func refresh_evocations() -> void:
 			action.disabled = not evocation.familiar_action_available or game.get_player_board_action_options(player_index,"familiar").is_empty()
 			action.pressed.connect(game.open_player_board_action.bind(player_index,"familiar"))
 			card.add_child(action)
-		var damage := HBoxContainer.new()
+		# Board choices can arrive in the same frame as a network refresh.
+		# Lay out each cube now so its hitbox has its final position immediately.
+		var damage := Control.new()
 		damage.name = "EvocationDamage"
 		damage.position = Vector2(4, 4)
 		damage.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		damage.add_theme_constant_override("separation", 1)
 		card.add_child(damage)
-		for owner_id in evocation.damage_cubes:
+		for i in evocation.damage_cubes.size():
 			var cube = cube_scene.instantiate()
-			cube.cube_color = get_damage_cube_color(owner_id)
+			cube.cube_color = get_damage_cube_color(evocation.damage_cubes[i])
+			cube.position = Vector2((i % 9) * 18, floori(i / 9.0) * 18)
 			damage.add_child(cube)
 		var label := Label.new()
 		label.position = Vector2(4, 111)
