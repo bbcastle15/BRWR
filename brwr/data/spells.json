@@ -952,7 +952,7 @@
         }
       ],
       "enhancement": {
-        "element": "water",
+        "element": ["water", "air"],
         "effects": [
           {
             "type": "damage_models_damaged_by_effect",

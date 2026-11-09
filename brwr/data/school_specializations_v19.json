@@ -245,7 +245,7 @@
   "heka": {
     "name": "Heka",
     "description": "Jinx cards impose a penalty and a task. Each completed task places one of the affected Mage's Cubes on the Jinx. Discard it when all slots are filled. A Mage cannot have two Jinxes with the same name; exhausted copies cannot be assigned.",
-    "art_pending": false,
+    "art_pending": true,
     "starting_grimoires": [
       {
         "id": "revenants",
@@ -272,12 +272,12 @@
         ]
       }
     ],
-    "rules_implemented": true
+    "rules_implemented": true 
   },
   "hex": {
     "name": "Hex",
     "description": "Assign Jinx cards to opposing Mages. Each completed Jinx task places one of that Mage's Cubes on its slots; discard a filled Jinx and return the Cubes. Duplicate Jinx names cannot be assigned. Hex also removes Jinxes to power additional Effects.",
-    "art_pending": false,
+    "art_pending": true,
     "starting_grimoires": [
       {
         "id": "malediction",
@@ -341,7 +341,7 @@
   "nightmare": {
     "name": "Nightmare",
     "description": "Nightmares belong to the Black Rose and are assigned to Mages without consuming Evocation slots. They follow their assigned Mage and activate at the beginning of the Evocation Phase in the order chosen by the Crown holder. They are removed when the assigned Mage is defeated.",
-    "art_pending": false,
+    "art_pending": true,
     "starting_grimoires": [
       {
         "id": "scarecrow",
@@ -400,7 +400,7 @@
         ]
       }
     ],
-    "rules_implemented": true
+    "rules_implemented": false
   },
   "pestilence": {
     "name": "Pestilence",

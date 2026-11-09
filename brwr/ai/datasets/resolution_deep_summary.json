@@ -1,0 +1,298 @@
+{
+  "games": 1,
+  "seeds": [
+    20270491
+  ],
+  "decisions": 452,
+  "bridge_step_us": 4398538,
+  "stats": {
+    "_clear_direct_lodge_effect_choice": {
+      "calls": 292,
+      "inclusive_us": 62464,
+      "exclusive_us": 62464
+    },
+    "_continue_black_rose_after_event": {
+      "calls": 6,
+      "inclusive_us": 176,
+      "exclusive_us": 130
+    },
+    "_dispatch_beta_input": {
+      "calls": 292,
+      "inclusive_us": 1930572,
+      "exclusive_us": 6069
+    },
+    "_finish_black_rose_phase_after_upgrades": {
+      "calls": 6,
+      "inclusive_us": 2958,
+      "exclusive_us": 2882
+    },
+    "_handle_resolution_completion": {
+      "calls": 1150,
+      "inclusive_us": 1816260,
+      "exclusive_us": 7909
+    },
+    "_hide_chaos_wildcard_overlay": {
+      "calls": 292,
+      "inclusive_us": 816,
+      "exclusive_us": 816
+    },
+    "_log_phase_choice": {
+      "calls": 292,
+      "inclusive_us": 10491,
+      "exclusive_us": 10491
+    },
+    "_present_resolution_card": {
+      "calls": 3028,
+      "inclusive_us": 4831,
+      "exclusive_us": 4831
+    },
+    "_queue_evocation_damage_abilities": {
+      "calls": 11,
+      "inclusive_us": 95,
+      "exclusive_us": 95
+    },
+    "_refresh_damage_boards": {
+      "calls": 11,
+      "inclusive_us": 28,
+      "exclusive_us": 28
+    },
+    "_request_stepwise_action_activation": {
+      "calls": 174,
+      "inclusive_us": 1134666,
+      "exclusive_us": 697222
+    },
+    "_submit_beta_input_authoritative": {
+      "calls": 292,
+      "inclusive_us": 1946939,
+      "exclusive_us": 5876
+    },
+    "_visuals_busy": {
+      "calls": 3176,
+      "inclusive_us": 5382,
+      "exclusive_us": 5382
+    },
+    "advance_action_phase": {
+      "calls": 67,
+      "inclusive_us": 21279,
+      "exclusive_us": 20840
+    },
+    "advance_black_rose_quest_steps": {
+      "calls": 44,
+      "inclusive_us": 264284,
+      "exclusive_us": 121318
+    },
+    "advance_cleanup_phase": {
+      "calls": 6,
+      "inclusive_us": 72589,
+      "exclusive_us": 72364
+    },
+    "advance_evocation_phase": {
+      "calls": 29,
+      "inclusive_us": 309687,
+      "exclusive_us": 216725
+    },
+    "advance_study_phase": {
+      "calls": 30,
+      "inclusive_us": 3533,
+      "exclusive_us": 2205
+    },
+    "append_public_log": {
+      "calls": 324,
+      "inclusive_us": 21385,
+      "exclusive_us": 21385
+    },
+    "clear_board_target_choices": {
+      "calls": 292,
+      "inclusive_us": 973,
+      "exclusive_us": 973
+    },
+    "clear_lodge_room_choices": {
+      "calls": 292,
+      "inclusive_us": 3525,
+      "exclusive_us": 3525
+    },
+    "clear_player_input": {
+      "calls": 292,
+      "inclusive_us": 370973,
+      "exclusive_us": 301419
+    },
+    "finish_cleanup_phase": {
+      "calls": 5,
+      "inclusive_us": 321555,
+      "exclusive_us": 321419
+    },
+    "move_mage_to_room_id": {
+      "calls": 120,
+      "inclusive_us": 561477,
+      "exclusive_us": 550972
+    },
+    "process_action_events_resolution": {
+      "calls": 18,
+      "inclusive_us": 211,
+      "exclusive_us": 184
+    },
+    "process_activation_resolution": {
+      "calls": 226,
+      "inclusive_us": 9116,
+      "exclusive_us": 8757
+    },
+    "process_cleanup_finish_resolution": {
+      "calls": 30,
+      "inclusive_us": 14291,
+      "exclusive_us": 14249
+    },
+    "process_command_resolution": {
+      "calls": 14,
+      "inclusive_us": 2555,
+      "exclusive_us": 1959
+    },
+    "process_damage_resolution": {
+      "calls": 40,
+      "inclusive_us": 4856,
+      "exclusive_us": 2482
+    },
+    "process_effect_sequence_resolution": {
+      "calls": 52,
+      "inclusive_us": 150311,
+      "exclusive_us": 146893
+    },
+    "process_evocation_damage_resolution": {
+      "calls": 18,
+      "inclusive_us": 9432,
+      "exclusive_us": 8616
+    },
+    "process_explore_resolution": {
+      "calls": 186,
+      "inclusive_us": 323161,
+      "exclusive_us": 7445
+    },
+    "process_fight_resolution": {
+      "calls": 8,
+      "inclusive_us": 312,
+      "exclusive_us": 234
+    },
+    "process_game_event": {
+      "calls": 535,
+      "inclusive_us": 36817,
+      "exclusive_us": 36621
+    },
+    "process_resolution_stack": {
+      "calls": 350,
+      "inclusive_us": 3233478,
+      "exclusive_us": 553500
+    },
+    "process_room_activation_resolution": {
+      "calls": 69,
+      "inclusive_us": 47334,
+      "exclusive_us": 46317
+    },
+    "process_spell_cast_resolution": {
+      "calls": 11,
+      "inclusive_us": 2304,
+      "exclusive_us": 1995
+    },
+    "process_spell_resolution_frame": {
+      "calls": 18,
+      "inclusive_us": 576,
+      "exclusive_us": 538
+    },
+    "queue_resolution": {
+      "calls": 1150,
+      "inclusive_us": 924785,
+      "exclusive_us": 8763
+    },
+    "record_physical_action_feedback": {
+      "calls": 48,
+      "inclusive_us": 361,
+      "exclusive_us": 361
+    },
+    "refresh_all_player_boards": {
+      "calls": 595,
+      "inclusive_us": 2898,
+      "exclusive_us": 2898
+    },
+    "refresh_player_board": {
+      "calls": 164,
+      "inclusive_us": 582,
+      "exclusive_us": 582
+    },
+    "request_player_input": {
+      "calls": 292,
+      "inclusive_us": 449649,
+      "exclusive_us": 448590
+    },
+    "submit_action_activation_step": {
+      "calls": 113,
+      "inclusive_us": 989395,
+      "exclusive_us": 52626
+    },
+    "submit_beta_input": {
+      "calls": 292,
+      "inclusive_us": 1951228,
+      "exclusive_us": 4289
+    },
+    "submit_black_rose_optional_quest_discard": {
+      "calls": 20,
+      "inclusive_us": 113733,
+      "exclusive_us": 19188
+    },
+    "submit_effect_choice": {
+      "calls": 26,
+      "inclusive_us": 275054,
+      "exclusive_us": 1878
+    },
+    "submit_evocation_phase_activations": {
+      "calls": 23,
+      "inclusive_us": 156241,
+      "exclusive_us": 4514
+    },
+    "submit_preparation": {
+      "calls": 24,
+      "inclusive_us": 87460,
+      "exclusive_us": 10823
+    },
+    "submit_starting_grimoire_choice": {
+      "calls": 4,
+      "inclusive_us": 94503,
+      "exclusive_us": 11988
+    },
+    "submit_starting_mage_choice": {
+      "calls": 4,
+      "inclusive_us": 162534,
+      "exclusive_us": 159593
+    },
+    "submit_starting_school_choice": {
+      "calls": 4,
+      "inclusive_us": 1774,
+      "exclusive_us": 321
+    },
+    "submit_study_hand_limit": {
+      "calls": 2,
+      "inclusive_us": 1386,
+      "exclusive_us": 394
+    },
+    "submit_study_keep_cards": {
+      "calls": 24,
+      "inclusive_us": 16704,
+      "exclusive_us": 6814
+    },
+    "submit_study_optional_discard": {
+      "calls": 24,
+      "inclusive_us": 14713,
+      "exclusive_us": 4253
+    },
+    "submit_study_school_choices": {
+      "calls": 24,
+      "inclusive_us": 11006,
+      "exclusive_us": 1624
+    },
+    "update_table_layout": {
+      "calls": 1,
+      "inclusive_us": 1928,
+      "exclusive_us": 1928
+    }
+  },
+  "sidecars": [
+    "C:\\Users\\bigba\\Desktop\\BRWR\\brwr\\ai\\datasets\\resolution_deep_episode_20270491_h4_avnone_na_normal.jsonl.submit_profile.json"
+  ]
+}

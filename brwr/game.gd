@@ -11241,8 +11241,7 @@ func _spell_primary_target_options(
 			return _spell_evocation_target_options(
 				caster_id,
 				side,
-				str(side.get("target_archetype", "")) == ""
-				and str(side.get("target_owner", "")) != "self"
+				true
 			)
 
 		"model":

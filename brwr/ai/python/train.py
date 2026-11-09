@@ -1,0 +1,349 @@
+"""BRWR AI v4: experimental ON-POLICY self-play with a small PyTorch policy.
+
+Godot is the only rules engine. The Python process exchanges action *indices* and
+owner-filtered observations through ai/runtime; it never sends arbitrary effects.
+
+Usage (from brwr):
+  py -m pip install torch
+  py ai/python/train.py --godot "C:\\path\\to\\Godot_console.exe" --games 2 --apprentice-only
+
+This is a first trainable prototype (policy-gradient / REINFORCE), not mature PPO.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import random
+import shutil
+import subprocess
+import sys
+import time
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+try:
+    import torch
+    from torch import nn
+    from torch.nn import functional as F
+except ImportError as exc:
+    raise SystemExit("PyTorch non installato: esegui 'py -m pip install torch'") from exc
+
+NUMERIC = 32
+BUCKETS = 96
+FEATURE_DIM = NUMERIC + BUCKETS
+PROJECT = Path(__file__).resolve().parents[2]
+
+
+def num(value: Any, default: float = 0.0) -> float:
+    try:
+        if isinstance(value, bool):
+            return float(value)
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def hashed_bucket(text: str) -> int:
+    return int.from_bytes(hashlib.blake2b(text.encode("utf-8"), digest_size=8).digest(), "big") % BUCKETS
+
+
+def encode_action(obs: dict, decision: dict, option: dict, choice_index: int, total_options: int) -> list[float]:
+    """One fixed-length feature vector for an arbitrary number of players/actions.
+
+    Uses generic action/side/effect descriptors, with stable hashed categorical
+    features for known schools, spells and destinations. No hidden game state.
+    """
+    v = [0.0] * FEATURE_DIM
+    player_index = int(decision.get("player_index", -1))
+    players = obs.get("players", [])
+    own = players[player_index] if 0 <= player_index < len(players) else {}
+    others = [x for i, x in enumerate(players) if i != player_index]
+    mage = own.get("mage", {}) if isinstance(own.get("mage"), dict) else {}
+    avatar = obs.get("avatar", {})
+    payload = option.get("payload", {})
+    detail = option.get("detail", {})
+    action = detail.get("action", {}) if isinstance(detail.get("action", {}), dict) else {}
+    side = detail.get("side_features", {}) if isinstance(detail.get("side_features", {}), dict) else {}
+    stage = str(decision.get("substep", ""))
+
+    v[0] = 1.0
+    v[1] = min(3.0, num(obs.get("round")) / 12.0)
+    v[2] = min(1.0, len(players) / 6.0)
+    v[3] = max(0.0, player_index / 6.0)
+    v[4] = float(bool(avatar))
+    v[5] = num(own.get("power")) / 40.0
+    v[6] = num(own.get("hand_count", len(own.get("hand", [])))) / 12.0
+    v[7] = num(own.get("available_cubes")) / 30.0
+    v[8] = num(mage.get("health")) / 12.0
+    v[9] = num(mage.get("speed")) / 5.0
+    v[10] = num(mage.get("strength")) / 5.0
+    v[11] = float(bool(mage.get("in_cell", False)))
+    v[12] = (sum(num(x.get("power")) for x in others) / max(1, len(others))) / 40.0
+    v[13] = max((num(x.get("power")) for x in others), default=0) / 40.0
+    v[14] = num(obs.get("moon")) / 3.0
+    v[15] = num(obs.get("black_rose_power")) / 40.0
+    v[16] = num(own.get("ready_spell_count")) / 3.0
+    v[17] = choice_index / max(1, total_options - 1)
+    v[18] = math.log1p(total_options) / 8.0
+    v[19] = float(bool(payload.get("ai_dark", payload.get("quick_dark_side", False))))
+    v[20] = num(payload.get("ai_count")) / 3.0
+    v[21] = float(int(num(payload.get("ai_hand_index", -1))) >= 0)
+    v[22] = float("ai_finish" in payload)
+    v[23] = float(bool(detail.get("instability", False)))
+    v[24] = float(bool(detail.get("light", False)))
+    v[25] = float(bool(detail.get("dark", False)))
+    v[26] = float(str(detail.get("side", "")).lower() == "dark")
+    v[27] = float(str(detail.get("side", "")).lower() == "light")
+    v[28] = num(own.get("active_quest_count")) / 4.0
+    v[29] = num(own.get("completed_quest_count")) / 4.0
+    v[30] = min(1.0, len(obs.get("active_schools", [])) / 6.0)
+    v[31] = 1.0 if stage == "quick_card" else 0.0
+
+    terms: list[str] = [
+        "req:" + str(decision.get("type", "")),
+        "stage:" + stage,
+        "ownschool:" + str(own.get("school_id", "")),
+        "actionkind:" + str(detail.get("kind", "")),
+        "actiontype:" + str(action.get("type", "")),
+    ]
+    for key in ("spell_id", "school_id", "id", "side", "evocation"):
+        val = detail.get(key, "")
+        if isinstance(val, str) and val:
+            terms.append(f"{key}:{val}")
+    for key in ("mage_id", "school_id", "grimoire_id"):
+        val = payload.get(key, "")
+        if isinstance(val, str) and val:
+            terms.append(f"choose_{key}:{val}")
+    for key in ("type", "target", "range"):
+        if str(side.get(key, "")):
+            terms.append(f"side_{key}:{side[key]}")
+    for effect_type in side.get("effect_types", []):
+        terms.append("effect:" + str(effect_type))
+    if "ai_select" in payload:
+        terms.append("selection:" + str(payload["ai_select"]))
+    if "token" in payload:
+        # Token prefixes generalize better than their often unique full strings.
+        terms.append("token_kind:" + str(payload["token"]).split(":")[0])
+    for item in payload.get("school_ids", []):
+        terms.append("draw_school:" + str(item))
+
+    scale = 1.0 / math.sqrt(max(1, len(terms)))
+    for token in terms:
+        v[NUMERIC + hashed_bucket(token)] += scale
+    return v
+
+
+class ActionPolicy(nn.Module):
+    """Score each candidate separately, then softmax over this legal set."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.net = nn.Sequential(nn.Linear(FEATURE_DIM, 96), nn.Tanh(), nn.Linear(96, 48), nn.Tanh(), nn.Linear(48, 1))
+
+    def forward(self, actions: torch.Tensor) -> torch.Tensor:
+        return self.net(actions).flatten()
+
+
+@dataclass
+class Experience:
+    player_index: int
+    candidate_features: torch.Tensor
+    selected: int
+
+
+def rewards_from_result(result: dict, human_count: int) -> list[float]:
+    """Victory dominates; small score margin signal distinguishes losing bots.
+
+    Includes Black Rose/Avatar score as a competitor, but no action for Avatar.
+    """
+    scores = result.get("scores", [])
+    totals = {int(item.get("player_index", -10)): num(item.get("total")) for item in scores}
+    best_abs = max([10.0, *[abs(x) for x in totals.values()]])
+    winner = int(result.get("winner", -1))
+    out = []
+    for player in range(human_count):
+        own = totals.get(player, 0.0)
+        opposition = max((score for key, score in totals.items() if key != player), default=own)
+        # If nobody defeats Black Rose, high-scoring Mage bots still get a
+        # stronger signal than those that scored very little.
+        margin = max(-1.0, min(1.0, (own - opposition) / best_abs))
+        out.append((2.0 if winner == player else -0.5) + 0.40 * margin)
+    return out
+
+
+def read_episode_end(path: Path) -> dict:
+    if not path.is_file():
+        raise RuntimeError(f"Missing episode dataset: {path}")
+    last = None
+    with path.open("r", encoding="utf-8") as stream:
+        for line in stream:
+            if line.strip():
+                row = json.loads(line)
+                if row.get("record_type") == "episode_end":
+                    last = row
+    if last is None:
+        raise RuntimeError(f"No episode_end in {path}")
+    return last
+
+
+def run_one_game(godot: str, seed: int, bots: int, avatar: str, difficulty: str,
+                 policy: ActionPolicy, rng: random.Random) -> tuple[dict, list[Experience]]:
+    runtime = PROJECT / "ai" / "runtime"
+    dataset = PROJECT / "ai" / "datasets"
+    runtime.mkdir(parents=True, exist_ok=True)
+    dataset.mkdir(parents=True, exist_ok=True)
+    for file in runtime.glob("request_*.json"):
+        file.unlink()
+    for file in runtime.glob("response_*.json"):
+        file.unlink()
+    command = [godot, "--headless", "--path", str(PROJECT), "--script", "res://ai/ai_policy_match.gd",
+               "--", str(seed), str(bots), avatar, difficulty, "normal"]
+    log_path = runtime / "last_godot.log"
+    experiences: list[Experience] = []
+    with log_path.open("w", encoding="utf-8", errors="replace") as log:
+        process = subprocess.Popen(command, cwd=PROJECT, stdout=log, stderr=subprocess.STDOUT)
+        step_number = 1
+        last_progress = time.monotonic()
+        try:
+            while process.poll() is None:
+                request_path = runtime / f"request_{step_number:06}.json"
+                if not request_path.is_file():
+                    if time.monotonic() - last_progress > 130:
+                        raise RuntimeError("No progress for 130s; inspect ai/runtime/last_godot.log")
+                    time.sleep(0.001)
+                    continue
+                try:
+                    request = json.loads(request_path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    time.sleep(0.001)
+                    continue
+                if int(request.get("step", -1)) != step_number:
+                    raise RuntimeError("IPC sequence mismatch")
+                options = request["decision"].get("candidates", [])
+                if not options:
+                    raise RuntimeError("Godot proposed no legal candidates")
+                player_index = int(request["player_index"])
+                features = torch.tensor(
+                    [encode_action(request["observation"], request["decision"], candidate, idx, len(options))
+                     for idx, candidate in enumerate(options)], dtype=torch.float32)
+                with torch.no_grad():
+                    logits = policy(features)
+                    # Sampling rather than argmax is essential for exploration.
+                    probs = torch.softmax(logits, dim=0)
+                    selected = int(torch.multinomial(probs, 1).item())
+                experiences.append(Experience(player_index, features, selected))
+                response_path = runtime / f"response_{step_number:06}.json"
+                temp_path = response_path.with_suffix(".tmp")
+                temp_path.write_text(json.dumps({"step": step_number, "choice_id": selected}), encoding="utf-8")
+                temp_path.replace(response_path)
+                step_number += 1
+                last_progress = time.monotonic()
+            exit_code = process.wait()
+        finally:
+            if process.poll() is None:
+                process.kill()
+                process.wait()
+    if exit_code != 0:
+        tail = "\n".join(log_path.read_text(encoding="utf-8", errors="replace").splitlines()[-35:])
+        raise RuntimeError(f"Godot failed, exit={exit_code}. Last log lines:\n{tail}")
+    scenario = f"h{bots}_av{avatar}_{difficulty if avatar != 'none' else 'na'}_normal"
+    end = read_episode_end(dataset / f"policy_episode_{seed}_{scenario}.jsonl")
+    if int(end.get("decisions", -1)) != len(experiences):
+        raise RuntimeError("Recorded decisions differ from Python policy calls")
+    return end, experiences
+
+
+def update_from_episode(policy: ActionPolicy, optimizer: torch.optim.Optimizer,
+                        experiences: list[Experience], rewards: list[float], entropy_coef: float) -> float:
+    """First on-policy update: REINFORCE with same-game relative baseline."""
+    if not experiences:
+        return 0.0
+    avg_reward = sum(rewards) / max(1, len(rewards))
+    losses = []
+    for transition in experiences:
+        logits = policy(transition.candidate_features)
+        log_probs = F.log_softmax(logits, dim=0)
+        probs = log_probs.exp()
+        entropy = -(probs * log_probs).sum()
+        # Relative score ranking provides a signal even when Black Rose wins.
+        advantage = rewards[transition.player_index] - avg_reward
+        losses.append(-advantage * log_probs[transition.selected] - entropy_coef * entropy)
+    loss = torch.stack(losses).mean()
+    optimizer.zero_grad()
+    loss.backward()
+    nn.utils.clip_grad_norm_(policy.parameters(), max_norm=1.0)
+    optimizer.step()
+    return float(loss.detach())
+
+
+def scenarios(apprentice_only: bool) -> list[tuple[int, str, str]]:
+    s = [(bots, "none", "apprentice") for bots in range(2, 7)]
+    levels = ("apprentice",) if apprentice_only else ("apprentice", "master")
+    s += [(bots, "possessed", level) for level in levels for bots in range(2, 6)]
+    return s
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="BRWR AI v4 experimental on-policy trainer")
+    parser.add_argument("--godot", required=True, help="Path to Godot 4 console executable")
+    parser.add_argument("--games", type=int, default=13)
+    parser.add_argument("--seed", type=int, default=20270101)
+    parser.add_argument("--lr", type=float, default=0.0005)
+    parser.add_argument("--entropy", type=float, default=0.02)
+    parser.add_argument("--apprentice-only", action="store_true", help="Skip not-yet-tested Avatar Master scenarios")
+    parser.add_argument("--resume", action="store_true", help="Resume saved model/optimizer")
+    args = parser.parse_args()
+    if args.games <= 0:
+        parser.error("--games must be positive")
+    if not Path(args.godot).is_file() and not shutil.which(args.godot):
+        parser.error("Godot executable not found")
+
+    rng = random.Random(args.seed)
+    torch.manual_seed(args.seed)
+    model = ActionPolicy()
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+    output_dir = PROJECT / "ai" / "model"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = output_dir / "brwr_policy_v4.pt"
+    history_path = output_dir / "training_history.csv"
+    start_game = 0
+    if args.resume and checkpoint_path.exists():
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+        model.load_state_dict(checkpoint["model"])
+        optimizer.load_state_dict(checkpoint["optimizer"])
+        start_game = int(checkpoint.get("games_completed", 0))
+        print(f"Resuming checkpoint after {start_game} games", flush=True)
+
+    scenario_list = scenarios(args.apprentice_only)
+    if not args.resume and history_path.exists():
+        history_path.unlink()
+    if not history_path.exists():
+        with history_path.open("w", newline="", encoding="utf-8") as file:
+            csv.writer(file).writerow(["game", "seed", "bots", "avatar", "difficulty", "round", "decisions", "winner", "rewards", "loss"])
+
+    for k in range(args.games):
+        if k % len(scenario_list) == 0:
+            rng.shuffle(scenario_list)
+        game_no = start_game + k + 1
+        bots, avatar, difficulty = scenario_list[k % len(scenario_list)]
+        game_seed = args.seed + game_no
+        print(f"Game {game_no}: {bots} bots, Avatar={avatar}/{difficulty}, seed={game_seed}", flush=True)
+        end, experience = run_one_game(args.godot, game_seed, bots, avatar, difficulty, model, rng)
+        reward = rewards_from_result(end, bots)
+        loss = update_from_episode(model, optimizer, experience, reward, args.entropy)
+        print(f"  complete: decisions={len(experience)} winner={end['winner']} loss={loss:.4f} rewards={[round(r,3) for r in reward]}", flush=True)
+        with history_path.open("a", newline="", encoding="utf-8") as file:
+            csv.writer(file).writerow([game_no, game_seed, bots, avatar, difficulty,
+                                       end.get("round", ""), len(experience), end.get("winner", ""),
+                                       json.dumps([round(r, 4) for r in reward]), round(loss, 6)])
+        torch.save({"model": model.state_dict(), "optimizer": optimizer.state_dict(),
+                    "games_completed": game_no, "feature_dim": FEATURE_DIM}, checkpoint_path)
+    print(f"Training completed. Checkpoint: {checkpoint_path}", flush=True)
+
+
+if __name__ == "__main__":
+    main()

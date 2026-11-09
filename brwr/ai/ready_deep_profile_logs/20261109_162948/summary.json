@@ -1,0 +1,610 @@
+﻿{
+    "games":  [
+                  {
+                      "seed":  20270491,
+                      "decisions":  452,
+                      "wall_s":  37.441013,
+                      "log":  ".\\ai\\ready_deep_profile_logs\\20261109_162948\\ready_001_seed20270491.log"
+                  },
+                  {
+                      "seed":  20270492,
+                      "decisions":  568,
+                      "wall_s":  36.6403457,
+                      "log":  ".\\ai\\ready_deep_profile_logs\\20261109_162948\\ready_002_seed20270492.log"
+                  },
+                  {
+                      "seed":  20270493,
+                      "decisions":  242,
+                      "wall_s":  23.027503499999998,
+                      "log":  ".\\ai\\ready_deep_profile_logs\\20261109_162948\\ready_003_seed20270493.log"
+                  }
+              ],
+    "roots":  [
+                  {
+                      "after_first_await_until_add_returns_ms":  0.969,
+                      "before_game_ready_ms":  2.318,
+                      "game_ready_to_first_await_ms":  12096.029,
+                      "root_add_ms":  12099.316,
+                      "seed":  20270491
+                  },
+                  {
+                      "after_first_await_until_add_returns_ms":  1.149,
+                      "before_game_ready_ms":  2.725,
+                      "game_ready_to_first_await_ms":  11875.051,
+                      "root_add_ms":  11878.925,
+                      "seed":  20270492
+                  },
+                  {
+                      "after_first_await_until_add_returns_ms":  0.912,
+                      "before_game_ready_ms":  2.245,
+                      "game_ready_to_first_await_ms":  11273.881,
+                      "root_add_ms":  11277.038,
+                      "seed":  20270493
+                  }
+              ],
+    "stages":  [
+                   {
+                       "seed":  20270491,
+                       "stage":  "rng_and_viewport",
+                       "duration_ms":  0.008
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_rooms",
+                       "duration_ms":  1.075
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_layouts",
+                       "duration_ms":  0.232
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_cells_and_initial_logging",
+                       "duration_ms":  0.202
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_spell_database",
+                       "duration_ms":  8.979
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_school_specializations",
+                       "duration_ms":  0.588
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_evocation_database",
+                       "duration_ms":  0.791
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "select_active_schools",
+                       "duration_ms":  11334.167
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_school_libraries",
+                       "duration_ms":  3.848
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_forgotten_deck",
+                       "duration_ms":  0.609
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_mage_database",
+                       "duration_ms":  1.316
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_quest_database",
+                       "duration_ms":  1.327
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_quest_decks",
+                       "duration_ms":  0.089
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "load_event_database",
+                       "duration_ms":  0.704
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_event_decks",
+                       "duration_ms":  0.073
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_players",
+                       "duration_ms":  0.072
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "avatar_rules_setup",
+                       "duration_ms":  0.009
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "assign_initial_crown",
+                       "duration_ms":  0.308
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_lodge",
+                       "duration_ms":  570.341
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "avatar_rules_place_at_setup_and_avatar_board",
+                       "duration_ms":  0.005
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_model_tokens",
+                       "duration_ms":  2.308
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "create_player_boards",
+                       "duration_ms":  159.933
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "refresh_player_boards",
+                       "duration_ms":  8.255
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "powerboard_initialize",
+                       "duration_ms":  89.374
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "eventboard_refresh",
+                       "duration_ms":  0.064
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "update_table_layout",
+                       "duration_ms":  1.02
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "await_visual_frame",
+                       "duration_ms":  10.615
+                   },
+                   {
+                       "seed":  20270491,
+                       "stage":  "ui_optional_and_ready_end",
+                       "duration_ms":  0.001
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "rng_and_viewport",
+                       "duration_ms":  0.012
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_rooms",
+                       "duration_ms":  1.207
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_layouts",
+                       "duration_ms":  0.271
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_cells_and_initial_logging",
+                       "duration_ms":  0.238
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_spell_database",
+                       "duration_ms":  9.785
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_school_specializations",
+                       "duration_ms":  0.861
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_evocation_database",
+                       "duration_ms":  1.222
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "select_active_schools",
+                       "duration_ms":  11150.046
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_school_libraries",
+                       "duration_ms":  2.839
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_forgotten_deck",
+                       "duration_ms":  0.599
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_mage_database",
+                       "duration_ms":  0.666
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_quest_database",
+                       "duration_ms":  1.247
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_quest_decks",
+                       "duration_ms":  0.118
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "load_event_database",
+                       "duration_ms":  0.768
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_event_decks",
+                       "duration_ms":  0.11
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_players",
+                       "duration_ms":  0.105
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "avatar_rules_setup",
+                       "duration_ms":  0.011
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "assign_initial_crown",
+                       "duration_ms":  0.343
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_lodge",
+                       "duration_ms":  518.021
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "avatar_rules_place_at_setup_and_avatar_board",
+                       "duration_ms":  0.005
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_model_tokens",
+                       "duration_ms":  1.478
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "create_player_boards",
+                       "duration_ms":  175.367
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "refresh_player_boards",
+                       "duration_ms":  8.883
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "powerboard_initialize",
+                       "duration_ms":  83.031
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "eventboard_refresh",
+                       "duration_ms":  0.101
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "update_table_layout",
+                       "duration_ms":  1.185
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "await_visual_frame",
+                       "duration_ms":  11.893
+                   },
+                   {
+                       "seed":  20270492,
+                       "stage":  "ui_optional_and_ready_end",
+                       "duration_ms":  0.002
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "rng_and_viewport",
+                       "duration_ms":  0.007
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_rooms",
+                       "duration_ms":  1.054
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_layouts",
+                       "duration_ms":  0.247
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_cells_and_initial_logging",
+                       "duration_ms":  0.409
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_spell_database",
+                       "duration_ms":  8.903
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_school_specializations",
+                       "duration_ms":  0.63
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_evocation_database",
+                       "duration_ms":  0.813
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "select_active_schools",
+                       "duration_ms":  10576.095
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_school_libraries",
+                       "duration_ms":  2.731
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_forgotten_deck",
+                       "duration_ms":  0.472
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_mage_database",
+                       "duration_ms":  0.6
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_quest_database",
+                       "duration_ms":  1.096
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_quest_decks",
+                       "duration_ms":  0.082
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "load_event_database",
+                       "duration_ms":  0.68
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_event_decks",
+                       "duration_ms":  0.07
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_players",
+                       "duration_ms":  0.066
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "avatar_rules_setup",
+                       "duration_ms":  1.681
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "assign_initial_crown",
+                       "duration_ms":  0.289
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_lodge",
+                       "duration_ms":  513.558
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "avatar_rules_place_at_setup_and_avatar_board",
+                       "duration_ms":  58.926
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_model_tokens",
+                       "duration_ms":  1.404
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "create_player_boards",
+                       "duration_ms":  99.035
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "refresh_player_boards",
+                       "duration_ms":  4.308
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "powerboard_initialize",
+                       "duration_ms":  85.878
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "eventboard_refresh",
+                       "duration_ms":  0.056
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "update_table_layout",
+                       "duration_ms":  0.806
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "await_visual_frame",
+                       "duration_ms":  7.925
+                   },
+                   {
+                       "seed":  20270493,
+                       "stage":  "ui_optional_and_ready_end",
+                       "duration_ms":  0.003
+                   }
+               ],
+    "grouped_stages":  [
+                           {
+                               "stage":  "select_active_schools",
+                               "total_s":  33.060308,
+                               "per_game_s":  11.020102666666666
+                           },
+                           {
+                               "stage":  "create_lodge",
+                               "total_s":  1.60192,
+                               "per_game_s":  0.5339733333333333
+                           },
+                           {
+                               "stage":  "create_player_boards",
+                               "total_s":  0.43433499999999992,
+                               "per_game_s":  0.14477833333333331
+                           },
+                           {
+                               "stage":  "powerboard_initialize",
+                               "total_s":  0.25828300000000004,
+                               "per_game_s":  0.086094333333333342
+                           },
+                           {
+                               "stage":  "avatar_rules_place_at_setup_and_avatar_board",
+                               "total_s":  0.058936,
+                               "per_game_s":  0.019645333333333334
+                           },
+                           {
+                               "stage":  "await_visual_frame",
+                               "total_s":  0.030433,
+                               "per_game_s":  0.010144333333333333
+                           },
+                           {
+                               "stage":  "load_spell_database",
+                               "total_s":  0.027667,
+                               "per_game_s":  0.0092223333333333341
+                           },
+                           {
+                               "stage":  "refresh_player_boards",
+                               "total_s":  0.021445999999999996,
+                               "per_game_s":  0.0071486666666666651
+                           },
+                           {
+                               "stage":  "create_school_libraries",
+                               "total_s":  0.009418,
+                               "per_game_s":  0.003139333333333333
+                           },
+                           {
+                               "stage":  "create_model_tokens",
+                               "total_s":  0.0051899999999999993,
+                               "per_game_s":  0.0017299999999999998
+                           },
+                           {
+                               "stage":  "load_quest_database",
+                               "total_s":  0.00367,
+                               "per_game_s":  0.0012233333333333334
+                           },
+                           {
+                               "stage":  "load_rooms",
+                               "total_s":  0.0033360000000000004,
+                               "per_game_s":  0.0011120000000000001
+                           },
+                           {
+                               "stage":  "update_table_layout",
+                               "total_s":  0.0030110000000000002,
+                               "per_game_s":  0.0010036666666666668
+                           },
+                           {
+                               "stage":  "load_evocation_database",
+                               "total_s":  0.0028259999999999995,
+                               "per_game_s":  0.0009419999999999998
+                           },
+                           {
+                               "stage":  "load_mage_database",
+                               "total_s":  0.002582,
+                               "per_game_s":  0.0008606666666666667
+                           },
+                           {
+                               "stage":  "load_event_database",
+                               "total_s":  0.0021520000000000003,
+                               "per_game_s":  0.00071733333333333339
+                           },
+                           {
+                               "stage":  "load_school_specializations",
+                               "total_s":  0.0020789999999999997,
+                               "per_game_s":  0.00069299999999999993
+                           },
+                           {
+                               "stage":  "avatar_rules_setup",
+                               "total_s":  0.001701,
+                               "per_game_s":  0.000567
+                           },
+                           {
+                               "stage":  "create_forgotten_deck",
+                               "total_s":  0.0016799999999999999,
+                               "per_game_s":  0.00056
+                           },
+                           {
+                               "stage":  "assign_initial_crown",
+                               "total_s":  0.00094,
+                               "per_game_s":  0.00031333333333333332
+                           },
+                           {
+                               "stage":  "load_cells_and_initial_logging",
+                               "total_s":  0.00084899999999999993,
+                               "per_game_s":  0.000283
+                           },
+                           {
+                               "stage":  "load_layouts",
+                               "total_s":  0.00075,
+                               "per_game_s":  0.00025
+                           },
+                           {
+                               "stage":  "create_quest_decks",
+                               "total_s":  0.000289,
+                               "per_game_s":  9.6333333333333321E-05
+                           },
+                           {
+                               "stage":  "create_event_decks",
+                               "total_s":  0.000253,
+                               "per_game_s":  8.4333333333333341E-05
+                           },
+                           {
+                               "stage":  "create_players",
+                               "total_s":  0.000243,
+                               "per_game_s":  8.1E-05
+                           },
+                           {
+                               "stage":  "eventboard_refresh",
+                               "total_s":  0.000221,
+                               "per_game_s":  7.3666666666666664E-05
+                           },
+                           {
+                               "stage":  "rng_and_viewport",
+                               "total_s":  2.7E-05,
+                               "per_game_s":  9E-06
+                           },
+                           {
+                               "stage":  "ui_optional_and_ready_end",
+                               "total_s":  6E-06,
+                               "per_game_s":  2E-06
+                           }
+                       ],
+    "process_wall_s":  97.2101637
+}

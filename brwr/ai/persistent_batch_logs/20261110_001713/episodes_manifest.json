@@ -1,0 +1,12 @@
+{
+    "episodes":  [
+                     {
+                         "seed":  20270491,
+                         "bots":  4,
+                         "avatar":  "none",
+                         "difficulty":  "apprentice",
+                         "mode":  "normal"
+                     }
+                 ],
+    "schema_version":  1
+}

@@ -1,0 +1,145 @@
+"""Generate isolated AI-only school-cache Game/scene/workers from CURRENT BRWR sources.
+
+Original game.gd, game.tscn, worker and policy remain unchanged.
+"""
+from pathlib import Path
+import re
+import sys
+
+root = Path.cwd()
+required = [root / 'game.gd', root / 'game.tscn', root / 'ai' / 'ai_policy_native_match.gd']
+for p in required:
+    if not p.is_file():
+        sys.exit(f'SCHOOL_CACHE_BUILD_STOP missing {p}')
+
+game = required[0].read_text(encoding='utf-8-sig')
+scene = required[1].read_text(encoding='utf-8-sig')
+worker = required[2].read_text(encoding='utf-8-sig')
+
+sig = 'func get_playable_school_ids() -> Array[String]:'
+end_anchor = '\n\nfunc is_school_complete('
+if game.count(sig) != 1:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP get_playable_school_ids signature missing/nonunique')
+start = game.index(sig)
+end = game.find(end_anchor, start)
+if end < 0:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP is_school_complete boundary missing')
+orig = game[start:end]
+if '_brwr_uncached_get_playable_school_ids' in game:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP source game.gd already instrumented')
+
+# Keep the complete original eligibility algorithm as a callable reference.
+original_impl = orig.replace(sig, 'func _brwr_uncached_get_playable_school_ids() -> Array[String]:', 1)
+wrapper = '''
+
+# AI-only fast path. The manifest is produced by prepare_school_cache.py before
+# every benchmark. If stale/missing/corrupted, rerun the original full checks.
+const _BRWR_SCHOOL_MANIFEST := "res://ai/model/school_cache_manifest_v1.json"
+const _BRWR_SCHOOL_RESULT := "res://ai/model/playable_schools_cache_v1.json"
+
+func get_playable_school_ids() -> Array[String]:
+	var signature: String = ""
+	if FileAccess.file_exists(_BRWR_SCHOOL_MANIFEST):
+		var raw_manifest: Variant = JSON.parse_string(FileAccess.get_file_as_string(_BRWR_SCHOOL_MANIFEST))
+		if raw_manifest is Dictionary:
+			signature = str(raw_manifest.get("signature", ""))
+	var keys: Array = school_specialization_database.keys()
+	if not signature.is_empty() and FileAccess.file_exists(_BRWR_SCHOOL_RESULT):
+		var raw_cache: Variant = JSON.parse_string(FileAccess.get_file_as_string(_BRWR_SCHOOL_RESULT))
+		if raw_cache is Dictionary:
+			var cache: Dictionary = raw_cache
+			var valid: bool = str(cache.get("signature", "")) == signature
+			valid = valid and cache.get("school_keys", []) == keys
+			var entries: Variant = cache.get("schools", [])
+			valid = valid and entries is Array
+			if valid:
+				var cached: Array[String] = []
+				var unique: Dictionary = {}
+				for entry in entries:
+					if not entry is String or not school_specialization_database.has(entry) or unique.has(entry):
+						valid = false
+						break
+					unique[entry] = true
+					cached.append(entry)
+				if valid:
+					print("BRWR_SCHOOL_CACHE_HIT schools=", cached.size())
+					return cached
+
+	# This is exactly the original validation (including image/asset checks).
+	var result: Array[String] = _brwr_uncached_get_playable_school_ids()
+	print("BRWR_SCHOOL_CACHE_MISS schools=", result.size())
+	if not signature.is_empty():
+		var f: FileAccess = FileAccess.open(_BRWR_SCHOOL_RESULT, FileAccess.WRITE)
+		if f != null:
+			f.store_string(JSON.stringify({
+				"signature": signature,
+				"school_keys": keys,
+				"schools": result,
+				"format_version": 1
+			}))
+			f.close()
+			print("BRWR_SCHOOL_CACHE_WRITE_OK")
+		else:
+			push_warning("BRWR: cannot write school cache; using fully validated result")
+	return result
+'''
+game_new = game[:start] + original_impl + wrapper + game[end:]
+
+# BRWR_AI_ONLY_BOARD_REFRESH_GUARD_V1: Only the generated AI copy is changed.
+# Production game.gd and the baseline comparison worker remain untouched.
+_guard_sig = 'func refresh_all_player_boards() -> void:\n'
+if game_new.count(_guard_sig) != 1:
+    sys.exit('AI_UI_GUARD_STOP: refresh_all_player_boards signature not unique; originals untouched')
+game_new = game_new.replace(
+    _guard_sig,
+    _guard_sig + '\tif not enable_beta_hud:\n\t\treturn\n',
+    1,
+)
+print('BRWR_AI_BOARD_REFRESH_GUARD_GENERATED disabled_when_enable_beta_hud_false=1')
+
+# BRWR_AI_TARGETED_UI_GUARDS_V2: only in AI generated script.
+# Do not skip gameplay/state mutation; suppress only render-only entry points.
+_brwr_player_sig = 'func refresh_player_board(\n\tplayer_index: int\n) -> void:\n'
+_brwr_damage_sig = 'func _refresh_damage_boards(\n\ttarget_player_index: int,\n\tattacker_id: int\n):\n'
+for _brwr_name, _brwr_signature in (
+    ('refresh_player_board', _brwr_player_sig),
+    ('_refresh_damage_boards', _brwr_damage_sig),
+):
+    if game_new.count(_brwr_signature) != 1:
+        sys.exit('BRWR_AI_TARGETED_GUARD_STOP: signature mismatch for ' + _brwr_name)
+    game_new = game_new.replace(
+        _brwr_signature,
+        _brwr_signature + '\tif not enable_beta_hud:\n\t\treturn\n',
+        1,
+    )
+print('BRWR_AI_TARGETED_UI_GUARDS_GENERATED refresh_player_board=1 damage_boards=1')
+
+script_lines = [line for line in scene.splitlines(keepends=True)
+                if line.startswith('[ext_resource ') and 'path="res://game.gd"' in line]
+if len(script_lines) != 1:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP expected exactly one game.gd resource in game.tscn')
+script_line = script_lines[0]
+new_script_line = script_line.replace('path="res://game.gd"', 'path="res://ai/game_school_cached.gd"')
+new_script_line = re.sub(r'\suid="[^"]+"', '', new_script_line)
+scene_new = scene.replace(script_line, new_script_line, 1)
+scene_new = re.sub(r'(?m)^(\[gd_scene[^\n\]]*)\suid="[^"]+"', r'\1', scene_new, count=1)
+
+load_anchor = 'load("res://game.tscn")'
+if worker.count(load_anchor) != 1:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP native worker scene load missing/nonunique')
+worker_cached = worker.replace(load_anchor, 'load("res://ai/game_school_cached.tscn")', 1)
+if worker_cached.count('native_episode_') != 1 or worker.count('native_episode_') != 1:
+    sys.exit('SCHOOL_CACHE_BUILD_STOP native worker dataset filename anchor missing/nonunique')
+worker_cached = worker_cached.replace('native_episode_', 'school_cached_episode_', 1)
+worker_base = worker.replace('native_episode_', 'school_baseline_episode_', 1)
+
+out = [
+    (root / 'ai' / 'game_school_cached.gd', game_new),
+    (root / 'ai' / 'game_school_cached.tscn', scene_new),
+    (root / 'ai' / 'ai_policy_school_cached_match.gd', worker_cached),
+    (root / 'ai' / 'ai_policy_school_baseline_match.gd', worker_base),
+]
+for path, content in out:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding='utf-8', newline='\n')
+print('SCHOOL_CACHE_BUILD_OK originals_unchanged=1 generated=' + ','.join(p.name for p, _ in out))

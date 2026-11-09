@@ -9,9 +9,11 @@ func run() -> void:
 	await check_duplicate_jinx()
 	await check_pain(false)
 	await check_pain(true)
+	await check_pain_on_guarded_target()
 	await check_peak()
 	await check_peak_evocation()
 	await check_entropy()
+	await check_entropy_sources()
 	await check_deferred_last_damage()
 	print("NOV07 SPELL REACTIONS: ", checks, " assertions; failures: ", failures)
 	quit(0 if failures.is_empty() else 1)
@@ -57,6 +59,10 @@ func check_duplicate_jinx() -> void:
 	await drive()
 	expect(game.players[1].mage.jinxes.map(func(jinx): return jinx.id) == before, "A duplicate draw neither adds a second copy nor redraws")
 	expect(game.public_action_log.any(func(line): return line.contains("already has Slowness")), "Duplicate Jinx draw reports its name and outcome")
+	for owner in [0, 2]:
+		game.players[owner].mage.jinxes.append({"id":"slowness", "progress":0})
+	await effects([{"type":"assign_jinx"}], mage_context(1))
+	expect(game.public_action_log.back().contains("No Jinx cards remain"), "A depleted deck reports the actual outcome")
 
 func check_pain(redirect: bool) -> void:
 	reset_case()
@@ -82,6 +88,16 @@ func check_pain(redirect: bool) -> void:
 	expect(game.players[0].mage.damage_cubes.count(-1) == int(not redirect), "Caster takes exactly the Pain they kept")
 	expect(game.players[1].mage.damage_cubes.count(-1) == 0, "Other Mage in the summon Room takes no Pain")
 	expect(game.public_action_log.any(func(line): return line.contains("Pain") and line.contains("Target: " + game.player_display_name(0))), "Pain history names the caster rather than the summon Room")
+
+func check_pain_on_guarded_target() -> void:
+	reset_case()
+	var room: String = game._beta_adjacent_room_ids("arena")[0]
+	var immune: EvocationState = game.summon_evocation(1, "albedo", room)
+	var context := {"game":game, "caster_id":0, "caster_room_id":"arena", "target_room_id":room,
+		"target_evocation":immune, "spell_target_type":"evocation", "target_model_type":"evocation"}
+	await effects([{"type":"pain", "amount":1}, {"type":"damage", "amount":3}], context)
+	expect(game.players[0].mage.damage_cubes == [-1] and immune.damage_cubes.is_empty(), "A primary target's Spell immunity does not cancel the caster's Pain")
+	expect(context.target_evocation == immune and context.target_room_id == room, "Pain preserves the target of later sentences")
 
 func check_peak() -> void:
 	reset_case()
@@ -159,6 +175,19 @@ func check_entropy() -> void:
 	expect(game.pending_input.get("prompt", "").contains(game.player_display_name(3)), "New trigger names the new victim")
 	await drive()
 	expect(game.players[3].mage.in_cell and game.players[0].active_spells.is_empty(), "Second copy resolves on the next victim")
+
+func check_entropy_sources() -> void:
+	reset_case()
+	await cast("entropy", true)
+	var attacker: EvocationState = game.summon_evocation(1, "cadaver", "arena")
+	for source in ["evocation", "black_rose", "owner"]:
+		locate(2, "arena")
+		game.players[2].mage.health = 1
+		var source_id := 1 if source == "evocation" else (-1 if source == "black_rose" else 0)
+		game.deal_damage(source_id, 2, 1, "evocation_attack" if source == "evocation" else "spell", [], attacker if source == "evocation" else null)
+		await drive()
+		expect(game.players[2].mage.in_cell and game.players[0].active_spells.size() == 1, "Non-qualifying last Damage leaves Entropy armed: " + source)
+	expect(decisions.all(func(r): return r.type != "trigger_decision"), "Only another Mage can trigger Entropy Dark")
 
 func check_deferred_last_damage() -> void:
 	reset_case()
