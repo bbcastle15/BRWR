@@ -168,13 +168,20 @@ static func process_activation(game, frame: Dictionary) -> bool:
 	var card := state.draw_command(bool(frame.get("additional", false)))
 	if card == null: return true
 	game.queue_resolution({"type": "avatar_command", "card": card, "sections": card.avatar_command.sections,
-		"index": 0, "context": {}})
+		"index": 0, "context": {}, "additional": frame.get("additional", false)})
 	return false
 
 static func process_command(game, frame: Dictionary) -> bool:
 	if not bool(frame.get("revealed", false)):
 		frame["revealed"] = true
 		var card: SpellCardState = frame.card
+		var source := "activation"
+		if frame.get("reaction", false): source = str(card.avatar_command.reaction.type).capitalize() + " reaction"
+		elif frame.get("additional", false): source = "additional Command"
+		var entry := "%s · %s · %s (%d/%d Commands)" % [game.avatar.definition.name,
+			source, card.card_name, game.avatar.commands_used, game.avatar.command_limit()]
+		print(entry)
+		game.append_public_log(entry)
 		if card.avatar_command.sections.any(func(s): return s.kind == "spell"):
 			game.players[game.avatar.player_index].revealed_spells.append(RevealedSpellState.new(card, false))
 			var event := GameEvent.new("spell_revealed")

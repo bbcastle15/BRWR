@@ -5,7 +5,7 @@ const PASSIVES := ["avatar_room_activation", "avatar_convert_new_instability"]
 
 static func on_event(game, event: GameEvent) -> void:
 	if game.avatar == null: return
-	for card in game.active_events:
+	for card in EventTrack.all_cards(game.active_events):
 		if card == null or card.phase != game.current_phase: continue
 		for effect in card.effects:
 			if effect.type == "avatar_room_activation" and event.event_type == "room_effect_resolved" and event.source_player_index >= 0 and not AvatarRules.is_avatar(game, event.source_player_index):
@@ -45,7 +45,7 @@ static func process(game, frame: Dictionary) -> bool:
 		"avatar_convert_new_instability":
 			_advance(frame)
 			var room = game.get_room_by_id(str(frame.get("room_id", "")))
-			if room != null:
+			if room != null and ForgottenPassives.can_convert_instability(game, room.room_id, target, -1):
 				for index in range(room.instability_cubes.size() - 1, -1, -1):
 					if int(room.instability_cubes[index]) != target: continue
 					if game.take_owner_cubes(-1, 1) > 0:

@@ -145,9 +145,10 @@ func run():
 	reset_case()
 	var sacrifice = game.summon_evocation(0, "cadaver", "black_rose")
 	await drive()
-	preferred["choice"] = "evocation:%d" % sacrifice.get_instance_id()
+	preferred["0:choice"] = "evocation:%d" % sacrifice.get_instance_id()
 	await event_effect("revolt_of_the_servants")
 	expect(game.players[0].power == 10 and game.players[0].evocations.is_empty(), "Revolt removes selected own Evocation")
+	expect(game.players[1].power == 9 and game.players[2].power == 9, "Other Mages make their own Revolt choice")
 
 	for entry in [["letters_of_destruction","garden"],["conspiracy_book","armory"]]:
 		reset_case()

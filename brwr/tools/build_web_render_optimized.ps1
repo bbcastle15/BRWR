@@ -64,7 +64,7 @@ function Remove-UnreferencedSourcePhotos {
     $textExtensions = @('.gd', '.tscn', '.tres', '.json', '.cfg', '.txt')
     $textFiles = Get-ChildItem -LiteralPath $sourceRoot -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object {
-            $_.FullName -notmatch '\\(\.git|\.godot|output|\.tls|\.multiplayer_relay_backup)\\' -and
+            $_.FullName -notmatch '\\(\.git|\.godot|output|\.tls|\.multiplayer_relay_backup|ai)\\' -and
             $textExtensions -contains $_.Extension.ToLowerInvariant()
         }
 
@@ -130,7 +130,7 @@ New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
 
 # Copy the project, but never copy build/cache/local-network artefacts.
 $null = & robocopy $sourceRoot $tempRoot /MIR /NFL /NDL /NJH /NJS /NP `
-    /XD '.git' '.godot' 'output' '.tls' '.multiplayer_relay_backup' 'docs' 'deploy' `
+    /XD '.git' '.godot' 'output' '.tls' '.multiplayer_relay_backup' 'docs' 'deploy' (Join-Path $sourceRoot 'ai') `
     /XF 'BRWR_UPNP_*.zip' '*.bak' '*.backup' '*.tmp'
 
 if ($LASTEXITCODE -gt 7) {

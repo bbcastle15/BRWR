@@ -4,9 +4,28 @@ extends RefCounted
 static func value(player, key: String) -> int:
 	var result: int = 0
 	for active in player.active_spells:
-		if active.active:
-			result += int(active.get_side().get("passives", {}).get(key, 0))
+		if not active.active: continue
+		var passives: Dictionary = active.get_side().get("passives", {})
+		if not passives.has(key): continue
+		if passives.has("minimum_equipment"):
+			var equipment := 0
+			for ev in player.evocations:
+				if ev.archetype == "equipment" and not ev.is_defeated():
+					equipment += 1
+			if equipment < int(passives.minimum_equipment): continue
+		result += int(passives[key])
 	return result
+
+static func can_convert_instability(game, room_id: String, owner: int, new_owner: int) -> bool:
+	if owner == new_owner: return false
+	if owner < 0 or owner >= game.players.size(): return true
+	for active in game.players[owner].active_spells:
+		var radius: int = int(active.get_side().get("passives", {}).get("protect_instability_range", -1))
+		if radius < 0: continue
+		var center: String = game.room_for_persistent(active)
+		if not center.is_empty() and game.is_room_within_effect_range(center, room_id, radius):
+			return false
+	return true
 
 static func protects_from_spell(game, caster: int, target: int) -> bool:
 	if caster == target or target < 0:

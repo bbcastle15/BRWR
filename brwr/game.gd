@@ -306,11 +306,7 @@ var event_decks: Dictionary = {
 
 var event_discard: Array[EventCardState] = []
 
-var active_events: Array = [
-	null,
-	null,
-	null
-]
+var active_events: Array = [[], [], []]
 
 
 func load_cells():
@@ -2237,12 +2233,11 @@ func open_discarded_quest_card(card: QuestCardState) -> void:
 
 
 func open_event_card(event: EventCardState) -> void:
-	if event == null or (not active_events.has(event) and not event_discard.has(event)):
+	if event == null or (not EventTrack.all_cards(active_events).has(event) and not event_discard.has(event)):
 		return
 	inspected_quest = null
 	_reference_card_preview().show_card("events", event.id, event.event_name,
 		"Moon %d · %s\n%s\n\nEffects:\n%s" % [event.moon, event.phase, event.text, ReferenceCardPreview.describe_rules(event.effects)])
-
 
 func _reference_card_preview():
 	var preview = get_node_or_null("ReferenceCardPreview")
@@ -2260,6 +2255,14 @@ func _close_reference_card_preview() -> void:
 		preview.hide_preview()
 
 
+func room_for_persistent(active: ActiveSpellState) -> String:
+	if not active.active or not _is_ongoing_revealed_spell(active.get_side()):
+		return ""
+	if str(active.get_side().get("target", "")) not in ["room", "area"]:
+		return ""
+	return str(active.context.get("target_room_id", ""))
+
+
 func _refresh_permanent_room_markers() -> void:
 	for room_id in room_id_by_coord.values():
 		var room = get_room_by_id(str(room_id))
@@ -2275,9 +2278,7 @@ func _refresh_permanent_room_markers() -> void:
 		room.add_child(markers)
 		for player in players:
 			for active in player.active_spells:
-				if not active.active or not _is_ongoing_revealed_spell(active.get_side()):
-					continue
-				if str(active.get_side().get("target", "")) not in ["room", "area"] or str(active.context.get("target_room_id", "")) != str(room_id):
+				if room_for_persistent(active) != str(room_id):
 					continue
 				var button := Button.new()
 				button.custom_minimum_size = Vector2(44, 44)
@@ -6812,11 +6813,7 @@ func create_event_decks():
 
 	event_discard.clear()
 
-	active_events = [
-		null,
-		null,
-		null
-	]
+	active_events = [[], [], []]
 
 
 	for moon in [
@@ -6847,61 +6844,18 @@ func create_event_decks():
 			deck.size()
 		)
 		
-func shift_active_events():
-
-	print("Shifting active Events")
-
-
-	# =====================================================
-	# SLOT 3 -> DISCARD
-	# =====================================================
-
-	var leaving_event = (
-		active_events[2]
-	)
-
-
-	if leaving_event != null:
-
-		print(
-			"Event leaving Slot 3: ",
-			leaving_event.event_name
-		)
-
-
-		# Normale uscita dall'Event Board:
-		# concede il discard Power.
-
-		discard_event(
-			leaving_event,
-			true
-		)
-
-
-	# =====================================================
-	# SHIFT
-	# =====================================================
-
-	active_events[2] = (
-		active_events[1]
-	)
-
-	active_events[1] = (
-		active_events[0]
-	)
-
-	active_events[0] = null
-
-
-	# =====================================================
-	# UI
-	# =====================================================
-
+func shift_active_events() -> void:
+	var leaving := EventTrack.cards_in(active_events, 2)
+	active_events = [[], EventTrack.cards_in(active_events, 0), EventTrack.cards_in(active_events, 1)]
+	for card in leaving:
+		discard_event(card, true, false)
 	$EventBoard.refresh_event_slots()
-	
+
+
 func discard_event(
 	event: EventCardState,
-	gain_discard_power: bool = false
+	gain_discard_power: bool = false,
+	refresh_board: bool = true
 ):
 
 	if event == null:
@@ -6944,108 +6898,25 @@ func discard_event(
 		)
 
 
-	$EventBoard.refresh_event_slots()
+	if refresh_board:
+		$EventBoard.refresh_event_slots()
 	
-func place_event_on_board(
-	event: EventCardState
-) -> bool:
-
-	if event == null:
+func place_event_on_board(event: EventCardState) -> bool:
+	if event == null or event.slot < 1 or event.slot > active_events.size():
 		return false
-
-
-	if event.slot < 1 \
-	or event.slot > 3:
-
-		print(
-			"place_event_on_board: invalid slot ",
-			event.slot,
-			" for ",
-			event.event_name
-		)
-
-		return false
-
-
-	var index: int = (
-		event.slot - 1
-	)
-
-
-	var displaced: EventCardState = (
-		event
-	)
-
-
-	while displaced != null:
-
-
-		# =================================================
-		# PUSHED OUT OF SLOT 3
-		# =================================================
-
-		if index >= 3:
-
-			print(
-				"Event pushed out of board: ",
-				displaced.event_name
-			)
-
-
-			discard_event(
-				displaced,
-				true
-			)
-
-
+	var incoming: Array = [event]
+	for i in range(event.slot - 1, active_events.size()):
+		var displaced := EventTrack.cards_in(active_events, i)
+		active_events[i] = incoming
+		incoming = displaced
+		if incoming.is_empty():
 			break
-
-
-		# =================================================
-		# SAVE CURRENT EVENT
-		# =================================================
-
-		var next_event = (
-			active_events[index]
-		)
-
-
-		# =================================================
-		# PLACE EVENT
-		# =================================================
-
-		active_events[index] = (
-			displaced
-		)
-
-
-		print(
-			displaced.event_name,
-			" placed in Event Slot ",
-			index + 1
-		)
-
-
-		# =================================================
-		# PUSH OLD EVENT RIGHT
-		# =================================================
-
-		displaced = (
-			next_event
-		)
-
-		index += 1
-
-
-	# =====================================================
-	# UI
-	# =====================================================
-
+	for card in incoming:
+		discard_event(card, true, false)
 	$EventBoard.refresh_event_slots()
-
-
 	return true
-	
+
+
 func draw_event(
 	drawing_player_index: int,
 	context: Dictionary = {},
@@ -7068,6 +6939,7 @@ func draw_event(
 		return null
 
 
+	EventTrack.refill_deck(self, moon)
 	var deck: Array = (
 		event_decks[moon]
 	)
@@ -7202,7 +7074,7 @@ func resolve_events_for_phase(
 	context: Dictionary = {}
 ) -> bool:
 
-	var phase_events: Array = active_events.filter(func(event): return event != null and event.phase == phase)
+	var phase_events: Array = EventTrack.all_cards(active_events).filter(func(event): return event.phase == phase)
 	if phase_events.is_empty():
 		return true
 	return queue_resolution({"type": "action_events", "events": phase_events, "context": context})
@@ -7232,7 +7104,7 @@ func resolve_event(
 
 func get_active_event_effects(effect_type: String) -> Array:
 	var effects: Array = []
-	for event in active_events:
+	for event in EventTrack.all_cards(active_events):
 		if event == null or (event.phase != "always" and event.phase != current_phase):
 			continue
 		for effect in event.effects:
@@ -7256,7 +7128,7 @@ func get_active_event_by_id(
 	event_id: String
 ) -> EventCardState:
 
-	for event in active_events:
+	for event in EventTrack.all_cards(active_events):
 
 		if event == null:
 			continue
@@ -7543,10 +7415,7 @@ func resolve_black_rose_phase(
 	)
 
 	if drawn_event == null:
-		print(
-			"Black Rose Phase: Event draw failed"
-		)
-		return false
+		append_public_log("The Event deck and discard have no cards for the current Moon.")
 
 	if black_rose_instant_event_queued:
 		return true
@@ -7556,7 +7425,7 @@ func resolve_black_rose_phase(
 func _continue_black_rose_after_event(event_context: Dictionary) -> bool:
 	return queue_resolution({
 		"type": "action_events", "context": event_context,
-		"events": active_events.filter(func(event): return event != null and event.phase == PHASE_BLACK_ROSE),
+		"events": EventTrack.all_cards(active_events).filter(func(event): return event.phase == PHASE_BLACK_ROSE),
 		"on_complete": "continue_black_rose_quests"
 	})
 
@@ -8831,7 +8700,7 @@ func resolve_action_phase(
 	# Events can suspend for choices, damage triggers and Evocation activation.
 	return queue_resolution({
 		"type": "action_events", "context": phase_context,
-		"events": active_events.filter(func(event): return event != null and event.phase == PHASE_ACTION),
+		"events": EventTrack.all_cards(active_events).filter(func(event): return event.phase == PHASE_ACTION),
 		"index": 0, "on_complete": "advance_action_phase"
 	})
 	
@@ -9225,14 +9094,25 @@ func request_effect_choice(
 		public_options
 	)
 	var request_options: Array = [] if direct_lodge else public_options
+	var public_description := _public_effect_choice_description(choice_kind, context, prompt, context_key)
+	if (choice_kind.contains("target") or choice_kind in ["secondary_room", "secondary_mage", "secondary_model", "secondary_evocation"]) and not resolution_stack.is_empty():
+		var current: Dictionary = resolution_stack.front()
+		# The running sequence advances its index immediately before asking.
+		# Use this sentence, even when two copies of a Persistent share a name.
+		var index: int = int(current.get("index", 0)) - 1
+		if current.type == "effect_sequence" and index >= 0 and index < current.effects.size():
+			var detail := preload("res://effect_description.gd").target_detail([current.effects[index]], context)
+			prompt = detail + " " + prompt
+			if context.get("active_spell") is ActiveSpellState:
+				public_description = detail + " " + public_description
 	var request: Dictionary = {
 		"type": "effect_choice",
 		"phase": current_phase,
 		"player_index": player_index,
 		"choice_kind": choice_kind,
 		"context_key": context_key,
-		"public_description": _public_effect_choice_description(choice_kind, context, prompt, context_key),
-		"effect_description": prompt if not prompt.is_empty() else _public_effect_choice_description(choice_kind, context, prompt, context_key),
+		"public_description": public_description,
+		"effect_description": prompt if not prompt.is_empty() else public_description,
 		"movement_origin_room_id": movement_origin,
 		"prompt": prompt,
 		"min_select": min_select,
@@ -10115,30 +9995,12 @@ func _prepare_quest_special_choice(
 				0,
 				int(effect.get("amount", 0))
 			)
-			var convertible_count: int = 0
-
-			for owner_value in room.instability_cubes:
-				if int(owner_value) != caster_id:
-					convertible_count += 1
-
-			var max_convert: int = mini(
-				amount,
-				convertible_count
-			)
-			max_convert = mini(
-				max_convert,
-				player.available_cubes
-			)
-
-			if max_convert <= 0:
-				return true
-
 			var options: Array = []
 			var owner_occurrences: Dictionary = {}
 
 			for cube_index in range(room.instability_cubes.size()):
 				var owner_id: int = int(room.instability_cubes[cube_index])
-				if owner_id == caster_id:
+				if not ForgottenPassives.can_convert_instability(self, room_id, owner_id, caster_id):
 					continue
 
 				var ordinal: int = int(
@@ -10165,6 +10027,9 @@ func _prepare_quest_special_choice(
 					"cube_room_id": room_id
 				})
 
+			var max_convert := mini(amount, mini(options.size(), player.available_cubes))
+			if max_convert <= 0:
+				return true
 			if options.size() <= max_convert:
 				var selected_owners: Array = []
 				for option_value in options:
@@ -11314,7 +11179,7 @@ func _prepare_spell_primary_target_choice(
 		options,
 		1,
 		1,
-		"Choose the Spell target."
+		(preload("res://effect_description.gd").target_detail(side.get("effects", []), context) + " Choose the Spell target.").strip_edges()
 	)
 
 	return false
@@ -14391,10 +14256,13 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 		if active != null and active.get_spell_type() in ["trap", "protection"]:
 			data = {"kind": "spells", "id": active.spell.id, "title": active.spell.card_name,
 				"player": active.owner_id, "dark": active.use_dark_side, "single": active.spell.has_single_effect(), "triggered": true, "previous": {"kind":public_history.back().kind,"id":public_history.back().id} if not public_history.is_empty() else {}}
-	elif frame.get("type") == "event_sequence":
+	elif frame.get("type") in ["event_sequence", "oracle_prophecy"]:
 		var event: EventCardState = frame.get("event")
 		if event != null:
 			data = {"kind": "events", "id": event.id, "title": event.event_name}
+			if frame.type == "oracle_prophecy":
+				data["player"] = frame.caster_id
+				data["awaiting_players"] = AvatarRules.human_order(self).duplicate()
 	elif frame.get("type") == "quest_resolution":
 		var quest: QuestState = frame.get("quest")
 		if quest != null and quest.is_completed() and not quest.is_solved():
@@ -14669,6 +14537,8 @@ func process_resolution_stack() -> bool:
 				completed = process_cleanup_finish_resolution(frame)
 			"event_tribute":
 				completed = process_tribute_resolution(frame)
+			"oracle_prophecy":
+				completed = OracleRules.place_prophecy(self, frame)
 			"event_sequence":
 				completed = event_effect_resolver.process_sequence(frame, self)
 			"event_effect":
@@ -17021,7 +16891,7 @@ func process_room_activation_resolution(
 			resolution["step"] = "done"
 			room.mark_activated()
 			# Passive Events are consumed at activation, never at phase start.
-			for event in active_events:
+			for event in EventTrack.all_cards(active_events):
 				if event == null or event.phase != current_phase:
 					continue
 				for effect in event.effects:
@@ -17142,7 +17012,8 @@ func process_activation_resolution(
 		return true
 
 	if action_index >= actions.size():
-		print("Player ", player_index + 1, " Activation complete")
+		if resolution.get("on_complete") != "continue_action_activation":
+			print("Player ", player_index + 1, " Activation complete")
 		return true
 
 	var action: Dictionary = actions[action_index]

@@ -1,3 +1,78 @@
+# Ripresa 12 novembre 2026 — i due maghi di Duel: Kami
+
+Abe no Seimei ed En no Gyōja sono selezionabili dal normale setup. La foto originale del proprietario è già sincronizzabile nel progetto come `assets/mages/IMG20261001212707.jpg`. È identica all’allegato del 12 novembre. Abe è in basso a sinistra, En in alto a destra. I dati vengono dalle schede fisiche.
+
+| Scheda | ID mago | Salute | Limite mano | Forza | Movimento | Limite Quest attive | Personal Spell |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| DUE-KAM B-001 | `abe_no_seimei` | 10 | 8 | 2 | 2 | 2 | Onmyōji's Plot, `onmyojis_plot` |
+| DUE-KAM B-002 | `en_no_gyoja` | 11 | 7 | 2 | 2 | 2 | Shoei's Courage, `shoeis_courage` |
+
+**Dati e grafica.** Le definizioni sono in `data/mages.json` e `data/spells.json`. Le mage card da 1672 × 941 sono in `assets/mages/abe_no_seimei.png` e `assets/mages/en_no_gyoja.png`. I ritratti riprendono la foto e l’impaginazione segue la carta di Bartholomäus. Le immagini delle Personal Spell in `assets/spells/` sono copie delle facce complete orientate sul lato Light fornite in `../materials/kami/`. Lì si trovano anche i riferimenti Dark. Le carte stampate hanno i codici DUE-KAM S-014 e S-015. Il regolamento locale si trova in `../materials/official_missing/Duel_Kami_ENG.txt`, con le regole per usare i maghi con altre scuole a p. 27.
+
+**Comportamento.** Ogni mago riceve nel setup una copia della propria Personal Spell, insieme alle sei carte di specializzazione. Le copie successive seguono le normali regole delle Personal Spell. Onmyōji's Plot Light protegge i cubi Instabilità del proprietario nella stanza segnata e nelle adiacenti. Dark guadagna 1 Power, pesca dal Grimorio e permette di spostare un proprio Persistente assegnato a una stanza, attivando la destinazione anche se già usata. La posizione del segnalino è il campo `target_room_id` del Persistente in gioco, condiviso con la plancia e la proiezione online. Shoei's Courage Light cura 3, guadagna 1 Power e conferisce +1 Forza mentre il proprietario ha almeno due Equipment. Dark fa scegliere un Equipment non-Forgotten disponibile e ripristina un token Azione Fisica. L’effetto di ripristino si risolve anche quando la riserva non offre un Equipment.
+
+**Verifiche eseguite con Godot 4.7.2.** Dalla cartella di `project.godot`, eseguire `godot --headless --path . --script res://docs/handoff-2026-10-18/checks/kami_mages.gd`. Sono passate 53 asserzioni specifiche su setup, statistiche, immagini, Grimorio, entrambi i lati delle due carte, conversioni di maghi e Avatar, Thorny Corruption e posizione del Persistente visibile a un altro giocatore. Sono passati anche `nov02_mages` (232 verifiche su 74 lati), `nov11_oracle` (53) e `avatar_rules` (137), per 475 verifiche complessive. Entrambi i JSON sono validi, con 58 maghi, 316 ID Spell univoci e tutti i riferimenti alle Personal Spell risolti. L’import nell’editor è passato.
+
+**Versione Web per il laptop.** Aggiornati `output/web` e `deploy/web_bundle`. Godot ha caricato il pacchetto esportato. Il confronto con il progetto ha verificato 253 texture Spell, 59 carte Mago/Avatar, 49 Quest e 113 impronte di codice o risorse. Verificati anche i 13 file della distribuzione, comprese le sette parti di ciascun archivio PCK, compresso e non compresso. Il pacchetto è pronto per la pubblicazione.
+
+<details>
+<summary>Riferimenti e prompt delle due illustrazioni</summary>
+
+Le due immagini sono state realizzate con lo strumento integrato. Il primo riferimento di ogni carta è il ritaglio del mago dalla foto originale, il secondo è `assets/mages/bartholomaus.png`. Ogni prompt è il testo comune seguito dal testo individuale.
+
+**Testo comune**
+
+> Create one landscape 16:9 mage card, a finished edge-to-edge digital asset for Black Rose Wars: Rebirth, approximately 1672 × 941. Reference 1 is the actual printed card photographed by its owner. Preserve that character’s identity, face, palette, pose and accessories faithfully. Reference 2 is the exact digital layout and finish to match: near-black embossed rose in the background, antique metal nameplate upper left, ivory serif small caps, two empty four-point-star action squares lower left, five ivory stat pictograms down the far right and circled skull trophy cup below. Use the same positions and size as reference 2. Render flat, front-on, square to the frame, no table, photo glare, printer texture, margins, labels, extra numerals or other cards. Keep the five printed symbols in their given sequence: heart, hand of cards, fist with a burst, walking mage, quest scroll. The only lettering is the exact name and the five numbers.
+
+**Abe**
+
+> Name "Abe no Seimei". Exact stat values from top to bottom: 10, 8, 2, 2, 2. Pale, stern onmyoji with long silver hair and a tall dark indigo court cap with gold cord, pale blue and ivory robes with crimson scarf and beads. Keep the painted gold-and-ivory folding fan and fingers in the original pose.
+
+**En**
+
+> Name "En no Gyōja". Exact stat values from top to bottom: 11, 7, 2, 2, 2. Weathered, broad-faced older Japanese ascetic in an ochre robe, wide straw hat with a tied chin cord, vivid blue prayer beads and dark bowl with a subtle spirit glow. Keep the original pose and staff. Use a clearly visible horizontal macron on the o in Gyōja.
+
+</details>
+
+# Ripresa 11 novembre 2026 — Oracle, Event Board e turni di Possessed
+
+Il progetto partiva dal commit `5e9dba2` del laptop, con lavoro locale su `data/school_specializations_v19.json` e UID dei profiler AI. Le correzioni precedenti di Agony, Entropy e Cursed Hieroglyphics sono già nel commit `961b3a2`. Il test dedicato del 7 novembre ha superato 81 verifiche. Le scene di gioco usano il `game.gd` principale.
+
+**Regole confrontate.** Regolamento pp. 36 e 38, FAQ su Trap/Protection dell’Avatar, Codex Arcanum p. 41 e correzione della carta scuola Oracle nelle FAQ. Una reazione usa una delle 3/4 Command, il segno + pesca una Command aggiuntiva e la normale attivazione successiva rimane disponibile finché c’è budget. Nel log del giocatore Explore precede Pneuma Light nella stessa attivazione. Le due frasi stampate di Release Force indicano entrambe la Black Rose Room. Per Prophecy il giocatore chiede esplicitamente di impilare nello slot occupato e di lasciare negli scarti tutti gli Instant se nessuna carta piazzabile è disponibile. Quando la ricerca riesce, gli Instant rivelati rientrano nel mazzo secondo la FAQ.
+
+**Comportamento verificato.**
+
+- Prophecy rivela l’Evento a tutti a schermo intero prima della scelta dello slot. Il lanciatore può scegliere uno slot occupato. La carta nuova si appoggia sopra, leggermente sfalsata. Le carte coperte continuano ad avere effetto e sono selezionabili singolarmente per Revelation e per i costi che chiedono di scartare Eventi. Il clic sullo slot o sulla pila degli scarti apre la consultazione dalla carta più recente.
+- La pila avanza insieme durante la Black Rose Phase e quando una pesca ordinaria la spinge. Ogni carta che esce normalmente assegna una sola volta il proprio Potere di scarto. La riserva degli Eventi resta distinta per Luna. Se Prophecy esaurisce il mazzo, rimescola gli scarti della Luna corrente e continua la ricerca. Se trova solo Instant fra le due pile, li lascia tutti negli scarti, senza attribuire Potere o Corona.
+- Con due Purification attive, il lanciatore e gli osservatori vedono la carta, il lato e l’operazione quando si deve scegliere la stanza. Light piazza 1 Instabilità e Dark ne converte 1. Con Release Force nella Black Rose Room si piazzano prima 2 Instabilità e poi si converte il cubo idoneo più a destra. La prova include una stanza diversa e l’ordine finale dei cubi.
+- Il log di Possessed indica il titolo e distingue attivazione, reazione e Command aggiuntiva, con il conteggio rispetto al limite. Provati un solo mago umano e tre maghi umani con l’Avatar, sia con carte ancora disponibili sia al limite. Provato Pneuma Light in entrambe le posizioni dell’attivazione. In prima posizione lascia una seconda azione legale. Dopo Explore chiude l’attivazione a due.
+
+**Dove intervenire in futuro.** `event_track.gd` gestisce gli slot come pile ordinate dal basso verso l’alto. `game.gd` risolve rivelazione, spinta e avanzamento, `oracle_rules.gd` gestisce la ricerca e il piazzamento, `event_board.gd` disegna e anima le carte. `network_projection.gd` trasmette le pile come liste di ID e legge anche il precedente formato a carta singola. I bersagli usano il testo dell’effetto effettivamente in risoluzione in `effect_description.gd`. Per Possessed vedere `avatar_effects.gd` e `avatar_rules.gd`.
+
+**Come ripetere i controlli.** Dalla cartella di `project.godot`, usare Godot 4.7.2 con `--headless --path . --script res://docs/handoff-2026-10-18/checks/NOME.gd`. I sei controlli hanno superato 518 asserzioni.
+
+| Script | Asserzioni | Copertura |
+| --- | ---: | --- |
+| `nov11_oracle` | 53 | Ricerca e rimescolamento, azioni di Pneuma e Possessed, pile, animazione, Revelation e pagamento di tre Eventi |
+| `nov04_playtest` | 147 | Due istanze Godot, protocollo host–client serializzato, comparsa dell’Evento prima dello slot, due Purification, scarti e consultazione da remoto |
+| `avatar_rules` | 137 | Regole e carte di Possessed, inclusa Release Force dentro e fuori dalla Black Rose Room |
+| `avatar_flow` | 52 | Flusso delle attivazioni, reazioni, Eventi Avatar e scelta di ciascun giocatore per Revolt of the Servants |
+| `nov07_spell_reactions` | 81 | Pain di Cross and Delight, Peak of Agony, Entropy passata e Jinx di Cursed Hieroglyphics |
+| `nov04_quest_triggers` | 48 | Enhancement di Fountain of the Three e regressioni Quest/trigger |
+
+L’import nell’editor Godot headless è passato. Alla sola chiusura del controllo host–client headless, Godot segnala 25 risorse script ancora in uso. Il controllo termina con codice 0 dopo tutte le 147 asserzioni. Il rilascio della cache delle immagini Avatar nel teardown elimina l’avviso sulle texture del renderer.
+
+**Prova con WebSocket reali.** Su localhost, due sessioni Godot hanno creato e raggiunto una stanza tramite il relay del progetto (`relay/server.js`) e avviato la partita a due dal normale flusso online. Il client ha visto la faccia dell’Evento prima della scelta. Entrambi hanno confermato, il client ha scelto lo slot II già occupato e ha sfogliato le due carte nell’ordine corretto. Dopo due avanzamenti entrambe erano consultabili negli scarti anche dal client.
+
+**Versione Web per il laptop.** Il contenuto di `output/web` è stato riportato in `deploy/web_bundle`. Per la build il percorso `ai/` contiene strumenti di profilazione e dati di addestramento offline e viene escluso dall’export. Il pacchetto esportato ha superato il caricamento in Godot, il confronto con il sorgente su 251 texture Spell, 57 carte Mago, 49 Quest e 113 impronte di codice o risorse, e l’avvio di WebAssembly/PCK in Chrome su localhost. Verificati i 13 file Web e la ricostituzione delle sette parti di ciascun archivio.
+
+| Archivio | Byte | SHA-256 |
+| --- | ---: | --- |
+| `index.pck` | 271550744 | `268dd05100dac81918e9ed2d96b2392b0f3dbda50c563b370f31695a9630f53e` |
+| `index.pck.gz` | 268673111 | `79a39efa5e496283dc6d7497511ec17f43e3c1d92918f3ad6385ca7afe7ec8c0` |
+
+Il bundle è pronto in locale. Restano la pubblicazione e il playtest su Internet fra due PC. Come scenario breve sul laptop, usare due Purification opposte, lanciare Prophecy con uno slot occupato e confrontare rivelazione, scelta del bersaglio e avanzamento della pila su entrambi gli schermi.
+
 # Ripresa 7 novembre 2026 — Agony, Entropy e Cursed Hieroglyphics
 
 Il playtest segnalato comprende Cross and Delight Light, Peak of Agony Dark, due copie di Entropy Dark e una Cursed Hieroglyphics scattata durante Explore. Il controllo dedicato è `docs/handoff-2026-10-18/checks/nov07_spell_reactions.gd`. Riutilizza i lanci, le finestre delle trappole, i danni e gli spostamenti effettivi del motore.

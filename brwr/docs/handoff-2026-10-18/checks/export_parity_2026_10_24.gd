@@ -63,6 +63,7 @@ func run():
 	var script_hashes := {}
 	for file in ["game.gd", "beta_hud.gd", "hand_overlay.gd", "player_board.gd",
 		"tabletop_shell.gd", "tabletop_style.gd", "power_board.gd", "avatar_board.gd",
+		"event_track.gd", "event_board.gd", "oracle_rules.gd", "avatar_events.gd", "forgotten_rules.gd",
 		"reference_card_preview.gd", "table_reserves.gd", "room.gd", "network_projection.gd", "online_session.gd", "choice_confirmation.gd", "avatar_effects.gd", "effect_resolver.gd", "effect_description.gd", "table_camera.gd", "action_history.gd", "data/room_art_sockets.json", "data/spells.json", "avatar_art.gd", "avatar_state.gd", "avatar_rules.gd",
 		"spell_card_preview.gd", "spell_art_resolver.gd", "evocation_inspection.gd", "equipment_rules.gd", "druidic_rules.gd", "assets/tokens/evocation_portrait.gdshader", "assets/tokens/player_token.gdshader", "data/school_specializations_v19.json",
 		"umbra_token.gd", "evocation_token.gd", "mage_token.gd", "mage_effects.gd", "familiar_rules.gd", "mage_database.gd", "evocation_state.gd", "forgotten_evocations.gd", "forgotten_passives.gd", "school_effects.gd", "triggered_spell_manager.gd", "data/mages.json", "data/evocations.json", "assets/tokens/evocations/portraits.json", "school_draw_presentation.gd", "main_menu.gd", "death_effect_resolver.gd", "data/quests.json"]:

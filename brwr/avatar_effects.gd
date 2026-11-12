@@ -131,6 +131,7 @@ static func rightmost_conversion(game, cubes: Array, amount: int, room = null) -
 		if converted >= amount: break
 		var owner: int = int(cubes[i])
 		if owner == -1: continue
+		if room != null and not ForgottenPassives.can_convert_instability(game, room.room_id, owner, -1): continue
 		if game.take_owner_cubes(-1, 1) <= 0: break
 		game.return_owner_cubes(owner, 1)
 		if room != null: room.convert_instability_cube(owner, -1, i)
@@ -220,10 +221,11 @@ static func resolve(game, frame: Dictionary) -> bool:
 		"release_energy":
 			if room_id == str(game.avatar.definition.setup_room): game.place_instability(actor, mage.room_id, 2)
 		"release_force":
-			if room_id == str(game.avatar.definition.setup_room): game.place_instability(actor, mage.room_id, 2)
-			else:
+			if room_id == str(game.avatar.definition.setup_room):
 				var room = game.get_room_by_id(room_id)
-				if room != null: rightmost_conversion(game, room.instability_cubes, 1, room)
+				game.place_instability(actor, room_id, 2)
+				if room != null:
+					rightmost_conversion(game, room.instability_cubes, 1, room)
 		"discard_hand": return _discard_hand(game, frame, target, amount)
 		"discard_each_hand":
 			if not frame.has("players"):

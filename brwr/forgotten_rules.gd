@@ -260,11 +260,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 	return false
 
 static func event_count(game) -> int:
-	var n: int = 0
-	for event in game.active_events:
-		if event != null:
-			n += 1
-	return n
+	return EventTrack.all_cards(game.active_events).size()
 
 static func process_frame(game, frame: Dictionary) -> bool:
 	if bool(frame.get("finished", false)):

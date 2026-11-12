@@ -56,6 +56,7 @@ func run():
 	await check_attack()
 	await check_damage_confirmations()
 	await check_cube_picking()
+	await check_oracle_events()
 	for instance in [game, remote_game]:
 		quiet(instance)
 		instance.network_session = null
@@ -68,8 +69,83 @@ func run():
 	sender.queue_free()
 	receiver.queue_free()
 	for i in 4: await process_frame
+	AvatarArt.textures.clear()
 	print("NOV04 PLAYTEST: ", checks, " assertions; failures: ", failures)
 	quit(0 if failures.is_empty() else 1)
+
+func check_oracle_events() -> void:
+	reset_case()
+	for instance in [game, remote_game]: quiet(instance)
+	game.suppress_placement_feedback = true
+	game.get_room_by_id("arena").add_instability_cube(0, false)
+	var old_card: EventCardState = game.event_database.get_event("avatar_divinatory_secrets")
+	var drawn: EventCardState = game.event_database.get_event("avatar_thorny_corruption")
+	game.active_events = [[], [old_card], []]
+	game.event_decks[1].assign([drawn])
+	game.event_discard.clear()
+	for dark in [false, true]:
+		var spell = game.clone_spell_card(game.spell_database.get_spell("purification"))
+		game.players[1].active_spells.append(ActiveSpellState.new(spell, 1, dark))
+	sender.publish()
+	game.queue_resolution({"type":"effect_sequence", "resolver_kind":"spell", "effects":[{"type":"prophecy"}],
+		"context":{"game":game,"caster_id":1}})
+	for i in 20:
+		if not game.card_presentation.is_empty(): break
+		await process_frame
+	var serial: int = game.card_presentation.get("serial", -1)
+	for instance in [game, remote_game]:
+		expect(instance.card_presentation.get("id") == drawn.id and instance.table_shell.card_overlay.visible, "Prophecy face reaches both peers before a slot is requested")
+		expect(instance.table_shell.presentation_art.texture != null and not instance.waiting_for_player_input, "Revealed Event uses its actual art before the prompt")
+	expect(game.dismiss_card_presentation(serial, 0) and receiver.acknowledge_presentation(serial), "Host and guest can acknowledge Prophecy")
+	expect(not game.waiting_for_player_input, "The last reader still has the revealed Event")
+	game.dismiss_card_presentation(serial, 2)
+	for i in 20:
+		if game.waiting_for_player_input: break
+		await process_frame
+	sender.publish()
+	expect(remote_game.pending_input.get("choice_kind") == "prophecy_slot", "Only after reveal does the remote caster choose the slot")
+	expect(receiver.submit_local(1, {"selection":"slot:1"}), "Remote caster can place on the occupied slot")
+	var saw_light := false
+	var saw_dark := false
+	for i in range(200):
+		await process_frame
+		sender.publish()
+		if not game.waiting_for_player_input:
+			if game.resolution_stack.is_empty(): break
+			continue
+		var req: Dictionary = remote_game.pending_input
+		if req.get("type") != "effect_choice": break
+		var opts: Array = req.board_options if req.board_only else req.options
+		var token: String = opts[0].token
+		if req.choice_kind == "secondary_room":
+			for instance in [game, remote_game]: instance.beta_hud._process(0)
+			var operation: String = "Place" if req.prompt.contains("Light") else "Convert"
+			var phrase := "%s 1 Instability" % operation
+			saw_light = saw_light or (operation == "Place" and req.prompt.contains("Light"))
+			saw_dark = saw_dark or (operation == "Convert" and req.prompt.contains("Dark"))
+			expect(req.prompt.contains("Purification") and req.prompt.contains(phrase), "Chooser sees Persistent, side and " + phrase)
+			expect(game.beta_hud.effect_text.text.contains(phrase) and remote_game.beta_hud.effect_text.text.contains(phrase), "Chooser and observer both see " + phrase)
+			for o in opts:
+				if o.get("room_id") == "arena": token = o.token
+		expect(receiver.submit_local(1, {"selection": token}), "Guest can finish " + str(req.choice_kind))
+	expect(saw_light and saw_dark, "Both Purification sides trigger after Prophecy")
+	game.shift_active_events()
+	sender.publish()
+	for instance in [game, remote_game]:
+		var board = instance.get_node("EventBoard")
+		var ids: Array = EventTrack.cards_in(instance.active_events, 2).map(func(c): return c.id)
+		expect(ids == [old_card.id, drawn.id], "Same ordered stack reaches slot III on both peers")
+		var view: Button = board._event_views[drawn.id]
+		expect(view.get_meta("slide").is_running(), "Stack slides on both peers")
+		view.pressed.emit()
+		var preview = instance._reference_card_preview()
+		expect(preview.pile_cards.size() == 2 and preview.pile_cards[1].id == old_card.id, "Both peers can consult the covered Event")
+		preview.hide_preview()
+	game.shift_active_events()
+	sender.publish()
+	remote_game.get_node("EventBoard").open_event_pile(-1)
+	expect(remote_game._reference_card_preview().pile_cards.size() == 2, "Both cards in Event discard reach the remote browser")
+	remote_game._reference_card_preview().hide_preview()
 
 func check_waiting():
 	game.summon_evocation(0, "cadaver", "arena")

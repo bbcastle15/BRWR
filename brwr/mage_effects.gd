@@ -8,7 +8,7 @@ const TYPES := ["heal_caster", "fixed_room_effect", "summon_removed_evocation", 
 	"discard_quest_or_jinx", "discard_hand_for_effect", "move_then_effect", "if_mage_moved",
 	"move_per_board_event", "attack_selected_target", "summon_in_unoccupied_type_room",
 	"peek_forgotten_keep_bottom", "gain_target_trophy", "repeat_paid_effect", "pay_power_or_effect",
-	"discard_triggering_persistent", "each_mage_move_attack", "record_personal_attack"]
+	"discard_triggering_persistent", "each_mage_move_attack", "record_personal_attack", "move_room_persistent"]
 
 static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 	var game = context.game
@@ -19,6 +19,8 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return ForgottenRules.queue(game, [{"type":"self_effect", "effects":[{"type":"heal", "amount":int(effect.amount)}]}], context)
 		"fixed_room_effect":
 			return ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, str(effect.room_id)))
+		"move_room_persistent":
+			return move_room_persistent(game, player, caster, effect, context)
 		"summon_removed_evocation":
 			if str(context.get("removed_evocation_id", "")).is_empty(): return true
 			return ForgottenRules.queue(game, [{"type":"summon_evocation", "evocation_id":context.removed_evocation_id}], context)
@@ -174,3 +176,34 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 				game.add_player_power(int(counter.owner),int(counter.power))
 			return true
 	return false
+
+static func move_room_persistent(game, player: PlayerState, caster: int, effect: Dictionary, context: Dictionary) -> bool:
+	if not context.has("moving_persistent"):
+		var tokens: Array = []
+		for active in player.active_spells:
+			var room_id: String = game.room_for_persistent(active)
+			if room_id.is_empty(): continue
+			var room = game.get_room_by_id(room_id)
+			if room != null:
+				tokens.append({
+					"token": "persistent:%d" % active.get_instance_id(), "value": active,
+					"id": active.spell.id, "card_kind": "spells",
+					"name": "%s · %s" % [active.spell.card_name, room.room_name]
+				})
+		if tokens.is_empty(): return true
+		if not DruidicRules.choose(game, caster, context, "moving_persistent", tokens,
+				"Choose one of your Persistent tokens assigned to a Room.", false, "room_persistent"):
+			return false
+	var token: ActiveSpellState = context.moving_persistent
+	var origin: String = game.room_for_persistent(token)
+	if origin.is_empty() or token not in player.active_spells: return true
+	var rooms: Array = ForgottenRules.rooms(game, context).filter(func(option): return option.room_id != origin)
+	if rooms.is_empty(): return true
+	if not DruidicRules.choose(game, caster, context, "persistent_destination", rooms,
+			"Choose another Room for the Persistent token. That Room will activate.", false, "secondary_room"):
+		return false
+	var destination: String = context.persistent_destination
+	context.erase("moving_persistent")
+	context.erase("persistent_destination")
+	token.context["target_room_id"] = destination
+	return ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, destination))

@@ -5,23 +5,15 @@ const TYPES := ["prophecy", "revelation", "revelation_or", "oracle_keyword_resol
 
 static func prepare_revelation(game, caster: int, side: Dictionary, context: Dictionary) -> bool:
 	if not bool(side.get("revelation", false)) or context.has("revelation_count"): return true
-	var options: Array = []
-	for i in game.active_events.size():
-		var event: EventCardState = game.active_events[i]
-		if event != null: options.append({"token": "event:%d" % i, "value": i, "id": event.id, "name": event.event_name, "card_kind": "events"})
+	var options := EventTrack.choices(game.active_events)
 	if not context.has("revelation_slots") and not options.is_empty():
 		game.request_effect_choice(caster, "events", context, "revelation_slots", options, 0, options.size(), "Revelation: choose Events to discard before resolving this Spell.")
 		return false
 	var selected = context.get("revelation_slots", [])
-	var slots: Array = selected if selected is Array else [selected]
 	context["revelation_count"] = 0
-	for slot in slots:
-		if slot is int or slot is float:
-			var event: EventCardState = game.active_events[int(slot)]
-			if event != null:
-				game.active_events[int(slot)] = null
-				game.discard_event(event, false)
-				context.revelation_count += 1
+	for card in (selected if selected is Array else [selected]):
+		if card is EventCardState and EventTrack.discard_from_slot(game, card, false):
+			context.revelation_count += 1
 	return true
 
 static func keyword_event(game, caster: int, keyword: String) -> void:
@@ -31,36 +23,61 @@ static func keyword_event(game, caster: int, keyword: String) -> void:
 	event.data["keyword"] = keyword
 	game.queue_resolution({"type": "game_event", "event": event})
 
+static func draw_prophecy(game) -> EventCardState:
+	var moon: int = game.current_moon
+	var deck: Array = game.event_decks[moon]
+	var instants: Array[EventCardState] = []
+	while true:
+		if deck.is_empty():
+			EventTrack.refill_deck(game, moon)
+		if deck.is_empty():
+			# Holding the revealed Instants aside keeps the search finite.
+			game.event_discard.append_array(instants)
+			game.get_node("EventBoard").refresh_event_slots()
+			game.append_public_log("Prophecy found no non-Instant Event for this Moon.")
+			return null
+		var card: EventCardState = deck.pop_back()
+		if card.is_instant():
+			instants.append(card)
+			continue
+		# The Oracle erratum returns revealed Instants to the deck on success.
+		if not instants.is_empty():
+			deck.append_array(instants)
+			game.shuffle_with_rng(deck)
+		game.get_node("EventBoard").refresh_event_slots()
+		return card
+	return null
+
+static func place_prophecy(game, frame: Dictionary) -> bool:
+	if frame.get("placed", false): return true
+	var options := []
+	for i in game.active_events.size():
+		options.append({"token": "slot:%d" % i, "value": i, "name": "Event slot %d" % (i + 1)})
+	var card: EventCardState = frame.event
+	if not DruidicRules.choose(game, frame.caster_id, frame, "prophecy_slot", options,
+			"Prophecy · Choose a slot for %s." % card.event_name, false, "prophecy_slot"):
+		return false
+	var slot: int = frame.prophecy_slot
+	frame["placed"] = true
+	var stack := EventTrack.cards_in(game.active_events, slot)
+	stack.append(card)
+	game.active_events[slot] = stack
+	game.get_node("EventBoard").refresh_event_slots()
+	game.append_public_log("Prophecy placed %s in Event slot %d." % [card.event_name, slot + 1])
+	keyword_event(game, frame.caster_id, "prophecy")
+	if card.phase == "always":
+		game.queue_resolution({"type": "event_sequence", "event": card, "_card_presented": true,
+			"context": {"game": game, "event": card, "drawing_player_index": frame.caster_id, "play_order": game.get_play_order()}})
+	return true
+
 static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 	var game = context.game
 	var caster: int = int(context.caster_id)
 	match str(effect.type):
 		"prophecy":
-			if not context.has("prophecy_event"):
-				var deck: Array = game.event_decks.get(game.current_moon, [])
-				var instants: Array = []
-				var found: EventCardState
-				while not deck.is_empty():
-					var event: EventCardState = deck.pop_back()
-					if event.is_instant(): instants.append(event)
-					else:
-						found = event
-						break
-				deck.append_array(instants)
-				game.shuffle_with_rng(deck)
-				if found == null: return true
-				context["prophecy_event"] = found
-			var options: Array = []
-			for i in 3: options.append({"token": "slot:%d" % i, "value": i, "name": "Event slot %d" % (i + 1)})
-			if not DruidicRules.choose(game, caster, context, "prophecy_slot", options, "Prophecy: choose the slot for " + context.prophecy_event.event_name + "."): return false
-			var slot: int = int(context.prophecy_slot)
-			var displaced: EventCardState = game.active_events[slot]
-			game.active_events[slot] = context.prophecy_event
-			if displaced != null: game.discard_event(displaced, false)
-			context.erase("prophecy_event")
-			context.erase("prophecy_slot")
-			game.get_node("EventBoard").refresh_event_slots()
-			keyword_event(game, caster, "prophecy")
+			var card := draw_prophecy(game)
+			if card != null:
+				return game.queue_resolution({"type": "oracle_prophecy", "event": card, "caster_id": caster})
 			return true
 		"revelation", "revelation_or":
 			var count: int = int(context.get("revelation_count", 0))
@@ -73,20 +90,22 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			keyword_event(game, caster, str(effect.keyword))
 			return true
 		"discard_events_for_effect":
-			var slots: Array = []
-			for i in game.active_events.size():
-				if game.active_events[i] != null: slots.append(i)
-			if slots.size() < int(effect.amount): return true
-			if not DruidicRules.choose(game, caster, context, "oracle_pay_events", [{"token": "discard", "value": true, "name": "Discard %d Events" % int(effect.amount)}], "Discard Events for this Effect?", true): return false
-			var accepted: bool = context.get("oracle_pay_events") == true
+			var options := EventTrack.choices(game.active_events)
+			var amount := int(effect.amount)
+			if options.size() < amount: return true
+			if not DruidicRules.choose(game, caster, context, "oracle_pay_events", [{"token": "discard", "value": true, "name": "Discard %d Events" % amount}], "Discard Events for this Effect?", true): return false
+			if context.get("oracle_pay_events") != true:
+				context.erase("oracle_pay_events")
+				return true
+			if options.size() > amount and not context.has("oracle_payment_cards"):
+				game.request_effect_choice(caster, "events", context, "oracle_payment_cards", options, amount, amount, "Choose %d Events to discard." % amount)
+				return false
+			var payment: Array = context.get("oracle_payment_cards", options.map(func(o): return o.value))
 			context.erase("oracle_pay_events")
-			if accepted:
-				for i in slots:
-					var event: EventCardState = game.active_events[i]
-					game.active_events[i] = null
-					game.discard_event(event, true)
-				return ForgottenRules.queue(game, effect.effects, context)
-			return true
+			context.erase("oracle_payment_cards")
+			for event in payment:
+				EventTrack.discard_from_slot(game, event, true)
+			return ForgottenRules.queue(game, effect.effects, context)
 		"peek_library_keep":
 			if not context.has("oracle_peek"): context["oracle_peek"] = []
 			while context.oracle_peek.size() < int(effect.get("amount", 2)) and not bool(context.get("oracle_peek_done", false)):

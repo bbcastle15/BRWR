@@ -52,7 +52,9 @@ static func build(game, viewer: int) -> Dictionary:
 			state.rooms.append({"id": child.room_id, "variant_id": child.get_art_id(), "coord": child.get_meta("hex_coord"), "flipped": child.flipped, "activated": child.activated_this_turn, "cubes": child.instability_cubes.duplicate(), "vastum": game.room_has_vastum(child.room_id)})
 		elif child.has_meta("owner_index"):
 			state.cells.append({"owner": child.get_meta("owner_index"), "coord": child.get_meta("hex_coord")})
-	state["events"] = game.active_events.map(func(card): return "" if card == null else card.id)
+	state["events"] = []
+	for i in game.active_events.size():
+		state.events.append(EventTrack.cards_in(game.active_events, i).map(func(card): return card.id))
 	state["event_discard"] = game.event_discard.map(func(card): return card.id)
 	state["event_counts"] = {}
 	for moon in game.event_decks:
@@ -244,8 +246,13 @@ static func apply(game, state: Dictionary) -> void:
 				child.set_meta("hex_coord", data.coord)
 				child.position = game.hex_to_pixel(data.coord)
 	game.active_events.clear()
-	for id in state.events:
-		game.active_events.append(game.event_database.get_event(id) if id != "" else null)
+	for slot in state.events:
+		var ids: Array = slot if slot is Array else ([] if slot == "" else [slot])
+		var stack := []
+		for id in ids:
+			var card: EventCardState = game.event_database.get_event(id)
+			if card != null: stack.append(card)
+		game.active_events.append(stack)
 	game.event_discard.clear()
 	for id in state.event_discard:
 		game.event_discard.append(game.event_database.get_event(id))
@@ -253,7 +260,7 @@ static func apply(game, state: Dictionary) -> void:
 		game.event_decks[moon].clear()
 		game.event_decks[moon].resize(state.event_counts[moon])
 	game.get_node("EventBoard").set_black_rose_cube_count(state.black_rose_cubes)
-	game.get_node("EventBoard").refresh_event_slots()
+	game.get_node("EventBoard").refresh_event_slots(not initial_snapshot)
 	game.get_node("PowerBoard").set_black_rose_power(game.black_rose_power)
 	power_board.instant_updates = false
 	game.update_table_layout()

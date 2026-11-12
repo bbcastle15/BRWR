@@ -95,8 +95,11 @@ func drive():
 			choices.append(request)
 			if request.type == "effect_choice":
 				var options: Array = request.board_options if request.get("board_only", false) else request.options
-				var token: String = str(preferred.get(str(request.context_key), options[0].token))
-				expect(game.submit_effect_choice(int(request.player_index), token), "Choice accepted: " + str(request.context_key))
+				var seat_key := "%d:%s" % [request.player_index, request.context_key]
+				var token: String = str(preferred.get(seat_key, preferred.get(str(request.context_key), options[0].token)))
+				var accepted: bool = game.submit_effect_choice(int(request.player_index), token)
+				expect(accepted, "Choice accepted: " + seat_key)
+				if not accepted: return
 			elif request.type == "trigger_decision":
 				expect(game.submit_trigger_decision(int(request.player_index), int(request.options[0].queue_index)), "Trigger accepted")
 			else:
@@ -388,7 +391,13 @@ func run():
 	game.place_instability(0, "arena", 2)
 	await drive()
 	await section("release_force", 1)
-	expect(game.get_room_by_id("arena").instability_cubes == [0,-1], "Release Force converts rightmost in another Room")
+	expect(game.get_room_by_id("arena").instability_cubes == [0,0], "Release Force has no Instability effect outside the Black Rose Room")
+	reset_case()
+	game.place_instability(0, "black_rose", 2)
+	await drive()
+	await section("release_force", 1)
+	expect(game.get_room_by_id("black_rose").instability_cubes == [0,-1,-1,-1], "Release Force places two Black Rose cubes and converts the rightmost eligible cube")
+	expect(game.players[0].available_cubes == 24 and game.get_node("EventBoard").black_rose_cube_count == 27, "Release Force preserves order and returns the converted cube to its owner")
 
 	for id in ["tomb_reinforcements", "infernal_reinforcements", "abyssal_reinforcements"]:
 		reset_case()

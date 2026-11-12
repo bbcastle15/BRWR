@@ -218,16 +218,11 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			return resolve({"type": "filtered_model_effect", "owner": "self", "archetype": "altar", "optional": true,
 				"effects": [{"type": "damage_selected_evocation", "amount": 1, "black_rose": true}, {"type": "if_effect_result", "key": "last_damage_dealt", "effects": effect.effects}]}, context)
 		"discard_board_event":
-			var options: Array = []
-			for i in game.active_events.size():
-				if game.active_events[i] != null: options.append({"token": "event:%d" % i, "value": i, "id": game.active_events[i].id, "name": game.active_events[i].event_name, "card_kind": "events"})
+			var options := EventTrack.choices(game.active_events)
 			if not DruidicRules.choose(game, caster, context, "school_discard_event", options, "Choose an Event to discard."): return false
-			var slot = context.get("school_discard_event")
+			var card: EventCardState = context.get("school_discard_event")
 			context.erase("school_discard_event")
-			if slot != null:
-				var event: EventCardState = game.active_events[int(slot)]
-				game.active_events[int(slot)] = null
-				game.discard_event(event, not bool(effect.get("remove", false)))
+			if EventTrack.discard_from_slot(game, card, not bool(effect.get("remove", false))):
 				return ForgottenRules.queue(game, effect.get("effects", []), context)
 			return true
 		"damage_from_context":
@@ -321,7 +316,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 		"move_mage_in_target_room":
 			return resolve({"type": "filtered_model_effect", "target": "mage", "range": 0, "from_target": true, "effects": [{"type": "move_target_up_to", "distance": 1}]}, context)
 		"repeat_for_events":
-			for event in game.active_events:
+			for event in EventTrack.all_cards(game.active_events):
 				if event != null: ForgottenRules.queue(game, effect.effects, context.duplicate(true))
 			return true
 		"remember_trigger_count":
@@ -532,7 +527,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 						if model.evocation_id == str(effect.evocation_id): amount += 1
 				"room_nightmares": amount += nightmare_count(game, -1, FamineRules.target_room(game, context))
 				"board_events":
-					for event in game.active_events:
+					for event in EventTrack.all_cards(game.active_events):
 						if event != null: amount += 1
 				"all_altars":
 					for model in ForgottenEvocations.all_models(game):
@@ -580,6 +575,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 				var options: Array = []
 				for data in game.evocation_database.evocations.values():
 					if data.archetype != "equipment" or (effect.has("id") and data.id != effect.id): continue
+					if effect.get("non_forgotten", false) and data.get("forgotten", false): continue
 					if game.get_available_evocation_copies(data.id) <= 0 or player.evocations.any(func(e): return e.evocation_id == data.id): continue
 					options.append({"token": "equipment:" + data.id, "value": data.id, "id": data.id, "card_kind": "evocations", "name": data.name})
 				if options.is_empty():

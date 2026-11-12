@@ -17549,5 +17549,72 @@
       ]
     },
     "source": "Codex Arcanum p. 82, Ulrich"
+  },
+  {
+    "id": "onmyojis_plot",
+    "name": "Onmyōji's Plot",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "room",
+      "range": "*",
+      "persistent": true,
+      "text": "Your Instability cannot be converted in Rooms within 1 of the target Room.",
+      "passives": { "protect_instability_range": 1 },
+      "effects": []
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "text": "Gain 1 Power. Draw 1 Spell. Move one of your room-assigned Persistent tokens to another Room. If you do, activate that Room even if already used.",
+      "effects": [
+        { "type": "gain_power", "amount": 1 },
+        { "type": "draw_grimoire", "amount": 1 },
+        {
+          "type": "move_room_persistent",
+          "effects": [{ "type": "activate_target_room", "allow_reactivate": true }]
+        }
+      ]
+    },
+    "source": "Duel: Kami, DUE-KAM S-014"
+  },
+  {
+    "id": "shoeis_courage",
+    "name": "Shoei's Courage",
+    "school": "personal",
+    "personal": true,
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "persistent": true,
+      "text": "Heal 3 Damage. Gain 1 Power. While you have at least two Equipment, you have +1 Strength.",
+      "effects": [
+        { "type": "heal", "amount": 3 },
+        { "type": "gain_power", "amount": 1 }
+      ],
+      "passives": { "minimum_equipment": 2, "strength_bonus": 1 }
+    },
+    "dark": {
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "text": "Summon a non-Forgotten Equipment of your choice. Restore one Physical Action token.",
+      "effects": [
+        { "type": "summon_equipment", "non_forgotten": true },
+        { "type": "refresh_physical_action_token", "amount": 1 }
+      ]
+    },
+    "source": "Duel: Kami, DUE-KAM S-015"
   }
 ]

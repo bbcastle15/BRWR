@@ -2373,7 +2373,7 @@ func _resolve_convert_instability(
 				cube_index = int(selected.get("cube_index", -1))
 			else:
 				old_owner = int(selected)
-			if old_owner == caster_id or not old_owner in room.instability_cubes:
+			if old_owner not in room.instability_cubes or not ForgottenPassives.can_convert_instability(game, room_id, old_owner, caster_id):
 				continue
 		else:
 			if explicit_selection:
@@ -2381,7 +2381,7 @@ func _resolve_convert_instability(
 
 			for owner_value in room.instability_cubes:
 				var candidate: int = int(owner_value)
-				if candidate != caster_id:
+				if ForgottenPassives.can_convert_instability(game, room_id, candidate, caster_id):
 					old_owner = candidate
 					break
 
@@ -3300,17 +3300,7 @@ func _resolve_discard_active_events(
 		return true
 
 	if not context.has(choice_key):
-		var options: Array = []
-		for slot_index in range(game.active_events.size()):
-			var event = game.active_events[slot_index]
-			if event == null:
-				continue
-			options.append({
-				"token": "geomancy:event:" + str(slot_index),
-				"value": slot_index,
-				"slot_index": slot_index,
-				"name": event.event_name
-			})
+		var options := EventTrack.choices(game.active_events)
 
 		var max_select: int = mini(amount, options.size())
 		if max_select <= 0:
@@ -3334,27 +3324,11 @@ func _resolve_discard_active_events(
 	var selected: Array = _geomancy_choice_array(
 		context.get(choice_key, [])
 	)
-	var unique_slots: Array[int] = []
-	for selected_value in selected:
-		var slot_index: int = int(selected_value)
-		if slot_index < 0 or slot_index >= game.active_events.size():
-			continue
-		if unique_slots.has(slot_index):
-			continue
-		if game.active_events[slot_index] == null:
-			continue
-		unique_slots.append(slot_index)
-
 	var discarded: int = 0
-	for slot_index in unique_slots:
-		var event = game.active_events[slot_index]
-		if event == null:
-			continue
-		game.active_events[slot_index] = null
-		# Fortuna Major explicitly prevents the Black Rose from gaining the
-		# Event's normal discard Power.
-		game.discard_event(event, false)
-		discarded += 1
+	for card in selected:
+		# Fortuna Major prevents the normal discard Power.
+		if card is EventCardState and EventTrack.discard_from_slot(game, card, false):
+			discarded += 1
 
 	context.erase(choice_key)
 	context[store_key] = discarded

@@ -11,6 +11,9 @@ var cube_scene = preload("res://cube.tscn")
 # Preserve the existing pool API used by Game; visual nodes never own cubes.
 var black_rose_cube_count: int = BLACK_ROSE_MAX_CUBES
 var _slots_ready := false
+var _event_views: Dictionary = {}
+var _track_initialized := false
+const EVENT_SLIDE_SECONDS := 0.52
 var _trophy_snapshot: Array = []
 var _quest_top: QuestCardState
 var _starved_snapshot: Array = []
@@ -65,7 +68,13 @@ func setup_event_slots() -> void:
 	setup_card_slot($ActiveEvent1, _art_point(Vector2(141, 825)), "Event I")
 	setup_card_slot($EventDeckSlot, _art_point(Vector2(89, 1087)), "Event deck")
 	_make_badge($EventDeckSlot, "Label", Vector2(0, SMALL_CARD_SIZE.y + 3))
-	_make_badge($EventDiscardSlot, "Label", Vector2(0, -13))
+	var browse := Button.new()
+	browse.flat = true
+	browse.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	browse.tooltip_text = "Browse Event discards"
+	browse.pressed.connect(open_event_pile.bind(-1))
+	$EventDiscardSlot.add_child(browse)
+	_make_badge($EventDiscardSlot, "Label", Vector2(0, -13)).z_index = 2
 
 func setup_lower_slots() -> void:
 	setup_card_slot($BlackRoseTrophySlot, _art_point(Vector2(565, 265)), "Black Rose trophies", Vector2(78, 54))
@@ -102,27 +111,104 @@ func _rotate_card_view(view: Button, card_size: Vector2) -> void:
 			child.rotation = -PI / 2.0
 			child.position = Vector2(0, card_size.y)
 
-func show_event_in_slot(slot: Control, event: EventCardState) -> void:
-	_remove_view(slot, "EventView")
-	if event == null:
-		return
+func open_event_pile(slot_index: int = -1) -> void:
 	var game = get_parent()
-	var view = game.ReferenceCardPreview.make_card("events", event.id, event.event_name,
-		slot.size, game.open_event_card.bind(event), true)
-	view.name = "EventView"
-	_rotate_card_view(view, slot.size)
-	slot.add_child(view)
+	var cards: Array = game.event_discard if slot_index < 0 else EventTrack.cards_in(game.active_events, slot_index)
+	var entries := []
+	for i in range(cards.size() - 1, -1, -1):
+		var event: EventCardState = cards[i]
+		entries.append({"id": event.id, "name": event.event_name,
+			"text": "Moon %d · %s\n\n%s" % [event.moon, event.phase.capitalize(), event.text]})
+	game.inspected_quest = null
+	var title: String = "Event discards" if slot_index < 0 else "Event slot " + ["I", "II", "III"][slot_index]
+	game._reference_card_preview().show_reference_pile("events", entries, title, func(entry): return entry.text)
 
-func refresh_event_slots() -> void:
+func _inspect_event(id: String) -> void:
+	var game = get_parent()
+	for i in game.active_events.size():
+		for card in EventTrack.cards_in(game.active_events, i):
+			if card.id == id:
+				open_event_pile(i)
+				return
+	open_event_pile(-1)
+
+func _position_event(event: EventCardState, slot: Control, offset: Vector2, animate: bool) -> Button:
+	var view: Button = _event_views.get(event.id)
+	var start: Vector2 = $EventDeckSlot.position
+	if view == null:
+		view = get_parent().ReferenceCardPreview.make_card("events", event.id, event.event_name,
+			slot.size, _inspect_event.bind(event.id), true)
+		view.name = "Event_" + event.id
+		_rotate_card_view(view, slot.size)
+		_event_views[event.id] = view
+	else:
+		var old_slot: Control = view.get_parent()
+		if old_slot == slot and view.get_meta("destination", Vector2.INF) == offset and animate:
+			return view
+		start = old_slot.position + view.position
+		var tween: Tween = view.get_meta("slide") if view.has_meta("slide") else null
+		if tween != null: tween.kill()
+		old_slot.remove_child(view)
+	slot.add_child(view)
+	view.set_meta("destination", offset)
+	view.position = start - slot.position if animate else offset
+	if view.position != offset:
+		var tween := view.create_tween()
+		view.set_meta("slide", tween)
+		tween.tween_property(view, "position", offset, EVENT_SLIDE_SECONDS).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	return view
+
+func _remove_event_view(id: String) -> void:
+	var view: Button = _event_views[id]
+	_event_views.erase(id)
+	view.get_parent().remove_child(view)
+	view.queue_free()
+
+func refresh_event_slots(animate: bool = true) -> void:
 	if not _slots_ready:
 		return
 	var game = get_parent()
-	for i in range(3):
-		show_event_in_slot(get_node("ActiveEvent" + str(i + 1)), game.active_events[i])
-	show_event_in_slot($EventDiscardSlot, game.event_discard.back() if not game.event_discard.is_empty() else null)
+	animate = animate and _track_initialized
+	_track_initialized = true
+	var visible_ids := {}
+	for i in game.active_events.size():
+		var slot: Control = get_node("ActiveEvent" + str(i + 1))
+		var cards := EventTrack.cards_in(game.active_events, i)
+		for depth in cards.size():
+			var card: EventCardState = cards[depth]
+			var offset := Vector2(2.6, 2.2) * depth * minf(1.0, 3.0 / maxi(1, cards.size() - 1))
+			var view := _position_event(card, slot, offset, animate)
+			slot.move_child(view, -1)
+			visible_ids[card.id] = true
+	var top: EventCardState = null if game.event_discard.is_empty() else game.event_discard.back()
+	if top != null:
+		var view := _position_event(top, $EventDiscardSlot, Vector2.ZERO, animate)
+		$EventDiscardSlot.move_child(view, -1)
+		visible_ids[top.id] = true
+	for id in _event_views.keys():
+		if visible_ids.has(id): continue
+		var view: Button = _event_views[id]
+		var discarded: EventCardState = game.event_database.get_event(id)
+		# Multiple cards can leave III at once. Let the buried ones arrive too.
+		if animate and discarded != null and game.event_discard.has(discarded):
+			if view.get_parent() != $EventDiscardSlot:
+				_position_event(discarded, $EventDiscardSlot, Vector2.ZERO, true)
+				$EventDiscardSlot.move_child(view, 0)
+			var slide: Tween = view.get_meta("slide") if view.has_meta("slide") else null
+			if slide != null and slide.is_running():
+				var finish := _finish_discard_slide.bind(id)
+				if not slide.finished.is_connected(finish): slide.finished.connect(finish, CONNECT_ONE_SHOT)
+				continue
+		_remove_event_view(id)
 	update_event_deck_label()
 	update_event_discard_label()
 	refresh_support_slots()
+
+func _finish_discard_slide(id: String) -> void:
+	var view: Button = _event_views.get(id)
+	var discard: Array = get_parent().event_discard
+	if view != null and view.get_parent() == $EventDiscardSlot and (discard.is_empty() or discard.back().id != id):
+		_remove_event_view(id)
 
 func update_event_deck_label() -> void:
 	if not _slots_ready:
