@@ -138,6 +138,6 @@ replace_once(
     '"profile_episode_%d_%s.jsonl" % [match_seed, scenario]', 'isolated dataset output')
 
 # This is a new generated file, not an in-place modification of the active worker.
-dst.write_text(text, encoding='utf-8', newline='\n')
+dst.write_text(text, encoding='utf-8')
 print(f'Profiling worker creato: {dst}')
 print('Originale ai/ai_policy_match.gd non modificato.')

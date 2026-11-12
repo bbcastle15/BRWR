@@ -1,5 +1,10 @@
 extends Node2D
 
+var _brwr_r3_decision_step: int = 0
+var _brwr_r3_room_activations: int = 0
+var _brwr_r3_uncredited: int = 0
+var _brwr_r3_effect_events: Array = []
+
 const BetaHUDScript = preload("res://beta_hud.gd")
 
 @export var run_tests_on_ready: bool = false
@@ -6715,6 +6720,20 @@ func cast_next_ready_spell(
 		print("cast_next_ready_spell: no Ready Spell")
 		return false
 
+	# The rebuilt Arena and similar room effects may cast a prepared Spell
+	# without the Mage choosing a Cast Action this step.
+	var proven_room_cast: Dictionary = _brwr_v5m1_room_cast_provenance(player_index)
+	context = context.duplicate(false)
+	# Never inherit stale provenance from another effect context.
+	context.erase("_brwr_v5m1_cast_origin")
+	context.erase("_brwr_v5m1_origin_room_id")
+	if not proven_room_cast.is_empty():
+		context["_brwr_v5m1_cast_origin"] = str(proven_room_cast["origin"])
+		context["_brwr_v5m1_origin_room_id"] = str(proven_room_cast["room_id"])
+		# Fail closed on missing causal step: the R3 emitter will count
+		# the effect as uncredited rather than assign it to another Mage.
+		context["_brwr_r3_cast_decision"] = int(proven_room_cast.get("source_step", -1))
+
 	return queue_resolution({
 		"type": "spell_cast",
 		"step": "start",
@@ -12444,6 +12463,14 @@ func submit_action_activation_step(
 	if action.is_empty():
 		return false
 
+	# V5M1 AI-only: causal decision origin survives suspended resolutions.
+	if kind == "action":
+		var selected_type: String = str(action.get("type", ""))
+		if selected_type in ["explore", "fight"]:
+			var origin_context: Dictionary = action.get("context", {}).duplicate(false)
+			origin_context["_brwr_v5m1_action_source_step"] = _brwr_r3_decision_step
+			action["context"] = origin_context
+
 	clear_player_input()
 
 	if kind == "quest":
@@ -16611,6 +16638,7 @@ func process_spell_resolution_frame(
 
 			resolution["sequences"] = sequences
 			resolution["sequence_index"] = 0
+			resolution["_brwr_r3_before"] = _brwr_r3_snapshot()
 			resolution["step"] = "next_sequence"
 
 			return false
@@ -16669,6 +16697,7 @@ func process_spell_resolution_frame(
 
 		"reveal":
 
+			_brwr_r3_emit(resolution, context, false)
 			resolution["step"] = "done"
 			# Draw-triggered Forgotten cards are discarded immediately, never
 			# prepared/cast. Requiem can also return to hand during its resolution.
@@ -16759,6 +16788,8 @@ func process_spell_cast_resolution(
 			context["game"] = self
 			context["caster_id"] = player_index
 			context["caster_room_id"] = player.mage.room_id
+			if not context.has("_brwr_r3_cast_decision"):
+				context["_brwr_r3_cast_decision"] = _brwr_r3_decision_step
 			resolution["context"] = context
 
 			var side: Dictionary = spell.get_side(use_dark_side)
@@ -16980,6 +17011,8 @@ func process_trigger_spell_resolution(
 			return false
 		"prepare_effects":
 			var context: Dictionary = resolution.context
+			if not resolution.has("_brwr_r3_before"):
+				resolution["_brwr_r3_before"] = _brwr_r3_snapshot()
 			if not OracleRules.prepare_revelation(self, owner_id, active_spell.get_side(), context): return false
 			resolution["step"] = "after_effects"
 			queue_resolution({
@@ -16993,6 +17026,7 @@ func process_trigger_spell_resolution(
 
 		"after_effects":
 			var context: Dictionary = resolution.get("context", {})
+			_brwr_r3_emit(resolution, context, true)
 			for key in context:
 				if key not in ["game", "trigger_event", "active_spell"]:
 					active_spell.context[key] = context[key]
@@ -17078,6 +17112,7 @@ func process_room_activation_resolution(
 			# Finalize once, then let the resumed frame finish without re-emitting.
 			resolution["step"] = "done"
 			room.mark_activated()
+			_brwr_r3_room_activations += 1
 			# Passive Events are consumed at activation, never at phase start.
 			for event in active_events:
 				if event == null or event.phase != current_phase:
@@ -22222,3 +22257,130 @@ func show_lodge_room_choices(callbacks: Dictionary, selected_rooms: Array[String
 		choice.add_to_group("lodge_room_choices")
 		choice.chosen.connect(callbacks[room_id])
 		room.add_child(choice)
+
+
+# ---------------------------------------------------------------------------
+# BRWR AI-only R3 training telemetry (not part of the production rules engine).
+# Changes here are read-only observation of authoritative game state.
+# A cast with no material outcome receives NO receipt.
+# ---------------------------------------------------------------------------
+func _brwr_r3_card_ids(cards: Array) -> Array:
+	var result: Array = []
+	for card in cards:
+		result.append(str(card.id) if card != null else "")
+	return result
+
+func _brwr_r3_snapshot() -> Dictionary:
+	var state: Dictionary = {"players": [], "rooms": [], "room_activations": _brwr_r3_room_activations}
+	for player in players:
+		if player == null or player.mage == null:
+			continue
+		var mage = player.mage
+		var jinxes: Array = []
+		for jinx in mage.jinxes:
+			jinxes.append(str(jinx.get("id", "")))
+		var quests: Array = []
+		for quest in player.active_quests + player.completed_quests:
+			if quest != null:
+				quests.append([quest.get_id(), quest.progress, quest.completed, quest.solved])
+		var evocations: Array = []
+		for ev in player.evocations:
+			if ev != null:
+				evocations.append([ev.evocation_id, ev.board_number, ev.room_id,
+					ev.damage_cubes.duplicate(), ev.health, ev.strength, ev.speed,
+					ev.controller_id, ev.stored_trophies.duplicate(), ev.upgrades.duplicate()])
+		state["players"].append({
+			"player": player.player_index,
+			"power": player.power,
+			"damage": mage.damage_cubes.duplicate(),
+			"destiny": mage.destiny_tokens.duplicate(),
+			"infectio": mage.infectio_tokens.duplicate(),
+			"jinxes": jinxes,
+			"room": mage.room_id,
+			"in_cell": mage.in_cell,
+			"available_cubes": player.available_cubes,
+			"starved_cubes": player.starved_cubes,
+			"trophies": player.trophies.duplicate(),
+			"hand": _brwr_r3_card_ids(player.hand),
+			"grimoire": _brwr_r3_card_ids(player.grimoire),
+			"memories": _brwr_r3_card_ids(player.memories),
+			"quests": quests,
+			"evocations": evocations
+		})
+	for node in get_children():
+		if not node.has_meta("room_id"):
+			continue
+		state["rooms"].append({
+			"id": str(node.get_meta("room_id")),
+			"instability": node.instability_cubes.duplicate(),
+			"flipped": node.flipped,
+			"activated": node.activated_this_turn,
+			"vastum": node.vastum_present
+		})
+	return state
+
+func _brwr_r3_emit(frame: Dictionary, context: Dictionary, triggered: bool) -> void:
+	if bool(frame.get("_brwr_r3_reported", false)):
+		return
+	frame["_brwr_r3_reported"] = true
+	if not frame.has("_brwr_r3_before"):
+		return
+	var before: Dictionary = frame["_brwr_r3_before"]
+	var after: Dictionary = _brwr_r3_snapshot()
+	var material_change: bool = before != after
+	# Prevention can have a real, attributable consequence without a state delta:
+	# an incoming damage event is reduced before damage is committed.
+	var prevention: bool = int(context.get("silver_damage_ignored", 0)) > 0 \
+		or context.has("caput_ignored_player_index")
+	if not material_change and not prevention:
+		return
+	var player: int = int(context.get("caster_id", -1))
+	var step: int = int(context.get("_brwr_r3_cast_decision", -1))
+	if player < 0 or player >= players.size() or step <= 0:
+		_brwr_r3_uncredited += 1
+		return
+	var spell_type: String = str(context.get("spell_type", ""))
+	var reaction: bool = triggered and spell_type in ["trap", "protection"]
+	_brwr_r3_effect_events.append({
+		"step": step,
+		"player_index": player,
+		"spell_id": str(context.get("spell_id", "")),
+		"spell_type": spell_type,
+		"kind": "reaction" if reaction else "spell",
+		"material_change": material_change,
+		"prevention": prevention,
+		"cast_origin": str(context.get("_brwr_v5m1_cast_origin", "direct")),
+		"origin_room_id": str(context.get("_brwr_v5m1_origin_room_id", "")),
+		"use_dark_side": context.get("spell_use_dark_side", null)
+	})
+
+
+# V5M1: inspect the active resolution stack, never infer an auto-cast from
+# a previously cast Spell or merely from the current step number.
+func _brwr_v5m1_room_cast_provenance(player_index: int) -> Dictionary:
+	var in_room_effect: bool = false
+	for frame in resolution_stack:
+		if str(frame.get("type", "")) == "effect_sequence" \
+		and str(frame.get("resolver_kind", "")) == "room":
+			in_room_effect = true
+			break
+	if not in_room_effect:
+		return {}
+	for frame in resolution_stack:
+		if str(frame.get("type", "")) != "room_activation":
+			continue
+		if int(frame.get("player_index", -1)) != player_index:
+			continue
+		var room_id: String = str(frame.get("room_id", ""))
+		var room = get_room_by_id(room_id)
+		if room == null:
+			continue
+		for effect_value in room.get_effects():
+			if effect_value is Dictionary \
+			and str(effect_value.get("type", "")) == "cast_next_ready_spell":
+				# This belongs to the original Explore/Fight Action, NOT the
+				# global decision counter at the moment the nested Spell starts.
+				var activation_context: Dictionary = frame.get("context", {})
+				var source_step: int = int(activation_context.get("_brwr_v5m1_action_source_step", -1))
+				return {"origin": "room_cast_next_ready", "room_id": room_id, "source_step": source_step}
+	return {}

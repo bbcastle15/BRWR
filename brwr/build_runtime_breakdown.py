@@ -168,5 +168,5 @@ replace_once('''	output_file.close()
 	print("AI_EPISODE_COMPLETE seed=", match_seed''', 'profile footer')
 
 output.parent.mkdir(parents=True, exist_ok=True)
-output.write_text(s, encoding='utf-8', newline='\n')
+output.write_text(s, encoding='utf-8')
 print('RUNTIME_BREAKDOWN_BUILD_OK isolated=1 original_game_unchanged=1 worker_unchanged=1')

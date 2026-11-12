@@ -46,7 +46,7 @@ def main():
     if BACKUP.exists():
         sys.exit('AI_UI_GUARD_STOP: existing backup from another revision; refusing to overwrite')
     shutil.copy2(BUILDER, BACKUP)
-    BUILDER.write_text(modified, encoding='utf-8', newline='\n')
+    BUILDER.write_text(modified, encoding='utf-8')
     print('AI_UI_GUARD_PATCH_OK: generated game_school_cached.gd only')
     print('BACKUP:', BACKUP)
     print('Production game.gd and checkpoint not touched.')

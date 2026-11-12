@@ -171,6 +171,6 @@ out = [
 ]
 for path, contents in out:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(contents, encoding='utf-8', newline='\n')
+    path.write_text(contents, encoding='utf-8')
 print(f'RESOLUTION_DEEP_BUILD_OK isolated=1 wrappers={len(wrapped)} checkpoint_unchanged=1')
 print('RESOLUTION_DEEP_COMPONENTS ' + ','.join(wrapped))

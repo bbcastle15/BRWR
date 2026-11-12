@@ -63,7 +63,7 @@ def main() -> None:
     modified = contents.replace(ANCHOR, ANCHOR + INSERT, 1)
     ast.parse(modified, filename=str(BUILDER))
     shutil.copy2(BUILDER, BACKUP)
-    BUILDER.write_text(modified, encoding='utf-8', newline='\n')
+    BUILDER.write_text(modified, encoding='utf-8')
     print('BRWR_AI_TARGETED_GUARD_PATCH_OK: generated AI game only')
     print('BACKUP:', BACKUP)
     print('Production game.gd, rules and neural checkpoint unchanged.')

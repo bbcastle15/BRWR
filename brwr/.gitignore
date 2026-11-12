@@ -3,3 +3,36 @@
 /android/
 /output/
 /web_build.json
+# === BEGIN BRWR AI SYNC V2 ===
+
+# Dataset e runtime generati
+/ai/datasets/
+/ai/runtime/
+/ai/model/backups/
+/ai/*_logs/
+
+# Checkpoint: conserva solo V5 attuale e V4
+/ai/model/*.pt
+!/ai/model/brwr_policy_v5_momentumone_reset.pt
+!/ai/model/brwr_policy_v4.pt
+
+# Storico del training
+/ai/model/training_history*.csv
+!/ai/model/training_history_v5_momentumone_reset.csv
+
+# Output di diagnostica
+/ai/model/*probe*.json
+/ai/model/native_policy_v5.json
+/v5m1_*evidence*.zip
+/v5m1_*diagnostic*.txt
+/v5m1_training_audit.txt
+/ai_git_inventory.txt
+
+# Cache
+__pycache__/
+*.pyc
+*.translation
+*.import
+*.before_*.bak
+
+# === END BRWR AI SYNC V2 ===
