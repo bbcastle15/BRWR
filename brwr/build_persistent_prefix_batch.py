@@ -178,6 +178,6 @@ if 'return false false' in s or 'return true false' in s:
 if s.count('BRWR_PERSISTENT_BATCH_COMPLETE') != 1:
     sys.exit('PERSISTENT_BATCH_BUILD_STOP missing marker')
 
-out.write_text(s, encoding='utf-8', newline='\n')
+out.write_text(s, encoding='utf-8')
 print('PERSISTENT_BATCH_BUILD_OK generated=ai/ai_policy_prefix_batch_match.gd original_worker_unchanged=1')
 print('PERSISTENT_BATCH_ISOLATION scene_fresh_per_episode=1 policy_shared=1 rng_reseeded=1 queued_game_freed=1 root_leak_guard=1')
