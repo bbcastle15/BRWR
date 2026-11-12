@@ -141,5 +141,5 @@ out = [
 ]
 for path, content in out:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding='utf-8', newline='\n')
+    path.write_text(content, encoding='utf-8')
 print('SCHOOL_CACHE_BUILD_OK originals_unchanged=1 generated=' + ','.join(p.name for p, _ in out))

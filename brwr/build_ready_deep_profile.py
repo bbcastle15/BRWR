@@ -169,6 +169,6 @@ worker_new = worker_new.replace('native_episode_', 'native_ready_deep_episode_')
 # All validations passed. Only write isolated copies.
 for p, content in ((DEST_GAME, game_new), (DEST_SCENE, scene_new), (DEST_WORKER, worker_new)):
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(content, encoding='utf-8', newline='\n')
+    p.write_text(content, encoding='utf-8')
 print('READY_DEEP_BUILD_OK originals_unchanged=1 generated=' + ','.join(str(x) for x in (DEST_GAME,DEST_SCENE,DEST_WORKER)))
 print(f'READY_DEEP_STAGE_COUNT {len(BOUNDARIES)+1}')

@@ -164,5 +164,5 @@ replace_once('''"native_episode_%d_%s.jsonl"''', '''"native_setup_episode_%d_%s.
 # style per block. We injected 4-space indents, so normalize all tabs to spaces.
 s = s.replace('\t', '    ')
 # Keep CRLF/windows-friendly UTF-8, and write only after *all* anchor checks.
-target.write_text(s, encoding='utf-8', newline='\n')
+target.write_text(s, encoding='utf-8')
 print(f'NATIVE_SETUP_BUILD_OK isolated_worker={target} originals_unchanged=1')

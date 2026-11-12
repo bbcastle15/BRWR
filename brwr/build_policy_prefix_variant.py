@@ -127,8 +127,8 @@ new_worker = worker.replace(ref_path, fast_path, 1).replace('school_cached_episo
 
 out_policy = root / 'ai/ai_native_policy_prefix_v4.gd'
 out_worker = root / 'ai/ai_policy_school_prefix_match.gd'
-out_policy.write_text(new_policy, encoding='utf-8', newline='\n')
-out_worker.write_text(new_worker, encoding='utf-8', newline='\n')
+out_policy.write_text(new_policy, encoding='utf-8')
+out_worker.write_text(new_worker, encoding='utf-8')
 print('POLICY_PREFIX_BUILD_OK isolated=1 shared_features=17 original_policy_unchanged=1 rules_unchanged=1')
 print('PREFIX_POLICY_FILE ' + str(out_policy))
 print('PREFIX_WORKER_FILE ' + str(out_worker))

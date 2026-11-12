@@ -256,6 +256,6 @@ output_files = {
     AI / 'ai_policy_native_profile.gd': w,
 }
 for path, content in output_files.items():
-    path.write_text(content, encoding='utf-8', newline='\n')
+    path.write_text(content, encoding='utf-8')
     print('NATIVE_PROFILE_FILE_OK', path)
 print('NATIVE_PROFILE_BUILD_OK originals_unchanged=1')
