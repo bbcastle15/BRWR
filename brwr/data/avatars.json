@@ -7,7 +7,7 @@
     "speed": 2,
     "skill": "dominion",
     "setup_room": "black_rose",
-    "implemented": false,
+    "implemented": true,
     "command_prefix": "possessed_",
     "priorities": {
       "1": [

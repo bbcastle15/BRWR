@@ -1,0 +1,97 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER COUNT: 2
+GAME SEED: 0
+Spells loaded: 316
+Loaded Starting Grimoires from res://data/school_specializations_v19.json
+Evocations loaded: 57
+
+ACTIVE SCHOOLS:
+  - druidic
+  - nightmare
+  - heka
+  - hex
+  - lex
+  - geomancy
+Selected 6 / 14 available schools
+
+SCHOOL LIBRARIES:
+  druidic: 36 cards
+  nightmare: 36 cards
+  heka: 36 cards
+  hex: 36 cards
+  lex: 36 cards
+  geomancy: 36 cards
+Forgotten deck created: 42 cards
+Mages DB: 58
+Quests DB: 49
+Quest Deck Moon 1: 15
+Quest Deck Moon 2: 21
+Quest Deck Moon 3: 13
+Events DB: 39
+Event Deck Moon 1: 13
+Event Deck Moon 2: 13
+Event Deck Moon 3: 13
+Player 1 assigned Mage: Rikkart | HP 11 | Hand 7 | STR 2 | SPD 2
+Player 2 assigned Mage: Angela | HP 11 | Hand 7 | STR 2 | SPD 2
+Players created: 2
+Events DB: 15
+Event Deck Moon 1: 5
+Event Deck Moon 2: 5
+Event Deck Moon 3: 5
+Initial Crown assigned to Player 1
+Player 1 takes the Crown
+Player 1 Cell exits: ["cemetery", "arena"] | primary: cemetery | starts in Cell: true
+Player 2 Cell exits: ["sacrificial_altar", "oracle_room"] | primary: oracle_room | starts in Cell: true
+Cells created: 2
+Rooms in database: 45
+Random rooms: 17
+Available positions: 17
+Power Board initialized for 2 players
+Pestis #1: stored 1 owner cube on its card
+Player 1 summoned Pestis in room pleasures_room
+Pleasures Room received instability from owner 0 | 1/6
+Owner 0 placed 1 Instability in Pleasures Room
+Spell Instability: Player 1 | Proliferate | Room pleasures_room
+Damage: attacker 0 -> Player 2 | 1 damage | Target HP: 10/11
+Player 1 revealed Quest: Purple Star
+Player 1 completed Quest: Purple Star
+Player 1 cast Proliferate | side: Light
+
+ACTIVE SCHOOLS:
+  - pestilence
+  - oracle
+  - famine
+  - druidic
+  - hex
+  - lex
+Selected 6 / 14 available schools
+Player 1 summoned Cadaver in room arena
+Player 2 summoned Cadaver in room arena
+Pestis #1: stored 1 owner cube on its card
+Player 1 summoned Pestis in room arena
+summon_evocation: summoned Pestis in arena
+Pestis #2: stored 1 owner cube on its card
+Player 1 summoned Pestis in room arena
+summon_evocation: summoned Pestis in arena
+Waiting for Player 1 | input type: effect_choice
+EFFECT PAUSED: type=filtered_model_effect | input=effect_choice | retry_index=2
+Player 1 cast Pandemic | side: Dark
+Player 1 summoned Cadaver in room arena
+Player 2 summoned Colossus in room sanctuary
+Cadaver moved to sanctuary
+Damage: attacker 0 -> Evocation Colossus | 2 damage | HP: 2/4
+Evocation activated: Cadaver | controller P1 | Strength 2
+Player 1 summoned Bellum in room arena
+Player 2 summoned Colossus in room sanctuary
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Bellum moved to sanctuary
+Waiting for Player 1 | input type: effect_choice
+Waiting for Player 1 | input type: effect_choice
+Damage: attacker 0 -> Evocation Colossus | 4 damage | HP: 0/4
+Pestis #1: stored 1 owner cube on its card
+Player 1 summoned Pestis in room arena
+Pestis #2: stored 1 owner cube on its card
+Player 1 summoned Pestis in room arena
+NOV13 CHECKS: 22; FAILURES: 0

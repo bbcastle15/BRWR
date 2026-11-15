@@ -479,8 +479,7 @@
           {
             "type": "heal",
             "amount": 2,
-            "power_per_missing": 1,
-            "up_to": true
+            "power_if_none": 2
           }
         ]
       }

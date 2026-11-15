@@ -32,7 +32,7 @@ static func model_options(game, effect: Dictionary, context: Dictionary) -> Arra
 			return []
 		if primary_ev == null and (primary_mage < 0 or game.is_mage_in_cell(primary_mage)):
 			return []
-	var options := ForgottenRules.models(game, context, str(effect.get("target", "evocation")), effect.get("range", "*"), center)
+	var options := ForgottenRules.models(game, context, str(effect.get("target", "evocation")), effect.get("range", "*"), center, true, bool(effect.get("include_caster", false)))
 	return options.filter(func(o):
 		var ev: EvocationState = o.value.get("evocation")
 		if bool(effect.get("exclude_primary", false)):

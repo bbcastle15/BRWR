@@ -596,8 +596,8 @@ func receive_feedback(event: Dictionary) -> void:
 		phase_queue.append(event.duplicate())
 	if event.get("kind") == "physical_action":
 		animation_queue.append({"player": event.player, "node": "PhysicalAction" + str(event.token_index), "kind": "physical", "action": event.action})
-	if event.get("kind") == "destiny":
-		animation_queue.append({"player": event.player, "node": "", "kind": "destiny", "index": event.index})
+	if event.get("kind") in ["destiny", "infectio"]:
+		animation_queue.append({"player": event.player, "node": "", "kind": event.kind, "index": event.index})
 	if event.get("kind") == "attack":
 		attack_queue.append(event.duplicate())
 	if event.get("kind") == "damage_conversion":
@@ -650,15 +650,17 @@ func _play_next_animation() -> void:
 		# A separate presentation node survives an authoritative board refresh.
 		board.add_child(animated_node)
 		animated_avatar_marker = true
-	if event.kind in ["trophy", "destiny"]:
+	if event.kind in ["trophy", "destiny", "infectio"]:
 		animated_node = null
 		var board = game.player_boards[index]
 		if board is AvatarBoard: board.refresh()
-		elif event.kind == "destiny": board.refresh_destiny_tokens()
+		elif event.kind in ["destiny", "infectio"]: board.refresh_destiny_tokens()
 		else: board.refresh_trophies()
-		var stack = board.get_node_or_null("DestinyTokens" if event.kind == "destiny" else ("EvocationCards/AvatarTrophies" if board is AvatarBoard else "MageCardSlot/TrophyStack"))
-		if event.kind == "destiny" and board is AvatarBoard:
-			hidden_trophy = board.cards_root.get_node_or_null("DestinyToken%d" % int(event.index))
+		var stack = board.get_node_or_null("DestinyTokens" if event.kind in ["destiny", "infectio"] else ("EvocationCards/AvatarTrophies" if board is AvatarBoard else "MageCardSlot/TrophyStack"))
+		if event.kind in ["destiny", "infectio"] and board is AvatarBoard:
+			hidden_trophy = board.cards_root.get_node_or_null("%sToken%d" % [str(event.kind).capitalize(), int(event.index)])
+		elif event.kind == "infectio" and stack != null:
+			hidden_trophy = stack.get_node_or_null("InfectioToken%d" % int(event.index))
 		elif stack != null and int(event.index) < stack.get_child_count():
 			hidden_trophy = stack.get_child(int(event.index))
 		if is_instance_valid(hidden_trophy):
@@ -705,7 +707,7 @@ func _play_next_animation() -> void:
 		action_notice = _make_notice("PHYSICAL ACTION", "%s · %s" % [game.player_display_name(index), str(event.get("action", "Physical Action"))])
 		board_overlay.add_child(action_notice)
 		action_notice.position = Vector2((board_overlay.size.x - action_notice.size.x) * 0.5, 10)
-		animated_node.text = "+"
+		animated_node.get_node("Face").material.set_shader_parameter("exhausted", false)
 		animation.tween_interval(0.7)
 		animation.tween_property(animated_node, "scale:x", 0.03, 0.15).set_trans(Tween.TRANS_SINE)
 		animation.tween_callback(_refresh_animated_board)

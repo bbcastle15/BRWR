@@ -41,7 +41,7 @@ func setup(
 	evocation_name = name_value
 	owner_id = owner_index
 	owner_color = color
-	board_number = number
+	board_number = state.get_token_number() if state != null else number
 	_state = state
 	z_index = 79
 	_portrait = portrait_texture(evocation_id)
@@ -183,7 +183,7 @@ func sync_state(state: EvocationState, owner_index: int, color: Color) -> void:
 			get_node("OwnerRing").color = color
 			get_node("OwnerLabel").text = "P%d" % (owner_id + 1)
 			get_node("OwnerLabel").add_theme_color_override("font_color", color)
-	board_number = state.board_number
+	board_number = state.get_token_number()
 	_refresh_details()
 
 

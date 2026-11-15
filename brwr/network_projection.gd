@@ -220,7 +220,7 @@ static func apply(game, state: Dictionary) -> void:
 		room.set_meta("hex_coord", data.coord)
 		room.position = game.hex_to_pixel(data.coord)
 		game.room_id_by_coord[data.coord] = data.id
-		room.flipped = data.flipped
+		room.set_rebuilt(data.flipped, not initial_snapshot)
 		room.activated_this_turn = data.activated
 		if bool(data.get("vastum", false)):
 			game.vastum_room_state[str(data.id)] = true

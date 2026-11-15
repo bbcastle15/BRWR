@@ -176,10 +176,16 @@ func run():
 
 	reset_case()
 	damage(AVATAR, [0, 1, 1])
-	preferred["heal_owner"] = "heal:stop"
+	preferred["heal_owner"] = "heal:1"
 	await section("sap_of_the_black_rose")
-	expect(game.players[AVATAR].mage.get_damage() == 3 and game.black_rose_power == 2, "Sap: Crown may heal zero and gain 2 Power")
-	expect(choices.size() == 1 and choices[0].player_index == 0, "Optional heal is chosen by Crown")
+	expect(game.players[AVATAR].mage.get_damage() == 1 and game.black_rose_power == 0, "Sap must heal two")
+	reset_case()
+	damage(AVATAR, [0])
+	await section("sap_of_the_black_rose")
+	expect(game.players[AVATAR].mage.get_damage() == 0 and game.black_rose_power == 0, "Sap heals one with no Power")
+	reset_case()
+	await section("sap_of_the_black_rose")
+	expect(game.black_rose_power == 2, "Sap gains two Power only at full health")
 
 	reset_case()
 	damage(AVATAR, [0, 1, 1])
@@ -321,6 +327,28 @@ func run():
 		for i in AVATAR: expect(game.players[i].mage.damage_cubes == [-1,-1,-1], id + " area damage P%d" % i)
 		expect(enemy.damage_cubes == [-1,-1,-1] and own.get_damage() == 0, id + " uses BR cubes and respects own Evocation immunity")
 		expect(game.get_room_by_id("black_rose").instability_cubes.size() == (0 if id == "incendiary_ball" else 1), id + " places printed instability")
+
+	reset_case()
+	var protected_model = game.summon_evocation(0, "colossus", "black_rose")
+	var other_model = game.summon_evocation(1, "colossus", "black_rose")
+	game.players[0].active_spells.append(ActiveSpellState.new(game.spell_database.get_spell("earth_totem"), 0, false))
+	await section("blaze")
+	expect(game.players[0].mage.get_damage() == 0 and protected_model.get_damage() == 0, "Earth Totem shields Mage and existing Evocation from Blaze")
+	expect(game.players[0].evocations.any(func(ev): return ev.evocation_id == "totem" and ev.get_damage() == 0), "New Totem survives the triggering Blaze")
+	expect(other_model.get_damage() == 3 and game.players[1].mage.get_damage() == 3 and game.get_room_by_id("black_rose").instability_cubes.size() == 1, "Blaze resolves for unprotected Models and Room")
+	await section("blaze")
+	expect(protected_model.get_damage() == 3 and game.players[0].mage.get_damage() == 3, "Earth Totem protection ends with the triggering Spell")
+	reset_case()
+	var protected_cadaver = game.summon_evocation(0, "cadaver", "black_rose")
+	game.players[0].active_spells.append(ActiveSpellState.new(game.spell_database.get_spell("earth_totem"), 0, false))
+	await section("frost_spear", 1)
+	expect(game.players[0].mage.get_damage() == 0 and game.is_evocation_in_play(protected_cadaver) and game.players[0].evocations.size() == 2, "Earth Totem also ignores Frost Spear's subsequent removal")
+	reset_case()
+	hand(0, 2)
+	hand(1, 2)
+	game.players[0].active_spells.append(ActiveSpellState.new(game.spell_database.get_spell("earth_totem"), 0, true))
+	await section("manuscript_on_deceptions", 1)
+	expect(game.players[0].hand.size() == 2 and game.players[1].hand.size() < 2 and game.players[0].power == 11 and game.players[0].evocations.any(func(ev): return ev.evocation_id == "totem"), "Dark Earth Totem ignores Contingency discard and resolves its rewards")
 
 	for id in ["unstable_thorns", "explosion_of_thorns", "explosion_of_dark_petals"]:
 		reset_case()

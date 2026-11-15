@@ -7,7 +7,9 @@ static func assign(game, caster: int, target: int, amount: int) -> void:
 	if target < 0 or target == caster or target >= game.players.size(): return
 	var mage: MageState = game.players[target].mage
 	var taken: int = game.take_owner_cubes(caster, mini(amount, maxi(0, 3 - mage.infectio_tokens.size())))
-	for i in taken: mage.infectio_tokens.append(caster)
+	for i in taken:
+		mage.infectio_tokens.append(caster)
+		game.record_table_feedback({"kind": "infectio", "player": target, "index": mage.infectio_tokens.size() - 1})
 	game.refresh_player_board(target)
 
 static func resolve(effect: Dictionary, context: Dictionary) -> bool:

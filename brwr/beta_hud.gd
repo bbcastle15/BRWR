@@ -190,8 +190,8 @@ func _build_ui() -> void:
 	root_box.add_child(top_row)
 
 	var title := Label.new()
-	title.text = "BRWR — BETA UI"
-	title.visible = false
+	title.text = str({"local": "Local match", "solo": "Solo · Possessed"}.get(str(game.get("local_match_mode")), ""))
+	title.visible = not title.text.is_empty()
 	title.add_theme_font_size_override("font_size", 20)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top_row.add_child(title)
@@ -282,7 +282,7 @@ func _build_ui() -> void:
 	root_box.add_child(feedback_label)
 
 	var footer := Label.new()
-	footer.text = "H: hand   •   F10: show/hide beta panel"
+	footer.text = "H: hand   •   F10: show/hide controls"
 	footer.visible = false
 	footer.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	footer.modulate = Color(0.75, 0.75, 0.75)
@@ -1802,6 +1802,7 @@ func _render_board_variants(choices: Array) -> void:
 	_clear_content()
 	var evocation_targeting: bool = (
 		str(current_request.get("type", "")) == "evocation_phase_activations"
+		or choices.any(func(c): return c.has("timing"))
 		or str(current_request.get("choice_kind", "")) == "evocation_activation_plan"
 	)
 	panel.anchor_top = 1.0
@@ -1816,7 +1817,7 @@ func _render_board_variants(choices: Array) -> void:
 		var target: Dictionary = choice.get("board_target", {})
 		if target.is_empty():
 			if evocation_targeting:
-				_add_confirmation("Finish without attack", choice.callback)
+				_add_confirmation("Move only · NO ATTACK", choice.callback)
 			else:
 				_add_button(str(choice.get("label", "Continue")), choice.callback)
 			continue
@@ -1829,7 +1830,12 @@ func _render_board_variants(choices: Array) -> void:
 		var target: Dictionary = variants[0].board_target.duplicate()
 		target["token"] = key
 		var callback: Callable = variants[0].callback if variants.size() == 1 else _render_target_variants.bind(variants)
-		if not game.show_board_target_choice(target, callback):
+		if evocation_targeting and groups.size() == 1 and variants.size() == 1:
+			callback.call()
+			return
+		var on_board: bool = game.show_board_target_choice(target, callback)
+		if not on_board:
+			panel.show()
 			_add_button(str(variants[0].get("label", "Target")), callback)
 	if evocation_targeting:
 		_add_confirmation("← Back", _render_current_request)
@@ -1839,6 +1845,7 @@ func _render_board_variants(choices: Array) -> void:
 
 func _render_target_variants(choices: Array) -> void:
 	_clear_content()
+	panel.show()
 	for choice in choices:
 		_add_button(str(choice.get("label", "Continue")), choice.callback)
 	_add_button("← Back", _render_current_request)
@@ -1878,9 +1885,13 @@ func _render_command_paths() -> void:
 		if int(option.get("action", {}).get("evocation_index", -1)) != evocation_index:
 			continue
 		var path: Array = _command_option_path(option)
-		choices.append({"path": path, "callback": _set_action_menu.bind("command_variants", {"evocation_index": evocation_index, "path_key": _action_path_key(path)})})
+		var context: Dictionary = option.action.get("context", {})
+		choices.append({"path": path, "label": _command_variant_label(option),
+			"timing": context.get("evocation_attack_timing", "none"),
+			"board_target": _attack_target_option(context, "evocation_"),
+			"callback": _submit_action_token.bind(str(option.token))})
 	var evocation = game.get_evocation_by_owner_index(current_player_index, evocation_index)
-	_render_lodge_paths(choices, [], "" if evocation == null else str(evocation.room_id))
+	_choose_attack_order(choices, "" if evocation == null else str(evocation.room_id))
 
 
 func _command_variant_label(
@@ -2085,6 +2096,13 @@ func _render_effect_choice() -> void:
 		[]
 	)
 
+	if current_request.get("choice_kind") == "evocation_attack_target":
+		panel.hide()
+		for option in options:
+			game.show_board_target_choice(option, _submit_effect_single.bind(str(option.token)))
+		_add_confirmation("Skip attack", _submit_effect_single.bind(""))
+		return
+
 	if current_request.get("choice_kind") == "succubus_redirect":
 		for option in options:
 			var choose := _submit_effect_single.bind(str(option.token))
@@ -2103,8 +2121,11 @@ func _render_effect_choice() -> void:
 			choices.append({"path": [], "label": "Skip", "callback": _submit_effect_single.bind("")})
 		for option in options:
 			var path: Array = option.get("path", option.get("value", {}).get("evocation_move_room_ids", []) if option.get("value") is Dictionary else [option.get("room_id", "")])
-			choices.append({"path": path, "label": _option_label(option), "board_target": option.get("board_target", {}), "callback": _submit_effect_single.bind(str(option.get("token", "")))})
-		_render_lodge_paths(choices, [], str(current_request.get("movement_origin_room_id", "")))
+			choices.append({"path": path, "label": _option_label(option), "timing": option.get("attack_timing", "none"), "board_target": option.get("board_target", {}), "callback": _submit_effect_single.bind(str(option.get("token", "")))})
+		if current_request.get("choice_kind") == "evocation_activation_plan":
+			_choose_attack_order(choices, str(current_request.get("movement_origin_room_id", "")))
+		else:
+			_render_lodge_paths(choices, [], str(current_request.get("movement_origin_room_id", "")))
 		return
 
 	var board_tokens: Array[String] = []
@@ -2617,9 +2638,30 @@ func _render_evocation_movement(evocation: Dictionary) -> void:
 		return
 	var choices: Array = []
 	for plan in evocation.get("activation_plans", []):
-		choices.append({"path": plan.get("path", []), "label": _evocation_phase_plan_label(plan), "board_target": _attack_target_option(plan.get("context", {}), "evocation_"), "callback": _choose_evocation_plan.bind(int(evocation.get("evocation_index", -1)), plan.get("context", {}).duplicate(true))})
+		choices.append({"path": plan.get("path", []), "timing": plan.context.get("evocation_attack_timing", "none"), "label": _evocation_phase_plan_label(plan), "board_target": _attack_target_option(plan.get("context", {}), "evocation_"), "callback": _choose_evocation_plan.bind(int(evocation.get("evocation_index", -1)), plan.get("context", {}).duplicate(true))})
 	var model = game.get_evocation_by_owner_index(current_player_index, int(evocation.get("evocation_index", -1)))
-	_render_lodge_paths(choices, [], "" if model == null else str(model.room_id))
+	_choose_attack_order(choices, "" if model == null else str(model.room_id))
+
+
+func _choose_attack_order(choices: Array, origin: String) -> void:
+	var has_attack := choices.any(func(c): return c.get("timing", "none") != "none")
+	if not has_attack:
+		_render_lodge_paths(choices, [], origin)
+		return
+	_clear_content()
+	_center_choice_panel()
+	panel.show()
+	for timing in ["after", "before"]:
+		var plans := choices.filter(func(c): return c.get("timing") == timing or c.get("timing") == "none")
+		# Without movement, the attack is legal in either order.
+		if timing == "after" and not plans.any(func(c): return c.get("timing") == "after" and c.path.is_empty()):
+			plans.append_array(choices.filter(func(c): return c.get("timing") == "before" and c.path.is_empty()))
+		var can_attack := plans.any(func(c): return c.get("timing", "none") != "none")
+		if timing == "before":
+			var attacks := plans.filter(func(c): return c.get("timing") == "before" and c.path.is_empty())
+			_add_button("Attack → Move", _render_board_variants.bind(attacks), attacks.is_empty())
+		else:
+			_add_button("Move → Attack", _render_lodge_paths.bind(plans, [], origin), not can_attack)
 
 
 func _choose_evocation_plan(

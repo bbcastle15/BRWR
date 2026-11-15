@@ -149,6 +149,8 @@ static func quest_progress_centers(id: String, card_size: Vector2) -> PackedVect
 		"dominate_fear": [.480, .405, .60],
 		"cinder_and_gold": [.474, .30, .50, .70],
 		"bloody_sun": [.548, .30, .50, .70],
+		"invisible_sun": [.538, .30, .50, .699],
+		"extinct_sun": [.538, .30, .50, .699],
 		"vial_sun": [.544, .30, .50, .70],
 		"master_of_death": [.565, .31, .50, .69]
 	}

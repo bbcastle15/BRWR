@@ -499,9 +499,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "pleasures_room",
-      "elements": [
-        "profane",
-        "magic"
+      "spell_types": [
+        "combat",
+        "contingency"
       ]
     },
     "cube_slots": 0,
@@ -513,7 +513,7 @@
       }
     ],
     "power_reward": 1,
-    "raw_task": "After you resolve a Profane or Magic Spell while you are in the Pleasures Room.",
+    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Pleasures Room.",
     "raw_effect": "You may draw 1 Event. If you do, gain 2 Power."
   },
   "mortal_moon": {
@@ -673,9 +673,9 @@
     "task": {
       "trigger": "spell_resolved",
       "in_room_id": "observatory",
-      "elements": [
-        "air",
-        "earth"
+      "spell_types": [
+        "combat",
+        "contingency"
       ]
     },
     "cube_slots": 0,
@@ -686,7 +686,7 @@
       }
     ],
     "power_reward": 2,
-    "raw_task": "After you resolve an Air or Earth Spell while you are in the Observatory.",
+    "raw_task": "After you resolve a Combat or Contingency Spell while you are in the Observatory.",
     "raw_effect": "Draw 2 Spells from your Grimoire."
   },
   "indigo_star": {

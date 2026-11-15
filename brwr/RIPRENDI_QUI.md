@@ -1,3 +1,39 @@
+# 16 novembre — Local, Solo e Avatar
+
+Local configura il mago del giocatore, da uno a cinque maghi rivali e un Avatar facoltativo entro il limite di sei posti. Con Avatar si possono scegliere anche zero rivali. Il giocatore al dispositivo prende le decisioni dei maghi. Solo avvia un mago contro Possessed e ha un selettore di stanze alternative indipendente da Local. Possessed è disponibile nel catalogo ordinario, anche per l'estrazione casuale.
+
+# 14 novembre — Extinct Sun e Citrine Star
+
+Extinct Sun usa la grafica restaurata con tre caselle grandi e coordinate dei cubi allineate. Per la ricompensa la versione con simboli e il database concordano sul raggio 0 per entrambi i Cadaver. Citrine Star ora controlla il tipo Combat o Contingency alla risoluzione della magia nell'Observatory.
+
+# 14 novembre — Totem
+
+All'attivazione il Totem può scegliere anche il mago che lo controlla, se nella sua stanza o in una stanza adiacente. Heal 1 rimuove un danno. Convert 1 sostituisce un cubo danno avversario con uno del controllore. La scelta resta facoltativa e la distanza si misura dal Totem.
+
+# Aggiornamento del 13 novembre — azioni fisiche e attacchi
+
+Stone Phoenix Dark può rievocare anche l'ultima copia. La sconfitta o rimozione libera il modello prima di aprire la finestra della Trappola. L'evento conserva il riferimento al modello e la stanza. Con Attack → Move la scelta del percorso per un'evocazione umana arriva dal resolver dopo danni e reazioni. Il Sacrificial Altar ricostruito mostra sul segnalino di attivazione disponibile il simbolo Modello con asterisco e i due danni del Codex Arcanum, p. 87.
+
+La plancia usa ora le due facce illustrate del token azione fisica con il bordo nel colore del giocatore. Golden Sun ha una nuova immagine restaurata. Il menu delle evocazioni propone gli ordini Move → Attack e Attack → Move. Con un solo bersaglio l'attacco è automatico, con più bersagli si sceglie sulla plancia. Pestis salta la selezione quando manca un bersaglio.
+
+Sap of the Black Rose cura obbligatoriamente fino a due danni e dà due Potere solo ad Avatar illeso. Verificati in Godot Endemia con due cubi convertibili, entrambi i lati di Contaminate e gli attacchi di Cadaver e Bellum. Le suite aggiornate avatar_rules, nov13_beta e nov13_ui hanno superato rispettivamente 139, 34 e 8 controlli. Nessun nuovo export Web.
+
+# Ripresa 13 novembre 2026 — menu beta, Pestilence e Quest
+
+Il menu ha tre sezioni `local`, `online`, `solo`. Local conserva il setup hot-seat precedente; online conserva creazione/join relay e apre automaticamente la sezione online per un invito Web. Solo avvia un umano contro Possessed, difficoltà Apprendista/Maestro, con checkbox per forzare fino a sei scuole complete. `Game.forced_school_ids` entra nella selezione autorevole delle sei Libraries; il resto viene estratto con il normale RNG. Il catalogo completo viene interrogato attraverso lo stesso controllo di disponibilità del gioco. La scelta solo è richiesta direttamente dall’utente; il catalogo Avatar generale mantiene il precedente gating sperimentale.
+
+Pestis usa internamente numeri da 200 per non occupare gli slot I–III. `EvocationState.get_token_number()` espone 1, 2, 3… per i no-slot senza cambiare identificativi, snapshot o lookup. I token e i nomi leggibili usano questo numero.
+
+Nuovi asset `assets/tokens/infectio.png`, `assets/quests/restored/invisible_sun.png`. I token hanno alpha reale. Infectio mostra il cubo del proprietario, accanto alla Mage card e fuori dai recessi delle azioni; la coda condivisa di feedback `infectio` anima il piazzamento come Destiny/Trophies, anche sulla plancia Avatar. La stessa coda viene serializzata online. Le azioni fisiche seguono il regolamento base p. 24: segnalino quadrato con bordo del colore del giocatore, stella chiara sul lato disponibile e croce rossa sul lato esaurito. Invisible Sun conserva testo, tre caselle e ricompensa; il resolver grafico esistente seleziona automaticamente la versione restaurata.
+
+Purple Star aveva lo stesso errore storico di Cinder Star: fulmine e sfera indicano Combat/Contingency, non elementi Profane/Magic. Corretto il requisito `spell_types` nei dati. Proliferate Light nella Pleasures Room completa la Quest nel test reale di lancio. Pandemic Dark dichiara esplicitamente target Evocation e il prompt ricorda che comprende le proprie. Il resolver includeva già i propri modelli: la prova completa rimuove un proprio Cadaver. I nomi di modello nelle scelte ora identificano il proprietario.
+
+Per la segnalazione Cadaver/Bellum, il motore ha inflitto regolarmente danno dopo movimento contro un’Evocation di Possessed; Bellum ha sconfitto Colossus. Non è stato riprodotto il salvataggio esatto dello screenshot. Trovato e corretto un difetto UI distinto: `_render_target_variants` non riapriva il pannello nascosto quando un bersaglio offriva più varianti. Le scelte attacco delle attivazioni mostrano anche pulsanti espliciti; “Move only · NO ATTACK” distingue il piano privo di attacco. Non sono state cambiate regole di danno o immunità.
+
+Verifiche Godot 4.7.2 effettive: `nov13_beta` 22 controlli, `nov13_ui` 7, `nov13_menu` 10 condizioni; regressioni `avatar_rules` 137, `nov04_quest_triggers` 48, `nov11_oracle` 53. Import editor, JSON e diff check. Rendering Compatibility reale del menu e della plancia, immagini in `docs/handoff-2026-10-18/evidence/nov13-*.png`. Nessuna nuova partita Internet su due PC e nessun export Web. Le modifiche preesistenti a bundle/export, cancellazioni foto e UID AI sono preservate. Nessun commit.
+
+Prompt e provenienza degli asset: `docs/NOV13-ART-PROMPTS.md`.
+
 # Ripresa 12 novembre 2026 — i due maghi di Duel: Kami
 
 Abe no Seimei ed En no Gyōja sono selezionabili dal normale setup. La foto originale del proprietario è già sincronizzabile nel progetto come `assets/mages/IMG20261001212707.jpg`. È identica all’allegato del 12 novembre. Abe è in basso a sinistra, En in alto a destra. I dati vengono dalle schede fisiche.

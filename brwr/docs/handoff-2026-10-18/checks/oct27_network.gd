@@ -33,6 +33,21 @@ func run():
  NetworkSnapshot.apply(client,NetworkSnapshot.build(game,0))
  client.beta_hud._process(0)
  expect(not client.beta_hud.effect_box.visible,"Spectator stale prompt disappears after conversion")
+ game.queue_resolution({"type":"evocation_damage_ability","name":ev.get_display_name(),"ability":ability,"context":{"game":game,"caster_id":1,"caster_room_id":"arena","target_room_id":"arena"}})
+ expect(game.submit_effect_choice(1,"") and not game.waiting_for_player_input and room.instability_cubes==[1],"Skipping Nigredo finishes the ability without changing Instability")
+ game.suppress_placement_feedback=false
+ while not room.is_instability_complete():
+  room.add_instability_cube(1,false)
+ expect(game.resolve_room_completion(room) and room.flipped and room.showing_old_face,"Completion rebuilds immediately and starts the old face turning")
+ NetworkSnapshot.apply(client,NetworkSnapshot.build(game,0))
+ var remote_room=client.get_room_by_id("arena")
+ var turn=remote_room.flip_animation
+ NetworkSnapshot.apply(client,NetworkSnapshot.build(game,0))
+ expect(turn!=null and remote_room.flip_animation==turn,"Repeated snapshots preserve the same flip")
+ room.flip_animation.custom_step(0.30)
+ expect(not room.showing_old_face and room.get_node("Background").scale.x<0.25,"The rebuilt face appears edge-on")
+ room.flip_animation.custom_step(0.50)
+ expect(room.flip_animation==null and is_equal_approx(room.get_node("Background").scale.x,1.0),"Tile finishes at normal width")
  game.table_shell=shell
  game.suppress_placement_feedback=false
  game.record_damage_feedback(AVATAR,0,[0],0)

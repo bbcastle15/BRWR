@@ -11,6 +11,9 @@ const TYPES := ["assign_destiny", "destiny_threshold", "defeat_with_destiny",
 static func ignores(context: Dictionary, player: int) -> bool:
 	return player in context.get("ignored_spell_players", [])
 
+static func ignores_evocation(game, context: Dictionary, ev: EvocationState) -> bool:
+	return ev != null and game.get_evocation_controller_id(ev) in context.get("ignored_spell_model_controllers", [])
+
 static func mage_context(context: Dictionary, target: int) -> Dictionary:
 	var result := context.duplicate(false)
 	result.erase("target_evocation")
@@ -313,7 +316,8 @@ static func announce_spell(game, context: Dictionary, effects: Array) -> bool:
 		return false
 	if not context.has("_spell_guard_announced"):
 		context["_spell_guard_announced"] = []
-		context["ignored_spell_players"] = []
+		if not context.has("ignored_spell_players"):
+			context["ignored_spell_players"] = []
 	var card: SpellCardState = game.spell_database.get_spell(str(context.spell_id))
 	if card == null or card.forgotten:
 		return false

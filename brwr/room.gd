@@ -35,6 +35,8 @@ var flipped: bool = false:
 		flipped = value
 		if is_node_ready():
 			refresh_art()
+var flip_animation: Tween
+var showing_old_face := false
 var activated_this_turn: bool = false:
 	set(value):
 		activated_this_turn = value
@@ -71,9 +73,33 @@ func _ready():
 	_refresh_vastum_token()
 
 
+func set_rebuilt(value: bool, animate: bool) -> void:
+	if value == flipped:
+		return
+	if flip_animation != null:
+		flip_animation.kill()
+		flip_animation = null
+	showing_old_face = value and animate and is_node_ready()
+	flipped = value
+	if not is_node_ready():
+		return
+	var tile := $Background as Polygon2D
+	tile.scale.x = 1.0
+	if showing_old_face:
+		flip_animation = create_tween()
+		flip_animation.tween_property(tile, "scale:x", 0.025, 0.28).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		flip_animation.tween_callback(func():
+			showing_old_face = false
+			refresh_art())
+		flip_animation.tween_property(tile, "scale:x", 1.0, 0.32).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		flip_animation.tween_callback(func():
+			flip_animation = null
+			_refresh_activation_token())
+
+
 func refresh_art() -> void:
 	$Background.color = room_color
-	var has_art := preload("res://room_art.gd").apply($Background, get_art_id(), radius, flipped)
+	var has_art := preload("res://room_art.gd").apply($Background, get_art_id(), radius, flipped and not showing_old_face)
 	$RoomName.visible = not has_art
 	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_refresh_activation_token()
@@ -183,7 +209,7 @@ func _refresh_activation_token() -> void:
 		token.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		token.z_index = 20
 		add_child(token)
-	token.visible = flipped
+	token.visible = flipped and not showing_old_face and flip_animation == null
 	if not flipped:
 		return
 	token.position = Vector2(-radius * 0.60, -radius * 0.77)
