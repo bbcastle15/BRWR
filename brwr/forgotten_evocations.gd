@@ -27,7 +27,7 @@ static func can_activate(game, ev: EvocationState) -> bool:
 	return true
 
 static func can_remove(game, ev: EvocationState, context: Dictionary) -> bool:
-	if not game.is_evocation_in_play(ev):
+	if not game.is_evocation_in_play(ev) or DeathEffectResolver.ignores_evocation(game, context, ev):
 		return false
 	if not ability(game, ev, "immortal_while_trophies").is_empty() and not ev.stored_trophies.is_empty():
 		return false
@@ -169,7 +169,9 @@ static func process_activation(game, frame: Dictionary) -> bool:
 			var options: Array = ForgottenRules.rooms(game, context, int(area.get("range", 0))) if not area.is_empty() else ForgottenRules.models(game, context, "model", range_value, "", false)
 			options = options.filter(func(o): return not (o.get("value") is Dictionary and o.value.get("evocation") != null and not ability(game, o.value.evocation, "cannot_be_physically_attacked").is_empty()))
 			options = options.filter(func(o): return not (o.get("value") is Dictionary and o.value.get("target_type") == "mage" and ForgottenPassives.value(game.players[int(o.value.player_index)], "cannot_be_evocation_attack_target") > 0))
-			if not DruidicRules.choose(game, controller, frame, "attack_target", options, "Choose the target for " + ev.evocation_name + ".", true, "secondary_room" if not area.is_empty() else "model_target"):
+			if options.size() == 1:
+				frame["attack_target"] = options[0].value
+			if not DruidicRules.choose(game, controller, frame, "attack_target", options, "Choose the target for " + ev.evocation_name + ".", true, "secondary_room" if not area.is_empty() else "evocation_attack_target"):
 				return false
 			var selected = frame.get("attack_target")
 			if selected == null:
@@ -202,6 +204,10 @@ static func process_activation(game, frame: Dictionary) -> bool:
 			for i in data.choices.size():
 				if not i in selected:
 					options.append({"token": "attack_effect:%d" % i, "value": i, "name": str(data.choices[i].label)})
+			# A mandatory single replacement can resolve directly. Its optional
+			# target choice already skips itself when no legal model exists.
+			if options.size() == 1 and data.choices.size() == 1 and not bool(data.get("optional", false)):
+				frame["replacement_choice"] = options[0].value
 			if not DruidicRules.choose(game, controller, frame, "replacement_choice", options, "Choose the Physical Attack Effect.", bool(data.get("optional", false))):
 				return false
 			var choice = frame.get("replacement_choice")

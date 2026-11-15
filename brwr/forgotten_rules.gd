@@ -22,22 +22,22 @@ static func origin(game, context: Dictionary) -> String:
 static func rooms(game, context: Dictionary, distance = "*") -> Array:
 	return game._quest_room_choice_options(int(context.caster_id), {"range": distance}, origin(game, context))
 
-static func models(game, context: Dictionary, kind: String = "model", distance = "*", center: String = "", include_owned: bool = true) -> Array:
+static func models(game, context: Dictionary, kind: String = "model", distance = "*", center: String = "", include_owned: bool = true, include_caster: bool = false) -> Array:
 	var result: Array = []
 	var caster: int = int(context.caster_id)
 	if center.is_empty():
 		center = origin(game, context)
 	for i in game.players.size():
 		var p = game.players[i]
-		if kind != "evocation" and i != caster and not p.mage.in_cell and game.is_room_within_effect_range(center, p.mage.room_id, distance):
+		if kind != "evocation" and (include_caster or i != caster) and not p.mage.in_cell and game.is_room_within_effect_range(center, p.mage.room_id, distance):
 			result.append({"token": "mage:%d" % i, "value": {"target_type": "mage", "player_index": i}, "player_index": i, "room_id": p.mage.room_id, "name": p.player_name})
 		if kind == "mage":
 			continue
 		for ev in p.evocations:
-			if not EquipmentRules.can_target_as(ev, caster, kind):
+			if DeathEffectResolver.ignores_evocation(game, context, ev) or not EquipmentRules.can_target_as(ev, caster, kind):
 				continue
 			if not ev.is_defeated() and (include_owned or game.get_evocation_controller_id(ev) != caster) and game.is_room_within_effect_range(center, ev.room_id, distance):
-				result.append({"token": "evocation:%d:%d" % [i, p.evocations.find(ev)], "value": {"target_type": "evocation", "evocation": ev}, "room_id": ev.room_id, "name": ev.get_display_name()})
+				result.append({"token": "evocation:%d:%d" % [i, p.evocations.find(ev)], "value": {"target_type": "evocation", "evocation": ev}, "room_id": ev.room_id, "name": ev.get_display_name() + " · " + game.player_display_name(i)})
 	return result
 
 static func target_context(context: Dictionary, value) -> Dictionary:

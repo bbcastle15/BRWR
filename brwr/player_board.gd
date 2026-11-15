@@ -430,7 +430,17 @@ func refresh_action_tokens() -> void:
 			token.name = "PhysicalAction" + str(i)
 			token.position = Vector2(385 + i * 70, 215)
 			token.size = Vector2(60, 60)
-			token.add_theme_font_size_override("font_size", 36)
+			token.flat = true
+			var art := TextureRect.new()
+			art.name = "Face"
+			art.texture = preload("res://assets/tokens/physical_action_faces.png")
+			art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var material := ShaderMaterial.new()
+			material.shader = preload("res://assets/tokens/physical_action.gdshader")
+			art.material = material
+			token.add_child(art)
+			art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 			token.pressed.connect(game.open_player_board_action.bind(player_index, "physical"))
 			add_child(token)
 		# Anubis prints the two action recesses at different positions from
@@ -444,20 +454,11 @@ func refresh_action_tokens() -> void:
 		else:
 			token.position = Vector2(385 + i * 70, 215)
 		var available: bool = i < player_state.available_physical_actions
-		token.text = "+" if available else "×"
+		var face: ShaderMaterial = token.get_node("Face").material
+		face.set_shader_parameter("rim_color", player_state.color)
+		face.set_shader_parameter("exhausted", not available)
 		token.tooltip_text = "Physical action: " + " / ".join(action_names) if available else "Physical action exhausted"
 		token.disabled = not available or game.get_player_board_action_options(player_index, "physical").is_empty()
-		for state in ["normal", "hover", "pressed", "disabled"]:
-			var style := StyleBoxFlat.new()
-			style.bg_color = Color(0.04, 0.05, 0.07)
-			style.border_color = get_damage_cube_color(player_index)
-			style.set_border_width_all(5)
-			style.set_corner_radius_all(10)
-			if state == "hover":
-				style.bg_color = Color(0.18, 0.2, 0.25)
-			token.add_theme_stylebox_override(state, style)
-		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_disabled_color"]:
-			token.add_theme_color_override(state, Color.WHITE if available else Color(1, 0.12, 0.12))
 	for i in range(3):
 		var category: String = ["momentum", "quests", "finish"][i]
 		var button = get_node_or_null("BoardAction_" + category)
@@ -921,15 +922,21 @@ func refresh_destiny_tokens() -> void:
 		cube.position = Vector2(28, 27)
 	for i in player_state.mage.infectio_tokens.size():
 		var owner: int = player_state.mage.infectio_tokens[i]
-		var token := Panel.new()
-		token.position = Vector2(i * 34, 46)
-		token.size = Vector2(30, 30)
+		var token := TextureRect.new()
+		token.name = "InfectioToken%d" % i
+		token.texture = game.ReferenceCardPreview.card_texture("tokens", "infectio")
+		token.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		token.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		# Keep Infectio beside the Mage card, clear of the Physical Action recesses.
+		token.position = Vector2(-182 + i * 44, 46)
+		token.size = Vector2(42, 42)
 		token.tooltip_text = "Infectio — assigned by " + game.player_display_name(owner)
 		row.add_child(token)
 		var cube = cube_scene.instantiate()
 		cube.cube_color = get_damage_cube_color(owner)
 		token.add_child(cube)
-		cube.position = Vector2(15, 15)
+		cube.position = Vector2(30, 30)
+		cube.scale = Vector2(0.7, 0.7)
 
 
 func refresh_evocations() -> void:

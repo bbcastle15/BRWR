@@ -57,7 +57,7 @@ func has_archetype(kind: String) -> bool:
 
 
 func get_display_name() -> String:
-	return evocation_name + (" #" + str(board_number) if board_number > 0 else "")
+	return evocation_name + (" #" + str(get_token_number()) if board_number > 0 else "")
 
 
 func get_remaining_health() -> int:
@@ -84,3 +84,6 @@ func add_damage(owner: int, amount: int) -> int:
 
 func get_damage_from(owner: int) -> int:
 	return damage_cubes.count(owner)
+
+func get_token_number() -> int:
+	return board_number - 199 if bool(definition.get("no_slot", false)) else board_number

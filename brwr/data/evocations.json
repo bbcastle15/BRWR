@@ -31,7 +31,7 @@
     "abilities": [
       {
         "type": "on_inflict_damage",
-        "optional": false,
+        "optional": true,
         "choices": [
           {
             "type": "place_instability",
@@ -1197,6 +1197,7 @@
           {
             "type": "filtered_model_effect",
             "range": 1,
+            "include_caster": true,
             "effects": [
               {
                 "type": "choose_one",
@@ -1217,6 +1218,7 @@
                     "effects": [
                       {
                         "type": "convert_damage",
+                        "include_owned_models": true,
                         "amount": 1
                       }
                     ]

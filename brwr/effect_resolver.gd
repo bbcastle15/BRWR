@@ -39,6 +39,8 @@ func resolve_effect(
 	var target_ev: EvocationState = context.get("target_evocation")
 	if game != null and target_ev != null and str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, target_ev, "ignore_spell_effects").is_empty():
 		return true
+	if game != null and _target_type(context) in ["evocation", "model"] and DeathEffectResolver.ignores_evocation(game, context, target_ev):
+		return true
 	if _caput_direct_target_is_ignored(context):
 		return true
 	if effect_type in DeathEffectResolver.TYPES:
@@ -862,14 +864,9 @@ func _remove_evocation(
 
 	var room_id = str(evocation.room_id)
 
-	# Trigger before removal, as required by Stone Phoenix.
-	game.emit_evocation_defeated_or_removed(
-		evocation,
-		"removed"
-	)
-
 	if not game.finalize_evocation_removal(evocation):
 		return false
+	game.emit_evocation_defeated_or_removed(evocation, "removed")
 
 	if store_result:
 		context["removed_evocation"] = evocation
@@ -1778,7 +1775,7 @@ func _resolve_convert_damage(
 		if not _valid_player(game, player_index):
 			return false
 
-		if player_index == caster_id or DeathEffectResolver.ignores(context, player_index):
+		if (player_index == caster_id and not effect.get("include_owned_models", false)) or DeathEffectResolver.ignores(context, player_index):
 			return true
 
 		var converted = convert_damage_cubes(
@@ -1809,7 +1806,7 @@ func _resolve_convert_damage(
 		if controller_id < 0:
 			controller_id = int(evocation.owner_id)
 
-		if controller_id == caster_id:
+		if controller_id == caster_id and not effect.get("include_owned_models", false):
 			return true
 
 		var converted = convert_damage_cubes(
@@ -1860,7 +1857,7 @@ func _resolve_convert_damage(
 				if not _valid_player(game, owner_index) or evocation_index < 0 or evocation_index >= game.players[owner_index].evocations.size():
 					continue
 				var evocation = game.players[owner_index].evocations[evocation_index]
-				if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
+				if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or DeathEffectResolver.ignores_evocation(game, context, evocation) or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
 					continue
 				cubes = evocation.damage_cubes
 			else:
@@ -1894,7 +1891,7 @@ func _resolve_convert_damage(
 				for evocation in player.evocations:
 					if total_converted >= amount:
 						break
-					if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
+					if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or DeathEffectResolver.ignores_evocation(game, context, evocation) or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(game, evocation, "ignore_spell_effects").is_empty()):
 						continue
 					total_converted += convert_damage_cubes(
 						evocation.damage_cubes,
@@ -2403,6 +2400,7 @@ func _resolve_convert_instability(
 
 	context["effect_target_room_id"] = room_id
 	context["effect_instability_converted"] = converted
+	game.append_public_log("Converted %d/%d Instability in %s" % [converted, amount, room_id])
 
 	print(
 		"Player ", caster_id + 1,
@@ -5290,6 +5288,12 @@ func _resolve_ignore_trigger_spell_effect(
 		ignored.append(protected_player)
 		source_context["ignored_spell_players"] = ignored
 
+	if effect.get("include_controlled_models", false):
+		var controllers: Array = source_context.get("ignored_spell_model_controllers", [])
+		if not protected_player in controllers:
+			controllers.append(protected_player)
+		source_context["ignored_spell_model_controllers"] = controllers
+
 	context["caput_ignored_spell_id"] = str(event.get_meta("source_spell_id", ""))
 	context["caput_ignored_player_index"] = protected_player
 
@@ -5522,6 +5526,8 @@ func _resolve_move_model_near_target_room(effect: Dictionary, context: Dictionar
 		var options: Array = []
 		for option in game._quest_model_choice_options(caster, {"range":"*", "include_self":true}):
 			if game.get_hex_distance(game.room_id_to_coord(origin), game.room_id_to_coord(str(option.room_id))) > int(effect.get("model_range", 1)):
+				continue
+			if DeathEffectResolver.ignores_evocation(game, context, option.value.get("evocation")):
 				continue
 			if option.value.type == "mage" and DeathEffectResolver.ignores(context, int(option.value.player_index)):
 				continue

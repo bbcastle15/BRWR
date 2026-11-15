@@ -11864,6 +11864,8 @@
         },
         {
           "type": "filtered_model_effect",
+          "target": "evocation",
+          "prompt": "Choose an Evocation with Health 3 or less, including your own.",
           "range": 0,
           "effects": [
             {
@@ -12284,7 +12286,9 @@
       "range": 0,
       "effects": [
         {
-          "type": "ignore_trigger_spell_effect"
+          "type": "ignore_trigger_spell_effect",
+          "include_controlled_models": true,
+          "include_forgotten": true
         },
         {
           "type": "self_room_effect",
@@ -12312,7 +12316,9 @@
       "range": 0,
       "effects": [
         {
-          "type": "ignore_trigger_spell_effect"
+          "type": "ignore_trigger_spell_effect",
+          "include_controlled_models": true,
+          "include_forgotten": true
         },
         {
           "type": "self_room_effect",

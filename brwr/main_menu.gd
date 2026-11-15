@@ -19,9 +19,19 @@ var solo_count: SpinBox
 var online_count: SpinBox
 var roster: Label
 var room_selections: Dictionary = {}
+var solo_room_selections: Dictionary = {}
 var room_setup_button: Button
+var solo_room_button: Button
+var local_lineup: Label
+var avatar_solo_start: Button
 var avatar_selection: Dictionary = {}
 var avatar_setup_button: Button
+var mode_pages: Dictionary = {}
+var mode_buttons: Dictionary = {}
+var forced_school_ids: Array[String] = []
+var school_checks: Array[CheckBox] = []
+var school_count_label: Label
+var solo_difficulty: OptionButton
 var username: LineEdit
 
 func _ready() -> void:
@@ -80,14 +90,38 @@ func _ready() -> void:
 	username.max_length = 24
 	box.add_child(username)
 
+	var navigation := HBoxContainer.new()
+	box.add_child(navigation)
+	for mode in ["local", "online", "solo"]:
+		var button := _button(navigation, mode, _show_mode.bind(mode))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.toggle_mode = true
+		mode_buttons[mode] = button
+	for mode in ["local", "online", "solo"]:
+		var page := VBoxContainer.new()
+		page.add_theme_constant_override("separation", 12)
+		box.add_child(page)
+		mode_pages[mode] = page
+	var root_box := box
+	box = mode_pages.local
+	_label(box, "Local match")
+	_label(box, "Choose your opponents. You control every Mage on this device.")
 	var solo_row := HBoxContainer.new()
 	box.add_child(solo_row)
 	solo_count = _count(solo_row)
-	solo_button = _button(solo_row, "Solo playtest", _solo)
+	solo_count.prefix = "Rival Mages: "
+	solo_count.min_value = 1
+	solo_count.max_value = 5
+	solo_count.value = 1
+	local_lineup = _label(box, "")
+	solo_count.value_changed.connect(func(_value): _refresh_local_lineup())
+	username.text_changed.connect(func(_value): _refresh_local_lineup())
+	_refresh_local_lineup()
 	room_setup_button = _button(box, "Lodge Rooms · original / alternative", _open_room_setup)
-	avatar_setup_button = _button(box, "Avatar · disabled (playtest available)", _open_avatar_setup)
-	box.add_child(HSeparator.new())
+	avatar_setup_button = _button(box, "Avatar · None", _open_avatar_setup)
+	solo_button = _button(box, "Start local match", _solo)
 
+	box = mode_pages.online
 	_label(box, "Online PvP · Host and players connect to the BRWR server on Render.")
 	if OS.has_feature("web"):
 		_label(box, "Open the host’s invite link and press Join game.")
@@ -98,7 +132,7 @@ func _ready() -> void:
 		var mages := MageDatabase.new()
 		mages.load_database()
 		online_count.max_value = mini(6, mages.get_mage_ids().size())
-		host_button = _button(host_row, "Create PvP room", _host)
+		host_button = _button(host_row, "Create online room", _host)
 
 		public_address = LineEdit.new()
 		public_address.placeholder_text = "BRWR server on Render"
@@ -130,6 +164,17 @@ func _ready() -> void:
 	box.add_child(code)
 
 	join_button = _button(box, "Join game", _join)
+	box = mode_pages.solo
+	_label(box, "One Mage against Possessed")
+	solo_difficulty = OptionButton.new()
+	solo_difficulty.add_item("Apprendista · 3 Command Cards")
+	solo_difficulty.add_item("Maestro · 4 Command Cards")
+	box.add_child(solo_difficulty)
+	solo_room_button = _button(box, "Lodge Rooms · original / alternative", _open_room_setup.bind(true))
+	_build_school_options(box)
+	avatar_solo_start = _button(box, "Start solo game", _start_avatar_solo)
+	box = root_box
+	_show_mode("local")
 	message = _label(box, "")
 	message.custom_minimum_size.y = 50
 
@@ -142,6 +187,7 @@ func _ready() -> void:
 		if not invitation.is_empty():
 			address.text = invitation.address
 			code.text = invitation.code
+			_show_mode("online")
 			_status("Invite ready. Press Join game.")
 		JavaScriptBridge.eval(
 			"document.addEventListener('contextmenu', function(e) { e.preventDefault(); });",
@@ -175,15 +221,70 @@ func _button(box: Control, title: String, callback: Callable) -> Button:
 	box.add_child(button)
 	return button
 
+func _show_mode(mode: String) -> void:
+	for key in mode_pages:
+		mode_pages[key].visible = key == mode
+		mode_buttons[key].button_pressed = key == mode
+
+func _build_school_options(box: Control) -> void:
+	school_count_label = _label(box, "Force Schools · 0/6 · remaining Schools are random")
+	# Query the same completeness gate used by the match, without starting a game.
+	var catalog = load("res://game.gd").new()
+	catalog.spell_database.load_database()
+	catalog.evocation_database.load_database()
+	catalog.school_specialization_database = catalog.load_school_specializations()
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.add_child(grid)
+	for id in catalog.get_playable_school_ids():
+		var check := CheckBox.new()
+		check.text = catalog.get_school_display_name(id)
+		check.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		check.set_meta("school_id", id)
+		grid.add_child(check)
+		school_checks.append(check)
+		check.toggled.connect(func(selected: bool):
+			if selected and not forced_school_ids.has(id) and forced_school_ids.size() < 6:
+				forced_school_ids.append(id)
+			elif not selected:
+				forced_school_ids.erase(id)
+			for item in school_checks:
+				item.disabled = forced_school_ids.size() >= 6 and not item.button_pressed
+			school_count_label.text = "Force Schools · %d/6 · remaining Schools are random" % forced_school_ids.size())
+	catalog.free()
+
+func _start_avatar_solo() -> void:
+	_start_local(true)
+
+func _refresh_local_lineup() -> void:
+	var name_text: String = session.clean_display_name(username.text)
+	var seats := PackedStringArray(["You" if name_text.is_empty() else name_text])
+	for i in int(solo_count.value):
+		seats.append("Rival " + str(i + 1))
+	if not avatar_selection.is_empty():
+		seats.append("Random Avatar" if avatar_selection.id == "random" else str(avatar_selection.id).capitalize())
+	local_lineup.text = "Lodge · " + "  /  ".join(seats)
+
 func _solo() -> void:
+	_start_local(false)
+
+func _start_local(against_avatar: bool) -> void:
 	if not _accept_username(): return
 	if session.started or session.connected or session.connection_started > 0:
 		return
 	var game = load("res://game.tscn").instantiate()
+	game.local_match_mode = "solo" if against_avatar else "local"
 	game.player_names = {0: session.display_name}
-	game.avatar_selection = avatar_selection.duplicate(true)
-	game.player_count = clampi(int(solo_count.value), 2, 6) if avatar_selection.is_empty() else clampi(int(solo_count.value), 1, 5) + 1
-	game.room_variants = room_selections.duplicate()
+	game.avatar_selection = {"id": "possessed", "difficulty": "master" if solo_difficulty.selected == 1 else "apprentice"} if against_avatar else avatar_selection.duplicate(true)
+	game.forced_school_ids.assign(forced_school_ids if against_avatar else [])
+	game.player_count = 2
+	if not against_avatar:
+		var rivals := int(solo_count.value)
+		game.player_count = 1 + rivals + (0 if avatar_selection.is_empty() else 1)
+		for i in rivals:
+			game.player_names[i + 1] = "Rival " + str(i + 1)
+	game.room_variants = (solo_room_selections if against_avatar else room_selections).duplicate()
 	game.beta_force_fullscreen = not OS.has_feature("web")
 	add_child(game)
 	menu.hide()
@@ -239,6 +340,9 @@ func _refresh_lobby() -> void:
 	username.editable = not in_session
 	solo_button.disabled = in_session
 	room_setup_button.disabled = in_session
+	solo_room_button.disabled = in_session
+	avatar_solo_start.disabled = in_session
+	avatar_setup_button.disabled = in_session
 	join_button.disabled = in_session
 	address.editable = not in_session
 	code.editable = not in_session
@@ -281,7 +385,8 @@ func _reset() -> void:
 	session.return_to_menu()
 
 
-func _open_room_setup() -> void:
+func _open_room_setup(for_solo: bool = false) -> void:
+	var selections: Dictionary = solo_room_selections if for_solo else room_selections
 	var definitions: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/rooms.json"))
 	var overlay := PanelContainer.new()
 	overlay.theme = theme
@@ -300,8 +405,8 @@ func _open_room_setup() -> void:
 	var toolbar := HBoxContainer.new()
 	column.add_child(toolbar)
 	var controls: Dictionary = {}
-	_button(toolbar, "All original", func(): _set_all_rooms(controls, false))
-	_button(toolbar, "Random variants", func(): _set_all_rooms(controls, true))
+	_button(toolbar, "All original", func(): _set_all_rooms(controls, selections, false))
+	_button(toolbar, "Random variants", func(): _set_all_rooms(controls, selections, true))
 	var close := _button(toolbar, "Confirm and return to menu", func():
 		menu.show()
 		overlay.queue_free())
@@ -341,25 +446,25 @@ func _open_room_setup() -> void:
 				button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				button.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 				button.add_theme_constant_override("icon_max_width", 160)
-			button.button_pressed = str(room_selections.get(base_id, base_id)) == variant_id
+			button.button_pressed = str(selections.get(base_id, base_id)) == variant_id
 			button.pressed.connect(func():
 				if variant_id != "random":
-					for other in room_selections.keys():
-						if other != base_id and room_selections[other] == variant_id:
-							room_selections[other] = other
+					for other in selections.keys():
+						if other != base_id and selections[other] == variant_id:
+							selections[other] = other
 							if controls.has(other): controls[other][other].button_pressed = true
-				room_selections[base_id] = variant_id)
+				selections[base_id] = variant_id)
 			choices.add_child(button)
 			controls[base_id][variant_id] = button
 		rows.add_child(HSeparator.new())
 	_label(rows, "Apocalypse, Room of Rebirth and the four Gaea scenario Rooms are excluded until their modes are implemented.")
 
 
-func _set_all_rooms(controls: Dictionary, randomize_variants: bool) -> void:
-	room_selections.clear()
+func _set_all_rooms(controls: Dictionary, selections: Dictionary, randomize_variants: bool) -> void:
+	selections.clear()
 	for base_id in controls:
 		var selected: String = "random" if randomize_variants else str(base_id)
-		room_selections[base_id] = selected
+		selections[base_id] = selected
 		controls[base_id][selected].button_pressed = true
 
 func _open_avatar_setup() -> void:
@@ -376,23 +481,23 @@ func _open_avatar_setup() -> void:
 	margin.add_child(column)
 	var title := _label(column, "AVATAR MODE")
 	title.add_theme_font_size_override("font_size", 30)
-	_label(column, "EXPERIMENTAL PLAYTEST · Possessed is in development; board interactions and online play are still being tested.")
 	_label(column, "The Avatar occupies a seat in the Lodge and controls the Black Rose. Ties and choices not resolved by priorities belong to the Crown holder.")
 	var selection := OptionButton.new()
+	selection.name = "AvatarSelection"
 	selection.custom_minimum_size.y = 48
 	selection.add_item("Disabled")
 	selection.set_item_metadata(0, "")
 	if not AvatarRules.available().is_empty():
 		selection.add_item("Random Avatar")
 		selection.set_item_metadata(1, "random")
-	for definition in AvatarRules.definitions():
-		if not bool(definition.get("implemented", false)) and str(definition.id) != "possessed": continue
-		selection.add_item(str(definition.name) + (" · experimental playtest" if not bool(definition.get("implemented", false)) else ""))
+	for definition in AvatarRules.available():
+		selection.add_item(str(definition.name))
 		selection.set_item_metadata(selection.item_count - 1, str(definition.id))
 	for i in selection.item_count:
 		if selection.get_item_metadata(i) == avatar_selection.get("id", ""): selection.select(i)
 	column.add_child(selection)
 	var difficulty := OptionButton.new()
+	difficulty.name = "AvatarDifficulty"
 	difficulty.custom_minimum_size.y = 48
 	difficulty.add_item("Apprendista · 3 Comandi per fase Azione")
 	difficulty.add_item("Maestro · 4 Comandi per fase Azione")
@@ -408,9 +513,10 @@ func _open_avatar_setup() -> void:
 	_button(column, "Confirm and return to menu", func():
 		var id: String = str(selection.get_selected_metadata())
 		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
-		avatar_setup_button.text = "Avatar · " + ("disabled (playtest available)" if id.is_empty() else ("random" if id == "random" else id.capitalize() + " · playtest"))
-		solo_count.min_value = 2 if id.is_empty() else 1
-		solo_count.max_value = 6 if id.is_empty() else 5
+		avatar_setup_button.text = "Avatar · " + ("None" if id.is_empty() else id.capitalize())
+		solo_count.min_value = 1 if id.is_empty() else 0
+		solo_count.max_value = 5 if id.is_empty() else 4
+		_refresh_local_lineup()
 		if online_count != null: online_count.max_value = 6 if id.is_empty() else 5
 		menu.show()
 		overlay.queue_free())

@@ -8,6 +8,7 @@ const BetaHUDScript = preload("res://beta_hud.gd")
 
 var beta_hud = null
 var network_session = null
+var local_match_mode: String = ""
 var player_names: Dictionary = {}
 
 func player_display_name(index: int) -> String:
@@ -254,6 +255,7 @@ var school_libraries: Dictionary = {}
 var school_discards: Dictionary = {}
 const ACTIVE_SCHOOL_COUNT: int = 6
 var active_school_ids: Array[String] = []
+var forced_school_ids: Array[String] = []
 
 # Setup step: unique School choice + one of its two Starting Grimoires.
 var school_specialization_database: Dictionary = {}
@@ -2917,6 +2919,8 @@ func deal_damage_to_evocation(
 ) -> int:
 	if evocation == null or FamiliarRules.guarded(evocation) or amount <= 0 or is_event_active("immortals"):
 		return 0
+	if action_type == "spell" and DeathEffectResolver.ignores_evocation(self, active_effect_context, evocation):
+		return 0
 	amount = _event_spell_damage_amount(attacker_id, amount, action_type)
 	# Rebirth, Immunity: controlled Evocations ignore their Mage's damage.
 	if attacker_id >= 0 and get_evocation_controller_id(evocation) == attacker_id:
@@ -5347,7 +5351,7 @@ func resolve_room_completion(
 	# REBUILD ROOM
 	# -----------------------------------------------------
 
-	room.flipped = true
+	room.set_rebuilt(true, not suppress_placement_feedback)
 	room.activated_this_turn = false
 
 
@@ -5699,11 +5703,14 @@ func select_active_schools():
 	)
 
 
-	for i in range(amount_to_select):
-
-		active_school_ids.append(
-			available_school_ids[i]
-		)
+	for school_id in forced_school_ids:
+		if available_school_ids.has(school_id) and not active_school_ids.has(school_id) and active_school_ids.size() < amount_to_select:
+			active_school_ids.append(school_id)
+	for school_id in available_school_ids:
+		if active_school_ids.size() >= amount_to_select:
+			break
+		if not active_school_ids.has(school_id):
+			active_school_ids.append(school_id)
 
 
 	print("")
@@ -9033,6 +9040,7 @@ func request_effect_choice(
 		var value = option.get("value")
 		if choice_kind == "evocation_activation_plan" and value is Dictionary:
 			public_option["path"] = value.get("evocation_move_room_ids", []).duplicate()
+			public_option["attack_timing"] = value.get("evocation_attack_timing", "none")
 		if token.begins_with("evocation_type:") or token.begins_with("evocation_deck:"):
 			public_option["card_kind"] = "evocations"
 		elif token.begins_with("school:") or option.has("school_id"):
@@ -11516,7 +11524,7 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 					})
 			for evocation_index in range(players[player_index].evocations.size()):
 				var evocation: EvocationState = players[player_index].evocations[evocation_index]
-				if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(self, evocation, "ignore_spell_effects").is_empty()):
+				if evocation == null or evocation.is_defeated() or evocation.room_id != room_id or DeathEffectResolver.ignores_evocation(self, context, evocation) or (str(context.get("resolver_kind", "spell")) == "spell" and not ForgottenEvocations.ability(self, evocation, "ignore_spell_effects").is_empty()):
 					continue
 				var ev_occurrences: Dictionary = {}
 				for cube_index in range(evocation.damage_cubes.size()):
@@ -11552,7 +11560,7 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 			continue
 		if mode == "convert_damage_on_caster":
 			include = i == caster
-		elif i != caster:
+		elif i != caster or effect.get("include_owned_models", false):
 			if mode == "convert_damage_each_other_mage":
 				include = i != int(context.get("target_player_index", -1)) and not mage.in_cell
 			elif target_type == "mage":
@@ -11563,7 +11571,7 @@ func _prepare_damage_conversion_choices(effect: Dictionary, context: Dictionary)
 			continue
 		for j in range(players[i].evocations.size()):
 			var evocation: EvocationState = players[i].evocations[j]
-			if evocation.is_defeated() or get_evocation_controller_id(evocation) == caster:
+			if evocation.is_defeated() or (get_evocation_controller_id(evocation) == caster and not effect.get("include_owned_models", false)):
 				continue
 			if target_type == "evocation" and context.get("target_evocation") == evocation:
 				models.append({"key": "evocation:%d" % evocation.get_instance_id(), "cubes": evocation.damage_cubes, "cube_evocation_owner": i, "cube_evocation_index": j})
@@ -14005,6 +14013,18 @@ func resolve_spell_reveal_instability(
 		)
 
 
+	if placed == 0:
+		var destination = get_room_by_id(mage.room_id)
+		var reason := "placement prevented"
+		if destination != null and destination.flipped:
+			reason = "Room destroyed"
+		elif destination != null and destination.get_instability_count() >= destination.get_instability_resistance():
+			reason = "Room full"
+		elif players[player_index].available_cubes <= 0:
+			reason = "no cubes available"
+		append_public_log("%s · no Spell Instability in %s (%s)" % [spell.card_name, mage.room_id, reason])
+	else:
+		append_public_log("%s · 1 Spell Instability in %s" % [spell.card_name, mage.room_id])
 	print(
 		"Spell Instability: Player ",
 		player_index + 1,
@@ -14873,6 +14893,7 @@ func process_damage_resolution(
 					"defeated"
 				)
 				resolution["step"] = "after_redirect_defeat"
+				finalize_evocation_removal(redirected_evocation)
 
 				if not process_game_event(defeat_event):
 					return false
@@ -14889,10 +14910,6 @@ func process_damage_resolution(
 
 			if redirected_evocation != null:
 				var room_id: String = redirected_evocation.room_id
-
-				finalize_evocation_removal(
-					redirected_evocation
-				)
 
 				_apply_puppeteer_after_evocation_loss(
 					room_id
@@ -15385,6 +15402,10 @@ func process_evocation_damage_resolution(
 			)
 
 			if cubes_available <= 0:
+				if resolution.get("action_type") == "evocation_attack":
+					var message := "%s · attack on %s deals 0 Damage (no cubes available)" % [player_display_name(attacker_id), evocation.get_display_name()]
+					append_public_log(message)
+					print(message)
 				_sync_evocation_damage_result_context(
 					resolution,
 					0
@@ -15485,6 +15506,7 @@ func process_evocation_damage_resolution(
 					"defeated"
 				)
 
+				finalize_evocation_removal(evocation)
 				resolution["step"] = "after_defeat_event"
 
 				if not process_game_event(defeat_event):
@@ -15497,7 +15519,6 @@ func process_evocation_damage_resolution(
 		"after_defeat_event":
 			var room_id: String = evocation.room_id
 
-			finalize_evocation_removal(evocation)
 			_apply_puppeteer_after_evocation_loss(room_id)
 
 			return true
@@ -16781,6 +16802,7 @@ func process_trigger_spell_resolution(
 			# Stored targets/choices of a permanent must not mask this trigger.
 			context.erase("_spell_guard_announced")
 			context.erase("ignored_spell_players")
+			context.erase("ignored_spell_model_controllers")
 			DeathEffectResolver.apply_trigger_target(active_side, context, event)
 
 			resolution["context"] = context
@@ -17562,6 +17584,19 @@ func process_evocation_activation_resolution(
 			return false
 
 		"move":
+			if context.get("choose_move_after_attack", false):
+				if not resolution.has("post_attack_path"):
+					var paths := _beta_evocation_movement_paths(evocation, int(context.get("evocation_activation_speed_bonus", 0)))
+					if paths.size() > 1:
+						var options: Array = []
+						for path: Array in paths:
+							options.append({"token": "path:" + str(options.size()), "value": path, "path": path,
+								"name": "Stay" if path.is_empty() else " → ".join(path)})
+						resolution["movement_origin_room_id"] = evocation.room_id
+						request_effect_choice(controller_id, "movement_destination", resolution, "post_attack_path", options, 1, 1,
+							"Choose movement for " + evocation.get_display_name() + " after its attack.")
+						return false
+				move_room_ids = resolution.get("post_attack_path", [])
 			var move_index: int = int(
 				resolution.get(
 					"move_index",
@@ -19246,7 +19281,7 @@ func _beta_evocation_attack_targets(
 				"target_player_index": -1,
 				"target_evocation_owner_id": owner_id,
 				"target_evocation_index": evocation_index,
-				"name": target_evocation.get_display_name(),
+				"name": target_evocation.get_display_name() + " · " + player_display_name(owner_id),
 				"room_id": room_id,
 				"controller_id": get_evocation_controller_id(
 					target_evocation
@@ -19301,6 +19336,8 @@ func _beta_evocation_activation_plans(
 		return result
 
 	var origin_room_id: String = evocation.room_id
+	var interactive_order := not AvatarRules.is_avatar(self, controller_id)
+	var origin_targets := _beta_evocation_attack_targets(evocation, controller_id, origin_room_id)
 
 	for path_value in _beta_evocation_movement_paths(
 		evocation, speed_bonus
@@ -19330,11 +19367,7 @@ func _beta_evocation_activation_plans(
 		})
 
 		# Physical Attack before all Move 1 Effects.
-		for target_value in _beta_evocation_attack_targets(
-			evocation,
-			controller_id,
-			origin_room_id
-		):
+		for target_value in (origin_targets if path.is_empty() or not interactive_order else []):
 			var target: Dictionary = target_value
 			var before_context: Dictionary = {
 				"evocation_attack_timing": "before",
@@ -19348,6 +19381,13 @@ func _beta_evocation_activation_plans(
 			for key in target_context:
 				before_context[key] = target_context[key]
 
+			if interactive_order:
+				# Staying before attacking ends movement for this activation.
+				var stay_context := before_context.duplicate()
+				stay_context["evocation_attack_timing"] = "after"
+				result.append({"label": "Stay and attack " + str(target.name), "context": stay_context,
+					"path": [], "attack_timing": "after", "target": target.duplicate(true)})
+				before_context["choose_move_after_attack"] = true
 			result.append({
 				"label":
 					"Attack "
@@ -19363,7 +19403,7 @@ func _beta_evocation_activation_plans(
 				"target": target.duplicate(true)
 			})
 
-		# With no movement, "before" and "after" are mechanically identical.
+		# Stationary attacks were already added for the current Room.
 		if path.is_empty():
 			continue
 
@@ -19455,6 +19495,8 @@ func _validate_evocation_activation_context(
 		[]
 	)
 
+	if context.get("choose_move_after_attack", false) and (attack_timing != "before" or not move_room_ids.is_empty()):
+		return false
 	if move_room_ids.size() > evocation.speed + int(context.get("evocation_activation_speed_bonus", 0)):
 		return false
 
