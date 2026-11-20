@@ -26,5 +26,42 @@
         "most_instability"
       ]
     }
+  },
+  {
+    "id": "anubis",
+    "name": "Anubis",
+    "health": 11,
+    "strength": 2,
+    "speed": 2,
+    "skill": "dominion",
+    "skills": [
+      "scourge",
+      "pledge",
+      "judgment",
+      "divine_sandstorm",
+      "dominion"
+    ],
+    "setup_room": "black_rose",
+    "implemented": false,
+    "command_prefix": "anubis_",
+    "priorities": {
+      "1": [
+        "most_power",
+        "most_solved_quests",
+        "most_trophies",
+        "most_damage"
+      ],
+      "2": [
+        "most_damage",
+        "most_trophies",
+        "most_solved_quests",
+        "most_power"
+      ],
+      "3": [
+        "most_instability",
+        "most_mages",
+        "most_models"
+      ]
+    }
   }
 ]

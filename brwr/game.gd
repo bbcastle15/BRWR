@@ -2280,13 +2280,14 @@ func _refresh_permanent_room_markers() -> void:
 		room.add_child(markers)
 		for player in players:
 			for active in player.active_spells:
-				if room_for_persistent(active) != str(room_id):
+				if room_for_persistent(active) != str(room_id) and not room_id in active.context.get("ward_rooms", []):
 					continue
 				var button := Button.new()
 				button.custom_minimum_size = Vector2(44, 44)
 				button.flat = true
 				var slot_id := _find_player_board_slot_for_spell(active.owner_id, active.spell)
-				button.add_child(preload("res://tabletop_style.gd").marker("permanent", players[active.owner_id].color, Vector2(44, 44), slot_id))
+				var marker_slot: String = str(active.context.ward_slots.find_key(room_id)) if active.context.has("ward_slots") else slot_id
+				button.add_child(preload("res://tabletop_style.gd").marker("permanent", players[active.owner_id].color, Vector2(44, 44), marker_slot))
 				button.tooltip_text = active.spell.card_name
 				button.pressed.connect(open_player_board_spell.bind(active.owner_id, slot_id))
 				markers.add_child(button)
@@ -2654,6 +2655,9 @@ func summon_evocation_for_effect(owner_id: int, evocation_id: String, room_id: S
 	context.erase("summon_declined")
 	context.erase("last_summoned_evocation")
 	if owner_id < 0 or owner_id >= players.size() or evocation_database.get_evocation(evocation_id).is_empty() or not is_lodge_room_id(room_id):
+		return null
+	if AnubisRules.cannot_summon(self, owner_id, evocation_id):
+		context["summon_declined"] = true
 		return null
 	if str(evocation_database.get_evocation(evocation_id).get("archetype", "")) == "nightmare":
 		return null
@@ -3256,6 +3260,7 @@ func gain_player_trophy(owner: int, victim: int) -> void:
 	event.source_model_type = "mage"
 	event.target_player_index = victim
 	queue_resolution({"type": "game_event", "event": event})
+	AnubisRules.on_trophy(self, owner)
 
 
 func process_game_event(
@@ -4744,6 +4749,8 @@ func _valid_mage_physical_attack_evocation(
 
 	if not is_room_within_effect_range(attacker_mage.room_id, evocation.room_id, attack_range):
 		return false
+	if not ForgottenRules.can_target_from(self, evocation, attacker_id, attacker_mage.room_id):
+		return false
 
 	# A Mage and the Evocations they control ignore Damage resolved by that
 	# Mage. Do not expose such a Model as a useful Physical Attack target.
@@ -4781,6 +4788,8 @@ func activate_room(
 		return false
 
 	var force_activation: bool = bool(context.get("force_room_activation", false))
+	if room.is_wrecked():
+		return false
 	if not force_activation and not room.can_activate(allow_reactivate_flipped):
 		print(
 			"activate_room: ",
@@ -5237,7 +5246,7 @@ func resolve_room_completion(
 		print(
 			"Room completion skipped: ",
 			room.room_name,
-			" is already rebuilt"
+			" is already completed"
 		)
 		return false
 
@@ -5357,7 +5366,7 @@ func resolve_room_completion(
 
 	print(
 		room.room_name,
-		" rebuilt"
+		" " + room.get_current_side_name()
 	)
 
 
@@ -7209,6 +7218,8 @@ func place_instability(
 ) -> int:
 
 	var requested_instability := amount
+	if ForgottenPassives.wards_instability(self, room_id, owner_id):
+		return 0
 	amount = ForgottenAttachments.reduce_instability(self, owner_id, room_id, amount)
 	if amount < requested_instability:
 		var source_name := "Black Rose" if owner_id < 0 else players[owner_id].player_name
@@ -9468,6 +9479,8 @@ func _quest_evocation_choice_options(
 				continue
 			if not EquipmentRules.can_target_as(evocation, caster_id, str(effect.get("target", "evocation"))):
 				continue
+			if not ForgottenRules.can_target_from(self, evocation, caster_id, players[caster_id].mage.room_id):
+				continue
 
 			if archetype_filter != "" \
 			and not evocation.has_archetype(archetype_filter):
@@ -10785,6 +10798,21 @@ func _register_ongoing_revealed_spell(
 		ongoing.context[key] = context[key]
 
 	players[player_index].add_active_spell(ongoing)
+	if side.get("persistent", false):
+		var slot := _find_player_board_slot_for_spell(player_index, spell)
+		for previous in players[player_index].active_spells.duplicate():
+			if previous == ongoing or not previous.get_side().get("persistent", false): continue
+			if ongoing.context.has("ward_rooms"):
+				previous.active = false
+				players[player_index].remove_active_spell(previous)
+			elif previous.context.has("ward_slots") and previous.context.ward_slots.has(slot):
+				previous.context.ward_rooms.erase(previous.context.ward_slots[slot])
+				previous.context.ward_slots.erase(slot)
+		if ongoing.context.has("ward_rooms"):
+			var slots := ["Q", "I", "II", "III"]
+			ongoing.context["ward_slots"] = {}
+			for i in ongoing.context.ward_rooms.size():
+				ongoing.context.ward_slots[slots[i]] = ongoing.context.ward_rooms[i]
 
 	print(
 		"Player ", player_index + 1,
@@ -10888,6 +10916,8 @@ func _spell_materialize_primary_target(
 
 
 func _spell_room_target_allowed(caster_id: int, side: Dictionary, room_id: String) -> bool:
+	if side.get("only_black_rose_room", false) and room_id != "black_rose":
+		return false
 	for effect in side.get("effects", []):
 		if str(effect.get("type", "")) != "activate_room_from_owned_evocation":
 			continue
@@ -10987,7 +11017,7 @@ func _effects_inflict_damage(effects: Array) -> bool:
 	for effect in effects:
 		if not effect is Dictionary: continue
 		if str(effect.get("type", "")).begins_with("damage"): return true
-		for key in ["effects", "choices", "then", "else"]:
+		for key in ["effects", "choices", "options", "then", "else"]:
 			if effect.get(key) is Array and _effects_inflict_damage(effect[key]): return true
 	return false
 
@@ -14289,8 +14319,8 @@ func _present_resolution_card(frame: Dictionary) -> bool:
 			data = {"kind": "quests", "id": quest.get_id(), "title": quest.get_name(), "player": frame.get("player_index", -1)}
 	elif frame.get("type") == "room_activation":
 		var room = get_room_by_id(str(frame.get("room_id", "")))
-		if room != null and (bool(frame.get("force_activation", false)) or room.can_activate(bool(frame.get("allow_reactivate_flipped", false)))):
-			data = {"kind": "rooms", "id": room.get_art_id(), "title": room.room_name, "flipped": room.flipped}
+		if room != null and not room.is_wrecked() and (bool(frame.get("force_activation", false)) or room.can_activate(bool(frame.get("allow_reactivate_flipped", false)))):
+			data = {"kind": "rooms", "id": room.get_art_id(), "title": room.room_name, "flipped": room.flipped, "activation_token": room.wrecks_on_completion() and room.has_activation_token()}
 	if data.is_empty():
 		return false
 	frame["_history_index"] = add_history_entry(data)
@@ -14519,6 +14549,8 @@ func process_resolution_stack() -> bool:
 				completed = AvatarRules.process_command(self, frame)
 			"avatar_section":
 				completed = AvatarEffects.process_section(self, frame)
+			"anubis_effect":
+				completed = AnubisRules.resolve(self, frame)
 			"avatar_event":
 				completed = AvatarEvents.process(self, frame)
 			"avatar_cleanup":
@@ -15034,6 +15066,7 @@ func process_damage_resolution(
 				killer = -1
 			if killer == -1:
 				black_rose_trophies.append(victim)
+				if avatar != null: AnubisRules.on_trophy(self, avatar.player_index)
 			elif killer >= 0 and killer < players.size():
 				gain_player_trophy(killer, victim)
 			# Codex p.13 grants the automatic Destiny defeat's caster an extra Trophy.
@@ -16470,7 +16503,8 @@ func process_spell_resolution_frame(
 
 			if sequence_index >= sequences.size():
 
-				resolution["step"] = "reveal"
+				var remaining := int(spell.get_side(use_dark_side).get("repeat", 0)) - int(resolution.get("times_repeated", 0))
+				resolution["step"] = "repeat" if remaining > 0 else "reveal"
 
 				return false
 
@@ -16500,6 +16534,49 @@ func process_spell_resolution_frame(
 		# REVEAL
 		# =================================================
 
+		"repeat":
+			var side := spell.get_side(use_dark_side)
+			var cost := int(side.get("repeat_discard", 0))
+			var hand: Array = players[caster_id].hand
+			if hand.size() < cost:
+				resolution["step"] = "reveal"
+				return false
+			var prompt := "Repeat %s?" % spell.card_name
+			if cost > 0:
+				prompt = "Discard %d to repeat %s?" % [cost, spell.card_name]
+			if not DruidicRules.choose(self, caster_id, context, "kami_repeat", [{"token":"repeat", "name":"Repeat", "value":true}], prompt, true):
+				return false
+			if context.get("kami_repeat") != true:
+				resolution["step"] = "reveal"
+				return false
+			if cost > 0:
+				if not context.has("repeat_payment"):
+					var options := []
+					for i in hand.size():
+						var card: SpellCardState = hand[i]
+						options.append({"token":"card:%d" % i, "value":card, "name":card.card_name, "card_kind":"spells", "id":card.id})
+					request_effect_choice(caster_id, "repeat_payment", context, "repeat_payment", options, cost, cost, prompt)
+					return false
+				var payment = context.repeat_payment
+				var selected: Array = payment if payment is Array else [payment]
+				for card in selected:
+					discard_player_spell(caster_id, card)
+			var next := DruidicRules.scoped_context(context)
+			for key in context.get("_interactive_choice_keys", []):
+				next.erase(key)
+			next.erase("_interactive_choice_keys")
+			next.erase("repeat_payment")
+			next.erase("kami_repeat")
+			resolution["context"] = next
+			resolution["times_repeated"] = int(resolution.get("times_repeated", 0)) + 1
+			resolution["step"] = "repeat_target"
+			return false
+		"repeat_target":
+			if not _prepare_spell_primary_target_choice(caster_id, spell.get_side(use_dark_side), context):
+				return false
+			resolution["sequence_index"] = 0
+			resolution["step"] = "next_sequence"
+			return false
 		"reveal":
 
 			resolution["step"] = "done"
@@ -16882,6 +16959,8 @@ func process_room_activation_resolution(
 	match str(resolution.get("step", "prepare")):
 		"prepare":
 			var force_activation: bool = bool(resolution.get("force_activation", false))
+			if room.is_wrecked():
+				return true
 			if not force_activation and not room.can_activate(
 				bool(resolution.get("allow_reactivate_flipped", false))
 			):
@@ -16911,7 +16990,8 @@ func process_room_activation_resolution(
 			# A nested game_event temporarily keeps this frame on the stack.
 			# Finalize once, then let the resumed frame finish without re-emitting.
 			resolution["step"] = "done"
-			room.mark_activated()
+			if not bool(resolution.get("context", {}).get("preserve_room_token", false)):
+				room.mark_activated()
 			# Passive Events are consumed at activation, never at phase start.
 			for event in EventTrack.all_cards(active_events):
 				if event == null or event.phase != current_phase:
@@ -19187,7 +19267,8 @@ func _valid_evocation_attack_evocation(
 	evocation: EvocationState,
 	controller_id: int,
 	target_evocation: EvocationState,
-	expected_room_id: String = ""
+	expected_room_id: String = "",
+	targets_room: bool = false
 ) -> bool:
 	if FamiliarRules.guarded(evocation) or FamiliarRules.guarded(target_evocation): return false
 	if target_evocation != null and not ForgottenEvocations.ability(self, target_evocation, "cannot_be_physically_attacked").is_empty():
@@ -19222,6 +19303,8 @@ func _valid_evocation_attack_evocation(
 	var target_coord: Vector2i = room_id_to_coord(
 		target_evocation.room_id
 	)
+	if not targets_room and not ForgottenRules.can_target_from(self, target_evocation, controller_id, attack_room_id):
+		return false
 
 	if attack_coord == Vector2i(9999, 9999) \
 	or target_coord == Vector2i(9999, 9999):

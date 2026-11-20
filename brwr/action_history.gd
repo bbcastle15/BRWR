@@ -34,6 +34,8 @@ func add_art(entry: Dictionary):
 		token.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		cards.add_child(token)
 	var texture: Texture2D = game.ReferenceCardPreview.card_texture(str(entry.get("kind","")),str(entry.get("id",""))) if entry.get("kind") != "physical" else null
+	if entry.get("kind") == "rooms" and entry.get("activation_token", false):
+		texture = preload("res://room_art.gd").activation_token(str(entry.id), false)
 	if entry.get("kind") == "rooms" and entry.get("flipped",false):
 		var path := "res://assets/rooms/rebuilt/%s.png" % str(entry.id)
 		if ResourceLoader.exists(path):texture=load(path)

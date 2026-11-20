@@ -336,6 +336,8 @@ func sync_card_presentation() -> void:
 	if game.beta_hud != null:
 		game.beta_hud.hand_overlay.close_overlay()
 	presentation_art.texture = game.ReferenceCardPreview.card_texture(str(data.kind), str(data.id))
+	if data.kind == "rooms" and bool(data.get("activation_token", false)):
+		presentation_art.texture = preload("res://room_art.gd").activation_token(str(data.id), false)
 	if data.kind == "rooms" and bool(data.get("flipped", false)):
 		var rebuilt_path := "res://assets/rooms/rebuilt/%s.png" % str(data.id)
 		if ResourceLoader.exists(rebuilt_path):

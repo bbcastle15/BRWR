@@ -499,8 +499,8 @@ func _open_avatar_setup() -> void:
 	var difficulty := OptionButton.new()
 	difficulty.name = "AvatarDifficulty"
 	difficulty.custom_minimum_size.y = 48
-	difficulty.add_item("Apprendista · 3 Comandi per fase Azione")
-	difficulty.add_item("Maestro · 4 Comandi per fase Azione")
+	difficulty.add_item("Apprentice · 3 Commands per Action Phase")
+	difficulty.add_item("Master · 4 Commands per Action Phase")
 	difficulty.select(1 if avatar_selection.get("difficulty") == "master" else 0)
 	column.add_child(difficulty)
 	var art := TextureRect.new()
@@ -509,7 +509,19 @@ func _open_avatar_setup() -> void:
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	art.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(art)
-	_label(column, "Possessed · 12 Health · 2 Strength · 2 Speed\nDominion: if it starts its activation in its Cell, place it in the Black Rose Room without revealing a Command.")
+	var description := _label(column, "")
+	var update_avatar := func(_index: int):
+		var selected_id := str(selection.get_selected_metadata())
+		var entries: Array = AvatarRules.available().filter(func(item): return item.id == selected_id)
+		if entries.is_empty():
+			art.texture = null
+			description.text = "Choose an Avatar, or select Random Avatar."
+		else:
+			var entry: Dictionary = entries[0]
+			art.texture = AvatarArt.texture(str(entry.id))
+			description.text = "%s · %d Health · %d Strength · %d Speed\n%s" % [entry.name, entry.health, entry.strength, entry.speed, ", ".join(entry.get("skills", ["dominion"])) .capitalize()]
+	selection.item_selected.connect(update_avatar)
+	update_avatar.call(selection.selected)
 	_button(column, "Confirm and return to menu", func():
 		var id: String = str(selection.get_selected_metadata())
 		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}

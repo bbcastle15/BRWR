@@ -68,7 +68,7 @@ static func perform(game, player_index: int, id: String, action: String) -> bool
 			game.refresh_player_board(player_index)
 			return game.queue_resolution({"type": "druidic_action", "player_index": player_index, "index": 0,
 				"effects": ability.effects, "context": {"game": game, "caster_id": player_index,
-					"caster_room_id": player.mage.room_id, "action_type": "physical_attack"}})
+					"caster_room_id": player.mage.room_id, "equipment_source": ev, "action_type": "physical_attack"}})
 	return false
 
 static func on_event(game, event: GameEvent) -> void:

@@ -1,3 +1,27 @@
+# 19 novembre — Stanze di Duel: Kami completate
+
+Integrate le sette stanze di `../materials/kami/rooms`: Cherry Blossom Garden, Kami Throne Room, Oni Sacrificial Altar, Satori Arena, Shinto Sanctuary, Spiritual Black Rose Room e Wabi-Sabi Mirrors Room. Sono varianti selezionabili delle rispettive stanze base. Fonti: schermate fornite e regolamento locale Duel: Kami, pagine 16 e 20.
+
+Le stanze iniziano integre/ricostruite, con token di attivazione. Il token mostra il retro usato dopo l'attivazione. Completata l'Instabilità, vengono assegnate le ricompense, la stanza passa al lato distrutto, il token scompare e non può più essere attivata, neppure tramite riattivazione forzata. Il campo condiviso `flipped` continua a indicare il completamento della stanza: usare `is_rebuilt()` e `is_wrecked()` per distinguere il significato fisico dei lati. Il percorso storico `assets/rooms/rebuilt/` contiene quindi i retro distrutti delle stanze Kami.
+
+Sono integrate 28 immagini PNG ad alta risoluzione con trasparenza: sette stanze integre, sette retro distrutti e quattordici facce dei token. Provenienza, riepilogo dei prompt, dimensioni e SHA-256 sono in `assets/rooms/kami_generation.json`. Le coordinate dei cubi sono registrate in `data/room_art_sockets.json` e verificate nel rendering reale di Godot. Il database autorevole rimane `data/rooms.json`.
+
+Effetti: Garden pesca dal Grimorio; Throne scarta fino a due magie per altrettanto Potere; Oni converte un'Instabilità; Satori infligge un danno a un modello entro due stanze e permette di spostarlo; Shinto cura due e consente di scartare un Persistente assegnato non-Forgotten; Spiritual Black Rose richiede il pagamento completo di due Potere e due carte per pescare una Forgotten. Wabi-Sabi attiva un'altra stanza ammissibile, anche già usata, preservandone lo stato del token ed escludendo Black Rose e se stessa. Le presentazioni e il log mostrano il token con l'effetto effettivo.
+
+Verifiche Godot 4.7.2 completate: `docs/handoff-2026-10-18/checks/kami_rooms.gd` (163 asserzioni), regressioni stanze alternative (143 controlli) e `shugendo.gd` (154 asserzioni): 460 verifiche senza fallimenti. Inclusi caricamento delle 28 texture, ciclo di vita, effetti, ricompense e trasferimento dello stato mediante snapshot. JSON e `git diff --check` verificati. L'import editor segnala soltanto un problema di salvataggio delle impostazioni dell'editor nell'ambiente di lavoro; nessun errore di parsing degli script nei test.
+
+Il controllo grafico è riproducibile con `docs/handoff-2026-10-18/checks/kami_rooms_visual.gd` usando il renderer Compatibility. Le tre schermate sono in `../build-user-data/kami_rooms_intact.png`, `kami_rooms_used.png` e `kami_rooms_wrecked.png`. I log dei test sono nella stessa cartella, con prefisso `kami_`.
+
+Non è stato eseguito un nuovo export/pubblicazione Web né una partita completa su due browser. Per provare queste modifiche online occorre prima riesportare il progetto. Nessun commit; preservate le modifiche preesistenti.
+
+# 17 novembre — Shugendō e materiali di Duel: Kami
+
+Shugendō è selezionabile nel setup. Onmyōji e Shoei contengono sei magie diverse ciascuno. La Libreria usa tre copie di ogni magia. Le quattro Forgotten entrano nel mazzo Forgotten e le due magie personali restano associate ai rispettivi maghi. Le sette evocazioni comprendono cinque Equipment ordinari da tre copie, Kusanagi-no-Tsurugi e Mononoke.
+
+I dati sono in `data/school_specializations_v19.json`, `data/spells.json` e `data/evocations.json`. Le fonti illustrate sono in `../materials/kami`. Il regolamento inglese di Duel: Kami descrive Repeat, Restore e i Persistent a pagina 23 e l’integrazione in Rebirth a pagina 27.
+
+Per verificare la scuola dopo un trasferimento, importare il progetto con Godot e lanciare gli script headless `docs/handoff-2026-10-18/checks/shugendo.gd` e `docs/handoff-2026-10-18/checks/kami_mages.gd`. Il primo verifica anche i bersagli di Mononoke, i quattro segnalini di Kodama e il costo di Repeat.
+
 # 16 novembre — Local, Solo e Avatar
 
 Local configura il mago del giocatore, da uno a cinque maghi rivali e un Avatar facoltativo entro il limite di sei posti. Con Avatar si possono scegliere anche zero rivali. Il giocatore al dispositivo prende le decisioni dei maghi. Solo avvia un mago contro Possessed e ha un selettore di stanze alternative indipendente da Local. Possessed è disponibile nel catalogo ordinario, anche per l'estrazione casuale.

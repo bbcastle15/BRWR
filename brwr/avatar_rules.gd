@@ -64,6 +64,8 @@ static func setup(game) -> void:
 		game.spell_database.spells[card.id] = card
 		state.decks[int(entry.moon)].append(card)
 	for deck in state.decks.values(): game.shuffle_with_rng(deck)
+	if id == "anubis":
+		game.forgotten_deck = game.forgotten_deck.filter(func(card): return card.id != "wrath_of_the_jackal_god")
 	# Replace the Event DB/decks, rather than mixing Avatar and ordinary Events.
 	game.event_database.load_database(EVENTS)
 	game.create_event_decks()
@@ -133,6 +135,7 @@ static func _metric(game, option: Dictionary, criterion: String, origin: String)
 		"most_black_rose_damage": return ev.damage_cubes.count(-1) if ev != null else mage.get_damage_from(-1)
 		"most_power": return game.players[index].power
 		"most_trophies": return game.players[index].trophies.size()
+		"most_solved_quests": return game.players[index].completed_quests.filter(func(q): return q.is_solved()).size()
 	return 0
 
 static func rank(game, options: Array, criteria: Array, origin: String = "") -> Array:

@@ -1429,5 +1429,254 @@
       }
     ],
     "source": "Codex Arcanum p.68; Magister pp.8–10; FAQ Eracleto setup"
+  },
+  {
+    "id": "gohei",
+    "name": "Gohei",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "name": "Spiritual Blow",
+        "id": "spiritual_blow",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_attack",
+            "optional": true,
+            "range": 1
+          }
+        ]
+      }
+    ],
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "kagura_suzu",
+    "name": "Kagura Suzu",
+    "archetype": "equipment",
+    "health": 2,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "name": "Sacred Dance",
+        "id": "sacred_dance",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "self_room_effect",
+            "effects": [
+              {
+                "type": "choose_one",
+                "choice_key": "kami_branch",
+                "prompt": "Choose an Effect.",
+                "options": [
+                  {
+                    "id": "0",
+                    "label": "Place 1 Instability",
+                    "effects": [
+                      {
+                        "type": "place_instability",
+                        "amount": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "1",
+                    "label": "Convert 1 Instability",
+                    "effects": [
+                      {
+                        "type": "convert_instability",
+                        "amount": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "ofuda",
+    "name": "Ofuda",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "immune_room_damage"
+      },
+      {
+        "type": "equipment_action",
+        "name": "Cleanse",
+        "id": "cleanse",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "kami_cleanse",
+            "self_only": false,
+            "effects": [
+              {
+                "type": "independent_target",
+                "target": "model",
+                "range": 2,
+                "effects": [
+                  {
+                    "type": "damage",
+                    "amount": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "omamori",
+    "name": "Omamori",
+    "archetype": "equipment",
+    "health": 4,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "immune_room_damage"
+      },
+      {
+        "type": "redirect_owner_damage",
+        "amount": 1,
+        "mandatory": true
+      }
+    ],
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "shakujo",
+    "name": "Shakujo",
+    "archetype": "equipment",
+    "health": 3,
+    "strength": 0,
+    "speed": 0,
+    "copies": 3,
+    "abilities": [
+      {
+        "type": "equipment_action",
+        "name": "Toll",
+        "id": "toll",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_attack",
+            "optional": true,
+            "range": 0,
+            "effects": [
+              {
+                "type": "move_target_up_to",
+                "distance": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "kusanagi_no_tsurugi",
+    "name": "Kusanagi-no-Tsurugi",
+    "archetype": "equipment",
+    "health": 5,
+    "strength": 0,
+    "speed": 0,
+    "copies": 1,
+    "abilities": [
+      {
+        "type": "immune_room_damage"
+      },
+      {
+        "type": "equipment_action",
+        "name": "Solar Slash",
+        "id": "solar_slash",
+        "effects": [
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_move",
+            "distance": 1
+          },
+          {
+            "type": "mage_attack",
+            "optional": true,
+            "range": 0,
+            "strength_bonus": 2
+          },
+          {
+            "type": "damage_source_evocation",
+            "black_rose": true,
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "forgotten": true,
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "mononoke",
+    "opponent_target_from_room": "black_rose",
+    "name": "Mononoke",
+    "archetype": "demon",
+    "health": 6,
+    "strength": 3,
+    "speed": 0,
+    "copies": 1,
+    "abilities": [
+      {
+        "type": "attack_room",
+        "range": 2,
+        "same_room_bonus": 2
+      }
+    ],
+    "forgotten": true,
+    "source": "Duel: Kami"
   }
 ]

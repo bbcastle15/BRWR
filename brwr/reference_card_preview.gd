@@ -308,6 +308,9 @@ func show_school_library(school_id: String) -> void:
 	var spells: Array = game.spell_database.get_school_spells(school_id).filter(func(spell): return not spell.personal and not spell.forgotten and spell.avatar_command.is_empty())
 	spells.sort_custom(func(a, b): return str(a.card_name).naturalnocasecmp_to(str(b.card_name)) < 0)
 	var cards: Array = [{"id": school_id, "name": game.get_school_display_name(school_id), "card_kind": "schools"}]
+	var specialization: String = str(game.school_specialization_database.get(school_id, {}).get("specialization_card", ""))
+	if not specialization.is_empty():
+		cards.append({"id": specialization, "name": "Starting Grimoires", "card_kind": "schools"})
 	for spell in spells:
 		cards.append({"id": spell.id, "name": spell.card_name, "card_kind": "spells"})
 	show_reference_pile("schools", cards, "Available " + game.get_school_display_name(school_id) + " spells")

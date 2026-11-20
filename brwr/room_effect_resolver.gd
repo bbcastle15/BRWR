@@ -2748,6 +2748,8 @@ func _resolve_copy_room_effect(
 		"rebuilt_effects",
 		[]
 	)
+	if copied_room.is_wrecked():
+		return true
 
 
 	if copied_effects.is_empty():

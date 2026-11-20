@@ -1,0 +1,294 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "date": "2026-11-19",
+  "source": "materials/kami/rooms; Duel_Kami_ENG.pdf pages 16 and 20",
+  "layout_note": "The legacy rebuilt directory stores the flipped/completed face. For Kami this is the wrecked face, not an intact room.",
+  "prompt_summary": {
+    "intact": "Faithfully redraw the supplied room photograph as a high-resolution regular flat-top hexagon, transparent exterior, polished painted top-down art matching Satori Arena. Preserve scene, English title and colored room emblem. Remove white template outlines. Exact instability socket count: Garden4, Sanctuary5, Arena/Altar/Mirrors6, Throne/BlackRose10. No baked effect panel; use separate token.",
+    "wrecked": "Faithfully redraw supplied wrecked back photograph in the same polished style and hexagonal geometry. Preserve English title and room emblem. Broken scenery, no instability sockets, no effect panel, no reward shields. Transparent exterior.",
+    "available": "Recreate supplied activation-token front sharply with exact English effect text and pictograms, colored scroll ends and three reward shields. Instability is a solid black circle, Power an outlined rose. Transparent outside.",
+    "used": "Reconstruct token back using supplied Spiritual Black Rose used token as reference. Dark scroll, English room name and emblem, large red X instead of effect, same three reward shields. Transparent outside."
+  },
+  "assets": [
+    {
+      "room": "cherry_blossom_garden",
+      "face": "intact",
+      "path": "assets/rooms/cherry_blossom_garden.png",
+      "width": 1346,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "723915b0906780869cf88a5a3a01e1cf92634e1382dff16fb0240f62368dcdf7",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-c667a28a-52c2-4fe4-8673-94cdaf1ffd46.png"
+    },
+    {
+      "room": "cherry_blossom_garden",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/cherry_blossom_garden.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "d78aff462341e58644028200ae2836bfa8f34dff0ceb98023a9ea0df078ad574",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-1c3e9a10-3b71-4278-a331-984b12344830.png"
+    },
+    {
+      "room": "cherry_blossom_garden",
+      "face": "available",
+      "path": "assets/rooms/tokens/cherry_blossom_garden_available.png",
+      "width": 1828,
+      "height": 860,
+      "rgba": true,
+      "sha256": "c8d12ed6a4e83cde9ee7f0b62fe98a1a9934c88aaf13952d37687efc9c8ec1f4",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-5ee32f95-87ea-4fb0-ac31-313aa8ed5415.png"
+    },
+    {
+      "room": "cherry_blossom_garden",
+      "face": "used",
+      "path": "assets/rooms/tokens/cherry_blossom_garden_used.png",
+      "width": 1827,
+      "height": 861,
+      "rgba": true,
+      "sha256": "0810d70c38d7aa5e44a149484f1dc1a2f310e319506f6b421443e3e818c1c1d3",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b5b5ad08-cabf-40cd-8832-91aa51f41cbb.png"
+    },
+    {
+      "room": "kami_throne_room",
+      "face": "intact",
+      "path": "assets/rooms/kami_throne_room.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "93ed8fc929deb6d5e58e637ed2fb52b8505ca0cfa05705fc5f10e6fdbc662159",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-9dbc301e-7be7-40fc-a956-9450261b8346.png"
+    },
+    {
+      "room": "kami_throne_room",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/kami_throne_room.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "b37c68d71cbc804b2b06b9661b676ec1c577e3c55e4b74df43b30c5589aca897",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-36a69b8d-2fb3-4b02-8e92-86cf4fd477d4.png"
+    },
+    {
+      "room": "kami_throne_room",
+      "face": "available",
+      "path": "assets/rooms/tokens/kami_throne_room_available.png",
+      "width": 1752,
+      "height": 897,
+      "rgba": true,
+      "sha256": "c97bb5a00183ad4813133402fd316d46a33e47bbd480cc80342080bc956b2487",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-385dfe69-67ef-419f-a741-d6e2beab3cea.png"
+    },
+    {
+      "room": "kami_throne_room",
+      "face": "used",
+      "path": "assets/rooms/tokens/kami_throne_room_used.png",
+      "width": 1798,
+      "height": 875,
+      "rgba": true,
+      "sha256": "ce2a3f6b3416dd185ac3e2c29912e00ee83463721327a08a334be89a6a6b82b2",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-47970735-7336-42ff-b6e9-6ddb240cac55.png"
+    },
+    {
+      "room": "oni_sacrificial_altar",
+      "face": "intact",
+      "path": "assets/rooms/oni_sacrificial_altar.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "a4d9a56b8ab0c6f8ecc1d29c76684022eae3751c655d1493d7ef3068ca68c4b3",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b7178176-6610-4270-a0bf-879a5ef1bb2f.png"
+    },
+    {
+      "room": "oni_sacrificial_altar",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/oni_sacrificial_altar.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "c483b789b713175e3f424545a5cd5d2c4019222216466b4d39d0d5b849c2ac55",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-688a8c02-c968-4f2e-b22b-a5aa3391148a.png"
+    },
+    {
+      "room": "oni_sacrificial_altar",
+      "face": "available",
+      "path": "assets/rooms/tokens/oni_sacrificial_altar_available.png",
+      "width": 1819,
+      "height": 865,
+      "rgba": true,
+      "sha256": "2f9bb10b08803292a8f73ba9fd9753ea104aa229896a7bb5174692163ef0d761",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-20cb3ad3-a374-42d7-ba28-02429a3367c8.png"
+    },
+    {
+      "room": "oni_sacrificial_altar",
+      "face": "used",
+      "path": "assets/rooms/tokens/oni_sacrificial_altar_used.png",
+      "width": 1817,
+      "height": 866,
+      "rgba": true,
+      "sha256": "e5e25c809291e3370180d229069bf14ab1f9da4bae8363c4fb31c00ddb4874e0",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-75cebc14-d619-4c4f-b7c2-870e41e64a1f.png"
+    },
+    {
+      "room": "satori_arena",
+      "face": "intact",
+      "path": "assets/rooms/satori_arena.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "4d95b6da62dfb9f59cd66854ced464c31265959264f80f07b88e2a6f4b0734a4",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-124e2020-e2b0-4328-9c80-4b7c53f00caa.png"
+    },
+    {
+      "room": "satori_arena",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/satori_arena.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "613aebd066a3f92caed1f796588a600159d248aaa38c445cf10bc56f7638055b",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-b3ca93d7-fbae-4330-bc03-48f483cd84de.png"
+    },
+    {
+      "room": "satori_arena",
+      "face": "available",
+      "path": "assets/rooms/tokens/satori_arena_available.png",
+      "width": 1792,
+      "height": 878,
+      "rgba": true,
+      "sha256": "cdb98c4ae11d4c8ec2256ab5979730211c75a489fe3cfdc0667443e80c708c42",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-7ded2105-0968-4e07-9822-a620beee53ec.png"
+    },
+    {
+      "room": "satori_arena",
+      "face": "used",
+      "path": "assets/rooms/tokens/satori_arena_used.png",
+      "width": 1793,
+      "height": 877,
+      "rgba": true,
+      "sha256": "0b27c3ee6e1984b9c3e35addb3e1aacfb10e0b0273835b9913e4cc711980d290",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-772ca117-a777-4050-a4e1-3f5dca10126f.png"
+    },
+    {
+      "room": "shinto_sanctuary",
+      "face": "intact",
+      "path": "assets/rooms/shinto_sanctuary.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "d1d5f281d4d792fc0eaae5cb8aa126fc3a38e27b433919864b891317c8505a7b",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-f98d4f6b-3ff4-42ab-9689-77dc3784d82e.png"
+    },
+    {
+      "room": "shinto_sanctuary",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/shinto_sanctuary.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "a8d191d41df88915a8a5b4767d0b32227be487cc7964a05840e39d54b7c64025",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-0ed6c896-6f47-4e62-8914-42d49b3cc109.png"
+    },
+    {
+      "room": "shinto_sanctuary",
+      "face": "available",
+      "path": "assets/rooms/tokens/shinto_sanctuary_available.png",
+      "width": 1819,
+      "height": 865,
+      "rgba": true,
+      "sha256": "9f243ca7c8181f9da4cf60df6628f8f3dfea1a917fd24ebee5bbe85fd4fe6672",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-aae93d2a-20d5-43e0-bc3d-4aae27ed5135.png"
+    },
+    {
+      "room": "shinto_sanctuary",
+      "face": "used",
+      "path": "assets/rooms/tokens/shinto_sanctuary_used.png",
+      "width": 1821,
+      "height": 864,
+      "rgba": true,
+      "sha256": "ac2d57bb7b6ccc69ee38b3bc2d85dc42396e0312bceb2f7f8b79270db6d7310a",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-e92a0a70-037e-422d-a07f-1cfda04240ac.png"
+    },
+    {
+      "room": "spiritual_black_rose_room",
+      "face": "intact",
+      "path": "assets/rooms/spiritual_black_rose_room.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "69326bc402fc92ae3bf28e6f22eb9b8a0ae435711d1b58b9f98aac7b87715171",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-81f4ca42-57b5-4798-b28c-002ca1c6b9d9.png"
+    },
+    {
+      "room": "spiritual_black_rose_room",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/spiritual_black_rose_room.png",
+      "width": 1347,
+      "height": 1167,
+      "rgba": true,
+      "sha256": "136f89b80a46ae953775ffa22f5190f89f6e924633fc893b2ee747f0b4a5204a",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-a12e7f6f-0183-4de3-b1c1-7de5ef8782f7.png"
+    },
+    {
+      "room": "spiritual_black_rose_room",
+      "face": "available",
+      "path": "assets/rooms/tokens/spiritual_black_rose_room_available.png",
+      "width": 1897,
+      "height": 829,
+      "rgba": true,
+      "sha256": "8581bca4cf67c2bc405e1874447140a7a8e7e7a03dfa737912eddb864ff77abf",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-129fac67-f2e8-48a3-936e-ab25f72594d6.png"
+    },
+    {
+      "room": "spiritual_black_rose_room",
+      "face": "used",
+      "path": "assets/rooms/tokens/spiritual_black_rose_room_used.png",
+      "width": 1829,
+      "height": 860,
+      "rgba": true,
+      "sha256": "0e25045b8229a1269d7160aed79b6d210b1ed8db3504bba5e74525d54d0ed216",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-03b423b5-7b15-403d-92dd-bd9c6a5ca3bc.png"
+    },
+    {
+      "room": "wabi_sabi_mirrors_room",
+      "face": "intact",
+      "path": "assets/rooms/wabi_sabi_mirrors_room.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "c296e6dada66c3056b6fc20503270118e4d1ebd93af10137d578ba77bb940804",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-2f3d57a5-4b30-472c-ae83-241b1ddb79be.png"
+    },
+    {
+      "room": "wabi_sabi_mirrors_room",
+      "face": "wrecked",
+      "path": "assets/rooms/rebuilt/wabi_sabi_mirrors_room.png",
+      "width": 1347,
+      "height": 1168,
+      "rgba": true,
+      "sha256": "1610c8bc8d491904f425eeb4444abf0b0d612ecc3c2fcd806d5e32396727bcfc",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-7f718a13-10de-430e-a087-559f76c08dfe.png"
+    },
+    {
+      "room": "wabi_sabi_mirrors_room",
+      "face": "available",
+      "path": "assets/rooms/tokens/wabi_sabi_mirrors_room_available.png",
+      "width": 1798,
+      "height": 875,
+      "rgba": true,
+      "sha256": "840aca5a189f811deb362f550f688fe38ecfc9960be4d99c90c5cb56086b9953",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-1f44c3b3-8ed2-4a26-8a98-0f7ab4d8baf2.png"
+    },
+    {
+      "room": "wabi_sabi_mirrors_room",
+      "face": "used",
+      "path": "assets/rooms/tokens/wabi_sabi_mirrors_room_used.png",
+      "width": 1798,
+      "height": 875,
+      "rgba": true,
+      "sha256": "14638a478ced61ad2089c6f329604c5633a159bd364e14e8688bb3be71d6f102",
+      "generated_source": "C:\\Users\\bigba\\.codex\\generated_images\\01a15366-4fbe-77e1-a417-7b1c320ab75a\\exec-856edac5-5b1d-4e2b-ba99-2fd88908eae6.png"
+    }
+  ]
+}

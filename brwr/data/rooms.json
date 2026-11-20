@@ -1859,5 +1859,271 @@
         ]
       }
     ]
+  },
+  {
+    "id": "cherry_blossom_garden",
+    "name": "Cherry Blossom Garden",
+    "color": "green",
+    "core": false,
+    "fixed": false,
+    "replaces": "garden",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 4,
+    "completion_rewards": [
+      2,
+      1,
+      0
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/cherry_blossom_garden_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Self]: Draw 1 [Spell].",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "draw_grimoire",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "kami_throne_room",
+    "name": "Kami' Throne Room",
+    "color": "purple",
+    "core": false,
+    "fixed": false,
+    "replaces": "throne",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/kami_throne_room_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Self]: Discard up to 2 [Spell]. Gain [Power] equal to the [Spell] discarded.",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_discard_for_power"
+      }
+    ]
+  },
+  {
+    "id": "oni_sacrificial_altar",
+    "name": "Oni Sacrificial Altar",
+    "color": "grey",
+    "core": false,
+    "fixed": false,
+    "replaces": "sacrificial_altar",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/oni_sacrificial_altar_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Room *]: Convert 1 [Instability].",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "room",
+        "range": "*",
+        "effects": [
+          {
+            "type": "convert_instability",
+            "amount": 1,
+            "shared": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "satori_arena",
+    "name": "Satori Arena",
+    "color": "red",
+    "core": false,
+    "fixed": false,
+    "replaces": "arena",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/satori_arena_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Model 2]: Inflict 1 [Damage]. You may Move the target up to 1.",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "model",
+        "range": 2,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "shared": true
+          },
+          {
+            "type": "room_move",
+            "distance": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shinto_sanctuary",
+    "name": "Shinto Sanctuary",
+    "color": "yellow",
+    "core": false,
+    "fixed": false,
+    "replaces": "sanctuary",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 5,
+    "completion_rewards": [
+      3,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/shinto_santuary_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Special]: Heal 2 [Damage] on yourself, you may discard an assigned [Persistent] that is not assigned with a Forgotten Spell.",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_target",
+        "target": "self",
+        "effects": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "shared": true
+          }
+        ]
+      },
+      {
+        "type": "room_discard_persistent"
+      }
+    ]
+  },
+  {
+    "id": "spiritual_black_rose_room",
+    "name": "Spiritual Black Rose Room",
+    "color": "black",
+    "core": false,
+    "fixed": false,
+    "replaces": "black_rose",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 10,
+    "completion_rewards": [
+      6,
+      3,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/spiritual_black_rose_room_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Self]: Lose 2 [Power]. Discard 2 [Spell]. If you do: draw 1 Forgotten [Spell].",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_payment",
+        "power": 2,
+        "hand": 2,
+        "effects": [
+          {
+            "type": "draw_forgotten",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wabi_sabi_mirrors_room",
+    "name": "Wabi-Sabi Mirrors Room",
+    "color": "blue",
+    "core": false,
+    "fixed": false,
+    "replaces": "mirrors_room",
+    "playable": true,
+    "expansion": "kami",
+    "wrecks_on_completion": true,
+    "instability_resistance": 6,
+    "completion_rewards": [
+      4,
+      2,
+      1
+    ],
+    "source": {
+      "document": "Black Rose Wars Duel: Kami",
+      "rulebook": "materials/official_missing/Duel_Kami_ENG.pdf",
+      "room_rules_page": 20,
+      "cleanup_page": 16,
+      "token": "materials/kami/rooms/room_token/wabi_sabi_mirrors_room_front.png"
+    },
+    "destroyed_text": "Wrecked: no Room Effect. This Room cannot be activated or receive Instability.",
+    "rebuilt_text": "[Room *]: You cannot target the [Black Rose Room]. Activate the Room, even if used, without flipping its Activation Token.",
+    "destroyed_effects": [],
+    "rebuilt_effects": [
+      {
+        "type": "room_activate_other"
+      }
+    ]
   }
 ]

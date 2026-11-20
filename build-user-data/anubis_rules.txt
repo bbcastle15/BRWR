@@ -1,0 +1,3174 @@
+PAGE 1
+Last Dynasty
+PAGE 2
+Credits
+Project Manager and Art Director: Andrea Colletti
+Game Designer: Marco Montanaro
+Additional Game Design and Development: Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: Paolo Scippo
+Graphic Design: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: Cristian Casado Otazu
+Lead 3D Sculptor: Fernando Armentano
+3D Sculptor: Tommaso Incecchi
+Translation: Elettra Nuzzo
+Editing: Myles Schaller
+Production: Fabio Braghettoni, Paolo Scippo
+Playtest: Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. deﬁ  ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+ContentsContents
+Credits
+Credits
+Project Manager and Art Director
+: Andrea Colletti
+Game Designer
+: Marco Montanaro
+Additional Game Design and Development: 
+Diego Fonseca, Leonardo Romano, Michele 
+Morosini
+Graphic Director: 
+Paolo Scippo
+Graphic Design
+: Diana Maranzano, Diego Fonseca, Elisa Fiore
+Concept Artists: 
+Giovanni Pirrotta, Eleonora Lisi, Domenico Cava
+Environment Artist: 
+Cristian Casado Otazu
+Lead 3D Sculptor: 
+Fernando Armentano
+3D Sculptor: 
+Tommaso Incecchi
+Translation:
+ Elettra Nuzzo
+Editing:
+ Myles Schaller
+Production:
+ Fabio Braghettoni, Paolo Scippo
+Playtest:
+ Alberto Grillo, Alberto Sandron, Alessandro Angelini, Alessandro Brogi, Chiara 
+Spagnoletto, Daniele Samele, Daniele Vendittozzi, Federico Morara, Flavio Galmacci, 
+Francesco Pica, Francesco Red Raven, Francesco Xunil83, Francesco Rotolo, FrankZappa, 
+Gabriele Macchioro, Gianni Punzo, Giovanni Milani, Lorenzo Meucci, Luca Benedetti, 
+Luca Francescangeli, Luca Perra, Marco G. deﬁ  ar, Maurizio Salvi, Paolo guerrieronuvola, 
+Paolo Bianchi, Pasquale Carotenuto
+2
+PAGE 3
+Contents
+Game Components ..............................................4
+Avatar Components ............................................................6
+Models ..................................................................................7
+Avatar Card Anatomy .................................................................................8
+Anubis Setup .....................................................................................................8
+Avatar ..................................................................8
+Avatar Skills — Anubis ........................................................9
+Anubis Priority .................................................................................................9
+Legendary Scenario: Damned Souls ....................10
+Additional Setup .................................................................10
+Scenario Rules .....................................................................10
+Honorable Mention ...........................................................10
+Anubis Priority ...............................................................................................12
+Contents
+Contents
+Game Components
+ ..............................................
+4
+Avatar Components
+ ............................................................
+6
+Models
+ ..................................................................................
+7
+Avatar Card Anatomy
+ .................................................................................
+8
+Anubis Setup
+ .....................................................................................................
+8
+Avatar
+ ..................................................................
+8
+Avatar Skills — Anubis
+ ........................................................
+9
+Anubis Priority
+ .................................................................................................
+9
+Legendary Scenario: Damned Souls
+ ....................
+10
+Additional Setup
+ .................................................................
+10
+Scenario Rules
+ .....................................................................
+10
+Honorable Mention
+ ...........................................................
+10
+Anubis Priority
+ ...............................................................................................
+12
+3
+PAGE 4
+During step 9 of the Setup you can replace 
+one of the Schools of Magic present in the 
+core game with the Heka School.
+Game Components
+
+2 MAGE CARDS
+
+36 HEKA SPELL  
+CARDS
+ 
+
+Sun of Amon-Ra
+Sun of Amon-Ra
+  
+   
+Sun of Amon-Ra
+Sun of Amon-Ra
+1 SCHOOL REFERENCE 
+CARD
+Imhotep and Saba can be chosen as Mages 
+during step 8  of the Setup described in the 
+core game rulebook.
+
+3
+
+6
+
+6
+
+6
+
+3
+
+6
+
+6
+
+6
+6 PERSONAL SPELL 
+CARDS
+Light and Shadow
+
+Assign a random Jinx to the target.
+Summon a Pharaoh in a from the target.
+Light and Shadow
+
+Solve 1 of your Active Quests.or
+Assign a random Jinx to a from yourself.
+Assign a random Jinx to a from yourself.
+Light and Shadow
+  
+Assign a random Jinx to the target.
+Summon a Pharaoh in a from the target.
+Light and Shadow
+  
+Solve 1 of your Active Quests.or
+Assign a random Jinx to a from yourself.
+Assign a random Jinx to a from yourself.
+Great Architect
+
+Great Architect
+  
+During 
+step
+ 9
+ of the 
+Setup
+ you can replace 
+one of the Schools of Magic present in the 
+core game with the Heka School.
+Game Components
+Game Components
+I
+I
+I
+I
+I
+I
+MHOTEP
+MHOTEP
+MHOTEP
+MHOTEP
+MHOTEP
+MHOTEP
+
+
+ 11
+11
+11
+
+
+
+
+
+
+
+
+
+7
+7
+7
+7
+7
+7
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+2 MAGE CARDS
+MHOTEP
+MHOTEP
+MHOTEP
+ 
+
+
+ 2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+S
+S
+S
+S
+S
+S
+S
+S
+S
+S
+S
+S
+ABA
+ABA
+ABA
+ABA
+ABA
+ABA
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+
+2
+2
+2
+ 10
+10
+10
+10
+10
+10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8
+8
+8
+8
+8
+8
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+36 HEKA SPELL  
+CARDS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Place
+
+
+
+
+
+
+Place
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+Summon 
+
+
+
+Summon 
+
+
+
+
+
+
+a 
+
+
+
+
+
+
+a 
+
+
+
+Pharaoh
+
+
+
+Pharaoh
+
+
+
+
+
+
+Pharaoh
+
+
+
+.
+
+
+
+Sun of Amon-Ra
+Sun of Amon-Ra
+Sun of Amon-Ra
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Inﬂ  ict 2
+
+
+
+Inﬂ  ict 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+Convert
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+or
+
+
+
+One of your Evocations with a 
+One of your Evocations with a 
+One of your Evocations with a 
+
+
+
+One of your Evocations with a 
+
+
+
+
+ value of 
+
+
+
+ value of 
+
+
+
+
+
+
+3
+ 
+
+
+ or less in a 
+
+
+
+ or less in a 
+
+
+
+
+
+from the target 
+
+
+
+from the target 
+
+
+
+from the target 
+
+
+
+from the target 
+
+
+
+activates
+
+
+
+activates
+
+
+
+.
+
+
+ 
+
+ 
+Sun of Amon-Ra
+
+
+1 SCHOOL REFERENCE  
+CARD
+CARD
+Imhotep and Saba 
+ can be chosen as Mages 
+during 
+step
+ 8
+  of the 
+Setup
+ described in the 
+core game rulebook.
+
+
+
+Some Spells of this school assign 
+Some Spells of this school assign 
+Jinx 
+Jinx 
+Cards
+Cards
+ to the target Mage. These cards are 
+ to the target Mage. These cards are 
+to be taken from the corresponding deck 
+to be taken from the corresponding deck 
+and placed next to the target Mage's Sheet.
+and placed next to the target Mage's Sheet.
+Each Jinx Card inﬂ  icts a negative Effect on the 
+Each Jinx Card inﬂ  icts a negative Effect on the 
+
+
+
+
+
+Each Jinx Card inﬂ  icts a negative Effect on the 
+
+
+
+
+
+Mage to whom it is assigned, and indicates 
+Mage to whom it is assigned, and indicates 
+
+
+
+
+
+Mage to whom it is assigned, and indicates 
+
+
+
+
+
+a Task that the Mage can complete (as with 
+a Task that the Mage can complete (as with 
+
+
+
+
+
+a Task that the Mage can complete (as with 
+
+
+
+
+
+Quest Cards) in order to place one of their 
+Quest Cards) in order to place one of their 
+
+
+
+
+
+Quest Cards) in order to place one of their 
+
+
+
+
+
+own 
+own 
+
+
+
+
+
+own 
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+ on one of the dedicated slots. When 
+
+
+
+
+
+all the slots on the Jinx Card are occupied by 
+all the slots on the Jinx Card are occupied by 
+
+
+
+
+
+all the slots on the Jinx Card are occupied by 
+
+
+
+
+
+a 
+a 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+, it is 
+
+
+
+
+
+
+
+
+
+
+removed
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+Cards but 
+Cards but 
+
+
+
+
+
+Cards but 
+
+
+
+
+
+
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+name.
+name.
+
+
+
+
+
+name.
+
+
+
+
+
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+assigned instead.
+assigned instead.
+
+
+
+
+
+assigned instead.
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+assigned.
+assigned.
+Heka
+Heka
+Heka
+Heka
+Heka
+
+
+3
+3
+
+
+
+
+
+to be taken from the corresponding deck 
+to be taken from the corresponding deck 
+and placed next to the target Mage's Sheet.
+and placed next to the target Mage's Sheet.
+
+
+
+
+
+Each Jinx Card inﬂ  icts a negative Effect on the 
+
+
+
+
+
+
+
+
+
+
+Mage to whom it is assigned, and indicates 
+
+
+
+
+
+
+
+
+
+
+a Task that the Mage can complete (as with 
+
+
+
+
+
+
+
+
+
+
+Quest Cards) in order to place one of their 
+
+
+
+
+
+
+
+
+
+
+ on one of the dedicated slots. When 
+
+
+
+
+
+
+
+
+
+
+all the slots on the Jinx Card are occupied by 
+
+
+
+
+
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+Heka
+Heka
+Heka
+Heka
+Heka
+
+
+3
+3
+
+
+
+
+
+
+
+to be taken from the corresponding deck 
+to be taken from the corresponding deck 
+and placed next to the target Mage's Sheet.
+and placed next to the target Mage's Sheet.
+Each Jinx Card inﬂ  icts a negative Effect on the 
+Each Jinx Card inﬂ  icts a negative Effect on the 
+
+
+
+
+
+Each Jinx Card inﬂ  icts a negative Effect on the 
+
+
+
+
+
+Mage to whom it is assigned, and indicates 
+Mage to whom it is assigned, and indicates 
+
+
+
+
+
+Mage to whom it is assigned, and indicates 
+
+
+
+
+
+a Task that the Mage can complete (as with 
+a Task that the Mage can complete (as with 
+
+
+
+
+
+a Task that the Mage can complete (as with 
+
+
+
+
+
+Quest Cards) in order to place one of their 
+Quest Cards) in order to place one of their 
+
+
+
+
+
+Quest Cards) in order to place one of their 
+
+
+
+
+
+ on one of the dedicated slots. When 
+ on one of the dedicated slots. When 
+
+
+
+
+
+ on one of the dedicated slots. When 
+
+
+
+
+
+all the slots on the Jinx Card are occupied by 
+all the slots on the Jinx Card are occupied by 
+
+
+
+
+
+all the slots on the Jinx Card are occupied by 
+
+
+
+
+
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+Heka
+Heka
+Heka
+Heka
+Heka
+
+
+6
+6
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+A Mage may be assigned any number of Jinx 
+
+
+
+
+
+no more than one with the same 
+no more than one with the same 
+
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+ If a second Jinx Card with the same 
+ If a second Jinx Card with the same 
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+Heka
+Heka
+Heka
+Heka
+Heka
+
+
+6
+6
+
+
+ 
+
+6
+6
+Revenants  
+Revenants  
+Revenants  
+Revenants  
+
+
+
+
+
+Revenants  
+
+
+
+
+
+no more than one with the same 
+no more than one with the same 
+Revenants  
+no more than one with the same 
+no more than one with the same 
+
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+Revenants  
+
+
+
+
+no more than one with the same 
+
+
+
+
+
+ If a second Jinx Card with the same 
+ If a second Jinx Card with the same 
+Revenants  
+ If a second Jinx Card with the same 
+ If a second Jinx Card with the same 
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+Revenants  
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+Revenants  
+    
+   
+Sun of Amon-Ra
+Sun of Amon-Ra
+Sun of Amon-Ra
+
+
+
+
+
+Sun of Amon-Ra
+
+
+
+
+
+ If a second Jinx Card with the same 
+ If a second Jinx Card with the same 
+Sun of Amon-Ra
+ If a second Jinx Card with the same 
+ If a second Jinx Card with the same 
+
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+Sun of Amon-Ra
+
+
+
+
+ If a second Jinx Card with the same 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+Sun of Amon-Ra
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+Sun of Amon-Ra
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+      
+      
+      
+Sun of Amon-Ra
+      
+Sun of Amon-Ra
+Cursed Hieroglyphics
+Cursed Hieroglyphics
+Cursed Hieroglyphics
+Cursed Hieroglyphics
+
+
+
+
+
+Cursed Hieroglyphics
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+Cursed Hieroglyphics
+name is to be assigned to a Mage, it is not 
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+Cursed Hieroglyphics
+
+
+
+
+name is to be assigned to a Mage, it is not 
+
+
+
+
+
+         
+         
+Mummify
+Mummify
+
+
+
+
+
+Mummify
+
+
+
+
+
+Mummify
+Mummify
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+Mummify
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+Mummify
+
+
+
+
+If a Jinx whose corresponding card is not 
+
+
+
+
+
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+Mummify
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+       
+       
+       
+       
+       
+       
+       
+Mummify
+Mummify
+       
+Mummify
+Mummify
+Mummify
+Mummify
+       
+Mummify
+Mummify
+Weighing of Souls
+Weighing of Souls
+Weighing of Souls
+Weighing of Souls
+Weighing of Souls
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+Weighing of Souls
+If a Jinx whose corresponding card is not 
+If a Jinx whose corresponding card is not 
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+Weighing of Souls
+available in the deck is to be assigned, it is not 
+available in the deck is to be assigned, it is not 
+      
+      
+      
+Brazier of Anubis
+Brazier of Anubis
+Brazier of Anubis
+Brazier of Anubis
+Brazier of Anubis
+      
+      
+      
+Moon of Nut
+Moon of Nut
+Moon of Nut
+Moon of Nut
+      
+      
+      
+      
+      
+Sentence  
+Sentence  
+Sentence  
+Sentence  
+Heka
+Heka
+Heka
+Heka
+Heka
+Sentence  
+Heka
+Heka
+Heka
+Heka
+Heka
+
+
+Sentence  
+
+
+Sentence  
+    
+   
+Branding
+Branding
+
+
+Branding
+
+
+ 
+
+Branding
+
+
+        
+       
+       
+       
+       
+Misfortune
+Misfortune
+
+
+Misfortune
+
+
+6
+6
+Misfortune
+6
+6
+ 6
+6
+Misfortune
+6
+6
+        
+       
+       
+       
+       
+Plague of the Nile
+Plague of the Nile
+Plague of the Nile
+6
+6
+Plague of the Nile
+6
+6
+ 6
+6
+Plague of the Nile
+6
+6
+        
+       
+       
+       
+       
+Stinging Sand
+Stinging Sand
+Stinging Sand
+      
+      
+      
+Sarcophagus
+      
+      
+      
+Power of the Ankh
+      
+      
+      
+Heka
+Heka
+Heka
+
+3
+
+6
+
+6
+
+6
+Mage to whom it is assigned, and indicates 
+Mage to whom it is assigned, and indicates 
+a Task that the Mage can complete (as with 
+a Task that the Mage can complete (as with 
+Quest Cards) in order to place one of their 
+Quest Cards) in order to place one of their 
+ on one of the dedicated slots. When 
+ on one of the dedicated slots. When 
+all the slots on the Jinx Card are occupied by 
+all the slots on the Jinx Card are occupied by 
+6 PERSONAL SPELL 
+CARDS
+Light and Shadow
+Light and Shadow
+
+
+
+Solve 1 
+of your Active Quests.
+of your Active Quests.
+or
+Assign 
+a random Jinx to a 
+a random Jinx to a 
+
+from yourself.
+from yourself.
+Assign 
+a random Jinx to a 
+a random Jinx to a 
+
+from yourself.
+from yourself.
+
+ a random Jinx to the 
+ in a 
+
+
+
+Light and Shadow
+
+ a random Jinx to the 
+Pharaoh
+Pharaoh
+ in a 
+from the target.
+from the target.
+ a random Jinx to the 
+ a random Jinx to the 
+target.
+Summon 
+a 
+Pharaoh
+Pharaoh
+from the target.
+Light and Shadow
+
+Light and Shadow
+Light and Shadow
+
+ 
+ 
+ a random Jinx to the 
+ a random Jinx to the 
+Great Architect
+Great Architect
+Great Architect
+
+
+
+
+
+Place 1
+
+from the target.
+
+from the target.
+. 
+Activate 
+Activate 
+the
+ target 
+target 
+Room even if 
+Summon 
+Room even if 
+Summon 
+from the target.
+Room even if 
+from the target.
+used
+used
+.
+
+Assign
+ a random Jinx to the 
+
+
+
+
+Great Architect
+
+
+ 
+ 
+Activate 
+the
+target Room even 
+target Room even 
+if 
+used
+. If the target is a 
+rebuilt
+rebuilt
+Light and Shadow
+rebuilt
+Light and Shadow
+Room, 
+gain 1
+
+.
+.
+4
+PAGE 5
+Game ComponentsGame Components
+2 FORGOTTEN 
+SPELL CARDS
+Inverted Pyramid
+ 
+Beast — Forgotten
+Sphynx
+1 3 8BeastForgotten
+Sphynx
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+12 JINX CARDS 3 EVOCATION 
+CARDS
+Add these cards to the Jinx 
+Deck of the core game.
+Add these cards to the 
+Evocation Deck of the core 
+game.
+Undead
+Pharaoh
+212Undead
+Pharaoh
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+2 FORGOTTEN 
+SPELL CARDS
+
+
+
+
+
+
+
+
+
+
+
+
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+Draw 
+and 
+
+
+
+and 
+
+
+
+
+
+
+solve 1
+
+
+
+ Quest of the 
+ Quest of the 
+
+
+
+ Quest of the 
+
+
+
+
+
+
+Third Moon.
+
+
+
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+Keeper of the T omb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Summon 
+
+
+
+Summon 
+
+
+
+
+
+
+Summon 
+
+
+
+Sphynx
+
+
+
+Sphynx
+
+
+
+
+
+
+Sphynx
+
+
+
+.
+
+
+
+It 
+
+
+
+
+
+
+activates
+
+
+
+
+
+
+activates
+
+
+
+
+
+
+activates
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+Inverted Pyramid
+When you are 
+When you are 
+assigned
+ this 
+Jinx and when you 
+Jinx and when you 
+solve
+ a 
+Quest, the 
+Quest, the 
+
+ inﬂ  icts
+2
+ 
+to you.
+Discard 
+Discard 
+this card.
+After you resolve the Effect of a 
+After you resolve the Effect of a 
+After you resolve the Effect of a 
+
+
+ or 
+ or 
+ or 
+
+
+
+
+
+
+ Room, 
+ Room, 
+place 1
+
+ on 
+this card. 
+
+
+Beast — Forgotten
+Beast — Forgotten
+Sphynx
+Sphynx
+Beast — Forgotten
+Beast — Forgotten
+Sphynx
+Sphynx
+Beast — Forgotten
+Beast — Forgotten
+Sphynx
+Sphynx
+
+1
+ 
+3
+ 
+8
+When another Mage 
+When another Mage 
+solves
+ a
+Quest
+Quest
+, gain 1
+
+
+.
+When another Mage is 
+When another Mage is 
+When another Mage is 
+defeated
+defeated
+, 
+gain 1
+
+
+ of that 
+Mage.
+Beast
+Beast
+Forgotten
+Forgotten
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Sphynx
+Add these cards to the Forgotten Spells Deck 
+of the core game.
+12 JINX CARDS
+ 3 EVOCATION 
+CARDS
+Add these cards to the Jinx 
+Deck of the core game.
+Add these cards to the 
+Evocation Deck of the core 
+game.
+Pharaoh
+Pharaoh
+Undead
+Undead
+Pharaoh
+Pharaoh
+Undead
+Undead
+Pharaoh
+Pharaoh
+
+2
+
+1
+
+2
+Pharoah
+Pharoah
+ has 
+ has 
+
+1
+ for each 
+Mage with at least 
+Mage with at least 
+Mage with at least 
+1
+ Jinx 
+assigned.
+assigned.
+Undead
+Undead
+Undead
+Undead
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+Pharaoh
+2 FORGOTTEN 
+EVOCATION CARDS
+Add these cards to the 
+Evocation Deck of the core 
+game.
+5
+PAGE 6
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the Sanctuary Room in the core game.
+1 AVATAR CARD
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+30 COMMAND 
+CARDS
+Anubis
+
+  
+T orment
+. Moves towards the target.
+Avatar Components
+1 SANCTUARY OF ANUBIS 
+ROOM
+1 ROOM ACTIVATION 
+TOKEN
+This Room (and its associated Activation 
+Token) can be used in any game to replace 
+the 
+Sanctuary
+ Room in the core game.
+1 AVATAR CARD
+
+
+: 
+summons 
+a 
+Pharaoh
+ in a 
+
+
+ from himself
+. An Evocation 
+ from himself
+. An Evocation 
+ from himself
+controlled by 
+controlled by 
+Anubis
+ in a 
+
+from the target 
+activates
+.
+Anubis
+Anubis
+11
+11
+11
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+
+
+:
+  
+
+ 
+ 
+ 
+.
+
+
+:
+  
+
+ 
+ 
+ 
+.
+
+ 
+ 
+ 
+.
+Anubis
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+Divine Sandstorm, Dominion
+30 COMMAND 
+CARDS
+Anubis
+Anubis
+Anubis
+Anubis
+
+
+ 
+
+ 
+T orment
+T orment
+
+. 
+Moves 
+towards the target.
+
+.
+Gains 1
+
+ of the target. 
+Assigns 
+a random Jinx to the 
+target.
+
+.
+Avatar Components
+1 SANCTUARY OF ANUBIS 
+ROOM
+1 ROOM ACTIVATION 
+TOKEN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Sanctuary 
+Sanctuary 
+Sanctuary 
+of Anubis
+of Anubis
+of Anubis
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+3
+ 1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+ 1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+TOKEN
+6
+PAGE 7
+Imhotep Saba
+3x Pharaoh Anubis
+Sphynx
+Models
+Imhotep
+ Saba
+3x Pharaoh
+ Anubis
+Sphynx
+Imhotep
+ Saba
+3x Pharaoh
+ Anubis
+Sphynx
+Models
+7
+PAGE 8
+ANUBIS SETUP
+Apply the following during step 3
+of the Avatar Setup:
+• Clip the Avatar Base to the Anubis
+Model. 
+• Place the Anubis Model in the 
+Black Rose Room.
+• Remove the Wrath of the Jackal 
+God card from the Forgotten 
+Spells Deck.
+Avatar
+Anubis, the Egyptian God of Death, has awakened the mummies of the Pharaohs from 
+their millennial slumber and invaded the Lodge to judge the hearts of the Mages. Those 
+who fail his tests will lose their souls and be condemned to eternal oblivion.
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+A Avatar Eﬀ  ect : The Eﬀ  ect 
+indicated by the  symbol on 
+the Avatar Card must be resolved 
+whenever the Eﬀ  ect of a Command 
+Card shows the  symbol.
+B Avatar Skills:
+ Anubis has the Avatar Skills 
+explained in detail on page 9.
+AVATAR CARD ANATOMY
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+A
+B
+ANUBIS SETUP
+Apply the following during
+ step
+of the
+ Avatar Setup
+:
+• 
+ Clip the Avatar Base to the 
+Anubis
+Model. 
+• 
+ Place the 
+ Anubis
+ Model in the 
+Black Rose Room
+.
+• 
+ Remove the 
+ Wrath of the Jackal 
+God
+ card from the Forgotten 
+God
+ card from the Forgotten 
+God
+Spells Deck.
+Avatar
+Avatar
+Anubis, the Egyptian God of Death, has awakened the mummies of the Pharaohs from 
+their millennial slumber and invaded the Lodge to judge the hearts of the Mages. Those 
+Anubis, the Egyptian God of Death, has awakened the mummies of the Pharaohs from 
+their millennial slumber and invaded the Lodge to judge the hearts of the Mages. Those 
+Anubis, the Egyptian God of Death, has awakened the mummies of the Pharaohs from 
+who fail his tests will lose their souls and be condemned to eternal oblivion.
+their millennial slumber and invaded the Lodge to judge the hearts of the Mages. Those 
+who fail his tests will lose their souls and be condemned to eternal oblivion.
+their millennial slumber and invaded the Lodge to judge the hearts of the Mages. Those 
+Pharaoh
+ in a 
+. An Evocation 
+controlled by 
+controlled by 
+Anubis
+ in a 
+
+from the target 
+activates
+.
+Anubis
+Anubis
+11
+11
+11
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+2
+2
+2
+2
+2
+2
+
+
+
+
+
+
+
+
+:
+  
+
+ 
+
+
+
+:
+  
+
+ 
+
+ 
+Anubis
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+Divine Sandstorm, Dominion
+A
+ Avatar Eﬀ  ect
+ 
+: The Eﬀ  ect 
+indicated by the 
+ 
+ symbol on 
+the Avatar Card must be resolved 
+whenever the Eﬀ  ect of a Command 
+Card shows the 
+
+ symbol.
+AVATAR CARD ANATOMY
+summons 
+a 
+Pharaoh
+
+
+ from himself
+. An Evocation 
+ from himself
+. An Evocation 
+ from himself
+controlled by 
+controlled by 
+Anubis
+from the target 
+summons 
+
+
+ from himself
+controlled by 
+
+
+: 
+summons 
+
+
+A
+Anubis
+Anubis
+Anubis
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+Divine Sandstorm, Dominion
+Anubis
+Anubis
+Scourge, Pledge, Judgment,
+Divine Sandstorm, Dominion
+Divine Sandstorm, Dominion
+B
+3
+Anubis
+ Model in the 
+Wrath of the Jackal 
+ card from the Forgotten 
+
+ 
+ 
+.
+
+ 
+ 
+.
+
+ 
+ 
+.
+B
+ Avatar Skills
+:
+ Anubis
+ Anubis
+ has the Avatar Skills 
+explained in detail on page 9.
+8
+PAGE 9
+ANUBIS PRIORITY
+:     
+Anubis chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+ : the Mage with the most , if tied, the Choice of the Crown applies.
+:     
+Anubis chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied, the Choice of the Crown applies.
+   
+Anubis chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if tied...
+: the Room with the most Models, if tied, the Choice of the Crown applies.
+Scourge
+If an Eﬀ  ect is to assign a Jinx to Anubis, that 
+Jinx is not assigned instead.
+Pledge
+For each  obtained, Anubis heals 2 on 
+himself.
+Judgment
+When Anubis has a number of  of the 
+Mages equal to the number of players 
+participating in the game, he gains 1, then 
+each Mage gets back their own  held by 
+Anubis.
+Divine Sandstorm
+When Anubis is to summon an Evocation 
+but cannot do so, he inﬂ  icts 2 in each 
+from each of his Evocations.
+Dominion
+If Anubis has to activate when he is in a Cell, 
+he does not activate and places himself in the 
+Black Rose Room.
+Avatar Skills — Anubis
+ANUBIS PRIORITY
+
+:
+  
+
+ 
+ 
+ 
+Anubis chooses as a target:
+
+: 
+the Mage with the most 
+
+, if tied...
+
+:
+ the Mage with the most 
+
+, if tied...
+
+:
+ the Mage with the most 
+
+, if tied...
+ 
+:
+ the Mage with the most 
+
+, if tied, the Choice of the Crown applies.
+
+:
+  
+
+ 
+ 
+ 
+Anubis chooses as a target:
+
+:
+ the Mage with the most 
+
+, if tied...
+
+: 
+the Mage with the most 
+
+, if tied...
+
+: 
+the Mage with the most 
+
+, if tied...
+
+:
+ the Mage with the most 
+
+, if tied, the Choice of the Crown applies.
+
+ 
+ 
+ 
+Anubis chooses as a target:
+
+:
+ the Room with the most 
+
+, if tied...
+
+: 
+the Room with the most Mages, if tied...
+
+: 
+the Room with the most Models, if tied, the Choice of the Crown applies.
+Scourge
+If an Eﬀ  ect is to assign a Jinx to Anubis, that 
+Jinx is not assigned instead.
+Pledge
+For each 
+ 
+ obtained, Anubis heals 
+ 2
+
+ on 
+himself.
+Judgment
+When Anubis has a number of 
+ 
+ of the 
+Mages equal to the number of players 
+participating in the game, he gains 
+1
+
+, then 
+each Mage gets back their own 
+ 
+ held by 
+Anubis.
+Divine Sandstorm
+When Anubis is to summon an Evocation 
+but cannot do so, he inﬂ  icts 
+2
+
+ in each 
+ 
+from each of his Evocations.
+Dominion
+If Anubis has to activate when he is in a Cell, 
+he does not activate and places himself in the 
+Black Rose Room
+.
+Avatar Skills — Anubis
+9
+PAGE 10
+Additional Setup
+Apply the following during the regular Game Setup:
+• Before step 4 : replace the Sanctuary Room with the Sanctuary of Anubis Room.
+Once the Setup is complete:
+1. Place the Second Moon Cube on Slot 8,the Third Moon Cube on Slot 16,and the
+Black Rose Cube on Slot 32
+of the Power Board.
+2. Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. 
+Anubis is the Avatar for this 
+Legendary Scenario.
+Scenario Rules
+The following rule applies while playing this Legendary Scenario:
+• Sepulcher: on step 2  of the Clean-up Phase, the  places 1 in each   from each 
+Pharaoh owned by Anubis.
+Honorable Mention
+At the end of the game, the Mage with the least gains 2. If tied, no Mage gains additional 
+.
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose W ars: Rebirth by applying a speciﬁ  c set of new rules.
+In Damned Souls, the Pharaohs' bloodline has returned to claim the Lodge, and the Mages 
+must defend it.
+Legendary Scenario:
+ Damned Souls
+Additional Setup
+Apply the following during the regular Game Setup:
+• 
+ Before step
+ 4
+ :
+ replace
+ the 
+Sanctuary
+ Room with the 
+Sanctuary of Anubis
+ Room.
+Once the Setup is complete
+:
+1. 
+Place the Second Moon Cube on Slot
+ 8
+
+,
+ the Third Moon Cube on Slot
+ 16
+
+,
+ and
+ the
+Black Rose Cube
+ on Slot 
+32
+
+of the Power Board
+.
+2. 
+ Carry out the steps of the 
+Avatar Setup indicated in the 
+core rulebook of the game. 
+Anubis is the Avatar for this 
+Legendary Scenario.
+Scenario Rules
+The following rule applies while playing this Legendary Scenario
+:
+• 
+ Sepulcher
+:
+ on 
+ step
+ 2
+  of the 
+ Clean-up Phase
+, the 
+ 
+ places 
+ 1
+
+ in each 
+ 
+ from each 
+Pharaoh owned by Anubis.
+Honorable Mention
+At the end of the game, the Mage with the
+ least 
+
+ gains 2
+
+. If tied, 
+no Mage gains additional 
+
+.
+A Legendary Scenario is a special game that allows you to play an event from the world of 
+Black Rose W ars: Rebirth
+ by applying a speciﬁ  c set of new rules.
+In 
+Damned Souls
+, the Pharaohs' bloodline has returned to claim the Lodge, and the Mages 
+must defend it.
+Legendary Scenario:
+Legendary Scenario:
+ Damned Souls
+ Damned Souls
+10
+PAGE 11
+11
+PAGE 12
+Last Dynasty Rulebook v.1.0
+©2023 Ludus Magnus Studio
+All rights reserved
+www.ludusmagnusstudio.com
+Scourge
+If an Eﬀ  ect is to assign a Jinx to Anubis, that 
+Jinx is not assigned instead.
+Pledge
+For each  obtained, Anubis heals 2 on 
+himself.
+Judgment
+When Anubis has a number of  of the Mages 
+equal to the number of players participating in 
+the game, he gains 1 , then each Mage gets 
+back their own  held by Anubis.
+Divine Sandstorm
+When Anubis is to summon an Evocation but 
+cannot do so, he inﬂ  icts 2 in each  from 
+each of his Evocations.
+Dominion
+If Anubis has to activate when is in a Cell, he 
+do not activate and place himself in the Black 
+Rose Room.
+ANUBIS PRIORITY
+:     
+Anubis chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+ : the Mage with the most , if tied, 
+the Choice of the Crown applies.
+:     
+Anubis chooses as a target:
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied...
+: the Mage with the most , if tied, 
+the Choice of the Crown applies.
+   
+Anubis chooses as a target:
+: the Room with the most , if tied...
+: the Room with the most Mages, if 
+tied...
+: the Room with the most Models, if 
+tied, the Choice of the Crown applies.

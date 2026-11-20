@@ -1,0 +1,17 @@
+MOON I
+punish the explorers -> protection combact
+quicksand -> protection damage 
+blinding glare -> protection damage 
+others -> normal
+
+MOON II
+Lost in Dunes -> protection combact
+No mercy -> protection damage 
+hounding -> protection damage 
+others -> normal
+
+MOON III
+Supreme Plague -> protection combact
+Sarcophagus -> protection damage 
+Hopeless -> protection damage 
+others -> normal

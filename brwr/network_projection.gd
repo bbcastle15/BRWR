@@ -44,7 +44,10 @@ static func build(game, viewer: int) -> Dictionary:
 			state.players[i].evocations[j]["stored_owner_cubes"] = game.get_evocation_stored_owner_cube_count(player.evocations[j])
 		for active in player.active_spells:
 			if active.active and game._is_ongoing_revealed_spell(active.get_side()):
-				state.permanents.append({"owner": i, "slot": game._find_player_board_slot_for_spell(i, active.spell), "id": active.spell.id, "dark": active.use_dark_side, "room": str(active.context.get("target_room_id", "")), "target_player": active.target_player_index})
+				var permanent := {"owner": i, "slot": game._find_player_board_slot_for_spell(i, active.spell), "id": active.spell.id, "dark": active.use_dark_side, "room": str(active.context.get("target_room_id", "")), "target_player": active.target_player_index}
+				if active.context.has("ward_slots"):
+					permanent["ward_slots"] = active.context.ward_slots.duplicate()
+				state.permanents.append(permanent)
 	for child in game.get_children():
 		if not child.has_meta("hex_coord"):
 			continue
@@ -201,6 +204,9 @@ static func apply(game, state: Dictionary) -> void:
 	for data in state.permanents:
 		var active := ActiveSpellState.new(game.spell_database.get_spell(data.id), data.owner, data.dark)
 		active.context["target_room_id"] = data.room
+		if data.has("ward_slots"):
+			active.context["ward_slots"] = data.ward_slots.duplicate()
+			active.context["ward_rooms"] = data.ward_slots.values()
 		active.target_player_index = int(data.get("target_player", -1))
 		game.players[data.owner].active_spells.append(active)
 		if not str(data.slot).is_empty():

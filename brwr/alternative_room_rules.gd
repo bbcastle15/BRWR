@@ -5,7 +5,8 @@ extends RefCounted
 # These are reusable printed clauses, not a second Room/state database.
 const EFFECT_TYPES := ["room_target", "room_payment", "room_choice", "room_search_deck",
 	"room_library_draw", "room_activate_evocation", "room_black_rose_damage",
-	"room_damage_evocations", "room_remove_evocations", "room_move"]
+	"room_damage_evocations", "room_remove_evocations", "room_move",
+	"room_discard_for_power", "room_activate_other", "room_discard_persistent"]
 
 static func child_context(context: Dictionary) -> Dictionary:
 	var nested := DruidicRules.scoped_context(context)
@@ -27,6 +28,59 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 		return false
 	var player = game.players[caster]
 	match str(effect.type):
+		"room_discard_for_power":
+			if player.hand.is_empty():
+				return true
+			if not context.has("room_discard_cards"):
+				var options: Array = []
+				for i in player.hand.size():
+					var card: SpellCardState = player.hand[i]
+					options.append({"token": "discard:%d" % i, "value": card, "id": card.id, "name": card.card_name, "card_kind": "spells"})
+				game.request_effect_choice(caster, "room_payment", context, "room_discard_cards", options, 0, mini(2, options.size()), "Discard up to 2 Spells. Gain 1 Power for each discarded Spell.")
+				return false
+			var cards: Array = selections(context.get("room_discard_cards"))
+			context.erase("room_discard_cards")
+			var paid := 0
+			for card in cards:
+				if card in player.hand and paid < 2:
+					player.hand.erase(card)
+					game.move_spell_to_memories_or_remove(caster, card)
+					paid += 1
+			game.add_player_power(caster, paid)
+			game.refresh_all_player_boards()
+			return true
+		"room_activate_other":
+			var options: Array = ForgottenRules.rooms(game, context, "*")
+			options = options.filter(func(o):
+				var target = game.get_room_by_id(str(o.get("room_id", "")))
+				return target != null and target.get_room_id() not in ["black_rose", str(context.get("room_id", ""))] and target.can_activate(true))
+			if not DruidicRules.choose(game, caster, context, "room_remote_activation", options, "Activate a Room without flipping its Activation Token (Black Rose Room excluded).", false, "secondary_room"):
+				return false
+			var selected = context.get("room_remote_activation")
+			context.erase("room_remote_activation")
+			if selected == null:
+				return true
+			var nested := ForgottenRules.target_context(child_context(context), selected)
+			# Only this nested activation preserves its token, not Wabi-Sabi's.
+			nested["preserve_room_token"] = true
+			return game.activate_room(caster, str(nested.get("target_room_id", "")), true, nested)
+		"room_discard_persistent":
+			var options: Array = []
+			for owner in game.players:
+				for active in owner.active_spells:
+					if not active.active or active.spell.forgotten or not active.get_side().get("persistent", false):
+						continue
+					options.append({"token": "persistent:%d:%d" % [active.owner_id, owner.active_spells.find(active)], "value": active, "name": active.spell.card_name + " · " + owner.player_name})
+			if not DruidicRules.choose(game, caster, context, "room_persistent", options, "You may discard an assigned Persistent token (Forgotten Spells excluded).", true):
+				return false
+			var selected: ActiveSpellState = context.get("room_persistent")
+			context.erase("room_persistent")
+			if selected != null:
+				selected.active = false
+				game.players[selected.owner_id].remove_active_spell(selected)
+				game._refresh_permanent_room_markers()
+				game.refresh_all_player_boards()
+			return true
 		"room_move":
 			return game.queue_resolution({"type": "room_move", "remaining": int(effect.get("distance", 1)), "context": context.duplicate(true)})
 		"room_target":

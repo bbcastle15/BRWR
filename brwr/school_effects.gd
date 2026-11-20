@@ -232,7 +232,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 			match str(effect.condition):
 				"target_room_rebuilt":
 					var room = game.get_room_by_id(FamineRules.target_room(game, context))
-					valid = room != null and room.flipped
+					valid = room != null and room.is_rebuilt()
 				"target_has_upgrade": valid = ev != null and not ev.upgrades.is_empty()
 				"target_survived": valid = game.is_evocation_in_play(ev) if ev != null else target >= 0 and not game.players[target].mage.in_cell
 				"caster_survived": valid = not player.mage.in_cell and not player.mage.is_defeated()

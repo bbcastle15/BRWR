@@ -204,6 +204,10 @@ static func mage_attack(game, caster: int, effect: Dictionary, context: Dictiona
 		if str(option.get("target_type", "")) == "dummy":
 			continue
 		var value: Dictionary = option.get("value", {})
+		if effect.get("primary_target_only", false):
+			if value.get("target_type") != context.get("target_model_type"): continue
+			if value.get("target_type") == "mage" and value.get("player_index") != context.get("target_player_index"): continue
+			if value.get("target_type") == "evocation" and value.get("evocation") != context.get("target_evocation"): continue
 		if value.get("target_type") == "evocation" and not game._valid_mage_physical_attack_evocation(caster, value.evocation, int(effect.get("range", 0))):
 			continue
 		valid.append(option)

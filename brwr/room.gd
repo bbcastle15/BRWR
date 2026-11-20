@@ -209,11 +209,15 @@ func _refresh_activation_token() -> void:
 		token.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		token.z_index = 20
 		add_child(token)
-	token.visible = flipped and not showing_old_face and flip_animation == null
-	if not flipped:
+	token.visible = has_activation_token() and not showing_old_face and flip_animation == null
+	if not has_activation_token():
 		return
 	token.position = Vector2(-radius * 0.60, -radius * 0.77)
+	# Kami tokens include the three reward tabs; reserve their full height.
 	token.size = Vector2(radius * 1.20, radius * 0.40)
+	if wrecks_on_completion():
+		token.position = Vector2(-radius * 0.65, -radius * 0.84)
+		token.size = Vector2(radius * 1.30, radius * 0.65)
 	token.texture = preload("res://room_art.gd").activation_token(get_art_id(), activated_this_turn)
 
 
@@ -262,6 +266,8 @@ func get_room_data() -> Dictionary:
 
 
 func get_effects() -> Array:
+	if wrecks_on_completion():
+		return [] if flipped else room_data.get("rebuilt_effects", [])
 
 	if flipped:
 		return room_data.get(
@@ -276,11 +282,31 @@ func get_effects() -> Array:
 
 
 func get_current_side_name() -> String:
+	if wrecks_on_completion():
+		return "wrecked" if flipped else "intact"
 
 	if flipped:
 		return "rebuilt"
 
 	return "destroyed"
+
+
+# `flipped` is the network/save flag for completion, not a universal rebuilt
+# state: Kami starts intact and becomes permanently wrecked on completion.
+func wrecks_on_completion() -> bool:
+	return bool(room_data.get("wrecks_on_completion", false))
+
+
+func is_wrecked() -> bool:
+	return wrecks_on_completion() and flipped
+
+
+func is_rebuilt() -> bool:
+	return not flipped if wrecks_on_completion() else flipped
+
+
+func has_activation_token() -> bool:
+	return is_rebuilt()
 
 
 # =========================================================
@@ -293,7 +319,9 @@ func can_activate(
 
 	# Destroyed Rooms can be activated any number
 	# of times during the same turn.
-	if not flipped:
+	if is_wrecked():
+		return false
+	if not has_activation_token():
 		return true
 
 	# Rebuilt Rooms can normally be activated
@@ -306,7 +334,7 @@ func can_activate(
 
 func mark_activated():
 
-	if flipped:
+	if has_activation_token():
 		activated_this_turn = true
 
 

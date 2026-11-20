@@ -13,7 +13,8 @@ const EFFECT_TYPES := ["independent_target", "self_room_effect", "target_mage_ro
 	"instability_for_damage", "assign_jinx", "assign_upgrade", "damage_per_jinx",
 	"damage_per_jinxed_mage", "assign_nightmare", "activate_assigned_nightmares",
 	"place_evocation_in_any_room", "heal_source_evocation", "damage_source_evocation",
-	"activation_strength_bonus", "instability_cost", "instability_per_event", "activate_source_room"]
+	"activation_strength_bonus", "instability_cost", "instability_per_event", "activate_source_room",
+	"kami_place_wards", "kami_cleanse"]
 
 static func origin(game, context: Dictionary) -> String:
 	var source: EvocationState = context.get("source_evocation")
@@ -22,7 +23,7 @@ static func origin(game, context: Dictionary) -> String:
 static func rooms(game, context: Dictionary, distance = "*") -> Array:
 	return game._quest_room_choice_options(int(context.caster_id), {"range": distance}, origin(game, context))
 
-static func models(game, context: Dictionary, kind: String = "model", distance = "*", center: String = "", include_owned: bool = true, include_caster: bool = false) -> Array:
+static func models(game, context: Dictionary, kind: String = "model", distance = "*", center: String = "", include_owned: bool = true, include_caster: bool = false, targets_room: bool = false) -> Array:
 	var result: Array = []
 	var caster: int = int(context.caster_id)
 	if center.is_empty():
@@ -34,11 +35,15 @@ static func models(game, context: Dictionary, kind: String = "model", distance =
 		if kind == "mage":
 			continue
 		for ev in p.evocations:
+			if not targets_room and not can_target_from(game, ev, caster, origin(game, context)): continue
 			if DeathEffectResolver.ignores_evocation(game, context, ev) or not EquipmentRules.can_target_as(ev, caster, kind):
 				continue
 			if not ev.is_defeated() and (include_owned or game.get_evocation_controller_id(ev) != caster) and game.is_room_within_effect_range(center, ev.room_id, distance):
 				result.append({"token": "evocation:%d:%d" % [i, p.evocations.find(ev)], "value": {"target_type": "evocation", "evocation": ev}, "room_id": ev.room_id, "name": ev.get_display_name() + " · " + game.player_display_name(i)})
 	return result
+
+static func can_target_from(game, ev: EvocationState, caster: int, source_room: String) -> bool:
+	return not ev.definition.has("opponent_target_from_room") or game.get_evocation_controller_id(ev) == caster or source_room == ev.definition.opponent_target_from_room
 
 static func target_context(context: Dictionary, value) -> Dictionary:
 	var nested := DruidicRules.scoped_context(context)
@@ -67,9 +72,44 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 	var target: int = int(context.get("target_player_index", -1))
 	var source: EvocationState = context.get("source_evocation")
 	match str(effect.type):
+		"kami_place_wards":
+			if not context.has("ward_rooms"):
+				var options := rooms(game, context)
+				var count := mini(4, options.size())
+				if count == 0: return true
+				game.request_effect_choice(caster, "ward_rooms", context, "ward_rooms", options, count, count, "Choose a different Room for each Persistent token.")
+				return false
+			return true
+		"kami_cleanse":
+			var options := []
+			for owner in game.players:
+				for active in owner.active_spells:
+					if not active.active or not active.get_side().get("persistent", false): continue
+					var kind: String = str(active.get_side().get("target", ""))
+					var marked_ev = active.context.get("target_evocation")
+					var marked: int = active.owner_id if kind == "self" else active.target_player_index
+					var own: bool = marked_ev == null and kind in ["self","mage","model"] and marked == caster
+					var place: String = game.room_for_persistent(active)
+					if marked_ev != null: place = marked_ev.room_id
+					elif marked >= 0 and kind in ["self","mage","model"]: place = game.players[marked].mage.room_id
+					var wards: Array = active.context.get("ward_rooms", [])
+					if not own and (effect.self_only or (place != player.mage.room_id and not player.mage.room_id in wards)): continue
+					options.append({"token":"persistent:%d:%d" % [active.owner_id, owner.active_spells.find(active)], "value":active, "name":active.spell.card_name + " · " + owner.player_name})
+			if not DruidicRules.choose(game, caster, context, "kami_persistent", options, "Choose a Persistent token to discard."): return false
+			var selected: ActiveSpellState = context.get("kami_persistent")
+			context.erase("kami_persistent")
+			if selected == null: return true
+			if selected.context.has("ward_rooms"):
+				selected.context.ward_rooms.erase(player.mage.room_id)
+				selected.context.ward_slots.erase(selected.context.ward_slots.find_key(player.mage.room_id))
+			if selected.context.get("ward_rooms", []).is_empty():
+				selected.active = false
+				game.players[selected.owner_id].remove_active_spell(selected)
+			game._refresh_permanent_room_markers()
+			return queue(game, effect.effects, context)
 		"independent_target":
 			var kind: String = str(effect.target)
-			var options: Array = rooms(game, context, effect.get("range", "*")) if kind == "room" else models(game, context, kind, effect.get("range", "*"))
+			var options: Array = rooms(game, context, effect.get("range", "*")) if kind == "room" else models(game, context, kind, effect.get("range", "*"), "", not game._effects_inflict_damage(effect.effects))
 			if not DruidicRules.choose(game, caster, context, "forgotten_target", options, "Choose a " + kind + ".", bool(effect.get("optional", false)), "secondary_room" if kind == "room" else "model_target"):
 				return false
 			var selected = context.get("forgotten_target")
@@ -226,6 +266,7 @@ static func resolve(effect: Dictionary, context: Dictionary) -> bool:
 				game.effect_resolver._heal_evocation(game, source, int(effect.amount))
 			return true
 		"damage_source_evocation":
+			if source == null: source = context.get("equipment_source")
 			if source != null:
 				game.deal_damage_to_evocation(-1 if bool(effect.get("black_rose", false)) else caster, source, int(effect.amount), [], "evocation", "black_rose" if bool(effect.get("black_rose", false)) else "evocation", null if bool(effect.get("black_rose", false)) else source)
 			return true
