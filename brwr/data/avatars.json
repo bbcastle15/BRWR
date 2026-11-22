@@ -42,7 +42,7 @@
       "dominion"
     ],
     "setup_room": "black_rose",
-    "implemented": false,
+    "implemented": true,
     "command_prefix": "anubis_",
     "priorities": {
       "1": [

@@ -90,6 +90,36 @@ func run():
 			game.queue_resolution({"type":"avatar_section","card":card,"section":s,"reaction":true,"event":event,"context":{},"stage":"target"})
 			await drive()
 			expect(game.resolution_stack.is_empty(), card.card_name + " reaction finishes")
+	reset_case()
+	expect(not AnubisRules.legendary(game), "Legendary rules are opt-in")
+	game.avatar_selection.scenario = "damned_souls"
+	AnubisRules.setup_scenario(game)
+	expect(game.room_variants.get("sanctuary") == "sanctuary_of_anubis", "Scenario forces Sanctuary of Anubis")
+	expect(game.get_node("PowerBoard").second_moon_threshold == 8 and game.get_node("PowerBoard").third_moon_threshold == 16 and game.get_node("PowerBoard").end_game_threshold == 32, "Scenario thresholds 8/16/32")
+	var snapshot: Dictionary = preload("res://network_projection.gd").build(game, 0)
+	expect(snapshot.power_thresholds == [8,16,32] and snapshot.avatar.id == "anubis", "Network projection includes Anubis and scenario thresholds")
+	game.summon_evocation(AVATAR, "pharaoh", "arena")
+	game.summon_evocation(AVATAR, "pharaoh", "arena")
+	game.summon_evocation(AVATAR, "cadaver", "garden")
+	await effect({"type":"anubis_sepulcher"})
+	expect(game.get_room_by_id("arena").instability_cubes == [-1,-1], "Sepulcher places once per Pharaoh, including shared Room")
+	expect(game.get_room_by_id("garden").instability_cubes.is_empty(), "Sepulcher excludes other Evocations")
+	expect(AnubisRules.honorable_mention(game) == -1, "Honorable Mention gives no bonus on tie")
+	game.players[1].trophies.append(0)
+	game.players[2].trophies.append(0)
+	expect(AnubisRules.honorable_mention(game) == 0, "Honorable Mention selects unique Mage with fewest trophies")
+	game.players[0].power = 32
+	expect(game.check_end_game(), "Scenario ends at 32 Power")
+	var result_row: Dictionary = game.final_result.scores.filter(func(row): return row.player_index == 0)[0]
+	expect(result_row.scenario == 2 and result_row.total == result_row.base + result_row.quests + result_row.trophies + result_row.crown + 2, "Scenario bonus is visible and included in final standings")
+	game.avatar_selection.erase("scenario")
+	for card in cards.values():
+		expect(AvatarArt.texture(card.id) != null, card.card_name + " restored texture loads")
+	for moon in [1,2,3]:
+		for symbol in ["", "combat_spell", "suffered_damage"]:
+			var back := AvatarArt.command_back_id(moon, {"id":"anubis", "reaction":symbol, "reaction_type":"protection"})
+			expect(AvatarArt.texture(back) != null, "Back loads: " + back)
+	expect(AvatarArt.texture("anubis") != null, "Avatar sheet loads")
 	print("ANUBIS: %d checks; failures: %s" % [checks, failures])
 	game.queue_free()
 	await process_frame

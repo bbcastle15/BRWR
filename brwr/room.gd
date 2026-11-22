@@ -104,6 +104,32 @@ func refresh_art() -> void:
 	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_refresh_activation_token()
 	_refresh_vastum_token()
+	_refresh_standard_sockets()
+
+func _refresh_standard_sockets() -> void:
+	var overlay := $Background.get_node_or_null("StandardSockets")
+	if overlay == null:
+		overlay = Node2D.new()
+		overlay.name = "StandardSockets"
+		$Background.add_child(overlay)
+	for child in overlay.get_children():
+		overlay.remove_child(child)
+		child.queue_free()
+	# Use the same printed socket as the core Forge. Keep calibrated centres
+	# and rotations, and inherit the tile's flip animation rather than floating.
+	overlay.visible = wrecks_on_completion() and (not flipped or showing_old_face)
+	if not overlay.visible or $Background.texture == null: return
+	var socket := AtlasTexture.new()
+	socket.atlas = preload("res://assets/rooms/forge.png")
+	socket.region = Rect2(404, 994, 112, 112)
+	socket.filter_clip = true
+	for centre in get_art_instability_slots():
+		var sprite := Sprite2D.new()
+		sprite.texture = socket
+		sprite.position = centre
+		sprite.rotation = get_art_instability_slot_rotation(centre)
+		sprite.scale = Vector2.ONE * radius * 0.18 / 112.0
+		overlay.add_child(sprite)
 
 
 func _find_vastum_texture_recursive(
@@ -216,8 +242,8 @@ func _refresh_activation_token() -> void:
 	# Kami tokens include the three reward tabs; reserve their full height.
 	token.size = Vector2(radius * 1.20, radius * 0.40)
 	if wrecks_on_completion():
-		token.position = Vector2(-radius * 0.65, -radius * 0.84)
-		token.size = Vector2(radius * 1.30, radius * 0.65)
+		token.position = Vector2(-radius * 0.50, -radius * 0.77)
+		token.size = Vector2(radius, radius * 0.50)
 	token.texture = preload("res://room_art.gd").activation_token(get_art_id(), activated_this_turn)
 
 

@@ -32,6 +32,8 @@ var avatar_marker_event: Dictionary = {}
 var hidden_avatar_marker: Control
 var hidden_damage_cube: Control = null
 var damage_display: Dictionary = {}
+var physical_display: Dictionary = {}
+var physical_restore_event: Dictionary = {}
 var damage_event: Dictionary = {}
 var defeat_notice: Label
 var transient_board := false
@@ -585,6 +587,9 @@ func _has_damage_presentation() -> bool:
 func displayed_damage(player_index: int, actual: Array) -> Array:
 	return damage_display.get(player_index, actual)
 
+func displayed_physical_actions(player_index: int, actual: int) -> int:
+	return int(physical_display.get(player_index, actual))
+
 func _refresh_damage_display(index: int) -> void:
 	var board = game.player_boards[index]
 	if board is AvatarBoard:
@@ -598,6 +603,9 @@ func receive_feedback(event: Dictionary) -> void:
 		phase_queue.append(event.duplicate())
 	if event.get("kind") == "physical_action":
 		animation_queue.append({"player": event.player, "node": "PhysicalAction" + str(event.token_index), "kind": "physical", "action": event.action})
+	if event.get("kind") == "physical_restore":
+		if not physical_display.has(int(event.player)): physical_display[int(event.player)] = int(event.token_index)
+		animation_queue.append({"player":event.player, "node":"PhysicalAction" + str(event.token_index), "kind":"physical", "action":"Physical action restored", "restored":true, "token_index":event.token_index})
 	if event.get("kind") in ["destiny", "infectio"]:
 		animation_queue.append({"player": event.player, "node": "", "kind": event.kind, "index": event.index})
 	if event.get("kind") == "attack":
@@ -628,6 +636,7 @@ func queue_damage_placement(player_index: int, previous_damage: int, owners: Arr
 func _play_next_animation() -> void:
 	# Pure visual feedback: no rule waits on a Tween, and Close always skips it.
 	var event: Dictionary = animation_queue.pop_front()
+	physical_restore_event = event.duplicate() if event.get("restored", false) else {}
 	if game.beta_hud != null:
 		game.beta_hud.hand_overlay.hide()
 		game.beta_hud.panel.hide()
@@ -709,10 +718,15 @@ func _play_next_animation() -> void:
 		action_notice = _make_notice("PHYSICAL ACTION", "%s · %s" % [game.player_display_name(index), str(event.get("action", "Physical Action"))])
 		board_overlay.add_child(action_notice)
 		action_notice.position = Vector2((board_overlay.size.x - action_notice.size.x) * 0.5, 10)
-		animated_node.get_node("Face").material.set_shader_parameter("exhausted", false)
+		animated_node.get_node("Face").material.set_shader_parameter("exhausted", event.get("restored", false))
 		animation.tween_interval(0.7)
 		animation.tween_property(animated_node, "scale:x", 0.03, 0.15).set_trans(Tween.TRANS_SINE)
-		animation.tween_callback(_refresh_animated_board)
+		animation.tween_callback(func():
+			if event.get("restored", false):
+				physical_display[index] = int(event.token_index) + 1
+				if not animation_queue.any(func(e): return e.player == index and e.get("restored", false)):
+					physical_display.erase(index)
+			_refresh_animated_board())
 		animation.tween_property(animated_node, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_SINE)
 		animation.tween_interval(0.9)
 	elif event.kind == "damage":
@@ -807,6 +821,7 @@ func _finish_animation() -> void:
 		return
 	animation = null
 	board_layer.layer = 10
+	physical_restore_event.clear()
 	if is_instance_valid(action_notice): action_notice.queue_free()
 	_refresh_animated_board()
 	if is_instance_valid(animated_node):
@@ -895,10 +910,18 @@ func _play_world_placements() -> void:
 		delay += 0.32
 
 func _cancel_animation(preserve_avatar_placement: bool = false) -> void:
+	physical_display.clear()
 	# Closing an inspection or changing requests is not an acknowledgement of
 	# a public token placement. Keep queued feedback; resume an interrupted
 	# placement after the new card/choice. The explicit Close button may skip it.
 	var pending_avatar: Array[Dictionary] = animation_queue.filter(func(event): return event.kind == "avatar_marker")
+	if preserve_avatar_placement:
+		pending_avatar = animation_queue.filter(func(event): return event.kind == "avatar_marker" or event.get("restored", false))
+		if not physical_restore_event.is_empty(): pending_avatar.push_front(physical_restore_event.duplicate())
+		for event in pending_avatar:
+			if event.get("restored", false) and not physical_display.has(int(event.player)):
+				physical_display[int(event.player)] = int(event.token_index)
+	physical_restore_event.clear()
 	if preserve_avatar_placement and animated_avatar_marker and not avatar_marker_event.is_empty():
 		pending_avatar.push_front(avatar_marker_event.duplicate(true))
 	if is_instance_valid(action_notice): action_notice.queue_free()

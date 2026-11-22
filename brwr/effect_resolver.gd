@@ -3016,16 +3016,7 @@ func _resolve_refresh_physical_action_token(
 		caster_id
 	]
 
-	player.available_physical_actions = min(
-		player.MAX_PHYSICAL_ACTIONS,
-		player.available_physical_actions
-		+ int(
-			effect.get(
-				"amount",
-				1
-			)
-		)
-	)
+	game.restore_physical_actions(caster_id, int(effect.get("amount", 1)))
 
 	if caster_id < game.player_boards.size():
 		game.player_boards[

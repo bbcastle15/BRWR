@@ -66,6 +66,7 @@ static func setup(game) -> void:
 	for deck in state.decks.values(): game.shuffle_with_rng(deck)
 	if id == "anubis":
 		game.forgotten_deck = game.forgotten_deck.filter(func(card): return card.id != "wrath_of_the_jackal_god")
+		AnubisRules.setup_scenario(game)
 	# Replace the Event DB/decks, rather than mixing Avatar and ordinary Events.
 	game.event_database.load_database(EVENTS)
 	game.create_event_decks()

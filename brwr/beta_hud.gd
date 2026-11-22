@@ -508,11 +508,15 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	content.add_child(title)
 	var table := GridContainer.new()
 	table.name = "FinalStandings"
-	table.columns = 7
+	var has_scenario: bool = rows.any(func(row): return int(row.get("scenario", 0)) != 0)
+	table.columns = 8 if has_scenario else 7
 	table.add_theme_constant_override("h_separation", 12)
 	table.add_theme_constant_override("v_separation", 8)
 	content.add_child(table)
-	for heading in ["Rank", "Mage", "Power", "Quests", "Trophies", "Crown", "Total"]:
+	var headings: Array = ["Rank", "Mage", "Power", "Quests", "Trophies", "Crown"]
+	if has_scenario: headings.append("Scenario")
+	headings.append("Total")
+	for heading in headings:
 		var label := Label.new()
 		label.text = heading
 		label.add_theme_color_override("font_color", TabletopStyle.GOLD)
@@ -520,7 +524,10 @@ func _on_game_over(winner_data: Dictionary) -> void:
 	for index in rows.size():
 		var row: Dictionary = rows[index]
 		var champion := int(row.player_index) == winner
-		for value in [str(index + 1), row.name, str(row.base), "+%d" % row.quests, "+%d" % row.trophies, "+%d" % row.crown, str(row.total)]:
+		var values: Array = [str(index + 1), row.name, str(row.base), "+%d" % row.quests, "+%d" % row.trophies, "+%d" % row.crown]
+		if has_scenario: values.append("+%d" % int(row.get("scenario", 0)))
+		values.append(str(row.total))
+		for value in values:
 			var cell := PanelContainer.new()
 			cell.add_theme_stylebox_override("panel", TabletopStyle.panel(TabletopStyle.GOLD if champion else Color("3b4143"), Color("303028") if champion else TabletopStyle.INK))
 			var label := Label.new()
@@ -1496,7 +1503,9 @@ func _render_action_step() -> void:
 		"momentum_destinations":
 			_render_momentum_destinations()
 		"fight_variants":
-			_render_action_variant_list("fight")
+			_render_fight_targets()
+		"fight_order":
+			_render_fight_order()
 		"command_plans":
 			_render_command_paths()
 		"command_variants":
@@ -1849,6 +1858,45 @@ func _render_target_variants(choices: Array) -> void:
 	for choice in choices:
 		_add_button(str(choice.get("label", "Continue")), choice.callback)
 	_add_button("← Back", _render_current_request)
+
+
+func _render_fight_targets() -> void:
+	var targets: Dictionary = {}
+	var without_attack: Array = []
+	for option in _action_options_of_type("fight"):
+		var target := _attack_target_option(option.get("action", {}))
+		if target.is_empty():
+			without_attack.append(option)
+		else:
+			targets[JSON.stringify(target)] = target
+	prompt_label.text = "Fight · choose your target on the Lodge."
+	if game.table_shell != null: game.table_shell.close_board()
+	panel.visible = targets.is_empty()
+	for key in targets:
+		var target: Dictionary = targets[key].duplicate()
+		target["token"] = str(key)
+		var choose := _set_action_menu.bind("fight_order", {"target": targets[key]})
+		if not game.show_board_target_choice(target, choose):
+			panel.show()
+			_add_button("Choose target · " + ("Player %d" % (int(target.player_index) + 1) if target.has("player_index") else "Player %d · Evocation %d" % [int(target.owner_id) + 1, int(target.evocation_index) + 1]), choose)
+	for option in without_attack:
+		var label: String = "Activate Room only" if option.get("action", {}).get("perform_room_activation", false) else "Skip both effects"
+		_add_confirmation(label, _submit_action_token.bind(str(option.get("token", ""))))
+	_add_confirmation("← Back", _set_action_menu.bind("physical"))
+
+
+func _render_fight_order() -> void:
+	var target: Dictionary = action_menu_filter.get("target", {})
+	prompt_label.text = "Fight · choose the order of effects."
+	for timing in ["before", "after", "none"]:
+		for option in _action_options_of_type("fight"):
+			if _attack_target_option(option.get("action", {})) != target or target.is_empty(): continue
+			var action: Dictionary = option.get("action", {})
+			var order: String = "none" if not action.get("perform_room_activation", false) else ("before" if action.get("activate_room_first", false) else "after")
+			if order != timing: continue
+			var label: String = {"before": "Activate Room → Fight", "after": "Fight → Activate Room", "none": "Fight only"}[timing]
+			_add_button(label, _submit_action_token.bind(str(option.get("token", ""))))
+	_add_button("← Choose another target", _set_action_menu.bind("fight_variants"))
 
 
 func _render_action_variant_list(action_type: String) -> void:

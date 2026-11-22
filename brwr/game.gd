@@ -14444,6 +14444,14 @@ func record_physical_action_feedback(player_index: int, action: String) -> void:
 	record_table_feedback({"kind": "physical_action", "player": player_index,
 		"action": action, "token_index": players[player_index].available_physical_actions})
 
+func restore_physical_actions(player_index: int, amount: int) -> void:
+	var player = players[player_index]
+	var before: int = player.available_physical_actions
+	player.available_physical_actions = mini(PlayerState.MAX_PHYSICAL_ACTIONS, before + maxi(0, amount))
+	for index in range(before, player.available_physical_actions):
+		record_table_feedback({"kind":"physical_restore", "player":player_index, "token_index":index})
+	if player.available_physical_actions > before: _request_resolution_visual_yield()
+
 
 func record_conversion_feedback(player: int, before: Array, after: Array, converter: int) -> void:
 	if network_client: return
@@ -18229,8 +18237,12 @@ func process_cleanup_finish_resolution(frame: Dictionary) -> bool:
 			for id in order: PestilenceRules.queue_tokens(self, id)
 			return false
 		"events":
-			frame["step"] = "rooms"
+			frame["step"] = "sepulcher"
 			resolve_events_for_phase(PHASE_CLEANUP, frame.context)
+			return false
+		"sepulcher":
+			frame["step"] = "rooms"
+			if AnubisRules.legendary(self): AnubisRules.queue(self, {"type": "anubis_sepulcher"})
 			return false
 		"rooms":
 			for room in get_children():
@@ -18316,14 +18328,16 @@ func check_end_game() -> bool:
 	var quest_rewards: Dictionary = ranked_power_rewards(quest_counts)
 	var trophy_rewards: Dictionary = ranked_power_rewards(trophy_counts)
 	var scores: Array = []
+	var honorable_mage: int = AnubisRules.honorable_mention(self)
 	for owner in range(-1, players.size()):
 		if AvatarRules.is_avatar(self, owner): continue
 		var base: int = black_rose_power if owner == -1 else players[owner].power
 		var quest_bonus: int = int(quest_rewards.get(owner, 0))
 		var trophy_bonus: int = int(trophy_rewards.get(owner, 0))
 		var crown_bonus: int = 1 if owner >= 0 and owner == crown_owner_id else 0
-		var total: int = base + quest_bonus + trophy_bonus + crown_bonus
-		scores.append({"player_index": owner, "name": (str(avatar.definition.name) if avatar != null else "Black Rose") if owner == -1 else player_display_name(owner), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "total": total})
+		var scenario_bonus: int = 2 if owner >= 0 and owner == honorable_mage else 0
+		var total: int = base + quest_bonus + trophy_bonus + crown_bonus + scenario_bonus
+		scores.append({"player_index": owner, "name": (str(avatar.definition.name) if avatar != null else "Black Rose") if owner == -1 else player_display_name(owner), "base": base, "quests": quest_bonus, "trophies": trophy_bonus, "crown": crown_bonus, "scenario": scenario_bonus, "total": total})
 		# Final bonuses do not open gameplay trigger windows.
 		if owner == -1:
 			set_black_rose_power(total)

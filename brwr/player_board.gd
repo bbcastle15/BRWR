@@ -453,7 +453,9 @@ func refresh_action_tokens() -> void:
 			token.position = $MageCardSlot.position + art_offset + centre * art_scale - token.size * 0.5
 		else:
 			token.position = Vector2(385 + i * 70, 215)
-		var available: bool = i < player_state.available_physical_actions
+		var displayed: int = player_state.available_physical_actions
+		if game.table_shell != null: displayed = game.table_shell.displayed_physical_actions(player_index, displayed)
+		var available: bool = i < displayed
 		var face: ShaderMaterial = token.get_node("Face").material
 		face.set_shader_parameter("rim_color", player_state.color)
 		face.set_shader_parameter("exhausted", not available)

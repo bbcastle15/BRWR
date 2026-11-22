@@ -6,6 +6,31 @@ extends RefCounted
 static func active(game) -> bool:
 	return game.avatar != null and game.avatar.definition.id == "anubis"
 
+static func legendary(game) -> bool:
+	return active(game) and game.avatar_selection.get("scenario", "") == "damned_souls"
+
+static func setup_scenario(game) -> void:
+	if not legendary(game): return
+	game.room_variants["sanctuary"] = "sanctuary_of_anubis"
+	var board = game.get_node("PowerBoard")
+	board.second_moon_threshold = 8
+	board.third_moon_threshold = 16
+	board.end_game_threshold = 32
+	board.update_threshold_markers()
+
+static func honorable_mention(game) -> int:
+	if not legendary(game): return -1
+	var candidates: Array = []
+	var least := 2147483647
+	for player in game.players:
+		if player.avatar != null: continue
+		var count: int = player.trophies.size()
+		if count < least:
+			least = count
+			candidates.clear()
+		if count == least: candidates.append(player.player_index)
+	return int(candidates[0]) if candidates.size() == 1 else -1
+
 static func queue(game, effect: Dictionary, context: Dictionary = {}) -> void:
 	game.queue_resolution({"type": "anubis_effect", "effect": effect, "context": context})
 
@@ -29,6 +54,14 @@ static func resolve(game, frame: Dictionary) -> bool:
 	var amount: int = int(effect.get("amount", 1))
 	var room_id: String = str(context.get("target_room_id", mage.room_id))
 	match str(effect.type):
+		"anubis_sepulcher":
+			if not frame.has("rooms"):
+				frame.rooms = []
+				for ev in game.players[actor].evocations:
+					if ev.evocation_id == "pharaoh" and game.is_lodge_room_id(ev.room_id): frame.rooms.append(ev.room_id)
+			if frame.rooms.is_empty(): return AvatarEffects._done(frame)
+			game.place_instability(actor, str(frame.rooms.pop_front()), 1)
+			return false
 		"anubis_pledge":
 			if not frame.has("healing"):
 				frame.healing = {"effect": {}, "context": {}}

@@ -27,152 +27,202 @@
     {
       "id": "anubis_torment",
       "path": "assets/avatars/anubis/approved/anubis_torment.png",
-      "sha256": "6313be7602da0e668692c53b725f6899ffb1646e7f9a380be0a05846e7d449a8"
+      "sha256": "09bd39687dff8e3a88cd475ea398315db9ff8743229d549eb12e9b1e81432e4a"
     },
     {
       "id": "anubis_sucking_the_life",
       "path": "assets/avatars/anubis/approved/anubis_sucking_the_life.png",
-      "sha256": "c7b4b630cabc98adae76b127baa647505659dc1d6591674afe0878379fc72cb8"
+      "sha256": "80381556a7244fd75136fc77259334e817692eade3c872b2477a9d8e7bec345e"
     },
     {
       "id": "anubis_shadow_of_the_night",
       "path": "assets/avatars/anubis/approved/anubis_shadow_of_the_night.png",
-      "sha256": "991388bbeadb24f1f30b6adb13126eac079669bf45db5c119d538d35506264b9"
+      "sha256": "837fcd768d06cc99779e5e77dac1016b20e7a33daca7f49f5d807cca27c9f0d5"
     },
     {
       "id": "anubis_awakening",
       "path": "assets/avatars/anubis/approved/anubis_awakening.png",
-      "sha256": "507744b7339baaf79a71b92b2b01db2df7d5833c18eedc001978c15ee53c67de"
+      "sha256": "77717436794cefae7038ba6aaa60f43b035aeb78b6861e17a48ccdd0cd5bc576"
     },
     {
       "id": "anubis_moon_ritual",
       "path": "assets/avatars/anubis/approved/anubis_moon_ritual.png",
-      "sha256": "d45d0758cf8782e0f45ca22565b226d0f71fdcf9a65c721957d4b984a7e85b72"
+      "sha256": "01620d14a07b7f3c15d4cd9ea95633fdb842142713fc0c5d0523e8536d0d963e"
     },
     {
       "id": "anubis_empty_the_sarcophagi",
       "path": "assets/avatars/anubis/approved/anubis_empty_the_sarcophagi.png",
-      "sha256": "3fd97cb437c601ed16e9c3a35f38289a45c294c0c1449fb10537ec412983f6da"
+      "sha256": "524e139f8ac95c6b406b2d2e0728f7c6caf881be48bf019b3923ca21e25313d7"
     },
     {
       "id": "anubis_quicksand",
       "path": "assets/avatars/anubis/approved/anubis_quicksand.png",
-      "sha256": "7eabe7374a83c8bbc07b701e9363005b5728c26f61cf874607ced957a94626e8"
+      "sha256": "adeac73a7897a64e106b73128b69c71761de5cbf820850f37f1de186f9631feb"
     },
     {
       "id": "anubis_blinding_glare",
       "path": "assets/avatars/anubis/approved/anubis_blinding_glare.png",
-      "sha256": "4183c3833cafd10e946f16aa88c4b4a0d39b2b8d8a26081a8429ddd24c90981c"
+      "sha256": "eeb00b6360fb60f12083c78812bbc455c5388906bca8a207c2f3884939b3b7d0"
     },
     {
       "id": "anubis_punish_the_explorers",
       "path": "assets/avatars/anubis/approved/anubis_punish_the_explorers.png",
-      "sha256": "57e8f82811228ff98d2917ba96348304ef0084145d451e979b618f122074e061"
+      "sha256": "ee8972ab5136281882b576484f2b3982cb4af0a5119edd49b48316c555d9c835"
     },
     {
       "id": "anubis_epicenter",
       "path": "assets/avatars/anubis/approved/anubis_epicenter.png",
-      "sha256": "fa7b11d3b448767be8da849dc79c4b71a587de21a40414baaf766f960108a938"
+      "sha256": "a92f8a8164cfd3df1bf5bf4ad4f4bf66c11b1ba8c588db97ac1560d80bbc931b"
     },
     {
       "id": "anubis_pointing_the_finger",
       "path": "assets/avatars/anubis/approved/anubis_pointing_the_finger.png",
-      "sha256": "ff78a48098b49cfe9031109c8ec5a9b1a770bbd3f62912e135bf93da9dbc895f"
+      "sha256": "27076145b8ce9271cd4859f6583e48b349ee887b5f85753ab5a044c71dd377f6"
     },
     {
       "id": "anubis_nefarious_brand",
       "path": "assets/avatars/anubis/approved/anubis_nefarious_brand.png",
-      "sha256": "12e6aebe9220825256d0bc1a51e5371120ec690902ee102540917115f8c7962e"
+      "sha256": "07e8b7470b7cc7d1b5c597cf0e20bb32f35315e0dc044e4a1ddd32126da0cc5e"
     },
     {
       "id": "anubis_open_wounds",
       "path": "assets/avatars/anubis/approved/anubis_open_wounds.png",
-      "sha256": "b5bce4c6f8a92dae84e6174f411c1bd541ea9da5ca53c424c9610cc6a7410fe9"
+      "sha256": "bb74a41f59a81b17df72cecdc58be2d5a4f99707d6ff08395b55ae9700e28c41"
     },
     {
       "id": "anubis_tomb_knowledge",
       "path": "assets/avatars/anubis/approved/anubis_tomb_knowledge.png",
-      "sha256": "d7b240f8b14ba783d08195a32d75eb4adf4ed71f5b479294bca19a6f022f5ee8"
+      "sha256": "95bbd6e99339ba762d68e82c03231af7f97a8f4675632049da126270338fdd5c"
     },
     {
       "id": "anubis_funeral_home",
       "path": "assets/avatars/anubis/approved/anubis_funeral_home.png",
-      "sha256": "11c38927f8d5e2d22d89daf8036835787e4538ba900a11df7a2fb81f67bb59d7"
+      "sha256": "8669ee2d6096c5317e2ac4343d60bd35fa67cde2deb57b488ba5b80eb2193c3d"
     },
     {
       "id": "anubis_in_the_tomb",
       "path": "assets/avatars/anubis/approved/anubis_in_the_tomb.png",
-      "sha256": "bf48ec036e72e82f721a46837cbefc7c0e26a3c723652338022acaa285a6acaa"
+      "sha256": "89b2d90ce8deecf9ebc7bf34a295b2eeafc4c51964111d6f08e4c898ac384df9"
     },
     {
       "id": "anubis_hounding",
       "path": "assets/avatars/anubis/approved/anubis_hounding.png",
-      "sha256": "61cc967aa1ec605cb2215d2dea411c360cd6fe81c772c257274046e3cfe16096"
+      "sha256": "8b856ed4a7b5c444dc9848ad9801d52844ec923cd991de0922bc48d0e2929c3b"
     },
     {
       "id": "anubis_no_mercy",
       "path": "assets/avatars/anubis/approved/anubis_no_mercy.png",
-      "sha256": "a77d7dcbdc0ad021c5631ff15bd1d8b5e378641e3147c1ae6358639130312832"
+      "sha256": "d08c0455e108d6f0833f43ee48e60a29ddffaebedbe5fbf9724359fb462a29d4"
     },
     {
       "id": "anubis_lost_in_the_dunes",
       "path": "assets/avatars/anubis/approved/anubis_lost_in_the_dunes.png",
-      "sha256": "13b6ec65ce8631f20b3d2ddcc7b1bd89b1d819e82d1323c6f984362ad2887646"
+      "sha256": "119b7306db920f5a06bfb500b3753bfde7675e0edb9bbdcd2001fd50b5cf3b0f"
     },
     {
       "id": "anubis_merciless_desert",
       "path": "assets/avatars/anubis/approved/anubis_merciless_desert.png",
-      "sha256": "79139ae307c10b7843f09434b7f8a721ad41a36786837da4557774ae72fa361f"
+      "sha256": "fb999f0539c31bf658fc8077d8a63790d424389e8bd596a3b55ce3a497b64000"
     },
     {
       "id": "anubis_humiliate",
       "path": "assets/avatars/anubis/approved/anubis_humiliate.png",
-      "sha256": "e297f04c79d8d0d548f8f06fc81dd48bdd33c885aaa24fd4604ac0477e92f524"
+      "sha256": "b697798857ab0535ec20cf94929699f246d5b0523ee8c3b397dedf20acee00ba"
     },
     {
       "id": "anubis_mourning",
       "path": "assets/avatars/anubis/approved/anubis_mourning.png",
-      "sha256": "845707dd36437f7aa18df1cd2b58492c9c67175b7b0cd259ef78de70f36f4185"
+      "sha256": "98c50cde731bf952784f76591f0307724276ecd1d28c086386e614d0e7811992"
     },
     {
       "id": "anubis_despair",
       "path": "assets/avatars/anubis/approved/anubis_despair.png",
-      "sha256": "809a97ea122bf64800ad25435d2583bd82c4862d5226a12dcf08edc7cbfd4318"
+      "sha256": "9e3e13aeec9393bbdb70214d55f4b1d098ffd39b0896cd49ac48a59085968631"
     },
     {
       "id": "anubis_last_chance",
       "path": "assets/avatars/anubis/approved/anubis_last_chance.png",
-      "sha256": "d1b53efe8966086254d25f0cdc2b168e5d585ad3fd569869de16411617fcac88"
+      "sha256": "2e1f5d09d4ea274853cda8b8efe0c6da97d5c42a86c8664ce2c4fd78c82597d0"
     },
     {
       "id": "anubis_dark_ritual",
       "path": "assets/avatars/anubis/approved/anubis_dark_ritual.png",
-      "sha256": "4608fd4b8773ceeaa406cc062cdeff9ec77cbcf9a0a4cf77a8a8b81e142615cd"
+      "sha256": "fa622ea2d235c5912dd193dcd6d69b3cab893d091b57b0712884d497109e76ad"
     },
     {
       "id": "anubis_mummified_horde",
       "path": "assets/avatars/anubis/approved/anubis_mummified_horde.png",
-      "sha256": "4d6f6afdb51238f1ff95524e33884021a82d4f558d04a8373121d1e0a690d612"
+      "sha256": "0bb6f1c0f2f1f69ab361230ae0d45f9d83848e0f8f6a8e3703b9f54f57800c94"
     },
     {
       "id": "anubis_hopeless",
       "path": "assets/avatars/anubis/approved/anubis_hopeless.png",
-      "sha256": "bfbedab7f8da4893a4f663d345e03c52df86bbedf5fe4e8f91945fe9fe5632c8"
+      "sha256": "4f3edb45b5964eed959dacdbe751aac06d914a3ed9337b454a566f6693df1ec7"
     },
     {
       "id": "anubis_sarcophagus",
       "path": "assets/avatars/anubis/approved/anubis_sarcophagus.png",
-      "sha256": "8292aaeab56768987c1e69c665c2afd96815a0a451859f80f3221db30e2f2366"
+      "sha256": "13c96b7a6cf1e23292dd749ec3fa35c05130a8653aed6802cee25d212260756a"
     },
     {
       "id": "anubis_supreme_plague",
       "path": "assets/avatars/anubis/approved/anubis_supreme_plague.png",
-      "sha256": "95b5a4791f69f0b994985edbaa57a967443fa40ffab5202f94fe5ece7174ed93"
+      "sha256": "2a3a83447c4bb833a9d49860e7245442dea0af4da4be06231a217235f86be123"
     },
     {
       "id": "anubis_eternal_guardians",
       "path": "assets/avatars/anubis/approved/anubis_eternal_guardians.png",
-      "sha256": "e08b1efdd79b19b3dc44a7745faf9b20c0633c3d09619b8835edf9e022d36f9e"
+      "sha256": "c77d96699082eb78148b0ffd7691253952d08517e6d0297637e44d68d9c02bb9"
+    },
+    {
+      "id": "anubis_command_back_1",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_1.png",
+      "sha256": "3dfa90cdbe74da09746c1f203bf0f9fefaa9c579f88e81646cc027a545b1c69a"
+    },
+    {
+      "id": "anubis_command_back_1_protection_combat",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_1_protection_combat.png",
+      "sha256": "0bf050cbc57488ede7c26a603bc4a1a530ecd60e209e02a69e65db5775b0da8d"
+    },
+    {
+      "id": "anubis_command_back_1_protection_damage",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_1_protection_damage.png",
+      "sha256": "8bd58e82ab35bba07ba77ef7a247339b40595275324fc986a9bbee92e6b42941"
+    },
+    {
+      "id": "anubis_command_back_2",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_2.png",
+      "sha256": "c5a094665ae9d690e389ba54e6767321ee728b6e909df0b2d1d7381e620047fd"
+    },
+    {
+      "id": "anubis_command_back_2_protection_combat",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_2_protection_combat.png",
+      "sha256": "ed60a3c9c380b532b58df91fac6558ac70eb125b538a71190fd5ac04e07f58e7"
+    },
+    {
+      "id": "anubis_command_back_2_protection_damage",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_2_protection_damage.png",
+      "sha256": "cb9353a64df2a03e0a67b109b3ce5468cd4820734a60ddd9e2dbe41699796be2"
+    },
+    {
+      "id": "anubis_command_back_3",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_3.png",
+      "sha256": "2e6d08dcd37bd3fb59183f4a5e3f895633586221fab856f2aa20403fb3fa66cc"
+    },
+    {
+      "id": "anubis_command_back_3_protection_combat",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_3_protection_combat.png",
+      "sha256": "0b6726e571afb3357422a63859a1956c06f689b5cea007c780c211da8f4d9b21"
+    },
+    {
+      "id": "anubis_command_back_3_protection_damage",
+      "path": "assets/avatars/anubis/approved/anubis_command_back_3_protection_damage.png",
+      "sha256": "9e4ebe78576c2febad84ffe9d50ab48dd494d83b6d4a4e27186861f1dd2c808f"
+    },
+    {
+      "id": "anubis",
+      "path": "assets/avatars/anubis/approved/anubis.png",
+      "sha256": "870e231869e9aa31838d5dcad769f153207c920da83095f55112baa772dfb027"
     }
   ]
 }

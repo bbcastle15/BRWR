@@ -13,6 +13,8 @@ static func build(game, viewer: int) -> Dictionary:
 	state["feedback_serial"] = game.table_feedback_serial
 	state["feedback_events"] = game.table_feedback_events.duplicate(true)
 	state["avatar"] = game.avatar.public_data() if game.avatar != null else {}
+	var track = game.get_node("PowerBoard")
+	state["power_thresholds"] = [track.second_moon_threshold, track.third_moon_threshold, track.end_game_threshold]
 	state["active_schools"] = game.active_school_ids.duplicate()
 	state["school_discards"] = {}
 	for school_id in game.school_discards:
@@ -69,6 +71,12 @@ static func build(game, viewer: int) -> Dictionary:
 
 static func apply(game, state: Dictionary) -> void:
 	var power_board = game.get_node("PowerBoard")
+	var thresholds: Array = state.get("power_thresholds", [6, 18, 30])
+	if thresholds.size() == 3:
+		power_board.second_moon_threshold = int(thresholds[0])
+		power_board.third_moon_threshold = int(thresholds[1])
+		power_board.end_game_threshold = int(thresholds[2])
+		power_board.update_threshold_markers()
 	# Joining a running table positions markers directly; subsequent score
 	# changes use the same animations as local games.
 	power_board.instant_updates = not game.has_meta("received_network_snapshot")
