@@ -31,7 +31,12 @@ var mode_buttons: Dictionary = {}
 var forced_school_ids: Array[String] = []
 var school_checks: Array[CheckBox] = []
 var school_count_label: Label
-var solo_difficulty: OptionButton
+var solo_avatar_selection: Dictionary = {"id": "possessed", "difficulty": "apprentice"}
+var online_avatar_selection: Dictionary = {}
+var online_room_selections: Dictionary = {}
+var solo_avatar_button: Button
+var online_avatar_button: Button
+var online_room_button: Button
 var username: LineEdit
 
 func _ready() -> void:
@@ -126,6 +131,9 @@ func _ready() -> void:
 	if OS.has_feature("web"):
 		_label(box, "Open the host’s invite link and press Join game.")
 	else:
+		_label(box, "Host setup · choose before creating the room")
+		online_room_button = _button(box, "Lodge Rooms · original / alternative", _open_room_setup.bind(false, true))
+		online_avatar_button = _button(box, "Avatar · None", _open_avatar_setup.bind("online"))
 		var host_row := HBoxContainer.new()
 		box.add_child(host_row)
 		online_count = _count(host_row)
@@ -165,11 +173,8 @@ func _ready() -> void:
 
 	join_button = _button(box, "Join game", _join)
 	box = mode_pages.solo
-	_label(box, "One Mage against Possessed")
-	solo_difficulty = OptionButton.new()
-	solo_difficulty.add_item("Apprendista · 3 Command Cards")
-	solo_difficulty.add_item("Maestro · 4 Command Cards")
-	box.add_child(solo_difficulty)
+	_label(box, "One Mage against the Avatar")
+	solo_avatar_button = _button(box, "Avatar · Possessed · Apprentice", _open_avatar_setup.bind("solo"))
 	solo_room_button = _button(box, "Lodge Rooms · original / alternative", _open_room_setup.bind(true))
 	_build_school_options(box)
 	avatar_solo_start = _button(box, "Start solo game", _start_avatar_solo)
@@ -276,7 +281,7 @@ func _start_local(against_avatar: bool) -> void:
 	var game = load("res://game.tscn").instantiate()
 	game.local_match_mode = "solo" if against_avatar else "local"
 	game.player_names = {0: session.display_name}
-	game.avatar_selection = {"id": "possessed", "difficulty": "master" if solo_difficulty.selected == 1 else "apprentice"} if against_avatar else avatar_selection.duplicate(true)
+	game.avatar_selection = (solo_avatar_selection if against_avatar else avatar_selection).duplicate(true)
 	game.forced_school_ids.assign(forced_school_ids if against_avatar else [])
 	game.player_count = 2
 	if not against_avatar:
@@ -302,8 +307,8 @@ func _host() -> void:
 		_status("Render server not configured. Set its URL in online_server_url.txt.")
 		return
 
-	session.room_variants = room_selections.duplicate()
-	session.avatar_selection = avatar_selection.duplicate(true)
+	session.room_variants = online_room_selections.duplicate()
+	session.avatar_selection = online_avatar_selection.duplicate(true)
 	var error: Error = session.host(int(online_count.value))
 	if error != OK:
 		_status("Unable to connect to online server: " + error_string(error))
@@ -343,6 +348,9 @@ func _refresh_lobby() -> void:
 	solo_room_button.disabled = in_session
 	avatar_solo_start.disabled = in_session
 	avatar_setup_button.disabled = in_session
+	solo_avatar_button.disabled = in_session
+	if online_avatar_button != null: online_avatar_button.disabled = in_session
+	if online_room_button != null: online_room_button.disabled = in_session
 	join_button.disabled = in_session
 	address.editable = not in_session
 	code.editable = not in_session
@@ -385,8 +393,9 @@ func _reset() -> void:
 	session.return_to_menu()
 
 
-func _open_room_setup(for_solo: bool = false) -> void:
-	var selections: Dictionary = solo_room_selections if for_solo else room_selections
+func _open_room_setup(for_solo: bool = false, for_online: bool = false) -> void:
+	if session.connected or session.started or session.connection_started > 0: return
+	var selections: Dictionary = online_room_selections if for_online else (solo_room_selections if for_solo else room_selections)
 	var definitions: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/rooms.json"))
 	var overlay := PanelContainer.new()
 	overlay.theme = theme
@@ -467,9 +476,11 @@ func _set_all_rooms(controls: Dictionary, selections: Dictionary, randomize_vari
 		selections[base_id] = selected
 		controls[base_id][selected].button_pressed = true
 
-func _open_avatar_setup() -> void:
-	if session.connected or session.started: return
+func _open_avatar_setup(mode: String = "local") -> void:
+	if session.connected or session.started or session.connection_started > 0: return
+	var current: Dictionary = solo_avatar_selection if mode == "solo" else (online_avatar_selection if mode == "online" else avatar_selection)
 	var overlay := PanelContainer.new()
+	overlay.theme = theme
 	menu.get_parent().add_child(overlay)
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu.hide()
@@ -479,44 +490,98 @@ func _open_avatar_setup() -> void:
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 18)
 	margin.add_child(column)
-	var title := _label(column, "AVATAR MODE")
+	var title := _label(column, "CHOOSE YOUR AVATAR · " + mode.to_upper())
 	title.add_theme_font_size_override("font_size", 30)
 	_label(column, "The Avatar occupies a seat in the Lodge and controls the Black Rose. Ties and choices not resolved by priorities belong to the Crown holder.")
+	var body := HBoxContainer.new()
+	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body.add_theme_constant_override("separation", 28)
+	column.add_child(body)
+	var preview := PanelContainer.new()
+	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	preview.add_theme_stylebox_override("panel", preload("res://tabletop_style.gd").panel())
+	preview.size_flags_stretch_ratio = 1.7
+	body.add_child(preview)
+	var settings := VBoxContainer.new()
+	settings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	settings.add_theme_constant_override("separation", 18)
+	body.add_child(settings)
+	_label(settings, "AVATAR")
 	var selection := OptionButton.new()
 	selection.name = "AvatarSelection"
 	selection.custom_minimum_size.y = 48
-	selection.add_item("Disabled")
-	selection.set_item_metadata(0, "")
+	if mode != "solo":
+		selection.add_item("Disabled")
+		selection.set_item_metadata(0, "")
 	if not AvatarRules.available().is_empty():
 		selection.add_item("Random Avatar")
-		selection.set_item_metadata(1, "random")
+		selection.set_item_metadata(selection.item_count - 1, "random")
 	for definition in AvatarRules.available():
 		selection.add_item(str(definition.name))
 		selection.set_item_metadata(selection.item_count - 1, str(definition.id))
 	for i in selection.item_count:
-		if selection.get_item_metadata(i) == avatar_selection.get("id", ""): selection.select(i)
-	column.add_child(selection)
+		if selection.get_item_metadata(i) == current.get("id", ""): selection.select(i)
+	_style_avatar_option(selection)
+	settings.add_child(selection)
+	_label(settings, "DIFFICULTY")
 	var difficulty := OptionButton.new()
 	difficulty.name = "AvatarDifficulty"
 	difficulty.custom_minimum_size.y = 48
-	difficulty.add_item("Apprendista · 3 Comandi per fase Azione")
-	difficulty.add_item("Maestro · 4 Comandi per fase Azione")
-	difficulty.select(1 if avatar_selection.get("difficulty") == "master" else 0)
-	column.add_child(difficulty)
+	difficulty.add_item("Apprentice · 3 Commands per Action Phase")
+	difficulty.add_item("Master · 4 Commands per Action Phase")
+	difficulty.select(1 if current.get("difficulty") == "master" else 0)
+	_style_avatar_option(difficulty)
+	settings.add_child(difficulty)
+	var legendary := CheckBox.new()
+	legendary.name = "DamnedSoulsScenario"
+	legendary.text = "Damned Souls · Legendary Scenario (Anubis)"
+	legendary.button_pressed = current.get("scenario", "") == "damned_souls"
+	settings.add_child(legendary)
 	var art := TextureRect.new()
 	art.texture = AvatarArt.texture("possessed")
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	art.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	column.add_child(art)
-	_label(column, "Possessed · 12 Health · 2 Strength · 2 Speed\nDominion: if it starts its activation in its Cell, place it in the Black Rose Room without revealing a Command.")
+	preview.add_child(art)
+	var description := _label(settings, "")
+	var update_avatar := func(_index: int):
+		var selected_id := str(selection.get_selected_metadata())
+		legendary.visible = selected_id == "anubis"
+		difficulty.disabled = selected_id.is_empty()
+		var entries: Array = AvatarRules.available().filter(func(item): return item.id == selected_id)
+		if entries.is_empty():
+			art.texture = null
+			description.text = "The Avatar is chosen randomly when the match starts." if selected_id == "random" else "Mages compete without an Avatar. Select an Avatar to see its abilities."
+		else:
+			var entry: Dictionary = entries[0]
+			art.texture = AvatarArt.texture(str(entry.id))
+			description.text = "%s · %d Health · %d Strength · %d Speed\n%s" % [entry.name, entry.health, entry.strength, entry.speed, ", ".join(entry.get("skills", ["dominion"])).replace("_", " ").capitalize()]
+	selection.item_selected.connect(update_avatar)
+	update_avatar.call(selection.selected)
 	_button(column, "Confirm and return to menu", func():
 		var id: String = str(selection.get_selected_metadata())
-		avatar_selection = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
-		avatar_setup_button.text = "Avatar · " + ("None" if id.is_empty() else id.capitalize())
-		solo_count.min_value = 1 if id.is_empty() else 0
-		solo_count.max_value = 5 if id.is_empty() else 4
-		_refresh_local_lineup()
-		if online_count != null: online_count.max_value = 6 if id.is_empty() else 5
+		var chosen: Dictionary = {} if id.is_empty() else {"id": id, "difficulty": "master" if difficulty.selected == 1 else "apprentice"}
+		if id == "anubis" and legendary.button_pressed: chosen["scenario"] = "damned_souls"
+		var summary: String = "Avatar · " + ("None" if id.is_empty() else id.capitalize() + " · " + str(chosen.difficulty).capitalize())
+		if mode == "solo":
+			solo_avatar_selection = chosen
+			solo_avatar_button.text = summary
+		elif mode == "online":
+			online_avatar_selection = chosen
+			online_avatar_button.text = summary
+			online_count.max_value = 6 if id.is_empty() else 5
+		else:
+			avatar_selection = chosen
+			avatar_setup_button.text = summary
+			solo_count.min_value = 1 if id.is_empty() else 0
+			solo_count.max_value = 5 if id.is_empty() else 4
+			_refresh_local_lineup()
 		menu.show()
 		overlay.queue_free())
+
+
+func _style_avatar_option(option: OptionButton) -> void:
+	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
+		option.add_theme_stylebox_override(state, theme.get_stylebox(state, "Button"))
+	option.add_theme_color_override("font_color", preload("res://tabletop_style.gd").PAPER)
+	option.get_popup().add_theme_stylebox_override("panel", preload("res://tabletop_style.gd").panel())

@@ -97,6 +97,9 @@ static func recompute_stats(game, ev: EvocationState) -> void:
 static func assign_jinx(game, caster: int, target: int, context: Dictionary, effect: Dictionary = {}) -> bool:
 	if target < 0 or target >= game.players.size() or DeathEffectResolver.ignores(context, target):
 		return true
+	if AnubisRules.active(game) and target == game.avatar.player_index:
+		game.append_public_log("Anubis · Scourge: the Jinx is not assigned.")
+		return true
 	var mage = game.players[target].mage
 	# An attack resolves defeat before its subsequent ability (FAQ p.5).
 	if mage == null or (mage.in_cell and target != caster):

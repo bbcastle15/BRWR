@@ -1098,5 +1098,1269 @@
       }
     ],
     "reaction": {}
+  },
+  {
+    "id": "anubis_torment",
+    "name": "Torment",
+    "number": 1,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": 2,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "trophy"
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-001"
+  },
+  {
+    "id": "anubis_sucking_the_life",
+    "name": "Sucking the Life",
+    "number": 2,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 2,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_convert_per_jinx",
+            "amount": 1
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-002"
+  },
+  {
+    "id": "anubis_shadow_of_the_night",
+    "name": "Shadow of the Night",
+    "number": 3,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "mage",
+        "range": 1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "trophy"
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-003"
+  },
+  {
+    "id": "anubis_awakening",
+    "name": "Awakening",
+    "number": 4,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 0,
+            "color": "black"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "mage",
+        "range": -1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-004"
+  },
+  {
+    "id": "anubis_moon_ritual",
+    "name": "Moon Ritual",
+    "number": 5,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "area",
+        "range": -1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_convert_instability",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "yellow"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-005"
+  },
+  {
+    "id": "anubis_empty_the_sarcophagi",
+    "name": "Empty the Sarcophagi",
+    "number": 6,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "area",
+        "range": 1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 1
+          },
+          {
+            "type": "instability",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "green"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-006"
+  },
+  {
+    "id": "anubis_quicksand",
+    "name": "Quicksand",
+    "number": 7,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "earth",
+        "target": "mage",
+        "range": -1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_instability_per_jinx",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "suffered_damage",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 3
+        },
+        {
+          "type": "remove_target_evocation",
+          "max_health": 999
+        }
+      ]
+    },
+    "source": "BRW-LAS M-007"
+  },
+  {
+    "id": "anubis_blinding_glare",
+    "name": "Blinding Glare",
+    "number": 8,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "instability",
+            "amount": 2
+          },
+          {
+            "type": "damage",
+            "amount": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "suffered_damage",
+      "target": "area",
+      "effects": [
+        {
+          "type": "instability",
+          "amount": 2
+        },
+        {
+          "type": "damage",
+          "amount": 3
+        }
+      ]
+    },
+    "source": "BRW-LAS M-008"
+  },
+  {
+    "id": "anubis_punish_the_explorers",
+    "name": "Punish the Explorers",
+    "number": 9,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_solve_quests",
+            "amount": 1
+          },
+          {
+            "type": "anubis_damage_quest_mages",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "combat_spell",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "anubis_discard_solved_quest"
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ]
+    },
+    "source": "BRW-LAS M-009"
+  },
+  {
+    "id": "anubis_epicenter",
+    "name": "Epicenter",
+    "number": 10,
+    "moon": 1,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "mage",
+        "range": -1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_summon",
+            "at": "target",
+            "range": 0
+          },
+          {
+            "type": "anubis_summon",
+            "at": "black_rose"
+          },
+          {
+            "type": "anubis_event"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-010"
+  },
+  {
+    "id": "anubis_pointing_the_finger",
+    "name": "Pointing the Finger",
+    "number": 11,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": 2,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_target_power",
+            "amount": -2
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-011"
+  },
+  {
+    "id": "anubis_nefarious_brand",
+    "name": "Nefarious Brand",
+    "number": 12,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 2,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_convert_per_jinx",
+            "amount": 3
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-012"
+  },
+  {
+    "id": "anubis_open_wounds",
+    "name": "Open Wounds",
+    "number": 13,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "mage",
+        "range": 1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "trophy"
+          },
+          {
+            "type": "anubis_steal_power",
+            "amount": 1
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-013"
+  },
+  {
+    "id": "anubis_tomb_knowledge",
+    "name": "Tomb Knowledge",
+    "number": 14,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 0,
+            "color": "black"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "mage",
+        "range": -1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-014"
+  },
+  {
+    "id": "anubis_funeral_home",
+    "name": "Funeral Home",
+    "number": 15,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "area",
+        "range": -1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_convert_instability",
+            "amount": 3
+          },
+          {
+            "type": "anubis_summon"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "grey"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-015"
+  },
+  {
+    "id": "anubis_in_the_tomb",
+    "name": "In the Tomb",
+    "number": 16,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "area",
+        "range": 1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "instability",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "blue"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-016"
+  },
+  {
+    "id": "anubis_hounding",
+    "name": "Hounding",
+    "number": 17,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "earth",
+        "target": "mage",
+        "range": -1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_damage_per_jinx",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "suffered_damage",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "anubis_damage_per_jinx",
+          "amount": 3
+        },
+        {
+          "type": "anubis_summon",
+          "at": "target",
+          "range": 0
+        }
+      ]
+    },
+    "source": "BRW-LAS M-017"
+  },
+  {
+    "id": "anubis_no_mercy",
+    "name": "No Mercy",
+    "number": 18,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "instability",
+            "amount": 3
+          },
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "suffered_damage",
+      "target": "area",
+      "effects": [
+        {
+          "type": "instability",
+          "amount": 3
+        },
+        {
+          "type": "damage",
+          "amount": 4
+        }
+      ]
+    },
+    "source": "BRW-LAS M-018"
+  },
+  {
+    "id": "anubis_lost_in_the_dunes",
+    "name": "Lost in the Dunes",
+    "number": 19,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_solve_quests",
+            "amount": 2
+          },
+          {
+            "type": "anubis_damage_quest_mages",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "combat_spell",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "anubis_steal_solved_quest"
+        },
+        {
+          "type": "damage",
+          "amount": 2
+        }
+      ]
+    },
+    "source": "BRW-LAS M-019"
+  },
+  {
+    "id": "anubis_merciless_desert",
+    "name": "Merciless Desert",
+    "number": 20,
+    "moon": 2,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "mage",
+        "range": -1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_summon",
+            "at": "target",
+            "range": 0
+          },
+          {
+            "type": "anubis_summon",
+            "at": "target",
+            "range": 1,
+            "exclude_previous": true
+          },
+          {
+            "type": "anubis_summon",
+            "at": "black_rose"
+          },
+          {
+            "type": "anubis_event"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-020"
+  },
+  {
+    "id": "anubis_humiliate",
+    "name": "Humiliate",
+    "number": 21,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "profane",
+        "target": "mage",
+        "range": 2,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "trophy",
+            "amount": 2
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-021"
+  },
+  {
+    "id": "anubis_mourning",
+    "name": "Mourning",
+    "number": 22,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 2,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "mage",
+        "range": 1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_steal_per_jinx",
+            "amount": 1
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-022"
+  },
+  {
+    "id": "anubis_despair",
+    "name": "Despair",
+    "number": 23,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 1,
+            "color": ""
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "sacred",
+        "target": "mage",
+        "range": 1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "trophy"
+          },
+          {
+            "type": "convert_damage",
+            "amount": 3
+          },
+          {
+            "type": "anubis_steal_missing_conversion",
+            "amount": 1
+          },
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-023"
+  },
+  {
+    "id": "anubis_last_chance",
+    "name": "Last Chance",
+    "number": 24,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 0,
+            "color": "black"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "mage",
+        "range": -1,
+        "priority": 1,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_steal_power",
+            "amount": 1
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-024"
+  },
+  {
+    "id": "anubis_dark_ritual",
+    "name": "Dark Ritual",
+    "number": 25,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "profane",
+        "target": "area",
+        "range": -1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_convert_instability",
+            "amount": 4,
+            "power_per_missing": 1
+          },
+          {
+            "type": "anubis_ability"
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "purple"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-025"
+  },
+  {
+    "id": "anubis_mummified_horde",
+    "name": "Mummified Horde",
+    "number": 26,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "magic",
+        "target": "area",
+        "range": -1,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "instability",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "kind": "physical",
+        "effects": [
+          {
+            "type": "move_toward",
+            "priority": 3,
+            "color": "red"
+          },
+          {
+            "type": "instability",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-026"
+  },
+  {
+    "id": "anubis_hopeless",
+    "name": "Hopeless",
+    "number": 27,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "earth",
+        "target": "mage",
+        "range": -1,
+        "priority": 2,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_jinx"
+          },
+          {
+            "type": "anubis_defeat"
+          },
+          {
+            "type": "power",
+            "amount": 4
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "suffered_damage",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "anubis_defeat"
+        },
+        {
+          "type": "power",
+          "amount": 3
+        }
+      ]
+    },
+    "source": "BRW-LAS M-027"
+  },
+  {
+    "id": "anubis_sarcophagus",
+    "name": "Sarcophagus",
+    "number": 28,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "fire",
+        "target": "area",
+        "range": 2,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_instability",
+            "amount": 4,
+            "power_per_missing": 1
+          },
+          {
+            "type": "damage",
+            "amount": 3
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "damage",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "ignore_damage",
+          "amount": 999
+        },
+        {
+          "type": "anubis_instability",
+          "amount": 3,
+          "power_per_missing": 1,
+          "at": "self"
+        }
+      ]
+    },
+    "source": "BRW-LAS M-028"
+  },
+  {
+    "id": "anubis_supreme_plague",
+    "name": "Supreme Plague",
+    "number": 29,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "combat",
+        "element": "fire",
+        "target": "special",
+        "range": -1,
+        "priority": 0,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_steal_each_quest"
+          },
+          {
+            "type": "anubis_event"
+          }
+        ]
+      }
+    ],
+    "reaction": {
+      "type": "protection",
+      "trigger": "combat_spell",
+      "target": "mage",
+      "effects": [
+        {
+          "type": "anubis_steal_solved_quest"
+        },
+        {
+          "type": "anubis_steal_power",
+          "amount": 1
+        }
+      ]
+    },
+    "source": "BRW-LAS M-029"
+  },
+  {
+    "id": "anubis_eternal_guardians",
+    "name": "Eternal Guardians",
+    "number": 30,
+    "moon": 3,
+    "sections": [
+      {
+        "kind": "spell",
+        "type": "contingency",
+        "element": "magic",
+        "target": "area",
+        "range": 0,
+        "priority": 3,
+        "instability": false,
+        "effects": [
+          {
+            "type": "anubis_summon",
+            "activate": true
+          },
+          {
+            "type": "anubis_summon",
+            "activate": true
+          },
+          {
+            "type": "anubis_power_per_evocation"
+          },
+          {
+            "type": "additional_command"
+          }
+        ]
+      }
+    ],
+    "reaction": {},
+    "source": "BRW-LAS M-030"
   }
 ]

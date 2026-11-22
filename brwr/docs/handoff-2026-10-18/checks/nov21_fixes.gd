@@ -1,0 +1,40 @@
+extends "res://docs/handoff-2026-10-18/checks/avatar_board_ui.gd"
+
+func run():
+	game = await create_game()
+	reset_case()
+	var shell = game.table_shell
+	shell.set_process(false)
+	shell._cancel_animation()
+	expect(game.ReferenceCardPreview.card_texture("mages", "anubis") == load("res://assets/mages/anubis.png"), "Anubis Mage uses Mage card")
+	expect(game.ReferenceCardPreview.card_texture("avatars", "anubis") == AvatarArt.texture("anubis"), "Anubis Avatar retains Avatar card")
+	game.players[0].available_physical_actions = 0
+	game.restore_physical_actions(0, 2)
+	expect(game.players[0].available_physical_actions == 2, "Restore updates authoritative state")
+	expect(shell.animation_queue.size() == 2, "One animation per restored action")
+	var events: Array = game.table_feedback_events.filter(func(e): return e.kind == "physical_restore")
+	expect(events.size() == 2 and events[0].token_index == 0 and events[1].token_index == 1, "Restore events include public token indices")
+	var board = game.player_boards[0]
+	board.refresh_action_tokens()
+	expect(board.get_node("PhysicalAction0/Face").material.get_shader_parameter("exhausted"), "Restored token stays exhausted before animation")
+	shell._play_next_animation()
+	expect(shell.board_overlay.visible and shell.shown_player == 0, "Restore opens affected PlayerBoard")
+	shell.animation.custom_step(1.0)
+	expect(not board.get_node("PhysicalAction0/Face").material.get_shader_parameter("exhausted"), "First token flips to available")
+	expect(board.get_node("PhysicalAction1/Face").material.get_shader_parameter("exhausted"), "Second token waits for its animation")
+	shell._cancel_animation(true)
+	expect(not shell.animation_queue.is_empty(), "Pending restore survives board navigation")
+	shell._cancel_animation(false)
+	var count: int = game.table_feedback_events.size()
+	game.restore_physical_actions(0, 1)
+	expect(game.table_feedback_events.size() == count, "No animation when all actions are available")
+	var room = game.get_room_by_id("garden")
+	room.setup_room(game.get_room("cherry_blossom_garden"))
+	expect(is_equal_approx(room.get_node("ActivationToken").size.x, room.radius), "Kami token has standard width")
+	expect(room.get_node("Background/StandardSockets").get_child_count() == 4, "Kami uses four standard sockets")
+	room.set_rebuilt(true, false)
+	expect(not room.get_node("Background/StandardSockets").visible, "Destroyed Kami room has no sockets")
+	print("NOV21: %d checks; failures: %s" % [checks, failures])
+	game.queue_free()
+	await process_frame
+	quit(0 if failures.is_empty() else 1)

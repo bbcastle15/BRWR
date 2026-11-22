@@ -1,0 +1,50 @@
+import json
+from pathlib import Path
+root=Path('brwr/data')
+def effect(t,amount=None,**kw):
+    return dict(type=t,**({'amount':amount} if amount is not None else {}),**kw)
+def spell(typ,element,target,range,priority,*effects):
+    element={'death':'profane','demon':'sacred'}.get(element,element)
+    return dict(kind='spell',type=typ,element=element,target=target,range=range,priority=priority,instability=False,effects=list(effects))
+def move(priority=0,color='',place=False):
+    return dict(kind='physical',effects=[effect('move_toward',priority=priority,color=color)]+([effect('instability',1)] if place else []))
+def reaction(trigger,*effects,room=False):
+    return dict(type='protection',trigger=trigger,target='area' if room else 'mage',effects=list(effects))
+jinx=effect('anubis_jinx'); ability=effect('anubis_ability'); more=effect('additional_command')
+cards=[]
+def add(n,name,sections,r=None):
+    cards.append(dict(id='anubis_'+name.lower().replace(' ','_'),name=name,number=n,moon=(n-1)//10+1,sections=sections,reaction=r or {},source='BRW-LAS M-%03d'%n))
+def targeted(n,name,prio,rng,el,*eff):
+    add(n,name,[move(prio),spell('combat',el,'mage',rng,prio,*eff)])
+targeted(1,'Torment',1,2,'death',effect('trophy'),jinx,ability)
+targeted(2,'Sucking the Life',2,1,'magic',jinx,effect('anubis_convert_per_jinx',1),ability)
+targeted(3,'Shadow of the Night',1,1,'demon',effect('trophy'),jinx,ability)
+add(4,'Awakening',[move(color='black',place=True),spell('contingency','death','mage',-1,1,jinx,more)])
+add(5,'Moon Ritual',[spell('contingency','death','area',-1,3,effect('anubis_convert_instability',2)),move(3,'yellow',True)])
+add(6,'Empty the Sarcophagi',[spell('combat','magic','area',1,3,effect('damage',1),effect('instability',2)),move(3,'green',True)])
+add(7,'Quicksand',[spell('combat','earth','mage',-1,1,jinx,effect('anubis_instability_per_jinx',2))],reaction('suffered_damage',effect('damage',3),effect('remove_target_evocation',max_health=999)))
+add(8,'Blinding Glare',[spell('combat','fire','area',2,3,effect('instability',2),effect('damage',1),more)],reaction('suffered_damage',effect('instability',2),effect('damage',3),room=True))
+add(9,'Punish the Explorers',[spell('combat','fire','special',-1,0,effect('anubis_solve_quests',1),effect('anubis_damage_quest_mages',2))],reaction('combat_spell',effect('anubis_discard_solved_quest'),effect('damage',2)))
+add(10,'Epicenter',[spell('contingency','magic','mage',-1,2,effect('anubis_summon',at='target',range=0),effect('anubis_summon',at='black_rose'),effect('anubis_event'),more)])
+targeted(11,'Pointing the Finger',1,2,'death',effect('anubis_target_power',-2),jinx,ability)
+targeted(12,'Nefarious Brand',2,1,'magic',jinx,effect('anubis_convert_per_jinx',3),ability)
+targeted(13,'Open Wounds',1,1,'demon',effect('trophy'),effect('anubis_steal_power',1),jinx,ability)
+add(14,'Tomb Knowledge',[move(color='black',place=True),spell('contingency','death','mage',-1,1,jinx,more)])
+add(15,'Funeral Home',[spell('contingency','death','area',-1,3,effect('anubis_convert_instability',3),effect('anubis_summon'),ability),move(3,'grey',True)])
+add(16,'In the Tomb',[spell('combat','magic','area',1,3,effect('damage',2),effect('instability',3)),move(3,'blue',True)])
+add(17,'Hounding',[spell('combat','earth','mage',-1,2,jinx,effect('anubis_damage_per_jinx',3))],reaction('suffered_damage',effect('anubis_damage_per_jinx',3),effect('anubis_summon',at='target',range=0)))
+add(18,'No Mercy',[spell('combat','fire','area',2,3,effect('instability',3),effect('damage',2),more)],reaction('suffered_damage',effect('instability',3),effect('damage',4),room=True))
+add(19,'Lost in the Dunes',[spell('combat','fire','special',-1,0,effect('anubis_solve_quests',2),effect('anubis_damage_quest_mages',3))],reaction('combat_spell',effect('anubis_steal_solved_quest'),effect('damage',2)))
+add(20,'Merciless Desert',[spell('contingency','magic','mage',-1,2,effect('anubis_summon',at='target',range=0),effect('anubis_summon',at='target',range=1,exclude_previous=True),effect('anubis_summon',at='black_rose'),effect('anubis_event'))])
+targeted(21,'Humiliate',1,2,'death',effect('trophy',2),jinx,ability)
+targeted(22,'Mourning',2,1,'magic',jinx,effect('anubis_steal_per_jinx',1),ability)
+targeted(23,'Despair',1,1,'demon',effect('trophy'),effect('convert_damage',3),effect('anubis_steal_missing_conversion',1),jinx,ability)
+add(24,'Last Chance',[move(color='black',place=True),spell('contingency','death','mage',-1,1,jinx,effect('anubis_steal_power',1),more)])
+add(25,'Dark Ritual',[spell('contingency','death','area',-1,3,effect('anubis_convert_instability',4,power_per_missing=1),ability),move(3,'purple',True)])
+add(26,'Mummified Horde',[spell('combat','magic','area',-1,3,effect('damage',3),effect('instability',4)),move(3,'red',True)])
+add(27,'Hopeless',[spell('combat','earth','mage',-1,2,jinx,effect('anubis_defeat'),effect('power',4))],reaction('suffered_damage',effect('anubis_defeat'),effect('power',3)))
+add(28,'Sarcophagus',[spell('contingency','fire','area',2,3,effect('anubis_instability',4,power_per_missing=1),effect('damage',3),more)],reaction('damage',effect('ignore_damage',999),effect('anubis_instability',3,power_per_missing=1,at='self')))
+add(29,'Supreme Plague',[spell('combat','fire','special',-1,0,effect('anubis_steal_each_quest'),effect('anubis_event'))],reaction('combat_spell',effect('anubis_steal_solved_quest'),effect('anubis_steal_power',1)))
+add(30,'Eternal Guardians',[spell('contingency','magic','area',0,3,effect('anubis_summon',activate=True),effect('anubis_summon',activate=True),effect('anubis_power_per_evocation'),more)])
+p=root/'avatar_commands.json'; data=json.loads(p.read_text()); data=[c for c in data if not c['id'].startswith('anubis_')]+cards;p.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+p=root/'avatars.json'; data=json.loads(p.read_text()); data=[c for c in data if c['id']!='anubis']; data.append(dict(id='anubis',name='Anubis',health=11,strength=2,speed=2,skill='dominion',skills=['scourge','pledge','judgment','divine_sandstorm','dominion'],setup_room='black_rose',implemented=False,command_prefix='anubis_',priorities={'1':['most_power','most_solved_quests','most_trophies','most_damage'],'2':['most_damage','most_trophies','most_solved_quests','most_power'],'3':['most_instability','most_mages','most_models']}));p.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')

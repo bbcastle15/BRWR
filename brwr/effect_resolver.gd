@@ -2400,6 +2400,13 @@ func _resolve_convert_instability(
 
 	context["effect_target_room_id"] = room_id
 	context["effect_instability_converted"] = converted
+	if converted > 0:
+		var event := GameEvent.new("instability_converted")
+		event.source_player_index = caster_id
+		event.source_evocation = context.get("source_evocation")
+		event.target_room_id = room_id
+		event.amount = converted
+		game.queue_resolution({"type":"game_event", "event":event})
 	game.append_public_log("Converted %d/%d Instability in %s" % [converted, amount, room_id])
 
 	print(
@@ -3009,16 +3016,7 @@ func _resolve_refresh_physical_action_token(
 		caster_id
 	]
 
-	player.available_physical_actions = min(
-		player.MAX_PHYSICAL_ACTIONS,
-		player.available_physical_actions
-		+ int(
-			effect.get(
-				"amount",
-				1
-			)
-		)
-	)
+	game.restore_physical_actions(caster_id, int(effect.get("amount", 1)))
 
 	if caster_id < game.player_boards.size():
 		game.player_boards[
@@ -6376,6 +6374,8 @@ func _resolve_choose_one(
 			if not _choice_option_available(option, context):
 				continue
 			var option_id: String = str(option.get("id", ""))
+			if effect.has("max_uses_per_option") and int(context.get("branch_uses", {}).get(option_id, 0)) >= int(effect.max_uses_per_option):
+				continue
 			if option_id == "":
 				continue
 			options.append({
@@ -6404,6 +6404,10 @@ func _resolve_choose_one(
 		var option: Dictionary = option_value
 		if str(option.get("id", "")) != selected_id:
 			continue
+		if effect.has("max_uses_per_option"):
+			var uses: Dictionary = context.get("branch_uses", {})
+			uses[selected_id] = int(uses.get(selected_id, 0)) + 1
+			context["branch_uses"] = uses
 		var nested_effects: Array = option.get("effects", [])
 		context.erase(choice_key)
 		if nested_effects.is_empty():

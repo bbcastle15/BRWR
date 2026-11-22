@@ -181,6 +181,9 @@ static func move_room_persistent(game, player: PlayerState, caster: int, effect:
 	if not context.has("moving_persistent"):
 		var tokens: Array = []
 		for active in player.active_spells:
+			for ward in active.context.get("ward_rooms", []):
+				var marked_room = game.get_room_by_id(ward)
+				tokens.append({"token":"ward:" + str(ward), "value":{"active":active,"room":ward}, "name":active.spell.card_name + " · " + marked_room.room_name})
 			var room_id: String = game.room_for_persistent(active)
 			if room_id.is_empty(): continue
 			var room = game.get_room_by_id(room_id)
@@ -194,10 +197,11 @@ static func move_room_persistent(game, player: PlayerState, caster: int, effect:
 		if not DruidicRules.choose(game, caster, context, "moving_persistent", tokens,
 				"Choose one of your Persistent tokens assigned to a Room.", false, "room_persistent"):
 			return false
-	var token: ActiveSpellState = context.moving_persistent
-	var origin: String = game.room_for_persistent(token)
+	var selection = context.moving_persistent
+	var token: ActiveSpellState = selection.active if selection is Dictionary else selection
+	var origin: String = selection.room if selection is Dictionary else game.room_for_persistent(token)
 	if origin.is_empty() or token not in player.active_spells: return true
-	var rooms: Array = ForgottenRules.rooms(game, context).filter(func(option): return option.room_id != origin)
+	var rooms: Array = ForgottenRules.rooms(game, context).filter(func(option): return option.room_id != origin and not option.room_id in token.context.get("ward_rooms", []))
 	if rooms.is_empty(): return true
 	if not DruidicRules.choose(game, caster, context, "persistent_destination", rooms,
 			"Choose another Room for the Persistent token. That Room will activate.", false, "secondary_room"):
@@ -205,5 +209,10 @@ static func move_room_persistent(game, player: PlayerState, caster: int, effect:
 	var destination: String = context.persistent_destination
 	context.erase("moving_persistent")
 	context.erase("persistent_destination")
-	token.context["target_room_id"] = destination
+	if selection is Dictionary:
+		token.context.ward_rooms[token.context.ward_rooms.find(origin)] = destination
+		var slot = token.context.ward_slots.find_key(origin)
+		token.context.ward_slots[slot] = destination
+	else:
+		token.context["target_room_id"] = destination
 	return ForgottenRules.queue(game, effect.effects, ForgottenRules.target_context(context, destination))

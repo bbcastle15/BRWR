@@ -20,6 +20,10 @@ static func process_section(game, frame: Dictionary) -> bool:
 				context["target_player_index"] = event.source_player_index
 				context["target_model_type"] = "mage"
 				context["spell_target_type"] = "mage"
+				if section.get("target", "") == "area":
+					context["target_room_id"] = event.source_room_id if not event.source_room_id.is_empty() else game.players[event.source_player_index].mage.room_id
+					context["spell_target_type"] = "area"
+					context["target_model_type"] = "room"
 			elif section.get("target") in ["mage", "area"]:
 				var options: Array = AvatarRules.model_options(game, int(section.range)) if section.target == "mage" else AvatarRules.room_options(game, int(section.range))
 				options = AvatarRules.priority(game, options, int(section.priority))
@@ -93,8 +97,13 @@ static func announce_effect(game, effect: Dictionary, context: Dictionary) -> vo
 		affected = AvatarRules.model_options(game, int(effect.get("range", 0)), origin).map(func(o): return int(o.value.player_index))
 	elif kind in ["damage", "damage_per_ignored", "convert_damage", "discard_hand",
 		"target_power_per_missing_conversion", "target_power_per_missing_discard",
-		"remove_target_evocation", "remove_per_discard", "trophy"] and context.has("target_player_index"):
+		"remove_target_evocation", "remove_per_discard", "trophy", "anubis_jinx",
+		"anubis_convert_per_jinx", "anubis_damage_per_jinx", "anubis_steal_power",
+		"anubis_steal_per_jinx", "anubis_steal_missing_conversion", "anubis_defeat",
+		"anubis_target_power", "anubis_discard_solved_quest", "anubis_steal_solved_quest"] and context.has("target_player_index"):
 		affected = [int(context.target_player_index)]
+	elif kind in ["anubis_damage_quest_mages", "anubis_steal_each_quest"]:
+		affected = AvatarRules.model_options(game).filter(func(o): return not game.players[int(o.value.player_index)].completed_quests.is_empty()).map(func(o): return int(o.value.player_index))
 	if affected.is_empty(): return
 	var event := GameEvent.new("spell_effect_about_to_resolve")
 	event.source_model_type = "mage"
@@ -173,6 +182,7 @@ static func _damage_targets(game, frame: Dictionary, options: Array, amount: int
 
 static func resolve(game, frame: Dictionary) -> bool:
 	if bool(frame.get("done", false)): return true
+	if str(frame.effect.type).begins_with("anubis_"): return AnubisRules.resolve(game, frame)
 	var effect: Dictionary = frame.effect
 	var context: Dictionary = frame.context
 	var actor: int = game.avatar.player_index
@@ -268,7 +278,12 @@ static func resolve(game, frame: Dictionary) -> bool:
 				if not actor in ignored: ignored.append(actor)
 				original["ignored_spell_players"] = ignored
 		"trophy":
-			if target >= 0: game.gain_player_trophy(actor, target)
+			if target >= 0:
+				var gained: int = int(frame.get("gained", 0))
+				if gained >= amount: return _done(frame)
+				frame.gained = gained + 1
+				game.gain_player_trophy(actor, target)
+				return false
 		_:
 			push_error("Unsupported Avatar Effect: " + str(effect.type))
 	return _done(frame)
@@ -335,7 +350,7 @@ static func _move(game, frame: Dictionary) -> bool:
 		options = AvatarRules.priority(game, AvatarRules.model_options(game), int(effect.priority))
 	else:
 		options = AvatarRules.room_options(game).filter(func(o): return o.room_id != "throne" and str(game.get_room_by_id(o.room_id).room_data.get("color", "")) == str(effect.color))
-		options = AvatarRules.rank(game, options, ["nearest"])
+		options = AvatarRules.priority(game, options, int(effect.priority)) if int(effect.get("priority", 0)) > 0 else AvatarRules.rank(game, options, ["nearest"])
 	if not AvatarRules.choose(game, frame, "destination", options, "Avatar movement · choose the nearest %s Room." % str(effect.color) if not str(effect.color).is_empty() else "Avatar movement · choose destination.", "room_target"): return false
 	if frame.destination == null: return _done(frame)
 	var destination: String = str(frame.destination) if frame.destination is String else game.players[int(frame.destination.player_index)].mage.room_id

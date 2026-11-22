@@ -18,7 +18,7 @@ const CARD_ART_ROOTS: Array[String] = [
 ]
 
 static func get_texture(spell_id: String, school_id: String = "") -> Texture2D:
-	if spell_id.begins_with("possessed_"): return AvatarArt.texture(spell_id)
+	if spell_id.begins_with("possessed_") or spell_id.begins_with("anubis_"): return AvatarArt.texture(spell_id)
 	if spell_id == "":
 		return null
 

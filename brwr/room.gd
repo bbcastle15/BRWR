@@ -104,6 +104,32 @@ func refresh_art() -> void:
 	$RoomName.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_refresh_activation_token()
 	_refresh_vastum_token()
+	_refresh_standard_sockets()
+
+func _refresh_standard_sockets() -> void:
+	var overlay := $Background.get_node_or_null("StandardSockets")
+	if overlay == null:
+		overlay = Node2D.new()
+		overlay.name = "StandardSockets"
+		$Background.add_child(overlay)
+	for child in overlay.get_children():
+		overlay.remove_child(child)
+		child.queue_free()
+	# Use the same printed socket as the core Forge. Keep calibrated centres
+	# and rotations, and inherit the tile's flip animation rather than floating.
+	overlay.visible = wrecks_on_completion() and (not flipped or showing_old_face)
+	if not overlay.visible or $Background.texture == null: return
+	var socket := AtlasTexture.new()
+	socket.atlas = preload("res://assets/rooms/forge.png")
+	socket.region = Rect2(404, 994, 112, 112)
+	socket.filter_clip = true
+	for centre in get_art_instability_slots():
+		var sprite := Sprite2D.new()
+		sprite.texture = socket
+		sprite.position = centre
+		sprite.rotation = get_art_instability_slot_rotation(centre)
+		sprite.scale = Vector2.ONE * radius * 0.18 / 112.0
+		overlay.add_child(sprite)
 
 
 func _find_vastum_texture_recursive(
@@ -209,11 +235,15 @@ func _refresh_activation_token() -> void:
 		token.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		token.z_index = 20
 		add_child(token)
-	token.visible = flipped and not showing_old_face and flip_animation == null
-	if not flipped:
+	token.visible = has_activation_token() and not showing_old_face and flip_animation == null
+	if not has_activation_token():
 		return
 	token.position = Vector2(-radius * 0.60, -radius * 0.77)
+	# Kami tokens include the three reward tabs; reserve their full height.
 	token.size = Vector2(radius * 1.20, radius * 0.40)
+	if wrecks_on_completion():
+		token.position = Vector2(-radius * 0.50, -radius * 0.77)
+		token.size = Vector2(radius, radius * 0.50)
 	token.texture = preload("res://room_art.gd").activation_token(get_art_id(), activated_this_turn)
 
 
@@ -262,6 +292,8 @@ func get_room_data() -> Dictionary:
 
 
 func get_effects() -> Array:
+	if wrecks_on_completion():
+		return [] if flipped else room_data.get("rebuilt_effects", [])
 
 	if flipped:
 		return room_data.get(
@@ -276,11 +308,31 @@ func get_effects() -> Array:
 
 
 func get_current_side_name() -> String:
+	if wrecks_on_completion():
+		return "wrecked" if flipped else "intact"
 
 	if flipped:
 		return "rebuilt"
 
 	return "destroyed"
+
+
+# `flipped` is the network/save flag for completion, not a universal rebuilt
+# state: Kami starts intact and becomes permanently wrecked on completion.
+func wrecks_on_completion() -> bool:
+	return bool(room_data.get("wrecks_on_completion", false))
+
+
+func is_wrecked() -> bool:
+	return wrecks_on_completion() and flipped
+
+
+func is_rebuilt() -> bool:
+	return not flipped if wrecks_on_completion() else flipped
+
+
+func has_activation_token() -> bool:
+	return is_rebuilt()
 
 
 # =========================================================
@@ -293,7 +345,9 @@ func can_activate(
 
 	# Destroyed Rooms can be activated any number
 	# of times during the same turn.
-	if not flipped:
+	if is_wrecked():
+		return false
+	if not has_activation_token():
 		return true
 
 	# Rebuilt Rooms can normally be activated
@@ -306,7 +360,7 @@ func can_activate(
 
 func mark_activated():
 
-	if flipped:
+	if has_activation_token():
 		activated_this_turn = true
 
 

@@ -6,12 +6,14 @@ static var textures: Dictionary = {}
 
 static func command_back_id(moon: int, public_state: Dictionary) -> String:
 	var id := "command_back_%d" % clampi(moon, 1, 3)
+	var avatar_id := str(public_state.get("id", "possessed"))
+	if avatar_id != "possessed": id = avatar_id + "_" + id
 	var symbol := str(public_state.get("reaction", ""))
 	if symbol in ["damage", "suffered_damage", "combat_spell"]:
 		var kind := str(public_state.get("reaction_type", "protection"))
 		var suffix := "combat" if symbol == "combat_spell" else "damage"
 		var candidate := id + "_" + kind + "_" + suffix
-		if ResourceLoader.exists("res://assets/avatars/possessed/approved/" + candidate + ".png"):
+		if ResourceLoader.exists("res://assets/avatars/" + avatar_id + "/approved/" + candidate + ".png"):
 			return candidate
 	return id
 
@@ -25,6 +27,11 @@ static func reaction_description(public_state: Dictionary) -> String:
 
 static func texture(id: String) -> Texture2D:
 	if id == "command_back": id = "command_back_1"
+	if id == "anubis" or id.begins_with("anubis_"):
+		var path := "res://assets/avatars/anubis/approved/" + id + ".png"
+		if not ResourceLoader.exists(path): return null
+		if not textures.has(id): textures[id] = load(path)
+		return textures[id]
 	# The restored PNGs use the Energy of the Rose treatment approved by the user.
 	# All presentation paths (board, previews and resolution) share this loader.
 	var restored_path := "res://assets/avatars/possessed/approved/" + id + ".png"

@@ -16,7 +16,17 @@ static func value(player, key: String) -> int:
 		result += int(passives[key])
 	return result
 
+static func wards_instability(game, room_id: String, actor: int) -> bool:
+	for player in game.players:
+		for active in player.active_spells:
+			if not active.active: continue
+			var passives: Dictionary = active.get_side().get("passives", {})
+			if passives.get("ward_instability", false) and game.room_for_persistent(active) == room_id: return true
+			if passives.get("exclusive_wards", false) and actor != active.owner_id and room_id in active.context.get("ward_rooms", []): return true
+	return false
+
 static func can_convert_instability(game, room_id: String, owner: int, new_owner: int) -> bool:
+	if wards_instability(game, room_id, new_owner): return false
 	if owner == new_owner: return false
 	if owner < 0 or owner >= game.players.size(): return true
 	for active in game.players[owner].active_spells:
@@ -96,6 +106,19 @@ static func on_event(game, event: GameEvent) -> void:
 			var context := context_for(game, active)
 			var owner: int = active.owner_id
 			var marked: int = active.target_player_index
+			if event.event_type == "mage_defeated" and event.source_player_index == owner and data.has("power_on_mage_defeat"):
+				game.add_player_power(owner, int(data.power_on_mage_defeat))
+			if event.event_type == "model_enters_room" and data.has("on_model_entry"):
+				var center: String = player.mage.room_id if data.get("entry_at_owner", false) else game.room_for_persistent(active)
+				if center == event.target_room_id:
+					var model := {"target_type":"evocation", "evocation":event.source_evocation} if event.source_evocation != null else {"target_type":"mage", "player_index":event.source_player_index}
+					ForgottenRules.queue(game, data.on_model_entry, ForgottenRules.target_context(context, model))
+			if event.event_type == "instability_converted" and data.has("on_target_conversion"):
+				var assigned = active.context.get("target_evocation")
+				if assigned != null and assigned == event.source_evocation:
+					ForgottenRules.queue(game, data.on_target_conversion, ForgottenRules.target_context(context, {"target_type":"evocation","evocation":assigned}))
+				elif assigned == null and marked == event.source_player_index and event.source_evocation == null:
+					ForgottenRules.queue(game, data.on_target_conversion, context)
 			if event.event_type == "damage_inflicted" and event.amount > 0 and event.source_player_index == owner and event.source_model_type == "mage" and event.action_type == "spell" and event.target_model_type == "mage" and event.target_player_index != owner and int(data.get("instability_after_spell_damage_to_mage",0)) > 0:
 				ForgottenRules.queue(game,[{"type":"place_instability","amount":int(data.instability_after_spell_damage_to_mage)}],ForgottenRules.target_context(context,event.target_room_id))
 			if event.event_type == "power_gained" and event.source_player_index == marked and str(event.data.get("source_kind", "")) in data.get("bond_power_sources", []):

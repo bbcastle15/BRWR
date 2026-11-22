@@ -17622,5 +17622,1025 @@
       ]
     },
     "source": "Duel: Kami, DUE-KAM S-015"
+  },
+  {
+    "id": "spiritual_dance",
+    "name": "Spiritual Dance",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "text": "Summon Kagura Suzu or restore a Physical Action.",
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Summon kagura suzu",
+              "effects": [
+                {
+                  "type": "summon_equipment",
+                  "id": "kagura_suzu"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Restore a Physical Action",
+              "effects": [
+                {
+                  "type": "refresh_physical_action_token",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "text": "Move up to 1. Place 1 Instability in your Room. Convert 1 Instability in your Room. Repeat 1: discard 2 Spells.",
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "mage_move",
+          "distance": 1
+        },
+        {
+          "type": "self_room_effect",
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            },
+            {
+              "type": "convert_instability",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 2
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "summoning_the_kami",
+    "name": "Summoning the Kami",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "text": "Summon Ofuda or inflict 4 Damage on a Model in your Room.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Summon ofuda",
+              "effects": [
+                {
+                  "type": "summon_equipment",
+                  "id": "ofuda"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Inflict 4 Damage",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "model",
+                  "range": 0,
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "amount": 4
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "text": "Persistent: Instability cannot be placed or converted in the target Room.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": "*",
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "ward_instability": true
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "fortune_talisman",
+    "name": "Fortune Talisman",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Summon Omamori or restore a Physical Action.",
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Summon omamori",
+              "effects": [
+                {
+                  "type": "summon_equipment",
+                  "id": "omamori"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Restore a Physical Action",
+              "effects": [
+                {
+                  "type": "refresh_physical_action_token",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "text": "Heal 3 Damage. Draw 2 Spells. Persistent: you have +1 Speed.",
+      "type": "contingency",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "heal",
+          "amount": 3
+        },
+        {
+          "type": "draw_grimoire",
+          "amount": 2
+        }
+      ],
+      "persistent": true,
+      "passives": {
+        "speed_bonus": 1
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "ebisus_intervention",
+    "name": "Ebisu's Intervention",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "text": "Place 2 Instability. Draw 1 Spell.",
+      "type": "contingency",
+      "element": "water",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "place_instability",
+          "amount": 2
+        },
+        {
+          "type": "draw_grimoire",
+          "amount": 1
+        }
+      ]
+    },
+    "dark": {
+      "text": "Persistent: when a Model enters the target Room, place 1 Instability in a Room within 1 of yourself.",
+      "type": "contingency",
+      "element": "water",
+      "target": "room",
+      "range": "*",
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "on_model_entry": [
+          {
+            "type": "independent_target",
+            "target": "room",
+            "range": 1,
+            "effects": [
+              {
+                "type": "place_instability",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "susanoos_presence",
+    "name": "Susanoo's Presence",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "text": "Inflict 1 Damage. Convert 1 Instability. Repeat 1: discard 1 Spell.",
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 1,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "convert_instability",
+          "amount": 1
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 1
+    },
+    "dark": {
+      "text": "Persistent: when a Model enters the target Room, inflict 3 Damage on that Model.",
+      "type": "combat",
+      "element": "water",
+      "target": "room",
+      "range": 1,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "on_model_entry": [
+          {
+            "type": "damage",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "sarutahikos_guidance",
+    "name": "Sarutahiko's Guidance",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Place yourself in the target Room. Activate it. Repeat 1: discard 2 Spells.",
+      "type": "contingency",
+      "element": "earth",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "place_caster_in_target_room"
+        },
+        {
+          "type": "activate_target_room"
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 2
+    },
+    "dark": {
+      "text": "Persistent: when a Model enters your Room, convert 1 Instability in any Room.",
+      "type": "contingency",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "entry_at_owner": true,
+        "on_model_entry": [
+          {
+            "type": "independent_target",
+            "target": "room",
+            "range": "*",
+            "effects": [
+              {
+                "type": "convert_instability",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "channeling_the_spirit",
+    "name": "Channeling the Spirit",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Summon Gohei or inflict 2 Damage on a Model within 2.",
+      "type": "combat",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Summon gohei",
+              "effects": [
+                {
+                  "type": "summon_equipment",
+                  "id": "gohei"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Inflict 2 Damage",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "model",
+                  "range": 2,
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "amount": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "text": "Inflict 1 Damage. Move the target up to 1. Repeat 2: discard 1 Spell.",
+      "type": "combat",
+      "element": "magic",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        }
+      ],
+      "repeat": 2,
+      "repeat_discard": 1
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "spiritual_perfection",
+    "name": "Spiritual Perfection",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Restore a Physical Action. Repeat 1: discard 2 Spells.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "refresh_physical_action_token",
+          "amount": 1
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 2
+    },
+    "dark": {
+      "text": "Convert 2 Instability in a Room within 1 of yourself, or discard a Persistent token assigned to yourself. If you discard it, draw 2 Spells.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Convert 2 Instability",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "room",
+                  "range": 1,
+                  "effects": [
+                    {
+                      "type": "convert_instability",
+                      "amount": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Discard a Persistent assigned to yourself",
+              "effects": [
+                {
+                  "type": "kami_cleanse",
+                  "self_only": true,
+                  "effects": [
+                    {
+                      "type": "draw_grimoire",
+                      "amount": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "occult_tolls",
+    "name": "Occult Tolls",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Summon Shakujo or inflict 3 Damage on a Model within 1.",
+      "type": "combat",
+      "element": "magic",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Summon shakujo",
+              "effects": [
+                {
+                  "type": "summon_equipment",
+                  "id": "shakujo"
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Inflict 3 Damage",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "model",
+                  "range": 1,
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "amount": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "dark": {
+      "text": "Inflict 1 Damage. Convert 1 Damage. Repeat 2: discard 2 Spells.",
+      "type": "combat",
+      "element": "magic",
+      "target": "model",
+      "range": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 1
+        },
+        {
+          "type": "convert_damage",
+          "amount": 1
+        }
+      ],
+      "repeat": 2,
+      "repeat_discard": 2
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "hachimans_essence",
+    "name": "Hachiman's Essence",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "You may perform a Physical Attack against the target. You may move the target up to 1. Repeat 1: discard 2 Spells.",
+      "type": "combat",
+      "element": "earth",
+      "target": "model",
+      "range": 1,
+      "effects": [
+        {
+          "type": "mage_attack",
+          "optional": true,
+          "range": 1,
+          "primary_target_only": true
+        },
+        {
+          "type": "move_target_up_to",
+          "distance": 1
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 2
+    },
+    "dark": {
+      "text": "Convert 2 Instability in your Room. Persistent: you have +1 Strength. When you defeat a Mage, gain 1 Power.",
+      "type": "combat",
+      "element": "earth",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "self_room_effect",
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 2
+            }
+          ]
+        }
+      ],
+      "persistent": true,
+      "passives": {
+        "strength_bonus": 1,
+        "power_on_mage_defeat": 1
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "tenjins_teaching",
+    "name": "Tenjin's Teaching",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": true,
+    "light": {
+      "text": "Draw 2 Spells. Convert 1 Instability in a Room within 1. Repeat 1: discard 3 Spells.",
+      "type": "contingency",
+      "element": "all",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "draw_grimoire",
+          "amount": 2
+        },
+        {
+          "type": "independent_target",
+          "target": "room",
+          "range": 1,
+          "effects": [
+            {
+              "type": "convert_instability",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 3
+    },
+    "dark": {
+      "text": "Persistent: whenever the target converts Instability, inflict 2 Damage on it.",
+      "type": "contingency",
+      "element": "all",
+      "target": "model",
+      "range": "*",
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "on_target_conversion": [
+          {
+            "type": "damage",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "inaris_influence",
+    "name": "Inari's Influence",
+    "school": "shugendo",
+    "copies": 3,
+    "instability": false,
+    "light": {
+      "text": "Inflict 2 Damage. Place 1 Instability in your Room. Repeat 1: discard 2 Spells.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "model",
+      "range": 0,
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 2
+        },
+        {
+          "type": "self_room_effect",
+          "effects": [
+            {
+              "type": "place_instability",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 2
+    },
+    "dark": {
+      "text": "Persistent: when a Model enters the target Room, inflict 2 Damage on it and heal 1 Damage on yourself.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": "*",
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "on_model_entry": [
+          {
+            "type": "damage",
+            "amount": 2
+          },
+          {
+            "type": "self_effect",
+            "effects": [
+              {
+                "type": "heal",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "coming_of_the_kodama",
+    "name": "Coming of the Kodama",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": true,
+    "light": {
+      "text": "Place each of your Persistent tokens in a different Room. Persistent: only you can place or convert Instability in those Rooms.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "kami_place_wards"
+        }
+      ],
+      "persistent": true,
+      "passives": {
+        "exclusive_wards": true
+      }
+    },
+    "dark": {
+      "text": "Place or convert 1 Instability. Repeat 5.",
+      "type": "contingency",
+      "element": "sacred",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_branch",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Place 1 Instability",
+              "effects": [
+                {
+                  "type": "place_instability",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Convert 1 Instability",
+              "effects": [
+                {
+                  "type": "convert_instability",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "repeat": 5,
+      "repeat_discard": 0
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "image_of_amaterasu",
+    "name": "Image of Amaterasu",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": false,
+    "light": {
+      "text": "Summon Kusanagi-no-Tsurugi. Restore a Physical Action.",
+      "type": "contingency",
+      "element": "fire",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "summon_equipment",
+          "id": "kusanagi_no_tsurugi"
+        },
+        {
+          "type": "refresh_physical_action_token",
+          "amount": 1
+        }
+      ]
+    },
+    "dark": {
+      "text": "Inflict 4 Damage. Convert 4 Instability.",
+      "type": "combat",
+      "element": "fire",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "damage",
+          "amount": 4
+        },
+        {
+          "type": "convert_instability",
+          "amount": 4
+        }
+      ]
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "image_of_tsukuyomi",
+    "name": "Image of Tsukuyomi",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": false,
+    "light": {
+      "text": "Persistent: whenever you inflict Damage, inflict +1 Damage.",
+      "type": "contingency",
+      "element": "water",
+      "target": "self",
+      "range": 0,
+      "effects": [],
+      "persistent": true,
+      "passives": {
+        "damage_bonus": 1
+      }
+    },
+    "dark": {
+      "text": "Inflict 2 Damage in any Room. Convert 2 Damage in any Room. Draw 2 Spells. Repeat 1: discard 1 Spell.",
+      "type": "combat",
+      "element": "water",
+      "target": "self",
+      "range": 0,
+      "effects": [
+        {
+          "type": "independent_target",
+          "target": "room",
+          "range": "*",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "type": "independent_target",
+          "target": "room",
+          "range": "*",
+          "effects": [
+            {
+              "type": "convert_damage",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "type": "draw_grimoire",
+          "amount": 2
+        }
+      ],
+      "repeat": 1,
+      "repeat_discard": 1
+    },
+    "source": "Duel: Kami"
+  },
+  {
+    "id": "mononokes_fury",
+    "name": "Mononoke's Fury",
+    "school": "forgotten",
+    "copies": 1,
+    "forgotten": true,
+    "instability": false,
+    "light": {
+      "text": "Target the Black Rose Room. Summon Mononoke. It activates.",
+      "type": "combat",
+      "element": "profane",
+      "target": "room",
+      "range": "*",
+      "effects": [
+        {
+          "type": "summon_evocation",
+          "evocation_id": "mononoke"
+        },
+        {
+          "type": "activate_summoned_evocation"
+        }
+      ],
+      "only_black_rose_room": true
+    },
+    "dark": {
+      "text": "Choose one: inflict or convert 1 Damage on a Model within 2, place or convert 1 Instability in a Room within 2, or heal 1 Damage on yourself. Repeat 5. You may choose each Effect at most three times.",
+      "type": "combat",
+      "element": "profane",
+      "target": "special",
+      "range": "*",
+      "effects": [
+        {
+          "type": "choose_one",
+          "choice_key": "kami_fury",
+          "prompt": "Choose an Effect.",
+          "options": [
+            {
+              "id": "0",
+              "label": "Inflict or convert Damage",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "model",
+                  "range": 2,
+                  "effects": [
+                    {
+                      "type": "choose_one",
+                      "choice_key": "kami_branch",
+                      "prompt": "Choose an Effect.",
+                      "options": [
+                        {
+                          "id": "0",
+                          "label": "Inflict 1 Damage",
+                          "effects": [
+                            {
+                              "type": "damage",
+                              "amount": 1
+                            }
+                          ]
+                        },
+                        {
+                          "id": "1",
+                          "label": "Convert 1 Damage",
+                          "effects": [
+                            {
+                              "type": "convert_damage",
+                              "amount": 1
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "label": "Place or convert Instability",
+              "effects": [
+                {
+                  "type": "independent_target",
+                  "target": "room",
+                  "range": 2,
+                  "effects": [
+                    {
+                      "type": "choose_one",
+                      "choice_key": "kami_branch",
+                      "prompt": "Choose an Effect.",
+                      "options": [
+                        {
+                          "id": "0",
+                          "label": "Place 1 Instability",
+                          "effects": [
+                            {
+                              "type": "place_instability",
+                              "amount": 1
+                            }
+                          ]
+                        },
+                        {
+                          "id": "1",
+                          "label": "Convert 1 Instability",
+                          "effects": [
+                            {
+                              "type": "convert_instability",
+                              "amount": 1
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "2",
+              "label": "Heal 1 Damage",
+              "effects": [
+                {
+                  "type": "self_effect",
+                  "effects": [
+                    {
+                      "type": "heal",
+                      "amount": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "max_uses_per_option": 3
+        }
+      ],
+      "repeat": 5,
+      "repeat_discard": 0
+    },
+    "source": "Duel: Kami"
   }
 ]

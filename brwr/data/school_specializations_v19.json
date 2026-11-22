@@ -1,4 +1,36 @@
 {
+  "shugendo": {
+    "name": "Shugendō",
+    "specialization_card": "shugendo_specialization",
+    "description": "Repeat N allows up to N additional resolutions of the same Effect. Pay any printed discard cost for each repetition and choose a valid target again. Restore makes one exhausted Physical Action token available.",
+    "starting_grimoires": [
+      {
+        "id": "onmyoji",
+        "name": "Onmyōji",
+        "spell_ids": [
+          "spiritual_dance",
+          "summoning_the_kami",
+          "fortune_talisman",
+          "ebisus_intervention",
+          "susanoos_presence",
+          "sarutahikos_guidance"
+        ]
+      },
+      {
+        "id": "shoei",
+        "name": "Shoei",
+        "spell_ids": [
+          "channeling_the_spirit",
+          "spiritual_perfection",
+          "occult_tolls",
+          "hachimans_essence",
+          "tenjins_teaching",
+          "inaris_influence"
+        ]
+      }
+    ],
+    "rules_implemented": true
+  },
   "agony": {
     "name": "Agony",
     "starting_grimoires": [

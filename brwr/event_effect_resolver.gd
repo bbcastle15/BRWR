@@ -199,6 +199,7 @@ func process_effect(frame: Dictionary, game) -> bool:
 			if trophy_index >= 0 and trophy_index < player.trophies.size():
 				game.black_rose_trophies.append(player.trophies[trophy_index])
 				player.trophies.remove_at(trophy_index)
+				if game.avatar != null: AnubisRules.on_trophy(game, game.avatar.player_index)
 				if not mage.in_cell:
 					game.place_instability(player_index, mage.room_id, amount)
 		"each_mage_optional_lose_power_draw_forgotten":

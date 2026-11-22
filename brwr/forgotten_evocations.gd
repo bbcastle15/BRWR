@@ -188,6 +188,8 @@ static func process_activation(game, frame: Dictionary) -> bool:
 			frame["forgotten_step"] = "after_attack"
 			var amount: int = game.get_evocation_effective_strength(ev, int(frame.get("strength_bonus", 0)) + int(context.evocation_activation_frame.get("strength_bonus", 0)))
 			amount += bonus_strength(game, ev, controller) - bonus_strength(game, ev)
+			if str(context.get("target_room_id", "")) == ev.room_id:
+				amount += int(ability(game, ev, "attack_room").get("same_room_bonus", 0))
 			if context.get("spell_target_type") == "mage" and not ability(game, ev, "steal_power_instead_mage_attack").is_empty():
 				ForgottenRules.queue(game, [{"type": "steal_power", "amount": 1}], context)
 				return false
@@ -259,7 +261,7 @@ static func process_activation(game, frame: Dictionary) -> bool:
 static func attack_damage(game, ev: EvocationState, controller: int, amount: int, context: Dictionary) -> void:
 	var targets: Array = []
 	if context.get("spell_target_type") == "room":
-		for option in ForgottenRules.models(game, context, "model", 0, str(context.target_room_id), false):
+		for option in ForgottenRules.models(game, context, "model", 0, str(context.target_room_id), false, false, true):
 			targets.append(option.value)
 	else:
 		targets.append({"target_type": "evocation", "evocation": context.target_evocation} if context.get("target_evocation") != null else {"target_type": "mage", "player_index": int(context.get("target_player_index", -1))})
@@ -268,7 +270,7 @@ static func attack_damage(game, ev: EvocationState, controller: int, amount: int
 			if game._valid_evocation_attack_mage(ev, controller, int(target.player_index)):
 				game.deal_damage_from_evocation(ev, int(target.player_index), amount + FamiliarRules.attack_bonus(game,ev,game.players[int(target.player_index)].mage.get_damage()), controller)
 		else:
-			if game._valid_evocation_attack_evocation(ev, controller, target.evocation):
+			if game._valid_evocation_attack_evocation(ev, controller, target.evocation, "", context.get("spell_target_type") == "room"):
 				game.deal_damage_to_evocation(controller, target.evocation, amount + FamiliarRules.attack_bonus(game,ev,target.evocation.get_damage()), [], "evocation_attack", "evocation", ev)
 
 static func resolve_assignment(game, effect: Dictionary, context: Dictionary) -> bool:

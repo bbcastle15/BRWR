@@ -86,8 +86,10 @@ func refresh() -> void:
 		cards_root.remove_child(card)
 		card.queue_free()
 	var preview = game._reference_card_preview()
-	_add_card("avatars", "possessed", "Possessed · Dominion", SHEET,
-		func(): preview.show_card("avatars", "possessed", "Possessed · Dominion", ""))
+	var avatar_id: String = str(game.avatar.definition.id)
+	var avatar_name: String = str(game.avatar.definition.name)
+	_add_card("avatars", avatar_id, avatar_name, SHEET,
+		func(): preview.show_card("avatars", avatar_id, avatar_name, ""))
 	var public_state: Dictionary = game.avatar.public_data()
 	var back_id := AvatarArt.command_back_id(game.current_moon, public_state)
 	var hand = _add_card("avatars", back_id, "Command deck · Moon %d · %d cards" % [game.current_moon, player.grimoire.size()], COMMANDS,
@@ -278,7 +280,7 @@ func _add_mage_tokens(player: PlayerState) -> void:
 
 func _add_card(kind: String, id: String, title: String, rect: Rect2, callback: Callable) -> Button:
 	var card: Button = game.ReferenceCardPreview.make_card(kind, id, title, rect.size, callback, kind != "evocations")
-	card.set_meta("avatar_reference", kind == "avatars" and id == "possessed")
+	card.set_meta("avatar_reference", kind == "avatars" and id == str(game.avatar.definition.id))
 	card.flat = true
 	card.position = rect.position
 	cards_root.add_child(card)

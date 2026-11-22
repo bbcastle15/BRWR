@@ -22,9 +22,24 @@ func run():
 	await process_frame
 	assert(menu.avatar_selection == {"id":"possessed", "difficulty":"master"})
 	assert(menu.solo_count.min_value == 0 and menu.solo_count.max_value == 4)
-	assert(menu.online_count.max_value == 5)
+	assert(menu.online_count.max_value == 6, "Local setup must not alter Online seats")
 	assert(menu.menu.visible)
 	assert(AvatarRules.available().any(func(d): return d.id == "possessed"), "Possessed is released")
+	menu.avatar_setup_button.pressed.emit()
+	avatar = menu.find_child("AvatarSelection", true, false)
+	var anubis := -1
+	for i in avatar.item_count:
+		if avatar.get_item_metadata(i) == "anubis": anubis = i
+	assert(anubis >= 0, "Anubis must be selectable")
+	avatar.select(anubis)
+	avatar.item_selected.emit(anubis)
+	var scenario = menu.find_child("DamnedSoulsScenario", true, false)
+	assert(scenario.visible, "Anubis offers Damned Souls")
+	scenario.button_pressed = true
+	for button in menu.find_children("*", "Button", true, false):
+		if button.text == "Confirm and return to menu": button.pressed.emit()
+	await process_frame
+	assert(menu.avatar_selection.get("id") == "anubis" and menu.avatar_selection.get("scenario") == "damned_souls")
 	menu.avatar_setup_button.pressed.emit()
 	menu.find_child("AvatarSelection", true, false).select(0)
 	for button in menu.find_children("*", "Button", true, false):
